@@ -13,11 +13,10 @@ interface ServerLocation {
 }
 
 const serverLocations: ServerLocation[] = [
-  { key: "frankfurt", count: 2, protocols: ["WireGuard", "VLESS-Reality"], flag: "🇩🇪" },
-  { key: "moscow", count: 2, protocols: ["WireGuard", "VLESS-Reality"], flag: "🇷🇺" },
-  { key: "zurich", count: 1, protocols: ["WireGuard"], flag: "🇨🇭" },
-  { key: "london", count: 1, protocols: ["WireGuard", "VLESS-Reality"], flag: "🇬🇧" },
-  { key: "newYork", count: 1, protocols: ["WireGuard", "VLESS-Reality"], flag: "🇺🇸" },
+  { key: "germany", count: 1, protocols: ["VLESS-Reality"], flag: "🇩🇪" },
+  { key: "russia", count: 2, protocols: ["VLESS-Reality"], flag: "🇷🇺" },
+  { key: "france", count: 1, protocols: ["VLESS-Reality"], flag: "🇫🇷" },
+  { key: "japan", count: 1, protocols: ["VLESS-Reality"], flag: "🇯🇵" },
 ];
 
 /* ─── Protocol badge ─── */
@@ -73,7 +72,7 @@ export function Servers() {
     <Section id="servers">
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {serverLocations.map((location, i) => (
           <Reveal key={location.key} delay={i * 50}>
             <ServerCard location={location} t={t} />

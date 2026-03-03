@@ -28,21 +28,18 @@ function formatPrice(amount: number): string {
 }
 
 const freeFeatureKeys = [
-  "servers",
-  "data",
-  "protocols",
+  "connection",
   "devices",
+  "data",
   "noLogs",
 ] as const;
 
 const plusFeatureKeys = [
   "everything",
-  "adBlocker",
-  "categoryFilter",
-  "customBlocklist",
+  "premiumServers",
+  "smartRouting",
   "devices",
   "support",
-  "smartVpn",
 ] as const;
 
 interface DurationSelectorProps {
@@ -312,14 +309,6 @@ export function Pricing() {
                   >
                     <CheckIcon className="text-accent-teal" />
                     {t(`plusFeatures.${feature}`)}
-                    {feature === "smartVpn" && (
-                      <Badge
-                        variant="teal"
-                        className="ms-1.5 text-[10px] px-1.5 py-0.5"
-                      >
-                        {t("comingSoon")}
-                      </Badge>
-                    )}
                   </li>
                 ))}
               </ul>

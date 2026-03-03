@@ -25,7 +25,6 @@ export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
     const serverId = params.get("server_id");
     const platform = params.get("platform");
-    const protocol = params.get("protocol");
     const status = params.get("status");
     const search = params.get("search");
     const offset = parseInt(params.get("offset") || "0");
@@ -50,7 +49,6 @@ export async function GET(request: NextRequest) {
 
     if (serverId) query = query.eq("server_id", serverId);
     if (platform) query = query.eq("platform", platform);
-    if (protocol) query = query.eq("protocol", protocol);
     if (status) query = query.eq("status", status);
     if (search) query = query.ilike("backend_username", `%${search}%`);
 
@@ -72,7 +70,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       users,
       total: count || 0,
-      filters: { server_id: serverId, platform, protocol, status },
+      filters: { server_id: serverId, platform, status },
     });
   } catch (e: unknown) {
     return NextResponse.json({ error: (e as Error).message }, { status: 500 });

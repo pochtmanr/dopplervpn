@@ -61,15 +61,15 @@ const statusColors: Record<string, string> = {
   on_hold: "text-text-muted",
 };
 
-const platformColors: Record<string, string> = {
-  ios: "text-blue-400",
-  android: "text-green-400",
-  telegram: "text-sky-400",
-  desktop: "text-purple-400",
-  unknown: "text-text-muted",
+const deviceBadgeStyles: Record<string, string> = {
+  telegram: "bg-sky-400/15 text-sky-400",
+  ios: "bg-blue-400/15 text-blue-400",
+  android: "bg-green-400/15 text-green-400",
+  desktop: "bg-purple-400/15 text-purple-400",
+  unknown: "bg-gray-400/15 text-gray-400",
 };
 
-const platformLabels: Record<string, string> = {
+const deviceLabels: Record<string, string> = {
   ios: "iOS",
   android: "Android",
   telegram: "Telegram",
@@ -84,15 +84,26 @@ function detectPlatform(u: VpnUserRow): string {
   return "unknown";
 }
 
-function displayPlatform(u: VpnUserRow): string {
-  return platformLabels[detectPlatform(u)] || detectPlatform(u);
+function DeviceBadge({ user }: { user: VpnUserRow }) {
+  const device = detectPlatform(user);
+  const label = deviceLabels[device] || device;
+  const style = deviceBadgeStyles[device] || deviceBadgeStyles.unknown;
+  return (
+    <span className={`inline-block px-1.5 py-0.5 rounded-full text-[10px] font-medium ${style}`}>
+      {label}
+    </span>
+  );
 }
 
-function displayPlatformColor(u: VpnUserRow): string {
-  return platformColors[detectPlatform(u)] || platformColors.unknown;
+function extractDisplayName(username: string): { primary: string; subtitle: string | null } {
+  const tgMatch = username.match(/^tg_(\d+)_\d+$/);
+  if (tgMatch) {
+    return { primary: tgMatch[1], subtitle: username };
+  }
+  return { primary: username, subtitle: null };
 }
 
-type SortKey = "platform" | "status" | "traffic" | "expires" | null;
+type SortKey = "username" | "server" | "device" | "status" | "traffic" | "expires" | "last_online" | null;
 type SortDir = "asc" | "desc";
 
 const statusOrder: Record<string, number> = {
@@ -108,7 +119,13 @@ function sortUsers(users: VpnUserRow[], key: SortKey, dir: SortDir): VpnUserRow[
   const sorted = [...users].sort((a, b) => {
     let cmp = 0;
     switch (key) {
-      case "platform": {
+      case "username":
+        cmp = a.backend_username.localeCompare(b.backend_username);
+        break;
+      case "server":
+        cmp = (a.server_name || "").localeCompare(b.server_name || "");
+        break;
+      case "device": {
         const pa = detectPlatform(a);
         const pb = detectPlatform(b);
         cmp = pa.localeCompare(pb);
@@ -124,6 +141,12 @@ function sortUsers(users: VpnUserRow[], key: SortKey, dir: SortDir): VpnUserRow[
         const ta = a.expires_at ? new Date(a.expires_at).getTime() : 0;
         const tb = b.expires_at ? new Date(b.expires_at).getTime() : 0;
         cmp = ta - tb;
+        break;
+      }
+      case "last_online": {
+        const la = a.last_online_at ? new Date(a.last_online_at).getTime() : 0;
+        const lb = b.last_online_at ? new Date(b.last_online_at).getTime() : 0;
+        cmp = la - lb;
         break;
       }
     }
@@ -147,7 +170,6 @@ export default function VpnUsersPage() {
 
   const serverId = searchParams.get("server_id") || "";
   const platform = searchParams.get("platform") || "";
-  const protocol = searchParams.get("protocol") || "";
   const status = searchParams.get("status") || "";
   const search = searchParams.get("search") || "";
   const page = parseInt(searchParams.get("page") || "1");
@@ -167,7 +189,6 @@ export default function VpnUsersPage() {
       const params = new URLSearchParams();
       if (serverId) params.set("server_id", serverId);
       if (platform) params.set("platform", platform);
-      if (protocol) params.set("protocol", protocol);
       if (status) params.set("status", status);
       if (search) params.set("search", search);
       params.set("offset", String((page - 1) * limit));
@@ -184,7 +205,7 @@ export default function VpnUsersPage() {
     } finally {
       setUsersLoading(false);
     }
-  }, [serverId, platform, protocol, status, search, page, limit]);
+  }, [serverId, platform, status, search, page, limit]);
 
   useEffect(() => {
     fetchUsers();
@@ -247,7 +268,7 @@ export default function VpnUsersPage() {
 
   const sortedUsers = sortUsers(users, sortKey, sortDir);
   const totalPages = Math.ceil(usersTotal / limit);
-  const hasUserFilters = serverId || platform || protocol || status || search;
+  const hasUserFilters = serverId || platform || status || search;
 
   function SortIcon({ col }: { col: SortKey }) {
     if (sortKey !== col) return <span className="text-text-muted/30 ml-1">&#8597;</span>;
@@ -303,25 +324,12 @@ export default function VpnUsersPage() {
           onChange={(e) => updateFilter("platform", e.target.value)}
           className="px-3 py-2 bg-bg-secondary border border-overlay/10 rounded-lg text-sm text-text-primary focus:outline-none focus:border-accent-teal cursor-pointer"
         >
-          <option value="">All Platforms</option>
+          <option value="">All Devices</option>
           <option value="ios">iOS</option>
           <option value="android">Android</option>
           <option value="telegram">Telegram</option>
           <option value="desktop">Desktop</option>
           <option value="unknown">Unknown</option>
-        </select>
-
-        <select
-          value={protocol}
-          onChange={(e) => updateFilter("protocol", e.target.value)}
-          className="px-3 py-2 bg-bg-secondary border border-overlay/10 rounded-lg text-sm text-text-primary focus:outline-none focus:border-accent-teal cursor-pointer"
-        >
-          <option value="">All Protocols</option>
-          <option value="wireguard">WireGuard</option>
-          <option value="vless">VLESS</option>
-          <option value="shadowsocks">Shadowsocks</option>
-          <option value="trojan">Trojan</option>
-          <option value="udp">UDP</option>
         </select>
 
         <select
@@ -369,12 +377,15 @@ export default function VpnUsersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-overlay/10 text-text-muted text-left">
-                  <th className="px-4 py-3 font-medium">Username</th>
-                  <th className="px-4 py-3 font-medium">Server</th>
-                  <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("platform")}>
-                    Platform<SortIcon col="platform" />
+                  <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("username")}>
+                    Username<SortIcon col="username" />
                   </th>
-                  <th className="px-4 py-3 font-medium">Protocol</th>
+                  <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("server")}>
+                    Server<SortIcon col="server" />
+                  </th>
+                  <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("device")}>
+                    Device<SortIcon col="device" />
+                  </th>
                   <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("status")}>
                     Status<SortIcon col="status" />
                   </th>
@@ -384,69 +395,74 @@ export default function VpnUsersPage() {
                   <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("expires")}>
                     Expires<SortIcon col="expires" />
                   </th>
-                  <th className="px-4 py-3 font-medium">Last Online</th>
+                  <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("last_online")}>
+                    Last Online<SortIcon col="last_online" />
+                  </th>
                   <th className="px-4 py-3 font-medium text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {sortedUsers.map((u) => (
-                  <tr
-                    key={u.id}
-                    className="border-b border-overlay/5 hover:bg-overlay/[0.02]"
-                  >
-                    <td className="px-4 py-3">
-                      <span className="text-text-primary font-medium">
-                        {u.backend_username}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-text-muted">
-                      <span className="mr-1">
-                        {countryFlag(u.server_country_code)}
-                      </span>
-                      {u.server_name}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className={`text-xs ${displayPlatformColor(u)}`}>
-                        {displayPlatform(u)}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-text-muted text-xs">
-                      {u.protocol}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`text-xs ${statusColors[u.status] || "text-text-muted"}`}
-                      >
-                        {u.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-text-muted">
-                      {formatBytes(u.used_traffic_bytes)}
-                      {u.data_limit_bytes
-                        ? ` / ${formatBytes(u.data_limit_bytes)}`
-                        : ""}
-                    </td>
-                    <td className="px-4 py-3 text-text-muted">
-                      {formatDate(u.expires_at)}
-                    </td>
-                    <td className="px-4 py-3 text-text-muted">
-                      {formatDate(u.last_online_at)}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <button
-                        onClick={() => handleDelete(u)}
-                        disabled={deleting === u.id}
-                        className="px-2 py-1 text-xs text-red-400 hover:bg-red-500/10 rounded transition-colors cursor-pointer disabled:opacity-50"
-                      >
-                        {deleting === u.id ? "..." : "Delete"}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {sortedUsers.map((u) => {
+                  const { primary, subtitle } = extractDisplayName(u.backend_username);
+                  return (
+                    <tr
+                      key={u.id}
+                      className="border-b border-overlay/5 hover:bg-overlay/[0.02]"
+                    >
+                      <td className="px-4 py-3">
+                        <span className="text-text-primary font-medium">
+                          {primary}
+                        </span>
+                        {subtitle && (
+                          <span className="block text-[11px] text-text-muted">
+                            {subtitle}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-text-muted">
+                        <span className="mr-1">
+                          {countryFlag(u.server_country_code)}
+                        </span>
+                        {u.server_name}
+                      </td>
+                      <td className="px-4 py-3">
+                        <DeviceBadge user={u} />
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`text-xs ${statusColors[u.status] || "text-text-muted"}`}
+                        >
+                          {u.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-text-muted">
+                        {formatBytes(u.used_traffic_bytes)}
+                        {u.data_limit_bytes
+                          ? ` / ${formatBytes(u.data_limit_bytes)}`
+                          : ""}
+                      </td>
+                      <td className="px-4 py-3 text-text-muted">
+                        {formatDate(u.expires_at)}
+                      </td>
+                      <td className="px-4 py-3 text-text-muted">
+                        {formatDate(u.last_online_at)}
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        <button
+                          onClick={() => handleDelete(u)}
+                          disabled={deleting === u.id}
+                          className="px-2 py-1 text-xs text-red-400 hover:bg-red-500/10 rounded transition-colors cursor-pointer disabled:opacity-50"
+                        >
+                          {deleting === u.id ? "..." : "Delete"}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
                 {sortedUsers.length === 0 && (
                   <tr>
                     <td
-                      colSpan={9}
+                      colSpan={8}
                       className="px-4 py-8 text-center text-text-muted"
                     >
                       No users found
@@ -466,51 +482,58 @@ export default function VpnUsersPage() {
         ) : sortedUsers.length === 0 ? (
           <p className="text-center text-text-muted py-8">No users found</p>
         ) : (
-          sortedUsers.map((u) => (
-            <div
-              key={u.id}
-              className="bg-bg-secondary border border-overlay/10 rounded-lg p-4 space-y-2"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-text-primary font-medium text-sm truncate">
-                  {u.backend_username}
-                </span>
-                <span
-                  className={`text-xs ${statusColors[u.status] || "text-text-muted"}`}
-                >
-                  {u.status}
-                </span>
+          sortedUsers.map((u) => {
+            const { primary, subtitle } = extractDisplayName(u.backend_username);
+            return (
+              <div
+                key={u.id}
+                className="bg-bg-secondary border border-overlay/10 rounded-lg p-4 space-y-2"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="truncate">
+                    <span className="text-text-primary font-medium text-sm">
+                      {primary}
+                    </span>
+                    {subtitle && (
+                      <span className="block text-[11px] text-text-muted truncate">
+                        {subtitle}
+                      </span>
+                    )}
+                  </div>
+                  <span
+                    className={`text-xs ${statusColors[u.status] || "text-text-muted"}`}
+                  >
+                    {u.status}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-muted items-center">
+                  <span>
+                    {countryFlag(u.server_country_code)} {u.server_name}
+                  </span>
+                  <DeviceBadge user={u} />
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-muted">
+                  <span>
+                    Traffic: {formatBytes(u.used_traffic_bytes)}
+                    {u.data_limit_bytes ? ` / ${formatBytes(u.data_limit_bytes)}` : ""}
+                  </span>
+                  <span>Expires: {formatDate(u.expires_at)}</span>
+                </div>
+                <div className="flex items-center justify-between pt-1">
+                  <span className="text-xs text-text-muted">
+                    Last online: {formatDate(u.last_online_at)}
+                  </span>
+                  <button
+                    onClick={() => handleDelete(u)}
+                    disabled={deleting === u.id}
+                    className="px-2 py-1 text-xs text-red-400 hover:bg-red-500/10 rounded transition-colors cursor-pointer disabled:opacity-50"
+                  >
+                    {deleting === u.id ? "..." : "Delete"}
+                  </button>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-muted">
-                <span>
-                  {countryFlag(u.server_country_code)} {u.server_name}
-                </span>
-                <span className={displayPlatformColor(u)}>
-                  {displayPlatform(u)}
-                </span>
-                <span>{u.protocol}</span>
-              </div>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-muted">
-                <span>
-                  Traffic: {formatBytes(u.used_traffic_bytes)}
-                  {u.data_limit_bytes ? ` / ${formatBytes(u.data_limit_bytes)}` : ""}
-                </span>
-                <span>Expires: {formatDate(u.expires_at)}</span>
-              </div>
-              <div className="flex items-center justify-between pt-1">
-                <span className="text-xs text-text-muted">
-                  Last online: {formatDate(u.last_online_at)}
-                </span>
-                <button
-                  onClick={() => handleDelete(u)}
-                  disabled={deleting === u.id}
-                  className="px-2 py-1 text-xs text-red-400 hover:bg-red-500/10 rounded transition-colors cursor-pointer disabled:opacity-50"
-                >
-                  {deleting === u.id ? "..." : "Delete"}
-                </button>
-              </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
 

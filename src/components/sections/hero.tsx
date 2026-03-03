@@ -108,7 +108,7 @@ export function Hero() {
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
-                {t("trustBadges.wireguard")}
+                {t("trustBadges.vless")}
               </span>
             </div>
           </div>
