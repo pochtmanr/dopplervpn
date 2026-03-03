@@ -30,7 +30,7 @@ export async function GET(
       .from("vpn_servers")
       .select("id, name, country_code");
 
-    const serverMap = new Map(
+    const serverMap = new Map<string, { id: string; name: string; country_code: string }>(
       (servers || []).map((s: { id: string; name: string; country_code: string }) => [s.id, s])
     );
 

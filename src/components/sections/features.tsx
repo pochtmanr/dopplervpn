@@ -22,9 +22,9 @@ const featureIcons: Record<string, React.ReactNode> = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
     </svg>
   ),
-  contentFilter: (
+  smartRouting: (
     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
     </svg>
   ),
   minimalData: (
@@ -44,8 +44,8 @@ const featureIcons: Record<string, React.ReactNode> = {
 const featureLayout: { key: string; colSpan: string; hasImage?: boolean; imagePath?: string; isWide?: boolean }[] = [
   { key: "noRegistration", colSpan: "md:col-span-2", hasImage: true, imagePath: "/images/features/1.avif" },
   { key: "vlessReality", colSpan: "" },
+  { key: "smartRouting", colSpan: "" },
   { key: "adBlocker", colSpan: "" },
-  { key: "contentFilter", colSpan: "" },
   { key: "minimalData", colSpan: "" },
   { key: "completelyFree", colSpan: "md:col-span-3", isWide: true },
 ];
