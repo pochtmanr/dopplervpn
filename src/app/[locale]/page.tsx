@@ -35,6 +35,25 @@ interface HomePostData {
   }[];
 }
 
+interface ServerData {
+  name: string;
+  country: string;
+  country_code: string;
+  city: string;
+  protocol: string;
+  is_premium: boolean;
+}
+
+async function getServers() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("vpn_servers")
+    .select("name, country, country_code, city, protocol, is_premium")
+    .eq("is_active", true)
+    .order("country_code");
+  return (data as ServerData[]) || [];
+}
+
 async function getLatestPosts(locale: string) {
   const supabase = await createClient();
 
@@ -100,7 +119,10 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const posts = await getLatestPosts(locale);
+  const [posts, servers] = await Promise.all([
+    getLatestPosts(locale),
+    getServers(),
+  ]);
 
   return (
     <>
@@ -109,7 +131,7 @@ export default async function HomePage({ params }: PageProps) {
         <Hero />
         <Features />
         <HowItWorks />
-        <Servers />
+        <Servers servers={servers} />
         <Pricing />
         <FAQ />
         <CTA />

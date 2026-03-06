@@ -36,21 +36,6 @@ Rules:
 - If a field is null in the input, set it to null in the output
 - Do NOT add commentary — return ONLY the JSON object`;
 
-const CASUAL_SYSTEM_PROMPT = (languageName: string) =>
-  `You are translating a casual, internet-culture tech blog post to ${languageName}. This is NOT a formal article — it's written like a real person talking to friends about tech news, memes, and viral moments.
-
-Rules:
-- Maintain all markdown formatting exactly
-- Keep technical terms in English: VPN, DNS, IP, HTTPS, SSL, TLS, Wi-Fi, iOS, Android, macOS, Windows
-- Keep brand names in English: Doppler VPN, Simnetiq, Apple, Google
-- PRESERVE the casual, conversational tone — do NOT make it more formal or professional
-- Keep internet slang, meme references, and humor intact
-- If a meme or cultural reference doesn't translate well, keep the original reference and add brief context if needed
-- Adapt jokes and humor naturally to ${languageName} culture where possible
-- For RTL languages (Hebrew, Arabic, Farsi, Urdu): ensure the text reads naturally in RTL
-- Return valid JSON with these exact keys: title, excerpt, content, image_alt, meta_title, meta_description, og_title, og_description
-- If a field is null in the input, set it to null in the output
-- Do NOT add commentary — return ONLY the JSON object`;
 
 interface TranslationInput {
   title: string;
@@ -76,15 +61,12 @@ async function sleep(ms: number) {
 export async function translateContent(
   source: TranslationInput,
   targetLocale: string,
-  templateType?: string
+  _templateType?: string
 ): Promise<TranslationOutput> {
   const openai = getOpenAI();
   const languageName = LANGUAGE_NAMES[targetLocale] || targetLocale;
 
-  const isCasual = templateType === "meme" || templateType === "roundup";
-  const systemPrompt = isCasual
-    ? CASUAL_SYSTEM_PROMPT(languageName)
-    : FORMAL_SYSTEM_PROMPT(languageName);
+  const systemPrompt = FORMAL_SYSTEM_PROMPT(languageName);
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
