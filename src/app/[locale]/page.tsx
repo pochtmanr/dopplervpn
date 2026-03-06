@@ -48,7 +48,7 @@ async function getServers() {
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("get_public_servers");
   if (error) console.error("[getServers]", error);
-  return (data as ServerData[]) || [];
+  return (data as unknown as ServerData[]) || [];
 }
 
 async function getLatestPosts(locale: string) {
