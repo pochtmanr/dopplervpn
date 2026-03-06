@@ -4,63 +4,24 @@ import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
-/* ─── Types ─── */
-interface ServerData {
-  name: string;
-  country: string;
-  country_code: string;
-  city: string;
-  protocol: string;
-  is_premium: boolean;
-}
-
-interface ServerGroup {
+/* ─── Server location data (from Supabase vpn_servers, updated 2026-03-06) ─── */
+interface ServerLocation {
   country: string;
   city: string;
-  flag: string;
   count: number;
   protocol: string;
-  hasPremium: boolean;
+  flag: string;
 }
 
-/* ─── Country code to flag emoji ─── */
-const FLAG_MAP: Record<string, string> = {
-  DE: "\u{1F1E9}\u{1F1EA}",
-  RU: "\u{1F1F7}\u{1F1FA}",
-  RU2: "\u{1F1F7}\u{1F1FA}",
-  FR: "\u{1F1EB}\u{1F1F7}",
-  JP: "\u{1F1EF}\u{1F1F5}",
-  NL: "\u{1F1F3}\u{1F1F1}",
-  SG: "\u{1F1F8}\u{1F1EC}",
-  US: "\u{1F1FA}\u{1F1F8}",
-  IL: "\u{1F1EE}\u{1F1F1}",
-  CH: "\u{1F1E8}\u{1F1ED}",
-  GB: "\u{1F1EC}\u{1F1E7}",
-};
-
-function groupServers(servers: ServerData[]): ServerGroup[] {
-  const groups = new Map<string, ServerGroup>();
-
-  for (const s of servers) {
-    const baseCode = s.country_code.replace(/\d+$/, "");
-    const existing = groups.get(baseCode);
-    if (existing) {
-      existing.count += 1;
-      if (s.is_premium) existing.hasPremium = true;
-    } else {
-      groups.set(baseCode, {
-        country: s.country,
-        city: s.city,
-        flag: FLAG_MAP[s.country_code] || FLAG_MAP[baseCode] || "\u{1F30D}",
-        count: 1,
-        protocol: s.protocol === "vless" ? "VLESS-Reality" : s.protocol,
-        hasPremium: s.is_premium,
-      });
-    }
-  }
-
-  return Array.from(groups.values());
-}
+const serverLocations: ServerLocation[] = [
+  { country: "Germany", city: "Frankfurt", count: 1, protocol: "VLESS-Reality", flag: "\u{1F1E9}\u{1F1EA}" },
+  { country: "France", city: "Paris", count: 1, protocol: "VLESS-Reality", flag: "\u{1F1EB}\u{1F1F7}" },
+  { country: "Japan", city: "Tokyo", count: 1, protocol: "VLESS-Reality", flag: "\u{1F1EF}\u{1F1F5}" },
+  { country: "Netherlands", city: "Amsterdam", count: 1, protocol: "VLESS-Reality", flag: "\u{1F1F3}\u{1F1F1}" },
+  { country: "Russia", city: "Moscow", count: 2, protocol: "VLESS-Reality", flag: "\u{1F1F7}\u{1F1FA}" },
+  { country: "Singapore", city: "Singapore", count: 1, protocol: "VLESS-Reality", flag: "\u{1F1F8}\u{1F1EC}" },
+  { country: "United States", city: "Dallas", count: 1, protocol: "VLESS-Reality", flag: "\u{1F1FA}\u{1F1F8}" },
+];
 
 /* ─── Protocol badge ─── */
 function ProtocolBadge({ protocol }: { protocol: string }) {
@@ -72,45 +33,44 @@ function ProtocolBadge({ protocol }: { protocol: string }) {
 }
 
 /* ─── Server card ─── */
-function ServerCard({ group, t }: { group: ServerGroup; t: ReturnType<typeof useTranslations> }) {
+function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<typeof useTranslations> }) {
   return (
     <div className="group rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
-          <span className="text-2xl leading-none">{group.flag}</span>
+          <span className="text-2xl leading-none">{location.flag}</span>
           <div>
             <h3 className="text-base font-semibold text-text-primary">
-              {group.city}
+              {location.city}
             </h3>
             <p className="text-xs text-text-muted">
-              {group.country}
+              {location.country}
             </p>
           </div>
         </div>
         <span className="text-xs text-text-muted bg-overlay/5 px-2 py-1 rounded-full">
-          {group.count} {group.count > 1 ? t("servers") : t("server")}
+          {location.count} {location.count > 1 ? t("servers") : t("server")}
         </span>
       </div>
       <div className="flex flex-wrap gap-1.5">
-        <ProtocolBadge protocol={group.protocol} />
+        <ProtocolBadge protocol={location.protocol} />
       </div>
     </div>
   );
 }
 
 /* ─── Servers section ─── */
-export function Servers({ servers }: { servers: ServerData[] }) {
+export function Servers() {
   const t = useTranslations("servers");
-  const groups = groupServers(servers);
 
   return (
     <Section id="servers">
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {groups.map((group, i) => (
-          <Reveal key={group.country + group.city} delay={i * 50}>
-            <ServerCard group={group} t={t} />
+        {serverLocations.map((location, i) => (
+          <Reveal key={location.country + location.city} delay={i * 50}>
+            <ServerCard location={location} t={t} />
           </Reveal>
         ))}
       </div>

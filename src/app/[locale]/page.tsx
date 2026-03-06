@@ -35,22 +35,6 @@ interface HomePostData {
   }[];
 }
 
-interface ServerData {
-  name: string;
-  country: string;
-  country_code: string;
-  city: string;
-  protocol: string;
-  is_premium: boolean;
-}
-
-async function getServers() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.rpc("get_public_servers");
-  if (error) console.error("[getServers]", error);
-  return (data as unknown as ServerData[]) || [];
-}
-
 async function getLatestPosts(locale: string) {
   const supabase = await createClient();
 
@@ -116,10 +100,7 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [posts, servers] = await Promise.all([
-    getLatestPosts(locale),
-    getServers(),
-  ]);
+  const posts = await getLatestPosts(locale);
 
   return (
     <>
@@ -128,7 +109,7 @@ export default async function HomePage({ params }: PageProps) {
         <Hero />
         <Features />
         <HowItWorks />
-        <Servers servers={servers} />
+        <Servers />
         <Pricing />
         <FAQ />
         <CTA />
