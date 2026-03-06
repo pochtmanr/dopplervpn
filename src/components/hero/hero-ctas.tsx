@@ -66,9 +66,10 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
     primaryLabel = t("getAndroid");
     targetHref = "/guide/android";
   } else if (os === "mac") {
-    primaryIcon = <MonitorIcon />;
+    primaryIcon = <AppleIcon />;
     primaryLabel = t("downloadMac");
-    targetHref = "/guide/mac";
+    targetHref = "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
+    isExternal = true;
   } else if (os === "windows") {
     primaryIcon = <MonitorIcon />;
     primaryLabel = t("downloadWindows");
@@ -84,7 +85,7 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
       href={targetHref}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={t("downloadIosLabel")}
+      aria-label={primaryLabel}
       className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
     >
       {primaryIcon}
@@ -92,7 +93,7 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
     </a>
   ) : (
     <Link
-      href={targetHref as "/guide/android" | "/guide/mac" | "/guide/windows" | "/downloads"}
+      href={targetHref as "/guide/android" | "/guide/windows" | "/downloads"}
       className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
     >
       {primaryIcon}
