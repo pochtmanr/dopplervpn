@@ -23,7 +23,8 @@ const MOBILE = {
   },
   android: {
     doppler: {
-      href: "https://play.google.com/store/apps/details?id=com.dopplervpn.android",
+      href: "/downloads/doppler-vpn-v1.2.0.apk",
+      meta: "APK \u00b7 v1.2.0 \u00b7 95 MB",
     },
     vless: {
       href: "https://github.com/2dust/v2rayNG/releases/download/1.10.32/v2rayNG_1.10.32_universal.apk",
@@ -218,19 +219,23 @@ export default async function AppsPage({ params }: PageProps) {
                     </div>
                   </div>
 
-                  {/* Doppler Android — coming soon */}
-                  <div className="rounded-xl bg-overlay/5 border border-overlay/10 px-4 py-3">
-                    <div className="flex items-center justify-between">
+                  {/* Doppler Android — APK download */}
+                  <a
+                    href={MOBILE.android.doppler.href}
+                    download
+                    className="group flex items-center justify-between rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all"
+                  >
+                    <div className="flex items-center gap-3">
+                      <DownloadIcon className="w-4 h-4 text-accent-teal shrink-0" />
                       <div>
                         <div className="text-sm font-semibold text-text-primary">{t("android.doppler")}</div>
-                        <div className="text-xs text-text-muted">{t("android.dopplerSub")}</div>
+                        <div className="text-xs text-text-muted">{MOBILE.android.doppler.meta}</div>
                       </div>
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted shrink-0">
-                        <span className="w-1.5 h-1.5 rounded-full bg-text-muted/50" />
-                        {t("comingSoon")}
-                      </span>
                     </div>
-                  </div>
+                    <span className="text-accent-teal text-sm font-medium shrink-0">
+                      {t("download")} APK <Arrow />
+                    </span>
+                  </a>
 
                   {/* VLESS — direct GitHub APK download */}
                   <div className="rounded-xl border border-overlay/8 bg-bg-primary/40 px-4 py-3 space-y-2">
