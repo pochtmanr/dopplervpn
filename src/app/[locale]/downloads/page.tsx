@@ -55,22 +55,6 @@ const DESKTOP = {
     doppler: {
       href: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
     },
-    vless: [
-      {
-        labelKey: "appleSilicon" as const,
-        href: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-macos-arm64.dmg",
-        size: "105 MB",
-        arch: "M1 / M2 / M3 / M4",
-        ext: ".dmg",
-      },
-      {
-        labelKey: "intel" as const,
-        href: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-macos-64.dmg",
-        size: "110 MB",
-        arch: "Intel x86_64",
-        ext: ".dmg",
-      },
-    ],
   },
 };
 
@@ -351,43 +335,6 @@ export default async function AppsPage({ params }: PageProps) {
                       {t("mac.macAppStore")} <Arrow />
                     </span>
                   </a>
-
-                  {/* VLESS */}
-                  <div className="rounded-xl border border-overlay/8 bg-bg-primary/40 px-4 py-3 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="px-1.5 py-0.5 rounded bg-accent-gold/15 text-accent-gold text-[10px] font-semibold uppercase tracking-wider">
-                        VLESS
-                      </span>
-                      <span className="text-[11px] text-text-muted">{t("vlessNote")}</span>
-                    </div>
-                    {DESKTOP.mac.vless.map((v) => (
-                      <a
-                        key={v.labelKey}
-                        href={v.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-overlay/5 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <DownloadIcon className="w-4 h-4 text-text-muted group-hover:text-accent-teal transition-colors shrink-0" />
-                          <div>
-                            <div className="text-sm text-text-primary">{t(`mac.${v.labelKey}`)}</div>
-                            <div className="text-[11px] text-text-muted">{v.arch} &middot; {v.ext} &middot; {v.size}</div>
-                          </div>
-                        </div>
-                        <span className="text-text-muted text-xs group-hover:text-accent-teal transition-colors shrink-0">
-                          {t("download")} <Arrow />
-                        </span>
-                      </a>
-                    ))}
-                  </div>
-
-                  <Link
-                    href="/guide/mac"
-                    className="inline-block text-xs text-text-muted hover:text-accent-teal transition-colors"
-                  >
-                    {t("viewSetupGuide")} <Arrow />
-                  </Link>
                 </div>
               </div>
             </section>

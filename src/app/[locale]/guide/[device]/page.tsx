@@ -59,18 +59,6 @@ const DOWNLOAD_OPTIONS: Record<Device, DownloadOption[]> = {
       descKey: "mac.dlMacStoreDesc",
       href: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
     },
-    {
-      nameKey: "mac.dlV2rayNSilicon",
-      descKey: "mac.dlV2rayNSiliconDesc",
-      href: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-macos-arm64.dmg",
-      protocol: "vless",
-    },
-    {
-      nameKey: "mac.dlV2rayNIntel",
-      descKey: "mac.dlV2rayNIntelDesc",
-      href: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-macos-64.dmg",
-      protocol: "vless",
-    },
   ],
   windows: [
     {
@@ -90,8 +78,7 @@ const DOWNLOAD_OPTIONS: Record<Device, DownloadOption[]> = {
     {
       nameKey: "android.dlDoppler",
       descKey: "android.dlDopplerDesc",
-      href: "https://play.google.com/store/apps/details?id=com.dopplervpn.android",
-      comingSoon: true,
+      href: "/downloads/doppler-vpn-v1.2.0.apk",
     },
     {
       nameKey: "android.dlV2rayNG",
