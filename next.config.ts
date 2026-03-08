@@ -24,6 +24,12 @@ const nextConfig: NextConfig = {
         destination: "/:locale/downloads",
         permanent: true,
       },
+      {
+        source: "/downloads/doppler-vpn-v1.2.0.apk",
+        destination:
+          "https://github.com/pochtmanr/dopplerland/releases/download/v1.2.0-android/doppler-vpn-v1.2.0.apk",
+        permanent: false,
+      },
     ];
   },
   images: {

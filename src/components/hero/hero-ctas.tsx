@@ -64,7 +64,8 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
   } else if (platform === "android") {
     primaryIcon = <AndroidIcon />;
     primaryLabel = t("getAndroid");
-    targetHref = "/guide/android";
+    targetHref = "/downloads/doppler-vpn-v1.2.0.apk";
+    isExternal = true;
   } else if (os === "mac") {
     primaryIcon = <AppleIcon />;
     primaryLabel = t("downloadMac");
@@ -87,13 +88,14 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
       rel="noopener noreferrer"
       aria-label={primaryLabel}
       className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
+      {...(targetHref.endsWith('.apk') ? { download: true } : {})}
     >
       {primaryIcon}
       {primaryLabel}
     </a>
   ) : (
     <Link
-      href={targetHref as "/guide/android" | "/guide/windows" | "/downloads"}
+      href={targetHref as "/guide/windows" | "/downloads"}
       className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
     >
       {primaryIcon}
