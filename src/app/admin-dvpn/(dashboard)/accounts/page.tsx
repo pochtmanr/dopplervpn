@@ -8,6 +8,7 @@ interface AccountRow {
   id: string;
   account_id: string;
   subscription_tier: string;
+  subscription_store: string | null;
   max_devices: number;
   created_at: string;
   updated_at: string;
@@ -104,6 +105,8 @@ export default function AccountsPage() {
   const [detailsLoading, setDetailsLoading] = useState(false);
   const [changingTier, setChangingTier] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [grantProAccount, setGrantProAccount] = useState<AccountRow | null>(null);
+  const [grantDuration, setGrantDuration] = useState("30");
 
   const tier = searchParams.get("tier") || "";
   const contactMethod = searchParams.get("contact_method") || "";
@@ -164,16 +167,30 @@ export default function AccountsPage() {
     }
   }
 
-  async function handleChangeTier(account: AccountRow, newTier: string) {
+  function handleTierSelect(account: AccountRow, newTier: string) {
     if (newTier === account.subscription_tier) return;
+    if (newTier === "free") {
+      // Downgrade immediately — no duration needed
+      handleChangeTier(account, "free");
+    } else {
+      // Show modal to pick duration
+      setGrantProAccount(account);
+      setGrantDuration("30");
+    }
+  }
+
+  async function handleChangeTier(account: AccountRow, newTier: string, durationDays?: number) {
     setChangingTier(account.id);
     try {
+      const body: Record<string, unknown> = { subscription_tier: newTier };
+      if (durationDays) body.duration_days = durationDays;
       const res = await fetch(`/api/admin/accounts/${account.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subscription_tier: newTier }),
+        body: JSON.stringify(body),
       });
       if (!res.ok) throw new Error("Failed to update tier");
+      setGrantProAccount(null);
       fetchAccounts();
     } catch {
       setError("Failed to update tier");
@@ -344,6 +361,7 @@ export default function AccountsPage() {
                   <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("tier")}>
                     Tier<SortIcon apiKey="subscription_tier" />
                   </th>
+                  <th className="px-4 py-3 font-medium">Expires</th>
                   <th className="px-4 py-3 font-medium">Devices</th>
                   <th className="px-4 py-3 font-medium cursor-pointer select-none hover:text-text-primary transition-colors" onClick={() => toggleSort("created")}>
                     Created<SortIcon apiKey="created_at" />
@@ -363,13 +381,25 @@ export default function AccountsPage() {
                       </td>
                       <td className="px-4 py-3">
                         <TierBadge tier={a.subscription_tier} />
+                        {a.subscription_store && (
+                          <span className="ml-1.5 text-[10px] text-text-muted/60">{a.subscription_store}</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-text-muted text-xs">
+                        {a.subscription_expires_at ? (
+                          <span className={new Date(a.subscription_expires_at) < new Date() ? "text-red-400" : ""}>
+                            {formatDate(a.subscription_expires_at)}
+                          </span>
+                        ) : a.subscription_tier !== "free" ? (
+                          <span className="text-text-muted/40">no expiry</span>
+                        ) : "—"}
                       </td>
                       <td className="px-4 py-3 text-text-muted">{a.device_count}</td>
                       <td className="px-4 py-3 text-text-muted">{formatDate(a.created_at)}</td>
                       <td className="px-4 py-3 text-right" onClick={(e) => e.stopPropagation()}>
                         <select
                           value={a.subscription_tier}
-                          onChange={(e) => handleChangeTier(a, e.target.value)}
+                          onChange={(e) => handleTierSelect(a, e.target.value)}
                           disabled={changingTier === a.id}
                           className="mr-2 px-1.5 py-0.5 bg-transparent border border-overlay/10 rounded text-[11px] text-text-muted focus:outline-none focus:border-accent-teal cursor-pointer disabled:opacity-50"
                         >
@@ -388,7 +418,7 @@ export default function AccountsPage() {
                     </tr>
                     {expandedId === a.id && (
                       <tr>
-                        <td colSpan={5} className="px-4 py-3 bg-overlay/[0.02] space-y-4">
+                        <td colSpan={6} className="px-4 py-3 bg-overlay/[0.02] space-y-4">
                           {detailsLoading ? (
                             <p className="text-xs text-text-muted py-2">Loading...</p>
                           ) : (
@@ -474,7 +504,7 @@ export default function AccountsPage() {
                 ))}
                 {accounts.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="px-4 py-8 text-center text-text-muted">
+                    <td colSpan={6} className="px-4 py-8 text-center text-text-muted">
                       No accounts found
                     </td>
                   </tr>
@@ -504,11 +534,19 @@ export default function AccountsPage() {
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-muted">
                 <span>{a.device_count} device{a.device_count !== 1 ? "s" : ""}</span>
                 <span>Created: {formatDate(a.created_at)}</span>
+                {a.subscription_expires_at && (
+                  <span className={new Date(a.subscription_expires_at) < new Date() ? "text-red-400" : ""}>
+                    Expires: {formatDate(a.subscription_expires_at)}
+                  </span>
+                )}
+                {a.subscription_store && (
+                  <span>via {a.subscription_store}</span>
+                )}
               </div>
               <div className="flex items-center justify-between pt-1">
                 <select
                   value={a.subscription_tier}
-                  onChange={(e) => handleChangeTier(a, e.target.value)}
+                  onChange={(e) => handleTierSelect(a, e.target.value)}
                   disabled={changingTier === a.id}
                   className="px-1.5 py-0.5 bg-transparent border border-overlay/10 rounded text-[11px] text-text-muted focus:outline-none focus:border-accent-teal cursor-pointer disabled:opacity-50"
                 >
@@ -528,6 +566,73 @@ export default function AccountsPage() {
           ))
         )}
       </div>
+
+      {/* Grant Pro Modal */}
+      {grantProAccount && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setGrantProAccount(null)}>
+          <div className="bg-bg-secondary border border-overlay/10 rounded-xl p-6 w-full max-w-sm mx-4 space-y-4" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-semibold text-text-primary">Grant Pro</h3>
+            <p className="text-sm text-text-muted">
+              Account: <span className="font-mono text-text-primary">{grantProAccount.account_id}</span>
+            </p>
+
+            <div>
+              <label className="block text-xs text-text-muted mb-1.5">Duration</label>
+              <div className="grid grid-cols-4 gap-2">
+                {[
+                  { label: "7 days", value: "7" },
+                  { label: "30 days", value: "30" },
+                  { label: "90 days", value: "90" },
+                  { label: "1 year", value: "365" },
+                ].map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setGrantDuration(opt.value)}
+                    className={`px-2 py-1.5 text-xs rounded-lg border transition-colors cursor-pointer ${
+                      grantDuration === opt.value
+                        ? "border-accent-teal bg-accent-teal/10 text-accent-teal"
+                        : "border-overlay/10 text-text-muted hover:border-overlay/20"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-2">
+                <input
+                  type="number"
+                  value={grantDuration}
+                  onChange={(e) => setGrantDuration(e.target.value)}
+                  min="1"
+                  max="3650"
+                  className="w-full px-3 py-1.5 bg-transparent border border-overlay/10 rounded-lg text-sm text-text-primary focus:outline-none focus:border-accent-teal"
+                  placeholder="Custom days..."
+                />
+              </div>
+            </div>
+
+            <p className="text-xs text-text-muted">
+              Expires: {new Date(Date.now() + Number(grantDuration) * 86400000).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+            </p>
+
+            <div className="flex gap-3 pt-2">
+              <button
+                onClick={() => setGrantProAccount(null)}
+                className="flex-1 px-3 py-2 text-sm border border-overlay/10 rounded-lg text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleChangeTier(grantProAccount, "pro", Number(grantDuration))}
+                disabled={changingTier === grantProAccount.id || !grantDuration || Number(grantDuration) < 1}
+                className="flex-1 px-3 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors cursor-pointer disabled:opacity-50"
+              >
+                {changingTier === grantProAccount.id ? "Granting..." : "Grant Pro"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Pagination */}
       {totalPages > 1 && (

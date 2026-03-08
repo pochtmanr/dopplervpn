@@ -11,16 +11,35 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { subscription_tier } = body;
+    const { subscription_tier, duration_days } = body;
 
     if (!["free", "pro", "premium"].includes(subscription_tier)) {
       return NextResponse.json({ error: "Invalid tier" }, { status: 400 });
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { error: updateErr } = await (adminClient as any)
+    const client = adminClient as any;
+
+    const updateData: Record<string, unknown> = {
+      subscription_tier,
+      updated_at: new Date().toISOString(),
+    };
+
+    if (subscription_tier === "free") {
+      // Downgrading to free — clear subscription fields
+      updateData.subscription_expires_at = null;
+      updateData.subscription_store = null;
+    } else if (duration_days) {
+      // Granting Pro/Premium with duration
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + Number(duration_days));
+      updateData.subscription_expires_at = expiresAt.toISOString();
+      updateData.subscription_store = "admin";
+    }
+
+    const { error: updateErr } = await client
       .from("accounts")
-      .update({ subscription_tier })
+      .update(updateData)
       .eq("id", id);
 
     if (updateErr) throw new Error(`Failed to update: ${updateErr.message}`);

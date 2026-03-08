@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     let query: any = adminClient
       .from("accounts")
       .select(
-        "id, account_id, subscription_tier, max_devices, created_at, updated_at, subscription_expires_at, contact_method, contact_value, language",
+        "id, account_id, subscription_tier, subscription_store, max_devices, created_at, updated_at, subscription_expires_at, contact_method, contact_value, language",
         { count: "exact" }
       );
 
