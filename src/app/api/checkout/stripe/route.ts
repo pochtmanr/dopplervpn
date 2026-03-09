@@ -7,6 +7,7 @@ function getStripe() {
 }
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PLANS: Record<string, { name: string; cents: number; days: number }> = {
   monthly: { name: 'Doppler VPN Pro — Monthly', cents: 400, days: 30 },
@@ -14,30 +15,81 @@ const PLANS: Record<string, { name: string; cents: number; days: number }> = {
   yearly: { name: 'Doppler VPN Pro — Yearly', cents: 3500, days: 365 },
 };
 
+function generateAccountId(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const seg = () =>
+    Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  return `VPN-${seg()}-${seg()}-${seg()}`;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { planId, accountId, promoId } = await req.json();
+    const { planId, accountId: rawAccountId, email, promoId } = await req.json();
 
     const plan = PLANS[planId];
     if (!plan) {
       return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
     }
 
-    if (!accountId || !ACCOUNT_ID_REGEX.test(accountId)) {
-      return NextResponse.json({ error: 'Invalid account ID format' }, { status: 400 });
+    // Require either a valid accountId or a valid email
+    const hasAccountId = rawAccountId && ACCOUNT_ID_REGEX.test(rawAccountId);
+    const hasEmail = email && EMAIL_REGEX.test(email);
+
+    if (!hasAccountId && !hasEmail) {
+      return NextResponse.json(
+        { error: 'Either a valid account ID or email is required' },
+        { status: 400 },
+      );
     }
 
     const supabase = createUntypedAdminClient();
+    let accountId: string;
 
-    // Verify account exists
-    const { data: account, error: accountError } = await supabase
-      .from('accounts')
-      .select('id')
-      .eq('account_id', accountId)
-      .single();
+    if (hasAccountId) {
+      // Existing flow: verify account exists
+      accountId = rawAccountId;
+      const { data: account, error: accountError } = await supabase
+        .from('accounts')
+        .select('id')
+        .eq('account_id', accountId)
+        .single();
 
-    if (accountError || !account) {
-      return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+      if (accountError || !account) {
+        return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+      }
+    } else {
+      // Email-based flow: find existing account or create a new one
+      const normalizedEmail = email.toLowerCase().trim();
+
+      const { data: existing } = await supabase
+        .from('accounts')
+        .select('account_id')
+        .eq('contact_method', 'email')
+        .eq('contact_value', normalizedEmail)
+        .single();
+
+      if (existing) {
+        accountId = existing.account_id;
+      } else {
+        // Create new account with unique ID (retry on collision)
+        accountId = '';
+        let attempts = 0;
+        while (attempts < 5) {
+          accountId = generateAccountId();
+          const { error: insertError } = await supabase.from('accounts').insert({
+            account_id: accountId,
+            subscription_tier: 'free',
+            contact_method: 'email',
+            contact_value: normalizedEmail,
+            contact_verified: false,
+          });
+          if (!insertError) break;
+          attempts++;
+          if (attempts >= 5) {
+            return NextResponse.json({ error: 'Failed to create account' }, { status: 500 });
+          }
+        }
+      }
     }
 
     // Apply promo discount if provided
@@ -65,6 +117,7 @@ export async function POST(req: NextRequest) {
 
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
+      customer_email: email || undefined,
       line_items: [{
         price_data: {
           currency: 'usd',
@@ -77,13 +130,14 @@ export async function POST(req: NextRequest) {
         account_id: accountId,
         plan_id: planId,
         days: String(plan.days),
-        source: 'web_checkout',
+        source: 'web_subscribe',
+        email: email || '',
         promo_id: promoId || '',
         promo_discount: String(promoDiscount),
         original_cents: String(plan.cents),
       },
-      success_url: `${baseUrl}/en/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/en/checkout?account_id=${accountId}`,
+      success_url: `${baseUrl}/en/subscribe/success?session_id={CHECKOUT_SESSION_ID}&account_id=${accountId}`,
+      cancel_url: `${baseUrl}/en/subscribe`,
     });
 
     return NextResponse.json({ url: session.url });
