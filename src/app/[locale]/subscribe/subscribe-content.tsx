@@ -6,9 +6,9 @@ import { useTranslations, useLocale } from 'next-intl';
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
 const PLANS = [
-  { id: 'monthly', cents: 400, months: 1, save: null, best: false },
-  { id: '6month', cents: 2000, months: 6, save: 17, best: false },
-  { id: 'yearly', cents: 3500, months: 12, save: 27, best: true },
+  { id: 'monthly', cents: 699, months: 1, save: null, best: false },
+  { id: '6month', cents: 2999, months: 6, save: 28, best: false },
+  { id: 'yearly', cents: 3999, months: 12, save: 52, best: true },
 ] as const;
 
 type PlanId = (typeof PLANS)[number]['id'];
@@ -129,6 +129,7 @@ function LogOutIcon({ className = 'w-4 h-4' }: { className?: string }) {
 interface AccountInfo {
   accountId: string;
   tier: string;
+  rawTier: string | null;
   expiresAt: string | null;
   contactMethod: string | null;
   contactValue: string | null;
@@ -161,6 +162,16 @@ function SubscribeInner() {
   const [connectEmailOpen, setConnectEmailOpen] = useState(false);
   const [contactSaving, setContactSaving] = useState(false);
   const [contactSaved, setContactSaved] = useState(false);
+
+  /* ── Premium support state ────────────────────────────────────── */
+  const [premiumTicketOpen, setPremiumTicketOpen] = useState(false);
+  const [premiumTicketForm, setPremiumTicketForm] = useState({ subject: '', description: '', contactEmail: '' });
+  const [premiumTicketLoading, setPremiumTicketLoading] = useState(false);
+  const [premiumTicketSuccess, setPremiumTicketSuccess] = useState<string | null>(null);
+  const [premiumTicketError, setPremiumTicketError] = useState('');
+
+  /* ── Delete account state ────────────────────────────────────── */
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
 
   /* ── Plan & checkout state ─────────────────────────────────────── */
   const [selected, setSelected] = useState<PlanId>('yearly');
@@ -381,6 +392,49 @@ function SubscribeInner() {
     setContactSaved(false);
   };
 
+  /* ── Submit premium ticket ────────────────────────────────────── */
+  const resolvedTicketEmail = knownEmail || (accountInfo?.contactMethod === 'email' ? accountInfo?.contactValue : null) || '';
+
+  const handlePremiumTicket = async () => {
+    const { subject, description, contactEmail: formEmail } = premiumTicketForm;
+    if (!subject.trim() || !description.trim()) return;
+
+    const contactEmail = resolvedTicketEmail || formEmail.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(contactEmail)) {
+      setPremiumTicketError(t('dashboard.ticketEmailRequired'));
+      return;
+    }
+
+    setPremiumTicketLoading(true);
+    setPremiumTicketError('');
+    try {
+      const res = await fetch('/api/support/create-ticket', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: 'subscription_billing',
+          subject: subject.trim(),
+          description: description.trim(),
+          contact_email: contactEmail.toLowerCase(),
+          account_id: accountId,
+          priority: 'premium',
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPremiumTicketError(data.error || t('error'));
+        return;
+      }
+      setPremiumTicketSuccess(data.ticket_number);
+      setPremiumTicketForm({ subject: '', description: '', contactEmail: '' });
+    } catch {
+      setPremiumTicketError(t('error'));
+    } finally {
+      setPremiumTicketLoading(false);
+    }
+  };
+
   /* ── Step 2: Subscribe ─────────────────────────────────────────── */
   const handleSubscribe = async () => {
     setLoading(true);
@@ -418,9 +472,10 @@ function SubscribeInner() {
     t('feat4'), t('feat5'), t('feat6'),
   ];
 
-  const isPro = accountInfo?.tier === 'pro';
-  const isExpired = isPro && accountInfo?.expiresAt && new Date(accountInfo.expiresAt) < new Date();
-  const isActivePro = isPro && !isExpired;
+  const isPro = accountInfo?.tier === 'pro' || accountInfo?.tier === 'premium';
+  const isActivePro = isPro;
+  // Expired pro: rawTier was pro/premium but effective tier is free (server already computed)
+  const isExpiredPro = !isPro && (accountInfo?.rawTier === 'pro' || accountInfo?.rawTier === 'premium');
 
   /* ── Render ────────────────────────────────────────────────────── */
   return (
@@ -759,12 +814,35 @@ function SubscribeInner() {
 
                   {/* Account actions */}
                   <div className="space-y-2">
-                    <a
-                      href={`/${locale}/support#delete-account`}
-                      className="flex items-center gap-2 w-full rounded-xl border border-red-500/10 px-4 py-2.5 text-sm text-red-400/70 hover:text-red-400 hover:border-red-500/20 hover:bg-red-500/5 transition-colors"
-                    >
-                      {t('dashboard.deleteAccount')}
-                    </a>
+                    {isActivePro ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setDeleteConfirmOpen(!deleteConfirmOpen)}
+                          className="flex items-center gap-2 w-full rounded-xl border border-red-500/10 px-4 py-2.5 text-sm text-red-400/70 hover:text-red-400 hover:border-red-500/20 hover:bg-red-500/5 transition-colors"
+                        >
+                          {t('dashboard.deleteAccount')}
+                        </button>
+                        {deleteConfirmOpen && (
+                          <div className="rounded-xl border border-red-500/15 bg-red-500/5 px-4 py-3 space-y-2">
+                            <p className="text-xs text-red-300">{t('dashboard.deleteWarningPro')}</p>
+                            <a
+                              href={`/${locale}/support#delete-account`}
+                              className="inline-flex text-xs text-red-400 underline underline-offset-2 hover:text-red-300 transition-colors"
+                            >
+                              {t('dashboard.deleteConfirm')}
+                            </a>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <a
+                        href={`/${locale}/support#delete-account`}
+                        className="flex items-center gap-2 w-full rounded-xl border border-red-500/10 px-4 py-2.5 text-sm text-red-400/70 hover:text-red-400 hover:border-red-500/20 hover:bg-red-500/5 transition-colors"
+                      >
+                        {t('dashboard.deleteAccount')}
+                      </a>
+                    )}
                   </div>
                 </div>
 
@@ -810,21 +888,24 @@ function SubscribeInner() {
                           </button>
                           <button
                             type="button"
-                            disabled
-                            className="rounded-xl border border-overlay/10 bg-overlay/[0.02] px-4 py-3 text-sm font-medium text-text-muted/50 cursor-not-allowed"
-                            title={t('dashboard.expressSupportSoon')}
+                            onClick={() => { setPremiumTicketOpen(true); setPremiumTicketSuccess(null); setPremiumTicketError(''); }}
+                            className="rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-4 py-3 text-sm font-medium text-accent-teal hover:bg-accent-teal/10 transition-colors"
                           >
                             {t('dashboard.expressSupport')}
                           </button>
                         </div>
-                        <p className="text-[10px] text-text-muted/40 text-center">
-                          {t('dashboard.expressSupportSoon')}
-                        </p>
                       </div>
                     ) : (
                       <div className="space-y-5">
                         <div className="flex items-center justify-between">
-                          <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
+                          <div>
+                            <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
+                            {isExpiredPro && accountInfo?.expiresAt && (
+                              <p className="text-xs text-yellow-400 mt-1">
+                                {t('dashboard.expiredPro', { date: formatDate(accountInfo.expiresAt, locale) })}
+                              </p>
+                            )}
+                          </div>
                           <ShieldIcon className="w-8 h-8 text-overlay/10" />
                         </div>
                         <button
@@ -832,7 +913,7 @@ function SubscribeInner() {
                           onClick={() => setShowPlans(!showPlans)}
                           className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
                         >
-                          {t('dashboard.getPro')}
+                          {isExpiredPro ? t('dashboard.renewPro') : t('dashboard.getPro')}
                           <ArrowRightIcon className="w-4 h-4" />
                         </button>
                       </div>
@@ -1038,6 +1119,119 @@ function SubscribeInner() {
               </div>
             </>
           )}
+        </div>
+      )}
+      {/* ── Premium Support Modal ──────────────────────────────── */}
+      {premiumTicketOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={(e) => { if (e.target === e.currentTarget) { setPremiumTicketOpen(false); } }}
+        >
+          <div className="w-full sm:max-w-lg bg-bg-secondary border border-overlay/10 rounded-t-2xl sm:rounded-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between p-6 pb-0">
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-lg font-display font-bold text-text-primary">
+                    {t('dashboard.expressSupport')}
+                  </h2>
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-accent-teal/15 text-accent-teal text-[10px] font-bold uppercase tracking-wider">
+                    Pro
+                  </span>
+                </div>
+                <p className="text-xs text-text-muted mt-1">{t('dashboard.premiumSupportDesc')}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setPremiumTicketOpen(false)}
+                className="p-2 rounded-lg hover:bg-overlay/5 text-text-muted hover:text-text-primary transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="p-6">
+              {premiumTicketSuccess ? (
+                <div className="text-center py-8 space-y-4">
+                  <CheckIcon className="w-12 h-12 text-green-400 mx-auto" />
+                  <h3 className="text-lg font-display font-bold text-text-primary">
+                    {t('dashboard.ticketCreated')}
+                  </h3>
+                  <p className="text-sm text-text-muted">
+                    {t('dashboard.ticketCreatedDesc', { ticketNumber: premiumTicketSuccess })}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setPremiumTicketOpen(false)}
+                    className="mt-4 w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3 text-sm transition-colors"
+                  >
+                    {t('dashboard.close')}
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-5">
+                  <div>
+                    <label className="block text-xs font-medium text-text-muted mb-1.5">
+                      {t('dashboard.ticketSubject')}
+                    </label>
+                    <input
+                      type="text"
+                      value={premiumTicketForm.subject}
+                      onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, subject: e.target.value }))}
+                      placeholder={t('dashboard.ticketSubjectPlaceholder')}
+                      className="w-full rounded-xl border border-overlay/10 bg-bg-primary/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-text-muted mb-1.5">
+                      {t('dashboard.ticketDescription')}
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={premiumTicketForm.description}
+                      onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, description: e.target.value }))}
+                      placeholder={t('dashboard.ticketDescPlaceholder')}
+                      className="w-full rounded-xl border border-overlay/10 bg-bg-primary/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all resize-none"
+                    />
+                  </div>
+                  {/* Contact email — only show if we don't already know it */}
+                  {!resolvedTicketEmail && (
+                    <div>
+                      <label className="block text-xs font-medium text-text-muted mb-1.5">
+                        {t('dashboard.ticketEmailLabel')}
+                      </label>
+                      <input
+                        type="email"
+                        value={premiumTicketForm.contactEmail}
+                        onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, contactEmail: e.target.value }))}
+                        placeholder={t('dashboard.connectEmailPlaceholder')}
+                        className="w-full rounded-xl border border-overlay/10 bg-bg-primary/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all"
+                      />
+                    </div>
+                  )}
+                  {premiumTicketError && (
+                    <p className="text-xs text-red-400 ps-1">{premiumTicketError}</p>
+                  )}
+                  <button
+                    type="button"
+                    onClick={handlePremiumTicket}
+                    disabled={premiumTicketLoading || !premiumTicketForm.subject.trim() || !premiumTicketForm.description.trim() || (!resolvedTicketEmail && !premiumTicketForm.contactEmail.trim())}
+                    className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                  >
+                    {premiumTicketLoading ? (
+                      <>
+                        <SpinnerIcon className="w-4 h-4" />
+                        {t('dashboard.submitting')}
+                      </>
+                    ) : (
+                      t('dashboard.submitTicket')
+                    )}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </main>

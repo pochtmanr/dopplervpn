@@ -126,7 +126,7 @@ export function Hero() {
               <div className="absolute inset-0">
                 <Image
                   src="/images/hero.avif"
-                  alt="Doppler VPN - Protected connection"
+                  alt="Doppler VPN — secure private VPN for iOS, Android, Mac and Windows"
                   fill
                   className="object-cover"
                   priority

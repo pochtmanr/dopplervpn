@@ -17,9 +17,9 @@ interface PriceData {
 }
 
 const PRICES: Record<Duration, PriceData> = {
-  monthly: { total: 4, monthly: 4, savings: null },
-  sixMonth: { total: 20, monthly: 3.33, savings: 17 },
-  annual: { total: 35, monthly: 2.92, savings: 27 },
+  monthly: { total: 6.99, monthly: 6.99, savings: null },
+  sixMonth: { total: 29.99, monthly: 5.00, savings: 28 },
+  annual: { total: 39.99, monthly: 3.33, savings: 52 },
 };
 
 function formatPrice(amount: number): string {
@@ -261,8 +261,18 @@ export function Pricing() {
             {t("plusCta")}
           </Button>
 
+          {/* Trial note */}
+          <p className="text-center text-accent-teal text-xs mt-4 font-medium">
+            {t("trialNote")}
+          </p>
+
+          {/* Tax note */}
+          <p className="text-center text-text-muted text-xs mt-2">
+            {t("taxNote")}
+          </p>
+
           {/* Footer note */}
-          <p className="text-center text-text-muted text-xs mt-4">
+          <p className="text-center text-text-muted text-xs mt-2">
             {t("guarantee")}
           </p>
         </Card>

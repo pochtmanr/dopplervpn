@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     const lookupField = isCode ? 'account_id' : 'id';
     const { data: account, error: accErr } = await supabase
       .from('accounts')
-      .select('id, account_id, subscription_tier, max_devices')
+      .select('id, account_id, subscription_tier, subscription_expires_at, max_devices')
       .eq(lookupField, account_id)
       .single();
 
@@ -163,8 +163,10 @@ AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 25`;
     }
 
-    // 8. Determine expiry
-    const tier = account.subscription_tier || 'free';
+    // 8. Determine expiry — check subscription_expires_at to catch lapsed subscriptions
+    const isSubscriptionExpired = account.subscription_expires_at &&
+      new Date(account.subscription_expires_at) < new Date();
+    const tier = isSubscriptionExpired ? 'free' : (account.subscription_tier || 'free');
     const now = new Date();
     const expiresAt = tier === 'free'
       ? new Date(now.getTime() + 24 * 60 * 60 * 1000)       // 24 hours

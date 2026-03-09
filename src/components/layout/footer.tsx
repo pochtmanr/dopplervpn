@@ -45,7 +45,7 @@ export async function Footer() {
                 <span className="text-sm text-text-primary">App Store</span>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.dopplervpn.android"
+                href="https://play.google.com/store/apps/details?id=org.dopplervpn.android"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-overlay/5 rounded-lg hover:bg-overlay/10 transition-colors"

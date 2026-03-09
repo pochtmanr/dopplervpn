@@ -273,7 +273,7 @@ export function BlogCta({ title, subtitle, doppler, simnetiq }: BlogCtaProps) {
       appStoreLabel: doppler.appStore,
       playStoreLabel: doppler.playStore,
       appStoreHref: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-      playStoreHref: "https://play.google.com/store/apps/details?id=com.dopplervpn.android",
+      playStoreHref: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
       accentColor: "teal",
       promo,
     },

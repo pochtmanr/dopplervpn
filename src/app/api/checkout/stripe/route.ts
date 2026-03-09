@@ -10,9 +10,9 @@ const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PLANS: Record<string, { name: string; cents: number; days: number }> = {
-  monthly: { name: 'Doppler VPN Pro — Monthly', cents: 400, days: 30 },
-  '6month': { name: 'Doppler VPN Pro — 6 Months', cents: 2000, days: 180 },
-  yearly: { name: 'Doppler VPN Pro — Yearly', cents: 3500, days: 365 },
+  monthly: { name: 'Doppler VPN Pro — Monthly', cents: 699, days: 30 },
+  '6month': { name: 'Doppler VPN Pro — 6 Months', cents: 2999, days: 180 },
+  yearly: { name: 'Doppler VPN Pro — Yearly', cents: 3999, days: 365 },
 };
 
 function generateAccountId(): string {
@@ -118,11 +118,13 @@ export async function POST(req: NextRequest) {
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       customer_email: email || undefined,
+      automatic_tax: { enabled: true },
       line_items: [{
         price_data: {
           currency: 'usd',
           product_data: { name: plan.name },
           unit_amount: finalCents,
+          tax_behavior: 'exclusive',
         },
         quantity: 1,
       }],

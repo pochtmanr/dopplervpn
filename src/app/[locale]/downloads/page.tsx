@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
-import { Arrow } from "@/components/ui/arrow";
+
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -12,7 +12,8 @@ interface PageProps {
 
 const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  android: "/downloads/doppler-vpn-v1.2.0.apk",
+  androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
+  androidApk: "/downloads/doppler-vpn-v1.2.0.apk",
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   windowsX64: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-windows-64.zip",
   windowsArm64: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-windows-arm64.zip",
@@ -115,7 +116,6 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("ios.button")}
-                <Arrow />
               </a>
 
               <SetupSteps
@@ -137,13 +137,22 @@ export default async function DownloadsPage({ params }: PageProps) {
               </div>
 
               <a
-                href={URLS.android}
-                download
+                href={URLS.androidPlayStore}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
               >
                 <DownloadIcon className="w-4 h-4" />
-                {t("android.button")}
-                <Arrow />
+                {t("android.buttonPlayStore")}
+              </a>
+
+              <a
+                href={URLS.androidApk}
+                download
+                className="group flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
+              >
+                <DownloadIcon className="w-4 h-4" />
+                {t("android.buttonApk")}
               </a>
               <p className="text-xs text-text-muted text-center mt-1.5">{t("android.meta")}</p>
 
@@ -173,7 +182,6 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("mac.button")}
-                <Arrow />
               </a>
 
               <SetupSteps
@@ -246,7 +254,7 @@ export default async function DownloadsPage({ params }: PageProps) {
               href="/support"
               className="inline-flex items-center gap-2 text-accent-teal hover:text-accent-teal-light font-medium transition-colors"
             >
-              {t("visitSupport")} <Arrow />
+              {t("visitSupport")}
             </Link>
           </div>
         </div>

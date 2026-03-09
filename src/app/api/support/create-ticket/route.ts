@@ -12,7 +12,7 @@ const VALID_TOPICS = [
 
 export async function POST(req: NextRequest) {
   try {
-    const { topic, subject, description, contact_email, account_id } =
+    const { topic, subject, description, contact_email, account_id, priority } =
       await req.json();
 
     // Validate topic
@@ -76,6 +76,7 @@ export async function POST(req: NextRequest) {
         contact_email: contact_email.toLowerCase().trim(),
         account_id: account_id || null,
         status: 'open',
+        priority: priority === 'premium' ? 'premium' : 'normal',
       });
 
     if (insertError) {

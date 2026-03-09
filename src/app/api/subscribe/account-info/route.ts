@@ -3,6 +3,13 @@ import { createUntypedAdminClient } from '@/lib/supabase/admin';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
+function computeEffectiveTier(tier: string | null, expiresAt: string | null): string {
+  if (!tier || tier === 'free') return 'free';
+  // If pro/premium but expired, treat as free
+  if (expiresAt && new Date(expiresAt) < new Date()) return 'free';
+  return tier;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const accountId = req.nextUrl.searchParams.get('account_id');
@@ -23,8 +30,12 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
     }
 
-    // Also check if this account's email/contact is linked to OTHER accounts
-    // (warns user about potential duplicates)
+    const effectiveTier = computeEffectiveTier(
+      account.subscription_tier,
+      account.subscription_expires_at,
+    );
+
+    // Check if this account's email is linked to other accounts
     let linkedAccountsCount = 0;
     if (account.contact_value && account.contact_method === 'email') {
       const { count } = await supabase
@@ -32,12 +43,13 @@ export async function GET(req: NextRequest) {
         .select('*', { count: 'exact', head: true })
         .eq('contact_method', 'email')
         .eq('contact_value', account.contact_value);
-      linkedAccountsCount = (count ?? 1) - 1; // exclude self
+      linkedAccountsCount = (count ?? 1) - 1;
     }
 
     return NextResponse.json({
       accountId: account.account_id,
-      tier: account.subscription_tier,
+      tier: effectiveTier,
+      rawTier: account.subscription_tier,
       expiresAt: account.subscription_expires_at,
       contactMethod: account.contact_method,
       contactValue: account.contact_value,

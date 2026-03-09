@@ -13,6 +13,7 @@ interface Ticket {
   contact_email: string;
   account_id: string | null;
   status: string;
+  priority: string | null;
   admin_notes: string | null;
   created_at: string;
 }
@@ -168,6 +169,9 @@ export default function TicketsPage() {
                       >
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-xs font-mono text-text-muted">{t.ticket_number}</span>
+                          {t.priority === 'premium' && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">PRO</span>
+                          )}
                           <span className={`px-2 py-0.5 rounded-lg text-xs border ${topic.color}`}>
                             {topic.label}
                           </span>
@@ -243,7 +247,14 @@ export default function TicketsPage() {
                         className="border-b border-overlay/5 hover:bg-overlay/5 transition-colors cursor-pointer"
                         onClick={() => router.push(`/admin-dvpn/tickets/${t.id}`)}
                       >
-                        <td className="px-4 py-3 font-mono text-xs text-text-muted">{t.ticket_number}</td>
+                        <td className="px-4 py-3 font-mono text-xs text-text-muted">
+                          <span className="flex items-center gap-1.5">
+                            {t.ticket_number}
+                            {t.priority === 'premium' && (
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">PRO</span>
+                            )}
+                          </span>
+                        </td>
                         <td className="px-4 py-3">
                           <span className={`px-2 py-0.5 rounded-lg text-xs border ${topic.color}`}>
                             {topic.label}
