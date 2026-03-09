@@ -58,7 +58,7 @@ export default async function SupportPage({ params }: PageProps) {
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* ── Header ────────────────────────────────────────────── */}
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-display font-bold text-text-primary mb-4 tracking-tight">
@@ -95,76 +95,79 @@ export default async function SupportPage({ params }: PageProps) {
             </section>
           </div>
 
-          {/* ── Section 3: Delete Account ─────────────────────────── */}
-          <section id="delete-account" className="mb-14">
-            <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
-              {t("deleteAccount.title")}
-            </h2>
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
-              <ol className="space-y-3 mb-5">
-                {(["step1", "step2", "step3", "step4"] as const).map((key, i) => (
-                  <li key={key} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent-teal/15 text-accent-teal text-xs font-semibold flex items-center justify-center mt-0.5">
-                      {i + 1}
-                    </span>
-                    <span className="text-sm text-text-muted leading-relaxed">
-                      {t(`deleteAccount.${key}`)}
-                    </span>
-                  </li>
-                ))}
-              </ol>
+          {/* ── Delete Account + Contact Us (2-col on desktop) ───── */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
+            {/* ── Delete Account ──────────────────────────────────── */}
+            <section id="delete-account">
+              <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
+                {t("deleteAccount.title")}
+              </h2>
+              <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
+                <ol className="space-y-3 mb-5">
+                  {(["step1", "step2", "step3", "step4"] as const).map((key, i) => (
+                    <li key={key} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent-teal/15 text-accent-teal text-xs font-semibold flex items-center justify-center mt-0.5">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm text-text-muted leading-relaxed">
+                        {t(`deleteAccount.${key}`)}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
 
-              <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 mb-4">
-                <p className="text-sm text-red-400 leading-relaxed">
-                  {t("deleteAccount.warning")}
+                <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 mb-4">
+                  <p className="text-sm text-red-400 leading-relaxed">
+                    {t("deleteAccount.warning")}
+                  </p>
+                </div>
+
+                <p className="text-sm text-text-muted">
+                  {t("deleteAccount.alternative")}
                 </p>
               </div>
+            </section>
 
-              <p className="text-sm text-text-muted">
-                {t("deleteAccount.alternative")}
-              </p>
-            </div>
-          </section>
+            {/* ── Contact Us ─────────────────────────────────────── */}
+            <section id="contact">
+              <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
+                {t("contact.title")}
+              </h2>
+              <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 space-y-4">
+                <a
+                  href="https://t.me/DopplerSupportBot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-[#2AABEE]/30 hover:bg-[#2AABEE]/5 p-4 transition-all"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#2AABEE]/15 border border-[#2AABEE]/25 flex items-center justify-center text-[#2AABEE] shrink-0">
+                    <TelegramIcon />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-text-primary">{t("contact.telegram")}</div>
+                    <div className="text-xs text-text-muted">{t("contact.telegramBot")}</div>
+                  </div>
+                </a>
 
-          {/* ── Section 4: Contact Us ─────────────────────────────── */}
-          <section id="contact" className="mb-14">
-            <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
-              {t("contact.title")}
-            </h2>
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 space-y-4">
-              <a
-                href="https://t.me/DopplerSupportBot"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-[#2AABEE]/30 hover:bg-[#2AABEE]/5 p-4 transition-all"
-              >
-                <div className="w-10 h-10 rounded-xl bg-[#2AABEE]/15 border border-[#2AABEE]/25 flex items-center justify-center text-[#2AABEE] shrink-0">
-                  <TelegramIcon />
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-text-primary">{t("contact.telegram")}</div>
-                  <div className="text-xs text-text-muted">{t("contact.telegramBot")}</div>
-                </div>
-              </a>
+                <a
+                  href="mailto:support@simnetiq.store"
+                  className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 p-4 transition-all"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-accent-teal/15 border border-accent-teal/25 flex items-center justify-center text-accent-teal shrink-0">
+                    <EmailIcon />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium text-text-primary">{t("contact.email")}</div>
+                    <div className="text-xs text-text-muted">{t("contact.emailAddress")}</div>
+                  </div>
+                </a>
 
-              <a
-                href="mailto:support@simnetiq.store"
-                className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 p-4 transition-all"
-              >
-                <div className="w-10 h-10 rounded-xl bg-accent-teal/15 border border-accent-teal/25 flex items-center justify-center text-accent-teal shrink-0">
-                  <EmailIcon />
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-text-primary">{t("contact.email")}</div>
-                  <div className="text-xs text-text-muted">{t("contact.emailAddress")}</div>
-                </div>
-              </a>
-
-              <p className="text-xs text-text-muted/70 text-center pt-2">
-                {t("contact.responseTime")}
-              </p>
-            </div>
-          </section>
+                <p className="text-xs text-text-muted/70 text-center pt-2">
+                  {t("contact.responseTime")}
+                </p>
+              </div>
+            </section>
+          </div>
         </div>
       </main>
       <Footer />

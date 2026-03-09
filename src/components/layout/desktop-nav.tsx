@@ -14,11 +14,16 @@ interface DesktopNavProps {
 
 export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   const [langOpen, setLangOpen] = useState(false);
+  const [hasAccount, setHasAccount] = useState(false);
   const t = useTranslations("nav");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    setHasAccount(!!localStorage.getItem("doppler_account_id"));
+  }, []);
 
   const close = useCallback(() => setLangOpen(false), []);
 
@@ -86,7 +91,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
             href="/subscribe"
             className="ml-1 px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors"
           >
-            {t("getPro")}
+            {hasAccount ? t("account") : t("getPro")}
           </Link>
         </div>
 

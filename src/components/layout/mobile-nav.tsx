@@ -12,6 +12,7 @@ export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [hasAccount, setHasAccount] = useState(false);
   const t = useTranslations("nav");
   const locale = useLocale();
   const router = useRouter();
@@ -19,7 +20,10 @@ export function MobileNav() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    setHasAccount(!!localStorage.getItem("doppler_account_id"));
+  }, []);
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -207,7 +211,7 @@ export function MobileNav() {
           onClick={close}
           className="mt-8 inline-flex items-center justify-center px-8 py-3 rounded-xl bg-accent-teal text-bg-primary font-medium text-base hover:bg-accent-teal/90 transition-colors"
         >
-          {t("getPro")}
+          {hasAccount ? t("account") : t("getPro")}
         </Link>
       </div>
     </div>

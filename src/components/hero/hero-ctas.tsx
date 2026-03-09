@@ -15,10 +15,10 @@ export function HeroCTAs({ platform: _platform }: HeroCTAsProps) {
   return (
     <div className="flex flex-row items-center justify-center lg:justify-start gap-3">
       <Link
-        href="/subscribe"
+        href="/downloads"
         className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
       >
-        {t("getPro")}
+        {t("downloadApp")}
       </Link>
       <a
         href="#pricing"
