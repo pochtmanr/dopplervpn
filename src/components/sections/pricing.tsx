@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,18 +26,12 @@ function formatPrice(amount: number): string {
   return `$${amount.toFixed(2)}`;
 }
 
-const freeFeatureKeys = [
-  "connection",
-  "devices",
-  "data",
-  "noLogs",
-] as const;
-
 const plusFeatureKeys = [
-  "everything",
   "premiumServers",
   "smartRouting",
+  "alwaysOn",
   "devices",
+  "noLogs",
   "support",
 ] as const;
 
@@ -214,154 +207,65 @@ export function Pricing() {
     <Section id="pricing" className="bg-bg-secondary/30">
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
-      <Reveal className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-          {/* Free Card */}
-          <div className="order-last md:order-first md:col-span-2">
-            <Card padding="lg" className="h-full">
-              <div className="text-center mb-6">
-                <Badge variant="default" className="mb-4">
-                  {t("freeBadge")}
-                </Badge>
-                <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
-                  {t("freeTitle")}
-                </h3>
-                <p className="text-text-muted text-sm">
-                  {t("freeSubtitle")}
-                </p>
-              </div>
-
-              {/* Free Price */}
-              <div className="text-center mb-8">
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="font-display text-5xl md:text-6xl font-bold text-text-primary">
-                    {t("freePrice")}
-                  </span>
-                  <span className="text-xl text-text-muted">
-                    /{t("freePeriod")}
-                  </span>
-                </div>
-              </div>
-
-              {/* Free Features */}
-              <ul className="space-y-3 mb-8">
-                {freeFeatureKeys.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-center gap-2 text-text-muted text-sm"
-                  >
-                    <CheckIcon className="text-text-muted" />
-                    {t(`freeFeatures.${feature}`)}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Free CTA */}
-              <Button
-                variant="outline"
-                className="w-full"
-                size="lg"
-                href="/downloads"
-              >
-                {t("freeCta")}
-              </Button>
-            </Card>
+      <Reveal className="max-w-xl mx-auto">
+        <Card
+          padding="lg"
+          className="border-accent-teal/30 bg-gradient-to-b from-accent-teal/5 to-transparent"
+        >
+          <div className="text-center mb-6">
+            <Badge variant="teal" className="mb-4">
+              {t("plusBadge")}
+            </Badge>
+            <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
+              {t("plusTitle")}
+            </h3>
+            <p className="text-text-muted text-sm">
+              {t("plusSubtitle")}
+            </p>
           </div>
 
-          {/* Plus Card */}
-          <div className="order-first md:order-last md:col-span-3">
-            <Card
-              padding="lg"
-              className="h-full border-accent-teal/30 bg-gradient-to-b from-accent-teal/5 to-transparent"
-            >
-              <div className="text-center mb-6">
-                <Badge variant="teal" className="mb-4">
-                  {t("plusBadge")}
-                </Badge>
-                <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
-                  {t("plusTitle")}
-                </h3>
-                <p className="text-text-muted text-sm">
-                  {t("plusSubtitle")}
-                </p>
-              </div>
-
-              {/* Duration Selector */}
-              <div className="mb-8">
-                <DurationSelector
-                  selected={selectedDuration}
-                  onSelect={setSelectedDuration}
-                  t={t}
-                />
-              </div>
-
-              {/* Price Display */}
-              <div className="text-center mb-8 min-h-[140px] flex items-center justify-center">
-                <PriceDisplay duration={selectedDuration} t={t} />
-              </div>
-
-              {/* Plus Features */}
-              <ul className="space-y-3 mb-8">
-                {plusFeatureKeys.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-center gap-2 text-text-muted text-sm"
-                  >
-                    <CheckIcon className="text-accent-teal" />
-                    {t(`plusFeatures.${feature}`)}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Plus CTA */}
-              <Button
-                variant="primary"
-                className="w-full"
-                size="lg"
-                href="https://t.me/dopplercreatebot"
-                external
-              >
-                {t("plusCta")}
-              </Button>
-
-              {/* Trial note */}
-              <p className="text-center text-text-muted text-xs mt-4">
-                {t("trialNote")}
-              </p>
-
-              {/* Platform note */}
-              <p className="text-center text-text-muted/70 text-xs mt-3">
-                {t("platformNote")}{" "}
-                <Link
-                  href="/guide/subscription"
-                  className="text-accent-teal hover:underline"
-                >
-                  {t("platformLink")}
-                </Link>
-              </p>
-            </Card>
-          </div>
-        </div>
-      </Reveal>
-
-      {/* Money-back guarantee */}
-      <Reveal className="text-center mt-8" delay={100}>
-        <p className="text-text-muted text-sm">
-          <svg
-            className="inline-block w-5 h-5 me-2 text-accent-teal"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+          {/* Duration Selector */}
+          <div className="mb-8">
+            <DurationSelector
+              selected={selectedDuration}
+              onSelect={setSelectedDuration}
+              t={t}
             />
-          </svg>
-          {t("guarantee")}
-        </p>
+          </div>
+
+          {/* Price Display */}
+          <div className="text-center mb-8 min-h-[140px] flex items-center justify-center">
+            <PriceDisplay duration={selectedDuration} t={t} />
+          </div>
+
+          {/* Plus Features */}
+          <ul className="space-y-3 mb-8">
+            {plusFeatureKeys.map((feature) => (
+              <li
+                key={feature}
+                className="flex items-center gap-2 text-text-muted text-sm"
+              >
+                <CheckIcon className="text-accent-teal" />
+                {t(`plusFeatures.${feature}`)}
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA */}
+          <Button
+            variant="primary"
+            className="w-full"
+            size="lg"
+            href="/subscribe"
+          >
+            {t("plusCta")}
+          </Button>
+
+          {/* Footer note */}
+          <p className="text-center text-text-muted text-xs mt-4">
+            {t("guarantee")}
+          </p>
+        </Card>
       </Reveal>
     </Section>
   );
