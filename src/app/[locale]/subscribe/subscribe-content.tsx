@@ -64,6 +64,8 @@ function SubscribeInner() {
   const [email, setEmail] = useState('');
   const [accountId, setAccountId] = useState('');
   const [identifyError, setIdentifyError] = useState('');
+  const [identifyLoading, setIdentifyLoading] = useState(false);
+  const [existingAccount, setExistingAccount] = useState(false);
 
   /* ── Plan & checkout state ─────────────────────────────────────── */
   const [selected, setSelected] = useState<PlanId>('yearly');
@@ -103,7 +105,7 @@ function SubscribeInner() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           code,
-          account_id: accountId || email,
+          account_id: accountId,
           plan: planMap[selected] || 'monthly',
         }),
       });
@@ -133,7 +135,7 @@ function SubscribeInner() {
   };
 
   /* ── Step 1: Continue ──────────────────────────────────────────── */
-  const handleContinue = () => {
+  const handleContinue = async () => {
     setIdentifyError('');
     if (mode === 'new') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -141,15 +143,37 @@ function SubscribeInner() {
         setIdentifyError(t('emailRequired'));
         return;
       }
+      // Call create-account API to look up or create account
+      setIdentifyLoading(true);
+      try {
+        const res = await fetch('/api/subscribe/create-account', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email.trim() }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setIdentifyError(data.error || t('error'));
+          return;
+        }
+        setAccountId(data.accountId);
+        setExistingAccount(data.existing === true);
+        setStep(2);
+      } catch {
+        setIdentifyError(t('error'));
+      } finally {
+        setIdentifyLoading(false);
+      }
     } else {
+      const normalized = accountId.trim().toUpperCase();
       const accountRegex = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-      if (!accountRegex.test(accountId.trim().toUpperCase())) {
+      if (!accountRegex.test(normalized)) {
         setIdentifyError(t('accountRequired'));
         return;
       }
-      setAccountId(accountId.trim().toUpperCase());
+      setAccountId(normalized);
+      setStep(2);
     }
-    setStep(2);
   };
 
   /* ── Step 2: Subscribe ─────────────────────────────────────────── */
@@ -157,10 +181,11 @@ function SubscribeInner() {
     setLoading(true);
     setError('');
     try {
-      const body =
-        mode === 'new'
-          ? { planId: selected, email: email.trim(), promoId: promoApplied?.promo_id || null }
-          : { planId: selected, accountId: accountId.trim().toUpperCase(), promoId: promoApplied?.promo_id || null };
+      const body = {
+        planId: selected,
+        accountId: accountId.trim().toUpperCase(),
+        promoId: promoApplied?.promo_id || null,
+      };
 
       const res = await fetch('/api/checkout/stripe', {
         method: 'POST',
@@ -192,7 +217,7 @@ function SubscribeInner() {
     t('feat6'),
   ];
 
-  const displayIdentifier = mode === 'new' ? email.trim() : accountId.trim().toUpperCase();
+  const displayIdentifier = accountId.trim().toUpperCase();
 
   /* ── Render ────────────────────────────────────────────────────── */
   return (
@@ -270,9 +295,17 @@ function SubscribeInner() {
             <button
               type="button"
               onClick={handleContinue}
-              className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3.5 text-sm transition-colors"
+              disabled={identifyLoading}
+              className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
             >
-              {t('continue')}
+              {identifyLoading ? (
+                <>
+                  <SpinnerIcon className="w-4 h-4" />
+                  {mode === 'new' ? t('lookingUp') : t('verifyingAccount')}
+                </>
+              ) : (
+                t('continue')
+              )}
             </button>
           </div>
         )}
@@ -281,7 +314,7 @@ function SubscribeInner() {
         {step === 2 && (
           <>
             {/* Account badge with back link */}
-            <div className="flex items-center justify-center gap-2 mb-8">
+            <div className="flex items-center justify-center gap-2 mb-4">
               <span className="text-xs text-text-muted">{t('accountLabel')}:</span>
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-overlay/5 border border-overlay/10 text-xs font-mono font-medium text-text-primary">
                 {displayIdentifier}
@@ -294,6 +327,16 @@ function SubscribeInner() {
                 {t('back')}
               </button>
             </div>
+
+            {/* Existing account notice */}
+            {existingAccount && mode === 'new' && (
+              <div className="mb-8 rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-4 py-3 text-center">
+                <p className="text-sm font-medium text-accent-teal">{t('accountFound')}</p>
+                <p className="text-xs text-text-muted mt-1">{t('accountFoundNote')}</p>
+              </div>
+            )}
+
+            {!existingAccount && <div className="mb-4" />}
 
             {/* ── Plan cards ─────────────────────────────────────── */}
             <div className="space-y-3 mb-6">
