@@ -1,13 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import { AccountCard } from './account-card';
+import { useLocale } from 'next-intl';
 import { ActionButtons } from './action-buttons';
 import { TicketModal } from './ticket-modal';
 import { RestoreModal } from './restore-modal';
 
-/* ── Account type ─────────────────────────────────────────────────── */
+/* ── Account type (for pre-filling ticket form) ───────────────────── */
 
 export interface AccountData {
   account_id: string;
@@ -23,7 +22,6 @@ export interface AccountData {
 /* ── SupportContent ───────────────────────────────────────────────── */
 
 export function SupportContent() {
-  const t = useTranslations('support');
   const locale = useLocale();
 
   const [account, setAccount] = useState<AccountData | null>(null);
@@ -37,46 +35,19 @@ export function SupportContent() {
     }
   }, []);
 
-  /* Try to restore session from localStorage */
+  /* Try to restore session from localStorage (for pre-filling ticket form only) */
   useEffect(() => {
     const savedId = localStorage.getItem('doppler_account_id');
     if (savedId) {
-      fetchAccount(savedId);
+      fetch(`/api/support/account?account_id=${encodeURIComponent(savedId)}`)
+        .then((res) => res.ok ? res.json() : null)
+        .then((data) => { if (data?.account) setAccount(data.account); })
+        .catch(() => {});
     }
   }, []);
 
-  const fetchAccount = async (accountId: string) => {
-    try {
-      const res = await fetch(
-        `/api/support/account?account_id=${encodeURIComponent(accountId)}`
-      );
-      if (res.ok) {
-        const data = await res.json();
-        if (data.account) {
-          setAccount(data.account);
-          localStorage.setItem('doppler_account_id', data.account.account_id);
-        }
-      }
-    } catch {
-      // silently fail
-    }
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem('doppler_account_id');
-    setAccount(null);
-  };
-
   return (
-    <section className="mb-14 space-y-8">
-      <AccountCard
-        account={account}
-        locale={locale}
-        onSignIn={fetchAccount}
-        onSignOut={handleSignOut}
-        onAccountUpdate={fetchAccount}
-      />
-
+    <section className="mb-14">
       <ActionButtons
         onOpenTicket={() => setTicketModalOpen(true)}
         onOpenRestore={() => setRestoreModalOpen(true)}
