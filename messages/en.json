@@ -462,57 +462,125 @@
   "apps": {
     "title": "Get Doppler VPN",
     "subtitle": "One-tap privacy on every device. Choose your platform below.",
-    "mobileApps": "Mobile Apps",
-    "desktopApps": "Desktop Apps",
-    "telegramWeb": "Telegram & Web",
-    "available": "Available",
-    "comingSoon": "Coming Soon",
     "download": "Download",
-    "viewSetupGuide": "View setup guide",
-    "vlessNote": "For Telegram bot users in restricted regions",
+    "syncNote": "Already subscribed? Your Pro status syncs across all devices.",
+    "needHelp": "Need help?",
+    "visitSupport": "Visit Support",
     "ios": {
       "title": "iOS",
-      "description": "iPhone & iPad",
-      "doppler": "Doppler VPN",
-      "dopplerSub": "WireGuard — recommended",
-      "appStore": "App Store"
+      "button": "App Store",
+      "step1": "Download Doppler VPN from the App Store",
+      "step2": "Open the app — your account is created automatically",
+      "step3": "Choose a plan and subscribe",
+      "step4": "Tap Connect — you're protected!"
     },
     "android": {
       "title": "Android",
-      "description": "Phones & tablets",
-      "doppler": "Doppler VPN",
-      "dopplerSub": "WireGuard — recommended",
-      "googlePlay": "Google Play"
-    },
-    "windows": {
-      "title": "Windows",
-      "description": "v2rayN — VLESS client",
-      "x64": "Windows x64",
-      "arm64": "Windows ARM64"
+      "button": "Download APK",
+      "meta": "APK · v1.2.0 · 95 MB",
+      "step1": "Download Doppler VPN APK",
+      "step2": "Open the app — your account is created automatically",
+      "step3": "Choose a plan and subscribe",
+      "step4": "Tap Connect — you're protected!"
     },
     "mac": {
       "title": "macOS",
-      "description": "Native app — requires macOS 26",
-      "doppler": "Doppler VPN",
-      "dopplerSub": "Native macOS app — requires macOS 26",
-      "macAppStore": "Mac App Store",
-      "appleSilicon": "v2rayN — Apple Silicon",
-      "intel": "v2rayN — Intel"
+      "button": "Mac App Store",
+      "step1": "Download Doppler VPN from the Mac App Store",
+      "step2": "Open the app — your account is created automatically",
+      "step3": "Choose a plan and subscribe",
+      "step4": "Tap Connect — you're protected!"
     },
-    "telegram": {
-      "title": "Telegram Bot",
-      "description": "Manage VPN via Telegram"
+    "windows": {
+      "title": "Windows",
+      "x64": "v2rayN — x64",
+      "arm64": "v2rayN — ARM64",
+      "step1": "Download and install v2rayN",
+      "step2": "Open @dopplercreatebot on Telegram",
+      "step3": "Tap \"Connect VPN\" → choose a server → receive VLESS config",
+      "step4": "In v2rayN: import config from clipboard",
+      "step5": "Connect!",
+      "note": "Requires Doppler Pro subscription (purchase on website or via Telegram bot)."
+    }
+  },
+  "support": {
+    "title": "Support",
+    "subtitle": "Find answers, troubleshoot issues, or get in touch.",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": {
+        "what": {
+          "question": "What is Doppler VPN?",
+          "answer": "Doppler VPN is a fast, private VPN service that uses VLESS-Reality technology. It works on iOS, Android, macOS, and Windows."
+        },
+        "cost": {
+          "question": "How much does it cost?",
+          "answer": "Doppler Pro costs $4/month, $20/6 months (save 17%), or $35/year (save 27%). One-time payments, no auto-renewal."
+        },
+        "subscribe": {
+          "question": "How do I subscribe?",
+          "answer": "Visit our subscribe page, enter your email, choose a plan, and pay via Stripe. Your Pro subscription activates instantly."
+        },
+        "multiDevice": {
+          "question": "Can I use one account on multiple devices?",
+          "answer": "Yes! Doppler Pro supports up to 10 devices on a single account."
+        },
+        "accountId": {
+          "question": "What's my Account ID?",
+          "answer": "Your Account ID (VPN-XXXX-XXXX-XXXX) is your key across all devices. It's created when you first use the app or subscribe on the web."
+        },
+        "refund": {
+          "question": "Do you offer refunds?",
+          "answer": "Yes, we offer a 30-day money-back guarantee. Contact support to request a refund."
+        },
+        "privacy": {
+          "question": "Is my data private?",
+          "answer": "Absolutely. Doppler VPN has a strict no-logs policy. We don't collect or store your browsing data."
+        },
+        "platforms": {
+          "question": "Which platforms are supported?",
+          "answer": "iOS, Android, macOS (native Doppler app) and Windows (via v2rayN client)."
+        }
+      }
     },
-    "miniApp": {
-      "title": "Mini App",
-      "description": "Telegram Mini App coming soon"
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "items": {
+        "wontConnect": {
+          "question": "VPN won't connect",
+          "answer": "Try switching servers. Go to Settings → select a different server. If the issue persists, restart the app."
+        },
+        "drops": {
+          "question": "Connection drops frequently",
+          "answer": "Enable Always-On VPN in Settings. Also check your internet connection."
+        },
+        "battery": {
+          "question": "Battery drain on mobile",
+          "answer": "Some battery usage is normal. Disable Always-On if you only need VPN occasionally."
+        },
+        "noSub": {
+          "question": "App says 'No subscription'",
+          "answer": "Make sure you're using the correct Account ID. If you just purchased, wait a few seconds and restart the app."
+        }
+      }
     },
-    "extension": {
-      "title": "Browser Extension",
-      "description": "Chrome & Firefox coming soon"
+    "deleteAccount": {
+      "title": "Delete Your Account",
+      "step1": "Open the Doppler VPN app",
+      "step2": "Go to Settings → Account",
+      "step3": "Tap \"Delete Account\"",
+      "step4": "Confirm deletion",
+      "warning": "Account deletion is permanent. All data, subscription time, and server configurations will be removed. This action cannot be undone.",
+      "alternative": "If you can't access the app, contact support to request account deletion."
     },
-    "needHelp": "Need help setting up?",
-    "viewGuides": "View Setup Guides"
+    "contact": {
+      "title": "Contact Us",
+      "telegram": "Telegram",
+      "telegramBot": "@DopplerSupportBot",
+      "email": "Email",
+      "emailAddress": "support@simnetiq.store",
+      "responseTime": "We typically respond within 24 hours."
+    }
   },
   "guideProtocols": {
     "backToGuides": "All Guides",
