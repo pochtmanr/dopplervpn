@@ -21,16 +21,19 @@ export async function POST(req: NextRequest) {
     const normalizedEmail = email.toLowerCase().trim();
     const supabase = createUntypedAdminClient();
 
-    // Check if email already linked to an account
-    const { data: existing } = await supabase
+    // Find ALL accounts with this email (handles multiple matches)
+    const { data: matches, error: lookupError } = await supabase
       .from('accounts')
-      .select('account_id')
+      .select('account_id, contact_verified, subscription_tier, created_at')
       .eq('contact_method', 'email')
       .eq('contact_value', normalizedEmail)
-      .single();
+      .order('contact_verified', { ascending: false })  // verified first
+      .order('created_at', { ascending: true });         // oldest first among ties
 
-    if (existing) {
-      return NextResponse.json({ accountId: existing.account_id, existing: true });
+    if (!lookupError && matches && matches.length > 0) {
+      // Prefer: verified > unverified, then oldest (original) account
+      const best = matches[0];
+      return NextResponse.json({ accountId: best.account_id, existing: true });
     }
 
     // Create new account with unique ID (retry on collision)

@@ -7,13 +7,12 @@ import { routing } from "@/i18n/routing";
 import { localeConfig } from "@/lib/languages";
 
 interface DesktopNavProps {
-  pricingLabel: string;
   logo: ReactNode;
   controls: ReactNode;
   mobile: ReactNode;
 }
 
-export function DesktopNav({ pricingLabel, logo, controls, mobile }: DesktopNavProps) {
+export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   const [langOpen, setLangOpen] = useState(false);
   const t = useTranslations("nav");
   const locale = useLocale();
@@ -81,13 +80,6 @@ export function DesktopNav({ pricingLabel, logo, controls, mobile }: DesktopNavP
             className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
           >
             {t("support")}
-          </Link>
-
-          <Link
-            href="/#pricing"
-            className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
-          >
-            {pricingLabel}
           </Link>
 
           <Link

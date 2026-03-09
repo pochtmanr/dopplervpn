@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DopplerLogo } from "./doppler-logo";
 import { DesktopNav } from "./desktop-nav";
@@ -6,12 +5,10 @@ import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "./theme-toggle";
 
 export async function Navbar() {
-  const t = await getTranslations("nav");
 
   return (
     <header className="fixed top-4 inset-x-0 z-50 px-4 sm:px-6 lg:px-8">
       <DesktopNav
-        pricingLabel={t("pricing")}
         logo={
           <Link href="/" className="flex items-center gap-2.5">
             <DopplerLogo />

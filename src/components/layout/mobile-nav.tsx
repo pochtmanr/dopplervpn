@@ -61,7 +61,6 @@ export function MobileNav() {
   const navItems: { href: string; label: string; isPage?: boolean }[] = [
     { href: "/downloads", label: t("downloads"), isPage: true },
     { href: "/support", label: t("support"), isPage: true },
-    { href: "/#pricing", label: t("pricing") },
   ];
 
   const currentLang = localeConfig[locale] || localeConfig.en;
