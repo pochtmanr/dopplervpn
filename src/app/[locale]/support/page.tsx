@@ -58,7 +58,7 @@ export default async function SupportPage({ params }: PageProps) {
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           {/* ── Header ────────────────────────────────────────────── */}
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-display font-bold text-text-primary mb-4 tracking-tight">
@@ -72,25 +72,28 @@ export default async function SupportPage({ params }: PageProps) {
           {/* ── Account & Actions ──────────────────────────────────── */}
           <SupportContent />
 
-          {/* ── Section 1: FAQ ────────────────────────────────────── */}
-          <section id="faq" className="mb-14">
-            <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
-              {t("faq.title")}
-            </h2>
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 px-6">
-              <SupportFaq items={faqItems} />
-            </div>
-          </section>
+          {/* ── FAQ + Troubleshooting (2-col on desktop) ──────────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
+            {/* ── FAQ ──────────────────────────────────────────────── */}
+            <section id="faq">
+              <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
+                {t("faq.title")}
+              </h2>
+              <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 px-6">
+                <SupportFaq items={faqItems} />
+              </div>
+            </section>
 
-          {/* ── Section 2: Troubleshooting ────────────────────────── */}
-          <section id="troubleshooting" className="mb-14">
-            <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
-              {t("troubleshooting.title")}
-            </h2>
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 px-6">
-              <SupportFaq items={troubleshootItems} />
-            </div>
-          </section>
+            {/* ── Troubleshooting ──────────────────────────────────── */}
+            <section id="troubleshooting">
+              <h2 className="text-2xl font-display font-bold text-text-primary mb-6">
+                {t("troubleshooting.title")}
+              </h2>
+              <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 px-6">
+                <SupportFaq items={troubleshootItems} />
+              </div>
+            </section>
+          </div>
 
           {/* ── Section 3: Delete Account ─────────────────────────── */}
           <section id="delete-account" className="mb-14">
