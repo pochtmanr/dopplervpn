@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SupportFaq } from "./faq";
+import { SupportContent } from "./support-content";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -67,6 +68,9 @@ export default async function SupportPage({ params }: PageProps) {
               {t("subtitle")}
             </p>
           </div>
+
+          {/* ── Account & Actions ──────────────────────────────────── */}
+          <SupportContent />
 
           {/* ── Section 1: FAQ ────────────────────────────────────── */}
           <section id="faq" className="mb-14">
