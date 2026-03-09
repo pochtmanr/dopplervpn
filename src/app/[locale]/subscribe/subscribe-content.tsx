@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
@@ -177,6 +177,18 @@ function SubscribeInner() {
   const [promoError, setPromoError] = useState('');
   const [promoLoading, setPromoLoading] = useState(false);
 
+  /* ── Auto-restore session from localStorage ─────────────────── */
+  useEffect(() => {
+    const savedId = localStorage.getItem('doppler_account_id');
+    if (savedId) {
+      setAccountId(savedId);
+      setMode('existing');
+      setStep(2);
+      fetchAccountInfo(savedId);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   /* ── Derived: what email does this user have? ────────────────── */
   // If user authenticated via email, we already know it
   const knownEmail = mode === 'new' && email.trim()
@@ -278,6 +290,7 @@ function SubscribeInner() {
           return;
         }
         setAccountId(data.accountId);
+        localStorage.setItem('doppler_account_id', data.accountId);
         setExistingAccount(data.existing === true);
         setStep(2);
         fetchAccountInfo(data.accountId);
@@ -304,6 +317,7 @@ function SubscribeInner() {
         }
         const data = await res.json();
         setAccountInfo(data);
+        localStorage.setItem('doppler_account_id', normalized);
         setStep(2);
       } catch {
         setIdentifyError(t('error'));
@@ -353,6 +367,7 @@ function SubscribeInner() {
 
   /* ── Logout ──────────────────────────────────────────────────── */
   const handleLogout = () => {
+    localStorage.removeItem('doppler_account_id');
     setStep(1);
     setAccountId('');
     setEmail('');
