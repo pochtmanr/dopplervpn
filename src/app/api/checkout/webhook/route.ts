@@ -77,8 +77,25 @@ export async function POST(req: NextRequest) {
         status: 'paid',
         provider: 'stripe',
         provider_payment_id: session.payment_intent as string,
-        notes: `web_checkout:${accountId}`,
+        notes: `web_subscribe:${accountId}`,
       });
+
+      // 5. Send welcome email if we have the customer's email
+      const customerEmail = session.metadata?.email || session.customer_details?.email;
+      if (customerEmail) {
+        try {
+          const { sendWelcomeEmail } = await import('@/lib/email');
+          await sendWelcomeEmail({
+            to: customerEmail,
+            accountId,
+            planName: `Doppler Pro — ${planId}`,
+            expiresAt: newExpiry.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          });
+        } catch (emailErr) {
+          console.error('Welcome email failed:', emailErr);
+          // Don't fail the webhook for email errors
+        }
+      }
     } catch (error) {
       console.error('Webhook processing error:', error);
     }
