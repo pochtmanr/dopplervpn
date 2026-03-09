@@ -30,6 +30,58 @@ const nextConfig: NextConfig = {
           "https://github.com/pochtmanr/dopplerland/releases/download/v1.2.0-android/doppler-vpn-v1.2.0.apk",
         permanent: false,
       },
+      // Old URL redirects
+      {
+        source: "/:locale/checkout",
+        destination: "/:locale/subscribe",
+        permanent: true,
+      },
+      {
+        source: "/:locale/checkout/success",
+        destination: "/:locale/subscribe/success",
+        permanent: true,
+      },
+      {
+        source: "/:locale/guide/:device",
+        destination: "/:locale/downloads",
+        permanent: true,
+      },
+      {
+        source: "/:locale/guide",
+        destination: "/:locale/downloads",
+        permanent: true,
+      },
+      {
+        source: "/:locale/delete-account",
+        destination: "/:locale/support",
+        permanent: true,
+      },
+      // Non-locale versions
+      {
+        source: "/checkout",
+        destination: "/en/subscribe",
+        permanent: true,
+      },
+      {
+        source: "/checkout/success",
+        destination: "/en/subscribe/success",
+        permanent: true,
+      },
+      {
+        source: "/guide/:device",
+        destination: "/en/downloads",
+        permanent: true,
+      },
+      {
+        source: "/guide",
+        destination: "/en/downloads",
+        permanent: true,
+      },
+      {
+        source: "/delete-account",
+        destination: "/en/support",
+        permanent: true,
+      },
     ];
   },
   images: {

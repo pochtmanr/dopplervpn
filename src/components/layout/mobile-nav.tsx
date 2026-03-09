@@ -60,8 +60,7 @@ export function MobileNav() {
 
   const navItems: { href: string; label: string; isPage?: boolean }[] = [
     { href: "/downloads", label: t("downloads"), isPage: true },
-    { href: "/guide", label: t("guides"), isPage: true },
-    { href: "/blog", label: t("blog"), isPage: true },
+    { href: "/support", label: t("support"), isPage: true },
     { href: "/#pricing", label: t("pricing") },
   ];
 
@@ -203,13 +202,13 @@ export function MobileNav() {
           <ThemeToggle />
         </div>
 
-        {/* Download CTA — mobile only */}
+        {/* Get Pro CTA — mobile only */}
         <Link
-          href="/downloads"
+          href="/subscribe"
           onClick={close}
-          className="mt-8 inline-flex items-center justify-center px-8 py-3 rounded-xl bg-accent-gold text-bg-primary font-medium text-base hover:bg-accent-gold/90 transition-colors"
+          className="mt-8 inline-flex items-center justify-center px-8 py-3 rounded-xl bg-accent-teal text-bg-primary font-medium text-base hover:bg-accent-teal/90 transition-colors"
         >
-          {t("download")}
+          {t("getPro")}
         </Link>
       </div>
     </div>
