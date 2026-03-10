@@ -5,6 +5,10 @@ import nodemailer from 'nodemailer';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
+  // Debug mode: add ?debug=1 to see what's happening (temporary)
+  const debug = req.nextUrl.searchParams.get('debug') === '1';
+  const debugLog: string[] = [];
+
   try {
     const { email } = await req.json();
 
@@ -13,12 +17,10 @@ export async function POST(req: NextRequest) {
     }
 
     const normalizedEmail = email.toLowerCase().trim();
+    debugLog.push(`email: ${normalizedEmail}`);
+
     const supabase = createUntypedAdminClient();
 
-    // Look up account by email
-    // Use .maybeSingle() instead of .limit(1).single() — .single() returns an
-    // error (and nullifies data) when zero rows match, silently preventing the
-    // email from being sent. .maybeSingle() returns data: null without an error.
     const { data: account, error: lookupError } = await supabase
       .from('accounts')
       .select('account_id')
@@ -28,24 +30,29 @@ export async function POST(req: NextRequest) {
       .limit(1)
       .maybeSingle();
 
+    debugLog.push(`lookup: ${account ? account.account_id : 'NOT FOUND'}`);
     if (lookupError) {
+      debugLog.push(`lookupError: ${lookupError.message}`);
       console.error('[restore-account] DB lookup error:', lookupError.message);
     }
 
-    // If found, send email with account ID
     if (account) {
       const smtpHost = process.env.SMTP_HOST;
       const smtpPort = parseInt(process.env.SMTP_PORT || '465', 10);
       const smtpUser = process.env.SMTP_USER;
       const smtpPass = process.env.SMTP_PASS;
 
+      debugLog.push(`smtp: host=${smtpHost || 'MISSING'} port=${smtpPort} user=${smtpUser || 'MISSING'} pass=${smtpPass ? 'SET' : 'MISSING'}`);
+
       if (!smtpHost || !smtpUser || !smtpPass) {
-        console.error('Missing SMTP configuration');
-        // Still return success to not leak info
+        debugLog.push('ABORT: missing SMTP config');
+        console.error('[restore-account] Missing SMTP configuration');
+        if (debug) {
+          return NextResponse.json({ success: false, debug: debugLog });
+        }
         return NextResponse.json({
           success: true,
-          message:
-            "If an account exists with this email, we've sent the Account ID.",
+          message: "If an account exists with this email, we've sent the Account ID.",
         });
       }
 
@@ -57,7 +64,7 @@ export async function POST(req: NextRequest) {
       });
 
       try {
-        await transporter.sendMail({
+        const info = await transporter.sendMail({
           from: `"Doppler VPN" <${smtpUser}>`,
           to: normalizedEmail,
           subject: 'Your Doppler VPN Account ID',
@@ -76,25 +83,30 @@ export async function POST(req: NextRequest) {
             </div>
           `,
         });
-        console.log(`[restore-account] Email sent to ${normalizedEmail}`);
+        debugLog.push(`sent: messageId=${info.messageId}`);
+        console.log(`[restore-account] Email sent to ${normalizedEmail}, messageId: ${info.messageId}`);
       } catch (emailError) {
-        console.error('[restore-account] SMTP send failed:', {
-          host: smtpHost,
-          port: smtpPort,
-          user: smtpUser,
-          error: emailError instanceof Error ? emailError.message : emailError,
-        });
+        const errMsg = emailError instanceof Error ? emailError.message : String(emailError);
+        debugLog.push(`SMTP ERROR: ${errMsg}`);
+        console.error('[restore-account] SMTP send failed:', errMsg);
       }
     }
 
-    // Always return success regardless of whether account was found
+    if (debug) {
+      return NextResponse.json({ success: true, debug: debugLog });
+    }
+
     return NextResponse.json({
       success: true,
-      message:
-        "If an account exists with this email, we've sent the Account ID.",
+      message: "If an account exists with this email, we've sent the Account ID.",
     });
   } catch (error) {
+    const errMsg = error instanceof Error ? error.message : String(error);
+    debugLog.push(`CATCH: ${errMsg}`);
     console.error('Restore account error:', error);
+    if (debug) {
+      return NextResponse.json({ success: false, debug: debugLog }, { status: 500 });
+    }
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
 }
