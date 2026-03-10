@@ -16,14 +16,21 @@ export async function POST(req: NextRequest) {
     const supabase = createUntypedAdminClient();
 
     // Look up account by email
-    const { data: account } = await supabase
+    // Use .maybeSingle() instead of .limit(1).single() — .single() returns an
+    // error (and nullifies data) when zero rows match, silently preventing the
+    // email from being sent. .maybeSingle() returns data: null without an error.
+    const { data: account, error: lookupError } = await supabase
       .from('accounts')
       .select('account_id')
       .eq('contact_method', 'email')
       .eq('contact_value', normalizedEmail)
       .order('created_at', { ascending: true })
       .limit(1)
-      .single();
+      .maybeSingle();
+
+    if (lookupError) {
+      console.error('[restore-account] DB lookup error:', lookupError.message);
+    }
 
     // If found, send email with account ID
     if (account) {
@@ -49,25 +56,35 @@ export async function POST(req: NextRequest) {
         auth: { user: smtpUser, pass: smtpPass },
       });
 
-      await transporter.sendMail({
-        from: `"Doppler VPN" <${smtpUser}>`,
-        to: normalizedEmail,
-        subject: 'Your Doppler VPN Account ID',
-        html: `
-          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0a0a0a; color: #ffffff; border-radius: 12px;">
-            <h2 style="margin: 0 0 16px; color: #ffffff;">Doppler VPN</h2>
-            <p style="color: #a1a1aa; margin: 0 0 24px;">You requested your Account ID. Here it is:</p>
-            <div style="background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 20px; text-align: center; margin: 0 0 24px;">
-              <p style="color: #a1a1aa; font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1px;">Account ID</p>
-              <p style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0; font-family: monospace; letter-spacing: 2px;">${account.account_id}</p>
+      try {
+        await transporter.sendMail({
+          from: `"Doppler VPN" <${smtpUser}>`,
+          to: normalizedEmail,
+          subject: 'Your Doppler VPN Account ID',
+          html: `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0a0a0a; color: #ffffff; border-radius: 12px;">
+              <h2 style="margin: 0 0 16px; color: #ffffff;">Doppler VPN</h2>
+              <p style="color: #a1a1aa; margin: 0 0 24px;">You requested your Account ID. Here it is:</p>
+              <div style="background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 20px; text-align: center; margin: 0 0 24px;">
+                <p style="color: #a1a1aa; font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1px;">Account ID</p>
+                <p style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0; font-family: monospace; letter-spacing: 2px;">${account.account_id}</p>
+              </div>
+              <p style="color: #a1a1aa; margin: 0 0 16px;">Use this ID to manage your subscription and access your VPN services.</p>
+              <a href="https://www.dopplervpn.org/subscribe" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">Go to Doppler VPN</a>
+              <hr style="border: none; border-top: 1px solid #27272a; margin: 24px 0;" />
+              <p style="color: #71717a; font-size: 12px; margin: 0;">If you did not request this, you can safely ignore this email.</p>
             </div>
-            <p style="color: #a1a1aa; margin: 0 0 16px;">Use this ID to manage your subscription and access your VPN services.</p>
-            <a href="https://www.dopplervpn.org/subscribe" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">Go to Doppler VPN</a>
-            <hr style="border: none; border-top: 1px solid #27272a; margin: 24px 0;" />
-            <p style="color: #71717a; font-size: 12px; margin: 0;">If you did not request this, you can safely ignore this email.</p>
-          </div>
-        `,
-      });
+          `,
+        });
+        console.log(`[restore-account] Email sent to ${normalizedEmail}`);
+      } catch (emailError) {
+        console.error('[restore-account] SMTP send failed:', {
+          host: smtpHost,
+          port: smtpPort,
+          user: smtpUser,
+          error: emailError instanceof Error ? emailError.message : emailError,
+        });
+      }
     }
 
     // Always return success regardless of whether account was found

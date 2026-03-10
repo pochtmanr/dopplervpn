@@ -196,7 +196,7 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
               </div>
 
               <a
-                href="https://t.me/DopplerSupportBot?start=restore"
+                href="https://t.me/DopplerVerifyBot?start=restore"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full rounded-xl bg-[#2AABEE] hover:bg-[#2AABEE]/90 text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
