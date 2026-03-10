@@ -5,10 +5,6 @@ import nodemailer from 'nodemailer';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
-  // Debug mode: add ?debug=1 to see what's happening (temporary)
-  const debug = req.nextUrl.searchParams.get('debug') === '1';
-  const debugLog: string[] = [];
-
   try {
     const { email } = await req.json();
 
@@ -17,8 +13,6 @@ export async function POST(req: NextRequest) {
     }
 
     const normalizedEmail = email.toLowerCase().trim();
-    debugLog.push(`email: ${normalizedEmail}`);
-
     const supabase = createUntypedAdminClient();
 
     const { data: account, error: lookupError } = await supabase
@@ -30,9 +24,7 @@ export async function POST(req: NextRequest) {
       .limit(1)
       .maybeSingle();
 
-    debugLog.push(`lookup: ${account ? account.account_id : 'NOT FOUND'}`);
     if (lookupError) {
-      debugLog.push(`lookupError: ${lookupError.message}`);
       console.error('[restore-account] DB lookup error:', lookupError.message);
     }
 
@@ -42,14 +34,8 @@ export async function POST(req: NextRequest) {
       const smtpUser = process.env.SMTP_USER;
       const smtpPass = process.env.SMTP_PASS;
 
-      debugLog.push(`smtp: host=${smtpHost || 'MISSING'} port=${smtpPort} user=${smtpUser || 'MISSING'} pass=${smtpPass ? 'SET' : 'MISSING'}`);
-
       if (!smtpHost || !smtpUser || !smtpPass) {
-        debugLog.push('ABORT: missing SMTP config');
         console.error('[restore-account] Missing SMTP configuration');
-        if (debug) {
-          return NextResponse.json({ success: false, debug: debugLog });
-        }
         return NextResponse.json({
           success: true,
           message: "If an account exists with this email, we've sent the Account ID.",
@@ -83,17 +69,10 @@ export async function POST(req: NextRequest) {
             </div>
           `,
         });
-        debugLog.push(`sent: messageId=${info.messageId}`);
         console.log(`[restore-account] Email sent to ${normalizedEmail}, messageId: ${info.messageId}`);
       } catch (emailError) {
-        const errMsg = emailError instanceof Error ? emailError.message : String(emailError);
-        debugLog.push(`SMTP ERROR: ${errMsg}`);
-        console.error('[restore-account] SMTP send failed:', errMsg);
+        console.error('[restore-account] SMTP send failed:', emailError instanceof Error ? emailError.message : emailError);
       }
-    }
-
-    if (debug) {
-      return NextResponse.json({ success: true, debug: debugLog });
     }
 
     return NextResponse.json({
@@ -101,12 +80,7 @@ export async function POST(req: NextRequest) {
       message: "If an account exists with this email, we've sent the Account ID.",
     });
   } catch (error) {
-    const errMsg = error instanceof Error ? error.message : String(error);
-    debugLog.push(`CATCH: ${errMsg}`);
-    console.error('Restore account error:', error);
-    if (debug) {
-      return NextResponse.json({ success: false, debug: debugLog }, { status: 500 });
-    }
+    console.error('[restore-account] Error:', error);
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
 }
