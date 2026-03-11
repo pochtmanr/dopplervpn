@@ -37,49 +37,25 @@ export function TechnicalHowItWorks() {
     <Section id="how-doppler-works">
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
-      {/* Flow Diagram */}
-      <Reveal>
-        <div
-          className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-0 mb-16"
-          aria-label={`${t("flow.step1")} → ${t("flow.step2")} → ${t("flow.step3")} → ${t("flow.step4")}`}
-          role="img"
-        >
-          {flowSteps.map((step, i) => (
-            <div key={step} className="flex items-center gap-3 md:gap-0">
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-14 h-14 rounded-2xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal text-lg font-semibold">
-                  {i + 1}
-                </div>
-                <span className="text-sm text-text-primary font-medium text-center max-w-[120px]">
-                  {t(`flow.${step}`)}
-                </span>
+      {/* Flow Steps as Cards */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4"
+        aria-label={`${t("flow.step1")} → ${t("flow.step2")} → ${t("flow.step3")} → ${t("flow.step4")}`}
+        role="img"
+      >
+        {flowSteps.map((step, i) => (
+          <Reveal key={step} delay={i * 50}>
+            <div className="h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 hover:border-accent-teal/20 transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal text-lg font-semibold mb-4">
+                {i + 1}
               </div>
-              {i < flowSteps.length - 1 && (
-                <svg
-                  className="w-6 h-6 text-text-muted mx-3 hidden md:block rtl:rotate-180"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-              )}
-              {i < flowSteps.length - 1 && (
-                <svg
-                  className="w-6 h-6 text-text-muted my-1 block md:hidden"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0 6.75-6.75M12 19.5l-6.75-6.75" />
-                </svg>
-              )}
+              <h3 className="text-lg font-semibold text-text-primary mb-1.5">
+                {t(`flow.${step}`)}
+              </h3>
             </div>
-          ))}
-        </div>
-      </Reveal>
+          </Reveal>
+        ))}
+      </div>
 
       {/* Explanation Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
