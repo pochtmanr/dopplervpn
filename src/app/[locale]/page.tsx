@@ -12,6 +12,7 @@ import {
   TechnicalHowItWorks,
   Servers,
   Pricing,
+  PrivacyModel,
   FAQ,
   CTA,
 } from "@/components/sections";
@@ -121,6 +122,7 @@ export default async function HomePage({ params }: PageProps) {
         <HowItWorks />
         <Servers />
         <Pricing />
+        <PrivacyModel />
         <FAQ />
         <CTA />
         <HomeBlogSection posts={posts} locale={locale} />

@@ -8,5 +8,6 @@ export { HowItWorks } from "./how-it-works";
 export { TechnicalHowItWorks } from "./technical-how-it-works";
 export { Servers } from "./servers";
 export { Pricing } from "./pricing";
+export { PrivacyModel } from "./privacy-model";
 export { FAQ } from "./faq";
 export { CTA } from "./cta";
