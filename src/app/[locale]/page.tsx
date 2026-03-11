@@ -5,6 +5,7 @@ import {
   Hero,
   TrustIndicators,
   Features,
+  CensorshipResistance,
   HowItWorks,
   TechnicalHowItWorks,
   Servers,
@@ -112,6 +113,7 @@ export default async function HomePage({ params }: PageProps) {
         <TrustIndicators />
         <TechnicalHowItWorks />
         <Features />
+        <CensorshipResistance />
         <HowItWorks />
         <Servers />
         <Pricing />
