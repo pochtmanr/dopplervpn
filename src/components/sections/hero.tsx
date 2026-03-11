@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { HeroCTAs } from "@/components/hero/hero-ctas";
-import { PromoCode } from "@/components/hero/promo-code";
 import type { Platform } from "@/components/hero/hero-ctas";
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
@@ -43,9 +42,11 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="space-y-6 text-center lg:text-start">
-            {/* Promo Code (replaces old tagline badge) */}
+            {/* Tagline Badge */}
             <div className="hero-animate">
-              <PromoCode />
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-accent-teal/10 text-accent-teal border border-accent-teal/20">
+                {t("tagline")}
+              </span>
             </div>
 
             {/* Headline */}
@@ -62,12 +63,14 @@ export function Hero() {
                   <><span className="italic">{t("headlinePart1a")}</span>{" "}<span>{t("headlinePart1b")}</span></>
                 )}
               </span>
-              <span
-                className="block mt-0 bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 700 } : { fontFamily: "var(--font-raster)" }}
-              >
-                {t("headlinePart2")}
-              </span>
+              {t("headlinePart2") && (
+                <span
+                  className="block mt-0 bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
+                  style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 700 } : { fontFamily: "var(--font-raster)" }}
+                >
+                  {t("headlinePart2")}
+                </span>
+              )}
             </h1>
 
             {/* Subheadline */}
