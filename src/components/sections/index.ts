@@ -3,6 +3,7 @@ export { TrustIndicators } from "./trust-indicators";
 export { Features } from "./features";
 export { CensorshipResistance } from "./censorship-resistance";
 export { UseCases } from "./use-cases";
+export { ComparisonTable } from "./comparison-table";
 export { HowItWorks } from "./how-it-works";
 export { TechnicalHowItWorks } from "./technical-how-it-works";
 export { Servers } from "./servers";

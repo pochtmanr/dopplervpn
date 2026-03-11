@@ -7,6 +7,7 @@ import {
   Features,
   CensorshipResistance,
   UseCases,
+  ComparisonTable,
   HowItWorks,
   TechnicalHowItWorks,
   Servers,
@@ -116,6 +117,7 @@ export default async function HomePage({ params }: PageProps) {
         <Features />
         <CensorshipResistance />
         <UseCases />
+        <ComparisonTable />
         <HowItWorks />
         <Servers />
         <Pricing />
