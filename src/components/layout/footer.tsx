@@ -92,6 +92,14 @@ export async function Footer() {
                   {t("blog")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/bypass-censorship"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("bypassCensorship")}
+                </Link>
+              </li>
             </ul>
           </div>
 
