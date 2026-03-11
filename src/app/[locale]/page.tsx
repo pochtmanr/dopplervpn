@@ -110,8 +110,8 @@ export default async function HomePage({ params }: PageProps) {
       <main className="overflow-x-hidden">
         <Hero />
         <TrustIndicators />
-        <Features />
         <TechnicalHowItWorks />
+        <Features />
         <HowItWorks />
         <Servers />
         <Pricing />
