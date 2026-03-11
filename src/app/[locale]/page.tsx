@@ -5,6 +5,7 @@ import {
   Hero,
   Features,
   HowItWorks,
+  TechnicalHowItWorks,
   Servers,
   Pricing,
   FAQ,
@@ -108,6 +109,7 @@ export default async function HomePage({ params }: PageProps) {
       <main className="overflow-x-hidden">
         <Hero />
         <Features />
+        <TechnicalHowItWorks />
         <HowItWorks />
         <Servers />
         <Pricing />
