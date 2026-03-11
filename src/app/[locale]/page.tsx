@@ -119,10 +119,10 @@ export default async function HomePage({ params }: PageProps) {
         <CensorshipResistance />
         <UseCases />
         <ComparisonTable />
-        <HowItWorks />
         <Servers />
         <Pricing />
         <PrivacyModel />
+        <HowItWorks />
         <FAQ />
         <CTA />
         <HomeBlogSection posts={posts} locale={locale} />
