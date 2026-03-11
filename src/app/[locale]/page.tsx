@@ -6,6 +6,7 @@ import {
   TrustIndicators,
   Features,
   CensorshipResistance,
+  UseCases,
   HowItWorks,
   TechnicalHowItWorks,
   Servers,
@@ -114,6 +115,7 @@ export default async function HomePage({ params }: PageProps) {
         <TechnicalHowItWorks />
         <Features />
         <CensorshipResistance />
+        <UseCases />
         <HowItWorks />
         <Servers />
         <Pricing />
