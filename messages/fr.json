@@ -988,5 +988,255 @@
       "title": "Demandes professionnelles",
       "subtitle": "Partenariats, presse, entreprises"
     }
+  },
+  "bypassCensorship": {
+    "metadata": {
+      "title": "How Doppler Bypasses Internet Censorship | Doppler VPN",
+      "description": "Learn how VLESS-Reality makes VPN traffic undetectable by deep packet inspection and censorship systems."
+    },
+    "hero": {
+      "title": "How Doppler Bypasses Internet Censorship",
+      "subtitle": "A technical overview of how VLESS-Reality makes VPN traffic undetectable."
+    },
+    "problem": {
+      "title": "How Censorship Systems Block VPNs",
+      "p1": "Modern censorship systems use Deep Packet Inspection (DPI) to analyze internet traffic in real time. These systems don't just look at where your data is going — they examine how it's packaged, looking for telltale signs of VPN protocols.",
+      "p2": "Traditional VPN protocols like OpenVPN and WireGuard have recognizable traffic patterns. DPI systems can identify these patterns and block the connections instantly. Even when VPN providers try to disguise their traffic, the underlying protocol signatures remain detectable.",
+      "p3": "Beyond protocol detection, censorship systems also block known VPN server IP addresses and analyze TLS handshake fingerprints to identify and block VPN connections before they're fully established."
+    },
+    "evasion": {
+      "title": "Why Doppler Traffic Is Invisible",
+      "reality": {
+        "title": "Reality Handshake",
+        "description": "VLESS-Reality performs a genuine TLS handshake using a real website's certificate. To any observer — including DPI systems — the connection looks identical to someone browsing a normal HTTPS website. There's no fake certificate or proxy signature to detect."
+      },
+      "noSignature": {
+        "title": "No Protocol Signature",
+        "description": "Unlike OpenVPN (which uses a distinctive handshake) or WireGuard (which has a known packet structure), VLESS-Reality produces no identifiable protocol signature. Automated detection systems have nothing to match against."
+      },
+      "indistinguishable": {
+        "title": "Traffic Indistinguishable from HTTPS",
+        "description": "Once the tunnel is established, all data flowing through it is encrypted and formatted exactly like standard HTTPS traffic. Packet sizes, timing patterns, and headers all match what a normal web browsing session looks like."
+      },
+      "infrastructure": {
+        "title": "Dynamic Server Infrastructure",
+        "description": "Doppler rotates server endpoints and IP addresses, making it harder for censorship systems to maintain up-to-date blocklists. Even if one endpoint is identified, the network adapts."
+      }
+    },
+    "flow": {
+      "title": "What Censorship Systems See",
+      "step1": "Your Device",
+      "step1note": "Doppler client initiates connection",
+      "step2": "TLS Handshake",
+      "step2note": "Looks like visiting a normal website",
+      "step3": "VLESS Tunnel",
+      "step3note": "DPI sees: regular HTTPS traffic",
+      "step4": "Doppler Node",
+      "step4note": "Traffic exits to open internet",
+      "dpiLabel": "What DPI sees: normal HTTPS traffic"
+    },
+    "comparison": {
+      "title": "Protocol Comparison",
+      "headers": {
+        "protocol": "Protocol",
+        "detectability": "Detectability",
+        "speed": "Speed",
+        "censorship": "Censorship Resistance",
+        "fingerprint": "Protocol Fingerprint"
+      },
+      "openvpn": {
+        "name": "OpenVPN",
+        "detectability": "High",
+        "speed": "Moderate",
+        "censorship": "Low",
+        "fingerprint": "Visible"
+      },
+      "wireguard": {
+        "name": "WireGuard",
+        "detectability": "Medium",
+        "speed": "Fast",
+        "censorship": "Low",
+        "fingerprint": "Visible"
+      },
+      "vless": {
+        "name": "VLESS-Reality",
+        "detectability": "Very Low",
+        "speed": "Fast",
+        "censorship": "High",
+        "fingerprint": "None"
+      }
+    },
+    "works": {
+      "title": "Where Doppler Works",
+      "description": "Doppler is tested and operational in networks with active VPN blocking, including restrictive ISP environments, national-level firewalls, and corporate networks that block traditional VPN protocols.",
+      "environments": {
+        "isp": "Restrictive ISP environments",
+        "national": "National-level firewall systems",
+        "corporate": "Corporate network restrictions",
+        "public": "Filtered public Wi-Fi networks"
+      }
+    },
+    "cta": {
+      "title": "Try Doppler in your network",
+      "subtitle": "See if Doppler works where other VPNs fail.",
+      "button": "Download Doppler"
+    }
+  },
+  "trustIndicators": {
+    "items": {
+      "noAccount": {
+        "label": "No Account Needed",
+        "description": "Your device is your identity"
+      },
+      "zeroLogs": {
+        "label": "Zero Activity Logs",
+        "description": "We can't see what you browse"
+      },
+      "encryptedDns": {
+        "label": "Encrypted DNS",
+        "description": "Every query protected"
+      },
+      "dpiBypass": {
+        "label": "DPI Bypass",
+        "description": "Traffic looks like normal HTTPS"
+      },
+      "freeTier": {
+        "label": "Free Tier Available",
+        "description": "Try before you commit"
+      }
+    }
+  },
+  "technicalHowItWorks": {
+    "title": "How Doppler Protects Your Traffic",
+    "subtitle": "Your connection is encrypted and routed through Doppler's edge network. Nothing is logged.",
+    "flow": {
+      "step1": "Your Device",
+      "step2": "Encrypted VLESS Tunnel",
+      "step3": "Doppler Edge Node",
+      "step4": "Open Internet"
+    },
+    "cards": {
+      "handshake": {
+        "title": "VLESS-Reality Handshake",
+        "description": "Your connection mimics a normal HTTPS session. Network firewalls and DPI systems can't distinguish Doppler traffic from regular web browsing."
+      },
+      "dns": {
+        "title": "Encrypted DNS Pipeline",
+        "description": "DNS queries are encrypted before leaving your device. Your ISP never sees which domains you visit."
+      },
+      "auth": {
+        "title": "Device-Based Authentication",
+        "description": "No accounts, no emails, no passwords. Your device identity is the only key — nothing personally identifiable is stored on our servers."
+      }
+    }
+  },
+  "censorshipResistance": {
+    "title": "Designed for Restrictive Networks",
+    "subtitle": "Doppler uses techniques that make VPN traffic invisible to network censorship systems.",
+    "learnMore": "Learn how it works",
+    "items": {
+      "dpi": {
+        "title": "Deep Packet Inspection Bypass",
+        "description": "Traditional VPN protocols have recognizable traffic signatures. VLESS-Reality eliminates them — your traffic is indistinguishable from regular HTTPS."
+      },
+      "tls": {
+        "title": "TLS Traffic Camouflage",
+        "description": "Doppler performs a genuine TLS handshake with a real website certificate. Censorship systems see normal web traffic, not a VPN connection."
+      },
+      "fingerprint": {
+        "title": "No Detectable Protocol Fingerprint",
+        "description": "Unlike OpenVPN or WireGuard, VLESS-Reality leaves no protocol fingerprint. There's nothing for automated blocking systems to match against."
+      },
+      "regions": {
+        "title": "Works in Restricted Regions",
+        "description": "Tested and operational in networks with active VPN blocking. Doppler connects where mainstream VPNs fail."
+      }
+    }
+  },
+  "useCases": {
+    "title": "Who Uses Doppler",
+    "subtitle": "Built for people who need more than a generic VPN.",
+    "items": {
+      "restricted": {
+        "title": "People in Restricted Networks",
+        "description": "Connect freely when your government or ISP blocks VPN traffic. Doppler's protocol bypasses active censorship."
+      },
+      "travelers": {
+        "title": "Travelers on Public Wi-Fi",
+        "description": "Hotel, airport, cafe — your traffic is encrypted and your DNS queries are private. No one on the network can see what you do."
+      },
+      "journalists": {
+        "title": "Journalists & Researchers",
+        "description": "Access blocked sources and communicate without exposing your traffic patterns. No account means no identity trail."
+      },
+      "developers": {
+        "title": "Developers & Remote Workers",
+        "description": "Reliable encrypted tunnels that don't get throttled or blocked. Works consistently across restrictive corporate and national firewalls."
+      }
+    }
+  },
+  "comparisonTable": {
+    "title": "Doppler vs. Traditional VPNs",
+    "subtitle": "Not all VPNs are built the same.",
+    "headers": {
+      "feature": "Feature",
+      "traditional": "Traditional VPN",
+      "doppler": "Doppler"
+    },
+    "rows": {
+      "account": {
+        "feature": "Account required",
+        "traditional": "Email + password",
+        "doppler": "No account needed"
+      },
+      "fingerprint": {
+        "feature": "Traffic fingerprint",
+        "traditional": "Detectable by DPI",
+        "doppler": "Camouflaged as HTTPS"
+      },
+      "protocol": {
+        "feature": "Protocol",
+        "traditional": "OpenVPN / WireGuard",
+        "doppler": "VLESS-Reality"
+      },
+      "dns": {
+        "feature": "DNS encryption",
+        "traditional": "Sometimes",
+        "doppler": "Always"
+      },
+      "censorship": {
+        "feature": "Censorship resistance",
+        "traditional": "Limited",
+        "doppler": "Built-in"
+      },
+      "logs": {
+        "feature": "Activity logs",
+        "traditional": "Varies",
+        "doppler": "Never"
+      }
+    }
+  },
+  "privacyModel": {
+    "title": "What We Don't Store",
+    "subtitle": "Privacy by architecture, not just policy.",
+    "tagline": "We can't hand over data we don't have.",
+    "items": {
+      "browsing": {
+        "title": "No browsing logs",
+        "description": "We never see which websites you visit"
+      },
+      "ip": {
+        "title": "No IP address logs",
+        "description": "Your real IP is never recorded"
+      },
+      "dns": {
+        "title": "No DNS query storage",
+        "description": "Encrypted and discarded after resolution"
+      },
+      "account": {
+        "title": "No account database",
+        "description": "Device authentication means no personal data to store"
+      }
+    }
   }
 }
