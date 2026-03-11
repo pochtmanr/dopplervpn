@@ -1,4 +1,5 @@
 export { Hero } from "./hero";
+export { TrustIndicators } from "./trust-indicators";
 export { Features } from "./features";
 export { HowItWorks } from "./how-it-works";
 export { TechnicalHowItWorks } from "./technical-how-it-works";

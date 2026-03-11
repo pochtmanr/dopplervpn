@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import {
   Hero,
+  TrustIndicators,
   Features,
   HowItWorks,
   TechnicalHowItWorks,
@@ -108,6 +109,7 @@ export default async function HomePage({ params }: PageProps) {
       <Navbar />
       <main className="overflow-x-hidden">
         <Hero />
+        <TrustIndicators />
         <Features />
         <TechnicalHowItWorks />
         <HowItWorks />
