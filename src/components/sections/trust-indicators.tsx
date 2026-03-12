@@ -4,11 +4,10 @@ import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/reveal";
 
 const trustItems = [
-  { key: "noAccount", icon: "user" },
   { key: "zeroLogs", icon: "eye-off" },
   { key: "encryptedDns", icon: "lock" },
   { key: "dpiBypass", icon: "shield" },
-  { key: "freeTier", icon: "gift" },
+  { key: "freeTrial", icon: "gift" },
 ] as const;
 
 const icons: Record<string, React.ReactNode> = {
@@ -46,7 +45,7 @@ export function TrustIndicators() {
     <section className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5">
       <div className="mx-auto max-w-7xl">
         <Reveal>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 [&>:last-child]:col-span-2 md:[&>:last-child]:col-span-1 [&>:last-child]:justify-self-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
             {trustItems.map(({ key, icon }) => (
               <div key={key} className="flex flex-col items-center text-center gap-2">
                 <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal">

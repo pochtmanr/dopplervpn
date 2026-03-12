@@ -63,9 +63,9 @@
         "label": "DPI Bypass",
         "description": "Traffic looks like normal HTTPS"
       },
-      "freeTier": {
-        "label": "Free Tier Available",
-        "description": "Try before you commit"
+      "freeTrial": {
+        "label": "3-Day Free Trial",
+        "description": "Try full access risk-free"
       }
     }
   },
@@ -191,7 +191,7 @@
       },
       "whatIsIncluded": {
         "question": "What is included in Premium?",
-        "answer": "Premium includes VPN servers in 50+ locations with WireGuard encryption, DNS-level ad blocker that works across all apps, content filter with parental controls, and connection on up to 10 devices simultaneously."
+        "answer": "Premium includes VPN servers in 50+ locations with VLESS-Reality encryption, DNS-level ad blocker that works across all apps, content filter with parental controls, and connection on up to 10 devices simultaneously."
       },
       "plans": {
         "question": "What subscription plans are available?",
@@ -232,9 +232,9 @@
   },
   "cta": {
     "doppler": {
-      "titleItalic": "Get started",
-      "titleMiddle": "with",
-      "titlePlayful": "Doppler VPN",
+      "titleItalic": "Get started with",
+      "titleMiddle": " Doppler VPN",
+      "titlePlayful": "",
       "subtitle": "Secure, private VPN with no registration. Connect instantly with VLESS-Reality encryption and DNS protection.",
       "cta": "Get Doppler Pro"
     }
@@ -271,11 +271,11 @@
       },
       "vpnData": {
         "title": "VPN Data Handling",
-        "content": "When you connect to our VPN service, your internet traffic is encrypted using the WireGuard protocol and routed through our servers. We do not inspect, log, store, modify, or sell any data that passes through our VPN tunnel. Our DNS-level ad blocker and content filter operate on our DNS resolver and do not log individual queries or browsing patterns."
+        "content": "When you connect to our VPN service, your internet traffic is encrypted using the VLESS-Reality protocol and routed through our servers. We do not inspect, log, store, modify, or sell any data that passes through our VPN tunnel. Our DNS-level ad blocker and content filter operate on our DNS resolver and do not log individual queries or browsing patterns."
       },
       "security": {
         "title": "Data Security",
-        "content": "We use industry-standard encryption protocols including WireGuard to protect your connection. All data transmission between your device and our servers is encrypted end-to-end. Our server infrastructure is configured to minimize data retention by design."
+        "content": "We use the VLESS-Reality protocol to protect your connection, making your traffic indistinguishable from regular HTTPS. All data transmission between your device and our servers is encrypted end-to-end. Our server infrastructure is configured to minimize data retention by design."
       },
       "thirdParty": {
         "title": "Third Parties",
@@ -412,9 +412,7 @@
       "dlMacStore": "Doppler VPN (Mac)",
       "dlMacStoreDesc": "Runs natively on M-chip Macs via Mac App Store",
       "dlStreisand": "Streisand",
-      "dlStreisandDesc": "Free VLESS client — App Store",
-      "dlWireGuard": "WireGuard",
-      "dlWireGuardDesc": "Official WireGuard app — App Store"
+      "dlStreisandDesc": "Free VLESS client — App Store"
     },
     "windows": {
       "title": "Windows Setup",
@@ -435,9 +433,7 @@
       "dlV2rayNx64": "v2rayN — x64",
       "dlV2rayNx64Desc": ".zip — Intel / AMD 64-bit (143 MB)",
       "dlV2rayNArm": "v2rayN — ARM64",
-      "dlV2rayNArmDesc": ".zip — Snapdragon (133 MB)",
-      "dlWireGuard": "WireGuard",
-      "dlWireGuardDesc": "Official WireGuard installer for Windows"
+      "dlV2rayNArmDesc": ".zip — Snapdragon (133 MB)"
     },
     "mac": {
       "title": "macOS Setup",
@@ -461,9 +457,7 @@
       "dlV2rayNSilicon": "v2rayN — Apple Silicon",
       "dlV2rayNSiliconDesc": ".dmg — M1 / M2 / M3 / M4 (105 MB)",
       "dlV2rayNIntel": "v2rayN — Intel",
-      "dlV2rayNIntelDesc": ".dmg — Intel x86_64 (110 MB)",
-      "dlWireGuard": "WireGuard",
-      "dlWireGuardDesc": "Official WireGuard app — Mac App Store"
+      "dlV2rayNIntelDesc": ".dmg — Intel x86_64 (110 MB)"
     },
     "telegramSection": {
       "title": "Telegram Integration",
@@ -483,7 +477,7 @@
     "learnMore": "Learn more",
     "protocolsCard": {
       "title": "VPN Protocols",
-      "subtitle": "WireGuard vs VLESS-Reality — which protocol fits your needs and which apps support them."
+      "subtitle": "How VLESS-Reality works, why we chose it, and which apps support it."
     },
     "subscriptionCard": {
       "title": "Subscription & Pricing",
@@ -517,7 +511,11 @@
     "download": "Download",
     "syncNote": "Already subscribed? Your Pro status syncs across all devices.",
     "needHelp": "Need help?",
-    "visitSupport": "Visit Support",
+    "visitSupport": "Visit our support center for setup guides and troubleshooting",
+    "censorshipCard": {
+      "title": "Bypass Censorship",
+      "description": "Learn how Doppler uses VLESS-Reality to evade deep packet inspection and bypass internet restrictions"
+    },
     "ios": {
       "title": "iOS",
       "button": "App Store",
@@ -734,58 +732,49 @@
   "guideProtocols": {
     "backToGuides": "All Guides",
     "title": "VPN Protocols",
-    "subtitle": "Doppler supports two VPN protocols — WireGuard and VLESS-Reality. Each serves a different purpose. Choose the one that fits your situation.",
+    "subtitle": "Doppler uses VLESS-Reality — a next-generation protocol designed for censorship resistance and undetectable privacy. Here's why.",
     "bestFor": "Best for",
     "apps": "Supported apps",
-    "comparison": "Side-by-side comparison",
+    "comparison": "Why VLESS-Reality over traditional VPN protocols",
     "tableFeature": "Feature",
-    "whichToUse": "Which should I use?",
+    "whyVless": "Why we chose VLESS-Reality",
     "getApps": "Download apps",
     "viewSubscription": "Subscription & pricing",
-    "wireguard": {
-      "title": "WireGuard",
-      "badge": "Recommended",
-      "description": "A modern, lightweight VPN protocol trusted by security professionals. WireGuard offers the fastest connections, best battery efficiency, and military-grade encryption. This is what the Doppler VPN app uses natively.",
-      "speed": "Maximum speed — outperforms OpenVPN and IKEv2",
-      "battery": "Minimal battery drain on mobile devices",
-      "streaming": "Smooth streaming and video calls",
-      "everyday": "Everyday privacy and ad blocking",
-      "appIos": "Doppler VPN (iOS)",
-      "appAndroid": "Doppler VPN (Android)"
-    },
     "vless": {
       "title": "VLESS-Reality",
-      "badge": "Censorship bypass",
-      "description": "An advanced proxy protocol designed to bypass deep packet inspection (DPI) and network censorship. VLESS-Reality disguises VPN traffic as regular HTTPS, making it nearly undetectable. Used via our Telegram bot.",
-      "censorship": "Bypassing government internet censorship",
+      "badge": "Doppler's protocol",
+      "description": "An advanced protocol designed to bypass deep packet inspection (DPI) and network censorship. VLESS-Reality disguises VPN traffic as regular HTTPS, making it nearly undetectable — this is what powers every Doppler connection.",
+      "censorship": "Bypasses government internet censorship",
       "stealth": "Undetectable traffic — looks like normal HTTPS",
-      "deepPacket": "Evading deep packet inspection (DPI)",
-      "restricted": "Accessing internet in Russia, China, Iran, and other restricted regions",
-      "appIos": "Streisand (iOS)",
-      "appAndroid": "v2rayNG (Android)",
+      "deepPacket": "Evades deep packet inspection (DPI)",
+      "speed": "Fast connections with minimal overhead",
+      "appIos": "Doppler VPN (iOS)",
+      "appAndroid": "Doppler VPN (Android)",
+      "appStreisand": "Streisand (iOS — alternative client)",
+      "appV2rayAndroid": "v2rayNG (Android — alternative client)",
       "appWindows": "v2rayN (Windows)",
       "appMac": "v2rayN (macOS)"
     },
     "table": {
       "speed": {
         "label": "Connection speed",
-        "wireguard": "Excellent — fastest available",
-        "vless": "Good — slight overhead from masking"
+        "wireguard": "Fast — but easily blocked",
+        "vless": "Fast — with censorship resistance"
       },
-      "battery": {
-        "label": "Battery impact",
-        "wireguard": "Minimal — kernel-level efficiency",
-        "vless": "Moderate — runs in userspace"
+      "detectability": {
+        "label": "Detectability",
+        "wireguard": "Detectable — known packet structure",
+        "vless": "Undetectable — looks like HTTPS"
       },
       "censorship": {
         "label": "Censorship bypass",
-        "wireguard": "Basic — can be blocked by DPI",
+        "wireguard": "None — blocked by DPI",
         "vless": "Excellent — undetectable by DPI"
       },
-      "setup": {
-        "label": "Setup difficulty",
-        "wireguard": "One-tap — built into Doppler app",
-        "vless": "Manual — config from Telegram bot"
+      "fingerprint": {
+        "label": "Protocol fingerprint",
+        "wireguard": "Visible — identifiable signature",
+        "vless": "None — no protocol signature"
       },
       "platforms": {
         "label": "Platforms",
@@ -793,13 +782,13 @@
         "vless": "iOS, Android, Windows, macOS"
       }
     },
-    "useWireguard": {
-      "title": "Use WireGuard if...",
-      "desc": "You want the simplest experience with the best performance. Just download the Doppler VPN app and tap connect — no configuration needed. Perfect for everyday browsing, streaming, and privacy."
+    "whyNotWireguard": {
+      "title": "Why not WireGuard?",
+      "desc": "WireGuard is a great protocol for speed, but it has a known packet structure that makes it easy to detect and block. In countries with internet censorship (Russia, China, Iran), WireGuard connections are blocked instantly by DPI systems. VLESS-Reality solves this by producing traffic that's indistinguishable from regular HTTPS."
     },
-    "useVless": {
-      "title": "Use VLESS-Reality if...",
-      "desc": "You're in a country with internet censorship (Russia, China, Iran, etc.) or your ISP blocks VPN connections. Get your config from our Telegram bot @dopplercreatebot and use a third-party client app."
+    "dopplerAdvantage": {
+      "title": "The Doppler advantage",
+      "desc": "By building exclusively on VLESS-Reality, every Doppler connection is censorship-resistant by default. Download the app, connect, and your traffic is invisible to DPI systems — no manual configuration needed."
     }
   },
   "guideSubscription": {
@@ -1073,27 +1062,13 @@
     "promoError": "Invalid promo code"
   },
   "technicalHowItWorks": {
-    "title": "How Doppler Protects Your Traffic",
+    "title": "How Doppler VPN Protects Your Traffic",
     "subtitle": "Your connection is encrypted and routed through Doppler's edge network. Nothing is logged.",
     "flow": {
-      "step1": "Your Device",
-      "step2": "Encrypted VLESS Tunnel",
-      "step3": "Doppler Edge Node",
-      "step4": "Open Internet"
-    },
-    "cards": {
-      "handshake": {
-        "title": "VLESS-Reality Handshake",
-        "description": "Your connection mimics a normal HTTPS session. Network firewalls and DPI systems can't distinguish Doppler traffic from regular web browsing."
-      },
-      "dns": {
-        "title": "Encrypted DNS Pipeline",
-        "description": "DNS queries are encrypted before leaving your device. Your ISP never sees which domains you visit."
-      },
-      "auth": {
-        "title": "Device-Based Authentication",
-        "description": "No accounts, no emails, no passwords. Your device identity is the only key — nothing personally identifiable is stored on our servers."
-      }
+      "step1": { "title": "Your Device", "description": "Connection originates from your device with no account required" },
+      "step2": { "title": "VLESS-Reality Tunnel", "description": "Traffic is encrypted and disguised as normal HTTPS" },
+      "step3": { "title": "Doppler Edge Node", "description": "Routed through our zero-log infrastructure" },
+      "step4": { "title": "Open Internet", "description": "You browse freely — no one can see what you access" }
     }
   },
   "useCases": {
@@ -1184,11 +1159,11 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "How Doppler Bypasses Internet Censorship | Doppler VPN",
+      "title": "How Doppler VPN Bypasses Internet Censorship",
       "description": "Learn how VLESS-Reality makes VPN traffic undetectable by deep packet inspection and censorship systems."
     },
     "hero": {
-      "title": "How Doppler Bypasses Internet Censorship",
+      "title": "How Doppler VPN Bypasses Internet Censorship",
       "subtitle": "A technical overview of how VLESS-Reality makes VPN traffic undetectable."
     },
     "problem": {
@@ -1198,7 +1173,7 @@
       "p3": "Beyond protocol detection, censorship systems also block known VPN server IP addresses and analyze TLS handshake fingerprints to identify and block VPN connections before they're fully established."
     },
     "evasion": {
-      "title": "Why Doppler Traffic Is Invisible",
+      "title": "Why Doppler VPN Traffic Is Invisible",
       "reality": {
         "title": "Reality Handshake",
         "description": "VLESS-Reality performs a genuine TLS handshake using a real website's certificate. To any observer — including DPI systems — the connection looks identical to someone browsing a normal HTTPS website. There's no fake certificate or proxy signature to detect."
@@ -1213,7 +1188,7 @@
       },
       "infrastructure": {
         "title": "Dynamic Server Infrastructure",
-        "description": "Doppler rotates server endpoints and IP addresses, making it harder for censorship systems to maintain up-to-date blocklists. Even if one endpoint is identified, the network adapts."
+        "description": "Doppler VPN rotates server endpoints and IP addresses, making it harder for censorship systems to maintain up-to-date blocklists. Even if one endpoint is identified, the network adapts."
       }
     },
     "flow": {
@@ -1260,7 +1235,7 @@
       }
     },
     "works": {
-      "title": "Where Doppler Works",
+      "title": "Where Doppler VPN Works",
       "description": "Doppler is tested and operational in networks with active VPN blocking, including restrictive ISP environments, national-level firewalls, and corporate networks that block traditional VPN protocols.",
       "environments": {
         "isp": "Restrictive ISP environments",
@@ -1270,9 +1245,9 @@
       }
     },
     "cta": {
-      "title": "Try Doppler in your network",
+      "title": "Try Doppler VPN in your network",
       "subtitle": "See if Doppler works where other VPNs fail.",
-      "button": "Download Doppler"
+      "button": "Download Doppler VPN "
     }
   }
 }

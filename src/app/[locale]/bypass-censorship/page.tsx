@@ -78,30 +78,18 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
         <Section>
           <SectionHeader title={t("flow.title")} />
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {(["step1", "step2", "step3", "step4"] as const).map((step, i) => (
-                <div key={step} className="flex items-center gap-4 md:gap-0">
-                  <div className="flex flex-col items-center gap-2 min-w-[140px]">
-                    <div className="w-14 h-14 rounded-2xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal text-lg font-semibold">
-                      {i + 1}
-                    </div>
-                    <span className="text-sm font-medium text-text-primary text-center">
-                      {t(`flow.${step}`)}
-                    </span>
-                    <span className="text-xs text-text-muted text-center">
-                      {t(`flow.${step}note`)}
-                    </span>
+                <div key={step} className="rounded-2xl border border-accent-teal/20 bg-accent-teal/5 p-5 flex flex-col items-center gap-3 text-center">
+                  <div className="w-10 h-10 rounded-xl bg-accent-teal/15 flex items-center justify-center text-accent-teal font-semibold">
+                    {i + 1}
                   </div>
-                  {i < 3 && (
-                    <>
-                      <svg className="w-6 h-6 text-text-muted mx-3 hidden md:block rtl:rotate-180" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                      </svg>
-                      <svg className="w-6 h-6 text-text-muted my-1 block md:hidden" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0 6.75-6.75M12 19.5l-6.75-6.75" />
-                      </svg>
-                    </>
-                  )}
+                  <span className="text-sm font-medium text-text-primary">
+                    {t(`flow.${step}`)}
+                  </span>
+                  <span className="text-xs text-text-muted leading-relaxed">
+                    {t(`flow.${step}note`)}
+                  </span>
                 </div>
               ))}
             </div>
