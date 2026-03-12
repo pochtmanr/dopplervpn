@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { localeConfig } from "@/lib/languages";
+import { localeConfig, getFlagUrl } from "@/lib/languages";
 import { ThemeToggle } from "./theme-toggle";
 
 export function MobileNav() {
@@ -62,11 +62,6 @@ export function MobileNav() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, close]);
 
-  const navItems: { href: string; label: string; isPage?: boolean }[] = [
-    { href: "/downloads", label: t("downloads"), isPage: true },
-    { href: "/support", label: t("support"), isPage: true },
-  ];
-
   const currentLang = localeConfig[locale] || localeConfig.en;
 
   const overlay = (
@@ -81,72 +76,76 @@ export function MobileNav() {
           : "opacity-0 pointer-events-none"
       }`}
     >
-      {/* Backdrop — use bg opacity instead of heavy backdrop-blur on mobile */}
+      {/* Dark backdrop only */}
       <div
-        className="absolute inset-0 bg-bg-primary/95 backdrop-blur-none"
+        className="absolute inset-0 bg-black/60"
         onClick={close}
         aria-hidden="true"
       />
 
-      {/* Content */}
+      {/* Content — same sizing as desktop nav */}
       <div
-        className={`relative flex flex-col items-center justify-center h-full px-6 transition-[transform,opacity] duration-200 ease-out will-change-[transform,opacity] ${
-          isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+        className={`relative mx-4 mt-[max(1rem,env(safe-area-inset-top))] bg-bg-primary/95 backdrop-blur-md rounded-2xl shadow-lg shadow-overlay/10 border border-overlay/10 transition-[transform,opacity] duration-200 ease-out will-change-[transform,opacity] ${
+          isOpen ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
         }`}
-        style={{ transform: 'translateZ(0)' }}
       >
-        {/* Close button */}
-        <button
-          ref={closeButtonRef}
-          onClick={close}
-          className="absolute top-[max(1.25rem,env(safe-area-inset-top))] end-5 p-2.5 text-text-muted hover:text-text-primary transition-colors rounded-full"
-          aria-label="Close menu"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-            <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        {/* Top row — logo area + close */}
+        <div className="flex items-center justify-between h-14 px-4 border-b border-overlay/10">
+          <span className="text-base font-semibold text-text-primary tracking-tight">
+            Doppler VPN
+          </span>
+          <button
+            ref={closeButtonRef}
+            onClick={close}
+            className="p-2 -me-2 text-text-muted hover:text-text-primary transition-colors rounded-full"
+            aria-label="Close menu"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
+              <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
 
-        {/* Nav links */}
-        <nav className="flex flex-col items-center gap-2">
-          {navItems.map((item) =>
-            item.isPage ? (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={close}
-                className="text-text-primary hover:text-accent-gold transition-colors py-2.5 text-2xl font-medium tracking-tight"
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={close}
-                className="text-text-primary hover:text-accent-gold transition-colors py-2.5 text-2xl font-medium tracking-tight"
-              >
-                {item.label}
-              </a>
-            )
-          )}
-        </nav>
+        {/* Nav links — same text size as desktop */}
+        <div className="px-2 py-2 space-y-0.5">
+          <Link
+            href="/downloads"
+            onClick={close}
+            className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
+          >
+            {t("downloads")}
+          </Link>
+          <Link
+            href="/support"
+            onClick={close}
+            className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
+          >
+            {t("support")}
+          </Link>
+          <Link
+            href="/account"
+            onClick={close}
+            className="flex items-center justify-center mx-2 mt-1 px-4 py-2 text-sm font-semibold rounded-full bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors"
+          >
+            {hasAccount ? t("account") : t("getPro")}
+          </Link>
+        </div>
 
-        {/* Language accordion */}
-        <div className="w-full max-w-sm mt-10">
-          {/* Trigger */}
+        {/* Language + theme row */}
+        <div className="px-2 py-2 border-t border-overlay/10">
+          {/* Language accordion */}
           <button
             onClick={() => setLangOpen((prev) => !prev)}
-            className="flex items-center justify-between w-full py-3 px-4 rounded-xl bg-bg-secondary/50 text-text-primary"
+            className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-sm font-medium text-text-primary hover:bg-overlay/5 transition-colors"
             aria-expanded={langOpen}
             aria-controls="mobile-language-list"
           >
-            <span className="flex items-center gap-2 text-lg font-medium">
-              <span className="text-xl leading-none">{currentLang.flag}</span>
+            <span className="flex items-center gap-2">
+              <img src={getFlagUrl(currentLang.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover" />
               {currentLang.name}
             </span>
             <svg
-              className={`w-4 h-4 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`}
+              className={`w-3 h-3 transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -164,56 +163,48 @@ export function MobileNav() {
             }`}
           >
             <div className="overflow-hidden">
-              <div className="relative mt-2">
-                <div className="grid grid-cols-2 gap-1.5 max-h-[60vh] overflow-y-auto px-1 pb-1">
-                  {routing.locales.map((loc) => {
-                    const config = localeConfig[loc] || { label: loc, flag: "", name: loc };
-                    const isActive = locale === loc;
-                    return (
-                      <button
-                        key={loc}
-                        onClick={() => switchLocale(loc)}
-                        className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-base transition-colors duration-150 min-w-0 ${
-                          isActive
-                            ? "bg-accent-teal/15 text-accent-teal ring-1 ring-accent-teal/20"
-                            : "text-text-muted hover:text-text-primary hover:bg-overlay/5"
-                        }`}
-                        aria-current={isActive ? "true" : undefined}
-                        aria-label={`Switch to ${config.name}`}
-                      >
-                        <span className="text-base leading-none shrink-0">{config.flag}</span>
-                        <span className="font-medium truncate">{config.name}</span>
-                        {isActive && (
-                          <svg className="w-3.5 h-3.5 ms-auto shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+              <div className="grid grid-cols-2 gap-1 mt-1 px-1 pb-1 max-h-[50vh] overflow-y-auto">
+                {routing.locales.map((loc) => {
+                  const config = localeConfig[loc] || { label: loc, countryCode: "", name: loc };
+                  const isActive = locale === loc;
+                  return (
+                    <button
+                      key={loc}
+                      onClick={() => switchLocale(loc)}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors duration-150 min-w-0 ${
+                        isActive
+                          ? "bg-accent-teal/15 text-accent-teal ring-1 ring-accent-teal/20"
+                          : "text-text-muted hover:text-text-primary hover:bg-overlay/5"
+                      }`}
+                      aria-current={isActive ? "true" : undefined}
+                      aria-label={`Switch to ${config.name}`}
+                    >
+                      {config.countryCode && (
+                        <img src={getFlagUrl(config.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover shrink-0" />
+                      )}
+                      <span className="font-medium truncate">{config.name}</span>
+                      {isActive && (
+                        <svg className="w-3.5 h-3.5 ms-auto shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Theme toggle */}
-        <div className="mt-6">
-          <ThemeToggle />
+          {/* Theme toggle */}
+          <div className="flex items-center justify-between px-3 py-2.5">
+            <span className="text-sm font-medium text-text-muted">Theme</span>
+            <ThemeToggle />
+          </div>
         </div>
-
-        {/* Get Pro CTA — mobile only */}
-        <Link
-          href="/account"
-          onClick={close}
-          className="mt-8 inline-flex items-center justify-center px-8 py-3 rounded-xl bg-accent-teal text-bg-primary font-medium text-base hover:bg-accent-teal/90 transition-colors"
-        >
-          {hasAccount ? t("account") : t("getPro")}
-        </Link>
       </div>
     </div>
   );
@@ -234,7 +225,7 @@ export function MobileNav() {
         </svg>
       </button>
 
-      {/* Portal overlay to body — escapes nav's backdrop-filter containing block */}
+      {/* Portal overlay to body */}
       {mounted && createPortal(overlay, document.body)}
     </div>
   );

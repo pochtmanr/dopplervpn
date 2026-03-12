@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Instrument_Serif, Space_Grotesk, Inter, Jost } from "next/font/google";
+import { Instrument_Serif, Space_Grotesk, Rubik } from "next/font/google";
 
 import { routing, isRtlLocale } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
@@ -33,20 +33,12 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-// Inter - body font for Russian locale (Cyrillic-capable Google Sans alternative)
-const inter = Inter({
+// Rubik - Google Sans alternative for Cyrillic locales (ru, uk)
+const rubik = Rubik({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-body",
+  variable: "--font-rubik",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-// Jost - heading font for Russian locale (Cyrillic-capable)
-const jost = Jost({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-serif",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 
@@ -137,8 +129,8 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dir}
       suppressHydrationWarning
-      className={locale === "ru"
-        ? `${jost.variable} ${inter.variable}`
+      className={(locale === "ru" || locale === "uk")
+        ? rubik.variable
         : `${instrumentSerif.variable} ${spaceGrotesk.variable}`
       }
     >

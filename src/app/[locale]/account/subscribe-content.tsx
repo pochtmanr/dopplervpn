@@ -94,7 +94,7 @@ function TelegramIcon({ className = 'w-4 h-4' }: { className?: string }) {
 
 function ArrowRightIcon({ className = 'w-4 h-4' }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <svg className={`rtl:-scale-x-100 ${className}`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
     </svg>
   );
@@ -602,28 +602,20 @@ function SubscribeInner() {
               {/* ── Dashboard header ─────────────────────────────── */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-accent-teal/10 border border-accent-teal/20">
+                  <div className="flex items-center justify-center w-11 h-11 rounded-full bg-accent-teal/10 border border-accent-teal/20">
                     <UserIcon className="w-5 h-5 text-accent-teal" />
                   </div>
                   <div>
-                    <h1 className="text-xl sm:text-2xl font-display font-bold tracking-tight">
+                    <h1 className="text-2xl sm:text-3xl font-display font-bold tracking-tight">
                       {t('dashboard.title')}
                     </h1>
                     {accountInfo?.createdAt && (
-                      <p className="text-xs text-text-muted mt-0.5">
+                      <p className="text-sm text-text-muted mt-0.5">
                         {t('dashboard.memberSince')} {formatDate(accountInfo.createdAt, locale)}
                       </p>
                     )}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
-                >
-                  <LogOutIcon className="w-3.5 h-3.5" />
-                  {t('dashboard.logout')}
-                </button>
               </div>
 
               {/* ── Save your ID warning for new accounts ──────── */}
@@ -666,22 +658,22 @@ function SubscribeInner() {
 
                   {/* Account ID card */}
                   <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 p-5">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-semibold uppercase tracking-widest text-text-muted">
                         {t('accountLabel')}
                       </span>
-                      <div className={`w-2 h-2 rounded-full ${isActivePro ? 'bg-green-400' : 'bg-text-muted/30'}`} />
+                      <div className={`w-2.5 h-2.5 rounded-full ${isActivePro ? 'bg-green-400' : 'bg-text-muted/30'}`} />
                     </div>
                     <button
                       type="button"
                       onClick={copyAccountId}
-                      className="group flex items-center gap-2.5 w-full"
+                      className="group flex items-center gap-3 w-full"
                     >
-                      <span className="font-mono text-base sm:text-lg font-bold text-text-primary tracking-wide">
+                      <span className="font-mono text-lg sm:text-xl font-bold text-text-primary tracking-wide">
                         {accountId}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-[10px] text-text-muted group-hover:text-accent-teal transition-colors">
-                        <CopyIcon className="w-3 h-3" />
+                      <span className="inline-flex items-center gap-1 text-xs text-text-muted group-hover:text-accent-teal transition-colors">
+                        <CopyIcon className="w-3.5 h-3.5" />
                         {copied ? t('dashboard.copied') : ''}
                       </span>
                     </button>
@@ -690,27 +682,27 @@ function SubscribeInner() {
                   {/* Linked contacts card */}
                   <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 p-5">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+                      <h3 className="text-xs font-semibold uppercase tracking-widest text-text-muted">
                         {t('dashboard.contacts')}
                       </h3>
-                      <span className="text-[10px] text-text-muted/60">{t('dashboard.contactsOptional')}</span>
+                      <span className="text-xs text-text-muted/60">{t('dashboard.contactsOptional')}</span>
                     </div>
 
                     <div className="space-y-3">
                       {/* Email row */}
                       {(hasEmailContact || knownEmail) && (
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-bg-primary/40 border border-overlay/5">
-                          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-accent-teal/10">
+                        <div className="flex items-center gap-3 p-3.5 rounded-xl bg-bg-primary/40 border border-overlay/5">
+                          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-accent-teal/10">
                             <MailIcon className="w-4 h-4 text-accent-teal" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-xs text-text-muted">{t('dashboard.email')}</p>
-                            <p className="text-sm text-text-primary truncate">
+                            <p className="text-base text-text-primary truncate">
                               {hasEmailContact ? accountInfo!.contactValue : knownEmail}
                             </p>
                           </div>
                           {hasEmailContact && (
-                            <span className={`shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                            <span className={`shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${
                               accountInfo!.contactVerified
                                 ? 'bg-green-500/15 text-green-400'
                                 : 'bg-yellow-500/15 text-yellow-400'
@@ -719,7 +711,7 @@ function SubscribeInner() {
                             </span>
                           )}
                           {!hasEmailContact && knownEmail && (
-                            <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-overlay/5 text-text-muted">
+                            <span className="shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-overlay/5 text-text-muted">
                               {t('dashboard.unverified')}
                             </span>
                           )}
@@ -728,15 +720,15 @@ function SubscribeInner() {
 
                       {/* Telegram row */}
                       {hasTelegramContact && (
-                        <div className="flex items-center gap-3 p-3 rounded-xl bg-bg-primary/40 border border-overlay/5">
-                          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#229ED9]/10">
+                        <div className="flex items-center gap-3 p-3.5 rounded-xl bg-bg-primary/40 border border-overlay/5">
+                          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-[#229ED9]/10">
                             <TelegramIcon className="w-4 h-4 text-[#229ED9]" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-xs text-text-muted">{t('dashboard.telegram')}</p>
-                            <p className="text-sm text-text-primary truncate">{accountInfo!.contactValue}</p>
+                            <p className="text-base text-text-primary truncate">{accountInfo!.contactValue}</p>
                           </div>
-                          <span className={`shrink-0 inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                          <span className={`shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${
                             accountInfo!.contactVerified
                               ? 'bg-green-500/15 text-green-400'
                               : 'bg-yellow-500/15 text-yellow-400'
@@ -748,7 +740,7 @@ function SubscribeInner() {
 
                       {/* No contacts at all */}
                       {!hasEmailContact && !hasTelegramContact && !knownEmail && (
-                        <p className="text-sm text-text-muted py-1">{t('dashboard.noContacts')}</p>
+                        <p className="text-base text-text-muted py-1">{t('dashboard.noContacts')}</p>
                       )}
                     </div>
 
@@ -807,10 +799,10 @@ function SubscribeInner() {
 
                   {/* Restore purchases card */}
                   <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 p-5">
-                    <h3 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted mb-4">
+                    <h3 className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-3">
                       {t('dashboard.restorePurchases')}
                     </h3>
-                    <p className="text-xs text-text-muted mb-4">
+                    <p className="text-sm text-text-muted mb-4">
                       {t('dashboard.restorePurchasesDesc')}
                     </p>
                     <div className="space-y-2">
@@ -837,23 +829,32 @@ function SubscribeInner() {
                     </div>
                   </div>
 
-                  {/* Account actions */}
-                  <div className="space-y-2">
+                  {/* Account actions — same-size stacked CTAs */}
+                  <div className="space-y-2.5">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex items-center justify-center gap-2 w-full rounded-xl border border-overlay/15 bg-bg-secondary/40 px-4 py-3 text-sm font-medium text-text-muted hover:text-text-primary hover:border-overlay/25 transition-colors"
+                    >
+                      <LogOutIcon className="w-4 h-4" />
+                      {t('dashboard.logout')}
+                    </button>
+
                     {isActivePro ? (
                       <>
                         <button
                           type="button"
                           onClick={() => setDeleteConfirmOpen(!deleteConfirmOpen)}
-                          className="flex items-center gap-2 w-full rounded-xl border border-red-500/10 px-4 py-2.5 text-sm text-red-400/70 hover:text-red-400 hover:border-red-500/20 hover:bg-red-500/5 transition-colors"
+                          className="flex items-center justify-center gap-2 w-full rounded-xl border border-red-500/15 px-4 py-3 text-sm font-medium text-red-400/70 hover:text-red-400 hover:border-red-500/25 hover:bg-red-500/5 transition-colors"
                         >
                           {t('dashboard.deleteAccount')}
                         </button>
                         {deleteConfirmOpen && (
                           <div className="rounded-xl border border-red-500/15 bg-red-500/5 px-4 py-3 space-y-2">
-                            <p className="text-xs text-red-300">{t('dashboard.deleteWarningPro')}</p>
+                            <p className="text-sm text-red-300">{t('dashboard.deleteWarningPro')}</p>
                             <a
                               href={`/${locale}/support#delete-account`}
-                              className="inline-flex text-xs text-red-400 underline underline-offset-2 hover:text-red-300 transition-colors"
+                              className="inline-flex text-sm text-red-400 underline underline-offset-2 hover:text-red-300 transition-colors"
                             >
                               {t('dashboard.deleteConfirm')}
                             </a>
@@ -863,7 +864,7 @@ function SubscribeInner() {
                     ) : (
                       <a
                         href={`/${locale}/support#delete-account`}
-                        className="flex items-center gap-2 w-full rounded-xl border border-red-500/10 px-4 py-2.5 text-sm text-red-400/70 hover:text-red-400 hover:border-red-500/20 hover:bg-red-500/5 transition-colors"
+                        className="flex items-center justify-center gap-2 w-full rounded-xl border border-red-500/15 px-4 py-3 text-sm font-medium text-red-400/70 hover:text-red-400 hover:border-red-500/25 hover:bg-red-500/5 transition-colors"
                       >
                         {t('dashboard.deleteAccount')}
                       </a>
@@ -875,25 +876,24 @@ function SubscribeInner() {
                 <div className="lg:col-span-3 space-y-5">
 
                   {/* Subscription status card */}
-                  <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 p-6">
-                    <h3 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted mb-5">
-                      {t('dashboard.subscription')}
-                    </h3>
-
-                    {isActivePro ? (
+                  {isActivePro ? (
+                    <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 p-6">
+                      <h3 className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-5">
+                        {t('dashboard.subscription')}
+                      </h3>
                       <div className="space-y-5">
                         <div className="flex items-start justify-between">
                           <div>
                             <div className="flex items-center gap-2.5">
-                              <span className="text-lg font-bold text-text-primary">
+                              <span className="text-xl font-bold text-text-primary">
                                 {t('dashboard.proActive')}
                               </span>
-                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-green-500/15 text-green-400 text-[10px] font-bold uppercase tracking-wider">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-green-500/15 text-green-400 text-xs font-bold uppercase tracking-wider">
                                 Active
                               </span>
                             </div>
                             {accountInfo?.expiresAt && (
-                              <p className="text-sm text-text-muted mt-1">
+                              <p className="text-sm text-text-muted mt-1.5">
                                 {t('dashboard.activeUntil')} {formatDate(accountInfo.expiresAt, locale)}
                               </p>
                             )}
@@ -920,30 +920,59 @@ function SubscribeInner() {
                           </button>
                         </div>
                       </div>
-                    ) : (
-                      <div className="space-y-5">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
-                            {isExpiredPro && accountInfo?.expiresAt && (
-                              <p className="text-xs text-yellow-400 mt-1">
-                                {t('dashboard.expiredPro', { date: formatDate(accountInfo.expiresAt, locale) })}
-                              </p>
-                            )}
-                          </div>
-                          <ShieldIcon className="w-8 h-8 text-overlay/10" />
+                    </div>
+                  ) : (
+                    /* ── Paywall-style card for non-subscribers ──── */
+                    <div className="rounded-2xl border border-accent-teal/20 bg-gradient-to-b from-accent-teal/5 via-bg-secondary/60 to-bg-secondary/40 overflow-hidden">
+                      {/* Header with gradient accent */}
+                      <div className="relative px-6 pt-6 pb-5">
+                        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-teal/40 to-transparent" />
+                        <div className="flex items-center gap-3 mb-2">
+                          <ShieldIcon className="w-7 h-7 text-accent-teal" />
+                          <h3 className="text-xl font-bold text-text-primary">{t('dashboard.proActive')}</h3>
+                        </div>
+                        {isExpiredPro && accountInfo?.expiresAt && (
+                          <p className="text-sm text-yellow-400">
+                            {t('dashboard.expiredPro', { date: formatDate(accountInfo.expiresAt, locale) })}
+                          </p>
+                        )}
+                        {!isExpiredPro && (
+                          <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
+                        )}
+                      </div>
+
+                      {/* Features list — paywall style */}
+                      <div className="px-6 pb-5">
+                        <ul className="space-y-3">
+                          {features.map((feat) => (
+                            <li key={feat} className="flex items-center gap-3">
+                              <div className="flex items-center justify-center w-5 h-5 rounded-full bg-accent-teal/15">
+                                <CheckIcon className="w-3 h-3 text-accent-teal" />
+                              </div>
+                              <span className="text-sm text-text-primary">{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Price preview + CTA */}
+                      <div className="px-6 pb-6 space-y-4">
+                        <div className="flex items-baseline gap-1.5 justify-center">
+                          <span className="text-3xl font-bold text-text-primary">$2.99</span>
+                          <span className="text-sm text-text-muted">{t('perMonth')}</span>
                         </div>
                         <button
                           type="button"
                           onClick={() => setShowPlans(!showPlans)}
-                          className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                          className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3.5 text-base transition-colors flex items-center justify-center gap-2"
                         >
                           {isExpiredPro ? t('dashboard.renewPro') : t('dashboard.getPro')}
                           <ArrowRightIcon className="w-4 h-4" />
                         </button>
+                        <p className="text-xs text-text-muted/60 text-center">{t('footerNote')}</p>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* ── Plan cards (inline, toggle) ──────────────── */}
                   {showPlans && (
@@ -1102,7 +1131,7 @@ function SubscribeInner() {
 
                       {/* Features */}
                       <div className="rounded-xl border border-overlay/10 bg-bg-secondary/40 p-5">
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted mb-3">
+                        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-3">
                           {t('features')}
                         </h3>
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">

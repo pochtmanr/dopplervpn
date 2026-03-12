@@ -3,29 +3,30 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TranslationEditor } from "./translation-editor";
+import { getFlagUrl } from "@/lib/languages";
 
 const ALL_LOCALES = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "he", name: "Hebrew", flag: "🇮🇱" },
-  { code: "ru", name: "Russian", flag: "🇷🇺" },
-  { code: "es", name: "Spanish", flag: "🇪🇸" },
-  { code: "pt", name: "Portuguese", flag: "🇧🇷" },
-  { code: "fr", name: "French", flag: "🇫🇷" },
-  { code: "zh", name: "Chinese", flag: "🇨🇳" },
-  { code: "de", name: "German", flag: "🇩🇪" },
-  { code: "fa", name: "Farsi", flag: "🇮🇷" },
-  { code: "ar", name: "Arabic", flag: "🇸🇦" },
-  { code: "hi", name: "Hindi", flag: "🇮🇳" },
-  { code: "id", name: "Indonesian", flag: "🇮🇩" },
-  { code: "tr", name: "Turkish", flag: "🇹🇷" },
-  { code: "vi", name: "Vietnamese", flag: "🇻🇳" },
-  { code: "th", name: "Thai", flag: "🇹🇭" },
-  { code: "ms", name: "Malay", flag: "🇲🇾" },
-  { code: "ko", name: "Korean", flag: "🇰🇷" },
-  { code: "ja", name: "Japanese", flag: "🇯🇵" },
-  { code: "tl", name: "Filipino", flag: "🇵🇭" },
-  { code: "ur", name: "Urdu", flag: "🇵🇰" },
-  { code: "sw", name: "Swahili", flag: "🇰🇪" },
+  { code: "en", name: "English", countryCode: "us" },
+  { code: "he", name: "Hebrew", countryCode: "il" },
+  { code: "ru", name: "Russian", countryCode: "ru" },
+  { code: "es", name: "Spanish", countryCode: "es" },
+  { code: "pt", name: "Portuguese", countryCode: "br" },
+  { code: "fr", name: "French", countryCode: "fr" },
+  { code: "zh", name: "Chinese", countryCode: "cn" },
+  { code: "de", name: "German", countryCode: "de" },
+  { code: "fa", name: "Farsi", countryCode: "ir" },
+  { code: "ar", name: "Arabic", countryCode: "sa" },
+  { code: "hi", name: "Hindi", countryCode: "in" },
+  { code: "id", name: "Indonesian", countryCode: "id" },
+  { code: "tr", name: "Turkish", countryCode: "tr" },
+  { code: "vi", name: "Vietnamese", countryCode: "vn" },
+  { code: "th", name: "Thai", countryCode: "th" },
+  { code: "ms", name: "Malay", countryCode: "my" },
+  { code: "ko", name: "Korean", countryCode: "kr" },
+  { code: "ja", name: "Japanese", countryCode: "jp" },
+  { code: "tl", name: "Filipino", countryCode: "ph" },
+  { code: "ur", name: "Urdu", countryCode: "pk" },
+  { code: "sw", name: "Swahili", countryCode: "ke" },
 ];
 
 interface Translation {
@@ -244,7 +245,7 @@ export function TranslationGrid({
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <span className="text-lg">{loc.flag}</span>
+                        <img src={getFlagUrl(loc.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover" />
                         <div>
                           <p className="text-sm font-medium text-text-primary">
                             {loc.name}
@@ -357,7 +358,7 @@ export function TranslationGrid({
             >
               {/* Row 1: flag + name + status */}
               <div className="flex items-center gap-2.5">
-                <span className="text-base shrink-0">{loc.flag}</span>
+                <img src={getFlagUrl(loc.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover shrink-0" />
                 <div className="min-w-0 flex-1">
                   <span className="text-sm font-medium text-text-primary">{loc.name}</span>
                   <span className="text-xs text-text-muted ml-1.5">{loc.code}</span>

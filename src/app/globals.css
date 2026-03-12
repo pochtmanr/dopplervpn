@@ -14,10 +14,10 @@
   --color-overlay: #ffffff;
 
   /* Typography - Font variables are set by next/font in layout.tsx */
-  /* Space Grotesk - main site font */
-  --font-family-body: var(--font-body), "Space Grotesk", system-ui, sans-serif;
-  /* Instrument Serif - hero headline */
-  --font-family-serif: var(--font-serif), "Instrument Serif", Georgia, serif;
+  /* Space Grotesk - main site font; Rubik for Cyrillic via --font-cyrillic */
+  --font-family-body: var(--font-body, var(--font-rubik)), "Space Grotesk", system-ui, sans-serif;
+  /* Instrument Serif - hero headline; Rubik for Cyrillic via --font-cyrillic */
+  --font-family-serif: var(--font-serif, var(--font-rubik)), "Instrument Serif", Georgia, serif;
   /* Container */
   --container-max: 1280px;
 

@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { localeConfig } from "@/lib/languages";
+import { localeConfig, getFlagUrl } from "@/lib/languages";
 
 interface DesktopNavProps {
   logo: ReactNode;
@@ -17,7 +17,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   const [langOpen, setLangOpen] = useState(false);
   const [hasAccount, setHasAccount] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [panelPos, setPanelPos] = useState<{ top: number; right: number } | null>(null);
+  const [panelPos, setPanelPos] = useState<{ top: number; right?: number; left?: number } | null>(null);
   const t = useTranslations("nav");
   const locale = useLocale();
   const router = useRouter();
@@ -48,9 +48,12 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     // Calculate position BEFORE opening so the panel never flashes at (0,0)
     if (!navRef.current) return;
     const navRect = navRef.current.getBoundingClientRect();
+    const isRtl = document.documentElement.dir === "rtl";
     setPanelPos({
       top: navRect.bottom + 8,
-      right: window.innerWidth - navRect.right,
+      ...(isRtl
+        ? { left: navRect.left }
+        : { right: window.innerWidth - navRect.right }),
     });
     setLangOpen((prev) => !prev);
   }, []);
@@ -68,9 +71,12 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     if (!langOpen || !navRef.current) return;
     const recalc = () => {
       const navRect = navRef.current!.getBoundingClientRect();
+      const isRtl = document.documentElement.dir === "rtl";
       setPanelPos({
         top: navRect.bottom + 8,
-        right: window.innerWidth - navRect.right,
+        ...(isRtl
+          ? { left: navRect.left }
+          : { right: window.innerWidth - navRect.right }),
       });
     };
     window.addEventListener("resize", recalc);
@@ -159,7 +165,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
               aria-haspopup="true"
               aria-controls="language-panel"
             >
-              <span className="text-base leading-none">{currentLang.flag}</span>
+              <img src={getFlagUrl(currentLang.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover" />
               <span>{currentLang.label}</span>
               <svg
                 className={`w-3 h-3 transition-transform duration-200 ${
@@ -189,10 +195,10 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
             ref={langPanelRef}
             style={
               panelPos
-                ? { top: panelPos.top, right: panelPos.right }
+                ? { top: panelPos.top, right: panelPos.right, left: panelPos.left }
                 : undefined
             }
-            className={`fixed z-[60] w-[min(calc(100vw-2rem),42rem)] transition-all duration-200 origin-top-right ${
+            className={`fixed z-[60] w-[min(calc(100vw-2rem),42rem)] transition-all duration-200 rtl:origin-top-left ltr:origin-top-right ${
               langOpen && panelPos
                 ? "opacity-100 scale-100 pointer-events-auto"
                 : "opacity-0 scale-95 pointer-events-none"
@@ -209,7 +215,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
                 {routing.locales.map((loc) => {
                   const config = localeConfig[loc] || {
                     label: loc,
-                    flag: "",
+                    countryCode: "",
                     name: loc,
                   };
                   const isActive = locale === loc;
@@ -227,9 +233,9 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
                       aria-current={isActive ? "true" : undefined}
                       aria-label={`Switch to ${config.name}`}
                     >
-                      <span className="text-base leading-none shrink-0">
-                        {config.flag}
-                      </span>
+                      {config.countryCode && (
+                        <img src={getFlagUrl(config.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover shrink-0" />
+                      )}
                       <span className="font-medium truncate">{config.name}</span>
                       {isActive && (
                         <svg
