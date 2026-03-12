@@ -147,7 +147,6 @@ function SubscribeInner() {
   /* ── Step state ────────────────────────────────────────────────── */
   const [step, setStep] = useState<1 | 2>(1);
   const [mode, setMode] = useState<'new' | 'existing'>('new');
-  const [email, setEmail] = useState('');
   const [accountId, setAccountId] = useState('');
   const [identifyError, setIdentifyError] = useState('');
   const [identifyLoading, setIdentifyLoading] = useState(false);
@@ -201,12 +200,7 @@ function SubscribeInner() {
   }, []);
 
   /* ── Derived: what email does this user have? ────────────────── */
-  // If user authenticated via email, we already know it
-  const knownEmail = mode === 'new' && email.trim()
-    ? email.trim().toLowerCase()
-    : accountInfo?.contactMethod === 'email'
-      ? accountInfo.contactValue
-      : null;
+  const knownEmail = accountInfo?.contactMethod === 'email' ? accountInfo.contactValue : null;
 
   const hasEmailContact = !!(accountInfo?.contactMethod === 'email' && accountInfo?.contactValue);
   const hasTelegramContact = !!(accountInfo?.contactMethod === 'telegram' && accountInfo?.contactValue);
@@ -279,62 +273,59 @@ function SubscribeInner() {
     }
   };
 
-  /* ── Step 1: Continue ──────────────────────────────────────────── */
+  /* ── Step 1: Create anonymous account ─────────────────────────── */
+  const handleCreateAccount = async () => {
+    setIdentifyError('');
+    setIdentifyLoading(true);
+    try {
+      const res = await fetch('/api/subscribe/create-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setIdentifyError(data.error || t('error'));
+        return;
+      }
+      setAccountId(data.accountId);
+      localStorage.setItem('doppler_account_id', data.accountId);
+      setExistingAccount(false);
+      setStep(2);
+      fetchAccountInfo(data.accountId);
+    } catch {
+      setIdentifyError(t('error'));
+    } finally {
+      setIdentifyLoading(false);
+    }
+  };
+
+  /* ── Step 1: Continue with existing account ─────────────────── */
   const handleContinue = async () => {
     setIdentifyError('');
-    if (mode === 'new') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email.trim())) {
-        setIdentifyError(t('emailRequired'));
+    const normalized = accountId.trim().toUpperCase();
+    const accountRegex = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+    if (!accountRegex.test(normalized)) {
+      setIdentifyError(t('accountRequired'));
+      return;
+    }
+    setAccountId(normalized);
+    setIdentifyLoading(true);
+    try {
+      const res = await fetch(`/api/subscribe/account-info?account_id=${encodeURIComponent(normalized)}`);
+      if (!res.ok) {
+        setIdentifyError(t('accountNotFound'));
+        setIdentifyLoading(false);
         return;
       }
-      setIdentifyLoading(true);
-      try {
-        const res = await fetch('/api/subscribe/create-account', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email.trim() }),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          setIdentifyError(data.error || t('error'));
-          return;
-        }
-        setAccountId(data.accountId);
-        localStorage.setItem('doppler_account_id', data.accountId);
-        setExistingAccount(data.existing === true);
-        setStep(2);
-        fetchAccountInfo(data.accountId);
-      } catch {
-        setIdentifyError(t('error'));
-      } finally {
-        setIdentifyLoading(false);
-      }
-    } else {
-      const normalized = accountId.trim().toUpperCase();
-      const accountRegex = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-      if (!accountRegex.test(normalized)) {
-        setIdentifyError(t('accountRequired'));
-        return;
-      }
-      setAccountId(normalized);
-      setIdentifyLoading(true);
-      try {
-        const res = await fetch(`/api/subscribe/account-info?account_id=${encodeURIComponent(normalized)}`);
-        if (!res.ok) {
-          setIdentifyError(t('accountNotFound'));
-          setIdentifyLoading(false);
-          return;
-        }
-        const data = await res.json();
-        setAccountInfo(data);
-        localStorage.setItem('doppler_account_id', normalized);
-        setStep(2);
-      } catch {
-        setIdentifyError(t('error'));
-      } finally {
-        setIdentifyLoading(false);
-      }
+      const data = await res.json();
+      setAccountInfo(data);
+      localStorage.setItem('doppler_account_id', normalized);
+      setStep(2);
+    } catch {
+      setIdentifyError(t('error'));
+    } finally {
+      setIdentifyLoading(false);
     }
   };
 
@@ -381,7 +372,6 @@ function SubscribeInner() {
     localStorage.removeItem('doppler_account_id');
     setStep(1);
     setAccountId('');
-    setEmail('');
     setAccountInfo(null);
     setShowPlans(false);
     setExistingAccount(false);
@@ -525,16 +515,34 @@ function SubscribeInner() {
               </button>
             </div>
 
-            {/* Input field */}
             {mode === 'new' ? (
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => { setEmail(e.target.value); setIdentifyError(''); }}
-                placeholder={t('emailPlaceholder')}
-                className="w-full rounded-xl border border-overlay/10 bg-bg-secondary/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all"
-                onKeyDown={(e) => e.key === 'Enter' && handleContinue()}
-              />
+              <>
+                {/* No registration explanation */}
+                <div className="rounded-xl border border-overlay/10 bg-bg-secondary/30 p-4 space-y-2">
+                  <p className="text-sm text-text-primary font-medium">{t('noRegistrationNote')}</p>
+                  <p className="text-xs text-text-muted">{t('autoDeleteNote')}</p>
+                </div>
+
+                {/* Create account button */}
+                <button
+                  type="button"
+                  onClick={handleCreateAccount}
+                  disabled={identifyLoading}
+                  className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                >
+                  {identifyLoading ? (
+                    <>
+                      <SpinnerIcon className="w-4 h-4" />
+                      {t('creatingAnonymous')}
+                    </>
+                  ) : (
+                    <>
+                      <ShieldIcon className="w-4 h-4" />
+                      {t('createAccount')}
+                    </>
+                  )}
+                </button>
+              </>
             ) : (
               <>
                 <input
@@ -554,29 +562,29 @@ function SubscribeInner() {
                 >
                   {t("dashboard.forgotAccountId")}
                 </button>
+
+                {/* Continue button */}
+                <button
+                  type="button"
+                  onClick={handleContinue}
+                  disabled={identifyLoading}
+                  className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                >
+                  {identifyLoading ? (
+                    <>
+                      <SpinnerIcon className="w-4 h-4" />
+                      {t('verifyingAccount')}
+                    </>
+                  ) : (
+                    t('continue')
+                  )}
+                </button>
               </>
             )}
 
             {identifyError && (
               <p className="text-xs text-red-400 ps-1">{identifyError}</p>
             )}
-
-            {/* Continue button */}
-            <button
-              type="button"
-              onClick={handleContinue}
-              disabled={identifyLoading}
-              className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
-            >
-              {identifyLoading ? (
-                <>
-                  <SpinnerIcon className="w-4 h-4" />
-                  {mode === 'new' ? t('lookingUp') : t('verifyingAccount')}
-                </>
-              ) : (
-                t('continue')
-              )}
-            </button>
           </div>
         </div>
       )}
@@ -617,8 +625,21 @@ function SubscribeInner() {
                 </button>
               </div>
 
+              {/* ── Save your ID warning for new accounts ──────── */}
+              {!existingAccount && mode === 'new' && (
+                <div className="mb-6 rounded-xl border border-amber-500/20 bg-amber-500/5 px-5 py-3.5 flex items-start gap-3">
+                  <svg className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm font-medium text-amber-300">{t('saveWarning')}</p>
+                    <p className="text-xs text-text-muted mt-0.5">{t('saveWarningDetail')}</p>
+                  </div>
+                </div>
+              )}
+
               {/* ── Existing account notice ───────────────────────── */}
-              {existingAccount && mode === 'new' && (
+              {existingAccount && (
                 <div className="mb-6 rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-5 py-3.5 flex items-start gap-3">
                   <CheckIcon className="w-4 h-4 text-accent-teal mt-0.5 shrink-0" />
                   <div>
@@ -667,9 +688,12 @@ function SubscribeInner() {
 
                   {/* Linked contacts card */}
                   <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 p-5">
-                    <h3 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted mb-4">
-                      {t('dashboard.contacts')}
-                    </h3>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+                        {t('dashboard.contacts')}
+                      </h3>
+                      <span className="text-[10px] text-text-muted/60">{t('dashboard.contactsOptional')}</span>
+                    </div>
 
                     <div className="space-y-3">
                       {/* Email row */}
