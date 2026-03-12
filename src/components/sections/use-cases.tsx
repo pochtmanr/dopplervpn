@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -34,8 +32,8 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-export function UseCases() {
-  const t = useTranslations("useCases");
+export async function UseCases() {
+  const t = await getTranslations("useCases");
 
   return (
     <Section id="use-cases">

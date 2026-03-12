@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/ui/reveal";
 
 const trustItems = [
@@ -38,8 +36,8 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-export function TrustIndicators() {
-  const t = useTranslations("trustIndicators");
+export async function TrustIndicators() {
+  const t = await getTranslations("trustIndicators");
 
   return (
     <section className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5">

@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { getFlagUrl } from "@/lib/languages";
@@ -34,7 +32,7 @@ function ProtocolBadge({ protocol }: { protocol: string }) {
 }
 
 /* ─── Server card ─── */
-function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<typeof useTranslations> }) {
+function ServerCard({ location, t }: { location: ServerLocation; t: Awaited<ReturnType<typeof getTranslations>> }) {
   return (
     <div className="group rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors">
       <div className="flex items-start justify-between mb-3">
@@ -61,8 +59,8 @@ function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<t
 }
 
 /* ─── Servers section ─── */
-export function Servers() {
-  const t = useTranslations("servers");
+export async function Servers() {
+  const t = await getTranslations("servers");
 
   return (
     <Section id="servers">

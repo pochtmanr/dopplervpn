@@ -1,13 +1,11 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
 const rowKeys = ["account", "fingerprint", "protocol", "dns", "censorship", "logs"] as const;
 
-export function ComparisonTable() {
-  const t = useTranslations("comparisonTable");
+export async function ComparisonTable() {
+  const t = await getTranslations("comparisonTable");
 
   return (
     <Section id="comparison">

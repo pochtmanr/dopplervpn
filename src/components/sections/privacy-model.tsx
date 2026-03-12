@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -30,8 +28,8 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-export function PrivacyModel() {
-  const t = useTranslations("privacyModel");
+export async function PrivacyModel() {
+  const t = await getTranslations("privacyModel");
 
   return (
     <Section id="privacy-model">
