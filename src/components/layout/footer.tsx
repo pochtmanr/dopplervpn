@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { DopplerLogo } from "./doppler-logo";
 
 export async function Footer() {
   const t = await getTranslations("footer");
@@ -12,14 +12,8 @@ export async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2 mb-4" dir="ltr">
-              <Image
-                src="/images/roundeddopplerlogo.png"
-                alt="Doppler VPN"
-                width={32}
-                height={32}
-                className="w-8 h-8 rounded-full"
-              />
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
+              <DopplerLogo className="w-8 h-8" />
               <span className="font-display text-xl font-semibold text-text-primary">
                 Doppler VPN
               </span>
