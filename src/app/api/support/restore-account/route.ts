@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
                 <p style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0; font-family: monospace; letter-spacing: 2px;">${account.account_id}</p>
               </div>
               <p style="color: #a1a1aa; margin: 0 0 16px;">Use this ID to manage your subscription and access your VPN services.</p>
-              <a href="https://www.dopplervpn.org/subscribe" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">Go to Doppler VPN</a>
+              <a href="https://www.dopplervpn.org/account" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">Go to Doppler VPN</a>
               <hr style="border: none; border-top: 1px solid #27272a; margin: 24px 0;" />
               <p style="color: #71717a; font-size: 12px; margin: 0;">If you did not request this, you can safely ignore this email.</p>
             </div>

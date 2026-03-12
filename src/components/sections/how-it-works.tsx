@@ -26,7 +26,7 @@ const stepIcons: Record<string, React.ReactNode> = {
 const stepKeys = ["choose", "download", "connect"] as const;
 
 const stepLinks: Record<(typeof stepKeys)[number], { href: string; isPage?: boolean }> = {
-  choose: { href: "/subscribe", isPage: true },
+  choose: { href: "/account", isPage: true },
   download: { href: "/downloads", isPage: true },
   connect: { href: "/#faq" },
 };

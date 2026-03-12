@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
     const { count: proCount } = await client
       .from("accounts")
       .select("id", { count: "exact", head: true })
-      .in("subscription_tier", ["pro", "premium"]);
+      .in("subscription_tier", ["pro"]);
 
     const { count: withContact } = await client
       .from("accounts")

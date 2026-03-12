@@ -117,8 +117,8 @@ export default async function HomePage({ params }: PageProps) {
         <TechnicalHowItWorks />
         <Features />
         <CensorshipResistance />
-        <UseCases />
         <ComparisonTable />
+        <UseCases />
         <Servers />
         <Pricing />
         <PrivacyModel />

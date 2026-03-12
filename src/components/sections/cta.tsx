@@ -58,7 +58,7 @@ export function CTA() {
             {/* Subscribe Button */}
             <div className="flex flex-row flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
               <Link
-                href="/subscribe"
+                href="/account"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30"
               >
                 {t("doppler.cta")}

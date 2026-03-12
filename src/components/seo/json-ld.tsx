@@ -12,8 +12,8 @@ export function OrganizationSchema({ locale }: OrganizationSchemaProps) {
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
     description:
       locale === "he"
-        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת WireGuard, חוסם פרסומות מובנה וסינון תוכן."
-        : "Free VPN with no email or sign up required. Connect instantly with WireGuard encryption, built-in ad blocker & content filter.",
+        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן."
+        : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter.",
     sameAs: [],
   };
 
@@ -37,8 +37,8 @@ export function ProductSchema({ locale }: ProductSchemaProps) {
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
     description:
       locale === "he"
-        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת WireGuard, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים."
-        : "Free VPN with no email or sign up required. Connect instantly with WireGuard encryption, built-in ad blocker & content filter. No logs.",
+        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים."
+        : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter. No logs.",
     brand: {
       "@type": "Brand",
       name: "Doppler VPN",
@@ -157,8 +157,8 @@ export function SoftwareApplicationSchema({
     operatingSystem: "iOS, macOS, Android",
     description:
       locale === "he"
-        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת WireGuard, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים. ללא הגבלות נתונים."
-        : "Free VPN with no email or sign up required. Connect instantly with WireGuard encryption, built-in ad blocker & content filter. No logs. No data caps.",
+        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים. ללא הגבלות נתונים."
+        : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter. No logs. No data caps.",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -171,7 +171,7 @@ export function SoftwareApplicationSchema({
     },
     featureList: [
       locale === "he" ? "ללא רישום נדרש" : "No registration required",
-      locale === "he" ? "הצפנת WireGuard" : "WireGuard encryption",
+      locale === "he" ? "הצפנת VLESS-Reality" : "VLESS-Reality encryption",
       locale === "he" ? "חוסם פרסומות מובנה" : "Built-in ad blocker",
       locale === "he" ? "סינון תוכן ובקרת הורים" : "Content filter & parental controls",
       locale === "he" ? "מדיניות ללא יומנים" : "No-logs policy",

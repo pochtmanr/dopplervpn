@@ -72,7 +72,6 @@ function formatDate(ts: string | null): string {
 const tierColors: Record<string, string> = {
   free: "bg-gray-400/15 text-gray-400",
   pro: "bg-blue-400/15 text-blue-400",
-  premium: "bg-amber-400/15 text-amber-400",
 };
 
 function TierBadge({ tier }: { tier: string }) {
@@ -289,7 +288,7 @@ export default function AccountsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
           { label: "Total Accounts", value: stats.total_accounts },
-          { label: "Pro / Premium", value: stats.pro_subscribers },
+          { label: "Pro", value: stats.pro_subscribers },
           { label: "With Contact", value: stats.with_contact },
           { label: "Active Configs", value: stats.active_configs },
         ].map((s) => (
@@ -310,7 +309,6 @@ export default function AccountsPage() {
           <option value="">All Tiers</option>
           <option value="free">Free</option>
           <option value="pro">Pro</option>
-          <option value="premium">Premium</option>
         </select>
 
         <select
@@ -405,7 +403,6 @@ export default function AccountsPage() {
                         >
                           <option value="free">free</option>
                           <option value="pro">pro</option>
-                          <option value="premium">premium</option>
                         </select>
                         <button
                           onClick={() => handleDelete(a)}
@@ -552,7 +549,6 @@ export default function AccountsPage() {
                 >
                   <option value="free">free</option>
                   <option value="pro">pro</option>
-                  <option value="premium">premium</option>
                 </select>
                 <button
                   onClick={() => handleDelete(a)}

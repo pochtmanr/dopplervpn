@@ -25,6 +25,12 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     setHasAccount(!!localStorage.getItem("doppler_account_id"));
   }, []);
 
+  // Close language panel when navbar goes compact
+  useEffect(() => {
+    const header = navRef.current?.closest("[data-compact]");
+    if (header) setLangOpen(false);
+  });
+
   const close = useCallback(() => setLangOpen(false), []);
 
   const toggleLang = useCallback(() => {
@@ -65,14 +71,16 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   return (
     <nav
       ref={navRef}
-      className="relative mx-auto max-w-7xl bg-bg-primary/90 backdrop-blur-xl rounded-2xl shadow-lg shadow-overlay/5"
+      className={`relative mx-auto bg-bg-primary/90 backdrop-blur-xl shadow-sm shadow-overlay/5 overflow-hidden transition-[max-width,border-radius] duration-300 ease-out max-w-7xl group-data-[compact]:max-w-[4.5rem] ${
+        langOpen ? "rounded-2xl" : "rounded-full"
+      }`}
     >
       {/* Main bar row */}
-      <div className="flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4">
+      <div className="flex items-center justify-between h-12 sm:h-14 group-data-[compact]:h-10 transition-[height] duration-300 px-3 sm:px-4 group-data-[compact]:px-2">
         {logo}
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-0.5">
+        <div className="hidden md:flex items-center gap-0.5 transition-opacity duration-200 group-data-[compact]:opacity-0 group-data-[compact]:pointer-events-none">
           <Link
             href="/downloads"
             className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
@@ -88,7 +96,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
           </Link>
 
           <Link
-            href="/subscribe"
+            href="/account"
             className="ml-1 px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors"
           >
             {hasAccount ? t("account") : t("getPro")}
@@ -96,7 +104,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
         </div>
 
         {/* Right side controls (desktop) */}
-        <div className="hidden md:flex items-center gap-1.5">
+        <div className="hidden md:flex items-center gap-1.5 transition-opacity duration-200 group-data-[compact]:opacity-0 group-data-[compact]:pointer-events-none">
           {controls}
 
           {/* Language trigger */}

@@ -138,8 +138,8 @@ export async function POST(req: NextRequest) {
         promo_discount: String(promoDiscount),
         original_cents: String(plan.cents),
       },
-      success_url: `${baseUrl}/en/subscribe/success?session_id={CHECKOUT_SESSION_ID}&account_id=${accountId}`,
-      cancel_url: `${baseUrl}/en/subscribe`,
+      success_url: `${baseUrl}/en/account/success?session_id={CHECKOUT_SESSION_ID}&account_id=${accountId}`,
+      cancel_url: `${baseUrl}/en/account`,
     });
 
     return NextResponse.json({ url: session.url });

@@ -472,10 +472,10 @@ function SubscribeInner() {
     t('feat4'), t('feat5'), t('feat6'),
   ];
 
-  const isPro = accountInfo?.tier === 'pro' || accountInfo?.tier === 'premium';
+  const isPro = accountInfo?.tier === 'pro';
   const isActivePro = isPro;
   // Expired pro: rawTier was pro/premium but effective tier is free (server already computed)
-  const isExpiredPro = !isPro && (accountInfo?.rawTier === 'pro' || accountInfo?.rawTier === 'premium');
+  const isExpiredPro = !isPro && accountInfo?.rawTier === 'pro';
 
   /* ── Render ────────────────────────────────────────────────────── */
   return (

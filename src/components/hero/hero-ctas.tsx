@@ -29,34 +29,34 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
       href={downloadConfig.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
+      className="inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
     >
       {downloadConfig.label}
     </a>
   ) : (
     <Link
       href="/downloads"
-      className="inline-flex items-center gap-2 px-5 py-3 bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
+      className="inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 rounded-lg transition-colors text-sm font-medium"
     >
       {downloadConfig.label}
     </Link>
   );
 
   return (
-    <div className="flex flex-row items-center justify-center lg:justify-start gap-3">
+    <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 w-full">
       {downloadBtn}
       {platform === "android" && (
         <a
           href={ANDROID_APK}
           download
-          className="inline-flex items-center gap-2 px-5 py-3 border border-overlay/20 text-text-muted hover:text-text-primary hover:border-overlay/40 rounded-lg transition-colors text-sm font-medium"
+          className="inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center border border-overlay/20 text-text-muted hover:text-text-primary hover:border-overlay/40 rounded-lg transition-colors text-sm font-medium"
         >
           {t("getAndroid")}
         </a>
       )}
       <a
         href="#pricing"
-        className="inline-flex items-center gap-2 px-5 py-3 border border-overlay/20 text-text-muted hover:text-text-primary hover:border-overlay/40 rounded-lg transition-colors text-sm font-medium"
+        className="inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center border border-overlay/20 text-text-muted hover:text-text-primary hover:border-overlay/40 rounded-lg transition-colors text-sm font-medium"
       >
         {t("seePrices")}
       </a>

@@ -13,7 +13,7 @@ export async function PATCH(
     const body = await request.json();
     const { subscription_tier, duration_days } = body;
 
-    if (!["free", "pro", "premium"].includes(subscription_tier)) {
+    if (!["free", "pro"].includes(subscription_tier)) {
       return NextResponse.json({ error: "Invalid tier" }, { status: 400 });
     }
 
@@ -30,7 +30,7 @@ export async function PATCH(
       updateData.subscription_expires_at = null;
       updateData.subscription_store = null;
     } else if (duration_days) {
-      // Granting Pro/Premium with duration
+      // Granting Pro with duration
       const expiresAt = new Date();
       expiresAt.setDate(expiresAt.getDate() + Number(duration_days));
       updateData.subscription_expires_at = expiresAt.toISOString();

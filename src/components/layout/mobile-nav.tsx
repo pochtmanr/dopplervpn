@@ -98,7 +98,7 @@ export function MobileNav() {
         <button
           ref={closeButtonRef}
           onClick={close}
-          className="absolute top-5 end-5 p-2.5 text-text-muted hover:text-text-primary transition-colors rounded-full"
+          className="absolute top-[max(1.25rem,env(safe-area-inset-top))] end-5 p-2.5 text-text-muted hover:text-text-primary transition-colors rounded-full"
           aria-label="Close menu"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
@@ -207,7 +207,7 @@ export function MobileNav() {
 
         {/* Get Pro CTA — mobile only */}
         <Link
-          href="/subscribe"
+          href="/account"
           onClick={close}
           className="mt-8 inline-flex items-center justify-center px-8 py-3 rounded-xl bg-accent-teal text-bg-primary font-medium text-base hover:bg-accent-teal/90 transition-colors"
         >
