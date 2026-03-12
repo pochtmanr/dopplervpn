@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
 
 function generateAccountId(): string {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I/O/0/1 for clarity
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   const seg = () =>
     Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   return `VPN-${seg()}-${seg()}-${seg()}`;
@@ -11,6 +12,10 @@ function generateAccountId(): string {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 5 account creations per minute per IP
+  const rl = rateLimit(req, { limit: 5, windowMs: 60_000, prefix: 'create-account' });
+  if (rl) return rl;
+
   try {
     let body: { email?: string } = {};
     try {
@@ -22,7 +27,6 @@ export async function POST(req: NextRequest) {
     const { email } = body;
     const supabase = createUntypedAdminClient();
 
-    // If email provided, try to find existing account
     if (email && EMAIL_REGEX.test(email)) {
       const normalizedEmail = email.toLowerCase().trim();
 
@@ -39,7 +43,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ accountId: best.account_id, existing: true });
       }
 
-      // Create account with email
       let accountId = '';
       let attempts = 0;
       while (attempts < 5) {
@@ -60,7 +63,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ accountId, existing: false });
     }
 
-    // Anonymous account creation — no email required
     let accountId = '';
     let attempts = 0;
     while (attempts < 5) {

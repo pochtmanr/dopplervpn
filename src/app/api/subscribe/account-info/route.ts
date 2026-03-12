@@ -1,16 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
 function computeEffectiveTier(tier: string | null, expiresAt: string | null): string {
   if (!tier || tier === 'free') return 'free';
-  // If pro/premium but expired, treat as free
   if (expiresAt && new Date(expiresAt) < new Date()) return 'free';
   return tier;
 }
 
 export async function GET(req: NextRequest) {
+  // Rate limit: 10 lookups per minute per IP
+  const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'account-info' });
+  if (rl) return rl;
+
   try {
     const accountId = req.nextUrl.searchParams.get('account_id');
 
@@ -35,17 +39,6 @@ export async function GET(req: NextRequest) {
       account.subscription_expires_at,
     );
 
-    // Check if this account's email is linked to other accounts
-    let linkedAccountsCount = 0;
-    if (account.contact_value && account.contact_method === 'email') {
-      const { count } = await supabase
-        .from('accounts')
-        .select('*', { count: 'exact', head: true })
-        .eq('contact_method', 'email')
-        .eq('contact_value', account.contact_value);
-      linkedAccountsCount = (count ?? 1) - 1;
-    }
-
     return NextResponse.json({
       accountId: account.account_id,
       tier: effectiveTier,
@@ -55,7 +48,6 @@ export async function GET(req: NextRequest) {
       contactValue: account.contact_value,
       contactVerified: account.contact_verified,
       createdAt: account.created_at,
-      linkedAccountsCount,
     });
   } catch (error) {
     console.error('Account info error:', error);

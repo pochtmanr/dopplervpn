@@ -49,7 +49,7 @@ src/
 
 ## Important Notes
 - **Always use `www.dopplervpn.org`** for API calls — dopplervpn.org redirects strip auth headers
-- Blog API key: `dpvpn-blog-8313727fefa39868fb43a4a399e13646`
+- Blog API key: stored in `.env.local` as `BLOG_API_KEY` (never commit this value)
 - Admin panel has 4 tabs: Dashboard (Supabase stats), Messages (bot logs), VPN Users (Marzban), Posts (blog)
 - OpenAI model used: `gpt-5-mini`
 - Images: External URLs from Unsplash/Pixabay/Pexels are allowed in next.config

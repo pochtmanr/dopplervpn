@@ -12,7 +12,7 @@ export async function Navbar() {
         logo={
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <DopplerLogo />
-            <span className="text-base sm:text-lg font-semibold text-text-primary tracking-tight group-data-[compact]:text-sm transition-[font-size] duration-500">
+            <span className="text-base sm:text-lg font-semibold text-text-primary tracking-tight">
               Doppler VPN
             </span>
           </Link>

@@ -1,19 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SUPPORTED_LOCALES } from "@/lib/openai/translate";
-
-function requireApiKey(request: Request) {
-  const apiKey = process.env.BLOG_API_KEY;
-  if (!apiKey) throw new Error("BLOG_API_KEY not configured");
-  const auth = request.headers.get("authorization");
-  if (!auth) return false;
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : auth;
-  return token === apiKey;
-}
+import { requireBlogApiKey } from "@/lib/api-auth";
+import { rateLimit } from "@/lib/rate-limit";
 
 // GET /api/blog/status — check API health, key validity, stats
-export async function GET(request: Request) {
-  if (!requireApiKey(request)) {
+export async function GET(request: NextRequest) {
+  const rl = rateLimit(request, { limit: 30, windowMs: 60_000, prefix: 'blog-status' });
+  if (rl) return rl;
+
+  if (!requireBlogApiKey(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -34,7 +30,7 @@ export async function GET(request: Request) {
     .from("blog_post_translations")
     .select("id", { count: "exact", head: true });
 
-  // Template type distribution (template_type column added in migration 002, not yet in generated types)
+  // Template type distribution
   const { data: templateStats } = await db
     .from("blog_posts")
     .select("template_type" as string)
@@ -63,7 +59,7 @@ export async function GET(request: Request) {
   return NextResponse.json({
     status: "ok",
     api_version: "1.0",
-    key_expires: null, // No expiry — static key
+    key_expires: null,
     supported_locales: ["en", ...SUPPORTED_LOCALES],
     total_languages: SUPPORTED_LOCALES.length + 1,
     stats: {

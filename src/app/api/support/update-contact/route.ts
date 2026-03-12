@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const VALID_METHODS = ['email', 'telegram'] as const;
 
 export async function POST(req: NextRequest) {
+  // Strict rate limit: 3 updates per minute per IP
+  const rl = rateLimit(req, { limit: 3, windowMs: 60_000, prefix: 'support-update-contact' });
+  if (rl) return rl;
+
   try {
     const { account_id, contact_method, contact_value } = await req.json();
 
@@ -38,6 +43,17 @@ export async function POST(req: NextRequest) {
     }
 
     const supabase = createUntypedAdminClient();
+
+    // Verify account exists before updating
+    const { data: account, error: lookupError } = await supabase
+      .from('accounts')
+      .select('id')
+      .eq('account_id', account_id)
+      .single();
+
+    if (lookupError || !account) {
+      return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+    }
 
     const { error } = await supabase
       .from('accounts')

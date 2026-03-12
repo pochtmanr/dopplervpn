@@ -1,46 +1,42 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function GET(req: NextRequest) {
+  // Strict rate limit: 5 lookups per minute per IP
+  const rl = rateLimit(req, { limit: 5, windowMs: 60_000, prefix: 'support-account' });
+  if (rl) return rl;
+
   try {
     const accountId = req.nextUrl.searchParams.get('account_id');
-    const email = req.nextUrl.searchParams.get('email');
 
-    if (!accountId && !email) {
+    // REMOVED: email-based lookup to prevent PII enumeration.
+    // Only account_id lookup is allowed — the user must know their account ID.
+    if (!accountId) {
       return NextResponse.json(
-        { error: 'Provide account_id or email' },
+        { error: 'Provide account_id' },
+        { status: 400 }
+      );
+    }
+
+    if (!ACCOUNT_ID_REGEX.test(accountId)) {
+      return NextResponse.json(
+        { error: 'Invalid account ID format' },
         { status: 400 }
       );
     }
 
     const supabase = createUntypedAdminClient();
 
-    const selectFields =
-      'account_id, subscription_tier, subscription_expires_at, contact_method, contact_value, contact_verified, subscription_source, created_at';
-
-    let query = supabase.from('accounts').select(selectFields);
-
-    if (accountId) {
-      if (!ACCOUNT_ID_REGEX.test(accountId)) {
-        return NextResponse.json(
-          { error: 'Invalid account ID format' },
-          { status: 400 }
-        );
-      }
-      query = query.eq('account_id', accountId);
-    } else if (email) {
-      if (!EMAIL_REGEX.test(email)) {
-        return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
-      }
-      query = query
-        .eq('contact_method', 'email')
-        .eq('contact_value', email.toLowerCase().trim());
-    }
-
-    const { data: account, error } = await query.limit(1).single();
+    // Only return non-sensitive fields — no contact_value (email/telegram)
+    const { data: account, error } = await supabase
+      .from('accounts')
+      .select('account_id, subscription_tier, subscription_expires_at, contact_method, contact_verified, subscription_source, created_at')
+      .eq('account_id', accountId)
+      .limit(1)
+      .single();
 
     if (error || !account) {
       return NextResponse.json(
@@ -49,6 +45,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    // Mask contact value — only show partial info
     return NextResponse.json({ account });
   } catch (error) {
     console.error('Account lookup error:', error);

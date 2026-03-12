@@ -1,28 +1,29 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { translateContent, SUPPORTED_LOCALES } from "@/lib/openai/translate";
-
-function requireApiKey(request: Request) {
-  const apiKey = process.env.BLOG_API_KEY;
-  if (!apiKey) {
-    throw new Error("BLOG_API_KEY not configured");
-  }
-  const auth = request.headers.get("authorization");
-  if (!auth) return false;
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : auth;
-  return token === apiKey;
-}
+import { requireBlogApiKey } from "@/lib/api-auth";
+import { rateLimit } from "@/lib/rate-limit";
 
 // Allow up to 5 minutes for translating all 20 languages
 export const maxDuration = 300;
 
 // POST /api/blog/translate — trigger translations for an existing post
-export async function POST(request: Request) {
-  if (!requireApiKey(request)) {
+export async function POST(request: NextRequest) {
+  const rl = rateLimit(request, { limit: 10, windowMs: 60_000, prefix: 'blog-translate' });
+  if (rl) return rl;
+
+  if (!requireBlogApiKey(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { post_id, slug, locales } = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const { post_id, slug, locales } = body;
 
   if (!post_id && !slug) {
     return NextResponse.json(

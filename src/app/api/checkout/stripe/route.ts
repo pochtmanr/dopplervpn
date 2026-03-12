@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -8,6 +9,7 @@ function getStripe() {
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SUPPORTED_LOCALES = ['en', 'he', 'ru', 'es', 'pt', 'fr', 'zh', 'de', 'fa', 'ar', 'hi', 'id', 'tr', 'vi', 'th', 'ms', 'ko', 'ja', 'tl', 'ur', 'sw'];
 
 const PLANS: Record<string, { name: string; cents: number; days: number }> = {
   monthly: { name: 'Doppler VPN Pro — Monthly', cents: 699, days: 30 },
@@ -23,15 +25,17 @@ function generateAccountId(): string {
 }
 
 export async function POST(req: NextRequest) {
+  const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'checkout' });
+  if (rl) return rl;
+
   try {
-    const { planId, accountId: rawAccountId, email, promoId } = await req.json();
+    const { planId, accountId: rawAccountId, email, promoId, locale } = await req.json();
 
     const plan = PLANS[planId];
     if (!plan) {
       return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
     }
 
-    // Require either a valid accountId or a valid email
     const hasAccountId = rawAccountId && ACCOUNT_ID_REGEX.test(rawAccountId);
     const hasEmail = email && EMAIL_REGEX.test(email);
 
@@ -46,7 +50,6 @@ export async function POST(req: NextRequest) {
     let accountId: string;
 
     if (hasAccountId) {
-      // Existing flow: verify account exists
       accountId = rawAccountId;
       const { data: account, error: accountError } = await supabase
         .from('accounts')
@@ -58,7 +61,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Account not found' }, { status: 404 });
       }
     } else {
-      // Email-based flow: find existing account or create a new one
       const normalizedEmail = email.toLowerCase().trim();
 
       const { data: existing } = await supabase
@@ -71,7 +73,6 @@ export async function POST(req: NextRequest) {
       if (existing) {
         accountId = existing.account_id;
       } else {
-        // Create new account with unique ID (retry on collision)
         accountId = '';
         let attempts = 0;
         while (attempts < 5) {
@@ -92,21 +93,30 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Apply promo discount if provided
+    // SECURITY: Re-validate promo at checkout time (full validation, not just discount lookup)
     let finalCents = plan.cents;
     let promoDiscount = 0;
     if (promoId) {
       try {
         const { data: promo } = await supabase
           .from('promo_codes')
-          .select('discount_percent')
+          .select('id, discount_percent, is_active, expires_at, max_redemptions, current_redemptions, applicable_plans')
           .eq('id', promoId)
           .eq('is_active', true)
           .single();
 
         if (promo) {
-          promoDiscount = promo.discount_percent;
-          finalCents = Math.round(plan.cents * (1 - promoDiscount / 100));
+          // Check expiry
+          const isExpired = promo.expires_at && new Date(promo.expires_at) < new Date();
+          // Check redemption limit
+          const isFullyRedeemed = promo.max_redemptions && promo.current_redemptions >= promo.max_redemptions;
+          // Check plan applicability
+          const isApplicable = !promo.applicable_plans || promo.applicable_plans.includes(planId);
+
+          if (!isExpired && !isFullyRedeemed && isApplicable) {
+            promoDiscount = promo.discount_percent;
+            finalCents = Math.round(plan.cents * (1 - promoDiscount / 100));
+          }
         }
       } catch (e) {
         console.error('Promo lookup failed:', e);
@@ -114,6 +124,8 @@ export async function POST(req: NextRequest) {
     }
 
     const baseUrl = req.nextUrl.origin;
+    // Use provided locale if valid, default to 'en'
+    const safeLocale = locale && SUPPORTED_LOCALES.includes(locale) ? locale : 'en';
 
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
@@ -138,8 +150,8 @@ export async function POST(req: NextRequest) {
         promo_discount: String(promoDiscount),
         original_cents: String(plan.cents),
       },
-      success_url: `${baseUrl}/en/account/success?session_id={CHECKOUT_SESSION_ID}&account_id=${accountId}`,
-      cancel_url: `${baseUrl}/en/account`,
+      success_url: `${baseUrl}/${safeLocale}/account/success?session_id={CHECKOUT_SESSION_ID}&account_id=${accountId}`,
+      cancel_url: `${baseUrl}/${safeLocale}/account`,
     });
 
     return NextResponse.json({ url: session.url });

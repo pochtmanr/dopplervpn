@@ -133,6 +133,14 @@ export async function Footer() {
                   {t("terms")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("about")}
+                </Link>
+              </li>
             </ul>
           </div>
 

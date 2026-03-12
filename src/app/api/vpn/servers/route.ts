@@ -1,20 +1,23 @@
-import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { NextRequest, NextResponse } from 'next/server';
+import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { requireAppApiKey } from '@/lib/api-auth';
+import { rateLimit } from '@/lib/rate-limit';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+export async function GET(req: NextRequest) {
+  const rl = rateLimit(req, { limit: 30, windowMs: 60_000, prefix: 'vpn-servers' });
+  if (rl) return rl;
 
-function getSupabase() {
-  return createClient(supabaseUrl, supabaseKey);
-}
+  if (!requireAppApiKey(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
-export async function GET() {
   try {
-    const supabase = getSupabase();
+    const supabase = createUntypedAdminClient();
 
+    // Only return safe fields — never expose ip_address or config_data
     const { data: servers, error } = await supabase
       .from('vpn_servers')
-      .select('id, name, country, country_code, city, ip_address, port, is_premium, is_active, load_percentage, latency_ms, speed_mbps')
+      .select('id, name, country, country_code, city, port, is_premium, is_active, load_percentage, latency_ms, speed_mbps')
       .eq('is_active', true)
       .order('country');
 

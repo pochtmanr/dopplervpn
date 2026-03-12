@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
 import nodemailer from 'nodemailer';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
+  // Strict rate limit: 2 restores per minute per IP (prevents email spam)
+  const rl = rateLimit(req, { limit: 2, windowMs: 60_000, prefix: 'restore-account' });
+  if (rl) return rl;
+
   try {
     const { email } = await req.json();
 
@@ -36,6 +41,7 @@ export async function POST(req: NextRequest) {
 
       if (!smtpHost || !smtpUser || !smtpPass) {
         console.error('[restore-account] Missing SMTP configuration');
+        // Return same response to not leak whether account exists
         return NextResponse.json({
           success: true,
           message: "If an account exists with this email, we've sent the Account ID.",
@@ -50,7 +56,7 @@ export async function POST(req: NextRequest) {
       });
 
       try {
-        const info = await transporter.sendMail({
+        await transporter.sendMail({
           from: `"Doppler VPN" <${smtpUser}>`,
           to: normalizedEmail,
           subject: 'Your Doppler VPN Account ID',
@@ -69,12 +75,12 @@ export async function POST(req: NextRequest) {
             </div>
           `,
         });
-        console.log(`[restore-account] Email sent to ${normalizedEmail}, messageId: ${info.messageId}`);
       } catch (emailError) {
         console.error('[restore-account] SMTP send failed:', emailError instanceof Error ? emailError.message : emailError);
       }
     }
 
+    // Always return the same response regardless of whether account was found
     return NextResponse.json({
       success: true,
       message: "If an account exists with this email, we've sent the Account ID.",

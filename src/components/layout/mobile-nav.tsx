@@ -64,7 +64,6 @@ export function MobileNav() {
 
   const navItems: { href: string; label: string; isPage?: boolean }[] = [
     { href: "/downloads", label: t("downloads"), isPage: true },
-    { href: "/about", label: t("about"), isPage: true },
     { href: "/support", label: t("support"), isPage: true },
   ];
 

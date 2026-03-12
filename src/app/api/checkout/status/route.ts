@@ -1,16 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { rateLimit } from '@/lib/rate-limit';
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!);
 }
 
 export async function GET(req: NextRequest) {
+  const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'checkout-status' });
+  if (rl) return rl;
+
   try {
     const sessionId = req.nextUrl.searchParams.get('session_id');
 
     if (!sessionId) {
       return NextResponse.json({ error: 'Missing session_id' }, { status: 400 });
+    }
+
+    // Validate session_id format (Stripe session IDs start with cs_)
+    if (!sessionId.startsWith('cs_')) {
+      return NextResponse.json({ error: 'Invalid session_id format' }, { status: 400 });
     }
 
     const session = await getStripe().checkout.sessions.retrieve(sessionId);
@@ -22,7 +31,6 @@ export async function GET(req: NextRequest) {
     });
   } catch (error: unknown) {
     console.error('Status check error:', error);
-    const message = error instanceof Error ? error.message : 'Internal error';
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: 'Session not found' }, { status: 404 });
   }
 }

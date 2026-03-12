@@ -434,6 +434,7 @@ function SubscribeInner() {
         planId: selected,
         accountId: accountId.trim().toUpperCase(),
         promoId: promoApplied?.promo_id || null,
+        locale,
       };
 
       const res = await fetch('/api/checkout/stripe', {

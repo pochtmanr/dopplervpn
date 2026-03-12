@@ -34,16 +34,21 @@ export function ScrollHeader({ children, className }: ScrollHeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const expand = () => {
     if (!compact) return;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setCompact(false);
+    // Briefly lock so scroll handler doesn't immediately re-compact
+    headerRef.current?.setAttribute("data-nav-lock", "");
+    setTimeout(() => {
+      headerRef.current?.removeAttribute("data-nav-lock");
+    }, 1500);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!compact) return;
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      scrollToTop();
+      expand();
     }
   };
 
@@ -52,11 +57,11 @@ export function ScrollHeader({ children, className }: ScrollHeaderProps) {
       ref={headerRef}
       className={`group ${className ?? ""}`}
       data-compact={compact || undefined}
-      onClick={scrollToTop}
+      onClick={expand}
       onKeyDown={handleKeyDown}
       tabIndex={compact ? 0 : undefined}
       role={compact ? "button" : undefined}
-      aria-label={compact ? "Scroll to top" : undefined}
+      aria-label={compact ? "Expand navigation" : undefined}
       style={{ cursor: compact ? "pointer" : undefined }}
     >
       {children}

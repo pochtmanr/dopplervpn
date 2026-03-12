@@ -110,27 +110,20 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     <>
       <nav
         ref={navRef}
-        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md group-data-[compact]:bg-bg-primary group-data-[compact]:backdrop-blur-none shadow-sm shadow-overlay/5 overflow-hidden transition-[max-width,border-radius] duration-700 group-data-[compact]:duration-500 ease-out max-w-7xl group-data-[compact]:max-w-[9.5rem] rounded-full group-data-[compact]:pointer-events-none group-data-[compact]:opacity-50 will-change-[max-width] [contain:layout_style]"
+        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md group-data-[compact]:bg-bg-primary/70 group-data-[compact]:backdrop-blur-xl shadow-sm shadow-overlay/5 overflow-hidden transition-[max-width,border-radius,background-color,backdrop-filter,opacity] duration-700 ease-out max-w-7xl max-md:group-data-[compact]:max-w-[9.5rem] rounded-full max-md:group-data-[compact]:pointer-events-none will-change-[max-width]"
       >
         {/* Main bar row */}
-        <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 group-data-[compact]:px-2">
+        <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 max-md:group-data-[compact]:px-2 md:min-w-max">
           {logo}
 
           {/* Desktop links — centered */}
-          <div className="hidden md:flex items-center gap-0.5 absolute inset-0 justify-center pointer-events-none transition-opacity duration-300 group-data-[compact]:opacity-0">
-            <div className="flex items-center gap-0.5 pointer-events-auto group-data-[compact]:pointer-events-none">
+          <div className="hidden md:flex items-center gap-0.5 absolute inset-0 justify-center pointer-events-none transition-opacity duration-300">
+            <div className="flex items-center gap-0.5 pointer-events-auto">
             <Link
               href="/downloads"
               className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
             >
               {t("downloads")}
-            </Link>
-
-            <Link
-              href="/about"
-              className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
-            >
-              {t("about")}
             </Link>
 
             <Link
@@ -150,7 +143,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
           </div>
 
           {/* Right side controls (desktop) — pushed to end */}
-          <div className="hidden md:flex items-center gap-1.5 ms-auto transition-opacity duration-300 group-data-[compact]:opacity-0 group-data-[compact]:pointer-events-none">
+          <div className="hidden md:flex items-center gap-1.5 ms-auto transition-opacity duration-300">
             {controls}
 
             {/* Language trigger */}
@@ -183,7 +176,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
           </div>
 
           {/* Mobile hamburger — fades in compact */}
-          <div className="transition-opacity duration-300 group-data-[compact]:opacity-0 group-data-[compact]:pointer-events-none">
+          <div className="transition-opacity duration-500 ease-out max-md:group-data-[compact]:opacity-0 max-md:group-data-[compact]:pointer-events-none">
             {mobile}
           </div>
         </div>

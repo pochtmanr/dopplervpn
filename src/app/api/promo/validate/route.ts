@@ -1,8 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createUntypedAdminClient } from "@/lib/supabase/admin";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
-  const { code, account_id, plan } = await req.json();
+  // Rate limit: 10 validations per minute per IP (prevent brute-force)
+  const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'promo-validate' });
+  if (rl) return rl;
+
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const { code, account_id, plan } = body;
 
   if (!code || !account_id || !plan) {
     return NextResponse.json({ error: "code, account_id, plan required" }, { status: 400 });

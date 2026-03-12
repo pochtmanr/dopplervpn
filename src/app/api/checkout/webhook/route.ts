@@ -80,7 +80,35 @@ export async function POST(req: NextRequest) {
         notes: `web_subscribe:${accountId}`,
       });
 
-      // 5. Send welcome email if we have the customer's email
+      // 5. Increment promo redemption count if a promo was used
+      const promoId = session.metadata?.promo_id;
+      if (promoId) {
+        try {
+          // Increment redemption count on the promo code
+          const { data: promo } = await supabase
+            .from('promo_codes')
+            .select('current_redemptions')
+            .eq('id', promoId)
+            .single();
+
+          if (promo) {
+            await supabase
+              .from('promo_codes')
+              .update({ current_redemptions: (promo.current_redemptions || 0) + 1 })
+              .eq('id', promoId);
+          }
+
+          // Record the redemption
+          await supabase.from('promo_redemptions').insert({
+            promo_code_id: promoId,
+            account_id: accountId,
+          });
+        } catch (promoErr) {
+          console.error('Promo redemption tracking failed:', promoErr);
+        }
+      }
+
+      // 6. Send welcome email if we have the customer's email
       const customerEmail = session.metadata?.email || session.customer_details?.email;
       if (customerEmail) {
         try {
