@@ -43,7 +43,7 @@ export function CTA() {
                 </span>{" "}
                 <span
                   className="bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                  style={{ fontFamily: "var(--font-raster)" }}
+                  style={{ fontFamily: "var(--font-serif)" }}
                 >
                   {t("doppler.titlePlayful")}
                 </span>

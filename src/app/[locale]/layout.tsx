@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Instrument_Serif, Space_Grotesk, Inter, Jost } from "next/font/google";
-import localFont from "next/font/local";
+
 import { routing, isRtlLocale } from "@/i18n/routing";
 import {
   OrganizationSchema,
@@ -48,12 +48,6 @@ const jost = Jost({
   weight: ["400", "500", "600", "700"],
 });
 
-// FK Raster - for "Stay protected" text only
-const fkRaster = localFont({
-  src: "../../fonts/FKRasterRomanCompact-Blended.otf",
-  variable: "--font-raster",
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   viewportFit: "cover",
@@ -163,8 +157,8 @@ export default async function LocaleLayout({
       dir={dir}
       suppressHydrationWarning
       className={locale === "ru"
-        ? `${jost.variable} ${inter.variable} ${fkRaster.variable}`
-        : `${instrumentSerif.variable} ${spaceGrotesk.variable} ${fkRaster.variable}`
+        ? `${jost.variable} ${inter.variable}`
+        : `${instrumentSerif.variable} ${spaceGrotesk.variable}`
       }
     >
       <head>

@@ -108,7 +108,7 @@ export function Hero() {
               {t("headlinePart2") && (
                 <span
                   className="block mt-0 bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                  style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 700 } : { fontFamily: "var(--font-raster)" }}
+                  style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 700 } : { fontFamily: "var(--font-serif)" }}
                 >
                   {t("headlinePart2")}
                 </span>

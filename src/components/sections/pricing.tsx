@@ -278,8 +278,8 @@ export function Pricing() {
 
               {/* Right column — features + CTA (2/5 width on desktop) */}
               <div className="lg:col-span-2 p-6 sm:p-8 lg:p-12 lg:border-s border-t lg:border-t-0 border-overlay/5 bg-bg-secondary/30 flex flex-col">
-                {/* Features list */}
-                <ul className="space-y-4 mb-8 flex-1">
+                {/* Features list — desktop only */}
+                <ul className="hidden lg:block space-y-4 mb-8 flex-1">
                   {plusFeatureKeys.map((feature) => (
                     <li
                       key={feature}
