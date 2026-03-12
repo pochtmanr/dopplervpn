@@ -27,5 +27,5 @@ export const localeConfig: Record<string, { label: string; countryCode: string; 
 
 /** Circular flag image URL for a given country code */
 export function getFlagUrl(countryCode: string): string {
-  return `https://hatscripts.github.io/circle-flags/flags/${countryCode}.svg`;
+  return `/flags/${countryCode}.svg`;
 }
