@@ -1,4 +1,6 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
@@ -100,8 +102,8 @@ function WideCard({ featureKey, title, description }: { featureKey: string; titl
 }
 
 /* ─── Features section ─── */
-export async function Features() {
-  const t = await getTranslations("features");
+export function Features() {
+  const t = useTranslations("features");
 
   return (
     <Section id="features">

@@ -1,4 +1,6 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
@@ -29,8 +31,8 @@ const stepLinks: Record<(typeof stepKeys)[number], { href: string; isPage?: bool
   connect: { href: "/#faq" },
 };
 
-export async function HowItWorks() {
-  const t = await getTranslations("howItWorks");
+export function HowItWorks() {
+  const t = useTranslations("howItWorks");
 
   return (
     <Section id="how-it-works">

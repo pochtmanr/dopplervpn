@@ -1,4 +1,6 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -35,8 +37,8 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
-export async function CensorshipResistance() {
-  const t = await getTranslations("censorshipResistance");
+export function CensorshipResistance() {
+  const t = useTranslations("censorshipResistance");
 
   return (
     <Section id="censorship-resistance">

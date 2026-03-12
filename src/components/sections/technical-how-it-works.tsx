@@ -1,11 +1,13 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
 const flowSteps = ["step1", "step2", "step3", "step4"] as const;
 
-export async function TechnicalHowItWorks() {
-  const t = await getTranslations("technicalHowItWorks");
+export function TechnicalHowItWorks() {
+  const t = useTranslations("technicalHowItWorks");
 
   return (
     <Section id="how-doppler-works">

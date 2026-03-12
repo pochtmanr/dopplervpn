@@ -1,11 +1,13 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
 
-export async function CTA() {
-  const t = await getTranslations("cta");
+export function CTA() {
+  const t = useTranslations("cta");
 
   return (
     <section className="relative py-20 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
