@@ -1,0 +1,70 @@
+<h2>Hero Device Mockups — Layout Approach</h2>
+<p class="subtitle">How should the iPhone + Android devices be arranged on the right side?</p>
+
+<div class="cards">
+  <div class="card" data-choice="overlapping" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0f1a;padding:40px 20px;display:flex;justify-content:center;align-items:flex-end;gap:0;min-height:280px;position:relative;">
+      <!-- Android device (left, slightly behind) -->
+      <div style="width:120px;height:220px;border-radius:16px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #2a3a4a;position:relative;z-index:1;transform:translateX(20px) translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40px;height:4px;border-radius:2px;background:#2a3a4a;"></div>
+        <div style="padding:20px 10px;text-align:center;color:#4aedc4;font-size:10px;margin-top:30px;">Android</div>
+        <div style="margin:8px;height:80px;border-radius:8px;background:linear-gradient(180deg,#4aedc4/20,transparent);"></div>
+      </div>
+      <!-- iPhone device (right, in front) -->
+      <div style="width:130px;height:240px;border-radius:20px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #4aedc4/30;position:relative;z-index:2;transform:translateX(-20px) translateY(10px);box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:60px;height:20px;border-radius:10px;background:#1a1a2a;"></div>
+        <div style="padding:20px 10px;text-align:center;color:#4aedc4;font-size:10px;margin-top:35px;">iPhone</div>
+        <div style="margin:8px;height:90px;border-radius:8px;background:linear-gradient(180deg,#4aedc4/20,transparent);"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A. Overlapping Devices</h3>
+      <p>iPhone in front, Android slightly behind and offset. Classic app showcase style. On scroll: iPhone slides up, Android slides down — creating a "splitting" parallax effect.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="side-by-side" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0f1a;padding:40px 20px;display:flex;justify-content:center;align-items:center;gap:30px;min-height:280px;">
+      <!-- Android -->
+      <div style="width:110px;height:210px;border-radius:16px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #2a3a4a;box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+        <div style="padding:20px 10px;text-align:center;color:#4aedc4;font-size:10px;margin-top:30px;">Android</div>
+        <div style="margin:8px;height:80px;border-radius:8px;background:linear-gradient(180deg,#4aedc4/20,transparent);"></div>
+      </div>
+      <!-- iPhone -->
+      <div style="width:120px;height:230px;border-radius:20px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #4aedc4/30;box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+        <div style="position:relative;top:8px;left:50%;transform:translateX(-50%);width:60px;height:20px;border-radius:10px;background:#1a1a2a;"></div>
+        <div style="padding:20px 10px;text-align:center;color:#4aedc4;font-size:10px;margin-top:15px;">iPhone</div>
+        <div style="margin:8px;height:90px;border-radius:8px;background:linear-gradient(180deg,#4aedc4/20,transparent);"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B. Side by Side</h3>
+      <p>Devices next to each other with breathing room. On scroll: left device drifts down, right device drifts up — symmetric parallax divergence.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="staggered" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0f1a;padding:40px 20px;display:flex;justify-content:center;align-items:flex-start;gap:20px;min-height:280px;">
+      <!-- Android (higher) -->
+      <div style="width:110px;height:210px;border-radius:16px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #2a3a4a;margin-top:0;box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+        <div style="padding:20px 10px;text-align:center;color:#4aedc4;font-size:10px;margin-top:30px;">Android</div>
+        <div style="margin:8px;height:80px;border-radius:8px;background:linear-gradient(180deg,#4aedc4/20,transparent);"></div>
+      </div>
+      <!-- iPhone (lower) -->
+      <div style="width:120px;height:230px;border-radius:20px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #4aedc4/30;margin-top:50px;box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+        <div style="position:relative;top:8px;left:50%;transform:translateX(-50%);width:60px;height:20px;border-radius:10px;background:#1a1a2a;"></div>
+        <div style="padding:20px 10px;text-align:center;color:#4aedc4;font-size:10px;margin-top:15px;">iPhone</div>
+        <div style="margin:8px;height:90px;border-radius:8px;background:linear-gradient(180deg,#4aedc4/20,transparent);"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C. Staggered Heights</h3>
+      <p>Devices at different vertical positions from the start — one high, one low. On scroll: they diverge further (one up, one down), amplifying the stagger into a dramatic split.</p>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:24px;padding:16px;border-radius:12px;background:rgba(74,237,196,0.05);border:1px solid rgba(74,237,196,0.15);">
+  <h3 style="margin:0 0 8px;color:#4aedc4;">LCP Impact Note</h3>
+  <p style="margin:0;color:#999;font-size:14px;">The parallax scroll effect uses CSS <code>transform: translateY()</code> driven by a scroll listener — this is GPU-composited and does NOT affect LCP. The device images themselves are loaded with <code>priority</code> on Next.js Image, same as current hero. Net LCP impact: <strong>zero to minimal</strong> (one extra image load, but both can be priority-preloaded).</p>
+</div>

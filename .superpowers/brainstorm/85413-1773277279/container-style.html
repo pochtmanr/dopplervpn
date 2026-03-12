@@ -1,0 +1,42 @@
+<h2>Device Container Style</h2>
+<p class="subtitle">Should the overlapping devices sit inside a card, or float freely in the hero space?</p>
+
+<div class="cards">
+  <div class="card" data-choice="card" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0f1a;padding:30px;display:flex;justify-content:center;align-items:center;min-height:300px;">
+      <!-- Card container -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:40px 30px;display:flex;justify-content:center;align-items:flex-end;position:relative;width:320px;height:260px;">
+        <!-- Gradient bg inside card -->
+        <div style="position:absolute;inset:0;border-radius:24px;background:linear-gradient(135deg,rgba(74,237,196,0.08),transparent,rgba(212,175,55,0.04));"></div>
+        <!-- Android -->
+        <div style="width:100px;height:190px;border-radius:14px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #2a3a4a;position:relative;z-index:1;transform:translateX(18px) translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,0.4);"></div>
+        <!-- iPhone -->
+        <div style="width:110px;height:210px;border-radius:18px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid rgba(74,237,196,0.3);position:relative;z-index:2;transform:translateX(-18px) translateY(10px);box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+          <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:50px;height:18px;border-radius:9px;background:#1a1a2a;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A. Inside Card</h3>
+      <p>Keep the current glassmorphic card. Devices are contained, clean boundary. Parallax moves devices within (or slightly beyond) the card. Consistent with existing design language.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="floating" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0f1a;padding:30px;display:flex;justify-content:center;align-items:flex-end;min-height:300px;position:relative;">
+      <!-- No card — devices float freely -->
+      <!-- Subtle glow behind devices -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:250px;height:250px;background:radial-gradient(circle,rgba(74,237,196,0.12),transparent 70%);"></div>
+      <!-- Android -->
+      <div style="width:110px;height:200px;border-radius:14px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid #2a3a4a;position:relative;z-index:1;transform:translateX(22px) translateY(-15px);box-shadow:0 30px 60px rgba(0,0,0,0.5);"></div>
+      <!-- iPhone -->
+      <div style="width:120px;height:220px;border-radius:18px;background:linear-gradient(135deg,#1a2a3a,#0d1926);border:2px solid rgba(74,237,196,0.3);position:relative;z-index:2;transform:translateX(-22px) translateY(15px);box-shadow:0 35px 70px rgba(0,0,0,0.5);">
+        <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:50px;height:18px;border-radius:9px;background:#1a1a2a;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B. Floating (No Card)</h3>
+      <p>Devices float directly in the hero with just a subtle glow behind them. More dramatic, more breathing room. Parallax feels unconstrained — devices can travel further on scroll. Modern, editorial feel.</p>
+    </div>
+  </div>
+</div>

@@ -42,19 +42,16 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     }
   }, [langOpen]);
 
-  // Position the panel below the nav bar
-  useEffect(() => {
-    if (!langOpen || !navRef.current) return;
+  const close = useCallback(() => setLangOpen(false), []);
+
+  const toggleLang = useCallback(() => {
+    // Calculate position BEFORE opening so the panel never flashes at (0,0)
+    if (!navRef.current) return;
     const navRect = navRef.current.getBoundingClientRect();
     setPanelPos({
       top: navRect.bottom + 8,
       right: window.innerWidth - navRect.right,
     });
-  }, [langOpen]);
-
-  const close = useCallback(() => setLangOpen(false), []);
-
-  const toggleLang = useCallback(() => {
     setLangOpen((prev) => !prev);
   }, []);
 
@@ -65,6 +62,24 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     },
     [router, pathname]
   );
+
+  // Keep panel aligned on resize/scroll while open
+  useEffect(() => {
+    if (!langOpen || !navRef.current) return;
+    const recalc = () => {
+      const navRect = navRef.current!.getBoundingClientRect();
+      setPanelPos({
+        top: navRect.bottom + 8,
+        right: window.innerWidth - navRect.right,
+      });
+    };
+    window.addEventListener("resize", recalc);
+    window.addEventListener("scroll", recalc, { passive: true });
+    return () => {
+      window.removeEventListener("resize", recalc);
+      window.removeEventListener("scroll", recalc);
+    };
+  }, [langOpen]);
 
   // Click outside & Escape — check both nav and floating panel
   useEffect(() => {
@@ -175,10 +190,10 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
             style={
               panelPos
                 ? { top: panelPos.top, right: panelPos.right }
-                : { top: 0, right: 0 }
+                : undefined
             }
             className={`fixed z-[60] w-[min(calc(100vw-2rem),42rem)] transition-all duration-200 origin-top-right ${
-              langOpen
+              langOpen && panelPos
                 ? "opacity-100 scale-100 pointer-events-auto"
                 : "opacity-0 scale-95 pointer-events-none"
             }`}

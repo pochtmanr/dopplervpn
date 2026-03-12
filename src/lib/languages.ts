@@ -20,4 +20,7 @@ export const localeConfig: Record<string, { label: string; flag: string; name: s
   tl: { label: "TL", flag: "🇵🇭", name: "Filipino" },
   ur: { label: "اُر", flag: "🇵🇰", name: "اردو" },
   sw: { label: "SW", flag: "🇰🇪", name: "Kiswahili" },
+  az: { label: "AZ", flag: "🇦🇿", name: "Azərbaycan" },
+  pl: { label: "PL", flag: "🇵🇱", name: "Polski" },
+  uk: { label: "УК", flag: "🇺🇦", name: "Українська" },
 };
