@@ -1,20 +1,10 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { translateContent, SUPPORTED_LOCALES } from "@/lib/openai/translate";
-
-function requireApiKey(request: Request) {
-  const apiKey = process.env.BLOG_API_KEY;
-  if (!apiKey) {
-    throw new Error("BLOG_API_KEY not configured");
-  }
-
-  const auth = request.headers.get("authorization");
-  if (!auth) return false;
-
-  // Support "Bearer <key>" or raw key
-  const token = auth.startsWith("Bearer ") ? auth.slice(7) : auth;
-  return token === apiKey;
-}
+import { requireBlogApiKey, isAllowedWebhookUrl } from "@/lib/api-auth";
+import { rateLimit } from "@/lib/rate-limit";
+import { NextRequest } from "next/server";
+import { CURATED_TAG_SLUGS } from "@/lib/blog-tags";
 
 function slugify(text: string): string {
   return text
@@ -26,13 +16,23 @@ function slugify(text: string): string {
     .slice(0, 100);
 }
 
-export async function POST(request: Request) {
-  // Auth check
-  if (!requireApiKey(request)) {
+export async function POST(request: NextRequest) {
+  // Rate limit: 10 requests per minute
+  const rl = rateLimit(request, { limit: 10, windowMs: 60_000, prefix: 'blog-create' });
+  if (rl) return rl;
+
+  // Auth check (timing-safe)
+  if (!requireBlogApiKey(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
   const {
     title,
     content,
@@ -64,6 +64,14 @@ export async function POST(request: Request) {
   if (template_type && !validTemplateTypes.includes(template_type)) {
     return NextResponse.json(
       { error: `template_type must be one of: ${validTemplateTypes.join(", ")}` },
+      { status: 400 }
+    );
+  }
+
+  // Validate webhook URL against SSRF
+  if (webhook_url && !isAllowedWebhookUrl(webhook_url)) {
+    return NextResponse.json(
+      { error: "Invalid webhook_url: must be HTTPS to a public host" },
       { status: 400 }
     );
   }
@@ -159,12 +167,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: transError.message }, { status: 500 });
   }
 
-  // Attach tags if provided
+  // Attach tags if provided (only curated tags allowed)
   if (tags && tags.length > 0) {
-    // Look up or create tags
+    const skippedTags: string[] = [];
     for (const tagName of tags) {
       const tagSlug = slugify(tagName);
-      // Upsert tag
+      if (!CURATED_TAG_SLUGS.includes(tagSlug)) {
+        skippedTags.push(tagName);
+        continue;
+      }
       const { data: tag } = await db
         .from("blog_tags")
         .upsert({ slug: tagSlug }, { onConflict: "slug" })
@@ -177,6 +188,9 @@ export async function POST(request: Request) {
           tag_id: tag.id,
         });
       }
+    }
+    if (skippedTags.length > 0) {
+      console.warn(`[blog/create] Skipped non-curated tags: ${skippedTags.join(", ")}`);
     }
   }
 
@@ -198,7 +212,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // Translate to all languages in background-ish (sequentially to avoid rate limits)
+  // Translate to all languages sequentially to avoid rate limits
   const translationResults: Record<string, string> = { en: englishUrl };
   const errors: string[] = [];
 
@@ -254,7 +268,7 @@ export async function POST(request: Request) {
     errors: errors.length > 0 ? errors : undefined,
   };
 
-  // Send webhook if provided
+  // Send webhook if provided (already validated above)
   if (webhook_url) {
     try {
       await fetch(webhook_url, {

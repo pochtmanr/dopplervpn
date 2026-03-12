@@ -4,6 +4,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { Instrument_Serif, Space_Grotesk, Inter, Jost } from "next/font/google";
 
 import { routing, isRtlLocale } from "@/i18n/routing";
+import { ogLocaleMap } from "@/lib/og-locale-map";
 import {
   OrganizationSchema,
   ProductSchema,
@@ -61,29 +62,6 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const ogLocaleMap: Record<string, string> = {
-  en: "en_US",
-  ru: "ru_RU",
-  es: "es_ES",
-  pt: "pt_BR",
-  fr: "fr_FR",
-  zh: "zh_CN",
-  de: "de_DE",
-  he: "he_IL",
-  fa: "fa_IR",
-  ar: "ar_SA",
-  hi: "hi_IN",
-  id: "id_ID",
-  tr: "tr_TR",
-  vi: "vi_VN",
-  th: "th_TH",
-  ms: "ms_MY",
-  ko: "ko_KR",
-  ja: "ja_JP",
-  tl: "tl_PH",
-  ur: "ur_PK",
-  sw: "sw_KE",
-};
 
 export async function generateMetadata({
   params,
@@ -121,6 +99,9 @@ export async function generateMetadata({
       url: `https://www.dopplervpn.org/${locale}`,
       siteName: "Doppler VPN",
       locale: ogLocaleMap[locale] || "en_US",
+      alternateLocale: routing.locales
+        .filter((l) => l !== locale)
+        .map((l) => ogLocaleMap[l] || l),
       type: "website",
     },
     twitter: {

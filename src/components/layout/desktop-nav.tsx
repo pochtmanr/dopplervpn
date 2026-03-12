@@ -110,20 +110,27 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     <>
       <nav
         ref={navRef}
-        className="relative mx-auto bg-bg-primary/90 backdrop-blur-xl shadow-sm shadow-overlay/5 overflow-hidden transition-[max-width,border-radius] duration-700 group-data-[compact]:duration-500 ease-out max-w-7xl group-data-[compact]:max-w-[9.5rem] rounded-full"
+        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md group-data-[compact]:bg-bg-primary group-data-[compact]:backdrop-blur-none shadow-sm shadow-overlay/5 overflow-hidden transition-[max-width,border-radius] duration-700 group-data-[compact]:duration-500 ease-out max-w-7xl group-data-[compact]:max-w-[9.5rem] rounded-full group-data-[compact]:pointer-events-none group-data-[compact]:opacity-50 will-change-[max-width] [contain:layout_style]"
       >
         {/* Main bar row */}
-        <div className="relative flex items-center justify-between h-12 sm:h-14 group-data-[compact]:h-10 transition-[height] duration-700 group-data-[compact]:duration-500 px-3 sm:px-4 group-data-[compact]:px-2">
+        <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 group-data-[compact]:px-2">
           {logo}
 
           {/* Desktop links — centered */}
           <div className="hidden md:flex items-center gap-0.5 absolute inset-0 justify-center pointer-events-none transition-opacity duration-300 group-data-[compact]:opacity-0">
-            <div className="flex items-center gap-0.5 pointer-events-auto">
+            <div className="flex items-center gap-0.5 pointer-events-auto group-data-[compact]:pointer-events-none">
             <Link
               href="/downloads"
               className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
             >
               {t("downloads")}
+            </Link>
+
+            <Link
+              href="/about"
+              className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
+            >
+              {t("about")}
             </Link>
 
             <Link

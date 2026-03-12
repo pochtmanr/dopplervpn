@@ -64,6 +64,7 @@ export function MobileNav() {
 
   const navItems: { href: string; label: string; isPage?: boolean }[] = [
     { href: "/downloads", label: t("downloads"), isPage: true },
+    { href: "/about", label: t("about"), isPage: true },
     { href: "/support", label: t("support"), isPage: true },
   ];
 
@@ -75,24 +76,25 @@ export function MobileNav() {
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
-      className={`fixed inset-0 z-[60] md:hidden transition-opacity duration-200 ease-out ${
+      className={`fixed inset-0 z-[60] md:hidden transition-opacity duration-200 ease-out will-change-[opacity] ${
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
       }`}
     >
-      {/* Backdrop */}
+      {/* Backdrop — use bg opacity instead of heavy backdrop-blur on mobile */}
       <div
-        className="absolute inset-0 bg-bg-primary/80 backdrop-blur-2xl"
+        className="absolute inset-0 bg-bg-primary/95 backdrop-blur-none"
         onClick={close}
         aria-hidden="true"
       />
 
       {/* Content */}
       <div
-        className={`relative flex flex-col items-center justify-center h-full px-6 transition-all duration-200 ease-out ${
+        className={`relative flex flex-col items-center justify-center h-full px-6 transition-[transform,opacity] duration-200 ease-out will-change-[transform,opacity] ${
           isOpen ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         }`}
+        style={{ transform: 'translateZ(0)' }}
       >
         {/* Close button */}
         <button
