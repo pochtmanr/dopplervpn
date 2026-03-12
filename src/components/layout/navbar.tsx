@@ -3,11 +3,10 @@ import { DopplerLogo } from "./doppler-logo";
 import { DesktopNav } from "./desktop-nav";
 import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "./theme-toggle";
-import { ScrollHeader } from "./scroll-header";
 
 export async function Navbar() {
   return (
-    <ScrollHeader className="fixed top-[max(1rem,env(safe-area-inset-top))] inset-x-0 z-50 px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-[max(1rem,env(safe-area-inset-top))] inset-x-0 z-50 px-4 sm:px-6 lg:px-8">
       <DesktopNav
         logo={
           <Link href="/" dir="ltr" className="flex items-center gap-2.5 shrink-0">
@@ -20,6 +19,6 @@ export async function Navbar() {
         controls={<ThemeToggle />}
         mobile={<MobileNav />}
       />
-    </ScrollHeader>
+    </header>
   );
 }

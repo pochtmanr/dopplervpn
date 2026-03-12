@@ -116,10 +116,10 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     <>
       <nav
         ref={navRef}
-        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md group-data-[compact]:bg-bg-primary/70 group-data-[compact]:backdrop-blur-xl shadow-sm shadow-overlay/5 overflow-hidden transition-[max-width,border-radius,background-color,backdrop-filter,opacity] duration-700 ease-out max-w-7xl max-md:group-data-[compact]:max-w-[9.5rem] rounded-full max-md:group-data-[compact]:pointer-events-none will-change-[max-width]"
+        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md shadow-sm shadow-overlay/5 overflow-hidden max-w-7xl rounded-full"
       >
         {/* Main bar row */}
-        <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 max-md:group-data-[compact]:px-2 md:min-w-max">
+        <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 md:min-w-max">
           {logo}
 
           {/* Desktop links — centered */}
@@ -181,8 +181,8 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
             </button>
           </div>
 
-          {/* Mobile hamburger — fades in compact */}
-          <div className="transition-opacity duration-500 ease-out max-md:group-data-[compact]:opacity-0 max-md:group-data-[compact]:pointer-events-none">
+          {/* Mobile hamburger */}
+          <div>
             {mobile}
           </div>
         </div>
