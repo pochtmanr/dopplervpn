@@ -11,23 +11,32 @@ export function HeroParallax({ children }: HeroParallaxProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const androidRef = useRef<HTMLDivElement>(null);
   const iphoneRef = useRef<HTMLDivElement>(null);
+  const sectionHeightRef = useRef(0);
+  const rafId = useRef(0);
 
   const handleScroll = useCallback(() => {
-    if (!wrapperRef.current) return;
-    const rect = wrapperRef.current.getBoundingClientRect();
-    const sectionHeight = rect.height;
-    const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
+    cancelAnimationFrame(rafId.current);
+    rafId.current = requestAnimationFrame(() => {
+      if (!wrapperRef.current) return;
+      if (!sectionHeightRef.current) {
+        sectionHeightRef.current = wrapperRef.current.getBoundingClientRect().height;
+      }
+      const sectionHeight = sectionHeightRef.current;
+      const scrolled = -wrapperRef.current.getBoundingClientRect().top;
+      const progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
 
-    const iphoneDrift = progress * sectionHeight * 0.2;
-    const androidDrift = progress * sectionHeight * 0.12;
+      const iphoneDrift = progress * sectionHeight * 0.2;
+      const androidDrift = progress * sectionHeight * 0.12;
+      const iphoneScale = 1 + progress * 0.15;
+      const androidScale = 1 - progress * 0.12;
 
-    if (iphoneRef.current) {
-      iphoneRef.current.style.transform = `translateY(${iphoneDrift}px)`;
-    }
-    if (androidRef.current) {
-      androidRef.current.style.transform = `translateY(${androidDrift}px)`;
-    }
+      if (iphoneRef.current) {
+        iphoneRef.current.style.transform = `translateY(${iphoneDrift}px) scale(${iphoneScale})`;
+      }
+      if (androidRef.current) {
+        androidRef.current.style.transform = `translateY(${androidDrift}px) scale(${androidScale})`;
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -47,6 +56,7 @@ export function HeroParallax({ children }: HeroParallaxProps) {
     return () => {
       mql.removeEventListener("change", toggle);
       window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId.current);
     };
   }, [handleScroll]);
 

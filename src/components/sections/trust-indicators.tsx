@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import { Reveal } from "@/components/ui/reveal";
 
