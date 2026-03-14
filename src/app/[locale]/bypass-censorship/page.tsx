@@ -4,10 +4,13 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
+
+const baseUrl = "https://www.dopplervpn.org";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -15,6 +18,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: `${baseUrl}/${locale}/bypass-censorship`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/bypass-censorship`]),
+        ["x-default", `${baseUrl}/en/bypass-censorship`],
+      ]),
+    },
   };
 }
 

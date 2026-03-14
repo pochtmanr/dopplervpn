@@ -1,11 +1,31 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SupportFaq } from "./faq";
 import { SupportContent } from "./support-content";
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
+}
+
+const baseUrl = "https://www.dopplervpn.org";
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "support" });
+  return {
+    title: t("title"),
+    description: "Get help with Doppler VPN. Setup guides, troubleshooting, FAQ, and contact support via Telegram or email.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/support`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/support`]),
+        ["x-default", `${baseUrl}/en/support`],
+      ]),
+    },
+  };
 }
 
 /* ── Icons ────────────────────────────────────────────────────────── */

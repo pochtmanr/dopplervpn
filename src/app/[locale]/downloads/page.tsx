@@ -1,11 +1,29 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
-
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
+}
+
+const baseUrl = "https://www.dopplervpn.org";
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Downloads | Doppler VPN",
+    description: "Download Doppler VPN for iOS, Android, macOS, and Windows. Free, secure, no-logs VPN with VLESS-Reality encryption.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/downloads`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/downloads`]),
+        ["x-default", `${baseUrl}/en/downloads`],
+      ]),
+    },
+  };
 }
 
 /* ── Download URLs ───────────────────────────────────────────────── */

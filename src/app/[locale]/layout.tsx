@@ -66,9 +66,10 @@ export async function generateMetadata({
   const title = t("title");
   const description = t("description");
 
-  const alternateLanguages = Object.fromEntries(
+  const alternateLanguages: Record<string, string> = Object.fromEntries(
     routing.locales.map((loc) => [loc, `https://www.dopplervpn.org/${loc}`])
   );
+  alternateLanguages["x-default"] = "https://www.dopplervpn.org/en";
 
   return {
     title: {
@@ -95,11 +96,20 @@ export async function generateMetadata({
         .filter((l) => l !== locale)
         .map((l) => ogLocaleMap[l] || l),
       type: "website",
+      images: [
+        {
+          url: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
+          width: 512,
+          height: 512,
+          alt: "Doppler VPN",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: ["https://www.dopplervpn.org/images/iosdopplerlogo.png"],
     },
     alternates: {
       canonical: `https://www.dopplervpn.org/${locale}`,

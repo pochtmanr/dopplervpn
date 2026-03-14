@@ -14,7 +14,11 @@ export function OrganizationSchema({ locale }: OrganizationSchemaProps) {
       locale === "he"
         ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן."
         : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter.",
-    sameAs: [],
+    sameAs: [
+      "https://apps.apple.com/app/doppler-vpn-fast-secure/id6744068438",
+      "https://t.me/dopplervpn",
+      "https://t.me/dopplervpnen",
+    ],
   };
 
   return (
@@ -154,7 +158,7 @@ export function SoftwareApplicationSchema({
     name: "Doppler VPN",
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
     applicationCategory: "SecurityApplication",
-    operatingSystem: "iOS, macOS, Android",
+    operatingSystem: "iOS, Android, macOS, Windows",
     description:
       locale === "he"
         ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים. ללא הגבלות נתונים."
