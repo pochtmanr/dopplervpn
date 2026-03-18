@@ -80,29 +80,24 @@ export async function POST(req: NextRequest) {
         notes: `web_subscribe:${accountId}`,
       });
 
-      // 5. Increment promo redemption count if a promo was used
+      // 5. Record promo redemption if a promo was used
       const promoId = session.metadata?.promo_id;
       if (promoId) {
         try {
-          // Increment redemption count on the promo code
-          const { data: promo } = await supabase
-            .from('promo_codes')
-            .select('current_redemptions')
-            .eq('id', promoId)
-            .single();
+          // Insert redemption record first — unique constraint prevents double-counting
+          const { error: redemptionError } = await supabase
+            .from('promo_redemptions')
+            .insert({ promo_code_id: promoId, account_id: accountId });
 
-          if (promo) {
-            await supabase
-              .from('promo_codes')
-              .update({ current_redemptions: (promo.current_redemptions || 0) + 1 })
-              .eq('id', promoId);
+          if (redemptionError) {
+            // Unique constraint violation = already redeemed, skip increment
+            if (redemptionError.code !== '23505') {
+              console.error('Promo redemption insert failed:', redemptionError);
+            }
+          } else {
+            // Only increment if redemption was newly recorded (atomic SQL expression via rpc)
+            await supabase.rpc('increment_promo_redemptions', { p_promo_id: promoId });
           }
-
-          // Record the redemption
-          await supabase.from('promo_redemptions').insert({
-            promo_code_id: promoId,
-            account_id: accountId,
-          });
         } catch (promoErr) {
           console.error('Promo redemption tracking failed:', promoErr);
         }

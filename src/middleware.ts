@@ -58,6 +58,20 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
+    // Verify the authenticated user is an allowed admin
+    const allowedAdmins = (process.env.ADMIN_EMAILS ?? "")
+      .split(",")
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean);
+
+    if (allowedAdmins.length > 0 && !allowedAdmins.includes((user.email ?? "").toLowerCase())) {
+      if (isAdminApi) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+      }
+      const loginUrl = new URL(ADMIN_LOGIN_PATH, request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+
     // Prevent indexing of admin pages
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
 

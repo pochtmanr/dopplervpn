@@ -44,15 +44,23 @@ export async function POST(req: NextRequest) {
 
     const supabase = createUntypedAdminClient();
 
-    // Verify account exists before updating
+    // Verify account exists and check if contact is already verified
     const { data: account, error: lookupError } = await supabase
       .from('accounts')
-      .select('id')
+      .select('id, contact_verified')
       .eq('account_id', account_id)
       .single();
 
     if (lookupError || !account) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
+    }
+
+    // Prevent overwriting a verified contact — that would be an account takeover vector
+    if (account.contact_verified) {
+      return NextResponse.json(
+        { error: 'Contact already verified — contact support to change it' },
+        { status: 403 }
+      );
     }
 
     const { error } = await supabase
