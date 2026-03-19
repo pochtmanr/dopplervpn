@@ -1,18 +1,37 @@
+import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
-import { Arrow } from "@/components/ui/arrow";
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
+}
+
+const baseUrl = "https://www.dopplervpn.org";
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Downloads | Doppler VPN",
+    description: "Download Doppler VPN for iOS, Android, macOS, and Windows. Free, secure, no-logs VPN with VLESS-Reality encryption.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/downloads`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/downloads`]),
+        ["x-default", `${baseUrl}/en/downloads`],
+      ]),
+    },
+  };
 }
 
 /* ── Download URLs ───────────────────────────────────────────────── */
 
 const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  android: "/downloads/doppler-vpn-v1.2.0.apk",
+  androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
+  androidApk: "/downloads/doppler-vpn-v1.2.0.apk",
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   windowsX64: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-windows-64.zip",
   windowsArm64: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-windows-arm64.zip",
@@ -86,7 +105,7 @@ export default async function DownloadsPage({ params }: PageProps) {
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* ── Header ────────────────────────────────────────────── */}
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl font-display font-bold text-text-primary mb-4 tracking-tight">
@@ -115,7 +134,6 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("ios.button")}
-                <Arrow />
               </a>
 
               <SetupSteps
@@ -137,13 +155,22 @@ export default async function DownloadsPage({ params }: PageProps) {
               </div>
 
               <a
-                href={URLS.android}
-                download
+                href={URLS.androidPlayStore}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
               >
                 <DownloadIcon className="w-4 h-4" />
-                {t("android.button")}
-                <Arrow />
+                {t("android.buttonPlayStore")}
+              </a>
+
+              <a
+                href={URLS.androidApk}
+                download
+                className="group flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
+              >
+                <DownloadIcon className="w-4 h-4" />
+                {t("android.buttonApk")}
               </a>
               <p className="text-xs text-text-muted text-center mt-1.5">{t("android.meta")}</p>
 
@@ -173,7 +200,6 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("mac.button")}
-                <Arrow />
               </a>
 
               <SetupSteps
@@ -237,16 +263,42 @@ export default async function DownloadsPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* ── Bottom CTA ──────────────────────────────────────── */}
-          <div className="mt-14 rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-8 sm:p-12 text-center">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-primary mb-3">
-              {t("needHelp")}
-            </h2>
+          {/* ── Bottom Cards ──────────────────────────────────── */}
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Bypass Censorship */}
+            <Link
+              href="/bypass-censorship"
+              className="group rounded-2xl border border-accent-teal/20 bg-accent-teal/5 p-8 sm:p-10 text-center hover:bg-accent-teal/10 hover:border-accent-teal/30 transition-all"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-accent-teal/15 border border-accent-teal/20 flex items-center justify-center text-accent-teal mx-auto mb-4">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                </svg>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-text-primary mb-2">
+                {t("censorshipCard.title")}
+              </h2>
+              <p className="text-sm text-text-muted">
+                {t("censorshipCard.description")}
+              </p>
+            </Link>
+
+            {/* Need Help */}
             <Link
               href="/support"
-              className="inline-flex items-center gap-2 text-accent-teal hover:text-accent-teal-light font-medium transition-colors"
+              className="group rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-8 sm:p-10 text-center hover:bg-bg-secondary/70 hover:border-overlay/20 transition-all"
             >
-              {t("visitSupport")} <Arrow />
+              <div className="w-12 h-12 rounded-2xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted mx-auto mb-4">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-text-primary mb-2">
+                {t("needHelp")}
+              </h2>
+              <p className="text-sm text-text-muted">
+                {t("visitSupport")}
+              </p>
             </Link>
           </div>
         </div>

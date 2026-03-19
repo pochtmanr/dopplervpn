@@ -11,9 +11,10 @@ interface SitemapPost {
 
 function buildAlternates(path: string) {
   return {
-    languages: Object.fromEntries(
-      routing.locales.map((locale) => [locale, `${baseUrl}/${locale}${path}`])
-    ),
+    languages: Object.fromEntries([
+      ...routing.locales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ["x-default", `${baseUrl}/en${path}`],
+    ]),
   };
 }
 
@@ -29,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = postsRaw as SitemapPost[] | null;
 
   // Static pages — one entry per page with hreflang alternates
-  const staticPages = ["", "/downloads", "/guide", "/privacy", "/terms", "/blog"];
+  const staticPages = ["", "/downloads", "/privacy", "/terms", "/blog", "/support", "/about", "/bypass-censorship"];
 
   const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
     url: `${baseUrl}/en${page}`,
@@ -43,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             ? ("monthly" as const)
             : ("monthly" as const),
     priority:
-      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : page === "/guide" ? 0.7 : 0.5,
+      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : page === "/bypass-censorship" ? 0.7 : page === "/support" ? 0.6 : page === "/about" ? 0.6 : 0.5,
     alternates: buildAlternates(page),
   }));
 

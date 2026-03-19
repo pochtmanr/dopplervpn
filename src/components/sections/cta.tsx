@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -23,28 +21,12 @@ export function CTA() {
           <Reveal className="space-y-6 text-center lg:text-start">
             {/* App Icon + Headline */}
             <div className="flex flex-row items-center justify-center lg:justify-start gap-4">
-              <Image
-                src="/images/iosdopplerlogo.png"
-                alt="Doppler VPN"
-                width={80}
-                height={80}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-[18px] shadow-lg shrink-0"
-              />
+            
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-text-primary leading-tight">
-                <span
-                  className="italic"
-                  style={{ fontFamily: "var(--font-serif)" }}
-                >
-                  {t("doppler.titleItalic")}
-                </span>{" "}
-                <span style={{ fontFamily: "var(--font-serif)" }}>
-                  {t("doppler.titleMiddle")}
-                </span>{" "}
-                <span
-                  className="bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                  style={{ fontFamily: "var(--font-raster)" }}
-                >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
+                {t("doppler.titleItalic")}{" "}
+                {t("doppler.titleMiddle")}{" "}
+                <span className="bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent">
                   {t("doppler.titlePlayful")}
                 </span>
               </h2>
@@ -58,10 +40,19 @@ export function CTA() {
             {/* Subscribe Button */}
             <div className="flex flex-row flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
               <Link
-                href="/subscribe"
+                href="/account"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30"
               >
                 {t("doppler.cta")}
+              </Link>
+              <Link
+                href="/downloads"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary text-text-muted hover:text-text-primary border border-overlay/10 hover:border-overlay/20"
+              >
+                {t("doppler.downloads")}
+                <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
               </Link>
             </div>
           </Reveal>

@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-function getSupabase() {
-  return createClient(supabaseUrl, supabaseKey);
-}
+import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { requireAppApiKey } from '@/lib/api-auth';
+import { rateLimit } from '@/lib/rate-limit';
 
 export async function POST(req: NextRequest) {
+  const rl = rateLimit(req, { limit: 20, windowMs: 60_000, prefix: 'vpn-disconnect' });
+  if (rl) return rl;
+
+  if (!requireAppApiKey(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { account_id, public_key, config_id } = await req.json();
 
@@ -16,9 +18,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'account_id and (public_key or config_id) required' }, { status: 400 });
     }
 
-    const supabase = getSupabase();
+    const supabase = createUntypedAdminClient();
 
-    // Find the active config
     let query = supabase
       .from('vpn_user_configs')
       .select('*, vpn_servers!inner(id, ip_address, config_data)')
@@ -40,7 +41,6 @@ export async function POST(req: NextRequest) {
     const cfg = configs[0];
     const server = cfg.vpn_servers;
 
-    // Parse server config for WG API details
     let serverConfig: Record<string, string>;
     try {
       serverConfig = JSON.parse(server.config_data || '{}');
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     const wgApiKey = serverConfig.wg_api_key;
 
     if (!wgApiUrl || !wgApiKey) {
-      console.error('Server missing wg_api_url or wg_api_key in config_data:', server.id);
+      console.error('Server missing wg_api_url or wg_api_key:', server.id);
       return NextResponse.json({ error: 'Server not properly configured' }, { status: 500 });
     }
 
@@ -72,7 +72,6 @@ export async function POST(req: NextRequest) {
       }
     } catch (err) {
       console.error('WG API delete failed:', err);
-      // Continue — still deactivate in DB even if WG cleanup fails
     }
 
     // Deactivate in DB

@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { DopplerLogo } from "./doppler-logo";
 
 export async function Footer() {
   const t = await getTranslations("footer");
@@ -12,14 +12,8 @@ export async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image
-                src="/images/roundeddopplerlogo.png"
-                alt="Doppler VPN"
-                width={32}
-                height={32}
-                className="w-8 h-8 rounded-full"
-              />
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
+              <DopplerLogo className="w-8 h-8" />
               <span className="font-display text-xl font-semibold text-text-primary">
                 Doppler VPN
               </span>
@@ -34,6 +28,7 @@ export async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-overlay/5 rounded-lg hover:bg-overlay/10 transition-colors"
+                dir="ltr"
               >
                 <svg
                   className="w-5 h-5 text-text-primary"
@@ -45,10 +40,11 @@ export async function Footer() {
                 <span className="text-sm text-text-primary">App Store</span>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.dopplervpn.android"
+                href="https://play.google.com/store/apps/details?id=org.dopplervpn.android"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-overlay/5 rounded-lg hover:bg-overlay/10 transition-colors"
+                dir="ltr"
               >
                 <svg
                   className="w-5 h-5 text-text-primary"
@@ -92,6 +88,14 @@ export async function Footer() {
                   {t("blog")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/bypass-censorship"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("bypassCensorship")}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -125,6 +129,14 @@ export async function Footer() {
                   {t("terms")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("about")}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -140,8 +152,9 @@ export async function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm inline-flex items-center gap-1.5"
+                  dir="ltr"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                   </svg>
                   {t("telegram")}
@@ -151,6 +164,7 @@ export async function Footer() {
                 <a
                   href="mailto:support@simnetiq.store"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                  dir="ltr"
                 >
                   {t("email")}
                 </a>
@@ -192,7 +206,7 @@ export async function Footer() {
               </a>
             </div>
 
-            <p className="text-text-muted text-sm">
+            <p className="text-text-muted text-sm" dir="ltr">
               Made by{" "}
               <a
                 href="https://simnetiq.store"

@@ -3,10 +3,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section } from "@/components/ui/section";
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
+
+const baseUrl = "https://www.dopplervpn.org";
 
 export async function generateMetadata({
   params,
@@ -20,6 +23,13 @@ export async function generateMetadata({
       locale === "he"
         ? "תנאי השימוש של Doppler VPN - קרא את ההסכם שלנו"
         : "Doppler VPN Terms of Service - Read our usage agreement",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/terms`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/terms`]),
+        ["x-default", `${baseUrl}/en/terms`],
+      ]),
+    },
   };
 }
 

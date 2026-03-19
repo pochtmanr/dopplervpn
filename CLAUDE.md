@@ -1,58 +1,76 @@
-# Doppler VPN Landing + Admin Panel
+# Doppler Landing + Admin
 
 ## Overview
-Next.js 15 app with Tailwind CSS v4, TypeScript, next-intl (21 languages). Includes:
-- Public landing page (dopplervpn.org)
-- Admin panel (/admin-dvpn)
-- Blog system with AI content pipeline
-- API routes for blog CRUD and VPN management
+Next.js 15 web app serving as the public marketing site, admin panel, and blog pipeline for Doppler VPN. Deployed at `dopplervpn.org`. Includes 21-language landing, blog with AI content generation, admin dashboard, and API routes used by the Telegram bots.
 
 ## Tech Stack
 - **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
 - **Styling:** Tailwind CSS v4 + `@tailwindcss/postcss`
-- **i18n:** next-intl v3 (21 languages)
+- **i18n:** next-intl v3 (21 languages, URL routing via `[locale]`)
 - **Backend:** Supabase (ref: `fzlrhmjdjjzcgstaeblu`)
-- **AI:** OpenAI (gpt-5-mini) for blog content generation
+- **AI:** OpenAI `gpt-5-mini` for blog content generation
 - **Animation:** Framer Motion
-- **Deployment:** Vercel (domain: dopplervpn.org)
+- **Deployment:** Vercel (dopplervpn.org) — GitHub: pochtmanr/dopplerland
 
-## Directory Structure
+## Architecture
+
 ```
 src/
   app/
-    [locale]/     # i18n routes (21 languages)
-    admin-dvpn/   # Admin panel (Dashboard, Messages, VPN Users, Posts)
+    [locale]/             # All public pages (21 locale routes)
+      page.tsx            # Landing page
+      layout.tsx          # Root layout with i18n provider
+      blog/               # Blog listing + post pages
+      downloads/          # App download links
+      support/            # Support / FAQ page
+      privacy/            # Privacy policy
+      terms/              # Terms of service
+      bypass-censorship/  # SEO landing page
+      account/            # Account management (planned)
+    admin-dvpn/           # Admin panel (4 tabs)
+      page.tsx            # Dashboard (Supabase stats)
+      # Messages, VPN Users (Marzban), Posts (blog)
     api/
-      admin/      # Admin API routes
-      blog/       # Blog CRUD (create, translate, status)
-      vpn/        # VPN management routes
-    auth/         # Auth routes
-  components/     # Shared components
-  fonts/          # Local fonts
-  i18n/           # i18n configuration
-  lib/            # Supabase client, utilities
+      admin/              # Admin API routes (auth-protected)
+      blog/
+        create/           # POST — AI generates article (OpenAI)
+        translate/        # POST — translates to all 21 langs
+        status/           # GET/POST — publish/unpublish
+      vpn/                # VPN management routes
+    auth/                 # Auth callback routes
+    globals.css           # Global styles
+    robots.ts             # robots.txt
+    sitemap.ts            # Sitemap generation
+  components/             # Shared UI components
+  fonts/                  # Local font files
+  i18n/                   # next-intl config + routing
+  lib/                    # Supabase client, shared utilities
 ```
 
 ## Key Patterns
-- **API Routes:** All under `src/app/api/`. Blog routes require `BLOG_API_KEY` header.
-- **i18n:** 21 language JSON files. Use next-intl `useTranslations()` hook.
-- **Supabase:** Client initialized in `src/lib/`. Use SSR client for server components.
-- **Admin:** Protected routes under `/admin-dvpn`. Uses Supabase for data.
-- **Blog pipeline:** POST /api/blog/create (AI generates) -> POST /api/blog/translate (translates to all langs) -> n8n webhook posts to Telegram channels.
+- **Blog pipeline:** `POST /api/blog/create` (OpenAI generates) → `POST /api/blog/translate` (21 langs) → n8n webhook → Telegram channels + live blog
+- **Blog API auth:** All blog API routes require `BLOG_API_KEY` header — never expose this key
+- **i18n:** 21 JSON translation files. Use `useTranslations()` hook in Client Components, `getTranslations()` in Server Components
+- **Admin panel** at `/admin-dvpn` has 4 tabs: Dashboard, Messages, VPN Users, Posts — uses Supabase for data
 
-## Environment Variables (in .env.local)
-- `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `OPENAI_API_KEY`
-- `BLOG_API_KEY` — required for blog API authentication
-- `MARZBAN_*` — VPN panel credentials
+## Backend Integration
+- **Supabase tables:** `accounts` (R), `vpn_users` (R/W), `vpn_servers` (R/W), `blog_posts` (R/W), `blog_translations` (R/W)
+- **External APIs:** OpenAI API (blog generation), Marzban API (`MARZBAN_*` env vars), n8n webhook (blog posting)
+- **Auth model:** Supabase Auth for admin panel login; no auth for public pages
 
-## Important Notes
-- **Always use `www.dopplervpn.org`** for API calls — dopplervpn.org redirects strip auth headers
-- Blog API key: `dpvpn-blog-8313727fefa39868fb43a4a399e13646`
-- Admin panel has 4 tabs: Dashboard (Supabase stats), Messages (bot logs), VPN Users (Marzban), Posts (blog)
-- OpenAI model used: `gpt-5-mini`
-- Images: External URLs from Unsplash/Pixabay/Pexels are allowed in next.config
+## Environment Variables
+```
+NEXT_PUBLIC_SUPABASE_URL          # https://fzlrhmjdjjzcgstaeblu.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY     # Supabase anon key
+SUPABASE_SERVICE_ROLE_KEY         # Service role key (server-only)
+OPENAI_API_KEY                    # For blog generation
+BLOG_API_KEY                      # Required header for /api/blog/* routes
+ADMIN_EMAILS                      # Comma-separated list of allowed admin emails (e.g. pochtmanrca@gmail.com)
+MARZBAN_HOST                      # Marzban panel URL
+MARZBAN_USERNAME                  # Marzban admin username
+MARZBAN_PASSWORD                  # Marzban admin password
+```
 
 ## Commands
 ```bash
@@ -61,3 +79,17 @@ npm run build      # Production build
 npm run lint       # ESLint
 npm run typecheck  # TypeScript check
 ```
+
+## Deployment
+Vercel auto-deploys on push to main branch. Domain: `dopplervpn.org` (Vercel DNS).
+
+## Important Notes
+- **Always use `www.dopplervpn.org`** in links and API calls — `dopplervpn.org` redirects strip auth headers
+- `BLOG_API_KEY` must match the value in `admin-bot/.env` — both sides need the same key
+- Images from Unsplash/Pixabay/Pexels are allowed in `next.config` — do not add other external image domains without updating `next.config`
+- OpenAI model: `gpt-5-mini` — do not change without updating the prompt engineering
+
+## Related Projects
+- `admin-bot/` — Admin bot that triggers blog pipeline and calls these API routes
+- `bot/` — Customer bot that links to this site for downloads + (planned) checkout
+- `miniapp/` — Mini App that shares the same Supabase backend

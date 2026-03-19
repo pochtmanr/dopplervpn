@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -26,7 +24,7 @@ const stepIcons: Record<string, React.ReactNode> = {
 const stepKeys = ["choose", "download", "connect"] as const;
 
 const stepLinks: Record<(typeof stepKeys)[number], { href: string; isPage?: boolean }> = {
-  choose: { href: "/subscribe", isPage: true },
+  choose: { href: "/account", isPage: true },
   download: { href: "/downloads", isPage: true },
   connect: { href: "/#faq" },
 };

@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient, createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
+import { ogLocaleMap } from "@/lib/og-locale-map";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Navbar } from "@/components/layout/navbar";
@@ -107,7 +108,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: translation.og_title || title,
       description: translation.og_description || description,
       url: `${baseUrl}/${locale}/blog/${slug}`,
-      locale: locale === "he" ? "he_IL" : "en_US",
+      locale: ogLocaleMap[locale] || "en_US",
+      alternateLocale: routing.locales
+        .filter((l) => l !== locale)
+        .map((l) => ogLocaleMap[l] || l),
       type: "article",
       images: post.image_url
         ? [{ url: post.image_url, width: 1200, height: 630 }]

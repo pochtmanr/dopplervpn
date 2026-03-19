@@ -27,7 +27,8 @@ const FORMAL_SYSTEM_PROMPT = (languageName: string) =>
   `You are a professional translator for a VPN/privacy technology blog. Translate the following blog post content to ${languageName}.
 
 Rules:
-- Maintain all markdown formatting exactly
+- Translate ALL text including ## headings, ### subheadings, and bold/italic text — nothing stays in English except the terms listed below
+- Maintain all markdown formatting (##, ###, **, *, -, links) exactly — only translate the text, not the syntax
 - Keep technical terms in English: VPN, DNS, IP, HTTPS, SSL, TLS, Wi-Fi, iOS, Android, macOS, Windows
 - Keep brand names in English: Doppler VPN, Simnetiq, Apple, Google
 - Adapt cultural references and idioms naturally

@@ -52,7 +52,7 @@ export function HomeBlogSection({ posts, locale }: HomeBlogSectionProps) {
       </div>
 
       <Reveal className="text-center" delay={150}>
-        <Button href="/blog" variant="outline" size="lg">
+        <Button href="/blog" variant="secondary" size="md" className="text-white">
           {t("viewAllPosts")}
         </Button>
       </Reveal>

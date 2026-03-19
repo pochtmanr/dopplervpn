@@ -1,38 +1,19 @@
-"use client";
-
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { HeroCTAs } from "@/components/hero/hero-ctas";
-import { PromoCode } from "@/components/hero/promo-code";
-import type { Platform } from "@/components/hero/hero-ctas";
+import { HeroCTAsWrapper } from "@/components/hero/hero-ctas-wrapper";
+import { HeroParallax } from "@/components/hero/hero-parallax";
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
 const FALLBACK_FONT_LOCALES = new Set(["ru", "uk", "zh", "ja", "ko", "ar", "fa", "he", "hi", "ur", "th"]);
-
-function detectPlatform(): Platform {
-  if (typeof window === "undefined") return "desktop";
-
-  const ua = navigator.userAgent.toLowerCase();
-  if (/iphone|ipad|ipod/.test(ua)) return "ios";
-  if (/android/.test(ua)) return "android";
-  return "desktop";
-}
 
 export function Hero() {
   const t = useTranslations("hero");
   const locale = useLocale();
   const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
-  const [platform, setPlatform] = useState<Platform>("desktop");
-
-  useEffect(() => {
-    setPlatform(detectPlatform());
-  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-28 pb-16 px-4 sm:px-6 lg:px-8">
-      {/* Background Effects - no overflow-hidden so blurs bleed into next section */}
+    <section className="relative min-h-screen flex items-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
@@ -43,18 +24,20 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="space-y-6 text-center lg:text-start">
-            {/* Promo Code (replaces old tagline badge) */}
+            {/* Tagline Badge */}
             <div className="hero-animate">
-              <PromoCode />
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-accent-teal/10 text-accent-teal border border-accent-teal/20">
+                {t("tagline")}
+              </span>
             </div>
 
-            {/* Headline */}
+            {/* Headline — server-rendered, no hydration delay */}
             <h1
               className="hero-animate hero-animate-delay-1 text-5xl sm:text-6xl md:text-6xl lg:text-7xl text-text-primary leading-tight"
             >
               <span
                 className="block"
-                style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 700 } : { fontFamily: "var(--font-serif)" }}
+                style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 300 } : { fontFamily: "var(--font-serif)" }}
               >
                 {useFallbackFont ? (
                   <>{t("headlinePart1a")} {t("headlinePart1b")}</>
@@ -62,24 +45,26 @@ export function Hero() {
                   <><span className="italic">{t("headlinePart1a")}</span>{" "}<span>{t("headlinePart1b")}</span></>
                 )}
               </span>
-              <span
-                className="block mt-0 bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 700 } : { fontFamily: "var(--font-raster)" }}
-              >
-                {t("headlinePart2")}
-              </span>
+              {t("headlinePart2") && (
+                <span
+                  className="block mt-0 bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
+                  style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 300 } : { fontFamily: "var(--font-serif)" }}
+                >
+                  {t("headlinePart2")}
+                </span>
+              )}
             </h1>
 
             {/* Subheadline */}
             <p
-              className="hero-animate hero-animate-delay-2 text-text-muted text-md sm:text-xl md:text-2xl max-w-md sm:max-w-xl mx-auto lg:mx-0"
+              className="hero-animate hero-animate-delay-2 text-text-muted text-sm sm:text-base md:text-lg max-w-md sm:max-w-xl mx-auto lg:mx-0"
             >
               {t("subheadline")}
             </p>
 
-            {/* Platform-Aware CTAs */}
+            {/* Platform-Aware CTAs — client component for UA detection */}
             <div className="hero-animate hero-animate-delay-3 pt-4">
-              <HeroCTAs platform={platform} />
+              <HeroCTAsWrapper />
             </div>
 
             {/* Trust Badges */}
@@ -113,27 +98,21 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column - Card with iPhone (hidden on mobile) */}
-          <div className="hero-animate hero-animate-delay-3 hidden lg:flex justify-end">
-            <Card
-              padding="lg"
-              className="relative w-full max-w-xl lg:max-w-2xl aspect-[5/6] overflow-hidden"
-            >
-              {/* Decorative gradient background */}
+          {/* Right Column - Devices with parallax */}
+          <HeroParallax>
+            {/* Background frame with hero.avif */}
+            <div className="relative w-full max-w-xl mx-auto h-full rounded-3xl overflow-hidden border border-white/[0.06]">
+              <Image
+                src="/images/hero.avif"
+                alt="Doppler VPN — secure private VPN for iOS, Android, Mac and Windows"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1023px) 0px, (max-width: 1280px) 50vw, 576px"
+                priority
+              />
               <div className="absolute inset-0 bg-gradient-to-br from-accent-teal/10 via-transparent to-accent-gold/5" />
-
-              {/* iPhone Image */}
-              <div className="absolute inset-0">
-                <Image
-                  src="/images/hero.avif"
-                  alt="Doppler VPN - Protected connection"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </Card>
-          </div>
+            </div>
+          </HeroParallax>
         </div>
       </div>
     </section>

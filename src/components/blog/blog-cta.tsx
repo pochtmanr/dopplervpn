@@ -273,7 +273,7 @@ export function BlogCta({ title, subtitle, doppler, simnetiq }: BlogCtaProps) {
       appStoreLabel: doppler.appStore,
       playStoreLabel: doppler.playStore,
       appStoreHref: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-      playStoreHref: "https://play.google.com/store/apps/details?id=com.dopplervpn.android",
+      playStoreHref: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
       accentColor: "teal",
       promo,
     },
@@ -294,15 +294,24 @@ export function BlogCta({ title, subtitle, doppler, simnetiq }: BlogCtaProps) {
     const container = scrollRef.current;
     if (!container) return;
 
+    let cardWidth = container.offsetWidth * 0.85;
+
+    const handleResize = () => {
+      if (scrollRef.current) cardWidth = scrollRef.current.offsetWidth * 0.85;
+    };
+
     const handleScroll = () => {
       const scrollLeft = container.scrollLeft;
-      const cardWidth = container.offsetWidth * 0.85;
       const newIndex = Math.round(scrollLeft / cardWidth);
       setActiveIndex(Math.min(newIndex, apps.length - 1));
     };
 
     container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [apps.length]);
 
   const scrollToCard = (index: number) => {

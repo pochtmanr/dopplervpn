@@ -1,14 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { requireAppApiKey } from '@/lib/api-auth';
+import { rateLimit } from '@/lib/rate-limit';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-
-function getSupabase() {
-  return createClient(supabaseUrl, supabaseKey);
-}
+const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 20 connects per minute per IP
+  const rl = rateLimit(req, { limit: 20, windowMs: 60_000, prefix: 'vpn-connect' });
+  if (rl) return rl;
+
+  // Require app API key
+  if (!requireAppApiKey(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const { account_id, device_id, server_id } = await req.json();
 
@@ -16,15 +22,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'account_id and server_id required' }, { status: 400 });
     }
 
-    const supabase = getSupabase();
+    const supabase = createUntypedAdminClient();
 
-    // 1. Verify account exists and get subscription tier
-    // Support both UUID (id) and code (account_id like VPN-XXXX-XXXX-XXXX)
-    const isCode = account_id.startsWith('VPN-') || account_id.includes('-');
+    // Strict account ID format check
+    const isCode = ACCOUNT_ID_REGEX.test(account_id);
     const lookupField = isCode ? 'account_id' : 'id';
     const { data: account, error: accErr } = await supabase
       .from('accounts')
-      .select('id, account_id, subscription_tier, max_devices')
+      .select('id, account_id, subscription_tier, subscription_expires_at, max_devices')
       .eq(lookupField, account_id)
       .single();
 
@@ -32,10 +37,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
     }
 
-    // Use the account_id (code) for vpn_user_configs since that's what the app stores
     const accountCode = account.account_id;
 
-    // 2. Check for existing active config for this account + server
+    // Check for existing active config for this account + server
     const { data: existing } = await supabase
       .from('vpn_user_configs')
       .select('*')
@@ -47,9 +51,7 @@ export async function POST(req: NextRequest) {
 
     if (existing?.length) {
       const cfg = existing[0];
-      // Check if expired
       if (cfg.expires_at && new Date(cfg.expires_at) > new Date()) {
-        // Return existing config
         return NextResponse.json({
           config: cfg.config_data,
           public_key: cfg.public_key,
@@ -58,14 +60,13 @@ export async function POST(req: NextRequest) {
           existing: true,
         });
       }
-      // Expired — deactivate and create new
       await supabase
         .from('vpn_user_configs')
         .update({ is_active: false })
         .eq('id', cfg.id);
     }
 
-    // 3. Check device limit
+    // Check device limit
     const { count } = await supabase
       .from('vpn_user_configs')
       .select('*', { count: 'exact', head: true })
@@ -76,7 +77,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Device limit reached' }, { status: 403 });
     }
 
-    // 4. Get server details
+    // Get server details
     const { data: server, error: srvErr } = await supabase
       .from('vpn_servers')
       .select('*')
@@ -88,7 +89,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Server not found or inactive' }, { status: 404 });
     }
 
-    // 5. Parse server config to get WG API URL
     let serverConfig: Record<string, string>;
     try {
       serverConfig = JSON.parse(server.config_data || '{}');
@@ -100,11 +100,11 @@ export async function POST(req: NextRequest) {
     const wgApiKey = serverConfig.wg_api_key;
 
     if (!wgApiUrl || !wgApiKey) {
-      console.error('Server missing wg_api_url or wg_api_key in config_data:', server.id);
+      console.error('Server missing wg_api_url or wg_api_key:', server.id);
       return NextResponse.json({ error: 'Server not properly configured' }, { status: 500 });
     }
 
-    // 6. Call WG API to create peer
+    // Call WG API to create peer
     const wgRes = await fetch(`${wgApiUrl}/create`, {
       method: 'POST',
       headers: { 'x-api-key': wgApiKey },
@@ -118,14 +118,10 @@ export async function POST(req: NextRequest) {
 
     const peerRaw = await wgRes.json();
 
-    // Handle two WG API response formats:
-    // Format A (Germany/Russia): { private_key, public_key, client_ip, server_pubkey, endpoint, dns }
-    // Format B (USA/UK/CH): { status, config } where config is a full WireGuard config string
     let peer: { private_key: string; public_key: string; client_ip: string; server_pubkey: string; endpoint: string; dns: string };
     let wgConfig: string;
 
     if (peerRaw.config && typeof peerRaw.config === 'string') {
-      // Format B — parse the config string
       wgConfig = peerRaw.config.trim();
       const lines = wgConfig.split('\n');
       const getValue = (key: string) => {
@@ -134,21 +130,16 @@ export async function POST(req: NextRequest) {
       };
       peer = {
         private_key: getValue('PrivateKey'),
-        public_key: '', // not returned in this format, generate from config
+        public_key: '',
         client_ip: getValue('Address').replace('/24', '').replace('/32', ''),
         server_pubkey: getValue('PublicKey'),
         endpoint: getValue('Endpoint'),
         dns: getValue('DNS'),
       };
-      // Ensure MTU and PersistentKeepalive are present
       if (!wgConfig.includes('MTU')) {
         wgConfig = wgConfig.replace('[Peer]', 'MTU = 1420\n\n[Peer]');
       }
-      if (!wgConfig.includes('AllowedIPs = 0.0.0.0/0, ::/0')) {
-        wgConfig = wgConfig.replace('AllowedIPs = 0.0.0.0/0, ::/0', 'AllowedIPs = 0.0.0.0/0, ::/0');
-      }
     } else {
-      // Format A — individual fields
       peer = peerRaw as typeof peer;
       wgConfig = `[Interface]
 PrivateKey = ${peer.private_key}
@@ -163,14 +154,16 @@ AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 25`;
     }
 
-    // 8. Determine expiry
-    const tier = account.subscription_tier || 'free';
+    // Determine expiry
+    const isSubscriptionExpired = account.subscription_expires_at &&
+      new Date(account.subscription_expires_at) < new Date();
+    const tier = isSubscriptionExpired ? 'free' : (account.subscription_tier || 'free');
     const now = new Date();
     const expiresAt = tier === 'free'
-      ? new Date(now.getTime() + 24 * 60 * 60 * 1000)       // 24 hours
-      : new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
+      ? new Date(now.getTime() + 24 * 60 * 60 * 1000)
+      : new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-    // 9. Save to vpn_user_configs
+    // Save to vpn_user_configs
     const { error: insertErr } = await supabase
       .from('vpn_user_configs')
       .insert({
@@ -186,7 +179,6 @@ PersistentKeepalive = 25`;
 
     if (insertErr) {
       console.error('DB insert error:', insertErr);
-      // Try to clean up the WG peer
       try {
         await fetch(`${wgApiUrl}/delete`, {
           method: 'POST',
@@ -197,7 +189,6 @@ PersistentKeepalive = 25`;
       return NextResponse.json({ error: 'Failed to save config' }, { status: 500 });
     }
 
-    // 10. Return config to app
     return NextResponse.json({
       config: wgConfig,
       public_key: peer.public_key,

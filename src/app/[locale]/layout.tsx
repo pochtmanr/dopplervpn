@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Instrument_Serif, Space_Grotesk, Inter, Jost } from "next/font/google";
-import localFont from "next/font/local";
+import { Instrument_Serif, Space_Grotesk, Rubik } from "next/font/google";
+
 import { routing, isRtlLocale } from "@/i18n/routing";
+import { ogLocaleMap } from "@/lib/og-locale-map";
 import {
   OrganizationSchema,
   ProductSchema,
@@ -32,56 +33,27 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-// Inter - body font for Russian locale (Cyrillic-capable Google Sans alternative)
-const inter = Inter({
+// Rubik - Google Sans alternative for Cyrillic locales (ru, uk)
+const rubik = Rubik({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-body",
+  variable: "--font-rubik",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-// Jost - heading font for Russian locale (Cyrillic-capable)
-const jost = Jost({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-serif",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
 
-// FK Raster - for "Stay protected" text only
-const fkRaster = localFont({
-  src: "../../fonts/FKRasterRomanCompact-Blended.otf",
-  variable: "--font-raster",
-  display: "swap",
-});
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const ogLocaleMap: Record<string, string> = {
-  en: "en_US",
-  ru: "ru_RU",
-  es: "es_ES",
-  pt: "pt_BR",
-  fr: "fr_FR",
-  zh: "zh_CN",
-  de: "de_DE",
-  he: "he_IL",
-  fa: "fa_IR",
-  ar: "ar_SA",
-  hi: "hi_IN",
-  id: "id_ID",
-  tr: "tr_TR",
-  vi: "vi_VN",
-  th: "th_TH",
-  ms: "ms_MY",
-  ko: "ko_KR",
-  ja: "ja_JP",
-  tl: "tl_PH",
-  ur: "ur_PK",
-  sw: "sw_KE",
-};
 
 export async function generateMetadata({
   params,
@@ -94,9 +66,10 @@ export async function generateMetadata({
   const title = t("title");
   const description = t("description");
 
-  const alternateLanguages = Object.fromEntries(
+  const alternateLanguages: Record<string, string> = Object.fromEntries(
     routing.locales.map((loc) => [loc, `https://www.dopplervpn.org/${loc}`])
   );
+  alternateLanguages["x-default"] = "https://www.dopplervpn.org/en";
 
   return {
     title: {
@@ -119,12 +92,24 @@ export async function generateMetadata({
       url: `https://www.dopplervpn.org/${locale}`,
       siteName: "Doppler VPN",
       locale: ogLocaleMap[locale] || "en_US",
+      alternateLocale: routing.locales
+        .filter((l) => l !== locale)
+        .map((l) => ogLocaleMap[l] || l),
       type: "website",
+      images: [
+        {
+          url: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
+          width: 512,
+          height: 512,
+          alt: "Doppler VPN",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: ["https://www.dopplervpn.org/images/iosdopplerlogo.png"],
     },
     alternates: {
       canonical: `https://www.dopplervpn.org/${locale}`,
@@ -154,9 +139,9 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dir}
       suppressHydrationWarning
-      className={locale === "ru"
-        ? `${jost.variable} ${inter.variable} ${fkRaster.variable}`
-        : `${instrumentSerif.variable} ${spaceGrotesk.variable} ${fkRaster.variable}`
+      className={(locale === "ru" || locale === "uk")
+        ? rubik.variable
+        : `${instrumentSerif.variable} ${spaceGrotesk.variable}`
       }
     >
       <head>

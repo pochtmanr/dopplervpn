@@ -80,7 +80,30 @@ export async function POST(req: NextRequest) {
         notes: `web_subscribe:${accountId}`,
       });
 
-      // 5. Send welcome email if we have the customer's email
+      // 5. Record promo redemption if a promo was used
+      const promoId = session.metadata?.promo_id;
+      if (promoId) {
+        try {
+          // Insert redemption record first — unique constraint prevents double-counting
+          const { error: redemptionError } = await supabase
+            .from('promo_redemptions')
+            .insert({ promo_code_id: promoId, account_id: accountId });
+
+          if (redemptionError) {
+            // Unique constraint violation = already redeemed, skip increment
+            if (redemptionError.code !== '23505') {
+              console.error('Promo redemption insert failed:', redemptionError);
+            }
+          } else {
+            // Only increment if redemption was newly recorded (atomic SQL expression via rpc)
+            await supabase.rpc('increment_promo_redemptions', { p_promo_id: promoId });
+          }
+        } catch (promoErr) {
+          console.error('Promo redemption tracking failed:', promoErr);
+        }
+      }
+
+      // 6. Send welcome email if we have the customer's email
       const customerEmail = session.metadata?.email || session.customer_details?.email;
       if (customerEmail) {
         try {

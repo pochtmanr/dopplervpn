@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ImageUploader } from "./image-uploader";
+import { CURATED_TAG_SLUGS } from "@/lib/blog-tags";
 
 interface Tag {
   id: string;
@@ -387,7 +388,7 @@ export function PostForm({
             Tags
           </label>
           <div className="flex flex-wrap gap-2">
-            {availableTags.map((tag) => {
+            {availableTags.filter((tag) => CURATED_TAG_SLUGS.includes(tag.slug)).map((tag) => {
               const selected = form.tag_ids.includes(tag.id);
               return (
                 <button

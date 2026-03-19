@@ -10,34 +10,19 @@ export async function extractFromUrl(url: string): Promise<{
   og_description: string;
   tokensUsed: number;
 }> {
-  // Fetch the page content with browser-like headers
-  const res = await fetch(url, {
+  // Use Jina Reader API to scrape and extract clean text
+  const jinaUrl = `https://r.jina.ai/${url}`;
+  const res = await fetch(jinaUrl, {
     headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-      "Accept":
-        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "Accept-Language": "en-US,en;q=0.9",
+      "Accept": "text/plain",
     },
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch URL: ${res.status} ${res.statusText}`);
+    throw new Error(`Failed to fetch URL via Jina Reader: ${res.status} ${res.statusText}`);
   }
 
-  const html = await res.text();
-
-  // Strip HTML to plain text (basic extraction)
-  const textContent = html
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
-    .replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, "")
-    .replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, "")
-    .replace(/<header[^>]*>[\s\S]*?<\/header>/gi, "")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 15000); // Limit to avoid token overflow
+  const textContent = (await res.text()).slice(0, 15000); // Limit to avoid token overflow
 
   const openai = getOpenAI();
 
@@ -46,25 +31,26 @@ export async function extractFromUrl(url: string): Promise<{
     messages: [
       {
         role: "system",
-        content: `You are a professional blog writer for Doppler VPN, a privacy and security technology company.
+        content: `You are a technology news editor. Adapt source articles into well-structured blog posts for a tech-savvy audience.
 
-Given the extracted text from a web page, create a comprehensive blog article:
-- Write 800-1500 words in clean markdown
-- Focus on privacy, security, and VPN relevance
-- Use proper headings (## and ###), bullet points, and paragraphs
-- Write in an informative, professional tone
-- Include a compelling introduction and conclusion
-- Mention how a VPN (specifically Doppler VPN) relates to the topic where relevant, but don't be overly promotional
-- Do NOT copy text verbatim — rewrite and synthesize the information
+Rules:
+- Preserve the original article's topic, facts, claims, and meaning exactly
+- Use only information present in the source material
+- Keep the original article's tone and subject matter
+- Structure with markdown: ## for main sections, ### for subsections, bullet points where appropriate
+- Title must accurately reflect the article's actual subject
+- Match the source length — a 500-word source becomes a ~500-700 word post
+- Write for SEO: use the article's real keywords naturally in headings and throughout the text
+- If the article covers internet censorship, surveillance, geo-blocking, or online privacy, add a short hook at the end (1-2 sentences) about how a VPN like Doppler VPN can help — this is the only context where Doppler VPN appears
 
 Return valid JSON with keys: title, excerpt, content, meta_title, meta_description, og_title, og_description
-- title: compelling article title (max 80 chars)
-- excerpt: 1-2 sentence summary (max 200 chars)
+- title: accurate article title preserving original meaning (max 80 chars)
+- excerpt: factual 1-2 sentence summary (max 200 chars)
 - content: full article in markdown
-- meta_title: SEO-optimized page title (max 70 chars, include primary keyword)
-- meta_description: SEO meta description (max 160 chars, compelling with call-to-action)
-- og_title: Open Graph title for social sharing (max 70 chars, can differ from meta_title)
-- og_description: Open Graph description for social sharing (max 200 chars, engaging preview)`,
+- meta_title: SEO title with primary keyword from the actual topic (max 70 chars)
+- meta_description: factual summary for search results (max 160 chars)
+- og_title: social sharing title (max 70 chars)
+- og_description: social sharing description (max 200 chars)`,
       },
       {
         role: "user",
