@@ -107,6 +107,60 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.pexels.com",
       },
+      // Blog source sites (OG images)
+      {
+        protocol: "https",
+        hostname: "**.asiatimes.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.eff.org",
+      },
+      {
+        protocol: "https",
+        hostname: "**.restofworld.org",
+      },
+      {
+        protocol: "https",
+        hostname: "**.torrentfreak.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.therecord.media",
+      },
+      {
+        protocol: "https",
+        hostname: "**.freedomhouse.org",
+      },
+      {
+        protocol: "https",
+        hostname: "**.meduza.io",
+      },
+      {
+        protocol: "https",
+        hostname: "**.novayagazeta.eu",
+      },
+      {
+        protocol: "https",
+        hostname: "**.theins.ru",
+      },
+      // Common CDNs used by news sites for OG images
+      {
+        protocol: "https",
+        hostname: "**.wp.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.wordpress.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "**.amazonaws.com",
+      },
     ],
   },
 };
