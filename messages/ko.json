@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — 가입 불필요 무료 VPN | 개인정보 보호 & 보안",
-    "description": "이메일이나 가입 없이 무료 VPN. VLESS-Reality 암호화, 내장 광고 차단기 & 콘텐츠 필터로 즉시 연결. 로그 없음. 데이터 제한 없음. iOS, Android, Telegram에서 사용 가능."
+    "title": "Doppler VPN — 프라이버시를 위한 안전한 노로그 VPN & 프록시",
+    "description": "Doppler VPN은 VLESS-Reality 프록시 암호화, DNS 보호, 엄격한 노로그 정책으로 개인정보를 보호합니다. DPI 및 정부 검열을 우회합니다. iOS, Android, macOS, Windows 지원."
   },
   "nav": {
     "features": "기능",
@@ -1084,49 +1084,135 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Doppler의 검열 우회 방법 | Doppler VPN",
-      "description": "VLESS-Reality가 DPI와 검열 시스템에서 VPN 트래픽을 어떻게 숨기는지 알아보세요."
+      "title": "인터넷 검열 가이드 — VPN이 차단되는 원리와 연결을 유지하는 방법",
+      "description": "정부가 DPI, TSPU, 머신러닝을 이용해 VPN과 프록시를 차단하는 방법, 그리고 VLESS-Reality 프록시가 모든 탐지 방식을 우회하는 원리에 대한 기술 가이드. 강화되는 규제에 대비하세요."
     },
     "hero": {
-      "title": "Doppler는 어떻게 검열을 우회하는가",
-      "subtitle": "VLESS-Reality가 VPN 트래픽을 탐지 불가능하게 만드는 기술 개요."
+      "title": "인터넷 자유를 위한 가이드",
+      "subtitle": "정부가 VPN을 탐지하고 차단하는 방법, Doppler가 모든 차단 방식을 무력화하는 원리, 그리고 규제가 강화되기 전에 지금 무엇을 해야 하는지 알아보세요."
     },
-    "problem": {
-      "title": "검열 시스템은 VPN을 어떻게 차단하는가",
-      "p1": "최신 검열 시스템은 DPI를 사용하여 트래픽을 실시간으로 분석합니다. 데이터의 목적지뿐만 아니라 패킷 구조까지 검사하여 VPN 프로토콜의 흔적을 찾습니다.",
-      "p2": "OpenVPN과 WireGuard는 고유한 트래픽 패턴이 있습니다. DPI는 이를 즉시 감지하고 차단합니다. VPN 제공업체가 트래픽을 위장해도 프로토콜 서명은 남습니다.",
-      "p3": "프로토콜 탐지 외에도, 알려진 VPN 서버 IP 차단과 TLS 핸드셰이크 지문 분석으로 연결이 완료되기 전에 VPN을 차단합니다."
+    "detection": {
+      "title": "정부가 VPN을 탐지하고 차단하는 방법",
+      "intro": "인터넷 검열은 단순한 IP 차단을 훨씬 넘어섰습니다. 러시아, 중국, 이란 같은 나라들은 머신러닝을 활용한 정교한 시스템을 배치하여 VPN 연결을 실시간으로 식별하고 차단합니다. 그 구체적인 방법은 다음과 같습니다.",
+      "tspu": {
+        "title": "인프라: TSPU와 DPI",
+        "p1": "러시아는 TSPU(위협 대응 기술 시스템) — ISP 네트워크 노드에 직접 설치된 전문 하드웨어를 배치합니다. 중국은 만리방화벽(Great Firewall)을, 이란은 NIN을 운용합니다. 이러한 시스템은 네트워크를 통과하는 모든 패킷에 대해 DPI(심층 패킷 검사)를 수행합니다.",
+        "p2": "OpenVPN, WireGuard, IPSec 같은 전통적인 VPN 프로토콜은 고유한 패킷 구조를 가지고 있습니다. DPI는 이를 즉시 식별하고 연결을 끊습니다. 소위 '난독화' 모드도 기본 핸드셰이크 패턴이 탐지 가능하기 때문에 실패하는 경우가 많습니다.",
+        "p3": "기본적인 서명 매칭으로 충분하지 않을 때, 이러한 시스템은 머신러닝 모듈을 가동합니다. 패킷 내부를 들여다보는 것(모든 것이 암호화되어 있으므로)을 멈추고, 트래픽의 행동 패턴을 분석하기 시작합니다."
+      },
+      "method1": {
+        "title": "방법 1: TLS 클라이언트 핑거프린팅",
+        "description": "모든 TLS 클라이언트 — Chrome, Firefox, Safari — 는 핸드셰이크 과정에서 연결 매개변수를 특정 순서로 전송합니다. 이것이 고유한 지문이 됩니다. HTTPS 트래픽으로 위장하는 VPN 클라이언트는 실제 브라우저와 다른 순서로 이 매개변수를 전송하는 경우가 많습니다. DPI는 이 지문을 알려진 브라우저 데이터베이스와 비교합니다. 불일치? 터널로 플래그됩니다."
+      },
+      "method2": {
+        "title": "방법 2: 트래픽 엔트로피 분석",
+        "description": "실제 인터넷 사용에는 특유의 패턴이 있습니다. 동영상 스트리밍은 대용량 패킷이 연속으로 발생하고, 웹 브라우징은 요청-응답-대기 주기를 따릅니다. VPN 터널은 완전히 다른 엔트로피 프로필을 가지고 있습니다 — 균일한 패킷 크기, 일정한 타이밍, 비인간적인 밀도. 트래픽이 HTTPS로 위장되어 있어도, 머신러닝 모델은 패킷 길이와 시간 간격의 통계적 이상을 탐지합니다."
+      },
+      "method3": {
+        "title": "방법 3: 능동적 프로빙",
+        "description": "시스템이 외국 서버에서 VPN이 실행되고 있다고 의심하면, 자체적으로 프로브 요청을 보냅니다. 서버가 일반 웹사이트처럼 — 404 오류나 HTML 페이지를 반환하며 — 응답하면 통과합니다. 하지만 서버가 VPN 핸드셰이크를 시도하거나 예상과 다르게 동작하면, 해당 IP 주소는 즉시 차단됩니다. 단순한 VPN은 이 테스트를 즉시 통과하지 못합니다."
+      },
+      "method4": {
+        "title": "방법 4: IP 및 DNS 블랙리스트",
+        "description": "알려진 VPN 제공업체 IP 대역은 전면 차단됩니다. VPN 도메인에 대한 DNS 요청은 가로채집니다. 공개 서버 목록을 가진 상용 VPN 제공업체가 가장 쉬운 대상이 됩니다 — 전체 인프라가 몇 분 만에 차단될 수 있습니다."
+      },
+      "conclusion": "결과적으로, NordVPN, ExpressVPN, Surfshark 같은 원클릭 VPN과 일반 프록시 서비스는 단속이 시작되면 몇 시간 만에 작동을 멈춥니다. 일반 웹 트래픽과 구별할 수 없도록 특별히 설계된 프록시 프로토콜만이 살아남습니다."
     },
-    "evasion": {
-      "title": "Doppler 트래픽이 보이지 않는 이유",
-      "reality": {
-        "title": "Reality 핸드셰이크",
-        "description": "VLESS-Reality는 실제 웹사이트 인증서로 진짜 TLS 핸드셰이크를 수행합니다. DPI를 포함한 모든 관찰자에게는 일반 HTTPS 사이트 방문과 동일하게 보입니다. 가짜 인증서나 프록시 서명이 없습니다."
+    "defeats": {
+      "title": "Doppler가 모든 탐지 방식을 무력화하는 방법",
+      "subtitle": "각 탐지 기술에는 Doppler의 모든 연결을 구동하는 프로토콜인 VLESS-Reality에 내장된 특정 대응 수단이 있습니다.",
+      "signatures": {
+        "attack": "프로토콜 서명",
+        "defense": "VPN 서명 제로",
+        "description": "VLESS-Reality는 식별 가능한 프로토콜 패턴을 생성하지 않습니다. VPN 핸드셰이크도 없고, 고유한 패킷 구조도 없으며, DPI 서명 데이터베이스가 매칭할 대상이 전혀 없습니다."
       },
-      "noSignature": {
-        "title": "프로토콜 서명 없음",
-        "description": "OpenVPN(고유한 핸드셰이크)이나 WireGuard(알려진 패킷 구조)와 달리, VLESS-Reality는 식별 가능한 프로토콜 서명을 생성하지 않습니다. 자동 탐지 시스템이 대조할 대상이 없습니다."
+      "fingerprinting": {
+        "attack": "TLS 핑거프린팅",
+        "defense": "실제 TLS 핸드셰이크",
+        "description": "Reality는 합법적인 웹사이트의 인증서를 사용하여 실제 TLS 핸드셰이크를 수행합니다. 지문이 실제 브라우저가 생성하는 것과 정확히 일치합니다 — 실제 TLS 연결이기 때문입니다."
       },
-      "indistinguishable": {
-        "title": "HTTPS와 구별 불가능한 트래픽",
-        "description": "터널이 구성되면 모든 데이터가 표준 HTTPS와 동일한 형식으로 암호화됩니다. 패킷 크기, 타이밍, 헤더 모두 일반 웹 브라우징과 일치합니다."
+      "entropy": {
+        "attack": "엔트로피 분석",
+        "defense": "자연스러운 트래픽 패턴",
+        "description": "VLESS-Reality 터널을 통과하는 트래픽은 표준 HTTPS와 동일한 형식으로 구성됩니다. 패킷 크기, 타이밍, 흐름 패턴이 일반 웹 브라우징과 일치하여 통계 분석을 무력화합니다."
       },
-      "infrastructure": {
-        "title": "동적 서버 인프라",
-        "description": "Doppler는 서버 엔드포인트와 IP 주소를 순환하여 검열 시스템이 차단 목록을 유지하기 어렵게 합니다. 하나의 엔드포인트가 발각되어도 네트워크가 적응합니다."
+      "probing": {
+        "attack": "능동적 프로빙",
+        "defense": "합법적인 서버 응답",
+        "description": "프로빙을 받으면 Doppler 서버는 자신이 미러링하는 합법적인 웹사이트와 정확히 동일하게 응답합니다. 인증되지 않은 프로브 요청은 일반적인 웹 응답을 받습니다. VPN 터널은 유효한 클라이언트 인증이 있어야만 활성화됩니다."
+      },
+      "blacklisting": {
+        "attack": "IP 블랙리스트",
+        "defense": "동적 인프라",
+        "description": "Doppler는 서버 엔드포인트와 IP 주소를 순환합니다. 하나의 엔드포인트가 식별되더라도 네트워크가 자동으로 적응합니다. Telegram 봇을 통해 업데이트된 서버 구성에 즉시 접근할 수 있습니다."
       }
     },
-    "flow": {
-      "title": "검열 시스템에 보이는 것",
-      "step1": "내 기기",
-      "step1note": "Doppler 클라이언트가 연결 시작",
-      "step2": "TLS 핸드셰이크",
-      "step2note": "일반 웹사이트 방문처럼 보임",
-      "step3": "VLESS 터널",
-      "step3note": "DPI에는 일반 HTTPS로 보임",
-      "step4": "Doppler 노드",
-      "step4note": "트래픽이 개방 인터넷으로 나감",
-      "dpiLabel": "DPI에 보이는 것: 일반 HTTPS 트래픽"
+    "blocked": {
+      "title": "러시아에서 차단됨 — 그래도 여전히 여기 있습니다",
+      "badge": "Roskomnadzor 확인",
+      "p1": "러시아 당국은 Doppler VPN을 특정하여 차단했습니다. 우리 도메인은 연방 차단 목록에 추가되었습니다. 이것은 숨길 일이 아닙니다 — 우리 기술이 작동한다는 증거입니다.",
+      "p2": "삭제 요청에 응하거나 규제 시장에서 조용히 철수하는 상용 VPN 제공업체와 달리, Doppler는 바로 이런 상황을 위해 만들어졌습니다. 웹사이트가 차단되면 Telegram 봇이 접근 가능합니다. 서버 IP가 차단되면 인프라가 자동으로 교체됩니다.",
+      "p3": "그들이 가하는 모든 차단을 우리는 우회합니다. 이것은 마케팅 문구가 아닙니다 — 우리의 일상 운영입니다.",
+      "stat1label": "RKN에 의해 도메인 차단",
+      "stat1value": "확인됨",
+      "stat2label": "서비스 상태",
+      "stat2value": "운영 중",
+      "stat3label": "대체 접근 경로",
+      "stat3value": "Telegram 봇"
+    },
+    "future": {
+      "title": "앞으로 예상되는 것: 인터넷 규제의 미래",
+      "intro": "인터넷 검열은 멈춰 있지 않습니다. 앞으로의 방향을 이해하면 대비할 수 있습니다. 현재의 인프라와 정책 동향에 기반한 현실적인 전개 시나리오입니다.",
+      "stage1": {
+        "label": "현재 단계",
+        "title": "DPI + 머신러닝 탐지",
+        "description": "정부는 ISP 노드에 머신러닝 모듈이 탑재된 TSPU/DPI 하드웨어를 배치합니다. 표준 VPN 프로토콜은 자동으로 차단됩니다. VLESS-Reality와 유사한 검열 우회 프로토콜은 HTTPS와 구별할 수 없는 트래픽을 생성하기 때문에 여전히 작동합니다.",
+        "status": "러시아, 중국, 이란에서 현재 가동 중"
+      },
+      "stage2": {
+        "label": "가능한 다음 단계",
+        "title": "화이트리스트 모델",
+        "description": "특정 프로토콜을 차단하는 대신, 승인된 도메인과 IP 주소만 접근 가능하게 됩니다. 나머지는 기본적으로 차단됩니다. SSH, RDP, 게임 포트 — 법인이 등록하지 않으면 모두 차단됩니다. 이 방식은 2018년 러시아의 Telegram 차단 시도 당시 부분적으로 테스트된 바 있습니다.",
+        "status": "기술적으로 가능하며, 부분적으로 실행됨"
+      },
+      "stage3": {
+        "label": "극단적 시나리오",
+        "title": "국가 인터넷 격리",
+        "description": "국가가 발급하는 루트 인증서 의무화, 외국 서비스의 국내 미러링, 글로벌 인터넷에 대한 직접 접속 차단을 포함하는 완전히 격리된 국내 네트워크. 북한의 광명망을 대규모로 확대한 것과 같은 개념입니다.",
+        "status": "경제적으로 치명적 — 아래 참조"
+      },
+      "reality": {
+        "title": "경제적 현실 점검",
+        "p1": "2018년 Roskomnadzor가 Telegram만 차단하려 했을 때, 결과적으로 수백만 개의 Amazon과 Google IP 주소를 차단하게 되었습니다. 매장의 금전등록기가 작동을 멈추었고, 스마트 홈 기기가 오프라인이 되었으며, 은행 푸시 알림이 실패했습니다.",
+        "p2": "화이트리스트 모델은 이것의 100배 규모로 발생합니다. 현대 러시아 웹사이트들은 Google Fonts, 해외 CDN 라이브러리, 국제 인증 기관, 클라우드 서비스에 의존합니다. 은행과 물류 회사는 해외 SSL 인증서를 사용합니다. 개발자들은 GitHub, Docker Hub, npm에 접근할 수 없게 됩니다.",
+        "p3": "완전한 격리는 기술적으로 가능합니다 — 그러나 그 대가는 기술적 퇴보입니다. Windows와 Android 업데이트를 받을 수 없게 됩니다. 의료 장비의 드라이버 지원이 끊깁니다. 글로벌 오픈소스 인프라 없이는 AI 개발이 완전히 중단됩니다.",
+        "p4": "가장 가능성 높은 경로는 갑작스러운 차단이 아닌 수년에 걸친 점진적 규제 강화입니다. 하지만 규제가 한 단계씩 강화될 때마다 준비되지 않은 VPN 사용자들은 접속할 수 없게 됩니다."
+      }
+    },
+    "prepare": {
+      "title": "지금 준비하는 방법",
+      "subtitle": "접속이 더 어려워질 때까지 기다리지 마세요. 오늘 이 단계들을 실행하세요.",
+      "step1": {
+        "title": "지금 Doppler VPN을 다운로드하세요",
+        "description": "앱 스토어와 웹사이트가 아직 접근 가능한 동안 앱을 설치하세요. 규제가 강화되면 다운로드 자체가 훨씬 어려워집니다."
+      },
+      "step2": {
+        "title": "Telegram 봇을 저장하세요",
+        "description": "@dopplercreatebot을 Telegram에 추가하세요. 웹사이트가 차단되어도 봇은 Telegram 내에서 접근 가능하며, VPN 설정을 즉시 제공할 수 있습니다.",
+        "link": "@dopplercreatebot 열기"
+      },
+      "step3": {
+        "title": "Android 독립 실행 APK를 받으세요",
+        "description": "Telegram 봇이 Android 앱을 APK 파일로 직접 배포합니다 — Play Store가 필요 없습니다. Google Play가 제한될 경우를 대비한 백업 수단입니다."
+      },
+      "step4": {
+        "title": "앱을 최신 상태로 유지하세요",
+        "description": "새로운 차단 기술에 앞서 나가기 위해 프로토콜 업데이트를 계속 배포합니다. 자동 업데이트를 활성화하거나 Telegram 채널을 통해 정기적으로 업데이트를 확인하세요."
+      },
+      "step5": {
+        "title": "필요한 사람들에게 공유하세요",
+        "description": "규제가 강화되기 전에 Doppler를 설치한 사람이 많을수록 좋습니다. Telegram 봇 링크를 공유하세요 — 우리가 가진 가장 검열 저항적인 배포 채널입니다."
+      }
     },
     "comparison": {
       "title": "프로토콜 비교",
@@ -1159,20 +1245,15 @@
         "fingerprint": "없음"
       }
     },
-    "works": {
-      "title": "Doppler가 작동하는 곳",
-      "description": "Doppler는 VPN 차단이 활성화된 네트워크에서 테스트를 완료했습니다. 제한적인 ISP 환경, 국가 수준 방화벽, 기존 VPN을 차단하는 기업 네트워크를 포함합니다.",
-      "environments": {
-        "isp": "제한적인 ISP 환경",
-        "national": "국가 수준 방화벽",
-        "corporate": "기업 네트워크 제한",
-        "public": "필터링된 공공 Wi-Fi"
-      }
-    },
     "cta": {
-      "title": "내 네트워크에서 시도하기",
-      "subtitle": "다른 VPN이 안 되는 곳에서 Doppler가 작동하는지 확인하세요.",
-      "button": "Doppler 다운로드"
+      "title": "우리는 누구도 뒤에 남기지 않습니다",
+      "subtitle": "Doppler VPN은 제한된 네트워크를 위해 특별히 만들어졌습니다. 인프라를 지속적으로 개선하고, 서버를 교체하며, 프로토콜을 업데이트하여 모든 새로운 차단 기술에 앞서 나갑니다. 인터넷 자유는 협상의 대상이 아닙니다.",
+      "downloadIos": "iOS용 다운로드",
+      "downloadAndroid": "Android용 다운로드",
+      "telegramBot": "Telegram 봇으로 받기",
+      "telegramChannelRu": "업데이트 (러시아어)",
+      "telegramChannelEn": "업데이트 (영어)",
+      "button": "Doppler VPN 다운로드"
     }
   },
   "trustIndicators": {
@@ -1222,25 +1303,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "제한된 네트워크를 위한 설계",
-    "subtitle": "Doppler는 VPN 트래픽을 검열 시스템에서 보이지 않게 만듭니다.",
-    "learnMore": "작동 원리 알아보기",
+    "title": "정부 검열을 우회하도록 설계",
+    "subtitle": "Doppler는 TSPU, DPI, TLS 핑거프린팅, 능동적 프로빙을 무력화합니다 — 러시아, 중국, 이란이 VPN을 차단하는 데 사용하는 바로 그 시스템입니다.",
+    "learnMore": "전체 기술 가이드 읽기",
     "items": {
       "dpi": {
-        "title": "DPI 우회",
-        "description": "기존 VPN은 고유한 트래픽 서명으로 탐지됩니다. VLESS-Reality는 이를 제거합니다 — 트래픽이 일반 HTTPS와 구별되지 않습니다."
+        "title": "딥 패킷 인스펙션 무력화",
+        "description": "TSPU와 DPI 하드웨어는 머신러닝으로 VPN 트래픽 패턴을 탐지합니다. VLESS-Reality는 시그니처가 전혀 없어 탐지할 대상 자체가 없습니다."
       },
       "tls": {
-        "title": "TLS 트래픽 위장",
-        "description": "Doppler는 실제 웹사이트 인증서로 진짜 TLS 핸드셰이크를 수행합니다. 검열 시스템에는 일반 웹 트래픽으로 보입니다."
+        "title": "실제 TLS 핸드셰이크",
+        "description": "Doppler는 실제 웹사이트 인증서로 진짜 TLS 핸드셰이크를 수행합니다. DPI에는 일반 HTTPS 연결로 보이며, VPN 터널로 인식되지 않습니다."
       },
       "fingerprint": {
-        "title": "탐지 가능한 프로토콜 지문 없음",
-        "description": "OpenVPN이나 WireGuard와 달리 VLESS-Reality는 프로토콜 지문을 남기지 않습니다. 자동 차단 시스템이 대조할 대상이 없습니다."
+        "title": "능동적 프로빙 통과",
+        "description": "검열 기관이 서버를 탐색하면 정상적인 웹사이트로 응답합니다. 인증된 클라이언트만 VPN 터널을 활성화할 수 있습니다."
       },
       "regions": {
-        "title": "제한 지역에서도 작동",
-        "description": "VPN 차단이 활성화된 네트워크에서 테스트 완료. 일반 VPN이 안 되는 곳에서도 Doppler는 연결됩니다."
+        "title": "러시아에 차단됨 — 여전히 운영 중",
+        "description": "저희 도메인은 Roskomnadzor 차단 목록에 등재되어 있습니다. 그래도 운영 중입니다. 웹사이트가 차단될 때는 Telegram 봇으로 다운로드하세요."
       }
     }
   },

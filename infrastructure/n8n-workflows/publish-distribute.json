@@ -33,7 +33,7 @@
                     "parameters": [
                         {
                             "name": "Authorization",
-                            "value": "Bearer YOUR_BLOG_API_KEY"
+                            "value": "=Bearer {{ $env.BLOG_API_KEY }}"
                         }
                     ]
                 },
@@ -60,7 +60,7 @@
         },
         {
             "parameters": {
-                "jsCode": "const blogResponse = $input.first().json;\nconst apiBody = blogResponse.body || blogResponse;\n\n// Get original data from Flatten Body (has title, excerpt, content, etc.)\nconst original = $('Flatten Body').first().json;\n\nconst templateType = original.templateType || original.template_type || apiBody.template_type || 'quick-take';\nconst title = original.title || apiBody.title || '';\nconst excerpt = original.excerpt || apiBody.excerpt || '';\nconst slug = apiBody.slug || original.slug || '';\nconst baseUrl = 'https://www.dopplervpn.org';\nconst enUrl = (apiBody.all_urls && apiBody.all_urls.en) || apiBody.english_url || (baseUrl + '/en/blog/' + slug);\nconst ruUrl = (apiBody.all_urls && apiBody.all_urls.ru) || apiBody.russian_url || (baseUrl + '/ru/blog/' + slug);\n\nlet enMessage, ruMessage;\n\nif (templateType === 'meme' || templateType === 'roundup') {\n  const emoji = templateType === 'meme' ? '\\u{1F602}' : '\\u{1F525}';\n  enMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + enUrl;\n  ruMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + ruUrl;\n} else if (templateType === 'analysis') {\n  enMessage = '\\u{1F4CA} Deep Dive: ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} Read full analysis: ' + enUrl;\n  ruMessage = '\\u{1F4CA} \\u0410\\u043D\\u0430\\u043B\\u0438\\u0442\\u0438\\u043A\\u0430: ' + title + '\\n\\n\\u{1F517} \\u0427\\u0438\\u0442\\u0430\\u0442\\u044C \\u043F\\u043E\\u043B\\u043D\\u043E\\u0441\\u0442\\u044C\\u044E: ' + ruUrl;\n} else {\n  enMessage = '\\u{26A1} ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} ' + enUrl;\n  ruMessage = '\\u{26A1} ' + title + '\\n\\n\\u{1F517} ' + ruUrl;\n}\n\nreturn [{\n  json: {\n    ...apiBody,\n    title,\n    excerpt,\n    templateType,\n    enMessage,\n    ruMessage,\n    enUrl,\n    ruUrl,\n    blogId: apiBody.blog_id || apiBody.id,\n    slug\n  }\n}];"
+                "jsCode": "const blogResponse = $input.first().json;\nlet apiBody = blogResponse.body || blogResponse;\n\n// Handle string body from fullResponse mode\nif (typeof apiBody === 'string') {\n  try { apiBody = JSON.parse(apiBody); } catch(e) { apiBody = {}; }\n}\n\n// Get original data from Flatten Body (has title, excerpt, content, etc.)\nconst original = $('Flatten Body').first().json;\n\nconst templateType = original.templateType || original.template_type || apiBody.template_type || 'quick-take';\nconst title = original.title || apiBody.title || '';\nconst excerpt = original.excerpt || apiBody.excerpt || '';\nconst slug = apiBody.slug || original.slug || '';\nconst baseUrl = 'https://www.dopplervpn.org';\nconst enUrl = (apiBody.all_urls && apiBody.all_urls.en) || apiBody.english_url || (baseUrl + '/en/blog/' + slug);\nconst ruUrl = (apiBody.all_urls && apiBody.all_urls.ru) || apiBody.russian_url || (baseUrl + '/ru/blog/' + slug);\n\nlet enMessage, ruMessage;\n\nif (templateType === 'meme' || templateType === 'roundup') {\n  const emoji = templateType === 'meme' ? '\\u{1F602}' : '\\u{1F525}';\n  enMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + enUrl;\n  ruMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + ruUrl;\n} else if (templateType === 'analysis') {\n  enMessage = '\\u{1F4CA} Deep Dive: ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} Read full analysis: ' + enUrl;\n  ruMessage = '\\u{1F4CA} \\u0410\\u043D\\u0430\\u043B\\u0438\\u0442\\u0438\\u043A\\u0430: ' + title + '\\n\\n\\u{1F517} \\u0427\\u0438\\u0442\\u0430\\u0442\\u044C \\u043F\\u043E\\u043B\\u043D\\u043E\\u0441\\u0442\\u044C\\u044E: ' + ruUrl;\n} else {\n  enMessage = '\\u{26A1} ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} ' + enUrl;\n  ruMessage = '\\u{26A1} ' + title + '\\n\\n\\u{1F517} ' + ruUrl;\n}\n\nreturn [{\n  json: {\n    ...apiBody,\n    title,\n    excerpt,\n    templateType,\n    enMessage,\n    ruMessage,\n    enUrl,\n    ruUrl,\n    blogId: apiBody.blog_id || apiBody.id,\n    slug\n  }\n}];"
             },
             "id": "format-telegram",
             "name": "Format Telegram Messages",
@@ -132,15 +132,15 @@
                     "parameters": [
                         {
                             "name": "Authorization",
-                            "value": "Bearer YOUR_BLOG_API_KEY"
+                            "value": "=Bearer {{ $env.BLOG_API_KEY }}"
                         }
                     ]
                 },
                 "sendBody": true,
                 "specifyBody": "json",
-                "jsonBody": "={{ JSON.stringify({ post_id: $json.body ? $json.body.blog_id : $json.blog_id }) }}",
+                "jsonBody": "={{ JSON.stringify({ post_id: $json.body ? (typeof $json.body === 'string' ? JSON.parse($json.body).blog_id : $json.body.blog_id) : $json.blog_id }) }}",
                 "options": {
-                    "timeout": 30000
+                    "timeout": 300000
                 }
             },
             "type": "n8n-nodes-base.httpRequest",
@@ -327,7 +327,7 @@
                         "parameters": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer YOUR_BLOG_API_KEY"
+                                "value": "=Bearer {{ $env.BLOG_API_KEY }}"
                             }
                         ]
                     },
@@ -354,7 +354,7 @@
             },
             {
                 "parameters": {
-                    "jsCode": "const blogResponse = $input.first().json;\nconst apiBody = blogResponse.body || blogResponse;\n\n// Get original data from Flatten Body (has title, excerpt, content, etc.)\nconst original = $('Flatten Body').first().json;\n\nconst templateType = original.templateType || original.template_type || apiBody.template_type || 'quick-take';\nconst title = original.title || apiBody.title || '';\nconst excerpt = original.excerpt || apiBody.excerpt || '';\nconst slug = apiBody.slug || original.slug || '';\nconst baseUrl = 'https://www.dopplervpn.org';\nconst enUrl = (apiBody.all_urls && apiBody.all_urls.en) || apiBody.english_url || (baseUrl + '/en/blog/' + slug);\nconst ruUrl = (apiBody.all_urls && apiBody.all_urls.ru) || apiBody.russian_url || (baseUrl + '/ru/blog/' + slug);\n\nlet enMessage, ruMessage;\n\nif (templateType === 'meme' || templateType === 'roundup') {\n  const emoji = templateType === 'meme' ? '\\u{1F602}' : '\\u{1F525}';\n  enMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + enUrl;\n  ruMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + ruUrl;\n} else if (templateType === 'analysis') {\n  enMessage = '\\u{1F4CA} Deep Dive: ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} Read full analysis: ' + enUrl;\n  ruMessage = '\\u{1F4CA} \\u0410\\u043D\\u0430\\u043B\\u0438\\u0442\\u0438\\u043A\\u0430: ' + title + '\\n\\n\\u{1F517} \\u0427\\u0438\\u0442\\u0430\\u0442\\u044C \\u043F\\u043E\\u043B\\u043D\\u043E\\u0441\\u0442\\u044C\\u044E: ' + ruUrl;\n} else {\n  enMessage = '\\u{26A1} ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} ' + enUrl;\n  ruMessage = '\\u{26A1} ' + title + '\\n\\n\\u{1F517} ' + ruUrl;\n}\n\nreturn [{\n  json: {\n    ...apiBody,\n    title,\n    excerpt,\n    templateType,\n    enMessage,\n    ruMessage,\n    enUrl,\n    ruUrl,\n    blogId: apiBody.blog_id || apiBody.id,\n    slug\n  }\n}];"
+                    "jsCode": "const blogResponse = $input.first().json;\nlet apiBody = blogResponse.body || blogResponse;\n\n// Handle string body from fullResponse mode\nif (typeof apiBody === 'string') {\n  try { apiBody = JSON.parse(apiBody); } catch(e) { apiBody = {}; }\n}\n\n// Get original data from Flatten Body (has title, excerpt, content, etc.)\nconst original = $('Flatten Body').first().json;\n\nconst templateType = original.templateType || original.template_type || apiBody.template_type || 'quick-take';\nconst title = original.title || apiBody.title || '';\nconst excerpt = original.excerpt || apiBody.excerpt || '';\nconst slug = apiBody.slug || original.slug || '';\nconst baseUrl = 'https://www.dopplervpn.org';\nconst enUrl = (apiBody.all_urls && apiBody.all_urls.en) || apiBody.english_url || (baseUrl + '/en/blog/' + slug);\nconst ruUrl = (apiBody.all_urls && apiBody.all_urls.ru) || apiBody.russian_url || (baseUrl + '/ru/blog/' + slug);\n\nlet enMessage, ruMessage;\n\nif (templateType === 'meme' || templateType === 'roundup') {\n  const emoji = templateType === 'meme' ? '\\u{1F602}' : '\\u{1F525}';\n  enMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + enUrl;\n  ruMessage = emoji + ' ' + title + '\\n\\n\\u{1F449} ' + ruUrl;\n} else if (templateType === 'analysis') {\n  enMessage = '\\u{1F4CA} Deep Dive: ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} Read full analysis: ' + enUrl;\n  ruMessage = '\\u{1F4CA} \\u0410\\u043D\\u0430\\u043B\\u0438\\u0442\\u0438\\u043A\\u0430: ' + title + '\\n\\n\\u{1F517} \\u0427\\u0438\\u0442\\u0430\\u0442\\u044C \\u043F\\u043E\\u043B\\u043D\\u043E\\u0441\\u0442\\u044C\\u044E: ' + ruUrl;\n} else {\n  enMessage = '\\u{26A1} ' + title + '\\n\\n' + (excerpt || '') + '\\n\\n\\u{1F517} ' + enUrl;\n  ruMessage = '\\u{26A1} ' + title + '\\n\\n\\u{1F517} ' + ruUrl;\n}\n\nreturn [{\n  json: {\n    ...apiBody,\n    title,\n    excerpt,\n    templateType,\n    enMessage,\n    ruMessage,\n    enUrl,\n    ruUrl,\n    blogId: apiBody.blog_id || apiBody.id,\n    slug\n  }\n}];"
                 },
                 "id": "format-telegram",
                 "name": "Format Telegram Messages",
@@ -426,7 +426,7 @@
                         "parameters": [
                             {
                                 "name": "Authorization",
-                                "value": "Bearer YOUR_BLOG_API_KEY"
+                                "value": "=Bearer {{ $env.BLOG_API_KEY }}"
                             }
                         ]
                     },

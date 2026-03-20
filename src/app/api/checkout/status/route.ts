@@ -3,7 +3,9 @@ import Stripe from 'stripe';
 import { rateLimit } from '@/lib/rate-limit';
 
 function getStripe() {
-  return new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error('STRIPE_SECRET_KEY is not configured');
+  return new Stripe(key);
 }
 
 export async function GET(req: NextRequest) {
@@ -22,7 +24,18 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid session_id format' }, { status: 400 });
     }
 
+    // Require account_id to prevent session enumeration
+    const accountId = req.nextUrl.searchParams.get('account_id');
+    if (!accountId || !/^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(accountId)) {
+      return NextResponse.json({ error: 'Missing or invalid account_id' }, { status: 400 });
+    }
+
     const session = await getStripe().checkout.sessions.retrieve(sessionId);
+
+    // Verify the session belongs to the requesting account
+    if (session.metadata?.account_id !== accountId) {
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
+    }
 
     return NextResponse.json({
       paid: session.payment_status === 'paid',

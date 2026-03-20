@@ -32,16 +32,6 @@ const nextConfig: NextConfig = {
       },
       // Old URL redirects
       {
-        source: "/:locale/checkout",
-        destination: "/:locale/subscribe",
-        permanent: true,
-      },
-      {
-        source: "/:locale/checkout/success",
-        destination: "/:locale/subscribe/success",
-        permanent: true,
-      },
-      {
         source: "/:locale/guide/:device",
         destination: "/:locale/downloads",
         permanent: true,
@@ -57,16 +47,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Non-locale versions
-      {
-        source: "/checkout",
-        destination: "/en/subscribe",
-        permanent: true,
-      },
-      {
-        source: "/checkout/success",
-        destination: "/en/subscribe/success",
-        permanent: true,
-      },
       {
         source: "/guide/:device",
         destination: "/en/downloads",

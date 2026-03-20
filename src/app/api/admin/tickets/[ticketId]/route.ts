@@ -53,9 +53,18 @@ export async function PATCH(
     const { status, admin_notes } = body;
 
     const supabase = createUntypedAdminClient();
+    const validStatuses = ["open", "in_progress", "resolved", "closed"];
+    if (status && !validStatuses.includes(status)) {
+      return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+    }
+
     const updates: Record<string, unknown> = {};
     if (status) updates.status = status;
     if (admin_notes !== undefined) updates.admin_notes = admin_notes;
+
+    if (Object.keys(updates).length === 0) {
+      return NextResponse.json({ error: "No fields to update" }, { status: 400 });
+    }
 
     const { error: e } = await supabase
       .from("support_tickets")

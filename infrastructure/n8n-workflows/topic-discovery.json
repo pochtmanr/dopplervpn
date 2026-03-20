@@ -1,5 +1,5 @@
 {
-    "updatedAt": "2026-02-26T02:18:04.439Z",
+    "updatedAt": "2026-03-19T10:00:00.000Z",
     "createdAt": "2026-02-26T00:00:57.242Z",
     "id": "M6Gm4TKM6YwGzygG",
     "name": "Doppler Editorial \u2014 Topic Discovery",
@@ -12,13 +12,7 @@
                 "rule": {
                     "interval": [
                         {
-                            "triggerAtHour": 8
-                        },
-                        {
-                            "triggerAtHour": 13
-                        },
-                        {
-                            "triggerAtHour": 18
+                            "triggerAtHour": 10
                         }
                     ]
                 }
@@ -34,78 +28,14 @@
         },
         {
             "parameters": {
-                "jsCode": "const hour = new Date().getUTCHours();\nlet timeSlot = 'morning';\nif (hour >= 12 && hour < 16) timeSlot = 'midday';\nif (hour >= 16) timeSlot = 'afternoon';\n\nconst dayOfWeek = new Date().getUTCDay();\nconst isWeekend = dayOfWeek === 0 || dayOfWeek === 6;\n\nconst combos = {\n  morning: [\n    ['twitter', 'google-trends'],\n    ['twitter', 'hacker-news'],\n    ['google-trends', 'reddit'],\n  ],\n  midday: [\n    ['reddit', 'hacker-news'],\n    ['tech-rss', 'reddit'],\n    ['hacker-news', 'twitter'],\n  ],\n  afternoon: [\n    ['tech-rss', 'telegram-ru'],\n    ['twitter', 'tech-rss'],\n    ['reddit', 'telegram-ru'],\n  ],\n};\n\nconst slotCombos = combos[timeSlot];\nconst combo = slotCombos[dayOfWeek % slotCombos.length];\n\nlet templateType = 'quick-take';\nif (timeSlot === 'midday') {\n  templateType = dayOfWeek % 2 === 0 ? 'analysis' : 'meme';\n}\nif (timeSlot === 'afternoon') {\n  if (dayOfWeek === 5) templateType = 'roundup';\n  else templateType = dayOfWeek % 2 === 0 ? 'meme' : 'quick-take';\n}\nif (isWeekend) {\n  templateType = dayOfWeek % 2 === 0 ? 'meme' : 'roundup';\n}\n\nreturn [{\n  json: {\n    timeSlot,\n    sources: combo,\n    sourcesStr: combo.join('+'),\n    templateType,\n    dayOfWeek,\n    isWeekend,\n  }\n}];"
+                "jsCode": "const https = require('https');\nconst supabaseUrl = $env.SUPABASE_URL;\nconst supabaseKey = $env.SUPABASE_SERVICE_KEY;\nconst hostname = supabaseUrl.replace('https://', '');\n\nfunction httpsGet(opts) {\n  return new Promise((resolve, reject) => {\n    const req = https.get(opts, (res) => {\n      let body = '';\n      res.on('data', chunk => body += chunk);\n      res.on('end', () => {\n        try {\n          resolve({ status: res.statusCode, data: JSON.parse(body) });\n        } catch (e) {\n          resolve({ status: res.statusCode, data: body });\n        }\n      });\n    });\n    req.on('error', reject);\n    req.setTimeout(15000, () => { req.destroy(); reject(new Error('timeout')); });\n  });\n}\n\ntry {\n  const today = new Date().toISOString().split('T')[0];\n\n  // Check if already posted today\n  const postsToday = await httpsGet({\n    hostname,\n    path: `/rest/v1/blog_posts?select=id&created_at=gte.${today}T00:00:00Z&created_at=lt.${today}T23:59:59Z&limit=1`,\n    headers: {\n      'apikey': supabaseKey,\n      'Authorization': 'Bearer ' + supabaseKey\n    }\n  });\n\n  if (Array.isArray(postsToday.data) && postsToday.data.length > 0) {\n    return [{ json: { skip: true, reason: 'Already posted today' } }];\n  }\n\n  // Fetch last 10 English blog post titles for dedup\n  const recentRes = await httpsGet({\n    hostname,\n    path: '/rest/v1/blog_post_translations?locale=eq.en&select=title&order=created_at.desc&limit=10',\n    headers: {\n      'apikey': supabaseKey,\n      'Authorization': 'Bearer ' + supabaseKey\n    }\n  });\n\n  const recentTitles = Array.isArray(recentRes.data) ? recentRes.data.map(r => r.title) : [];\n\n  // Determine template type by day of week\n  const dayOfWeek = new Date().getUTCDay();\n  let templateType = 'quick-take';\n  if (dayOfWeek >= 1 && dayOfWeek <= 4) templateType = 'quick-take';\n  else if (dayOfWeek === 5) templateType = 'analysis';\n  else if (dayOfWeek === 6) templateType = 'meme';\n  else if (dayOfWeek === 0) templateType = 'roundup';\n\n  return [{ json: { skip: false, recentTitles, templateType, today } }];\n} catch (e) {\n  return [{ json: { skip: false, recentTitles: [], templateType: 'quick-take', today: new Date().toISOString().split('T')[0], error: String(e) } }];\n}"
             },
-            "id": "source-rotation",
-            "name": "Source Rotation",
+            "id": "preflight-check",
+            "name": "Preflight Check",
             "type": "n8n-nodes-base.code",
             "typeVersion": 2,
             "position": [
                 250,
-                0
-            ]
-        },
-        {
-            "parameters": {
-                "method": "POST",
-                "url": "https://api.perplexity.ai/chat/completions",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "Authorization",
-                            "value": "=Bearer {{ $env.PERPLEXITY_API_KEY }}"
-                        },
-                        {
-                            "name": "Content-Type",
-                            "value": "application/json"
-                        }
-                    ]
-                },
-                "sendBody": true,
-                "specifyBody": "json",
-                "jsonBody": "={\n  \"model\": \"sonar\",\n  \"search_recency_filter\": \"day\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a tech news researcher. Find the single most newsworthy event from TODAY ONLY ({{ new Date().toISOString().split('T')[0] }}) using these sources: {{ $json.sourcesStr }}.\\n\\nTOPIC AREAS: VPN/privacy, AI launches, tech regulation, censorship, cybersecurity, big tech, startups.\\n\\nCRITICAL \u2014 ONLY REAL EVENTS:\\n- The event must have been ANNOUNCED, LAUNCHED, SIGNED, LEAKED, PASSED, or HAPPENED today.\\n- Do NOT return predictions, forecasts, analyses, or opinion pieces.\\n- Do NOT return stories about something that is 'expected to', 'poised to', 'planning to', or 'considering'.\\n- If nothing concrete happened today, return {\\\"topic\\\": \\\"\\\", \\\"headline\\\": \\\"\\\", \\\"summary\\\": \\\"\\\", \\\"key_quotes\\\": [], \\\"topic_category\\\": \\\"\\\", \\\"sources\\\": []}.\\n\\nSOURCE QUALITY:\\n- Return 2-3 direct URLs to specific articles about THIS event (not homepages, not archive pages, not category pages).\\n- Each URL must point to an individual article with a real path (e.g., /2026/02/article-slug, not just /news/).\\n- If you cannot find specific article URLs, return an empty sources array.\\n\\nQUOTE RULES:\\n- key_quotes: ONLY include real quotes with real person names or verified handles.\\n- If no real attributed quotes exist, return an empty key_quotes array.\\n- NEVER fabricate quotes or handles.\\n\\nReturn ONLY valid JSON: {\\\"topic\\\": \\\"string\\\", \\\"headline\\\": \\\"max 70 chars\\\", \\\"summary\\\": \\\"200 words max factual summary of what happened\\\", \\\"key_quotes\\\": [{\\\"text\\\": \\\"...\\\", \\\"author\\\": \\\"Real Name or @handle\\\", \\\"source\\\": \\\"outlet\\\"}], \\\"topic_category\\\": \\\"one of: vpn-privacy, ai-launches, ai-regulation, big-tech, us-policy, censorship, cybersecurity, streaming, startup-vc\\\", \\\"sources\\\": [\\\"url1\\\", \\\"url2\\\"]}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Find the most important tech event that ACTUALLY HAPPENED today {{ new Date().toISOString().split('T')[0] }}. Template: {{ $json.templateType }}. If meme/roundup, focus on viral moments. Must be a real concrete event \u2014 not a prediction or forecast.\"\n    }\n  ]\n}",
-                "options": {
-                    "timeout": 30000,
-                    "response": {
-                        "response": {
-                            "responseFormat": "json"
-                        }
-                    }
-                }
-            },
-            "id": "perplexity-research",
-            "name": "Perplexity Research",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                500,
-                0
-            ]
-        },
-        {
-            "parameters": {
-                "jsCode": "const input = $input.first().json;\nconst prevData = $('Source Rotation').first().json;\n\nlet content = input.choices[0].message.content;\nif (content.startsWith('```')) {\n  content = content.replace(/^```(?:json)?\\n?/, '').replace(/\\n?```$/, '');\n}\nlet research;\ntry {\n  research = JSON.parse(content);\n} catch (e) {\n  const match = content.match(/\\{[\\s\\S]*\\}/);\n  if (match) {\n    research = JSON.parse(match[0]);\n  } else {\n    throw new Error('Failed to parse: ' + content.substring(0, 200));\n  }\n}\n\n// Skip if Perplexity returned empty (no real event found)\nif (!research.topic || research.topic.trim() === '') {\n  return [{\n    json: {\n      topic: '',\n      headline: '',\n      summary: '',\n      key_quotes: [],\n      topicCategory: '',\n      sources: [],\n      sourceLinks: [],\n      templateType: prevData.templateType,\n      sourcesStr: prevData.sourcesStr,\n      timeSlot: prevData.timeSlot,\n      date: new Date().toISOString().split('T')[0],\n      isDuplicate: true, // Force skip\n    }\n  }];\n}\n\n// Extract topic keywords for relevance checking\nconst topicWords = (research.topic || '')\n  .toLowerCase()\n  .split(/[^a-z0-9]+/)\n  .filter(w => w.length > 3 && !['that', 'this', 'with', 'from', 'what', 'when', 'where', 'most', 'more', 'than', 'into', 'over', 'about', 'been', 'have', 'will', 'could', 'would', 'should'].includes(w));\n\n// Domains known to be irrelevant for tech news\nconst BAD_DOMAINS = ['pinterest.com', 'facebook.com', 'instagram.com', 'linkedin.com/feed', 'youtube.com/watch', 'tiktok.com', 'amazon.com/dp'];\n\nfunction isRelevantUrl(url) {\n  if (!url || !url.startsWith('http')) return false;\n  const lower = url.toLowerCase();\n  \n  // Block known bad domains\n  if (BAD_DOMAINS.some(d => lower.includes(d))) return false;\n  \n  // Filter out homepages, archives, generic pages\n  const path = lower.replace(/^https?:\\/\\/[^/]+/, '');\n  if (path.length < 15) return false; // Too short = homepage\n  if (/\\/archive|\\/tag\\/|\\/category\\/|\\/topics?\\/|\\/news\\/?$|\\/blog\\/?$|\\/search/i.test(path)) return false;\n  \n  // Check if any topic keyword appears in the URL\n  const matchCount = topicWords.filter(w => lower.includes(w)).length;\n  return matchCount >= 1;\n}\n\n// Perplexity citations + research JSON sources\nconst citations = (input.citations || []).filter(u => u && u.startsWith('http'));\nconst researchSources = (research.sources || []).filter(u => u && u.startsWith('http'));\nconst allUrls = [...citations, ...researchSources].filter((v, i, a) => a.indexOf(v) === i);\n\n// Filter for relevant sources\nlet relevantSources = allUrls.filter(isRelevantUrl).slice(0, 3);\n\n// Fallback: if no keyword-matched sources, take citations with real article paths\nif (relevantSources.length === 0 && citations.length > 0) {\n  relevantSources = citations.filter(u => {\n    const path = u.toLowerCase().replace(/^https?:\\/\\/[^/]+/, '');\n    return path.length > 20 && !BAD_DOMAINS.some(d => u.toLowerCase().includes(d));\n  }).slice(0, 3);\n}\n\nreturn [{\n  json: {\n    topic: research.topic || '',\n    headline: research.headline || '',\n    summary: research.summary || '',\n    key_quotes: (research.key_quotes || []).filter(q => q && q.text && q.author),\n    topicCategory: research.topic_category || '',\n    sources: relevantSources,\n    sourceLinks: relevantSources,\n    templateType: prevData.templateType,\n    sourcesStr: prevData.sourcesStr,\n    timeSlot: prevData.timeSlot,\n    date: new Date().toISOString().split('T')[0],\n  }\n}];"
-            },
-            "id": "parse-research",
-            "name": "Parse Research",
-            "type": "n8n-nodes-base.code",
-            "typeVersion": 2,
-            "position": [
-                750,
-                0
-            ]
-        },
-        {
-            "parameters": {
-                "jsCode": "const https = require('https');\nconst supabaseUrl = $env.SUPABASE_URL;\nconst supabaseKey = $env.SUPABASE_SERVICE_KEY;\n\nconst hostname = supabaseUrl.replace('https://', '');\nconst options = {\n  hostname,\n  path: '/rest/v1/blog_post_translations?locale=eq.en&select=title&order=created_at.desc&limit=10',\n  headers: {\n    'apikey': supabaseKey,\n    'Authorization': 'Bearer ' + supabaseKey,\n  }\n};\n\nconst data = await new Promise((resolve, reject) => {\n  const req = https.get(options, (res) => {\n    let body = '';\n    res.on('data', chunk => body += chunk);\n    res.on('end', () => resolve(JSON.parse(body)));\n  });\n  req.on('error', reject);\n});\n\nconst existingTitles = data.map(r => r.title.toLowerCase());\nconst proposedTopic = ($input.first().json.topic || '').toLowerCase();\n\nconst isDuplicate = existingTitles.some(t => {\n  const words = proposedTopic.split(' ').filter(w => w.length > 4);\n  if (words.length === 0) return false;\n  const matches = words.filter(w => t.includes(w));\n  return matches.length >= 3;\n});\n\nreturn [{\n  json: {\n    ...$input.first().json,\n    isDuplicate,\n    existingTitles,\n  }\n}];"
-            },
-            "id": "dedup-check",
-            "name": "Dedup Check",
-            "type": "n8n-nodes-base.code",
-            "typeVersion": 2,
-            "position": [
-                1000,
                 0
             ]
         },
@@ -119,8 +49,8 @@
                     },
                     "conditions": [
                         {
-                            "id": "dedup-condition",
-                            "leftValue": "={{ $json.isDuplicate }}",
+                            "id": "should-continue-cond",
+                            "leftValue": "={{ $json.skip }}",
                             "rightValue": false,
                             "operator": {
                                 "type": "boolean",
@@ -132,9 +62,66 @@
                     "combinator": "and"
                 }
             },
-            "id": "if-not-duplicate",
-            "name": "Not Duplicate?",
+            "id": "should-continue",
+            "name": "Should Continue?",
             "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                500,
+                0
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "const https = require('https');\n\nconst RSS_FEEDS = [\n  { name: 'Asia Times', url: 'https://asiatimes.com/feed/' },\n  { name: 'EFF', url: 'https://www.eff.org/rss/updates.xml' },\n  { name: 'Rest of World', url: 'https://restofworld.org/feed/' },\n  { name: 'TorrentFreak', url: 'https://torrentfreak.com/feed/' },\n  { name: 'The Record', url: 'https://therecord.media/feed' },\n  { name: 'Freedom House', url: 'https://freedomhouse.org/rss.xml' },\n  { name: 'Meduza EN', url: 'https://meduza.io/rss/en/all' },\n  { name: 'Novaya Gazeta EU', url: 'https://novayagazeta.eu/rss/all' },\n  { name: 'The Insider', url: 'https://theins.ru/rss' }\n];\n\nconst MAX_PER_FEED = 10;\nconst TIMEOUT_MS = 15000;\nconst MAX_REDIRECTS = 3;\nconst USER_AGENT = 'Doppler Editorial Bot/1.0';\n\nfunction decodeEntities(str) {\n  if (!str) return '';\n  return str\n    .replace(/&amp;/g, '&')\n    .replace(/&lt;/g, '<')\n    .replace(/&gt;/g, '>')\n    .replace(/&#039;/g, \"'\")\n    .replace(/&apos;/g, \"'\")\n    .replace(/&quot;/g, '\"');\n}\n\nfunction stripHtml(str) {\n  if (!str) return '';\n  return str.replace(/<[^>]+>/g, '').replace(/\\s+/g, ' ').trim();\n}\n\nfunction fetchUrl(url, redirectCount) {\n  if (redirectCount === undefined) redirectCount = 0;\n  return new Promise((resolve, reject) => {\n    const proto = url.startsWith('https') ? https : require('http');\n    const req = proto.get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {\n      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirectCount < MAX_REDIRECTS) {\n        let redirectUrl = res.headers.location;\n        if (redirectUrl.startsWith('/')) {\n          const parsed = new URL(url);\n          redirectUrl = parsed.origin + redirectUrl;\n        }\n        resolve(fetchUrl(redirectUrl, redirectCount + 1));\n        return;\n      }\n      let body = '';\n      res.on('data', chunk => body += chunk);\n      res.on('end', () => resolve(body));\n    });\n    req.on('error', () => resolve(''));\n    req.setTimeout(TIMEOUT_MS, () => { req.destroy(); resolve(''); });\n  });\n}\n\nfunction parseItems(xml) {\n  const items = [];\n  const itemRegex = /<item[\\s>][\\s\\S]*?<\\/item>/gi;\n  let match;\n  while ((match = itemRegex.exec(xml)) !== null) {\n    const block = match[0];\n    const titleMatch = block.match(/<title>(?:<!\\[CDATA\\[)?(.*?)(?:\\]\\]>)?<\\/title>/s);\n    const linkMatch = block.match(/<link>(?:<!\\[CDATA\\[)?(.*?)(?:\\]\\]>)?<\\/link>/s);\n    const pubDateMatch = block.match(/<pubDate>(.*?)<\\/pubDate>/s);\n    const descMatch = block.match(/<description>(?:<!\\[CDATA\\[)?(.*?)(?:\\]\\]>)?<\\/description>/s);\n    if (titleMatch && linkMatch) {\n      items.push({\n        title: decodeEntities(stripHtml(titleMatch[1])),\n        url: decodeEntities(linkMatch[1].trim()),\n        pubDate: pubDateMatch ? pubDateMatch[1].trim() : '',\n        description: descMatch ? decodeEntities(stripHtml(descMatch[1])).substring(0, 500) : ''\n      });\n    }\n  }\n  return items;\n}\n\nconst now = Date.now();\nconst oneDayAgo = now - 24 * 60 * 60 * 1000;\nconst seenUrls = new Set();\nconst allArticles = [];\n\nfor (const feed of RSS_FEEDS) {\n  try {\n    const xml = await fetchUrl(feed.url);\n    if (!xml) continue;\n    const items = parseItems(xml);\n    let count = 0;\n    for (const item of items) {\n      if (count >= MAX_PER_FEED) break;\n      if (seenUrls.has(item.url)) continue;\n\n      // Filter to last 24 hours\n      if (item.pubDate) {\n        const pubTime = new Date(item.pubDate).getTime();\n        if (!isNaN(pubTime) && pubTime < oneDayAgo) continue;\n      }\n\n      seenUrls.add(item.url);\n      allArticles.push({\n        title: item.title,\n        url: item.url,\n        source: feed.name,\n        summary: item.description\n      });\n      count++;\n    }\n  } catch (e) {\n    // Skip failed feeds silently\n    continue;\n  }\n}\n\nreturn [{ json: { articles: allArticles, articleCount: allArticles.length } }];"
+            },
+            "id": "fetch-rss-feeds",
+            "name": "Fetch RSS Feeds",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                750,
+                0
+            ]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "has-articles-cond",
+                            "leftValue": "={{ $json.articleCount }}",
+                            "rightValue": 0,
+                            "operator": {
+                                "type": "number",
+                                "operation": "gt"
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                }
+            },
+            "id": "has-articles",
+            "name": "Has Articles?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [
+                1000,
+                0
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "const articles = $json.articles;\nconst recentTitles = $('Preflight Check').first().json.recentTitles || [];\nconst templateType = $('Preflight Check').first().json.templateType || 'quick-take';\n\nconst articleList = articles.map((a, i) => `${i}. [${a.source}] ${a.title}\\n   ${a.summary ? a.summary.substring(0, 150) : '(no summary)'}\\n   URL: ${a.url}`).join('\\n\\n');\n\nconst recentList = recentTitles.length > 0 ? recentTitles.map(t => `- ${t}`).join('\\n') : '(none)';\n\nconst systemPrompt = `You are an editorial assistant for Doppler VPN's tech blog. Your job is to pick ONE article from the list below that is most relevant and newsworthy for a VPN/privacy/tech audience.\\n\\nTOPIC PRIORITIES (in order):\\n1. Internet censorship, VPN bans, website blocks\\n2. Digital privacy, surveillance, data protection\\n3. AI policy, AI product launches\\n4. Cybersecurity incidents, vulnerabilities\\n5. Tech geopolitics, sanctions, regulations\\n6. Big tech news (Google, Apple, Meta, etc.)\\n\\nAVOID DUPLICATES — these titles were recently published:\\n${recentList}\\n\\nIf no article is relevant to privacy/tech/VPN topics, return: {\"chosen_index\": -1, \"chosen_url\": \"\", \"chosen_title\": \"\", \"topic\": \"\", \"reason\": \"No relevant articles found\", \"topic_category\": \"\"}\\n\\nReturn ONLY valid JSON:\\n{\"chosen_index\": N, \"chosen_url\": \"...\", \"chosen_title\": \"...\", \"topic\": \"brief description for the writer\", \"reason\": \"why this article was chosen\", \"topic_category\": \"one of: vpn-privacy, ai-launches, ai-regulation, big-tech, censorship, cybersecurity, us-policy\"}`;\n\nconst userPrompt = `Today's template type: ${templateType}\\n\\nHere are ${articles.length} articles from RSS feeds. Pick the single best one:\\n\\n${articleList}`;\n\nreturn [{ json: { systemPrompt, userPrompt, templateType, articles } }];"
+            },
+            "id": "build-prompt",
+            "name": "Build Prompt",
+            "type": "n8n-nodes-base.code",
             "typeVersion": 2,
             "position": [
                 1250,
@@ -143,12 +130,37 @@
         },
         {
             "parameters": {
-                "jsCode": "const input = $input.first().json;\nconst { existingTitles, isDuplicate, ...topicData } = input;\n\nreturn [{\n  json: {\n    ...topicData,\n    status: 'ready_for_generation',\n    discoveredAt: new Date().toISOString(),\n  }\n}];"
+                "method": "POST",
+                "url": "https://api.openai.com/v1/chat/completions",
+                "sendHeaders": true,
+                "headerParameters": {
+                    "parameters": [
+                        {
+                            "name": "Authorization",
+                            "value": "=Bearer {{ $env.OPENAI_API_KEY }}"
+                        },
+                        {
+                            "name": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ]
+                },
+                "sendBody": true,
+                "specifyBody": "json",
+                "jsonBody": "={\n  \"model\": \"gpt-5-mini\",\n  \"max_completion_tokens\": 1000,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": {{ JSON.stringify($json.systemPrompt) }}\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($json.userPrompt) }}\n    }\n  ]\n}",
+                "options": {
+                    "timeout": 30000,
+                    "response": {
+                        "response": {
+                            "responseFormat": "json"
+                        }
+                    }
+                }
             },
-            "id": "format-output",
-            "name": "Format Output",
-            "type": "n8n-nodes-base.code",
-            "typeVersion": 2,
+            "id": "openai-select",
+            "name": "OpenAI Select",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
             "position": [
                 1500,
                 0
@@ -156,26 +168,50 @@
         },
         {
             "parameters": {
-                "jsCode": "const input = $input.first().json;\nreturn [{\n  json: {\n    status: 'skipped_duplicate',\n    topic: input.topic,\n    message: 'Topic was too similar to recent posts. Will try again next slot.',\n  }\n}];"
+                "jsCode": "const https = require('https');\nconst input = $input.first().json;\nconst templateType = $('Build Prompt').first().json.templateType;\n\n// Parse OpenAI response\nlet content = input.choices[0].message.content;\nif (content.startsWith('```')) {\n  content = content.replace(/^```(?:json)?\\n?/, '').replace(/\\n?```$/, '');\n}\n\nlet selection;\ntry {\n  selection = JSON.parse(content);\n} catch (e) {\n  const match = content.match(/\\{[\\s\\S]*\\}/);\n  if (match) {\n    selection = JSON.parse(match[0]);\n  } else {\n    return [{ json: { skip: true, reason: 'Failed to parse OpenAI response: ' + content.substring(0, 200) } }];\n  }\n}\n\n// If no topic selected\nif (!selection.topic || selection.topic.trim() === '' || selection.chosen_index === -1) {\n  return [{ json: { skip: true, reason: selection.reason || 'No relevant topic found' } }];\n}\n\n// Fetch article HTML for OG image and text extraction\nconst articleUrl = selection.chosen_url;\nlet html = '';\nlet imageUrl = null;\nlet articleText = '';\n\nfunction fetchHtml(url, redirects) {\n  if (redirects === undefined) redirects = 0;\n  return new Promise((resolve, reject) => {\n    const proto = url.startsWith('https') ? https : require('http');\n    const req = proto.get(url, {\n      headers: {\n        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'\n      }\n    }, (res) => {\n      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirects < 3) {\n        let rUrl = res.headers.location;\n        if (rUrl.startsWith('/')) {\n          const parsed = new URL(url);\n          rUrl = parsed.origin + rUrl;\n        }\n        resolve(fetchHtml(rUrl, redirects + 1));\n        return;\n      }\n      let body = '';\n      res.on('data', chunk => body += chunk);\n      res.on('end', () => resolve(body));\n    });\n    req.on('error', () => resolve(''));\n    req.setTimeout(15000, () => { req.destroy(); resolve(''); });\n  });\n}\n\nfunction validateImage(url) {\n  return new Promise((resolve) => {\n    if (!url || !url.startsWith('http')) { resolve(false); return; }\n    const proto = url.startsWith('https') ? https : require('http');\n    const req = proto.request(url, { method: 'HEAD', headers: { 'User-Agent': 'Doppler Editorial Bot/1.0' } }, (res) => {\n      const ct = (res.headers['content-type'] || '').toLowerCase();\n      resolve(res.statusCode === 200 && ct.startsWith('image/'));\n    });\n    req.on('error', () => resolve(false));\n    req.setTimeout(10000, () => { req.destroy(); resolve(false); });\n    req.end();\n  });\n}\n\ntry {\n  html = await fetchHtml(articleUrl);\n\n  if (html) {\n    // Extract OG image\n    const ogMatch = html.match(/<meta[^>]+property=[\"']og:image[\"'][^>]+content=[\"']([^\"']+)[\"']/i)\n      || html.match(/<meta[^>]+content=[\"']([^\"']+)[\"'][^>]+property=[\"']og:image[\"']/i);\n    const twitterMatch = html.match(/<meta[^>]+name=[\"']twitter:image[\"'][^>]+content=[\"']([^\"']+)[\"']/i)\n      || html.match(/<meta[^>]+content=[\"']([^\"']+)[\"'][^>]+name=[\"']twitter:image[\"']/i);\n\n    let candidateUrl = ogMatch ? ogMatch[1] : (twitterMatch ? twitterMatch[1] : null);\n\n    if (candidateUrl) {\n      // Handle relative URLs\n      if (candidateUrl.startsWith('/')) {\n        const parsed = new URL(articleUrl);\n        candidateUrl = parsed.origin + candidateUrl;\n      }\n      const isValid = await validateImage(candidateUrl);\n      if (isValid) imageUrl = candidateUrl;\n    }\n\n    // Extract article text\n    let textSource = '';\n    const articleMatch = html.match(/<article[^>]*>([\\s\\S]*?)<\\/article>/i);\n    if (articleMatch) {\n      textSource = articleMatch[1];\n    } else {\n      textSource = html;\n    }\n\n    // Get paragraphs\n    const pRegex = /<p[^>]*>([\\s\\S]*?)<\\/p>/gi;\n    let pMatch;\n    const paragraphs = [];\n    while ((pMatch = pRegex.exec(textSource)) !== null) {\n      const text = pMatch[1].replace(/<[^>]+>/g, '').replace(/\\s+/g, ' ').trim();\n      if (text.length > 50) paragraphs.push(text);\n    }\n    articleText = paragraphs.join('\\n\\n').substring(0, 3000);\n  }\n} catch (e) {\n  // Non-fatal: continue without image/text\n}\n\nreturn [{\n  json: {\n    skip: false,\n    topic: selection.topic,\n    headline: selection.chosen_title,\n    summary: articleText || selection.topic,\n    topicCategory: selection.topic_category || '',\n    sources: [articleUrl],\n    sourceLinks: [articleUrl],\n    templateType,\n    imageUrl,\n    key_quotes: [],\n    date: new Date().toISOString().split('T')[0]\n  }\n}];"
             },
-            "id": "skip-duplicate",
-            "name": "Skip (Duplicate)",
+            "id": "process-selection",
+            "name": "Process Selection + OG Image",
             "type": "n8n-nodes-base.code",
             "typeVersion": 2,
             "position": [
-                1500,
-                300
+                1750,
+                0
             ]
         },
         {
-            "id": "call-content-gen",
-            "name": "Call Content Generation",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "strict"
+                    },
+                    "conditions": [
+                        {
+                            "id": "has-valid-topic-cond",
+                            "leftValue": "={{ $json.skip }}",
+                            "rightValue": false,
+                            "operator": {
+                                "type": "boolean",
+                                "operation": "equals",
+                                "singleValue": true
+                            }
+                        }
+                    ],
+                    "combinator": "and"
+                }
+            },
+            "id": "has-valid-topic",
+            "name": "Has Valid Topic?",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
             "position": [
-                1740,
+                2000,
                 0
-            ],
+            ]
+        },
+        {
             "parameters": {
                 "method": "POST",
                 "url": "http://localhost:5678/webhook/doppler-content-gen",
@@ -185,37 +221,30 @@
                 "options": {
                     "timeout": 300000
                 }
-            }
-        },
-        {
-            "id": "call-image-pipeline",
-            "name": "Call Image Pipeline",
+            },
+            "id": "call-content-gen",
+            "name": "Call Content Gen",
             "type": "n8n-nodes-base.httpRequest",
             "typeVersion": 4.2,
             "position": [
-                1980,
+                2250,
                 0
-            ],
+            ]
+        },
+        {
             "parameters": {
-                "method": "POST",
-                "url": "http://localhost:5678/webhook/doppler-image-gen",
-                "sendBody": true,
-                "specifyBody": "json",
-                "jsonBody": "={{ JSON.stringify($json) }}",
-                "options": {
-                    "timeout": 120000
-                }
-            }
+                "jsCode": "const contentGen = $input.first().json;\nconst processNode = $('Process Selection + OG Image').first().json;\n\nconst merged = {\n  ...contentGen,\n  imageUrl: contentGen.imageUrl || processNode.imageUrl,\n  sourceLinks: processNode.sourceLinks || [],\n  topicCategory: processNode.topicCategory || contentGen.topicCategory || '',\n  templateType: processNode.templateType || contentGen.templateType || 'quick-take',\n  sourcesStr: (processNode.sourceLinks || []).join(', ')\n};\n\nreturn [{ json: merged }];"
+            },
+            "id": "prepare-publish",
+            "name": "Prepare Publish Data",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2500,
+                0
+            ]
         },
         {
-            "id": "call-publish",
-            "name": "Call Publish",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                2220,
-                0
-            ],
             "parameters": {
                 "method": "POST",
                 "url": "http://localhost:5678/webhook/doppler-publish",
@@ -225,7 +254,54 @@
                 "options": {
                     "timeout": 360000
                 }
-            }
+            },
+            "id": "call-publish",
+            "name": "Call Publish",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.2,
+            "position": [
+                2750,
+                0
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "return [{ json: { status: 'skipped', reason: 'Already posted today' } }];"
+            },
+            "id": "skip-already-posted",
+            "name": "Skip: Already Posted",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                750,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "return [{ json: { status: 'skipped', reason: 'No articles found in RSS feeds' } }];"
+            },
+            "id": "skip-no-articles",
+            "name": "Skip: No Articles",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                1250,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "jsCode": "const reason = $json.reason || 'No relevant topic found';\nreturn [{ json: { status: 'skipped', reason } }];"
+            },
+            "id": "skip-no-valid-topic",
+            "name": "Skip: No Valid Topic",
+            "type": "n8n-nodes-base.code",
+            "typeVersion": 2,
+            "position": [
+                2250,
+                300
+            ]
         }
     ],
     "connections": {
@@ -233,98 +309,134 @@
             "main": [
                 [
                     {
-                        "node": "Source Rotation",
+                        "node": "Preflight Check",
                         "type": "main",
                         "index": 0
                     }
                 ]
             ]
         },
-        "Source Rotation": {
+        "Preflight Check": {
             "main": [
                 [
                     {
-                        "node": "Perplexity Research",
+                        "node": "Should Continue?",
                         "type": "main",
                         "index": 0
                     }
                 ]
             ]
         },
-        "Perplexity Research": {
+        "Should Continue?": {
             "main": [
                 [
                     {
-                        "node": "Parse Research",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Parse Research": {
-            "main": [
-                [
-                    {
-                        "node": "Dedup Check",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Dedup Check": {
-            "main": [
-                [
-                    {
-                        "node": "Not Duplicate?",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Not Duplicate?": {
-            "main": [
-                [
-                    {
-                        "node": "Format Output",
+                        "node": "Fetch RSS Feeds",
                         "type": "main",
                         "index": 0
                     }
                 ],
                 [
                     {
-                        "node": "Skip (Duplicate)",
+                        "node": "Skip: Already Posted",
                         "type": "main",
                         "index": 0
                     }
                 ]
             ]
         },
-        "Format Output": {
+        "Fetch RSS Feeds": {
             "main": [
                 [
                     {
-                        "node": "Call Content Generation",
+                        "node": "Has Articles?",
                         "type": "main",
                         "index": 0
                     }
                 ]
             ]
         },
-        "Call Content Generation": {
+        "Has Articles?": {
             "main": [
                 [
                     {
-                        "node": "Call Image Pipeline",
+                        "node": "Build Prompt",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Skip: No Articles",
                         "type": "main",
                         "index": 0
                     }
                 ]
             ]
         },
-        "Call Image Pipeline": {
+        "Build Prompt": {
+            "main": [
+                [
+                    {
+                        "node": "OpenAI Select",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "OpenAI Select": {
+            "main": [
+                [
+                    {
+                        "node": "Process Selection + OG Image",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Process Selection + OG Image": {
+            "main": [
+                [
+                    {
+                        "node": "Has Valid Topic?",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Has Valid Topic?": {
+            "main": [
+                [
+                    {
+                        "node": "Call Content Gen",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Skip: No Valid Topic",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Call Content Gen": {
+            "main": [
+                [
+                    {
+                        "node": "Prepare Publish Data",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Prepare Publish Data": {
             "main": [
                 [
                     {
@@ -348,9 +460,9 @@
     },
     "meta": null,
     "pinData": null,
-    "versionId": "f2f6673a-8729-4982-861a-0cf88d797ebe",
-    "activeVersionId": "f2f6673a-8729-4982-861a-0cf88d797ebe",
-    "versionCounter": 29,
+    "versionId": "a1b2c3d4-5678-9012-abcd-ef0123456789",
+    "activeVersionId": "a1b2c3d4-5678-9012-abcd-ef0123456789",
+    "versionCounter": 30,
     "triggerCount": 1,
     "shared": [
         {
@@ -399,9 +511,9 @@
     ],
     "tags": [],
     "activeVersion": {
-        "updatedAt": "2026-02-26T02:18:04.441Z",
-        "createdAt": "2026-02-26T02:18:04.441Z",
-        "versionId": "f2f6673a-8729-4982-861a-0cf88d797ebe",
+        "updatedAt": "2026-03-19T10:00:00.000Z",
+        "createdAt": "2026-03-19T10:00:00.000Z",
+        "versionId": "a1b2c3d4-5678-9012-abcd-ef0123456789",
         "workflowId": "M6Gm4TKM6YwGzygG",
         "nodes": [
             {
@@ -409,13 +521,7 @@
                     "rule": {
                         "interval": [
                             {
-                                "triggerAtHour": 8
-                            },
-                            {
-                                "triggerAtHour": 13
-                            },
-                            {
-                                "triggerAtHour": 18
+                                "triggerAtHour": 10
                             }
                         ]
                     }
@@ -431,78 +537,14 @@
             },
             {
                 "parameters": {
-                    "jsCode": "const hour = new Date().getUTCHours();\nlet timeSlot = 'morning';\nif (hour >= 12 && hour < 16) timeSlot = 'midday';\nif (hour >= 16) timeSlot = 'afternoon';\n\nconst dayOfWeek = new Date().getUTCDay();\nconst isWeekend = dayOfWeek === 0 || dayOfWeek === 6;\n\nconst combos = {\n  morning: [\n    ['twitter', 'google-trends'],\n    ['twitter', 'hacker-news'],\n    ['google-trends', 'reddit'],\n  ],\n  midday: [\n    ['reddit', 'hacker-news'],\n    ['tech-rss', 'reddit'],\n    ['hacker-news', 'twitter'],\n  ],\n  afternoon: [\n    ['tech-rss', 'telegram-ru'],\n    ['twitter', 'tech-rss'],\n    ['reddit', 'telegram-ru'],\n  ],\n};\n\nconst slotCombos = combos[timeSlot];\nconst combo = slotCombos[dayOfWeek % slotCombos.length];\n\nlet templateType = 'quick-take';\nif (timeSlot === 'midday') {\n  templateType = dayOfWeek % 2 === 0 ? 'analysis' : 'meme';\n}\nif (timeSlot === 'afternoon') {\n  if (dayOfWeek === 5) templateType = 'roundup';\n  else templateType = dayOfWeek % 2 === 0 ? 'meme' : 'quick-take';\n}\nif (isWeekend) {\n  templateType = dayOfWeek % 2 === 0 ? 'meme' : 'roundup';\n}\n\nreturn [{\n  json: {\n    timeSlot,\n    sources: combo,\n    sourcesStr: combo.join('+'),\n    templateType,\n    dayOfWeek,\n    isWeekend,\n  }\n}];"
+                    "jsCode": "const https = require('https');\nconst supabaseUrl = $env.SUPABASE_URL;\nconst supabaseKey = $env.SUPABASE_SERVICE_KEY;\nconst hostname = supabaseUrl.replace('https://', '');\n\nfunction httpsGet(opts) {\n  return new Promise((resolve, reject) => {\n    const req = https.get(opts, (res) => {\n      let body = '';\n      res.on('data', chunk => body += chunk);\n      res.on('end', () => {\n        try {\n          resolve({ status: res.statusCode, data: JSON.parse(body) });\n        } catch (e) {\n          resolve({ status: res.statusCode, data: body });\n        }\n      });\n    });\n    req.on('error', reject);\n    req.setTimeout(15000, () => { req.destroy(); reject(new Error('timeout')); });\n  });\n}\n\ntry {\n  const today = new Date().toISOString().split('T')[0];\n\n  // Check if already posted today\n  const postsToday = await httpsGet({\n    hostname,\n    path: `/rest/v1/blog_posts?select=id&created_at=gte.${today}T00:00:00Z&created_at=lt.${today}T23:59:59Z&limit=1`,\n    headers: {\n      'apikey': supabaseKey,\n      'Authorization': 'Bearer ' + supabaseKey\n    }\n  });\n\n  if (Array.isArray(postsToday.data) && postsToday.data.length > 0) {\n    return [{ json: { skip: true, reason: 'Already posted today' } }];\n  }\n\n  // Fetch last 10 English blog post titles for dedup\n  const recentRes = await httpsGet({\n    hostname,\n    path: '/rest/v1/blog_post_translations?locale=eq.en&select=title&order=created_at.desc&limit=10',\n    headers: {\n      'apikey': supabaseKey,\n      'Authorization': 'Bearer ' + supabaseKey\n    }\n  });\n\n  const recentTitles = Array.isArray(recentRes.data) ? recentRes.data.map(r => r.title) : [];\n\n  // Determine template type by day of week\n  const dayOfWeek = new Date().getUTCDay();\n  let templateType = 'quick-take';\n  if (dayOfWeek >= 1 && dayOfWeek <= 4) templateType = 'quick-take';\n  else if (dayOfWeek === 5) templateType = 'analysis';\n  else if (dayOfWeek === 6) templateType = 'meme';\n  else if (dayOfWeek === 0) templateType = 'roundup';\n\n  return [{ json: { skip: false, recentTitles, templateType, today } }];\n} catch (e) {\n  return [{ json: { skip: false, recentTitles: [], templateType: 'quick-take', today: new Date().toISOString().split('T')[0], error: String(e) } }];\n}"
                 },
-                "id": "source-rotation",
-                "name": "Source Rotation",
+                "id": "preflight-check",
+                "name": "Preflight Check",
                 "type": "n8n-nodes-base.code",
                 "typeVersion": 2,
                 "position": [
                     250,
-                    0
-                ]
-            },
-            {
-                "parameters": {
-                    "method": "POST",
-                    "url": "https://api.perplexity.ai/chat/completions",
-                    "sendHeaders": true,
-                    "headerParameters": {
-                        "parameters": [
-                            {
-                                "name": "Authorization",
-                                "value": "=Bearer {{ $env.PERPLEXITY_API_KEY }}"
-                            },
-                            {
-                                "name": "Content-Type",
-                                "value": "application/json"
-                            }
-                        ]
-                    },
-                    "sendBody": true,
-                    "specifyBody": "json",
-                    "jsonBody": "={\n  \"model\": \"sonar\",\n  \"search_recency_filter\": \"day\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a tech news researcher. Find the single most newsworthy event from TODAY ONLY ({{ new Date().toISOString().split('T')[0] }}) using these sources: {{ $json.sourcesStr }}.\\n\\nTOPIC AREAS: VPN/privacy, AI launches, tech regulation, censorship, cybersecurity, big tech, startups.\\n\\nCRITICAL \u2014 ONLY REAL EVENTS:\\n- The event must have been ANNOUNCED, LAUNCHED, SIGNED, LEAKED, PASSED, or HAPPENED today.\\n- Do NOT return predictions, forecasts, analyses, or opinion pieces.\\n- Do NOT return stories about something that is 'expected to', 'poised to', 'planning to', or 'considering'.\\n- If nothing concrete happened today, return {\\\"topic\\\": \\\"\\\", \\\"headline\\\": \\\"\\\", \\\"summary\\\": \\\"\\\", \\\"key_quotes\\\": [], \\\"topic_category\\\": \\\"\\\", \\\"sources\\\": []}.\\n\\nSOURCE QUALITY:\\n- Return 2-3 direct URLs to specific articles about THIS event (not homepages, not archive pages, not category pages).\\n- Each URL must point to an individual article with a real path (e.g., /2026/02/article-slug, not just /news/).\\n- If you cannot find specific article URLs, return an empty sources array.\\n\\nQUOTE RULES:\\n- key_quotes: ONLY include real quotes with real person names or verified handles.\\n- If no real attributed quotes exist, return an empty key_quotes array.\\n- NEVER fabricate quotes or handles.\\n\\nReturn ONLY valid JSON: {\\\"topic\\\": \\\"string\\\", \\\"headline\\\": \\\"max 70 chars\\\", \\\"summary\\\": \\\"200 words max factual summary of what happened\\\", \\\"key_quotes\\\": [{\\\"text\\\": \\\"...\\\", \\\"author\\\": \\\"Real Name or @handle\\\", \\\"source\\\": \\\"outlet\\\"}], \\\"topic_category\\\": \\\"one of: vpn-privacy, ai-launches, ai-regulation, big-tech, us-policy, censorship, cybersecurity, streaming, startup-vc\\\", \\\"sources\\\": [\\\"url1\\\", \\\"url2\\\"]}\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Find the most important tech event that ACTUALLY HAPPENED today {{ new Date().toISOString().split('T')[0] }}. Template: {{ $json.templateType }}. If meme/roundup, focus on viral moments. Must be a real concrete event \u2014 not a prediction or forecast.\"\n    }\n  ]\n}",
-                    "options": {
-                        "timeout": 30000,
-                        "response": {
-                            "response": {
-                                "responseFormat": "json"
-                            }
-                        }
-                    }
-                },
-                "id": "perplexity-research",
-                "name": "Perplexity Research",
-                "type": "n8n-nodes-base.httpRequest",
-                "typeVersion": 4.2,
-                "position": [
-                    500,
-                    0
-                ]
-            },
-            {
-                "parameters": {
-                    "jsCode": "const input = $input.first().json;\nconst prevData = $('Source Rotation').first().json;\n\nlet content = input.choices[0].message.content;\nif (content.startsWith('```')) {\n  content = content.replace(/^```(?:json)?\\n?/, '').replace(/\\n?```$/, '');\n}\nlet research;\ntry {\n  research = JSON.parse(content);\n} catch (e) {\n  const match = content.match(/\\{[\\s\\S]*\\}/);\n  if (match) {\n    research = JSON.parse(match[0]);\n  } else {\n    throw new Error('Failed to parse: ' + content.substring(0, 200));\n  }\n}\n\n// Skip if Perplexity returned empty (no real event found)\nif (!research.topic || research.topic.trim() === '') {\n  return [{\n    json: {\n      topic: '',\n      headline: '',\n      summary: '',\n      key_quotes: [],\n      topicCategory: '',\n      sources: [],\n      sourceLinks: [],\n      templateType: prevData.templateType,\n      sourcesStr: prevData.sourcesStr,\n      timeSlot: prevData.timeSlot,\n      date: new Date().toISOString().split('T')[0],\n      isDuplicate: true, // Force skip\n    }\n  }];\n}\n\n// Extract topic keywords for relevance checking\nconst topicWords = (research.topic || '')\n  .toLowerCase()\n  .split(/[^a-z0-9]+/)\n  .filter(w => w.length > 3 && !['that', 'this', 'with', 'from', 'what', 'when', 'where', 'most', 'more', 'than', 'into', 'over', 'about', 'been', 'have', 'will', 'could', 'would', 'should'].includes(w));\n\n// Domains known to be irrelevant for tech news\nconst BAD_DOMAINS = ['pinterest.com', 'facebook.com', 'instagram.com', 'linkedin.com/feed', 'youtube.com/watch', 'tiktok.com', 'amazon.com/dp'];\n\nfunction isRelevantUrl(url) {\n  if (!url || !url.startsWith('http')) return false;\n  const lower = url.toLowerCase();\n  \n  // Block known bad domains\n  if (BAD_DOMAINS.some(d => lower.includes(d))) return false;\n  \n  // Filter out homepages, archives, generic pages\n  const path = lower.replace(/^https?:\\/\\/[^/]+/, '');\n  if (path.length < 15) return false; // Too short = homepage\n  if (/\\/archive|\\/tag\\/|\\/category\\/|\\/topics?\\/|\\/news\\/?$|\\/blog\\/?$|\\/search/i.test(path)) return false;\n  \n  // Check if any topic keyword appears in the URL\n  const matchCount = topicWords.filter(w => lower.includes(w)).length;\n  return matchCount >= 1;\n}\n\n// Perplexity citations + research JSON sources\nconst citations = (input.citations || []).filter(u => u && u.startsWith('http'));\nconst researchSources = (research.sources || []).filter(u => u && u.startsWith('http'));\nconst allUrls = [...citations, ...researchSources].filter((v, i, a) => a.indexOf(v) === i);\n\n// Filter for relevant sources\nlet relevantSources = allUrls.filter(isRelevantUrl).slice(0, 3);\n\n// Fallback: if no keyword-matched sources, take citations with real article paths\nif (relevantSources.length === 0 && citations.length > 0) {\n  relevantSources = citations.filter(u => {\n    const path = u.toLowerCase().replace(/^https?:\\/\\/[^/]+/, '');\n    return path.length > 20 && !BAD_DOMAINS.some(d => u.toLowerCase().includes(d));\n  }).slice(0, 3);\n}\n\nreturn [{\n  json: {\n    topic: research.topic || '',\n    headline: research.headline || '',\n    summary: research.summary || '',\n    key_quotes: (research.key_quotes || []).filter(q => q && q.text && q.author),\n    topicCategory: research.topic_category || '',\n    sources: relevantSources,\n    sourceLinks: relevantSources,\n    templateType: prevData.templateType,\n    sourcesStr: prevData.sourcesStr,\n    timeSlot: prevData.timeSlot,\n    date: new Date().toISOString().split('T')[0],\n  }\n}];"
-                },
-                "id": "parse-research",
-                "name": "Parse Research",
-                "type": "n8n-nodes-base.code",
-                "typeVersion": 2,
-                "position": [
-                    750,
-                    0
-                ]
-            },
-            {
-                "parameters": {
-                    "jsCode": "const https = require('https');\nconst supabaseUrl = $env.SUPABASE_URL;\nconst supabaseKey = $env.SUPABASE_SERVICE_KEY;\n\nconst hostname = supabaseUrl.replace('https://', '');\nconst options = {\n  hostname,\n  path: '/rest/v1/blog_post_translations?locale=eq.en&select=title&order=created_at.desc&limit=10',\n  headers: {\n    'apikey': supabaseKey,\n    'Authorization': 'Bearer ' + supabaseKey,\n  }\n};\n\nconst data = await new Promise((resolve, reject) => {\n  const req = https.get(options, (res) => {\n    let body = '';\n    res.on('data', chunk => body += chunk);\n    res.on('end', () => resolve(JSON.parse(body)));\n  });\n  req.on('error', reject);\n});\n\nconst existingTitles = data.map(r => r.title.toLowerCase());\nconst proposedTopic = ($input.first().json.topic || '').toLowerCase();\n\nconst isDuplicate = existingTitles.some(t => {\n  const words = proposedTopic.split(' ').filter(w => w.length > 4);\n  if (words.length === 0) return false;\n  const matches = words.filter(w => t.includes(w));\n  return matches.length >= 3;\n});\n\nreturn [{\n  json: {\n    ...$input.first().json,\n    isDuplicate,\n    existingTitles,\n  }\n}];"
-                },
-                "id": "dedup-check",
-                "name": "Dedup Check",
-                "type": "n8n-nodes-base.code",
-                "typeVersion": 2,
-                "position": [
-                    1000,
                     0
                 ]
             },
@@ -516,8 +558,8 @@
                         },
                         "conditions": [
                             {
-                                "id": "dedup-condition",
-                                "leftValue": "={{ $json.isDuplicate }}",
+                                "id": "should-continue-cond",
+                                "leftValue": "={{ $json.skip }}",
                                 "rightValue": false,
                                 "operator": {
                                     "type": "boolean",
@@ -529,9 +571,66 @@
                         "combinator": "and"
                     }
                 },
-                "id": "if-not-duplicate",
-                "name": "Not Duplicate?",
+                "id": "should-continue",
+                "name": "Should Continue?",
                 "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    500,
+                    0
+                ]
+            },
+            {
+                "parameters": {
+                    "jsCode": "const https = require('https');\n\nconst RSS_FEEDS = [\n  { name: 'Asia Times', url: 'https://asiatimes.com/feed/' },\n  { name: 'EFF', url: 'https://www.eff.org/rss/updates.xml' },\n  { name: 'Rest of World', url: 'https://restofworld.org/feed/' },\n  { name: 'TorrentFreak', url: 'https://torrentfreak.com/feed/' },\n  { name: 'The Record', url: 'https://therecord.media/feed' },\n  { name: 'Freedom House', url: 'https://freedomhouse.org/rss.xml' },\n  { name: 'Meduza EN', url: 'https://meduza.io/rss/en/all' },\n  { name: 'Novaya Gazeta EU', url: 'https://novayagazeta.eu/rss/all' },\n  { name: 'The Insider', url: 'https://theins.ru/rss' }\n];\n\nconst MAX_PER_FEED = 10;\nconst TIMEOUT_MS = 15000;\nconst MAX_REDIRECTS = 3;\nconst USER_AGENT = 'Doppler Editorial Bot/1.0';\n\nfunction decodeEntities(str) {\n  if (!str) return '';\n  return str\n    .replace(/&amp;/g, '&')\n    .replace(/&lt;/g, '<')\n    .replace(/&gt;/g, '>')\n    .replace(/&#039;/g, \"'\")\n    .replace(/&apos;/g, \"'\")\n    .replace(/&quot;/g, '\"');\n}\n\nfunction stripHtml(str) {\n  if (!str) return '';\n  return str.replace(/<[^>]+>/g, '').replace(/\\s+/g, ' ').trim();\n}\n\nfunction fetchUrl(url, redirectCount) {\n  if (redirectCount === undefined) redirectCount = 0;\n  return new Promise((resolve, reject) => {\n    const proto = url.startsWith('https') ? https : require('http');\n    const req = proto.get(url, { headers: { 'User-Agent': USER_AGENT } }, (res) => {\n      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirectCount < MAX_REDIRECTS) {\n        let redirectUrl = res.headers.location;\n        if (redirectUrl.startsWith('/')) {\n          const parsed = new URL(url);\n          redirectUrl = parsed.origin + redirectUrl;\n        }\n        resolve(fetchUrl(redirectUrl, redirectCount + 1));\n        return;\n      }\n      let body = '';\n      res.on('data', chunk => body += chunk);\n      res.on('end', () => resolve(body));\n    });\n    req.on('error', () => resolve(''));\n    req.setTimeout(TIMEOUT_MS, () => { req.destroy(); resolve(''); });\n  });\n}\n\nfunction parseItems(xml) {\n  const items = [];\n  const itemRegex = /<item[\\s>][\\s\\S]*?<\\/item>/gi;\n  let match;\n  while ((match = itemRegex.exec(xml)) !== null) {\n    const block = match[0];\n    const titleMatch = block.match(/<title>(?:<!\\[CDATA\\[)?(.*?)(?:\\]\\]>)?<\\/title>/s);\n    const linkMatch = block.match(/<link>(?:<!\\[CDATA\\[)?(.*?)(?:\\]\\]>)?<\\/link>/s);\n    const pubDateMatch = block.match(/<pubDate>(.*?)<\\/pubDate>/s);\n    const descMatch = block.match(/<description>(?:<!\\[CDATA\\[)?(.*?)(?:\\]\\]>)?<\\/description>/s);\n    if (titleMatch && linkMatch) {\n      items.push({\n        title: decodeEntities(stripHtml(titleMatch[1])),\n        url: decodeEntities(linkMatch[1].trim()),\n        pubDate: pubDateMatch ? pubDateMatch[1].trim() : '',\n        description: descMatch ? decodeEntities(stripHtml(descMatch[1])).substring(0, 500) : ''\n      });\n    }\n  }\n  return items;\n}\n\nconst now = Date.now();\nconst oneDayAgo = now - 24 * 60 * 60 * 1000;\nconst seenUrls = new Set();\nconst allArticles = [];\n\nfor (const feed of RSS_FEEDS) {\n  try {\n    const xml = await fetchUrl(feed.url);\n    if (!xml) continue;\n    const items = parseItems(xml);\n    let count = 0;\n    for (const item of items) {\n      if (count >= MAX_PER_FEED) break;\n      if (seenUrls.has(item.url)) continue;\n\n      // Filter to last 24 hours\n      if (item.pubDate) {\n        const pubTime = new Date(item.pubDate).getTime();\n        if (!isNaN(pubTime) && pubTime < oneDayAgo) continue;\n      }\n\n      seenUrls.add(item.url);\n      allArticles.push({\n        title: item.title,\n        url: item.url,\n        source: feed.name,\n        summary: item.description\n      });\n      count++;\n    }\n  } catch (e) {\n    // Skip failed feeds silently\n    continue;\n  }\n}\n\nreturn [{ json: { articles: allArticles, articleCount: allArticles.length } }];"
+                },
+                "id": "fetch-rss-feeds",
+                "name": "Fetch RSS Feeds",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    750,
+                    0
+                ]
+            },
+            {
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "has-articles-cond",
+                                "leftValue": "={{ $json.articleCount }}",
+                                "rightValue": 0,
+                                "operator": {
+                                    "type": "number",
+                                    "operation": "gt"
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    }
+                },
+                "id": "has-articles",
+                "name": "Has Articles?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
+                "position": [
+                    1000,
+                    0
+                ]
+            },
+            {
+                "parameters": {
+                    "jsCode": "const articles = $json.articles;\nconst recentTitles = $('Preflight Check').first().json.recentTitles || [];\nconst templateType = $('Preflight Check').first().json.templateType || 'quick-take';\n\nconst articleList = articles.map((a, i) => `${i}. [${a.source}] ${a.title}\\n   ${a.summary ? a.summary.substring(0, 150) : '(no summary)'}\\n   URL: ${a.url}`).join('\\n\\n');\n\nconst recentList = recentTitles.length > 0 ? recentTitles.map(t => `- ${t}`).join('\\n') : '(none)';\n\nconst systemPrompt = `You are an editorial assistant for Doppler VPN's tech blog. Your job is to pick ONE article from the list below that is most relevant and newsworthy for a VPN/privacy/tech audience.\\n\\nTOPIC PRIORITIES (in order):\\n1. Internet censorship, VPN bans, website blocks\\n2. Digital privacy, surveillance, data protection\\n3. AI policy, AI product launches\\n4. Cybersecurity incidents, vulnerabilities\\n5. Tech geopolitics, sanctions, regulations\\n6. Big tech news (Google, Apple, Meta, etc.)\\n\\nAVOID DUPLICATES — these titles were recently published:\\n${recentList}\\n\\nIf no article is relevant to privacy/tech/VPN topics, return: {\"chosen_index\": -1, \"chosen_url\": \"\", \"chosen_title\": \"\", \"topic\": \"\", \"reason\": \"No relevant articles found\", \"topic_category\": \"\"}\\n\\nReturn ONLY valid JSON:\\n{\"chosen_index\": N, \"chosen_url\": \"...\", \"chosen_title\": \"...\", \"topic\": \"brief description for the writer\", \"reason\": \"why this article was chosen\", \"topic_category\": \"one of: vpn-privacy, ai-launches, ai-regulation, big-tech, censorship, cybersecurity, us-policy\"}`;\n\nconst userPrompt = `Today's template type: ${templateType}\\n\\nHere are ${articles.length} articles from RSS feeds. Pick the single best one:\\n\\n${articleList}`;\n\nreturn [{ json: { systemPrompt, userPrompt, templateType, articles } }];"
+                },
+                "id": "build-prompt",
+                "name": "Build Prompt",
+                "type": "n8n-nodes-base.code",
                 "typeVersion": 2,
                 "position": [
                     1250,
@@ -540,12 +639,37 @@
             },
             {
                 "parameters": {
-                    "jsCode": "const input = $input.first().json;\nconst { existingTitles, isDuplicate, ...topicData } = input;\n\nreturn [{\n  json: {\n    ...topicData,\n    status: 'ready_for_generation',\n    discoveredAt: new Date().toISOString(),\n  }\n}];"
+                    "method": "POST",
+                    "url": "https://api.openai.com/v1/chat/completions",
+                    "sendHeaders": true,
+                    "headerParameters": {
+                        "parameters": [
+                            {
+                                "name": "Authorization",
+                                "value": "=Bearer {{ $env.OPENAI_API_KEY }}"
+                            },
+                            {
+                                "name": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ]
+                    },
+                    "sendBody": true,
+                    "specifyBody": "json",
+                    "jsonBody": "={\n  \"model\": \"gpt-5-mini\",\n  \"max_completion_tokens\": 1000,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": {{ JSON.stringify($json.systemPrompt) }}\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($json.userPrompt) }}\n    }\n  ]\n}",
+                    "options": {
+                        "timeout": 30000,
+                        "response": {
+                            "response": {
+                                "responseFormat": "json"
+                            }
+                        }
+                    }
                 },
-                "id": "format-output",
-                "name": "Format Output",
-                "type": "n8n-nodes-base.code",
-                "typeVersion": 2,
+                "id": "openai-select",
+                "name": "OpenAI Select",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
                 "position": [
                     1500,
                     0
@@ -553,26 +677,50 @@
             },
             {
                 "parameters": {
-                    "jsCode": "const input = $input.first().json;\nreturn [{\n  json: {\n    status: 'skipped_duplicate',\n    topic: input.topic,\n    message: 'Topic was too similar to recent posts. Will try again next slot.',\n  }\n}];"
+                    "jsCode": "const https = require('https');\nconst input = $input.first().json;\nconst templateType = $('Build Prompt').first().json.templateType;\n\n// Parse OpenAI response\nlet content = input.choices[0].message.content;\nif (content.startsWith('```')) {\n  content = content.replace(/^```(?:json)?\\n?/, '').replace(/\\n?```$/, '');\n}\n\nlet selection;\ntry {\n  selection = JSON.parse(content);\n} catch (e) {\n  const match = content.match(/\\{[\\s\\S]*\\}/);\n  if (match) {\n    selection = JSON.parse(match[0]);\n  } else {\n    return [{ json: { skip: true, reason: 'Failed to parse OpenAI response: ' + content.substring(0, 200) } }];\n  }\n}\n\n// If no topic selected\nif (!selection.topic || selection.topic.trim() === '' || selection.chosen_index === -1) {\n  return [{ json: { skip: true, reason: selection.reason || 'No relevant topic found' } }];\n}\n\n// Fetch article HTML for OG image and text extraction\nconst articleUrl = selection.chosen_url;\nlet html = '';\nlet imageUrl = null;\nlet articleText = '';\n\nfunction fetchHtml(url, redirects) {\n  if (redirects === undefined) redirects = 0;\n  return new Promise((resolve, reject) => {\n    const proto = url.startsWith('https') ? https : require('http');\n    const req = proto.get(url, {\n      headers: {\n        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'\n      }\n    }, (res) => {\n      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirects < 3) {\n        let rUrl = res.headers.location;\n        if (rUrl.startsWith('/')) {\n          const parsed = new URL(url);\n          rUrl = parsed.origin + rUrl;\n        }\n        resolve(fetchHtml(rUrl, redirects + 1));\n        return;\n      }\n      let body = '';\n      res.on('data', chunk => body += chunk);\n      res.on('end', () => resolve(body));\n    });\n    req.on('error', () => resolve(''));\n    req.setTimeout(15000, () => { req.destroy(); resolve(''); });\n  });\n}\n\nfunction validateImage(url) {\n  return new Promise((resolve) => {\n    if (!url || !url.startsWith('http')) { resolve(false); return; }\n    const proto = url.startsWith('https') ? https : require('http');\n    const req = proto.request(url, { method: 'HEAD', headers: { 'User-Agent': 'Doppler Editorial Bot/1.0' } }, (res) => {\n      const ct = (res.headers['content-type'] || '').toLowerCase();\n      resolve(res.statusCode === 200 && ct.startsWith('image/'));\n    });\n    req.on('error', () => resolve(false));\n    req.setTimeout(10000, () => { req.destroy(); resolve(false); });\n    req.end();\n  });\n}\n\ntry {\n  html = await fetchHtml(articleUrl);\n\n  if (html) {\n    // Extract OG image\n    const ogMatch = html.match(/<meta[^>]+property=[\"']og:image[\"'][^>]+content=[\"']([^\"']+)[\"']/i)\n      || html.match(/<meta[^>]+content=[\"']([^\"']+)[\"'][^>]+property=[\"']og:image[\"']/i);\n    const twitterMatch = html.match(/<meta[^>]+name=[\"']twitter:image[\"'][^>]+content=[\"']([^\"']+)[\"']/i)\n      || html.match(/<meta[^>]+content=[\"']([^\"']+)[\"'][^>]+name=[\"']twitter:image[\"']/i);\n\n    let candidateUrl = ogMatch ? ogMatch[1] : (twitterMatch ? twitterMatch[1] : null);\n\n    if (candidateUrl) {\n      // Handle relative URLs\n      if (candidateUrl.startsWith('/')) {\n        const parsed = new URL(articleUrl);\n        candidateUrl = parsed.origin + candidateUrl;\n      }\n      const isValid = await validateImage(candidateUrl);\n      if (isValid) imageUrl = candidateUrl;\n    }\n\n    // Extract article text\n    let textSource = '';\n    const articleMatch = html.match(/<article[^>]*>([\\s\\S]*?)<\\/article>/i);\n    if (articleMatch) {\n      textSource = articleMatch[1];\n    } else {\n      textSource = html;\n    }\n\n    // Get paragraphs\n    const pRegex = /<p[^>]*>([\\s\\S]*?)<\\/p>/gi;\n    let pMatch;\n    const paragraphs = [];\n    while ((pMatch = pRegex.exec(textSource)) !== null) {\n      const text = pMatch[1].replace(/<[^>]+>/g, '').replace(/\\s+/g, ' ').trim();\n      if (text.length > 50) paragraphs.push(text);\n    }\n    articleText = paragraphs.join('\\n\\n').substring(0, 3000);\n  }\n} catch (e) {\n  // Non-fatal: continue without image/text\n}\n\nreturn [{\n  json: {\n    skip: false,\n    topic: selection.topic,\n    headline: selection.chosen_title,\n    summary: articleText || selection.topic,\n    topicCategory: selection.topic_category || '',\n    sources: [articleUrl],\n    sourceLinks: [articleUrl],\n    templateType,\n    imageUrl,\n    key_quotes: [],\n    date: new Date().toISOString().split('T')[0]\n  }\n}];"
                 },
-                "id": "skip-duplicate",
-                "name": "Skip (Duplicate)",
+                "id": "process-selection",
+                "name": "Process Selection + OG Image",
                 "type": "n8n-nodes-base.code",
                 "typeVersion": 2,
                 "position": [
-                    1500,
-                    300
+                    1750,
+                    0
                 ]
             },
             {
-                "id": "call-content-gen",
-                "name": "Call Content Generation",
-                "type": "n8n-nodes-base.httpRequest",
-                "typeVersion": 4.2,
+                "parameters": {
+                    "conditions": {
+                        "options": {
+                            "caseSensitive": true,
+                            "leftValue": "",
+                            "typeValidation": "strict"
+                        },
+                        "conditions": [
+                            {
+                                "id": "has-valid-topic-cond",
+                                "leftValue": "={{ $json.skip }}",
+                                "rightValue": false,
+                                "operator": {
+                                    "type": "boolean",
+                                    "operation": "equals",
+                                    "singleValue": true
+                                }
+                            }
+                        ],
+                        "combinator": "and"
+                    }
+                },
+                "id": "has-valid-topic",
+                "name": "Has Valid Topic?",
+                "type": "n8n-nodes-base.if",
+                "typeVersion": 2,
                 "position": [
-                    1740,
+                    2000,
                     0
-                ],
+                ]
+            },
+            {
                 "parameters": {
                     "method": "POST",
                     "url": "http://localhost:5678/webhook/doppler-content-gen",
@@ -582,37 +730,30 @@
                     "options": {
                         "timeout": 300000
                     }
-                }
-            },
-            {
-                "id": "call-image-pipeline",
-                "name": "Call Image Pipeline",
+                },
+                "id": "call-content-gen",
+                "name": "Call Content Gen",
                 "type": "n8n-nodes-base.httpRequest",
                 "typeVersion": 4.2,
                 "position": [
-                    1980,
+                    2250,
                     0
-                ],
+                ]
+            },
+            {
                 "parameters": {
-                    "method": "POST",
-                    "url": "http://localhost:5678/webhook/doppler-image-gen",
-                    "sendBody": true,
-                    "specifyBody": "json",
-                    "jsonBody": "={{ JSON.stringify($json) }}",
-                    "options": {
-                        "timeout": 120000
-                    }
-                }
+                    "jsCode": "const contentGen = $input.first().json;\nconst processNode = $('Process Selection + OG Image').first().json;\n\nconst merged = {\n  ...contentGen,\n  imageUrl: contentGen.imageUrl || processNode.imageUrl,\n  sourceLinks: processNode.sourceLinks || [],\n  topicCategory: processNode.topicCategory || contentGen.topicCategory || '',\n  templateType: processNode.templateType || contentGen.templateType || 'quick-take',\n  sourcesStr: (processNode.sourceLinks || []).join(', ')\n};\n\nreturn [{ json: merged }];"
+                },
+                "id": "prepare-publish",
+                "name": "Prepare Publish Data",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2500,
+                    0
+                ]
             },
             {
-                "id": "call-publish",
-                "name": "Call Publish",
-                "type": "n8n-nodes-base.httpRequest",
-                "typeVersion": 4.2,
-                "position": [
-                    2220,
-                    0
-                ],
                 "parameters": {
                     "method": "POST",
                     "url": "http://localhost:5678/webhook/doppler-publish",
@@ -622,7 +763,54 @@
                     "options": {
                         "timeout": 360000
                     }
-                }
+                },
+                "id": "call-publish",
+                "name": "Call Publish",
+                "type": "n8n-nodes-base.httpRequest",
+                "typeVersion": 4.2,
+                "position": [
+                    2750,
+                    0
+                ]
+            },
+            {
+                "parameters": {
+                    "jsCode": "return [{ json: { status: 'skipped', reason: 'Already posted today' } }];"
+                },
+                "id": "skip-already-posted",
+                "name": "Skip: Already Posted",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    750,
+                    300
+                ]
+            },
+            {
+                "parameters": {
+                    "jsCode": "return [{ json: { status: 'skipped', reason: 'No articles found in RSS feeds' } }];"
+                },
+                "id": "skip-no-articles",
+                "name": "Skip: No Articles",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    1250,
+                    300
+                ]
+            },
+            {
+                "parameters": {
+                    "jsCode": "const reason = $json.reason || 'No relevant topic found';\nreturn [{ json: { status: 'skipped', reason } }];"
+                },
+                "id": "skip-no-valid-topic",
+                "name": "Skip: No Valid Topic",
+                "type": "n8n-nodes-base.code",
+                "typeVersion": 2,
+                "position": [
+                    2250,
+                    300
+                ]
             }
         ],
         "connections": {
@@ -630,98 +818,134 @@
                 "main": [
                     [
                         {
-                            "node": "Source Rotation",
+                            "node": "Preflight Check",
                             "type": "main",
                             "index": 0
                         }
                     ]
                 ]
             },
-            "Source Rotation": {
+            "Preflight Check": {
                 "main": [
                     [
                         {
-                            "node": "Perplexity Research",
+                            "node": "Should Continue?",
                             "type": "main",
                             "index": 0
                         }
                     ]
                 ]
             },
-            "Perplexity Research": {
+            "Should Continue?": {
                 "main": [
                     [
                         {
-                            "node": "Parse Research",
-                            "type": "main",
-                            "index": 0
-                        }
-                    ]
-                ]
-            },
-            "Parse Research": {
-                "main": [
-                    [
-                        {
-                            "node": "Dedup Check",
-                            "type": "main",
-                            "index": 0
-                        }
-                    ]
-                ]
-            },
-            "Dedup Check": {
-                "main": [
-                    [
-                        {
-                            "node": "Not Duplicate?",
-                            "type": "main",
-                            "index": 0
-                        }
-                    ]
-                ]
-            },
-            "Not Duplicate?": {
-                "main": [
-                    [
-                        {
-                            "node": "Format Output",
+                            "node": "Fetch RSS Feeds",
                             "type": "main",
                             "index": 0
                         }
                     ],
                     [
                         {
-                            "node": "Skip (Duplicate)",
+                            "node": "Skip: Already Posted",
                             "type": "main",
                             "index": 0
                         }
                     ]
                 ]
             },
-            "Format Output": {
+            "Fetch RSS Feeds": {
                 "main": [
                     [
                         {
-                            "node": "Call Content Generation",
+                            "node": "Has Articles?",
                             "type": "main",
                             "index": 0
                         }
                     ]
                 ]
             },
-            "Call Content Generation": {
+            "Has Articles?": {
                 "main": [
                     [
                         {
-                            "node": "Call Image Pipeline",
+                            "node": "Build Prompt",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Skip: No Articles",
                             "type": "main",
                             "index": 0
                         }
                     ]
                 ]
             },
-            "Call Image Pipeline": {
+            "Build Prompt": {
+                "main": [
+                    [
+                        {
+                            "node": "OpenAI Select",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "OpenAI Select": {
+                "main": [
+                    [
+                        {
+                            "node": "Process Selection + OG Image",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Process Selection + OG Image": {
+                "main": [
+                    [
+                        {
+                            "node": "Has Valid Topic?",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Has Valid Topic?": {
+                "main": [
+                    [
+                        {
+                            "node": "Call Content Gen",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ],
+                    [
+                        {
+                            "node": "Skip: No Valid Topic",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Call Content Gen": {
+                "main": [
+                    [
+                        {
+                            "node": "Prepare Publish Data",
+                            "type": "main",
+                            "index": 0
+                        }
+                    ]
+                ]
+            },
+            "Prepare Publish Data": {
                 "main": [
                     [
                         {
@@ -739,10 +963,10 @@
         "autosaved": false,
         "workflowPublishHistory": [
             {
-                "createdAt": "2026-02-26T02:18:04.490Z",
-                "id": 165,
+                "createdAt": "2026-03-19T10:00:00.000Z",
+                "id": 166,
                 "workflowId": "M6Gm4TKM6YwGzygG",
-                "versionId": "f2f6673a-8729-4982-861a-0cf88d797ebe",
+                "versionId": "a1b2c3d4-5678-9012-abcd-ef0123456789",
                 "event": "activated",
                 "userId": "00f12e0f-5634-430b-ab08-fd0aefa1a039"
             }

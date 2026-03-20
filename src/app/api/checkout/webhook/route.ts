@@ -3,7 +3,9 @@ import Stripe from 'stripe';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 
 function getStripe() {
-  return new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error('STRIPE_SECRET_KEY is not configured');
+  return new Stripe(key);
 }
 
 const PLAN_DAYS: Record<string, number> = {
@@ -18,7 +20,9 @@ export async function POST(req: NextRequest) {
 
   let event: Stripe.Event;
   try {
-    event = getStripe().webhooks.constructEvent(body, sig!, process.env.STRIPE_CHECKOUT_WEBHOOK_SECRET!);
+    const webhookSecret = process.env.STRIPE_CHECKOUT_WEBHOOK_SECRET;
+    if (!webhookSecret) throw new Error('STRIPE_CHECKOUT_WEBHOOK_SECRET is not configured');
+    event = getStripe().webhooks.constructEvent(body, sig!, webhookSecret);
   } catch {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
@@ -58,7 +62,7 @@ export async function POST(req: NextRequest) {
       newExpiry.setDate(newExpiry.getDate() + days);
 
       // 3. Update account subscription
-      await supabase
+      const { error: updateErr } = await supabase
         .from('accounts')
         .update({
           subscription_tier: 'pro',
@@ -67,6 +71,8 @@ export async function POST(req: NextRequest) {
           updated_at: new Date().toISOString(),
         })
         .eq('id', account.id);
+
+      if (updateErr) throw new Error(`Account update failed: ${updateErr.message}`);
 
       // 4. Log invoice — telegram_user_id set to 0 since this is a web checkout
       await supabase.from('vpn_invoices').insert({
@@ -121,6 +127,7 @@ export async function POST(req: NextRequest) {
       }
     } catch (error) {
       console.error('Webhook processing error:', error);
+      return NextResponse.json({ error: 'Processing failed' }, { status: 500 });
     }
   }
 

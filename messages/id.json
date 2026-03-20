@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — VPN Gratis Tanpa Registrasi | Privat & Aman",
-    "description": "VPN gratis tanpa email atau pendaftaran. Terhubung dengan enkripsi VLESS-Reality, pemblokir iklan bawaan & filter konten. Tanpa log. Untuk iOS dan Android."
+    "title": "Doppler VPN — VPN Aman Tanpa Log & Proxy untuk Privasi",
+    "description": "Doppler VPN menjaga privasi Anda dengan enkripsi proxy VLESS-Reality, perlindungan DNS, dan kebijakan tanpa log yang ketat. Menembus DPI dan sensor pemerintah. Tersedia di iOS, Android, macOS & Windows."
   },
   "nav": {
     "features": "Fitur",
@@ -1092,49 +1092,135 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Cara Doppler Menembus Sensor Internet | Doppler VPN",
-      "description": "Pelajari bagaimana VLESS-Reality membuat lalu lintas VPN tidak terdeteksi oleh DPI dan sistem sensor."
+      "title": "Panduan Sensor Internet — Bagaimana VPN Diblokir & Cara Tetap Terhubung",
+      "description": "Panduan teknis tentang bagaimana pemerintah memblokir VPN dan proxy menggunakan DPI, TSPU, dan machine learning — serta bagaimana proxy VLESS-Reality menembus setiap metode deteksi. Persiapkan diri Anda menghadapi pembatasan yang semakin ketat."
     },
     "hero": {
-      "title": "Cara Doppler Menembus Sensor Internet",
-      "subtitle": "Tinjauan teknis bagaimana VLESS-Reality membuat lalu lintas VPN tak terdeteksi."
+      "title": "Panduan Kebebasan Internet Anda",
+      "subtitle": "Bagaimana pemerintah mendeteksi dan memblokir VPN, bagaimana Doppler mengalahkan setiap metode, dan apa yang harus Anda lakukan sekarang agar tetap terhubung saat pembatasan meningkat."
     },
-    "problem": {
-      "title": "Bagaimana Sistem Sensor Memblokir VPN",
-      "p1": "Sistem sensor modern menggunakan Deep Packet Inspection (DPI) untuk menganalisis lalu lintas internet secara real time. Sistem ini tidak hanya melihat tujuan data — mereka memeriksa cara data dikemas, mencari tanda-tanda protokol VPN.",
-      "p2": "Protokol VPN tradisional seperti OpenVPN dan WireGuard punya pola lalu lintas yang mudah dikenali. DPI langsung mendeteksi dan memblokir koneksi. Meski VPN mencoba menyamar, sidik jari protokol tetap terdeteksi.",
-      "p3": "Selain mendeteksi protokol, sistem sensor juga memblokir IP server VPN yang sudah diketahui dan menganalisis sidik jari handshake TLS untuk memblokir koneksi VPN sebelum terhubung penuh."
+    "detection": {
+      "title": "Bagaimana Pemerintah Mendeteksi dan Memblokir VPN",
+      "intro": "Sensor internet telah berkembang jauh melampaui pemblokiran IP sederhana. Negara-negara seperti Rusia, Tiongkok, dan Iran menggunakan sistem canggih yang memanfaatkan machine learning untuk mengidentifikasi dan memutus koneksi VPN secara real time. Berikut cara kerja mereka secara detail.",
+      "tspu": {
+        "title": "Infrastruktur: TSPU dan DPI",
+        "p1": "Rusia menggunakan TSPU (Technical Systems for Threat Countermeasures) — perangkat keras khusus yang dipasang langsung di node jaringan ISP. Tiongkok menggunakan Great Firewall, Iran mengoperasikan NIN. Sistem-sistem ini melakukan Deep Packet Inspection (DPI) pada setiap paket yang melintas di jaringan.",
+        "p2": "Protokol VPN tradisional seperti OpenVPN, WireGuard, dan IPSec memiliki struktur paket yang khas. DPI langsung mengidentifikasinya dan memutus koneksi. Bahkan mode \"obfuscated\" sering gagal karena pola handshake dasarnya tetap terdeteksi.",
+        "p3": "Ketika pencocokan signature dasar tidak cukup, sistem ini mengaktifkan modul machine learning. Mereka berhenti melihat isi paket (semuanya terenkripsi) dan mulai menganalisis perilaku lalu lintas."
+      },
+      "method1": {
+        "title": "Metode 1: TLS Client Fingerprinting",
+        "description": "Setiap klien TLS — Chrome, Firefox, Safari — mengirimkan parameter koneksi dalam urutan tertentu saat handshake. Ini menciptakan sidik jari unik. Klien VPN yang berpura-pura menjadi lalu lintas HTTPS sering mengirimkan parameter ini dalam urutan berbeda dari browser sungguhan. DPI membandingkan sidik jari tersebut dengan database browser yang dikenal. Tidak cocok? Ditandai sebagai tunnel."
+      },
+      "method2": {
+        "title": "Metode 2: Analisis Entropi Lalu Lintas",
+        "description": "Penggunaan internet yang sebenarnya memiliki pola khas. Streaming video menghasilkan banyak paket besar berurutan. Browsing web mengikuti siklus permintaan-respons-jeda. Tunnel VPN memiliki profil entropi yang sangat berbeda — ukuran paket seragam, timing konsisten, kepadatan tidak manusiawi. Bahkan ketika lalu lintas disamarkan sebagai HTTPS, model machine learning mendeteksi anomali statistik ini dalam panjang paket dan jeda waktu."
+      },
+      "method3": {
+        "title": "Metode 3: Active Probing",
+        "description": "Ketika sistem mencurigai server asing menjalankan VPN, ia mengirim permintaan probe sendiri. Jika server merespons seperti situs web biasa — mengembalikan error 404 atau halaman HTML — server lolos. Tetapi jika server mencoba memulai handshake VPN atau berperilaku tidak wajar, alamat IP langsung diblokir. VPN sederhana langsung gagal dalam pengujian ini."
+      },
+      "method4": {
+        "title": "Metode 4: Pemblokiran IP dan DNS",
+        "description": "Rentang IP penyedia VPN yang diketahui diblokir langsung. Permintaan DNS untuk domain VPN dicegat. Penyedia VPN komersial dengan daftar server publik adalah target paling mudah — seluruh infrastruktur mereka bisa diblokir dalam hitungan menit."
+      },
+      "conclusion": "Hasilnya: VPN instan dan layanan proxy standar seperti NordVPN, ExpressVPN, dan Surfshark berhenti berfungsi dalam hitungan jam setelah penindakan. Hanya protokol proxy yang dirancang khusus agar tidak bisa dibedakan dari lalu lintas web biasa yang bertahan."
     },
-    "evasion": {
-      "title": "Mengapa Lalu Lintas Doppler Tak Terlihat",
-      "reality": {
-        "title": "Reality Handshake",
-        "description": "VLESS-Reality melakukan handshake TLS asli menggunakan sertifikat situs nyata. Bagi pengamat mana pun — termasuk DPI — koneksi terlihat identik dengan browsing situs HTTPS biasa. Tidak ada sertifikat palsu untuk dideteksi."
+    "defeats": {
+      "title": "Bagaimana Doppler Mengalahkan Setiap Metode Deteksi",
+      "subtitle": "Setiap teknik deteksi memiliki penanggulangan spesifik yang tertanam dalam VLESS-Reality — protokol yang menggerakkan setiap koneksi Doppler.",
+      "signatures": {
+        "attack": "Signature Protokol",
+        "defense": "Tanpa Signature VPN",
+        "description": "VLESS-Reality tidak menghasilkan pola protokol yang dapat diidentifikasi. Tidak ada handshake VPN, tidak ada struktur paket yang khas, tidak ada yang bisa dicocokkan oleh database signature DPI."
       },
-      "noSignature": {
-        "title": "Tanpa Sidik Jari Protokol",
-        "description": "Berbeda dari OpenVPN (dengan handshake khas) atau WireGuard (dengan struktur paket yang dikenal), VLESS-Reality tidak menghasilkan sidik jari. Sistem deteksi otomatis tidak punya apa-apa untuk dicocokkan."
+      "fingerprinting": {
+        "attack": "TLS Fingerprinting",
+        "defense": "Handshake TLS Asli",
+        "description": "Reality melakukan handshake TLS sungguhan menggunakan sertifikat situs web yang sah. Sidik jarinya sama persis dengan yang dihasilkan browser asli — karena memang itu adalah koneksi TLS yang sesungguhnya."
       },
-      "indistinguishable": {
-        "title": "Lalu Lintas Sama Seperti HTTPS",
-        "description": "Begitu tunnel terbentuk, semua data terenkripsi dan terformat persis seperti HTTPS standar. Ukuran paket, pola waktu, header — semuanya seperti sesi browsing biasa."
+      "entropy": {
+        "attack": "Analisis Entropi",
+        "defense": "Pola Lalu Lintas Alami",
+        "description": "Lalu lintas yang melewati tunnel VLESS-Reality diformat identik dengan HTTPS standar. Ukuran paket, timing, dan pola aliran cocok dengan browsing web normal, mengalahkan analisis statistik."
       },
-      "infrastructure": {
-        "title": "Infrastruktur Server Dinamis",
-        "description": "Doppler merotasi endpoint dan alamat IP server. Meski satu endpoint teridentifikasi, jaringan beradaptasi."
+      "probing": {
+        "attack": "Active Probing",
+        "defense": "Respons Server Sah",
+        "description": "Saat di-probe, server Doppler merespons persis seperti situs web sah yang mereka cerminkan. Permintaan probe tidak sah menerima respons web normal. Tunnel VPN hanya aktif dengan autentikasi klien yang valid."
+      },
+      "blacklisting": {
+        "attack": "Pemblokiran IP",
+        "defense": "Infrastruktur Dinamis",
+        "description": "Doppler merotasi endpoint server dan alamat IP. Bahkan jika satu endpoint teridentifikasi, jaringan beradaptasi secara otomatis. Bot Telegram kami menyediakan akses instan ke konfigurasi server terbaru."
       }
     },
-    "flow": {
-      "title": "Yang Dilihat Sistem Sensor",
-      "step1": "Perangkat Anda",
-      "step1note": "Klien Doppler memulai koneksi",
-      "step2": "Handshake TLS",
-      "step2note": "Terlihat seperti mengunjungi situs biasa",
-      "step3": "Tunnel VLESS",
-      "step3note": "DPI melihat: lalu lintas HTTPS biasa",
-      "step4": "Node Doppler",
-      "step4note": "Lalu lintas keluar ke internet terbuka",
-      "dpiLabel": "Yang DPI lihat: lalu lintas HTTPS biasa"
+    "blocked": {
+      "title": "Diblokir di Rusia — Dan Tetap Ada",
+      "badge": "Diverifikasi oleh Roskomnadzor",
+      "p1": "Otoritas Rusia secara khusus menargetkan dan memblokir Doppler VPN. Domain kami telah ditambahkan ke daftar blokir federal. Ini bukan sesuatu yang kami sembunyikan — ini adalah bukti bahwa teknologi kami bekerja.",
+      "p2": "Berbeda dengan penyedia VPN komersial yang mematuhi permintaan takedown atau diam-diam keluar dari pasar terbatas, Doppler dibangun untuk skenario persis ini. Ketika situs web kami diblokir, bot Telegram kami tetap bisa diakses. Ketika IP server diblokir, infrastruktur kami berotasi secara otomatis.",
+      "p3": "Setiap pemblokiran yang mereka terapkan, kami tembus. Itu bukan klaim pemasaran — itu operasional harian kami.",
+      "stat1label": "Domain diblokir oleh RKN",
+      "stat1value": "Terkonfirmasi",
+      "stat2label": "Status layanan",
+      "stat2value": "Beroperasi",
+      "stat3label": "Akses alternatif",
+      "stat3value": "Bot Telegram"
+    },
+    "future": {
+      "title": "Yang Perlu Diketahui: Masa Depan Pembatasan Internet",
+      "intro": "Sensor internet tidak berhenti berkembang. Memahami arah perkembangannya membantu Anda bersiap. Berikut adalah perkembangan realistis berdasarkan tren infrastruktur dan kebijakan saat ini.",
+      "stage1": {
+        "label": "Tahap Saat Ini",
+        "title": "DPI + Deteksi Machine Learning",
+        "description": "Pemerintah menggunakan perangkat keras TSPU/DPI dengan modul ML di node ISP. Protokol VPN standar diblokir secara otomatis. VLESS-Reality dan protokol anti-sensor serupa masih berfungsi karena menghasilkan lalu lintas yang tidak bisa dibedakan dari HTTPS.",
+        "status": "Aktif saat ini di Rusia, Tiongkok, Iran"
+      },
+      "stage2": {
+        "label": "Kemungkinan Langkah Selanjutnya",
+        "title": "Model Whitelist",
+        "description": "Alih-alih memblokir protokol tertentu, hanya domain dan alamat IP yang disetujui yang bisa diakses. Semua lainnya diblokir secara default. SSH, RDP, port gaming — semua diblokir kecuali didaftarkan oleh badan hukum. Ini pernah diuji coba sebagian saat pemblokiran Telegram di Rusia tahun 2018.",
+        "status": "Secara teknis memungkinkan, sebagian sudah diterapkan"
+      },
+      "stage3": {
+        "label": "Skenario Ekstrem",
+        "title": "Isolasi Internet Nasional",
+        "description": "Jaringan domestik yang sepenuhnya terisolasi dengan sertifikat root wajib dari negara, mirror lokal layanan asing, dan tanpa akses langsung ke internet global. Bayangkan Kwangmyong Korea Utara, tapi dalam skala besar.",
+        "status": "Sangat merusak ekonomi — lihat di bawah"
+      },
+      "reality": {
+        "title": "Realitas Ekonomi",
+        "p1": "Pada tahun 2018, ketika Roskomnadzor mencoba memblokir hanya Telegram, mereka akhirnya memblokir jutaan alamat IP Amazon dan Google. Mesin kasir di toko berhenti berfungsi. Perangkat smart home mati. Notifikasi push perbankan gagal.",
+        "p2": "Model whitelist akan menyebabkan hal ini dalam skala 100 kali lipat. Situs web Rusia modern bergantung pada Google Fonts, library CDN asing, otoritas sertifikat internasional, dan layanan cloud. Bank dan perusahaan logistik menggunakan sertifikat SSL asing. Developer akan kehilangan akses ke GitHub, Docker Hub, dan npm.",
+        "p3": "Isolasi penuh secara teknis memungkinkan — tetapi harganya adalah degradasi teknologi. Pembaruan Windows dan Android menjadi tidak tersedia. Peralatan medis kehilangan dukungan driver. Pengembangan AI berhenti total tanpa infrastruktur open-source global.",
+        "p4": "Jalur yang paling mungkin adalah pembatasan bertahap selama bertahun-tahun, bukan pemutusan mendadak. Tetapi setiap langkah eskalasi berarti lebih banyak pengguna VPN yang tertinggal — kecuali mereka sudah siap."
+      }
+    },
+    "prepare": {
+      "title": "Cara Mempersiapkan Diri Sekarang",
+      "subtitle": "Jangan tunggu sampai akses semakin sulit. Lakukan langkah-langkah ini hari ini.",
+      "step1": {
+        "title": "Unduh Doppler VPN Sekarang",
+        "description": "Instal aplikasinya selagi app store dan situs web kami masih bisa diakses di wilayah Anda. Begitu pembatasan meningkat, mengunduh akan jauh lebih sulit."
+      },
+      "step2": {
+        "title": "Simpan Bot Telegram Kami",
+        "description": "Tambahkan @dopplercreatebot ke Telegram Anda. Meskipun situs web kami diblokir, bot tetap bisa diakses di dalam Telegram dan dapat memberikan konfigurasi VPN secara instan.",
+        "link": "Buka @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Dapatkan APK Android Mandiri",
+        "description": "Bot Telegram kami mendistribusikan aplikasi Android langsung sebagai file APK — tanpa perlu Play Store. Ini cadangan Anda jika Google Play dibatasi di negara Anda."
+      },
+      "step4": {
+        "title": "Jaga Aplikasi Tetap Terbaru",
+        "description": "Kami merilis pembaruan protokol untuk selalu selangkah di depan teknik pemblokiran baru. Aktifkan pembaruan otomatis atau periksa pembaruan secara rutin melalui channel Telegram kami."
+      },
+      "step5": {
+        "title": "Bagikan kepada Orang yang Membutuhkan",
+        "description": "Semakin banyak orang yang memasang Doppler sebelum pembatasan meningkat, semakin baik. Bagikan link bot Telegram kami — ini adalah saluran distribusi paling tahan sensor yang kami miliki."
+      }
     },
     "comparison": {
       "title": "Perbandingan Protokol",
@@ -1167,20 +1253,15 @@
         "fingerprint": "Tidak Ada"
       }
     },
-    "works": {
-      "title": "Di Mana Doppler Bekerja",
-      "description": "Doppler teruji di jaringan dengan pemblokiran VPN aktif — ISP restriktif, firewall nasional, dan jaringan korporat yang memblokir VPN tradisional.",
-      "environments": {
-        "isp": "ISP dengan pembatasan",
-        "national": "Firewall tingkat nasional",
-        "corporate": "Jaringan korporat terbatas",
-        "public": "Wi-Fi publik dengan filter"
-      }
-    },
     "cta": {
-      "title": "Coba Doppler di jaringan Anda",
-      "subtitle": "Lihat apakah Doppler bekerja di tempat VPN lain gagal.",
-      "button": "Unduh Doppler"
+      "title": "Kami Tidak Meninggalkan Siapa Pun",
+      "subtitle": "Doppler VPN dibangun khusus untuk jaringan terbatas. Kami terus meningkatkan infrastruktur, merotasi server, dan memperbarui protokol untuk selalu selangkah di depan setiap teknik pemblokiran baru. Kebebasan internet Anda tidak bisa ditawar.",
+      "downloadIos": "Unduh untuk iOS",
+      "downloadAndroid": "Unduh untuk Android",
+      "telegramBot": "Dapatkan via Bot Telegram",
+      "telegramChannelRu": "Update (Rusia)",
+      "telegramChannelEn": "Update (Inggris)",
+      "button": "Unduh Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1230,25 +1311,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Dirancang untuk Jaringan Terbatas",
-    "subtitle": "Doppler membuat lalu lintas VPN tak terlihat oleh sistem sensor.",
-    "learnMore": "Pelajari cara kerjanya",
+    "title": "Dirancang untuk Menembus Sensor Pemerintah",
+    "subtitle": "Doppler mengalahkan TSPU, DPI, TLS fingerprinting, dan active probing — sistem yang sama yang digunakan Rusia, Tiongkok, dan Iran untuk memblokir VPN.",
+    "learnMore": "Baca panduan teknis lengkap",
     "items": {
       "dpi": {
-        "title": "Tembus Deep Packet Inspection",
-        "description": "VPN biasa punya sidik jari lalu lintas yang mudah dikenali. VLESS-Reality menghilangkannya — lalu lintas Anda tidak bisa dibedakan dari HTTPS biasa."
+        "title": "Mengalahkan Deep Packet Inspection",
+        "description": "Perangkat keras TSPU dan DPI menggunakan machine learning untuk mendeteksi pola lalu lintas VPN. VLESS-Reality tidak menghasilkan sidik jari apa pun — tidak ada yang bisa dideteksi."
       },
       "tls": {
-        "title": "Kamuflase TLS",
-        "description": "Doppler melakukan handshake TLS asli dengan sertifikat situs nyata. Sistem sensor melihat lalu lintas web biasa, bukan VPN."
+        "title": "TLS Handshake Asli",
+        "description": "Doppler melakukan TLS handshake asli dengan sertifikat situs web nyata. DPI melihat koneksi HTTPS biasa, bukan tunnel VPN."
       },
       "fingerprint": {
-        "title": "Tanpa Sidik Jari Protokol",
-        "description": "Berbeda dari OpenVPN atau WireGuard, VLESS-Reality tidak meninggalkan sidik jari. Sistem pemblokiran otomatis tidak punya apa-apa untuk dicocokkan."
+        "title": "Lolos dari Active Probing",
+        "description": "Ketika sensor memprobe server kami, server merespons sebagai situs web yang sah. Hanya klien yang terautentikasi yang mengaktifkan tunnel VPN."
       },
       "regions": {
-        "title": "Bekerja di Jaringan Terbatas",
-        "description": "Teruji di jaringan dengan pemblokiran VPN aktif. Doppler terhubung di tempat VPN lain gagal."
+        "title": "Diblokir Rusia — Tetap Beroperasi",
+        "description": "Domain kami ada di daftar blokir Roskomnadzor. Kami masih di sini. Unduh via bot Telegram saat situs web diblokir."
       }
     }
   },

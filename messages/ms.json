@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — VPN Selamat Tanpa Log | Peribadi",
-    "description": "VPN percuma tanpa e-mel atau pendaftaran. Sambung dengan penyulitan VLESS-Reality dan penyekat iklan. Tanpa log. Tersedia di iOS, Android dan Telegram."
+    "title": "Doppler VPN — VPN Selamat Tanpa Log & Proksi untuk Privasi",
+    "description": "Doppler VPN melindungi privasi anda dengan penyulitan proksi VLESS-Reality, perlindungan DNS dan dasar tanpa log yang ketat. Memintas DPI dan penapisan kerajaan. Tersedia di iOS, Android, macOS & Windows."
   },
   "nav": {
     "features": "Ciri-ciri",
@@ -1092,49 +1092,135 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Cara Doppler Mengatasi Penapisan Internet | Doppler VPN",
-      "description": "Ketahui bagaimana VLESS-Reality menjadikan trafik VPN tidak dapat dikesan oleh DPI dan sistem penapisan."
+      "title": "Panduan Penapisan Internet — Cara VPN Disekat & Cara Kekal Bersambung",
+      "description": "Panduan teknikal tentang cara kerajaan menyekat VPN dan proksi menggunakan DPI, TSPU, dan ML — serta cara proksi VLESS-Reality mengatasi setiap kaedah pengesanan. Bersedia untuk sekatan yang semakin ketat."
     },
     "hero": {
-      "title": "Cara Doppler Mengatasi Penapisan Internet",
-      "subtitle": "Tinjauan teknikal bagaimana VLESS-Reality menjadikan trafik VPN tidak dapat dikesan."
+      "title": "Panduan Anda untuk Kebebasan Internet",
+      "subtitle": "Bagaimana kerajaan mengesan dan menyekat VPN, bagaimana Doppler mengalahkan setiap kaedah, dan apa yang perlu anda lakukan sekarang untuk kekal bersambung apabila sekatan meningkat."
     },
-    "problem": {
-      "title": "Bagaimana Sistem Penapisan Menyekat VPN",
-      "p1": "Sistem penapisan moden menggunakan Deep Packet Inspection (DPI) untuk menganalisis trafik internet secara langsung. Sistem ini bukan sahaja melihat ke mana data anda pergi — mereka memeriksa cara data dibungkus, mencari tanda-tanda protokol VPN.",
-      "p2": "Protokol VPN tradisional seperti OpenVPN dan WireGuard mempunyai corak trafik yang mudah dikenali. DPI mengesan dan menyekat sambungan dengan serta-merta. Walaupun penyedia VPN cuba menyamar, tandatangan protokol tetap dapat dikesan.",
-      "p3": "Selain pengesanan protokol, sistem penapisan juga menyekat alamat IP pelayan VPN yang diketahui dan menganalisis cap jari TLS handshake untuk menyekat sambungan VPN sebelum ia sepenuhnya terbina."
+    "detection": {
+      "title": "Bagaimana Kerajaan Mengesan dan Menyekat VPN",
+      "intro": "Penapisan internet telah berkembang jauh melampaui penyekatan IP mudah. Negara seperti Rusia, China, dan Iran menggunakan sistem canggih yang menggunakan pembelajaran mesin untuk mengenal pasti dan menamatkan sambungan VPN secara langsung. Begini cara tepat mereka melakukannya.",
+      "tspu": {
+        "title": "Infrastruktur: TSPU dan DPI",
+        "p1": "Rusia menggunakan TSPU (Technical Systems for Threat Countermeasures) — perkakasan khusus yang dipasang terus pada nod rangkaian ISP. China menggunakan Great Firewall, Iran mengendalikan NIN. Sistem-sistem ini melakukan Deep Packet Inspection (DPI) pada setiap paket yang merentasi rangkaian.",
+        "p2": "Protokol VPN tradisional seperti OpenVPN, WireGuard, dan IPSec mempunyai struktur paket yang tersendiri. DPI mengenal pasti mereka serta-merta dan memutuskan sambungan. Malah mod \"obfuscated\" sering gagal kerana corak handshake asas masih dapat dikesan.",
+        "p3": "Apabila padanan tandatangan asas tidak mencukupi, sistem ini mengaktifkan modul pembelajaran mesin. Mereka berhenti melihat ke dalam paket (semuanya disulitkan) dan mula menganalisis bagaimana trafik berkelakuan."
+      },
+      "method1": {
+        "title": "Kaedah 1: Cap Jari Klien TLS",
+        "description": "Setiap klien TLS — Chrome, Firefox, Safari — menghantar parameter sambungan dalam susunan tertentu semasa handshake. Ini mencipta cap jari unik. Klien VPN yang berpura-pura sebagai trafik HTTPS sering menghantar parameter ini dalam susunan yang berbeza daripada mana-mana pelayar sebenar. DPI membandingkan cap jari dengan pangkalan data pelayar yang diketahui. Tidak sepadan? Ditandai sebagai terowong."
+      },
+      "method2": {
+        "title": "Kaedah 2: Analisis Entropi Trafik",
+        "description": "Penggunaan internet sebenar mempunyai corak yang tersendiri. Penstriman video menghasilkan banyak paket besar berturutan. Pelayaran web mengikuti kitaran permintaan-respons-jeda. Terowong VPN mempunyai profil entropi yang sama sekali berbeza — saiz paket seragam, masa yang konsisten, kepadatan bukan manusia. Walaupun trafik disamarkan sebagai HTTPS, model pembelajaran mesin mengesan anomali statistik ini dalam panjang paket dan kelewatan masa."
+      },
+      "method3": {
+        "title": "Kaedah 3: Siasatan Aktif",
+        "description": "Apabila sistem mengesyaki pelayan asing menjalankan VPN, ia menghantar permintaan siasatan sendiri. Jika pelayan menjawab seperti laman web biasa — mengembalikan ralat 404 atau halaman HTML — ia lulus. Tetapi jika pelayan cuba memulakan VPN handshake atau berkelakuan tidak dijangka, alamat IP itu segera disekat. VPN mudah gagal ujian ini serta-merta."
+      },
+      "method4": {
+        "title": "Kaedah 4: Senarai Hitam IP dan DNS",
+        "description": "Julat IP penyedia VPN yang diketahui disekat terus. Permintaan DNS untuk domain VPN dipintas. Penyedia VPN komersial dengan senarai pelayan awam adalah sasaran termudah — seluruh infrastruktur mereka boleh disekat dalam beberapa minit."
+      },
+      "conclusion": "Hasilnya: VPN satu-klik dan perkhidmatan proksi standard seperti NordVPN, ExpressVPN, dan Surfshark berhenti berfungsi dalam beberapa jam selepas tindakan keras. Hanya protokol proksi yang direka khusus untuk tidak dapat dibezakan daripada trafik web biasa yang bertahan."
     },
-    "evasion": {
-      "title": "Mengapa Trafik Doppler Tidak Kelihatan",
-      "reality": {
-        "title": "Reality Handshake",
-        "description": "VLESS-Reality melaksanakan TLS handshake tulen menggunakan sijil laman web sebenar. Bagi mana-mana pemerhati — termasuk DPI — sambungan kelihatan sama seperti melayari laman HTTPS biasa. Tiada sijil palsu untuk dikesan."
+    "defeats": {
+      "title": "Bagaimana Doppler Mengalahkan Setiap Kaedah Pengesanan",
+      "subtitle": "Setiap teknik pengesanan mempunyai langkah balas khusus yang terbina dalam VLESS-Reality — protokol yang menguasai setiap sambungan Doppler.",
+      "signatures": {
+        "attack": "Tandatangan Protokol",
+        "defense": "Sifar Tandatangan VPN",
+        "description": "VLESS-Reality tidak menghasilkan sebarang corak protokol yang boleh dikenal pasti. Tiada VPN handshake, tiada struktur paket tersendiri, tiada apa-apa untuk dipadankan oleh pangkalan data tandatangan DPI."
       },
-      "noSignature": {
-        "title": "Tiada Tandatangan Protokol",
-        "description": "Tidak seperti OpenVPN (dengan handshake tersendiri) atau WireGuard (dengan struktur paket yang dikenali), VLESS-Reality tidak menghasilkan tandatangan. Sistem pengesanan automatik tiada apa untuk dipadankan."
+      "fingerprinting": {
+        "attack": "Cap Jari TLS",
+        "defense": "TLS Handshake Tulen",
+        "description": "Reality melaksanakan TLS handshake sebenar menggunakan sijil laman web yang sah. Cap jari sepadan tepat dengan apa yang pelayar sebenar hasilkan — kerana ia memang sambungan TLS sebenar."
       },
-      "indistinguishable": {
-        "title": "Trafik Sama Seperti HTTPS",
-        "description": "Setelah terowong terbina, semua data disulitkan dan diformatkan sama seperti trafik HTTPS standard. Saiz paket, corak masa, header — semuanya sepadan dengan sesi pelayaran biasa."
+      "entropy": {
+        "attack": "Analisis Entropi",
+        "defense": "Corak Trafik Semula Jadi",
+        "description": "Trafik yang mengalir melalui terowong VLESS-Reality diformatkan sama seperti HTTPS standard. Saiz paket, masa, dan corak aliran sepadan dengan pelayaran web biasa, menewaskan analisis statistik."
       },
-      "infrastructure": {
-        "title": "Infrastruktur Pelayan Dinamik",
-        "description": "Doppler menukar titik akhir dan alamat IP pelayan. Walaupun satu titik akhir dikenal pasti, rangkaian menyesuaikan diri."
+      "probing": {
+        "attack": "Siasatan Aktif",
+        "defense": "Respons Pelayan yang Sah",
+        "description": "Apabila disiasati, pelayan Doppler menjawab tepat seperti laman web sah yang mereka cerminkan. Permintaan siasatan tanpa kebenaran menerima respons web biasa. Terowong VPN hanya diaktifkan dengan pengesahan klien yang sah."
+      },
+      "blacklisting": {
+        "attack": "Senarai Hitam IP",
+        "defense": "Infrastruktur Dinamik",
+        "description": "Doppler memutar titik akhir pelayan dan alamat IP. Walaupun satu titik akhir dikenal pasti, rangkaian menyesuaikan diri secara automatik. Bot Telegram kami menyediakan akses segera kepada konfigurasi pelayan yang dikemas kini."
       }
     },
-    "flow": {
-      "title": "Apa yang Sistem Penapisan Lihat",
-      "step1": "Peranti Anda",
-      "step1note": "Klien Doppler memulakan sambungan",
-      "step2": "TLS Handshake",
-      "step2note": "Kelihatan seperti melawat laman web biasa",
-      "step3": "Terowong VLESS",
-      "step3note": "DPI nampak: trafik HTTPS biasa",
-      "step4": "Nod Doppler",
-      "step4note": "Trafik keluar ke internet terbuka",
-      "dpiLabel": "Apa yang DPI nampak: trafik HTTPS biasa"
+    "blocked": {
+      "title": "Disekat di Rusia — Dan Masih Di Sini",
+      "badge": "Disahkan oleh Roskomnadzor",
+      "p1": "Pihak berkuasa Rusia telah menyasarkan dan menyekat Doppler VPN secara khusus. Domain kami telah ditambah ke senarai sekat persekutuan. Ini bukan sesuatu yang kami sembunyikan — ia adalah bukti bahawa teknologi kami berkesan.",
+      "p2": "Tidak seperti penyedia VPN komersial yang mematuhi permintaan penyingkiran atau senyap-senyap meninggalkan pasaran terhad, Doppler dibina untuk senario tepat ini. Apabila laman web kami disekat, bot Telegram kami kekal boleh diakses. Apabila IP pelayan disekat, infrastruktur kami berputar secara automatik.",
+      "p3": "Setiap sekatan yang mereka kenakan, kami atasi. Itu bukan dakwaan pemasaran — ia adalah operasi harian kami.",
+      "stat1label": "Domain disekat oleh RKN",
+      "stat1value": "Disahkan",
+      "stat2label": "Status perkhidmatan",
+      "stat2value": "Beroperasi",
+      "stat3label": "Akses alternatif",
+      "stat3value": "Bot Telegram"
+    },
+    "future": {
+      "title": "Apa yang Dijangka: Masa Depan Sekatan Internet",
+      "intro": "Penapisan internet tidak berdiam diri. Memahami hala tuju perkara ini membantu anda bersedia. Berikut adalah perkembangan realistik berdasarkan trend infrastruktur dan dasar semasa.",
+      "stage1": {
+        "label": "Peringkat Semasa",
+        "title": "DPI + Pengesanan Pembelajaran Mesin",
+        "description": "Kerajaan menggunakan perkakasan TSPU/DPI dengan modul ML pada nod ISP. Protokol VPN standard disekat secara automatik. VLESS-Reality dan protokol anti-penapisan yang serupa masih berfungsi kerana mereka menghasilkan trafik yang tidak dapat dibezakan daripada HTTPS.",
+        "status": "Aktif sekarang di Rusia, China, Iran"
+      },
+      "stage2": {
+        "label": "Langkah Seterusnya yang Mungkin",
+        "title": "Model Senarai Putih",
+        "description": "Daripada menyekat protokol tertentu, hanya domain dan alamat IP yang diluluskan boleh diakses. Semua yang lain disekat secara lalai. SSH, RDP, port permainan — semuanya disekat kecuali didaftarkan oleh entiti sah. Ini telah diuji sebahagiannya semasa larangan Telegram Rusia pada 2018.",
+        "status": "Boleh dilaksanakan secara teknikal, sebahagiannya telah digunakan"
+      },
+      "stage3": {
+        "label": "Senario Melampau",
+        "title": "Pengasingan Internet Nasional",
+        "description": "Rangkaian domestik yang sepenuhnya terpencil dengan sijil akar negara yang wajib, cermin tempatan perkhidmatan asing, dan tiada akses langsung ke internet global. Bayangkan Kwangmyong Korea Utara, tetapi pada skala besar.",
+        "status": "Membawa kemusnahan ekonomi — lihat di bawah"
+      },
+      "reality": {
+        "title": "Semakan Realiti Ekonomi",
+        "p1": "Pada 2018, apabila Roskomnadzor cuba menyekat Telegram sahaja, mereka akhirnya menyekat berjuta-juta alamat IP Amazon dan Google. Mesin tunai di kedai berhenti berfungsi. Peranti rumah pintar terputus. Pemberitahuan push perbankan gagal.",
+        "p2": "Model senarai putih akan menyebabkan perkara ini pada skala 100x ganda. Laman web Rusia moden bergantung pada Google Fonts, pustaka CDN asing, pihak berkuasa sijil antarabangsa, dan perkhidmatan awan. Bank dan syarikat logistik menggunakan sijil SSL asing. Pembangun akan kehilangan akses kepada GitHub, Docker Hub, dan npm.",
+        "p3": "Pengasingan sepenuhnya secara teknikal boleh dilakukan — tetapi harganya adalah kemerosotan teknologi. Kemas kini Windows dan Android menjadi tidak tersedia. Peralatan perubatan kehilangan sokongan pemacu. Pembangunan AI berhenti sepenuhnya tanpa infrastruktur sumber terbuka global.",
+        "p4": "Laluan yang paling mungkin adalah sekatan berperingkat selama bertahun-tahun, bukan pemutusan secara tiba-tiba. Tetapi setiap langkah peningkatan bermakna lebih ramai pengguna VPN ketinggalan — melainkan mereka bersedia."
+      }
+    },
+    "prepare": {
+      "title": "Cara Bersedia Sekarang",
+      "subtitle": "Jangan tunggu sehingga akses menjadi lebih sukar. Ambil langkah-langkah ini hari ini.",
+      "step1": {
+        "title": "Muat Turun Doppler VPN Sekarang",
+        "description": "Pasang aplikasi selagi gedung aplikasi dan laman web kami masih boleh diakses di kawasan anda. Sebaik sahaja sekatan meningkat, memuat turun menjadi jauh lebih sukar."
+      },
+      "step2": {
+        "title": "Simpan Bot Telegram Kami",
+        "description": "Tambah @dopplercreatebot ke Telegram anda. Walaupun laman web kami disekat, bot kekal boleh diakses dalam Telegram dan boleh memberikan anda konfigurasi VPN serta-merta.",
+        "link": "Buka @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Dapatkan APK Android Bebas",
+        "description": "Bot Telegram kami mengedarkan aplikasi Android secara langsung sebagai fail APK — tanpa memerlukan Play Store. Ini adalah sandaran anda jika Google Play menjadi terhad di negara anda."
+      },
+      "step4": {
+        "title": "Pastikan Aplikasi Anda Dikemas Kini",
+        "description": "Kami menolak kemas kini protokol untuk kekal mendahului teknik penyekatan baharu. Aktifkan kemas kini automatik atau semak kemas kini secara berkala melalui saluran Telegram kami."
+      },
+      "step5": {
+        "title": "Kongsi dengan Mereka yang Memerlukannya",
+        "description": "Semakin ramai orang memasang Doppler sebelum sekatan meningkat, semakin baik. Kongsi pautan bot Telegram kami — ia adalah saluran pengedaran paling tahan penapisan yang kami ada."
+      }
     },
     "comparison": {
       "title": "Perbandingan Protokol",
@@ -1167,20 +1253,15 @@
         "fingerprint": "Tiada"
       }
     },
-    "works": {
-      "title": "Di Mana Doppler Berfungsi",
-      "description": "Doppler diuji dan beroperasi dalam rangkaian dengan penyekatan VPN aktif — ISP terhad, firewall peringkat nasional, dan rangkaian korporat yang menyekat VPN tradisional.",
-      "environments": {
-        "isp": "ISP dengan sekatan",
-        "national": "Firewall peringkat nasional",
-        "corporate": "Sekatan rangkaian korporat",
-        "public": "Wi-Fi awam dengan penapisan"
-      }
-    },
     "cta": {
-      "title": "Cuba Doppler dalam rangkaian anda",
-      "subtitle": "Lihat sama ada Doppler berfungsi di mana VPN lain gagal.",
-      "button": "Muat Turun Doppler"
+      "title": "Kami Tidak Akan Tinggalkan Sesiapa",
+      "subtitle": "Doppler VPN dibina khusus untuk rangkaian terhad. Kami sentiasa menambah baik infrastruktur, memutar pelayan, dan mengemas kini protokol untuk kekal mendahului setiap teknik penyekatan baharu. Kebebasan internet anda tidak boleh dirunding.",
+      "downloadIos": "Muat Turun untuk iOS",
+      "downloadAndroid": "Muat Turun untuk Android",
+      "telegramBot": "Dapatkan melalui Bot Telegram",
+      "telegramChannelRu": "Kemas Kini (Rusia)",
+      "telegramChannelEn": "Kemas Kini (Inggeris)",
+      "button": "Muat Turun Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1230,25 +1311,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Direka untuk Rangkaian Terhad",
-    "subtitle": "Doppler menjadikan trafik VPN tidak kelihatan kepada sistem penapisan.",
-    "learnMore": "Ketahui cara ia berfungsi",
+    "title": "Direka untuk Memintas Penapisan Kerajaan",
+    "subtitle": "Doppler mengalahkan TSPU, DPI, TLS fingerprinting dan active probing — sistem yang sama digunakan Rusia, China dan Iran untuk menyekat VPN.",
+    "learnMore": "Baca panduan teknikal penuh",
     "items": {
       "dpi": {
-        "title": "Pintas Deep Packet Inspection",
-        "description": "VPN biasa mempunyai tandatangan trafik yang mudah dikenali. VLESS-Reality menghapuskannya — trafik anda tidak dapat dibezakan daripada HTTPS biasa."
+        "title": "Mengalahkan Deep Packet Inspection",
+        "description": "Perkakasan TSPU dan DPI menggunakan machine learning untuk mengesan corak trafik VPN. VLESS-Reality tidak menghasilkan sebarang tandatangan — tiada apa untuk dikesan."
       },
       "tls": {
-        "title": "Penyamaran TLS",
-        "description": "Doppler melaksanakan TLS handshake tulen dengan sijil laman web sebenar. Sistem penapisan nampak trafik web biasa, bukan sambungan VPN."
+        "title": "TLS Handshake Tulen",
+        "description": "Doppler melaksanakan TLS handshake tulen dengan sijil laman web sebenar. DPI nampak sambungan HTTPS biasa, bukan terowong VPN."
       },
       "fingerprint": {
-        "title": "Tiada Cap Jari Protokol",
-        "description": "Tidak seperti OpenVPN atau WireGuard, VLESS-Reality tidak meninggalkan cap jari. Sistem penyekatan automatik tiada apa untuk dipadankan."
+        "title": "Lepas Active Probing",
+        "description": "Apabila penapis menyiasat pelayan kami, ia bertindak balas sebagai laman web yang sah. Hanya klien yang disahkan mengaktifkan terowong VPN."
       },
       "regions": {
-        "title": "Berfungsi di Kawasan Terhad",
-        "description": "Diuji dan beroperasi dalam rangkaian dengan penyekatan VPN aktif. Doppler bersambung di mana VPN biasa gagal."
+        "title": "Disekat oleh Rusia — Masih Beroperasi",
+        "description": "Domain kami ada dalam senarai sekatan Roskomnadzor. Kami masih di sini. Muat turun melalui bot Telegram apabila laman web disekat."
       }
     }
   },

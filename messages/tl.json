@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — Ligtas na VPN Walang Logs | Pribado",
-    "description": "Libreng VPN walang email o rehistro. Kumonekta gamit ang VLESS-Reality encryption at ad blocker. Walang logs. Available sa iOS, Android at Telegram."
+    "title": "Doppler VPN — Ligtas na No-Logs VPN at Proxy para sa Privacy",
+    "description": "Pinoprotektahan ka ng Doppler VPN gamit ang VLESS-Reality proxy encryption, DNS protection, at mahigpit na no-logs policy. Nila-lagpas ang DPI at government censorship. Available sa iOS, Android, macOS at Windows."
   },
   "nav": {
     "features": "Mga Tampok",
@@ -1092,49 +1092,135 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Paano Binabypass ng Doppler ang Internet Censorship | Doppler VPN",
-      "description": "Alamin kung paano ginagawang hindi nakikita ng DPI at censorship systems ang VPN traffic gamit ang VLESS-Reality."
+      "title": "Gabay sa Internet Censorship — Paano Bino-block ang mga VPN at Paano Manatiling Konektado",
+      "description": "Teknikal na gabay kung paano bino-block ng mga gobyerno ang mga VPN at proxy gamit ang DPI, TSPU, at ML — at paano binabypass ng VLESS-Reality proxy ang bawat paraan ng detection. Maghanda para sa papaigting na mga restriksyon."
     },
     "hero": {
-      "title": "Paano Binabypass ng Doppler ang Internet Censorship",
-      "subtitle": "Teknikal na paliwanag kung paano ginagawang hindi nakikita ang VPN traffic ng VLESS-Reality."
+      "title": "Ang Gabay Mo sa Kalayaan sa Internet",
+      "subtitle": "Paano nide-detect at bino-block ng mga gobyerno ang mga VPN, paano tinatalunin ng Doppler ang bawat paraan, at ano ang dapat mong gawin ngayon para manatiling konektado habang tumitindi ang mga restriksyon."
     },
-    "problem": {
-      "title": "Paano Bino-block ng Censorship Systems ang VPN",
-      "p1": "Ginagamit ng modernong censorship systems ang Deep Packet Inspection (DPI) para suriin ang internet traffic sa real time. Hindi lang nila tinitingnan kung saan papunta ang data — sinusuri nila kung paano ito nakabalot, naghahanap ng palatandaan ng VPN protocols.",
-      "p2": "Ang mga tradisyunal na VPN protocol tulad ng OpenVPN at WireGuard ay may kilalang traffic patterns. Agad itong nakikita ng DPI at bino-block. Kahit subukan pa itago ng VPN, nananatiling detectable ang protocol signatures.",
-      "p3": "Bukod sa protocol detection, bino-block din ng censorship systems ang mga kilalang VPN server IP at sinusuri ang TLS handshake fingerprints para hadlangan ang VPN bago pa ito ganap na makakonekta."
+    "detection": {
+      "title": "Paano Nide-detect at Bino-block ng mga Gobyerno ang mga VPN",
+      "intro": "Ang internet censorship ay lumampas na sa simpleng IP blocking. Ang mga bansa tulad ng Russia, China, at Iran ay gumagamit ng mga sopistikadong sistema na gumagamit ng machine learning para matukoy at maputol ang mga VPN connection sa real time. Ganito mismo ang ginagawa nila.",
+      "tspu": {
+        "title": "Ang Imprastraktura: TSPU at DPI",
+        "p1": "Gumagamit ang Russia ng TSPU (Technical Systems for Threat Countermeasures) — espesyal na hardware na naka-install direkta sa mga ISP network node. Gumagamit ang China ng Great Firewall, at ang Iran ay nag-ooperate ng NIN. Ang mga sistemang ito ay nagsasagawa ng Deep Packet Inspection (DPI) sa bawat packet na dumaraan sa network.",
+        "p2": "Ang mga tradisyunal na VPN protocol tulad ng OpenVPN, WireGuard, at IPSec ay may kakaibang packet structure. Agad itong natutukoy ng DPI at pinapaputol ang koneksyon. Kahit ang mga \"obfuscated\" mode ay madalas nabibigo dahil nananatiling detectable ang underlying handshake pattern.",
+        "p3": "Kapag hindi sapat ang basic signature matching, ina-activate ng mga sistemang ito ang mga machine learning module. Humihinto sila sa pagtingin sa loob ng mga packet (lahat ay encrypted) at nagsisimulang suriin kung paano kumikilos ang traffic."
+      },
+      "method1": {
+        "title": "Paraan 1: TLS Client Fingerprinting",
+        "description": "Bawat TLS client — Chrome, Firefox, Safari — ay nagpapadala ng mga connection parameter sa isang partikular na pagkakasunod-sunod habang nagha-handshake. Lumilikha ito ng natatanging fingerprint. Ang isang VPN client na nagpapanggap bilang HTTPS traffic ay madalas nagpapadala ng mga parameter na ito sa ibang pagkakasunod-sunod kaysa sa anumang tunay na browser. Kinukumpara ng DPI ang fingerprint sa database ng mga kilalang browser. Hindi tugma? Fina-flag bilang tunnel."
+      },
+      "method2": {
+        "title": "Paraan 2: Traffic Entropy Analysis",
+        "description": "Ang tunay na paggamit ng internet ay may mga kakaibang pattern. Ang video streaming ay gumagawa ng maraming magkakasunod na malalaking packet. Ang web browsing ay sumusunod sa cycle na request-response-pause. Ang VPN tunnel ay may ganap na kaibang entropy profile — pare-parehong laki ng packet, consistent na timing, at hindi natural na density. Kahit nakatago bilang HTTPS, natutukoy ng mga machine learning model ang mga statistical anomaly na ito sa packet length at time delay."
+      },
+      "method3": {
+        "title": "Paraan 3: Active Probing",
+        "description": "Kapag pinaghihinalaan ng sistema na may VPN na tumatakbo sa isang foreign server, nagpapadala ito ng sarili nitong probe request. Kung tumugon ang server na parang normal na website — nagbabalik ng 404 error o HTML page — pumasa ito. Pero kung sinubukan ng server na mag-initiate ng VPN handshake o kumilos nang hindi inaasahan, agad na bina-ban ang IP address. Nabibigo agad ang mga simpleng VPN sa pagsubok na ito."
+      },
+      "method4": {
+        "title": "Paraan 4: IP at DNS Blacklisting",
+        "description": "Ang mga kilalang VPN provider IP range ay tuwirang bino-block. Ang mga DNS request para sa VPN domain ay inii-intercept. Ang mga komersyal na VPN provider na may pampublikong listahan ng server ang pinaka-madaling target — maaaring ma-block ang buong imprastraktura nila sa loob ng ilang minuto."
+      },
+      "conclusion": "Ang resulta: ang mga push-button VPN at karaniwang proxy service tulad ng NordVPN, ExpressVPN, at Surfshark ay humihinto sa pag-andar sa loob ng ilang oras ng crackdown. Tanging ang mga proxy protocol na espesyal na idinisenyo para maging hindi makilala mula sa karaniwang web traffic ang nakakaligtas."
     },
-    "evasion": {
-      "title": "Bakit Invisible ang Trapiko ng Doppler",
-      "reality": {
-        "title": "Reality Handshake",
-        "description": "Gumagawa ang VLESS-Reality ng tunay na TLS handshake gamit ang certificate ng totoong website. Sa sinumang tumitingin — kasama na ang DPI — parang nagba-browse lang ng normal na HTTPS website. Walang pekeng certificate na madetect."
+    "defeats": {
+      "title": "Paano Tinatalunin ng Doppler ang Bawat Paraan ng Detection",
+      "subtitle": "Bawat detection technique ay may partikular na countermeasure na naka-built sa VLESS-Reality — ang protocol na nagpapatakbo sa bawat koneksyon ng Doppler.",
+      "signatures": {
+        "attack": "Protocol Signatures",
+        "defense": "Walang VPN Signature",
+        "description": "Walang natutukoy na protocol pattern ang VLESS-Reality. Walang VPN handshake, walang kakaibang packet structure, walang maimamatch sa mga DPI signature database."
       },
-      "noSignature": {
-        "title": "Walang Protocol Signature",
-        "description": "Hindi tulad ng OpenVPN (na may kakaibang handshake) o WireGuard (na may kilalang packet structure), walang naiiwang signature ang VLESS-Reality. Walang maimamatch ang automated detection systems."
+      "fingerprinting": {
+        "attack": "TLS Fingerprinting",
+        "defense": "Tunay na TLS Handshake",
+        "description": "Nagsasagawa ang Reality ng tunay na TLS handshake gamit ang certificate ng lehitimong website. Eksaktong tumutugma ang fingerprint sa kung ano ang gagawin ng tunay na browser — dahil tunay na TLS connection ito."
       },
-      "indistinguishable": {
-        "title": "Trapiko na Kamukhang-kamukha ng HTTPS",
-        "description": "Pagkatapos mabuo ang tunnel, lahat ng data ay encrypted at naka-format na parang standard HTTPS traffic. Packet sizes, timing patterns, headers — lahat pareho sa normal na browsing."
+      "entropy": {
+        "attack": "Entropy Analysis",
+        "defense": "Natural na Traffic Pattern",
+        "description": "Ang traffic na dumadaan sa VLESS-Reality tunnel ay naka-format na kapareho ng standard HTTPS. Ang laki ng packet, timing, at flow pattern ay tumutugma sa normal na web browsing, na tinatalo ang statistical analysis."
       },
-      "infrastructure": {
-        "title": "Dynamic na Server Infrastructure",
-        "description": "Niro-rotate ng Doppler ang mga server endpoints at IP addresses. Kahit ma-identify ang isang endpoint, nag-a-adapt ang network."
+      "probing": {
+        "attack": "Active Probing",
+        "defense": "Lehitimong Server Response",
+        "description": "Kapag ni-probe, tumutugon ang mga Doppler server na eksaktong katulad ng lehitimong website na kanilang minomonitor. Ang mga hindi awtorisadong probe request ay tumatanggap ng normal na web response. Nag-a-activate lang ang VPN tunnel kapag may valid na client authentication."
+      },
+      "blacklisting": {
+        "attack": "IP Blacklisting",
+        "defense": "Dynamic na Imprastraktura",
+        "description": "Niro-rotate ng Doppler ang mga server endpoint at IP address. Kahit matukoy ang isang endpoint, awtomatikong nag-a-adapt ang network. Nagbibigay ang aming Telegram bot ng agarang access sa updated na server configuration."
       }
     },
-    "flow": {
-      "title": "Ang Nakikita ng Censorship Systems",
-      "step1": "Ang Device Mo",
-      "step1note": "Nagsisimula ang koneksyon ng Doppler client",
-      "step2": "TLS Handshake",
-      "step2note": "Parang bumibisita lang sa normal na website",
-      "step3": "VLESS Tunnel",
-      "step3note": "Nakikita ng DPI: normal na HTTPS traffic",
-      "step4": "Doppler Node",
-      "step4note": "Lumalabas ang trapiko sa bukas na internet",
-      "dpiLabel": "Nakikita ng DPI: normal na HTTPS traffic"
+    "blocked": {
+      "title": "Na-block sa Russia — At Naririto Pa Rin",
+      "badge": "Na-verify ng Roskomnadzor",
+      "p1": "Espesipikong tinarget at bino-block ng mga awtoridad ng Russia ang Doppler VPN. Naidagdag na ang aming domain sa federal blocklist. Hindi namin ito itinatago — patunay ito na gumagana ang aming teknolohiya.",
+      "p2": "Hindi tulad ng mga komersyal na VPN provider na sumusunod sa mga takedown request o tahimik na umaalis sa mga restriktibong merkado, binuo ang Doppler para sa eksaktong sitwasyong ito. Kapag na-block ang aming website, nananatiling accessible ang aming Telegram bot. Kapag na-ban ang mga server IP, awtomatikong nag-ro-rotate ang aming imprastraktura.",
+      "p3": "Bawat block na ipinapataw nila, binabypass namin. Hindi iyan marketing claim — iyan ang aming pang-araw-araw na operasyon.",
+      "stat1label": "Domain na-block ng RKN",
+      "stat1value": "Nakumpirma",
+      "stat2label": "Status ng serbisyo",
+      "stat2value": "Operasyonal",
+      "stat3label": "Alternatibong access",
+      "stat3value": "Telegram Bot"
+    },
+    "future": {
+      "title": "Ano ang Inaasahan: Ang Kinabukasan ng mga Restriksyon sa Internet",
+      "intro": "Hindi tumitigil ang internet censorship. Makakatulong ang pag-unawa kung saan patungo ang mga bagay-bagay para makapaghanda ka. Narito ang makatotohanang progression batay sa kasalukuyang imprastraktura at mga trend sa patakaran.",
+      "stage1": {
+        "label": "Kasalukuyang Yugto",
+        "title": "DPI + Machine Learning Detection",
+        "description": "Nagde-deploy ang mga gobyerno ng TSPU/DPI hardware na may ML module sa mga ISP node. Awtomatikong bino-block ang mga standard VPN protocol. Gumagana pa rin ang VLESS-Reality at mga katulad na anti-censorship protocol dahil gumagawa sila ng traffic na hindi makilala mula sa HTTPS.",
+        "status": "Aktibo na ngayon sa Russia, China, Iran"
+      },
+      "stage2": {
+        "label": "Posibleng Susunod na Hakbang",
+        "title": "Whitelist Model",
+        "description": "Sa halip na i-block ang mga partikular na protocol, tanging mga aprubadong domain at IP address lang ang maa-access. Lahat ng iba pa ay bino-block bilang default. SSH, RDP, gaming port — lahat bino-block maliban kung rehistrado ng legal na entity. Bahagyang sinubukan ito noong 2018 Telegram ban ng Russia.",
+        "status": "Technically feasible, bahagyang nai-deploy"
+      },
+      "stage3": {
+        "label": "Matinding Senaryo",
+        "title": "Pambansang Internet Isolation",
+        "description": "Isang ganap na nakahiwalay na domestic network na may mandatoryong state-issued root certificate, lokal na mirror ng mga dayuhang serbisyo, at walang direktang access sa global internet. Isipin ang Kwangmyong ng North Korea, pero sa malaking saklaw.",
+        "status": "Matinding pinsala sa ekonomiya — tingnan sa ibaba"
+      },
+      "reality": {
+        "title": "Ang Katotohanan sa Ekonomiya",
+        "p1": "Noong 2018, nang subukan ng Roskomnadzor na i-block lang ang Telegram, napunta sila sa pag-ban ng milyun-milyong Amazon at Google IP address. Huminto ang mga cash register sa mga tindahan. Nag-offline ang mga smart home device. Nabigo ang mga banking push notification.",
+        "p2": "Ang whitelist model ay magdudulot nito sa 100x na saklaw. Ang mga modernong Russian website ay umaasa sa Google Fonts, dayuhang CDN library, internasyonal na certificate authority, at mga cloud service. Gumagamit ng dayuhang SSL certificate ang mga bangko at logistics company. Mawawalan ng access ang mga developer sa GitHub, Docker Hub, at npm.",
+        "p3": "Posible sa teknikal ang buong isolation — pero ang presyo nito ay pagkabulok ng teknolohiya. Hindi na maa-access ang mga update ng Windows at Android. Mawawalan ng driver support ang mga medical equipment. Ganap na titigil ang AI development nang walang global open-source na imprastraktura.",
+        "p4": "Ang pinakamalamang na landas ay unti-unting paghihigpit sa loob ng maraming taon, hindi isang biglang pagputol. Pero bawat hakbang ng pagtaas ay nangangahulugang mas maraming VPN user ang maiiwanan — maliban kung sila ay handa."
+      }
+    },
+    "prepare": {
+      "title": "Paano Maghanda Ngayon",
+      "subtitle": "Huwag hintaying maging mas mahirap ang access. Gawin ang mga hakbang na ito ngayon.",
+      "step1": {
+        "title": "I-download na ang Doppler VPN Ngayon",
+        "description": "I-install ang app habang accessible pa ang mga app store at ang aming website sa iyong rehiyon. Kapag tumindi ang mga restriksyon, magiging mas mahirap ang pag-download."
+      },
+      "step2": {
+        "title": "I-save ang Aming Telegram Bot",
+        "description": "Idagdag ang @dopplercreatebot sa iyong Telegram. Kahit ma-block ang aming website, nananatiling accessible ang bot sa loob ng Telegram at makapagbibigay sa iyo ng VPN configuration sa isang iglap.",
+        "link": "Buksan ang @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Kunin ang Standalone Android APK",
+        "description": "Ang aming Telegram bot ay nagdi-distribute ng Android app direkta bilang APK file — hindi kailangan ang Play Store. Ito ang iyong backup kung ma-restrict ang Google Play sa iyong bansa."
+      },
+      "step4": {
+        "title": "Panatilihing Updated ang Iyong App",
+        "description": "Nagpu-push kami ng mga protocol update para manatiling nangunguna sa mga bagong blocking technique. I-enable ang auto-update o regular na mag-check ng mga update sa pamamagitan ng aming mga Telegram channel."
+      },
+      "step5": {
+        "title": "I-share sa mga Taong Nangangailangan",
+        "description": "Mas maraming tao ang may naka-install na Doppler bago tumindi ang mga restriksyon, mas mabuti. I-share ang aming Telegram bot link — ito ang pinaka-censorship-resistant na distribution channel na mayroon kami."
+      }
     },
     "comparison": {
       "title": "Paghahambing ng Protocol",
@@ -1167,20 +1253,15 @@
         "fingerprint": "Wala"
       }
     },
-    "works": {
-      "title": "Saan Gumagana ang Doppler",
-      "description": "Na-test at gumagana ang Doppler sa mga network na aktibong bino-block ang VPN — mga restriktibong ISP, national-level firewalls, at corporate networks na humahadlang sa tradisyunal na VPN.",
-      "environments": {
-        "isp": "Mga ISP na may restriksyon",
-        "national": "National-level na firewall systems",
-        "corporate": "Corporate network restrictions",
-        "public": "Filtered na public Wi-Fi"
-      }
-    },
     "cta": {
-      "title": "Subukan ang Doppler sa network mo",
-      "subtitle": "Tingnan kung gumagana ang Doppler kung saan nabibigo ang ibang VPN.",
-      "button": "I-download ang Doppler"
+      "title": "Walang Iiwan Naming Sinuman",
+      "subtitle": "Ang Doppler VPN ay espesyal na binuo para sa mga restriktibong network. Patuloy naming pinapahusay ang aming imprastraktura, niro-rotate ang mga server, at ina-update ang mga protocol para manatiling nangunguna sa bawat bagong blocking technique. Hindi mapag-uusapan ang iyong kalayaan sa internet.",
+      "downloadIos": "I-download para sa iOS",
+      "downloadAndroid": "I-download para sa Android",
+      "telegramBot": "Kunin sa pamamagitan ng Telegram Bot",
+      "telegramChannelRu": "Mga Update (Russian)",
+      "telegramChannelEn": "Mga Update (English)",
+      "button": "I-download ang Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1230,25 +1311,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Gawa para sa Restricted Networks",
-    "subtitle": "Ginagawang invisible ng Doppler ang VPN traffic sa censorship systems.",
-    "learnMore": "Alamin kung paano",
+    "title": "Ginawa para Lagpasan ang Government Censorship",
+    "subtitle": "Tinatalo ng Doppler ang TSPU, DPI, TLS fingerprinting, at active probing — ang parehong mga sistema na ginagamit ng Russia, China, at Iran para i-block ang mga VPN.",
+    "learnMore": "Basahin ang buong technical guide",
     "items": {
       "dpi": {
-        "title": "Deep Packet Inspection Bypass",
-        "description": "Ang mga karaniwang VPN ay may kilalang traffic signatures. Inaalis ito ng VLESS-Reality — hindi makilala ang trapiko mo sa normal na HTTPS."
+        "title": "Tinatalo ang Deep Packet Inspection",
+        "description": "Gumagamit ang TSPU at DPI hardware ng machine learning para ma-detect ang VPN traffic patterns. Zero signature ang VLESS-Reality — walang made-detect."
       },
       "tls": {
-        "title": "TLS Traffic Camouflage",
-        "description": "Gumagawa ang Doppler ng tunay na TLS handshake gamit ang totoong website certificate. Normal na web traffic ang nakikita ng censorship systems, hindi VPN."
+        "title": "Tunay na TLS Handshake",
+        "description": "Gumagawa ang Doppler ng tunay na TLS handshake gamit ang totoong website certificate. Normal na HTTPS connection ang nakikita ng DPI, hindi VPN tunnel."
       },
       "fingerprint": {
-        "title": "Walang Detectable Protocol Fingerprint",
-        "description": "Hindi tulad ng OpenVPN o WireGuard, walang naiiwang protocol fingerprint ang VLESS-Reality. Wala silang maimamatch."
+        "title": "Pumapasa sa Active Probing",
+        "description": "Kapag sinusuri ng mga censor ang aming servers, tumutugon sila bilang mga lehitimong website. Ang mga authenticated clients lang ang nag-a-activate ng VPN tunnel."
       },
       "regions": {
-        "title": "Gumagana sa Restricted Regions",
-        "description": "Na-test at gumagana sa mga network na aktibong nagbo-block ng VPN. Kumokonekta ang Doppler kung saan nabibigo ang karaniwang VPN."
+        "title": "Na-block ng Russia — Gumagana Pa Rin",
+        "description": "Nasa blocklist ng Roskomnadzor ang aming domain. Nandito pa rin kami. Mag-download sa pamamagitan ng Telegram bot kapag na-block ang website."
       }
     }
   },

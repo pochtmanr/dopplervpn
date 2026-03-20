@@ -113,21 +113,6 @@ function DurationSelector({ selected, onSelect, t }: DurationSelectorProps) {
           >
             <span className="relative z-10 flex items-center justify-center gap-1.5">
               {t(`durations.${duration}`)}
-              {isAnnual && (
-                <span
-                  className={`
-                  hidden sm:inline text-[10px] uppercase tracking-wider font-bold
-                  px-1.5 py-0.5 rounded-full
-                  ${
-                    isSelected
-                      ? "bg-bg-primary/20 text-bg-primary"
-                      : "bg-accent-teal/15 text-accent-teal"
-                  }
-                `}
-                >
-                  {t("bestValue")}
-                </span>
-              )}
             </span>
           </button>
         );
@@ -156,6 +141,11 @@ function PriceDisplay({ duration, t }: PriceDisplayProps) {
         {priceData.savings && (
           <Badge variant="teal" className="self-center ms-1 text-[10px] lg:text-xs px-1.5 py-0.5 lg:px-2 lg:py-1">
             {t("save")} {priceData.savings}%
+          </Badge>
+        )}
+        {duration === "annual" && (
+          <Badge variant="gold" className="self-center ms-1 text-[10px] lg:text-xs px-1.5 py-0.5 lg:px-2 lg:py-1">
+            {t("bestValue")}
           </Badge>
         )}
       </div>

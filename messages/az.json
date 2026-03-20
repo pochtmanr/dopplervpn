@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — Təhlükəsiz VPN Loqsuz | Məxfi",
-    "description": "Doppler VPN sizi VLESS-Reality şifrələməsi, DNS qoruması və ciddi qeyd saxlamama siyasəti ilə qoruyur. iOS, Android, macOS və Windows-da mövcuddur."
+    "title": "Doppler VPN — Təhlükəsiz Loqsuz VPN və Proksi Məxfilik Üçün",
+    "description": "Doppler VPN sizi VLESS-Reality proksi şifrələməsi, DNS qoruması və ciddi loqsuz siyasəti ilə qoruyur. DPI və hökumət senzurasını keçir. iOS, Android, macOS və Windows-da mövcuddur."
   },
   "nav": {
     "features": "Xüsusiyyətlər",
@@ -1218,73 +1218,159 @@
     }
   },
   "censorshipResistance": {
-    "title": "Məhdudlaşdırıcı Şəbəkələr Üçün Dizayn Edilib",
-    "subtitle": "Doppler VPN trafikini şəbəkə senzura sistemləri üçün görünməz edən texnikalardan istifadə edir.",
-    "learnMore": "Necə işlədiyini öyrən",
+    "title": "Hökumət Senzurasını Keçmək Üçün Yaradılıb",
+    "subtitle": "Doppler TSPU, DPI, TLS fingerprinting və aktiv yoxlama sistemlərini məğlub edir — Rusiya, Çin və İranın VPN-ləri bloklamaq üçün istifadə etdiyi eyni sistemlər.",
+    "learnMore": "Tam texniki bələdçini oxuyun",
     "items": {
       "dpi": {
-        "title": "Dərin Paket Yoxlaması Keçidi",
-        "description": "Ənənəvi VPN protokolları tanınan trafik imzalarına malikdir. VLESS-Reality onları aradan qaldırır — trafikiniz adi HTTPS-dən fərqlənmir."
+        "title": "Deep Packet Inspection-ı Məğlub Edir",
+        "description": "TSPU və DPI avadanlığı VPN trafik nümunələrini aşkar etmək üçün maşın öyrənməsi istifadə edir. VLESS-Reality sıfır imza yaradır — aşkarlanacaq heç nə yoxdur."
       },
       "tls": {
-        "title": "TLS Trafik Kamuflyajı",
-        "description": "Doppler əsl veb sayt sertifikatı ilə həqiqi TLS əl sıxması həyata keçirir. Senzura sistemləri VPN əlaqəsi deyil, normal veb trafiki görür."
+        "title": "Həqiqi TLS Handshake",
+        "description": "Doppler əsl veb sayt sertifikatı ilə həqiqi TLS handshake həyata keçirir. DPI normal HTTPS bağlantısı görür, VPN tuneli deyil."
       },
       "fingerprint": {
-        "title": "Aşkarlana Bilən Protokol İzi Yoxdur",
-        "description": "OpenVPN və ya WireGuard-dan fərqli olaraq, VLESS-Reality heç bir protokol izi buraxmır. Avtomatik bloklama sistemlərinin uyğunlaşdıracağı heç nə yoxdur."
+        "title": "Aktiv Yoxlamanı Keçir",
+        "description": "Senzura serverlərimizi yoxladıqda, onlar qanuni veb saytlar kimi cavab verir. Yalnız autentifikasiya edilmiş müştərilər VPN tunelini aktivləşdirir."
       },
       "regions": {
-        "title": "Məhdud Bölgələrdə İşləyir",
-        "description": "Aktiv VPN bloklama olan şəbəkələrdə sınaqdan keçirilib və işləyir. Doppler əsas VPN-lərin uğursuz olduğu yerdə qoşulur."
+        "title": "Rusiya Tərəfindən Bloklanıb — Hələ Fəaliyyətdədir",
+        "description": "Domenimiz Roskomnadzor-un bloklama siyahısındadır. Biz hələ buradayıq. Sayt bloklandıqda Telegram bot vasitəsilə yükləyin."
       }
     }
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Doppler VPN İnternet Senzurasını Necə Keçir",
-      "description": "VLESS-Reality-nin VPN trafikini dərin paket yoxlaması və senzura sistemləri tərəfindən necə aşkarlanmaz etdiyini öyrənin."
+      "title": "İnternet Senzurası Bələdçisi — VPN-lər Necə Bloklanır və Əlaqədə Necə Qalmaq Olar",
+      "description": "Hökumətlərin DPI, TSPU və maşın öyrənməsi ilə VPN-ləri necə blokladığına və VLESS-Reality proksisinin hər aşkarlama metodunu necə aşdığına dair texniki bələdçi. Artan məhdudiyyətlərə hazır olun."
     },
     "hero": {
-      "title": "Doppler VPN İnternet Senzurasını Necə Keçir",
-      "subtitle": "VLESS-Reality-nin VPN trafikini necə aşkarlanmaz etdiyinə dair texniki baxış."
+      "title": "İnternet Azadlığı Bələdçiniz",
+      "subtitle": "Hökumətlər VPN-ləri necə aşkarlayır və bloklayır, Doppler hər metodu necə məğlub edir və məhdudiyyətlər artdıqca əlaqədə qalmaq üçün indi nə etməlisiniz."
     },
-    "problem": {
-      "title": "Senzura Sistemləri VPN-ləri Necə Bloklayır",
-      "p1": "Müasir senzura sistemləri internet trafikini real vaxtda təhlil etmək üçün Dərin Paket Yoxlamasından (DPI) istifadə edir. Bu sistemlər yalnız məlumatınızın hara getdiyinə baxmır — VPN protokollarının xarakterik əlamətlərini axtararaq necə paketləndiyini yoxlayır.",
-      "p2": "OpenVPN və WireGuard kimi ənənəvi VPN protokollarının tanınan trafik nümunələri var. DPI sistemləri bu nümunələri müəyyən edib əlaqələri dərhal bloklaya bilir. VPN provayderləri trafikini gizlətməyə çalışsa belə, əsas protokol imzaları aşkarlana bilir.",
-      "p3": "Protokol aşkarlanmasından əlavə, senzura sistemləri tanınan VPN server IP ünvanlarını da bloklayır və VPN əlaqələrini tam qurulmazdan əvvəl müəyyən edib bloklamaq üçün TLS əl sıxması iz analizindən istifadə edir."
+    "detection": {
+      "title": "Hökumətlər VPN-ləri Necə Aşkarlayır və Bloklayır",
+      "intro": "İnternet senzurası sadə IP bloklama səviyyəsindən çox irəli getmişdir. Rusiya, Çin və İran kimi ölkələr VPN əlaqələrini real vaxtda müəyyən edib dayandırmaq üçün maşın öyrənməsindən istifadə edən mürəkkəb sistemlər yerləşdirir. Bunu necə etdiklərini dəqiq izah edirik.",
+      "tspu": {
+        "title": "İnfrastruktur: TSPU və DPI",
+        "p1": "Rusiya TSPU (Təhdidlərə Qarşı Texniki Sistemlər) yerləşdirir — İSP şəbəkə qovşaqlarına birbaşa quraşdırılmış xüsusi avadanlıq. Çin Böyük Firewalldan, İran isə NIN-dən istifadə edir. Bu sistemlər şəbəkədən keçən hər paketə Dərin Paket Yoxlaması (DPI) tətbiq edir.",
+        "p2": "OpenVPN, WireGuard və IPSec kimi ənənəvi VPN protokollarının fərqli paket quruluşları var. DPI onları dərhal müəyyən edir və əlaqəni kəsir. Hətta \"gizlədilmiş\" rejimlər belə çox vaxt uğursuz olur, çünki əsas əl sıxması nümunəsi aşkarlana bilir.",
+        "p3": "Sadə imza uyğunlaşdırması kifayət etmədikdə, bu sistemlər maşın öyrənməsi modullarını aktivləşdirir. Paketlərin içinə baxmağı dayandırırlar (hər şey şifrələnmişdir) və trafikin necə davrandığını təhlil etməyə başlayırlar."
+      },
+      "method1": {
+        "title": "Metod 1: TLS Müştəri Barmaq İzi",
+        "description": "Hər TLS müştərisi — Chrome, Firefox, Safari — əl sıxması zamanı əlaqə parametrlərini müəyyən ardıcıllıqla göndərir. Bu unikal barmaq izi yaradır. HTTPS trafiki kimi görünməyə çalışan VPN müştərisi bu parametrləri çox vaxt həqiqi brauzerdən fərqli ardıcıllıqla göndərir. DPI barmaq izini tanınan brauzerlər bazası ilə müqayisə edir. Uyğunsuzluq? Tunel kimi qeyd olunur."
+      },
+      "method2": {
+        "title": "Metod 2: Trafik Entropiya Analizi",
+        "description": "Həqiqi internet istifadəsinin fərqli nümunələri var. Video axını ardıcıl böyük paketlər yaradır. Veb baxış sorğu-cavab-pauza dövrü izləyir. VPN tunelinin tamamilə fərqli entropiya profili var — eyni paket ölçüləri, ardıcıl zamanlama, qeyri-insani sıxlıq. Trafik HTTPS kimi gizlənsə belə, maşın öyrənməsi modelləri paket ölçülərindəki və zaman gecikmələrindəki bu statistik anomaliyaları aşkarlayır."
+      },
+      "method3": {
+        "title": "Metod 3: Aktiv Yoxlama",
+        "description": "Sistem xarici serverin VPN işlətdiyindən şübhələndikdə, öz yoxlama sorğusunu göndərir. Əgər server adi veb sayt kimi cavab verirsə — 404 xətası və ya HTML səhifəsi qaytarırsa — yoxlamadan keçir. Amma server VPN əl sıxması başlatmağa cəhd edirsə və ya gözlənilməz davranış göstərirsə, IP ünvanı dərhal bloklanır. Sadə VPN-lər bu sınaqdan dərhal keçə bilmir."
+      },
+      "method4": {
+        "title": "Metod 4: IP və DNS Qara Siyahısı",
+        "description": "Tanınan VPN provayder IP diapazonları birbaşa bloklanır. VPN domenlərinə DNS sorğuları tutulur. Açıq server siyahıları olan kommersiya VPN provayderləri ən asan hədəflərdir — bütün infrastrukturu bir neçə dəqiqə ərzində bloklamaq olar."
+      },
+      "conclusion": "Nəticə: NordVPN, ExpressVPN və Surfshark kimi adi VPN-lər və standart proksi xidmətləri sıxışdırma başladıqdan bir neçə saat sonra işləməyi dayandırır. Yalnız adi veb trafikindən fərqlənməyəcək şəkildə xüsusi hazırlanmış proksi protokolları sağ qalır."
     },
-    "evasion": {
-      "title": "Niyə Doppler VPN Trafiki Görünməzdir",
-      "reality": {
-        "title": "Reality Əl Sıxması",
-        "description": "VLESS-Reality həqiqi veb saytın sertifikatından istifadə edərək həqiqi TLS əl sıxması həyata keçirir. İstənilən müşahidəçi üçün — DPI sistemləri daxil — əlaqə adi HTTPS veb saytına baxan birinə bənzəyir. Aşkarlanacaq saxta sertifikat və ya proksi imzası yoxdur."
+    "defeats": {
+      "title": "Doppler Hər Aşkarlama Metodunu Necə Məğlub Edir",
+      "subtitle": "Hər aşkarlama texnikasının VLESS-Reality-də — hər Doppler əlaqəsini təmin edən protokolda — xüsusi əks-tədbiri var.",
+      "signatures": {
+        "attack": "Protokol İmzaları",
+        "defense": "Sıfır VPN İmzası",
+        "description": "VLESS-Reality heç bir müəyyən edilə bilən protokol nümunəsi yaratmır. VPN əl sıxması yoxdur, fərqli paket quruluşu yoxdur, DPI imza bazalarının uyğunlaşdıracağı heç nə yoxdur."
       },
-      "noSignature": {
-        "title": "Protokol İmzası Yoxdur",
-        "description": "OpenVPN-dən (fərqləndirici əl sıxması olan) və ya WireGuard-dan (tanınan paket quruluşu olan) fərqli olaraq, VLESS-Reality heç bir müəyyən edilə bilən protokol imzası yaratmır. Avtomatik aşkarlama sistemlərinin uyğunlaşdıracağı heç nə yoxdur."
+      "fingerprinting": {
+        "attack": "TLS Barmaq İzi",
+        "defense": "Həqiqi TLS Əl Sıxması",
+        "description": "Reality qanuni veb saytın sertifikatından istifadə edərək həqiqi TLS əl sıxması həyata keçirir. Barmaq izi həqiqi brauzerin yaradacağı ilə tam uyğun gəlir — çünki bu, həqiqi TLS əlaqəsidir."
       },
-      "indistinguishable": {
-        "title": "HTTPS-dən Fərqlənməyən Trafik",
-        "description": "Tunel qurulduqdan sonra, ondan keçən bütün məlumat standart HTTPS trafiki kimi şifrələnir və formatlanır. Paket ölçüləri, vaxt nümunələri və başlıqlar hamısı normal veb baxış sessiyasına uyğun gəlir."
+      "entropy": {
+        "attack": "Entropiya Analizi",
+        "defense": "Təbii Trafik Nümunələri",
+        "description": "VLESS-Reality tunelindən keçən trafik standart HTTPS ilə eyni formatdadır. Paket ölçüləri, zamanlama və axın nümunələri adi veb baxışa uyğun gəlir və statistik analizi məğlub edir."
       },
-      "infrastructure": {
-        "title": "Dinamik Server İnfrastrukturu",
-        "description": "Doppler VPN server nöqtələrini və IP ünvanlarını rotasiya edir, senzura sistemlərinin aktual blok siyahılarını saxlamasını çətinləşdirir. Hətta bir nöqtə müəyyən edilsə belə, şəbəkə uyğunlaşır."
+      "probing": {
+        "attack": "Aktiv Yoxlama",
+        "defense": "Qanuni Server Cavabı",
+        "description": "Yoxlandıqda, Doppler serverləri əks etdirdikləri qanuni veb sayt kimi tam eyni cavab verir. İcazəsiz yoxlama sorğuları adi veb cavablar alır. VPN tuneli yalnız etibarlı müştəri autentifikasiyası ilə aktivləşir."
+      },
+      "blacklisting": {
+        "attack": "IP Bloklama",
+        "defense": "Dinamik İnfrastruktur",
+        "description": "Doppler server nöqtələrini və IP ünvanlarını rotasiya edir. Hətta bir nöqtə müəyyən edilsə belə, şəbəkə avtomatik uyğunlaşır. Telegram botumuz yenilənmiş server konfiqurasiyalarına ani giriş təmin edir."
       }
     },
-    "flow": {
-      "title": "Senzura Sistemləri Nə Görür",
-      "step1": "Cihazınız",
-      "step1note": "Doppler müştəri əlaqəni başladır",
-      "step2": "TLS Əl Sıxması",
-      "step2note": "Normal veb sayta giriş kimi görünür",
-      "step3": "VLESS Tuneli",
-      "step3note": "DPI görür: adi HTTPS trafiki",
-      "step4": "Doppler Nodu",
-      "step4note": "Trafik açıq internetə çıxır",
-      "dpiLabel": "DPI-nin gördüyü: normal HTTPS trafiki"
+    "blocked": {
+      "title": "Rusiyada Bloklanıb — Və Hələ Buradayıq",
+      "badge": "Roskomnadzor tərəfindən təsdiqlənib",
+      "p1": "Rusiya hakimiyyəti Doppler VPN-i xüsusi hədəfə alıb və bloklayıb. Domenimiz federal blok siyahısına əlavə edilib. Bunu gizlətmirik — bu, texnologiyamızın işlədiyinin sübutudur.",
+      "p2": "Silmə tələblərinə tabe olan və ya məhdudlaşdırılmış bazarlardan səssizcə çıxan kommersiya VPN provayderlərindən fərqli olaraq, Doppler məhz bu ssenari üçün yaradılıb. Veb saytımız bloklandıqda, Telegram botumuz əlçatan qalır. Server IP-ləri bloklandıqda, infrastrukturumuz avtomatik rotasiya edir.",
+      "p3": "Onların qoyduğu hər bloku biz aşırıq. Bu marketinq iddiası deyil — bu, bizim gündəlik fəaliyyətimizdir.",
+      "stat1label": "Domen RKN tərəfindən bloklanıb",
+      "stat1value": "Təsdiqlənib",
+      "stat2label": "Xidmət vəziyyəti",
+      "stat2value": "Fəaliyyətdədir",
+      "stat3label": "Alternativ giriş",
+      "stat3value": "Telegram Bot"
+    },
+    "future": {
+      "title": "Nə Gözləməli: İnternet Məhdudiyyətlərinin Gələcəyi",
+      "intro": "İnternet senzurası yerində durmur. Hadisələrin hara getdiyini anlamaq hazırlaşmağınıza kömək edir. Hazırkı infrastruktur və siyasət tendensiyalarına əsaslanan real proqnoz budur.",
+      "stage1": {
+        "label": "Hazırkı Mərhələ",
+        "title": "DPI + Maşın Öyrənməsi ilə Aşkarlama",
+        "description": "Hökumətlər İSP qovşaqlarına ML modulları olan TSPU/DPI avadanlığı yerləşdirir. Standart VPN protokolları avtomatik bloklanır. VLESS-Reality və oxşar senzuraya qarşı protokollar hələ işləyir, çünki yaratdıqları trafik HTTPS-dən fərqlənmir.",
+        "status": "Hazırda Rusiya, Çin, İranda aktiv"
+      },
+      "stage2": {
+        "label": "Mümkün Növbəti Addım",
+        "title": "Ağ Siyahı Modeli",
+        "description": "Müəyyən protokolları bloklamaq əvəzinə, yalnız təsdiqlənmiş domenlər və IP ünvanları əlçatan olardı. Qalan hər şey standart olaraq bloklanır. SSH, RDP, oyun portları — hamısı hüquqi şəxs tərəfindən qeydiyyatdan keçirilmədikcə bloklanır. Bu, Rusiyanın 2018-ci il Telegram blokadası zamanı qismən sınaqdan keçirildi.",
+        "status": "Texniki baxımdan mümkündür, qismən tətbiq edilib"
+      },
+      "stage3": {
+        "label": "Ekstremal Ssenari",
+        "title": "Milli İnternet Təcridolunması",
+        "description": "Məcburi dövlət sertifikatları, xarici xidmətlərin yerli güzgüləri və qlobal internetə birbaşa girişi olmayan tam təcrid edilmiş daxili şəbəkə. Şimali Koreyanın Kwangmyong-unu düşünün, amma böyük miqyasda.",
+        "status": "İqtisadi baxımdan dağıdıcı — aşağıya baxın"
+      },
+      "reality": {
+        "title": "İqtisadi Reallıq Yoxlaması",
+        "p1": "2018-ci ildə Roskomnadzor yalnız Telegram-ı bloklamağa çalışanda, milyonlarla Amazon və Google IP ünvanını bloklamaqla nəticələndi. Mağazalarda kassa aparatları işləməyi dayandırdı. Ağıllı ev cihazları oflayn oldu. Bank push bildirişləri uğursuz oldu.",
+        "p2": "Ağ siyahı modeli buna 100 dəfə böyük miqyasda səbəb olardı. Müasir Rusiya veb saytları Google Fonts, xarici CDN kitabxanaları, beynəlxalq sertifikat təşkilatları və bulud xidmətlərindən asılıdır. Banklar və logistika şirkətləri xarici SSL sertifikatlarından istifadə edir. Tərtibatçılar GitHub, Docker Hub və npm-ə girişi itirərdi.",
+        "p3": "Tam təcrid texniki baxımdan mümkündür — amma qiyməti texnoloji degradasiyadır. Windows və Android yeniləmələri əlçatmaz olur. Tibbi avadanlıq sürücü dəstəyini itirir. Süni intellekt inkişafı qlobal açıq mənbə infrastrukturu olmadan tamamilə dayanır.",
+        "p4": "Ən ehtimal olunan yol ani kəsilmə deyil, illər ərzində tədricən artan məhdudiyyətdir. Amma hər eskalasiya addımı daha çox VPN istifadəçisinin geridə qalması deməkdir — hazırlıqlı olmadıqları halda."
+      }
+    },
+    "prepare": {
+      "title": "İndi Özünüzü Necə Hazırlamalısınız",
+      "subtitle": "Girişin çətinləşməsini gözləməyin. Bu addımları bu gün atın.",
+      "step1": {
+        "title": "Doppler VPN-i İndi Yükləyin",
+        "description": "Tətbiqi app mağazaları və veb saytımız hələ regionunuzda əlçatan ikən quraşdırın. Məhdudiyyətlər artdıqda yükləmə xeyli çətinləşir."
+      },
+      "step2": {
+        "title": "Telegram Botumuzu Saxlayın",
+        "description": "Telegram-da @dopplercreatebot-u əlavə edin. Veb saytımız bloklanasa belə, bot Telegram daxilində əlçatan qalır və sizə VPN konfiqurasiyalarını dərhal təqdim edə bilir.",
+        "link": "@dopplercreatebot-u açın"
+      },
+      "step3": {
+        "title": "Müstəqil Android APK-nı Əldə Edin",
+        "description": "Telegram botumuz Android tətbiqini birbaşa APK faylı kimi paylaşır — Play Store tələb olunmur. Google Play ölkənizdə məhdudlaşdırılarsa, bu sizin ehtiyat seçiminizdir."
+      },
+      "step4": {
+        "title": "Tətbiqinizi Yenilənmiş Saxlayın",
+        "description": "Yeni bloklama texnikalarından öndə olmaq üçün protokol yeniləmələri göndəririk. Avtomatik yeniləmələri aktiv edin və ya Telegram kanallarımız vasitəsilə mütəmadi olaraq yeniləmələri yoxlayın."
+      },
+      "step5": {
+        "title": "Ehtiyacı Olanlara Paylaşın",
+        "description": "Məhdudiyyətlər artmadan əvvəl nə qədər çox insan Doppler quraşdırıbsa, bir o qədər yaxşıdır. Telegram bot linkimizi paylaşın — bu, bizdə olan ən senzuraya davamlı paylanma kanalıdır."
+      }
     },
     "comparison": {
       "title": "Protokol Müqayisəsi",
@@ -1317,20 +1403,15 @@
         "fingerprint": "Yoxdur"
       }
     },
-    "works": {
-      "title": "Doppler VPN Harada İşləyir",
-      "description": "Doppler aktiv VPN bloklama olan şəbəkələrdə sınaqdan keçirilib və işləyir — məhdudlaşdırıcı İSP mühitləri, milli səviyyəli firewalllar və ənənəvi VPN protokollarını bloklayan korporativ şəbəkələr daxil.",
-      "environments": {
-        "isp": "Məhdudlaşdırıcı İSP mühitləri",
-        "national": "Milli səviyyəli firewall sistemləri",
-        "corporate": "Korporativ şəbəkə məhdudiyyətləri",
-        "public": "Filtrələnmiş ictimai Wi-Fi şəbəkələri"
-      }
-    },
     "cta": {
-      "title": "Şəbəkənizdə Doppler VPN-i sınayın",
-      "subtitle": "Doppler-in digər VPN-lərin uğursuz olduğu yerdə işlədiyini görün.",
-      "button": "Doppler VPN-i Yüklə "
+      "title": "Biz Heç Kimi Geridə Qoymayacağıq",
+      "subtitle": "Doppler VPN xüsusi olaraq məhdudlaşdırılmış şəbəkələr üçün yaradılıb. Biz davamlı olaraq infrastrukturumuzu təkmilləşdirir, serverləri rotasiya edir və hər yeni bloklama texnikasından öndə olmaq üçün protokolları yeniləyirik. İnternet azadlığınız müzakirə mövzusu deyil.",
+      "downloadIos": "iOS üçün yükləyin",
+      "downloadAndroid": "Android üçün yükləyin",
+      "telegramBot": "Telegram Bot ilə əldə edin",
+      "telegramChannelRu": "Yeniliklər (Rusca)",
+      "telegramChannelEn": "Yeniliklər (İngiliscə)",
+      "button": "Doppler VPN-i Yükləyin"
     }
   },
   "about": {

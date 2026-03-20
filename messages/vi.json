@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — VPN An Toàn Không Lưu Nhật Ký",
-    "description": "VPN miễn phí không cần email hay đăng ký. Kết nối với mã hóa VLESS-Reality, chặn quảng cáo và bộ lọc nội dung. Không log. Có trên iOS và Android."
+    "title": "Doppler VPN — VPN Bảo Mật Không Lưu Nhật Ký & Proxy Riêng Tư",
+    "description": "Doppler VPN bảo vệ quyền riêng tư của bạn với mã hóa proxy VLESS-Reality, bảo vệ DNS và chính sách không lưu nhật ký nghiêm ngặt. Vượt DPI và kiểm duyệt chính phủ. Có trên iOS, Android, macOS & Windows."
   },
   "nav": {
     "features": "Tính năng",
@@ -1092,95 +1092,176 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Cách Doppler Vượt Kiểm Duyệt Internet | Doppler VPN",
-      "description": "Tìm hiểu cách VLESS-Reality làm cho lưu lượng VPN không thể bị DPI và hệ thống kiểm duyệt phát hiện."
+      "title": "Hướng dẫn về kiểm duyệt Internet — Cách VPN bị chặn và cách duy trì kết nối",
+      "description": "Hướng dẫn kỹ thuật về cách chính phủ chặn VPN và proxy bằng DPI, TSPU và học máy — và cách proxy VLESS-Reality vượt qua mọi phương pháp phát hiện. Chuẩn bị cho các hạn chế ngày càng leo thang."
     },
     "hero": {
-      "title": "Cách Doppler Vượt Kiểm Duyệt Internet",
-      "subtitle": "Tổng quan kỹ thuật về cách VLESS-Reality giúp lưu lượng VPN không bị phát hiện."
+      "title": "Hướng dẫn tự do Internet của bạn",
+      "subtitle": "Cách chính phủ phát hiện và chặn VPN, cách Doppler đánh bại mọi phương pháp, và những gì bạn nên làm ngay bây giờ để duy trì kết nối khi các hạn chế ngày càng tăng."
     },
-    "problem": {
-      "title": "Hệ Thống Kiểm Duyệt Chặn VPN Như Thế Nào",
-      "p1": "Hệ thống kiểm duyệt hiện đại sử dụng Deep Packet Inspection (DPI) để phân tích lưu lượng internet theo thời gian thực. Chúng không chỉ nhìn đích đến mà còn kiểm tra cách dữ liệu được đóng gói, tìm dấu hiệu của giao thức VPN.",
-      "p2": "Các giao thức VPN truyền thống như OpenVPN và WireGuard có mẫu lưu lượng dễ nhận diện. DPI phát hiện và chặn kết nối ngay lập tức. Dù VPN cố ngụy trang, dấu vân tay giao thức vẫn bị phát hiện.",
-      "p3": "Ngoài phát hiện giao thức, hệ thống kiểm duyệt còn chặn IP máy chủ VPN đã biết và phân tích vân tay TLS handshake để chặn kết nối VPN trước khi thiết lập xong."
+    "detection": {
+      "title": "Cách chính phủ phát hiện và chặn VPN",
+      "intro": "Kiểm duyệt Internet đã phát triển vượt xa việc chặn IP đơn giản. Các quốc gia như Nga, Trung Quốc và Iran triển khai các hệ thống tinh vi sử dụng học máy để nhận dạng và ngắt kết nối VPN trong thời gian thực. Đây là cách chính xác họ thực hiện.",
+      "tspu": {
+        "title": "Hạ tầng: TSPU và DPI",
+        "p1": "Nga triển khai TSPU (Hệ thống kỹ thuật đối phó mối đe dọa) — phần cứng chuyên dụng được cài đặt trực tiếp trên các nút mạng của nhà cung cấp dịch vụ Internet. Trung Quốc sử dụng Tường lửa Vĩ đại, Iran vận hành NIN. Các hệ thống này thực hiện Kiểm tra gói tin sâu (DPI) trên mọi gói tin đi qua mạng.",
+        "p2": "Các giao thức VPN truyền thống như OpenVPN, WireGuard và IPSec có cấu trúc gói tin đặc trưng. DPI nhận dạng chúng ngay lập tức và ngắt kết nối. Ngay cả các chế độ \"ẩn\" thường cũng thất bại vì mẫu bắt tay kết nối cơ bản vẫn có thể phát hiện được.",
+        "p3": "Khi so khớp chữ ký cơ bản không đủ, các hệ thống này kích hoạt các mô-đun học máy. Chúng ngừng phân tích bên trong gói tin (mọi thứ đều được mã hóa) và bắt đầu phân tích cách lưu lượng truy cập hoạt động."
+      },
+      "method1": {
+        "title": "Phương pháp 1: Dấu vân tay TLS Client",
+        "description": "Mỗi TLS client — Chrome, Firefox, Safari — gửi các tham số kết nối theo một thứ tự cụ thể trong quá trình bắt tay. Điều này tạo ra một dấu vân tay duy nhất. Một VPN client giả danh lưu lượng HTTPS thường gửi các tham số này theo thứ tự khác với bất kỳ trình duyệt thực nào. DPI so sánh dấu vân tay với cơ sở dữ liệu các trình duyệt đã biết. Không khớp? Đánh dấu là đường hầm."
+      },
+      "method2": {
+        "title": "Phương pháp 2: Phân tích entropy lưu lượng",
+        "description": "Việc sử dụng Internet thực tế có các mẫu đặc trưng. Phát trực tuyến video tạo ra nhiều gói tin lớn liên tiếp. Duyệt web tuân theo chu trình yêu cầu-phản hồi-tạm dừng. Một đường hầm VPN có hồ sơ entropy hoàn toàn khác — kích thước gói tin đồng đều, thời gian nhất quán, mật độ phi tự nhiên. Ngay cả khi lưu lượng được ngụy trang thành HTTPS, các mô hình học máy vẫn phát hiện các bất thường thống kê trong độ dài gói tin và độ trễ thời gian."
+      },
+      "method3": {
+        "title": "Phương pháp 3: Thăm dò chủ động",
+        "description": "Khi hệ thống nghi ngờ một máy chủ nước ngoài đang chạy VPN, nó gửi yêu cầu thăm dò riêng. Nếu máy chủ phản hồi như một trang web bình thường — trả về lỗi 404 hoặc trang HTML — nó đạt yêu cầu. Nhưng nếu máy chủ cố khởi tạo bắt tay VPN hoặc hoạt động bất thường, địa chỉ IP sẽ bị cấm ngay lập tức. Các VPN đơn giản thất bại trong bài kiểm tra này ngay lập tức."
+      },
+      "method4": {
+        "title": "Phương pháp 4: Danh sách đen IP và DNS",
+        "description": "Các dải IP đã biết của nhà cung cấp VPN bị chặn hoàn toàn. Các yêu cầu DNS đến tên miền VPN bị chặn. Các nhà cung cấp VPN thương mại với danh sách máy chủ công khai là mục tiêu dễ nhất — toàn bộ hạ tầng của họ có thể bị chặn trong vài phút."
+      },
+      "conclusion": "Kết quả: các VPN dạng bấm-nút và dịch vụ proxy tiêu chuẩn như NordVPN, ExpressVPN và Surfshark ngừng hoạt động trong vài giờ sau khi có đợt trấn áp. Chỉ các giao thức proxy được thiết kế đặc biệt để không thể phân biệt với lưu lượng web thông thường mới tồn tại."
     },
-    "evasion": {
-      "title": "Tại Sao Lưu Lượng Doppler Vô Hình",
-      "reality": {
-        "title": "Reality Handshake",
-        "description": "VLESS-Reality thực hiện TLS handshake thật sử dụng chứng chỉ trang web thật. Với bất kỳ người quan sát nào — kể cả DPI — kết nối trông giống hệt duyệt web HTTPS bình thường. Không có chứng chỉ giả để phát hiện."
+    "defeats": {
+      "title": "Cách Doppler đánh bại mọi phương pháp phát hiện",
+      "subtitle": "Mỗi kỹ thuật phát hiện đều có một biện pháp đối phó cụ thể được tích hợp trong VLESS-Reality — giao thức cung cấp năng lượng cho mọi kết nối Doppler.",
+      "signatures": {
+        "attack": "Chữ ký giao thức",
+        "defense": "Không có chữ ký VPN",
+        "description": "VLESS-Reality không tạo ra bất kỳ mẫu giao thức nào có thể nhận dạng. Không có bắt tay VPN, không có cấu trúc gói tin đặc trưng, không có gì để cơ sở dữ liệu chữ ký DPI so khớp."
       },
-      "noSignature": {
-        "title": "Không Có Dấu Vân Tay Giao Thức",
-        "description": "Khác với OpenVPN (có handshake đặc trưng) hoặc WireGuard (có cấu trúc gói đã biết), VLESS-Reality không tạo ra dấu vân tay giao thức. Hệ thống phát hiện tự động không có gì để so khớp."
+      "fingerprinting": {
+        "attack": "Dấu vân tay TLS",
+        "defense": "Bắt tay TLS thật",
+        "description": "Reality thực hiện bắt tay TLS thật sử dụng chứng chỉ của một trang web hợp pháp. Dấu vân tay khớp chính xác với những gì một trình duyệt thật sẽ tạo ra — bởi vì đó là một kết nối TLS thật."
       },
-      "indistinguishable": {
-        "title": "Lưu Lượng Giống Hệt HTTPS",
-        "description": "Sau khi đường hầm được thiết lập, toàn bộ dữ liệu được mã hóa và định dạng giống hệt HTTPS tiêu chuẩn. Kích thước gói, mẫu thời gian, header — tất cả đều giống phiên duyệt web bình thường."
+      "entropy": {
+        "attack": "Phân tích entropy",
+        "defense": "Mẫu lưu lượng tự nhiên",
+        "description": "Lưu lượng đi qua đường hầm VLESS-Reality được định dạng giống hệt HTTPS tiêu chuẩn. Kích thước gói tin, thời gian và mẫu luồng khớp với duyệt web bình thường, đánh bại phân tích thống kê."
       },
-      "infrastructure": {
-        "title": "Hạ Tầng Máy Chủ Động",
-        "description": "Doppler xoay vòng endpoint và địa chỉ IP máy chủ. Dù một endpoint bị phát hiện, mạng lưới tự thích ứng."
+      "probing": {
+        "attack": "Thăm dò chủ động",
+        "defense": "Phản hồi máy chủ hợp pháp",
+        "description": "Khi bị thăm dò, máy chủ Doppler phản hồi chính xác như trang web hợp pháp mà chúng phản chiếu. Các yêu cầu thăm dò trái phép nhận được phản hồi web bình thường. Đường hầm VPN chỉ kích hoạt khi có xác thực client hợp lệ."
+      },
+      "blacklisting": {
+        "attack": "Danh sách đen IP",
+        "defense": "Hạ tầng động",
+        "description": "Doppler luân chuyển các điểm cuối máy chủ và địa chỉ IP. Ngay cả khi một điểm cuối bị phát hiện, mạng lưới tự động thích ứng. Bot Telegram của chúng tôi cung cấp quyền truy cập tức thì vào các cấu hình máy chủ được cập nhật."
       }
     },
-    "flow": {
-      "title": "Hệ Thống Kiểm Duyệt Nhìn Thấy Gì",
-      "step1": "Thiết Bị Của Bạn",
-      "step1note": "Client Doppler khởi tạo kết nối",
-      "step2": "TLS Handshake",
-      "step2note": "Trông như đang truy cập trang web bình thường",
-      "step3": "Đường Hầm VLESS",
-      "step3note": "DPI thấy: lưu lượng HTTPS bình thường",
-      "step4": "Node Doppler",
-      "step4note": "Lưu lượng đi ra internet mở",
-      "dpiLabel": "DPI thấy: lưu lượng HTTPS bình thường"
+    "blocked": {
+      "title": "Bị chặn tại Nga — Và vẫn hoạt động",
+      "badge": "Xác nhận bởi Roskomnadzor",
+      "p1": "Chính quyền Nga đã nhắm mục tiêu và chặn Doppler VPN cụ thể. Tên miền của chúng tôi đã được thêm vào danh sách chặn liên bang. Đây không phải điều chúng tôi che giấu — đó là bằng chứng công nghệ của chúng tôi hoạt động.",
+      "p2": "Không giống các nhà cung cấp VPN thương mại tuân thủ yêu cầu gỡ bỏ hoặc âm thầm rút khỏi các thị trường bị hạn chế, Doppler được xây dựng cho chính kịch bản này. Khi trang web của chúng tôi bị chặn, bot Telegram của chúng tôi vẫn có thể truy cập. Khi IP máy chủ bị cấm, hạ tầng của chúng tôi tự động luân chuyển.",
+      "p3": "Mọi lệnh chặn họ áp đặt, chúng tôi đều vượt qua. Đây không phải là tuyên bố quảng cáo — đây là hoạt động hàng ngày của chúng tôi.",
+      "stat1label": "Tên miền bị chặn bởi RKN",
+      "stat1value": "Đã xác nhận",
+      "stat2label": "Trạng thái dịch vụ",
+      "stat2value": "Đang hoạt động",
+      "stat3label": "Truy cập thay thế",
+      "stat3value": "Bot Telegram"
+    },
+    "future": {
+      "title": "Điều gì sẽ xảy ra: Tương lai của các hạn chế Internet",
+      "intro": "Kiểm duyệt Internet không đứng yên. Hiểu được hướng phát triển giúp bạn chuẩn bị. Đây là diễn biến thực tế dựa trên xu hướng hạ tầng và chính sách hiện tại.",
+      "stage1": {
+        "label": "Giai đoạn hiện tại",
+        "title": "Phát hiện DPI + Học máy",
+        "description": "Các chính phủ triển khai phần cứng TSPU/DPI với các mô-đun học máy trên các nút ISP. Các giao thức VPN tiêu chuẩn bị chặn tự động. VLESS-Reality và các giao thức chống kiểm duyệt tương tự vẫn hoạt động vì chúng tạo ra lưu lượng không thể phân biệt với HTTPS.",
+        "status": "Đang hoạt động tại Nga, Trung Quốc, Iran"
+      },
+      "stage2": {
+        "label": "Bước tiếp theo có thể",
+        "title": "Mô hình danh sách trắng",
+        "description": "Thay vì chặn các giao thức cụ thể, chỉ các tên miền và địa chỉ IP được phê duyệt mới có thể truy cập. Mọi thứ khác bị chặn mặc định. SSH, RDP, cổng game — tất cả bị chặn trừ khi được đăng ký bởi một pháp nhân. Điều này đã được thử nghiệm một phần trong lệnh cấm Telegram năm 2018 của Nga.",
+        "status": "Khả thi về kỹ thuật, đã triển khai một phần"
+      },
+      "stage3": {
+        "label": "Kịch bản cực đoan",
+        "title": "Cô lập Internet quốc gia",
+        "description": "Một mạng nội địa hoàn toàn cô lập với chứng chỉ gốc bắt buộc do nhà nước cấp, bản sao địa phương của các dịch vụ nước ngoài, và không có quyền truy cập trực tiếp vào Internet toàn cầu. Hãy nghĩ đến Kwangmyong của Triều Tiên, nhưng ở quy mô lớn.",
+        "status": "Gây tàn phá kinh tế — xem bên dưới"
+      },
+      "reality": {
+        "title": "Kiểm tra thực tế kinh tế",
+        "p1": "Năm 2018, khi Roskomnadzor cố chặn chỉ riêng Telegram, họ đã vô tình cấm hàng triệu địa chỉ IP của Amazon và Google. Máy tính tiền trong cửa hàng ngừng hoạt động. Thiết bị nhà thông minh mất kết nối. Thông báo đẩy ngân hàng bị lỗi.",
+        "p2": "Mô hình danh sách trắng sẽ gây ra hậu quả gấp 100 lần. Các trang web Nga hiện đại phụ thuộc vào Google Fonts, thư viện CDN nước ngoài, cơ quan chứng chỉ quốc tế và dịch vụ đám mây. Ngân hàng và công ty logistics sử dụng chứng chỉ SSL nước ngoài. Lập trình viên sẽ mất quyền truy cập GitHub, Docker Hub và npm.",
+        "p3": "Cô lập hoàn toàn về mặt kỹ thuật là khả thi — nhưng cái giá phải trả là suy thoái công nghệ. Bản cập nhật Windows và Android không thể tải về. Thiết bị y tế mất hỗ trợ trình điều khiển. Phát triển AI dừng hoàn toàn khi không có hạ tầng mã nguồn mở toàn cầu.",
+        "p4": "Con đường có khả năng nhất là hạn chế dần dần qua nhiều năm, không phải cắt đứt đột ngột. Nhưng mỗi bước leo thang đồng nghĩa nhiều người dùng VPN bị bỏ lại phía sau — trừ khi họ đã chuẩn bị."
+      }
+    },
+    "prepare": {
+      "title": "Cách chuẩn bị ngay bây giờ",
+      "subtitle": "Đừng đợi đến khi truy cập trở nên khó khăn hơn. Thực hiện các bước này ngay hôm nay.",
+      "step1": {
+        "title": "Tải Doppler VPN ngay",
+        "description": "Cài đặt ứng dụng khi cửa hàng ứng dụng và trang web của chúng tôi vẫn có thể truy cập trong khu vực của bạn. Khi các hạn chế leo thang, việc tải xuống sẽ khó khăn hơn đáng kể."
+      },
+      "step2": {
+        "title": "Lưu bot Telegram của chúng tôi",
+        "description": "Thêm @dopplercreatebot vào Telegram của bạn. Ngay cả khi trang web của chúng tôi bị chặn, bot vẫn có thể truy cập trong Telegram và có thể cung cấp cho bạn cấu hình VPN ngay lập tức.",
+        "link": "Mở @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Tải APK Android độc lập",
+        "description": "Bot Telegram của chúng tôi phân phối ứng dụng Android trực tiếp dưới dạng tệp APK — không cần Play Store. Đây là phương án dự phòng nếu Google Play bị hạn chế tại quốc gia của bạn."
+      },
+      "step4": {
+        "title": "Giữ ứng dụng luôn cập nhật",
+        "description": "Chúng tôi liên tục cập nhật giao thức để đi trước các kỹ thuật chặn mới. Bật cập nhật tự động hoặc kiểm tra cập nhật thường xuyên qua các kênh Telegram của chúng tôi."
+      },
+      "step5": {
+        "title": "Chia sẻ với những người cần",
+        "description": "Càng nhiều người cài đặt Doppler trước khi các hạn chế leo thang, càng tốt. Chia sẻ liên kết bot Telegram của chúng tôi — đó là kênh phân phối chống kiểm duyệt tốt nhất mà chúng tôi có."
+      }
     },
     "comparison": {
-      "title": "So Sánh Giao Thức",
+      "title": "So sánh giao thức",
       "headers": {
         "protocol": "Giao thức",
         "detectability": "Khả năng phát hiện",
         "speed": "Tốc độ",
-        "censorship": "Chống kiểm duyệt",
-        "fingerprint": "Vân tay giao thức"
+        "censorship": "Khả năng vượt kiểm duyệt",
+        "fingerprint": "Dấu vân tay giao thức"
       },
       "openvpn": {
         "name": "OpenVPN",
         "detectability": "Cao",
         "speed": "Trung bình",
         "censorship": "Thấp",
-        "fingerprint": "Có"
+        "fingerprint": "Nhìn thấy được"
       },
       "wireguard": {
         "name": "WireGuard",
         "detectability": "Trung bình",
         "speed": "Nhanh",
         "censorship": "Thấp",
-        "fingerprint": "Có"
+        "fingerprint": "Nhìn thấy được"
       },
       "vless": {
         "name": "VLESS-Reality",
         "detectability": "Rất thấp",
         "speed": "Nhanh",
         "censorship": "Cao",
-        "fingerprint": "Không"
-      }
-    },
-    "works": {
-      "title": "Doppler Hoạt Động Ở Đâu",
-      "description": "Doppler đã được kiểm tra và hoạt động trong các mạng có chặn VPN chủ động — ISP hạn chế, tường lửa quốc gia, và mạng doanh nghiệp chặn VPN truyền thống.",
-      "environments": {
-        "isp": "ISP có hạn chế",
-        "national": "Tường lửa cấp quốc gia",
-        "corporate": "Mạng doanh nghiệp hạn chế",
-        "public": "Wi-Fi công cộng có bộ lọc"
+        "fingerprint": "Không có"
       }
     },
     "cta": {
-      "title": "Thử Doppler trên mạng của bạn",
-      "subtitle": "Xem Doppler có hoạt động nơi VPN khác thất bại không.",
-      "button": "Tải Doppler"
+      "title": "Chúng tôi không bỏ lại ai phía sau",
+      "subtitle": "Doppler VPN được xây dựng đặc biệt cho các mạng bị hạn chế. Chúng tôi liên tục cải thiện hạ tầng, luân chuyển máy chủ và cập nhật giao thức để đi trước mọi kỹ thuật chặn mới. Quyền tự do Internet của bạn là không thể thương lượng.",
+      "downloadIos": "Tải cho iOS",
+      "downloadAndroid": "Tải cho Android",
+      "telegramBot": "Nhận qua bot Telegram",
+      "telegramChannelRu": "Cập nhật (tiếng Nga)",
+      "telegramChannelEn": "Cập nhật (tiếng Anh)",
+      "button": "Tải Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1230,25 +1311,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Thiết Kế Cho Mạng Hạn Chế",
-    "subtitle": "Doppler làm cho lưu lượng VPN vô hình với hệ thống kiểm duyệt.",
-    "learnMore": "Tìm hiểu cách hoạt động",
+    "title": "Thiết Kế Để Vượt Kiểm Duyệt Chính Phủ",
+    "subtitle": "Doppler đánh bại TSPU, DPI, TLS fingerprinting và active probing — chính những hệ thống mà Nga, Trung Quốc và Iran sử dụng để chặn VPN.",
+    "learnMore": "Đọc hướng dẫn kỹ thuật đầy đủ",
     "items": {
       "dpi": {
-        "title": "Vượt Deep Packet Inspection",
-        "description": "VPN truyền thống có dấu vân tay lưu lượng dễ nhận diện. VLESS-Reality loại bỏ chúng — lưu lượng của bạn không thể phân biệt với HTTPS thông thường."
+        "title": "Đánh Bại Deep Packet Inspection",
+        "description": "Phần cứng TSPU và DPI sử dụng machine learning để phát hiện mẫu lưu lượng VPN. VLESS-Reality không tạo ra bất kỳ dấu hiệu nào — không có gì để phát hiện."
       },
       "tls": {
-        "title": "Ngụy Trang TLS",
-        "description": "Doppler thực hiện TLS handshake thật với chứng chỉ trang web thật. Hệ thống kiểm duyệt thấy lưu lượng web bình thường, không phải VPN."
+        "title": "TLS Handshake Thật",
+        "description": "Doppler thực hiện TLS handshake thật với chứng chỉ trang web thật. DPI thấy một kết nối HTTPS bình thường, không phải đường hầm VPN."
       },
       "fingerprint": {
-        "title": "Không Có Vân Tay Giao Thức",
-        "description": "Khác với OpenVPN hay WireGuard, VLESS-Reality không để lại vân tay giao thức. Hệ thống chặn tự động không có gì để so khớp."
+        "title": "Vượt Qua Active Probing",
+        "description": "Khi hệ thống kiểm duyệt thăm dò máy chủ của chúng tôi, chúng phản hồi như trang web hợp lệ. Chỉ client được xác thực mới kích hoạt đường hầm VPN."
       },
       "regions": {
-        "title": "Hoạt Động Ở Vùng Hạn Chế",
-        "description": "Đã kiểm tra và hoạt động trong mạng có chặn VPN chủ động. Doppler kết nối nơi VPN thông thường thất bại."
+        "title": "Bị Nga Chặn — Vẫn Hoạt Động",
+        "description": "Tên miền của chúng tôi nằm trong danh sách chặn của Roskomnadzor. Chúng tôi vẫn ở đây. Tải qua bot Telegram khi trang web bị chặn."
       }
     }
   },

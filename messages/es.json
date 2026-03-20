@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — VPN Gratis Sin Registro | Privado y Seguro",
-    "description": "VPN gratis sin registro. Conéctate con cifrado VLESS-Reality, bloqueador de anuncios y filtro de contenido. Sin registros. Disponible en iOS, Android y más."
+    "title": "Doppler VPN — VPN Seguro Sin Registros & Proxy para tu Privacidad",
+    "description": "Doppler VPN protege tu privacidad con cifrado proxy VLESS-Reality, protección DNS y una política estricta de cero registros. Evade DPI y la censura gubernamental. Disponible en iOS, Android, macOS y Windows."
   },
   "nav": {
     "features": "Funciones",
@@ -1084,63 +1084,149 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Cómo Doppler evade la censura en internet | Doppler VPN",
-      "description": "Descubre cómo VLESS-Reality hace que el tráfico VPN sea indetectable por DPI y sistemas de censura."
+      "title": "Guía sobre censura en internet — Cómo bloquean las VPN y cómo mantenerte conectado",
+      "description": "Guía técnica sobre cómo los gobiernos bloquean VPN y proxies usando DPI, TSPU y aprendizaje automático — y cómo el proxy VLESS-Reality evade todos los métodos de detección. Prepárate para restricciones cada vez mayores."
     },
     "hero": {
-      "title": "Cómo Doppler evade la censura",
-      "subtitle": "Cómo VLESS-Reality hace que el tráfico VPN sea indetectable para los sistemas de análisis."
+      "title": "Tu guía hacia la libertad en internet",
+      "subtitle": "Cómo los gobiernos detectan y bloquean las VPN, cómo Doppler supera cada método y qué deberías hacer ahora para mantenerte conectado a medida que aumentan las restricciones."
     },
-    "problem": {
-      "title": "Cómo los sistemas de censura bloquean VPN",
-      "p1": "Los sistemas de censura modernos usan DPI para analizar el tráfico en tiempo real. No solo miran a dónde van tus datos — examinan cómo están empaquetados, buscando señales de protocolos VPN.",
-      "p2": "Protocolos como OpenVPN y WireGuard tienen patrones reconocibles. Los sistemas DPI los identifican y bloquean al instante. Incluso cuando intentan disfrazar el tráfico, las firmas del protocolo siguen siendo detectables.",
-      "p3": "Además de detectar protocolos, los sistemas de censura bloquean IPs conocidas de servidores VPN y analizan huellas de handshake TLS para cortar conexiones VPN antes de que se establezcan."
+    "detection": {
+      "title": "Cómo los gobiernos detectan y bloquean las VPN",
+      "intro": "La censura en internet ha evolucionado mucho más allá del simple bloqueo de IP. Países como Rusia, China e Irán despliegan sistemas sofisticados que usan aprendizaje automático para identificar y cortar conexiones VPN en tiempo real. Así es exactamente cómo lo hacen.",
+      "tspu": {
+        "title": "La infraestructura: TSPU y DPI",
+        "p1": "Rusia despliega TSPU (Sistemas Técnicos de Contramedidas ante Amenazas) — hardware especializado instalado directamente en los nodos de red de los ISP. China usa el Gran Cortafuegos, Irán opera NIN. Estos sistemas realizan inspección profunda de paquetes (DPI) sobre cada paquete que cruza la red.",
+        "p2": "Los protocolos VPN tradicionales como OpenVPN, WireGuard e IPSec tienen estructuras de paquetes distintas. DPI los identifica al instante y corta la conexión. Incluso los modos \"ofuscados\" suelen fallar porque el patrón subyacente del handshake sigue siendo detectable.",
+        "p3": "Cuando la coincidencia básica de firmas no es suficiente, estos sistemas activan módulos de aprendizaje automático. Dejan de mirar dentro de los paquetes (todo está cifrado) y comienzan a analizar cómo se comporta el tráfico."
+      },
+      "method1": {
+        "title": "Método 1: Fingerprinting de cliente TLS",
+        "description": "Cada cliente TLS — Chrome, Firefox, Safari — envía parámetros de conexión en un orden específico durante el handshake. Esto crea una huella digital única. Un cliente VPN que finge ser tráfico HTTPS a menudo envía estos parámetros en un orden diferente al de cualquier navegador real. DPI compara la huella con una base de datos de navegadores conocidos. ¿No coincide? Marcado como túnel."
+      },
+      "method2": {
+        "title": "Método 2: Análisis de entropía del tráfico",
+        "description": "El uso real de internet tiene patrones distintivos. El streaming de vídeo produce muchos paquetes grandes secuenciales. La navegación web sigue un ciclo de petición-respuesta-pausa. Un túnel VPN tiene un perfil de entropía completamente diferente — tamaños de paquete uniformes, temporización constante, densidad no humana. Incluso cuando el tráfico se disfraza de HTTPS, los modelos de aprendizaje automático detectan estas anomalías estadísticas en las longitudes de paquetes y los retardos temporales."
+      },
+      "method3": {
+        "title": "Método 3: Sondeo activo",
+        "description": "Cuando el sistema sospecha que un servidor extranjero ejecuta una VPN, envía su propia solicitud de sondeo. Si el servidor responde como un sitio web normal — devolviendo un error 404 o una página HTML — pasa la prueba. Pero si el servidor intenta iniciar un handshake VPN o se comporta de forma inesperada, la dirección IP se bloquea inmediatamente. Las VPN simples fallan esta prueba al instante."
+      },
+      "method4": {
+        "title": "Método 4: Listas negras de IP y DNS",
+        "description": "Los rangos de IP conocidos de proveedores VPN se bloquean directamente. Las solicitudes DNS hacia dominios de VPN se interceptan. Los proveedores comerciales de VPN con listas públicas de servidores son los objetivos más fáciles — toda su infraestructura puede bloquearse en minutos."
+      },
+      "conclusion": "El resultado: las VPN de un solo clic y los servicios proxy estándar como NordVPN, ExpressVPN y Surfshark dejan de funcionar a las pocas horas de una ofensiva de bloqueo. Solo los protocolos proxy diseñados específicamente para ser indistinguibles del tráfico web normal sobreviven."
     },
-    "evasion": {
-      "title": "Por qué el tráfico de Doppler es invisible",
-      "reality": {
-        "title": "Handshake Reality",
-        "description": "VLESS-Reality realiza un handshake TLS real con un certificado auténtico. Para cualquier observador — incluidos los sistemas DPI — la conexión es idéntica a navegar un sitio web normal. Sin certificados falsos ni firmas de proxy."
+    "defeats": {
+      "title": "Cómo Doppler supera cada método de detección",
+      "subtitle": "Cada técnica de detección tiene una contramedida específica integrada en VLESS-Reality — el protocolo que impulsa cada conexión de Doppler.",
+      "signatures": {
+        "attack": "Firmas de protocolo",
+        "defense": "Sin firma VPN",
+        "description": "VLESS-Reality no produce ningún patrón de protocolo identificable. No hay handshake VPN, ni estructura de paquete distintiva, nada que las bases de datos de firmas DPI puedan detectar."
       },
-      "noSignature": {
-        "title": "Sin firma de protocolo",
-        "description": "A diferencia de OpenVPN (con su handshake distintivo) o WireGuard (con estructura de paquetes conocida), VLESS-Reality no produce ninguna firma identificable. Los sistemas automáticos no tienen nada que detectar."
+      "fingerprinting": {
+        "attack": "Fingerprinting TLS",
+        "defense": "Handshake TLS auténtico",
+        "description": "Reality realiza un handshake TLS real usando el certificado de un sitio web legítimo. La huella digital coincide exactamente con lo que produciría un navegador real — porque es una conexión TLS real."
       },
-      "indistinguishable": {
-        "title": "Tráfico idéntico a HTTPS",
-        "description": "Una vez establecido el túnel, todos los datos están cifrados y formateados como tráfico HTTPS estándar. Tamaños de paquetes, tiempos y cabeceras — todo parece navegación web normal."
+      "entropy": {
+        "attack": "Análisis de entropía",
+        "defense": "Patrones de tráfico naturales",
+        "description": "El tráfico que fluye a través de un túnel VLESS-Reality está formateado de manera idéntica al HTTPS estándar. Los tamaños de paquete, la temporización y los patrones de flujo coinciden con la navegación web normal, derrotando el análisis estadístico."
       },
-      "infrastructure": {
-        "title": "Infraestructura dinámica",
-        "description": "Doppler rota IPs y puntos de acceso. Incluso si descubren un servidor, la red se adapta."
+      "probing": {
+        "attack": "Sondeo activo",
+        "defense": "Respuesta de servidor legítima",
+        "description": "Cuando son sondeados, los servidores de Doppler responden exactamente como el sitio web legítimo que replican. Las solicitudes de sondeo no autorizadas reciben respuestas web normales. El túnel VPN solo se activa con autenticación de cliente válida."
+      },
+      "blacklisting": {
+        "attack": "Listas negras de IP",
+        "defense": "Infraestructura dinámica",
+        "description": "Doppler rota los endpoints de servidor y las direcciones IP. Incluso si un endpoint es identificado, la red se adapta automáticamente. Nuestro bot de Telegram proporciona acceso instantáneo a configuraciones de servidor actualizadas."
       }
     },
-    "flow": {
-      "title": "Lo que ven los sistemas de censura",
-      "step1": "Tu dispositivo",
-      "step1note": "El cliente Doppler inicia la conexión",
-      "step2": "Handshake TLS",
-      "step2note": "Parece una visita a un sitio web normal",
-      "step3": "Túnel VLESS",
-      "step3note": "DPI ve: tráfico HTTPS normal",
-      "step4": "Servidor Doppler",
-      "step4note": "El tráfico sale al internet abierto",
-      "dpiLabel": "Lo que ve DPI: tráfico HTTPS normal"
+    "blocked": {
+      "title": "Bloqueado en Rusia — y seguimos aquí",
+      "badge": "Verificado por Roskomnadzor",
+      "p1": "Las autoridades rusas han bloqueado específicamente Doppler VPN. Nuestro dominio ha sido añadido a la lista federal de bloqueo. Esto no es algo que ocultemos — es la prueba de que nuestra tecnología funciona.",
+      "p2": "A diferencia de los proveedores comerciales de VPN que cumplen con solicitudes de retiro o abandonan silenciosamente los mercados restringidos, Doppler fue construido exactamente para este escenario. Cuando nuestro sitio web es bloqueado, nuestro bot de Telegram sigue accesible. Cuando las IP de los servidores son prohibidas, nuestra infraestructura rota automáticamente.",
+      "p3": "Cada bloqueo que imponen, nosotros lo evadimos. Eso no es un eslogan publicitario — es nuestra operación diaria.",
+      "stat1label": "Dominio bloqueado por RKN",
+      "stat1value": "Confirmado",
+      "stat2label": "Estado del servicio",
+      "stat2value": "Operativo",
+      "stat3label": "Acceso alternativo",
+      "stat3value": "Bot de Telegram"
+    },
+    "future": {
+      "title": "Qué esperar: el futuro de las restricciones en internet",
+      "intro": "La censura en internet no se detiene. Comprender hacia dónde se dirigen las cosas te ayuda a prepararte. Esta es la progresión realista basada en la infraestructura actual y las tendencias políticas.",
+      "stage1": {
+        "label": "Etapa actual",
+        "title": "DPI + detección por aprendizaje automático",
+        "description": "Los gobiernos despliegan hardware TSPU/DPI con módulos de aprendizaje automático en los nodos de los ISP. Los protocolos VPN estándar se bloquean automáticamente. VLESS-Reality y protocolos anticensura similares aún funcionan porque producen tráfico indistinguible de HTTPS.",
+        "status": "Activo actualmente en Rusia, China e Irán"
+      },
+      "stage2": {
+        "label": "Posible siguiente paso",
+        "title": "Modelo de lista blanca",
+        "description": "En lugar de bloquear protocolos específicos, solo los dominios y direcciones IP aprobados serían accesibles. Todo lo demás se bloquea por defecto. SSH, RDP, puertos de juegos — todo bloqueado a menos que esté registrado por una entidad legal. Esto se probó parcialmente durante el bloqueo de Telegram en Rusia en 2018.",
+        "status": "Técnicamente viable, parcialmente implementado"
+      },
+      "stage3": {
+        "label": "Escenario extremo",
+        "title": "Aislamiento nacional de internet",
+        "description": "Una red doméstica completamente aislada con certificados raíz emitidos por el estado obligatorios, espejos locales de servicios extranjeros y sin acceso directo a internet global. Piensa en Kwangmyong de Corea del Norte, pero a gran escala.",
+        "status": "Económicamente devastador — ver más abajo"
+      },
+      "reality": {
+        "title": "El choque con la realidad económica",
+        "p1": "En 2018, cuando Roskomnadzor intentó bloquear solo Telegram, terminó prohibiendo millones de direcciones IP de Amazon y Google. Las cajas registradoras en las tiendas dejaron de funcionar. Los dispositivos inteligentes del hogar se desconectaron. Las notificaciones push de los bancos fallaron.",
+        "p2": "Un modelo de lista blanca causaría esto a una escala 100 veces mayor. Los sitios web rusos modernos dependen de Google Fonts, bibliotecas CDN extranjeras, autoridades de certificación internacionales y servicios en la nube. Los bancos y empresas de logística usan certificados SSL extranjeros. Los desarrolladores perderían acceso a GitHub, Docker Hub y npm.",
+        "p3": "El aislamiento total es técnicamente posible — pero su precio es la degradación tecnológica. Las actualizaciones de Windows y Android dejan de estar disponibles. Los equipos médicos pierden soporte de controladores. El desarrollo de IA se detiene por completo sin la infraestructura global de código abierto.",
+        "p4": "El camino más probable es la restricción gradual a lo largo de años, no un corte repentino. Pero cada paso de escalada significa que más usuarios de VPN se quedan sin acceso — a menos que estén preparados."
+      }
+    },
+    "prepare": {
+      "title": "Cómo prepararte ahora",
+      "subtitle": "No esperes a que el acceso se complique más. Toma estas medidas hoy.",
+      "step1": {
+        "title": "Descarga Doppler VPN ahora",
+        "description": "Instala la aplicación mientras las tiendas de apps y nuestro sitio web aún son accesibles en tu región. Una vez que las restricciones aumenten, descargarla se vuelve significativamente más difícil."
+      },
+      "step2": {
+        "title": "Guarda nuestro bot de Telegram",
+        "description": "Añade @dopplercreatebot a tu Telegram. Incluso si nuestro sitio web es bloqueado, el bot sigue accesible dentro de Telegram y puede proporcionarte configuraciones VPN al instante.",
+        "link": "Abrir @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Obtén el APK independiente para Android",
+        "description": "Nuestro bot de Telegram distribuye la aplicación de Android directamente como archivo APK — sin necesidad de Play Store. Esta es tu alternativa si Google Play se restringe en tu país."
+      },
+      "step4": {
+        "title": "Mantén tu aplicación actualizada",
+        "description": "Lanzamos actualizaciones de protocolo para adelantarnos a las nuevas técnicas de bloqueo. Activa las actualizaciones automáticas o busca actualizaciones regularmente a través de nuestros canales de Telegram."
+      },
+      "step5": {
+        "title": "Comparte con quienes lo necesiten",
+        "description": "Cuantas más personas tengan Doppler instalado antes de que las restricciones aumenten, mejor. Comparte el enlace de nuestro bot de Telegram — es el canal de distribución más resistente a la censura que tenemos."
+      }
     },
     "comparison": {
       "title": "Comparación de protocolos",
       "headers": {
         "protocol": "Protocolo",
-        "detectability": "Detección",
+        "detectability": "Detectabilidad",
         "speed": "Velocidad",
-        "censorship": "Anticensura",
-        "fingerprint": "Huella"
+        "censorship": "Resistencia a la censura",
+        "fingerprint": "Huella de protocolo"
       },
       "openvpn": {
         "name": "OpenVPN",
-        "detectability": "Fácil",
-        "speed": "Media",
+        "detectability": "Alta",
+        "speed": "Moderada",
         "censorship": "Baja",
         "fingerprint": "Visible"
       },
@@ -1153,26 +1239,21 @@
       },
       "vless": {
         "name": "VLESS-Reality",
-        "detectability": "Casi imposible",
+        "detectability": "Muy baja",
         "speed": "Rápida",
         "censorship": "Alta",
         "fingerprint": "Ninguna"
       }
     },
-    "works": {
-      "title": "Dónde funciona Doppler",
-      "description": "Doppler está probado en redes con bloqueo activo de VPN — ISPs restrictivos, firewalls nacionales y redes corporativas.",
-      "environments": {
-        "isp": "ISPs con bloqueo de VPN",
-        "national": "Firewalls nacionales",
-        "corporate": "Redes corporativas",
-        "public": "Wi-Fi público con filtros"
-      }
-    },
     "cta": {
-      "title": "Prueba Doppler en tu red",
-      "subtitle": "Comprueba si funciona donde otros VPN fallan.",
-      "button": "Descargar Doppler"
+      "title": "No vamos a dejar a nadie atrás",
+      "subtitle": "Doppler VPN fue creado específicamente para redes restringidas. Mejoramos continuamente nuestra infraestructura, rotamos servidores y actualizamos protocolos para adelantarnos a cada nueva técnica de bloqueo. Tu libertad en internet no es negociable.",
+      "downloadIos": "Descargar para iOS",
+      "downloadAndroid": "Descargar para Android",
+      "telegramBot": "Obtener vía bot de Telegram",
+      "telegramChannelRu": "Actualizaciones (ruso)",
+      "telegramChannelEn": "Actualizaciones (inglés)",
+      "button": "Descargar Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1222,25 +1303,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Diseñado para redes restrictivas",
-    "subtitle": "Doppler hace que el tráfico VPN sea invisible para los sistemas de censura.",
-    "learnMore": "Cómo funciona",
+    "title": "Diseñado para evadir la censura gubernamental",
+    "subtitle": "Doppler vence a TSPU, DPI, TLS fingerprinting y active probing — los mismos sistemas que Rusia, China e Irán usan para bloquear VPNs.",
+    "learnMore": "Leer la guía técnica completa",
     "items": {
       "dpi": {
-        "title": "Evasión de DPI",
-        "description": "Los VPN tradicionales tienen firmas reconocibles. VLESS-Reality las elimina — tu tráfico es indistinguible del HTTPS normal."
+        "title": "Vence la Deep Packet Inspection",
+        "description": "El hardware TSPU y DPI usa aprendizaje automático para detectar patrones de tráfico VPN. VLESS-Reality no produce ninguna firma — no hay nada que detectar."
       },
       "tls": {
-        "title": "Camuflaje TLS",
-        "description": "Doppler realiza un handshake TLS real con un certificado auténtico. Los sistemas de censura ven tráfico web normal, no una VPN."
+        "title": "Handshake TLS real",
+        "description": "Doppler realiza un handshake TLS genuino con un certificado de sitio web real. DPI ve una conexión HTTPS normal, no un túnel VPN."
       },
       "fingerprint": {
-        "title": "Sin huella de protocolo",
-        "description": "A diferencia de OpenVPN o WireGuard, VLESS-Reality no deja huella. Los bloqueadores no tienen nada que detectar."
+        "title": "Supera el Active Probing",
+        "description": "Cuando los censores sondean nuestros servidores, estos responden como sitios web legítimos. Solo los clientes autenticados activan el túnel VPN."
       },
       "regions": {
-        "title": "Funciona donde bloquean",
-        "description": "Probado en redes con bloqueo activo de VPN. Doppler conecta donde los VPN convencionales fallan."
+        "title": "Bloqueado por Rusia — sigue operativo",
+        "description": "Nuestro dominio está en la lista de bloqueo de Roskomnadzor. Seguimos aquí. Descárgalo a través del bot de Telegram cuando el sitio web esté bloqueado."
       }
     }
   },

@@ -34,8 +34,9 @@ export async function POST(request: Request) {
     );
   }
 
-  // Generate unique filename
-  const ext = file.name.split(".").pop() || "jpg";
+  // Generate unique filename — derive extension from validated MIME type, not filename
+  const extMap: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif" };
+  const ext = extMap[file.type] || "jpg";
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const filePath = `posts/${filename}`;
 

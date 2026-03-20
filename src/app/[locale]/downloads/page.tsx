@@ -13,9 +13,10 @@ const baseUrl = "https://www.dopplervpn.org";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "apps" });
   return {
-    title: "Downloads | Doppler VPN",
-    description: "Download Doppler VPN for iOS, Android, macOS, and Windows. Free, secure, no-logs VPN with VLESS-Reality encryption.",
+    title: t("title"),
+    description: t("subtitle"),
     alternates: {
       canonical: `${baseUrl}/${locale}/downloads`,
       languages: Object.fromEntries([
@@ -33,8 +34,8 @@ const URLS = {
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
   androidApk: "/downloads/doppler-vpn-v1.2.0.apk",
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  windowsX64: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-windows-64.zip",
-  windowsArm64: "https://github.com/2dust/v2rayN/releases/download/7.18.0/v2rayN-windows-arm64.zip",
+  windowsX64: "https://www.dopplervpn.org/download/doppler-vpn-windows-x64.exe",
+  windowsArm64: "https://www.dopplervpn.org/download/doppler-vpn-windows-arm64.exe",
 };
 
 /* ── Icons ────────────────────────────────────────────────────────── */
@@ -223,27 +224,25 @@ export default async function DownloadsPage({ params }: PageProps) {
               <div className="space-y-2">
                 <a
                   href={URLS.windowsX64}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download
                   className="group flex items-center justify-between rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 transition-all"
                 >
                   <div className="flex items-center gap-2">
                     <DownloadIcon className="w-4 h-4 text-text-muted group-hover:text-accent-teal transition-colors" />
                     <span className="text-sm font-medium text-text-primary">{t("windows.x64")}</span>
                   </div>
-                  <span className="text-xs text-text-muted">.zip &middot; 143 MB</span>
+                  <span className="text-xs text-text-muted">.exe &middot; x64</span>
                 </a>
                 <a
                   href={URLS.windowsArm64}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download
                   className="group flex items-center justify-between rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 transition-all"
                 >
                   <div className="flex items-center gap-2">
                     <DownloadIcon className="w-4 h-4 text-text-muted group-hover:text-accent-teal transition-colors" />
                     <span className="text-sm font-medium text-text-primary">{t("windows.arm64")}</span>
                   </div>
-                  <span className="text-xs text-text-muted">.zip &middot; 133 MB</span>
+                  <span className="text-xs text-text-muted">.exe &middot; ARM64</span>
                 </a>
               </div>
 

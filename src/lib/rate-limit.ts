@@ -24,9 +24,8 @@ export function rateLimit(
   opts: { limit: number; windowMs: number; prefix?: string }
 ): NextResponse | null {
   const ip =
-    (req instanceof NextRequest
-      ? req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-      : req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()) ||
+    req.headers.get('x-real-ip') ||
+    req.headers.get('x-forwarded-for')?.split(',').pop()?.trim() ||
     'unknown';
   const key = `${opts.prefix || 'global'}:${ip}`;
   const now = Date.now();

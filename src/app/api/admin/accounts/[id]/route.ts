@@ -29,10 +29,17 @@ export async function PATCH(
       // Downgrading to free — clear subscription fields
       updateData.subscription_expires_at = null;
       updateData.subscription_store = null;
-    } else if (duration_days) {
-      // Granting Pro with duration
+    } else if (subscription_tier === "pro") {
+      // Granting Pro — require duration_days to prevent permanent free pro
+      if (!duration_days) {
+        return NextResponse.json({ error: "duration_days is required when upgrading to pro" }, { status: 400 });
+      }
+      const days = Number(duration_days);
+      if (!Number.isInteger(days) || days < 1 || days > 3650) {
+        return NextResponse.json({ error: "duration_days must be 1-3650" }, { status: 400 });
+      }
       const expiresAt = new Date();
-      expiresAt.setDate(expiresAt.getDate() + Number(duration_days));
+      expiresAt.setDate(expiresAt.getDate() + days);
       updateData.subscription_expires_at = expiresAt.toISOString();
       updateData.subscription_store = "admin";
     }
@@ -75,15 +82,17 @@ export async function DELETE(
     }
 
     // Delete configs (uses text VPN-XXXX), device sessions (uses UUID), then account
-    await client
+    const { error: configErr } = await client
       .from("vpn_user_configs")
       .delete()
       .eq("account_id", account.account_id);
+    if (configErr) throw new Error(`Failed to delete configs: ${configErr.message}`);
 
-    await client
+    const { error: sessErr } = await client
       .from("device_sessions")
       .delete()
       .eq("account_id", id);
+    if (sessErr) throw new Error(`Failed to delete sessions: ${sessErr.message}`);
 
     const { error: delErr } = await client
       .from("accounts")

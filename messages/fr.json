@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — VPN Sécurisé Sans Logs | Privé",
-    "description": "VPN gratuit sans inscription. Connexion avec chiffrement VLESS-Reality, bloqueur de pubs intégré et filtre de contenu. Sans logs. Disponible sur iOS et Android."
+    "title": "Doppler VPN — VPN Sécurisé Sans Logs & Proxy pour votre Vie Privée",
+    "description": "Doppler VPN protège votre vie privée avec le chiffrement proxy VLESS-Reality, la protection DNS et une politique stricte sans logs. Contourne le DPI et la censure gouvernementale. Disponible sur iOS, Android, macOS et Windows."
   },
   "nav": {
     "features": "Fonctionnalités",
@@ -1084,62 +1084,148 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Comment Doppler contourne la censure | Doppler VPN",
-      "description": "Découvre comment VLESS-Reality rend le trafic VPN indétectable par le DPI et les systèmes de censure."
+      "title": "Guide sur la censure d'Internet — Comment les VPN sont bloqués et comment rester connecté",
+      "description": "Guide technique sur les méthodes gouvernementales de blocage des VPN et proxys via DPI, TSPU et apprentissage automatique — et comment le proxy VLESS-Reality contourne chaque technique de détection. Préparez-vous aux restrictions croissantes."
     },
     "hero": {
-      "title": "Comment Doppler contourne la censure",
-      "subtitle": "Comment VLESS-Reality rend le trafic VPN invisible pour les systèmes d'analyse."
+      "title": "Votre guide vers la liberté sur Internet",
+      "subtitle": "Comment les gouvernements détectent et bloquent les VPN, comment Doppler déjoue chaque méthode, et ce que vous devez faire maintenant pour rester connecté face aux restrictions croissantes."
     },
-    "problem": {
-      "title": "Comment les systèmes de censure bloquent les VPN",
-      "p1": "Les systèmes de censure modernes utilisent le DPI pour analyser le trafic en temps réel. Ils ne regardent pas seulement où vont tes données — ils analysent leur structure pour détecter les signatures VPN.",
-      "p2": "Des protocoles comme OpenVPN et WireGuard ont des motifs reconnaissables. Le DPI les identifie et les bloque instantanément. Même déguisé, le protocole reste détectable.",
-      "p3": "En plus de la détection de protocole, les systèmes de censure bloquent les IP connues des serveurs VPN et analysent les empreintes de handshake TLS pour couper les connexions VPN avant qu'elles ne s'établissent."
+    "detection": {
+      "title": "Comment les gouvernements détectent et bloquent les VPN",
+      "intro": "La censure d'Internet a évolué bien au-delà du simple blocage d'IP. Des pays comme la Russie, la Chine et l'Iran déploient des systèmes sophistiqués utilisant l'apprentissage automatique pour identifier et couper les connexions VPN en temps réel. Voici précisément comment ils procèdent.",
+      "tspu": {
+        "title": "L'infrastructure : TSPU et DPI",
+        "p1": "La Russie déploie le TSPU (systèmes techniques de contre-mesures aux menaces) — du matériel spécialisé installé directement sur les nœuds réseau des FAI. La Chine utilise le Grand Pare-feu, l'Iran exploite le NIN. Ces systèmes effectuent une inspection approfondie des paquets (DPI) sur chaque paquet traversant le réseau.",
+        "p2": "Les protocoles VPN traditionnels comme OpenVPN, WireGuard et IPSec ont des structures de paquets distinctes. Le DPI les identifie instantanément et coupe la connexion. Même les modes dits « obfusqués » échouent souvent, car le schéma de handshake sous-jacent reste détectable.",
+        "p3": "Lorsque la simple correspondance de signatures ne suffit pas, ces systèmes activent leurs modules d'apprentissage automatique. Ils cessent de regarder à l'intérieur des paquets (tout est chiffré) et commencent à analyser le comportement du trafic."
+      },
+      "method1": {
+        "title": "Méthode 1 : Empreinte du client TLS",
+        "description": "Chaque client TLS — Chrome, Firefox, Safari — envoie les paramètres de connexion dans un ordre précis lors du handshake. Cela crée une empreinte unique. Un client VPN se faisant passer pour du trafic HTTPS envoie souvent ces paramètres dans un ordre différent de celui de n'importe quel vrai navigateur. Le DPI compare l'empreinte à une base de données de navigateurs connus. Discordance ? Signalé comme tunnel."
+      },
+      "method2": {
+        "title": "Méthode 2 : Analyse de l'entropie du trafic",
+        "description": "L'utilisation réelle d'Internet présente des schémas distinctifs. Le streaming vidéo produit de nombreux gros paquets séquentiels. La navigation web suit un cycle requête-réponse-pause. Un tunnel VPN a un profil d'entropie complètement différent — tailles de paquets uniformes, timing régulier, densité non humaine. Même lorsque le trafic est déguisé en HTTPS, les modèles d'apprentissage automatique détectent ces anomalies statistiques dans les tailles de paquets et les délais."
+      },
+      "method3": {
+        "title": "Méthode 3 : Sondage actif",
+        "description": "Lorsque le système soupçonne un serveur étranger d'héberger un VPN, il envoie sa propre requête de sondage. Si le serveur répond comme un site web normal — renvoyant une erreur 404 ou une page HTML — il passe le test. Mais si le serveur tente d'initier un handshake VPN ou se comporte de manière inattendue, l'adresse IP est immédiatement bannie. Les VPN simples échouent systématiquement à ce test."
+      },
+      "method4": {
+        "title": "Méthode 4 : Listes noires d'IP et de DNS",
+        "description": "Les plages d'IP connues des fournisseurs VPN sont bloquées directement. Les requêtes DNS vers les domaines VPN sont interceptées. Les fournisseurs VPN commerciaux avec des listes de serveurs publiques sont les cibles les plus faciles — toute leur infrastructure peut être bloquée en quelques minutes."
+      },
+      "conclusion": "Le résultat : les VPN grand public et les services proxy standard comme NordVPN, ExpressVPN et Surfshark cessent de fonctionner en quelques heures lors d'une vague de blocage. Seuls les protocoles proxy spécifiquement conçus pour être indiscernables du trafic web normal survivent."
     },
-    "evasion": {
-      "title": "Pourquoi le trafic Doppler est invisible",
-      "reality": {
-        "title": "Handshake Reality",
-        "description": "VLESS-Reality effectue un vrai handshake TLS avec un certificat authentique. Pour tout observateur — y compris le DPI — la connexion est identique à la visite d'un site web normal. Pas de faux certificat ni de signature proxy."
+    "defeats": {
+      "title": "Comment Doppler déjoue chaque méthode de détection",
+      "subtitle": "Chaque technique de détection a une contre-mesure spécifique intégrée à VLESS-Reality — le protocole qui propulse chaque connexion Doppler.",
+      "signatures": {
+        "attack": "Signatures de protocole",
+        "defense": "Aucune signature VPN",
+        "description": "VLESS-Reality ne produit aucun motif de protocole identifiable. Pas de handshake VPN, pas de structure de paquets distinctive, rien que les bases de signatures DPI puissent reconnaître."
       },
-      "noSignature": {
-        "title": "Aucune signature de protocole",
-        "description": "Contrairement à OpenVPN (handshake distinctif) ou WireGuard (structure de paquets connue), VLESS-Reality ne produit aucune signature identifiable. Les systèmes automatisés n'ont rien à détecter."
+      "fingerprinting": {
+        "attack": "Empreinte TLS",
+        "defense": "Handshake TLS authentique",
+        "description": "Reality effectue un vrai handshake TLS en utilisant le certificat d'un site web légitime. L'empreinte correspond exactement à celle d'un vrai navigateur — parce que c'est une vraie connexion TLS."
       },
-      "indistinguishable": {
-        "title": "Trafic identique au HTTPS",
-        "description": "Une fois le tunnel établi, toutes les données sont chiffrées et formatées exactement comme du trafic HTTPS standard. Tailles de paquets, timing, en-têtes — tout correspond à une session de navigation normale."
+      "entropy": {
+        "attack": "Analyse d'entropie",
+        "defense": "Schémas de trafic naturels",
+        "description": "Le trafic transitant par un tunnel VLESS-Reality est formaté de manière identique au HTTPS standard. Tailles des paquets, timing et schémas de flux correspondent à une navigation web normale, déjouant l'analyse statistique."
       },
-      "infrastructure": {
-        "title": "Infrastructure dynamique",
-        "description": "Doppler change les IP et points d'accès. Même si un serveur est repéré, le réseau s'adapte."
+      "probing": {
+        "attack": "Sondage actif",
+        "defense": "Réponse serveur légitime",
+        "description": "Lorsqu'ils sont sondés, les serveurs Doppler répondent exactement comme le site web légitime qu'ils imitent. Les requêtes de sondage non autorisées reçoivent des réponses web normales. Le tunnel VPN ne s'active qu'avec une authentification client valide."
+      },
+      "blacklisting": {
+        "attack": "Listes noires d'IP",
+        "defense": "Infrastructure dynamique",
+        "description": "Doppler effectue une rotation des points d'accès et des adresses IP. Même si un point d'accès est identifié, le réseau s'adapte automatiquement. Notre bot Telegram fournit un accès instantané aux configurations serveur mises à jour."
       }
     },
-    "flow": {
-      "title": "Ce que voient les systèmes de censure",
-      "step1": "Ton appareil",
-      "step1note": "Le client Doppler lance la connexion",
-      "step2": "Handshake TLS",
-      "step2note": "Ressemble à la visite d'un site normal",
-      "step3": "Tunnel VLESS",
-      "step3note": "Le DPI voit : du trafic HTTPS normal",
-      "step4": "Serveur Doppler",
-      "step4note": "Le trafic sort vers l'internet ouvert",
-      "dpiLabel": "Ce que le DPI voit : du trafic HTTPS normal"
+    "blocked": {
+      "title": "Bloqué en Russie — et toujours là",
+      "badge": "Vérifié par Roskomnadzor",
+      "p1": "Les autorités russes ont spécifiquement ciblé et bloqué Doppler VPN. Notre domaine a été ajouté à la liste de blocage fédérale. Ce n'est pas quelque chose que nous cachons — c'est la preuve que notre technologie fonctionne.",
+      "p2": "Contrairement aux fournisseurs VPN commerciaux qui se conforment aux demandes de retrait ou quittent discrètement les marchés restreints, Doppler a été conçu pour ce scénario exact. Lorsque notre site web est bloqué, notre bot Telegram reste accessible. Lorsque les IP de serveurs sont bannies, notre infrastructure effectue une rotation automatique.",
+      "p3": "Chaque blocage qu'ils imposent, nous le contournons. Ce n'est pas un argument marketing — c'est notre fonctionnement quotidien.",
+      "stat1label": "Domaine bloqué par RKN",
+      "stat1value": "Confirmé",
+      "stat2label": "État du service",
+      "stat2value": "Opérationnel",
+      "stat3label": "Accès alternatif",
+      "stat3value": "Bot Telegram"
+    },
+    "future": {
+      "title": "À quoi s'attendre : l'avenir des restrictions Internet",
+      "intro": "La censure d'Internet ne reste pas immobile. Comprendre la direction que prennent les choses vous aide à vous préparer. Voici la progression réaliste basée sur les tendances actuelles en matière d'infrastructure et de politique.",
+      "stage1": {
+        "label": "Stade actuel",
+        "title": "Détection par DPI + apprentissage automatique",
+        "description": "Les gouvernements déploient du matériel TSPU/DPI avec des modules d'apprentissage automatique sur les nœuds des FAI. Les protocoles VPN standard sont bloqués automatiquement. VLESS-Reality et les protocoles anti-censure similaires fonctionnent encore car ils produisent un trafic indiscernable du HTTPS.",
+        "status": "Actif actuellement en Russie, Chine, Iran"
+      },
+      "stage2": {
+        "label": "Prochaine étape possible",
+        "title": "Modèle de liste blanche",
+        "description": "Au lieu de bloquer des protocoles spécifiques, seuls les domaines et adresses IP approuvés seraient accessibles. Tout le reste est bloqué par défaut. SSH, RDP, ports de jeux — tout bloqué sauf si enregistré par une entité légale. Ce modèle a été partiellement testé lors du blocage de Telegram en Russie en 2018.",
+        "status": "Techniquement faisable, partiellement déployé"
+      },
+      "stage3": {
+        "label": "Scénario extrême",
+        "title": "Isolation Internet nationale",
+        "description": "Un réseau domestique entièrement isolé avec des certificats racine émis par l'État, des miroirs locaux des services étrangers et aucun accès direct à l'Internet mondial. Pensez au Kwangmyong de la Corée du Nord, mais à grande échelle.",
+        "status": "Économiquement dévastateur — voir ci-dessous"
+      },
+      "reality": {
+        "title": "La réalité économique",
+        "p1": "En 2018, lorsque Roskomnadzor a tenté de bloquer uniquement Telegram, ils ont fini par bannir des millions d'adresses IP Amazon et Google. Les caisses enregistreuses des magasins ont cessé de fonctionner. Les appareils domotiques se sont déconnectés. Les notifications push bancaires ont échoué.",
+        "p2": "Un modèle de liste blanche causerait cela à une échelle 100 fois supérieure. Les sites web russes modernes dépendent de Google Fonts, de bibliothèques CDN étrangères, d'autorités de certification internationales et de services cloud. Les banques et les entreprises de logistique utilisent des certificats SSL étrangers. Les développeurs perdraient l'accès à GitHub, Docker Hub et npm.",
+        "p3": "L'isolation totale est techniquement possible — mais son prix est la dégradation technologique. Les mises à jour Windows et Android deviennent indisponibles. Les équipements médicaux perdent le support des pilotes. Le développement de l'IA s'arrête totalement sans l'infrastructure open source mondiale.",
+        "p4": "Le scénario le plus probable est une restriction progressive sur plusieurs années, pas une coupure brutale. Mais chaque étape d'escalade signifie que davantage d'utilisateurs de VPN se retrouvent bloqués — à moins d'être préparés."
+      }
+    },
+    "prepare": {
+      "title": "Comment vous préparer dès maintenant",
+      "subtitle": "N'attendez pas que l'accès devienne plus difficile. Agissez aujourd'hui.",
+      "step1": {
+        "title": "Téléchargez Doppler VPN maintenant",
+        "description": "Installez l'application tant que les stores d'applications et notre site web sont encore accessibles dans votre région. Une fois les restrictions renforcées, le téléchargement devient nettement plus difficile."
+      },
+      "step2": {
+        "title": "Enregistrez notre bot Telegram",
+        "description": "Ajoutez @dopplercreatebot sur Telegram. Même si notre site web est bloqué, le bot reste accessible dans Telegram et peut vous fournir des configurations VPN instantanément.",
+        "link": "Ouvrir @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Obtenez l'APK Android autonome",
+        "description": "Notre bot Telegram distribue l'application Android directement sous forme d'APK — sans passer par le Play Store. C'est votre solution de secours si Google Play devient restreint dans votre pays."
+      },
+      "step4": {
+        "title": "Gardez votre application à jour",
+        "description": "Nous déployons des mises à jour de protocole pour garder une longueur d'avance sur les nouvelles techniques de blocage. Activez les mises à jour automatiques ou vérifiez régulièrement via nos chaînes Telegram."
+      },
+      "step5": {
+        "title": "Partagez avec ceux qui en ont besoin",
+        "description": "Plus il y a de personnes ayant Doppler installé avant le renforcement des restrictions, mieux c'est. Partagez le lien de notre bot Telegram — c'est le canal de distribution le plus résistant à la censure dont nous disposons."
+      }
     },
     "comparison": {
       "title": "Comparaison des protocoles",
       "headers": {
         "protocol": "Protocole",
-        "detectability": "Détection",
+        "detectability": "Détectabilité",
         "speed": "Vitesse",
-        "censorship": "Anti-censure",
-        "fingerprint": "Empreinte"
+        "censorship": "Résistance à la censure",
+        "fingerprint": "Empreinte de protocole"
       },
       "openvpn": {
         "name": "OpenVPN",
-        "detectability": "Facile",
+        "detectability": "Élevée",
         "speed": "Moyenne",
         "censorship": "Faible",
         "fingerprint": "Visible"
@@ -1153,26 +1239,21 @@
       },
       "vless": {
         "name": "VLESS-Reality",
-        "detectability": "Quasi impossible",
+        "detectability": "Très faible",
         "speed": "Rapide",
-        "censorship": "Forte",
+        "censorship": "Élevée",
         "fingerprint": "Aucune"
       }
     },
-    "works": {
-      "title": "Où Doppler fonctionne",
-      "description": "Doppler est testé dans des réseaux avec blocage actif de VPN — FAI restrictifs, pare-feu nationaux et réseaux d'entreprise.",
-      "environments": {
-        "isp": "FAI avec blocage VPN",
-        "national": "Pare-feu nationaux",
-        "corporate": "Réseaux d'entreprise",
-        "public": "Wi-Fi public filtré"
-      }
-    },
     "cta": {
-      "title": "Essaie Doppler sur ton réseau",
-      "subtitle": "Vérifie s'il fonctionne là où les autres VPN échouent.",
-      "button": "Télécharger Doppler"
+      "title": "Nous ne laissons personne derrière",
+      "subtitle": "Doppler VPN a été spécifiquement conçu pour les réseaux restreints. Nous améliorons continuellement notre infrastructure, effectuons la rotation des serveurs et mettons à jour les protocoles pour garder une longueur d'avance sur chaque nouvelle technique de blocage. Votre liberté sur Internet n'est pas négociable.",
+      "downloadIos": "Télécharger pour iOS",
+      "downloadAndroid": "Télécharger pour Android",
+      "telegramBot": "Obtenir via le bot Telegram",
+      "telegramChannelRu": "Actualités (russe)",
+      "telegramChannelEn": "Actualités (anglais)",
+      "button": "Télécharger Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1222,25 +1303,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Concu pour les réseaux restrictifs",
-    "subtitle": "Doppler rend le trafic VPN invisible pour les systèmes de censure.",
-    "learnMore": "Comment ca marche",
+    "title": "Conçu pour contourner la censure gouvernementale",
+    "subtitle": "Doppler déjoue TSPU, DPI, le TLS fingerprinting et l'active probing — les mêmes systèmes que la Russie, la Chine et l'Iran utilisent pour bloquer les VPN.",
+    "learnMore": "Lire le guide technique complet",
     "items": {
       "dpi": {
-        "title": "Contournement du DPI",
-        "description": "Les VPN classiques ont des signatures reconnaissables. VLESS-Reality les supprime — ton trafic est indiscernable du HTTPS normal."
+        "title": "Déjoue la Deep Packet Inspection",
+        "description": "Le matériel TSPU et DPI utilise l'apprentissage automatique pour détecter les modèles de trafic VPN. VLESS-Reality ne produit aucune signature — il n'y a rien à détecter."
       },
       "tls": {
-        "title": "Camouflage TLS",
-        "description": "Doppler effectue un vrai handshake TLS avec un certificat authentique. Les systèmes de censure voient du trafic web normal, pas un VPN."
+        "title": "Véritable handshake TLS",
+        "description": "Doppler effectue un véritable handshake TLS avec un certificat de site web réel. Le DPI voit une connexion HTTPS normale, pas un tunnel VPN."
       },
       "fingerprint": {
-        "title": "Aucune empreinte de protocole",
-        "description": "Contrairement à OpenVPN ou WireGuard, VLESS-Reality ne laisse aucune trace. Les bloqueurs n'ont rien à détecter."
+        "title": "Résiste à l'Active Probing",
+        "description": "Quand les censeurs sondent nos serveurs, ceux-ci répondent comme des sites web légitimes. Seuls les clients authentifiés activent le tunnel VPN."
       },
       "regions": {
-        "title": "Fonctionne dans les zones restreintes",
-        "description": "Testé dans des réseaux avec blocage actif de VPN. Doppler se connecte là où les VPN classiques échouent."
+        "title": "Bloqué par la Russie — toujours opérationnel",
+        "description": "Notre domaine figure sur la liste noire de Roskomnadzor. Nous sommes toujours là. Téléchargez via le bot Telegram lorsque le site web est bloqué."
       }
     }
   },

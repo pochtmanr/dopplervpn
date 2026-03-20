@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — 免费VPN无需注册 | 私密且安全",
-    "description": "免费VPN，无需邮箱或注册。通过VLESS-Reality加密即时连接，内置广告拦截器和内容过滤。无日志。无限制。 支持iOS、Android和Telegram。"
+    "title": "Doppler VPN — 安全无日志 VPN 和代理，守护您的隐私",
+    "description": "Doppler VPN 通过 VLESS-Reality 代理加密、DNS 保护和严格的无日志政策保障您的隐私。绕过 DPI 和政府审查。支持 iOS、Android、macOS 和 Windows。"
   },
   "nav": {
     "features": "功能",
@@ -1084,49 +1084,135 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Doppler如何绕过网络审查 | Doppler VPN",
-      "description": "了解VLESS-Reality如何让VPN流量在DPI和审查系统面前无法被检测。"
+      "title": "互联网审查指南 — VPN如何被封锁以及如何保持连接",
+      "description": "关于政府如何利用DPI、TSPU和机器学习封锁VPN和代理的技术指南 — 以及VLESS-Reality代理如何绕过所有检测方法。为不断升级的限制做好准备。"
     },
     "hero": {
-      "title": "Doppler如何绕过网络审查",
-      "subtitle": "VLESS-Reality让VPN流量无法被检测的技术概述。"
+      "title": "互联网自由指南",
+      "subtitle": "了解政府如何检测和封锁VPN、Doppler如何击败每一种封锁方法，以及在限制升级前你应该做些什么来保持畅通。"
     },
-    "problem": {
-      "title": "审查系统如何封锁VPN",
-      "p1": "现代审查系统使用DPI实时分析流量。它们不仅查看数据去向，还会检查数据包结构，寻找VPN协议的特征。",
-      "p2": "OpenVPN和WireGuard具有可识别的流量模式。DPI可以识别并立即封锁。即使VPN提供商尝试伪装，协议签名依然可被检测。",
-      "p3": "除了协议检测，审查系统还会封锁已知VPN服务器IP，并分析TLS握手指纹，在连接建立前就将VPN封锁。"
+    "detection": {
+      "title": "政府如何检测和封锁VPN",
+      "intro": "互联网审查早已不再是简单的IP封锁。俄罗斯、中国和伊朗等国家部署了先进的系统，利用机器学习实时识别和中断VPN连接。以下是它们的具体操作方式。",
+      "tspu": {
+        "title": "基础设施：TSPU和DPI",
+        "p1": "俄罗斯部署了TSPU（威胁对抗技术系统）— 直接安装在ISP网络节点上的专用硬件。中国使用防火长城（GFW），伊朗运营NIN。这些系统对穿越网络的每一个数据包执行深度包检测（DPI）。",
+        "p2": "传统VPN协议如OpenVPN、WireGuard和IPSec具有独特的数据包结构。DPI能够即时识别并断开连接。即使是所谓的混淆模式也往往失败，因为底层握手模式仍然可以被检测。",
+        "p3": "当基础签名匹配不够用时，这些系统会启动机器学习模块。它们不再分析数据包内容（数据都是加密的），转而分析流量的行为特征。"
+      },
+      "method1": {
+        "title": "方法一：TLS客户端指纹识别",
+        "description": "每个TLS客户端 — Chrome、Firefox、Safari — 在握手过程中会按特定顺序发送连接参数。这产生了独特的指纹。伪装成HTTPS流量的VPN客户端通常以与真实浏览器不同的顺序发送这些参数。DPI将指纹与已知浏览器数据库进行比对。不匹配？标记为隧道。"
+      },
+      "method2": {
+        "title": "方法二：流量熵值分析",
+        "description": "真实的互联网使用具有独特的模式。视频流产生大量连续的大数据包。网页浏览遵循请求-响应-暂停的周期。VPN隧道具有完全不同的熵值特征 — 均匀的数据包大小、一致的时间间隔、非人类的流量密度。即使流量伪装为HTTPS，机器学习模型也能在数据包长度和时间延迟中检测到这些统计异常。"
+      },
+      "method3": {
+        "title": "方法三：主动探测",
+        "description": "当系统怀疑某台境外服务器运行着VPN时，它会发送自己的探测请求。如果服务器像普通网站一样响应 — 返回404错误或HTML页面 — 则通过检测。但如果服务器尝试发起VPN握手或出现异常行为，该IP地址将被立即封禁。简单的VPN在这项测试中立刻暴露。"
+      },
+      "method4": {
+        "title": "方法四：IP和DNS黑名单",
+        "description": "已知的VPN提供商IP范围被直接封锁。VPN域名的DNS请求被拦截。拥有公开服务器列表的商业VPN提供商是最容易的目标 — 其整个基础设施可在数分钟内被封锁。"
+      },
+      "conclusion": "结果是：NordVPN、ExpressVPN和Surfshark等一键式VPN和标准代理服务在打压开始后数小时内便停止工作。只有专门设计为与正常网络流量无法区分的代理协议才能存活。"
     },
-    "evasion": {
-      "title": "Doppler流量为何不可见",
-      "reality": {
-        "title": "Reality握手",
-        "description": "VLESS-Reality使用真实网站的证书进行真正的TLS握手。对包括DPI在内的任何观察者来说，连接看起来与访问普通HTTPS网站完全一样。没有假证书，没有代理签名。"
+    "defeats": {
+      "title": "Doppler如何击败每一种检测方法",
+      "subtitle": "每种检测技术都有对应的反制措施，内置于VLESS-Reality — 驱动Doppler每一次连接的协议。",
+      "signatures": {
+        "attack": "协议签名",
+        "defense": "零VPN签名",
+        "description": "VLESS-Reality不产生任何可识别的协议模式。没有VPN握手，没有独特的数据包结构，DPI签名数据库找不到任何可匹配的内容。"
       },
-      "noSignature": {
-        "title": "无协议签名",
-        "description": "与OpenVPN（独特的握手）或WireGuard（已知的包结构）不同，VLESS-Reality不会产生任何可识别的协议签名。自动检测系统找不到匹配对象。"
+      "fingerprinting": {
+        "attack": "TLS指纹识别",
+        "defense": "真实的TLS握手",
+        "description": "Reality使用合法网站的证书执行真实的TLS握手。指纹与真实浏览器产生的完全一致 — 因为这本身就是一个真实的TLS连接。"
       },
-      "indistinguishable": {
-        "title": "流量与HTTPS无法区分",
-        "description": "隧道建立后，所有数据都以标准HTTPS的格式加密传输。包大小、时序和头部信息都与正常网页浏览一致。"
+      "entropy": {
+        "attack": "熵值分析",
+        "defense": "自然流量模式",
+        "description": "通过VLESS-Reality隧道的流量格式与标准HTTPS完全相同。数据包大小、时间间隔和流量模式与正常网页浏览一致，击败统计分析。"
       },
-      "infrastructure": {
-        "title": "动态服务器架构",
-        "description": "Doppler轮换服务器端点和IP地址，使审查系统难以维护封锁名单。即使一个端点被发现，网络也会自动适应。"
+      "probing": {
+        "attack": "主动探测",
+        "defense": "合法的服务器响应",
+        "description": "当被探测时，Doppler服务器的响应与其镜像的合法网站完全一致。未授权的探测请求会收到正常的网页响应。VPN隧道仅在有效的客户端认证下才会激活。"
+      },
+      "blacklisting": {
+        "attack": "IP黑名单",
+        "defense": "动态基础设施",
+        "description": "Doppler轮换服务器端点和IP地址。即使一个端点被识别，网络也会自动适应。我们的Telegram机器人提供对更新服务器配置的即时访问。"
       }
     },
-    "flow": {
-      "title": "审查系统看到的内容",
-      "step1": "你的设备",
-      "step1note": "Doppler客户端发起连接",
-      "step2": "TLS握手",
-      "step2note": "看起来像访问普通网站",
-      "step3": "VLESS隧道",
-      "step3note": "DPI看到的是普通HTTPS流量",
-      "step4": "Doppler节点",
-      "step4note": "流量进入开放互联网",
-      "dpiLabel": "DPI看到的：普通HTTPS流量"
+    "blocked": {
+      "title": "在俄罗斯被封锁 — 但我们仍在这里",
+      "badge": "经Roskomnadzor确认",
+      "p1": "俄罗斯当局专门针对并封锁了Doppler VPN。我们的域名已被添加到联邦封锁名单。这不是我们要隐瞒的事情 — 这恰恰证明我们的技术有效。",
+      "p2": "与那些服从下架要求或悄然退出受限市场的商业VPN提供商不同，Doppler正是为这种场景而生。当我们的网站被封锁时，我们的Telegram机器人仍然可用。当服务器IP被封禁时，我们的基础设施自动轮换。",
+      "p3": "他们施加的每一个封锁，我们都能绕过。这不是营销口号 — 这是我们的日常运营。",
+      "stat1label": "域名被RKN封锁",
+      "stat1value": "已确认",
+      "stat2label": "服务状态",
+      "stat2value": "正常运行",
+      "stat3label": "替代访问方式",
+      "stat3value": "Telegram机器人"
+    },
+    "future": {
+      "title": "未来展望：互联网限制的走向",
+      "intro": "互联网审查不会停滞不前。了解未来的趋势有助于你做好准备。以下是基于当前基础设施和政策趋势的现实预测。",
+      "stage1": {
+        "label": "当前阶段",
+        "title": "DPI + 机器学习检测",
+        "description": "政府在ISP节点上部署带有机器学习模块的TSPU/DPI硬件。标准VPN协议被自动封锁。VLESS-Reality及类似的反审查协议仍然有效，因为它们产生的流量与HTTPS无法区分。",
+        "status": "目前在俄罗斯、中国、伊朗活跃"
+      },
+      "stage2": {
+        "label": "可能的下一步",
+        "title": "白名单模式",
+        "description": "不再封锁特定协议，而是只允许访问经批准的域名和IP地址。其他一切默认封锁。SSH、RDP、游戏端口 — 除非由合法实体注册，否则全部封锁。俄罗斯在2018年封锁Telegram期间曾部分测试过这一模式。",
+        "status": "技术上可行，已部分部署"
+      },
+      "stage3": {
+        "label": "极端场景",
+        "title": "国家互联网隔离",
+        "description": "一个完全隔离的国内网络，强制使用国家签发的根证书，镜像外国服务，禁止直接访问全球互联网。类似朝鲜的光明网，但规模更大。",
+        "status": "经济代价巨大 — 见下文"
+      },
+      "reality": {
+        "title": "经济现实考量",
+        "p1": "2018年，当Roskomnadzor试图仅封锁Telegram时，最终封禁了数百万个Amazon和Google的IP地址。商店的收银机停止工作。智能家居设备离线。银行推送通知失败。",
+        "p2": "白名单模式将使这种情况扩大100倍。现代俄罗斯网站依赖Google Fonts、国外CDN库、国际证书颁发机构和云服务。银行和物流公司使用国外SSL证书。开发者将无法访问GitHub、Docker Hub和npm。",
+        "p3": "完全隔离在技术上是可行的 — 但代价是技术退化。Windows和Android更新将无法获取。医疗设备失去驱动支持。没有全球开源基础设施，AI发展将完全停滞。",
+        "p4": "最可能的路径是多年内逐步收紧，而非突然切断。但每一次升级都意味着更多的VPN用户被抛在后面 — 除非他们提前做好准备。"
+      }
+    },
+    "prepare": {
+      "title": "现在就做好准备",
+      "subtitle": "不要等到访问变得更困难。今天就采取这些步骤。",
+      "step1": {
+        "title": "立即下载Doppler VPN",
+        "description": "趁应用商店和我们的网站在你所在地区仍然可访问时安装应用。一旦限制升级，下载将变得困难得多。"
+      },
+      "step2": {
+        "title": "保存我们的Telegram机器人",
+        "description": "将@dopplercreatebot添加到你的Telegram。即使我们的网站被封锁，机器人在Telegram内仍然可用，能够即时为你提供VPN配置。",
+        "link": "打开@dopplercreatebot"
+      },
+      "step3": {
+        "title": "获取独立Android APK",
+        "description": "我们的Telegram机器人直接以APK文件分发Android应用 — 无需Google Play。如果Google Play在你的国家受到限制，这就是你的备选方案。"
+      },
+      "step4": {
+        "title": "保持应用更新",
+        "description": "我们会推送协议更新以应对新的封锁技术。启用自动更新，或通过我们的Telegram频道定期检查更新。"
+      },
+      "step5": {
+        "title": "分享给需要的人",
+        "description": "在限制升级前，越多人安装了Doppler越好。分享我们的Telegram机器人链接 — 这是我们最具抗审查能力的分发渠道。"
+      }
     },
     "comparison": {
       "title": "协议对比",
@@ -1134,7 +1220,7 @@
         "protocol": "协议",
         "detectability": "可检测性",
         "speed": "速度",
-        "censorship": "抗审查",
+        "censorship": "抗审查能力",
         "fingerprint": "协议指纹"
       },
       "openvpn": {
@@ -1159,20 +1245,15 @@
         "fingerprint": "无"
       }
     },
-    "works": {
-      "title": "Doppler在哪里可用",
-      "description": "Doppler已在VPN封锁活跃的网络中测试通过，包括限制性ISP环境、国家级防火墙以及封锁传统VPN的企业网络。",
-      "environments": {
-        "isp": "限制性ISP环境",
-        "national": "国家级防火墙",
-        "corporate": "企业网络限制",
-        "public": "过滤的公共Wi-Fi"
-      }
-    },
     "cta": {
-      "title": "在你的网络中试试",
-      "subtitle": "看看其他VPN失败的地方，Doppler能否连接。",
-      "button": "下载Doppler"
+      "title": "我们不会抛下任何人",
+      "subtitle": "Doppler VPN专为受限网络而生。我们持续改进基础设施、轮换服务器、更新协议，始终领先于每一种新的封锁技术。你的互联网自由不容妥协。",
+      "downloadIos": "下载iOS版",
+      "downloadAndroid": "下载Android版",
+      "telegramBot": "通过Telegram机器人获取",
+      "telegramChannelRu": "更新（俄语）",
+      "telegramChannelEn": "更新（英语）",
+      "button": "下载Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1222,25 +1303,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "为受限网络而设计",
-    "subtitle": "Doppler让VPN流量在审查系统面前完全不可见。",
-    "learnMore": "了解工作原理",
+    "title": "专为突破政府审查而打造",
+    "subtitle": "Doppler 击败 TSPU、DPI、TLS 指纹识别和主动探测 — 这些正是俄罗斯、中国和伊朗用来封锁 VPN 的技术。",
+    "learnMore": "阅读完整技术指南",
     "items": {
       "dpi": {
-        "title": "DPI绕过",
-        "description": "传统VPN有可识别的流量特征。VLESS-Reality将其消除 — 流量与普通HTTPS无法区分。"
+        "title": "击败深度包检测",
+        "description": "TSPU 和 DPI 硬件利用机器学习检测 VPN 流量特征。VLESS-Reality 产生零特征 — 没有任何可检测的内容。"
       },
       "tls": {
-        "title": "TLS流量伪装",
-        "description": "Doppler使用真实网站证书进行真正的TLS握手。审查系统看到的是普通网页流量，而非VPN连接。"
+        "title": "真实 TLS 握手",
+        "description": "Doppler 使用真实网站证书执行真正的 TLS 握手。DPI 看到的是一个正常的 HTTPS 连接，而非 VPN 隧道。"
       },
       "fingerprint": {
-        "title": "无可检测的协议指纹",
-        "description": "与OpenVPN或WireGuard不同，VLESS-Reality不留下协议指纹。自动封锁系统找不到匹配对象。"
+        "title": "通过主动探测",
+        "description": "当审查机构探测我们的服务器时，服务器以合法网站的方式回应。只有经过认证的客户端才能激活 VPN 隧道。"
       },
       "regions": {
-        "title": "在受限地区可用",
-        "description": "已在VPN封锁活跃的网络中测试通过。其他VPN连不上的地方，Doppler可以。"
+        "title": "被俄罗斯封锁 — 仍在运行",
+        "description": "我们的域名已被 Roskomnadzor 列入封锁名单。但我们依然在线。当网站被封锁时，可通过 Telegram 机器人下载。"
       }
     }
   },

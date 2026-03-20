@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Doppler VPN — VPN Bure Bila Usajili | Faragha na Usalama",
-    "description": "VPN bure bila barua pepe au usajili. Unganisha na usimbaji VLESS-Reality, kizuia matangazo na kichujio cha maudhui. Bila kumbukumbu. Kwa iOS na Android."
+    "title": "Doppler VPN — VPN Salama Bila Kumbukumbu na Proksi kwa Faragha",
+    "description": "Doppler VPN inakuhifadhi kwa usimbaji wa VLESS-Reality proxy, ulinzi wa DNS, na sera kali ya kutohifadhi kumbukumbu. Inapita DPI na udhibiti wa serikali. Inapatikana kwa iOS, Android, macOS na Windows."
   },
   "nav": {
     "features": "Vipengele",
@@ -1092,49 +1092,135 @@
   },
   "bypassCensorship": {
     "metadata": {
-      "title": "Jinsi Doppler Inavyopita Udhibiti wa Mtandao | Doppler VPN",
-      "description": "Jifunze jinsi VLESS-Reality inavyofanya trafiki ya VPN isiweze kugunduliwa na DPI na mifumo ya udhibiti."
+      "title": "Mwongozo wa Udhibiti wa Mtandao — Jinsi VPN Zinavyozuiwa na Jinsi ya Kubaki Mtandaoni",
+      "description": "Mwongozo wa kitaalamu kuhusu jinsi serikali zinavyozuia VPN na proksi kwa kutumia DPI, TSPU, na ujifunzaji wa mashine — na jinsi proksi ya VLESS-Reality inavyopita kila njia ya ugunduzi. Jiandae kwa vikwazo vinavyoongezeka."
     },
     "hero": {
-      "title": "Jinsi Doppler Inavyopita Udhibiti wa Mtandao",
-      "subtitle": "Muhtasari wa kitaalamu jinsi VLESS-Reality inavyofanya trafiki ya VPN isionekane."
+      "title": "Mwongozo Wako wa Uhuru wa Mtandao",
+      "subtitle": "Jinsi serikali zinavyogundua na kuzuia VPN, jinsi Doppler inavyoshinda kila njia, na unachopaswa kufanya sasa ili kubaki mtandaoni vikwazo vinapozidi."
     },
-    "problem": {
-      "title": "Jinsi Mifumo ya Udhibiti Inavyozuia VPN",
-      "p1": "Mifumo ya kisasa ya udhibiti inatumia Deep Packet Inspection (DPI) kuchambua trafiki ya mtandao kwa wakati halisi. Haichunguzi tu mahali data yako inakwenda — inachunguza jinsi inavyofungashwa, ikitafuta dalili za itifaki za VPN.",
-      "p2": "Itifaki za VPN za jadi kama OpenVPN na WireGuard zina mifumo ya trafiki inayotambulika. DPI inazigundua na kuzizuia papo hapo. Hata wakati watoa VPN wanajaribu kuficha, saini za itifaki zinabaki kuonekana.",
-      "p3": "Zaidi ya kugundua itifaki, mifumo ya udhibiti pia inazuia anwani za IP za seva za VPN zinazojulikana na kuchambua alama za TLS handshake ili kuzuia muunganisho wa VPN kabla haujajengwa kikamilifu."
+    "detection": {
+      "title": "Jinsi Serikali Zinavyogundua na Kuzuia VPN",
+      "intro": "Udhibiti wa mtandao umepita mbali zaidi ya kuzuia IP tu. Nchi kama Urusi, China, na Iran zinatumia mifumo ya kisasa inayotumia ujifunzaji wa mashine kutambua na kusitisha muunganisho wa VPN kwa wakati halisi. Hivi ndivyo wanavyofanya.",
+      "tspu": {
+        "title": "Miundombinu: TSPU na DPI",
+        "p1": "Urusi inatumia TSPU (Technical Systems for Threat Countermeasures) — vifaa maalum vilivyowekwa moja kwa moja kwenye nodi za mtandao wa ISP. China inatumia Great Firewall, Iran inaendesha NIN. Mifumo hii inafanya Deep Packet Inspection (DPI) kwa kila paketi inayopita mtandaoni.",
+        "p2": "Itifaki za VPN za jadi kama OpenVPN, WireGuard, na IPSec zina muundo wa paketi unaotofautiana. DPI inazitambua papo hapo na kusitisha muunganisho. Hata hali za \"kufichwa\" mara nyingi zinashindwa kwa sababu mfumo wa awali wa handshake unabaki kugunduliwa.",
+        "p3": "Wakati ulinganishaji wa saini za kawaida hautoshi, mifumo hii inaanzisha moduli za ujifunzaji wa mashine. Inaacha kuchunguza ndani ya paketi (kila kitu kimesimbwa) na kuanza kuchambua jinsi trafiki inavyojiendesha."
+      },
+      "method1": {
+        "title": "Njia ya 1: Uchapishaji wa Alama za TLS Client",
+        "description": "Kila TLS client — Chrome, Firefox, Safari — hutuma vigezo vya muunganisho kwa mpangilio maalum wakati wa handshake. Hii huunda alama ya kipekee. Mteja wa VPN anayejifanya kuwa trafiki ya HTTPS mara nyingi hutuma vigezo hivi kwa mpangilio tofauti na kivinjari chochote halisi. DPI inalinganisha alama hiyo na hifadhidata ya vivinjari vinavyojulikana. Hailingani? Inaashiriwa kama handaki."
+      },
+      "method2": {
+        "title": "Njia ya 2: Uchambuzi wa Entropy ya Trafiki",
+        "description": "Matumizi halisi ya mtandao yana mifumo tofauti. Utiririshaji wa video hutoa paketi nyingi kubwa zinazofuatana. Kuvinjari wavuti kunafuata mzunguko wa ombi-jibu-mapumziko. Handaki la VPN lina muundo tofauti kabisa wa entropy — ukubwa wa paketi sawa, muda thabiti, msongamano usio wa kibinadamu. Hata trafiki ikifichwa kama HTTPS, modeli za ujifunzaji wa mashine zinagundua tofauti hizi za kitakwimu katika urefu wa paketi na ucheleweshaji wa muda."
+      },
+      "method3": {
+        "title": "Njia ya 3: Uchunguzi Hai",
+        "description": "Mfumo unaposhuku seva ya kigeni inaendesha VPN, hutuma ombi lake la uchunguzi. Ikiwa seva inajibu kama tovuti ya kawaida — ikirudisha kosa la 404 au ukurasa wa HTML — inapita. Lakini ikiwa seva inajaribu kuanzisha handshake ya VPN au kujiendesha kwa njia isiyotarajiwa, anwani ya IP inazuiwa mara moja. VPN rahisi zinashindwa mtihani huu papo hapo."
+      },
+      "method4": {
+        "title": "Njia ya 4: Kuzuia IP na DNS",
+        "description": "Masafa ya IP ya watoa VPN yanayojulikana yanazuiwa kabisa. Maombi ya DNS kwa vikoa vya VPN yanazuiliwa. Watoa VPN wa kibiashara wenye orodha za seva za umma ndio shabaha rahisi zaidi — miundombinu yao yote inaweza kuzuiwa ndani ya dakika."
+      },
+      "conclusion": "Matokeo: VPN za kitufe-kimoja na huduma za proksi za kawaida kama NordVPN, ExpressVPN, na Surfshark zinaacha kufanya kazi ndani ya masaa ya hatua kali. Ni itifaki za proksi zilizoundwa mahususi kuwa sawa na trafiki ya kawaida ya wavuti pekee ndizo zinazobaki."
     },
-    "evasion": {
-      "title": "Kwa Nini Trafiki ya Doppler Haionekani",
-      "reality": {
-        "title": "Reality Handshake",
-        "description": "VLESS-Reality inafanya TLS handshake halisi kwa kutumia cheti cha tovuti halisi. Kwa mtazamaji yeyote — ikiwa ni pamoja na DPI — muunganisho unaonekana sawa na kuvinjari tovuti ya HTTPS ya kawaida. Hakuna cheti bandia cha kugunduliwa."
+    "defeats": {
+      "title": "Jinsi Doppler Inavyoshinda Kila Njia ya Ugunduzi",
+      "subtitle": "Kila mbinu ya ugunduzi ina kinga mahususi iliyojengwa ndani ya VLESS-Reality — itifaki inayoendesha kila muunganisho wa Doppler.",
+      "signatures": {
+        "attack": "Saini za Itifaki",
+        "defense": "Hakuna Saini ya VPN",
+        "description": "VLESS-Reality haitoi mfumo wowote wa itifaki unaotambulika. Hakuna handshake ya VPN, hakuna muundo wa paketi unaotofautiana, hakuna chochote ambacho hifadhidata za saini za DPI zinaweza kulinganisha."
       },
-      "noSignature": {
-        "title": "Hakuna Saini ya Itifaki",
-        "description": "Tofauti na OpenVPN (yenye handshake ya kipekee) au WireGuard (yenye muundo wa paketi unaojulikana), VLESS-Reality haitoi saini yoyote. Mifumo ya kiotomatiki haina kitu cha kulinganisha."
+      "fingerprinting": {
+        "attack": "Uchapishaji wa Alama za TLS",
+        "defense": "TLS Handshake Halisi",
+        "description": "Reality inafanya TLS handshake halisi kwa kutumia cheti cha tovuti halisi. Alama inalingana kabisa na ile ambayo kivinjari halisi kingetoa — kwa sababu ni muunganisho halisi wa TLS."
       },
-      "indistinguishable": {
-        "title": "Trafiki Sawa na HTTPS",
-        "description": "Baada ya handaki kujengwa, data yote inasimbwa na kupangwa sawa kabisa na trafiki ya HTTPS ya kawaida. Ukubwa wa paketi, mifumo ya wakati, vichwa — vyote vinaendana na sesheni ya kawaida ya kuvinjari."
+      "entropy": {
+        "attack": "Uchambuzi wa Entropy",
+        "defense": "Mifumo ya Trafiki ya Kawaida",
+        "description": "Trafiki inayopita kupitia handaki la VLESS-Reality imepangwa sawa kabisa na HTTPS ya kawaida. Ukubwa wa paketi, muda, na mifumo ya mtiririko vinalingana na kuvinjari wavuti kwa kawaida, na kushinda uchambuzi wa kitakwimu."
       },
-      "infrastructure": {
-        "title": "Miundombinu ya Seva Inayobadilika",
-        "description": "Doppler inabadilisha sehemu za mwisho na anwani za IP za seva. Hata ikiwa sehemu moja itagunduliwa, mtandao unajibadilisha."
+      "probing": {
+        "attack": "Uchunguzi Hai",
+        "defense": "Majibu Halisi ya Seva",
+        "description": "Zinapochunguzwa, seva za Doppler zinajibu kama tovuti halisi wanayoiiga. Maombi ya uchunguzi yasiyoidhinishwa yanapokea majibu ya kawaida ya wavuti. Handaki la VPN linaanzishwa tu kwa uthibitisho halisi wa mteja."
+      },
+      "blacklisting": {
+        "attack": "Kuzuia IP",
+        "defense": "Miundombinu Inayobadilika",
+        "description": "Doppler inabadilisha sehemu za mwisho za seva na anwani za IP. Hata sehemu moja ikitambuliwa, mtandao unajibadilisha kiotomatiki. Boti yetu ya Telegram inatoa ufikiaji wa papo hapo kwa mipangilio iliyosasishwa ya seva."
       }
     },
-    "flow": {
-      "title": "Mifumo ya Udhibiti Inaona Nini",
-      "step1": "Kifaa Chako",
-      "step1note": "Mteja wa Doppler anaanzisha muunganisho",
-      "step2": "TLS Handshake",
-      "step2note": "Inaonekana kama kutembelea tovuti ya kawaida",
-      "step3": "Handaki la VLESS",
-      "step3note": "DPI inaona: trafiki ya HTTPS ya kawaida",
-      "step4": "Nodi ya Doppler",
-      "step4note": "Trafiki inatoka kwenye mtandao wazi",
-      "dpiLabel": "DPI inaona: trafiki ya HTTPS ya kawaida"
+    "blocked": {
+      "title": "Imezuiwa Urusi — Na Bado Tunafanya Kazi",
+      "badge": "Imethibitishwa na Roskomnadzor",
+      "p1": "Mamlaka ya Urusi imelenga na kuzuia Doppler VPN mahususi. Kikoa chetu kimeongezwa kwenye orodha ya kuzuia ya shirikisho. Hii si kitu tunachoficha — ni uthibitisho kwamba teknolojia yetu inafanya kazi.",
+      "p2": "Tofauti na watoa VPN wa kibiashara wanaotii maombi ya kuondolewa au kutoka kimya kimya kwenye masoko yenye vikwazo, Doppler ilijengwa kwa hali hii haswa. Tovuti yetu inapozuiwa, boti yetu ya Telegram inabaki kupatikana. Wakati IP za seva zinapozuiwa, miundombinu yetu inabadilika kiotomatiki.",
+      "p3": "Kila kizuizi wanachoweka, tunakipita. Hii si dai la uuzaji — ni utendaji wetu wa kila siku.",
+      "stat1label": "Kikoa kimezuiwa na RKN",
+      "stat1value": "Imethibitishwa",
+      "stat2label": "Hali ya huduma",
+      "stat2value": "Inafanya kazi",
+      "stat3label": "Njia mbadala ya ufikiaji",
+      "stat3value": "Boti ya Telegram"
+    },
+    "future": {
+      "title": "Nini Cha Kutarajia: Mustakabali wa Vikwazo vya Mtandao",
+      "intro": "Udhibiti wa mtandao hausimami. Kuelewa mwelekeo wa mambo kunakusaidia kujiandaa. Huu ndio mpangilio wa kweli kulingana na hali ya sasa ya miundombinu na sera.",
+      "stage1": {
+        "label": "Hatua ya Sasa",
+        "title": "Ugunduzi wa DPI + Ujifunzaji wa Mashine",
+        "description": "Serikali zinatumia vifaa vya TSPU/DPI vyenye moduli za ujifunzaji wa mashine kwenye nodi za ISP. Itifaki za VPN za kawaida zinazuiwa kiotomatiki. VLESS-Reality na itifaki kama hizo za kupinga udhibiti bado zinafanya kazi kwa sababu zinatoa trafiki isiyotofautishwa na HTTPS.",
+        "status": "Inatumika sasa Urusi, China, Iran"
+      },
+      "stage2": {
+        "label": "Hatua Inayoweza Kufuata",
+        "title": "Mfumo wa Orodha ya Ruhusa",
+        "description": "Badala ya kuzuia itifaki maalum, ni vikoa na anwani za IP zilizoidhinishwa pekee ndizo zingefikiwa. Mengine yote yanazuiwa kwa chaguo-msingi. SSH, RDP, bandari za michezo — yote yanazuiwa isipokuwa yamesajiliwa na taasisi halali. Hii ilijaribiwa kwa sehemu wakati Urusi ilipozuia Telegram mwaka 2018.",
+        "status": "Inawezekana kitaalamu, imetumika kwa sehemu"
+      },
+      "stage3": {
+        "label": "Hali ya Kupindukia",
+        "title": "Kutengwa kwa Mtandao wa Kitaifa",
+        "description": "Mtandao wa ndani uliojitenga kabisa wenye vyeti vya mzizi vilivyotolewa na serikali, nakala za ndani za huduma za kigeni, na hakuna ufikiaji wa moja kwa moja wa mtandao wa kimataifa. Fikiria Kwangmyong ya Korea Kaskazini, lakini kwa kiwango kikubwa.",
+        "status": "Kungeharibu uchumi — angalia hapa chini"
+      },
+      "reality": {
+        "title": "Ukaguzi wa Hali Halisi ya Kiuchumi",
+        "p1": "Mwaka 2018, wakati Roskomnadzor ilipojaribu kuzuia Telegram peke yake, waliishia kuzuia mamilioni ya anwani za IP za Amazon na Google. Mashine za malipo katika maduka zilikoma kufanya kazi. Vifaa vya nyumba mahiri vilikatika. Arifa za benki zilishindwa kufika.",
+        "p2": "Mfumo wa orodha ya ruhusa ungesababisha hali hii mara 100 zaidi. Tovuti za kisasa za Urusi zinategemea Google Fonts, maktaba za CDN za kigeni, mamlaka ya vyeti vya kimataifa, na huduma za wingu. Benki na makampuni ya usafirishaji yanatumia vyeti vya SSL vya kigeni. Waendelezaji wangepoteza ufikiaji wa GitHub, Docker Hub, na npm.",
+        "p3": "Kutengwa kabisa kunawezekana kitaalamu — lakini bei yake ni kurudi nyuma kiteknolojia. Masasisho ya Windows na Android yanakuwa hayapatikani. Vifaa vya matibabu vinapoteza msaada wa viendeshaji. Uendelezaji wa AI unasimama kabisa bila miundombinu ya chanzo-huru ya kimataifa.",
+        "p4": "Njia inayowezekana zaidi ni vikwazo vya taratibu kwa miaka, si kukatika kwa ghafla. Lakini kila hatua ya kupandisha vikwazo inamaanisha watumiaji zaidi wa VPN wanabaki nyuma — isipokuwa wamejiandaa."
+      }
+    },
+    "prepare": {
+      "title": "Jinsi ya Kujiandaa Sasa",
+      "subtitle": "Usisubiri hadi ufikiaji uwe mgumu zaidi. Chukua hatua hizi leo.",
+      "step1": {
+        "title": "Pakua Doppler VPN Sasa",
+        "description": "Sakinisha programu wakati maduka ya programu na tovuti yetu bado yanapatikana katika eneo lako. Vikwazo vinapozidi, kupakua kunakuwa vigumu zaidi."
+      },
+      "step2": {
+        "title": "Hifadhi Boti Yetu ya Telegram",
+        "description": "Ongeza @dopplercreatebot kwenye Telegram yako. Hata tovuti yetu ikizuiwa, boti inabaki kupatikana ndani ya Telegram na inaweza kukupa mipangilio ya VPN papo hapo.",
+        "link": "Fungua @dopplercreatebot"
+      },
+      "step3": {
+        "title": "Pata APK ya Android Huru",
+        "description": "Boti yetu ya Telegram inasambaza programu ya Android moja kwa moja kama faili ya APK — hakuna Play Store inayohitajika. Hii ni akiba yako ikiwa Google Play itazuiwa katika nchi yako."
+      },
+      "step4": {
+        "title": "Sasisha Programu Yako",
+        "description": "Tunatuma masasisho ya itifaki ili kubaki mbele ya mbinu mpya za kuzuia. Washa masasisho ya kiotomatiki au angalia masasisho mara kwa mara kupitia chaneli zetu za Telegram."
+      },
+      "step5": {
+        "title": "Shiriki na Watu Wanaohitaji",
+        "description": "Watu wengi zaidi wakiwa na Doppler iliyosakinishwa kabla vikwazo havijazidi, ni bora zaidi. Shiriki kiungo cha boti yetu ya Telegram — ni njia yetu ya usambazaji inayostahimili udhibiti zaidi."
+      }
     },
     "comparison": {
       "title": "Kulinganisha Itifaki",
@@ -1142,7 +1228,7 @@
         "protocol": "Itifaki",
         "detectability": "Kugunduliwa",
         "speed": "Kasi",
-        "censorship": "Upinzani wa Udhibiti",
+        "censorship": "Ustahimilivu wa Udhibiti",
         "fingerprint": "Alama ya Itifaki"
       },
       "openvpn": {
@@ -1167,20 +1253,15 @@
         "fingerprint": "Hakuna"
       }
     },
-    "works": {
-      "title": "Doppler Inafanya Kazi Wapi",
-      "description": "Doppler imejaribiwa na inafanya kazi katika mitandao yenye kuzuia VPN — mazingira ya ISP yenye vikwazo, kuta za moto za kitaifa, na mitandao ya mashirika inayozuia VPN za jadi.",
-      "environments": {
-        "isp": "ISP zenye vikwazo",
-        "national": "Kuta za moto za kitaifa",
-        "corporate": "Vikwazo vya mitandao ya mashirika",
-        "public": "Wi-Fi ya umma yenye vichujio"
-      }
-    },
     "cta": {
-      "title": "Jaribu Doppler katika mtandao wako",
-      "subtitle": "Tazama kama Doppler inafanya kazi pale VPN nyingine zinaposhindwa.",
-      "button": "Pakua Doppler"
+      "title": "Hatuachi Mtu Yeyote Nyuma",
+      "subtitle": "Doppler VPN ilijengwa mahususi kwa mitandao yenye vikwazo. Tunaboresha miundombinu yetu kila wakati, tunabadilisha seva, na kusasisha itifaki ili kubaki mbele ya kila mbinu mpya ya kuzuia. Uhuru wako wa mtandao haujadiliwe.",
+      "downloadIos": "Pakua kwa iOS",
+      "downloadAndroid": "Pakua kwa Android",
+      "telegramBot": "Pata kupitia Boti ya Telegram",
+      "telegramChannelRu": "Masasisho (Kirusi)",
+      "telegramChannelEn": "Masasisho (Kiingereza)",
+      "button": "Pakua Doppler VPN"
     }
   },
   "trustIndicators": {
@@ -1230,25 +1311,25 @@
     }
   },
   "censorshipResistance": {
-    "title": "Imeundwa kwa Mitandao Yenye Vikwazo",
-    "subtitle": "Doppler inafanya trafiki ya VPN isionekane kwa mifumo ya udhibiti.",
-    "learnMore": "Jifunze jinsi inavyofanya kazi",
+    "title": "Imeundwa Kupita Udhibiti wa Serikali",
+    "subtitle": "Doppler inashinda TSPU, DPI, TLS fingerprinting, na uchunguzi hai — mifumo ile ile ambayo Urusi, China, na Iran wanatumia kuzuia VPN.",
+    "learnMore": "Soma mwongozo kamili wa kiufundi",
     "items": {
       "dpi": {
-        "title": "Kupita Deep Packet Inspection",
-        "description": "VPN za kawaida zina saini za trafiki zinazotambulika. VLESS-Reality inaziondoa — trafiki yako haiwezi kutofautishwa na HTTPS ya kawaida."
+        "title": "Inashinda Deep Packet Inspection",
+        "description": "Vifaa vya TSPU na DPI vinatumia machine learning kutambua mifumo ya trafiki ya VPN. VLESS-Reality haitoi saini yoyote — hakuna kinachoweza kutambuliwa."
       },
       "tls": {
-        "title": "Kujificha kwa TLS",
-        "description": "Doppler inafanya TLS handshake halisi na cheti cha tovuti halisi. Mifumo ya udhibiti inaona trafiki ya wavuti ya kawaida, si VPN."
+        "title": "TLS Handshake Halisi",
+        "description": "Doppler inafanya TLS handshake halisi na cheti halisi cha tovuti. DPI inaona muunganisho wa kawaida wa HTTPS, si handaki ya VPN."
       },
       "fingerprint": {
-        "title": "Hakuna Alama ya Itifaki",
-        "description": "Tofauti na OpenVPN au WireGuard, VLESS-Reality haiachi alama ya itifaki. Mifumo ya kuzuia kiotomatiki haina kitu cha kulinganisha."
+        "title": "Inapita Uchunguzi Hai",
+        "description": "Wadhibiti wanapochunguza seva zetu, zinajibu kama tovuti halisi. Wateja waliothibitishwa pekee ndio wanaowezesha handaki ya VPN."
       },
       "regions": {
-        "title": "Inafanya Kazi Kwenye Maeneo Yenye Vikwazo",
-        "description": "Imejaribiwa na inafanya kazi katika mitandao yenye kuzuia VPN. Doppler inaunganisha pale VPN nyingine zinaposhindwa."
+        "title": "Imezuiwa na Urusi — Bado Inafanya Kazi",
+        "description": "Kikoa chetu kiko kwenye orodha ya kuzuia ya Roskomnadzor. Bado tuko hapa. Pakua kupitia Telegram bot wakati tovuti imezuiwa."
       }
     }
   },

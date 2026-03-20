@@ -12,10 +12,19 @@ export async function PATCH(
   const { id } = await params;
   const body = await req.json();
 
+  const allowedFields = [
+    "code", "discount_percent", "discount_fixed", "max_redemptions",
+    "expires_at", "is_active", "applicable_plans", "description",
+  ];
+  const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
+  for (const key of allowedFields) {
+    if (body[key] !== undefined) updates[key] = body[key];
+  }
+
   const supabase = createUntypedAdminClient();
   const { data, error: dbError } = await supabase
     .from("promo_codes")
-    .update({ ...body, updated_at: new Date().toISOString() })
+    .update(updates)
     .eq("id", id)
     .select()
     .single();
