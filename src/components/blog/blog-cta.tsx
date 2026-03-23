@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
+import { trackCta } from "@/lib/track-cta";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -61,9 +62,10 @@ interface StoreButtonProps {
   label: string;
   href: string;
   accent: "teal" | "gold";
+  onTrack?: () => void;
 }
 
-function StoreButton({ store, label, href, accent }: StoreButtonProps) {
+function StoreButton({ store, label, href, accent, onTrack }: StoreButtonProps) {
   const colors =
     accent === "teal"
       ? "bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30"
@@ -74,6 +76,7 @@ function StoreButton({ store, label, href, accent }: StoreButtonProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={onTrack}
       className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg transition-colors ${colors}`}
     >
       {store === "apple" ? (
@@ -194,6 +197,7 @@ function AppCard({ app, platform }: AppCardProps) {
             label={app.appStoreLabel}
             href={app.appStoreHref}
             accent={app.accentColor}
+            onTrack={app.accentColor === "teal" ? () => trackCta("blog-bottom", "ios") : undefined}
           />
         )}
         {showGoogle && (
@@ -202,6 +206,7 @@ function AppCard({ app, platform }: AppCardProps) {
             label={app.playStoreLabel}
             href={app.playStoreHref}
             accent={app.accentColor}
+            onTrack={app.accentColor === "teal" ? () => trackCta("blog-bottom", "android") : undefined}
           />
         )}
       </div>
