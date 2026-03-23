@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { WaitlistForm } from "@/components/downloads/waitlist-form";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -212,52 +213,31 @@ export default async function DownloadsPage({ params }: PageProps) {
               </p>
             </div>
 
-            {/* ── Windows ──────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
+            {/* ── Windows (In Development) ────────────────────────── */}
+            <div className="rounded-2xl border border-accent-gold/20 bg-bg-secondary/50 p-6 relative overflow-hidden">
+              {/* "Coming Soon" corner ribbon effect */}
+              <div className="absolute top-0 end-0 bg-accent-gold/15 text-accent-gold text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-es-xl border-s border-b border-accent-gold/20">
+                {t("windows.comingSoon")}
+              </div>
+
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted">
                   <WindowsIcon className="w-5 h-5" />
                 </div>
-                <h2 className="text-xl font-semibold text-text-primary">{t("windows.title")}</h2>
+                <div>
+                  <h2 className="text-xl font-semibold text-text-primary">{t("windows.title")}</h2>
+                  <p className="text-xs text-accent-gold">{t("windows.inDevelopment")}</p>
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <a
-                  href={URLS.windowsX64}
-                  download
-                  className="group flex items-center justify-between rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 transition-all"
-                >
-                  <div className="flex items-center gap-2">
-                    <DownloadIcon className="w-4 h-4 text-text-muted group-hover:text-accent-teal transition-colors" />
-                    <span className="text-sm font-medium text-text-primary">{t("windows.x64")}</span>
-                  </div>
-                  <span className="text-xs text-text-muted">.exe &middot; x64</span>
-                </a>
-                <a
-                  href={URLS.windowsArm64}
-                  download
-                  className="group flex items-center justify-between rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 transition-all"
-                >
-                  <div className="flex items-center gap-2">
-                    <DownloadIcon className="w-4 h-4 text-text-muted group-hover:text-accent-teal transition-colors" />
-                    <span className="text-sm font-medium text-text-primary">{t("windows.arm64")}</span>
-                  </div>
-                  <span className="text-xs text-text-muted">.exe &middot; ARM64</span>
-                </a>
-              </div>
+              <p className="text-sm text-text-muted mb-4 leading-relaxed">
+                {t("windows.waitlistDescription")}
+              </p>
 
-              <SetupSteps
-                steps={[
-                  t("windows.step1"),
-                  t("windows.step2"),
-                  t("windows.step3"),
-                  t("windows.step4"),
-                  t("windows.step5"),
-                ]}
-              />
+              <WaitlistForm platform="windows" />
 
-              <p className="mt-4 text-xs text-accent-gold/80 italic">
-                {t("windows.note")}
+              <p className="mt-4 text-xs text-text-muted/60">
+                {t("windows.waitlistPrivacy")}
               </p>
             </div>
           </div>
