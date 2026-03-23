@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { isRtlLocale } from "@/i18n/routing";
+import { BlogInlineCta } from "./blog-inline-cta";
 
 interface BlogContentProps {
   content: string;
@@ -11,6 +13,8 @@ interface BlogContentProps {
 
 export function BlogContent({ content, locale }: BlogContentProps) {
   const isRtl = isRtlLocale(locale);
+  const h2CountRef = useRef(0);
+  h2CountRef.current = 0; // Reset on each render call (safe for Strict Mode)
 
   return (
     <article
@@ -100,6 +104,16 @@ export function BlogContent({ content, locale }: BlogContentProps) {
               {children}
             </a>
           ),
+          h2: ({ children, ...props }) => {
+            h2CountRef.current++;
+            const count = h2CountRef.current;
+            return (
+              <>
+                <h2 {...props}>{children}</h2>
+                {count === 3 && <BlogInlineCta />}
+              </>
+            );
+          },
         }}
       >
         {content}
