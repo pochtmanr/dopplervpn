@@ -83,34 +83,55 @@ export function BlogStickyBar({
 
   return (
     <div
-      className={`fixed bottom-0 inset-x-0 z-40 transition-transform duration-300 ${
+      className={`fixed bottom-0 inset-x-0 z-40 transition-transform duration-300 ease-out ${
         show ? "translate-y-0" : "translate-y-full"
       }`}
     >
-      <div className="bg-bg-primary/95 backdrop-blur-sm border-t border-overlay/10">
-        <div className="mx-auto max-w-3xl flex items-center justify-between gap-3 px-4 py-3">
-          <a
-            href={config.href}
-            target={platform === "desktop" ? undefined : "_blank"}
-            rel={platform === "desktop" ? undefined : "noopener noreferrer"}
-            onClick={handleClick}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors text-sm font-medium"
-          >
-            {config.icon}
-            {t("cta")}
-          </a>
-          <button
-            onClick={handleDismiss}
-            className="p-1.5 rounded-md text-text-muted hover:text-text-primary hover:bg-overlay/10 transition-colors"
-            aria-label={t("dismiss")}
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
+      <div className="bg-bg-secondary/98 backdrop-blur-md border-t border-overlay/10 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+            {/* Shield icon + message */}
+            <div className="flex items-start sm:items-center gap-3 flex-1 min-w-0">
+              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center">
+                <ShieldIcon />
+              </div>
+              <p className="text-sm text-text-muted leading-relaxed">
+                {t("message")}
+              </p>
+            </div>
+
+            {/* Action buttons — cookie consent style */}
+            <div className="flex items-center gap-2 flex-shrink-0 ps-12 sm:ps-0">
+              <a
+                href={config.href}
+                target={platform === "desktop" ? undefined : "_blank"}
+                rel={platform === "desktop" ? undefined : "noopener noreferrer"}
+                onClick={handleClick}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors text-sm font-medium whitespace-nowrap"
+              >
+                {config.icon}
+                {t("cta")}
+              </a>
+              <button
+                onClick={handleDismiss}
+                className="px-3 py-2 rounded-lg text-sm text-text-muted hover:text-text-primary hover:bg-overlay/10 border border-overlay/10 hover:border-overlay/20 transition-colors whitespace-nowrap"
+                aria-label={t("dismissLabel")}
+              >
+                {t("dismiss")}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg className="w-5 h-5 text-accent-teal" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+    </svg>
   );
 }
 
