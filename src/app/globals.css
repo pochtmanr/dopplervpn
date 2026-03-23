@@ -113,6 +113,16 @@ body {
 .hero-animate-delay-4 { animation-delay: 200ms; }
 .hero-animate-delay-5 { animation-delay: 250ms; }
 
+/* One-time CTA glow pulse */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(0, 140, 140, 0); }
+  50% { box-shadow: 0 0 20px 4px rgba(0, 140, 140, 0.3); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 140, 140, 0); }
+}
+.pulse-glow-once {
+  animation: pulse-glow 1.5s ease-out 1;
+}
+
 /* Modal animations */
 @keyframes fadeIn {
   from { opacity: 0; }
