@@ -15,6 +15,7 @@ import {
   BlogCta,
 } from "@/components/blog";
 import { ShareButtons } from "@/components/blog/share-buttons";
+import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
 import type { Metadata } from "next";
 
@@ -394,6 +395,9 @@ export default async function BlogPostPage({ params }: Props) {
               readMoreText={t("readMore")}
             />
 
+            {/* Sentinel for sticky bar auto-hide */}
+            <div id="blog-cta-sentinel" aria-hidden="true" />
+
             {/* CTA */}
             <BlogCta
               title={t("cta.title")}
@@ -414,6 +418,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </Section>
       </main>
+      <BlogStickyBar />
       <Footer />
     </>
   );
