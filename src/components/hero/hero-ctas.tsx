@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-export type Platform = "ios" | "android" | "desktop";
+import type { Platform } from "@/lib/detect-platform";
+export type { Platform };
 
 const APP_STORE_URL =
   "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
