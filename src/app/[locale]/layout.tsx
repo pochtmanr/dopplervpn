@@ -139,7 +139,7 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dir}
       suppressHydrationWarning
-      className={(locale === "ru" || locale === "uk")
+      className={(locale === "ru" || locale === "uk" || locale === "bg")
         ? rubik.variable
         : `${instrumentSerif.variable} ${spaceGrotesk.variable}`
       }
