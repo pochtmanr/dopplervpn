@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const t = await getTranslations({ locale, namespace: "support" });
   return {
     title: t("title"),
-    description: "Get help with Doppler VPN. Setup guides, troubleshooting, FAQ, and contact support via Telegram or email.",
+    description: t("subtitle"),
     alternates: {
       canonical: `${baseUrl}/${locale}/support`,
       languages: Object.fromEntries([

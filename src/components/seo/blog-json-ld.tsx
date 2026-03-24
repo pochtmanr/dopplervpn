@@ -1,3 +1,5 @@
+import { ogLocaleMap } from "@/lib/og-locale-map";
+
 interface BlogPostJsonLdProps {
   title: string;
   description: string;
@@ -7,6 +9,8 @@ interface BlogPostJsonLdProps {
   updatedAt: string;
   slug: string;
   locale: string;
+  breadcrumbHome: string;
+  breadcrumbBlog: string;
 }
 
 export function BlogPostJsonLd({
@@ -18,6 +22,8 @@ export function BlogPostJsonLd({
   updatedAt,
   slug,
   locale,
+  breadcrumbHome,
+  breadcrumbBlog,
 }: BlogPostJsonLdProps) {
   const baseUrl = "https://www.dopplervpn.org";
 
@@ -46,7 +52,7 @@ export function BlogPostJsonLd({
       "@type": "WebPage",
       "@id": `${baseUrl}/${locale}/blog/${slug}`,
     },
-    inLanguage: locale === "he" ? "he-IL" : "en-US",
+    inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
   };
 
   const breadcrumbSchema = {
@@ -56,13 +62,13 @@ export function BlogPostJsonLd({
       {
         "@type": "ListItem",
         position: 1,
-        name: locale === "he" ? "בית" : "Home",
+        name: breadcrumbHome,
         item: `${baseUrl}/${locale}`,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: locale === "he" ? "בלוג" : "Blog",
+        name: breadcrumbBlog,
         item: `${baseUrl}/${locale}/blog`,
       },
       {

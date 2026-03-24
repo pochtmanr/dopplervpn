@@ -1,8 +1,13 @@
-interface OrganizationSchemaProps {
+import { getTranslations } from "next-intl/server";
+import { ogLocaleMap } from "@/lib/og-locale-map";
+
+interface LocaleProps {
   locale: string;
 }
 
-export function OrganizationSchema({ locale }: OrganizationSchemaProps) {
+export async function OrganizationSchema({ locale }: LocaleProps) {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -10,10 +15,7 @@ export function OrganizationSchema({ locale }: OrganizationSchemaProps) {
     url: `https://www.dopplervpn.org/${locale}`,
     logo: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
-    description:
-      locale === "he"
-        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן."
-        : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter.",
+    description: t("description"),
     sameAs: [
       "https://apps.apple.com/app/doppler-vpn-fast-secure/id6744068438",
       "https://t.me/dopplervpn",
@@ -29,20 +31,16 @@ export function OrganizationSchema({ locale }: OrganizationSchemaProps) {
   );
 }
 
-interface ProductSchemaProps {
-  locale: string;
-}
+export async function ProductSchema({ locale }: LocaleProps) {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  const pt = await getTranslations({ locale, namespace: "pricing" });
 
-export function ProductSchema({ locale }: ProductSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: "Doppler VPN",
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
-    description:
-      locale === "he"
-        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים."
-        : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter. No logs.",
+    description: t("description"),
     brand: {
       "@type": "Brand",
       name: "Doppler VPN",
@@ -50,7 +48,7 @@ export function ProductSchema({ locale }: ProductSchemaProps) {
     offers: [
       {
         "@type": "Offer",
-        name: locale === "he" ? "חודשי" : "Monthly",
+        name: pt("durations.monthly"),
         price: "7.99",
         priceCurrency: "USD",
         priceValidUntil: "2026-12-31",
@@ -93,7 +91,7 @@ export function ProductSchema({ locale }: ProductSchemaProps) {
       },
       {
         "@type": "Offer",
-        name: locale === "he" ? "שנתי" : "Annual",
+        name: pt("durations.annual"),
         price: "79.99",
         priceCurrency: "USD",
         priceValidUntil: "2026-12-31",
@@ -145,13 +143,10 @@ export function ProductSchema({ locale }: ProductSchemaProps) {
   );
 }
 
-interface SoftwareApplicationSchemaProps {
-  locale: string;
-}
+export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  const ft = await getTranslations({ locale, namespace: "features.items" });
 
-export function SoftwareApplicationSchema({
-  locale,
-}: SoftwareApplicationSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -159,10 +154,8 @@ export function SoftwareApplicationSchema({
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
     applicationCategory: "SecurityApplication",
     operatingSystem: "iOS, Android, macOS, Windows",
-    description:
-      locale === "he"
-        ? "VPN חינמי ללא צורך באימייל או הרשמה. התחבר מיידית עם הצפנת VLESS-Reality, חוסם פרסומות מובנה וסינון תוכן. ללא יומנים. ללא הגבלות נתונים."
-        : "Free VPN with no email or sign up required. Connect instantly with VLESS-Reality encryption, built-in ad blocker & content filter. No logs. No data caps.",
+    description: t("description"),
+    inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -174,12 +167,12 @@ export function SoftwareApplicationSchema({
       ratingCount: "1000",
     },
     featureList: [
-      locale === "he" ? "ללא רישום נדרש" : "No registration required",
-      locale === "he" ? "הצפנת VLESS-Reality" : "VLESS-Reality encryption",
-      locale === "he" ? "חוסם פרסומות מובנה" : "Built-in ad blocker",
-      locale === "he" ? "סינון תוכן ובקרת הורים" : "Content filter & parental controls",
-      locale === "he" ? "מדיניות ללא יומנים" : "No-logs policy",
-      locale === "he" ? "רוחב פס ללא הגבלה" : "Unlimited bandwidth",
+      ft("noRegistration.title"),
+      ft("vlessReality.title"),
+      ft("adBlocker.title"),
+      ft("dnsProtection.title"),
+      ft("minimalData.title"),
+      ft("smartRouting.title"),
     ],
   };
 
@@ -217,16 +210,13 @@ export function FAQSchema({ items }: FAQSchemaProps) {
   );
 }
 
-interface WebsiteSchemaProps {
-  locale: string;
-}
-
-export function WebsiteSchema({ locale }: WebsiteSchemaProps) {
+export async function WebsiteSchema({ locale }: LocaleProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Doppler VPN",
     url: `https://www.dopplervpn.org/${locale}`,
+    inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
     potentialAction: {
       "@type": "SearchAction",
       target: {

@@ -19,10 +19,7 @@ export async function generateMetadata({
 
   return {
     title: t("title"),
-    description:
-      locale === "he"
-        ? "תנאי השימוש של Doppler VPN - קרא את ההסכם שלנו"
-        : "Doppler VPN Terms of Service - Read our usage agreement",
+    description: t("intro"),
     alternates: {
       canonical: `${baseUrl}/${locale}/terms`,
       languages: Object.fromEntries([

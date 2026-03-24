@@ -306,6 +306,8 @@ export default async function BlogPostPage({ params }: Props) {
         updatedAt={post.updatedAt}
         slug={post.slug}
         locale={locale}
+        breadcrumbHome={t("breadcrumb.home")}
+        breadcrumbBlog={t("breadcrumb.blog")}
       />
       <Navbar />
       <main className="min-h-screen pt-20">
