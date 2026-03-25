@@ -14,8 +14,6 @@ interface ServerLocation {
 
 const serverLocations: ServerLocation[] = [
   { country: "Germany", city: "Frankfurt", count: 1, protocol: "VLESS-Reality", countryCode: "de" },
-  { country: "France", city: "Paris", count: 1, protocol: "VLESS-Reality", countryCode: "fr" },
-  { country: "Japan", city: "Tokyo", count: 1, protocol: "VLESS-Reality", countryCode: "jp" },
   { country: "Netherlands", city: "Amsterdam", count: 1, protocol: "VLESS-Reality", countryCode: "nl" },
   { country: "Russia", city: "Moscow", count: 2, protocol: "VLESS-Reality", countryCode: "ru" },
   { country: "Singapore", city: "Singapore", count: 1, protocol: "VLESS-Reality", countryCode: "sg" },

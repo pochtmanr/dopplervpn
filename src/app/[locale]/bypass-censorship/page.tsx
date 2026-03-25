@@ -2,8 +2,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { ogLocaleMap } from "@/lib/og-locale-map";
+import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 
 interface PageProps {
@@ -23,15 +24,39 @@ const URLS = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "bypassCensorship.metadata" });
+  const title = t("title");
+  const description = t("description");
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
     alternates: {
       canonical: `${baseUrl}/${locale}/bypass-censorship`,
       languages: Object.fromEntries([
         ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/bypass-censorship`]),
         ["x-default", `${baseUrl}/en/bypass-censorship`],
       ]),
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/bypass-censorship`,
+      siteName: "Doppler VPN",
+      locale: ogLocaleMap[locale] || "en_US",
+      type: "article",
+      images: [
+        {
+          url: `${baseUrl}/images/og-banner.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Doppler VPN — Fast & Secure",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }
@@ -85,6 +110,7 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("bypassCensorship");
+  const mt = await getTranslations({ locale, namespace: "bypassCensorship.metadata" });
 
   const stageColors = [
     "border-accent-teal/30 bg-accent-teal/5",
@@ -99,6 +125,17 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: `${baseUrl}/${locale}` },
+          { name: t("hero.title"), url: `${baseUrl}/${locale}/bypass-censorship` },
+        ]}
+      />
+      <ArticleSchema
+        headline={mt("title")}
+        description={mt("description")}
+        url={`${baseUrl}/${locale}/bypass-censorship`}
+      />
       <Navbar />
       <main className="overflow-x-hidden">
         {/* ── Hero ──────────────────────────────────────────────── */}

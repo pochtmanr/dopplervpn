@@ -98,10 +98,10 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
-          width: 512,
-          height: 512,
-          alt: "Doppler VPN",
+          url: "https://www.dopplervpn.org/images/og-banner.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Doppler VPN — Fast & Secure",
         },
       ],
     },
@@ -109,7 +109,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["https://www.dopplervpn.org/images/iosdopplerlogo.png"],
+      images: ["https://www.dopplervpn.org/images/og-banner.jpg"],
     },
     alternates: {
       canonical: `https://www.dopplervpn.org/${locale}`,

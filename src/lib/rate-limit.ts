@@ -7,13 +7,17 @@ interface RateLimitEntry {
 
 const store = new Map<string, RateLimitEntry>();
 
-// Clean up expired entries every 5 minutes
-setInterval(() => {
+// Lazy cleanup: evict expired entries when store grows large.
+// NOTE: On Vercel serverless, each instance has its own in-memory store,
+// so this rate limiter is best-effort. For strict enforcement, use
+// Vercel KV or Upstash Redis.
+function evictExpired() {
+  if (store.size < 1000) return;
   const now = Date.now();
   for (const [key, entry] of store) {
     if (entry.resetAt < now) store.delete(key);
   }
-}, 5 * 60 * 1000);
+}
 
 /**
  * Simple in-memory rate limiter.
@@ -29,6 +33,7 @@ export function rateLimit(
     'unknown';
   const key = `${opts.prefix || 'global'}:${ip}`;
   const now = Date.now();
+  evictExpired();
 
   const entry = store.get(key);
   if (!entry || entry.resetAt < now) {

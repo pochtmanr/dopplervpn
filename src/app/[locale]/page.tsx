@@ -22,7 +22,7 @@ const SpeedComparison = dynamic(() => import("@/components/sections/speed-compar
 const PriceComparison = dynamic(() => import("@/components/sections/price-comparison").then(m => ({ default: m.PriceComparison })));
 const Pricing = dynamic(() => import("@/components/sections/pricing").then(m => ({ default: m.Pricing })));
 const FAQ = dynamic(() => import("@/components/sections/faq").then(m => ({ default: m.FAQ })));
-import { createClient } from "@/lib/supabase/server";
+import { createStaticClient } from "@/lib/supabase/server";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -47,7 +47,7 @@ interface HomePostData {
 }
 
 async function getLatestPosts(locale: string) {
-  const supabase = await createClient();
+  const supabase = createStaticClient();
 
   const { data: postsRaw } = await supabase
     .from("blog_posts")

@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section, SectionHeader } from "@/components/ui/section";
+import { BreadcrumbSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
 
@@ -17,27 +18,44 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const { tag } = await searchParams;
   const t = await getTranslations({ locale, namespace: "blog" });
   const baseUrl = "https://www.dopplervpn.org";
+  const tagSuffix = tag ? `?tag=${encodeURIComponent(tag)}` : "";
 
   return {
     title: t("indexTitle"),
     description: t("indexDescription"),
     alternates: {
-      canonical: `${baseUrl}/${locale}/blog`,
+      canonical: `${baseUrl}/${locale}/blog${tagSuffix}`,
       languages: Object.fromEntries([
-        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/blog`]),
-        ["x-default", `${baseUrl}/en/blog`],
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/blog${tagSuffix}`]),
+        ["x-default", `${baseUrl}/en/blog${tagSuffix}`],
       ]),
     },
     openGraph: {
-      title: t("title"),
+      title: t("indexTitle"),
       description: t("indexDescription"),
-      url: `${baseUrl}/${locale}/blog`,
+      url: `${baseUrl}/${locale}/blog${tagSuffix}`,
+      siteName: "Doppler VPN",
       locale: locale,
       type: "website",
+      images: [
+        {
+          url: `${baseUrl}/images/og-banner.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Doppler VPN — Fast & Secure",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("indexTitle"),
+      description: t("indexDescription"),
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }
@@ -162,8 +180,16 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
   const t = await getTranslations({ locale, namespace: "blog" });
   const { posts, tags } = await getBlogData(locale, tagSlug);
 
+  const baseUrl = "https://www.dopplervpn.org";
+
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: t("breadcrumb.home"), url: `${baseUrl}/${locale}` },
+          { name: t("title"), url: `${baseUrl}/${locale}/blog` },
+        ]}
+      />
       <Navbar />
       <main className="min-h-screen pt-20">
         <Section>

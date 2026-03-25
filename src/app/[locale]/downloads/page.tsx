@@ -4,6 +4,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import { ogLocaleMap } from "@/lib/og-locale-map";
+import { BreadcrumbSchema } from "@/components/seo/json-ld";
 import { WaitlistForm } from "@/components/downloads/waitlist-form";
 
 interface PageProps {
@@ -15,15 +17,39 @@ const baseUrl = "https://www.dopplervpn.org";
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "apps" });
+  const title = t("title");
+  const description = t("subtitle");
   return {
-    title: t("title"),
-    description: t("subtitle"),
+    title,
+    description,
     alternates: {
       canonical: `${baseUrl}/${locale}/downloads`,
       languages: Object.fromEntries([
         ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/downloads`]),
         ["x-default", `${baseUrl}/en/downloads`],
       ]),
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/downloads`,
+      siteName: "Doppler VPN",
+      locale: ogLocaleMap[locale] || "en_US",
+      type: "website",
+      images: [
+        {
+          url: `${baseUrl}/images/og-banner.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Doppler VPN — Fast & Secure",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }
@@ -99,6 +125,12 @@ export default async function DownloadsPage({ params }: PageProps) {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: `${baseUrl}/${locale}` },
+          { name: t("title"), url: `${baseUrl}/${locale}/downloads` },
+        ]}
+      />
       <Navbar />
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">
         {/* Background blurs */}
@@ -142,7 +174,14 @@ export default async function DownloadsPage({ params }: PageProps) {
                 steps={[t("ios.step1"), t("ios.step2"), t("ios.step3"), t("ios.step4")]}
               />
 
-              <p className="mt-4 text-xs text-text-muted/70 italic">
+              <Link
+                href="/vpn-for-ios"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
+              >
+                {t("ios.learnMore", { defaultMessage: "Learn more about VPN for iOS" })}
+                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </Link>
+              <p className="mt-2 text-xs text-text-muted/70 italic">
                 {t("syncNote")}
               </p>
             </div>
@@ -180,7 +219,14 @@ export default async function DownloadsPage({ params }: PageProps) {
                 steps={[t("android.step1"), t("android.step2"), t("android.step3"), t("android.step4")]}
               />
 
-              <p className="mt-4 text-xs text-text-muted/70 italic">
+              <Link
+                href="/vpn-for-android"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
+              >
+                {t("android.learnMore", { defaultMessage: "Learn more about VPN for Android" })}
+                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </Link>
+              <p className="mt-2 text-xs text-text-muted/70 italic">
                 {t("syncNote")}
               </p>
             </div>

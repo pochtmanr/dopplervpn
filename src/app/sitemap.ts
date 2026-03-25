@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = postsRaw as SitemapPost[] | null;
 
   // Static pages — one entry per page with hreflang alternates
-  const staticPages = ["", "/downloads", "/privacy", "/terms", "/blog", "/support", "/about", "/bypass-censorship"];
+  const staticPages = ["", "/downloads", "/privacy", "/terms", "/blog", "/support", "/about", "/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android"];
 
   const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
     url: `${baseUrl}/en${page}`,
@@ -40,11 +40,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ? ("weekly" as const)
         : page === "/blog"
           ? ("daily" as const)
-          : page === "/downloads" || page === "/guide"
-            ? ("monthly" as const)
-            : ("monthly" as const),
+          : ("monthly" as const),
     priority:
-      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : page === "/bypass-censorship" ? 0.7 : page === "/support" ? 0.6 : page === "/about" ? 0.6 : 0.5,
+      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : ["/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android"].includes(page) ? 0.7 : page === "/support" ? 0.6 : page === "/about" ? 0.6 : 0.5,
     alternates: buildAlternates(page),
   }));
 

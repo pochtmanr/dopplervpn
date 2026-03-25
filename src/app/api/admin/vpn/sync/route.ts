@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { createUntypedAdminClient } from "@/lib/supabase/admin";
 import { loadMarzbanServers, createMarzbanClient } from "@/lib/marzban";
 
 export async function POST() {
@@ -68,8 +69,8 @@ export async function POST() {
             updated_at: new Date().toISOString(),
           };
 
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const { error: upsertErr } = await (adminClient.from("vpn_users") as any)
+          const untypedClient = createUntypedAdminClient();
+          const { error: upsertErr } = await untypedClient.from("vpn_users")
             .upsert(row, { onConflict: "server_id,backend_username,backend_type" });
 
           if (upsertErr) {

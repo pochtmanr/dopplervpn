@@ -275,7 +275,11 @@
     "email": "support@simnetiq.store",
     "blog": "Blog",
     "bypassCensorship": "Cómo evitamos la censura",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "vlessVpn": "Protocolo VLESS",
+    "noRegistration": "VPN sin registro",
+    "vpnForIos": "VPN para iOS",
+    "vpnForAndroid": "VPN para Android"
   },
   "privacy": {
     "title": "Política de Privacidad",
@@ -344,8 +348,8 @@
     }
   },
   "blog": {
-    "indexTitle": "Blog",
-    "indexDescription": "Consejos de privacidad, guías de VPN e información de seguridad del equipo Doppler.",
+    "indexTitle": "Blog VPN — Consejos de privacidad, guías de seguridad y noticias sobre censura",
+    "indexDescription": "Lee guías VPN de expertos, consejos de privacidad en internet y estrategias para evadir la censura del equipo Doppler. Mantente informado sobre VLESS-Reality, evasión de DPI y seguridad digital.",
     "title": "Blog de Doppler VPN",
     "subtitle": "Consejos de privacidad, información de seguridad y guías de VPN",
     "allPosts": "Todas las publicaciones",
@@ -386,14 +390,14 @@
     "copyLink": "Copiar enlace",
     "copied": "¡Copiado!",
     "stickyBar": {
-      "message": "Protege tu navegación. Doppler VPN es gratuito, no requiere registro y no guarda registros.",
-      "cta": "Descargar gratis",
+      "message": "Protege tu navegación. Doppler VPN no requiere registro y no guarda registros. Pruébalo gratis durante 3 días.",
+      "cta": "Probar gratis 3 días",
       "dismiss": "Cerrar",
       "dismissLabel": "Cerrar banner de descarga"
     },
     "inlineCta": {
       "headline": "Protege tu privacidad con Doppler VPN",
-      "subtext": "Gratis. Sin registro. Sin registros.",
+      "subtext": "3 días de prueba gratis. Sin registro. Sin registros.",
       "downloadIos": "Descargar para iOS",
       "downloadAndroid": "Descargar para Android",
       "downloadDesktop": "Descargar app"
@@ -527,7 +531,7 @@
     "comingSoon": "Coming Soon",
     "transparency": {
       "subscription": "Subscription is available via our Telegram bot or inside the Doppler app on iOS and Mac.",
-      "freeTrial": "Every new connection includes 3 free days.",
+      "freeTrial": "Cada nueva conexión incluye 3 días de prueba gratis.",
       "subscriptionApp": "Subscribe inside the Doppler app or via our Telegram bot.",
       "crossPlatform": "All subscriptions work across platforms — a subscription purchased via Telegram works in the Doppler app, and vice versa."
     },
@@ -540,8 +544,8 @@
     "decline": "Rechazar"
   },
   "apps": {
-    "title": "Obtén Doppler VPN",
-    "subtitle": "Privacidad con un toque en cada dispositivo. Elige tu plataforma.",
+    "title": "Descargar Doppler VPN — iOS, Android, Mac y Windows",
+    "subtitle": "Descarga Doppler VPN en iOS, Android, macOS y Windows. Privacidad con un toque gracias al cifrado VLESS-Reality y sin necesidad de registro. Comienza con 3 días de prueba gratis.",
     "download": "Descargar",
     "syncNote": "¿Ya suscrito? Tu estado Pro se sincroniza en todos tus dispositivos.",
     "needHelp": "¿Necesitas ayuda?",
@@ -923,8 +927,8 @@
     "errorDesc": "Si se realizó el cargo, tu suscripción se activará en breve. Contacta soporte si no es así."
   },
   "support": {
-    "title": "Soporte",
-    "subtitle": "Encuentra respuestas, soluciona problemas o contáctanos.",
+    "title": "Centro de ayuda y soporte",
+    "subtitle": "Encuentra respuestas a preguntas frecuentes sobre VPN, soluciona problemas de conexión o contacta con nuestro equipo de soporte.",
     "faq": {
       "title": "Preguntas Frecuentes",
       "items": {
@@ -1468,6 +1472,701 @@
       "nameLabel": "Empresa",
       "websiteLabel": "Sitio web",
       "contactLabel": "Contacto"
+    }
+  },
+  "noRegistrationVpn": {
+    "metadata": {
+      "title": "VPN sin registro — Sin correo, sin cuenta | Doppler VPN",
+      "description": "Usa una VPN sin registro ni alta. Doppler VPN no requiere correo electrónico, ni número de teléfono, ni cuenta. Empieza a navegar de forma segura y anónima en segundos."
+    },
+    "hero": {
+      "title": "VPN sin registro",
+      "subtitle": "Empieza a navegar de forma segura en segundos. Sin correo electrónico, sin número de teléfono, sin cuenta. Doppler es una VPN gratuita sin registro — solo descarga, conecta y listo."
+    },
+    "whyRegister": {
+      "title": "Por qué la mayoría de las VPN exigen registro",
+      "intro": "¿Te has preguntado alguna vez por qué casi todos los servicios VPN piden tu correo electrónico, número de teléfono o crean una cuenta obligatoria? La respuesta tiene menos que ver con la seguridad y más con modelos de negocio basados en tus datos personales.",
+      "dataHarvesting": {
+        "title": "Recopilación de datos",
+        "description": "Cuando te registras con un correo electrónico, los proveedores de VPN vinculan tu actividad de navegación con tu identidad. Este perfil de datos — sitios visitados, horarios de conexión, uso de ancho de banda — se convierte en un activo valioso. Algunos proveedores venden datos de uso anonimizados (o no tan anonimizados) a empresas de análisis y corredores de datos, convirtiendo tu herramienta de privacidad en un producto de vigilancia."
+      },
+      "targetedAds": {
+        "title": "Publicidad dirigida",
+        "description": "Tu correo de registro conecta tu uso de VPN con redes publicitarias. Muchos servicios VPN gratuitos monetizan a través de publicidad dirigida, usando tus patrones de navegación para mostrar anuncios personalizados. Incluso las VPN de pago con cuentas pueden cruzar tus datos con plataformas publicitarias para generar ingresos adicionales."
+      },
+      "govRequests": {
+        "title": "Solicitudes gubernamentales",
+        "description": "Cuando un proveedor de VPN tiene tu correo y cuenta vinculados a registros de conexión, tiene algo que entregar cuando las autoridades lo solicitan. Citaciones, requerimientos de seguridad nacional y órdenes judiciales pueden obligar a los proveedores a revelar exactamente quién estaba conectado a qué servidor en qué momento, vinculando tu identidad real con tu actividad en línea."
+      },
+      "breachLiability": {
+        "title": "Riesgo de filtraciones",
+        "description": "Cada base de datos de cuentas es una filtración esperando a ocurrir. Los proveedores de VPN que almacenan correos, contraseñas y datos de pago crean objetivos para hackers. Cuando ocurren las filtraciones — y ocurren regularmente — tu identidad queda expuesta junto con el hecho de que usas una VPN, lo que en algunas regiones puede atraer atención no deseada de las autoridades."
+      },
+      "conclusion": "El patrón es claro: el registro existe para servir al proveedor, no al usuario. Una VPN verdaderamente privada nunca debería necesitar saber quién eres."
+    },
+    "howItWorks": {
+      "title": "Cómo funciona Doppler sin cuenta",
+      "subtitle": "Doppler reemplaza el modelo tradicional de correo y contraseña con autenticación basada en dispositivo. Sin registro, sin alta, sin información personal de ningún tipo.",
+      "download": {
+        "title": "Descarga la app",
+        "description": "Instala Doppler VPN desde la App Store, Google Play o consigue una configuración a través de nuestro bot de Telegram. Sin pantalla de creación de cuenta, sin campo de correo, sin códigos de verificación — la app está lista en cuanto termina de instalarse."
+      },
+      "generateKey": {
+        "title": "Tu dispositivo genera una clave única",
+        "description": "En el primer inicio, Doppler genera una clave criptográfica del dispositivo localmente en tu teléfono o computadora. Esta clave es un identificador aleatorio — no contiene información personal, ni huellas de hardware, y no puede rastrearse hasta ti. Piensa en ella como una llave aleatoria de hotel que abre una puerta pero no lleva ningún nombre."
+      },
+      "connect": {
+        "title": "Conéctate a cualquier servidor",
+        "description": "La clave de tu dispositivo te autentica en nuestros servidores VLESS-Reality. La conexión se establece usando el mismo handshake TLS 1.3 que usan los sitios web HTTPS normales, haciendo tu tráfico VPN indistinguible de la navegación web normal. Sin pantalla de inicio de sesión, sin credenciales transmitidas."
+      },
+      "done": {
+        "title": "Estás protegido",
+        "description": "Eso es todo. Sin confirmaciones por correo que esperar, sin contraseñas que recordar, sin cuentas que gestionar. Tu conexión está cifrada, tu identidad es anónima, y tu VPN no tiene ningún conocimiento de quién eres. Navegas como un usuario VPN verdaderamente anónimo — sin correo, sin rastro."
+      }
+    },
+    "noCollect": {
+      "title": "Lo que no recopilamos",
+      "subtitle": "La mayoría de los proveedores de VPN dicen ser privados pero aún así exigen una cuenta llena de datos personales. Aquí tienes una comparación transparente entre lo que recopilan los servicios VPN típicos y lo que Doppler almacena sobre ti.",
+      "headers": {
+        "dataType": "Tipo de dato",
+        "otherVpns": "Otras VPN",
+        "doppler": "Doppler VPN"
+      },
+      "email": {
+        "label": "Correo electrónico"
+      },
+      "phone": {
+        "label": "Número de teléfono"
+      },
+      "name": {
+        "label": "Nombre real"
+      },
+      "browsingHistory": {
+        "label": "Historial de navegación"
+      },
+      "ipLogs": {
+        "label": "Registros de dirección IP"
+      },
+      "connectionTimestamps": {
+        "label": "Marcas de tiempo de conexión"
+      },
+      "footnote": "Marca roja = recopilado por el proveedor. X roja = no recopilado por Doppler. Físicamente no podemos entregar datos que nunca almacenamos."
+    },
+    "comparison": {
+      "title": "Comparación de privacidad: Doppler vs VPN populares",
+      "headers": {
+        "provider": "Proveedor VPN",
+        "registration": "¿Requiere registro?",
+        "emailNeeded": "¿Necesita correo?",
+        "logsPolicy": "Política de registros",
+        "paymentTracking": "Rastreo de pagos",
+        "openProtocol": "Protocolo abierto"
+      },
+      "doppler": {
+        "name": "Doppler VPN",
+        "registration": "No",
+        "emailNeeded": "No",
+        "logsPolicy": "Cero registros",
+        "paymentTracking": "Anónimo",
+        "openProtocol": "VLESS-Reality"
+      },
+      "protonvpn": {
+        "name": "Proton VPN",
+        "registration": "Sí",
+        "emailNeeded": "Sí",
+        "logsPolicy": "Registros mínimos",
+        "paymentTracking": "Vinculado al correo",
+        "openProtocol": "WireGuard"
+      },
+      "nordvpn": {
+        "name": "NordVPN",
+        "registration": "Sí",
+        "emailNeeded": "Sí",
+        "logsPolicy": "Dicen no registrar",
+        "paymentTracking": "Vinculado a la cuenta",
+        "openProtocol": "NordLynx (propietario)"
+      },
+      "expressvpn": {
+        "name": "ExpressVPN",
+        "registration": "Sí",
+        "emailNeeded": "Sí",
+        "logsPolicy": "Dicen no registrar",
+        "paymentTracking": "Vinculado a la cuenta",
+        "openProtocol": "Lightway (propietario)"
+      }
+    },
+    "deviceKey": {
+      "title": "Tus datos, tu dispositivo",
+      "badge": "Arquitectura basada en dispositivo",
+      "p1": "La arquitectura VPN anónima de Doppler se basa en un principio simple: si nunca recopilamos tu información personal, nunca podremos filtrarla, venderla ni entregarla. En lugar de cuentas en el servidor, tu identidad vive completamente en tu dispositivo como una clave criptográfica.",
+      "p2": "Cuando tu dispositivo se conecta a un servidor de Doppler, presenta su clave única a través de un handshake TLS 1.3 estándar — el mismo cifrado usado por bancos y gobiernos. El servidor valida que la clave es legítima y concede acceso. En ningún momento el servidor sabe o almacena quién es el dueño de esa clave. No hay base de datos que vincule claves con correos, nombres o direcciones IP.",
+      "p3": "Este enfoque refleja cómo funciona Apple Private Relay: tu tráfico se autentica sin ser identificado. La diferencia es que Doppler aplica este principio a toda tu conexión a internet, no solo a la navegación en Safari. Cada app, cada protocolo, cada paquete — todo protegido sin requerir un solo dato personal.",
+      "p4": "El resultado: incluso si nuestros servidores fueran confiscados, no habría cuentas de usuario que exponer, correos que filtrar, ni historiales de navegación que revelar. Tu privacidad está garantizada por la arquitectura, no por promesas.",
+      "deviceGen": {
+        "title": "Claves generadas en el dispositivo",
+        "description": "Las claves criptográficas se crean y almacenan localmente en tu dispositivo. Nunca salen de tu teléfono o computadora y no contienen información personal."
+      },
+      "serverVal": {
+        "title": "Validación del servidor",
+        "description": "Nuestros servidores verifican la legitimidad de la clave sin almacenar datos de identidad. La autenticación ocurre mediante TLS 1.3 — sin cuentas, sin base de datos de credenciales."
+      },
+      "zeroPii": {
+        "title": "Cero datos personales almacenados",
+        "description": "Sin correo, sin nombre, sin teléfono, sin registros de IP. Arquitectónicamente no podemos identificar a nuestros usuarios porque nunca recopilamos información identificativa."
+      }
+    },
+    "getStarted": {
+      "title": "Empieza en 30 segundos",
+      "subtitle": "Sin formularios de registro. Sin verificación por correo. Sin esperas. Tres pasos hacia la privacidad total en línea con una VPN anónima sin registro.",
+      "step1": {
+        "title": "Descarga Doppler",
+        "description": "Consigue la app en la App Store, Google Play o descarga una configuración VLESS desde nuestro bot de Telegram. La instalación tarda segundos — no se requiere creación de cuenta en ningún momento."
+      },
+      "step2": {
+        "title": "Toca Conectar",
+        "description": "Abre la app y toca el botón de conectar. Tu dispositivo genera automáticamente una clave segura y establece un túnel cifrado. Sin pantalla de inicio de sesión, sin usuario, sin contraseña."
+      },
+      "step3": {
+        "title": "Navega en privado",
+        "description": "Ahora estás protegido con cifrado de grado militar. Tu IP real está oculta, tu tráfico es ilegible, y nadie — ni siquiera nosotros — sabe quién eres. VPN verdaderamente anónima sin registro."
+      }
+    },
+    "cta": {
+      "title": "¿Listo para una VPN que no te conoce?",
+      "subtitle": "Únete a miles de usuarios que eligieron una VPN sin registro. Sin correo, sin cuenta que crear, sin datos personales en riesgo. Descarga Doppler y conéctate en segundos — completamente gratis, completamente anónimo.",
+      "downloadIos": "Descargar para iOS",
+      "downloadAndroid": "Descargar para Android",
+      "telegramBot": "Obtener vía Telegram Bot",
+      "telegramChannelRu": "Canal de Telegram (RU)",
+      "telegramChannelEn": "Canal de Telegram (EN)"
+    },
+    "related": {
+      "vless": "Protocolo VLESS-Reality",
+      "vlessDesc": "Descubre cómo VLESS vence la inspección profunda de paquetes",
+      "ios": "VPN para iOS",
+      "iosDesc": "Descarga Doppler VPN para iPhone y iPad",
+      "android": "VPN para Android",
+      "androidDesc": "Consigue Doppler VPN en Google Play o APK"
+    }
+  },
+  "vlessVpn": {
+    "metadata": {
+      "title": "App VLESS VPN — Qué es el protocolo VLESS-Reality y por qué supera a WireGuard",
+      "description": "Descubre qué es el protocolo VLESS, cómo VLESS-Reality vence la inspección profunda de paquetes y por qué supera a WireGuard y OpenVPN para evadir la censura. Descarga la app Doppler VLESS VPN para iOS y Android."
+    },
+    "hero": {
+      "title": "VLESS-Reality: el protocolo diseñado para ser invisible",
+      "subtitle": "El protocolo VPN de nueva generación que vence la inspección profunda de paquetes. VLESS-Reality hace que tu tráfico sea indistinguible del HTTPS normal — sin firmas, sin huellas, sin detección."
+    },
+    "whatIs": {
+      "title": "¿Qué es el protocolo VLESS?",
+      "intro": "VLESS es un protocolo proxy ligero nacido del proyecto V2Ray — un ecosistema de código abierto creado específicamente para eludir la censura en internet. Entender qué es VLESS y cómo evolucionó explica por qué tiene éxito donde los protocolos VPN tradicionales fallan.",
+      "origin": {
+        "title": "De VMess a VLESS: la evolución",
+        "p1": "El proyecto V2Ray comenzó en 2015 como respuesta al Gran Cortafuegos de China. Su protocolo original, VMess, introdujo la ofuscación del tráfico — disfrazar las conexiones proxy como tráfico web normal. VMess funcionó bien al principio, pero a medida que los sistemas DPI se hicieron más sofisticados, sus debilidades se hicieron evidentes: complejidad innecesaria, sobrecarga de cifrado y patrones de handshake identificables.",
+        "p2": "VLESS (V2Ray-Less Encryption Serialization Stream) fue creado en 2020 como sucesor de VMess. Los diseñadores eliminaron todo lo innecesario: capas de cifrado redundantes, esquemas de autenticación complejos y marcadores específicos del protocolo. Lo que quedó fue un protocolo mínimo, sin estado y con cero sobrecarga — una capa de transporte limpia diseñada con un único propósito.",
+        "p3": "En 2022, el proyecto XTLS presentó Reality — una capa de camuflaje TLS que cambió fundamentalmente lo posible. VLESS-Reality no solo ofusca el tráfico. Toma prestado el certificado TLS de un sitio web legítimo, haciendo la conexión genuinamente indistinguible de la navegación HTTPS normal para cualquier observador, incluidos sistemas DPI estatales."
+      },
+      "difference": {
+        "title": "Qué hace diferente a VLESS",
+        "p1": "Los protocolos VPN tradicionales como WireGuard y OpenVPN priorizan velocidad y cifrado. Crean túneles cifrados, pero esos túneles tienen firmas distintivas — estructuras de paquetes reconocibles, patrones de handshake y perfiles de tráfico. Un sistema DPI los identifica en segundos. VLESS adopta el enfoque opuesto: invisibilidad primero. En lugar de construir un túnel cifrado que parece un túnel, VLESS-Reality crea una conexión que se ve exactamente como si estuvieras navegando en un sitio web normal.",
+        "p2": "Esta es la diferencia fundamental: VLESS-Reality es el único protocolo donde la conexión en sí es indistinguible del tráfico HTTPS regular — no ofuscada, no disfrazada, sino genuinamente idéntica a nivel de paquetes."
+      }
+    },
+    "howItWorks": {
+      "title": "Cómo funciona VLESS-Reality",
+      "subtitle": "Un proceso de cuatro pasos que hace tu conexión VPN invisible para la inspección profunda de paquetes, el sondeo activo y el análisis de tráfico — explicado sin jerga técnica.",
+      "step1": {
+        "title": "Imitación del handshake TLS",
+        "description": "Cuando te conectas, VLESS-Reality inicia un handshake TLS 1.3 real con un sitio web legítimo — como google.com o microsoft.com. Desde fuera, esto parece exactamente como si tu navegador se conectara a ese sitio. El sistema DPI ve una conexión estándar y esperada, y la deja pasar."
+      },
+      "step2": {
+        "title": "Préstamo de certificado",
+        "description": "A diferencia de las VPN tradicionales que usan certificados autofirmados (una señal de alerta para DPI), Reality toma prestado el certificado TLS del sitio web objetivo. La cadena de certificados es genuina. Cualquier sistema que inspeccione la conexión ve un certificado válido de una autoridad de confianza — porque lo es."
+      },
+      "step3": {
+        "title": "Camuflaje de tráfico",
+        "description": "Tus datos VPN reales se multiplexan dentro de la conexión TLS establecida. Los tamaños de paquetes, intervalos de tiempo y patrones de tráfico se ajustan para coincidir con lo que parece la navegación HTTPS normal. Los modelos de machine learning entrenados para detectar patrones de entropía VPN no ven nada anormal."
+      },
+      "step4": {
+        "title": "Comportamiento de proxy inverso",
+        "description": "Si alguien sondea el servidor — censores, escáneres automáticos o sistemas de sondeo activo DPI — el servidor responde exactamente como el sitio web legítimo que está imitando. Sirve páginas web reales, devuelve códigos de error correctos y se comporta de forma indistinguible del sitio real. La funcionalidad VPN está completamente oculta."
+      },
+      "conclusion": "El resultado: tu conexión no solo está cifrada — es invisible. Ningún sistema DPI, modelo de machine learning o sondeo activo puede distinguirla de los millones de conexiones HTTPS legítimas que ocurren cada segundo."
+    },
+    "comparison": {
+      "title": "VLESS vs WireGuard vs OpenVPN — Comparación de protocolos",
+      "subtitle": "¿Cómo se compara VLESS-Reality con otros protocolos VPN? Esta comparación cubre las métricas que importan para usuarios en regiones censuradas.",
+      "headers": {
+        "protocol": "Protocolo",
+        "dpiResistance": "Resistencia a DPI",
+        "speed": "Velocidad",
+        "latency": "Latencia",
+        "batteryImpact": "Impacto en batería",
+        "setupComplexity": "Complejidad de configuración",
+        "censorshipBypass": "Evasión de censura"
+      },
+      "vless": {
+        "name": "VLESS-Reality",
+        "dpiResistance": "Indetectable",
+        "speed": "Rápida",
+        "latency": "Baja",
+        "batteryImpact": "Mínimo",
+        "setupComplexity": "Alta (manual) / Fácil (Doppler)",
+        "censorshipBypass": "Excelente"
+      },
+      "wireguard": {
+        "name": "WireGuard",
+        "dpiResistance": "Ninguna",
+        "speed": "Muy rápida",
+        "latency": "Muy baja",
+        "batteryImpact": "Muy bajo",
+        "setupComplexity": "Fácil",
+        "censorshipBypass": "Bloqueado al instante"
+      },
+      "openvpn": {
+        "name": "OpenVPN",
+        "dpiResistance": "Baja",
+        "speed": "Moderada",
+        "latency": "Moderada",
+        "batteryImpact": "Alto",
+        "setupComplexity": "Moderada",
+        "censorshipBypass": "Bloqueado rápidamente"
+      },
+      "shadowsocks": {
+        "name": "Shadowsocks",
+        "dpiResistance": "Moderada",
+        "speed": "Rápida",
+        "latency": "Baja",
+        "batteryImpact": "Bajo",
+        "setupComplexity": "Moderada",
+        "censorshipBypass": "Parcial — detectable"
+      },
+      "trojan": {
+        "name": "Trojan",
+        "dpiResistance": "Alta",
+        "speed": "Rápida",
+        "latency": "Baja",
+        "batteryImpact": "Bajo",
+        "setupComplexity": "Alta",
+        "censorshipBypass": "Buena, pero sondeable"
+      }
+    },
+    "whyNot": {
+      "title": "Por qué las VPN comerciales no usan VLESS",
+      "subtitle": "Si VLESS-Reality es tan efectivo, ¿por qué NordVPN, ExpressVPN o Surfshark no lo usan? La respuesta revela por qué la mayoría de las VPN comerciales están diseñadas para el problema equivocado.",
+      "card1": {
+        "title": "Complejidad de implementación",
+        "description": "VLESS-Reality requiere Xray-core — un motor proxy especializado con configuración compleja del lado del servidor. Cada servidor necesita objetivos de certificados TLS individuales, configuración SNI y pares de claves Reality. Las VPN comerciales gestionan miles de servidores y optimizan la simplicidad, no el sigilo. Desplegar VLESS-Reality a escala requiere un conocimiento profundo de protocolos que la mayoría de las empresas VPN simplemente no tienen."
+      },
+      "card2": {
+        "title": "Mayores costes de servidor",
+        "description": "Los servidores VLESS-Reality realizan handshakes TLS reales con sitios web objetivo, enrutan tráfico a través de múltiples capas y deben responder de forma convincente a sondeos activos. Esto consume significativamente más CPU y ancho de banda que un simple túnel WireGuard. Para empresas VPN que optimizan márgenes en miles de servidores, el aumento de costes es prohibitivo."
+      },
+      "card3": {
+        "title": "Sin empaquetado para consumidores",
+        "description": "Hasta hace poco, usar VLESS-Reality significaba configurar manualmente clientes Xray-core, generar claves UUID y editar archivos de configuración JSON. No había una app para consumidores — sin conexión con un toque, sin selección automática de servidor. El protocolo existía solo como una herramienta técnica para usuarios avanzados, no como un producto."
+      },
+      "card4": {
+        "title": "Objetivo de optimización equivocado",
+        "description": "La mayoría de las VPN comerciales están diseñadas para acceso a streaming y marketing de privacidad — no para evadir la censura. WireGuard es más rápido para desbloquear Netflix. OpenVPN es más fácil de desplegar. Estas VPN no tienen incentivo para resolver el problema de la censura porque sus clientes están mayoritariamente en países sin restricciones de internet."
+      },
+      "conclusion": "Doppler resuelve los cuatro problemas: experiencia en Xray-core, infraestructura optimizada, apps de nivel consumidor y enfoque en usuarios que realmente necesitan evadir la censura."
+    },
+    "performance": {
+      "title": "Rendimiento real",
+      "badge": "Benchmarks de VLESS-Reality",
+      "p1": "VLESS-Reality no solo es invisible — es rápido. Dado que el protocolo añade una sobrecarga mínima (sin doble cifrado, sin capas de handshake innecesarias), el rendimiento real se aproxima a la velocidad de conexión pura. Usuarios en Rusia, Irán y China reportan conexiones fiables incluso durante bloqueos activos.",
+      "p2": "Estas métricas provienen de la infraestructura de producción de Doppler ejecutando VLESS-Reality en múltiples regiones de servidores, medidas durante períodos de aplicación activa de DPI.",
+      "stat1value": "99,2%",
+      "stat1label": "Tasa de éxito de conexión en regiones censuradas",
+      "stat2value": "<50ms",
+      "stat2label": "Latencia adicional promedio",
+      "stat3value": "99,8%",
+      "stat3label": "Tiempo de actividad mensual en todos los servidores"
+    },
+    "inDoppler": {
+      "title": "VLESS-Reality en Doppler",
+      "subtitle": "Doppler empaqueta el protocolo más avanzado de evasión de censura en apps que cualquiera puede usar — sin conocimientos técnicos.",
+      "feature1": {
+        "title": "Conexión con un toque",
+        "description": "Abre la app, toca conectar. Doppler maneja toda la configuración de VLESS-Reality automáticamente — inicialización de Xray-core, generación de UUID, intercambio de claves Reality y selección de objetivo TLS ocurren en segundo plano. Nunca verás un archivo de configuración."
+      },
+      "feature2": {
+        "title": "Selección automática de servidor",
+        "description": "Doppler prueba la latencia y disponibilidad del servidor en tiempo real, conectándote al servidor VLESS-Reality más rápido disponible. Si un servidor es bloqueado o degradado, la app cambia automáticamente — sin intervención manual."
+      },
+      "feature3": {
+        "title": "Sin configuración manual de Xray",
+        "description": "La configuración tradicional de VLESS-Reality requiere editar archivos JSON, gestionar claves y entender parámetros TLS. Doppler elimina todo eso. Las configuraciones del servidor se distribuyen de forma segura desde nuestra infraestructura, se actualizan automáticamente y se rotan para adelantarse a los intentos de bloqueo."
+      },
+      "feature4": {
+        "title": "iOS, Android y Telegram",
+        "description": "La experiencia VPN completa de VLESS-Reality está disponible en iOS (App Store), Android (Google Play) y a través de nuestro bot de Telegram para acceso basado en configuraciones. Cada plataforma usa el mismo motor Xray-core optimizado y la misma infraestructura de servidores."
+      }
+    },
+    "cta": {
+      "title": "Prueba la app VLESS VPN que simplemente funciona",
+      "subtitle": "Descarga Doppler y experimenta VLESS-Reality — el protocolo diseñado para ser invisible. Un toque. Sin configuración. Sin compromisos.",
+      "downloadIos": "Descargar para iOS",
+      "downloadAndroid": "Descargar para Android",
+      "telegramBot": "Telegram Bot",
+      "telegramChannelRu": "Telegram (RU)",
+      "telegramChannelEn": "Telegram (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN sin registro",
+      "noRegistrationDesc": "Usa una VPN sin alta ni cuenta",
+      "ios": "VPN para iOS",
+      "iosDesc": "Descarga Doppler VPN para iPhone y iPad",
+      "android": "VPN para Android",
+      "androidDesc": "Consigue Doppler VPN en Google Play o APK"
+    }
+  },
+  "vpnForIos": {
+    "metadata": {
+      "title": "VPN gratis para iPhone y iPad — Sin registro | Doppler VPN",
+      "description": "Descarga Doppler VPN para iOS — la mejor VPN gratuita para iPhone y iPad en 2026. Sin registro, sin cuenta. Protocolo VLESS-Reality, bloqueador de anuncios y protección permanente."
+    },
+    "hero": {
+      "title": "Doppler VPN para iPhone y iPad",
+      "subtitle": "VPN gratuita y segura sin registro. Descárgala desde la App Store."
+    },
+    "features": {
+      "title": "¿Por qué Doppler para iOS?",
+      "noRegistration": {
+        "title": "Sin registro",
+        "description": "Empieza a usar la VPN al instante — sin correo, sin número de teléfono, sin creación de cuenta. Solo descarga y conecta."
+      },
+      "vlessProtocol": {
+        "title": "Protocolo VLESS-Reality",
+        "description": "Cifrado de nueva generación que disfraza el tráfico VPN como navegación HTTPS normal. Indetectable por cortafuegos y sistemas DPI."
+      },
+      "adBlocker": {
+        "title": "Bloqueador de anuncios integrado",
+        "description": "Bloquea anuncios intrusivos, rastreadores y dominios maliciosos a nivel DNS. Navegación más rápida con menos consumo de datos."
+      },
+      "alwaysOn": {
+        "title": "VPN permanente",
+        "description": "Se reconecta automáticamente al cambiar entre Wi-Fi y datos móviles. Tu conexión está protegida las 24 horas."
+      },
+      "smartRouting": {
+        "title": "Enrutamiento inteligente",
+        "description": "La selección inteligente de servidor elige el nodo más rápido disponible. Optimizado para streaming, juegos y navegación diaria."
+      },
+      "dnsProtection": {
+        "title": "Protección DNS",
+        "description": "Las consultas DNS cifradas impiden que tu proveedor de internet vea qué sitios visitas. Protección completa contra fugas DNS incluida."
+      }
+    },
+    "howItWorks": {
+      "title": "Cómo funciona en iOS",
+      "subtitle": "Sin creación de cuenta, sin correo, sin número de teléfono — solo cuatro sencillos pasos.",
+      "step1": {
+        "title": "Descarga de la App Store",
+        "description": "Busca \"Doppler VPN\" o toca el enlace de abajo. La app es gratuita y pesa menos de 30 MB."
+      },
+      "step2": {
+        "title": "Abre la app",
+        "description": "Inicia Doppler VPN. Sin pantalla de registro, sin formulario de alta. La app está lista para usar de inmediato."
+      },
+      "step3": {
+        "title": "Toca Conectar",
+        "description": "Pulsa el botón de conectar. Doppler selecciona automáticamente el mejor servidor y establece un túnel seguro VLESS-Reality."
+      },
+      "step4": {
+        "title": "Navega con seguridad",
+        "description": "Eso es todo. Tu tráfico está cifrado, tu IP está oculta y los anuncios están bloqueados. Usa cualquier app o sitio web libremente."
+      }
+    },
+    "iosFeatures": {
+      "title": "Características específicas para iOS",
+      "subtitle": "Desarrollada de forma nativa para el ecosistema de Apple con integración profunda del sistema.",
+      "networkExtension": {
+        "title": "Network Extension (VPN a nivel de sistema)",
+        "description": "Doppler usa el framework Network Extension de Apple para operar como un VPN real a nivel de sistema. Todo el tráfico de cada app pasa por el túnel cifrado — no solo el tráfico del navegador. Esto proporciona la misma protección que Apple exige para soluciones VPN empresariales."
+      },
+      "alwaysOnVpn": {
+        "title": "VPN permanente",
+        "description": "Activa el modo Siempre Activo y Doppler se reconecta automáticamente cuando tu conexión se interrumpe. ¿Cambias de Wi-Fi a datos móviles? ¿Despiertas tu teléfono? La VPN se restablece en menos de un segundo, así que nunca estás expuesto."
+      },
+      "perAppVpn": {
+        "title": "VPN por aplicación",
+        "description": "Elige qué apps pasan por el túnel VPN y cuáles se conectan directamente. Mantén las apps bancarias en tu red local mientras proteges navegadores y apps de mensajería a través de la VPN."
+      },
+      "widget": {
+        "title": "Widget de pantalla de inicio",
+        "description": "Añade el widget de Doppler a tu pantalla de inicio o de bloqueo para ver el estado de conexión y activar/desactivar con un toque. Ve tu servidor actual, tiempo de conexión y estado de protección de un vistazo."
+      },
+      "ipadSplitView": {
+        "title": "Soporte Split View en iPad",
+        "description": "Soporte completo para multitarea en iPad. Usa Doppler VPN junto a otras apps en Split View o Slide Over. El estado de la VPN siempre es visible en la barra de estado sin importar qué app esté en primer plano."
+      }
+    },
+    "privacy": {
+      "title": "Privacidad en dispositivos Apple",
+      "subtitle": "Doppler complementa lo que Apple ya protege — y llena los vacíos para los que está diseñada una VPN.",
+      "intro": "Apple lidera la industria en privacidad a nivel de dispositivo — App Tracking Transparency, Mail Privacy Protection y la prevención inteligente de rastreo en Safari. Pero hay una capa que Apple no puede proteger: tu tráfico de red.",
+      "appleProtects": {
+        "title": "Lo que Apple protege",
+        "item1": "Rastreo a nivel de app (avisos ATT)",
+        "item2": "Cifrado de datos en el dispositivo (Secure Enclave)",
+        "item3": "Bloqueo de rastreadores en Safari",
+        "item4": "Prevención de rastreo por píxel en correo"
+      },
+      "dopplerAdds": {
+        "title": "Lo que Doppler VPN añade",
+        "item1": "Oculta tu dirección IP real de todos los sitios web y servicios",
+        "item2": "Cifra todo el tráfico de red con VLESS-Reality (indetectable)",
+        "item3": "Bloquea rastreo DNS y dominios publicitarios",
+        "item4": "Previene el monitoreo y la limitación de tráfico por parte del proveedor"
+      },
+      "noLogs": "Doppler usa autenticación basada en dispositivo — sin cuentas, sin correos, sin registros. No podemos identificarte porque nunca recopilamos información identificativa."
+    },
+    "compatibility": {
+      "title": "Requisitos del sistema y compatibilidad",
+      "os": {
+        "label": "Sistema operativo",
+        "value": "iOS 16.0 o posterior"
+      },
+      "iphone": {
+        "label": "iPhone",
+        "value": "iPhone 8 y posteriores (todos los modelos con soporte para iOS 16)"
+      },
+      "ipad": {
+        "label": "iPad",
+        "value": "Todos los modelos de iPad con iPadOS 16 o posterior"
+      },
+      "mac": {
+        "label": "Mac (Apple Silicon)",
+        "value": "M1, M2, M3, M4 Mac mediante compatibilidad con apps de iPad"
+      },
+      "size": {
+        "label": "Tamaño de la app",
+        "value": "Menos de 30 MB"
+      },
+      "battery": {
+        "label": "Impacto en batería",
+        "value": "Mínimo — VLESS es un protocolo ligero con bajo consumo de CPU"
+      },
+      "data": {
+        "label": "Consumo de datos adicional",
+        "value": "Menos del 2% de uso de datos adicional comparado con navegación sin cifrar"
+      }
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "q1": {
+        "question": "¿Doppler VPN es realmente gratis en iOS?",
+        "answer": "Sí. Doppler VPN ofrece un plan gratuito con acceso a las funciones básicas de VPN. Los planes premium desbloquean servidores adicionales, velocidades más rápidas y funciones avanzadas como VPN por aplicación."
+      },
+      "q2": {
+        "question": "¿Necesito crear una cuenta?",
+        "answer": "No. Doppler usa autenticación basada en dispositivo. No hay registro, no se necesita correo electrónico, no se pide número de teléfono. Solo descarga y conecta."
+      },
+      "q3": {
+        "question": "¿Doppler funciona en China, Rusia o Irán?",
+        "answer": "Sí. Doppler usa el protocolo VLESS-Reality, que disfraza el tráfico VPN como HTTPS regular. Esto lo hace extremadamente difícil de detectar y bloquear por sistemas de censura como el Gran Cortafuegos o TSPU."
+      },
+      "q4": {
+        "question": "¿Una VPN ralentizará mi iPhone?",
+        "answer": "Apenas perceptible. VLESS-Reality es uno de los protocolos VPN más ligeros disponibles. La mayoría de los usuarios notan una reducción de velocidad inferior al 5%. El impacto en la batería es mínimo gracias al manejo eficiente de paquetes."
+      },
+      "q5": {
+        "question": "¿Doppler funciona con apps de streaming?",
+        "answer": "Sí. El enrutamiento inteligente de Doppler está optimizado para streaming. La app selecciona automáticamente los servidores con mejor rendimiento para contenido de vídeo."
+      },
+      "q6": {
+        "question": "¿Puedo usar Doppler en mi iPad y iPhone al mismo tiempo?",
+        "answer": "Sí. Tu suscripción funciona en múltiples dispositivos Apple. Cada dispositivo obtiene su propia conexión segura."
+      }
+    },
+    "cta": {
+      "title": "Consigue Doppler VPN para iOS",
+      "subtitle": "Descarga gratuita. Sin registro. Sin tarjeta de crédito. Conéctate en segundos.",
+      "downloadIos": "Descargar en la App Store",
+      "downloadAndroid": "Descargar en Google Play",
+      "telegramBot": "Usar vía Telegram Bot",
+      "telegramChannelRu": "Canal de Telegram (RU)",
+      "telegramChannelEn": "Canal de Telegram (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN sin registro",
+      "noRegistrationDesc": "Usa una VPN sin alta ni cuenta",
+      "vless": "Protocolo VLESS-Reality",
+      "vlessDesc": "Descubre cómo VLESS vence la inspección profunda de paquetes",
+      "android": "VPN para Android",
+      "androidDesc": "Consigue Doppler VPN en Google Play o APK"
+    }
+  },
+  "vpnForAndroid": {
+    "metadata": {
+      "title": "VPN gratis para Android — Sin registro | Descargar Doppler VPN APK 2026",
+      "description": "Descarga la mejor VPN gratuita para Android 2026. Sin registro, sin cuenta. Disponible en Google Play y como APK para regiones censuradas. Protocolo VLESS-Reality para privacidad indetectable."
+    },
+    "hero": {
+      "title": "Doppler VPN para Android",
+      "subtitle": "VPN gratuita sin registro. Sin cuenta, sin correo, sin datos personales. Disponible en Google Play y como APK para regiones donde la Play Store está restringida.",
+      "googlePlay": "Google Play Store",
+      "downloadApk": "Descargar APK"
+    },
+    "features": {
+      "title": "¿Por qué Doppler para Android?",
+      "subtitle": "Diseñado específicamente para usuarios de Android que necesitan privacidad sin compromisos. Sin registros, sin recopilación de datos, sin límites.",
+      "noRegistration": {
+        "title": "Sin registro",
+        "description": "Abre la app y conéctate al instante. Sin correo, sin número de teléfono, sin creación de cuenta. Tu identidad se mantiene privada desde el primer toque."
+      },
+      "vlessReality": {
+        "title": "Protocolo VLESS-Reality",
+        "description": "Cifrado de grado militar que hace que tu tráfico VPN parezca navegación HTTPS normal. Indetectable por sistemas DPI y cortafuegos gubernamentales."
+      },
+      "adBlocker": {
+        "title": "Bloqueador de anuncios integrado",
+        "description": "Bloquea anuncios, rastreadores y dominios maliciosos a nivel DNS. Navegación más rápida, menos consumo de datos y mejor duración de batería en tu dispositivo Android."
+      },
+      "alwaysOn": {
+        "title": "VPN permanente",
+        "description": "Usa la función nativa de Android de VPN permanente para garantizar que tu conexión esté protegida 24/7, incluso después de reiniciar o cambiar de red."
+      },
+      "apkSideload": {
+        "title": "Instalación de APK",
+        "description": "¿No puedes acceder a Google Play? Descarga el APK directamente e instálalo manualmente. Perfecto para usuarios en Rusia, Irán, China y otras regiones censuradas."
+      },
+      "dnsProtection": {
+        "title": "Protección DNS",
+        "description": "Todas las consultas DNS se cifran y enrutan a través de servidores seguros. Previene fugas DNS e impide que tu proveedor vea qué sitios visitas."
+      }
+    },
+    "install": {
+      "title": "Dos formas de instalar",
+      "subtitle": "Elige el método de instalación que mejor se adapte a tu situación. Ambos ofrecen la misma experiencia VPN completa.",
+      "playStore": {
+        "title": "Google Play Store",
+        "badge": "Recomendado",
+        "benefit1": "Instalación con un toque, actualizaciones automáticas",
+        "benefit2": "Verificado por Google Play Protect",
+        "benefit3": "Gestión de suscripción integrada",
+        "cta": "Descargar en Google Play"
+      },
+      "apk": {
+        "title": "Descarga directa de APK",
+        "badge": "Para regiones restringidas",
+        "benefit1": "Funciona donde Google Play está bloqueado",
+        "benefit2": "No requiere cuenta de Google",
+        "benefit3": "Las mismas funciones que la versión de Play Store",
+        "note": "Ideal para usuarios en Rusia, Irán, China y otros países donde Google Play Store está restringido o las apps VPN han sido eliminadas de la tienda.",
+        "cta": "Obtener APK vía Telegram Bot"
+      }
+    },
+    "howItWorks": {
+      "title": "Cómo funciona en Android",
+      "subtitle": "De la descarga a la navegación segura en menos de 30 segundos. Sin cuenta, sin correo, sin asistente de configuración.",
+      "step1": {
+        "title": "Descarga la app",
+        "description": "Instala Doppler VPN desde Google Play o descarga el APK directamente. La app es ligera — menos de 15 MB."
+      },
+      "step2": {
+        "title": "Abre la app",
+        "description": "Inicia Doppler VPN. Sin pantalla de registro, sin formulario de alta. La app está lista para usar de inmediato."
+      },
+      "step3": {
+        "title": "Toca Conectar",
+        "description": "Pulsa el botón de conectar. Doppler selecciona automáticamente el servidor más rápido disponible y establece un túnel VLESS-Reality."
+      },
+      "step4": {
+        "title": "Navega libremente",
+        "description": "Tu conexión ahora está cifrada e indetectable. Accede a cualquier sitio web, app o servicio sin restricciones."
+      }
+    },
+    "androidFeatures": {
+      "title": "Características específicas para Android",
+      "subtitle": "Doppler VPN aprovecha al máximo las capacidades de Android para ofrecer la experiencia más segura y fluida.",
+      "alwaysOnVpn": {
+        "title": "VPN permanente",
+        "description": "Activa la configuración nativa de Android de VPN permanente para mantener Doppler siempre conectado. Ve a Ajustes > Red e Internet > VPN > Doppler VPN > activa Siempre activa. Tu dispositivo se reconectará automáticamente después de reinicios o cambios de red."
+      },
+      "splitTunneling": {
+        "title": "Túnel dividido",
+        "description": "Elige qué apps pasan por la VPN y cuáles usan tu conexión normal. Dirige las apps bancarias directamente mientras proteges los navegadores. Configura reglas VPN por app en los ajustes de Doppler."
+      },
+      "quickSettings": {
+        "title": "Mosaico de ajustes rápidos",
+        "description": "Añade Doppler VPN a tu panel de Ajustes Rápidos de Android. Conéctate o desconéctate con un solo deslizamiento y toque — sin necesidad de abrir la app. Disponible en Android 8.0 y superior."
+      },
+      "batteryOptimization": {
+        "title": "Optimización de batería",
+        "description": "Doppler consume una batería mínima. Para la mejor experiencia de VPN permanente, excluye Doppler de la optimización de batería de Android: Ajustes > Apps > Doppler VPN > Batería > Sin restricciones. Esto evita que Android cierre la conexión VPN en segundo plano."
+      },
+      "androidTv": {
+        "title": "Soporte para Android TV",
+        "description": "Instala el APK de Doppler VPN en tu Android TV o caja de TV para proteger tu tráfico de streaming. Accede a contenido con restricción geográfica en la pantalla grande con el mismo cifrado VLESS-Reality."
+      }
+    },
+    "sideloading": {
+      "title": "Guía de instalación de APK",
+      "badge": "Para regiones censuradas",
+      "intro": "Si estás en un país donde Google Play está restringido o las apps VPN han sido eliminadas de la tienda, puedes instalar Doppler VPN directamente desde el archivo APK. Sigue estos pasos cuidadosamente.",
+      "step1": {
+        "title": "Habilita orígenes desconocidos",
+        "description": "Ve a Ajustes > Apps > Acceso especial > Instalar apps desconocidas. Selecciona tu navegador o administrador de archivos y activa 'Permitir desde este origen'."
+      },
+      "step2": {
+        "title": "Descarga el APK",
+        "description": "Obtén el último APK de Doppler VPN desde nuestro bot oficial de Telegram @dopplercreatebot. Esto garantiza que siempre obtengas el archivo auténtico y sin modificar."
+      },
+      "step3": {
+        "title": "Instala el APK",
+        "description": "Abre el archivo .apk descargado y toca 'Instalar'. Android puede mostrar una advertencia sobre apps desconocidas — esto es normal para aplicaciones instaladas manualmente."
+      },
+      "step4": {
+        "title": "Verifica y conecta",
+        "description": "Abre Doppler VPN y verifica que la app funcione correctamente. La app debería conectarse sin requerir ninguna cuenta o registro — solo toca conectar."
+      },
+      "security": {
+        "title": "Nota de seguridad",
+        "description": "Solo descarga el APK de Doppler VPN desde nuestro bot oficial de Telegram (@dopplercreatebot) o el sitio web oficial (www.dopplervpn.org). Nunca instales archivos APK de fuentes de terceros — pueden contener malware o código modificado."
+      }
+    },
+    "requirements": {
+      "title": "Requisitos del sistema",
+      "os": {
+        "title": "Sistema operativo",
+        "value": "Android 8.0 (Oreo) o superior"
+      },
+      "battery": {
+        "title": "Impacto en batería",
+        "value": "Mínimo — menos del 2% de consumo adicional de batería con VPN permanente activada"
+      },
+      "storage": {
+        "title": "Almacenamiento",
+        "value": "Menos de 15 MB de tamaño de app, menos de 5 MB de uso de RAM cuando está conectado"
+      },
+      "permissions": {
+        "title": "Permisos necesarios",
+        "value": "Solo permiso de conexión VPN — sin acceso a contactos, fotos ni archivos"
+      },
+      "compatibility": {
+        "title": "Dispositivos compatibles"
+      }
+    },
+    "cta": {
+      "title": "Consigue Doppler VPN para Android ahora",
+      "subtitle": "Gratuita, privada e indetectable. Sin registro, sin cuenta, sin recopilación de datos. Descarga desde Google Play o consigue el APK para regiones restringidas.",
+      "googlePlay": "Google Play Store",
+      "downloadApk": "Descargar APK",
+      "alsoOnIos": "También disponible en iOS",
+      "telegramBot": "Telegram Bot",
+      "telegramChannelRu": "Canal de Telegram (RU)",
+      "telegramChannelEn": "Canal de Telegram (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN sin registro",
+      "noRegistrationDesc": "Usa una VPN sin alta ni cuenta",
+      "vless": "Protocolo VLESS-Reality",
+      "vlessDesc": "Descubre cómo VLESS vence la inspección profunda de paquetes",
+      "ios": "VPN para iOS",
+      "iosDesc": "Descarga Doppler VPN para iPhone y iPad"
     }
   }
 }

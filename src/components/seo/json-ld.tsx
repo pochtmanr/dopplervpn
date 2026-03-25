@@ -1,6 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 
+/** Escape closing script tags to prevent XSS when injecting JSON into <script> */
+function safeJsonLd(obj: unknown): string {
+  return JSON.stringify(obj).replace(/<\//g, "<\\/");
+}
+
 interface LocaleProps {
   locale: string;
 }
@@ -26,7 +31,7 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
     />
   );
 }
@@ -51,7 +56,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
         name: pt("durations.monthly"),
         price: "7.99",
         priceCurrency: "USD",
-        priceValidUntil: "2026-12-31",
+        priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
@@ -94,7 +99,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
         name: pt("durations.annual"),
         price: "79.99",
         priceCurrency: "USD",
-        priceValidUntil: "2026-12-31",
+        priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
@@ -138,7 +143,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
     />
   );
 }
@@ -161,11 +166,6 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
       price: "0",
       priceCurrency: "USD",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "1000",
-    },
     featureList: [
       ft("noRegistration.title"),
       ft("vlessReality.title"),
@@ -179,7 +179,7 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
     />
   );
 }
@@ -205,7 +205,7 @@ export function FAQSchema({ items }: FAQSchemaProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
     />
   );
 }
@@ -217,20 +217,97 @@ export async function WebsiteSchema({ locale }: LocaleProps) {
     name: "Doppler VPN",
     url: `https://www.dopplervpn.org/${locale}`,
     inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `https://www.dopplervpn.org/${locale}?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
+    publisher: {
+      "@type": "Organization",
+      name: "Doppler VPN",
+      url: "https://www.dopplervpn.org",
     },
   };
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
+    />
+  );
+}
+
+interface ArticleSchemaProps {
+  headline: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+}
+
+export function ArticleSchema({
+  headline,
+  description,
+  url,
+  image = "https://www.dopplervpn.org/images/og-banner.jpg",
+  datePublished = "2025-03-01",
+  dateModified = "2025-06-15",
+}: ArticleSchemaProps) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    image,
+    datePublished,
+    dateModified,
+    author: {
+      "@type": "Organization",
+      name: "Doppler VPN",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Doppler VPN",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
+    />
+  );
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface BreadcrumbSchemaProps {
+  items: BreadcrumbItem[];
+}
+
+export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
     />
   );
 }

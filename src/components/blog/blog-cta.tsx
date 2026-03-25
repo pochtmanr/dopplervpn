@@ -260,14 +260,19 @@ export function BlogCta({ title, subtitle, doppler, simnetiq }: BlogCtaProps) {
   useEffect(() => {
     setPlatform(detectPlatform());
 
-    fetch("/api/promo/active")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: { code: string; discount_percent: number } | null) => {
+    async function fetchPromo() {
+      try {
+        const res = await fetch("/api/promo/active");
+        if (!res.ok) return;
+        const data: { code: string; discount_percent: number } | null = await res.json();
         if (data?.code) {
           setPromo({ code: data.code, discount: `${data.discount_percent}% off` });
         }
-      })
-      .catch(() => {});
+      } catch {
+        // Promo fetch is non-critical — fail silently
+      }
+    }
+    fetchPromo();
   }, []);
 
   const apps: AppInfo[] = [

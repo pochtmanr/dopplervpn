@@ -1,12 +1,15 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
+import { BreadcrumbSchema } from "@/components/seo/json-ld";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section } from "@/components/ui/section";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ locale: string }> };
+
+const baseUrl = "https://www.dopplervpn.org";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -15,7 +18,6 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "about" });
-  const baseUrl = "https://www.dopplervpn.org";
 
   return {
     title: t("meta.title"),
@@ -92,7 +94,13 @@ export default async function AboutPage({ params }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/<\//g, "<\\/") }}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: `${baseUrl}/${locale}` },
+          { name: t("hero.title"), url: `${baseUrl}/${locale}/about` },
+        ]}
       />
       <Navbar />
       <main className="min-h-screen pt-24 pb-16">

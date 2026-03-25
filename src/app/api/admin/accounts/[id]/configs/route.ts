@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { createUntypedAdminClient } from "@/lib/supabase/admin";
 
 export async function GET(
   _request: NextRequest,
@@ -11,11 +12,10 @@ export async function GET(
   try {
     const { id } = await params;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const client = adminClient as any;
+    const untypedClient = createUntypedAdminClient();
 
     // Get account_id (text) from UUID
-    const { data: account } = await client
+    const { data: account } = await untypedClient
       .from("accounts")
       .select("account_id")
       .eq("id", id)
@@ -26,7 +26,7 @@ export async function GET(
     }
 
     // Get server lookup
-    const { data: servers } = await client
+    const { data: servers } = await untypedClient
       .from("vpn_servers")
       .select("id, name, country_code");
 
@@ -35,7 +35,7 @@ export async function GET(
     );
 
     // Get configs for this account (uses text VPN-XXXX)
-    const { data: configs } = await client
+    const { data: configs } = await untypedClient
       .from("vpn_user_configs")
       .select("id, server_id, device_id, is_active, tier, expires_at, created_at, marzban_username")
       .eq("account_id", account.account_id)
@@ -51,7 +51,7 @@ export async function GET(
     });
 
     // Get device sessions for this account (uses UUID)
-    const { data: devices } = await client
+    const { data: devices } = await untypedClient
       .from("device_sessions")
       .select("id, device_id, device_name, device_type, last_active_at, is_main, vpn_connected, created_at")
       .eq("account_id", id)

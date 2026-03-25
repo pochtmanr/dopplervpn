@@ -1,5 +1,10 @@
 import { ogLocaleMap } from "@/lib/og-locale-map";
 
+/** Escape closing script tags to prevent XSS when injecting JSON into <script> */
+function safeJsonLd(obj: unknown): string {
+  return JSON.stringify(obj).replace(/<\//g, "<\\/");
+}
+
 interface BlogPostJsonLdProps {
   title: string;
   description: string;
@@ -84,11 +89,11 @@ export function BlogPostJsonLd({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(articleSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbSchema) }}
       />
     </>
   );

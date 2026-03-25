@@ -317,7 +317,11 @@
     "telegram": "@dopplercreatebot",
     "email": "support@simnetiq.store",
     "bypassCensorship": "Kuidas me tsensuurist mööda pääseme",
-    "about": "Meist"
+    "about": "Meist",
+    "vlessVpn": "VLESS-protokoll",
+    "noRegistration": "VPN ilma registreerimiseta",
+    "vpnForIos": "VPN iOS-ile",
+    "vpnForAndroid": "VPN Androidile"
   },
   "privacy": {
     "title": "Privaatsuspoliitika",
@@ -386,8 +390,8 @@
     }
   },
   "blog": {
-    "indexTitle": "Blogi",
-    "indexDescription": "Privaatsusnõuanded, VPN-juhendid ja turvalisuse ülevaated Doppleri meeskonnalt.",
+    "indexTitle": "VPN-blogi — Privaatsusnõuanded, turvajuhendid ja tsensuuriuudised",
+    "indexDescription": "Lugege Doppleri meeskonna ekspertide VPN-juhendeid, internetiprivaatsuse nõuandeid ja tsensuuri vältimise strateegiaid. Olge kursis VLESS-Reality, DPI vältimise ja digitaalse turvalisusega.",
     "title": "Meie blogi",
     "subtitle": "Privaatsusnõuanded, turvalisuse ülevaated ja VPN-juhendid",
     "allPosts": "Kõik postitused",
@@ -425,14 +429,14 @@
       }
     },
     "stickyBar": {
-      "message": "Kaitske oma sirvimist. Doppler VPN on tasuta, ei nõua registreerimist ja ei pea logisid.",
-      "cta": "Laadi alla tasuta",
+      "message": "Kaitske oma sirvimist. Doppler VPN ei noua registreerimist ja ei pea logisid. Proovige tasuta 3 paeva.",
+      "cta": "Proovige tasuta 3 paeva",
       "dismiss": "Sulge",
       "dismissLabel": "Sulge allalaadimise bänner"
     },
     "inlineCta": {
       "headline": "Kaitske oma privaatsust Doppler VPN-iga",
-      "subtext": "Tasuta. Registreerimist pole. Logisid ei peeta.",
+      "subtext": "3-paevane tasuta prooviperiood. Registreerimist pole. Logisid ei peeta.",
       "downloadIos": "Laadi alla iOS-i jaoks",
       "downloadAndroid": "Laadi alla Androidi jaoks",
       "downloadDesktop": "Laadi rakendus alla"
@@ -582,8 +586,8 @@
     "decline": "Keeldu"
   },
   "apps": {
-    "title": "Hangi Doppler VPN",
-    "subtitle": "Ühe vajutusega privaatsus igas seadmes. Valige oma platvorm allpool.",
+    "title": "Laadi alla Doppler VPN — iOS, Android, Mac ja Windows",
+    "subtitle": "Laadige Doppler VPN alla iOS-i, Androidi, macOS-i ja Windowsi jaoks. Uhe vajutusega privaatsus tanu VLESS-Reality krupteerimisele, registreerimist pole vaja. Alustage 3-paevase tasuta prooviperioodiga.",
     "download": "Laadi alla",
     "syncNote": "Juba tellitud? Teie Pro-staatus sünkroonib kõigis seadmetes.",
     "needHelp": "Vajad abi?",
@@ -633,8 +637,8 @@
     }
   },
   "support": {
-    "title": "Tugi",
-    "subtitle": "Leidke vastused, lahendage probleemid või võtke meiega ühendust.",
+    "title": "Abikeskus ja tugi",
+    "subtitle": "Leidke vastused levinud VPN-küsimustele, lahendage ühendusprobleeme või võtke ühendust meie tugimeeskonnaga.",
     "faq": {
       "title": "Korduma kippuvad küsimused",
       "items": {
@@ -1471,6 +1475,701 @@
       "nameLabel": "Ettevõte",
       "websiteLabel": "Veebisait",
       "contactLabel": "Kontakt"
+    }
+  },
+  "noRegistrationVpn": {
+    "metadata": {
+      "title": "VPN ilma registreerimiseta — e-posti ega kontota pole vaja | Doppler VPN",
+      "description": "Kasutage VPN-i ilma registreerimise ja kontota. Doppler VPN ei nõua e-posti, telefoninumbrit ega kontot. Alustage turvalist ja anonüümset sirvimist sekunditega."
+    },
+    "hero": {
+      "title": "VPN ilma registreerimiseta",
+      "subtitle": "Alustage turvalist sirvimist sekunditega. E-posti pole vaja, telefoninumbrit pole vaja, kontot pole vaja. Doppler on tasuta VPN ilma registreerimiseta — lihtsalt laadige alla, ühenduge ja alustage."
+    },
+    "whyRegister": {
+      "title": "Miks enamik VPN-e nõuab registreerimist",
+      "intro": "Olete kunagi mõelnud, miks peaaegu iga VPN-teenus küsib teie e-posti, telefoninumbrit või loob kohustusliku konto? Vastus on vähem seotud turvalisusega ja rohkem seotud ärimudelitega, mis põhinevad teie isikuandmetel.",
+      "dataHarvesting": {
+        "title": "Andmete kogumine",
+        "description": "Kui registreerite end e-posti aadressiga, seovad VPN-teenuse pakkujad teie sirvimisaktiivsuse teie identiteediga. See andmeprofiil — külastatud veebilehed, ühendusajad, andmemahtude kasutus — muutub väärtuslikuks varaks. Mõned pakkujad müüvad anonümiseeritud (või mitte nii anonümiseeritud) kasutusandmeid kolmandate osapoolte analüüsifirmadele ja andmemaakleritele, muutes teie privaatsustööriista jälgimistooteks."
+      },
+      "targetedAds": {
+        "title": "Suunatud reklaam",
+        "description": "Teie registreerimise e-post ühendab teie VPN-i kasutuse reklaamivõrgustikega. Paljud tasuta VPN-teenused teenivad raha suunatud reklaamide kaudu, kasutades teie sirvimismustreid isikupärastatud reklaamide kuvamiseks. Isegi tasulised VPN-id kontodega võivad teie andmeid ristviidates reklaamiplatvormidega täiendavat tulu teenida."
+      },
+      "govRequests": {
+        "title": "Valitsuse andmepäringud",
+        "description": "Kui VPN-teenuse pakkujal on teie e-post ja konto seotud ühenduslogidega, on neil midagi üle anda, kui õiguskaitseorganid tulevad. Kohtukutsed, riikliku julgeoleku kirjad ja kohtuotsused võivad sundida pakkujaid paljastama, kes täpselt oli millise serveriga millisel ajal ühendatud — seostades teie päris identiteedi teie veebitegevusega."
+      },
+      "breachLiability": {
+        "title": "Andmelekke risk",
+        "description": "Iga kontode andmebaas on leke, mis ootab juhtumist. VPN-teenuse pakkujad, kes salvestavad e-poste, paroole ja makseandmeid, loovad häkkeritele sihtmärke. Kui lekked juhtuvad — ja need juhtuvad regulaarselt — paljastatakse teie identiteet koos faktiga, et kasutate VPN-i, mis mõnes piirkonnas võib iseenesest äratatada soovimatu tähelepanu."
+      },
+      "conclusion": "Muster on selge: registreerimine on pakkuja, mitte kasutaja teenistuses. Tõeliselt privaatne VPN ei peaks kunagi teadma, kes te olete."
+    },
+    "howItWorks": {
+      "title": "Kuidas Doppler töötab ilma kontota",
+      "subtitle": "Doppler asendab traditsioonilise e-posti ja parooli mudeli seadmepõhise autentimisega. Registreerimist pole, kontot pole, mitte mingeid isikuandmeid.",
+      "download": {
+        "title": "Laadige rakendus alla",
+        "description": "Installige Doppler VPN App Store'ist, Google Play'st või hankige konfiguratsioon meie Telegrami boti kaudu. Konto loomise ekraani pole, e-posti välja pole, kinnituskoode pole — rakendus on valmis hetkel, kui installimine lõpeb."
+      },
+      "generateKey": {
+        "title": "Teie seade genereerib unikaalse võtme",
+        "description": "Esmakäivitusel genereerib Doppler krüptograafilise seadmevõtme kohapeal teie telefonis või arvutis. See võti on juhuslik identifikaator — see ei sisalda isikuandmeid, riistvara sõrmejälgi ja seda ei saa teieni tagasi jälitada. Mõelge sellest kui juhuslikust hotellitoavõtmest, mis avab ukse, kuid ei kanna nime."
+      },
+      "connect": {
+        "title": "Ühenduge mis tahes serveriga",
+        "description": "Teie seadmevõti autendib teid meie VLESS-Reality serveritega. Ühendus luuakse sama TLS 1.3 käepigistusega, mis toidab tavalisi HTTPS-veebilehti, muutes teie VPN-liikluse eristamatu tavalisest veebisirvimisest. Sisselogimisekraani pole, mandaate ei edastata."
+      },
+      "done": {
+        "title": "Olete kaitstud",
+        "description": "See ongi kõik. E-posti kinnitust pole vaja oodata, paroole pole vaja meelde jätta, kontosid pole vaja hallata. Teie ühendus on krüpteeritud, teie identiteet on anonüümne ja teie VPN ei tea absoluutselt midagi sellest, kes te olete. Sirvite tõeliselt anonüümse VPN-kasutajana — e-posti pole vaja, jälgi ei jää."
+      }
+    },
+    "noCollect": {
+      "title": "Mida me ei kogu",
+      "subtitle": "Enamik VPN-teenuse pakkujaid väidab, et on privaatsed, kuid nõuab siiski isikuandmetega täidetud kontot. Siin on läbipaistev võrdlus tüüpiliste VPN-teenuste kogutavate andmete ja Doppleri teie kohta salvestatavate andmete vahel.",
+      "headers": {
+        "dataType": "Andmetüüp",
+        "otherVpns": "Teised VPN-id",
+        "doppler": "Doppler VPN"
+      },
+      "email": {
+        "label": "E-posti aadress"
+      },
+      "phone": {
+        "label": "Telefoninumber"
+      },
+      "name": {
+        "label": "Pärisnimi"
+      },
+      "browsingHistory": {
+        "label": "Sirvimisajalugu"
+      },
+      "ipLogs": {
+        "label": "IP-aadressi logid"
+      },
+      "connectionTimestamps": {
+        "label": "Ühenduse ajatemplid"
+      },
+      "footnote": "Punane linnuke = pakkuja kogub. Punane X = Doppler ei kogu. Me ei saa füüsiliselt üle anda andmeid, mida me kunagi ei salvestanud."
+    },
+    "comparison": {
+      "title": "Privaatsuse võrdlus: Doppler vs populaarsed VPN-id",
+      "headers": {
+        "provider": "VPN-teenuse pakkuja",
+        "registration": "Registreerimine nõutud?",
+        "emailNeeded": "E-post nõutud?",
+        "logsPolicy": "Logide poliitika",
+        "paymentTracking": "Makse jälgimine",
+        "openProtocol": "Avatud protokoll"
+      },
+      "doppler": {
+        "name": "Doppler VPN",
+        "registration": "Ei",
+        "emailNeeded": "Ei",
+        "logsPolicy": "Null logisid",
+        "paymentTracking": "Anonüümne",
+        "openProtocol": "VLESS-Reality"
+      },
+      "protonvpn": {
+        "name": "Proton VPN",
+        "registration": "Jah",
+        "emailNeeded": "Jah",
+        "logsPolicy": "Minimaalsed logid",
+        "paymentTracking": "E-postiga seotud",
+        "openProtocol": "WireGuard"
+      },
+      "nordvpn": {
+        "name": "NordVPN",
+        "registration": "Jah",
+        "emailNeeded": "Jah",
+        "logsPolicy": "Logideta väide",
+        "paymentTracking": "Kontoga seotud",
+        "openProtocol": "NordLynx (omand)"
+      },
+      "expressvpn": {
+        "name": "ExpressVPN",
+        "registration": "Jah",
+        "emailNeeded": "Jah",
+        "logsPolicy": "Logideta väide",
+        "paymentTracking": "Kontoga seotud",
+        "openProtocol": "Lightway (omand)"
+      }
+    },
+    "deviceKey": {
+      "title": "Teie andmed, teie seade",
+      "badge": "Seadmepõhine arhitektuur",
+      "p1": "Doppleri anonüümne VPN-arhitektuur põhineb lihtsal põhimõttel: kui me kunagi ei kogu teie isikuandmeid, ei saa me neid kunagi lekkida, müüa ega üle anda. Serveripoolsete kontode asemel elab teie identiteet täielikult teie seadmes krüptograafilise võtmena.",
+      "p2": "Kui teie seade ühendub Doppleri serveriga, esitab see oma unikaalse võtme standardse TLS 1.3 käepigistuse kaudu — sama krüpteerimine, mida kasutavad pangad ja valitsused. Server kinnitab, et võti on legitiimne, ja annab juurdepääsu. Üheski punktis ei tea ega salvesta server, kellele see võti kuulub. Pole andmebaasi, mis seostaks võtmeid e-postide, nimede või IP-aadressidega.",
+      "p3": "See lähenemine peegeldab Apple'i Private Relay toimimist: teie liiklus autentitakse ilma tuvastamiseta. Erinevus on selles, et Doppler rakendab seda põhimõtet kogu teie internetiühendusele, mitte ainult Safari sirvimisele. Iga rakendus, iga protokoll, iga pakett — kõik kaitstud ilma ühegi isikuandme nõudmiseta.",
+      "p4": "Tulemus: isegi kui meie serverid konfiskeeritaks, poleks kasutajakontosid paljastada, e-poste lekkida ega sirvimisajalugusid avalikustada. Teie privaatsus on tagatud arhitektuuri, mitte lubaduste poolt.",
+      "deviceGen": {
+        "title": "Seadme genereeritud võtmed",
+        "description": "Krüptograafilised võtmed luuakse ja salvestatakse kohapeal teie seadmes. Need ei lahku kunagi teie telefonist ega arvutist ja ei sisalda mingeid isikuandmeid."
+      },
+      "serverVal": {
+        "title": "Serveripoolne valideerimine",
+        "description": "Meie serverid kontrollivad võtme legitiimsust ilma identiteediandmeid salvestamata. Autentimine toimub TLS 1.3 kaudu — kontosid pole, mandaatide andmebaasi pole."
+      },
+      "zeroPii": {
+        "title": "Null isikuandmeid",
+        "description": "E-posti pole, nime pole, telefoni pole, IP-logisid pole. Arhitektuuriliselt ei saa me oma kasutajaid tuvastada, sest me ei kogu kunagi tuvastamiseks vajalikku teavet."
+      }
+    },
+    "getStarted": {
+      "title": "Alustage 30 sekundiga",
+      "subtitle": "Registreerimisvormi pole. E-posti kinnitust pole. Ootamist pole. Kolm sammu täieliku veebiprivaatsuseni anonüümse VPN-iga, mis ei nõua registreerimist.",
+      "step1": {
+        "title": "Laadige Doppler alla",
+        "description": "Hankige rakendus App Store'ist, Google Play'st või võtke VLESS-konfiguratsioon meie Telegrami botilt. Installimine võtab sekundeid — konto loomist pole vaja üheski etapis."
+      },
+      "step2": {
+        "title": "Vajutage Ühenda",
+        "description": "Avage rakendus ja vajutage ühendamisnuppu. Teie seade genereerib automaatselt turvalise võtme ja loob krüpteeritud tunneli. Sisselogimisekraani pole, kasutajanime pole, parooli pole."
+      },
+      "step3": {
+        "title": "Sirvige privaatselt",
+        "description": "Olete nüüd kaitstud sõjaväetaseme krüpteerimisega. Teie päris IP on peidetud, teie liiklus on loetamatu ja keegi — isegi mitte meie — ei tea, kes te olete. Tõeliselt anonüümne VPN ilma registreerimiseta."
+      }
+    },
+    "cta": {
+      "title": "Valmis VPN-iks, mis ei tunne teid?",
+      "subtitle": "Liituge tuhandete kasutajatega, kes valisid VPN-i ilma registreerimiseta. E-posti pole vaja, kontot pole vaja luua, isikuandmeid pole vaja riskida. Laadige Doppler alla ja ühenduge sekunditega — täiesti tasuta, täiesti anonüümne.",
+      "downloadIos": "Laadi alla iOS-ile",
+      "downloadAndroid": "Laadi alla Androidile",
+      "telegramBot": "Hangi Telegrami boti kaudu",
+      "telegramChannelRu": "Telegrami kanal (RU)",
+      "telegramChannelEn": "Telegrami kanal (EN)"
+    },
+    "related": {
+      "vless": "VLESS-Reality protokoll",
+      "vlessDesc": "Uurige, kuidas VLESS alistab sügava pakettide inspekteerimise",
+      "ios": "VPN iOS-ile",
+      "iosDesc": "Laadige Doppler VPN alla iPhone'ile ja iPadile",
+      "android": "VPN Androidile",
+      "androidDesc": "Hankige Doppler VPN Google Play'st või APK-na"
+    }
+  },
+  "vlessVpn": {
+    "metadata": {
+      "title": "VLESS VPN-rakendus — Mis on VLESS-Reality protokoll ja miks see ületab WireGuardi",
+      "description": "Uurige, mis on VLESS-protokoll, kuidas VLESS-Reality alistab sügava pakettide inspekteerimise ja miks see ületab WireGuardi ja OpenVPN-i tsensuuri vältimises. Laadige alla Doppleri VLESS VPN-rakendus iOS-ile ja Androidile."
+    },
+    "hero": {
+      "title": "VLESS-Reality: protokoll, mis on loodud nähtamatuks",
+      "subtitle": "Järgmise põlvkonna VPN-protokoll, mis alistab sügava pakettide inspekteerimise. VLESS-Reality muudab teie liikluse eristamatuks tavalisest HTTPS-ist — signatuure pole, sõrmejälgi pole, tuvastamist pole."
+    },
+    "whatIs": {
+      "title": "Mis on VLESS-protokoll?",
+      "intro": "VLESS on kerge proksiprotokoll, mis sündis V2Ray projektist — avatud lähtekoodiga ökosüsteemist, mis on loodud spetsiaalselt internetitsensuuri vältimiseks. VLESS-i olemuse ja arengu mõistmine selgitab, miks see õnnestub seal, kus traditsioonilised VPN-protokollid ebaõnnestuvad.",
+      "origin": {
+        "title": "VMess-ist VLESS-ini: areng",
+        "p1": "V2Ray projekt algas 2015. aastal vastusena Hiina Suurele Tulemüürile. Selle algne protokoll VMess tutvustas liikluse hägustamist — proksiühenduste maskeerimist tavalise veebiliiklusena. VMess töötas alguses hästi, kuid kui DPI-süsteemid muutusid keerukamaks, ilmnesid selle nõrkused: tarbetu keerukus, krüpteerimise koormus ja tuvastatavad käepigistuse mustrid.",
+        "p2": "VLESS (V2Ray-Less Encryption Serialization Stream) loodi 2020. aastal VMess-i järeltulijana. Disainerid eemaldasid kõik mittevajaliku: üleliigsed krüpteerimiskihid, keerulised autentimisskeemid ja protokollispetsiifilised markerid. Alles jäi minimaalne, olekuta protokoll nullkoormusega — puhas transpordikiht, mis on loodud üheks eesmärgiks.",
+        "p3": "2022. aastal tutvustas XTLS-i projekt Reality't — TLS-i kamuflaažikihti, mis muutis põhjalikult seda, mis on võimalik. VLESS-Reality ei hägusta lihtsalt liiklust. See laenab legitiimse veebisaidi TLS-sertifikaati, muutes ühenduse tõeliselt eristamatuks tavalisest HTTPS-sirvimisest iga vaatleja jaoks, sealhulgas riiklike DPI-süsteemide jaoks."
+      },
+      "difference": {
+        "title": "Mis teeb VLESS-i erinevaks",
+        "p1": "Traditsioonilised VPN-protokollid nagu WireGuard ja OpenVPN seavad prioriteediks kiiruse ja krüpteerimise. Need loovad krüpteeritud tunneleid, kuid neil tunnelitel on iseloomulikud signatuurid — äratuntavad pakettstruktuurid, käepigistuse mustrid ja liiklusprofiiid. DPI-süsteem tuvastab need sekunditega. VLESS kasutab vastupidist lähenemist: esmalt nähtamatus. Krüpteeritud tunneli ehitamise asemel, mis näeb välja nagu tunnel, loob VLESS-Reality ühenduse, mis näeb välja täpselt nagu tavaline veebisirvimine.",
+        "p2": "See on põhiline erinevus: VLESS-Reality on ainus protokoll, kus ühendus ise on eristamatu tavalisest HTTPS-liiklusest — mitte hägustatud, mitte maskeeritud, vaid tõeliselt identne pakettide tasemel."
+      }
+    },
+    "howItWorks": {
+      "title": "Kuidas VLESS-Reality töötab",
+      "subtitle": "Neljast sammust koosnev protsess, mis muudab teie VPN-ühenduse nähtamatuks sügavale pakettide inspekteerimisele, aktiivsele sondeerimisele ja liiklusanalüüsile — selgitatud ilma žargoonita.",
+      "step1": {
+        "title": "TLS-käepigistuse mimikeerimine",
+        "description": "Ühendumisel algatab VLESS-Reality tõelise TLS 1.3 käepigistuse legitiimse veebisaidiga — nagu google.com või microsoft.com. Väljastpoolt näeb see välja täpselt nagu teie brauser ühendub selle veebisaidiga. DPI-süsteem näeb standardset, oodatud ühendust ja laseb selle läbi."
+      },
+      "step2": {
+        "title": "Sertifikaadi laenamine",
+        "description": "Erinevalt traditsioonilistest VPN-idest, mis kasutavad iseallkirjastatud sertifikaate (punane lipp DPI jaoks), laenab Reality sihtveebisaidi TLS-sertifikaati. Sertifikaatide ahel on ehtne. Iga ühendust inspekteeriv süsteem näeb kehtivat sertifikaati usaldatud asutuselt — sest see ongi."
+      },
+      "step3": {
+        "title": "Liikluse kamuflaaž",
+        "description": "Teie tegelikud VPN-andmed multipleksitakse loodud TLS-ühenduse sees. Pakettide suurused, ajaintervallid ja liiklusmustrid on kujundatud vastama sellele, kuidas tavaline HTTPS-sirvimine välja näeb. Masinõppemudelid, mis on treenitud VPN-i entroopiamustreid tuvastama, ei näe midagi ebatavalist."
+      },
+      "step4": {
+        "title": "Pöördproksi käitumine",
+        "description": "Kui keegi sondeerib serverit — tsensorid, automaatsed skannerid või DPI aktiivse sondeerimise süsteemid — vastab server täpselt nagu see legitiimne veebisait, mida see jäljendab. See serveerib päris veebilehti, tagastab korrektseid veakoode ja käitub eristamatult päris saidist. VPN-funktsionaalsus on täielikult peidetud."
+      },
+      "conclusion": "Tulemus: teie ühendus pole lihtsalt krüpteeritud — see on nähtamatu. Ükski DPI-süsteem, masinõppemudel ega aktiivne sondeerimine ei suuda seda eristada miljonite legitiimsete HTTPS-ühenduste seast, mis toimuvad igal sekundil."
+    },
+    "comparison": {
+      "title": "VLESS vs WireGuard vs OpenVPN — protokollide võrdlus",
+      "subtitle": "Kuidas VLESS-Reality paistab teiste VPN-protokollidega võrreldes? See võrdlus katab mõõdikuid, mis on olulised tsenseeritud piirkondade kasutajatele.",
+      "headers": {
+        "protocol": "Protokoll",
+        "dpiResistance": "DPI-vastupanu",
+        "speed": "Kiirus",
+        "latency": "Latentsus",
+        "batteryImpact": "Aku mõju",
+        "setupComplexity": "Seadistuse keerukus",
+        "censorshipBypass": "Tsensuuri vältimine"
+      },
+      "vless": {
+        "name": "VLESS-Reality",
+        "dpiResistance": "Tuvastamatu",
+        "speed": "Kiire",
+        "latency": "Madal",
+        "batteryImpact": "Minimaalne",
+        "setupComplexity": "Kõrge (ise) / Lihtne (Doppler)",
+        "censorshipBypass": "Suurepärane"
+      },
+      "wireguard": {
+        "name": "WireGuard",
+        "dpiResistance": "Puudub",
+        "speed": "Väga kiire",
+        "latency": "Väga madal",
+        "batteryImpact": "Väga madal",
+        "setupComplexity": "Lihtne",
+        "censorshipBypass": "Blokeeritakse koheselt"
+      },
+      "openvpn": {
+        "name": "OpenVPN",
+        "dpiResistance": "Madal",
+        "speed": "Mõõdukas",
+        "latency": "Mõõdukas",
+        "batteryImpact": "Kõrge",
+        "setupComplexity": "Mõõdukas",
+        "censorshipBypass": "Blokeeritakse kiiresti"
+      },
+      "shadowsocks": {
+        "name": "Shadowsocks",
+        "dpiResistance": "Mõõdukas",
+        "speed": "Kiire",
+        "latency": "Madal",
+        "batteryImpact": "Madal",
+        "setupComplexity": "Mõõdukas",
+        "censorshipBypass": "Osaline — tuvastatav"
+      },
+      "trojan": {
+        "name": "Trojan",
+        "dpiResistance": "Kõrge",
+        "speed": "Kiire",
+        "latency": "Madal",
+        "batteryImpact": "Madal",
+        "setupComplexity": "Kõrge",
+        "censorshipBypass": "Hea, kuid sondeeritav"
+      }
+    },
+    "whyNot": {
+      "title": "Miks kommertsiaalsed VPN-id ei kasuta VLESS-i",
+      "subtitle": "Kui VLESS-Reality on nii efektiivne, miks ei kasuta seda NordVPN, ExpressVPN või Surfshark? Vastus paljastab, miks enamik kommertsiaalseid VPN-e on loodud vale probleemi jaoks.",
+      "card1": {
+        "title": "Teostuse keerukus",
+        "description": "VLESS-Reality nõuab Xray-core'i — spetsialiseeritud proksimootorit keerulise serveripoolse konfiguratsiooniga. Iga server vajab individuaalseid TLS-sertifikaadi sihtmärke, SNI-konfiguratsiooni ja Reality võtmepaare. Kommertsiaalsed VPN-id haldavad tuhandeid servereid ja optimeerivad lihtsuse, mitte varjatuse jaoks. VLESS-Reality juurutamine mastaabis nõuab sügavat protokolliteadmist, mida enamikul VPN-ettevõtetel lihtsalt pole."
+      },
+      "card2": {
+        "title": "Kõrgemad serverkulud",
+        "description": "VLESS-Reality serverid teostavad tõelisi TLS-käepigistusi sihtveebisaitidega, proksistavad liiklust läbi mitme kihi ja peavad veenvalt vastama aktiivsetele sondeerimistele. See tarbib oluliselt rohkem protsessorit ja ribalaiust kui lihtne WireGuardi tunnel. VPN-ettevõtete jaoks, kes optimeerivad marginaale tuhandete serverite üle, on kulude kasv keelav."
+      },
+      "card3": {
+        "title": "Puudub tarbijapakend",
+        "description": "Kuni viimase ajani tähendas VLESS-Reality kasutamine Xray-core klientide käsitsi konfigureerimist, UUID-võtmete genereerimist ja JSON-konfiguratsioonifailide redigeerimist. Kasutajasõbralikku rakendust polnud — ühe puudutusega ühendamist polnud, automaatset serverivalikut polnud. Protokoll eksisteeris ainult tehnilise tööriistana edasijõudnutele, mitte tootena."
+      },
+      "card4": {
+        "title": "Vale optimeerimissihtmärk",
+        "description": "Enamik kommertsiaalseid VPN-e on loodud voogedastuseks ja privaatsusturunduseks — mitte tsensuuri vältimiseks. WireGuard on kiirem Netflixi avamiseks. OpenVPN on lihtsam juurutada. Neil VPN-idel pole stiimulit tsensuuri probleemi lahendada, sest nende kliendid asuvad peamiselt riikides ilma internetipiiranguteta."
+      },
+      "conclusion": "Doppler lahendab kõik neli probleemi: Xray-core'i asjatundlikkus, optimeeritud infrastruktuur, tarbijaklassi rakendused ja fookus kasutajatele, kes tõesti vajavad tsensuuri vältimist."
+    },
+    "performance": {
+      "title": "Reaalne jõudlus",
+      "badge": "VLESS-Reality võrdlustestid",
+      "p1": "VLESS-Reality pole lihtsalt nähtamatu — see on kiire. Kuna protokoll lisab minimaalset koormust (topeltkrüpteerimist pole, tarbetuid käepigistuse kihte pole), läheneb tegelik läbilaskevõime toorsele ühenduskiirusele. Kasutajad Venemaal, Iraanis ja Hiinas teatavad järjekindlalt usaldusväärsetest ühendustest isegi aktiivsete mahasurumiste ajal.",
+      "p2": "Need mõõdikud pärinevad Doppleri tootmisinfrastruktuurist, kus VLESS-Reality töötab mitmes serveripiirkonnas, mõõdetuna aktiivse DPI-jõustamise perioodidel.",
+      "stat1value": "99,2%",
+      "stat1label": "Ühenduse õnnestumise määr tsenseeritud piirkondades",
+      "stat2value": "<50ms",
+      "stat2label": "Keskmine lisalatentsus",
+      "stat3value": "99,8%",
+      "stat3label": "Igakuine tööaeg kõigis serverites"
+    },
+    "inDoppler": {
+      "title": "VLESS-Reality Doppleris",
+      "subtitle": "Doppler pakendab kõige arenenuma tsensuuri vältimise protokolli rakendustesse, mida igaüks saab kasutada — tehnilisi teadmisi pole vaja.",
+      "feature1": {
+        "title": "Ühe puudutusega ühendamine",
+        "description": "Avage rakendus, vajutage ühenda. Doppler tegeleb automaatselt kogu VLESS-Reality konfiguratsiooniga — Xray-core'i initsialiseerimine, UUID genereerimine, Reality võtmevahetus ja TLS-sihtmärgi valimine toimuvad taustal. Te ei näe kunagi konfiguratsioonifaili."
+      },
+      "feature2": {
+        "title": "Automaatne serverivalik",
+        "description": "Doppler testib serveri latentsust ja saadavust reaalajas, ühendades teid kiireima saadaoleva VLESS-Reality serveriga. Kui server on blokeeritud või halvenenud, lülitub rakendus automaatselt — käsitsi sekkumist pole vaja."
+      },
+      "feature3": {
+        "title": "Käsitsi Xray konfiguratsiooni pole vaja",
+        "description": "Traditsiooniline VLESS-Reality seadistus nõuab JSON-konfiguratsioonide redigeerimist, võtmete haldamist ja TLS-parameetrite mõistmist. Doppler elimineerib selle kõik. Serverikonfiguratsioonid jagatakse turvaliselt meie infrastruktuurist, neid uuendatakse automaatselt ja vahetatakse, et püsida blokeerimiskatsetest ees."
+      },
+      "feature4": {
+        "title": "iOS, Android ja Telegram",
+        "description": "Täielik VLESS-Reality VPN-kogemus on saadaval iOS-is (App Store), Androidis (Google Play) ja meie Telegrami boti kaudu konfiguratsioonipõhiseks juurdepääsuks. Iga platvorm kasutab sama optimeeritud Xray-core mootorit ja sama serveriinfrastruktuuri."
+      }
+    },
+    "cta": {
+      "title": "Proovige VLESS VPN-rakendust, mis lihtsalt töötab",
+      "subtitle": "Laadige Doppler alla ja kogege VLESS-Reality't — protokolli, mis on loodud nähtamatuks. Üks puudutus. Konfiguratsiooni pole. Kompromisse pole.",
+      "downloadIos": "Laadi alla iOS-ile",
+      "downloadAndroid": "Laadi alla Androidile",
+      "telegramBot": "Telegrami bot",
+      "telegramChannelRu": "Telegram (RU)",
+      "telegramChannelEn": "Telegram (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN ilma registreerimiseta",
+      "noRegistrationDesc": "Kasutage VPN-i ilma registreerimise ja kontota",
+      "ios": "VPN iOS-ile",
+      "iosDesc": "Laadige Doppler VPN alla iPhone'ile ja iPadile",
+      "android": "VPN Androidile",
+      "androidDesc": "Hankige Doppler VPN Google Play'st või APK-na"
+    }
+  },
+  "vpnForIos": {
+    "metadata": {
+      "title": "Tasuta VPN iPhone'ile ja iPadile — ilma registreerimiseta | Doppler VPN",
+      "description": "Laadige alla Doppler VPN iOS-ile — parim tasuta VPN iPhone'ile ja iPadile 2026. aastal. Registreerimist pole, kontot pole vaja. VLESS-Reality protokoll, reklaamiblokeerija ja pidev kaitse."
+    },
+    "hero": {
+      "title": "Doppler VPN iPhone'ile ja iPadile",
+      "subtitle": "Tasuta, turvaline VPN ilma registreerimiseta. Laadige alla App Store'ist."
+    },
+    "features": {
+      "title": "Miks Doppler iOS-ile?",
+      "noRegistration": {
+        "title": "Ilma registreerimiseta",
+        "description": "Alustage VPN-i kasutamist koheselt — e-posti pole, telefoninumbrit pole, konto loomist pole. Lihtsalt laadige alla ja ühenduge."
+      },
+      "vlessProtocol": {
+        "title": "VLESS-Reality protokoll",
+        "description": "Järgmise põlvkonna krüpteerimine, mis maskeerib VPN-liikluse tavalise HTTPS-sirvimisena. Tuvastamatu tulemüüride ja DPI-süsteemide poolt."
+      },
+      "adBlocker": {
+        "title": "Sisseehitatud reklaamiblokeerija",
+        "description": "Blokeerige pealetükkivad reklaamid, jälgijad ja pahatahtlikud domeenid DNS-tasemel. Kiirem sirvimine väiksema andmekasutusega."
+      },
+      "alwaysOn": {
+        "title": "Always-On VPN",
+        "description": "Ühendub automaatselt uuesti Wi-Fi ja mobiilse andmeside vahel vahetamisel. Teie ühendus jääb kaitstuks 24/7."
+      },
+      "smartRouting": {
+        "title": "Nutikas marsruutimine",
+        "description": "Intelligentne serverivalik valib kiireima saadaoleva sõlme. Optimeeritud voogedastuseks, mängimiseks ja igapäevaseks sirvimiseks."
+      },
+      "dnsProtection": {
+        "title": "DNS-kaitse",
+        "description": "Krüpteeritud DNS-päringud takistavad teie internetiteenuse pakkujal nägemast, milliseid veebisaite külastate. Täielik DNS-lekkekaitse kaasas."
+      }
+    },
+    "howItWorks": {
+      "title": "Kuidas see iOS-is töötab",
+      "subtitle": "Konto loomist pole, e-posti pole, telefoninumbrit pole — lihtsalt neli lihtsat sammu.",
+      "step1": {
+        "title": "Laadige alla App Store'ist",
+        "description": "Otsige \"Doppler VPN\" või puudutage allpool olevat linki. Rakendus on tasuta ja alla 30 MB."
+      },
+      "step2": {
+        "title": "Avage rakendus",
+        "description": "Käivitage Doppler VPN. Registreerimisekraani pole, registreerimisvormi pole. Rakendus on kohe kasutamiseks valmis."
+      },
+      "step3": {
+        "title": "Vajutage Ühenda",
+        "description": "Vajutage ühendamisnuppu. Doppler valib automaatselt parima serveri ja loob turvalise VLESS-Reality tunneli."
+      },
+      "step4": {
+        "title": "Sirvige turvaliselt",
+        "description": "See ongi kõik. Teie liiklus on krüpteeritud, teie IP on peidetud ja reklaamid on blokeeritud. Kasutage mis tahes rakendust või veebisaiti vabalt."
+      }
+    },
+    "iosFeatures": {
+      "title": "iOS-spetsiifilised funktsioonid",
+      "subtitle": "Loodud Apple'i ökosüsteemile sügava süsteemiintegratsiooniga.",
+      "networkExtension": {
+        "title": "Network Extension (süsteemitaseme VPN)",
+        "description": "Doppler kasutab Apple'i Network Extension raamistikku, et töötada tõelise süsteemitaseme VPN-ina. Kogu liiklus igast rakendusest läbib krüpteeritud tunneli — mitte ainult brauseri liiklus. See pakub sama kaitset, mida Apple nõuab ettevõtte VPN-lahendustelt."
+      },
+      "alwaysOnVpn": {
+        "title": "Always-On VPN",
+        "description": "Lubage Always-On režiim ja Doppler ühendub automaatselt uuesti iga kord, kui teie ühendus katkeb. Vahetate Wi-Fi-lt mobiilsele? Äratate telefoni unest? VPN taastub alla sekundi, nii et te pole kunagi kaitsmata."
+      },
+      "perAppVpn": {
+        "title": "Rakendusepõhine VPN",
+        "description": "Valige, millised rakendused suunatakse läbi VPN-tunneli ja millised ühenduvad otse. Hoidke pangarakendused kohalikus võrgus, samal ajal kaitstes brausereid ja sõnumirakendusi VPN-i kaudu."
+      },
+      "widget": {
+        "title": "Avakuva vidin",
+        "description": "Lisage Doppleri vidin oma avakuvale või lukustuskuvale, et näha koheselt ühenduse olekut ja vahetada ühe puudutusega. Vaadake hetkeserverit, ühendusaega ja kaitseolekut ühe pilguga."
+      },
+      "ipadSplitView": {
+        "title": "iPadi Split View tugi",
+        "description": "Täielik iPadi multitegumtöö tugi. Kasutage Doppler VPN-i koos teiste rakendustega Split View's või Slide Over's. VPN-i olek on alati nähtav olekuribal, olenemata sellest, milline rakendus on esiplaanil."
+      }
+    },
+    "privacy": {
+      "title": "Privaatsus Apple'i seadmetes",
+      "subtitle": "Doppler täiendab seda, mida Apple juba kaitseb — ja täidab lüngad, mille jaoks VPN on loodud.",
+      "intro": "Apple on tööstuse liider seadmetaseme privaatsuses — App Tracking Transparency, Mail Privacy Protection ja Safari Intelligent Tracking Prevention. Kuid on kiht, mida Apple ei saa kaitsta: teie võrguliiklus.",
+      "appleProtects": {
+        "title": "Mida Apple kaitseb",
+        "item1": "Rakenduse tasandi jälgimine (ATT-viibad)",
+        "item2": "Seadmepõhine andmete krüpteerimine (Secure Enclave)",
+        "item3": "Safari jälgijate blokeerimine",
+        "item4": "E-posti pikslite jälgimise ennetamine"
+      },
+      "dopplerAdds": {
+        "title": "Mida Doppler VPN lisab",
+        "item1": "Peidab teie päris IP-aadressi iga veebisaidi ja teenuse eest",
+        "item2": "Krüpteerib kogu võrguliikluse VLESS-Reality'ga (tuvastamatu)",
+        "item3": "Blokeerib DNS-taseme jälgimise ja reklaamidomeenid",
+        "item4": "Ennetab internetiteenuse pakkuja liikluse jälgimist ja piiramist"
+      },
+      "noLogs": "Doppler kasutab seadmepõhist autentimist — kontosid pole, e-poste pole, logisid pole. Me ei saa teid tuvastada, sest me ei kogu kunagi tuvastavat teavet."
+    },
+    "compatibility": {
+      "title": "Süsteeminõuded ja ühilduvus",
+      "os": {
+        "label": "Operatsioonisüsteem",
+        "value": "iOS 16.0 või uuem"
+      },
+      "iphone": {
+        "label": "iPhone",
+        "value": "iPhone 8 ja uuemad (kõik mudelid iOS 16 toega)"
+      },
+      "ipad": {
+        "label": "iPad",
+        "value": "Kõik iPadi mudelid, mis töötavad iPadOS 16 või uuemaga"
+      },
+      "mac": {
+        "label": "Mac (Apple Silicon)",
+        "value": "M1, M2, M3, M4 Mac'id iPadi rakenduse ühilduvuse kaudu"
+      },
+      "size": {
+        "label": "Rakenduse suurus",
+        "value": "Alla 30 MB"
+      },
+      "battery": {
+        "label": "Aku mõju",
+        "value": "Minimaalne — VLESS on kerge protokoll madala protsessorikoormusega"
+      },
+      "data": {
+        "label": "Andmete lisakoormus",
+        "value": "Alla 2% lisaandmekasutust võrreldes krüpteerimata sirvimisega"
+      }
+    },
+    "faq": {
+      "title": "Korduma kippuvad küsimused",
+      "q1": {
+        "question": "Kas Doppler VPN on tõesti tasuta iOS-is?",
+        "answer": "Jah. Doppler VPN pakub tasuta taset põhiliste VPN-funktsioonidega. Premium-plaanid avavad lisakservereid, kiiremaid kiirusi ja täiustatud funktsioone nagu rakendusepõhine VPN."
+      },
+      "q2": {
+        "question": "Kas ma pean konto looma?",
+        "answer": "Ei. Doppler kasutab seadmepõhist autentimist. Registreerimist pole, e-posti pole vaja ja telefoninumbrit pole vaja. Lihtsalt laadige alla ja ühenduge."
+      },
+      "q3": {
+        "question": "Kas Doppler töötab Hiinas, Venemaal või Iraanis?",
+        "answer": "Jah. Doppler kasutab VLESS-Reality protokolli, mis maskeerib VPN-liikluse tavalise HTTPS-na. See muudab tsensuurisüsteemidel nagu Suur Tulemüür või TSPU äärmiselt keeruliseks selle tuvastamise ja blokeerimise."
+      },
+      "q4": {
+        "question": "Kas VPN aeglustab mu iPhone'i?",
+        "answer": "Vaevumärgatavalt. VLESS-Reality on üks kergeimaid VPN-protokolle. Enamik kasutajaid näeb alla 5% kiiruse vähenemist. Aku mõju on minimaalne tänu tõhusale pakettide käsitsemisele."
+      },
+      "q5": {
+        "question": "Kas Doppler töötab voogedastusrakendustega?",
+        "answer": "Jah. Doppleri nutikas marsruutimine on optimeeritud voogedastuseks. Rakendus valib automaatselt serverid parima jõudlusega videosisu jaoks."
+      },
+      "q6": {
+        "question": "Kas ma saan Dopplerit kasutada iPadis ja iPhone'is samaaegselt?",
+        "answer": "Jah. Teie tellimus töötab mitmes Apple'i seadmes. Iga seade saab oma turvalise ühenduse."
+      }
+    },
+    "cta": {
+      "title": "Hankige Doppler VPN iOS-ile",
+      "subtitle": "Tasuta allalaadimine. Registreerimist pole. Krediitkaarti pole. Ühenduge sekunditega.",
+      "downloadIos": "Laadige alla App Store'ist",
+      "downloadAndroid": "Hankige Google Play'st",
+      "telegramBot": "Kasutage Telegrami boti kaudu",
+      "telegramChannelRu": "Telegrami kanal (RU)",
+      "telegramChannelEn": "Telegrami kanal (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN ilma registreerimiseta",
+      "noRegistrationDesc": "Kasutage VPN-i ilma registreerimise ja kontota",
+      "vless": "VLESS-Reality protokoll",
+      "vlessDesc": "Uurige, kuidas VLESS alistab sügava pakettide inspekteerimise",
+      "android": "VPN Androidile",
+      "androidDesc": "Hankige Doppler VPN Google Play'st või APK-na"
+    }
+  },
+  "vpnForAndroid": {
+    "metadata": {
+      "title": "Tasuta VPN Androidile — ilma registreerimiseta | Doppler VPN APK allalaadimine 2026",
+      "description": "Laadige alla parim tasuta VPN Androidile 2026. Registreerimist pole, kontot pole vaja. Saadaval Google Play's ja APK-na tsenseeritud piirkondadele. VLESS-Reality protokoll tuvastamatuks privaatsuseks."
+    },
+    "hero": {
+      "title": "Doppler VPN Androidile",
+      "subtitle": "Tasuta VPN ilma registreerimiseta. Kontot pole, e-posti pole, isikuandmeid pole. Saadaval Google Play's ja APK-na piirkondadele, kus Play Store on piiratud.",
+      "googlePlay": "Google Play Store",
+      "downloadApk": "Laadi APK alla"
+    },
+    "features": {
+      "title": "Miks Doppler Androidile?",
+      "subtitle": "Loodud spetsiaalselt Androidi kasutajatele, kes vajavad privaatsust ilma kompromissideta. Registreerimist pole, andmekogumist pole, piiranguid pole.",
+      "noRegistration": {
+        "title": "Ilma registreerimiseta",
+        "description": "Avage rakendus ja ühenduge koheselt. E-posti pole, telefoninumbrit pole, konto loomist pole. Teie identiteet jääb privaatseks esimesest puudutusest alates."
+      },
+      "vlessReality": {
+        "title": "VLESS-Reality protokoll",
+        "description": "Sõjaväetaseme krüpteerimine, mis muudab teie VPN-liikluse tavaliseks HTTPS-sirvimiseks. Tuvastamatu DPI-süsteemide ja valitsuse tulemüüride poolt."
+      },
+      "adBlocker": {
+        "title": "Sisseehitatud reklaamiblokeerija",
+        "description": "Blokeerige reklaamid, jälgijad ja pahatahtlikud domeenid DNS-tasemel. Kiirem sirvimine, väiksem andmekasutus ja parem akukestvus teie Android-seadmes."
+      },
+      "alwaysOn": {
+        "title": "Always-On VPN",
+        "description": "Kasutab Androidi natiivset Always-On VPN funktsiooni, tagamaks et teie ühendus on kaitstud 24/7, isegi pärast taaskäivitust või võrgumuutusi."
+      },
+      "apkSideload": {
+        "title": "APK külglaadimine",
+        "description": "Pole juurdepääsu Google Play'le? Laadige APK otse alla ja installige käsitsi. Ideaalne kasutajatele Venemaal, Iraanis, Hiinas ja teistes tsenseeritud piirkondades."
+      },
+      "dnsProtection": {
+        "title": "DNS-kaitse",
+        "description": "Kõik DNS-päringud on krüpteeritud ja suunatud läbi turvaliste serverite. Ennetab DNS-lekkeid ja peatab teie internetiteenuse pakkuja nägemast, milliseid veebisaite külastate."
+      }
+    },
+    "install": {
+      "title": "Kaks viisi installimiseks",
+      "subtitle": "Valige installiviis, mis sobib teie olukorraga kõige paremini. Mõlemad annavad sama täisfunktsionaalse VPN-kogemuse.",
+      "playStore": {
+        "title": "Google Play Store",
+        "badge": "Soovitatav",
+        "benefit1": "Ühe puudutusega installimine, automaatsed uuendused",
+        "benefit2": "Google Play Protect poolt kontrollitud",
+        "benefit3": "Sujuv tellimuse haldamine",
+        "cta": "Hankige Google Play'st"
+      },
+      "apk": {
+        "title": "Otsene APK allalaadimine",
+        "badge": "Piiratud piirkondadele",
+        "benefit1": "Töötab seal, kus Google Play on blokeeritud",
+        "benefit2": "Google'i kontot pole vaja",
+        "benefit3": "Samad funktsioonid kui Play Store'i versioonil",
+        "note": "Ideaalne kasutajatele Venemaal, Iraanis, Hiinas ja teistes riikides, kus Google Play Store on piiratud või VPN-rakendused on poest eemaldatud.",
+        "cta": "Hankige APK Telegrami boti kaudu"
+      }
+    },
+    "howItWorks": {
+      "title": "Kuidas see Androidis töötab",
+      "subtitle": "Allalaadimisest turvalise sirvimiseni alla 30 sekundi. Kontot pole, e-posti pole, seadistusviisardit pole.",
+      "step1": {
+        "title": "Laadige rakendus alla",
+        "description": "Installige Doppler VPN Google Play'st või laadige APK otse alla. Rakendus on kerge — alla 15 MB."
+      },
+      "step2": {
+        "title": "Avage rakendus",
+        "description": "Käivitage Doppler VPN. Registreerimisekraani pole, registreerimisvormi pole. Rakendus on kohe kasutamiseks valmis."
+      },
+      "step3": {
+        "title": "Vajutage Ühenda",
+        "description": "Vajutage ühendamisnuppu. Doppler valib automaatselt kiireima saadaoleva serveri ja loob VLESS-Reality tunneli."
+      },
+      "step4": {
+        "title": "Sirvige vabalt",
+        "description": "Teie ühendus on nüüd krüpteeritud ja tuvastamatu. Pääsete ligi mis tahes veebisaidile, rakendusele või teenusele ilma piiranguteta."
+      }
+    },
+    "androidFeatures": {
+      "title": "Androidi-spetsiifilised funktsioonid",
+      "subtitle": "Doppler VPN kasutab Androidi võimalusi täiel määral, et pakkuda kõige turvalisemat ja sujuvamat kogemust.",
+      "alwaysOnVpn": {
+        "title": "Always-On VPN",
+        "description": "Lubage Androidi sisseehitatud Always-On VPN seade, et hoida Doppler kogu aeg ühendatuna. Minge Seaded > Võrk ja internet > VPN > Doppler VPN > lülitage sisse Always-on. Teie seade ühendub automaatselt uuesti pärast taaskäivitusi või võrgumuutusi."
+      },
+      "splitTunneling": {
+        "title": "Split Tunneling",
+        "description": "Valige, millised rakendused läbivad VPN-i ja millised kasutavad tavalist ühendust. Suunake pangarakendused otse, hoides brauserid kaitstuina. Seadistage rakendusepõhised VPN-reeglid Doppleri seadetes."
+      },
+      "quickSettings": {
+        "title": "Kiirseadete paan",
+        "description": "Lisage Doppler VPN oma Androidi kiirseadete paneelile. Ühenduge või katkestage ühendus ühe libistuse ja puudutusega — rakendust pole vaja avada. Saadaval Android 8.0 ja uuemal."
+      },
+      "batteryOptimization": {
+        "title": "Aku optimeerimine",
+        "description": "Doppler kasutab minimaalset akut. Parima Always-On kogemuse jaoks välitage Doppler Androidi aku optimeerimisest: Seaded > Rakendused > Doppler VPN > Aku > Piiramata. See takistab Androidil VPN-ühenduse taustal lõpetamast."
+      },
+      "androidTv": {
+        "title": "Android TV tugi",
+        "description": "Laadige Doppler VPN APK oma Android TV-le või TV-boksile, et kaitsta voogedastuse liiklust. Pääsete ligi geograafiliselt piiratud sisule suurel ekraanil sama VLESS-Reality krüpteerimisega."
+      }
+    },
+    "sideloading": {
+      "title": "APK külglaadimise juhend",
+      "badge": "Tsenseeritud piirkondadele",
+      "intro": "Kui olete riigis, kus Google Play on piiratud või VPN-rakendused on poest eemaldatud, saate Doppler VPN-i installida otse APK-failist. Järgige neid samme hoolikalt.",
+      "step1": {
+        "title": "Lubage tundmatud allikad",
+        "description": "Minge Seaded > Rakendused > Eriline rakenduse juurdepääs > Tundmatute rakenduste installimine. Valige oma brauser või failihaldur ja lülitage sisse 'Luba sellest allikast'."
+      },
+      "step2": {
+        "title": "Laadige APK alla",
+        "description": "Hankige uusim Doppler VPN APK meie ametlikult Telegrami botilt @dopplercreatebot. See tagab, et saate alati autentse, muutmata faili."
+      },
+      "step3": {
+        "title": "Installige APK",
+        "description": "Avage allalaaditud .apk fail ja puudutage 'Installi'. Android võib kuvada hoiatuse tundmatute rakenduste kohta — see on normaalne külglaaditud rakenduste puhul."
+      },
+      "step4": {
+        "title": "Kontrollige ja ühenduge",
+        "description": "Avage Doppler VPN ja kontrollige, et rakendus töötab korrektselt. Rakendus peaks ühenduma ilma kontot või registreerimist nõudmata — lihtsalt vajutage ühenda."
+      },
+      "security": {
+        "title": "Turvahoiatus",
+        "description": "Laadige Doppler VPN APK alla ainult meie ametlikult Telegrami botilt (@dopplercreatebot) või ametlikult veebisaidilt (www.dopplervpn.org). Ärge kunagi installige APK-faile kolmandate osapoolte allikatest — need võivad sisaldada pahavara või muudetud koodi."
+      }
+    },
+    "requirements": {
+      "title": "Süsteeminõuded",
+      "os": {
+        "title": "Operatsioonisüsteem",
+        "value": "Android 8.0 (Oreo) või uuem"
+      },
+      "battery": {
+        "title": "Aku mõju",
+        "value": "Minimaalne — alla 2% täiendavat akukulu Always-On VPN-iga"
+      },
+      "storage": {
+        "title": "Salvestusruum",
+        "value": "Rakenduse suurus alla 15 MB, alla 5 MB RAM-i kasutus ühendatuna"
+      },
+      "permissions": {
+        "title": "Nõutud load",
+        "value": "Ainult VPN-ühenduse luba — juurdepääs kontaktidele, fotodele ega failidele puudub"
+      },
+      "compatibility": {
+        "title": "Ühilduvad seadmed"
+      }
+    },
+    "cta": {
+      "title": "Hankige Doppler VPN Androidile kohe",
+      "subtitle": "Tasuta, privaatne ja tuvastamatu. Registreerimist pole, kontot pole, andmekogumist pole. Laadige alla Google Play'st või hankige APK piiratud piirkondadele.",
+      "googlePlay": "Google Play Store",
+      "downloadApk": "Laadi APK alla",
+      "alsoOnIos": "Saadaval ka iOS-is",
+      "telegramBot": "Telegrami bot",
+      "telegramChannelRu": "Telegrami kanal (RU)",
+      "telegramChannelEn": "Telegrami kanal (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN ilma registreerimiseta",
+      "noRegistrationDesc": "Kasutage VPN-i ilma registreerimise ja kontota",
+      "vless": "VLESS-Reality protokoll",
+      "vlessDesc": "Uurige, kuidas VLESS alistab sügava pakettide inspekteerimise",
+      "ios": "VPN iOS-ile",
+      "iosDesc": "Laadige Doppler VPN alla iPhone'ile ja iPadile"
     }
   }
 }

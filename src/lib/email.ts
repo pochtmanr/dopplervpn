@@ -1,5 +1,15 @@
 import nodemailer from 'nodemailer';
 
+/** Escape HTML entities to prevent XSS in email templates. */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function getTransporter() {
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -22,6 +32,10 @@ interface WelcomeEmailParams {
 export async function sendWelcomeEmail({ to, accountId, planName, expiresAt }: WelcomeEmailParams) {
   const transporter = getTransporter();
 
+  const safeAccountId = escapeHtml(accountId);
+  const safePlanName = escapeHtml(planName);
+  const safeExpiresAt = escapeHtml(expiresAt);
+
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
       <h1 style="color: #1a1a2e; font-size: 24px;">Welcome to Doppler Pro!</h1>
@@ -29,12 +43,12 @@ export async function sendWelcomeEmail({ to, accountId, planName, expiresAt }: W
 
       <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px; margin: 24px 0;">
         <p style="margin: 0 0 8px; color: #555; font-size: 14px;">Your Account ID:</p>
-        <p style="margin: 0; font-size: 20px; font-weight: bold; font-family: monospace; color: #1a1a2e;">${accountId}</p>
+        <p style="margin: 0; font-size: 20px; font-weight: bold; font-family: monospace; color: #1a1a2e;">${safeAccountId}</p>
         <p style="margin: 8px 0 0; color: #888; font-size: 12px;">Save this — it works across all your devices.</p>
       </div>
 
-      <p style="color: #555; font-size: 14px;"><strong>Plan:</strong> ${planName}</p>
-      <p style="color: #555; font-size: 14px;"><strong>Active until:</strong> ${expiresAt}</p>
+      <p style="color: #555; font-size: 14px;"><strong>Plan:</strong> ${safePlanName}</p>
+      <p style="color: #555; font-size: 14px;"><strong>Active until:</strong> ${safeExpiresAt}</p>
 
       <h2 style="color: #1a1a2e; font-size: 18px; margin-top: 32px;">Download Doppler VPN</h2>
       <ul style="color: #555; font-size: 14px; line-height: 2;">

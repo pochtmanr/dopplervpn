@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { createUntypedAdminClient } from "@/lib/supabase/admin";
 
 export async function GET(request: NextRequest) {
   const { admin, adminClient, error } = await requireAdmin();
@@ -13,8 +14,9 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(params.get("offset") || "0");
     const limit = Math.min(parseInt(params.get("limit") || "50"), 200);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let query: any = adminClient
+    const untypedClient = createUntypedAdminClient();
+
+    let query = untypedClient
       .from("accounts")
       .select(
         "id, account_id, subscription_tier, subscription_store, max_devices, created_at, updated_at, subscription_expires_at, contact_method, contact_value, language",
@@ -45,11 +47,8 @@ export async function GET(request: NextRequest) {
     // Text IDs for vpn_user_configs (which uses VPN-XXXX string)
     const accountTextIds = accounts.map((a: { account_id: string }) => a.account_id);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const client = adminClient as any;
-
     // Fetch device counts per account (uses UUID)
-    const { data: deviceCounts } = await client
+    const { data: deviceCounts } = await untypedClient
       .rpc("get_account_device_counts", { p_account_ids: accountUuids });
 
     const deviceMap = new Map(
@@ -57,7 +56,7 @@ export async function GET(request: NextRequest) {
     );
 
     // Fetch config counts per account (uses text VPN-XXXX)
-    const { data: configCounts } = await client
+    const { data: configCounts } = await untypedClient
       .rpc("get_account_config_counts", { p_account_ids: accountTextIds });
 
     const configMap = new Map<string, { total: number; active: number }>(
@@ -68,21 +67,21 @@ export async function GET(request: NextRequest) {
     );
 
     // Fetch stats
-    const { count: totalAccounts } = await client
+    const { count: totalAccounts } = await untypedClient
       .from("accounts")
       .select("id", { count: "exact", head: true });
 
-    const { count: proCount } = await client
+    const { count: proCount } = await untypedClient
       .from("accounts")
       .select("id", { count: "exact", head: true })
       .in("subscription_tier", ["pro"]);
 
-    const { count: withContact } = await client
+    const { count: withContact } = await untypedClient
       .from("accounts")
       .select("id", { count: "exact", head: true })
       .not("contact_method", "is", null);
 
-    const { count: activeConfigs } = await client
+    const { count: activeConfigs } = await untypedClient
       .from("vpn_user_configs")
       .select("id", { count: "exact", head: true })
       .eq("is_active", true);

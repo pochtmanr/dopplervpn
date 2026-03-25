@@ -96,6 +96,38 @@ export async function Footer() {
                   {t("bypassCensorship")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/vless-vpn"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("vlessVpn")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/no-registration-vpn"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("noRegistration")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/vpn-for-ios"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("vpnForIos")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/vpn-for-android"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("vpnForAndroid")}
+                </Link>
+              </li>
             </ul>
           </div>
 

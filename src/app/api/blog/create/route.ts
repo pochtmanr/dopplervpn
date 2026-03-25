@@ -6,6 +6,9 @@ import { rateLimit } from "@/lib/rate-limit";
 import { NextRequest } from "next/server";
 import { CURATED_TAG_SLUGS } from "@/lib/blog-tags";
 
+// Allow up to 5 minutes for AI generation + translating all languages
+export const maxDuration = 300;
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -142,7 +145,10 @@ export async function POST(request: NextRequest) {
     if (validLinks.length > 0) {
       fullContent += "\n\n---\n\n**Sources:**\n";
       for (const link of validLinks) {
-        fullContent += `- [${link.text || "Source"}](${link.url})\n`;
+        // Sanitize text and URL to prevent markdown injection
+        const safeText = (link.text || "Source").replace(/[\[\]()]/g, "");
+        const safeUrl = (link.url as string).replace(/[()]/g, "");
+        fullContent += `- [${safeText}](${safeUrl})\n`;
       }
     }
   }
@@ -227,31 +233,47 @@ export async function POST(request: NextRequest) {
     og_description: meta_description?.slice(0, 200) || postExcerpt.slice(0, 200),
   };
 
-  for (const locale of SUPPORTED_LOCALES) {
-    try {
-      const result = await translateContent(enSource, locale, template_type);
+  // Process translations in parallel batches of 2 (mini model rate limits)
+  const BATCH_SIZE = 2;
+  for (let i = 0; i < SUPPORTED_LOCALES.length; i += BATCH_SIZE) {
+    const batch = SUPPORTED_LOCALES.slice(i, i + BATCH_SIZE);
+    const batchResults = await Promise.allSettled(
+      batch.map(async (locale: string) => {
+        const result = await translateContent(enSource, locale, template_type);
 
-      await db.from("blog_post_translations").upsert(
-        {
-          post_id: post.id,
-          locale,
-          title: result.title?.slice(0, 255),
-          excerpt: result.excerpt,
-          content: result.content,
-          image_alt: result.image_alt,
-          meta_title: result.meta_title?.slice(0, 70) || null,
-          meta_description: result.meta_description?.slice(0, 160) || null,
-          og_title: result.og_title?.slice(0, 70) || null,
-          og_description: result.og_description?.slice(0, 200) || null,
-        },
-        { onConflict: "post_id,locale" }
-      );
+        const { error: upsertError } = await db.from("blog_post_translations").upsert(
+          {
+            post_id: post.id,
+            locale,
+            title: result.title?.slice(0, 255),
+            excerpt: result.excerpt,
+            content: result.content,
+            image_alt: result.image_alt,
+            meta_title: result.meta_title?.slice(0, 70) || null,
+            meta_description: result.meta_description?.slice(0, 160) || null,
+            og_title: result.og_title?.slice(0, 70) || null,
+            og_description: result.og_description?.slice(0, 200) || null,
+          },
+          { onConflict: "post_id,locale" }
+        );
 
-      translationResults[locale] = `${baseUrl}/${locale}/blog/${slug}`;
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : "Unknown error";
-      errors.push(`${locale}: ${msg}`);
-      console.error(`[blog/create] Translation to ${locale} failed:`, msg);
+        if (upsertError) {
+          throw new Error(`DB upsert failed: ${upsertError.message}`);
+        }
+
+        return locale;
+      })
+    );
+
+    for (const r of batchResults) {
+      if (r.status === "fulfilled") {
+        translationResults[r.value] = `${baseUrl}/${r.value}/blog/${slug}`;
+      } else {
+        const locale = batch[batchResults.indexOf(r)];
+        const msg = r.reason instanceof Error ? r.reason.message : "Unknown error";
+        errors.push(`${locale}: ${msg}`);
+        console.error(`[blog/create] Translation to ${locale} failed:`, msg);
+      }
     }
   }
 

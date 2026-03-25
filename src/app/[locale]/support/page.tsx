@@ -5,6 +5,8 @@ import { Footer } from "@/components/layout/footer";
 import { SupportFaq } from "./faq";
 import { SupportContent } from "./support-content";
 import { routing } from "@/i18n/routing";
+import { ogLocaleMap } from "@/lib/og-locale-map";
+import { FAQSchema, BreadcrumbSchema } from "@/components/seo/json-ld";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -15,15 +17,39 @@ const baseUrl = "https://www.dopplervpn.org";
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "support" });
+  const title = t("title");
+  const description = t("subtitle");
   return {
-    title: t("title"),
-    description: t("subtitle"),
+    title,
+    description,
     alternates: {
       canonical: `${baseUrl}/${locale}/support`,
       languages: Object.fromEntries([
         ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/support`]),
         ["x-default", `${baseUrl}/en/support`],
       ]),
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/support`,
+      siteName: "Doppler VPN",
+      locale: ogLocaleMap[locale] || "en_US",
+      type: "website",
+      images: [
+        {
+          url: `${baseUrl}/images/og-banner.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Doppler VPN — Fast & Secure",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }
@@ -68,8 +94,17 @@ export default async function SupportPage({ params }: PageProps) {
     answer: t(`troubleshooting.items.${key}.answer`),
   }));
 
+  const allFaqItems = [...faqItems, ...troubleshootItems];
+
   return (
     <>
+      <FAQSchema items={allFaqItems} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: `${baseUrl}/${locale}` },
+          { name: t("title"), url: `${baseUrl}/${locale}/support` },
+        ]}
+      />
       <Navbar />
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">
         {/* Background blurs */}

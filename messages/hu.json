@@ -317,7 +317,11 @@
     "telegram": "@dopplercreatebot",
     "email": "support@simnetiq.store",
     "bypassCensorship": "Hogyan kerüljük meg a cenzúrát",
-    "about": "Rólunk"
+    "about": "Rólunk",
+    "vlessVpn": "VLESS protokoll",
+    "noRegistration": "VPN regisztráció nélkül",
+    "vpnForIos": "VPN iOS-re",
+    "vpnForAndroid": "VPN Androidra"
   },
   "privacy": {
     "title": "Adatvédelmi szabályzat",
@@ -386,8 +390,8 @@
     }
   },
   "blog": {
-    "indexTitle": "Blog",
-    "indexDescription": "Adatvédelmi tippek, VPN-útmutatók és biztonsági tanácsok a Doppler csapattól.",
+    "indexTitle": "VPN blog — Adatvédelmi tippek, biztonsági útmutatók és cenzúrahírek",
+    "indexDescription": "Olvasson szakértő VPN-útmutatókat, internetes adatvédelmi tippeket és cenzúra-megkerülési stratégiákat a Doppler csapattól. Maradjon naprakész a VLESS-Reality, DPI-megkerülés és digitális biztonság terén.",
     "title": "Blogunk",
     "subtitle": "Adatvédelmi tippek, biztonsági tanácsok és VPN-útmutatók",
     "allPosts": "Összes bejegyzés",
@@ -425,14 +429,14 @@
       }
     },
     "stickyBar": {
-      "message": "Védd a böngészésedet. A Doppler VPN ingyenes, nem igényel regisztrációt és nulla naplót vezet.",
-      "cta": "Ingyenes letöltés",
+      "message": "Védd a böngészésedet. A Doppler VPN nem igényel regisztrációt és nulla naplót vezet. Próbáld ki ingyen 3 napig.",
+      "cta": "3 napos ingyenes próba",
       "dismiss": "Bezárás",
       "dismissLabel": "Letöltési banner bezárása"
     },
     "inlineCta": {
       "headline": "Védd a magánszférádat a Doppler VPN-nel",
-      "subtext": "Ingyenes. Nincs regisztráció. Nincs napló.",
+      "subtext": "3 napos ingyenes próbaidőszak. Nincs regisztráció. Nincs napló.",
       "downloadIos": "Letöltés iOS-re",
       "downloadAndroid": "Letöltés Androidra",
       "downloadDesktop": "Alkalmazás letöltése"
@@ -582,8 +586,8 @@
     "decline": "Elutasítom"
   },
   "apps": {
-    "title": "Doppler VPN letöltése",
-    "subtitle": "Egyérintéses adatvédelem minden eszközön. Válaszd ki a platformodat alább.",
+    "title": "Doppler VPN letöltése — iOS, Android, Mac és Windows",
+    "subtitle": "Töltsd le a Doppler VPN-t iOS, Android, macOS és Windows rendszerre. Egyérintéses adatvédelem VLESS-Reality titkosítással, regisztráció nélkül. Kezdd el 3 napos ingyenes próbával.",
     "download": "Letöltés",
     "syncNote": "Már előfizettél? A Pro státuszod automatikusan szinkronizálódik minden eszközön.",
     "needHelp": "Segítségre van szükséged?",
@@ -633,8 +637,8 @@
     }
   },
   "support": {
-    "title": "Támogatás",
-    "subtitle": "Találj válaszokat, hárítsd el a problémákat, vagy vedd fel velünk a kapcsolatot.",
+    "title": "Súgóközpont és támogatás",
+    "subtitle": "Találjon válaszokat a gyakori VPN-kérdésekre, hárítsa el a csatlakozási problémákat, vagy lépjen kapcsolatba támogatói csapatunkkal.",
     "faq": {
       "title": "Gyakran ismételt kérdések",
       "items": {
@@ -1471,6 +1475,701 @@
       "nameLabel": "Cég",
       "websiteLabel": "Weboldal",
       "contactLabel": "Kapcsolat"
+    }
+  },
+  "noRegistrationVpn": {
+    "metadata": {
+      "title": "VPN regisztráció nélkül — e-mail és fiók nélkül | Doppler VPN",
+      "description": "Használjon VPN-t regisztráció és fiók nélkül. A Doppler VPN nem igényel e-mailt, telefonszámot vagy fiókot. Kezdjen el biztonságosan és névtelenül böngészni másodpercek alatt."
+    },
+    "hero": {
+      "title": "VPN regisztráció nélkül",
+      "subtitle": "Kezdjen el biztonságosan böngészni másodpercek alatt. Nem kell e-mail, telefonszám vagy fiók. A Doppler egy ingyenes VPN regisztráció nélkül — csak töltse le, csatlakozzon és indulhat."
+    },
+    "whyRegister": {
+      "title": "Miért követel regisztrációt a legtöbb VPN",
+      "intro": "Elgondolkodott már azon, hogy szinte minden VPN-szolgáltatás miért kéri az e-mail címét, telefonszámát, vagy miért hoz létre kötelező fiókot? A válasz kevésbé kapcsolódik a biztonsághoz, és sokkal inkább a személyes adataira épülő üzleti modellekhez.",
+      "dataHarvesting": {
+        "title": "Adatgyűjtés",
+        "description": "Amikor e-mail címmel regisztrál, a VPN-szolgáltatók összekapcsolják böngészési tevékenységét az identitásával. Ez az adatprofil — meglátogatott weboldalak, csatlakozási idők, sávszélesség-használat — értékes eszközzé válik. Egyes szolgáltatók anonimizált (vagy nem annyira anonimizált) használati adatokat adnak el harmadik feles elemzőcégeknek és adatközvetítőknek, adatvédelmi eszközéből megfigyelési terméket csinálva."
+      },
+      "targetedAds": {
+        "title": "Célzott hirdetések",
+        "description": "Regisztrációs e-mailje összekapcsolja VPN-használatát hirdetési hálózatokkal. Sok ingyenes VPN-szolgáltatás célzott hirdetésekkel monetizál, böngészési szokásait felhasználva személyre szabott reklámok megjelenítéséhez. Még a fizetős, fiókkal rendelkező VPN-ek is kereszthivatkozhatják adatait hirdetési platformokkal további bevételekért."
+      },
+      "govRequests": {
+        "title": "Kormányzati adatkérések",
+        "description": "Amikor egy VPN-szolgáltatónak megvan az e-mailje és fiókja csatlakozási naplókhoz kapcsolva, van mit átadnia, ha a hatóságok kopogtatnak. Bírósági idézések, nemzetbiztonsági levelek és bírósági végzések kényszeríthetik a szolgáltatókat, hogy felfedjen, ki volt pontosan melyik szerverhez csatlakozva és mikor — valós identitását online tevékenységéhez kötve."
+      },
+      "breachLiability": {
+        "title": "Adatszivárgási kockázat",
+        "description": "Minden fiókadatbázis egy bekövetkezésre váró adatszivárgás. Azok a VPN-szolgáltatók, amelyek e-maileket, jelszavakat és fizetési adatokat tárolnak, célpontokat hoznak létre hackerek számára. Amikor adatszivárgások történnek — és rendszeresen előfordulnak — identitása leleplező a VPN-használat tényével együtt, ami egyes régiókban önmagában nemkívánatos figyelmet vonhat."
+      },
+      "conclusion": "A minta egyértelmű: a regisztráció a szolgáltatót szolgálja, nem a felhasználót. Egy valóban privát VPN-nek soha nem kellene tudnia, ki ön."
+    },
+    "howItWorks": {
+      "title": "Hogyan működik a Doppler fiók nélkül",
+      "subtitle": "A Doppler a hagyományos e-mail-jelszó modellt eszközalapú hitelesítéssel váltja fel. Nincs regisztráció, nincs feliratkozás, semmilyen személyes adat nem szükséges.",
+      "download": {
+        "title": "Töltse le az alkalmazást",
+        "description": "Telepítse a Doppler VPN-t az App Store-ból, a Google Playből, vagy szerezzen konfigurációt a Telegram botunkon keresztül. Nincs fióklétrehozási képernyő, nincs e-mail mező, nincsenek ellenőrző kódok — az alkalmazás azonnal kész a telepítés befejeztével."
+      },
+      "generateKey": {
+        "title": "Eszköze egyedi kulcsot generál",
+        "description": "Az első indításkor a Doppler egy kriptográfiai eszközkulcsot generál helyben a telefonján vagy számítógépén. Ez a kulcs egy véletlenszerű azonosító — nem tartalmaz személyes adatokat, hardver-ujjlenyomatokat, és nem követhető vissza önhöz. Gondoljon rá úgy, mint egy véletlenszerű szállodai szobakártyára, amely ajtót nyit, de nevet nem hordoz."
+      },
+      "connect": {
+        "title": "Csatlakozzon bármely szerverhez",
+        "description": "Eszközkulcsa hitelesíti önt a VLESS-Reality szervereinken. A kapcsolat ugyanazt a TLS 1.3 kézfogást használja, amely a normál HTTPS weboldalakat működteti, VPN-forgalmát megkülönböztethetetlenné téve a normál böngészéstől. Nincs bejelentkezési képernyő, nincsenek elküldött hitelesítő adatok."
+      },
+      "done": {
+        "title": "Védett",
+        "description": "Ennyi az egész. Nem kell e-mail megerősítésre várni, jelszavakat megjegyezni vagy fiókokat kezelni. Kapcsolata titkosított, identitása anonim, és VPN-je semmit sem tud önről. Valóban anonim VPN-felhasználóként böngészik — e-mail nélkül, nyom nélkül."
+      }
+    },
+    "noCollect": {
+      "title": "Amit nem gyűjtünk",
+      "subtitle": "A legtöbb VPN-szolgáltató azt állítja, hogy privát, de mégis személyes adatokkal teli fiókot követel. Íme egy átlátható összehasonlítás a tipikus VPN-szolgáltatások által gyűjtött adatok és a Doppler által tárolt adatok között.",
+      "headers": {
+        "dataType": "Adattípus",
+        "otherVpns": "Más VPN-ek",
+        "doppler": "Doppler VPN"
+      },
+      "email": {
+        "label": "E-mail cím"
+      },
+      "phone": {
+        "label": "Telefonszám"
+      },
+      "name": {
+        "label": "Valódi név"
+      },
+      "browsingHistory": {
+        "label": "Böngészési előzmények"
+      },
+      "ipLogs": {
+        "label": "IP-cím naplók"
+      },
+      "connectionTimestamps": {
+        "label": "Csatlakozási időbélyegek"
+      },
+      "footnote": "Piros pipa = a szolgáltató gyűjti. Piros X = a Doppler nem gyűjti. Fizikailag nem tudjuk átadni azokat az adatokat, amelyeket soha nem tároltunk."
+    },
+    "comparison": {
+      "title": "Adatvédelmi összehasonlítás: Doppler vs népszerű VPN-ek",
+      "headers": {
+        "provider": "VPN-szolgáltató",
+        "registration": "Regisztráció szükséges?",
+        "emailNeeded": "E-mail szükséges?",
+        "logsPolicy": "Naplózási szabályzat",
+        "paymentTracking": "Fizetéskövetés",
+        "openProtocol": "Nyílt protokoll"
+      },
+      "doppler": {
+        "name": "Doppler VPN",
+        "registration": "Nem",
+        "emailNeeded": "Nem",
+        "logsPolicy": "Nulla napló",
+        "paymentTracking": "Anonim",
+        "openProtocol": "VLESS-Reality"
+      },
+      "protonvpn": {
+        "name": "Proton VPN",
+        "registration": "Igen",
+        "emailNeeded": "Igen",
+        "logsPolicy": "Minimális naplók",
+        "paymentTracking": "E-mailhez kötött",
+        "openProtocol": "WireGuard"
+      },
+      "nordvpn": {
+        "name": "NordVPN",
+        "registration": "Igen",
+        "emailNeeded": "Igen",
+        "logsPolicy": "Naplómentesség állítása",
+        "paymentTracking": "Fiókhoz kötött",
+        "openProtocol": "NordLynx (saját fejlesztésű)"
+      },
+      "expressvpn": {
+        "name": "ExpressVPN",
+        "registration": "Igen",
+        "emailNeeded": "Igen",
+        "logsPolicy": "Naplómentesség állítása",
+        "paymentTracking": "Fiókhoz kötött",
+        "openProtocol": "Lightway (saját fejlesztésű)"
+      }
+    },
+    "deviceKey": {
+      "title": "Az ön adatai, az ön eszköze",
+      "badge": "Eszközalapú architektúra",
+      "p1": "A Doppler anonim VPN-architektúrája egyszerű elvre épül: ha soha nem gyűjtjük az ön személyes adatait, soha nem szivárogtathatjuk ki, adhatjuk el vagy adhatjuk át őket. Szerveroldali fiókok helyett identitása teljes egészében az eszközén él kriptográfiai kulcsként.",
+      "p2": "Amikor eszköze csatlakozik egy Doppler-szerverhez, egyedi kulcsát szabványos TLS 1.3 kézfogáson keresztül mutatja be — ugyanaz a titkosítás, amelyet bankok és kormányok használnak. A szerver ellenőrzi a kulcs legitimségét és hozzáférést biztosít. A szerver egyetlen ponton sem tudja vagy tárolja, ki a kulcs tulajdonosa. Nincs adatbázis, amely kulcsokat e-mailekhez, nevekhez vagy IP-címekhez rendelne.",
+      "p3": "Ez a megközelítés tükrözi az Apple Private Relay működését: forgalmát hitelesítik anélkül, hogy azonosítanák. A különbség az, hogy a Doppler ezt az elvet az egész internetkapcsolatára alkalmazza, nem csak a Safari böngészésre. Minden alkalmazás, minden protokoll, minden csomag — mind védve egyetlen személyes adat megkövetelése nélkül.",
+      "p4": "Az eredmény: még ha szervereinket lefoglalnák is, nem lennének felhasználói fiókok a feltáráshoz, e-mailek a kiszivárogtatáshoz, böngészési előzmények a felfedéshez. Adatvédelmét az architektúra garantálja, nem az ígéretek.",
+      "deviceGen": {
+        "title": "Eszközön generált kulcsok",
+        "description": "A kriptográfiai kulcsok helyben, az eszközén jönnek létre és tárolódnak. Soha nem hagyják el telefonját vagy számítógépét, és nulla személyes információt tartalmaznak."
+      },
+      "serverVal": {
+        "title": "Szerveroldali ellenőrzés",
+        "description": "Szervereink ellenőrzik a kulcs legitimségét identitásadatok tárolása nélkül. A hitelesítés TLS 1.3-on keresztül történik — fiókok nélkül, hitelesítőadat-adatbázis nélkül."
+      },
+      "zeroPii": {
+        "title": "Nulla személyes adat",
+        "description": "Nincs e-mail, nincs név, nincs telefonszám, nincsenek IP-naplók. Architektúrailag nem tudjuk azonosítani felhasználóinkat, mert soha nem gyűjtünk azonosító információt."
+      }
+    },
+    "getStarted": {
+      "title": "Kezdje el 30 másodperc alatt",
+      "subtitle": "Nincsenek regisztrációs űrlapok. Nincs e-mail ellenőrzés. Nincs várakozás. Három lépés a teljes online adatvédelemig egy anonim VPN-nel, amely nem igényel regisztrációt.",
+      "step1": {
+        "title": "Töltse le a Dopplert",
+        "description": "Szerezze be az alkalmazást az App Store-ból, a Google Playből, vagy kérjen VLESS-konfigurációt Telegram botunktól. A telepítés másodperceket vesz igénybe — semmilyen ponton nem kell fiókot létrehozni."
+      },
+      "step2": {
+        "title": "Nyomja meg a Csatlakozás gombot",
+        "description": "Nyissa meg az alkalmazást és nyomja meg a csatlakozás gombot. Eszköze automatikusan generál egy biztonságos kulcsot és létrehoz egy titkosított alagutat. Nincs bejelentkezési képernyő, nincs felhasználónév, nincs jelszó."
+      },
+      "step3": {
+        "title": "Böngésszen privát módon",
+        "description": "Most katonai szintű titkosítással védett. Valódi IP-címe rejtett, forgalma olvashatatlan, és senki — még mi sem — tudja, ki ön. Valóban anonim VPN regisztráció nélkül."
+      }
+    },
+    "cta": {
+      "title": "Készen áll egy VPN-re, amely nem ismeri önt?",
+      "subtitle": "Csatlakozzon felhasználók ezreihez, akik regisztráció nélküli VPN-t választottak. Nincs szükség e-mailre, fiókra, személyes adatok kockáztatására. Töltse le a Dopplert és csatlakozzon másodpercek alatt — teljesen ingyen, teljesen névtelenül.",
+      "downloadIos": "Letöltés iOS-re",
+      "downloadAndroid": "Letöltés Androidra",
+      "telegramBot": "Letöltés Telegram Boton keresztül",
+      "telegramChannelRu": "Telegram csatorna (RU)",
+      "telegramChannelEn": "Telegram csatorna (EN)"
+    },
+    "related": {
+      "vless": "VLESS-Reality protokoll",
+      "vlessDesc": "Tudja meg, hogyan győzi le a VLESS a mély csomagellenőrzést",
+      "ios": "VPN iOS-re",
+      "iosDesc": "Töltse le a Doppler VPN-t iPhone-ra és iPadre",
+      "android": "VPN Androidra",
+      "androidDesc": "Szerezze be a Doppler VPN-t a Google Playből vagy APK-ként"
+    }
+  },
+  "vlessVpn": {
+    "metadata": {
+      "title": "VLESS VPN alkalmazás — Mi az a VLESS-Reality protokoll és miért jobb a WireGuardnál",
+      "description": "Tudja meg, mi az a VLESS protokoll, hogyan győzi le a VLESS-Reality a mély csomagellenőrzést, és miért teljesít jobban a WireGuardnál és az OpenVPN-nél a cenzúra megkerülésében. Töltse le a Doppler VLESS VPN alkalmazást iOS-re és Androidra."
+    },
+    "hero": {
+      "title": "VLESS-Reality: a láthatatlanságra tervezett protokoll",
+      "subtitle": "A következő generációs VPN-protokoll, amely legyőzi a mély csomagellenőrzést. A VLESS-Reality megkülönböztethetetlenné teszi forgalmát a normál HTTPS-től — nincsenek aláírások, ujjlenyomatok vagy észlelés."
+    },
+    "whatIs": {
+      "title": "Mi az a VLESS protokoll?",
+      "intro": "A VLESS egy könnyű proxy protokoll, amely a V2Ray projektből született — egy nyílt forráskódú ökoszisztéma, amelyet kifejezetten az internetes cenzúra megkerülésére építettek. A VLESS mibenlétének és fejlődésének megértése magyarázza, miért sikerül ott, ahol a hagyományos VPN-protokollok kudarcot vallanak.",
+      "origin": {
+        "title": "A VMess-től a VLESS-ig: az evolúció",
+        "p1": "A V2Ray projekt 2015-ben indult válaszul Kína Nagy Tűzfalára. Eredeti protokollja, a VMess, bevezette a forgalom elfedését — a proxy kapcsolatok álcázását normál webforgalomként. A VMess kezdetben jól működött, de ahogy a DPI-rendszerek kifinomultabbá váltak, gyengeségei nyilvánvalóvá lettek: szükségtelen bonyolultság, titkosítási többlet és felismerhető kézfogási minták.",
+        "p2": "A VLESS (V2Ray-Less Encryption Serialization Stream) 2020-ban jött létre a VMess utódjaként. A tervezők eltávolítottak mindent, ami felesleges: redundáns titkosítási rétegeket, összetett hitelesítési sémákat és protokollspecifikus jelölőket. Ami maradt, az egy minimális, állapotmentes protokoll nulla többlettel — egy tiszta szállítási réteg, amelyet egyetlen célra terveztek.",
+        "p3": "2022-ben az XTLS projekt bemutatta a Reality-t — egy TLS álcázási réteget, amely alapvetően megváltoztatta a lehetőségeket. A VLESS-Reality nem csupán elfedi a forgalmat. Kölcsönveszi egy legitim weboldal TLS-tanúsítványát, és a kapcsolatot valóban megkülönböztethetetlenné teszi a normál HTTPS-böngészéstől bármely megfigyelő számára, beleértve az állami szintű DPI-rendszereket."
+      },
+      "difference": {
+        "title": "Mi teszi a VLESS-t különlegessé",
+        "p1": "A hagyományos VPN-protokollok, mint a WireGuard és az OpenVPN, a sebességet és a titkosítást helyezik előtérbe. Titkosított alagutakat hoznak létre, de ezeknek az alagutaknak jellegzetes aláírásaik vannak — felismerhető csomagstruktúrák, kézfogási minták és forgalmi profilok. Egy DPI-rendszer másodpercek alatt azonosítja őket. A VLESS az ellenkező megközelítést alkalmazza: előbb a láthatatlanság. Ahelyett, hogy alagútnak kinéző titkosított alagutat építene, a VLESS-Reality olyan kapcsolatot hoz létre, amely pontosan úgy néz ki, mintha normál weboldalt böngészne.",
+        "p2": "Ez az alapvető különbség: a VLESS-Reality az egyetlen protokoll, ahol maga a kapcsolat megkülönböztethetetlen a normál HTTPS-forgalomtól — nem elfedett, nem álcázott, hanem valóban azonos csomagszinten."
+      }
+    },
+    "howItWorks": {
+      "title": "Hogyan működik a VLESS-Reality",
+      "subtitle": "Egy négy lépéses folyamat, amely VPN-kapcsolatát láthatatlanná teszi a mély csomagellenőrzés, az aktív szondázás és a forgalomelemzés számára — szakzsargon nélkül elmagyarázva.",
+      "step1": {
+        "title": "TLS kézfogás utánzás",
+        "description": "Csatlakozáskor a VLESS-Reality valódi TLS 1.3 kézfogást kezdeményez egy legitim weboldallal — mint a google.com vagy microsoft.com. Kívülről ez pontosan úgy néz ki, mintha böngészője ahhoz a weboldalhoz csatlakozna. A DPI-rendszer szabványos, várt kapcsolatot lát, és átengedi."
+      },
+      "step2": {
+        "title": "Tanúsítvány kölcsönzés",
+        "description": "Ellentétben a hagyományos VPN-ekkel, amelyek önaláírt tanúsítványokat használnak (ami piros zászló a DPI számára), a Reality kölcsönveszi a célweboldal TLS-tanúsítványát. A tanúsítványlánc valódi. Bármely rendszer, amely vizsgálja a kapcsolatot, érvényes tanúsítványt lát megbízható hatóságtól — mert az is."
+      },
+      "step3": {
+        "title": "Forgalom álcázás",
+        "description": "Valódi VPN-adatai a létrehozott TLS-kapcsolaton belül multiplexelődnek. A csomagméretek, időzítési intervallumok és forgalmi minták úgy vannak kialakítva, hogy megfeleljenek a normál HTTPS-böngészésnek. A VPN-entrópia-minták felismerésére kiképzett gépi tanulási modellek semmi szokatlant nem látnak."
+      },
+      "step4": {
+        "title": "Fordított proxy viselkedés",
+        "description": "Ha bárki szondázza a szervert — cenzorok, automatizált szkennerek vagy DPI aktív szondázó rendszerek — a szerver pontosan úgy válaszol, mint az a legitim weboldal, amelyet utánoz. Valódi weboldalakat szolgál ki, helyes hibakódokat ad vissza, és megkülönböztethetetlenül viselkedik a valódi oldaltól. A VPN-funkcionalitás teljesen rejtett."
+      },
+      "conclusion": "Az eredmény: kapcsolata nem csak titkosított — láthatatlan. Egyetlen DPI-rendszer, gépi tanulási modell vagy aktív szonda sem képes megkülönböztetni a másodpercenként zajló millió legitim HTTPS-kapcsolattól."
+    },
+    "comparison": {
+      "title": "VLESS vs WireGuard vs OpenVPN — protokoll-összehasonlítás",
+      "subtitle": "Hogyan teljesít a VLESS-Reality más VPN-protokollokhoz képest? Ez az összehasonlítás a cenzúrázott régiók felhasználói számára fontos mutatókat foglalja össze.",
+      "headers": {
+        "protocol": "Protokoll",
+        "dpiResistance": "DPI-ellenállás",
+        "speed": "Sebesség",
+        "latency": "Késleltetés",
+        "batteryImpact": "Akkumulátor-hatás",
+        "setupComplexity": "Beállítás bonyolultsága",
+        "censorshipBypass": "Cenzúra megkerülése"
+      },
+      "vless": {
+        "name": "VLESS-Reality",
+        "dpiResistance": "Észlelhetetlen",
+        "speed": "Gyors",
+        "latency": "Alacsony",
+        "batteryImpact": "Minimális",
+        "setupComplexity": "Magas (DIY) / Egyszerű (Doppler)",
+        "censorshipBypass": "Kiváló"
+      },
+      "wireguard": {
+        "name": "WireGuard",
+        "dpiResistance": "Nincs",
+        "speed": "Nagyon gyors",
+        "latency": "Nagyon alacsony",
+        "batteryImpact": "Nagyon alacsony",
+        "setupComplexity": "Egyszerű",
+        "censorshipBypass": "Azonnal blokkolva"
+      },
+      "openvpn": {
+        "name": "OpenVPN",
+        "dpiResistance": "Alacsony",
+        "speed": "Közepes",
+        "latency": "Közepes",
+        "batteryImpact": "Magas",
+        "setupComplexity": "Közepes",
+        "censorshipBypass": "Gyorsan blokkolva"
+      },
+      "shadowsocks": {
+        "name": "Shadowsocks",
+        "dpiResistance": "Közepes",
+        "speed": "Gyors",
+        "latency": "Alacsony",
+        "batteryImpact": "Alacsony",
+        "setupComplexity": "Közepes",
+        "censorshipBypass": "Részleges — észlelhető"
+      },
+      "trojan": {
+        "name": "Trojan",
+        "dpiResistance": "Magas",
+        "speed": "Gyors",
+        "latency": "Alacsony",
+        "batteryImpact": "Alacsony",
+        "setupComplexity": "Magas",
+        "censorshipBypass": "Jó, de szondázható"
+      }
+    },
+    "whyNot": {
+      "title": "Miért nem használják a kereskedelmi VPN-ek a VLESS-t",
+      "subtitle": "Ha a VLESS-Reality ennyire hatékony, miért nem használja a NordVPN, az ExpressVPN vagy a Surfshark? A válasz feltárja, miért épül a legtöbb kereskedelmi VPN rossz problémára.",
+      "card1": {
+        "title": "Implementáció bonyolultsága",
+        "description": "A VLESS-Reality Xray-core-t igényel — egy speciális proxy motort összetett szerveroldali konfigurációval. Minden szerver egyedi TLS-tanúsítvány célpontokat, SNI-konfigurációt és Reality kulcspárokat igényel. A kereskedelmi VPN-ek ezreket szervereket üzemeltetnek, és egyszerűségre optimalizálnak, nem láthatatlanságra. A VLESS-Reality méretarányos telepítése mély protokolltudást igényel, amellyel a legtöbb VPN-vállalat egyszerűen nem rendelkezik."
+      },
+      "card2": {
+        "title": "Magasabb szerverköltségek",
+        "description": "A VLESS-Reality szerverek valódi TLS-kézfogásokat hajtanak végre célweboldalakkal, forgalmat proxyznak több rétegen keresztül, és meggyőzően kell válaszolniuk az aktív szondázásokra. Ez lényegesen több CPU-t és sávszélességet fogyaszt, mint egy egyszerű WireGuard alagút. Az ezer szerveren margint optimalizáló VPN-vállalatok számára a költségnövekedés tiltó."
+      },
+      "card3": {
+        "title": "Nincs fogyasztói csomagolás",
+        "description": "Egészen a közelmúltig a VLESS-Reality használata Xray-core kliensek kézi konfigurálását, UUID-kulcsok generálását és JSON-konfigurációs fájlok szerkesztését jelentette. Nem volt fogyasztóbarát alkalmazás — nem volt egygombos csatlakozás, automatikus szervervxálasztás. A protokoll csak technikai eszközként létezett haladó felhasználók számára, nem termékként."
+      },
+      "card4": {
+        "title": "Rossz optimalizálási cél",
+        "description": "A legtöbb kereskedelmi VPN streaming-hozzáférésre és adatvédelmi marketingre épül — nem cenzúra megkerülésére. A WireGuard gyorsabb a Netflix feloldásához. Az OpenVPN könnyebben telepíthető. Ezeknek a VPN-eknek nincs ösztönzésük a cenzúra problémáját megoldani, mert ügyfeleik többnyire internetkorlátozás nélküli országokban vannak."
+      },
+      "conclusion": "A Doppler mind a négy problémát megoldja: Xray-core szakértelem, optimalizált infrastruktúra, fogyasztói szintű alkalmazások és fókusz azokra a felhasználókra, akiknek valóban szükségük van a cenzúra megkerülésére."
+    },
+    "performance": {
+      "title": "Valós teljesítmény",
+      "badge": "VLESS-Reality benchmarkok",
+      "p1": "A VLESS-Reality nem csak láthatatlan — gyors is. Mivel a protokoll minimális többletet ad (nincs kettős titkosítás, nincsenek felesleges kézfogási rétegek), a tényleges átviteli sebesség megközelíti a nyers kapcsolati sebességet. Az oroszországi, iráni és kínai felhasználók következetesen megbízható kapcsolatokról számolnak be még aktív elnyomások idején is.",
+      "p2": "Ezek a mutatók a Doppler éles infrastruktúrájából származnak, VLESS-Reality-vel több szervrrégióban, aktív DPI-érvényesítés időszakaiban mérve.",
+      "stat1value": "99,2%",
+      "stat1label": "Kapcsolat sikerességi arány cenzúrázott régiókban",
+      "stat2value": "<50ms",
+      "stat2label": "Átlagos többletkésleltetés",
+      "stat3value": "99,8%",
+      "stat3label": "Havi üzemidő az összes szerveren"
+    },
+    "inDoppler": {
+      "title": "VLESS-Reality a Dopplerben",
+      "subtitle": "A Doppler a legfejlettebb cenzúramegkerülő protokollt csomagolja olyan alkalmazásokba, amelyeket bárki használhat — technikai tudás nélkül.",
+      "feature1": {
+        "title": "Egygombos csatlakozás",
+        "description": "Nyissa meg az alkalmazást, nyomja meg a csatlakozást. A Doppler automatikusan kezeli a teljes VLESS-Reality konfigurációt — Xray-core inicializáció, UUID generálás, Reality kulcscsere és TLS-célválasztás a háttérben történik. Soha nem lát konfigurációs fájlt."
+      },
+      "feature2": {
+        "title": "Automatikus szerverválasztás",
+        "description": "A Doppler valós időben teszteli a szerver késleltetését és elérhetőségét, a leggyorsabb elérhető VLESS-Reality szerverhez csatlakoztatva önt. Ha egy szerver blokkolva van vagy leromlott, az alkalmazás automatikusan vált — kézi beavatkozás nélkül."
+      },
+      "feature3": {
+        "title": "Nincs kézi Xray konfiguráció",
+        "description": "A hagyományos VLESS-Reality beállítás JSON-konfigurációk szerkesztését, kulcskezelést és TLS-paraméterek megértését igényli. A Doppler mindezt kiküszöböli. A szerverkonfigurációk biztonságosan kerülnek elosztásra infrastruktúránkból, automatikusan frissülnek és rotálnak, hogy a blokkolási kísérletek előtt maradjanak."
+      },
+      "feature4": {
+        "title": "iOS, Android és Telegram",
+        "description": "A teljes VLESS-Reality VPN-élmény elérhető iOS-en (App Store), Androidon (Google Play) és Telegram botunkon keresztül konfigurációalapú hozzáféréshez. Minden platform ugyanazt az optimalizált Xray-core motort és ugyanazt a szerver-infrastruktúrát használja."
+      }
+    },
+    "cta": {
+      "title": "Próbálja ki a VLESS VPN alkalmazást, amely egyszerűen működik",
+      "subtitle": "Töltse le a Dopplert és tapasztalja meg a VLESS-Reality-t — a láthatatlanságra tervezett protokollt. Egy érintés. Nincs konfiguráció. Nincs kompromisszum.",
+      "downloadIos": "Letöltés iOS-re",
+      "downloadAndroid": "Letöltés Androidra",
+      "telegramBot": "Telegram Bot",
+      "telegramChannelRu": "Telegram (RU)",
+      "telegramChannelEn": "Telegram (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN regisztráció nélkül",
+      "noRegistrationDesc": "Használjon VPN-t feliratkozás vagy fiók nélkül",
+      "ios": "VPN iOS-re",
+      "iosDesc": "Töltse le a Doppler VPN-t iPhone-ra és iPadre",
+      "android": "VPN Androidra",
+      "androidDesc": "Szerezze be a Doppler VPN-t a Google Playből vagy APK-ként"
+    }
+  },
+  "vpnForIos": {
+    "metadata": {
+      "title": "Ingyenes VPN iPhone-ra és iPadre — regisztráció nélkül | Doppler VPN",
+      "description": "Töltse le a Doppler VPN-t iOS-re — a legjobb ingyenes VPN iPhone-ra és iPadre 2026-ban. Nincs regisztráció, nincs fiók. VLESS-Reality protokoll, reklámblokkoló és folyamatos védelem."
+    },
+    "hero": {
+      "title": "Doppler VPN iPhone-ra és iPadre",
+      "subtitle": "Ingyenes, biztonságos VPN regisztráció nélkül. Töltse le az App Store-ból."
+    },
+    "features": {
+      "title": "Miért a Doppler iOS-re?",
+      "noRegistration": {
+        "title": "Regisztráció nélkül",
+        "description": "Azonnal kezdje el a VPN használatát — nem kell e-mail, telefonszám vagy fióklétrehozás. Csak töltse le és csatlakozzon."
+      },
+      "vlessProtocol": {
+        "title": "VLESS-Reality protokoll",
+        "description": "Következő generációs titkosítás, amely a VPN-forgalmat normál HTTPS-böngészésnek álcázza. Észlelhetetlen tűzfalak és DPI-rendszerek számára."
+      },
+      "adBlocker": {
+        "title": "Beépített reklámblokkoló",
+        "description": "Blokkolja a tolakodó hirdetéseket, nyomkövetőket és rosszindulatú domaineket DNS-szinten. Gyorsabb böngészés kevesebb adathasználattal."
+      },
+      "alwaysOn": {
+        "title": "Always-On VPN",
+        "description": "Automatikusan újracsatlakozik Wi-Fi és mobilhálózat közötti váltáskor. Kapcsolata 24/7 védett marad."
+      },
+      "smartRouting": {
+        "title": "Intelligens útvonalválasztás",
+        "description": "Az intelligens szerverválasztás a leggyorsabb elérhető csomópontot választja. Optimalizálva streameléshez, játékokhoz és mindennapi böngészéshez."
+      },
+      "dnsProtection": {
+        "title": "DNS-védelem",
+        "description": "A titkosított DNS-lekérdezések megakadályozzák, hogy internetszolgáltatója lássa, melyik weboldalakat látogatja. Teljes DNS-szivárgásvédelem."
+      }
+    },
+    "howItWorks": {
+      "title": "Hogyan működik iOS-en",
+      "subtitle": "Nincs fióklétrehozás, e-mail vagy telefonszám — csak négy egyszerű lépés.",
+      "step1": {
+        "title": "Töltse le az App Store-ból",
+        "description": "Keressen rá a \"Doppler VPN\"-re, vagy nyomja meg az alábbi linket. Az alkalmazás ingyenes és 30 MB alatti."
+      },
+      "step2": {
+        "title": "Nyissa meg az alkalmazást",
+        "description": "Indítsa el a Doppler VPN-t. Nincs regisztrációs képernyő, nincs feliratkozási űrlap. Az alkalmazás azonnal használatra kész."
+      },
+      "step3": {
+        "title": "Nyomja meg a Csatlakozás gombot",
+        "description": "Nyomja meg a csatlakozás gombot. A Doppler automatikusan kiválasztja a legjobb szervert és létrehoz egy biztonságos VLESS-Reality alagutat."
+      },
+      "step4": {
+        "title": "Böngésszen biztonságosan",
+        "description": "Ennyi. Forgalma titkosított, IP-címe rejtett és a hirdetések blokkolva vannak. Használjon bármely alkalmazást vagy weboldalt szabadon."
+      }
+    },
+    "iosFeatures": {
+      "title": "iOS-specifikus funkciók",
+      "subtitle": "Natívan építve az Apple ökoszisztémájára, mély rendszerintegrációval.",
+      "networkExtension": {
+        "title": "Network Extension (rendszerszintű VPN)",
+        "description": "A Doppler az Apple Network Extension keretrendszerét használja valódi rendszerszintű VPN-ként. Minden alkalmazás teljes forgalma áthalad a titkosított alagúton — nem csak a böngésző forgalma. Ez ugyanazt a védelmet nyújtja, amelyet az Apple a vállalati VPN-megoldásoktól megkövetel."
+      },
+      "alwaysOnVpn": {
+        "title": "Always-On VPN",
+        "description": "Kapcsolja be az Always-On módot, és a Doppler automatikusan újracsatlakozik, valahányszor kapcsolata megszakad. Váltás Wi-Fi-ről mobilra? Telefon felébresztése alvásból? A VPN egy másodperc alatt újra létrejön, így soha nincs védtelen."
+      },
+      "perAppVpn": {
+        "title": "Alkalmazásonkénti VPN",
+        "description": "Válassza ki, mely alkalmazások menjenek a VPN-alagúton, és melyek csatlakozzanak közvetlenül. Tartsa a banki alkalmazásokat helyi hálózaton, miközben védi a böngészőket és üzenetküldő alkalmazásokat a VPN-en keresztül."
+      },
+      "widget": {
+        "title": "Kezdőképernyő widget",
+        "description": "Adja hozzá a Doppler widgetet kezdőképernyőjéhez vagy zárolási képernyőjéhez az azonnali csatlakozási állapotért és egygombos váltásért. Lássa aktuális szerverét, csatlakozási idejét és védelmi állapotát egyetlen pillantással."
+      },
+      "ipadSplitView": {
+        "title": "iPad Split View támogatás",
+        "description": "Teljes iPad multitasking támogatás. Használja a Doppler VPN-t más alkalmazások mellett Split Viewban vagy Slide Overben. A VPN-állapot mindig látható az állapotsorban, függetlenül attól, melyik alkalmazás van előtérben."
+      }
+    },
+    "privacy": {
+      "title": "Adatvédelem Apple eszközökön",
+      "subtitle": "A Doppler kiegészíti, amit az Apple már véd — és kitölti azokat a réseket, amelyekre a VPN-t tervezték.",
+      "intro": "Az Apple az iparág vezetője az eszközszintű adatvédelemben — App Tracking Transparency, Mail Privacy Protection és Safari Intelligent Tracking Prevention. De van egy réteg, amelyet az Apple nem tud megvédeni: a hálózati forgalmát.",
+      "appleProtects": {
+        "title": "Amit az Apple véd",
+        "item1": "Alkalmazásszintű nyomkövetés (ATT kérések)",
+        "item2": "Eszközön tárolt adatok titkosítása (Secure Enclave)",
+        "item3": "Safari nyomkövető blokkolás",
+        "item4": "E-mail pixel nyomkövetés megelőzése"
+      },
+      "dopplerAdds": {
+        "title": "Amit a Doppler VPN hozzáad",
+        "item1": "Elrejti valódi IP-címét minden weboldal és szolgáltatás elől",
+        "item2": "Titkosítja az összes hálózati forgalmat VLESS-Reality-vel (észlelhetetlen)",
+        "item3": "Blokkolja a DNS-szintű nyomkövetést és hirdetési domaineket",
+        "item4": "Megakadályozza az internetszolgáltató forgalomfigyelését és -lassítását"
+      },
+      "noLogs": "A Doppler eszközalapú hitelesítést használ — nincsenek fiókok, e-mailek vagy naplók. Nem tudjuk azonosítani önt, mert soha nem gyűjtünk azonosító információt."
+    },
+    "compatibility": {
+      "title": "Rendszerkövetelmények és kompatibilitás",
+      "os": {
+        "label": "Operációs rendszer",
+        "value": "iOS 16.0 vagy újabb"
+      },
+      "iphone": {
+        "label": "iPhone",
+        "value": "iPhone 8 és újabb (minden iOS 16-ot támogató modell)"
+      },
+      "ipad": {
+        "label": "iPad",
+        "value": "Minden iPad modell iPadOS 16 vagy újabb rendszerrel"
+      },
+      "mac": {
+        "label": "Mac (Apple Silicon)",
+        "value": "M1, M2, M3, M4 Mac gépek iPad alkalmazás kompatibilitáson keresztül"
+      },
+      "size": {
+        "label": "Alkalmazás mérete",
+        "value": "30 MB alatt"
+      },
+      "battery": {
+        "label": "Akkumulátor-hatás",
+        "value": "Minimális — a VLESS könnyű protokoll alacsony CPU-terheléssel"
+      },
+      "data": {
+        "label": "Adattöbblet",
+        "value": "Kevesebb mint 2% többlet adathasználat a titkosítatlan böngészéshez képest"
+      }
+    },
+    "faq": {
+      "title": "Gyakran ismételt kérdések",
+      "q1": {
+        "question": "Tényleg ingyenes a Doppler VPN iOS-en?",
+        "answer": "Igen. A Doppler VPN ingyenes szintet kínál az alapvető VPN-funkciókhoz. A prémium csomagok további szervereket, gyorsabb sebességet és haladó funkciókat, például alkalmazásonkénti VPN-t oldanak fel."
+      },
+      "q2": {
+        "question": "Létre kell hoznom fiókot?",
+        "answer": "Nem. A Doppler eszközalapú hitelesítést használ. Nincs regisztráció, nincs szükség e-mailre és nincs szükség telefonszámra. Egyszerűen töltse le és csatlakozzon."
+      },
+      "q3": {
+        "question": "Működik a Doppler Kínában, Oroszországban vagy Iránban?",
+        "answer": "Igen. A Doppler a VLESS-Reality protokollt használja, amely a VPN-forgalmat normál HTTPS-nek álcázza. Ez rendkívül megnehezíti a cenzúrarendszerek, mint a Nagy Tűzfal vagy a TSPU számára az észlelést és blokkolást."
+      },
+      "q4": {
+        "question": "Lelassítja a VPN az iPhone-omat?",
+        "answer": "Alig észrevehetően. A VLESS-Reality az egyik legkönnyebb VPN-protokoll. A legtöbb felhasználó 5%-nál kisebb sebességcsökkenést tapasztal. Az akkumulátor-hatás minimális a hatékony csomagkezelésnek köszönhetően."
+      },
+      "q5": {
+        "question": "Működik a Doppler streaming alkalmazásokkal?",
+        "answer": "Igen. A Doppler intelligens útvonalválasztása streaming-re optimalizált. Az alkalmazás automatikusan kiválasztja a legjobb teljesítményű szervereket videós tartalmakhoz."
+      },
+      "q6": {
+        "question": "Használhatom a Dopplert iPaden és iPhone-on egyszerre?",
+        "answer": "Igen. Előfizetése több Apple eszközön működik. Minden eszköz saját biztonságos kapcsolatot kap."
+      }
+    },
+    "cta": {
+      "title": "Szerezze be a Doppler VPN-t iOS-re",
+      "subtitle": "Ingyenes letöltés. Nincs regisztráció. Nincs bankkártya. Csatlakozzon másodpercek alatt.",
+      "downloadIos": "Letöltés az App Store-ból",
+      "downloadAndroid": "Letöltés a Google Playből",
+      "telegramBot": "Használat Telegram Boton keresztül",
+      "telegramChannelRu": "Telegram csatorna (RU)",
+      "telegramChannelEn": "Telegram csatorna (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN regisztráció nélkül",
+      "noRegistrationDesc": "Használjon VPN-t feliratkozás vagy fiók nélkül",
+      "vless": "VLESS-Reality protokoll",
+      "vlessDesc": "Tudja meg, hogyan győzi le a VLESS a mély csomagellenőrzést",
+      "android": "VPN Androidra",
+      "androidDesc": "Szerezze be a Doppler VPN-t a Google Playből vagy APK-ként"
+    }
+  },
+  "vpnForAndroid": {
+    "metadata": {
+      "title": "Ingyenes VPN Androidra — regisztráció nélkül | Doppler VPN APK letöltés 2026",
+      "description": "Töltse le a legjobb ingyenes VPN-t Androidra 2026-ban. Nincs regisztráció, nincs fiók. Elérhető a Google Playen és APK-ként cenzúrázott régióknak. VLESS-Reality protokoll az észlelhetetlen adatvédelemért."
+    },
+    "hero": {
+      "title": "Doppler VPN Androidra",
+      "subtitle": "Ingyenes VPN regisztráció nélkül. Nincs fiók, nincs e-mail, nincsenek személyes adatok. Elérhető a Google Playen és APK-ként olyan régiókban, ahol a Play Store korlátozott.",
+      "googlePlay": "Google Play Store",
+      "downloadApk": "APK letöltése"
+    },
+    "features": {
+      "title": "Miért a Doppler Androidra?",
+      "subtitle": "Kifejezetten Android-felhasználóknak készült, akiknek kompromisszumok nélküli adatvédelem kell. Nincs regisztráció, nincs adatgyűjtés, nincsenek korlátok.",
+      "noRegistration": {
+        "title": "Regisztráció nélkül",
+        "description": "Nyissa meg az alkalmazást és csatlakozzon azonnal. Nincs e-mail, telefonszám vagy fióklétrehozás. Identitása az első érintéstől fogva privát marad."
+      },
+      "vlessReality": {
+        "title": "VLESS-Reality protokoll",
+        "description": "Katonai szintű titkosítás, amely VPN-forgalmát normál HTTPS-böngészésnek álcázza. Észlelhetetlen DPI-rendszerek és kormányzati tűzfalak számára."
+      },
+      "adBlocker": {
+        "title": "Beépített reklámblokkoló",
+        "description": "Blokkolja a hirdetéseket, nyomkövetőket és rosszindulatú domaineket DNS-szinten. Gyorsabb böngészés, kevesebb adathasználat és jobb akkumulátor-élettartam Android-eszközén."
+      },
+      "alwaysOn": {
+        "title": "Always-On VPN",
+        "description": "Az Android natív Always-On VPN funkcióját használja, biztosítva, hogy kapcsolata 24/7 védett legyen, még újraindítás vagy hálózatváltás után is."
+      },
+      "apkSideload": {
+        "title": "APK oldalletöltés",
+        "description": "Nincs hozzáférése a Google Playhez? Töltse le az APK-t közvetlenül és telepítse kézzel. Tökéletes oroszországi, iráni, kínai és más cenzúrázott régiók felhasználói számára."
+      },
+      "dnsProtection": {
+        "title": "DNS-védelem",
+        "description": "Minden DNS-lekérdezés titkosított és biztonságos szervereken keresztül van irányítva. Megakadályozza a DNS-szivárgásokat és meggátolja internetszolgáltatóját abban, hogy lássa, melyik weboldalakat látogatja."
+      }
+    },
+    "install": {
+      "title": "Két telepítési mód",
+      "subtitle": "Válassza az ön helyzetéhez legjobban illő telepítési módot. Mindkettő ugyanazt a teljes értékű VPN-élményt nyújtja.",
+      "playStore": {
+        "title": "Google Play Store",
+        "badge": "Ajánlott",
+        "benefit1": "Egygombos telepítés, automatikus frissítések",
+        "benefit2": "Google Play Protect által ellenőrzött",
+        "benefit3": "Zökkenőmentes előfizetéskezelés",
+        "cta": "Letöltés a Google Playből"
+      },
+      "apk": {
+        "title": "Közvetlen APK letöltés",
+        "badge": "Korlátozott régióknak",
+        "benefit1": "Működik ahol a Google Play blokkolva van",
+        "benefit2": "Nincs szükség Google-fiókra",
+        "benefit3": "Ugyanazok a funkciók, mint a Play Store verzió",
+        "note": "Ideális oroszországi, iráni, kínai és más olyan országok felhasználói számára, ahol a Google Play Store korlátozott vagy a VPN alkalmazásokat eltávolították az áruházból.",
+        "cta": "APK letöltése Telegram Boton keresztül"
+      }
+    },
+    "howItWorks": {
+      "title": "Hogyan működik Androidon",
+      "subtitle": "A letöltéstől a biztonságos böngészésig kevesebb mint 30 másodperc. Nincs fiók, e-mail vagy telepítővarázsló.",
+      "step1": {
+        "title": "Töltse le az alkalmazást",
+        "description": "Telepítse a Doppler VPN-t a Google Playből vagy töltse le az APK-t közvetlenül. Az alkalmazás könnyű — 15 MB alatt."
+      },
+      "step2": {
+        "title": "Nyissa meg az alkalmazást",
+        "description": "Indítsa el a Doppler VPN-t. Nincs regisztrációs képernyő, nincs feliratkozási űrlap. Az alkalmazás azonnal használatra kész."
+      },
+      "step3": {
+        "title": "Nyomja meg a Csatlakozás gombot",
+        "description": "Nyomja meg a csatlakozás gombot. A Doppler automatikusan kiválasztja a leggyorsabb elérhető szervert és létrehoz egy VLESS-Reality alagutat."
+      },
+      "step4": {
+        "title": "Böngésszen szabadon",
+        "description": "Kapcsolata most titkosított és észlelhetetlen. Érjen el bármely weboldalt, alkalmazást vagy szolgáltatást korlátozások nélkül."
+      }
+    },
+    "androidFeatures": {
+      "title": "Android-specifikus funkciók",
+      "subtitle": "A Doppler VPN teljes mértékben kihasználja az Android képességeit a legbiztonságosabb és legzökkenőmentesebb élmény érdekében.",
+      "alwaysOnVpn": {
+        "title": "Always-On VPN",
+        "description": "Kapcsolja be az Android beépített Always-On VPN beállítását, hogy a Doppler mindig csatlakozva maradjon. Menjen a Beállítások > Hálózat és internet > VPN > Doppler VPN > kapcsolja be az Always-on-t. Eszköze automatikusan újracsatlakozik újraindítás vagy hálózatváltás után."
+      },
+      "splitTunneling": {
+        "title": "Split Tunneling",
+        "description": "Válassza ki, mely alkalmazások menjenek a VPN-en keresztül és melyek használják a normál kapcsolatot. Irányítsa a banki alkalmazásokat közvetlenül, miközben védve tartja a böngészőket. Konfigurálja az alkalmazásonkénti VPN-szabályokat a Doppler beállításaiban."
+      },
+      "quickSettings": {
+        "title": "Gyorsbeállítás csempe",
+        "description": "Adja hozzá a Doppler VPN-t az Android Gyorsbeállítások paneljéhez. Csatlakozzon vagy válasszon le egyetlen húzással és érintéssel — nem kell megnyitni az alkalmazást. Elérhető Android 8.0 és újabb rendszereken."
+      },
+      "batteryOptimization": {
+        "title": "Akkumulátor-optimalizálás",
+        "description": "A Doppler minimális akkumulátort használ. A legjobb Always-On élményért zárja ki a Dopplert az Android akkumulátor-optimalizálásából: Beállítások > Alkalmazások > Doppler VPN > Akkumulátor > Korlátlan. Ez megakadályozza, hogy az Android leállítsa a VPN-kapcsolatot a háttérben."
+      },
+      "androidTv": {
+        "title": "Android TV támogatás",
+        "description": "Telepítse a Doppler VPN APK-t Android TV-jére vagy TV-boxra a streaming forgalom védelméért. Érjen el földrajzilag korlátozott tartalmakat a nagy képernyőn ugyanazzal a VLESS-Reality titkosítással."
+      }
+    },
+    "sideloading": {
+      "title": "APK oldalletöltési útmutató",
+      "badge": "Cenzúrázott régióknak",
+      "intro": "Ha olyan országban van, ahol a Google Play korlátozott vagy a VPN-alkalmazásokat eltávolították az áruházból, a Doppler VPN-t közvetlenül az APK-fájlból telepítheti. Kövesse gondosan ezeket a lépéseket.",
+      "step1": {
+        "title": "Ismeretlen források engedélyezése",
+        "description": "Menjen a Beállítások > Alkalmazások > Speciális alkalmazáshozzáférés > Ismeretlen alkalmazások telepítése. Válassza ki böngészőjét vagy fájlkezelőjét és kapcsolja be az 'Engedélyezés ebből a forrásból' opciót."
+      },
+      "step2": {
+        "title": "APK letöltése",
+        "description": "Szerezze be a legújabb Doppler VPN APK-t hivatalos Telegram botunktól: @dopplercreatebot. Ez biztosítja, hogy mindig az eredeti, nem módosított fájlt kapja."
+      },
+      "step3": {
+        "title": "APK telepítése",
+        "description": "Nyissa meg a letöltött .apk fájlt és nyomja meg a 'Telepítés' gombot. Az Android figyelmeztetést jeleníthet meg az ismeretlen alkalmazásokról — ez normális az oldalletöltött alkalmazásoknál."
+      },
+      "step4": {
+        "title": "Ellenőrzés és csatlakozás",
+        "description": "Nyissa meg a Doppler VPN-t és ellenőrizze, hogy az alkalmazás megfelelően működik. Az alkalmazásnak fiók vagy regisztráció nélkül kell csatlakoznia — egyszerűen nyomja meg a csatlakozást."
+      },
+      "security": {
+        "title": "Biztonsági megjegyzés",
+        "description": "A Doppler VPN APK-t kizárólag hivatalos Telegram botunktól (@dopplercreatebot) vagy a hivatalos weboldalról (www.dopplervpn.org) töltse le. Soha ne telepítsen APK-fájlokat harmadik féltől — rosszindulatú szoftvert vagy módosított kódot tartalmazhatnak."
+      }
+    },
+    "requirements": {
+      "title": "Rendszerkövetelmények",
+      "os": {
+        "title": "Operációs rendszer",
+        "value": "Android 8.0 (Oreo) vagy újabb"
+      },
+      "battery": {
+        "title": "Akkumulátor-hatás",
+        "value": "Minimális — kevesebb mint 2% többlet akkumulátor-fogyasztás bekapcsolt Always-On VPN-nel"
+      },
+      "storage": {
+        "title": "Tárhely",
+        "value": "15 MB alatti alkalmazásméret, 5 MB alatti RAM-használat csatlakozás közben"
+      },
+      "permissions": {
+        "title": "Szükséges engedélyek",
+        "value": "Csak VPN-csatlakozási engedély — nincs hozzáférés névjegyekhez, fényképekhez vagy fájlokhoz"
+      },
+      "compatibility": {
+        "title": "Kompatibilis eszközök"
+      }
+    },
+    "cta": {
+      "title": "Szerezze be a Doppler VPN-t Androidra most",
+      "subtitle": "Ingyenes, privát és észlelhetetlen. Nincs regisztráció, nincs fiók, nincs adatgyűjtés. Töltse le a Google Playből vagy szerezze be az APK-t korlátozott régióknak.",
+      "googlePlay": "Google Play Store",
+      "downloadApk": "APK letöltése",
+      "alsoOnIos": "iOS-en is elérhető",
+      "telegramBot": "Telegram Bot",
+      "telegramChannelRu": "Telegram csatorna (RU)",
+      "telegramChannelEn": "Telegram csatorna (EN)"
+    },
+    "related": {
+      "noRegistration": "VPN regisztráció nélkül",
+      "noRegistrationDesc": "Használjon VPN-t feliratkozás vagy fiók nélkül",
+      "vless": "VLESS-Reality protokoll",
+      "vlessDesc": "Tudja meg, hogyan győzi le a VLESS a mély csomagellenőrzést",
+      "ios": "VPN iOS-re",
+      "iosDesc": "Töltse le a Doppler VPN-t iPhone-ra és iPadre"
     }
   }
 }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { createUntypedAdminClient } from "@/lib/supabase/admin";
 
 export async function PATCH(
   request: NextRequest,
@@ -17,8 +18,7 @@ export async function PATCH(
       return NextResponse.json({ error: "Invalid tier" }, { status: 400 });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const client = adminClient as any;
+    const untypedClient = createUntypedAdminClient();
 
     const updateData: Record<string, unknown> = {
       subscription_tier,
@@ -44,7 +44,7 @@ export async function PATCH(
       updateData.subscription_store = "admin";
     }
 
-    const { error: updateErr } = await client
+    const { error: updateErr } = await untypedClient
       .from("accounts")
       .update(updateData)
       .eq("id", id);
@@ -67,11 +67,10 @@ export async function DELETE(
   try {
     const { id } = await params;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const client = adminClient as any;
+    const untypedClient = createUntypedAdminClient();
 
     // Get account_id first
-    const { data: account } = await client
+    const { data: account } = await untypedClient
       .from("accounts")
       .select("account_id")
       .eq("id", id)
@@ -82,19 +81,19 @@ export async function DELETE(
     }
 
     // Delete configs (uses text VPN-XXXX), device sessions (uses UUID), then account
-    const { error: configErr } = await client
+    const { error: configErr } = await untypedClient
       .from("vpn_user_configs")
       .delete()
       .eq("account_id", account.account_id);
     if (configErr) throw new Error(`Failed to delete configs: ${configErr.message}`);
 
-    const { error: sessErr } = await client
+    const { error: sessErr } = await untypedClient
       .from("device_sessions")
       .delete()
       .eq("account_id", id);
     if (sessErr) throw new Error(`Failed to delete sessions: ${sessErr.message}`);
 
-    const { error: delErr } = await client
+    const { error: delErr } = await untypedClient
       .from("accounts")
       .delete()
       .eq("id", id);

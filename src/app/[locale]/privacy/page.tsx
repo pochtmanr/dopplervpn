@@ -16,16 +16,30 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "privacy" });
+  const title = t("title");
+  const description = t("intro");
 
   return {
-    title: t("title"),
-    description: t("intro"),
+    title,
+    description,
     alternates: {
       canonical: `${baseUrl}/${locale}/privacy`,
       languages: Object.fromEntries([
         ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/privacy`]),
         ["x-default", `${baseUrl}/en/privacy`],
       ]),
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${baseUrl}/${locale}/privacy`,
+      siteName: "Doppler VPN",
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
     },
   };
 }

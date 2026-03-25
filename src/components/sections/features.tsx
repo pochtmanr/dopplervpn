@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -39,9 +40,9 @@ const featureIcons: Record<string, React.ReactNode> = {
 };
 
 /* ─── Bento grid layout ─── */
-const featureLayout: { key: string; colSpan: string; hasImage?: boolean; imagePath?: string; isWide?: boolean }[] = [
-  { key: "noRegistration", colSpan: "md:col-span-2", hasImage: true, imagePath: "/images/features/1.avif" },
-  { key: "vlessReality", colSpan: "" },
+const featureLayout: { key: string; colSpan: string; hasImage?: boolean; imagePath?: string; isWide?: boolean; href?: string }[] = [
+  { key: "noRegistration", colSpan: "md:col-span-2", hasImage: true, imagePath: "/images/features/1.avif", href: "/no-registration-vpn" },
+  { key: "vlessReality", colSpan: "", href: "/vless-vpn" },
   { key: "smartRouting", colSpan: "" },
   { key: "adBlocker", colSpan: "" },
   { key: "minimalData", colSpan: "" },
@@ -108,30 +109,34 @@ export function Features() {
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {featureLayout.map(({ key, colSpan, hasImage, imagePath, isWide }, i) => (
-          <Reveal key={key} delay={i * 50} className={colSpan}>
-            {hasImage && imagePath ? (
-              <FeaturedCard
-                featureKey={key}
-                title={t(`items.${key}.title`)}
-                description={t(`items.${key}.description`)}
-                imagePath={imagePath}
-              />
-            ) : isWide ? (
-              <WideCard
-                featureKey={key}
-                title={t(`items.${key}.title`)}
-                description={t(`items.${key}.description`)}
-              />
-            ) : (
-              <FeatureCard
-                featureKey={key}
-                title={t(`items.${key}.title`)}
-                description={t(`items.${key}.description`)}
-              />
-            )}
-          </Reveal>
-        ))}
+        {featureLayout.map(({ key, colSpan, hasImage, imagePath, isWide, href }, i) => {
+          const card = hasImage && imagePath ? (
+            <FeaturedCard
+              featureKey={key}
+              title={t(`items.${key}.title`)}
+              description={t(`items.${key}.description`)}
+              imagePath={imagePath}
+            />
+          ) : isWide ? (
+            <WideCard
+              featureKey={key}
+              title={t(`items.${key}.title`)}
+              description={t(`items.${key}.description`)}
+            />
+          ) : (
+            <FeatureCard
+              featureKey={key}
+              title={t(`items.${key}.title`)}
+              description={t(`items.${key}.description`)}
+            />
+          );
+
+          return (
+            <Reveal key={key} delay={i * 50} className={colSpan}>
+              {href ? <Link href={href} className="block h-full">{card}</Link> : card}
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );

@@ -4,6 +4,7 @@ import { rateLimit } from '@/lib/rate-limit';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const VALID_METHODS = ['email', 'telegram'] as const;
 
 export async function POST(req: NextRequest) {
   // Strict rate limit: 3 updates per minute per IP
@@ -17,8 +18,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid account ID' }, { status: 400 });
     }
 
-    if (!contactMethod || !contactValue) {
-      return NextResponse.json({ error: 'Missing contact fields' }, { status: 400 });
+    if (!contactMethod || !VALID_METHODS.includes(contactMethod as (typeof VALID_METHODS)[number])) {
+      return NextResponse.json({ error: 'contactMethod must be "email" or "telegram"' }, { status: 400 });
+    }
+
+    if (!contactValue || typeof contactValue !== 'string') {
+      return NextResponse.json({ error: 'Missing contactValue' }, { status: 400 });
     }
 
     if (contactMethod === 'email' && !EMAIL_REGEX.test(contactValue)) {

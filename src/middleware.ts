@@ -78,6 +78,27 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+  // Check for deleted blog posts — return 410 Gone so Google stops recrawling
+  const blogMatch = pathname.match(/^\/[a-z]{2}(?:-[a-zA-Z]+)?\/blog\/([a-z0-9-]+)$/);
+  if (blogMatch) {
+    const slug = blogMatch[1];
+    const { createClient } = await import("@supabase/supabase-js");
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+    // Check if slug exists but isn't published (deleted/draft)
+    const { data: post } = await supabase
+      .from("blog_posts")
+      .select("status")
+      .eq("slug", slug)
+      .single();
+
+    if (post && post.status !== "published") {
+      return new NextResponse("Gone", { status: 410 });
+    }
+  }
+
   // Public routes — i18n middleware
   return intlMiddleware(request);
 }
@@ -87,8 +108,8 @@ export const config = {
     // Admin routes
     "/admin-dvpn/:path*",
     "/api/admin/:path*",
-    // i18n routes
+    // i18n routes — must match all locales in src/i18n/routing.ts
     "/",
-    "/(en|he|ru|es|pt|fr|zh|de|fa|ar|hi|id|tr|vi|th|ms|ko|ja|tl|ur|sw)/:path*",
+    "/(en|ru|es|pt|fr|zh|zh-Hant|de|he|fa|ar|hi|id|tr|vi|th|ms|ko|ja|tl|ur|sw|az|pl|uk|bg|bn|ca|cs|da|el|et|fi|hr|hu|it|lt|lv|nb|nl|ro|sk|sl|sv)/:path*",
   ],
 };

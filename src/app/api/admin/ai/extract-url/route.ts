@@ -15,7 +15,27 @@ export async function POST(request: Request) {
   }
 
   try {
-    new URL(url); // Validate URL format
+    const parsed = new URL(url);
+    // Only allow HTTPS URLs to prevent SSRF with file://, ftp://, etc.
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      return NextResponse.json({ error: "Only HTTP/HTTPS URLs are allowed" }, { status: 400 });
+    }
+    // Block private/internal hostnames
+    const hostname = parsed.hostname;
+    if (
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname === "0.0.0.0" ||
+      hostname === "::1" ||
+      hostname.startsWith("10.") ||
+      hostname.startsWith("172.") ||
+      hostname.startsWith("192.168.") ||
+      hostname === "169.254.169.254" ||
+      hostname.endsWith(".internal") ||
+      hostname.endsWith(".local")
+    ) {
+      return NextResponse.json({ error: "Internal URLs are not allowed" }, { status: 400 });
+    }
   } catch {
     return NextResponse.json({ error: "Invalid URL format" }, { status: 400 });
   }
