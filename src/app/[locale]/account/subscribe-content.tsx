@@ -196,7 +196,6 @@ function SubscribeInner() {
       setStep(2);
       fetchAccountInfo(savedId);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* ── Derived: what email does this user have? ────────────────── */

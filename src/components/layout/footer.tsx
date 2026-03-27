@@ -163,6 +163,14 @@ export async function Footer() {
               </li>
               <li>
                 <Link
+                  href="/refund"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("refundPolicy")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm"
                 >

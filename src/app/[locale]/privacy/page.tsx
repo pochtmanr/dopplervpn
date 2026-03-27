@@ -48,9 +48,15 @@ const sectionKeys = [
   "noLogs",
   "collect",
   "vpnData",
+  "legalBasis",
+  "rights",
   "security",
   "thirdParty",
+  "international",
+  "retention",
+  "cookies",
   "children",
+  "changes",
   "contact",
 ] as const;
 

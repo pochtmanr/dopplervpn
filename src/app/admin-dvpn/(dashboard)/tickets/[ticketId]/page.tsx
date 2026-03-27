@@ -48,7 +48,7 @@ export default function TicketDetailPage() {
   const router = useRouter();
   const notesRef = useRef<HTMLTextAreaElement>(null);
   const [ticket, setTicket] = useState<Ticket | null>(null);
-  const [account, setAccount] = useState<AccountInfo | null>(null);
+  const [_account, setAccount] = useState<AccountInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [statusUpdating, setStatusUpdating] = useState(false);
   const [notesSaved, setNotesSaved] = useState(false);

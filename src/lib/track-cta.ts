@@ -6,6 +6,10 @@ export type CtaLocation =
   | "blog-inline"
   | "blog-bottom"
   | "bypass-censorship"
+  | "no-registration-vpn"
+  | "vless-vpn"
+  | "vpn-for-ios"
+  | "vpn-for-android"
   | "footer"
   | "downloads";
 

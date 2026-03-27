@@ -15,7 +15,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "terms" });
+  const t = await getTranslations({ locale, namespace: "refund" });
   const title = t("title");
   const description = t("intro");
 
@@ -23,16 +23,16 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `${baseUrl}/${locale}/terms`,
+      canonical: `${baseUrl}/${locale}/refund`,
       languages: Object.fromEntries([
-        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/terms`]),
-        ["x-default", `${baseUrl}/en/terms`],
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/refund`]),
+        ["x-default", `${baseUrl}/en/refund`],
       ]),
     },
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/${locale}/terms`,
+      url: `${baseUrl}/${locale}/refund`,
       siteName: "Doppler VPN",
       type: "website",
     },
@@ -45,26 +45,22 @@ export async function generateMetadata({
 }
 
 const sectionKeys = [
-  "service",
-  "eligibility",
-  "accounts",
-  "subscription",
-  "usage",
-  "ip",
-  "liability",
-  "indemnity",
-  "termination",
-  "governing",
-  "changes",
-  "severability",
+  "euRights",
+  "ukRights",
+  "goodwill",
+  "webSubscriptions",
+  "mobileSubscriptions",
+  "renewals",
+  "exclusions",
+  "howTo",
   "contact",
 ] as const;
 
-export default async function TermsPage({ params }: PageProps) {
+export default async function RefundPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("terms");
+  const t = await getTranslations("refund");
 
   return (
     <>
