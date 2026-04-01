@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next";
-import { routing } from "@/i18n/routing";
 import { createStaticClient } from "@/lib/supabase/server";
 
 const baseUrl = "https://www.dopplervpn.org";
+
+// Priority locales for sitemap — keeps crawl budget focused on a new domain.
+// All 44 locales still work via hreflang tags in the layout; they just aren't in the sitemap.
+const sitemapLocales = ["en", "ru", "es", "de", "fr", "pt", "zh", "ar"] as const;
 
 interface SitemapPost {
   slug: string;
@@ -12,7 +15,7 @@ interface SitemapPost {
 function buildAlternates(path: string) {
   return {
     languages: Object.fromEntries([
-      ...routing.locales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ...sitemapLocales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
       ["x-default", `${baseUrl}/en${path}`],
     ]),
   };
@@ -30,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = postsRaw as SitemapPost[] | null;
 
   // Static pages — one entry per page with hreflang alternates
-  const staticPages = ["", "/downloads", "/privacy", "/terms", "/refund", "/blog", "/support", "/about", "/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android"];
+  const staticPages = ["", "/downloads", "/privacy", "/terms", "/refund", "/blog", "/support", "/about", "/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android", "/vpn-for-macos", "/vpn-for-windows"];
 
   const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
     url: `${baseUrl}/en${page}`,
@@ -42,7 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           ? ("daily" as const)
           : ("monthly" as const),
     priority:
-      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : ["/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android"].includes(page) ? 0.7 : page === "/support" ? 0.6 : page === "/about" ? 0.6 : 0.5,
+      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : ["/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android", "/vpn-for-macos", "/vpn-for-windows"].includes(page) ? 0.7 : page === "/support" ? 0.6 : page === "/about" ? 0.6 : 0.5,
     alternates: buildAlternates(page),
   }));
 
