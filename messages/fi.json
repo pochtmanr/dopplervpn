@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Doppler VPN — Turvallinen lokiton VPN ja välityspalvelin yksityisyydelle",
-    "description": "Doppler VPN suojaa yksityisyytesi VLESS-Reality-välityspalvelinsalauksella, DNS-suojauksella ja tiukalla lokittomuuskäytännöllä. Ohittaa DPI:n ja valtiollisen sensuurin. Saatavilla iOS-, Android-, macOS- ja Windows-laitteille."
+    "description": "Doppler VPN — nopea ja yksityinen VPN VLESS-Reality-salauksella. Ei lokeja, ohittaa sensuurin. Saatavilla iOS-, Android-, macOS- ja Windows-laitteille."
   },
   "nav": {
     "features": "Ominaisuudet",
@@ -22,7 +22,7 @@
     "headlinePart1a": "Toimii siellä, missä muut VPN:t",
     "headlinePart1b": "estetään.",
     "headlinePart2": "",
-    "subheadline": "Rakennettu VLESS-Reality-tekniikalla — liikenteesi näyttää tavalliselta HTTPS-liikenteeltä. Syväpaketti-inspektio ei havaitse sitä. Ei rekisteröitymistä, ei lokeja, ei seurantaa.",
+    "subheadline": "Doppler VPN perustuu VLESS-Reality-tekniikkaan — liikenteesi näyttää tavalliselta HTTPS:ltä. Syväpaketti-inspektio ei havaitse sitä. Ei rekisteröitymistä, ei lokeja, ei seurantaa.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Henkilötietoja ei tarvita",
@@ -298,7 +298,9 @@
       "titlePlayful": "",
       "subtitle": "Turvallinen, yksityinen VPN ilman rekisteröitymistä. Yhdistä heti VLESS-Reality-salauksella ja DNS-suojauksella.",
       "cta": "Hanki Doppler Pro",
-      "downloads": "Lataukset"
+      "downloads": "Lataukset",
+      "learnIos": "VPN iOS:lle",
+      "learnAndroid": "VPN Androidille"
     }
   },
   "footer": {
@@ -322,7 +324,9 @@
     "vlessVpn": "VLESS-protokolla",
     "noRegistration": "VPN ilman rekisteröitymistä",
     "vpnForIos": "VPN iOS:lle",
-    "vpnForAndroid": "VPN Androidille"
+    "vpnForAndroid": "VPN Androidille",
+    "vpnForMacos": "VPN Macille",
+    "vpnForWindows": "VPN Windowsille"
   },
   "privacy": {
     "title": "Tietosuojakäytäntö",
@@ -698,17 +702,17 @@
       "step1": "Lataa Doppler VPN App Storesta",
       "step2": "Avaa sovellus — tilisi luodaan automaattisesti",
       "step3": "Valitse paketti ja tilaa",
-      "step4": "Napauta Yhdistä — olet suojattu!"
+      "step4": "Napauta Yhdistä — olet suojattu!",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Hanki Google Playsta",
-      "buttonApk": "Lataa APK (erillinen)",
-      "meta": "APK · v1.2.0 · 95 MB",
       "step1": "Lataa Doppler VPN Google Playsta tai APK:na",
       "step2": "Avaa sovellus — tilisi luodaan automaattisesti",
       "step3": "Valitse paketti ja tilaa",
-      "step4": "Napauta Yhdistä — olet suojattu!"
+      "step4": "Napauta Yhdistä — olet suojattu!",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -716,20 +720,18 @@
       "step1": "Lataa Doppler VPN Mac App Storesta",
       "step2": "Avaa sovellus — tilisi luodaan automaattisesti",
       "step3": "Valitse paketti ja tilaa",
-      "step4": "Napauta Yhdistä — olet suojattu!"
+      "step4": "Napauta Yhdistä — olet suojattu!",
+      "learnMore": "Lue lisää VPN:stä Macille"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "Tulossa pian",
-      "inDevelopment": "Kehitteillä",
-      "waitlistDescription": "Rakennamme natiivista Windows-asiakasta samalla VLESS-Reality-salauksella. Liity odotuslistalle saadaksesi ilmoituksen, kun se on valmis.",
-      "waitlistPrivacy": "Käytämme sähköpostiasi ainoastaan ilmoittaaksemme Windows-julkaisusta. Ei roskapostia."
-    },
-    "waitlist": {
-      "placeholder": "sinun@sahkoposti.fi",
-      "button": "Ilmoita minulle",
-      "success": "Olet listalla! Lähetämme sähköpostia, kun se on valmis.",
-      "error": "Jokin meni pieleen. Yritä uudelleen."
+      "buttonX64": "Lataa Windowsille (x64)",
+      "buttonArm64": "Lataa Windowsille (ARM64)",
+      "step1": "Lataa asennusohjelma järjestelmällesi (x64 useimmille PC:ille)",
+      "step2": "Suorita asennusohjelma ja seuraa ohjattua asennusta",
+      "step3": "Avaa Doppler VPN — tilisi luodaan automaattisesti",
+      "step4": "Valitse paketti, tilaa ja yhdistä!",
+      "learnMore": "Lue lisää VPN:stä Windowsille"
     }
   },
   "support": {
@@ -1518,6 +1520,24 @@
         "fingerprint": "Ei mitään"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Voiko Doppler VPN ohittaa valtion sensuurin?",
+        "answer": "Kyllä. Doppler käyttää VLESS-Realitya, joka tekee VPN-liikenteestä erottamattoman tavallisesta HTTPS:stä. Se ohittaa DPI:n, TSPU:n ja Suuren palomuurin ilman havaittavia VPN-tunnisteita."
+      },
+      "q2": {
+        "question": "Toimiiko Doppler VPN Venäjällä, Kiinassa ja Iranissa?",
+        "answer": "Kyllä. Doppler on rakennettu nimenomaan sensuroituihin alueisiin. Verkkotunnuksemme on Roskomnadzor-viranomaisen estämä, mikä todistaa teknologiamme toimivuuden."
+      },
+      "q3": {
+        "question": "Mikä tekee VLESS-Realitysta paremman kuin OpenVPN tai WireGuard sensuurin ohittamiseen?",
+        "answer": "OpenVPN:llä ja WireGuardilla on tunnistettavat pakettitunnisteet, jotka DPI-järjestelmät tunnistavat välittömästi. VLESS-Reality suorittaa aidon TLS-kättelyn oikealla verkkosivuston sertifikaatilla."
+      },
+      "q4": {
+        "question": "Mitä tapahtuu, jos Dopplerin palvelimet estetään?",
+        "answer": "Doppler kierrättää palvelinpäätepisteitä ja IP-osoitteita automaattisesti. Jos yksi päätepiste tunnistetaan, verkko mukautuu. Telegram-bottimme tarjoaa välittömän pääsyn päivitettyihin palvelinkonfiguraatioihin."
+      }
+    },
     "cta": {
       "title": "Emme jätä ketään jälkeen",
       "subtitle": "Doppler VPN on rakennettu nimenomaan rajoitettuja verkkoja varten. Parannamme jatkuvasti infrastruktuuriamme, kierrätämme palvelimia ja päivitämme protokollia pysyäksemme jokaisen uuden estotekniikan edellä. Internet-vapautesi ei ole neuvoteltavissa.",
@@ -1730,6 +1750,24 @@
         "description": "Olet nyt suojattu sotilastason salauksella. Todellinen IP-osoitteesi on piilotettu, liikenteesi on lukukelvotonta, eikä kukaan — emme edes me — tiedä kuka olet. Todella anonyymi VPN ilman rekisteröitymistä."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Miten Doppler VPN toimii ilman rekisteröitymistä?",
+        "answer": "Doppler käyttää laitepohjaista todennusta. Sovelluksen avaamisen yhteydessä laitteellesi luodaan paikallisesti kryptografinen avain. Tämä avain todentaa sinut palvelimilla — sähköpostia, puhelinnumeroa tai tiliä ei tarvita."
+      },
+      "q2": {
+        "question": "Onko VPN ilman tiliä turvallinen?",
+        "answer": "Kyllä, turvallisempi. Perinteiset tilit luovat tietokantoja, jotka voidaan murtaa tai vaatia oikeudessa luovutettavaksi. Doppler ei tallenna henkilötietoja."
+      },
+      "q3": {
+        "question": "Voinko käyttää Doppleria useilla laitteilla ilman tiliä?",
+        "answer": "Kyllä. Jokainen laite luo oman uniikin avaimensa. Tilauksesi toimii useilla laitteilla. Voit halutessasi yhdistää laitteita palautussähköpostilla, mutta se ei ole koskaan pakollista."
+      },
+      "q4": {
+        "question": "Mitä tietoja Doppler kerää?",
+        "answer": "Doppler ei kerää sähköpostiasi, puhelinnumeroasi, nimeäsi, selaushistoriaasi, IP-lokeja tai yhteysaikaleimoja. Emme voi fyysisesti luovuttaa tietoja, joita emme ole koskaan tallentaneet."
+      }
+    },
     "cta": {
       "title": "Valmis VPN:ään, joka ei tunne sinua?",
       "subtitle": "Liity tuhansien käyttäjien joukkoon, jotka valitsivat VPN:n ilman rekisteröitymistä. Ei sähköpostia tarvita, ei tiliä luotavaksi, ei henkilötietoja vaarannettavaksi. Lataa Doppler ja yhdistä sekunneissa — täysin ilmainen, täysin anonyymi.",
@@ -1904,6 +1942,24 @@
         "description": "Täydellinen VLESS-Reality VPN -kokemus on saatavilla iOS:lla (App Store), Androidilla (Google Play) ja Telegram-botimme kautta konfiguraatiopohjaiseen käyttöön. Jokainen alusta käyttää samaa optimoitua Xray-core-moottoria ja samaa palvelininfrastruktuuria."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Mikä on VLESS-Reality-protokolla?",
+        "answer": "VLESS-Reality on seuraavan sukupolven välityspalvelinprotokolla, joka tekee VPN-liikenteestä erottamattoman tavallisesta HTTPS-selailusta. Se suorittaa aidon TLS-kättelyn oikealla verkkosivuston sertifikaatilla."
+      },
+      "q2": {
+        "question": "Onko VLESS-Reality nopeampi kuin WireGuard?",
+        "answer": "VLESS-Realityn nopeudet ovat verrattavissa WireGuardiin minimaalisella ylikuormituksella. Pääetu ei ole raaka nopeus vaan havaitsemattomuus — WireGuard estetään heti DPI-järjestelmillä."
+      },
+      "q3": {
+        "question": "Pitääkö minun konfiguroida Xray käyttääkseni VLESS:ää?",
+        "answer": "Ei Dopplerilla. Perinteinen VLESS-asennus vaatii JSON-konfiguraatioiden muokkaamista ja avaintenhallintaa. Doppler hoitaa kaiken konfiguraation automaattisesti."
+      },
+      "q4": {
+        "question": "Mitkä alustat tukevat VLESS-Realitya?",
+        "answer": "Doppler VPN tarjoaa VLESS-Realityn iOS:lle (App Store), Androidille (Google Play ja APK) ja Telegram-botille konfiguraatiopohjaiseen käyttöön."
+      }
+    },
     "cta": {
       "title": "Kokeile VLESS VPN -sovellusta, joka vain toimii",
       "subtitle": "Lataa Doppler ja koe VLESS-Reality — näkymättömäksi rakennettu protokolla. Yksi napautus. Ei konfigurointia. Ei kompromisseja.",
@@ -1929,33 +1985,43 @@
     },
     "hero": {
       "title": "Doppler VPN iPhonelle ja iPadille",
-      "subtitle": "Ilmainen, turvallinen VPN ilman rekisteröitymistä. Lataa App Storesta."
+      "subtitle": "Ilmainen, turvallinen VPN ilman rekisteröitymistä. Lataa App Storesta.",
+      "cta": "Download on the App Store"
     },
     "features": {
       "title": "Miksi Doppler iOS:lle?",
+      "subtitle": "Doppler VPN is designed from the ground up for iPhone and iPad users who demand real privacy without compromising speed or usability.",
+      "vlessEncryption": {
+        "title": "VLESS-Reality Encryption",
+        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring tools. The same technology used to bypass the Great Firewall of China."
+      },
       "noRegistration": {
         "title": "Ilman rekisteröitymistä",
         "description": "Aloita VPN:n käyttö välittömästi — ei sähköpostia, ei puhelinnumeroa, ei tilin luontia. Lataa ja yhdistä."
       },
-      "vlessProtocol": {
-        "title": "VLESS-Reality-protokolla",
-        "description": "Seuraavan sukupolven salaus, joka naamioi VPN-liikenteen tavalliseksi HTTPS-selailuksi. Palomuurien ja DPI-järjestelmien havaitsematon."
+      "oneTapConnect": {
+        "title": "One-Tap Connect",
+        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
       },
-      "adBlocker": {
-        "title": "Sisäänrakennettu mainosten esto",
-        "description": "Estä tungettelevat mainokset, seurantaohjelmat ja haitalliset verkkotunnukset DNS-tasolla. Nopeampaa selailua pienemmällä datan kulutuksella."
+      "bypassCensorship": {
+        "title": "Bypass Censorship & DPI",
+        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
       },
-      "alwaysOn": {
-        "title": "Aina päällä -VPN",
-        "description": "Yhdistää automaattisesti uudelleen vaihdettaessa Wi-Fin ja mobiiliverkon välillä. Yhteytesi pysyy suojattuna 24/7."
+      "noLogs": {
+        "title": "Strict No-Logs Policy",
+        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
       },
-      "smartRouting": {
-        "title": "Älykäs reititys",
-        "description": "Älykäs palvelinvalinta valitsee nopeimman käytettävissä olevan solmun. Optimoitu suoratoistolle, pelaamiselle ja päivittäiselle selailulle."
+      "globalServers": {
+        "title": "6 Global Server Locations",
+        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
       },
-      "dnsProtection": {
-        "title": "DNS-suojaus",
-        "description": "Salatut DNS-kyselyt estävät ISP:täsi näkemästä, mitä verkkosivustoja vierailet. Täydellinen DNS-vuotosuojaus sisältyy."
+      "freeTrial": {
+        "title": "3-Day Free Trial",
+        "description": "Try Doppler VPN with full access to all features for 3 days — no credit card required upfront. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month."
+      },
+      "iphoneIpad": {
+        "title": "Works on iPhone & iPad",
+        "description": "Native iOS app built with Apple's Network Extension framework. Full support for iPhone (8 and later), all iPad models, and Apple Silicon Macs via iPad app compatibility. Supports iPadOS Split View and multitasking."
       }
     },
     "howItWorks": {
@@ -1976,81 +2042,6 @@
       "step4": {
         "title": "Selaa turvallisesti",
         "description": "Siinä kaikki. Liikenteesi on salattua, IP-osoitteesi on piilotettu ja mainokset on estetty. Käytä mitä tahansa sovellusta tai verkkosivustoa vapaasti."
-      }
-    },
-    "iosFeatures": {
-      "title": "iOS-kohtaiset ominaisuudet",
-      "subtitle": "Natiivisti rakennettu Applen ekosysteemille syvällä järjestelmäintegraatiolla.",
-      "networkExtension": {
-        "title": "Network Extension (järjestelmätason VPN)",
-        "description": "Doppler käyttää Applen Network Extension -kehystä toimiakseen todellisena järjestelmätason VPN:nä. Kaikki liikenne jokaisesta sovelluksesta kulkee salatun tunnelin läpi — ei vain selainliikenne. Tämä tarjoaa saman suojan, jonka Apple vaatii yritysten VPN-ratkaisilta."
-      },
-      "alwaysOnVpn": {
-        "title": "Aina päällä -VPN",
-        "description": "Ota käyttöön Aina päällä -tila ja Doppler yhdistää automaattisesti uudelleen aina kun yhteytesi katkeaa. Vaihdat Wi-Fistä mobiiliverkkoon? Herätät puhelimesi lepotilasta? VPN palautuu alle sekunnissa, joten et ole koskaan suojaamaton."
-      },
-      "perAppVpn": {
-        "title": "Sovelluskohtainen VPN",
-        "description": "Valitse, mitkä sovellukset reititetään VPN-tunnelin kautta ja mitkä yhdistävät suoraan. Pidä pankkisovellukset paikallisessa verkossa samalla kun suojaat selaimia ja viestisovelluksia VPN:n kautta."
-      },
-      "widget": {
-        "title": "Kotinäytön widget",
-        "description": "Lisää Doppler-widget kotinäytöllesi tai lukitusnäytöllesi välittömän yhteystilan ja yhden napautuksen kytkennän saamiseksi. Näe nykyinen palvelin, yhteysaika ja suojaustila yhdellä silmäyksellä."
-      },
-      "ipadSplitView": {
-        "title": "iPad Split View -tuki",
-        "description": "Täysi tuki iPadin moniajoon. Käytä Doppler VPN:ää muiden sovellusten rinnalla Split View- tai Slide Over -tilassa. VPN-tila näkyy aina tilarivillä riippumatta siitä, mikä sovellus on etualalla."
-      }
-    },
-    "privacy": {
-      "title": "Yksityisyys Apple-laitteilla",
-      "subtitle": "Doppler täydentää Applen jo tarjoamaa suojaa — ja paikkaa aukot, joita varten VPN on suunniteltu.",
-      "intro": "Apple johtaa alaa laitetason yksityisyydessä — App Tracking Transparency, Mail Privacy Protection ja Safarin Intelligent Tracking Prevention. Mutta on kerros, jota Apple ei voi suojata: verkkoliikennettäsi.",
-      "appleProtects": {
-        "title": "Mitä Apple suojaa",
-        "item1": "Sovellustason seuranta (ATT-kehotteet)",
-        "item2": "Laitteella oleva datan salaus (Secure Enclave)",
-        "item3": "Safarin seurantaohjelmien esto",
-        "item4": "Sähköpostin pikseliseurannan esto"
-      },
-      "dopplerAdds": {
-        "title": "Mitä Doppler VPN lisää",
-        "item1": "Piilottaa todellisen IP-osoitteesi kaikilta verkkosivustoilta ja palveluilta",
-        "item2": "Salaa kaiken verkkoliikenteen VLESS-Realitylla (havaitsematon)",
-        "item3": "Estää DNS-tason seurannan ja mainosverkkotunnukset",
-        "item4": "Estää ISP:n liikennevalvonnan ja -kuristuksen"
-      },
-      "noLogs": "Doppler käyttää laitepohjaista todennusta — ei tilejä, ei sähköposteja, ei lokeja. Emme voi tunnistaa sinua, koska emme koskaan kerää tunnistavia tietoja."
-    },
-    "compatibility": {
-      "title": "Järjestelmävaatimukset ja yhteensopivuus",
-      "os": {
-        "label": "Käyttöjärjestelmä",
-        "value": "iOS 16.0 tai uudempi"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8 ja uudemmat (kaikki iOS 16 -tuetut mallit)"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "Kaikki iPad-mallit, joissa iPadOS 16 tai uudempi"
-      },
-      "mac": {
-        "label": "Mac (Apple Silicon)",
-        "value": "M1, M2, M3, M4 Mac iPad-sovellusyhteensopivuuden kautta"
-      },
-      "size": {
-        "label": "Sovelluksen koko",
-        "value": "Alle 30 MB"
-      },
-      "battery": {
-        "label": "Akkuvaikutus",
-        "value": "Minimaalinen — VLESS on kevyt protokolla matalalla prosessorikuormalla"
-      },
-      "data": {
-        "label": "Dataylikuorma",
-        "value": "Alle 2 % lisädatan käyttöä verrattuna salaamattomaan selailuun"
       }
     },
     "faq": {
@@ -2084,10 +2075,8 @@
       "title": "Hanki Doppler VPN iOS:lle",
       "subtitle": "Ilmainen lataus. Ei rekisteröitymistä. Ei luottokorttia. Yhdistä sekunneissa.",
       "downloadIos": "Lataa App Storesta",
-      "downloadAndroid": "Saatavilla Google Playssa",
-      "telegramBot": "Käytä Telegram Botin kautta",
-      "telegramChannelRu": "Telegram-kanava (RU)",
-      "telegramChannelEn": "Telegram-kanava (EN)"
+      "otherPlatforms": "Available on other platforms",
+      "downloadsLink": "View all downloads"
     },
     "related": {
       "noRegistration": "VPN ilman rekisteröitymistä",
@@ -2106,56 +2095,42 @@
     "hero": {
       "title": "Doppler VPN Androidille",
       "subtitle": "Ilmainen VPN ilman rekisteröitymistä. Ei tiliä, ei sähköpostia, ei henkilötietoja. Saatavilla Google Playssa ja APK:na alueille, joilla Play Store on rajoitettu.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "Lataa APK"
+      "cta": "Get it on Google Play"
     },
     "features": {
       "title": "Miksi Doppler Androidille?",
       "subtitle": "Rakennettu erityisesti Android-käyttäjille, jotka tarvitsevat yksityisyyttä ilman kompromisseja. Ei rekisteröitymisiä, ei tiedonkeruuta, ei rajoituksia.",
+      "vlessEncryption": {
+        "title": "VLESS-Reality Encryption",
+        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring. The same technology used to bypass the Great Firewall of China."
+      },
       "noRegistration": {
         "title": "Ilman rekisteröitymistä",
         "description": "Avaa sovellus ja yhdistä välittömästi. Ei sähköpostia, ei puhelinnumeroa, ei tilin luontia. Henkilöllisyytesi pysyy yksityisenä ensimmäisestä napautuksesta lähtien."
       },
-      "vlessReality": {
-        "title": "VLESS-Reality-protokolla",
-        "description": "Sotilastason salaus, joka saa VPN-liikenteesi näyttämään tavalliselta HTTPS-selailulta. DPI-järjestelmien ja valtioiden palomuurien havaitsematon."
+      "oneTapConnect": {
+        "title": "One-Tap Connect",
+        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
       },
-      "adBlocker": {
-        "title": "Sisäänrakennettu mainosten esto",
-        "description": "Estä mainokset, seurantaohjelmat ja haitalliset verkkotunnukset DNS-tasolla. Nopeampaa selailua, pienempää datan kulutusta ja parempaa akun kestoa Android-laitteellasi."
+      "bypassCensorship": {
+        "title": "Bypass Censorship & DPI",
+        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
       },
-      "alwaysOn": {
-        "title": "Aina päällä -VPN",
-        "description": "Käyttää Androidin natiivitoimintoa Aina päällä -VPN varmistaakseen, että yhteytesi on suojattu 24/7, jopa uudelleenkäynnistyksen tai verkkomuutosten jälkeen."
+      "noLogs": {
+        "title": "Strict No-Logs Policy",
+        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
       },
-      "apkSideload": {
-        "title": "APK-sivulataus",
-        "description": "Etkö pääse Google Playhin? Lataa APK suoraan ja asenna manuaalisesti. Täydellinen käyttäjille Venäjällä, Iranissa, Kiinassa ja muilla sensuroituilla alueilla."
+      "globalServers": {
+        "title": "6 Global Server Locations",
+        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
       },
-      "dnsProtection": {
-        "title": "DNS-suojaus",
-        "description": "Kaikki DNS-kyselyt salataan ja reititetään turvallisten palvelinten kautta. Estää DNS-vuodot ja pysäyttää ISP:si näkemästä, mitä verkkosivustoja vierailet."
-      }
-    },
-    "install": {
-      "title": "Kaksi tapaa asentaa",
-      "subtitle": "Valitse asennustapa, joka sopii parhaiten tilanteeseesi. Molemmat antavat saman täysiominaisuuksisen VPN-kokemuksen.",
-      "playStore": {
-        "title": "Google Play Store",
-        "badge": "Suositeltu",
-        "benefit1": "Yhden napautuksen asennus, automaattiset päivitykset",
-        "benefit2": "Google Play Protectin vahvistama",
-        "benefit3": "Saumaton tilausten hallinta",
-        "cta": "Saatavilla Google Playssa"
+      "freeTrial": {
+        "title": "3-Day Free Trial",
+        "description": "Try Doppler VPN with full access to all features for 3 days. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month. Manage your subscription through Google Play."
       },
-      "apk": {
-        "title": "Suora APK-lataus",
-        "badge": "Rajoitetuille alueille",
-        "benefit1": "Toimii siellä, missä Google Play on estetty",
-        "benefit2": "Ei Google-tiliä tarvita",
-        "benefit3": "Samat ominaisuudet kuin Play Store -versiossa",
-        "note": "Ihanteellinen käyttäjille Venäjällä, Iranissa, Kiinassa ja muissa maissa, joissa Google Play Store on rajoitettu tai VPN-sovellukset on poistettu kaupasta.",
-        "cta": "Hanki APK Telegram Botin kautta"
+      "batteryEfficient": {
+        "title": "Battery-Efficient Background Service",
+        "description": "Doppler uses Android's native Always-On VPN framework with minimal battery impact. Less than 2% additional drain even with 24/7 protection enabled. Optimized for Samsung, Xiaomi, OnePlus, Pixel, and all major Android brands."
       }
     },
     "howItWorks": {
@@ -2178,86 +2153,39 @@
         "description": "Yhteytesi on nyt salattu ja havaitsematon. Käytä mitä tahansa verkkosivustoa, sovellusta tai palvelua ilman rajoituksia."
       }
     },
-    "androidFeatures": {
-      "title": "Android-kohtaiset ominaisuudet",
-      "subtitle": "Doppler VPN hyödyntää Androidin täyden kapasiteetin tarjotakseen turvallisimman ja sujuvimman kokemuksen.",
-      "alwaysOnVpn": {
-        "title": "Aina päällä -VPN",
-        "description": "Ota käyttöön Androidin sisäänrakennettu Aina päällä -VPN-asetus pitääksesi Dopplerin yhdistettynä jatkuvasti. Siirry kohtaan Asetukset > Verkko ja internet > VPN > Doppler VPN > ota Aina päällä käyttöön. Laitteesi yhdistää automaattisesti uudelleen uudelleenkäynnistysten tai verkkomuutosten jälkeen."
+    "faq": {
+      "title": "Frequently Asked Questions — Doppler VPN for Android",
+      "q1": {
+        "question": "Does Doppler VPN work on Samsung devices?",
+        "answer": "Yes. Doppler VPN is fully compatible with all Samsung Galaxy phones and tablets running Android 8.0 (Oreo) or later. This includes the Galaxy S series, Galaxy A series, Galaxy Z Fold, Galaxy Z Flip, and Galaxy Tab. Doppler integrates with Samsung's Always-On VPN settings for 24/7 protection."
       },
-      "splitTunneling": {
-        "title": "Split Tunneling",
-        "description": "Valitse, mitkä sovellukset kulkevat VPN:n kautta ja mitkä käyttävät tavallista yhteyttäsi. Reititä pankkisovellukset suoraan samalla kun pidät selaimet suojattuina. Määritä sovelluskohtaiset VPN-säännöt Dopplerin asetuksissa."
+      "q2": {
+        "question": "Does Doppler VPN drain battery?",
+        "answer": "No. Doppler VPN uses less than 2% additional battery even with Always-On VPN enabled. The VLESS-Reality protocol is designed for efficiency with minimal CPU overhead. For the best experience, exclude Doppler from Android's battery optimization in Settings > Apps > Doppler VPN > Battery > Unrestricted."
       },
-      "quickSettings": {
-        "title": "Pika-asetusruutu",
-        "description": "Lisää Doppler VPN Androidin Pika-asetuspaneeliin. Yhdistä tai katkaise yhteys yhdellä pyyhkäisyllä ja napautuksella — ilman sovelluksen avaamista. Saatavilla Android 8.0:sta eteenpäin."
+      "q3": {
+        "question": "How do I set up VPN on Android?",
+        "answer": "Setting up Doppler VPN on Android takes under 30 seconds: 1) Download from Google Play, 2) Open the app (no registration needed), 3) Tap Connect. Doppler handles all the technical setup automatically — it configures the VPN profile, selects the best server, and establishes an encrypted tunnel."
       },
-      "batteryOptimization": {
-        "title": "Akun optimointi",
-        "description": "Doppler kuluttaa minimaalisesti akkua. Parhaan Aina päällä -kokemuksen saamiseksi sulje Doppler pois Androidin akun optimoinnista: Asetukset > Sovellukset > Doppler VPN > Akku > Rajoittamaton. Tämä estää Androidia katkaisemasta VPN-yhteyttä taustalla."
+      "q4": {
+        "question": "Does it work in Russia, China, and Iran?",
+        "answer": "Yes. Doppler uses the VLESS-Reality protocol, which disguises VPN traffic as regular HTTPS web browsing. This makes it extremely difficult for censorship systems like Russia's TSPU, China's Great Firewall, or Iran's filtering infrastructure to detect and block. Doppler is specifically designed for users in heavily censored regions."
       },
-      "androidTv": {
-        "title": "Android TV -tuki",
-        "description": "Sivulataa Doppler VPN APK Android TV:lle tai TV-boksillesi suojataksesi suoratoistoliikenteesi. Käytä maantieteellisesti rajoitettua sisältöä isolla näytöllä samalla VLESS-Reality-salauksella."
-      }
-    },
-    "sideloading": {
-      "title": "APK-sivulatausopas",
-      "badge": "Sensuroituille alueille",
-      "intro": "Jos olet maassa, jossa Google Play on rajoitettu tai VPN-sovellukset on poistettu kaupasta, voit asentaa Doppler VPN:n suoraan APK-tiedostosta. Noudata näitä ohjeita huolellisesti.",
-      "step1": {
-        "title": "Ota käyttöön tuntemattomat lähteet",
-        "description": "Siirry kohtaan Asetukset > Sovellukset > Sovellusten erityiskäyttöoikeudet > Asenna tuntemattomia sovelluksia. Valitse selaimesi tai tiedostonhallinta ja ota käyttöön 'Salli tästä lähteestä'."
+      "q5": {
+        "question": "How do I cancel my subscription?",
+        "answer": "To cancel your Doppler VPN subscription on Android: Open Google Play > tap your profile icon > Payments & subscriptions > Subscriptions > Doppler VPN > Cancel subscription. Your access continues until the end of the current billing period."
       },
-      "step2": {
-        "title": "Lataa APK",
-        "description": "Hae uusin Doppler VPN APK viralliselta Telegram-botiltamme @dopplercreatebot. Tämä varmistaa, että saat aina aidon, muokkaamattoman tiedoston."
-      },
-      "step3": {
-        "title": "Asenna APK",
-        "description": "Avaa ladattu .apk-tiedosto ja napauta 'Asenna'. Android saattaa näyttää varoituksen tuntemattomista sovelluksista — tämä on normaalia sivuladatuille sovelluksille."
-      },
-      "step4": {
-        "title": "Vahvista ja yhdistä",
-        "description": "Avaa Doppler VPN ja varmista, että sovellus toimii oikein. Sovelluksen tulisi yhdistää ilman tiliä tai rekisteröitymistä — napauta vain yhdistä."
-      },
-      "security": {
-        "title": "Turvallisuushuomautus",
-        "description": "Lataa Doppler VPN APK ainoastaan viralliselta Telegram-botiltamme (@dopplercreatebot) tai viralliselta verkkosivustolta (www.dopplervpn.org). Älä koskaan asenna APK-tiedostoja kolmannen osapuolen lähteistä — ne voivat sisältää haittaohjelmia tai muokattua koodia."
-      }
-    },
-    "requirements": {
-      "title": "Järjestelmävaatimukset",
-      "os": {
-        "title": "Käyttöjärjestelmä",
-        "value": "Android 8.0 (Oreo) tai uudempi"
-      },
-      "battery": {
-        "title": "Akkuvaikutus",
-        "value": "Minimaalinen — alle 2 % lisäakun kulutusta Aina päällä -VPN:n ollessa käytössä"
-      },
-      "storage": {
-        "title": "Tallennustila",
-        "value": "Alle 15 MB sovelluksen koko, alle 5 MB RAM-käyttö yhdistettynä"
-      },
-      "permissions": {
-        "title": "Tarvittavat oikeudet",
-        "value": "Vain VPN-yhteysoikeus — ei pääsyä yhteystietoihin, valokuviin tai tiedostoihin"
-      },
-      "compatibility": {
-        "title": "Yhteensopivat laitteet"
+      "q6": {
+        "question": "Can I use Doppler VPN on Android TV?",
+        "answer": "Yes. You can install Doppler VPN on Android TV devices and TV boxes to protect your streaming traffic. Access geo-restricted content on the big screen with the same VLESS-Reality encryption used on mobile."
       }
     },
     "cta": {
       "title": "Hanki Doppler VPN Androidille nyt",
       "subtitle": "Ilmainen, yksityinen ja havaitsematon. Ei rekisteröitymistä, ei tiliä, ei tiedonkeruuta. Lataa Google Playsta tai hanki APK rajoitetuille alueille.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "Lataa APK",
-      "alsoOnIos": "Saatavilla myös iOS:lle",
-      "telegramBot": "Telegram Bot",
-      "telegramChannelRu": "Telegram-kanava (RU)",
-      "telegramChannelEn": "Telegram-kanava (EN)"
+      "downloadAndroid": "Get it on Google Play",
+      "otherPlatforms": "Available on other platforms",
+      "downloadsLink": "View all downloads"
     },
     "related": {
       "noRegistration": "VPN ilman rekisteröitymistä",
@@ -2266,6 +2194,226 @@
       "vlessDesc": "Opi miten VLESS voittaa deep packet inspectionin",
       "ios": "VPN iOS:lle",
       "iosDesc": "Lataa Doppler VPN iPhonelle ja iPadille"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Doppler VPN Macille — nopea, yksityinen ja sensuurinkestävä",
+      "description": "Lataa Doppler VPN macOS:lle Mac App Storesta. VLESS-Reality-salaus, ei rekisteröitymistä, sensuurin ohitus. Natiivi Apple Silicon -tuki."
+    },
+    "hero": {
+      "title": "Doppler VPN Macille",
+      "subtitle": "Nopea, yksityinen ja sensuurinkestävä VPN, joka on rakennettu natiivisti macOS:lle. Rekisteröitymistä ei tarvita — lataa Mac App Storesta ja yhdistä sekunneissa. Tilauksesi toimii iPhonella, iPadilla ja Macilla.",
+      "cta": "Lataa Mac App Storesta"
+    },
+    "features": {
+      "title": "Miksi valita Doppler VPN macOS:lle?",
+      "subtitle": "Doppler VPN on natiivi macOS-sovellus, joka on suunniteltu Mac-käyttäjille, jotka tarvitsevat todellista yksityisyyttä, sensuurin ohitusta ja saumatonta integraatiota Apple-ekosysteemiin.",
+      "nativeMac": {
+        "title": "Natiivi macOS-sovellus",
+        "description": "Rakennettu erityisesti macOS:lle Applen Network Extension -kehystä käyttäen. Toimii natiivisti sekä Apple Silicon (M1/M2/M3/M4) - että Intel Mac -koneissa. Integroituu macOS:n järjestelmäasetuksiin, valikkopalkkiin ja ilmoituskeskukseen saumattoman työpöytä-VPN-kokemuksen takaamiseksi."
+      },
+      "macAppStore": {
+        "title": "Mac App Store -jakelu",
+        "description": "Lataa suoraan Mac App Storesta — Applen tarkistama ja turvallisuudeltaan varmennettu. Automaattiset päivitykset, helppo asennus ja saumaton tilausten hallinta Apple ID:lläsi. Ei sivulatauksia eikä manuaalista määritystä."
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality-salaus",
+        "description": "Seuraavan sukupolven protokolla, joka naamioi VPN-liikenteen tavalliseksi HTTPS-selaamiseksi. Yhteytesi on näkymätön palomuureille, syväpaketti-inspektiojärjestelmille ja ISP:n valvontatyökaluille. Sama teknologia, jolla ohitetaan Kiinan suuri palomuuri."
+      },
+      "noRegistration": {
+        "title": "Ei rekisteröitymistä",
+        "description": "Ei sähköpostia, ei puhelinnumeroa, ei tilin luomista. Lataa vain sovellus ja yhdistä heti. Doppler käyttää laitekohtaista todennusta, joten henkilöllisyytesi pysyy täysin yksityisenä ensimmäisestä napsautuksesta lähtien."
+      },
+      "oneClickConnect": {
+        "title": "Yhdistä yhdellä napsautuksella",
+        "description": "Napsauta yhtä painiketta ja Doppler valitsee automaattisesti nopeimman palvelimen, muodostaa salatun tunnelin ja suojaa kaiken Macisi liikenteen. Älykäs palvelinvalinta optimoi nopeuden ja luotettavuuden — toimii valikkopalkin kautta."
+      },
+      "bypassCensorship": {
+        "title": "Ohita sensuuri ja DPI",
+        "description": "Suunniteltu toimimaan maissa, joissa on tiukka internet-sensuuri — Venäjä, Iran, Kiina ja muut. VLESS-Reality tekee VPN-liikenteestäsi erottamattoman normaalista verkkoselailusta ohittaen TSPU:n ja GFW:n."
+      },
+      "noLogs": {
+        "title": "Tiukka lokittomuuskäytäntö",
+        "description": "Doppler ei koskaan kerää, tallenna tai jaa selailutietojasi. Ei yhteyslokit, ei liikennelokit, ei DNS-kyselylokit. Emme voi tunnistaa sinua, koska emme koskaan kerää tunnistetietoja."
+      },
+      "crossDevice": {
+        "title": "Synkronoituu kaikkiin Apple-laitteisiin",
+        "description": "Yksi tilaus kattaa Macisi, iPhonesi ja iPadisi. Tilisi ja tilaustietosi synkronoituvat automaattisesti kaikkiin Apple-laitteisiin. Vaihda laitetta ilman uudelleentilaamista tai uudelleenmääritystä — VPN:si on valmiina kaikkialla."
+      }
+    },
+    "howItWorks": {
+      "title": "Näin otat VPN:n käyttöön Macilla",
+      "subtitle": "Yhdistä alle minuutissa — teknistä osaamista ei tarvita.",
+      "step1": {
+        "title": "Lataa Mac App Storesta",
+        "description": "Etsi \"Doppler VPN\" Mac App Storesta tai napsauta alla olevaa latauspainiketta. Sovellus on ilmainen ja toimii macOS 14 Sonomalla ja uudemmilla. Tukee sekä Apple Silicon- että Intel Mac -koneita."
+      },
+      "step2": {
+        "title": "Avaa sovellus",
+        "description": "Käynnistä Doppler VPN Macillasi. Rekisteröitymisnäyttöä, rekisteröitymislomaketta tai sähköpostivahvistusta ei ole. Tilisi luodaan automaattisesti laitekohtaisen todennuksen avulla."
+      },
+      "step3": {
+        "title": "Valitse paketti",
+        "description": "Aloita 3 päivän ilmainen kokeilu tai valitse tilaussuunnitelma. Kuukausi- (6,99 $), 6 kuukauden (29,99 $) tai vuosipaketti (39,99 $). Hallitse tilaustasi suoraan App Storen kautta."
+      },
+      "step4": {
+        "title": "Napsauta Yhdistä",
+        "description": "Paina yhdistäpainiketta. Doppler valitsee automaattisesti parhaan palvelimen, muodostaa salatun VLESS-Reality-tunnelin ja reitittää kaiken liikenteesi sen kautta. IP-osoitteesi on piilotettu ja tietosi salattu."
+      }
+    },
+    "faq": {
+      "title": "Usein kysytyt kysymykset — Doppler VPN Macille",
+      "q1": {
+        "question": "Toimiiko Doppler VPN Apple Silicon Mac -koneissa?",
+        "answer": "Kyllä. Doppler VPN toimii natiivisti Apple Silicon (M1, M2, M3, M4) - ja Intel-pohjaisissa Mac-koneissa. Sovellus on universaali binaari, joka on optimoitu molemmille arkkitehtuureille ja takaa maksimaalisen suorituskyvyn sekä minimaalisen akkuvaikutuksen MacBook-kannettavissa."
+      },
+      "q2": {
+        "question": "Voinko käyttää samaa tiliä iPhonessa, iPadissa ja Macissa?",
+        "answer": "Kyllä. Doppler VPN -tilauksesi toimii kaikissa Apple-laitteissasi — iPhone, iPad ja Mac. Jokainen laite saa oman suojatun VPN-yhteyden. Yhteen tiliin voi yhdistää jopa 10 laitetta, ja tilaustietosi synkronoituvat automaattisesti Apple ID:si kautta."
+      },
+      "q3": {
+        "question": "Miten otan VPN:n käyttöön macOS:ssä?",
+        "answer": "Doppler VPN:n käyttöönotto Macilla kestää alle minuutin: 1) Lataa Mac App Storesta, 2) Avaa sovellus (rekisteröitymistä ei tarvita), 3) Napsauta Yhdistä. Doppler hoitaa kaiken teknisen asetuksen automaattisesti — se määrittää VPN-profiilin, valitsee parhaan palvelimen ja muodostaa salatun tunnelin."
+      },
+      "q4": {
+        "question": "Hidastaako se Maciani?",
+        "answer": "Doppler VPN on suunniteltu minimaaliseen suorituskykyvaikutukseen. Natiivi macOS-sovellus käyttää Applen Network Extension -kehystä tehokkaaseen liikenteen käsittelyyn. Apple Silicon Mac -koneissa sovellus käyttää alle 1 % prosessoria aktiivisten VPN-yhteyksien aikana. Palvelinvalinta on optimoitu matalimman viiveen saavuttamiseksi."
+      },
+      "q5": {
+        "question": "Onko Doppler VPN Mac App Storessa?",
+        "answer": "Kyllä. Doppler VPN on ladattavissa ilmaiseksi Mac App Storesta. Apple on tarkastanut ja hyväksynyt sen. Voit etsiä \"Doppler VPN\" tai käyttää suoraa linkkiä lataussivullamme. Päivitykset toimitetaan automaattisesti App Storen kautta."
+      },
+      "q6": {
+        "question": "Toimiiko se Venäjällä, Kiinassa ja Iranissa?",
+        "answer": "Kyllä. Doppler käyttää VLESS-Reality-protokollaa, joka naamioi VPN-liikenteen tavalliseksi HTTPS-verkkoselailuksi. Tämä tekee sensuurijärjestelmien — kuten Venäjän TSPU:n, Kiinan suuren palomuurin tai Iranin suodatusinfrastruktuurin — erittäin vaikeaksi havaita ja estää liikenne. Doppler on suunniteltu nimenomaan voimakkaasti sensuroitujen alueiden käyttäjille."
+      }
+    },
+    "cta": {
+      "title": "Lataa Doppler VPN Macille",
+      "subtitle": "Rekisteröitymistä ei tarvita. 3 päivän ilmainen kokeilu täydellä pääsyllä. VLESS-Reality-salaus pitää yhteytesi yksityisenä ja havaitsemattomana.",
+      "downloadMac": "Lataa Mac App Storesta",
+      "otherPlatforms": "Saatavilla muille alustoille",
+      "downloadsLink": "Näytä kaikki lataukset"
+    },
+    "related": {
+      "noRegistration": "VPN ilman rekisteröitymistä",
+      "noRegistrationDesc": "Käytä VPN:ää ilman rekisteröitymistä tai tiliä",
+      "vless": "VLESS-Reality-protokolla",
+      "vlessDesc": "Opi, miten VLESS ohittaa syväpaketti-inspektion",
+      "windows": "VPN Windowsille",
+      "windowsDesc": "Lataa Doppler VPN Windows-tietokoneelle"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Doppler VPN Windowsille — nopea, yksityinen ja sensuurinkestävä",
+      "description": "Lataa Doppler VPN Windowsille. VLESS-Reality-salaus, ei rekisteröitymistä, sensuurin ohitus. Tukee x64- ja ARM64-tietokoneita."
+    },
+    "hero": {
+      "title": "Doppler VPN Windowsille",
+      "subtitle": "Nopea, yksityinen ja sensuurinkestävä VPN, joka on rakennettu Windowsille. Rekisteröitymistä ei tarvita — lataa asennusohjelma ja yhdistä sekunneissa. Tukee sekä x64- että ARM64-tietokoneita automaattisilla päivityksillä.",
+      "ctaX64": "Lataa Windowsille (x64)",
+      "ctaArm64": "Lataa Windowsille (ARM64)"
+    },
+    "features": {
+      "title": "Miksi valita Doppler VPN Windowsille?",
+      "subtitle": "Doppler VPN on natiivi Windows-sovellus, joka on suunniteltu PC-käyttäjille, jotka tarvitsevat todellista yksityisyyttä, sensuurin ohitusta ja luotettavaa suorituskykyä millä tahansa Windows-laitteella.",
+      "nativeWindows": {
+        "title": "Natiivi Windows-sovellus",
+        "description": "Rakennettu erityisesti Windowsille selkeällä, modernilla käyttöliittymällä. Toimii Windows 10:ssä ja Windows 11:ssä täydellä tuella sekä x64- että ARM64-arkkitehtuureille. Asennus sekunneissa yksinkertaisella ohjatulla asennuksella — manuaalista määritystä tai komentorivityökaluja ei tarvita."
+      },
+      "dualArchitecture": {
+        "title": "x64 + ARM64 -tuki",
+        "description": "Doppler VPN tarjoaa erilliset versiot sekä x64:lle (tavalliset PC:t, pöytäkoneet ja useimmat kannettavat) että ARM64:lle (Surface Pro X, Snapdragon-kannettavat). Valitse oikea asennusohjelma laitteistollesi ja saat natiivin suorituskyvyn millä tahansa Windows-laitteella."
+      },
+      "autoUpdates": {
+        "title": "Automaattiset päivitykset Velopackilla",
+        "description": "Doppler VPN käyttää Velopackia saumattomiin taustapäivityksiin. Uudet versiot ladataan ja otetaan käyttöön automaattisesti — sinulla on aina uusimmat tietoturvakorjaukset, protokollaparannukset ja ominaisuudet ilman vaivaa."
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality-salaus",
+        "description": "Seuraavan sukupolven protokolla, joka naamioi VPN-liikenteen tavalliseksi HTTPS-selaamiseksi. Yhteytesi on näkymätön palomuureille, syväpaketti-inspektiojärjestelmille ja ISP:n valvontatyökaluille. Sama teknologia, jolla ohitetaan Kiinan suuri palomuuri."
+      },
+      "noRegistration": {
+        "title": "Ei rekisteröitymistä",
+        "description": "Ei sähköpostia, ei puhelinnumeroa, ei tilin luomista. Asenna vain sovellus ja yhdistä heti. Doppler käyttää laitekohtaista todennusta, joten henkilöllisyytesi pysyy täysin yksityisenä ensimmäisestä napsautuksesta lähtien."
+      },
+      "bypassCensorship": {
+        "title": "Ohita sensuuri ja DPI",
+        "description": "Suunniteltu toimimaan maissa, joissa on tiukka internet-sensuuri — Venäjä, Iran, Kiina ja muut. VLESS-Reality tekee VPN-liikenteestäsi erottamattoman normaalista verkkoselailusta ohittaen TSPU:n ja GFW:n."
+      },
+      "noLogs": {
+        "title": "Tiukka lokittomuuskäytäntö",
+        "description": "Doppler ei koskaan kerää, tallenna tai jaa selailutietojasi. Ei yhteyslokit, ei liikennelokit, ei DNS-kyselylokit. Emme voi tunnistaa sinua, koska emme koskaan kerää tunnistetietoja."
+      },
+      "globalServers": {
+        "title": "6 globaalia palvelinsijaintia",
+        "description": "Yhdistä palvelimiin useissa maissa ympäri Eurooppaa ja muualla. Jokaisella palvelimella on VLESS-Reality optimoidulla reitityksellä matalimman viiveen ja suurimman läpäisykyvyn takaamiseksi. Automaattinen palvelinvalinta valitsee nopeimman vaihtoehdon sijaintisi perusteella."
+      }
+    },
+    "howItWorks": {
+      "title": "Näin otat VPN:n käyttöön Windowsissa",
+      "subtitle": "Yhdistä alle minuutissa — teknistä osaamista ei tarvita.",
+      "step1": {
+        "title": "Lataa asennusohjelma",
+        "description": "Lataa Doppler VPN -asennusohjelma järjestelmällesi — x64 useimmille PC:ille ja kannettaville, ARM64 Surface Pro X:lle ja Snapdragon-laitteille. Asennusohjelma on alle 30 Mt ja virukseton."
+      },
+      "step2": {
+        "title": "Suorita ohjattu asennus",
+        "description": "Kaksoisnapsauta asennusohjelmaa ja seuraa ohjattua asennusta. Asennus kestää noin 15 sekuntia. Doppler VPN lisätään Käynnistä-valikkoon ja se voidaan vaihtoehtoisesti käynnistää Windowsin käynnistyksen yhteydessä."
+      },
+      "step3": {
+        "title": "Avaa Doppler VPN",
+        "description": "Käynnistä sovellus Käynnistä-valikosta tai työpöydän pikakuvakkeesta. Rekisteröitymisnäyttöä, rekisteröitymislomaketta tai sähköpostivahvistusta ei ole. Tilisi luodaan automaattisesti laitekohtaisen todennuksen avulla."
+      },
+      "step4": {
+        "title": "Tilaa ja yhdistä",
+        "description": "Valitse tilaussuunnitelma ja napsauta Yhdistä. Doppler valitsee automaattisesti parhaan palvelimen, muodostaa salatun VLESS-Reality-tunnelin ja reitittää kaiken liikenteesi sen kautta. IP-osoitteesi on piilotettu ja tietosi salattu."
+      }
+    },
+    "faq": {
+      "title": "Usein kysytyt kysymykset — Doppler VPN Windowsille",
+      "q1": {
+        "question": "Mitä Windows-versioita tuetaan?",
+        "answer": "Doppler VPN tukee Windows 10:tä (versio 1809 ja uudemmat) ja Windows 11:tä. Sekä x64- että ARM64-arkkitehtuurit ovat tuettuja. Sovellus toimii pöytäkoneissa, kannettavissa, tableteissa ja Surface-laitteissa, joissa on yhteensopiva Windows-versio."
+      },
+      "q2": {
+        "question": "Mikä ero on x64:llä ja ARM64:llä?",
+        "answer": "x64 on useimmille tavallisille PC:ille, pöytäkoneille ja kannettaville, joissa on Intel- tai AMD-suoritin. ARM64 on uudemmille laitteille, kuten Microsoft Surface Pro X, Lenovo ThinkPad X13s ja muut Snapdragon-pohjaiset Windows-kannettavat. Jos olet epävarma, lataa x64-versio — se toimii suurimmassa osassa Windows-tietokoneita."
+      },
+      "q3": {
+        "question": "Päivittyykö Doppler VPN automaattisesti Windowsissa?",
+        "answer": "Kyllä. Doppler VPN käyttää Velopackia automaattisiin taustapäivityksiin. Kun uusi versio on saatavilla, se ladataan taustalla ja päivitys otetaan käyttöön sovelluksen seuraavan käynnistyksen yhteydessä. Sinulla on aina uusimmat tietoturvakorjaukset ja ominaisuudet ilman manuaalisia toimia."
+      },
+      "q4": {
+        "question": "Voinko käyttää samaa tiliä puhelimessa ja PC:ssä?",
+        "answer": "Kyllä. Doppler VPN -tilauksesi toimii kaikissa laitteissasi — Windows, iOS, Android ja Mac. Jokainen laite saa oman suojatun VPN-yhteyden. Yhteen tiliin voi yhdistää jopa 10 laitetta."
+      },
+      "q5": {
+        "question": "Toimiiko se Windows Defenderin kanssa?",
+        "answer": "Kyllä. Doppler VPN on täysin yhteensopiva Windows Defenderin ja muiden suurten virustorjuntaohjelmistojen kanssa. Asennusohjelma on digitaalisesti allekirjoitettu eikä sovellus aiheuta vääriä hälytyksiä. Doppler toimii tavallisena VPN-asiakasohjelmana käyttäen Windowsin verkkorajapintoja."
+      },
+      "q6": {
+        "question": "Toimiiko se Venäjällä, Kiinassa ja Iranissa?",
+        "answer": "Kyllä. Doppler käyttää VLESS-Reality-protokollaa, joka naamioi VPN-liikenteen tavalliseksi HTTPS-verkkoselailuksi. Tämä tekee sensuurijärjestelmien — kuten Venäjän TSPU:n, Kiinan suuren palomuurin tai Iranin suodatusinfrastruktuurin — erittäin vaikeaksi havaita ja estää liikenne. Doppler on suunniteltu nimenomaan voimakkaasti sensuroitujen alueiden käyttäjille."
+      }
+    },
+    "cta": {
+      "title": "Lataa Doppler VPN Windowsille",
+      "subtitle": "Rekisteröitymistä ei tarvita. VLESS-Reality-salaus pitää yhteytesi yksityisenä ja havaitsemattomana. Tukee x64- ja ARM64-tietokoneita.",
+      "downloadX64": "Lataa Windowsille (x64)",
+      "downloadArm64": "Lataa Windowsille (ARM64)",
+      "otherPlatforms": "Saatavilla muille alustoille",
+      "downloadsLink": "Näytä kaikki lataukset"
+    },
+    "related": {
+      "noRegistration": "VPN ilman rekisteröitymistä",
+      "noRegistrationDesc": "Käytä VPN:ää ilman rekisteröitymistä tai tiliä",
+      "vless": "VLESS-Reality-protokolla",
+      "vlessDesc": "Opi, miten VLESS ohittaa syväpaketti-inspektion",
+      "macos": "VPN Macille",
+      "macosDesc": "Lataa Doppler VPN macOS:lle"
     }
   }
 }

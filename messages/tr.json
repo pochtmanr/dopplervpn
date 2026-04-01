@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Doppler VPN — Güvenli Kayıtsız VPN ve Proxy ile Gizlilik",
-    "description": "Doppler VPN, VLESS-Reality proxy şifrelemesi, DNS koruması ve sıkı kayıt tutmama politikasıyla gizliliğinizi korur. DPI ve devlet sansürünü aşar. iOS, Android, macOS ve Windows'ta kullanılabilir."
+    "description": "Doppler VPN, VLESS-Reality şifrelemesi ve DNS korumasıyla gizliliğinizi korur. DPI ve sansürü aşar. Kayıt gerektirmez. iOS ve Android'de kullanılabilir."
   },
   "nav": {
     "features": "Özellikler",
@@ -22,7 +22,7 @@
     "headlinePart1a": "Diğer VPN'lerin engellendiği yerde",
     "headlinePart1b": "çalışır.",
     "headlinePart2": "",
-    "subheadline": "VLESS-Reality üzerine kurulu — trafiğin normal HTTPS gibi görünür. DPI tarafından tespit edilemez. Kayıt yok, log yok, takip yok.",
+    "subheadline": "Doppler VPN, VLESS-Reality ile trafiğinizi normal HTTPS gibi gösterir. DPI tespit edemez. Kayıt yok, log yok, takip yok.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Kişisel Veri Gerekmez",
@@ -33,6 +33,8 @@
       "vless": "VLESS-Reality Protokolü"
     },
     "openTelegram": "Telegram Bot",
+    "getPro": "Doppler Pro'yu Edinin",
+    "downloadApp": "Uygulamayı İndir",
     "seePrices": "Fiyatları gör",
     "getAndroid": "APK İndir",
     "androidNote": "Bağımsız APK olarak da mevcuttur.",
@@ -42,9 +44,31 @@
     "desktopNote": "Abonelik Telegram veya iOS ile mevcut.",
     "downloadIosLabel": "App Store'dan Doppler VPN indir",
     "promoDiscount": "%{percent} indirim",
-    "promoCopyLabel": "{code} kodunu kopyala",
-    "getPro": "Doppler Pro'yu Edinin",
-    "downloadApp": "Uygulamayı İndir"
+    "promoCopyLabel": "{code} kodunu kopyala"
+  },
+  "trustIndicators": {
+    "items": {
+      "noAccount": {
+        "label": "Hesap Gerekmez",
+        "description": "Cihazın senin kimliğin"
+      },
+      "zeroLogs": {
+        "label": "Sıfır Aktivite Logu",
+        "description": "Ne yaptığını göremeyiz"
+      },
+      "encryptedDns": {
+        "label": "Şifreli DNS",
+        "description": "Her sorgu korunur"
+      },
+      "dpiBypass": {
+        "label": "DPI Atlatma",
+        "description": "Trafik normal HTTPS gibi görünür"
+      },
+      "freeTrial": {
+        "label": "3 Günlük Ücretsiz Deneme",
+        "description": "Tam erişimi risksiz deneyin"
+      }
+    }
   },
   "features": {
     "title": "Tam Gizlilik İçin Tasarlandı",
@@ -54,25 +78,21 @@
         "title": "Kayıt Gerektirmeyen Gizlilik",
         "description": "Cihazınız hesabınız olarak çalışır. E-posta yok. Telefon numarası yok. Kişisel bilgi yok. Gizlilik bağlandığınız anda başlar."
       },
-      "adBlocker": {
-        "title": "Temel Reklam Engelleyici",
-        "description": "Yerleşik DNS düzeyinde reklam engelleme, reklamların ve izleyicilerin yaklaşık %50'sini azaltır. Daha az karmaşa ile daha temiz gezinme, kutudan çıkar çıkmaz hazır."
+      "vlessReality": {
+        "title": "VLESS-Reality Protokolü",
+        "description": "VPN trafiğinizi normal HTTPS trafiği gibi gösteren gelişmiş sansür karşıtı protokol. Derin paket incelemesi tarafından tespit edilemez, kısıtlı ağlarda hızlı ve güvenilir."
       },
       "smartRouting": {
         "title": "Akıllı Yönlendirme",
         "description": "Ülkeye göre akıllı trafik yönlendirme. Hedefinize göre hız ve güvenilirlik için en iyi sunucu yolunu otomatik olarak seçer."
       },
+      "adBlocker": {
+        "title": "Temel Reklam Engelleyici",
+        "description": "Yerleşik DNS düzeyinde reklam engelleme, reklamların ve izleyicilerin yaklaşık %50'sini azaltır. Daha az karmaşa ile daha temiz gezinme, kutudan çıkar çıkmaz hazır."
+      },
       "minimalData": {
         "title": "Minimum Veri Toplama",
         "description": "Gezinme etkinliğinizi kaydetmiyoruz. Ziyaret ettiğiniz web sitelerini takip etmiyoruz. Mimarimiz tasarım gereği minimum veri gerektirir."
-      },
-      "completelyFree": {
-        "title": "Tamamen Ücretsiz",
-        "description": "Tüm sunucular tam işlevsellik ile ücretsizdir. Tam şifreleme, hızlı bağlantılar, sınırsız bant genişliği. Hız kısıtlama veya veri sınırı yok."
-      },
-      "vlessReality": {
-        "title": "VLESS-Reality Protokolü",
-        "description": "VPN trafiğinizi normal HTTPS trafiği gibi gösteren gelişmiş sansür karşıtı protokol. Derin paket incelemesi tarafından tespit edilemez, kısıtlı ağlarda hızlı ve güvenilir."
       },
       "dnsProtection": {
         "title": "Özel DNS Koruması",
@@ -121,13 +141,12 @@
     "perYear": "yıllık",
     "save": "Tasarruf",
     "plusFeatures": {
-      "everything": "Ücretsiz plandaki her şey",
       "premiumServers": "Premium sunucular",
       "smartRouting": "Akıllı yönlendirme",
-      "devices": "10 cihaza kadar",
-      "support": "Öncelikli destek",
       "alwaysOn": "Always-On VPN",
-      "noLogs": "Kayıt tutmama politikası"
+      "devices": "10 cihaza kadar",
+      "noLogs": "Kayıt tutmama politikası",
+      "support": "Öncelikli destek"
     },
     "plusCta": "Doppler Pro'yu Edinin",
     "trialNote": "3 günlük ücretsiz denemeyle başlayın",
@@ -249,6 +268,29 @@
       }
     }
   },
+  "privacyModel": {
+    "title": "Ne Saklamıyoruz",
+    "subtitle": "Gizlilik mimariye dayalı, sadece söze değil.",
+    "tagline": "Elimizde olmayan veriyi teslim edemeyiz.",
+    "items": {
+      "browsing": {
+        "title": "Gezinti logu yok",
+        "description": "Hangi siteleri ziyaret ettiğini asla göremeyiz"
+      },
+      "ip": {
+        "title": "IP adresi logu yok",
+        "description": "Gerçek IP'n hiçbir zaman kaydedilmez"
+      },
+      "dns": {
+        "title": "DNS sorgu kaydı yok",
+        "description": "Şifrelenir ve çözümlendikten sonra silinir"
+      },
+      "account": {
+        "title": "Hesap veritabanı yok",
+        "description": "Cihaz doğrulaması — saklanacak kişisel veri yok"
+      }
+    }
+  },
   "cta": {
     "doppler": {
       "titleItalic": "Başlayın",
@@ -256,7 +298,9 @@
       "titlePlayful": "Doppler VPN",
       "subtitle": "Kayıt gerektirmeyen gizlilik öncelikli VPN. VLESS-Reality şifreleme ile anında bağlanın.",
       "cta": "Doppler Pro'yu Edinin",
-      "downloads": "İndirmeler"
+      "downloads": "İndirmeler",
+      "learnIos": "iOS için VPN",
+      "learnAndroid": "Android için VPN"
     }
   },
   "footer": {
@@ -264,23 +308,25 @@
     "product": "Ürün",
     "pricing": "Fiyatlar",
     "download": "İndir",
+    "blog": "Blog",
     "legal": "Yasal",
     "privacy": "Gizlilik Politikası",
     "terms": "Hizmet Koşulları",
+    "refundPolicy": "İade Politikası",
     "copyright": "SIMNETIQ LTD. Tüm hakları saklıdır.",
     "supportTitle": "Destek",
     "helpCenter": "Yardım Merkezi",
     "connect": "İletişim",
     "telegram": "@dopplercreatebot",
     "email": "support@simnetiq.store",
-    "blog": "Blog",
     "bypassCensorship": "Sansürü Nasıl Aşıyoruz",
     "about": "Hakkında",
     "vlessVpn": "VLESS Protokolü",
     "noRegistration": "Kayıtsız VPN",
     "vpnForIos": "iOS için VPN",
     "vpnForAndroid": "Android için VPN",
-    "refundPolicy": "İade Politikası"
+    "vpnForMacos": "Mac için VPN",
+    "vpnForWindows": "Windows için VPN"
   },
   "privacy": {
     "title": "Gizlilik Politikası",
@@ -482,9 +528,6 @@
         "playStore": "Google Play"
       }
     },
-    "share": "Makaleyi paylaş",
-    "copyLink": "Bağlantıyı kopyala",
-    "copied": "Kopyalandı!",
     "stickyBar": {
       "message": "Gezintinizi koruyun. Doppler VPN kayıt gerektirmez ve hiçbir kayıt tutmaz. 3 gün ücretsiz deneyin.",
       "cta": "3 Gün Ücretsiz Dene",
@@ -497,7 +540,10 @@
       "downloadIos": "iOS için indir",
       "downloadAndroid": "Android için indir",
       "downloadDesktop": "Uygulamayı İndir"
-    }
+    },
+    "share": "Makaleyi paylaş",
+    "copyLink": "Bağlantıyı kopyala",
+    "copied": "Kopyalandı!"
   },
   "guide": {
     "title": "Kurulum Rehberi",
@@ -605,9 +651,9 @@
     },
     "backToGuides": "Tüm Rehberler",
     "seePricing": "See pricing plans",
+    "downloadApps": "Uygulamayı indir",
     "nextStep": "İleri",
     "prevStep": "Geri",
-    "downloadApps": "Uygulamayı indir",
     "learnMore": "Daha fazla bilgi",
     "protocolsCard": {
       "title": "VPN Protokolleri",
@@ -656,17 +702,17 @@
       "step1": "App Store'dan Doppler VPN'i indirin",
       "step2": "Uygulamayı açın — hesabınız otomatik oluşturulur",
       "step3": "Plan seçin ve abone olun",
-      "step4": "Bağlan'a dokunun — korunuyorsunuz!"
+      "step4": "Bağlan'a dokunun — korunuyorsunuz!",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Google Play'den edinin",
-      "buttonApk": "APK İndir (Bağımsız)",
-      "meta": "APK · v1.2.0 · 95 MB",
       "step1": "Doppler VPN'i Google Play veya APK'dan indirin",
       "step2": "Uygulamayı açın — hesabınız otomatik oluşturulur",
       "step3": "Plan seçin ve abone olun",
-      "step4": "Bağlan'a dokunun — korunuyorsunuz!"
+      "step4": "Bağlan'a dokunun — korunuyorsunuz!",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -674,45 +720,193 @@
       "step1": "Mac App Store'dan Doppler VPN'i indirin",
       "step2": "Uygulamayı açın — hesabınız otomatik oluşturulur",
       "step3": "Plan seçin ve abone olun",
-      "step4": "Bağlan'a dokunun — korunuyorsunuz!"
+      "step4": "Bağlan'a dokunun — korunuyorsunuz!",
+      "learnMore": "Mac için VPN hakkında daha fazla bilgi"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "Yakında",
-      "inDevelopment": "Şu anda geliştirme aşamasında",
-      "waitlistDescription": "Aynı VLESS-Reality şifrelemeye sahip yerel bir Windows istemcisi geliştiriyoruz. Hazır olduğunda bilgilendirilmek için bekleme listesine katılın.",
-      "waitlistPrivacy": "E-postanızı yalnızca Windows sürümü hakkında bilgilendirmek için kullanacağız. Spam yok."
-    },
-    "waitlist": {
-      "placeholder": "your@email.com",
-      "button": "Bana Bildir",
-      "success": "Listedesiniz! Hazır olduğunda size e-posta göndereceğiz.",
-      "error": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin."
+      "buttonX64": "Windows için indir (x64)",
+      "buttonArm64": "Windows için indir (ARM64)",
+      "step1": "Sisteminiz için yükleyiciyi indirin (çoğu PC için x64)",
+      "step2": "Yükleyiciyi çalıştırın ve kurulum sihirbazını takip edin",
+      "step3": "Doppler VPN'i açın — hesabınız otomatik oluşturulur",
+      "step4": "Plan seçin, abone olun ve bağlanın!",
+      "learnMore": "Windows için VPN hakkında daha fazla bilgi"
     }
   },
-  "servers": {
-    "title": "Küresel Sunucu Ağı",
-    "subtitle": "Dünya genelinde birçok konumdan seçin. Tüm sunucular çift protokol mimarisini destekler.",
-    "servers": "sunucu",
-    "server": "sunucu",
-    "protocols": "Protokoller",
-    "locations": {
-      "germany": {
-        "city": "Frankfurt",
-        "country": "Almanya"
-      },
-      "russia": {
-        "city": "Moskova",
-        "country": "Rusya"
-      },
-      "france": {
-        "city": "Paris",
-        "country": "Fransa"
-      },
-      "japan": {
-        "city": "Tokyo",
-        "country": "Japonya"
+  "support": {
+    "title": "Yardım Merkezi ve Destek",
+    "subtitle": "Sık sorulan VPN sorularına yanıt bulun, bağlantı sorunlarını giderin veya destek ekibimizle iletişime geçin.",
+    "faq": {
+      "title": "Sık Sorulan Sorular",
+      "items": {
+        "what": {
+          "question": "Doppler VPN nedir?",
+          "answer": "Doppler VPN, VLESS-Reality teknolojisini kullanan hızlı ve gizli bir VPN hizmetidir. iOS, Android, macOS ve Windows'ta çalışır."
+        },
+        "cost": {
+          "question": "Fiyatı nedir?",
+          "answer": "Doppler Pro aylık $4, 6 aylık $20 (%17 tasarruf) veya yıllık $35 (%27 tasarruf). Tek seferlik ödeme, otomatik yenileme yok."
+        },
+        "subscribe": {
+          "question": "Nasıl abone olabilirim?",
+          "answer": "Abone sayfamızı ziyaret edin, e-postanızı girin, plan seçin ve Paddle ile ödeyin. Pro aboneliğiniz anında etkinleşir."
+        },
+        "multiDevice": {
+          "question": "Bir hesabı birden fazla cihazda kullanabilir miyim?",
+          "answer": "Evet! Doppler Pro tek hesapta 10 cihaza kadar destekler."
+        },
+        "accountId": {
+          "question": "Hesap ID'm nedir?",
+          "answer": "Hesap ID'niz (VPN-XXXX-XXXX-XXXX) tüm cihazlardaki anahtarınızdır. Uygulamayı ilk kullandığınızda veya web üzerinden abone olduğunuzda oluşturulur."
+        },
+        "refund": {
+          "question": "İade yapıyor musunuz?",
+          "answer": "Evet, 30 günlük para iade garantisi sunuyoruz. İade talebinde bulunmak için destekle iletişime geçin."
+        },
+        "privacy": {
+          "question": "Verilerim güvende mi?",
+          "answer": "Kesinlikle. Doppler VPN sıkı bir kayıt tutmama politikası uygular. Gezinme verilerinizi toplamıyoruz veya saklamıyoruz."
+        },
+        "platforms": {
+          "question": "Hangi platformlar destekleniyor?",
+          "answer": "iOS, Android, macOS (yerel Doppler uygulaması) ve Windows (v2rayN istemcisi ile)."
+        }
       }
+    },
+    "troubleshooting": {
+      "title": "Sorun Giderme",
+      "items": {
+        "wontConnect": {
+          "question": "VPN bağlanmıyor",
+          "answer": "Sunucu değiştirmeyi deneyin. Ayarlar → farklı bir sunucu seçin. Sorun devam ederse uygulamayı yeniden başlatın."
+        },
+        "drops": {
+          "question": "Bağlantı sık sık kopuyor",
+          "answer": "Ayarlarda Always-On VPN'i etkinleştirin. İnternet bağlantınızı da kontrol edin."
+        },
+        "battery": {
+          "question": "Mobilde pil tüketimi",
+          "answer": "Biraz pil tüketimi normaldir. VPN'e sadece ara sıra ihtiyaç duyuyorsanız Always-On'u devre dışı bırakın."
+        },
+        "noSub": {
+          "question": "Uygulama 'Abonelik yok' diyor",
+          "answer": "Doğru Hesap ID'sini kullandığınızdan emin olun. Yeni satın aldıysanız birkaç saniye bekleyin ve uygulamayı yeniden başlatın."
+        }
+      }
+    },
+    "deleteAccount": {
+      "title": "Hesabınızı Silin",
+      "step1": "Doppler VPN uygulamasını açın",
+      "step2": "Ayarlar → Hesap'a gidin",
+      "step3": "\"Hesabı Sil\"e dokunun",
+      "step4": "Silmeyi onaylayın",
+      "warning": "Hesap silme kalıcıdır. Tüm veriler, abonelik süresi ve sunucu yapılandırmaları kaldırılacaktır. Bu işlem geri alınamaz.",
+      "alternative": "Uygulamaya erişemiyorsanız hesap silme talebinde bulunmak için destekle iletişime geçin."
+    },
+    "contact": {
+      "title": "Bize Ulaşın",
+      "telegram": "Telegram",
+      "telegramBot": "@DopplerSupportBot",
+      "email": "E-posta",
+      "emailAddress": "support@simnetiq.store",
+      "responseTime": "Genellikle 24 saat içinde yanıt veriyoruz."
+    },
+    "account": {
+      "title": "Hesabınızı Yönetin",
+      "signInTitle": "Hesabınızı yönetmek için giriş yapın",
+      "enterAccountId": "Hesap Kimliğini Girin",
+      "enterEmail": "E-postayı Girin",
+      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
+      "emailPlaceholder": "sizin@email.com",
+      "signIn": "Giriş Yap",
+      "noAccount": "Hesabınız yok mu?",
+      "getStarted": "Başla",
+      "signOut": "Çıkış Yap",
+      "statusTitle": "Hesap Durumu",
+      "memberSince": "Üyelik tarihi",
+      "tier": "Plan",
+      "tierFree": "Ücretsiz",
+      "tierMonthly": "Pro Aylık",
+      "tierSixMonth": "Pro 6 Aylık",
+      "tierYearly": "Pro Yıllık",
+      "expires": "Bitiş",
+      "expiresIn": "{days} gün içinde",
+      "expired": "Süresi Doldu",
+      "active": "Aktif",
+      "expiringSoon": "Yakında Bitiyor",
+      "contactTitle": "İletişim Bilgileri",
+      "contactMethod": "İletişim Yöntemi",
+      "contactValue": "İletişim",
+      "verified": "Doğrulandı",
+      "unverified": "Doğrulanmadı",
+      "changeContact": "Değiştir",
+      "saveContact": "Kaydet",
+      "cancelEdit": "İptal",
+      "subscriptionTitle": "Aboneliği Yönet",
+      "managePaddle": "Paddle ile Yönet",
+      "manageAppStore": "App Store'da Yönet",
+      "managePlayStore": "Google Play'de Yönet",
+      "invoicesTitle": "Faturalar",
+      "downloadInvoice": "PDF İndir",
+      "noInvoices": "Fatura bulunmuyor",
+      "notFound": "Hesap bulunamadı",
+      "fetchError": "Hesap yüklenemedi"
+    },
+    "ticket": {
+      "title": "Talep Gönder",
+      "subtitle": "24 saat içinde yanıt vereceğiz",
+      "topicLabel": "Konu",
+      "topics": {
+        "connection_issues": "Bağlantı Sorunları",
+        "subscription_billing": "Abonelik ve Faturalama",
+        "account": "Hesap",
+        "feature_request": "Özellik İsteği",
+        "other": "Diğer"
+      },
+      "subjectLabel": "Konu",
+      "subjectPlaceholder": "Sorununuzun kısa açıklaması",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Ne olduğunu bize anlatın...",
+      "emailLabel": "İletişim E-postası",
+      "emailPlaceholder": "sizin@email.com",
+      "accountIdLabel": "Hesap Kimliği (isteğe bağlı)",
+      "submit": "Talep Gönder",
+      "submitting": "Gönderiliyor...",
+      "successTitle": "Talep Gönderildi",
+      "successMessage": "{ticketNumber} numaralı destek talebi oluşturuldu. {email} adresine 24 saat içinde yanıt vereceğiz.",
+      "errorGeneric": "Talep gönderilemedi. Lütfen tekrar deneyin.",
+      "close": "Kapat"
+    },
+    "restore": {
+      "title": "Hesabınızı Geri Yükleyin",
+      "subtitle": "Hesabınıza bağlı e-posta veya Telegram adresinizi girin",
+      "emailTab": "E-posta",
+      "telegramTab": "Telegram",
+      "emailPlaceholder": "sizin@email.com",
+      "sendAccountId": "Hesap Kimliğini Gönder",
+      "sending": "Gönderiliyor...",
+      "emailSuccess": "Bu e-posta ile bir hesap varsa Hesap Kimliğini gönderdik. Gelen kutunuzu kontrol edin.",
+      "emailNotFound": "Hesap bulunamadı. Yardıma mı ihtiyacınız var?",
+      "submitTicket": "Destek talebi oluştur",
+      "telegramMessage": "Hesabınızı Telegram botumuz aracılığıyla arayacağız",
+      "openTelegramBot": "Telegram Botunu Aç",
+      "appSubscribers": "App Store veya Google Play üzerinden satın aldınız mı?",
+      "appStoreLink": "App Store Aboneliklerini Yönet",
+      "playStoreLink": "Google Play Aboneliklerini Yönet",
+      "close": "Kapat"
+    },
+    "business": {
+      "title": "İş Başvuruları",
+      "subtitle": "Ortaklıklar, basın, kurumsal"
+    },
+    "actions": {
+      "submitRequest": "Talep Gönder",
+      "submitRequestDesc": "Ekibimizden yardım alın",
+      "restoreAccount": "Hesabı Geri Yükle",
+      "restoreAccountDesc": "Hesap Kimliğinizi kurtarın",
+      "businessContact": "İş Başvuruları",
+      "businessContactDesc": "Ortaklıklar, basın, kurumsal"
     }
   },
   "guideProtocols": {
@@ -841,6 +1035,31 @@
     "openBot": "Telegram Botunu Aç",
     "viewProtocols": "VPN Protokolleri kılavuzu"
   },
+  "servers": {
+    "title": "Küresel Sunucu Ağı",
+    "subtitle": "Dünya genelinde birçok konumdan seçin. Tüm sunucular çift protokol mimarisini destekler.",
+    "servers": "sunucu",
+    "server": "sunucu",
+    "protocols": "Protokoller",
+    "locations": {
+      "germany": {
+        "city": "Frankfurt",
+        "country": "Almanya"
+      },
+      "russia": {
+        "city": "Moskova",
+        "country": "Rusya"
+      },
+      "france": {
+        "city": "Paris",
+        "country": "Fransa"
+      },
+      "japan": {
+        "city": "Tokyo",
+        "country": "Japonya"
+      }
+    }
+  },
   "deleteAccount": {
     "title": "Hesabınızı Silin",
     "metaDescription": "Doppler VPN hesabınızı nasıl sileceğinizi ve hangi verilerin kaldırıldığını öğrenin.",
@@ -864,39 +1083,6 @@
         "content": "Veri silme hakkında sorularınız varsa veya yardıma ihtiyaç duyuyorsanız, support@dopplervpn.org adresinden bize ulaşın."
       }
     }
-  },
-  "checkout": {
-    "title": "Doppler Pro'ya yukseltin",
-    "subtitle": "Planınızı secin ve Paddle ile guvenle odeyin.",
-    "accountLabel": "Hesap",
-    "monthly": "Aylık",
-    "sixMonth": "6 Ay",
-    "yearly": "Yıllık",
-    "perMonth": "/ay",
-    "save": "Tasarruf",
-    "bestValue": "En iyi fırsat",
-    "subscribe": "Simdi abone ol",
-    "processing": "Isleniyor...",
-    "features": "Pro Ozellikler",
-    "feat1": "Dunya capında premium sunucular",
-    "feat2": "Smart Route teknolojisi",
-    "feat3": "Her zaman acık VPN",
-    "feat4": "Sınırsız oturum suresi",
-    "feat5": "Oncelikli destek",
-    "promoPlaceholder": "Promosyon kodu",
-    "promoApply": "Uygula",
-    "promoRemove": "Kaldır",
-    "promoOff": "indirim",
-    "promoInvalid": "Gecersiz promosyon kodu",
-    "promoFailed": "Kod dogrulanamadı",
-    "footerNote": "Paddle ile guvenli odeme. Istediginiz zaman iptal edin.",
-    "terms": "Kullanım Sartları",
-    "privacy": "Gizlilik Politikası",
-    "error": "Bir seyler yanlıs gitti. Lutfen tekrar deneyin.",
-    "invalidAccount": "Gecersiz hesap kimliği",
-    "successTitle": "Odeme basarılı!",
-    "successDescription": "Doppler Pro aboneliginiz aktif.",
-    "returnToApp": "Uygulamaya don"
   },
   "subscribe": {
     "title": "Doppler Pro'yu Edinin",
@@ -945,9 +1131,9 @@
     "securedBy": "Paddle ile güvende",
     "accountFound": "Hesabınızı bulduk",
     "accountFoundNote": "Bu hesap size ait değil mi? Doğrulama için Telegram'da @DopplerVerifyBot ile iletişime geçin.",
-    "accountNotFound": "Hesap bulunamadı. Lütfen hesap ID'nizi kontrol edin.",
     "creatingAccount": "Hesabınız oluşturuluyor...",
     "lookingUp": "Hesabınız aranıyor...",
+    "accountNotFound": "Hesap bulunamadı. Lütfen hesap ID'nizi kontrol edin.",
     "verifyingAccount": "Doğrulanıyor...",
     "dashboard": {
       "title": "Hesabınız",
@@ -957,6 +1143,8 @@
       "telegram": "Telegram",
       "verified": "Doğrulandı",
       "unverified": "Doğrulanmadı",
+      "noContacts": "Bağlı kişi yok",
+      "contactsOptional": "İsteğe bağlı — yalnızca hesap kurtarma için",
       "subscription": "Abonelik",
       "freeTier": "Aktif abonelik yok",
       "proActive": "Doppler Pro",
@@ -964,21 +1152,6 @@
       "getPro": "Doppler Pro'yu Edinin",
       "extend": "Aboneliği Uzat",
       "expressSupport": "Öncelikli Destek",
-      "connectEmail": "E-posta Bağla",
-      "connectEmailPlaceholder": "E-posta adresi girin",
-      "connectTelegram": "Telegram ile Bağlan",
-      "contactSaved": "Kişi kaydedildi",
-      "save": "Kaydet",
-      "copied": "Kopyalandı!",
-      "logout": "Farklı Hesap Kullan",
-      "deleteAccount": "Hesabı Sil",
-      "restorePurchases": "Satın Almaları Geri Yükle",
-      "restorePurchasesDesc": "App Store veya Google Play üzerinden abonelik satın aldıysanız burada yönetin.",
-      "restoreAppStore": "App Store Abonelikleri",
-      "restorePlayStore": "Google Play Abonelikleri",
-      "noContacts": "Bağlı kişi yok",
-      "contactsOptional": "İsteğe bağlı — yalnızca hesap kurtarma için",
-      "forgotAccountId": "Hesap Kimliğinizi mi unuttunuz?",
       "premiumSupportDesc": "Biletiniz Pro abone olarak öncelikli olarak işlenecektir.",
       "ticketSubject": "Konu",
       "ticketSubjectPlaceholder": "Sorununuzun kısa özeti",
@@ -994,7 +1167,20 @@
       "expiredPro": "Pro aboneliğiniz {date} tarihinde sona erdi",
       "renewPro": "Doppler Pro'yu Yenile",
       "ticketEmailLabel": "E-postanız (yanıt için)",
-      "ticketEmailRequired": "Lütfen geçerli bir e-posta adresi girin"
+      "ticketEmailRequired": "Lütfen geçerli bir e-posta adresi girin",
+      "connectEmail": "E-posta Bağla",
+      "connectTelegram": "Telegram ile Bağlan",
+      "deleteAccount": "Hesabı Sil",
+      "logout": "Farklı Hesap Kullan",
+      "contactSaved": "Kişi kaydedildi",
+      "connectEmailPlaceholder": "E-posta adresi girin",
+      "save": "Kaydet",
+      "copied": "Kopyalandı!",
+      "forgotAccountId": "Hesap Kimliğinizi mi unuttunuz?",
+      "restorePurchases": "Satın Almaları Geri Yükle",
+      "restorePurchasesDesc": "App Store veya Google Play üzerinden abonelik satın aldıysanız burada yönetin.",
+      "restoreAppStore": "App Store Abonelikleri",
+      "restorePlayStore": "Google Play Abonelikleri"
     }
   },
   "subscribeSuccess": {
@@ -1022,179 +1208,153 @@
     "errorTitle": "Ödeme Sorunu",
     "errorDesc": "Ücret alındıysa aboneliğiniz kısa sürede etkinleşecek. Olmazsa destek ekibiyle iletişime geçin."
   },
-  "support": {
-    "title": "Yardım Merkezi ve Destek",
-    "subtitle": "Sık sorulan VPN sorularına yanıt bulun, bağlantı sorunlarını giderin veya destek ekibimizle iletişime geçin.",
-    "faq": {
-      "title": "Sık Sorulan Sorular",
-      "items": {
-        "what": {
-          "question": "Doppler VPN nedir?",
-          "answer": "Doppler VPN, VLESS-Reality teknolojisini kullanan hızlı ve gizli bir VPN hizmetidir. iOS, Android, macOS ve Windows'ta çalışır."
-        },
-        "cost": {
-          "question": "Fiyatı nedir?",
-          "answer": "Doppler Pro aylık $4, 6 aylık $20 (%17 tasarruf) veya yıllık $35 (%27 tasarruf). Tek seferlik ödeme, otomatik yenileme yok."
-        },
-        "subscribe": {
-          "question": "Nasıl abone olabilirim?",
-          "answer": "Abone sayfamızı ziyaret edin, e-postanızı girin, plan seçin ve Paddle ile ödeyin. Pro aboneliğiniz anında etkinleşir."
-        },
-        "multiDevice": {
-          "question": "Bir hesabı birden fazla cihazda kullanabilir miyim?",
-          "answer": "Evet! Doppler Pro tek hesapta 10 cihaza kadar destekler."
-        },
-        "accountId": {
-          "question": "Hesap ID'm nedir?",
-          "answer": "Hesap ID'niz (VPN-XXXX-XXXX-XXXX) tüm cihazlardaki anahtarınızdır. Uygulamayı ilk kullandığınızda veya web üzerinden abone olduğunuzda oluşturulur."
-        },
-        "refund": {
-          "question": "İade yapıyor musunuz?",
-          "answer": "Evet, 30 günlük para iade garantisi sunuyoruz. İade talebinde bulunmak için destekle iletişime geçin."
-        },
-        "privacy": {
-          "question": "Verilerim güvende mi?",
-          "answer": "Kesinlikle. Doppler VPN sıkı bir kayıt tutmama politikası uygular. Gezinme verilerinizi toplamıyoruz veya saklamıyoruz."
-        },
-        "platforms": {
-          "question": "Hangi platformlar destekleniyor?",
-          "answer": "iOS, Android, macOS (yerel Doppler uygulaması) ve Windows (v2rayN istemcisi ile)."
-        }
-      }
-    },
-    "troubleshooting": {
-      "title": "Sorun Giderme",
-      "items": {
-        "wontConnect": {
-          "question": "VPN bağlanmıyor",
-          "answer": "Sunucu değiştirmeyi deneyin. Ayarlar → farklı bir sunucu seçin. Sorun devam ederse uygulamayı yeniden başlatın."
-        },
-        "drops": {
-          "question": "Bağlantı sık sık kopuyor",
-          "answer": "Ayarlarda Always-On VPN'i etkinleştirin. İnternet bağlantınızı da kontrol edin."
-        },
-        "battery": {
-          "question": "Mobilde pil tüketimi",
-          "answer": "Biraz pil tüketimi normaldir. VPN'e sadece ara sıra ihtiyaç duyuyorsanız Always-On'u devre dışı bırakın."
-        },
-        "noSub": {
-          "question": "Uygulama 'Abonelik yok' diyor",
-          "answer": "Doğru Hesap ID'sini kullandığınızdan emin olun. Yeni satın aldıysanız birkaç saniye bekleyin ve uygulamayı yeniden başlatın."
-        }
-      }
-    },
-    "deleteAccount": {
-      "title": "Hesabınızı Silin",
-      "step1": "Doppler VPN uygulamasını açın",
-      "step2": "Ayarlar → Hesap'a gidin",
-      "step3": "\"Hesabı Sil\"e dokunun",
-      "step4": "Silmeyi onaylayın",
-      "warning": "Hesap silme kalıcıdır. Tüm veriler, abonelik süresi ve sunucu yapılandırmaları kaldırılacaktır. Bu işlem geri alınamaz.",
-      "alternative": "Uygulamaya erişemiyorsanız hesap silme talebinde bulunmak için destekle iletişime geçin."
-    },
-    "contact": {
-      "title": "Bize Ulaşın",
-      "telegram": "Telegram",
-      "telegramBot": "@DopplerSupportBot",
-      "email": "E-posta",
-      "emailAddress": "support@simnetiq.store",
-      "responseTime": "Genellikle 24 saat içinde yanıt veriyoruz."
-    },
-    "actions": {
-      "submitRequest": "Talep Gönder",
-      "submitRequestDesc": "Ekibimizden yardım alın",
-      "restoreAccount": "Hesabı Geri Yükle",
-      "restoreAccountDesc": "Hesap Kimliğinizi kurtarın",
-      "businessContact": "İş Başvuruları",
-      "businessContactDesc": "Ortaklıklar, basın, kurumsal"
-    },
-    "account": {
-      "title": "Hesabınızı Yönetin",
-      "signInTitle": "Hesabınızı yönetmek için giriş yapın",
-      "enterAccountId": "Hesap Kimliğini Girin",
-      "enterEmail": "E-postayı Girin",
-      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
-      "emailPlaceholder": "sizin@email.com",
-      "signIn": "Giriş Yap",
-      "noAccount": "Hesabınız yok mu?",
-      "getStarted": "Başla",
-      "signOut": "Çıkış Yap",
-      "statusTitle": "Hesap Durumu",
-      "memberSince": "Üyelik tarihi",
-      "tier": "Plan",
-      "tierFree": "Ücretsiz",
-      "tierMonthly": "Pro Aylık",
-      "tierSixMonth": "Pro 6 Aylık",
-      "tierYearly": "Pro Yıllık",
-      "expires": "Bitiş",
-      "expiresIn": "{days} gün içinde",
-      "expired": "Süresi Doldu",
-      "active": "Aktif",
-      "expiringSoon": "Yakında Bitiyor",
-      "contactTitle": "İletişim Bilgileri",
-      "contactMethod": "İletişim Yöntemi",
-      "contactValue": "İletişim",
-      "verified": "Doğrulandı",
-      "unverified": "Doğrulanmadı",
-      "changeContact": "Değiştir",
-      "saveContact": "Kaydet",
-      "cancelEdit": "İptal",
-      "subscriptionTitle": "Aboneliği Yönet",
-      "managePaddle": "Paddle ile Yönet",
-      "manageAppStore": "App Store'da Yönet",
-      "managePlayStore": "Google Play'de Yönet",
-      "invoicesTitle": "Faturalar",
-      "downloadInvoice": "PDF İndir",
-      "noInvoices": "Fatura bulunmuyor",
-      "notFound": "Hesap bulunamadı",
-      "fetchError": "Hesap yüklenemedi"
-    },
-    "ticket": {
-      "title": "Talep Gönder",
-      "subtitle": "24 saat içinde yanıt vereceğiz",
-      "topicLabel": "Konu",
-      "topics": {
-        "connection_issues": "Bağlantı Sorunları",
-        "subscription_billing": "Abonelik ve Faturalama",
-        "account": "Hesap",
-        "feature_request": "Özellik İsteği",
-        "other": "Diğer"
+  "checkout": {
+    "title": "Doppler Pro'ya yukseltin",
+    "subtitle": "Planınızı secin ve Paddle ile guvenle odeyin.",
+    "accountLabel": "Hesap",
+    "monthly": "Aylık",
+    "sixMonth": "6 Ay",
+    "yearly": "Yıllık",
+    "perMonth": "/ay",
+    "save": "Tasarruf",
+    "bestValue": "En iyi fırsat",
+    "subscribe": "Simdi abone ol",
+    "processing": "Isleniyor...",
+    "features": "Pro Ozellikler",
+    "feat1": "Dunya capında premium sunucular",
+    "feat2": "Smart Route teknolojisi",
+    "feat3": "Her zaman acık VPN",
+    "feat4": "Sınırsız oturum suresi",
+    "feat5": "Oncelikli destek",
+    "promoPlaceholder": "Promosyon kodu",
+    "promoApply": "Uygula",
+    "promoRemove": "Kaldır",
+    "promoOff": "indirim",
+    "promoInvalid": "Gecersiz promosyon kodu",
+    "promoFailed": "Kod dogrulanamadı",
+    "footerNote": "Paddle ile guvenli odeme. Istediginiz zaman iptal edin.",
+    "terms": "Kullanım Sartları",
+    "privacy": "Gizlilik Politikası",
+    "error": "Bir seyler yanlıs gitti. Lutfen tekrar deneyin.",
+    "invalidAccount": "Gecersiz hesap kimliği",
+    "successTitle": "Odeme basarılı!",
+    "successDescription": "Doppler Pro aboneliginiz aktif.",
+    "returnToApp": "Uygulamaya don",
+    "closeTab": "You can close this tab.",
+    "verifying": "Verifying payment...",
+    "verifyingDescription": "Please wait while we confirm your payment.",
+    "errorTitle": "Payment Issue",
+    "errorDescription": "We couldn't confirm your payment. If you were charged, your subscription will activate shortly.",
+    "apply": "Apply",
+    "promoApplied": "applied",
+    "promoError": "Invalid promo code"
+  },
+  "technicalHowItWorks": {
+    "title": "Doppler Trafiğini Nasıl Korur",
+    "subtitle": "Bağlantın şifrelenir ve Doppler ağı üzerinden yönlendirilir. Hiçbir şey kaydedilmez.",
+    "flow": {
+      "step1": {
+        "title": "Cihazınız",
+        "description": "Bağlantı, hesap gerekmeksizin cihazınızdan başlar"
       },
-      "subjectLabel": "Konu",
-      "subjectPlaceholder": "Sorununuzun kısa açıklaması",
-      "descriptionLabel": "Açıklama",
-      "descriptionPlaceholder": "Ne olduğunu bize anlatın...",
-      "emailLabel": "İletişim E-postası",
-      "emailPlaceholder": "sizin@email.com",
-      "accountIdLabel": "Hesap Kimliği (isteğe bağlı)",
-      "submit": "Talep Gönder",
-      "submitting": "Gönderiliyor...",
-      "successTitle": "Talep Gönderildi",
-      "successMessage": "{ticketNumber} numaralı destek talebi oluşturuldu. {email} adresine 24 saat içinde yanıt vereceğiz.",
-      "errorGeneric": "Talep gönderilemedi. Lütfen tekrar deneyin.",
-      "close": "Kapat"
+      "step2": {
+        "title": "VLESS-Reality Tüneli",
+        "description": "Trafik şifrelenir ve normal HTTPS gibi görünür hale getirilir"
+      },
+      "step3": {
+        "title": "Doppler Edge Node",
+        "description": "Sıfır günlük altyapımız üzerinden yönlendirilir"
+      },
+      "step4": {
+        "title": "Açık İnternet",
+        "description": "Özgürce gezinirsiniz — kimse neye eriştiğinizi göremez"
+      }
+    }
+  },
+  "useCases": {
+    "title": "Doppler'ı Kimler Kullanır",
+    "subtitle": "Sıradan bir VPN'den fazlasına ihtiyaç duyanlar için.",
+    "items": {
+      "restricted": {
+        "title": "Kısıtlı Ağlardaki Kullanıcılar",
+        "description": "Devletin veya ISP'nin VPN trafiğini engellediği yerde özgürce bağlan. Doppler'ın protokolü aktif sansürü aşar."
+      },
+      "travelers": {
+        "title": "Herkese Açık Wi-Fi'da Gezginler",
+        "description": "Otel, havalimanı, kafe — trafiğin şifreli, DNS sorguların gizli. Ağdaki kimse ne yaptığını göremez."
+      },
+      "journalists": {
+        "title": "Gazeteciler ve Araştırmacılar",
+        "description": "Engelli kaynaklara eriş, trafik izlerini açığa çıkarmadan iletişim kur. Hesap yok — kimlik izi yok."
+      },
+      "developers": {
+        "title": "Geliştiriciler ve Uzaktan Çalışanlar",
+        "description": "Yavaşlatılmayan ve engellenmeyen güvenilir şifreli tüneller. Kurumsal ve ulusal güvenlik duvarlarında tutarlı çalışır."
+      }
+    }
+  },
+  "comparisonTable": {
+    "title": "Doppler vs. Geleneksel VPN'ler",
+    "subtitle": "Her VPN aynı değil.",
+    "headers": {
+      "feature": "Özellik",
+      "traditional": "Geleneksel VPN",
+      "doppler": "Doppler"
     },
-    "restore": {
-      "title": "Hesabınızı Geri Yükleyin",
-      "subtitle": "Hesabınıza bağlı e-posta veya Telegram adresinizi girin",
-      "emailTab": "E-posta",
-      "telegramTab": "Telegram",
-      "emailPlaceholder": "sizin@email.com",
-      "sendAccountId": "Hesap Kimliğini Gönder",
-      "sending": "Gönderiliyor...",
-      "emailSuccess": "Bu e-posta ile bir hesap varsa Hesap Kimliğini gönderdik. Gelen kutunuzu kontrol edin.",
-      "emailNotFound": "Hesap bulunamadı. Yardıma mı ihtiyacınız var?",
-      "submitTicket": "Destek talebi oluştur",
-      "telegramMessage": "Hesabınızı Telegram botumuz aracılığıyla arayacağız",
-      "openTelegramBot": "Telegram Botunu Aç",
-      "appSubscribers": "App Store veya Google Play üzerinden satın aldınız mı?",
-      "appStoreLink": "App Store Aboneliklerini Yönet",
-      "playStoreLink": "Google Play Aboneliklerini Yönet",
-      "close": "Kapat"
-    },
-    "business": {
-      "title": "İş Başvuruları",
-      "subtitle": "Ortaklıklar, basın, kurumsal"
+    "rows": {
+      "account": {
+        "feature": "Hesap gerekli mi",
+        "traditional": "Email + şifre",
+        "doppler": "Hesap gerekmez"
+      },
+      "fingerprint": {
+        "feature": "Trafik izi",
+        "traditional": "DPI tarafından tespit edilir",
+        "doppler": "HTTPS olarak kamufle edilir"
+      },
+      "protocol": {
+        "feature": "Protokol",
+        "traditional": "OpenVPN / WireGuard",
+        "doppler": "VLESS-Reality"
+      },
+      "dns": {
+        "feature": "DNS şifreleme",
+        "traditional": "Bazen",
+        "doppler": "Her zaman"
+      },
+      "censorship": {
+        "feature": "Sansür direnci",
+        "traditional": "Sınırlı",
+        "doppler": "Yerleşik"
+      },
+      "logs": {
+        "feature": "Aktivite logları",
+        "traditional": "Değişir",
+        "doppler": "Asla"
+      }
+    }
+  },
+  "censorshipResistance": {
+    "title": "Devlet Sansürünü Aşmak İçin Tasarlandı",
+    "subtitle": "Doppler; TSPU, DPI, TLS fingerprinting ve active probing sistemlerini aşar — Rusya, Çin ve İran'ın VPN'leri engellemek için kullandığı aynı sistemler.",
+    "learnMore": "Teknik kılavuzun tamamını oku",
+    "items": {
+      "dpi": {
+        "title": "Deep Packet Inspection'ı Aşar",
+        "description": "TSPU ve DPI donanımları, VPN trafik kalıplarını tespit etmek için makine öğrenimi kullanır. VLESS-Reality sıfır imza üretir — tespit edilecek bir şey yoktur."
+      },
+      "tls": {
+        "title": "Gerçek TLS Handshake",
+        "description": "Doppler, gerçek bir web sitesi sertifikasıyla otantik bir TLS el sıkışması gerçekleştirir. DPI, VPN tüneli değil normal bir HTTPS bağlantısı görür."
+      },
+      "fingerprint": {
+        "title": "Active Probing'i Geçer",
+        "description": "Sansürcüler sunucularımızı sorguladığında, meşru web siteleri olarak yanıt verirler. Yalnızca kimliği doğrulanmış istemciler VPN tünelini etkinleştirir."
+      },
+      "regions": {
+        "title": "Rusya Tarafından Engellendi — Hâlâ Çalışıyor",
+        "description": "Alan adımız Roskomnadzor'un engelleme listesinde. Hâlâ buradayız. Web sitesi engellendiğinde Telegram botu üzerinden indirin."
+      }
     }
   },
   "bypassCensorship": {
@@ -1360,6 +1520,24 @@
         "fingerprint": "Yok"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPN devlet sansürünü aşabilir mi?",
+        "answer": "Evet. Doppler, VPN trafiğini normal HTTPS'den ayırt edilemez kılan VLESS-Reality kullanır. Tespit edilebilir VPN imzası olmadan DPI, TSPU ve Büyük Güvenlik Duvarını aşar."
+      },
+      "q2": {
+        "question": "Doppler VPN Rusya, Çin ve İran'da çalışıyor mu?",
+        "answer": "Evet. Doppler özellikle sansürlü bölgeler için inşa edilmiştir. Alan adımız Roskomnadzor tarafından engellenmiştir, bu da teknolojimizin çalıştığını kanıtlar."
+      },
+      "q3": {
+        "question": "VLESS-Reality'yi sansürü aşmada OpenVPN veya WireGuard'dan daha iyi yapan nedir?",
+        "answer": "OpenVPN ve WireGuard, DPI sistemlerinin anında tespit ettiği ayırt edici paket imzalarına sahiptir. VLESS-Reality, gerçek bir web sitesi sertifikası kullanarak gerçek bir TLS el sıkışması gerçekleştirir."
+      },
+      "q4": {
+        "question": "Doppler sunucuları engellenirse ne olur?",
+        "answer": "Doppler sunucu uç noktalarını ve IP adreslerini otomatik olarak döndürür. Bir uç nokta tespit edilirse ağ uyum sağlar. Telegram botumuz güncellenmiş sunucu yapılandırmalarına anında erişim sağlar."
+      }
+    },
     "cta": {
       "title": "Kimseyi Geride Bırakmıyoruz",
       "subtitle": "Doppler VPN özellikle kısıtlı ağlar için geliştirildi. Her yeni engelleme tekniğinin önünde kalmak için altyapımızı sürekli iyileştiriyor, sunucuları rotasyona sokuyor ve protokolleri güncelliyoruz. İnternet özgürlüğünüz pazarlık konusu değildir.",
@@ -1369,161 +1547,6 @@
       "telegramChannelRu": "Güncellemeler (Rusça)",
       "telegramChannelEn": "Güncellemeler (İngilizce)",
       "button": "Doppler VPN'i İndir"
-    }
-  },
-  "trustIndicators": {
-    "items": {
-      "noAccount": {
-        "label": "Hesap Gerekmez",
-        "description": "Cihazın senin kimliğin"
-      },
-      "zeroLogs": {
-        "label": "Sıfır Aktivite Logu",
-        "description": "Ne yaptığını göremeyiz"
-      },
-      "encryptedDns": {
-        "label": "Şifreli DNS",
-        "description": "Her sorgu korunur"
-      },
-      "dpiBypass": {
-        "label": "DPI Atlatma",
-        "description": "Trafik normal HTTPS gibi görünür"
-      },
-      "freeTrial": {
-        "label": "3 Günlük Ücretsiz Deneme",
-        "description": "Tam erişimi risksiz deneyin"
-      }
-    }
-  },
-  "technicalHowItWorks": {
-    "title": "Doppler Trafiğini Nasıl Korur",
-    "subtitle": "Bağlantın şifrelenir ve Doppler ağı üzerinden yönlendirilir. Hiçbir şey kaydedilmez.",
-    "flow": {
-      "step1": {
-        "title": "Cihazınız",
-        "description": "Bağlantı, hesap gerekmeksizin cihazınızdan başlar"
-      },
-      "step2": {
-        "title": "VLESS-Reality Tüneli",
-        "description": "Trafik şifrelenir ve normal HTTPS gibi görünür hale getirilir"
-      },
-      "step3": {
-        "title": "Doppler Edge Node",
-        "description": "Sıfır günlük altyapımız üzerinden yönlendirilir"
-      },
-      "step4": {
-        "title": "Açık İnternet",
-        "description": "Özgürce gezinirsiniz — kimse neye eriştiğinizi göremez"
-      }
-    }
-  },
-  "censorshipResistance": {
-    "title": "Devlet Sansürünü Aşmak İçin Tasarlandı",
-    "subtitle": "Doppler; TSPU, DPI, TLS fingerprinting ve active probing sistemlerini aşar — Rusya, Çin ve İran'ın VPN'leri engellemek için kullandığı aynı sistemler.",
-    "learnMore": "Teknik kılavuzun tamamını oku",
-    "items": {
-      "dpi": {
-        "title": "Deep Packet Inspection'ı Aşar",
-        "description": "TSPU ve DPI donanımları, VPN trafik kalıplarını tespit etmek için makine öğrenimi kullanır. VLESS-Reality sıfır imza üretir — tespit edilecek bir şey yoktur."
-      },
-      "tls": {
-        "title": "Gerçek TLS Handshake",
-        "description": "Doppler, gerçek bir web sitesi sertifikasıyla otantik bir TLS el sıkışması gerçekleştirir. DPI, VPN tüneli değil normal bir HTTPS bağlantısı görür."
-      },
-      "fingerprint": {
-        "title": "Active Probing'i Geçer",
-        "description": "Sansürcüler sunucularımızı sorguladığında, meşru web siteleri olarak yanıt verirler. Yalnızca kimliği doğrulanmış istemciler VPN tünelini etkinleştirir."
-      },
-      "regions": {
-        "title": "Rusya Tarafından Engellendi — Hâlâ Çalışıyor",
-        "description": "Alan adımız Roskomnadzor'un engelleme listesinde. Hâlâ buradayız. Web sitesi engellendiğinde Telegram botu üzerinden indirin."
-      }
-    }
-  },
-  "useCases": {
-    "title": "Doppler'ı Kimler Kullanır",
-    "subtitle": "Sıradan bir VPN'den fazlasına ihtiyaç duyanlar için.",
-    "items": {
-      "restricted": {
-        "title": "Kısıtlı Ağlardaki Kullanıcılar",
-        "description": "Devletin veya ISP'nin VPN trafiğini engellediği yerde özgürce bağlan. Doppler'ın protokolü aktif sansürü aşar."
-      },
-      "travelers": {
-        "title": "Herkese Açık Wi-Fi'da Gezginler",
-        "description": "Otel, havalimanı, kafe — trafiğin şifreli, DNS sorguların gizli. Ağdaki kimse ne yaptığını göremez."
-      },
-      "journalists": {
-        "title": "Gazeteciler ve Araştırmacılar",
-        "description": "Engelli kaynaklara eriş, trafik izlerini açığa çıkarmadan iletişim kur. Hesap yok — kimlik izi yok."
-      },
-      "developers": {
-        "title": "Geliştiriciler ve Uzaktan Çalışanlar",
-        "description": "Yavaşlatılmayan ve engellenmeyen güvenilir şifreli tüneller. Kurumsal ve ulusal güvenlik duvarlarında tutarlı çalışır."
-      }
-    }
-  },
-  "comparisonTable": {
-    "title": "Doppler vs. Geleneksel VPN'ler",
-    "subtitle": "Her VPN aynı değil.",
-    "headers": {
-      "feature": "Özellik",
-      "traditional": "Geleneksel VPN",
-      "doppler": "Doppler"
-    },
-    "rows": {
-      "account": {
-        "feature": "Hesap gerekli mi",
-        "traditional": "Email + şifre",
-        "doppler": "Hesap gerekmez"
-      },
-      "fingerprint": {
-        "feature": "Trafik izi",
-        "traditional": "DPI tarafından tespit edilir",
-        "doppler": "HTTPS olarak kamufle edilir"
-      },
-      "protocol": {
-        "feature": "Protokol",
-        "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
-      },
-      "dns": {
-        "feature": "DNS şifreleme",
-        "traditional": "Bazen",
-        "doppler": "Her zaman"
-      },
-      "censorship": {
-        "feature": "Sansür direnci",
-        "traditional": "Sınırlı",
-        "doppler": "Yerleşik"
-      },
-      "logs": {
-        "feature": "Aktivite logları",
-        "traditional": "Değişir",
-        "doppler": "Asla"
-      }
-    }
-  },
-  "privacyModel": {
-    "title": "Ne Saklamıyoruz",
-    "subtitle": "Gizlilik mimariye dayalı, sadece söze değil.",
-    "tagline": "Elimizde olmayan veriyi teslim edemeyiz.",
-    "items": {
-      "browsing": {
-        "title": "Gezinti logu yok",
-        "description": "Hangi siteleri ziyaret ettiğini asla göremeyiz"
-      },
-      "ip": {
-        "title": "IP adresi logu yok",
-        "description": "Gerçek IP'n hiçbir zaman kaydedilmez"
-      },
-      "dns": {
-        "title": "DNS sorgu kaydı yok",
-        "description": "Şifrelenir ve çözümlendikten sonra silinir"
-      },
-      "account": {
-        "title": "Hesap veritabanı yok",
-        "description": "Cihaz doğrulaması — saklanacak kişisel veri yok"
-      }
     }
   },
   "about": {
@@ -1727,6 +1750,24 @@
         "description": "Artık askeri düzeyde şifrelemeyle korunuyorsunuz. Gerçek IP'niz gizli, trafiğiniz okunamaz ve kimse — biz bile — kim olduğunuzu bilmiyor. Kayıt gerektirmeyen gerçek anonim VPN."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPN kayıt olmadan nasıl çalışır?",
+        "answer": "Doppler cihaz tabanlı kimlik doğrulama kullanır. Uygulamayı açtığınızda, cihazınızda yerel olarak bir kriptografik anahtar oluşturulur. Bu anahtar sizi sunucularda doğrular — e-posta, telefon numarası veya hesap gerekmez."
+      },
+      "q2": {
+        "question": "Hesapsız VPN güvenli mi?",
+        "answer": "Evet, daha güvenli. Geleneksel hesaplar hacklenebilecek veya mahkeme kararıyla talep edilebilecek veritabanları oluşturur. Doppler kişisel veri saklamaz."
+      },
+      "q3": {
+        "question": "Hesap olmadan Doppler'ı birden fazla cihazda kullanabilir miyim?",
+        "answer": "Evet. Her cihaz kendi benzersiz anahtarını oluşturur. Aboneliğiniz birden fazla cihazda çalışır. İsteğe bağlı olarak cihazları kurtarma e-postası ile bağlayabilirsiniz, ancak bu asla zorunlu değildir."
+      },
+      "q4": {
+        "question": "Doppler hangi verileri toplar?",
+        "answer": "Doppler e-postanızı, telefon numaranızı, adınızı, tarama geçmişinizi, IP kayıtlarını veya bağlantı zaman damgalarını toplamaz. Hiç saklamadığımız verileri fiziksel olarak teslim edemeyiz."
+      }
+    },
     "cta": {
       "title": "Sizi Tanımayan Bir VPN'e Hazır mısınız?",
       "subtitle": "Kayıt gerektirmeyen bir VPN'i tercih eden binlerce kullanıcıya katılın. E-posta gerekmez, hesap oluşturmaya gerek yok, kişisel veri riski yok. Doppler'ı indirin ve saniyeler içinde bağlanın — tamamen ücretsiz, tamamen anonim.",
@@ -1901,6 +1942,24 @@
         "description": "Tam VLESS-Reality VPN deneyimi iOS (App Store), Android (Google Play) ve yapılandırma tabanlı erişim için Telegram botumuz aracılığıyla kullanılabilir. Her platform aynı optimize Xray-core motorunu ve aynı sunucu altyapısını kullanır."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "VLESS-Reality protokolü nedir?",
+        "answer": "VLESS-Reality, VPN trafiğini normal HTTPS taramasından ayırt edilemez kılan yeni nesil bir proxy protokolüdür. Gerçek bir web sitesi sertifikası kullanarak gerçek bir TLS el sıkışması gerçekleştirir."
+      },
+      "q2": {
+        "question": "VLESS-Reality WireGuard'dan daha hızlı mı?",
+        "answer": "VLESS-Reality, minimum ek yük ile WireGuard'a benzer hızlara sahiptir. Temel avantaj ham hız değil, tespit edilemezliktir — WireGuard DPI tarafından anında engellenir."
+      },
+      "q3": {
+        "question": "VLESS kullanmak için Xray yapılandırmam gerekir mi?",
+        "answer": "Doppler ile hayır. Geleneksel VLESS kurulumu JSON yapılandırmaları düzenlemeyi ve anahtar yönetimi gerektirir. Doppler tüm yapılandırmayı otomatik olarak yönetir."
+      },
+      "q4": {
+        "question": "Hangi platformlar VLESS-Reality'yi destekliyor?",
+        "answer": "Doppler VPN, iOS (App Store), Android (Google Play ve APK) ve yapılandırma tabanlı erişim için Telegram botunda VLESS-Reality sunuyor."
+      }
+    },
     "cta": {
       "title": "Her Şeyi Kolaylaştıran VLESS VPN Uygulamasını Deneyin",
       "subtitle": "Doppler'ı indirin ve VLESS-Reality'yi deneyimleyin — görünmez olmak için tasarlanan protokol. Tek dokunuş. Yapılandırma yok. Taviz yok.",
@@ -1921,170 +1980,103 @@
   },
   "vpnForIos": {
     "metadata": {
-      "title": "iPhone ve iPad için Ücretsiz VPN — Kayıt Gereksiz | Doppler VPN",
-      "description": "iOS için Doppler VPN'i indirin — 2026'nın iPhone ve iPad için en iyi ücretsiz VPN'i. Kayıt gereksiz, hesap gereksiz. VLESS-Reality protokolü, reklam engelleyici ve her zaman açık koruma."
+      "title": "iPhone ve iPad için Doppler VPN — Hızlı, Gizli ve Sansüre Dayanıklı",
+      "description": "iOS için Doppler VPN'i indirin. VLESS-Reality şifreleme, kayıt gereksiz, Rusya, İran ve Çin'deki sansürü aşın. 3 günlük ücretsiz deneme."
     },
     "hero": {
       "title": "iPhone ve iPad için Doppler VPN",
-      "subtitle": "Kayıt gerektirmeyen ücretsiz, güvenli VPN. App Store'dan indirin."
+      "subtitle": "iOS için tasarlanmış hızlı, gizli ve sansüre dayanıklı VPN. Kayıt gereksiz — App Store'dan indirin ve saniyeler içinde bağlanın. Tüm özelliklere tam erişimli 3 günlük ücretsiz deneme dahil.",
+      "cta": "App Store'dan İndirin"
     },
     "features": {
-      "title": "Neden iOS için Doppler?",
+      "title": "Neden iOS için Doppler VPN?",
+      "subtitle": "Doppler VPN, hız veya kullanım kolaylığından ödün vermeden gerçek gizlilik isteyen iPhone ve iPad kullanıcıları için sıfırdan tasarlandı.",
+      "vlessEncryption": {
+        "title": "VLESS-Reality Şifreleme",
+        "description": "VPN trafiğini normal HTTPS taraması gibi gösteren yeni nesil protokol. Bağlantınız güvenlik duvarları, derin paket inceleme sistemleri ve ISS izleme araçları tarafından görünmezdir. Çin Büyük Güvenlik Duvarı'nı aşmak için kullanılan aynı teknoloji."
+      },
       "noRegistration": {
         "title": "Kayıt Gereksiz",
-        "description": "VPN'i anında kullanmaya başlayın — e-posta yok, telefon numarası yok, hesap oluşturma yok. İndirin ve bağlanın."
+        "description": "E-posta yok, telefon numarası yok, hesap oluşturma yok. Uygulamayı indirin ve anında bağlanın. Doppler, cihaz tabanlı kimlik doğrulama kullanır; böylece kimliğiniz ilk dokunuştan itibaren tamamen gizli kalır."
       },
-      "vlessProtocol": {
-        "title": "VLESS-Reality Protokolü",
-        "description": "VPN trafiğini normal HTTPS taraması gibi gösteren yeni nesil şifreleme. Güvenlik duvarları ve DPI sistemleri tarafından tespit edilemez."
+      "oneTapConnect": {
+        "title": "Tek Dokunuşla Bağlanın",
+        "description": "Tek bir düğmeye basın, Doppler otomatik olarak en hızlı sunucuyu seçer, şifreli bir tünel kurar ve tüm trafiğinizi korur. Akıllı sunucu seçimi hız ve güvenilirlik için optimize edilmiştir."
       },
-      "adBlocker": {
-        "title": "Dahili Reklam Engelleyici",
-        "description": "DNS düzeyinde rahatsız edici reklamları, izleyicileri ve kötü amaçlı alan adlarını engelleyin. Daha az veri kullanımıyla daha hızlı gezinme."
+      "bypassCensorship": {
+        "title": "Sansür ve DPI'yı Aşın",
+        "description": "Katı internet sansürü uygulanan ülkelerde çalışmak üzere tasarlandı — Rusya, İran, Çin ve ötesi. VLESS-Reality, VPN trafiğinizi normal web taramasından ayırt edilemez hale getirerek TSPU ve GFW'yi alt eder."
       },
-      "alwaysOn": {
-        "title": "Her Zaman Açık VPN",
-        "description": "Wi-Fi ve hücresel ağ arasında geçiş yaparken otomatik olarak yeniden bağlanır. Bağlantınız 7/24 korunur."
+      "noLogs": {
+        "title": "Sıkı Kayıt Tutmama Politikası",
+        "description": "Doppler, tarama verilerinizi asla toplamaz, saklamaz veya paylaşmaz. Bağlantı kaydı yok, trafik kaydı yok, DNS sorgu kaydı yok. Sizi tanımlayamayız çünkü tanımlayıcı bilgi toplamıyoruz."
       },
-      "smartRouting": {
-        "title": "Akıllı Yönlendirme",
-        "description": "Akıllı sunucu seçimi en hızlı mevcut düğümü seçer. Akış, oyun ve günlük gezinme için optimize edilmiştir."
+      "globalServers": {
+        "title": "6 Küresel Sunucu Konumu",
+        "description": "Avrupa ve ötesindeki birden fazla ülkedeki sunuculara bağlanın. Her sunucu, en düşük gecikme ve en yüksek aktarım hızı için optimize edilmiş yönlendirmeyle VLESS-Reality çalıştırır."
       },
-      "dnsProtection": {
-        "title": "DNS Koruması",
-        "description": "Şifreli DNS sorguları, ISS'nizin hangi web sitelerini ziyaret ettiğinizi görmesini engeller. Tam DNS sızıntı koruması dahildir."
+      "freeTrial": {
+        "title": "3 Günlük Ücretsiz Deneme",
+        "description": "Doppler VPN'i 3 gün boyunca tüm özelliklere tam erişimle deneyin — peşin kredi kartı gerektirmez. Deneme süresinden sonra aylık 3,33 $'dan başlayan aylık, 6 aylık veya yıllık planlar arasından seçim yapın."
+      },
+      "iphoneIpad": {
+        "title": "iPhone ve iPad'de Çalışır",
+        "description": "Apple'ın Network Extension çerçevesiyle oluşturulmuş yerel iOS uygulaması. iPhone (8 ve üzeri), tüm iPad modelleri ve iPad uygulama uyumluluğu aracılığıyla Apple Silicon Mac'ler için tam destek. iPadOS Split View ve çoklu görev desteği."
       }
     },
     "howItWorks": {
-      "title": "iOS'ta Nasıl Çalışır?",
-      "subtitle": "Hesap oluşturma yok, e-posta yok, telefon numarası yok — sadece dört basit adım.",
+      "title": "iPhone'da VPN Nasıl Kurulur",
+      "subtitle": "30 saniyenin altında bağlanın — teknik bilgi gerektirmez.",
       "step1": {
         "title": "App Store'dan İndirin",
-        "description": "\"Doppler VPN\" arayın veya aşağıdaki bağlantıya dokunun. Uygulama ücretsiz ve 30 MB'ın altında."
+        "description": "App Store'da \"Doppler VPN\" arayın veya aşağıdaki indirme düğmesine dokunun. Uygulama ücretsiz indirilebilir ve 30 MB'ın altındadır. iOS 16 ve üzeri ile uyumludur."
       },
       "step2": {
         "title": "Uygulamayı Açın",
-        "description": "Doppler VPN'i başlatın. Kayıt ekranı yok, üyelik formu yok. Uygulama hemen kullanıma hazır."
+        "description": "iPhone veya iPad'inizde Doppler VPN'i başlatın. Kayıt ekranı yok, üyelik formu yok, e-posta doğrulaması yok. Hesabınız cihaz tabanlı kimlik doğrulama kullanılarak otomatik olarak oluşturulur."
       },
       "step3": {
-        "title": "Bağlan'a Dokunun",
-        "description": "Bağlan düğmesine basın. Doppler otomatik olarak en iyi sunucuyu seçer ve güvenli bir VLESS-Reality tüneli kurar."
+        "title": "Plan Seçin",
+        "description": "3 günlük ücretsiz denemenizi başlatın veya bir abonelik planı seçin. Aylık (6,99 $), 6 aylık (29,99 $) veya yıllık (39,99 $) seçenekler mevcuttur. Aboneliğinizi doğrudan App Store üzerinden yönetin."
       },
       "step4": {
-        "title": "Güvenle Gezinin",
-        "description": "Hepsi bu kadar. Trafiğiniz şifreli, IP'niz gizli ve reklamlar engelli. Herhangi bir uygulama veya web sitesini özgürce kullanın."
-      }
-    },
-    "iosFeatures": {
-      "title": "iOS'a Özel Özellikler",
-      "subtitle": "Apple ekosistemi için yerel olarak geliştirilmiş, derin sistem entegrasyonlu.",
-      "networkExtension": {
-        "title": "Network Extension (Sistem Düzeyinde VPN)",
-        "description": "Doppler, Apple'ın Network Extension çerçevesini kullanarak gerçek bir sistem düzeyinde VPN olarak çalışır. Her uygulamadan gelen tüm trafik şifreli tünelden geçer — yalnızca tarayıcı trafiği değil. Bu, Apple'ın kurumsal VPN çözümleri için gerektirdiği aynı korumayı sağlar."
-      },
-      "alwaysOnVpn": {
-        "title": "Her Zaman Açık VPN",
-        "description": "Her Zaman Açık modunu etkinleştirin ve Doppler bağlantınız kesildiğinde otomatik olarak yeniden bağlanır. Wi-Fi'den hücresel ağa mı geçiyorsunuz? Telefonunuzu uykudan mı uyandırıyorsunuz? VPN bir saniyenin altında yeniden kurulur."
-      },
-      "perAppVpn": {
-        "title": "Uygulama Bazlı VPN Desteği",
-        "description": "Hangi uygulamaların VPN tünelinden geçeceğini ve hangilerinin doğrudan bağlanacağını seçin. Bankacılık uygulamalarını yerel ağınızda tutarken tarayıcıları ve mesajlaşma uygulamalarını VPN üzerinden koruyun."
-      },
-      "widget": {
-        "title": "Ana Ekran Widget'ı",
-        "description": "Doppler widget'ını Ana Ekranınıza veya Kilit Ekranınıza ekleyin — anlık bağlantı durumu ve tek dokunuşla açma/kapama. Mevcut sunucunuzu, bağlantı sürenizi ve koruma durumunuzu bir bakışta görün."
-      },
-      "ipadSplitView": {
-        "title": "iPad Split View Desteği",
-        "description": "iPad çoklu görev için tam destek. Doppler VPN'i Split View veya Slide Over'da diğer uygulamalarla birlikte kullanın. VPN durumu, ön planda hangi uygulama olursa olsun durum çubuğunda her zaman görünür."
-      }
-    },
-    "privacy": {
-      "title": "Apple Cihazlarında Gizlilik",
-      "subtitle": "Doppler, Apple'ın zaten koruduğu şeyleri tamamlar — ve bir VPN'in tasarlandığı boşlukları doldurur.",
-      "intro": "Apple, cihaz düzeyinde gizlilikte sektöre öncülük eder — Uygulama Takip Şeffaflığı, Mail Gizlilik Koruması ve Safari'nin Akıllı Takip Önleme. Ancak Apple'ın koruyamadığı bir katman var: ağ trafiğiniz.",
-      "appleProtects": {
-        "title": "Apple'ın Koruduğu",
-        "item1": "Uygulama düzeyinde takip (ATT istemleri)",
-        "item2": "Cihaz üzerinde veri şifreleme (Secure Enclave)",
-        "item3": "Safari izleyici engelleme",
-        "item4": "Mail piksel takibi önleme"
-      },
-      "dopplerAdds": {
-        "title": "Doppler VPN'in Eklediği",
-        "item1": "Gerçek IP adresinizi her web sitesinden ve hizmetten gizler",
-        "item2": "Tüm ağ trafiğini VLESS-Reality ile şifreler (tespit edilemez)",
-        "item3": "DNS düzeyinde takip ve reklam alan adlarını engeller",
-        "item4": "ISS trafik izleme ve hız kısıtlamasını önler"
-      },
-      "noLogs": "Doppler cihaz tabanlı kimlik doğrulama kullanır — hesap yok, e-posta yok, kayıt yok. Tanımlayıcı bilgi hiçbir zaman toplamadığımız için sizi tanımlamamız mümkün değildir."
-    },
-    "compatibility": {
-      "title": "Sistem Gereksinimleri ve Uyumluluk",
-      "os": {
-        "label": "İşletim Sistemi",
-        "value": "iOS 16.0 veya üstü"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8 ve üstü (iOS 16 desteği olan tüm modeller)"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "iPadOS 16 veya üstünü çalıştıran tüm iPad modelleri"
-      },
-      "mac": {
-        "label": "Mac (Apple Silicon)",
-        "value": "M1, M2, M3, M4 Mac'ler iPad uygulama uyumluluğuyla"
-      },
-      "size": {
-        "label": "Uygulama Boyutu",
-        "value": "30 MB'ın altında"
-      },
-      "battery": {
-        "label": "Pil Etkisi",
-        "value": "Minimal — VLESS düşük CPU yüküne sahip hafif bir protokoldür"
-      },
-      "data": {
-        "label": "Veri Ek Yükü",
-        "value": "Şifresiz gezintiye kıyasla %2'den az ek veri kullanımı"
+        "title": "Bağlan'a Dokunun",
+        "description": "Bağlan düğmesine basın. Doppler otomatik olarak en iyi sunucuyu seçer, şifreli bir VLESS-Reality tüneli kurar ve tüm trafiğinizi bu tünelden yönlendirir. IP'niz gizlenir ve verileriniz şifrelenir."
       }
     },
     "faq": {
-      "title": "Sık Sorulan Sorular",
+      "title": "Sık Sorulan Sorular — iOS için Doppler VPN",
       "q1": {
-        "question": "Doppler VPN iOS'ta gerçekten ücretsiz mi?",
-        "answer": "Evet. Doppler VPN, temel VPN özelliklerine erişimle ücretsiz bir katman sunar. Premium planlar ek sunucular, daha yüksek hızlar ve uygulama bazlı VPN yönlendirmesi gibi gelişmiş özellikler açar."
+        "question": "Doppler VPN iPad'de çalışır mı?",
+        "answer": "Evet. Doppler VPN, iPadOS 16 veya üzerini çalıştıran tüm iPad modellerinde çalışır. Uygulama, Split View ve Slide Over dahil iPad çoklu görev özelliklerini tam olarak destekler. Aboneliğiniz hem iPhone hem de iPad'i kapsar — tüm Apple cihazlarınızda aynı hesabı kullanın."
       },
       "q2": {
-        "question": "Hesap oluşturmam gerekiyor mu?",
-        "answer": "Hayır. Doppler cihaz tabanlı kimlik doğrulama kullanır. Kayıt yok, e-posta gerekmez ve telefon numarası gerekli değil. İndirin ve bağlanın."
+        "question": "iPhone'da VPN nasıl kurulur?",
+        "answer": "iPhone'da Doppler VPN kurulumu 30 saniyeden kısa sürer: 1) App Store'dan indirin, 2) Uygulamayı açın (kayıt gereksiz), 3) Bağlan'a dokunun. Doppler tüm teknik kurulumu otomatik olarak yapar — VPN profilini yapılandırır, en iyi sunucuyu seçer ve şifreli bir tünel kurar."
       },
       "q3": {
-        "question": "Doppler Çin, Rusya veya İran'da çalışıyor mu?",
-        "answer": "Evet. Doppler, VPN trafiğini normal HTTPS gibi gösteren VLESS-Reality protokolünü kullanır. Bu, Büyük Güvenlik Duvarı veya TSPU gibi sansür sistemlerinin tespit etmesini ve engellemesini son derece zorlaştırır."
+        "question": "Doppler VPN iOS için ücretsiz mi?",
+        "answer": "Doppler VPN, tüm özelliklere tam erişimli 3 günlük ücretsiz deneme sunar. Deneme süresinden sonra üç abonelik planından birini seçin: aylık (6,99 $), 6 aylık (29,99 $, %28 tasarruf) veya yıllık (39,99 $, %52 tasarruf). Tüm abonelikler App Store üzerinden yönetilir."
       },
       "q4": {
-        "question": "VPN iPhone'umu yavaşlatır mı?",
-        "answer": "Neredeyse fark edilmez. VLESS-Reality mevcut en hafif VPN protokollerinden biridir. Çoğu kullanıcı %5'ten az hız düşüşü yaşar. Verimli paket işleme sayesinde pil etkisi minimaldir."
+        "question": "Rusya, Çin ve İran'da çalışır mı?",
+        "answer": "Evet. Doppler, VPN trafiğini normal HTTPS web taraması gibi gösteren VLESS-Reality protokolünü kullanır. Bu, Rusya'nın TSPU'su, Çin'in Büyük Güvenlik Duvarı veya İran'ın filtreleme altyapısı gibi sansür sistemlerinin tespit etmesini ve engellemesini son derece zorlaştırır. Doppler, özellikle yoğun sansür uygulanan bölgelerdeki kullanıcılar için tasarlanmıştır."
       },
       "q5": {
-        "question": "Doppler yayın uygulamalarıyla çalışır mı?",
-        "answer": "Evet. Doppler'ın akıllı yönlendirmesi yayın için optimize edilmiştir. Uygulama, video içeriği için en iyi performansa sahip sunucuları otomatik olarak seçer."
+        "question": "Aboneliğimi nasıl iptal ederim?",
+        "answer": "iOS'ta Doppler VPN aboneliğinizi iptal etmek için: Ayarlar > Apple Kimliğinize dokunun > Abonelikler > Doppler VPN > Aboneliği İptal Et. Mevcut faturalama döneminin sonuna kadar erişiminiz devam eder. Tüm faturalamayı Apple yönetir — Doppler ödeme bilgilerinizi asla saklamaz."
       },
       "q6": {
-        "question": "Doppler'ı iPad ve iPhone'da aynı anda kullanabilir miyim?",
-        "answer": "Evet. Aboneliğiniz birden fazla Apple cihazında çalışır. Her cihaz kendi güvenli bağlantısına sahip olur."
+        "question": "Birden fazla Apple cihazında tek hesap kullanabilir miyim?",
+        "answer": "Evet. Doppler VPN aboneliğiniz birden fazla Apple cihazında çalışır — iPhone, iPad ve hatta iPad uygulama uyumluluğu aracılığıyla Apple Silicon Mac'ler. Her cihaz kendi güvenli VPN bağlantısına sahip olur. Tek bir hesaba en fazla 10 cihaz bağlanabilir."
       }
     },
     "cta": {
-      "title": "iOS için Doppler VPN'i Edinin",
-      "subtitle": "Ücretsiz indirme. Kayıt yok. Kredi kartı yok. Saniyeler içinde bağlanın.",
+      "title": "iPhone ve iPad için Doppler VPN'i İndirin",
+      "subtitle": "Kayıt gereksiz. Tüm özelliklere tam erişimli 3 günlük ücretsiz deneme. VLESS-Reality şifreleme, bağlantınızı gizli ve tespit edilemez tutar.",
       "downloadIos": "App Store'dan İndirin",
-      "downloadAndroid": "Google Play'den Edinin",
-      "telegramBot": "Telegram Bot ile Kullanın",
-      "telegramChannelRu": "Telegram Kanalı (RU)",
-      "telegramChannelEn": "Telegram Kanalı (EN)"
+      "otherPlatforms": "Diğer platformlarda da mevcut",
+      "downloadsLink": "Tüm indirmeleri görüntüle"
     },
     "related": {
       "noRegistration": "Kayıtsız VPN",
@@ -2092,7 +2084,7 @@
       "vless": "VLESS-Reality Protokolü",
       "vlessDesc": "VLESS'in derin paket incelemesini nasıl yendiğini öğrenin",
       "android": "Android için VPN",
-      "androidDesc": "Google Play veya APK üzerinden Doppler VPN edinin"
+      "androidDesc": "Google Play'den Doppler VPN'i edinin"
     }
   },
   "vpnForAndroid": {
@@ -2103,56 +2095,42 @@
     "hero": {
       "title": "Android için Doppler VPN",
       "subtitle": "Kayıt gerektirmeyen ücretsiz VPN. Hesap yok, e-posta yok, kişisel veri yok. Google Play'de ve Play Store'un kısıtlı olduğu bölgeler için APK olarak mevcut.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "APK İndir"
+      "cta": "Get it on Google Play"
     },
     "features": {
       "title": "Neden Android için Doppler?",
       "subtitle": "Taviz vermeden gizlilik isteyen Android kullanıcıları için özel olarak geliştirildi. Kayıt yok, veri toplama yok, sınır yok.",
+      "vlessEncryption": {
+        "title": "VLESS-Reality Encryption",
+        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring. The same technology used to bypass the Great Firewall of China."
+      },
       "noRegistration": {
         "title": "Kayıt Gereksiz",
         "description": "Uygulamayı açın ve anında bağlanın. E-posta yok, telefon numarası yok, hesap oluşturma yok. Kimliğiniz ilk dokunuştan itibaren gizli kalır."
       },
-      "vlessReality": {
-        "title": "VLESS-Reality Protokolü",
-        "description": "VPN trafiğinizi normal HTTPS gezintisi gibi gösteren askeri düzeyde şifreleme. DPI sistemleri ve devlet güvenlik duvarları tarafından tespit edilemez."
+      "oneTapConnect": {
+        "title": "One-Tap Connect",
+        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
       },
-      "adBlocker": {
-        "title": "Dahili Reklam Engelleyici",
-        "description": "DNS düzeyinde reklamları, izleyicileri ve kötü amaçlı alan adlarını engelleyin. Android cihazınızda daha hızlı gezinme, daha az veri kullanımı ve daha iyi pil ömrü."
+      "bypassCensorship": {
+        "title": "Bypass Censorship & DPI",
+        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
       },
-      "alwaysOn": {
-        "title": "Her Zaman Açık VPN",
-        "description": "Android'in yerel Her Zaman Açık VPN özelliğini kullanarak yeniden başlatma veya ağ değişikliklerinden sonra bile 7/24 bağlantınızın korunmasını sağlar."
+      "noLogs": {
+        "title": "Strict No-Logs Policy",
+        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
       },
-      "apkSideload": {
-        "title": "APK Yandan Yükleme",
-        "description": "Google Play'e erişemiyorsunuz? APK'yı doğrudan indirin ve manuel olarak kurun. Rusya, İran, Çin ve diğer sansürlü bölgelerdeki kullanıcılar için idealdir."
+      "globalServers": {
+        "title": "6 Global Server Locations",
+        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
       },
-      "dnsProtection": {
-        "title": "DNS Koruması",
-        "description": "Tüm DNS sorguları şifrelenir ve güvenli sunucular üzerinden yönlendirilir. DNS sızıntılarını önler ve ISS'nizin hangi web sitelerini ziyaret ettiğinizi görmesini engeller."
-      }
-    },
-    "install": {
-      "title": "İki Kurulum Yöntemi",
-      "subtitle": "Durumunuza en uygun kurulum yöntemini seçin. Her ikisi de aynı tam özellikli VPN deneyimini sunar.",
-      "playStore": {
-        "title": "Google Play Store",
-        "badge": "Önerilen",
-        "benefit1": "Tek dokunuşla kurulum, otomatik güncellemeler",
-        "benefit2": "Google Play Protect tarafından doğrulanmış",
-        "benefit3": "Sorunsuz abonelik yönetimi",
-        "cta": "Google Play'den Edinin"
+      "freeTrial": {
+        "title": "3-Day Free Trial",
+        "description": "Try Doppler VPN with full access to all features for 3 days. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month. Manage your subscription through Google Play."
       },
-      "apk": {
-        "title": "Doğrudan APK İndirme",
-        "badge": "Kısıtlı Bölgeler İçin",
-        "benefit1": "Google Play'in engellendiği yerlerde çalışır",
-        "benefit2": "Google hesabı gerekmez",
-        "benefit3": "Play Store sürümüyle aynı özellikler",
-        "note": "Rusya, İran, Çin ve Google Play Store'un kısıtlı olduğu veya VPN uygulamalarının mağazadan kaldırıldığı diğer ülkelerdeki kullanıcılar için idealdir.",
-        "cta": "Telegram Bot'tan APK Alın"
+      "batteryEfficient": {
+        "title": "Battery-Efficient Background Service",
+        "description": "Doppler uses Android's native Always-On VPN framework with minimal battery impact. Less than 2% additional drain even with 24/7 protection enabled. Optimized for Samsung, Xiaomi, OnePlus, Pixel, and all major Android brands."
       }
     },
     "howItWorks": {
@@ -2175,86 +2153,39 @@
         "description": "Bağlantınız artık şifreli ve tespit edilemez. Herhangi bir web sitesine, uygulamaya veya hizmete kısıtlama olmadan erişin."
       }
     },
-    "androidFeatures": {
-      "title": "Android'e Özel Özellikler",
-      "subtitle": "Doppler VPN, en güvenli ve sorunsuz deneyimi sunmak için Android'in yeteneklerinden tam olarak yararlanır.",
-      "alwaysOnVpn": {
-        "title": "Her Zaman Açık VPN",
-        "description": "Doppler'ı her zaman bağlı tutmak için Android'in dahili Her Zaman Açık VPN ayarını etkinleştirin. Ayarlar > Ağ ve İnternet > VPN > Doppler VPN > Her Zaman Açık'ı açın. Cihazınız yeniden başlatma veya ağ değişikliklerinden sonra otomatik olarak yeniden bağlanacaktır."
+    "faq": {
+      "title": "Frequently Asked Questions — Doppler VPN for Android",
+      "q1": {
+        "question": "Does Doppler VPN work on Samsung devices?",
+        "answer": "Yes. Doppler VPN is fully compatible with all Samsung Galaxy phones and tablets running Android 8.0 (Oreo) or later. This includes the Galaxy S series, Galaxy A series, Galaxy Z Fold, Galaxy Z Flip, and Galaxy Tab. Doppler integrates with Samsung's Always-On VPN settings for 24/7 protection."
       },
-      "splitTunneling": {
-        "title": "Bölünmüş Tünelleme",
-        "description": "Hangi uygulamaların VPN üzerinden gideceğini ve hangilerinin normal bağlantınızı kullanacağını seçin. Bankacılık uygulamalarını doğrudan yönlendirirken tarayıcıları koruma altında tutun. Uygulama bazlı VPN kurallarını Doppler ayarlarından yapılandırın."
+      "q2": {
+        "question": "Does Doppler VPN drain battery?",
+        "answer": "No. Doppler VPN uses less than 2% additional battery even with Always-On VPN enabled. The VLESS-Reality protocol is designed for efficiency with minimal CPU overhead. For the best experience, exclude Doppler from Android's battery optimization in Settings > Apps > Doppler VPN > Battery > Unrestricted."
       },
-      "quickSettings": {
-        "title": "Hızlı Ayarlar Kutucuğu",
-        "description": "Doppler VPN'i Android Hızlı Ayarlar paneline ekleyin. Tek bir kaydırma ve dokunuşla bağlanın veya bağlantıyı kesin — uygulamayı açmaya gerek yok. Android 8.0 ve üstünde kullanılabilir."
+      "q3": {
+        "question": "How do I set up VPN on Android?",
+        "answer": "Setting up Doppler VPN on Android takes under 30 seconds: 1) Download from Google Play, 2) Open the app (no registration needed), 3) Tap Connect. Doppler handles all the technical setup automatically — it configures the VPN profile, selects the best server, and establishes an encrypted tunnel."
       },
-      "batteryOptimization": {
-        "title": "Pil Optimizasyonu",
-        "description": "Doppler minimal pil kullanır. En iyi Her Zaman Açık deneyimi için Doppler'ı Android'in pil optimizasyonundan hariç tutun: Ayarlar > Uygulamalar > Doppler VPN > Pil > Kısıtlanmamış. Bu, Android'in arka planda VPN bağlantısını kapatmasını önler."
+      "q4": {
+        "question": "Does it work in Russia, China, and Iran?",
+        "answer": "Yes. Doppler uses the VLESS-Reality protocol, which disguises VPN traffic as regular HTTPS web browsing. This makes it extremely difficult for censorship systems like Russia's TSPU, China's Great Firewall, or Iran's filtering infrastructure to detect and block. Doppler is specifically designed for users in heavily censored regions."
       },
-      "androidTv": {
-        "title": "Android TV Desteği",
-        "description": "Doppler VPN APK'sını Android TV veya TV kutunuza yandan yükleyerek akış trafiğinizi koruyun. Aynı VLESS-Reality şifrelemeyle büyük ekranda coğrafi kısıtlamalı içeriğe erişin."
-      }
-    },
-    "sideloading": {
-      "title": "APK Yandan Yükleme Kılavuzu",
-      "badge": "Sansürlü Bölgeler İçin",
-      "intro": "Google Play'in kısıtlı olduğu veya VPN uygulamalarının mağazadan kaldırıldığı bir ülkedeyseniz, Doppler VPN'i doğrudan APK dosyasından yükleyebilirsiniz. Bu adımları dikkatlice izleyin.",
-      "step1": {
-        "title": "Bilinmeyen Kaynakları Etkinleştirin",
-        "description": "Ayarlar > Uygulamalar > Özel uygulama erişimi > Bilinmeyen uygulamaları yükle'ye gidin. Tarayıcınızı veya dosya yöneticinizi seçin ve 'Bu kaynaktan izin ver'i açın."
+      "q5": {
+        "question": "How do I cancel my subscription?",
+        "answer": "To cancel your Doppler VPN subscription on Android: Open Google Play > tap your profile icon > Payments & subscriptions > Subscriptions > Doppler VPN > Cancel subscription. Your access continues until the end of the current billing period."
       },
-      "step2": {
-        "title": "APK'yı İndirin",
-        "description": "En son Doppler VPN APK'sını resmi Telegram botumuz @dopplercreatebot'tan alın. Bu, her zaman orijinal, değiştirilmemiş dosyayı almanızı sağlar."
-      },
-      "step3": {
-        "title": "APK'yı Kurun",
-        "description": "İndirilen .apk dosyasını açın ve 'Yükle'ye dokunun. Android bilinmeyen uygulamalar hakkında bir uyarı gösterebilir — yandan yüklenen uygulamalar için bu normaldir."
-      },
-      "step4": {
-        "title": "Doğrulayın ve Bağlanın",
-        "description": "Doppler VPN'i açın ve uygulamanın doğru çalıştığını doğrulayın. Uygulama herhangi bir hesap veya kayıt gerektirmeden bağlanmalıdır — sadece bağlan'a dokunun."
-      },
-      "security": {
-        "title": "Güvenlik Notu",
-        "description": "Doppler VPN APK'sını yalnızca resmi Telegram botumuz (@dopplercreatebot) veya resmi web sitesi (www.dopplervpn.org) üzerinden indirin. Üçüncü taraf kaynaklardan asla APK dosyası yüklemeyin — kötü amaçlı yazılım veya değiştirilmiş kod içerebilirler."
-      }
-    },
-    "requirements": {
-      "title": "Sistem Gereksinimleri",
-      "os": {
-        "title": "İşletim Sistemi",
-        "value": "Android 8.0 (Oreo) veya üstü"
-      },
-      "battery": {
-        "title": "Pil Etkisi",
-        "value": "Minimal — Her Zaman Açık VPN etkinken %2'den az ek pil tüketimi"
-      },
-      "storage": {
-        "title": "Depolama",
-        "value": "15 MB'ın altında uygulama boyutu, bağlıyken 5 MB'ın altında RAM kullanımı"
-      },
-      "permissions": {
-        "title": "Gerekli İzinler",
-        "value": "Yalnızca VPN bağlantı izni — kişilere, fotoğraflara veya dosyalara erişim yok"
-      },
-      "compatibility": {
-        "title": "Uyumlu Cihazlar"
+      "q6": {
+        "question": "Can I use Doppler VPN on Android TV?",
+        "answer": "Yes. You can install Doppler VPN on Android TV devices and TV boxes to protect your streaming traffic. Access geo-restricted content on the big screen with the same VLESS-Reality encryption used on mobile."
       }
     },
     "cta": {
       "title": "Android için Doppler VPN'i Hemen Edinin",
       "subtitle": "Ücretsiz, gizli ve tespit edilemez. Kayıt yok, hesap yok, veri toplama yok. Google Play'den indirin veya kısıtlı bölgeler için APK alın.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "APK İndir",
-      "alsoOnIos": "iOS'ta da mevcut",
-      "telegramBot": "Telegram Bot",
-      "telegramChannelRu": "Telegram Kanalı (RU)",
-      "telegramChannelEn": "Telegram Kanalı (EN)"
+      "downloadAndroid": "Get it on Google Play",
+      "otherPlatforms": "Available on other platforms",
+      "downloadsLink": "View all downloads"
     },
     "related": {
       "noRegistration": "Kayıtsız VPN",
@@ -2263,6 +2194,226 @@
       "vlessDesc": "VLESS'in derin paket incelemesini nasıl yendiğini öğrenin",
       "ios": "iOS için VPN",
       "iosDesc": "iPhone ve iPad için Doppler VPN'i indirin"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Mac için Doppler VPN — Hızlı, Gizli ve Sansüre Dayanıklı",
+      "description": "Mac App Store'dan macOS için Doppler VPN'i indirin. VLESS-Reality şifrelemesi, kayıt gerektirmez, sansürü aşar. Yerel Apple Silicon desteği."
+    },
+    "hero": {
+      "title": "Mac için Doppler VPN",
+      "subtitle": "macOS için yerel olarak geliştirilen hızlı, gizli ve sansüre dayanıklı VPN. Kayıt gerektirmez — Mac App Store'dan indirin ve saniyeler içinde bağlanın. Aboneliğinizi iPhone, iPad ve Mac arasında paylaşır.",
+      "cta": "Mac App Store'dan İndir"
+    },
+    "features": {
+      "title": "Neden macOS için Doppler VPN?",
+      "subtitle": "Doppler VPN, gerçek gizlilik, sansür atlatma ve Apple ekosistemiyle kusursuz entegrasyon isteyen Mac kullanıcıları için tasarlanmış yerel bir macOS uygulamasıdır.",
+      "nativeMac": {
+        "title": "Yerel macOS Uygulaması",
+        "description": "Apple'ın Network Extension çerçevesi kullanılarak macOS için özel olarak geliştirilmiştir. Hem Apple Silicon (M1/M2/M3/M4) hem de Intel Mac'lerde yerel olarak çalışır. macOS sistem tercihleri, menü çubuğu ve bildirim merkezi ile entegre olarak kusursuz bir masaüstü VPN deneyimi sunar."
+      },
+      "macAppStore": {
+        "title": "Mac App Store Dağıtımı",
+        "description": "Doğrudan Mac App Store'dan indirin — Apple tarafından incelenmiş ve güvenlik açısından doğrulanmıştır. Otomatik güncellemeler, kolay kurulum ve Apple ID'niz üzerinden kesintisiz abonelik yönetimi. Yandan yükleme veya elle yapılandırma gerekmez."
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality Şifrelemesi",
+        "description": "VPN trafiğini normal HTTPS taraması gibi gösteren yeni nesil protokol. Bağlantınız güvenlik duvarları, DPI sistemleri ve ISS izleme araçları tarafından görünmezdir. Çin Büyük Güvenlik Duvarı'nı aşmak için kullanılan aynı teknoloji."
+      },
+      "noRegistration": {
+        "title": "Kayıt Gerektirmez",
+        "description": "E-posta yok, telefon numarası yok, hesap oluşturma yok. Uygulamayı indirin ve anında bağlanın. Doppler, cihaz tabanlı kimlik doğrulama kullanır; böylece kimliğiniz ilk tıklamadan itibaren tamamen gizli kalır."
+      },
+      "oneClickConnect": {
+        "title": "Tek Tıkla Bağlan",
+        "description": "Tek bir düğmeye tıklayın; Doppler otomatik olarak en hızlı sunucuyu seçer, şifreli bir tünel kurar ve Mac'inizin tüm trafiğini korur. Akıllı sunucu seçimi hız ve güvenilirlik için optimize edilmiştir — menü çubuğundan çalışır."
+      },
+      "bypassCensorship": {
+        "title": "Sansür ve DPI'yi Aşın",
+        "description": "Katı internet sansürü uygulanan ülkelerde çalışmak üzere tasarlanmıştır — Rusya, İran, Çin ve ötesi. VLESS-Reality, VPN trafiğinizi normal web taramasından ayırt edilemez hale getirerek TSPU ve GFW'yi yener."
+      },
+      "noLogs": {
+        "title": "Sıkı Kayıt Tutmama Politikası",
+        "description": "Doppler tarama verilerinizi asla toplamaz, saklamaz veya paylaşmaz. Bağlantı kaydı yok, trafik kaydı yok, DNS sorgu kaydı yok. Kimlik bilgilerinizi hiçbir zaman toplamadığımız için sizi tanımlayamayız."
+      },
+      "crossDevice": {
+        "title": "Tüm Apple Cihazlarında Senkronizasyon",
+        "description": "Tek bir abonelik Mac, iPhone ve iPad'inizi kapsar. Hesabınız ve abonelik durumunuz tüm Apple cihazlarında otomatik olarak senkronize olur. Yeniden abone olmadan veya yeniden yapılandırmadan cihazlar arasında geçiş yapın — VPN'iniz her yerde hazır."
+      }
+    },
+    "howItWorks": {
+      "title": "Mac'te VPN Nasıl Kurulur",
+      "subtitle": "Bir dakikadan kısa sürede bağlanın — teknik bilgi gerekmez.",
+      "step1": {
+        "title": "Mac App Store'dan İndirin",
+        "description": "Mac App Store'da \"Doppler VPN\" arayın veya aşağıdaki indirme düğmesine tıklayın. Uygulama ücretsiz olarak indirilebilir ve macOS 14 Sonoma ve sonrasında çalışır. Hem Apple Silicon hem de Intel Mac'leri destekler."
+      },
+      "step2": {
+        "title": "Uygulamayı Açın",
+        "description": "Mac'inizde Doppler VPN'i başlatın. Kayıt ekranı yok, kayıt formu yok ve e-posta doğrulaması yok. Hesabınız cihaz tabanlı kimlik doğrulama ile otomatik olarak oluşturulur."
+      },
+      "step3": {
+        "title": "Plan Seçin",
+        "description": "3 günlük ücretsiz denemenizi başlatın veya bir abonelik planı seçin. Aylık (6,99 $), 6 aylık (29,99 $) veya yıllık (39,99 $) seçenekler mevcuttur. Aboneliğinizi doğrudan App Store üzerinden yönetin."
+      },
+      "step4": {
+        "title": "Bağlan'a Tıklayın",
+        "description": "Bağlan düğmesine basın. Doppler otomatik olarak en iyi sunucuyu seçer, şifreli bir VLESS-Reality tüneli kurar ve tüm trafiğinizi bu tünelden yönlendirir. IP adresiniz gizlenir ve verileriniz şifrelenir."
+      }
+    },
+    "faq": {
+      "title": "Sık Sorulan Sorular — Mac için Doppler VPN",
+      "q1": {
+        "question": "Doppler VPN Apple Silicon Mac'lerde çalışır mı?",
+        "answer": "Evet. Doppler VPN, Apple Silicon (M1, M2, M3, M4) ve Intel tabanlı Mac'lerde yerel olarak çalışır. Uygulama, her iki mimari için optimize edilmiş evrensel bir ikili dosyadır ve MacBook dizüstü bilgisayarlarda maksimum performans ile minimum pil tüketimi sağlar."
+      },
+      "q2": {
+        "question": "Aynı hesabı iPhone, iPad ve Mac'imde kullanabilir miyim?",
+        "answer": "Evet. Doppler VPN aboneliğiniz tüm Apple cihazlarınızda geçerlidir — iPhone, iPad ve Mac. Her cihaz kendi güvenli VPN bağlantısına sahip olur. Tek bir hesaba 10 cihaza kadar bağlanabilir ve abonelik durumunuz Apple ID'niz aracılığıyla otomatik senkronize olur."
+      },
+      "q3": {
+        "question": "macOS'ta VPN'i nasıl kurarım?",
+        "answer": "Mac'te Doppler VPN kurulumu bir dakikadan kısa sürer: 1) Mac App Store'dan indirin, 2) Uygulamayı açın (kayıt gerekmez), 3) Bağlan'a tıklayın. Doppler tüm teknik kurulumu otomatik olarak halleder — VPN profilini yapılandırır, en iyi sunucuyu seçer ve şifreli bir tünel kurar."
+      },
+      "q4": {
+        "question": "Mac'imi yavaşlatır mı?",
+        "answer": "Doppler VPN, minimum performans etkisi için tasarlanmıştır. Yerel macOS uygulaması, verimli trafik yönetimi için Apple'ın Network Extension çerçevesini kullanır. Apple Silicon Mac'lerde uygulama, aktif VPN bağlantıları sırasında %1'den az CPU kullanır. Sunucu seçimi en düşük gecikme süresi için optimize edilmiştir."
+      },
+      "q5": {
+        "question": "Doppler VPN Mac App Store'da mı?",
+        "answer": "Evet. Doppler VPN, Mac App Store'da ücretsiz olarak indirilebilir. Apple tarafından incelenmiş ve onaylanmıştır. \"Doppler VPN\" arayabilir veya indirmeler sayfamızdaki doğrudan bağlantıyı kullanabilirsiniz. Güncellemeler App Store üzerinden otomatik olarak sunulur."
+      },
+      "q6": {
+        "question": "Rusya, Çin ve İran'da çalışır mı?",
+        "answer": "Evet. Doppler, VPN trafiğini normal HTTPS web taraması gibi gösteren VLESS-Reality protokolünü kullanır. Bu, Rusya'nın TSPU'su, Çin'in Büyük Güvenlik Duvarı veya İran'ın filtreleme altyapısı gibi sansür sistemlerinin tespit etmesini ve engellemesini son derece zorlaştırır. Doppler, özellikle yoğun sansür uygulanan bölgelerdeki kullanıcılar için tasarlanmıştır."
+      }
+    },
+    "cta": {
+      "title": "Mac için Doppler VPN'i İndirin",
+      "subtitle": "Kayıt gerektirmez. Tam erişimli 3 günlük ücretsiz deneme. VLESS-Reality şifrelemesi bağlantınızı gizli ve tespit edilemez tutar.",
+      "downloadMac": "Mac App Store'dan İndir",
+      "otherPlatforms": "Diğer platformlarda da mevcut",
+      "downloadsLink": "Tüm indirmeleri gör"
+    },
+    "related": {
+      "noRegistration": "Kayıtsız VPN",
+      "noRegistrationDesc": "Kayıt olmadan veya hesap oluşturmadan VPN kullanın",
+      "vless": "VLESS-Reality Protokolü",
+      "vlessDesc": "VLESS'in DPI'yi nasıl yendiğini öğrenin",
+      "windows": "Windows için VPN",
+      "windowsDesc": "Windows PC için Doppler VPN'i indirin"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Windows için Doppler VPN — Hızlı, Gizli ve Sansüre Dayanıklı",
+      "description": "Windows için Doppler VPN'i indirin. VLESS-Reality şifrelemesi, kayıt gerektirmez, sansürü aşar. x64 ve ARM64 PC desteği."
+    },
+    "hero": {
+      "title": "Windows için Doppler VPN",
+      "subtitle": "Windows için geliştirilen hızlı, gizli ve sansüre dayanıklı VPN. Kayıt gerektirmez — yükleyiciyi indirin ve saniyeler içinde bağlanın. Otomatik güncellemelerle hem x64 hem ARM64 PC'leri destekler.",
+      "ctaX64": "Windows için İndir (x64)",
+      "ctaArm64": "Windows için İndir (ARM64)"
+    },
+    "features": {
+      "title": "Neden Windows için Doppler VPN?",
+      "subtitle": "Doppler VPN, gerçek gizlilik, sansür atlatma ve her Windows cihazında güvenilir performans isteyen PC kullanıcıları için tasarlanmış yerel bir Windows uygulamasıdır.",
+      "nativeWindows": {
+        "title": "Yerel Windows Uygulaması",
+        "description": "Temiz ve modern bir arayüzle Windows için özel olarak geliştirilmiştir. Hem x64 hem de ARM64 mimarileri için tam destekle Windows 10 ve Windows 11'de çalışır. Basit bir kurulum sihirbazıyla saniyeler içinde yüklenir — elle yapılandırma veya komut satırı araçları gerekmez."
+      },
+      "dualArchitecture": {
+        "title": "x64 + ARM64 Desteği",
+        "description": "Doppler VPN, hem x64 (standart PC'ler, masaüstü bilgisayarlar ve çoğu dizüstü bilgisayar) hem de ARM64 (Surface Pro X, Snapdragon dizüstü bilgisayarlar) için özel yapılar sunar. Donanımınız için doğru yükleyiciyi seçin ve her Windows cihazında yerel performans elde edin."
+      },
+      "autoUpdates": {
+        "title": "Velopack ile Otomatik Güncellemeler",
+        "description": "Doppler VPN, kesintisiz arka plan güncellemeleri için Velopack kullanır. Yeni sürümler otomatik olarak indirilir ve uygulanır — hiçbir şey yapmadan her zaman en son güvenlik yamaları, protokol iyileştirmeleri ve özelliklere sahip olursunuz."
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality Şifrelemesi",
+        "description": "VPN trafiğini normal HTTPS taraması gibi gösteren yeni nesil protokol. Bağlantınız güvenlik duvarları, DPI sistemleri ve ISS izleme araçları tarafından görünmezdir. Çin Büyük Güvenlik Duvarı'nı aşmak için kullanılan aynı teknoloji."
+      },
+      "noRegistration": {
+        "title": "Kayıt Gerektirmez",
+        "description": "E-posta yok, telefon numarası yok, hesap oluşturma yok. Uygulamayı yükleyin ve anında bağlanın. Doppler, cihaz tabanlı kimlik doğrulama kullanır; böylece kimliğiniz ilk tıklamadan itibaren tamamen gizli kalır."
+      },
+      "bypassCensorship": {
+        "title": "Sansür ve DPI'yi Aşın",
+        "description": "Katı internet sansürü uygulanan ülkelerde çalışmak üzere tasarlanmıştır — Rusya, İran, Çin ve ötesi. VLESS-Reality, VPN trafiğinizi normal web taramasından ayırt edilemez hale getirerek TSPU ve GFW'yi yener."
+      },
+      "noLogs": {
+        "title": "Sıkı Kayıt Tutmama Politikası",
+        "description": "Doppler tarama verilerinizi asla toplamaz, saklamaz veya paylaşmaz. Bağlantı kaydı yok, trafik kaydı yok, DNS sorgu kaydı yok. Kimlik bilgilerinizi hiçbir zaman toplamadığımız için sizi tanımlayamayız."
+      },
+      "globalServers": {
+        "title": "6 Küresel Sunucu Konumu",
+        "description": "Avrupa ve ötesinde birçok ülkedeki sunuculara bağlanın. Her sunucu, en düşük gecikme süresi ve en yüksek verim için optimize edilmiş yönlendirmeyle VLESS-Reality çalıştırır. Otomatik sunucu seçimi, konumunuz için en hızlı seçeneği belirler."
+      }
+    },
+    "howItWorks": {
+      "title": "Windows'ta VPN Nasıl Kurulur",
+      "subtitle": "Bir dakikadan kısa sürede bağlanın — teknik bilgi gerekmez.",
+      "step1": {
+        "title": "Yükleyiciyi İndirin",
+        "description": "Sisteminiz için Doppler VPN yükleyicisini indirin — çoğu PC ve dizüstü bilgisayar için x64, Surface Pro X ve Snapdragon cihazlar için ARM64. Yükleyici 30 MB'nin altındadır ve virüs içermez."
+      },
+      "step2": {
+        "title": "Kurulum Sihirbazını Çalıştırın",
+        "description": "Yükleyiciye çift tıklayın ve kurulum sihirbazını takip edin. Kurulum yaklaşık 15 saniye sürer. Doppler VPN Başlat menünüze eklenir ve isteğe bağlı olarak Windows başlangıcında açılabilir."
+      },
+      "step3": {
+        "title": "Doppler VPN'i Açın",
+        "description": "Uygulamayı Başlat menüsünden veya masaüstü kısayolundan başlatın. Kayıt ekranı yok, kayıt formu yok ve e-posta doğrulaması yok. Hesabınız cihaz tabanlı kimlik doğrulama ile otomatik olarak oluşturulur."
+      },
+      "step4": {
+        "title": "Abone Olun ve Bağlanın",
+        "description": "Bir abonelik planı seçin ve Bağlan'a tıklayın. Doppler otomatik olarak en iyi sunucuyu seçer, şifreli bir VLESS-Reality tüneli kurar ve tüm trafiğinizi bu tünelden yönlendirir. IP adresiniz gizlenir ve verileriniz şifrelenir."
+      }
+    },
+    "faq": {
+      "title": "Sık Sorulan Sorular — Windows için Doppler VPN",
+      "q1": {
+        "question": "Hangi Windows sürümleri destekleniyor?",
+        "answer": "Doppler VPN, Windows 10 (sürüm 1809 ve sonrası) ve Windows 11'i destekler. Hem x64 hem de ARM64 mimarileri desteklenmektedir. Uygulama, uyumlu Windows sürümlerini çalıştıran masaüstü bilgisayarlarda, dizüstü bilgisayarlarda, tabletlerde ve Surface cihazlarda çalışır."
+      },
+      "q2": {
+        "question": "x64 ile ARM64 arasındaki fark nedir?",
+        "answer": "x64, Intel veya AMD işlemcili standart PC'ler, masaüstü bilgisayarlar ve dizüstü bilgisayarların çoğu içindir. ARM64, Microsoft Surface Pro X, Lenovo ThinkPad X13s ve diğer Snapdragon destekli Windows dizüstü bilgisayarlar gibi yeni cihazlar içindir. Emin değilseniz x64 sürümünü indirin — Windows bilgisayarların büyük çoğunluğunda çalışır."
+      },
+      "q3": {
+        "question": "Doppler VPN Windows'ta otomatik güncellenir mi?",
+        "answer": "Evet. Doppler VPN, otomatik arka plan güncellemeleri için Velopack kullanır. Yeni bir sürüm mevcut olduğunda, arka planda indirilir ve uygulamayı bir sonraki açışınızda güncelleme uygulanır. Elle işlem yapmadan her zaman en son güvenlik yamaları ve özelliklerine sahip olursunuz."
+      },
+      "q4": {
+        "question": "Aynı hesabı telefonumda ve PC'mde kullanabilir miyim?",
+        "answer": "Evet. Doppler VPN aboneliğiniz tüm cihazlarınızda geçerlidir — Windows, iOS, Android ve Mac. Her cihaz kendi güvenli VPN bağlantısına sahip olur. Tek bir hesaba 10 cihaza kadar bağlanabilir."
+      },
+      "q5": {
+        "question": "Windows Defender ile uyumlu mu?",
+        "answer": "Evet. Doppler VPN, Windows Defender ve diğer büyük antivirüs yazılımlarıyla tamamen uyumludur. Yükleyici dijital olarak imzalanmıştır ve uygulama yanlış pozitif tetiklemez. Doppler, Windows ağ API'lerini kullanan standart bir VPN istemcisi olarak çalışır."
+      },
+      "q6": {
+        "question": "Rusya, Çin ve İran'da çalışır mı?",
+        "answer": "Evet. Doppler, VPN trafiğini normal HTTPS web taraması gibi gösteren VLESS-Reality protokolünü kullanır. Bu, Rusya'nın TSPU'su, Çin'in Büyük Güvenlik Duvarı veya İran'ın filtreleme altyapısı gibi sansür sistemlerinin tespit etmesini ve engellemesini son derece zorlaştırır. Doppler, özellikle yoğun sansür uygulanan bölgelerdeki kullanıcılar için tasarlanmıştır."
+      }
+    },
+    "cta": {
+      "title": "Windows için Doppler VPN'i İndirin",
+      "subtitle": "Kayıt gerektirmez. VLESS-Reality şifrelemesi bağlantınızı gizli ve tespit edilemez tutar. x64 ve ARM64 PC desteği.",
+      "downloadX64": "Windows için İndir (x64)",
+      "downloadArm64": "Windows için İndir (ARM64)",
+      "otherPlatforms": "Diğer platformlarda da mevcut",
+      "downloadsLink": "Tüm indirmeleri gör"
+    },
+    "related": {
+      "noRegistration": "Kayıtsız VPN",
+      "noRegistrationDesc": "Kayıt olmadan veya hesap oluşturmadan VPN kullanın",
+      "vless": "VLESS-Reality Protokolü",
+      "vlessDesc": "VLESS'in DPI'yi nasıl yendiğini öğrenin",
+      "macos": "Mac için VPN",
+      "macosDesc": "macOS için Doppler VPN'i indirin"
     }
   }
 }

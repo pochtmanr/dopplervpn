@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Doppler VPN — 安全无日志 VPN 和代理，守护您的隐私",
-    "description": "Doppler VPN 通过 VLESS-Reality 代理加密、DNS 保护和严格的无日志政策保障您的隐私。绕过 DPI 和政府审查。支持 iOS、Android、macOS 和 Windows。"
+    "description": "Doppler VPN——基于 VLESS-Reality 加密的快速隐私 VPN。零日志，轻松绕过审查。支持 iOS、Android、macOS 和 Windows。"
   },
   "nav": {
     "features": "功能",
@@ -22,7 +22,7 @@
     "headlinePart1a": "其他VPN被封锁的地方，",
     "headlinePart1b": "Doppler依然可用。",
     "headlinePart2": "",
-    "subheadline": "基于VLESS-Reality — 流量看起来就像普通HTTPS。深度包检测无法识别。无需注册，零日志，无追踪。",
+    "subheadline": "Doppler VPN 基于 VLESS-Reality 协议——您的流量看起来就像普通 HTTPS，深度包检测无法识别。无需注册，零日志，无追踪。",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "无需个人信息",
@@ -33,6 +33,8 @@
       "vless": "VLESS-Reality 协议"
     },
     "openTelegram": "Telegram 机器人",
+    "getPro": "获取 Doppler Pro",
+    "downloadApp": "下载应用",
     "seePrices": "查看价格",
     "getAndroid": "下载 APK",
     "androidNote": "也可作为独立 APK 使用。",
@@ -42,9 +44,31 @@
     "desktopNote": "订阅可通过 Telegram 或 iOS 应用获取。",
     "downloadIosLabel": "从 App Store 下载 Doppler VPN",
     "promoDiscount": "{percent}% 折扣",
-    "promoCopyLabel": "复制优惠码 {code}",
-    "getPro": "获取 Doppler Pro",
-    "downloadApp": "下载应用"
+    "promoCopyLabel": "复制优惠码 {code}"
+  },
+  "trustIndicators": {
+    "items": {
+      "noAccount": {
+        "label": "无需账号",
+        "description": "设备即身份"
+      },
+      "zeroLogs": {
+        "label": "零活动日志",
+        "description": "我们看不到你浏览了什么"
+      },
+      "encryptedDns": {
+        "label": "DNS加密",
+        "description": "每个查询都受保护"
+      },
+      "dpiBypass": {
+        "label": "DPI绕过",
+        "description": "流量看起来像普通HTTPS"
+      },
+      "freeTrial": {
+        "label": "3天免费试用",
+        "description": "无风险体验完整功能"
+      }
+    }
   },
   "features": {
     "title": "为完全隐私而设计",
@@ -54,25 +78,21 @@
         "title": "无需注册的隐私保护",
         "description": "您的设备就是您的账户。无需邮箱。无需手机号。无需个人信息。连接的那一刻起隐私即开始。"
       },
-      "adBlocker": {
-        "title": "基础广告拦截",
-        "description": "内置DNS级广告拦截可减少约50%的广告和追踪器。开箱即用，浏览更干净，干扰更少。"
+      "vlessReality": {
+        "title": "VLESS-Reality 协议",
+        "description": "先进的反审查协议，使您的 VPN 流量看起来像普通 HTTPS 流量。深度包检测无法识别，在受限网络中快速可靠。"
       },
       "smartRouting": {
         "title": "智能路由",
         "description": "按国家智能路由流量。根据您的目的地自动选择最佳服务器路径，确保速度和可靠性。"
       },
+      "adBlocker": {
+        "title": "基础广告拦截",
+        "description": "内置DNS级广告拦截可减少约50%的广告和追踪器。开箱即用，浏览更干净，干扰更少。"
+      },
       "minimalData": {
         "title": "最少数据收集",
         "description": "我们不记录您的浏览活动。我们不追踪您访问的网站。我们的架构在设计上要求最少的数据。"
-      },
-      "completelyFree": {
-        "title": "完全免费",
-        "description": "所有服务器免费提供完整功能。完整加密、高速连接、无限带宽。无限速或数据上限。"
-      },
-      "vlessReality": {
-        "title": "VLESS-Reality 协议",
-        "description": "先进的反审查协议，使您的 VPN 流量看起来像普通 HTTPS 流量。深度包检测无法识别，在受限网络中快速可靠。"
       },
       "dnsProtection": {
         "title": "私有 DNS 保护",
@@ -121,13 +141,12 @@
     "perYear": "每年",
     "save": "节省",
     "plusFeatures": {
-      "everything": "免费版所有功能",
       "premiumServers": "高级服务器",
       "smartRouting": "智能路由",
-      "devices": "最多10台设备",
-      "support": "优先支持",
       "alwaysOn": "Always-On VPN",
-      "noLogs": "无日志政策"
+      "devices": "最多10台设备",
+      "noLogs": "无日志政策",
+      "support": "优先支持"
     },
     "plusCta": "获取 Doppler Pro",
     "trialNote": "从 3 天免费试用开始",
@@ -249,6 +268,29 @@
       }
     }
   },
+  "privacyModel": {
+    "title": "我们不存储什么",
+    "subtitle": "隐私靠架构保障，而非仅靠承诺。",
+    "tagline": "没有的数据，无法交出。",
+    "items": {
+      "browsing": {
+        "title": "无浏览日志",
+        "description": "我们看不到你访问了哪些网站"
+      },
+      "ip": {
+        "title": "无IP地址日志",
+        "description": "你的真实IP从不被记录"
+      },
+      "dns": {
+        "title": "无DNS查询存储",
+        "description": "加密后解析完即销毁"
+      },
+      "account": {
+        "title": "无账号数据库",
+        "description": "设备认证意味着无需存储个人数据"
+      }
+    }
+  },
   "cta": {
     "doppler": {
       "titleItalic": "开始使用",
@@ -256,7 +298,9 @@
       "titlePlayful": "Doppler VPN",
       "subtitle": "隐私至上的VPN，无需注册。通过VLESS-Reality加密即时连接。",
       "cta": "获取 Doppler Pro",
-      "downloads": "下载"
+      "downloads": "下载",
+      "learnIos": "iOS VPN",
+      "learnAndroid": "Android VPN"
     }
   },
   "footer": {
@@ -264,6 +308,7 @@
     "product": "产品",
     "pricing": "价格",
     "download": "下载",
+    "blog": "博客",
     "legal": "法律信息",
     "privacy": "隐私政策",
     "terms": "服务条款",
@@ -274,13 +319,14 @@
     "connect": "联系我们",
     "telegram": "@dopplercreatebot",
     "email": "support@simnetiq.store",
-    "blog": "博客",
     "bypassCensorship": "如何绕过审查",
     "about": "关于",
     "vlessVpn": "VLESS 协议",
     "noRegistration": "免注册 VPN",
     "vpnForIos": "iOS VPN",
-    "vpnForAndroid": "Android VPN"
+    "vpnForAndroid": "Android VPN",
+    "vpnForMacos": "Mac VPN",
+    "vpnForWindows": "Windows VPN"
   },
   "privacy": {
     "title": "隐私政策",
@@ -482,9 +528,6 @@
         "playStore": "Google Play"
       }
     },
-    "share": "分享文章",
-    "copyLink": "复制链接",
-    "copied": "已复制！",
     "stickyBar": {
       "message": "保护您的浏览安全。Doppler VPN 无需注册，且不保留任何日志。免费试用 3 天。",
       "cta": "免费试用 3 天",
@@ -497,16 +540,15 @@
       "downloadIos": "下载 iOS 版",
       "downloadAndroid": "下载 Android 版",
       "downloadDesktop": "下载应用"
-    }
+    },
+    "share": "分享文章",
+    "copyLink": "复制链接",
+    "copied": "已复制！"
   },
   "guide": {
     "title": "设置指南",
     "subtitle": "几分钟即可连接。选择您的设备开始。",
     "chooseDevice": "选择您的设备",
-    "backToGuides": "所有指南",
-    "seePricing": "See pricing plans",
-    "nextStep": "下一步",
-    "prevStep": "上一步",
     "android": {
       "title": "Android 设置",
       "subtitle": "在您的 Android 设备上设置 Doppler VPN",
@@ -607,7 +649,11 @@
       "miniApp": "订阅小程序",
       "miniAppDesc": "通过我们的 Telegram 小程序订阅和管理计划，支持安全的 Paddle 支付。"
     },
+    "backToGuides": "所有指南",
+    "seePricing": "See pricing plans",
     "downloadApps": "下载应用",
+    "nextStep": "下一步",
+    "prevStep": "上一步",
     "learnMore": "了解更多",
     "protocolsCard": {
       "title": "VPN协议",
@@ -656,17 +702,17 @@
       "step1": "从 App Store 下载 Doppler VPN",
       "step2": "打开应用 — 账户自动创建",
       "step3": "选择套餐并订阅",
-      "step4": "点击连接 — 您已受保护！"
+      "step4": "点击连接 — 您已受保护！",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "在 Google Play 下载",
-      "buttonApk": "下载 APK（独立版）",
-      "meta": "APK · v1.2.0 · 95 MB",
       "step1": "从 Google Play 或 APK 下载 Doppler VPN",
       "step2": "打开应用 — 账户自动创建",
       "step3": "选择套餐并订阅",
-      "step4": "点击连接 — 您已受保护！"
+      "step4": "点击连接 — 您已受保护！",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -674,45 +720,193 @@
       "step1": "从 Mac App Store 下载 Doppler VPN",
       "step2": "打开应用 — 账户自动创建",
       "step3": "选择套餐并订阅",
-      "step4": "点击连接 — 您已受保护！"
+      "step4": "点击连接 — 您已受保护！",
+      "learnMore": "了解更多 Mac VPN 详情"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "即将推出",
-      "inDevelopment": "目前正在开发中",
-      "waitlistDescription": "我们正在开发采用相同 VLESS-Reality 加密技术的原生 Windows 客户端。加入等待名单，我们会在准备就绪时通知您。",
-      "waitlistPrivacy": "我们仅会使用您的邮箱通知您 Windows 版本的发布消息。绝不发送垃圾邮件。"
-    },
-    "waitlist": {
-      "placeholder": "your@email.com",
-      "button": "通知我",
-      "success": "您已加入名单！准备就绪后我们会通过邮件通知您。",
-      "error": "出了点问题，请重试。"
+      "buttonX64": "下载 Windows 版 (x64)",
+      "buttonArm64": "下载 Windows 版 (ARM64)",
+      "step1": "下载适合您系统的安装程序（大多数电脑选 x64）",
+      "step2": "运行安装程序并按照向导操作",
+      "step3": "打开 Doppler VPN — 账户自动创建",
+      "step4": "选择套餐、订阅并连接！",
+      "learnMore": "了解更多 Windows VPN 详情"
     }
   },
-  "servers": {
-    "title": "全球服务器网络",
-    "subtitle": "从全球多个地点中选择。所有服务器均支持双协议架构。",
-    "servers": "台服务器",
-    "server": "台服务器",
-    "protocols": "协议",
-    "locations": {
-      "germany": {
-        "city": "法兰克福",
-        "country": "德国"
-      },
-      "russia": {
-        "city": "莫斯科",
-        "country": "俄罗斯"
-      },
-      "france": {
-        "city": "巴黎",
-        "country": "法国"
-      },
-      "japan": {
-        "city": "东京",
-        "country": "日本"
+  "support": {
+    "title": "帮助中心与支持",
+    "subtitle": "查找常见VPN问题的解答，排除连接故障，或联系我们的支持团队。",
+    "faq": {
+      "title": "常见问题",
+      "items": {
+        "what": {
+          "question": "什么是 Doppler VPN？",
+          "answer": "Doppler VPN 是一款快速、私密的 VPN 服务，使用 VLESS-Reality 技术。支持 iOS、Android、macOS 和 Windows。"
+        },
+        "cost": {
+          "question": "费用是多少？",
+          "answer": "Doppler Pro 月付 $4，6 个月 $20（节省 17%），年付 $35（节省 27%）。一次性付款，不自动续费。"
+        },
+        "subscribe": {
+          "question": "如何订阅？",
+          "answer": "访问我们的订阅页面，输入邮箱，选择套餐，通过 Paddle 付款。Pro 订阅即时激活。"
+        },
+        "multiDevice": {
+          "question": "一个账户可以在多台设备上使用吗？",
+          "answer": "可以！Doppler Pro 支持一个账户最多 10 台设备。"
+        },
+        "accountId": {
+          "question": "我的账户 ID 是什么？",
+          "answer": "您的账户 ID（VPN-XXXX-XXXX-XXXX）是您在所有设备上的通行密钥。在首次使用应用或网页订阅时创建。"
+        },
+        "refund": {
+          "question": "提供退款吗？",
+          "answer": "是的，我们提供 30 天退款保证。联系客服申请退款。"
+        },
+        "privacy": {
+          "question": "我的数据安全吗？",
+          "answer": "当然。Doppler VPN 实行严格的无日志政策。我们不收集或存储您的浏览数据。"
+        },
+        "platforms": {
+          "question": "支持哪些平台？",
+          "answer": "iOS、Android、macOS（原生 Doppler 应用）和 Windows（通过 v2rayN 客户端）。"
+        }
       }
+    },
+    "troubleshooting": {
+      "title": "故障排除",
+      "items": {
+        "wontConnect": {
+          "question": "VPN 无法连接",
+          "answer": "尝试切换服务器。前往设置 → 选择其他服务器。如果问题仍然存在，重启应用。"
+        },
+        "drops": {
+          "question": "连接频繁断开",
+          "answer": "在设置中启用 Always-On VPN。同时检查您的网络连接。"
+        },
+        "battery": {
+          "question": "手机耗电",
+          "answer": "一些电池消耗是正常的。如果只是偶尔需要 VPN，可以关闭 Always-On。"
+        },
+        "noSub": {
+          "question": "应用显示'无订阅'",
+          "answer": "确保使用的是正确的账户 ID。如果刚刚购买，等几秒钟后重启应用。"
+        }
+      }
+    },
+    "deleteAccount": {
+      "title": "删除您的账户",
+      "step1": "打开 Doppler VPN 应用",
+      "step2": "进入设置 → 账户",
+      "step3": "点击\"删除账户\"",
+      "step4": "确认删除",
+      "warning": "账户删除不可逆。所有数据、订阅时间和服务器配置将被永久删除。此操作无法撤销。",
+      "alternative": "如果无法访问应用，请联系客服请求删除账户。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "telegram": "Telegram",
+      "telegramBot": "@DopplerSupportBot",
+      "email": "邮箱",
+      "emailAddress": "support@simnetiq.store",
+      "responseTime": "我们通常在 24 小时内回复。"
+    },
+    "account": {
+      "title": "管理您的账户",
+      "signInTitle": "登录以管理您的账户",
+      "enterAccountId": "输入账户 ID",
+      "enterEmail": "输入邮箱",
+      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
+      "emailPlaceholder": "your@email.com",
+      "signIn": "登录",
+      "noAccount": "没有账户？",
+      "getStarted": "立即开始",
+      "signOut": "退出登录",
+      "statusTitle": "账户状态",
+      "memberSince": "注册时间",
+      "tier": "套餐",
+      "tierFree": "免费",
+      "tierMonthly": "Pro 月度",
+      "tierSixMonth": "Pro 半年",
+      "tierYearly": "Pro 年度",
+      "expires": "到期",
+      "expiresIn": "{days} 天后到期",
+      "expired": "已过期",
+      "active": "有效",
+      "expiringSoon": "即将到期",
+      "contactTitle": "联系方式",
+      "contactMethod": "联系方式",
+      "contactValue": "联系",
+      "verified": "已验证",
+      "unverified": "未验证",
+      "changeContact": "修改",
+      "saveContact": "保存",
+      "cancelEdit": "取消",
+      "subscriptionTitle": "管理订阅",
+      "managePaddle": "通过 Paddle 管理",
+      "manageAppStore": "在 App Store 管理",
+      "managePlayStore": "在 Google Play 管理",
+      "invoicesTitle": "发票",
+      "downloadInvoice": "下载 PDF",
+      "noInvoices": "暂无发票",
+      "notFound": "未找到账户",
+      "fetchError": "加载账户失败"
+    },
+    "ticket": {
+      "title": "提交请求",
+      "subtitle": "我们将在 24 小时内回复",
+      "topicLabel": "主题",
+      "topics": {
+        "connection_issues": "连接问题",
+        "subscription_billing": "订阅与账单",
+        "account": "账户",
+        "feature_request": "功能请求",
+        "other": "其他"
+      },
+      "subjectLabel": "主题",
+      "subjectPlaceholder": "简要描述您的问题",
+      "descriptionLabel": "详细说明",
+      "descriptionPlaceholder": "请描述发生了什么...",
+      "emailLabel": "联系邮箱",
+      "emailPlaceholder": "your@email.com",
+      "accountIdLabel": "账户 ID（可选）",
+      "submit": "提交请求",
+      "submitting": "提交中...",
+      "successTitle": "请求已提交",
+      "successMessage": "工单 {ticketNumber} 已创建，我们将在 24 小时内回复至 {email}。",
+      "errorGeneric": "提交失败，请重试。",
+      "close": "关闭"
+    },
+    "restore": {
+      "title": "找回您的账户",
+      "subtitle": "输入与账户关联的邮箱或 Telegram",
+      "emailTab": "邮箱",
+      "telegramTab": "Telegram",
+      "emailPlaceholder": "your@email.com",
+      "sendAccountId": "发送账户 ID",
+      "sending": "发送中...",
+      "emailSuccess": "如果此邮箱存在关联账户，我们已发送账户 ID。请检查您的收件箱。",
+      "emailNotFound": "未找到账户，需要帮助？",
+      "submitTicket": "提交支持工单",
+      "telegramMessage": "我们将通过 Telegram 机器人查找您的账户",
+      "openTelegramBot": "打开 Telegram 机器人",
+      "appSubscribers": "通过 App Store 或 Google Play 购买？",
+      "appStoreLink": "管理 App Store 订阅",
+      "playStoreLink": "管理 Google Play 订阅",
+      "close": "关闭"
+    },
+    "business": {
+      "title": "商务合作",
+      "subtitle": "合作伙伴、媒体、企业"
+    },
+    "actions": {
+      "submitRequest": "提交请求",
+      "submitRequestDesc": "获取团队帮助",
+      "restoreAccount": "找回账户",
+      "restoreAccountDesc": "找回您的账户 ID",
+      "businessContact": "商务合作",
+      "businessContactDesc": "合作伙伴、媒体、企业"
     }
   },
   "guideProtocols": {
@@ -841,6 +1035,31 @@
     "openBot": "打开Telegram机器人",
     "viewProtocols": "VPN协议指南"
   },
+  "servers": {
+    "title": "全球服务器网络",
+    "subtitle": "从全球多个地点中选择。所有服务器均支持双协议架构。",
+    "servers": "台服务器",
+    "server": "台服务器",
+    "protocols": "协议",
+    "locations": {
+      "germany": {
+        "city": "法兰克福",
+        "country": "德国"
+      },
+      "russia": {
+        "city": "莫斯科",
+        "country": "俄罗斯"
+      },
+      "france": {
+        "city": "巴黎",
+        "country": "法国"
+      },
+      "japan": {
+        "city": "东京",
+        "country": "日本"
+      }
+    }
+  },
   "deleteAccount": {
     "title": "删除您的账户",
     "metaDescription": "了解如何删除您的 Doppler VPN 账户以及哪些数据会被删除。",
@@ -864,39 +1083,6 @@
         "content": "如果您对数据删除有任何疑问或需要帮助，请通过 support@dopplervpn.org 联系我们。"
       }
     }
-  },
-  "checkout": {
-    "title": "升级到 Doppler Pro",
-    "subtitle": "选择您的计划，通过 Paddle 安全支付。",
-    "accountLabel": "账户",
-    "monthly": "月付",
-    "sixMonth": "6 个月",
-    "yearly": "年付",
-    "perMonth": "/月",
-    "save": "节省",
-    "bestValue": "最佳选择",
-    "subscribe": "立即订阅",
-    "processing": "处理中...",
-    "features": "Pro 功能",
-    "feat1": "全球高级服务器",
-    "feat2": "Smart Route 技术",
-    "feat3": "始终在线 VPN",
-    "feat4": "无限会话时间",
-    "feat5": "优先支持",
-    "promoPlaceholder": "促销代码",
-    "promoApply": "应用",
-    "promoRemove": "移除",
-    "promoOff": "折扣",
-    "promoInvalid": "无效的促销代码",
-    "promoFailed": "验证代码失败",
-    "footerNote": "通过 Paddle 安全支付。随时取消。",
-    "terms": "服务条款",
-    "privacy": "隐私政策",
-    "error": "出了点问题，请重试。",
-    "invalidAccount": "无效的账户 ID",
-    "successTitle": "支付成功！",
-    "successDescription": "您的 Doppler Pro 订阅已激活。",
-    "returnToApp": "返回应用"
   },
   "subscribe": {
     "title": "获取 Doppler Pro",
@@ -945,9 +1131,9 @@
     "securedBy": "由 Paddle 保护",
     "accountFound": "找到您的账户",
     "accountFoundNote": "这不是您的账户？请在 Telegram 联系 @DopplerVerifyBot 进行验证。",
-    "accountNotFound": "未找到账户。请检查您的账户 ID。",
     "creatingAccount": "正在创建您的账户...",
     "lookingUp": "正在查找您的账户...",
+    "accountNotFound": "未找到账户。请检查您的账户 ID。",
     "verifyingAccount": "验证中...",
     "dashboard": {
       "title": "您的账户",
@@ -957,6 +1143,8 @@
       "telegram": "Telegram",
       "verified": "已验证",
       "unverified": "未验证",
+      "noContacts": "未绑定任何联系方式",
+      "contactsOptional": "可选 — 仅用于账户恢复",
       "subscription": "订阅",
       "freeTier": "暂无有效订阅",
       "proActive": "Doppler Pro",
@@ -964,21 +1152,6 @@
       "getPro": "获取 Doppler Pro",
       "extend": "延长订阅",
       "expressSupport": "优先支持",
-      "connectEmail": "绑定邮箱",
-      "connectEmailPlaceholder": "输入邮箱地址",
-      "connectTelegram": "通过 Telegram 绑定",
-      "contactSaved": "联系方式已保存",
-      "save": "保存",
-      "copied": "已复制！",
-      "logout": "使用其他账户",
-      "deleteAccount": "删除账户",
-      "restorePurchases": "恢复购买",
-      "restorePurchasesDesc": "如果您通过 App Store 或 Google Play 购买了订阅，请在此处管理。",
-      "restoreAppStore": "App Store 订阅",
-      "restorePlayStore": "Google Play 订阅",
-      "noContacts": "未绑定任何联系方式",
-      "contactsOptional": "可选 — 仅用于账户恢复",
-      "forgotAccountId": "忘记账户 ID？",
       "premiumSupportDesc": "作为 Pro 订阅者，您的工单将被优先处理。",
       "ticketSubject": "主题",
       "ticketSubjectPlaceholder": "简述您的问题",
@@ -994,7 +1167,20 @@
       "expiredPro": "您的 Pro 订阅已于 {date} 到期",
       "renewPro": "续订 Doppler Pro",
       "ticketEmailLabel": "您的邮箱（用于回复）",
-      "ticketEmailRequired": "请输入有效的电子邮件地址"
+      "ticketEmailRequired": "请输入有效的电子邮件地址",
+      "connectEmail": "绑定邮箱",
+      "connectTelegram": "通过 Telegram 绑定",
+      "deleteAccount": "删除账户",
+      "logout": "使用其他账户",
+      "contactSaved": "联系方式已保存",
+      "connectEmailPlaceholder": "输入邮箱地址",
+      "save": "保存",
+      "copied": "已复制！",
+      "forgotAccountId": "忘记账户 ID？",
+      "restorePurchases": "恢复购买",
+      "restorePurchasesDesc": "如果您通过 App Store 或 Google Play 购买了订阅，请在此处管理。",
+      "restoreAppStore": "App Store 订阅",
+      "restorePlayStore": "Google Play 订阅"
     }
   },
   "subscribeSuccess": {
@@ -1022,179 +1208,153 @@
     "errorTitle": "付款问题",
     "errorDesc": "如果已扣款，您的订阅将很快激活。如未激活请联系支持。"
   },
-  "support": {
-    "title": "帮助中心与支持",
-    "subtitle": "查找常见VPN问题的解答，排除连接故障，或联系我们的支持团队。",
-    "faq": {
-      "title": "常见问题",
-      "items": {
-        "what": {
-          "question": "什么是 Doppler VPN？",
-          "answer": "Doppler VPN 是一款快速、私密的 VPN 服务，使用 VLESS-Reality 技术。支持 iOS、Android、macOS 和 Windows。"
-        },
-        "cost": {
-          "question": "费用是多少？",
-          "answer": "Doppler Pro 月付 $4，6 个月 $20（节省 17%），年付 $35（节省 27%）。一次性付款，不自动续费。"
-        },
-        "subscribe": {
-          "question": "如何订阅？",
-          "answer": "访问我们的订阅页面，输入邮箱，选择套餐，通过 Paddle 付款。Pro 订阅即时激活。"
-        },
-        "multiDevice": {
-          "question": "一个账户可以在多台设备上使用吗？",
-          "answer": "可以！Doppler Pro 支持一个账户最多 10 台设备。"
-        },
-        "accountId": {
-          "question": "我的账户 ID 是什么？",
-          "answer": "您的账户 ID（VPN-XXXX-XXXX-XXXX）是您在所有设备上的通行密钥。在首次使用应用或网页订阅时创建。"
-        },
-        "refund": {
-          "question": "提供退款吗？",
-          "answer": "是的，我们提供 30 天退款保证。联系客服申请退款。"
-        },
-        "privacy": {
-          "question": "我的数据安全吗？",
-          "answer": "当然。Doppler VPN 实行严格的无日志政策。我们不收集或存储您的浏览数据。"
-        },
-        "platforms": {
-          "question": "支持哪些平台？",
-          "answer": "iOS、Android、macOS（原生 Doppler 应用）和 Windows（通过 v2rayN 客户端）。"
-        }
-      }
-    },
-    "troubleshooting": {
-      "title": "故障排除",
-      "items": {
-        "wontConnect": {
-          "question": "VPN 无法连接",
-          "answer": "尝试切换服务器。前往设置 → 选择其他服务器。如果问题仍然存在，重启应用。"
-        },
-        "drops": {
-          "question": "连接频繁断开",
-          "answer": "在设置中启用 Always-On VPN。同时检查您的网络连接。"
-        },
-        "battery": {
-          "question": "手机耗电",
-          "answer": "一些电池消耗是正常的。如果只是偶尔需要 VPN，可以关闭 Always-On。"
-        },
-        "noSub": {
-          "question": "应用显示'无订阅'",
-          "answer": "确保使用的是正确的账户 ID。如果刚刚购买，等几秒钟后重启应用。"
-        }
-      }
-    },
-    "deleteAccount": {
-      "title": "删除您的账户",
-      "step1": "打开 Doppler VPN 应用",
-      "step2": "进入设置 → 账户",
-      "step3": "点击\"删除账户\"",
-      "step4": "确认删除",
-      "warning": "账户删除不可逆。所有数据、订阅时间和服务器配置将被永久删除。此操作无法撤销。",
-      "alternative": "如果无法访问应用，请联系客服请求删除账户。"
-    },
-    "contact": {
-      "title": "联系我们",
-      "telegram": "Telegram",
-      "telegramBot": "@DopplerSupportBot",
-      "email": "邮箱",
-      "emailAddress": "support@simnetiq.store",
-      "responseTime": "我们通常在 24 小时内回复。"
-    },
-    "actions": {
-      "submitRequest": "提交请求",
-      "submitRequestDesc": "获取团队帮助",
-      "restoreAccount": "找回账户",
-      "restoreAccountDesc": "找回您的账户 ID",
-      "businessContact": "商务合作",
-      "businessContactDesc": "合作伙伴、媒体、企业"
-    },
-    "account": {
-      "title": "管理您的账户",
-      "signInTitle": "登录以管理您的账户",
-      "enterAccountId": "输入账户 ID",
-      "enterEmail": "输入邮箱",
-      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
-      "emailPlaceholder": "your@email.com",
-      "signIn": "登录",
-      "noAccount": "没有账户？",
-      "getStarted": "立即开始",
-      "signOut": "退出登录",
-      "statusTitle": "账户状态",
-      "memberSince": "注册时间",
-      "tier": "套餐",
-      "tierFree": "免费",
-      "tierMonthly": "Pro 月度",
-      "tierSixMonth": "Pro 半年",
-      "tierYearly": "Pro 年度",
-      "expires": "到期",
-      "expiresIn": "{days} 天后到期",
-      "expired": "已过期",
-      "active": "有效",
-      "expiringSoon": "即将到期",
-      "contactTitle": "联系方式",
-      "contactMethod": "联系方式",
-      "contactValue": "联系",
-      "verified": "已验证",
-      "unverified": "未验证",
-      "changeContact": "修改",
-      "saveContact": "保存",
-      "cancelEdit": "取消",
-      "subscriptionTitle": "管理订阅",
-      "managePaddle": "通过 Paddle 管理",
-      "manageAppStore": "在 App Store 管理",
-      "managePlayStore": "在 Google Play 管理",
-      "invoicesTitle": "发票",
-      "downloadInvoice": "下载 PDF",
-      "noInvoices": "暂无发票",
-      "notFound": "未找到账户",
-      "fetchError": "加载账户失败"
-    },
-    "ticket": {
-      "title": "提交请求",
-      "subtitle": "我们将在 24 小时内回复",
-      "topicLabel": "主题",
-      "topics": {
-        "connection_issues": "连接问题",
-        "subscription_billing": "订阅与账单",
-        "account": "账户",
-        "feature_request": "功能请求",
-        "other": "其他"
+  "checkout": {
+    "title": "升级到 Doppler Pro",
+    "subtitle": "选择您的计划，通过 Paddle 安全支付。",
+    "accountLabel": "账户",
+    "monthly": "月付",
+    "sixMonth": "6 个月",
+    "yearly": "年付",
+    "perMonth": "/月",
+    "save": "节省",
+    "bestValue": "最佳选择",
+    "subscribe": "立即订阅",
+    "processing": "处理中...",
+    "features": "Pro 功能",
+    "feat1": "全球高级服务器",
+    "feat2": "Smart Route 技术",
+    "feat3": "始终在线 VPN",
+    "feat4": "无限会话时间",
+    "feat5": "优先支持",
+    "promoPlaceholder": "促销代码",
+    "promoApply": "应用",
+    "promoRemove": "移除",
+    "promoOff": "折扣",
+    "promoInvalid": "无效的促销代码",
+    "promoFailed": "验证代码失败",
+    "footerNote": "通过 Paddle 安全支付。随时取消。",
+    "terms": "服务条款",
+    "privacy": "隐私政策",
+    "error": "出了点问题，请重试。",
+    "invalidAccount": "无效的账户 ID",
+    "successTitle": "支付成功！",
+    "successDescription": "您的 Doppler Pro 订阅已激活。",
+    "returnToApp": "返回应用",
+    "closeTab": "You can close this tab.",
+    "verifying": "Verifying payment...",
+    "verifyingDescription": "Please wait while we confirm your payment.",
+    "errorTitle": "Payment Issue",
+    "errorDescription": "We couldn't confirm your payment. If you were charged, your subscription will activate shortly.",
+    "apply": "Apply",
+    "promoApplied": "applied",
+    "promoError": "Invalid promo code"
+  },
+  "technicalHowItWorks": {
+    "title": "Doppler如何保护你的流量",
+    "subtitle": "连接经过加密并通过Doppler边缘网络路由。不记录任何日志。",
+    "flow": {
+      "step1": {
+        "title": "您的设备",
+        "description": "连接从您的设备发起，无需任何账号"
       },
-      "subjectLabel": "主题",
-      "subjectPlaceholder": "简要描述您的问题",
-      "descriptionLabel": "详细说明",
-      "descriptionPlaceholder": "请描述发生了什么...",
-      "emailLabel": "联系邮箱",
-      "emailPlaceholder": "your@email.com",
-      "accountIdLabel": "账户 ID（可选）",
-      "submit": "提交请求",
-      "submitting": "提交中...",
-      "successTitle": "请求已提交",
-      "successMessage": "工单 {ticketNumber} 已创建，我们将在 24 小时内回复至 {email}。",
-      "errorGeneric": "提交失败，请重试。",
-      "close": "关闭"
+      "step2": {
+        "title": "VLESS-Reality 隧道",
+        "description": "流量经过加密并伪装成普通 HTTPS 流量"
+      },
+      "step3": {
+        "title": "Doppler Edge Node",
+        "description": "通过我们的零日志基础设施进行路由"
+      },
+      "step4": {
+        "title": "开放互联网",
+        "description": "您可以自由浏览 — 没有人能看到您访问的内容"
+      }
+    }
+  },
+  "useCases": {
+    "title": "谁在用Doppler",
+    "subtitle": "为需要更强VPN的人打造。",
+    "items": {
+      "restricted": {
+        "title": "受限网络用户",
+        "description": "当政府或ISP封锁VPN时依然自由连接。Doppler协议绕过主动审查。"
+      },
+      "travelers": {
+        "title": "公共Wi-Fi旅行者",
+        "description": "酒店、机场、咖啡厅 — 流量加密，DNS查询私密。网络上没人能看到你在做什么。"
+      },
+      "journalists": {
+        "title": "记者和研究人员",
+        "description": "访问被封锁的信息源，通信不暴露流量模式。无需账号意味着无身份痕迹。"
+      },
+      "developers": {
+        "title": "开发者和远程工作者",
+        "description": "稳定的加密隧道，不会被限速或封锁。在企业和国家级防火墙下稳定运行。"
+      }
+    }
+  },
+  "comparisonTable": {
+    "title": "Doppler vs 传统VPN",
+    "subtitle": "VPN并非千篇一律。",
+    "headers": {
+      "feature": "项目",
+      "traditional": "传统VPN",
+      "doppler": "Doppler"
     },
-    "restore": {
-      "title": "找回您的账户",
-      "subtitle": "输入与账户关联的邮箱或 Telegram",
-      "emailTab": "邮箱",
-      "telegramTab": "Telegram",
-      "emailPlaceholder": "your@email.com",
-      "sendAccountId": "发送账户 ID",
-      "sending": "发送中...",
-      "emailSuccess": "如果此邮箱存在关联账户，我们已发送账户 ID。请检查您的收件箱。",
-      "emailNotFound": "未找到账户，需要帮助？",
-      "submitTicket": "提交支持工单",
-      "telegramMessage": "我们将通过 Telegram 机器人查找您的账户",
-      "openTelegramBot": "打开 Telegram 机器人",
-      "appSubscribers": "通过 App Store 或 Google Play 购买？",
-      "appStoreLink": "管理 App Store 订阅",
-      "playStoreLink": "管理 Google Play 订阅",
-      "close": "关闭"
-    },
-    "business": {
-      "title": "商务合作",
-      "subtitle": "合作伙伴、媒体、企业"
+    "rows": {
+      "account": {
+        "feature": "需要账号",
+        "traditional": "邮箱+密码",
+        "doppler": "不需要"
+      },
+      "fingerprint": {
+        "feature": "流量指纹",
+        "traditional": "DPI可检测",
+        "doppler": "伪装为HTTPS"
+      },
+      "protocol": {
+        "feature": "协议",
+        "traditional": "OpenVPN / WireGuard",
+        "doppler": "VLESS-Reality"
+      },
+      "dns": {
+        "feature": "DNS加密",
+        "traditional": "偶尔",
+        "doppler": "始终"
+      },
+      "censorship": {
+        "feature": "抗审查",
+        "traditional": "有限",
+        "doppler": "内置"
+      },
+      "logs": {
+        "feature": "活动日志",
+        "traditional": "不确定",
+        "doppler": "绝不"
+      }
+    }
+  },
+  "censorshipResistance": {
+    "title": "专为突破政府审查而打造",
+    "subtitle": "Doppler 击败 TSPU、DPI、TLS 指纹识别和主动探测 — 这些正是俄罗斯、中国和伊朗用来封锁 VPN 的技术。",
+    "learnMore": "阅读完整技术指南",
+    "items": {
+      "dpi": {
+        "title": "击败深度包检测",
+        "description": "TSPU 和 DPI 硬件利用机器学习检测 VPN 流量特征。VLESS-Reality 产生零特征 — 没有任何可检测的内容。"
+      },
+      "tls": {
+        "title": "真实 TLS 握手",
+        "description": "Doppler 使用真实网站证书执行真正的 TLS 握手。DPI 看到的是一个正常的 HTTPS 连接，而非 VPN 隧道。"
+      },
+      "fingerprint": {
+        "title": "通过主动探测",
+        "description": "当审查机构探测我们的服务器时，服务器以合法网站的方式回应。只有经过认证的客户端才能激活 VPN 隧道。"
+      },
+      "regions": {
+        "title": "被俄罗斯封锁 — 仍在运行",
+        "description": "我们的域名已被 Roskomnadzor 列入封锁名单。但我们依然在线。当网站被封锁时，可通过 Telegram 机器人下载。"
+      }
     }
   },
   "bypassCensorship": {
@@ -1360,6 +1520,24 @@
         "fingerprint": "无"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPN能否绕过政府审查？",
+        "answer": "能。Doppler使用VLESS-Reality，使VPN流量与普通HTTPS无法区分。无需任何可检测的VPN签名即可绕过DPI、TSPU和防火长城。"
+      },
+      "q2": {
+        "question": "Doppler VPN在俄罗斯、中国和伊朗能用吗？",
+        "answer": "能。Doppler专为受审查地区打造。我们的域名已被Roskomnadzor封锁，这证明了我们的技术有效。"
+      },
+      "q3": {
+        "question": "是什么使VLESS-Reality在绕过审查方面优于OpenVPN或WireGuard？",
+        "answer": "OpenVPN和WireGuard具有DPI系统能立即识别的独特数据包签名。VLESS-Reality使用真实网站证书执行真正的TLS握手。"
+      },
+      "q4": {
+        "question": "如果Doppler服务器被封锁会怎样？",
+        "answer": "Doppler会自动轮换服务器端点和IP地址。如果一个端点被识别，网络会自动适应。我们的Telegram机器人提供即时访问更新的服务器配置。"
+      }
+    },
     "cta": {
       "title": "我们不会抛下任何人",
       "subtitle": "Doppler VPN专为受限网络而生。我们持续改进基础设施、轮换服务器、更新协议，始终领先于每一种新的封锁技术。你的互联网自由不容妥协。",
@@ -1369,161 +1547,6 @@
       "telegramChannelRu": "更新（俄语）",
       "telegramChannelEn": "更新（英语）",
       "button": "下载Doppler VPN"
-    }
-  },
-  "trustIndicators": {
-    "items": {
-      "noAccount": {
-        "label": "无需账号",
-        "description": "设备即身份"
-      },
-      "zeroLogs": {
-        "label": "零活动日志",
-        "description": "我们看不到你浏览了什么"
-      },
-      "encryptedDns": {
-        "label": "DNS加密",
-        "description": "每个查询都受保护"
-      },
-      "dpiBypass": {
-        "label": "DPI绕过",
-        "description": "流量看起来像普通HTTPS"
-      },
-      "freeTrial": {
-        "label": "3天免费试用",
-        "description": "无风险体验完整功能"
-      }
-    }
-  },
-  "technicalHowItWorks": {
-    "title": "Doppler如何保护你的流量",
-    "subtitle": "连接经过加密并通过Doppler边缘网络路由。不记录任何日志。",
-    "flow": {
-      "step1": {
-        "title": "您的设备",
-        "description": "连接从您的设备发起，无需任何账号"
-      },
-      "step2": {
-        "title": "VLESS-Reality 隧道",
-        "description": "流量经过加密并伪装成普通 HTTPS 流量"
-      },
-      "step3": {
-        "title": "Doppler Edge Node",
-        "description": "通过我们的零日志基础设施进行路由"
-      },
-      "step4": {
-        "title": "开放互联网",
-        "description": "您可以自由浏览 — 没有人能看到您访问的内容"
-      }
-    }
-  },
-  "censorshipResistance": {
-    "title": "专为突破政府审查而打造",
-    "subtitle": "Doppler 击败 TSPU、DPI、TLS 指纹识别和主动探测 — 这些正是俄罗斯、中国和伊朗用来封锁 VPN 的技术。",
-    "learnMore": "阅读完整技术指南",
-    "items": {
-      "dpi": {
-        "title": "击败深度包检测",
-        "description": "TSPU 和 DPI 硬件利用机器学习检测 VPN 流量特征。VLESS-Reality 产生零特征 — 没有任何可检测的内容。"
-      },
-      "tls": {
-        "title": "真实 TLS 握手",
-        "description": "Doppler 使用真实网站证书执行真正的 TLS 握手。DPI 看到的是一个正常的 HTTPS 连接，而非 VPN 隧道。"
-      },
-      "fingerprint": {
-        "title": "通过主动探测",
-        "description": "当审查机构探测我们的服务器时，服务器以合法网站的方式回应。只有经过认证的客户端才能激活 VPN 隧道。"
-      },
-      "regions": {
-        "title": "被俄罗斯封锁 — 仍在运行",
-        "description": "我们的域名已被 Roskomnadzor 列入封锁名单。但我们依然在线。当网站被封锁时，可通过 Telegram 机器人下载。"
-      }
-    }
-  },
-  "useCases": {
-    "title": "谁在用Doppler",
-    "subtitle": "为需要更强VPN的人打造。",
-    "items": {
-      "restricted": {
-        "title": "受限网络用户",
-        "description": "当政府或ISP封锁VPN时依然自由连接。Doppler协议绕过主动审查。"
-      },
-      "travelers": {
-        "title": "公共Wi-Fi旅行者",
-        "description": "酒店、机场、咖啡厅 — 流量加密，DNS查询私密。网络上没人能看到你在做什么。"
-      },
-      "journalists": {
-        "title": "记者和研究人员",
-        "description": "访问被封锁的信息源，通信不暴露流量模式。无需账号意味着无身份痕迹。"
-      },
-      "developers": {
-        "title": "开发者和远程工作者",
-        "description": "稳定的加密隧道，不会被限速或封锁。在企业和国家级防火墙下稳定运行。"
-      }
-    }
-  },
-  "comparisonTable": {
-    "title": "Doppler vs 传统VPN",
-    "subtitle": "VPN并非千篇一律。",
-    "headers": {
-      "feature": "项目",
-      "traditional": "传统VPN",
-      "doppler": "Doppler"
-    },
-    "rows": {
-      "account": {
-        "feature": "需要账号",
-        "traditional": "邮箱+密码",
-        "doppler": "不需要"
-      },
-      "fingerprint": {
-        "feature": "流量指纹",
-        "traditional": "DPI可检测",
-        "doppler": "伪装为HTTPS"
-      },
-      "protocol": {
-        "feature": "协议",
-        "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
-      },
-      "dns": {
-        "feature": "DNS加密",
-        "traditional": "偶尔",
-        "doppler": "始终"
-      },
-      "censorship": {
-        "feature": "抗审查",
-        "traditional": "有限",
-        "doppler": "内置"
-      },
-      "logs": {
-        "feature": "活动日志",
-        "traditional": "不确定",
-        "doppler": "绝不"
-      }
-    }
-  },
-  "privacyModel": {
-    "title": "我们不存储什么",
-    "subtitle": "隐私靠架构保障，而非仅靠承诺。",
-    "tagline": "没有的数据，无法交出。",
-    "items": {
-      "browsing": {
-        "title": "无浏览日志",
-        "description": "我们看不到你访问了哪些网站"
-      },
-      "ip": {
-        "title": "无IP地址日志",
-        "description": "你的真实IP从不被记录"
-      },
-      "dns": {
-        "title": "无DNS查询存储",
-        "description": "加密后解析完即销毁"
-      },
-      "account": {
-        "title": "无账号数据库",
-        "description": "设备认证意味着无需存储个人数据"
-      }
     }
   },
   "about": {
@@ -1727,6 +1750,24 @@
         "description": "你现在受到军事级加密保护。你的真实 IP 被隐藏，流量不可读取，没有人——包括我们——知道你是谁。真正免注册的匿名 VPN。"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPN如何在无需注册的情况下工作？",
+        "answer": "Doppler使用基于设备的身份验证。打开应用时，设备会在本地生成加密密钥。此密钥在服务器上验证您的身份 — 无需电子邮件、电话号码或账户。"
+      },
+      "q2": {
+        "question": "没有账户的VPN安全吗？",
+        "answer": "是的，更安全。传统账户创建的数据库可能被黑客攻击或被法院传唤。Doppler不存储任何个人数据。"
+      },
+      "q3": {
+        "question": "没有账户可以在多台设备上使用Doppler吗？",
+        "answer": "可以。每台设备生成自己的唯一密钥。您的订阅在多台设备上有效。您可以选择用恢复邮箱关联设备，但从不强制要求。"
+      },
+      "q4": {
+        "question": "Doppler收集什么数据？",
+        "answer": "Doppler不收集您的电子邮件、电话号码、姓名、浏览历史、IP日志或连接时间戳。我们物理上无法交出从未存储的数据。"
+      }
+    },
     "cta": {
       "title": "准备好使用不认识你的 VPN 了吗？",
       "subtitle": "加入数千名选择免注册 VPN 的用户。无需邮箱、无需创建账号、无需冒个人数据风险。下载 Doppler，几秒即可连接——免费试用 3 天。",
@@ -1901,6 +1942,24 @@
         "description": "完整的 VLESS-Reality VPN 体验可在 iOS（App Store）、Android（Google Play）以及通过我们的 Telegram 机器人获取配置。每个平台使用相同的优化 Xray-core 引擎和相同的服务器基础设施。"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "什么是VLESS-Reality协议？",
+        "answer": "VLESS-Reality是下一代代理协议，使VPN流量与普通HTTPS浏览无法区分。它使用真实网站证书执行真正的TLS握手，击败深度包检测和审查系统。"
+      },
+      "q2": {
+        "question": "VLESS-Reality比WireGuard快吗？",
+        "answer": "VLESS-Reality与WireGuard具有相当的速度，开销最小。关键优势不是原始速度而是不可检测性 — WireGuard被DPI系统立即阻止，而VLESS-Reality不被发现地通过。"
+      },
+      "q3": {
+        "question": "使用VLESS需要配置Xray吗？",
+        "answer": "使用Doppler不需要。传统的VLESS设置需要编辑JSON配置和管理密钥。Doppler自动处理所有配置 — 服务器配置安全分发并定期轮换。"
+      },
+      "q4": {
+        "question": "哪些平台支持VLESS-Reality？",
+        "answer": "Doppler VPN在iOS（App Store）、Android（Google Play和APK）和Telegram机器人上提供VLESS-Reality，用于基于配置的访问。"
+      }
+    },
     "cta": {
       "title": "试试开箱即用的 VLESS VPN 应用",
       "subtitle": "下载 Doppler，体验 VLESS-Reality——为隐形而生的协议。一键操作。无需配置。毫不妥协。",
@@ -1921,170 +1980,103 @@
   },
   "vpnForIos": {
     "metadata": {
-      "title": "iPhone 和 iPad VPN — 免注册 | Doppler VPN",
-      "description": "下载适用于 iOS 的 Doppler VPN——2026 年最佳 iPhone 和 iPad VPN。无需注册、无需账号。VLESS-Reality 协议、广告拦截、全天候保护。免费试用 3 天。"
+      "title": "Doppler VPN iPhone 和 iPad 版 — 快速、私密、抗审查",
+      "description": "下载适用于 iOS 的 Doppler VPN。VLESS-Reality 加密，无需注册，突破俄罗斯、伊朗和中国的网络审查。3 天免费试用。"
     },
     "hero": {
       "title": "适用于 iPhone 和 iPad 的 Doppler VPN",
-      "subtitle": "免注册的安全 VPN。从 App Store 下载。含 3 天免费试用。"
+      "subtitle": "为 iOS 打造的快速、私密、抗审查 VPN。无需注册 — 从 App Store 下载即可秒速连接。包含 3 天免费试用，可完整使用所有功能。",
+      "cta": "从 App Store 下载"
     },
     "features": {
-      "title": "为什么选择 Doppler iOS 版？",
+      "title": "为什么选择 Doppler VPN iOS 版？",
+      "subtitle": "Doppler VPN 专为追求真正隐私且不愿牺牲速度或易用性的 iPhone 和 iPad 用户从零打造。",
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代协议，将 VPN 流量伪装为普通 HTTPS 浏览。你的连接对防火墙、深度包检测系统和运营商监控工具完全不可见。正是用于突破中国防火长城的同一技术。"
+      },
       "noRegistration": {
-        "title": "免注册",
-        "description": "即刻使用 VPN——无需邮箱、手机号或创建账号。下载即可连接。"
+        "title": "无需注册",
+        "description": "无需邮箱、无需手机号、无需创建账号。下载应用即可立即连接。Doppler 采用基于设备的认证方式，从第一次点击起你的身份就完全私密。"
       },
-      "vlessProtocol": {
-        "title": "VLESS-Reality 协议",
-        "description": "新一代加密技术将 VPN 流量伪装为普通 HTTPS 浏览。防火墙和 DPI 系统无法检测。"
+      "oneTapConnect": {
+        "title": "一键连接",
+        "description": "按下一个按钮，Doppler 自动选择最快的服务器，建立加密隧道，保护你的全部流量。智能选路优化速度与稳定性。"
       },
-      "adBlocker": {
-        "title": "内置广告拦截",
-        "description": "在 DNS 层面拦截侵入性广告、追踪器和恶意域名。浏览更快，流量更省。"
+      "bypassCensorship": {
+        "title": "突破审查和 DPI 封锁",
+        "description": "专为网络审查严格的国家设计 — 俄罗斯、伊朗、中国等。VLESS-Reality 让你的 VPN 流量与正常网页浏览无法区分，轻松击败 TSPU 和 GFW。"
       },
-      "alwaysOn": {
-        "title": "始终在线 VPN",
-        "description": "在 Wi-Fi 和蜂窝网络之间切换时自动重连。全天候保护你的连接。"
+      "noLogs": {
+        "title": "严格的零日志政策",
+        "description": "Doppler 从不收集、存储或分享你的浏览数据。没有连接日志、没有流量日志、没有 DNS 查询日志。我们无法识别你的身份，因为我们从未收集过任何可识别信息。"
       },
-      "smartRouting": {
-        "title": "智能路由",
-        "description": "智能服务器选择为你挑选最快的可用节点。为流媒体、游戏和日常浏览优化。"
+      "globalServers": {
+        "title": "6 个全球服务器节点",
+        "description": "连接到分布在欧洲及其他地区多个国家的服务器。每台服务器都运行 VLESS-Reality，并通过优化路由实现最低延迟和最高吞吐量。"
       },
-      "dnsProtection": {
-        "title": "DNS 保护",
-        "description": "加密的 DNS 查询防止运营商看到你访问的网站。包含完整的 DNS 泄露防护。"
+      "freeTrial": {
+        "title": "3 天免费试用",
+        "description": "免费试用 Doppler VPN 3 天，完整使用所有功能 — 无需预先绑定信用卡。试用结束后，可选择月付、半年付或年付方案，最低每月仅 $3.33。"
+      },
+      "iphoneIpad": {
+        "title": "iPhone 和 iPad 通用",
+        "description": "原生 iOS 应用，基于 Apple Network Extension 框架构建。全面支持 iPhone（8 及以上）、所有 iPad 机型，以及通过 iPad 应用兼容运行的 Apple 芯片 Mac。支持 iPadOS Split View 和多任务处理。"
       }
     },
     "howItWorks": {
-      "title": "在 iOS 上如何使用",
-      "subtitle": "无需创建账号、无需邮箱、无需手机号——只需四个简单步骤。",
+      "title": "如何在 iPhone 上设置 VPN",
+      "subtitle": "30 秒内即可连接 — 无需任何技术知识。",
       "step1": {
         "title": "从 App Store 下载",
-        "description": "搜索「Doppler VPN」或点击下方链接。下载免费，应用不到 30 MB。"
+        "description": "在 App Store 搜索「Doppler VPN」或点击下方的下载按钮。应用免费下载，不到 30 MB。兼容 iOS 16 及以上版本。"
       },
       "step2": {
         "title": "打开应用",
-        "description": "启动 Doppler VPN。没有注册界面、没有登记表单。应用即开即用。"
+        "description": "在 iPhone 或 iPad 上启动 Doppler VPN。没有注册界面、没有登记表单、没有邮箱验证。通过基于设备的认证自动创建账号。"
       },
       "step3": {
-        "title": "点击连接",
-        "description": "按下连接按钮。Doppler 自动选择最佳服务器并建立安全的 VLESS-Reality 隧道。"
+        "title": "选择方案",
+        "description": "开始 3 天免费试用或选择订阅方案。月付（$6.99）、半年付（$29.99）或年付（$39.99）。通过 App Store 直接管理订阅。"
       },
       "step4": {
-        "title": "安全浏览",
-        "description": "就这么简单。你的流量已加密、IP 已隐藏、广告已屏蔽。自由使用任何应用或网站。"
-      }
-    },
-    "iosFeatures": {
-      "title": "iOS 专属功能",
-      "subtitle": "原生构建于 Apple 生态系统，深度系统集成。",
-      "networkExtension": {
-        "title": "Network Extension（系统级 VPN）",
-        "description": "Doppler 使用 Apple 的 Network Extension 框架作为真正的系统级 VPN 运行。来自每个应用的所有流量都通过加密隧道——不仅仅是浏览器流量。这提供了与 Apple 对企业 VPN 解决方案相同标准的保护。"
-      },
-      "alwaysOnVpn": {
-        "title": "始终在线 VPN",
-        "description": "启用始终在线模式，Doppler 会在连接中断时自动重连。从 Wi-Fi 切换到蜂窝网络？从睡眠中唤醒手机？VPN 在一秒内重新建立，你永远不会暴露。"
-      },
-      "perAppVpn": {
-        "title": "按应用 VPN",
-        "description": "选择哪些应用通过 VPN 隧道路由，哪些直接连接。将银行应用保持在本地网络上，同时通过 VPN 保护浏览器和通讯应用。"
-      },
-      "widget": {
-        "title": "主屏幕小组件",
-        "description": "将 Doppler 小组件添加到主屏幕或锁屏，即时查看连接状态并一键切换。一目了然地查看当前服务器、连接时间和保护状态。"
-      },
-      "ipadSplitView": {
-        "title": "iPad 分屏支持",
-        "description": "完全支持 iPad 多任务。在分屏浏览或侧拉中与其他应用同时使用 Doppler VPN。无论前台是哪个应用，VPN 状态始终在状态栏中可见。"
-      }
-    },
-    "privacy": {
-      "title": "Apple 设备上的隐私保护",
-      "subtitle": "Doppler 补充了 Apple 已有的保护——并填补了 VPN 专门解决的空白。",
-      "intro": "Apple 在设备级隐私方面处于行业领先——App 跟踪透明度、邮件隐私保护和 Safari 智能防追踪。但有一层 Apple 无法保护：你的网络流量。",
-      "appleProtects": {
-        "title": "Apple 保护的内容",
-        "item1": "应用级跟踪（ATT 提示）",
-        "item2": "设备端数据加密（Secure Enclave）",
-        "item3": "Safari 追踪器拦截",
-        "item4": "邮件像素追踪防护"
-      },
-      "dopplerAdds": {
-        "title": "Doppler VPN 增加的保护",
-        "item1": "对每个网站和服务隐藏你的真实 IP 地址",
-        "item2": "使用 VLESS-Reality 加密所有网络流量（无法检测）",
-        "item3": "拦截 DNS 级别的追踪和广告域名",
-        "item4": "防止运营商流量监控和限速"
-      },
-      "noLogs": "Doppler 使用基于设备的认证——没有账号、没有邮箱、没有日志。我们无法识别你，因为我们从未收集过可识别身份的信息。"
-    },
-    "compatibility": {
-      "title": "系统要求与兼容性",
-      "os": {
-        "label": "操作系统",
-        "value": "iOS 16.0 或更高版本"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8 及更新机型（所有支持 iOS 16 的型号）"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "所有运行 iPadOS 16 或更高版本的 iPad 型号"
-      },
-      "mac": {
-        "label": "Mac（Apple Silicon）",
-        "value": "M1、M2、M3、M4 Mac 通过 iPad 应用兼容"
-      },
-      "size": {
-        "label": "应用大小",
-        "value": "不到 30 MB"
-      },
-      "battery": {
-        "label": "电池影响",
-        "value": "极小——VLESS 是一种轻量级协议，CPU 开销低"
-      },
-      "data": {
-        "label": "数据开销",
-        "value": "与未加密浏览相比，额外数据使用不到 2%"
+        "title": "点击连接",
+        "description": "按下连接按钮。Doppler 自动选择最佳服务器，建立加密的 VLESS-Reality 隧道，并通过它路由你的全部流量。IP 地址被隐藏，数据已加密。"
       }
     },
     "faq": {
-      "title": "常见问题",
+      "title": "常见问题 — Doppler VPN iOS 版",
       "q1": {
-        "question": "Doppler VPN 在 iOS 上提供免费试用吗？",
-        "answer": "是的。每位新用户都可获得 3 天免费试用，完整访问所有功能。试用结束后，选择适合你的方案——月付、半年付或年付。"
+        "question": "Doppler VPN 在 iPad 上能用吗？",
+        "answer": "可以。Doppler VPN 适用于所有运行 iPadOS 16 及以上版本的 iPad 机型。应用完全支持 iPad 多任务功能，包括 Split View 和侧拉。你的订阅同时覆盖 iPhone 和 iPad — 在所有 Apple 设备上使用同一个账号。"
       },
       "q2": {
-        "question": "我需要创建账号吗？",
-        "answer": "不需要。Doppler 使用基于设备的认证。无需注册、无需邮箱、无需手机号。只需下载并连接。"
+        "question": "如何在 iPhone 上设置 VPN？",
+        "answer": "在 iPhone 上设置 Doppler VPN 只需不到 30 秒：1) 从 App Store 下载，2) 打开应用（无需注册），3) 点击连接。Doppler 自动完成所有技术设置 — 配置 VPN 配置文件、选择最佳服务器并建立加密隧道。"
       },
       "q3": {
-        "question": "Doppler 在中国、俄罗斯或伊朗可以使用吗？",
-        "answer": "可以。Doppler 使用 VLESS-Reality 协议，将 VPN 流量伪装为普通 HTTPS。这使得防火长城或 TSPU 等审查系统极难检测和封锁。"
+        "question": "Doppler VPN iOS 版免费吗？",
+        "answer": "Doppler VPN 提供 3 天免费试用，可完整使用所有功能。试用结束后，可选择三种订阅方案：月付（$6.99）、半年付（$29.99，省 28%）或年付（$39.99，省 52%）。所有订阅通过 App Store 管理。"
       },
       "q4": {
-        "question": "VPN 会拖慢我的 iPhone 吗？",
-        "answer": "几乎感觉不到。VLESS-Reality 是目前最轻量的 VPN 协议之一。大多数用户速度下降不到 5%。得益于高效的数据包处理，电池影响极小。"
+        "question": "在俄罗斯、中国和伊朗能用吗？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 协议，将 VPN 流量伪装为普通 HTTPS 网页浏览。这使得俄罗斯 TSPU、中国防火长城或伊朗过滤系统等审查机制极难检测和封锁。Doppler 专为重度审查地区的用户设计。"
       },
       "q5": {
-        "question": "Doppler 能用于流媒体应用吗？",
-        "answer": "可以。Doppler 的智能路由针对流媒体进行了优化。应用自动选择视频内容表现最佳的服务器。"
+        "question": "如何取消订阅？",
+        "answer": "在 iOS 上取消 Doppler VPN 订阅：打开「设置」> 点击你的 Apple ID > 订阅 > Doppler VPN > 取消订阅。在当前计费周期结束前，你仍可继续使用。Apple 负责所有计费 — Doppler 从不存储你的支付信息。"
       },
       "q6": {
-        "question": "我可以在 iPad 和 iPhone 上同时使用 Doppler 吗？",
-        "answer": "可以。你的订阅适用于多台 Apple 设备。每台设备获得独立的安全连接。"
+        "question": "一个账号可以在多台 Apple 设备上使用吗？",
+        "answer": "可以。你的 Doppler VPN 订阅可在多台 Apple 设备上使用 — iPhone、iPad，甚至通过 iPad 应用兼容运行的 Apple 芯片 Mac。每台设备获得独立的安全 VPN 连接。最多可在 10 台设备上登录同一个账号。"
       }
     },
     "cta": {
-      "title": "获取 Doppler VPN iOS 版",
-      "subtitle": "无需注册。3 天免费试用。几秒即可连接。",
+      "title": "下载 Doppler VPN iPhone 和 iPad 版",
+      "subtitle": "无需注册。3 天免费试用，完整使用所有功能。VLESS-Reality 加密让你的连接私密且无法检测。",
       "downloadIos": "从 App Store 下载",
-      "downloadAndroid": "在 Google Play 获取",
-      "telegramBot": "通过 Telegram 机器人使用",
-      "telegramChannelRu": "Telegram 频道（俄语）",
-      "telegramChannelEn": "Telegram 频道（英语）"
+      "otherPlatforms": "其他平台也可使用",
+      "downloadsLink": "查看所有下载"
     },
     "related": {
       "noRegistration": "免注册 VPN",
@@ -2092,169 +2084,108 @@
       "vless": "VLESS-Reality 协议",
       "vlessDesc": "了解 VLESS 如何击败深度包检测",
       "android": "Android VPN",
-      "androidDesc": "在 Google Play 或通过 APK 获取 Doppler VPN"
+      "androidDesc": "在 Google Play 上获取 Doppler VPN"
     }
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Android VPN — 免注册 | Doppler VPN APK 下载 2026",
-      "description": "下载 2026 年最佳 Android VPN。无需注册、无需账号。可在 Google Play 和 APK 获取，适用于受限地区。VLESS-Reality 协议。免费试用 3 天。"
+      "title": "Doppler VPN Android 版 — 快速、私密、抗审查",
+      "description": "从 Google Play 下载 Doppler VPN Android 版。VLESS-Reality 加密，无需注册，突破网络审查。3 天免费试用。"
     },
     "hero": {
       "title": "适用于 Android 的 Doppler VPN",
-      "subtitle": "免注册 VPN。无需账号、邮箱或个人数据。可在 Google Play 和 APK 获取。含 3 天免费试用。",
-      "googlePlay": "Google Play 商店",
-      "downloadApk": "下载 APK"
+      "subtitle": "为 Android 打造的快速、私密、抗审查 VPN。无需注册 — 从 Google Play 下载即可秒速连接。包含 3 天免费试用，可完整使用所有功能。",
+      "cta": "从 Google Play 下载"
     },
     "features": {
-      "title": "为什么选择 Doppler Android 版？",
-      "subtitle": "专为需要无妥协隐私的 Android 用户打造。无需注册、不收集数据、没有限制。",
+      "title": "为什么选择 Doppler VPN Android 版？",
+      "subtitle": "Doppler VPN 专为追求真正隐私且不愿牺牲速度、续航或易用性的 Android 用户打造。",
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代协议，将 VPN 流量伪装为普通 HTTPS 浏览。你的连接对防火墙、深度包检测系统和运营商监控完全不可见。正是用于突破中国防火长城的同一技术。"
+      },
       "noRegistration": {
-        "title": "免注册",
-        "description": "打开应用即可连接。无需邮箱、手机号或创建账号。从第一次点击起，你的身份就保持私密。"
+        "title": "无需注册",
+        "description": "无需邮箱、无需手机号、无需创建账号。从 Google Play 下载，打开应用即可立即连接。Doppler 采用基于设备的认证方式，你的身份始终完全私密。"
       },
-      "vlessReality": {
-        "title": "VLESS-Reality 协议",
-        "description": "军事级加密让你的 VPN 流量看起来像普通 HTTPS 浏览。DPI 系统和政府防火墙无法检测。"
+      "oneTapConnect": {
+        "title": "一键连接",
+        "description": "按下一个按钮，Doppler 自动选择最快的服务器，建立加密隧道，保护你的全部流量。智能选路优化速度与稳定性。"
       },
-      "adBlocker": {
-        "title": "内置广告拦截",
-        "description": "在 DNS 层面拦截广告、追踪器和恶意域名。浏览更快、流量更省，Android 设备电池续航更长。"
+      "bypassCensorship": {
+        "title": "突破审查和 DPI 封锁",
+        "description": "专为网络审查严格的国家设计 — 俄罗斯、伊朗、中国等。VLESS-Reality 让你的 VPN 流量与正常网页浏览无法区分，轻松击败 TSPU 和 GFW。"
       },
-      "alwaysOn": {
-        "title": "始终在线 VPN",
-        "description": "使用 Android 原生的始终在线 VPN 功能，确保全天候连接保护，即使重启或网络切换也不中断。"
+      "noLogs": {
+        "title": "严格的零日志政策",
+        "description": "Doppler 从不收集、存储或分享你的浏览数据。没有连接日志、没有流量日志、没有 DNS 查询日志。我们无法识别你的身份，因为我们从未收集过任何可识别信息。"
       },
-      "apkSideload": {
-        "title": "APK 侧载安装",
-        "description": "无法访问 Google Play？直接下载 APK 并手动安装。非常适合俄罗斯、伊朗、中国等受审查地区的用户。"
+      "globalServers": {
+        "title": "6 个全球服务器节点",
+        "description": "连接到分布在欧洲及其他地区多个国家的服务器。每台服务器都运行 VLESS-Reality，并通过优化路由实现最低延迟和最高吞吐量。"
       },
-      "dnsProtection": {
-        "title": "DNS 保护",
-        "description": "所有 DNS 查询都经过加密并通过安全服务器路由。防止 DNS 泄露，阻止运营商查看你访问的网站。"
-      }
-    },
-    "install": {
-      "title": "两种安装方式",
-      "subtitle": "选择最适合你情况的安装方式。两种方式都提供相同的完整 VPN 体验。",
-      "playStore": {
-        "title": "Google Play 商店",
-        "badge": "推荐",
-        "benefit1": "一键安装，自动更新",
-        "benefit2": "经 Google Play Protect 验证",
-        "benefit3": "无缝订阅管理",
-        "cta": "在 Google Play 获取"
+      "freeTrial": {
+        "title": "3 天免费试用",
+        "description": "免费试用 Doppler VPN 3 天，完整使用所有功能。试用结束后，可选择月付、半年付或年付方案，最低每月仅 $3.33。通过 Google Play 管理订阅。"
       },
-      "apk": {
-        "title": "直接下载 APK",
-        "badge": "适用于受限地区",
-        "benefit1": "Google Play 被封锁时仍可使用",
-        "benefit2": "无需 Google 账号",
-        "benefit3": "与 Play 商店版功能完全一致",
-        "note": "适合俄罗斯、伊朗、中国等 Google Play 商店受限或 VPN 应用被下架的国家的用户。",
-        "cta": "通过 Telegram 机器人获取 APK"
+      "batteryEfficient": {
+        "title": "低功耗后台服务",
+        "description": "Doppler 使用 Android 原生的始终开启 VPN 框架，对电量影响极小。即使开启全天候保护，额外电量消耗不到 2%。针对三星、小米、一加、Pixel 及所有主流 Android 品牌优化。"
       }
     },
     "howItWorks": {
-      "title": "在 Android 上如何使用",
-      "subtitle": "从下载到安全浏览不到 30 秒。无需账号、邮箱或设置向导。",
+      "title": "如何在 Android 上设置 VPN",
+      "subtitle": "30 秒内即可连接 — 无需任何技术知识。",
       "step1": {
-        "title": "下载应用",
-        "description": "从 Google Play 安装 Doppler VPN 或直接下载 APK。应用轻量——不到 15 MB。"
+        "title": "从 Google Play 下载",
+        "description": "在 Google Play 搜索「Doppler VPN」或点击下方的下载按钮。应用免费下载，体积不到 15 MB，兼容 Android 8.0（Oreo）及以上版本。"
       },
       "step2": {
         "title": "打开应用",
-        "description": "启动 Doppler VPN。没有注册界面、没有登记表单。应用即开即用。"
+        "description": "在 Android 手机或平板上启动 Doppler VPN。没有注册界面、没有登记表单、没有邮箱验证。通过基于设备的认证自动创建账号。"
       },
       "step3": {
+        "title": "选择方案",
+        "description": "开始 3 天免费试用或选择订阅方案。月付（$6.99）、半年付（$29.99）或年付（$39.99）。通过 Google Play 直接管理订阅。"
+      },
+      "step4": {
         "title": "点击连接",
-        "description": "按下连接按钮。Doppler 自动选择最快的可用服务器并建立 VLESS-Reality 隧道。"
-      },
-      "step4": {
-        "title": "自由浏览",
-        "description": "你的连接现已加密且无法检测。无限制访问任何网站、应用或服务。"
+        "description": "按下连接按钮。Doppler 自动选择最佳服务器，建立加密的 VLESS-Reality 隧道，并通过它路由你的全部流量。IP 地址被隐藏，数据已加密。"
       }
     },
-    "androidFeatures": {
-      "title": "Android 专属功能",
-      "subtitle": "Doppler VPN 充分利用 Android 的能力，提供最安全、最流畅的体验。",
-      "alwaysOnVpn": {
-        "title": "始终在线 VPN",
-        "description": "启用 Android 内置的始终在线 VPN 设置，让 Doppler 随时保持连接。前往 设置 > 网络和互联网 > VPN > Doppler VPN > 开启始终开启。你的设备会在重启或网络变化后自动重连。"
+    "faq": {
+      "title": "常见问题 — Doppler VPN Android 版",
+      "q1": {
+        "question": "Doppler VPN 在三星设备上能用吗？",
+        "answer": "可以。Doppler VPN 完全兼容所有运行 Android 8.0（Oreo）及以上版本的三星 Galaxy 手机和平板。包括 Galaxy S 系列、Galaxy A 系列、Galaxy Z Fold、Galaxy Z Flip 和 Galaxy Tab。Doppler 集成了三星的始终开启 VPN 设置，提供全天候保护。"
       },
-      "splitTunneling": {
-        "title": "分流隧道",
-        "description": "选择哪些应用走 VPN、哪些使用常规连接。将银行应用直接路由，同时保护浏览器。在 Doppler 的设置中配置按应用 VPN 规则。"
+      "q2": {
+        "question": "Doppler VPN 费电吗？",
+        "answer": "不费电。即使启用始终开启 VPN，Doppler VPN 的额外电量消耗也不到 2%。VLESS-Reality 协议在设计上追求高效，CPU 开销极低。为获得最佳体验，请在「设置 > 应用 > Doppler VPN > 电池 > 不受限制」中将 Doppler 排除在 Android 电池优化之外。"
       },
-      "quickSettings": {
-        "title": "快速设置磁贴",
-        "description": "将 Doppler VPN 添加到 Android 快速设置面板。一划一点即可连接或断开——无需打开应用。适用于 Android 8.0 及以上版本。"
+      "q3": {
+        "question": "如何在 Android 上设置 VPN？",
+        "answer": "在 Android 上设置 Doppler VPN 只需不到 30 秒：1) 从 Google Play 下载，2) 打开应用（无需注册），3) 点击连接。Doppler 自动完成所有技术设置 — 配置 VPN 配置文件、选择最佳服务器并建立加密隧道。"
       },
-      "batteryOptimization": {
-        "title": "电池优化",
-        "description": "Doppler 耗电极少。为获得最佳的始终在线体验，请将 Doppler 排除在 Android 电池优化之外：设置 > 应用 > Doppler VPN > 电池 > 不受限制。这可以防止 Android 在后台终止 VPN 连接。"
+      "q4": {
+        "question": "在俄罗斯、中国和伊朗能用吗？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 协议，将 VPN 流量伪装为普通 HTTPS 网页浏览。这使得俄罗斯 TSPU、中国防火长城或伊朗过滤系统等审查机制极难检测和封锁。Doppler 专为重度审查地区的用户设计。"
       },
-      "androidTv": {
-        "title": "Android TV 支持",
-        "description": "在你的 Android TV 或电视盒子上侧载安装 Doppler VPN APK，保护流媒体流量。在大屏上使用相同的 VLESS-Reality 加密访问受地域限制的内容。"
-      }
-    },
-    "sideloading": {
-      "title": "APK 侧载安装指南",
-      "badge": "适用于受审查地区",
-      "intro": "如果你所在的国家 Google Play 受限或 VPN 应用已从商店下架，你可以直接从 APK 文件安装 Doppler VPN。请仔细按照以下步骤操作。",
-      "step1": {
-        "title": "启用未知来源",
-        "description": "前往 设置 > 应用 > 特殊应用访问权限 > 安装未知应用。选择你的浏览器或文件管理器，开启「允许来自此来源」。"
+      "q5": {
+        "question": "如何取消订阅？",
+        "answer": "在 Android 上取消 Doppler VPN 订阅：打开 Google Play > 点击头像 > 付款和订阅 > 订阅 > Doppler VPN > 取消订阅。在当前计费周期结束前，你仍可继续使用。"
       },
-      "step2": {
-        "title": "下载 APK",
-        "description": "从我们的官方 Telegram 机器人 @dopplercreatebot 获取最新的 Doppler VPN APK。这确保你始终获得正版、未修改的文件。"
-      },
-      "step3": {
-        "title": "安装 APK",
-        "description": "打开下载的 .apk 文件并点击「安装」。Android 可能会显示关于未知应用的警告——这对于侧载安装的应用是正常的。"
-      },
-      "step4": {
-        "title": "验证并连接",
-        "description": "打开 Doppler VPN 并验证应用正常运行。应用应该无需任何账号或注册即可连接——只需点击连接。"
-      },
-      "security": {
-        "title": "安全提示",
-        "description": "仅从我们的官方 Telegram 机器人（@dopplercreatebot）或官方网站（www.dopplervpn.org）下载 Doppler VPN APK。切勿从第三方来源安装 APK 文件——可能包含恶意软件或被修改的代码。"
-      }
-    },
-    "requirements": {
-      "title": "系统要求",
-      "os": {
-        "title": "操作系统",
-        "value": "Android 8.0（Oreo）或更高版本"
-      },
-      "battery": {
-        "title": "电池影响",
-        "value": "极小——启用始终在线 VPN 后额外电量消耗不到 2%"
-      },
-      "storage": {
-        "title": "存储空间",
-        "value": "应用不到 15 MB，连接时内存占用不到 5 MB"
-      },
-      "permissions": {
-        "title": "所需权限",
-        "value": "仅需 VPN 连接权限——不访问联系人、照片或文件"
-      },
-      "compatibility": {
-        "title": "兼容设备"
+      "q6": {
+        "question": "Doppler VPN 能在 Android TV 上使用吗？",
+        "answer": "可以。你可以在 Android TV 设备和电视盒子上安装 Doppler VPN，保护你的流媒体流量。在大屏上访问受地域限制的内容，使用与手机端相同的 VLESS-Reality 加密。"
       }
     },
     "cta": {
-      "title": "立即获取 Doppler VPN Android 版",
-      "subtitle": "私密且无法检测。免注册、无需账号、不收集数据。免费试用 3 天。从 Google Play 下载或获取适用于受限地区的 APK。",
-      "googlePlay": "Google Play 商店",
-      "downloadApk": "下载 APK",
-      "alsoOnIos": "同时提供 iOS 版本",
-      "telegramBot": "Telegram 机器人",
-      "telegramChannelRu": "Telegram 频道（俄语）",
-      "telegramChannelEn": "Telegram 频道（英语）"
+      "title": "下载 Doppler VPN Android 版",
+      "subtitle": "无需注册。3 天免费试用，完整使用所有功能。VLESS-Reality 加密让你的连接私密且无法检测。",
+      "downloadAndroid": "从 Google Play 下载",
+      "otherPlatforms": "其他平台也可使用",
+      "downloadsLink": "查看所有下载"
     },
     "related": {
       "noRegistration": "免注册 VPN",
@@ -2263,6 +2194,226 @@
       "vlessDesc": "了解 VLESS 如何击败深度包检测",
       "ios": "iOS VPN",
       "iosDesc": "下载适用于 iPhone 和 iPad 的 Doppler VPN"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Doppler VPN Mac 版 — 快速、私密、抗审查",
+      "description": "从 Mac App Store 下载 Doppler VPN。VLESS-Reality 加密，无需注册，轻松绕过审查。原生支持 Apple Silicon。"
+    },
+    "hero": {
+      "title": "Doppler VPN Mac 版",
+      "subtitle": "专为 macOS 原生打造的快速、私密、抗审查 VPN。无需注册——从 Mac App Store 下载，几秒即可连接。订阅可在 iPhone、iPad 和 Mac 之间共享。",
+      "cta": "从 Mac App Store 下载"
+    },
+    "features": {
+      "title": "为什么选择 Doppler VPN macOS 版？",
+      "subtitle": "Doppler VPN 是一款原生 macOS 应用，专为需要真正隐私保护、绕过审查以及无缝融入 Apple 生态系统的 Mac 用户设计。",
+      "nativeMac": {
+        "title": "原生 macOS 应用",
+        "description": "使用 Apple 的 Network Extension 框架专为 macOS 打造。在 Apple Silicon（M1/M2/M3/M4）和 Intel Mac 上均可原生运行。与 macOS 系统偏好设置、菜单栏和通知中心深度整合，带来流畅的桌面 VPN 体验。"
+      },
+      "macAppStore": {
+        "title": "Mac App Store 发布",
+        "description": "直接从 Mac App Store 下载——经过 Apple 审核，安全可靠。自动更新、便捷安装，通过 Apple ID 轻松管理订阅。无需侧载或手动配置。"
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代协议，将 VPN 流量伪装成普通 HTTPS 浏览。您的连接对防火墙、深度包检测系统和 ISP 监控工具完全不可见。与绕过中国防火长城所使用的技术相同。"
+      },
+      "noRegistration": {
+        "title": "无需注册",
+        "description": "无需邮箱、无需手机号、无需创建账户。只需下载应用即可立即连接。Doppler 使用基于设备的身份验证，从第一次点击开始您的身份就完全保密。"
+      },
+      "oneClickConnect": {
+        "title": "一键连接",
+        "description": "点击一个按钮，Doppler 会自动选择最快的服务器、建立加密隧道并保护您 Mac 的所有流量。智能服务器选择针对速度和稳定性进行优化——可直接从菜单栏操作。"
+      },
+      "bypassCensorship": {
+        "title": "绕过审查与 DPI",
+        "description": "专为互联网审查严格的国家设计——俄罗斯、伊朗、中国等。VLESS-Reality 让您的 VPN 流量与正常网页浏览无异，可有效突破 TSPU 和 GFW。"
+      },
+      "noLogs": {
+        "title": "严格零日志政策",
+        "description": "Doppler 绝不收集、存储或共享您的浏览数据。无连接日志、无流量日志、无 DNS 查询日志。我们无法识别您的身份，因为我们从不收集身份信息。"
+      },
+      "crossDevice": {
+        "title": "所有 Apple 设备同步",
+        "description": "一份订阅覆盖您的 Mac、iPhone 和 iPad。账户和订阅状态在所有 Apple 设备间自动同步。无需重新订阅或重新配置即可在设备间切换——您的 VPN 随处可用。"
+      }
+    },
+    "howItWorks": {
+      "title": "如何在 Mac 上设置 VPN",
+      "subtitle": "一分钟内即可连接——无需任何技术知识。",
+      "step1": {
+        "title": "从 Mac App Store 下载",
+        "description": "在 Mac App Store 搜索 \"Doppler VPN\" 或点击下方的下载按钮。应用免费下载，支持 macOS 14 Sonoma 及更高版本。兼容 Apple Silicon 和 Intel Mac。"
+      },
+      "step2": {
+        "title": "打开应用",
+        "description": "在 Mac 上启动 Doppler VPN。没有注册页面、没有登记表单、没有邮箱验证。账户通过基于设备的身份验证自动创建。"
+      },
+      "step3": {
+        "title": "选择套餐",
+        "description": "开始 3 天免费试用或选择订阅套餐。提供月付（$6.99）、半年付（$29.99）和年付（$39.99）选项。通过 App Store 直接管理订阅。"
+      },
+      "step4": {
+        "title": "点击连接",
+        "description": "按下连接按钮。Doppler 会自动选择最佳服务器、建立加密的 VLESS-Reality 隧道，并将所有流量通过该隧道路由。您的 IP 被隐藏，数据被加密。"
+      }
+    },
+    "faq": {
+      "title": "常见问题 — Doppler VPN Mac 版",
+      "q1": {
+        "question": "Doppler VPN 支持 Apple Silicon Mac 吗？",
+        "answer": "支持。Doppler VPN 在 Apple Silicon（M1、M2、M3、M4）和 Intel Mac 上均可原生运行。该应用是针对两种架构优化的通用二进制文件，确保最佳性能和 MacBook 笔记本电脑上最低的电池消耗。"
+      },
+      "q2": {
+        "question": "我可以在 iPhone、iPad 和 Mac 上使用同一个账户吗？",
+        "answer": "可以。您的 Doppler VPN 订阅适用于所有 Apple 设备——iPhone、iPad 和 Mac。每台设备都有独立的安全 VPN 连接。单个账户最多可连接 10 台设备，订阅状态通过 Apple ID 自动同步。"
+      },
+      "q3": {
+        "question": "如何在 macOS 上设置 VPN？",
+        "answer": "在 Mac 上设置 Doppler VPN 不到一分钟：1) 从 Mac App Store 下载，2) 打开应用（无需注册），3) 点击连接。Doppler 会自动完成所有技术设置——配置 VPN 配置文件、选择最佳服务器并建立加密隧道。"
+      },
+      "q4": {
+        "question": "会拖慢我的 Mac 吗？",
+        "answer": "Doppler VPN 的设计目标是将性能影响降到最低。原生 macOS 应用使用 Apple 的 Network Extension 框架高效处理流量。在 Apple Silicon Mac 上，应用在 VPN 活跃连接期间 CPU 占用低于 1%。服务器选择针对最低延迟进行优化。"
+      },
+      "q5": {
+        "question": "Doppler VPN 在 Mac App Store 上有吗？",
+        "answer": "有。Doppler VPN 可在 Mac App Store 免费下载，已通过 Apple 审核和批准。您可以搜索 \"Doppler VPN\" 或使用我们下载页面上的直接链接。更新通过 App Store 自动推送。"
+      },
+      "q6": {
+        "question": "在俄罗斯、中国和伊朗能用吗？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 协议，将 VPN 流量伪装成普通 HTTPS 网页浏览。这使得俄罗斯的 TSPU、中国的防火长城或伊朗的过滤系统极难检测和封锁。Doppler 专为重度审查地区的用户设计。"
+      }
+    },
+    "cta": {
+      "title": "下载 Doppler VPN Mac 版",
+      "subtitle": "无需注册。3 天免费试用，完整访问所有功能。VLESS-Reality 加密确保您的连接私密且不可检测。",
+      "downloadMac": "从 Mac App Store 下载",
+      "otherPlatforms": "其他平台也可使用",
+      "downloadsLink": "查看所有下载"
+    },
+    "related": {
+      "noRegistration": "免注册 VPN",
+      "noRegistrationDesc": "无需任何注册或账户即可使用 VPN",
+      "vless": "VLESS-Reality 协议",
+      "vlessDesc": "了解 VLESS 如何突破深度包检测",
+      "windows": "Windows VPN",
+      "windowsDesc": "下载 Doppler VPN Windows 版"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Doppler VPN Windows 版 — 快速、私密、抗审查",
+      "description": "下载 Doppler VPN Windows 版。VLESS-Reality 加密，无需注册，轻松绕过审查。支持 x64 和 ARM64 电脑。"
+    },
+    "hero": {
+      "title": "Doppler VPN Windows 版",
+      "subtitle": "专为 Windows 打造的快速、私密、抗审查 VPN。无需注册——下载安装程序即可秒速连接。支持 x64 和 ARM64 电脑，自动更新。",
+      "ctaX64": "下载 Windows 版 (x64)",
+      "ctaArm64": "下载 Windows 版 (ARM64)"
+    },
+    "features": {
+      "title": "为什么选择 Doppler VPN Windows 版？",
+      "subtitle": "Doppler VPN 是一款原生 Windows 应用，专为需要真正隐私保护、绕过审查以及在任何 Windows 设备上稳定运行的 PC 用户设计。",
+      "nativeWindows": {
+        "title": "原生 Windows 应用",
+        "description": "专为 Windows 打造，界面简洁现代。支持 Windows 10 和 Windows 11，完全兼容 x64 和 ARM64 架构。通过简单的安装向导几秒内完成安装——无需手动配置或命令行工具。"
+      },
+      "dualArchitecture": {
+        "title": "x64 + ARM64 双架构支持",
+        "description": "Doppler VPN 为 x64（标准 PC、台式机和大多数笔记本电脑）和 ARM64（Surface Pro X、Snapdragon 笔记本）提供专用版本。选择适合您硬件的安装程序，在任何 Windows 设备上获得原生性能。"
+      },
+      "autoUpdates": {
+        "title": "通过 Velopack 自动更新",
+        "description": "Doppler VPN 使用 Velopack 实现无缝后台更新。新版本自动下载并应用——您无需任何操作即可始终拥有最新的安全补丁、协议改进和新功能。"
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代协议，将 VPN 流量伪装成普通 HTTPS 浏览。您的连接对防火墙、深度包检测系统和 ISP 监控工具完全不可见。与绕过中国防火长城所使用的技术相同。"
+      },
+      "noRegistration": {
+        "title": "无需注册",
+        "description": "无需邮箱、无需手机号、无需创建账户。只需安装应用即可立即连接。Doppler 使用基于设备的身份验证，从第一次点击开始您的身份就完全保密。"
+      },
+      "bypassCensorship": {
+        "title": "绕过审查与 DPI",
+        "description": "专为互联网审查严格的国家设计——俄罗斯、伊朗、中国等。VLESS-Reality 让您的 VPN 流量与正常网页浏览无异，可有效突破 TSPU 和 GFW。"
+      },
+      "noLogs": {
+        "title": "严格零日志政策",
+        "description": "Doppler 绝不收集、存储或共享您的浏览数据。无连接日志、无流量日志、无 DNS 查询日志。我们无法识别您的身份，因为我们从不收集身份信息。"
+      },
+      "globalServers": {
+        "title": "6 个全球服务器节点",
+        "description": "连接欧洲及其他地区多个国家的服务器。每台服务器运行 VLESS-Reality 并优化路由，实现最低延迟和最高吞吐量。自动服务器选择为您挑选最快的节点。"
+      }
+    },
+    "howItWorks": {
+      "title": "如何在 Windows 上设置 VPN",
+      "subtitle": "一分钟内即可连接——无需任何技术知识。",
+      "step1": {
+        "title": "下载安装程序",
+        "description": "下载适合您系统的 Doppler VPN 安装程序——大多数 PC 和笔记本选择 x64，Surface Pro X 和 Snapdragon 设备选择 ARM64。安装包不到 30 MB，无病毒。"
+      },
+      "step2": {
+        "title": "运行安装向导",
+        "description": "双击安装程序并按照向导操作。安装大约需要 15 秒。Doppler VPN 会添加到开始菜单，还可选择在 Windows 启动时自动运行。"
+      },
+      "step3": {
+        "title": "打开 Doppler VPN",
+        "description": "从开始菜单或桌面快捷方式启动应用。没有注册页面、没有登记表单、没有邮箱验证。账户通过基于设备的身份验证自动创建。"
+      },
+      "step4": {
+        "title": "订阅并连接",
+        "description": "选择订阅套餐并点击连接。Doppler 会自动选择最佳服务器、建立加密的 VLESS-Reality 隧道，并将所有流量通过该隧道路由。您的 IP 被隐藏，数据被加密。"
+      }
+    },
+    "faq": {
+      "title": "常见问题 — Doppler VPN Windows 版",
+      "q1": {
+        "question": "支持哪些 Windows 版本？",
+        "answer": "Doppler VPN 支持 Windows 10（1809 及更高版本）和 Windows 11。同时支持 x64 和 ARM64 架构。该应用可在运行兼容 Windows 版本的台式机、笔记本电脑、平板电脑和 Surface 设备上使用。"
+      },
+      "q2": {
+        "question": "x64 和 ARM64 有什么区别？",
+        "answer": "x64 适用于大多数标准 PC、台式机和配备 Intel 或 AMD 处理器的笔记本电脑。ARM64 适用于较新的设备，如 Microsoft Surface Pro X、Lenovo ThinkPad X13s 和其他搭载 Snapdragon 的 Windows 笔记本。如果不确定，请下载 x64 版本——它适用于绝大多数 Windows 电脑。"
+      },
+      "q3": {
+        "question": "Doppler VPN 在 Windows 上会自动更新吗？",
+        "answer": "会。Doppler VPN 使用 Velopack 进行自动后台更新。当新版本可用时，会在后台下载并在您下次启动应用时自动应用更新。您无需任何手动操作即可始终拥有最新的安全补丁和功能。"
+      },
+      "q4": {
+        "question": "我可以在手机和电脑上使用同一个账户吗？",
+        "answer": "可以。您的 Doppler VPN 订阅适用于所有设备——Windows、iOS、Android 和 Mac。每台设备都有独立的安全 VPN 连接。单个账户最多可连接 10 台设备。"
+      },
+      "q5": {
+        "question": "与 Windows Defender 兼容吗？",
+        "answer": "兼容。Doppler VPN 与 Windows Defender 及其他主流杀毒软件完全兼容。安装程序已经过数字签名，应用不会触发误报。Doppler 使用 Windows 网络 API 作为标准 VPN 客户端运行。"
+      },
+      "q6": {
+        "question": "在俄罗斯、中国和伊朗能用吗？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 协议，将 VPN 流量伪装成普通 HTTPS 网页浏览。这使得俄罗斯的 TSPU、中国的防火长城或伊朗的过滤系统极难检测和封锁。Doppler 专为重度审查地区的用户设计。"
+      }
+    },
+    "cta": {
+      "title": "下载 Doppler VPN Windows 版",
+      "subtitle": "无需注册。VLESS-Reality 加密确保您的连接私密且不可检测。支持 x64 和 ARM64 电脑。",
+      "downloadX64": "下载 Windows 版 (x64)",
+      "downloadArm64": "下载 Windows 版 (ARM64)",
+      "otherPlatforms": "其他平台也可使用",
+      "downloadsLink": "查看所有下载"
+    },
+    "related": {
+      "noRegistration": "免注册 VPN",
+      "noRegistrationDesc": "无需任何注册或账户即可使用 VPN",
+      "vless": "VLESS-Reality 协议",
+      "vlessDesc": "了解 VLESS 如何突破深度包检测",
+      "macos": "Mac VPN",
+      "macosDesc": "下载 Doppler VPN macOS 版"
     }
   }
 }

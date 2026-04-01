@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Doppler VPN — Varen VPN brez beleženj za zasebnost",
-    "description": "Doppler VPN varuje vašo zasebnost s šifriranjem VLESS-Reality, DNS zaščito in strogo politiko brez beleženj. Obide DPI in državno cenzuro. Na voljo za iOS, Android, macOS in Windows."
+    "description": "Doppler VPN — hiter, zaseben VPN s šifriranjem VLESS-Reality. Brez beleženj, obide cenzuro. Na voljo za iOS, Android, macOS in Windows."
   },
   "nav": {
     "features": "Funkcije",
@@ -22,7 +22,7 @@
     "headlinePart1a": "Deluje, ko drugi VPN-ji",
     "headlinePart1b": "odpovejo.",
     "headlinePart2": "",
-    "subheadline": "Zasnovan na VLESS-Reality — vaš promet je videti kot navaden HTTPS. Neodkrit s strani globokega pregleda paketov. Brez registracije, brez beleženj, brez sledenja.",
+    "subheadline": "Doppler VPN temelji na VLESS-Reality — vaš promet je videti kot navaden HTTPS. Neodkrit s strani globokega pregleda paketov. Brez registracije, brez beleženj, brez sledenja.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Brez osebnih podatkov",
@@ -298,7 +298,9 @@
       "titlePlayful": "",
       "subtitle": "Varen, zaseben VPN brez registracije. Povežite se takoj s šifriranjem VLESS-Reality in DNS zaščito.",
       "cta": "Pridobi Doppler Pro",
-      "downloads": "Prenosi"
+      "downloads": "Prenosi",
+      "learnIos": "VPN za iOS",
+      "learnAndroid": "VPN za Android"
     }
   },
   "footer": {
@@ -322,7 +324,9 @@
     "vlessVpn": "Protokol VLESS",
     "noRegistration": "VPN brez registracije",
     "vpnForIos": "VPN za iOS",
-    "vpnForAndroid": "VPN za Android"
+    "vpnForAndroid": "VPN za Android",
+    "vpnForMacos": "VPN za Mac",
+    "vpnForWindows": "VPN za Windows"
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -698,17 +702,17 @@
       "step1": "Prenesite Doppler VPN iz App Store",
       "step2": "Odprite aplikacijo — vaš račun je ustvarjen samodejno",
       "step3": "Izberite paket in se naročite",
-      "step4": "Tapnite Poveži — zaščiteni ste!"
+      "step4": "Tapnite Poveži — zaščiteni ste!",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Pridobi na Google Play",
-      "buttonApk": "Prenesi APK (samostojen)",
-      "meta": "APK · v1.2.0 · 95 MB",
       "step1": "Prenesite Doppler VPN iz Google Play ali APK",
       "step2": "Odprite aplikacijo — vaš račun je ustvarjen samodejno",
       "step3": "Izberite paket in se naročite",
-      "step4": "Tapnite Poveži — zaščiteni ste!"
+      "step4": "Tapnite Poveži — zaščiteni ste!",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -716,20 +720,18 @@
       "step1": "Prenesite Doppler VPN iz Mac App Store",
       "step2": "Odprite aplikacijo — vaš račun je ustvarjen samodejno",
       "step3": "Izberite paket in se naročite",
-      "step4": "Tapnite Poveži — zaščiteni ste!"
+      "step4": "Tapnite Poveži — zaščiteni ste!",
+      "learnMore": "Več o VPN za Mac"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "Kmalu na voljo",
-      "inDevelopment": "Trenutno v razvoju",
-      "waitlistDescription": "Razvijamo nativnega odjemalca za Windows z enakim šifriranjem VLESS-Reality. Pridružite se čakalnemu seznamu in vas bomo obvestili, ko bo pripravljen.",
-      "waitlistPrivacy": "Vaš e-poštni naslov bomo uporabili le za obvestilo o izdaji za Windows. Brez neželene pošte."
-    },
-    "waitlist": {
-      "placeholder": "vaš@email.com",
-      "button": "Obvesti me",
-      "success": "Na seznamu ste! Obvestili vas bomo po e-pošti, ko bo pripravljeno.",
-      "error": "Nekaj je šlo narobe. Poskusite znova."
+      "buttonX64": "Prenesi za Windows (x64)",
+      "buttonArm64": "Prenesi za Windows (ARM64)",
+      "step1": "Prenesite namestitveni program za vaš sistem (x64 za večino računalnikov)",
+      "step2": "Zaženite namestitveni program in sledite čarovniku za namestitev",
+      "step3": "Odprite Doppler VPN — vaš račun je ustvarjen samodejno",
+      "step4": "Izberite paket, se naročite in se povežite!",
+      "learnMore": "Več o VPN za Windows"
     }
   },
   "support": {
@@ -1518,6 +1520,24 @@
         "fingerprint": "Brez"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Ali lahko Doppler VPN obide vladno cenzuro?",
+        "answer": "Da. Doppler uporablja VLESS-Reality, ki naredi VPN promet nerazločljiv od navadnega HTTPS. Obide DPI, TSPU in Veliki požarni zid brez zaznavnih VPN podpisov."
+      },
+      "q2": {
+        "question": "Ali Doppler VPN deluje v Rusiji, na Kitajskem in v Iranu?",
+        "answer": "Da. Doppler je posebej zgrajen za cenzurirane regije. Našo domeno je blokiral Roskomnadzor, kar dokazuje, da naša tehnologija deluje."
+      },
+      "q3": {
+        "question": "Kaj naredi VLESS-Reality boljši od OpenVPN ali WireGuard za obhod cenzure?",
+        "answer": "OpenVPN in WireGuard imata značilne podpise paketov, ki jih DPI sistemi takoj prepoznajo. VLESS-Reality izvede pravo TLS rokovanje z resničnim certifikatom spletne strani."
+      },
+      "q4": {
+        "question": "Kaj se zgodi, če so strežniki Doppler blokirani?",
+        "answer": "Doppler samodejno zamenja končne točke strežnikov in IP naslove. Če je ena končna točka prepoznana, se omrežje prilagodi. Naš Telegram bot zagotavlja takojšen dostop do posodobljenih konfiguracij."
+      }
+    },
     "cta": {
       "title": "Ne bomo pustili nikogar za seboj",
       "subtitle": "Doppler VPN je bil zasnovan posebej za omejena omrežja. Nenehno izboljšujemo infrastrukturo, rotiramo strežnike in posodabljamo protokole, da ostanemo pred vsako novo tehniko blokiranja. Vaša internetna svoboda ni predmet pogajanj.",
@@ -1730,6 +1750,24 @@
         "description": "Zdaj ste zasciteni z vojasko stopnjo sifriranja. Vas pravi IP je skrit, vas promet je neberljiv in nihce — niti mi — ne ve, kdo ste. Pravi anonimni VPN brez registracije."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Kako Doppler VPN deluje brez registracije?",
+        "answer": "Doppler uporablja avtentikacijo na osnovi naprave. Ko odprete aplikacijo, se na vaši napravi lokalno ustvari kriptografski ključ. Ta ključ vas avtenticira pri strežnikih — brez e-pošte, telefonske številke ali računa."
+      },
+      "q2": {
+        "question": "Je VPN brez računa varen?",
+        "answer": "Da, varnejši. Tradicionalni računi ustvarjajo baze podatkov, ki jih je mogoče vdreti ali sodno zahtevati. Doppler ne shranjuje osebnih podatkov."
+      },
+      "q3": {
+        "question": "Ali lahko uporabljam Doppler na več napravah brez računa?",
+        "answer": "Da. Vsaka naprava ustvari svoj edinstven ključ. Vaša naročnina deluje na več napravah. Po želji lahko povežete naprave z e-pošto za obnovitev, vendar to ni nikoli obvezno."
+      },
+      "q4": {
+        "question": "Katere podatke zbira Doppler?",
+        "answer": "Doppler ne zbira e-pošte, telefonske številke, imena, zgodovine brskanja, IP dnevnikov ali časovnih žigov povezav. Fizično ne moremo predati podatkov, ki jih nikoli nismo shranili."
+      }
+    },
     "cta": {
       "title": "Pripravljeni na VPN, ki vas ne pozna?",
       "subtitle": "Pridruzite se tisocim uporabnikom, ki so izbrali VPN brez registracije. Brez zahtevane e-poste, brez racuna za ustvariti, brez osebnih podatkov za tvegati. Prenesite Doppler in se povezite v sekundah — popolnoma brezplacno, popolnoma anonimno.",
@@ -1904,6 +1942,24 @@
         "description": "Celotna izskusnja VPN VLESS-Reality je na voljo na iOS (App Store), Android (Google Play) in prek nasega bota na Telegramu za dostop na podlagi konfiguracije. Vsaka platforma uporablja isti optimizirani motor Xray-core in isto strezniško infrastrukturo."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Kaj je protokol VLESS-Reality?",
+        "answer": "VLESS-Reality je proxy protokol naslednje generacije, ki naredi VPN promet nerazločljiv od navadnega HTTPS brskanja. Izvede pravo TLS rokovanje z resničnim certifikatom spletne strani."
+      },
+      "q2": {
+        "question": "Je VLESS-Reality hitrejši od WireGuard?",
+        "answer": "VLESS-Reality ima primerljive hitrosti z WireGuardom pri minimalni obremenitvi. Ključna prednost ni surova hitrost, ampak neodkrivljivost — WireGuard je takoj blokiran s strani DPI."
+      },
+      "q3": {
+        "question": "Ali moram konfigurirati Xray za uporabo VLESS?",
+        "answer": "Ne z Dopplerjem. Tradicionalna nastavitev VLESS zahteva urejanje JSON konfiguracij in upravljanje ključev. Doppler samodejno upravlja vso konfiguracijo."
+      },
+      "q4": {
+        "question": "Katere platforme podpirajo VLESS-Reality?",
+        "answer": "Doppler VPN ponuja VLESS-Reality na iOS (App Store), Androidu (Google Play in APK) in Telegram botu za dostop na osnovi konfiguracije."
+      }
+    },
     "cta": {
       "title": "Preizkusite aplikacijo VLESS VPN, ki preprosto deluje",
       "subtitle": "Prenesite Doppler in izkusite VLESS-Reality — protokol, zgrajen za nevidnost. En tap. Brez konfiguracije. Brez kompromisov.",
@@ -1924,170 +1980,103 @@
   },
   "vpnForIos": {
     "metadata": {
-      "title": "Brezplacen VPN za iPhone in iPad — Brez registracije | Doppler VPN",
-      "description": "Prenesite Doppler VPN za iOS — najboljsi brezplacen VPN za iPhone in iPad v letu 2026. Brez registracije, brez potrebnega racuna. Protokol VLESS-Reality, blokiranje oglasov in stalna zascita."
+      "title": "Doppler VPN za iPhone in iPad — hiter, zaseben in odporen na cenzuro",
+      "description": "Prenesite Doppler VPN za iOS. Sifriranje VLESS-Reality, brez registracije, obvod cenzure v Rusiji, Iranu in na Kitajskem. 3-dnevno brezplacno poskusno obdobje."
     },
     "hero": {
       "title": "Doppler VPN za iPhone in iPad",
-      "subtitle": "Brezplacen, varen VPN brez registracije. Prenesite iz App Store."
+      "subtitle": "Hiter, zaseben VPN, odporen na cenzuro, zasnovan za iOS. Brez registracije — prenesite iz App Store in se povezite v nekaj sekundah. Vkljucen je 3-dnevni brezplacni preizkus s polnim dostopom do vseh funkcij.",
+      "cta": "Prenesite v App Store"
     },
     "features": {
-      "title": "Zakaj Doppler za iOS?",
+      "title": "Zakaj izbrati Doppler VPN za iOS?",
+      "subtitle": "Doppler VPN je od temeljev zasnovan za uporabnike iPhone in iPad, ki zahtevajo resnicno zasebnost brez kompromisov pri hitrosti ali uporabnosti.",
+      "vlessEncryption": {
+        "title": "Sifriranje VLESS-Reality",
+        "description": "Protokol naslednje generacije, ki prikrije VPN promet kot obicajno brskanje HTTPS. Vasa povezava je nevidna za pozarne zidove, sisteme za globoki pregled paketov (DPI) in orodja za nadzor ponudnikov. Ista tehnologija, ki se uporablja za obvod Velikega pozarnega zidu Kitajske."
+      },
       "noRegistration": {
         "title": "Brez registracije",
-        "description": "Zacnite uporabljati VPN takoj — brez e-poste, brez telefona, brez ustvarjanja racuna. Samo prenesite in se povezite."
+        "description": "Brez e-poste, brez telefonske stevilke, brez ustvarjanja racuna. Samo prenesite aplikacijo in se takoj povezite. Doppler uporablja avtentikacijo na podlagi naprave, zato vasa identiteta ostane popolnoma zasebna ze od prvega tapa."
       },
-      "vlessProtocol": {
-        "title": "Protokol VLESS-Reality",
-        "description": "Sifriranje naslednje generacije, ki prikrije VPN promet kot obicajno brskanje HTTPS. Nezaznaven s strani pozarnih zidov in sistemov DPI."
+      "oneTapConnect": {
+        "title": "Povezava z enim tapom",
+        "description": "Pritisnite en gumb in Doppler samodejno izbere najhitrejsi streznik, vzpostavi sifriran tunel in zasciti ves vas promet. Pametna izbira streznikov optimizira hitrost in zanesljivost."
       },
-      "adBlocker": {
-        "title": "Vgrajen blokator oglasov",
-        "description": "Blokirajte vsiljive oglase, sledilce in zlonamerne domene na ravni DNS. Hitrejse brskanje z manj porabljenimi podatki."
+      "bypassCensorship": {
+        "title": "Obvod cenzure in DPI",
+        "description": "Zasnovan za delovanje v drzavah s strogo internetno cenzuro — Rusija, Iran, Kitajska in drugod. VLESS-Reality naredi vas VPN promet nerazlocljiv od obicajnega spletnega brskanja ter premaga TSPU in GFW."
       },
-      "alwaysOn": {
-        "title": "Vedno vklopljen VPN",
-        "description": "Samodejno se ponovno poveze pri preklapljanju med Wi-Fi in mobilnim omrezjem. Vasa povezava ostaja zascitena 24/7."
+      "noLogs": {
+        "title": "Stroga politika brez dnevnikov",
+        "description": "Doppler nikoli ne zbira, shranjuje ali deli vasih podatkov o brskanju. Brez dnevnikov povezav, brez dnevnikov prometa, brez dnevnikov DNS poizvedb. Vas ne moremo identificirati, ker nikoli ne zbiramo identifikacijskih podatkov."
       },
-      "smartRouting": {
-        "title": "Pametno usmerjanje",
-        "description": "Inteligentna izbira streznika izbere najhitrejse razpolozljivo vozlisce. Optimizirano za pretakanje, igre in vsakdanje brskanje."
+      "globalServers": {
+        "title": "6 globalnih lokacij streznikov",
+        "description": "Povezite se s strezniki v vec drzavah po Evropi in sirsem svetu. Vsak streznik poganja VLESS-Reality z optimiziranim usmerjanjem za najnizjo latenco in najvisjo prepustnost."
       },
-      "dnsProtection": {
-        "title": "Zascita DNS",
-        "description": "Sifrirane poizvedbe DNS preprecujejo vasemu ponudniku, da vidi, katera spletna mesta obiskujete. Vkljucena popolna zascita pred uhajanjem DNS."
+      "freeTrial": {
+        "title": "3-dnevni brezplacni preizkus",
+        "description": "Preizkusite Doppler VPN s polnim dostopom do vseh funkcij za 3 dni — brez predhodne kreditne kartice. Po preizkusu izberite mesecne, 6-mesecne ali letne nacrte ze od 3,33 $/mesec."
+      },
+      "iphoneIpad": {
+        "title": "Deluje na iPhone in iPad",
+        "description": "Izvorna aplikacija za iOS, zgrajena z Applovim ogrodjem Network Extension. Polna podpora za iPhone (8 in novejsi), vse modele iPad ter racunalnike Apple Silicon Mac prek zdruzljivosti z aplikacijami za iPad. Podpira iPadOS Split View in vecopravilnost."
       }
     },
     "howItWorks": {
-      "title": "Kako deluje na iOS",
-      "subtitle": "Brez ustvarjanja racuna, brez e-poste, brez telefonske stevilke — samo stirje preprosti koraki.",
+      "title": "Kako nastaviti VPN na iPhonu",
+      "subtitle": "Povezite se v manj kot 30 sekundah — brez tehnicnega znanja.",
       "step1": {
         "title": "Prenesite iz App Store",
-        "description": "Poiscite \"Doppler VPN\" ali tapnite spodnjo povezavo. Aplikacija je brezplacna in manjsa od 30 MB."
+        "description": "Poiscite \"Doppler VPN\" v App Store ali tapnite spodnji gumb za prenos. Aplikacija je brezplacna za prenos in manjsa od 30 MB. Zdruzljiva z iOS 16 in novejsim."
       },
       "step2": {
         "title": "Odprite aplikacijo",
-        "description": "Zazenite Doppler VPN. Brez zaslona za prijavo, brez obrazca za registracijo. Aplikacija je takoj pripravljena za uporabo."
+        "description": "Zazenite Doppler VPN na svojem iPhonu ali iPadu. Ni zaslona za prijavo, ni obrazca za registracijo, ni preverjanja e-poste. Vas racun se samodejno ustvari z avtentikacijo na podlagi naprave."
       },
       "step3": {
-        "title": "Tapnite Povezi",
-        "description": "Pritisnite gumb za povezavo. Doppler samodejno izbere najboljsi streznik in vzpostavi varen tunel VLESS-Reality."
+        "title": "Izberite nacrt",
+        "description": "Zacnite 3-dnevni brezplacni preizkus ali izberite narocniski nacrt. Na voljo so mesecni (6,99 $), 6-mesecni (29,99 $) ali letni (39,99 $) nacrtti. Upravljajte narocnino neposredno prek App Store."
       },
       "step4": {
-        "title": "Brskajte varno",
-        "description": "To je vse. Vas promet je sifriran, vas IP je skrit in oglasi so blokirani. Prosto uporabljajte katero koli aplikacijo ali spletno mesto."
-      }
-    },
-    "iosFeatures": {
-      "title": "Funkcije, specificne za iOS",
-      "subtitle": "Izvorno zgrajeno za Applov ekosistem z globoko sistemsko integracijo.",
-      "networkExtension": {
-        "title": "Network Extension (sistemski VPN)",
-        "description": "Doppler uporablja Applov okvir Network Extension za delovanje kot pravi sistemski VPN. Ves promet iz vsake aplikacije gre skozi sifriran tunel — ne samo promet brskalnika. To zagotavlja enako zascito, kot jo Apple zahteva za poslovne VPN resitve."
-      },
-      "alwaysOnVpn": {
-        "title": "Vedno vklopljen VPN",
-        "description": "Omogocite nacin vedno vklopljen in Doppler se samodejno ponovno poveze, ko povezava pade. Preklapljate med Wi-Fi in mobilnim omrezjem? Zbujate telefon iz spanja? VPN se ponovno vzpostavi v manj kot sekundi, tako da nikoli niste izpostavljeni."
-      },
-      "perAppVpn": {
-        "title": "VPN po aplikacijah",
-        "description": "Izberite, katere aplikacije gredo skozi tunel VPN in katere se povezejo neposredno. Obdrzite bancne aplikacije na lokalnem omrezju, medtem ko brskalnike in aplikacije za sporocila scitite prek VPN."
-      },
-      "widget": {
-        "title": "Pripomocek za domaci zaslon",
-        "description": "Dodajte pripomocek Doppler na domaci zaslon ali zaklenjen zaslon za takojsnje stanje povezave in preklop z enim tapom. Na prvi pogled vidite trenutni streznik, cas povezave in stanje zascite."
-      },
-      "ipadSplitView": {
-        "title": "Podpora za Split View na iPadu",
-        "description": "Popolna podpora za vec opravil na iPadu. Uporabljajte Doppler VPN ob drugih aplikacijah v Split View ali Slide Over. Stanje VPN je vedno vidno v vrstici stanja, ne glede na to, katera aplikacija je v ospredju."
-      }
-    },
-    "privacy": {
-      "title": "Zasebnost na napravah Apple",
-      "subtitle": "Doppler dopolnjuje, kar Apple ze sciti — in zapolnjuje vrzeli, za katere je VPN zasnovan.",
-      "intro": "Apple vodi industrijo v zasebnosti na ravni naprave — App Tracking Transparency, Mail Privacy Protection in Safarijevo inteligentno preprecevanje sledenja. Toda obstaja plast, ki je Apple ne more zascititi: vas omrezni promet.",
-      "appleProtects": {
-        "title": "Kaj sciti Apple",
-        "item1": "Sledenje na ravni aplikacij (pozivi ATT)",
-        "item2": "Sifriranje podatkov na napravi (Secure Enclave)",
-        "item3": "Blokiranje sledilcev v Safariju",
-        "item4": "Preprecevanje sledenja s piksli v posti"
-      },
-      "dopplerAdds": {
-        "title": "Kaj doda Doppler VPN",
-        "item1": "Skrije vas pravi IP naslov pred vsako spletno stranjo in storitvijo",
-        "item2": "Sifrira ves omrezni promet z VLESS-Reality (nezaznaven)",
-        "item3": "Blokira sledenje na ravni DNS in oglasevalske domene",
-        "item4": "Prepreci nadzor prometa in omejevanje hitrosti s strani ponudnika"
-      },
-      "noLogs": "Doppler uporablja preverjanje pristnosti na podlagi naprave — brez racunov, brez e-poste, brez dnevnikov. Vas ne moremo identificirati, ker nikoli ne zbiramo identifikacijskih podatkov."
-    },
-    "compatibility": {
-      "title": "Sistemske zahteve in zdruzljivost",
-      "os": {
-        "label": "Operacijski sistem",
-        "value": "iOS 16.0 ali novejsi"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8 in novejsi (vsi modeli s podporo iOS 16)"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "Vsi modeli iPad z iPadOS 16 ali novejsim"
-      },
-      "mac": {
-        "label": "Mac (Apple Silicon)",
-        "value": "M1, M2, M3, M4 Mac prek zdruzljivosti aplikacij za iPad"
-      },
-      "size": {
-        "label": "Velikost aplikacije",
-        "value": "Pod 30 MB"
-      },
-      "battery": {
-        "label": "Vpliv na baterijo",
-        "value": "Minimalen — VLESS je lahek protokol z nizko obremenitvijo procesorja"
-      },
-      "data": {
-        "label": "Dodatna poraba podatkov",
-        "value": "Manj kot 2 % dodatne porabe podatkov v primerjavi z nesifriranim brskanjem"
+        "title": "Tapnite Povezi",
+        "description": "Pritisnite gumb za povezavo. Doppler samodejno izbere najboljsi streznik, vzpostavi sifriran tunel VLESS-Reality in usmeri ves vas promet skozenj. Vas IP je skrit, vasi podatki pa sifrirani."
       }
     },
     "faq": {
-      "title": "Pogosta vprasanja",
+      "title": "Pogosto zastavljena vprasanja — Doppler VPN za iOS",
       "q1": {
-        "question": "Je Doppler VPN res brezplacen na iOS?",
-        "answer": "Da. Doppler VPN ponuja brezplacen nacrtt z dostopom do osnovnih funkcij VPN. Premijski nacrti odklenejo dodatne streznike, hitrejse hitrosti in napredne funkcije, kot je usmerjanje VPN po aplikacijah."
+        "question": "Ali Doppler VPN deluje na iPadu?",
+        "answer": "Da. Doppler VPN deluje na vseh modelih iPad z iPadOS 16 ali novejsim. Aplikacija v celoti podpira funkcije vecopravilnosti na iPadu, vkljucno s Split View in Slide Over. Vasa narocnina pokriva tako iPhone kot iPad — uporabite isti racun na vseh svojih napravah Apple."
       },
       "q2": {
-        "question": "Ali moram ustvariti racun?",
-        "answer": "Ne. Doppler uporablja preverjanje pristnosti na podlagi naprave. Ni registracije, ni potrebe po e-posti ali telefonski stevilki. Samo prenesite in se povezite."
+        "question": "Kako nastavim VPN na iPhonu?",
+        "answer": "Nastavitev Doppler VPN na iPhonu traja manj kot 30 sekund: 1) Prenesite iz App Store, 2) Odprite aplikacijo (registracija ni potrebna), 3) Tapnite Povezi. Doppler poskrbi za vso tehnicno nastavitev samodejno — konfigurira profil VPN, izbere najboljsi streznik in vzpostavi sifriran tunel."
       },
       "q3": {
-        "question": "Ali Doppler deluje na Kitajskem, v Rusiji ali Iranu?",
-        "answer": "Da. Doppler uporablja protokol VLESS-Reality, ki prikrije VPN promet kot obicajni HTTPS. To izredno otezi cenzurnim sistemom, kot sta Veliki pozarni zid ali TSPU, da ga zaznajo in blokirajo."
+        "question": "Ali je Doppler VPN brezplacen za iOS?",
+        "answer": "Doppler VPN ponuja 3-dnevni brezplacni preizkus s polnim dostopom do vseh funkcij. Po preizkusu izbirate med tremi narocniskimi nacrtti: mesecni (6,99 $), 6-mesecni (29,99 $, prihranek 28 %) ali letni (39,99 $, prihranek 52 %). Vse narocnine se upravljajo prek App Store."
       },
       "q4": {
-        "question": "Ali bo VPN upocasnil moj iPhone?",
-        "answer": "Komaj opazno. VLESS-Reality je eden najlazjih VPN protokolov, ki so na voljo. Vecina uporabnikov opazi manj kot 5 % zmanjsanje hitrosti. Vpliv na baterijo je minimalen zahvaljujoc ucinkoviti obdelavi paketov."
+        "question": "Ali deluje v Rusiji, na Kitajskem in v Iranu?",
+        "answer": "Da. Doppler uporablja protokol VLESS-Reality, ki prikrije VPN promet kot obicajno brskanje HTTPS. To izjemno otezi cenzurnim sistemom, kot so ruski TSPU, kitajski Veliki pozarni zid ali iranska infrastruktura za filtriranje, da ga zaznajo in blokirajo. Doppler je posebej zasnovan za uporabnike v mocno cenzuriranih regijah."
       },
       "q5": {
-        "question": "Ali Doppler deluje z aplikacijami za pretakanje?",
-        "answer": "Da. Pametno usmerjanje Dopplerja je optimizirano za pretakanje. Aplikacija samodejno izbere streznike z najboljso zmogljivostjo za video vsebine."
+        "question": "Kako preklicm narocnino?",
+        "answer": "Za preklic narocnine Doppler VPN na iOS: odprite Nastavitve > tapnite svoj Apple ID > Narocnine > Doppler VPN > Preklici narocnino. Dostop se nadaljuje do konca trenutnega obracunskega obdobja. Apple upravlja vse obracunavanje — Doppler nikoli ne shranjuje vasih placilnih podatkov."
       },
       "q6": {
-        "question": "Ali lahko uporabljam Doppler na iPadu in iPhonu hkrati?",
-        "answer": "Da. Vasa narocnina deluje na vec napravah Apple. Vsaka naprava dobi svojo varno povezavo."
+        "question": "Ali lahko uporabim en racun na vec napravah Apple?",
+        "answer": "Da. Vasa narocnina Doppler VPN deluje na vec napravah Apple — iPhone, iPad in celo na racunalnikih Apple Silicon Mac prek zdruzljivosti z aplikacijami za iPad. Vsaka naprava dobi svojo varno povezavo VPN. Na en racun je lahko povezanih do 10 naprav."
       }
     },
     "cta": {
-      "title": "Pridobite Doppler VPN za iOS",
-      "subtitle": "Brezplacen prenos. Brez registracije. Brez kreditne kartice. Povezite se v sekundah.",
-      "downloadIos": "Prenesite iz App Store",
-      "downloadAndroid": "Pridobite na Google Play",
-      "telegramBot": "Uporabite prek bota na Telegramu",
-      "telegramChannelRu": "Telegram kanal (RU)",
-      "telegramChannelEn": "Telegram kanal (EN)"
+      "title": "Prenesite Doppler VPN za iPhone in iPad",
+      "subtitle": "Brez registracije. 3-dnevni brezplacni preizkus s polnim dostopom. Sifriranje VLESS-Reality ohranja vaso povezavo zasebno in nezaznavno.",
+      "downloadIos": "Prenesite v App Store",
+      "otherPlatforms": "Na voljo na drugih platformah",
+      "downloadsLink": "Oglejte si vse prenose"
     },
     "related": {
       "noRegistration": "VPN brez registracije",
@@ -2095,169 +2084,108 @@
       "vless": "Protokol VLESS-Reality",
       "vlessDesc": "Spoznajte, kako VLESS premaga globoki pregled paketov",
       "android": "VPN za Android",
-      "androidDesc": "Pridobite Doppler VPN na Google Play ali APK"
+      "androidDesc": "Pridobite Doppler VPN na Google Play"
     }
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Brezplacen VPN za Android — Brez registracije | Doppler VPN prenos APK 2026",
-      "description": "Prenesite najboljsi brezplacen VPN za Android v letu 2026. Brez registracije, brez potrebnega racuna. Na voljo na Google Play in kot APK za cenzurirane regije. Protokol VLESS-Reality za nezaznavno zasebnost."
+      "title": "Doppler VPN za Android — hiter, zaseben in odporen na cenzuro",
+      "description": "Prenesite Doppler VPN za Android iz Google Play. Sifriranje VLESS-Reality, brez registracije, obvod cenzure. 3-dnevno brezplacno poskusno obdobje."
     },
     "hero": {
       "title": "Doppler VPN za Android",
-      "subtitle": "Brezplacen VPN brez registracije. Brez racuna, brez e-poste, brez osebnih podatkov. Na voljo na Google Play in kot APK za regije, kjer je Play Store omejen.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "Prenesite APK"
+      "subtitle": "Hiter, zaseben VPN, odporen na cenzuro, zasnovan za Android. Brez registracije — prenesite iz Google Play in se povezite v nekaj sekundah. Vkljucen je 3-dnevni brezplacni preizkus s polnim dostopom do vseh funkcij.",
+      "cta": "Pridobite na Google Play"
     },
     "features": {
-      "title": "Zakaj Doppler za Android?",
-      "subtitle": "Posebej zgrajeno za uporabnike Androida, ki potrebujejo zasebnost brez kompromisov. Brez prijav, brez zbiranja podatkov, brez omejitev.",
+      "title": "Zakaj izbrati Doppler VPN za Android?",
+      "subtitle": "Doppler VPN je zasnovan za uporabnike Androida, ki zahtevajo resnicno zasebnost brez kompromisov pri hitrosti, porabi baterije ali uporabnosti.",
+      "vlessEncryption": {
+        "title": "Sifriranje VLESS-Reality",
+        "description": "Protokol naslednje generacije, ki prikrije VPN promet kot obicajno brskanje HTTPS. Vasa povezava je nevidna za pozarne zidove, sisteme za globoki pregled paketov (DPI) in nadzor ponudnikov. Ista tehnologija, ki se uporablja za obvod Velikega pozarnega zidu Kitajske."
+      },
       "noRegistration": {
         "title": "Brez registracije",
-        "description": "Odprite aplikacijo in se takoj povezite. Brez e-poste, brez telefonske stevilke, brez ustvarjanja racuna. Vasa identiteta ostaja zasebna od prvega tapa."
+        "description": "Brez e-poste, brez telefonske stevilke, brez ustvarjanja racuna. Prenesite iz Google Play, odprite aplikacijo in se takoj povezite. Doppler uporablja avtentikacijo na podlagi naprave, zato vasa identiteta ostane popolnoma zasebna."
       },
-      "vlessReality": {
-        "title": "Protokol VLESS-Reality",
-        "description": "Vojasko sifriranje, ki naredi vas VPN promet videti kot obicajno brskanje HTTPS. Nezaznaven s strani sistemov DPI in vladnih pozarnih zidov."
+      "oneTapConnect": {
+        "title": "Povezava z enim tapom",
+        "description": "Pritisnite en gumb in Doppler samodejno izbere najhitrejsi streznik, vzpostavi sifriran tunel in zasciti ves vas promet. Pametna izbira streznikov optimizira hitrost in zanesljivost."
       },
-      "adBlocker": {
-        "title": "Vgrajen blokator oglasov",
-        "description": "Blokirajte oglase, sledilce in zlonamerne domene na ravni DNS. Hitrejse brskanje, manj porabe podatkov in boljsa baterija na vasi napravi Android."
+      "bypassCensorship": {
+        "title": "Obvod cenzure in DPI",
+        "description": "Zasnovan za delovanje v drzavah s strogo internetno cenzuro — Rusija, Iran, Kitajska in drugod. VLESS-Reality naredi vas VPN promet nerazlocljiv od obicajnega spletnega brskanja ter premaga TSPU in GFW."
       },
-      "alwaysOn": {
-        "title": "Vedno vklopljen VPN",
-        "description": "Uporablja izvorno funkcijo Androida Vedno vklopljen VPN za zagotavljanje, da je vasa povezava zascitena 24/7, tudi po ponovnem zagonu ali spremembi omrezja."
+      "noLogs": {
+        "title": "Stroga politika brez dnevnikov",
+        "description": "Doppler nikoli ne zbira, shranjuje ali deli vasih podatkov o brskanju. Brez dnevnikov povezav, brez dnevnikov prometa, brez dnevnikov DNS poizvedb. Vas ne moremo identificirati, ker nikoli ne zbiramo identifikacijskih podatkov."
       },
-      "apkSideload": {
-        "title": "Stranska namestitev APK",
-        "description": "Ne morete dostopati do Google Play? Prenesite APK neposredno in ga namestite rocno. Popolno za uporabnike v Rusiji, Iranu, na Kitajskem in drugih cenzuriranih regijah."
+      "globalServers": {
+        "title": "6 globalnih lokacij streznikov",
+        "description": "Povezite se s strezniki v vec drzavah po Evropi in sirsem svetu. Vsak streznik poganja VLESS-Reality z optimiziranim usmerjanjem za najnizjo latenco in najvisjo prepustnost."
       },
-      "dnsProtection": {
-        "title": "Zascita DNS",
-        "description": "Vse poizvedbe DNS so sifrirane in usmerjene prek varnih streznikov. Preprecuje uhajanje DNS in vasemu ponudniku onemogoca, da vidi, katera spletna mesta obiskujete."
-      }
-    },
-    "install": {
-      "title": "Dva nacina namestitve",
-      "subtitle": "Izberite nacin namestitve, ki najbolje ustreza vasi situaciji. Oba vam nudita enako popolno izkusnjo VPN.",
-      "playStore": {
-        "title": "Google Play Store",
-        "badge": "Priporoceno",
-        "benefit1": "Namestitev z enim tapom, samodejne posodobitve",
-        "benefit2": "Preverjeno s strani Google Play Protect",
-        "benefit3": "Brez tezav upravljanje narocnin",
-        "cta": "Pridobite na Google Play"
+      "freeTrial": {
+        "title": "3-dnevni brezplacni preizkus",
+        "description": "Preizkusite Doppler VPN s polnim dostopom do vseh funkcij za 3 dni. Po preizkusu izberite mesecne, 6-mesecne ali letne nacrte ze od 3,33 $/mesec. Upravljajte narocnino prek Google Play."
       },
-      "apk": {
-        "title": "Neposreden prenos APK",
-        "badge": "Za omejene regije",
-        "benefit1": "Deluje, kjer je Google Play blokiran",
-        "benefit2": "Racun Google ni potreben",
-        "benefit3": "Enake funkcije kot razlicica iz Play Store",
-        "note": "Idealno za uporabnike v Rusiji, Iranu, na Kitajskem in drugih drzavah, kjer je Google Play Store omejen ali so bile aplikacije VPN odstranjene iz trgovine.",
-        "cta": "Pridobite APK prek bota na Telegramu"
+      "batteryEfficient": {
+        "title": "Energijsko ucinkovita storitev v ozadju",
+        "description": "Doppler uporablja izvorno ogrodje Always-On VPN za Android z minimalnim vplivom na baterijo. Manj kot 2 % dodatne porabe tudi pri vkljuceni neprekinjeni zasciti. Optimizirano za Samsung, Xiaomi, OnePlus, Pixel in vse vecje znamke Android."
       }
     },
     "howItWorks": {
-      "title": "Kako deluje na Androidu",
-      "subtitle": "Od prenosa do varnega brskanja v manj kot 30 sekundah. Brez racuna, brez e-poste, brez carovnika za namestitev.",
+      "title": "Kako nastaviti VPN na Androidu",
+      "subtitle": "Povezite se v manj kot 30 sekundah — brez tehnicnega znanja.",
       "step1": {
-        "title": "Prenesite aplikacijo",
-        "description": "Namestite Doppler VPN iz Google Play ali neposredno prenesite APK. Aplikacija je lahka — manj kot 15 MB."
+        "title": "Prenesite iz Google Play",
+        "description": "Poiscite \"Doppler VPN\" v trgovini Google Play ali tapnite spodnji gumb za prenos. Aplikacija je brezplacna za prenos, lahka z manj kot 15 MB in zdruzljiva z Android 8.0 (Oreo) in novejsim."
       },
       "step2": {
         "title": "Odprite aplikacijo",
-        "description": "Zazenite Doppler VPN. Brez zaslona za registracijo, brez obrazca za prijavo. Aplikacija je takoj pripravljena za uporabo."
+        "description": "Zazenite Doppler VPN na svojem telefonu ali tablici Android. Ni zaslona za prijavo, ni obrazca za registracijo, ni preverjanja e-poste. Vas racun se samodejno ustvari z avtentikacijo na podlagi naprave."
       },
       "step3": {
+        "title": "Izberite narocniski nacrt",
+        "description": "Zacnite 3-dnevni brezplacni preizkus ali izberite narocniski nacrt. Na voljo so mesecni (6,99 $), 6-mesecni (29,99 $) ali letni (39,99 $) nacrtti. Upravljajte narocnino neposredno prek Google Play."
+      },
+      "step4": {
         "title": "Tapnite Povezi",
-        "description": "Pritisnite gumb za povezavo. Doppler samodejno izbere najhitrejsi razpolozljivi streznik in vzpostavi tunel VLESS-Reality."
-      },
-      "step4": {
-        "title": "Brskajte prosto",
-        "description": "Vasa povezava je zdaj sifrirana in nezaznavna. Dostopajte do katerega koli spletnega mesta, aplikacije ali storitve brez omejitev."
+        "description": "Pritisnite gumb za povezavo. Doppler samodejno izbere najboljsi streznik, vzpostavi sifriran tunel VLESS-Reality in usmeri ves vas promet skozenj. Vas IP je skrit, vasi podatki pa sifrirani."
       }
     },
-    "androidFeatures": {
-      "title": "Funkcije, specificne za Android",
-      "subtitle": "Doppler VPN v celoti izkorisca zmogljivosti Androida za zagotavljanje najvarnejse in najbolj tekoce izkusnje.",
-      "alwaysOnVpn": {
-        "title": "Vedno vklopljen VPN",
-        "description": "Omogocite vgrajeno nastavitev Androida Vedno vklopljen VPN, da ostane Doppler ves cas povezan. Pojdite v Nastavitve > Omrezje in internet > VPN > Doppler VPN > vklopite Vedno vklopljeno. Vasa naprava se bo samodejno ponovno povezala po ponovnem zagonu ali spremembi omrezja."
+    "faq": {
+      "title": "Pogosto zastavljena vprasanja — Doppler VPN za Android",
+      "q1": {
+        "question": "Ali Doppler VPN deluje na napravah Samsung?",
+        "answer": "Da. Doppler VPN je popolnoma zdruzljiv z vsemi telefoni in tablicami Samsung Galaxy z Android 8.0 (Oreo) ali novejsim. To vkljucuje serije Galaxy S, Galaxy A, Galaxy Z Fold, Galaxy Z Flip in Galaxy Tab. Doppler se integrira z nastavitvami Always-On VPN podjetja Samsung za neprekinjeno zascito."
       },
-      "splitTunneling": {
-        "title": "Razdelitev tunela",
-        "description": "Izberite, katere aplikacije gredo skozi VPN in katere uporabljajo vaso obicajno povezavo. Usmerite bancne aplikacije neposredno, medtem ko brskalnike obdrzite zascitene. V nastavitvah Dopplerja konfigurirajte pravila VPN po aplikacijah."
+      "q2": {
+        "question": "Ali Doppler VPN prazni baterijo?",
+        "answer": "Ne. Doppler VPN porabi manj kot 2 % dodatne baterije tudi z vkljucenim Always-On VPN. Protokol VLESS-Reality je zasnovan za ucinkovitost z minimalno obremenitvijo procesorja. Za najboljso izkusnjo izkljucite Doppler iz optimizacije baterije na Androidu v Nastavitve > Aplikacije > Doppler VPN > Baterija > Neomejeno."
       },
-      "quickSettings": {
-        "title": "Plosica za hitre nastavitve",
-        "description": "Dodajte Doppler VPN v plosco hitrih nastavitev Androida. Povezite se ali prekinite z enim potegom in tapom — brez potrebe po odpiranju aplikacije. Na voljo na Android 8.0 in novejsem."
+      "q3": {
+        "question": "Kako nastavim VPN na Androidu?",
+        "answer": "Nastavitev Doppler VPN na Androidu traja manj kot 30 sekund: 1) Prenesite iz Google Play, 2) Odprite aplikacijo (registracija ni potrebna), 3) Tapnite Povezi. Doppler poskrbi za vso tehnicno nastavitev samodejno — konfigurira profil VPN, izbere najboljsi streznik in vzpostavi sifriran tunel."
       },
-      "batteryOptimization": {
-        "title": "Optimizacija baterije",
-        "description": "Doppler porabi minimalno baterijo. Za najboljso izkusnjo vedno vklopljen izlocite Doppler iz optimizacije baterije Androida: Nastavitve > Aplikacije > Doppler VPN > Baterija > Neomejeno. To prepreci Androidu, da bi prekinil povezavo VPN v ozadju."
+      "q4": {
+        "question": "Ali deluje v Rusiji, na Kitajskem in v Iranu?",
+        "answer": "Da. Doppler uporablja protokol VLESS-Reality, ki prikrije VPN promet kot obicajno brskanje HTTPS. To izjemno otezi cenzurnim sistemom, kot so ruski TSPU, kitajski Veliki pozarni zid ali iranska infrastruktura za filtriranje, da ga zaznajo in blokirajo. Doppler je posebej zasnovan za uporabnike v mocno cenzuriranih regijah."
       },
-      "androidTv": {
-        "title": "Podpora za Android TV",
-        "description": "Stransko namestite APK Doppler VPN na vaš Android TV ali TV box za zascito prometa pretakanja. Dostopajte do geografsko omejenih vsebin na velikem zaslonu z enakim sifriranjem VLESS-Reality."
-      }
-    },
-    "sideloading": {
-      "title": "Vodic za stransko namestitev APK",
-      "badge": "Za cenzurirane regije",
-      "intro": "Ce ste v drzavi, kjer je Google Play omejen ali so bile aplikacije VPN odstranjene iz trgovine, lahko Doppler VPN namestite neposredno iz datoteke APK. Skrbno sledite tem korakom.",
-      "step1": {
-        "title": "Omogocite neznane vire",
-        "description": "Pojdite v Nastavitve > Aplikacije > Poseben dostop aplikacij > Namescanje neznanih aplikacij. Izberite brskalnik ali upravljalnik datotek in vklopite 'Dovoli iz tega vira'."
+      "q5": {
+        "question": "Kako preklicm narocnino?",
+        "answer": "Za preklic narocnine Doppler VPN na Androidu: odprite Google Play > tapnite ikono profila > Placila in narocnine > Narocnine > Doppler VPN > Preklici narocnino. Dostop se nadaljuje do konca trenutnega obracunskega obdobja."
       },
-      "step2": {
-        "title": "Prenesite APK",
-        "description": "Pridobite najnovejsi APK Doppler VPN iz nasega uradnega bota na Telegramu @dopplercreatebot. To zagotavlja, da vedno dobite pristno, nespremenjen datoteko."
-      },
-      "step3": {
-        "title": "Namestite APK",
-        "description": "Odprite preneseno datoteko .apk in tapnite 'Namesti'. Android lahko prikaze opozorilo o neznanih aplikacijah — to je normalno za stransko namescene aplikacije."
-      },
-      "step4": {
-        "title": "Preverite in se povezite",
-        "description": "Odprite Doppler VPN in preverite, ali aplikacija pravilno deluje. Aplikacija se mora povezati brez zahtevanja racuna ali registracije — samo tapnite povezi."
-      },
-      "security": {
-        "title": "Varnostna opomba",
-        "description": "APK Doppler VPN prenasajte samo iz nasega uradnega bota na Telegramu (@dopplercreatebot) ali z uradne spletne strani (www.dopplervpn.org). Nikoli ne namescajte datotek APK iz tretjih virov — lahko vsebujejo zlonamerno programsko opremo ali spremenjen kodo."
-      }
-    },
-    "requirements": {
-      "title": "Sistemske zahteve",
-      "os": {
-        "title": "Operacijski sistem",
-        "value": "Android 8.0 (Oreo) ali novejsi"
-      },
-      "battery": {
-        "title": "Vpliv na baterijo",
-        "value": "Minimalen — manj kot 2 % dodatne porabe baterije z vedno vklopljenim VPN"
-      },
-      "storage": {
-        "title": "Shramba",
-        "value": "Manj kot 15 MB velikost aplikacije, pod 5 MB porabe RAM-a, ko je povezan"
-      },
-      "permissions": {
-        "title": "Zahtevana dovoljenja",
-        "value": "Samo dovoljenje za VPN povezavo — brez dostopa do stikov, fotografij ali datotek"
-      },
-      "compatibility": {
-        "title": "Zdruzljive naprave"
+      "q6": {
+        "question": "Ali lahko uporabim Doppler VPN na Android TV?",
+        "answer": "Da. Doppler VPN lahko namestite na naprave Android TV in TV sprejemnike za zascito prometa pri pretakanju. Dostopajte do geografsko omejenih vsebin na velikem zaslonu z istim sifriranjem VLESS-Reality kot na mobilni napravi."
       }
     },
     "cta": {
-      "title": "Pridobite Doppler VPN za Android zdaj",
-      "subtitle": "Brezplacen, zaseben in nezaznaven. Brez registracije, brez racuna, brez zbiranja podatkov. Prenesite iz Google Play ali pridobite APK za omejene regije.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "Prenesite APK",
-      "alsoOnIos": "Na voljo tudi na iOS",
-      "telegramBot": "Telegram bot",
-      "telegramChannelRu": "Telegram kanal (RU)",
-      "telegramChannelEn": "Telegram kanal (EN)"
+      "title": "Prenesite Doppler VPN za Android",
+      "subtitle": "Brez registracije. 3-dnevni brezplacni preizkus s polnim dostopom. Sifriranje VLESS-Reality ohranja vaso povezavo zasebno in nezaznavno.",
+      "downloadAndroid": "Pridobite na Google Play",
+      "otherPlatforms": "Na voljo na drugih platformah",
+      "downloadsLink": "Oglejte si vse prenose"
     },
     "related": {
       "noRegistration": "VPN brez registracije",
@@ -2266,6 +2194,226 @@
       "vlessDesc": "Spoznajte, kako VLESS premaga globoki pregled paketov",
       "ios": "VPN za iOS",
       "iosDesc": "Prenesite Doppler VPN za iPhone in iPad"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Doppler VPN za Mac — Hiter, zaseben in odporen na cenzuro",
+      "description": "Prenesite Doppler VPN za macOS iz Mac App Store. Šifriranje VLESS-Reality, brez registracije, obhod cenzure. Izvorna podpora za Apple Silicon."
+    },
+    "hero": {
+      "title": "Doppler VPN za Mac",
+      "subtitle": "Hiter, zaseben in cenzurno odporen VPN, zasnovan izključno za macOS. Brez registracije — prenesite iz Mac App Store in se povežite v nekaj sekundah. Naročnina se deli med iPhone, iPad in Mac.",
+      "cta": "Prenesi iz Mac App Store"
+    },
+    "features": {
+      "title": "Zakaj izbrati Doppler VPN za macOS?",
+      "subtitle": "Doppler VPN je izvorna aplikacija za macOS, zasnovana za uporabnike Mac, ki potrebujejo resnično zasebnost, obhod cenzure in brezhibno integracijo z ekosistemom Apple.",
+      "nativeMac": {
+        "title": "Izvorna aplikacija za macOS",
+        "description": "Posebej razvita za macOS z uporabo ogrodja Apple Network Extension. Deluje izvorno na Apple Silicon (M1/M2/M3/M4) in Intel Mac računalnikih. Integrirana z nastavitvami macOS, menijsko vrstico in centrom za obvestila za brezhibno namizno izkušnjo VPN."
+      },
+      "macAppStore": {
+        "title": "Distribucija prek Mac App Store",
+        "description": "Prenesite neposredno iz Mac App Store — pregledano in preverjeno s strani Apple. Samodejne posodobitve, enostavna namestitev in brezhibno upravljanje naročnine prek vašega Apple ID. Brez ročnega nalaganja ali ročne konfiguracije."
+      },
+      "vlessEncryption": {
+        "title": "Šifriranje VLESS-Reality",
+        "description": "Protokol naslednje generacije, ki prikrije VPN promet kot navadno HTTPS brskanje. Vaša povezava je nevidna za požarne zidove, sisteme za globoki pregled paketov in orodja za nadzor ponudnikov internetnih storitev. Enaka tehnologija, ki se uporablja za obhod Velikega kitajskega požarnega zidu."
+      },
+      "noRegistration": {
+        "title": "Brez registracije",
+        "description": "Brez e-pošte, brez telefonske številke, brez ustvarjanja računa. Preprosto prenesite aplikacijo in se takoj povežite. Doppler uporablja avtentikacijo na podlagi naprave, zato vaša identiteta ostane popolnoma zasebna od prvega klika."
+      },
+      "oneClickConnect": {
+        "title": "Povezava z enim klikom",
+        "description": "Kliknite en gumb in Doppler samodejno izbere najhitrejši strežnik, vzpostavi šifriran tunel in zaščiti ves promet vašega Mac-a. Pametna izbira strežnika optimizira hitrost in zanesljivost — deluje iz menijske vrstice."
+      },
+      "bypassCensorship": {
+        "title": "Obhod cenzure in DPI",
+        "description": "Zasnovano za delovanje v državah s strogo internetno cenzuro — Rusija, Iran, Kitajska in druge. VLESS-Reality naredi vaš VPN promet nerazločljiv od običajnega spletnega brskanja ter premaga TSPU in GFW."
+      },
+      "noLogs": {
+        "title": "Stroga politika brez beleženj",
+        "description": "Doppler nikoli ne zbira, shranjuje ali deli vaših podatkov o brskanju. Brez beleženj povezav, brez beleženj prometa, brez beleženj DNS poizvedb. Ne moremo vas identificirati, ker nikoli ne zbiramo identifikacijskih podatkov."
+      },
+      "crossDevice": {
+        "title": "Sinhronizacija med vsemi Apple napravami",
+        "description": "Ena naročnina pokriva vaš Mac, iPhone in iPad. Vaš račun in status naročnine se samodejno sinhronizirata med vsemi Apple napravami. Preklapljajte med napravami brez ponovnega naročanja ali ponovne konfiguracije — vaš VPN je pripravljen povsod."
+      }
+    },
+    "howItWorks": {
+      "title": "Kako nastaviti VPN na Mac-u",
+      "subtitle": "Povežite se v manj kot minuti — brez tehničnega znanja.",
+      "step1": {
+        "title": "Prenesite iz Mac App Store",
+        "description": "Poiščite \"Doppler VPN\" v Mac App Store ali kliknite spodnji gumb za prenos. Aplikacija je brezplačna za prenos in deluje na macOS 14 Sonoma in novejših. Podpira Apple Silicon in Intel Mac računalnike."
+      },
+      "step2": {
+        "title": "Odprite aplikacijo",
+        "description": "Zaženite Doppler VPN na vašem Mac-u. Ni zaslona za prijavo, ni registracijskega obrazca, ni preverjanja e-pošte. Vaš račun je ustvarjen samodejno z avtentikacijo na podlagi naprave."
+      },
+      "step3": {
+        "title": "Izberite paket",
+        "description": "Začnite s 3-dnevnim brezplačnim preizkusom ali izberite naročniški paket. Na voljo so mesečne ($6,99), 6-mesečne ($29,99) ali letne ($39,99) možnosti. Upravljajte naročnino neposredno prek App Store."
+      },
+      "step4": {
+        "title": "Kliknite Poveži",
+        "description": "Pritisnite gumb za povezavo. Doppler samodejno izbere najboljši strežnik, vzpostavi šifriran tunel VLESS-Reality in usmeri ves vaš promet skozi njega. Vaš IP naslov je skrit in vaši podatki so šifrirani."
+      }
+    },
+    "faq": {
+      "title": "Pogosta vprašanja — Doppler VPN za Mac",
+      "q1": {
+        "question": "Ali Doppler VPN deluje na Apple Silicon Mac računalnikih?",
+        "answer": "Da. Doppler VPN deluje izvorno na Apple Silicon (M1, M2, M3, M4) in Intel Mac računalnikih. Aplikacija je univerzalna binarna datoteka, optimizirana za obe arhitekturi, kar zagotavlja najboljšo zmogljivost in minimalen vpliv na baterijo pri prenosnikih MacBook."
+      },
+      "q2": {
+        "question": "Ali lahko uporabljam isti račun na iPhonu, iPadu in Macu?",
+        "answer": "Da. Vaša naročnina Doppler VPN deluje na vseh vaših Apple napravah — iPhone, iPad in Mac. Vsaka naprava dobi svojo varno VPN povezavo. Na en račun je lahko povezanih do 10 naprav, status naročnine pa se samodejno sinhronizira prek vašega Apple ID."
+      },
+      "q3": {
+        "question": "Kako nastavim VPN na macOS?",
+        "answer": "Nastavitev Doppler VPN na Macu traja manj kot minuto: 1) Prenesite iz Mac App Store, 2) Odprite aplikacijo (brez registracije), 3) Kliknite Poveži. Doppler samodejno poskrbi za vso tehnično nastavitev — konfigurira VPN profil, izbere najboljši strežnik in vzpostavi šifriran tunel."
+      },
+      "q4": {
+        "question": "Ali upočasni moj Mac?",
+        "answer": "Doppler VPN je zasnovan za minimalen vpliv na zmogljivost. Izvorna aplikacija za macOS uporablja ogrodje Apple Network Extension za učinkovito obdelavo prometa. Na Apple Silicon Mac računalnikih aplikacija porabi manj kot 1 % procesorske moči med aktivnimi VPN povezavami. Izbira strežnika je optimizirana za najnižjo zakasnitev."
+      },
+      "q5": {
+        "question": "Ali je Doppler VPN v Mac App Store?",
+        "answer": "Da. Doppler VPN je na voljo za brezplačen prenos v Mac App Store. Pregledal in odobril ga je Apple. Poiščete ga lahko z iskalnim nizom \"Doppler VPN\" ali uporabite neposredno povezavo na naši strani za prenose. Posodobitve se samodejno dostavljajo prek App Store."
+      },
+      "q6": {
+        "question": "Ali deluje v Rusiji, na Kitajskem in v Iranu?",
+        "answer": "Da. Doppler uporablja protokol VLESS-Reality, ki prikrije VPN promet kot navadno HTTPS spletno brskanje. To cenzurnim sistemom, kot so ruski TSPU, kitajski Veliki požarni zid ali iranska filtrirna infrastruktura, izjemno oteži odkrivanje in blokiranje. Doppler je posebej zasnovan za uporabnike v močno cenzuriranih regijah."
+      }
+    },
+    "cta": {
+      "title": "Prenesite Doppler VPN za Mac",
+      "subtitle": "Brez registracije. 3-dnevni brezplačni preizkus s polnim dostopom. Šifriranje VLESS-Reality ohranja vašo povezavo zasebno in neodkrito.",
+      "downloadMac": "Prenesi iz Mac App Store",
+      "otherPlatforms": "Na voljo na drugih platformah",
+      "downloadsLink": "Poglej vse prenose"
+    },
+    "related": {
+      "noRegistration": "VPN brez registracije",
+      "noRegistrationDesc": "Uporabljajte VPN brez prijave ali računa",
+      "vless": "Protokol VLESS-Reality",
+      "vlessDesc": "Spoznajte, kako VLESS premaga globoki pregled paketov",
+      "windows": "VPN za Windows",
+      "windowsDesc": "Prenesite Doppler VPN za Windows PC"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Doppler VPN za Windows — Hiter, zaseben in odporen na cenzuro",
+      "description": "Prenesite Doppler VPN za Windows. Šifriranje VLESS-Reality, brez registracije, obhod cenzure. Podpora za x64 in ARM64 računalnike."
+    },
+    "hero": {
+      "title": "Doppler VPN za Windows",
+      "subtitle": "Hiter, zaseben in cenzurno odporen VPN, zasnovan za Windows. Brez registracije — prenesite namestitveni program in se povežite v nekaj sekundah. Podpora za x64 in ARM64 računalnike s samodejnimi posodobitvami.",
+      "ctaX64": "Prenesi za Windows (x64)",
+      "ctaArm64": "Prenesi za Windows (ARM64)"
+    },
+    "features": {
+      "title": "Zakaj izbrati Doppler VPN za Windows?",
+      "subtitle": "Doppler VPN je izvorna aplikacija za Windows, zasnovana za uporabnike PC-jev, ki potrebujejo resnično zasebnost, obhod cenzure in zanesljivo delovanje na katerikoli napravi z Windows.",
+      "nativeWindows": {
+        "title": "Izvorna aplikacija za Windows",
+        "description": "Posebej razvita za Windows s čistim, sodobnim vmesnikom. Deluje na Windows 10 in Windows 11 s polno podporo za arhitekturi x64 in ARM64. Namesti se v nekaj sekundah s preprostim čarovnikom — brez ročne konfiguracije ali orodij ukazne vrstice."
+      },
+      "dualArchitecture": {
+        "title": "Podpora za x64 + ARM64",
+        "description": "Doppler VPN ponuja namenske različice za x64 (standardni PC-ji, namizni računalniki in večina prenosnikov) in ARM64 (Surface Pro X, prenosniki Snapdragon). Izberite pravi namestitveni program za svojo strojno opremo in pridobite izvorno zmogljivost na katerikoli napravi z Windows."
+      },
+      "autoUpdates": {
+        "title": "Samodejne posodobitve prek Velopack",
+        "description": "Doppler VPN uporablja Velopack za brezhibne posodobitve v ozadju. Nove različice se prenesejo in uporabijo samodejno — vedno imate najnovejše varnostne popravke, izboljšave protokola in funkcije, ne da bi dvignili prst."
+      },
+      "vlessEncryption": {
+        "title": "Šifriranje VLESS-Reality",
+        "description": "Protokol naslednje generacije, ki prikrije VPN promet kot navadno HTTPS brskanje. Vaša povezava je nevidna za požarne zidove, sisteme za globoki pregled paketov in orodja za nadzor ponudnikov internetnih storitev. Enaka tehnologija, ki se uporablja za obhod Velikega kitajskega požarnega zidu."
+      },
+      "noRegistration": {
+        "title": "Brez registracije",
+        "description": "Brez e-pošte, brez telefonske številke, brez ustvarjanja računa. Preprosto namestite aplikacijo in se takoj povežite. Doppler uporablja avtentikacijo na podlagi naprave, zato vaša identiteta ostane popolnoma zasebna od prvega klika."
+      },
+      "bypassCensorship": {
+        "title": "Obhod cenzure in DPI",
+        "description": "Zasnovano za delovanje v državah s strogo internetno cenzuro — Rusija, Iran, Kitajska in druge. VLESS-Reality naredi vaš VPN promet nerazločljiv od običajnega spletnega brskanja ter premaga TSPU in GFW."
+      },
+      "noLogs": {
+        "title": "Stroga politika brez beleženj",
+        "description": "Doppler nikoli ne zbira, shranjuje ali deli vaših podatkov o brskanju. Brez beleženj povezav, brez beleženj prometa, brez beleženj DNS poizvedb. Ne moremo vas identificirati, ker nikoli ne zbiramo identifikacijskih podatkov."
+      },
+      "globalServers": {
+        "title": "6 globalnih lokacij strežnikov",
+        "description": "Povežite se s strežniki v več državah po Evropi in širše. Vsak strežnik poganja VLESS-Reality z optimiziranim usmerjanjem za najnižjo zakasnitev in največjo prepustnost. Samodejna izbira strežnika izbere najhitrejšo možnost za vašo lokacijo."
+      }
+    },
+    "howItWorks": {
+      "title": "Kako nastaviti VPN na Windows",
+      "subtitle": "Povežite se v manj kot minuti — brez tehničnega znanja.",
+      "step1": {
+        "title": "Prenesite namestitveni program",
+        "description": "Prenesite namestitveni program Doppler VPN za vaš sistem — x64 za večino PC-jev in prenosnikov, ARM64 za Surface Pro X in naprave Snapdragon. Namestitveni program je manjši od 30 MB in brez virusov."
+      },
+      "step2": {
+        "title": "Zaženite čarovnika za namestitev",
+        "description": "Dvokliknite namestitveni program in sledite čarovniku za namestitev. Namestitev traja približno 15 sekund. Doppler VPN je dodan v meni Start in se po želji lahko zažene ob zagonu Windows."
+      },
+      "step3": {
+        "title": "Odprite Doppler VPN",
+        "description": "Zaženite aplikacijo iz menija Start ali bližnjice na namizju. Ni zaslona za prijavo, ni registracijskega obrazca, ni preverjanja e-pošte. Vaš račun je ustvarjen samodejno z avtentikacijo na podlagi naprave."
+      },
+      "step4": {
+        "title": "Naročite se in se povežite",
+        "description": "Izberite naročniški paket in kliknite Poveži. Doppler samodejno izbere najboljši strežnik, vzpostavi šifriran tunel VLESS-Reality in usmeri ves vaš promet skozi njega. Vaš IP naslov je skrit in vaši podatki so šifrirani."
+      }
+    },
+    "faq": {
+      "title": "Pogosta vprašanja — Doppler VPN za Windows",
+      "q1": {
+        "question": "Katere različice Windows so podprte?",
+        "answer": "Doppler VPN podpira Windows 10 (različica 1809 in novejše) ter Windows 11. Podprti sta arhitekturi x64 in ARM64. Aplikacija deluje na namiznih računalnikih, prenosnikih, tablicah in napravah Surface z združljivimi različicami Windows."
+      },
+      "q2": {
+        "question": "Kakšna je razlika med x64 in ARM64?",
+        "answer": "x64 je namenjen za večino standardnih PC-jev, namiznih računalnikov in prenosnikov s procesorji Intel ali AMD. ARM64 je za novejše naprave, kot so Microsoft Surface Pro X, Lenovo ThinkPad X13s in drugi prenosniki z Windows na platformi Snapdragon. Če niste prepričani, prenesite različico x64 — deluje na večini računalnikov z Windows."
+      },
+      "q3": {
+        "question": "Ali se Doppler VPN samodejno posodablja na Windows?",
+        "answer": "Da. Doppler VPN uporablja Velopack za samodejne posodobitve v ozadju. Ko je na voljo nova različica, se prenese v ozadju in posodobitev se uporabi ob naslednjem zagonu aplikacije. Vedno imate najnovejše varnostne popravke in funkcije brez kakršnegakoli ročnega ukrepanja."
+      },
+      "q4": {
+        "question": "Ali lahko uporabljam isti račun na telefonu in PC-ju?",
+        "answer": "Da. Vaša naročnina Doppler VPN deluje na vseh vaših napravah — Windows, iOS, Android in Mac. Vsaka naprava dobi svojo varno VPN povezavo. Na en račun je lahko povezanih do 10 naprav."
+      },
+      "q5": {
+        "question": "Ali deluje z Windows Defender?",
+        "answer": "Da. Doppler VPN je popolnoma združljiv z Windows Defender in drugimi večjimi protivirusnimi programi. Namestitveni program je digitalno podpisan in aplikacija ne sproži lažnih pozitivnih rezultatov. Doppler deluje kot standardni VPN odjemalec z uporabo omrežnih API-jev Windows."
+      },
+      "q6": {
+        "question": "Ali deluje v Rusiji, na Kitajskem in v Iranu?",
+        "answer": "Da. Doppler uporablja protokol VLESS-Reality, ki prikrije VPN promet kot navadno HTTPS spletno brskanje. To cenzurnim sistemom, kot so ruski TSPU, kitajski Veliki požarni zid ali iranska filtrirna infrastruktura, izjemno oteži odkrivanje in blokiranje. Doppler je posebej zasnovan za uporabnike v močno cenzuriranih regijah."
+      }
+    },
+    "cta": {
+      "title": "Prenesite Doppler VPN za Windows",
+      "subtitle": "Brez registracije. Šifriranje VLESS-Reality ohranja vašo povezavo zasebno in neodkrito. Podpora za x64 in ARM64 računalnike.",
+      "downloadX64": "Prenesi za Windows (x64)",
+      "downloadArm64": "Prenesi za Windows (ARM64)",
+      "otherPlatforms": "Na voljo na drugih platformah",
+      "downloadsLink": "Poglej vse prenose"
+    },
+    "related": {
+      "noRegistration": "VPN brez registracije",
+      "noRegistrationDesc": "Uporabljajte VPN brez prijave ali računa",
+      "vless": "Protokol VLESS-Reality",
+      "vlessDesc": "Spoznajte, kako VLESS premaga globoki pregled paketov",
+      "macos": "VPN za Mac",
+      "macosDesc": "Prenesite Doppler VPN za macOS"
     }
   }
 }

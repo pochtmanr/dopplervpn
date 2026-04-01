@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Doppler VPN — プライバシーを守るセキュアなノーログVPN & プロキシ",
-    "description": "Doppler VPNはVLESS-Realityプロキシ暗号化、DNS保護、厳格なノーログポリシーであなたのプライバシーを守ります。DPIや政府の検閲を突破。iOS、Android、macOS、Windowsに対応。"
+    "description": "Doppler VPN — VLESS-Reality暗号化搭載の高速プライベートVPN。ログなし、検閲を突破。iOS、Android、macOS、Windowsに対応。"
   },
   "nav": {
     "features": "機能",
@@ -22,7 +22,7 @@
     "headlinePart1a": "他のVPNが",
     "headlinePart1b": "ブロックされる場所でも動く。",
     "headlinePart2": "",
-    "subheadline": "VLESS-Reality搭載 — トラフィックは通常のHTTPSに見えます。DPIでも検知不可。登録不要、ログなし、追跡なし。",
+    "subheadline": "Doppler VPNはVLESS-Realityを基盤に構築 — トラフィックは通常のHTTPSに見えます。DPIでも検知不可。登録不要、ログなし、追跡なし。",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "個人情報不要",
@@ -33,6 +33,8 @@
       "vless": "VLESS-Realityプロトコル"
     },
     "openTelegram": "Telegramボット",
+    "getPro": "Doppler Pro を入手",
+    "downloadApp": "アプリをダウンロード",
     "seePrices": "料金を見る",
     "getAndroid": "APKをダウンロード",
     "androidNote": "スタンドアロンAPKとしても利用可能。",
@@ -42,9 +44,31 @@
     "desktopNote": "サブスクはTelegramまたはiOSで利用可能。",
     "downloadIosLabel": "App StoreでDoppler VPNをダウンロード",
     "promoDiscount": "{percent}%オフ",
-    "promoCopyLabel": "プロモコード{code}をコピー",
-    "getPro": "Doppler Pro を入手",
-    "downloadApp": "アプリをダウンロード"
+    "promoCopyLabel": "プロモコード{code}をコピー"
+  },
+  "trustIndicators": {
+    "items": {
+      "noAccount": {
+        "label": "アカウント不要",
+        "description": "デバイスがあなたのIDです"
+      },
+      "zeroLogs": {
+        "label": "ログ記録ゼロ",
+        "description": "閲覧内容は私たちにも見えません"
+      },
+      "encryptedDns": {
+        "label": "DNS暗号化",
+        "description": "すべてのクエリを保護"
+      },
+      "dpiBypass": {
+        "label": "DPIバイパス",
+        "description": "トラフィックは通常のHTTPSに見えます"
+      },
+      "freeTrial": {
+        "label": "3日間無料トライアル",
+        "description": "リスクなしで全機能を試せる"
+      }
+    }
   },
   "features": {
     "title": "完全なプライバシーのために設計",
@@ -54,25 +78,21 @@
         "title": "登録不要のプライバシー",
         "description": "デバイスがアカウントです。メール不要。電話番号不要。個人情報不要。プライバシーは接続した瞬間から始まります。"
       },
-      "adBlocker": {
-        "title": "基本広告ブロッカー",
-        "description": "内蔵のDNSレベル広告ブロックにより、約50%の広告とトラッカーを削減。すぐに使えるクリーンなブラウジング体験。"
+      "vlessReality": {
+        "title": "VLESS-Realityプロトコル",
+        "description": "VPNトラフィックを通常のHTTPSトラフィックのように見せる高度な検閲対策プロトコル。ディープパケットインスペクションで検出不可能、制限されたネットワークでも高速で信頼性が高い。"
       },
       "smartRouting": {
         "title": "スマートルーティング",
         "description": "国別のインテリジェントなトラフィックルーティング。接続先に基づいて、速度と信頼性のために最適なサーバーパスを自動選択します。"
       },
+      "adBlocker": {
+        "title": "基本広告ブロッカー",
+        "description": "内蔵のDNSレベル広告ブロックにより、約50%の広告とトラッカーを削減。すぐに使えるクリーンなブラウジング体験。"
+      },
       "minimalData": {
         "title": "最小限のデータ収集",
         "description": "ブラウジング活動を記録しません。訪問サイトを追跡しません。アーキテクチャ設計上、最小限のデータのみ必要です。"
-      },
-      "completelyFree": {
-        "title": "完全無料",
-        "description": "すべてのサーバーがフル機能で無料。完全な暗号化、高速、無制限帯域幅。速度制限やデータ制限なし。"
-      },
-      "vlessReality": {
-        "title": "VLESS-Realityプロトコル",
-        "description": "VPNトラフィックを通常のHTTPSトラフィックのように見せる高度な検閲対策プロトコル。ディープパケットインスペクションで検出不可能、制限されたネットワークでも高速で信頼性が高い。"
       },
       "dnsProtection": {
         "title": "プライベートDNS保護",
@@ -121,13 +141,12 @@
     "perYear": "年間",
     "save": "節約",
     "plusFeatures": {
-      "everything": "無料版のすべての機能",
       "premiumServers": "プレミアムサーバー",
       "smartRouting": "スマートルーティング",
-      "devices": "最大10台のデバイス",
-      "support": "優先サポート",
       "alwaysOn": "Always-On VPN",
-      "noLogs": "ノーログポリシー"
+      "devices": "最大10台のデバイス",
+      "noLogs": "ノーログポリシー",
+      "support": "優先サポート"
     },
     "plusCta": "Doppler Proを入手",
     "trialNote": "3日間の無料トライアルから始める",
@@ -249,6 +268,29 @@
       }
     }
   },
+  "privacyModel": {
+    "title": "保存しないもの",
+    "subtitle": "ポリシーではなく、アーキテクチャによるプライバシー。",
+    "tagline": "持っていないデータは渡しようがありません。",
+    "items": {
+      "browsing": {
+        "title": "閲覧ログなし",
+        "description": "どのサイトを訪問したかは私たちにも見えません"
+      },
+      "ip": {
+        "title": "IPアドレスログなし",
+        "description": "あなたの本当のIPは記録されません"
+      },
+      "dns": {
+        "title": "DNSクエリ保存なし",
+        "description": "暗号化され、名前解決後に即破棄"
+      },
+      "account": {
+        "title": "アカウントDBなし",
+        "description": "デバイス認証のため、個人データの保存が不要です"
+      }
+    }
+  },
   "cta": {
     "doppler": {
       "titleItalic": "始めましょう",
@@ -256,7 +298,9 @@
       "titlePlayful": "Doppler VPN",
       "subtitle": "登録不要のプライバシー最優先VPN。VLESS-Reality暗号化で即座に接続。",
       "cta": "Doppler Pro を入手",
-      "downloads": "ダウンロード"
+      "downloads": "ダウンロード",
+      "learnIos": "iOS用VPN",
+      "learnAndroid": "Android用VPN"
     }
   },
   "footer": {
@@ -264,6 +308,7 @@
     "product": "製品",
     "pricing": "料金",
     "download": "ダウンロード",
+    "blog": "ブログ",
     "legal": "法的情報",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約",
@@ -274,13 +319,14 @@
     "connect": "お問い合わせ",
     "telegram": "@dopplercreatebot",
     "email": "support@simnetiq.store",
-    "blog": "ブログ",
     "bypassCensorship": "検閲回避の仕組み",
     "about": "概要",
     "vlessVpn": "VLESSプロトコル",
     "noRegistration": "登録不要VPN",
     "vpnForIos": "iOS向けVPN",
-    "vpnForAndroid": "Android向けVPN"
+    "vpnForAndroid": "Android向けVPN",
+    "vpnForMacos": "Mac向けVPN",
+    "vpnForWindows": "Windows向けVPN"
   },
   "privacy": {
     "title": "プライバシーポリシー",
@@ -482,9 +528,6 @@
         "playStore": "Google Play"
       }
     },
-    "share": "記事をシェア",
-    "copyLink": "リンクをコピー",
-    "copied": "コピーしました！",
     "stickyBar": {
       "message": "ブラウジングを保護しましょう。Doppler VPNは登録不要、ログも一切保存しません。3日間無料でお試しください。",
       "cta": "3日間無料体験",
@@ -497,16 +540,15 @@
       "downloadIos": "iOS版をダウンロード",
       "downloadAndroid": "Android版をダウンロード",
       "downloadDesktop": "アプリをダウンロード"
-    }
+    },
+    "share": "記事をシェア",
+    "copyLink": "リンクをコピー",
+    "copied": "コピーしました！"
   },
   "guide": {
     "title": "セットアップガイド",
     "subtitle": "数分で接続できます。お使いのデバイスを選んで始めましょう。",
     "chooseDevice": "デバイスを選択",
-    "backToGuides": "すべてのガイド",
-    "seePricing": "See pricing plans",
-    "nextStep": "次へ",
-    "prevStep": "前へ",
     "android": {
       "title": "Android セットアップ",
       "subtitle": "Android デバイスで Doppler VPN を設定",
@@ -607,7 +649,11 @@
       "miniApp": "サブスクリプション ミニアプリ",
       "miniAppDesc": "Telegram ミニアプリから安全な Paddle 決済でサブスクリプションの登録・管理ができます。"
     },
+    "backToGuides": "すべてのガイド",
+    "seePricing": "See pricing plans",
     "downloadApps": "アプリをダウンロード",
+    "nextStep": "次へ",
+    "prevStep": "前へ",
     "learnMore": "詳しく見る",
     "protocolsCard": {
       "title": "VPNプロトコル",
@@ -656,17 +702,17 @@
       "step1": "App StoreからDoppler VPNをダウンロード",
       "step2": "アプリを開く — アカウントが自動作成されます",
       "step3": "プランを選んで登録",
-      "step4": "接続をタップ — 保護されています！"
+      "step4": "接続をタップ — 保護されています！",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Google Playで入手",
-      "buttonApk": "APKをダウンロード（スタンドアロン）",
-      "meta": "APK · v1.2.0 · 95 MB",
       "step1": "Google PlayまたはAPKからDoppler VPNをダウンロード",
       "step2": "アプリを開く — アカウントが自動作成されます",
       "step3": "プランを選んで登録",
-      "step4": "接続をタップ — 保護されています！"
+      "step4": "接続をタップ — 保護されています！",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -674,45 +720,193 @@
       "step1": "Mac App StoreからDoppler VPNをダウンロード",
       "step2": "アプリを開く — アカウントが自動作成されます",
       "step3": "プランを選んで登録",
-      "step4": "接続をタップ — 保護されています！"
+      "step4": "接続をタップ — 保護されています！",
+      "learnMore": "Mac向けVPNの詳細"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "近日公開",
-      "inDevelopment": "現在開発中",
-      "waitlistDescription": "同じVLESS-Reality暗号化を搭載したネイティブWindowsクライアントを開発中です。準備ができ次第お知らせするため、ウェイティングリストにご登録ください。",
-      "waitlistPrivacy": "メールアドレスはWindows版リリースのお知らせにのみ使用します。スパムは送りません。"
-    },
-    "waitlist": {
-      "placeholder": "your@email.com",
-      "button": "通知を受け取る",
-      "success": "リストに登録されました！準備ができ次第メールでお知らせします。",
-      "error": "エラーが発生しました。もう一度お試しください。"
+      "buttonX64": "Windows版をダウンロード（x64）",
+      "buttonArm64": "Windows版をダウンロード（ARM64）",
+      "step1": "お使いのシステムに合ったインストーラーをダウンロード（ほとんどのPCはx64）",
+      "step2": "インストーラーを実行してセットアップウィザードに従う",
+      "step3": "Doppler VPNを開く — アカウントが自動作成されます",
+      "step4": "プランを選んで登録し、接続！",
+      "learnMore": "Windows向けVPNの詳細"
     }
   },
-  "servers": {
-    "title": "グローバルサーバーネットワーク",
-    "subtitle": "世界各地のサーバーから選択。すべてのサーバーがデュアルプロトコルに対応。",
-    "servers": "サーバー",
-    "server": "サーバー",
-    "protocols": "プロトコル",
-    "locations": {
-      "germany": {
-        "city": "フランクフルト",
-        "country": "ドイツ"
-      },
-      "russia": {
-        "city": "モスクワ",
-        "country": "ロシア"
-      },
-      "france": {
-        "city": "パリ",
-        "country": "フランス"
-      },
-      "japan": {
-        "city": "東京",
-        "country": "日本"
+  "support": {
+    "title": "ヘルプセンター＆サポート",
+    "subtitle": "VPNに関するよくある質問への回答、接続の問題の解決、またはサポートチームへのお問い合わせはこちら。",
+    "faq": {
+      "title": "よくある質問",
+      "items": {
+        "what": {
+          "question": "Doppler VPNとは？",
+          "answer": "Doppler VPNはVLESS-Reality技術を使用した高速でプライベートなVPNサービスです。iOS、Android、macOS、Windowsに対応しています。"
+        },
+        "cost": {
+          "question": "料金はいくらですか？",
+          "answer": "Doppler Proは月額$4、6ヶ月$20（17%節約）、年間$35（27%節約）。一回払い、自動更新なし。"
+        },
+        "subscribe": {
+          "question": "登録方法は？",
+          "answer": "登録ページにアクセスし、メールアドレスを入力、プランを選んでPaddleで支払い。Proサブスクリプションはすぐに有効になります。"
+        },
+        "multiDevice": {
+          "question": "複数のデバイスで使えますか？",
+          "answer": "はい！Doppler Proは1アカウントで最大10台まで対応しています。"
+        },
+        "accountId": {
+          "question": "アカウントIDとは？",
+          "answer": "アカウントID（VPN-XXXX-XXXX-XXXX）は全デバイス共通のキーです。アプリ初回使用時またはWeb登録時に作成されます。"
+        },
+        "refund": {
+          "question": "返金はありますか？",
+          "answer": "はい、30日間返金保証があります。返金リクエストはサポートまでご連絡ください。"
+        },
+        "privacy": {
+          "question": "データは安全ですか？",
+          "answer": "もちろんです。Doppler VPNは厳格なノーログポリシーを実施しています。閲覧データの収集・保存は行いません。"
+        },
+        "platforms": {
+          "question": "対応プラットフォームは？",
+          "answer": "iOS、Android、macOS（ネイティブDopplerアプリ）、Windows（v2rayNクライアント経由）。"
+        }
       }
+    },
+    "troubleshooting": {
+      "title": "トラブルシューティング",
+      "items": {
+        "wontConnect": {
+          "question": "VPNが接続できない",
+          "answer": "サーバーを切り替えてみてください。設定 → 別のサーバーを選択。問題が続く場合はアプリを再起動してください。"
+        },
+        "drops": {
+          "question": "接続が頻繁に切れる",
+          "answer": "設定でAlways-On VPNを有効にしてください。インターネット接続も確認してください。"
+        },
+        "battery": {
+          "question": "モバイルでのバッテリー消耗",
+          "answer": "ある程度のバッテリー消費は正常です。VPNが時々必要な場合はAlways-Onを無効にしてください。"
+        },
+        "noSub": {
+          "question": "アプリに「サブスクリプションなし」と表示される",
+          "answer": "正しいアカウントIDを使用しているか確認してください。購入直後の場合は数秒待ってアプリを再起動してください。"
+        }
+      }
+    },
+    "deleteAccount": {
+      "title": "アカウントを削除",
+      "step1": "Doppler VPNアプリを開く",
+      "step2": "設定 → アカウントに移動",
+      "step3": "「アカウントを削除」をタップ",
+      "step4": "削除を確認",
+      "warning": "アカウント削除は永久的です。すべてのデータ、サブスクリプション期間、サーバー設定が削除されます。この操作は取り消せません。",
+      "alternative": "アプリにアクセスできない場合は、サポートに連絡してアカウント削除をリクエストしてください。"
+    },
+    "contact": {
+      "title": "お問い合わせ",
+      "telegram": "Telegram",
+      "telegramBot": "@DopplerSupportBot",
+      "email": "メール",
+      "emailAddress": "support@simnetiq.store",
+      "responseTime": "通常24時間以内に回答いたします。"
+    },
+    "account": {
+      "title": "アカウントの管理",
+      "signInTitle": "アカウントを管理するにはサインイン",
+      "enterAccountId": "アカウントIDを入力",
+      "enterEmail": "メールを入力",
+      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
+      "emailPlaceholder": "your@email.com",
+      "signIn": "サインイン",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "getStarted": "始める",
+      "signOut": "サインアウト",
+      "statusTitle": "アカウントの状態",
+      "memberSince": "メンバー登録日",
+      "tier": "プラン",
+      "tierFree": "無料",
+      "tierMonthly": "Pro 月額",
+      "tierSixMonth": "Pro 6ヶ月",
+      "tierYearly": "Pro 年額",
+      "expires": "有効期限",
+      "expiresIn": "{days}日後",
+      "expired": "期限切れ",
+      "active": "有効",
+      "expiringSoon": "もうすぐ期限切れ",
+      "contactTitle": "連絡先情報",
+      "contactMethod": "連絡方法",
+      "contactValue": "連絡先",
+      "verified": "確認済み",
+      "unverified": "未確認",
+      "changeContact": "変更",
+      "saveContact": "保存",
+      "cancelEdit": "キャンセル",
+      "subscriptionTitle": "サブスクリプションの管理",
+      "managePaddle": "Paddleで管理",
+      "manageAppStore": "App Storeで管理",
+      "managePlayStore": "Google Playで管理",
+      "invoicesTitle": "請求書",
+      "downloadInvoice": "PDFをダウンロード",
+      "noInvoices": "請求書がありません",
+      "notFound": "アカウントが見つかりません",
+      "fetchError": "アカウントの読み込みに失敗しました"
+    },
+    "ticket": {
+      "title": "リクエストを送信",
+      "subtitle": "24時間以内にご返答します",
+      "topicLabel": "トピック",
+      "topics": {
+        "connection_issues": "接続の問題",
+        "subscription_billing": "サブスクリプションと請求",
+        "account": "アカウント",
+        "feature_request": "機能リクエスト",
+        "other": "その他"
+      },
+      "subjectLabel": "件名",
+      "subjectPlaceholder": "問題の簡単な説明",
+      "descriptionLabel": "詳細",
+      "descriptionPlaceholder": "何が起きたか教えてください...",
+      "emailLabel": "連絡先メール",
+      "emailPlaceholder": "your@email.com",
+      "accountIdLabel": "アカウントID（任意）",
+      "submit": "リクエストを送信",
+      "submitting": "送信中...",
+      "successTitle": "リクエスト送信完了",
+      "successMessage": "チケット {ticketNumber} を作成しました。24時間以内に {email} へご返答します。",
+      "errorGeneric": "送信に失敗しました。もう一度お試しください。",
+      "close": "閉じる"
+    },
+    "restore": {
+      "title": "アカウントを復元",
+      "subtitle": "アカウントに登録されたメールまたはTelegramを入力してください",
+      "emailTab": "メール",
+      "telegramTab": "Telegram",
+      "emailPlaceholder": "your@email.com",
+      "sendAccountId": "アカウントIDを送信",
+      "sending": "送信中...",
+      "emailSuccess": "このメールのアカウントが存在する場合、アカウントIDを送信しました。受信トレイをご確認ください。",
+      "emailNotFound": "アカウントが見つかりません。サポートが必要ですか？",
+      "submitTicket": "チケットを送信",
+      "telegramMessage": "TelegramボットからアカウントIDを確認できます",
+      "openTelegramBot": "Telegramボットを開く",
+      "appSubscribers": "App StoreまたはGoogle Playで購入しましたか？",
+      "appStoreLink": "App Storeのサブスクリプションを管理",
+      "playStoreLink": "Google Playのサブスクリプションを管理",
+      "close": "閉じる"
+    },
+    "business": {
+      "title": "ビジネスに関するお問い合わせ",
+      "subtitle": "パートナーシップ、プレス、エンタープライズ"
+    },
+    "actions": {
+      "submitRequest": "リクエストを送信",
+      "submitRequestDesc": "チームからサポートを受ける",
+      "restoreAccount": "アカウントを復元",
+      "restoreAccountDesc": "アカウントIDを回復する",
+      "businessContact": "ビジネスに関するお問い合わせ",
+      "businessContactDesc": "パートナーシップ、プレス、エンタープライズ"
     }
   },
   "guideProtocols": {
@@ -841,6 +1035,31 @@
     "openBot": "Telegramボットを開く",
     "viewProtocols": "VPNプロトコルガイド"
   },
+  "servers": {
+    "title": "グローバルサーバーネットワーク",
+    "subtitle": "世界各地のサーバーから選択。すべてのサーバーがデュアルプロトコルに対応。",
+    "servers": "サーバー",
+    "server": "サーバー",
+    "protocols": "プロトコル",
+    "locations": {
+      "germany": {
+        "city": "フランクフルト",
+        "country": "ドイツ"
+      },
+      "russia": {
+        "city": "モスクワ",
+        "country": "ロシア"
+      },
+      "france": {
+        "city": "パリ",
+        "country": "フランス"
+      },
+      "japan": {
+        "city": "東京",
+        "country": "日本"
+      }
+    }
+  },
   "deleteAccount": {
     "title": "アカウントの削除",
     "metaDescription": "Doppler VPN アカウントを削除する方法と、削除されるデータについて説明します。",
@@ -864,39 +1083,6 @@
         "content": "データ削除に関するご質問やサポートが必要な場合は、support@dopplervpn.org までお問い合わせください。"
       }
     }
-  },
-  "checkout": {
-    "title": "Doppler Pro にアップグレード",
-    "subtitle": "プランを選択して、Paddle で安全にお支払いください。",
-    "accountLabel": "アカウント",
-    "monthly": "月額",
-    "sixMonth": "6ヶ月",
-    "yearly": "年額",
-    "perMonth": "/月",
-    "save": "割引",
-    "bestValue": "お得",
-    "subscribe": "今すぐ登録",
-    "processing": "処理中...",
-    "features": "Pro 機能",
-    "feat1": "世界中のプレミアムサーバー",
-    "feat2": "Smart Route テクノロジー",
-    "feat3": "常時接続 VPN",
-    "feat4": "無制限セッション",
-    "feat5": "優先サポート",
-    "promoPlaceholder": "プロモコード",
-    "promoApply": "適用",
-    "promoRemove": "削除",
-    "promoOff": "割引",
-    "promoInvalid": "無効なプロモコード",
-    "promoFailed": "コードの検証に失敗しました",
-    "footerNote": "Paddle による安全な決済。いつでもキャンセル可能。",
-    "terms": "利用規約",
-    "privacy": "プライバシーポリシー",
-    "error": "エラーが発生しました。もう一度お試しください。",
-    "invalidAccount": "無効なアカウント ID",
-    "successTitle": "お支払い完了！",
-    "successDescription": "Doppler Pro サブスクリプションが有効になりました。",
-    "returnToApp": "アプリに戻る"
   },
   "subscribe": {
     "title": "Doppler Pro を入手",
@@ -945,9 +1131,9 @@
     "securedBy": "Paddleで保護",
     "accountFound": "アカウントが見つかりました",
     "accountFoundNote": "このアカウントはあなたのものではありませんか？Telegramの @DopplerVerifyBot に連絡して確認してください。",
-    "accountNotFound": "アカウントが見つかりません。アカウントIDを確認してください。",
     "creatingAccount": "アカウントを作成中...",
     "lookingUp": "アカウントを検索中...",
+    "accountNotFound": "アカウントが見つかりません。アカウントIDを確認してください。",
     "verifyingAccount": "確認中...",
     "dashboard": {
       "title": "あなたのアカウント",
@@ -957,6 +1143,8 @@
       "telegram": "Telegram",
       "verified": "確認済み",
       "unverified": "未確認",
+      "noContacts": "リンクされた連絡先はありません",
+      "contactsOptional": "任意 — アカウント復元のみに使用",
       "subscription": "サブスクリプション",
       "freeTier": "有効なサブスクリプションなし",
       "proActive": "Doppler Pro",
@@ -964,21 +1152,6 @@
       "getPro": "Doppler Pro を入手",
       "extend": "サブスクリプションを延長",
       "expressSupport": "優先サポート",
-      "connectEmail": "メールを接続",
-      "connectEmailPlaceholder": "メールアドレスを入力",
-      "connectTelegram": "Telegramで接続",
-      "contactSaved": "連絡先を保存しました",
-      "save": "保存",
-      "copied": "コピーしました！",
-      "logout": "別のアカウントを使用",
-      "deleteAccount": "アカウントを削除",
-      "restorePurchases": "購入を復元",
-      "restorePurchasesDesc": "App StoreまたはGoogle Playでサブスクリプションを購入した場合は、こちらで管理してください。",
-      "restoreAppStore": "App Storeのサブスクリプション",
-      "restorePlayStore": "Google Playのサブスクリプション",
-      "noContacts": "リンクされた連絡先はありません",
-      "contactsOptional": "任意 — アカウント復元のみに使用",
-      "forgotAccountId": "アカウントIDをお忘れですか？",
       "premiumSupportDesc": "Proサブスクライバーとしてチケットが優先的に処理されます。",
       "ticketSubject": "件名",
       "ticketSubjectPlaceholder": "問題の簡単な概要",
@@ -994,7 +1167,20 @@
       "expiredPro": "Pro サブスクリプションは {date} に終了しました",
       "renewPro": "Doppler Pro を更新",
       "ticketEmailLabel": "メールアドレス（返信用）",
-      "ticketEmailRequired": "有効なメールアドレスを入力してください"
+      "ticketEmailRequired": "有効なメールアドレスを入力してください",
+      "connectEmail": "メールを接続",
+      "connectTelegram": "Telegramで接続",
+      "deleteAccount": "アカウントを削除",
+      "logout": "別のアカウントを使用",
+      "contactSaved": "連絡先を保存しました",
+      "connectEmailPlaceholder": "メールアドレスを入力",
+      "save": "保存",
+      "copied": "コピーしました！",
+      "forgotAccountId": "アカウントIDをお忘れですか？",
+      "restorePurchases": "購入を復元",
+      "restorePurchasesDesc": "App StoreまたはGoogle Playでサブスクリプションを購入した場合は、こちらで管理してください。",
+      "restoreAppStore": "App Storeのサブスクリプション",
+      "restorePlayStore": "Google Playのサブスクリプション"
     }
   },
   "subscribeSuccess": {
@@ -1022,179 +1208,153 @@
     "errorTitle": "支払いの問題",
     "errorDesc": "請求された場合、まもなくサブスクリプションが有効になります。反映されない場合はサポートまでお問い合わせください。"
   },
-  "support": {
-    "title": "ヘルプセンター＆サポート",
-    "subtitle": "VPNに関するよくある質問への回答、接続の問題の解決、またはサポートチームへのお問い合わせはこちら。",
-    "faq": {
-      "title": "よくある質問",
-      "items": {
-        "what": {
-          "question": "Doppler VPNとは？",
-          "answer": "Doppler VPNはVLESS-Reality技術を使用した高速でプライベートなVPNサービスです。iOS、Android、macOS、Windowsに対応しています。"
-        },
-        "cost": {
-          "question": "料金はいくらですか？",
-          "answer": "Doppler Proは月額$4、6ヶ月$20（17%節約）、年間$35（27%節約）。一回払い、自動更新なし。"
-        },
-        "subscribe": {
-          "question": "登録方法は？",
-          "answer": "登録ページにアクセスし、メールアドレスを入力、プランを選んでPaddleで支払い。Proサブスクリプションはすぐに有効になります。"
-        },
-        "multiDevice": {
-          "question": "複数のデバイスで使えますか？",
-          "answer": "はい！Doppler Proは1アカウントで最大10台まで対応しています。"
-        },
-        "accountId": {
-          "question": "アカウントIDとは？",
-          "answer": "アカウントID（VPN-XXXX-XXXX-XXXX）は全デバイス共通のキーです。アプリ初回使用時またはWeb登録時に作成されます。"
-        },
-        "refund": {
-          "question": "返金はありますか？",
-          "answer": "はい、30日間返金保証があります。返金リクエストはサポートまでご連絡ください。"
-        },
-        "privacy": {
-          "question": "データは安全ですか？",
-          "answer": "もちろんです。Doppler VPNは厳格なノーログポリシーを実施しています。閲覧データの収集・保存は行いません。"
-        },
-        "platforms": {
-          "question": "対応プラットフォームは？",
-          "answer": "iOS、Android、macOS（ネイティブDopplerアプリ）、Windows（v2rayNクライアント経由）。"
-        }
-      }
-    },
-    "troubleshooting": {
-      "title": "トラブルシューティング",
-      "items": {
-        "wontConnect": {
-          "question": "VPNが接続できない",
-          "answer": "サーバーを切り替えてみてください。設定 → 別のサーバーを選択。問題が続く場合はアプリを再起動してください。"
-        },
-        "drops": {
-          "question": "接続が頻繁に切れる",
-          "answer": "設定でAlways-On VPNを有効にしてください。インターネット接続も確認してください。"
-        },
-        "battery": {
-          "question": "モバイルでのバッテリー消耗",
-          "answer": "ある程度のバッテリー消費は正常です。VPNが時々必要な場合はAlways-Onを無効にしてください。"
-        },
-        "noSub": {
-          "question": "アプリに「サブスクリプションなし」と表示される",
-          "answer": "正しいアカウントIDを使用しているか確認してください。購入直後の場合は数秒待ってアプリを再起動してください。"
-        }
-      }
-    },
-    "deleteAccount": {
-      "title": "アカウントを削除",
-      "step1": "Doppler VPNアプリを開く",
-      "step2": "設定 → アカウントに移動",
-      "step3": "「アカウントを削除」をタップ",
-      "step4": "削除を確認",
-      "warning": "アカウント削除は永久的です。すべてのデータ、サブスクリプション期間、サーバー設定が削除されます。この操作は取り消せません。",
-      "alternative": "アプリにアクセスできない場合は、サポートに連絡してアカウント削除をリクエストしてください。"
-    },
-    "contact": {
-      "title": "お問い合わせ",
-      "telegram": "Telegram",
-      "telegramBot": "@DopplerSupportBot",
-      "email": "メール",
-      "emailAddress": "support@simnetiq.store",
-      "responseTime": "通常24時間以内に回答いたします。"
-    },
-    "actions": {
-      "submitRequest": "リクエストを送信",
-      "submitRequestDesc": "チームからサポートを受ける",
-      "restoreAccount": "アカウントを復元",
-      "restoreAccountDesc": "アカウントIDを回復する",
-      "businessContact": "ビジネスに関するお問い合わせ",
-      "businessContactDesc": "パートナーシップ、プレス、エンタープライズ"
-    },
-    "account": {
-      "title": "アカウントの管理",
-      "signInTitle": "アカウントを管理するにはサインイン",
-      "enterAccountId": "アカウントIDを入力",
-      "enterEmail": "メールを入力",
-      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
-      "emailPlaceholder": "your@email.com",
-      "signIn": "サインイン",
-      "noAccount": "アカウントをお持ちでないですか？",
-      "getStarted": "始める",
-      "signOut": "サインアウト",
-      "statusTitle": "アカウントの状態",
-      "memberSince": "メンバー登録日",
-      "tier": "プラン",
-      "tierFree": "無料",
-      "tierMonthly": "Pro 月額",
-      "tierSixMonth": "Pro 6ヶ月",
-      "tierYearly": "Pro 年額",
-      "expires": "有効期限",
-      "expiresIn": "{days}日後",
-      "expired": "期限切れ",
-      "active": "有効",
-      "expiringSoon": "もうすぐ期限切れ",
-      "contactTitle": "連絡先情報",
-      "contactMethod": "連絡方法",
-      "contactValue": "連絡先",
-      "verified": "確認済み",
-      "unverified": "未確認",
-      "changeContact": "変更",
-      "saveContact": "保存",
-      "cancelEdit": "キャンセル",
-      "subscriptionTitle": "サブスクリプションの管理",
-      "managePaddle": "Paddleで管理",
-      "manageAppStore": "App Storeで管理",
-      "managePlayStore": "Google Playで管理",
-      "invoicesTitle": "請求書",
-      "downloadInvoice": "PDFをダウンロード",
-      "noInvoices": "請求書がありません",
-      "notFound": "アカウントが見つかりません",
-      "fetchError": "アカウントの読み込みに失敗しました"
-    },
-    "ticket": {
-      "title": "リクエストを送信",
-      "subtitle": "24時間以内にご返答します",
-      "topicLabel": "トピック",
-      "topics": {
-        "connection_issues": "接続の問題",
-        "subscription_billing": "サブスクリプションと請求",
-        "account": "アカウント",
-        "feature_request": "機能リクエスト",
-        "other": "その他"
+  "checkout": {
+    "title": "Doppler Pro にアップグレード",
+    "subtitle": "プランを選択して、Paddle で安全にお支払いください。",
+    "accountLabel": "アカウント",
+    "monthly": "月額",
+    "sixMonth": "6ヶ月",
+    "yearly": "年額",
+    "perMonth": "/月",
+    "save": "割引",
+    "bestValue": "お得",
+    "subscribe": "今すぐ登録",
+    "processing": "処理中...",
+    "features": "Pro 機能",
+    "feat1": "世界中のプレミアムサーバー",
+    "feat2": "Smart Route テクノロジー",
+    "feat3": "常時接続 VPN",
+    "feat4": "無制限セッション",
+    "feat5": "優先サポート",
+    "promoPlaceholder": "プロモコード",
+    "promoApply": "適用",
+    "promoRemove": "削除",
+    "promoOff": "割引",
+    "promoInvalid": "無効なプロモコード",
+    "promoFailed": "コードの検証に失敗しました",
+    "footerNote": "Paddle による安全な決済。いつでもキャンセル可能。",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "error": "エラーが発生しました。もう一度お試しください。",
+    "invalidAccount": "無効なアカウント ID",
+    "successTitle": "お支払い完了！",
+    "successDescription": "Doppler Pro サブスクリプションが有効になりました。",
+    "returnToApp": "アプリに戻る",
+    "closeTab": "You can close this tab.",
+    "verifying": "Verifying payment...",
+    "verifyingDescription": "Please wait while we confirm your payment.",
+    "errorTitle": "Payment Issue",
+    "errorDescription": "We couldn't confirm your payment. If you were charged, your subscription will activate shortly.",
+    "apply": "Apply",
+    "promoApplied": "applied",
+    "promoError": "Invalid promo code"
+  },
+  "technicalHowItWorks": {
+    "title": "Dopplerがトラフィックを守る仕組み",
+    "subtitle": "接続は暗号化され、Dopplerのエッジネットワークを経由します。ログは一切残しません。",
+    "flow": {
+      "step1": {
+        "title": "あなたのデバイス",
+        "description": "アカウント不要で、あなたのデバイスから接続が始まります"
       },
-      "subjectLabel": "件名",
-      "subjectPlaceholder": "問題の簡単な説明",
-      "descriptionLabel": "詳細",
-      "descriptionPlaceholder": "何が起きたか教えてください...",
-      "emailLabel": "連絡先メール",
-      "emailPlaceholder": "your@email.com",
-      "accountIdLabel": "アカウントID（任意）",
-      "submit": "リクエストを送信",
-      "submitting": "送信中...",
-      "successTitle": "リクエスト送信完了",
-      "successMessage": "チケット {ticketNumber} を作成しました。24時間以内に {email} へご返答します。",
-      "errorGeneric": "送信に失敗しました。もう一度お試しください。",
-      "close": "閉じる"
+      "step2": {
+        "title": "VLESS-Reality トンネル",
+        "description": "トラフィックは暗号化され、通常の HTTPS に偽装されます"
+      },
+      "step3": {
+        "title": "Doppler Edge Node",
+        "description": "ログを一切残さないインフラ経由でルーティングされます"
+      },
+      "step4": {
+        "title": "オープンインターネット",
+        "description": "自由に閲覧できます — 何にアクセスしているかは誰にも見えません"
+      }
+    }
+  },
+  "useCases": {
+    "title": "Dopplerを使う人",
+    "subtitle": "普通のVPNでは足りない人のために。",
+    "items": {
+      "restricted": {
+        "title": "規制ネットワークの利用者",
+        "description": "政府やISPがVPNをブロックしても自由に接続。Dopplerのプロトコルは検閲を回避します。"
+      },
+      "travelers": {
+        "title": "公共Wi-Fiの旅行者",
+        "description": "ホテル、空港、カフェ — トラフィックは暗号化され、DNSクエリも保護されます。ネットワーク上の誰にも見えません。"
+      },
+      "journalists": {
+        "title": "ジャーナリスト・研究者",
+        "description": "ブロックされた情報源にアクセスし、通信パターンを露出せずに通信。アカウント不要だから身元の痕跡もなし。"
+      },
+      "developers": {
+        "title": "開発者・リモートワーカー",
+        "description": "速度制限やブロックを受けない安定した暗号化トンネル。企業や国家のファイアウォールを越えて確実に動作します。"
+      }
+    }
+  },
+  "comparisonTable": {
+    "title": "Doppler vs 従来のVPN",
+    "subtitle": "VPNは全て同じではありません。",
+    "headers": {
+      "feature": "項目",
+      "traditional": "従来のVPN",
+      "doppler": "Doppler"
     },
-    "restore": {
-      "title": "アカウントを復元",
-      "subtitle": "アカウントに登録されたメールまたはTelegramを入力してください",
-      "emailTab": "メール",
-      "telegramTab": "Telegram",
-      "emailPlaceholder": "your@email.com",
-      "sendAccountId": "アカウントIDを送信",
-      "sending": "送信中...",
-      "emailSuccess": "このメールのアカウントが存在する場合、アカウントIDを送信しました。受信トレイをご確認ください。",
-      "emailNotFound": "アカウントが見つかりません。サポートが必要ですか？",
-      "submitTicket": "チケットを送信",
-      "telegramMessage": "TelegramボットからアカウントIDを確認できます",
-      "openTelegramBot": "Telegramボットを開く",
-      "appSubscribers": "App StoreまたはGoogle Playで購入しましたか？",
-      "appStoreLink": "App Storeのサブスクリプションを管理",
-      "playStoreLink": "Google Playのサブスクリプションを管理",
-      "close": "閉じる"
-    },
-    "business": {
-      "title": "ビジネスに関するお問い合わせ",
-      "subtitle": "パートナーシップ、プレス、エンタープライズ"
+    "rows": {
+      "account": {
+        "feature": "アカウント",
+        "traditional": "メール+パスワード",
+        "doppler": "不要"
+      },
+      "fingerprint": {
+        "feature": "トラフィック指紋",
+        "traditional": "DPIで検知可能",
+        "doppler": "HTTPSに偽装"
+      },
+      "protocol": {
+        "feature": "プロトコル",
+        "traditional": "OpenVPN / WireGuard",
+        "doppler": "VLESS-Reality"
+      },
+      "dns": {
+        "feature": "DNS暗号化",
+        "traditional": "場合による",
+        "doppler": "常時"
+      },
+      "censorship": {
+        "feature": "検閲耐性",
+        "traditional": "限定的",
+        "doppler": "標準搭載"
+      },
+      "logs": {
+        "feature": "アクティビティログ",
+        "traditional": "まちまち",
+        "doppler": "一切なし"
+      }
+    }
+  },
+  "censorshipResistance": {
+    "title": "政府の検閲を突破するために設計",
+    "subtitle": "DopplerはTSPU、DPI、TLSフィンガープリント、アクティブプロービングを打ち破ります — ロシア、中国、イランがVPNをブロックするために使用しているシステムです。",
+    "learnMore": "技術ガイドの全文を読む",
+    "items": {
+      "dpi": {
+        "title": "ディープパケットインスペクションを突破",
+        "description": "TSPUやDPIハードウェアは機械学習でVPNトラフィックパターンを検出します。VLESS-Realityはゼロシグネチャ — 検出するものがありません。"
+      },
+      "tls": {
+        "title": "本物のTLSハンドシェイク",
+        "description": "Dopplerは実際のWebサイト証明書を使って本物のTLSハンドシェイクを行います。DPIには通常のHTTPS接続に見え、VPNトンネルとは認識されません。"
+      },
+      "fingerprint": {
+        "title": "アクティブプロービングを通過",
+        "description": "検閲当局がサーバーを探査すると、正規のWebサイトとして応答します。認証されたクライアントだけがVPNトンネルを起動できます。"
+      },
+      "regions": {
+        "title": "ロシアにブロックされても稼働中",
+        "description": "当サイトのドメインはRoskomnadzorのブロックリストに掲載されています。それでも稼働中です。ウェブサイトがブロックされた場合はTelegramボットからダウンロードできます。"
+      }
     }
   },
   "bypassCensorship": {
@@ -1360,6 +1520,24 @@
         "fingerprint": "なし"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPNは政府の検閲を回避できますか？",
+        "answer": "はい。DopplerはVLESS-Realityを使用し、VPNトラフィックを通常のHTTPSと区別できなくします。検出可能なVPN署名なしでDPI、TSPU、グレートファイアウォールを回避します。"
+      },
+      "q2": {
+        "question": "Doppler VPNはロシア、中国、イランで機能しますか？",
+        "answer": "はい。Dopplerは検閲地域向けに特別に構築されています。当社のドメインはRoskomnadzorによってブロックされており、当社の技術が機能することを証明しています。"
+      },
+      "q3": {
+        "question": "検閲回避においてVLESS-RealityがOpenVPNやWireGuardより優れている点は？",
+        "answer": "OpenVPNとWireGuardにはDPIシステムが即座に識別する特徴的なパケット署名があります。VLESS-Realityは実際のウェブサイト証明書を使用して本物のTLSハンドシェイクを実行します。"
+      },
+      "q4": {
+        "question": "Dopplerのサーバーがブロックされた場合どうなりますか？",
+        "answer": "DopplerはサーバーエンドポイントとIPアドレスを自動的にローテーションします。1つのエンドポイントが特定されても、ネットワークは適応します。Telegramボットが更新されたサーバー設定への即時アクセスを提供します。"
+      }
+    },
     "cta": {
       "title": "誰も見捨てない",
       "subtitle": "Doppler VPNは制限されたネットワークのために特別に構築されました。インフラの改善、サーバーのローテーション、プロトコルの更新を継続的に行い、あらゆる新しいブロック手法に先手を打ちます。あなたのインターネットの自由に妥協はありません。",
@@ -1369,161 +1547,6 @@
       "telegramChannelRu": "更新情報（ロシア語）",
       "telegramChannelEn": "更新情報（英語）",
       "button": "Doppler VPNをダウンロード"
-    }
-  },
-  "trustIndicators": {
-    "items": {
-      "noAccount": {
-        "label": "アカウント不要",
-        "description": "デバイスがあなたのIDです"
-      },
-      "zeroLogs": {
-        "label": "ログ記録ゼロ",
-        "description": "閲覧内容は私たちにも見えません"
-      },
-      "encryptedDns": {
-        "label": "DNS暗号化",
-        "description": "すべてのクエリを保護"
-      },
-      "dpiBypass": {
-        "label": "DPIバイパス",
-        "description": "トラフィックは通常のHTTPSに見えます"
-      },
-      "freeTrial": {
-        "label": "3日間無料トライアル",
-        "description": "リスクなしで全機能を試せる"
-      }
-    }
-  },
-  "technicalHowItWorks": {
-    "title": "Dopplerがトラフィックを守る仕組み",
-    "subtitle": "接続は暗号化され、Dopplerのエッジネットワークを経由します。ログは一切残しません。",
-    "flow": {
-      "step1": {
-        "title": "あなたのデバイス",
-        "description": "アカウント不要で、あなたのデバイスから接続が始まります"
-      },
-      "step2": {
-        "title": "VLESS-Reality トンネル",
-        "description": "トラフィックは暗号化され、通常の HTTPS に偽装されます"
-      },
-      "step3": {
-        "title": "Doppler Edge Node",
-        "description": "ログを一切残さないインフラ経由でルーティングされます"
-      },
-      "step4": {
-        "title": "オープンインターネット",
-        "description": "自由に閲覧できます — 何にアクセスしているかは誰にも見えません"
-      }
-    }
-  },
-  "censorshipResistance": {
-    "title": "政府の検閲を突破するために設計",
-    "subtitle": "DopplerはTSPU、DPI、TLSフィンガープリント、アクティブプロービングを打ち破ります — ロシア、中国、イランがVPNをブロックするために使用しているシステムです。",
-    "learnMore": "技術ガイドの全文を読む",
-    "items": {
-      "dpi": {
-        "title": "ディープパケットインスペクションを突破",
-        "description": "TSPUやDPIハードウェアは機械学習でVPNトラフィックパターンを検出します。VLESS-Realityはゼロシグネチャ — 検出するものがありません。"
-      },
-      "tls": {
-        "title": "本物のTLSハンドシェイク",
-        "description": "Dopplerは実際のWebサイト証明書を使って本物のTLSハンドシェイクを行います。DPIには通常のHTTPS接続に見え、VPNトンネルとは認識されません。"
-      },
-      "fingerprint": {
-        "title": "アクティブプロービングを通過",
-        "description": "検閲当局がサーバーを探査すると、正規のWebサイトとして応答します。認証されたクライアントだけがVPNトンネルを起動できます。"
-      },
-      "regions": {
-        "title": "ロシアにブロックされても稼働中",
-        "description": "当サイトのドメインはRoskomnadzorのブロックリストに掲載されています。それでも稼働中です。ウェブサイトがブロックされた場合はTelegramボットからダウンロードできます。"
-      }
-    }
-  },
-  "useCases": {
-    "title": "Dopplerを使う人",
-    "subtitle": "普通のVPNでは足りない人のために。",
-    "items": {
-      "restricted": {
-        "title": "規制ネットワークの利用者",
-        "description": "政府やISPがVPNをブロックしても自由に接続。Dopplerのプロトコルは検閲を回避します。"
-      },
-      "travelers": {
-        "title": "公共Wi-Fiの旅行者",
-        "description": "ホテル、空港、カフェ — トラフィックは暗号化され、DNSクエリも保護されます。ネットワーク上の誰にも見えません。"
-      },
-      "journalists": {
-        "title": "ジャーナリスト・研究者",
-        "description": "ブロックされた情報源にアクセスし、通信パターンを露出せずに通信。アカウント不要だから身元の痕跡もなし。"
-      },
-      "developers": {
-        "title": "開発者・リモートワーカー",
-        "description": "速度制限やブロックを受けない安定した暗号化トンネル。企業や国家のファイアウォールを越えて確実に動作します。"
-      }
-    }
-  },
-  "comparisonTable": {
-    "title": "Doppler vs 従来のVPN",
-    "subtitle": "VPNは全て同じではありません。",
-    "headers": {
-      "feature": "項目",
-      "traditional": "従来のVPN",
-      "doppler": "Doppler"
-    },
-    "rows": {
-      "account": {
-        "feature": "アカウント",
-        "traditional": "メール+パスワード",
-        "doppler": "不要"
-      },
-      "fingerprint": {
-        "feature": "トラフィック指紋",
-        "traditional": "DPIで検知可能",
-        "doppler": "HTTPSに偽装"
-      },
-      "protocol": {
-        "feature": "プロトコル",
-        "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
-      },
-      "dns": {
-        "feature": "DNS暗号化",
-        "traditional": "場合による",
-        "doppler": "常時"
-      },
-      "censorship": {
-        "feature": "検閲耐性",
-        "traditional": "限定的",
-        "doppler": "標準搭載"
-      },
-      "logs": {
-        "feature": "アクティビティログ",
-        "traditional": "まちまち",
-        "doppler": "一切なし"
-      }
-    }
-  },
-  "privacyModel": {
-    "title": "保存しないもの",
-    "subtitle": "ポリシーではなく、アーキテクチャによるプライバシー。",
-    "tagline": "持っていないデータは渡しようがありません。",
-    "items": {
-      "browsing": {
-        "title": "閲覧ログなし",
-        "description": "どのサイトを訪問したかは私たちにも見えません"
-      },
-      "ip": {
-        "title": "IPアドレスログなし",
-        "description": "あなたの本当のIPは記録されません"
-      },
-      "dns": {
-        "title": "DNSクエリ保存なし",
-        "description": "暗号化され、名前解決後に即破棄"
-      },
-      "account": {
-        "title": "アカウントDBなし",
-        "description": "デバイス認証のため、個人データの保存が不要です"
-      }
     }
   },
   "about": {
@@ -1727,6 +1750,24 @@
         "description": "ミリタリーグレードの暗号化で保護されました。あなたの実際のIPは隠され、トラフィックは解読不能で、あなたが誰であるかは私たちにすら分かりません。登録不要の真の匿名VPN。"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPNは登録なしでどのように機能しますか？",
+        "answer": "Dopplerはデバイスベースの認証を使用します。アプリを開くと、デバイス上でローカルに暗号鍵が生成されます。この鍵がサーバーであなたを認証します — メール、電話番号、アカウントは不要です。"
+      },
+      "q2": {
+        "question": "アカウントなしのVPNは安全ですか？",
+        "answer": "はい、より安全です。従来のアカウントはハッキングや召喚状の対象となるデータベースを作成します。Dopplerは個人データを保存しません。"
+      },
+      "q3": {
+        "question": "アカウントなしで複数デバイスでDopplerを使えますか？",
+        "answer": "はい。各デバイスが独自の鍵を生成します。サブスクリプションは複数デバイスで機能します。オプションでリカバリーメールでデバイスをリンクできますが、必須ではありません。"
+      },
+      "q4": {
+        "question": "Dopplerはどのデータを収集しますか？",
+        "answer": "Dopplerはメール、電話番号、名前、閲覧履歴、IPログ、接続タイムスタンプを収集しません。保存したことのないデータを物理的に引き渡すことはできません。"
+      }
+    },
     "cta": {
       "title": "あなたを知らないVPNを使いませんか？",
       "subtitle": "登録不要のVPNを選んだ数千人のユーザーに加わりましょう。メール不要、アカウント作成不要、個人データのリスクなし。Dopplerをダウンロードして数秒で接続 — 3日間の無料トライアルから始められます。",
@@ -1901,6 +1942,24 @@
         "description": "フル機能のVLESS-Reality VPN体験がiOS（App Store）、Android（Google Play）、設定ベースアクセス用のTelegramボットで利用可能です。すべてのプラットフォームが同じ最適化されたXray-coreエンジンと同じサーバーインフラを使用します。"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "VLESS-Realityプロトコルとは何ですか？",
+        "answer": "VLESS-Realityは次世代のプロキシプロトコルで、VPNトラフィックを通常のHTTPSブラウジングと区別できなくします。実際のウェブサイト証明書を使用して本物のTLSハンドシェイクを実行します。"
+      },
+      "q2": {
+        "question": "VLESS-RealityはWireGuardより速いですか？",
+        "answer": "VLESS-Realityは最小限のオーバーヘッドでWireGuardと同等の速度です。主な利点は生の速度ではなく検出不能性です — WireGuardはDPIシステムに即座にブロックされます。"
+      },
+      "q3": {
+        "question": "VLESSを使うためにXrayを設定する必要がありますか？",
+        "answer": "Dopplerでは不要です。従来のVLESSセットアップにはJSON設定の編集と鍵管理が必要です。Dopplerはすべての設定を自動的に処理します。"
+      },
+      "q4": {
+        "question": "どのプラットフォームがVLESS-Realityをサポートしていますか？",
+        "answer": "Doppler VPNはiOS（App Store）、Android（Google PlayとAPK）、設定ベースのアクセス用Telegramボットでvless-Realityを提供しています。"
+      }
+    },
     "cta": {
       "title": "そのまま使えるVLESS VPNアプリを試そう",
       "subtitle": "Dopplerをダウンロードして、見えないように設計されたプロトコルVLESS-Realityを体験。ワンタップ。設定不要。妥協なし。",
@@ -1921,178 +1980,111 @@
   },
   "vpnForIos": {
     "metadata": {
-      "title": "iPhone & iPad向けVPN — 登録不要 | Doppler VPN",
-      "description": "iOS向けDoppler VPNをダウンロード — 2026年のiPhone・iPad向け最高のVPN。登録不要、アカウント不要。VLESS-Realityプロトコル、広告ブロッカー、常時接続保護。3日間無料トライアル。"
+      "title": "iPhone & iPad向けDoppler VPN — 高速・プライベート・検閲耐性",
+      "description": "iOS向けDoppler VPNをダウンロード。VLESS-Reality暗号化、登録不要、ロシア・イラン・中国の検閲を突破。3日間無料トライアル。"
     },
     "hero": {
       "title": "iPhone & iPad向けDoppler VPN",
-      "subtitle": "登録不要のセキュアVPN。App Storeからダウンロード。3日間無料トライアル付き。"
+      "subtitle": "iOS向けに構築された、高速・プライベート・検閲耐性VPN。登録不要 — App Storeからダウンロードして数秒で接続。全機能にアクセスできる3日間無料トライアル付き。",
+      "cta": "App Storeからダウンロード"
     },
     "features": {
-      "title": "なぜiOSにDopplerを選ぶのか？",
+      "title": "なぜiOSにDoppler VPNを選ぶのか？",
+      "subtitle": "Doppler VPNは、速度や使いやすさを犠牲にせず真のプライバシーを求めるiPhone・iPadユーザーのためにゼロから設計されています。",
+      "vlessEncryption": {
+        "title": "VLESS-Reality暗号化",
+        "description": "VPNトラフィックを通常のHTTPSブラウジングに偽装する次世代プロトコル。ファイアウォール、DPIシステム、ISP監視ツールから接続が見えません。中国のグレートファイアウォールを突破するのと同じ技術です。"
+      },
       "noRegistration": {
         "title": "登録不要",
-        "description": "VPNを即座に使い始められます — メール、電話番号、アカウント作成は不要。ダウンロードして接続するだけ。"
+        "description": "メール、電話番号、アカウント作成は一切不要。アプリをダウンロードして即座に接続するだけ。Dopplerはデバイスベースの認証を使用しているため、最初のタップからあなたのアイデンティティは完全にプライベートです。"
       },
-      "vlessProtocol": {
-        "title": "VLESS-Realityプロトコル",
-        "description": "VPNトラフィックを通常のHTTPSブラウジングに偽装する次世代暗号化。ファイアウォールやDPIシステムに検出されません。"
+      "oneTapConnect": {
+        "title": "ワンタップ接続",
+        "description": "ボタンを1回押すだけで、Dopplerが自動的に最速のサーバーを選択し、暗号化トンネルを確立し、すべてのトラフィックを保護します。スマートサーバー選択が速度と信頼性を最適化します。"
       },
-      "adBlocker": {
-        "title": "内蔵広告ブロッカー",
-        "description": "DNSレベルで煩わしい広告、トラッカー、悪意あるドメインをブロック。データ使用量を抑えた高速ブラウジング。"
+      "bypassCensorship": {
+        "title": "検閲とDPIを突破",
+        "description": "厳格なインターネット検閲がある国 — ロシア、イラン、中国など — で動作するよう設計。VLESS-RealityがVPNトラフィックを通常のウェブブラウジングと区別不可能にし、TSPUやGFWを無力化します。"
       },
-      "alwaysOn": {
-        "title": "常時接続VPN",
-        "description": "Wi-Fiとモバイルデータの切り替え時に自動再接続。24時間365日接続を保護します。"
+      "noLogs": {
+        "title": "厳格なノーログポリシー",
+        "description": "Dopplerはブラウジングデータを収集・保存・共有しません。接続ログなし、トラフィックログなし、DNSクエリログなし。識別情報を一切収集しないため、あなたを特定することは不可能です。"
       },
-      "smartRouting": {
-        "title": "スマートルーティング",
-        "description": "インテリジェントなサーバー選択が最速のノードを選択。ストリーミング、ゲーム、日常のブラウジングに最適化。"
+      "globalServers": {
+        "title": "世界6拠点のサーバー",
+        "description": "ヨーロッパをはじめ複数の国のサーバーに接続可能。各サーバーはVLESS-Realityを実行し、最低遅延・最高スループットのための最適化ルーティングを備えています。"
       },
-      "dnsProtection": {
-        "title": "DNS保護",
-        "description": "暗号化されたDNSクエリがISPによるウェブサイト閲覧の監視を防止。完全なDNSリーク保護を搭載。"
+      "freeTrial": {
+        "title": "3日間無料トライアル",
+        "description": "Doppler VPNの全機能に3日間無料でアクセス — 事前のクレジットカード登録は不要。トライアル後は、月額$3.33からの月額・6ヶ月・年額プランからお選びください。"
+      },
+      "iphoneIpad": {
+        "title": "iPhone & iPadに対応",
+        "description": "AppleのNetwork Extensionフレームワークで構築されたネイティブiOSアプリ。iPhone（8以降）、全iPadモデル、iPadアプリ互換性によるApple Silicon Macをフルサポート。iPadOS Split Viewとマルチタスクに対応。"
       }
     },
     "howItWorks": {
-      "title": "iOSでの使い方",
-      "subtitle": "アカウント作成なし、メールなし、電話番号なし — 簡単4ステップ。",
+      "title": "iPhoneでVPNを設定する方法",
+      "subtitle": "30秒以内に接続完了 — 技術的な知識は不要です。",
       "step1": {
         "title": "App Storeからダウンロード",
-        "description": "「Doppler VPN」で検索するか、下のリンクをタップ。ダウンロードは無料、アプリサイズは30 MB未満です。"
+        "description": "App Storeで「Doppler VPN」を検索するか、下のダウンロードボタンをタップ。ダウンロードは無料、アプリサイズは30 MB未満。iOS 16以降に対応。"
       },
       "step2": {
         "title": "アプリを開く",
-        "description": "Doppler VPNを起動。サインアップ画面も登録フォームもありません。アプリはすぐに使えます。"
+        "description": "iPhoneまたはiPadでDoppler VPNを起動。サインアップ画面も登録フォームもメール認証もありません。デバイスベースの認証により、アカウントは自動的に作成されます。"
       },
       "step3": {
-        "title": "接続をタップ",
-        "description": "接続ボタンを押すと、Dopplerが自動的に最適なサーバーを選択し、セキュアなVLESS-Realityトンネルを確立します。"
+        "title": "プランを選択",
+        "description": "3日間無料トライアルを開始するか、サブスクリプションプランを選択。月額（$6.99）、6ヶ月（$29.99）、年額（$39.99）のオプションがあります。App Storeからサブスクリプションを直接管理できます。"
       },
       "step4": {
-        "title": "安全にブラウジング",
-        "description": "以上です。トラフィックは暗号化され、IPは隠され、広告はブロックされます。あらゆるアプリやウェブサイトを自由に利用できます。"
-      }
-    },
-    "iosFeatures": {
-      "title": "iOS固有の機能",
-      "subtitle": "Appleエコシステム向けにネイティブ構築。深いシステム統合を実現。",
-      "networkExtension": {
-        "title": "Network Extension（システムレベルVPN）",
-        "description": "DopplerはAppleのNetwork Extensionフレームワークを使用し、真のシステムレベルVPNとして動作します。ブラウザトラフィックだけでなく、すべてのアプリのすべてのトラフィックが暗号化トンネルを通過します。Appleがエンタープライズ VPNソリューションに求めるのと同じ保護を提供します。"
-      },
-      "alwaysOnVpn": {
-        "title": "常時接続VPN",
-        "description": "常時接続モードを有効にすると、接続が切断されるたびにDopplerが自動的に再接続します。Wi-Fiからモバイルデータへの切り替え時やスリープからの復帰時も、VPNは1秒以内に再確立されるため、無防備な状態になることはありません。"
-      },
-      "perAppVpn": {
-        "title": "アプリ別VPNサポート",
-        "description": "どのアプリをVPNトンネル経由にし、どのアプリを直接接続にするか選択可能。バンキングアプリはローカルネットワークで維持しながら、ブラウザやメッセージングアプリをVPNで保護できます。"
-      },
-      "widget": {
-        "title": "ホーム画面ウィジェット",
-        "description": "Dopplerウィジェットをホーム画面やロック画面に追加して、接続状態の即時確認とワンタップ切り替えが可能。現在のサーバー、接続時間、保護ステータスを一目で確認できます。"
-      },
-      "ipadSplitView": {
-        "title": "iPad Split View対応",
-        "description": "iPadマルチタスキングに完全対応。Split ViewやSlide OverでDoppler VPNを他のアプリと併用可能。フォアグラウンドのアプリに関係なく、ステータスバーにVPNステータスが常に表示されます。"
-      }
-    },
-    "privacy": {
-      "title": "Appleデバイスでのプライバシー",
-      "subtitle": "DopplerはAppleが既に保護しているものを補完し、VPNが設計された目的の隙間を埋めます。",
-      "intro": "Appleはデバイスレベルのプライバシーで業界をリードしています — App Tracking Transparency、メールプライバシー保護、SafariのIntelligent Tracking Prevention。しかしAppleでも保護できないレイヤーがあります：あなたのネットワークトラフィックです。",
-      "appleProtects": {
-        "title": "Appleが保護するもの",
-        "item1": "アプリレベルのトラッキング（ATTプロンプト）",
-        "item2": "デバイス上のデータ暗号化（Secure Enclave）",
-        "item3": "Safariトラッカーブロック",
-        "item4": "メールピクセルトラッキング防止"
-      },
-      "dopplerAdds": {
-        "title": "Doppler VPNが加えるもの",
-        "item1": "すべてのウェブサイトとサービスから実際のIPアドレスを隠す",
-        "item2": "VLESS-Reality（検出不可）ですべてのネットワークトラフィックを暗号化",
-        "item3": "DNSレベルのトラッキングと広告ドメインをブロック",
-        "item4": "ISPのトラフィック監視と帯域制限を防止"
-      },
-      "noLogs": "Dopplerはデバイスベースの認証を使用しています — アカウントなし、メールなし、ログなし。そもそも識別情報を収集していないため、あなたを特定することは不可能です。"
-    },
-    "compatibility": {
-      "title": "システム要件と互換性",
-      "os": {
-        "label": "オペレーティングシステム",
-        "value": "iOS 16.0以降"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8以降（iOS 16対応の全モデル）"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "iPadOS 16以降を搭載した全iPadモデル"
-      },
-      "mac": {
-        "label": "Mac（Apple Silicon）",
-        "value": "M1、M2、M3、M4 Mac（iPadアプリ互換性経由）"
-      },
-      "size": {
-        "label": "アプリサイズ",
-        "value": "30 MB未満"
-      },
-      "battery": {
-        "label": "バッテリー影響",
-        "value": "最小限 — VLESSは低CPU負荷の軽量プロトコル"
-      },
-      "data": {
-        "label": "データオーバーヘッド",
-        "value": "非暗号化ブラウジングと比較して2%未満の追加データ使用量"
+        "title": "接続をタップ",
+        "description": "接続ボタンを押すだけ。Dopplerが自動的に最適なサーバーを選択し、暗号化されたVLESS-Realityトンネルを確立し、すべてのトラフィックをルーティングします。IPは隠され、データは暗号化されます。"
       }
     },
     "faq": {
-      "title": "よくある質問",
+      "title": "よくある質問 — iOS向けDoppler VPN",
       "q1": {
-        "question": "Doppler VPNにはiOSで無料トライアルがありますか？",
-        "answer": "はい。すべての新規ユーザーに全機能アクセス付きの3日間無料トライアルを提供しています。トライアル後、月額、6ヶ月、年額から最適なプランをお選びください。"
+        "question": "Doppler VPNはiPadで使えますか？",
+        "answer": "はい。Doppler VPNはiPadOS 16以降を搭載した全iPadモデルで動作します。Split ViewやSlide Overなど、iPadのマルチタスク機能に完全対応。サブスクリプションはiPhoneとiPadの両方で使用可能 — 同じアカウントで全てのAppleデバイスでご利用いただけます。"
       },
       "q2": {
-        "question": "アカウントの作成は必要ですか？",
-        "answer": "いいえ。Dopplerはデバイスベースの認証を使用しています。登録不要、メール不要、電話番号不要。ダウンロードして接続するだけです。"
+        "question": "iPhoneでVPNを設定するには？",
+        "answer": "iPhoneでのDoppler VPNの設定は30秒以内で完了します：1) App Storeからダウンロード、2) アプリを開く（登録不要）、3) 接続をタップ。Dopplerが技術的な設定をすべて自動処理 — VPNプロファイルの設定、最適なサーバーの選択、暗号化トンネルの確立を行います。"
       },
       "q3": {
-        "question": "Dopplerは中国、ロシア、イランで使えますか？",
-        "answer": "はい。DopplerはVLESS-Realityプロトコルを使用しており、VPNトラフィックを通常のHTTPSに偽装します。これにより、グレートファイアウォールやTSPUなどの検閲システムによる検出とブロックが極めて困難になります。"
+        "question": "Doppler VPNはiOSで無料ですか？",
+        "answer": "Doppler VPNは全機能にアクセスできる3日間の無料トライアルを提供しています。トライアル後は、月額（$6.99）、6ヶ月（$29.99、28%お得）、年額（$39.99、52%お得）の3つのプランからお選びください。すべてのサブスクリプションはApp Storeを通じて管理されます。"
       },
       "q4": {
-        "question": "VPNでiPhoneの速度は低下しますか？",
-        "answer": "ほとんど気になりません。VLESS-Realityは利用可能な中で最も軽量なVPNプロトコルのひとつです。ほとんどのユーザーは5%未満の速度低下です。効率的なパケット処理によりバッテリーへの影響も最小限です。"
+        "question": "ロシア、中国、イランで使えますか？",
+        "answer": "はい。DopplerはVLESS-Realityプロトコルを使用しており、VPNトラフィックを通常のHTTPSウェブブラウジングに偽装します。これにより、ロシアのTSPU、中国のグレートファイアウォール、イランのフィルタリングインフラなどの検閲システムによる検出とブロックが極めて困難になります。Dopplerは検閲が厳しい地域のユーザーのために特別に設計されています。"
       },
       "q5": {
-        "question": "Dopplerはストリーミングアプリで使えますか？",
-        "answer": "はい。Dopplerのスマートルーティングはストリーミングに最適化されています。アプリは動画コンテンツに最適なパフォーマンスのサーバーを自動選択します。"
+        "question": "サブスクリプションをキャンセルするには？",
+        "answer": "iOSでDoppler VPNのサブスクリプションをキャンセルするには：設定を開く > Apple IDをタップ > サブスクリプション > Doppler VPN > サブスクリプションをキャンセル。現在の請求期間終了までアクセスは継続されます。AppleがすべてのPilingを処理 — Dopplerがお支払い情報を保存することはありません。"
       },
       "q6": {
-        "question": "iPadとiPhoneで同時に使えますか？",
-        "answer": "はい。サブスクリプションは複数のAppleデバイスで利用可能です。各デバイスが独自のセキュア接続を持ちます。"
+        "question": "複数のAppleデバイスで1つのアカウントを使えますか？",
+        "answer": "はい。Doppler VPNのサブスクリプションは、iPhone、iPad、iPadアプリ互換性によるApple Silicon Macなど、複数のAppleデバイスで利用可能です。各デバイスが独自のセキュアなVPN接続を持ちます。最大10台のデバイスを1つのアカウントに接続できます。"
       }
     },
     "cta": {
-      "title": "iOS向けDoppler VPNを入手",
-      "subtitle": "登録不要。3日間無料トライアル。数秒で接続。",
-      "downloadIos": "App Storeでダウンロード",
-      "downloadAndroid": "Google Playで入手",
-      "telegramBot": "Telegramボットで利用",
-      "telegramChannelRu": "Telegramチャンネル（RU）",
-      "telegramChannelEn": "Telegramチャンネル（EN）"
+      "title": "iPhone & iPad向けDoppler VPNをダウンロード",
+      "subtitle": "登録不要。全機能にアクセスできる3日間無料トライアル。VLESS-Reality暗号化で接続をプライベートかつ検出不可能に。",
+      "downloadIos": "App Storeからダウンロード",
+      "otherPlatforms": "他のプラットフォームでも利用可能",
+      "downloadsLink": "すべてのダウンロードを表示"
     },
     "related": {
       "noRegistration": "登録不要VPN",
       "noRegistrationDesc": "サインアップやアカウントなしでVPNを利用",
       "vless": "VLESS-Realityプロトコル",
-      "vlessDesc": "VLESSがディープパケットインスペクションを打ち破る仕組みを学ぶ",
+      "vlessDesc": "VLESSがDPIを突破する仕組みを学ぶ",
       "android": "Android向けVPN",
-      "androidDesc": "Google PlayまたはAPKでDoppler VPNを入手"
+      "androidDesc": "Google PlayでDoppler VPNを入手"
     }
   },
   "vpnForAndroid": {
@@ -2103,56 +2095,42 @@
     "hero": {
       "title": "Android向けDoppler VPN",
       "subtitle": "登録不要のVPN。アカウント不要、メール不要、個人データ不要。Google PlayおよびAPKで利用可能。3日間無料トライアル付き。",
-      "googlePlay": "Google Play ストア",
-      "downloadApk": "APKをダウンロード"
+      "cta": "Get it on Google Play"
     },
     "features": {
       "title": "なぜAndroidにDopplerを選ぶのか？",
       "subtitle": "妥協のないプライバシーを求めるAndroidユーザーのために特別に構築。サインアップなし、データ収集なし、制限なし。",
+      "vlessEncryption": {
+        "title": "VLESS-Reality Encryption",
+        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring. The same technology used to bypass the Great Firewall of China."
+      },
       "noRegistration": {
         "title": "登録不要",
         "description": "アプリを開いてすぐに接続。メール、電話番号、アカウント作成は不要。最初のタップからアイデンティティはプライベートのまま。"
       },
-      "vlessReality": {
-        "title": "VLESS-Realityプロトコル",
-        "description": "VPNトラフィックを通常のHTTPSブラウジングに見せるミリタリーグレードの暗号化。DPIシステムや政府のファイアウォールに検出されません。"
+      "oneTapConnect": {
+        "title": "One-Tap Connect",
+        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
       },
-      "adBlocker": {
-        "title": "内蔵広告ブロッカー",
-        "description": "DNSレベルで広告、トラッカー、悪意あるドメインをブロック。高速ブラウジング、データ使用量削減、Androidデバイスのバッテリー持ち改善。"
+      "bypassCensorship": {
+        "title": "Bypass Censorship & DPI",
+        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
       },
-      "alwaysOn": {
-        "title": "常時接続VPN",
-        "description": "Androidネイティブの常時接続VPN機能を使用し、再起動やネットワーク変更後も24時間365日接続を保護します。"
+      "noLogs": {
+        "title": "Strict No-Logs Policy",
+        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
       },
-      "apkSideload": {
-        "title": "APKサイドローディング",
-        "description": "Google Playにアクセスできない場合は APKを直接ダウンロードして手動インストール。ロシア、イラン、中国などの検閲地域のユーザーに最適です。"
+      "globalServers": {
+        "title": "6 Global Server Locations",
+        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
       },
-      "dnsProtection": {
-        "title": "DNS保護",
-        "description": "すべてのDNSクエリが暗号化されセキュアサーバーを経由。DNSリークを防止し、ISPによるウェブサイト閲覧の監視を阻止します。"
-      }
-    },
-    "install": {
-      "title": "2つのインストール方法",
-      "subtitle": "お使いの状況に最適なインストール方法をお選びください。どちらもフル機能のVPN体験を提供します。",
-      "playStore": {
-        "title": "Google Play ストア",
-        "badge": "推奨",
-        "benefit1": "ワンタップインストール、自動アップデート",
-        "benefit2": "Google Play プロテクトで検証済み",
-        "benefit3": "シームレスなサブスクリプション管理",
-        "cta": "Google Playで入手"
+      "freeTrial": {
+        "title": "3-Day Free Trial",
+        "description": "Try Doppler VPN with full access to all features for 3 days. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month. Manage your subscription through Google Play."
       },
-      "apk": {
-        "title": "APK直接ダウンロード",
-        "badge": "制限地域向け",
-        "benefit1": "Google Playがブロックされている地域でも利用可能",
-        "benefit2": "Googleアカウント不要",
-        "benefit3": "Play ストア版と同じ機能",
-        "note": "Google Play ストアが制限されていたり、VPNアプリがストアから削除されているロシア、イラン、中国などの国のユーザーに最適です。",
-        "cta": "Telegramボットでapkを入手"
+      "batteryEfficient": {
+        "title": "Battery-Efficient Background Service",
+        "description": "Doppler uses Android's native Always-On VPN framework with minimal battery impact. Less than 2% additional drain even with 24/7 protection enabled. Optimized for Samsung, Xiaomi, OnePlus, Pixel, and all major Android brands."
       }
     },
     "howItWorks": {
@@ -2175,86 +2153,39 @@
         "description": "接続は暗号化され検出不可能に。あらゆるウェブサイト、アプリ、サービスに制限なくアクセスできます。"
       }
     },
-    "androidFeatures": {
-      "title": "Android固有の機能",
-      "subtitle": "Doppler VPNはAndroidの機能をフル活用し、最も安全でシームレスな体験を提供します。",
-      "alwaysOnVpn": {
-        "title": "常時接続VPN",
-        "description": "Androidの内蔵常時接続VPN設定を有効にして、Dopplerを常に接続状態に。設定 > ネットワークとインターネット > VPN > Doppler VPN > 常時接続をオンに。再起動やネットワーク変更後もデバイスが自動再接続します。"
+    "faq": {
+      "title": "Frequently Asked Questions — Doppler VPN for Android",
+      "q1": {
+        "question": "Does Doppler VPN work on Samsung devices?",
+        "answer": "Yes. Doppler VPN is fully compatible with all Samsung Galaxy phones and tablets running Android 8.0 (Oreo) or later. This includes the Galaxy S series, Galaxy A series, Galaxy Z Fold, Galaxy Z Flip, and Galaxy Tab. Doppler integrates with Samsung's Always-On VPN settings for 24/7 protection."
       },
-      "splitTunneling": {
-        "title": "スプリットトンネリング",
-        "description": "どのアプリをVPN経由にし、どのアプリを通常の接続にするか選択。バンキングアプリは直接接続を維持しながら、ブラウザを保護。Dopplerの設定でアプリ別VPNルールを構成できます。"
+      "q2": {
+        "question": "Does Doppler VPN drain battery?",
+        "answer": "No. Doppler VPN uses less than 2% additional battery even with Always-On VPN enabled. The VLESS-Reality protocol is designed for efficiency with minimal CPU overhead. For the best experience, exclude Doppler from Android's battery optimization in Settings > Apps > Doppler VPN > Battery > Unrestricted."
       },
-      "quickSettings": {
-        "title": "クイック設定タイル",
-        "description": "Doppler VPNをAndroidのクイック設定パネルに追加。スワイプとタップひとつで接続・切断 — アプリを開く必要はありません。Android 8.0以上で利用可能。"
+      "q3": {
+        "question": "How do I set up VPN on Android?",
+        "answer": "Setting up Doppler VPN on Android takes under 30 seconds: 1) Download from Google Play, 2) Open the app (no registration needed), 3) Tap Connect. Doppler handles all the technical setup automatically — it configures the VPN profile, selects the best server, and establishes an encrypted tunnel."
       },
-      "batteryOptimization": {
-        "title": "バッテリー最適化",
-        "description": "Dopplerのバッテリー使用量は最小限です。最適な常時接続体験のため、Androidのバッテリー最適化からDopplerを除外してください：設定 > アプリ > Doppler VPN > バッテリー > 無制限。これにより、バックグラウンドでVPN接続が切断されるのを防ぎます。"
+      "q4": {
+        "question": "Does it work in Russia, China, and Iran?",
+        "answer": "Yes. Doppler uses the VLESS-Reality protocol, which disguises VPN traffic as regular HTTPS web browsing. This makes it extremely difficult for censorship systems like Russia's TSPU, China's Great Firewall, or Iran's filtering infrastructure to detect and block. Doppler is specifically designed for users in heavily censored regions."
       },
-      "androidTv": {
-        "title": "Android TVサポート",
-        "description": "Android TVやTVボックスにDoppler VPN APKをサイドロードして、ストリーミングトラフィックを保護。同じVLESS-Reality暗号化で大画面からジオブロックされたコンテンツにアクセスできます。"
-      }
-    },
-    "sideloading": {
-      "title": "APKサイドローディングガイド",
-      "badge": "検閲地域向け",
-      "intro": "Google Playが制限されている国やVPNアプリがストアから削除されている場合、APKファイルからDoppler VPNを直接インストールできます。以下の手順に従ってください。",
-      "step1": {
-        "title": "提供元不明のアプリを許可",
-        "description": "設定 > アプリ > 特別なアプリアクセス > 不明なアプリのインストールに移動。ブラウザまたはファイルマネージャーを選択し、「この提供元のアプリを許可」をオンに。"
+      "q5": {
+        "question": "How do I cancel my subscription?",
+        "answer": "To cancel your Doppler VPN subscription on Android: Open Google Play > tap your profile icon > Payments & subscriptions > Subscriptions > Doppler VPN > Cancel subscription. Your access continues until the end of the current billing period."
       },
-      "step2": {
-        "title": "APKをダウンロード",
-        "description": "公式Telegramボット @dopplercreatebot から最新のDoppler VPN APKを入手。常に正規の改変されていないファイルを確実に取得できます。"
-      },
-      "step3": {
-        "title": "APKをインストール",
-        "description": "ダウンロードした.apkファイルを開き「インストール」をタップ。Androidが不明なアプリについての警告を表示する場合がありますが、サイドロードアプリでは通常のことです。"
-      },
-      "step4": {
-        "title": "確認して接続",
-        "description": "Doppler VPNを開き、アプリが正常に動作することを確認。アカウントや登録を要求されることなく、接続をタップするだけで利用可能です。"
-      },
-      "security": {
-        "title": "セキュリティに関する注意",
-        "description": "Doppler VPN APKは公式Telegramボット（@dopplercreatebot）または公式ウェブサイト（www.dopplervpn.org）からのみダウンロードしてください。サードパーティのソースからのAPKファイルは絶対にインストールしないでください — マルウェアや改変されたコードが含まれている可能性があります。"
-      }
-    },
-    "requirements": {
-      "title": "システム要件",
-      "os": {
-        "title": "オペレーティングシステム",
-        "value": "Android 8.0（Oreo）以上"
-      },
-      "battery": {
-        "title": "バッテリー影響",
-        "value": "最小限 — 常時接続VPN有効時でも2%未満の追加バッテリー消費"
-      },
-      "storage": {
-        "title": "ストレージ",
-        "value": "アプリサイズ15 MB未満、接続時のRAM使用量5 MB未満"
-      },
-      "permissions": {
-        "title": "必要な権限",
-        "value": "VPN接続権限のみ — 連絡先、写真、ファイルへのアクセスなし"
-      },
-      "compatibility": {
-        "title": "対応デバイス"
+      "q6": {
+        "question": "Can I use Doppler VPN on Android TV?",
+        "answer": "Yes. You can install Doppler VPN on Android TV devices and TV boxes to protect your streaming traffic. Access geo-restricted content on the big screen with the same VLESS-Reality encryption used on mobile."
       }
     },
     "cta": {
       "title": "今すぐAndroid向けDoppler VPNを入手",
       "subtitle": "プライベートで検出不可能。登録不要、アカウント不要、データ収集なし。3日間無料トライアル。Google PlayまたはAPK（制限地域向け）からダウンロード。",
-      "googlePlay": "Google Play ストア",
-      "downloadApk": "APKをダウンロード",
-      "alsoOnIos": "iOSでも利用可能",
-      "telegramBot": "Telegramボット",
-      "telegramChannelRu": "Telegramチャンネル（RU）",
-      "telegramChannelEn": "Telegramチャンネル（EN）"
+      "downloadAndroid": "Get it on Google Play",
+      "otherPlatforms": "Available on other platforms",
+      "downloadsLink": "View all downloads"
     },
     "related": {
       "noRegistration": "登録不要VPN",
@@ -2263,6 +2194,226 @@
       "vlessDesc": "VLESSがディープパケットインスペクションを打ち破る仕組みを学ぶ",
       "ios": "iOS向けVPN",
       "iosDesc": "iPhone & iPad向けDoppler VPNをダウンロード"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Doppler VPN Mac版 — 高速・プライベート・検閲耐性VPN",
+      "description": "Mac App StoreからDoppler VPN for macOSをダウンロード。VLESS-Reality暗号化、登録不要、検閲を突破。Apple Siliconネイティブ対応。"
+    },
+    "hero": {
+      "title": "Doppler VPN Mac版",
+      "subtitle": "macOS向けにネイティブ開発された、高速・プライベート・検閲耐性VPN。登録不要 — Mac App Storeからダウンロードして数秒で接続。iPhone、iPad、Macでサブスクリプションを共有できます。",
+      "cta": "Mac App Storeでダウンロード"
+    },
+    "features": {
+      "title": "macOS向けDoppler VPNを選ぶ理由",
+      "subtitle": "Doppler VPNは、本格的なプライバシー保護、検閲回避、Appleエコシステムとのシームレスな連携を必要とするMacユーザーのために設計されたネイティブmacOSアプリケーションです。",
+      "nativeMac": {
+        "title": "ネイティブmacOSアプリ",
+        "description": "AppleのNetwork Extensionフレームワークを使用してmacOS向けに専用開発。Apple Silicon（M1/M2/M3/M4）とIntel Macの両方でネイティブ動作します。macOSのシステム設定、メニューバー、通知センターと統合し、シームレスなデスクトップVPN体験を提供します。"
+      },
+      "macAppStore": {
+        "title": "Mac App Storeで配信",
+        "description": "Mac App Storeから直接ダウンロード — Appleによる審査・安全性の検証済み。自動アップデート、簡単インストール、Apple IDによるシームレスなサブスクリプション管理。サイドローディングや手動設定は不要です。"
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality暗号化",
+        "description": "VPNトラフィックを通常のHTTPS通信に偽装する次世代プロトコル。ファイアウォール、DPI（ディープパケットインスペクション）システム、ISPの監視ツールから接続を隠します。中国のグレートファイアウォールを突破するのと同じ技術です。"
+      },
+      "noRegistration": {
+        "title": "登録不要",
+        "description": "メールアドレス、電話番号、アカウント作成は一切不要。アプリをダウンロードしてすぐに接続できます。Dopplerはデバイスベースの認証を使用するため、最初のクリックからあなたの身元は完全にプライベートです。"
+      },
+      "oneClickConnect": {
+        "title": "ワンクリック接続",
+        "description": "ボタンを1つクリックするだけで、Dopplerが自動的に最速のサーバーを選択し、暗号化トンネルを確立し、Macのすべてのトラフィックを保護します。スマートサーバー選択が速度と信頼性を最適化 — メニューバーから操作できます。"
+      },
+      "bypassCensorship": {
+        "title": "検閲とDPIを突破",
+        "description": "ロシア、イラン、中国など、厳格なインターネット検閲のある国で動作するよう設計されています。VLESS-RealityがVPNトラフィックを通常のWeb閲覧と見分けがつかなくし、TSPUやGFWを突破します。"
+      },
+      "noLogs": {
+        "title": "厳格なノーログポリシー",
+        "description": "Dopplerは閲覧データを収集、保存、共有することは一切ありません。接続ログ、トラフィックログ、DNSクエリログはなし。識別情報を一切収集しないため、あなたを特定することはできません。"
+      },
+      "crossDevice": {
+        "title": "すべてのAppleデバイスで同期",
+        "description": "1つのサブスクリプションでMac、iPhone、iPadをカバー。アカウントとサブスクリプション状況はすべてのAppleデバイス間で自動同期されます。再登録や再設定なしでデバイスを切り替え — どこでもVPNが使えます。"
+      }
+    },
+    "howItWorks": {
+      "title": "MacでのVPN設定方法",
+      "subtitle": "1分以内に接続完了 — 専門知識は不要です。",
+      "step1": {
+        "title": "Mac App Storeからダウンロード",
+        "description": "Mac App Storeで「Doppler VPN」を検索するか、下のダウンロードボタンをクリックしてください。アプリは無料でダウンロードでき、macOS 14 Sonoma以降で動作します。Apple SiliconとIntel Macの両方に対応。"
+      },
+      "step2": {
+        "title": "アプリを開く",
+        "description": "MacでDoppler VPNを起動します。サインアップ画面、登録フォーム、メール認証はありません。デバイスベースの認証により、アカウントが自動的に作成されます。"
+      },
+      "step3": {
+        "title": "プランを選択",
+        "description": "3日間の無料トライアルを開始するか、サブスクリプションプランを選択します。月額（$6.99）、6ヶ月（$29.99）、年額（$39.99）のオプションがあります。サブスクリプションはApp Storeから直接管理できます。"
+      },
+      "step4": {
+        "title": "接続をクリック",
+        "description": "接続ボタンを押します。Dopplerが自動的に最適なサーバーを選択し、暗号化されたVLESS-Realityトンネルを確立し、すべてのトラフィックをルーティングします。IPアドレスが隠され、データが暗号化されます。"
+      }
+    },
+    "faq": {
+      "title": "よくある質問 — Doppler VPN Mac版",
+      "q1": {
+        "question": "Doppler VPNはApple Silicon Macで動作しますか？",
+        "answer": "はい。Doppler VPNはApple Silicon（M1、M2、M3、M4）およびIntelベースのMacでネイティブに動作します。アプリは両方のアーキテクチャに最適化されたユニバーサルバイナリで、最大のパフォーマンスとMacBookラップトップでの最小限のバッテリー消費を実現します。"
+      },
+      "q2": {
+        "question": "iPhone、iPad、Macで同じアカウントを使えますか？",
+        "answer": "はい。Doppler VPNのサブスクリプションは、iPhone、iPad、MacなどすべてのAppleデバイスで利用できます。各デバイスに個別の安全なVPN接続が提供されます。1つのアカウントに最大10台のデバイスを接続でき、サブスクリプション状況はApple ID経由で自動的に同期されます。"
+      },
+      "q3": {
+        "question": "macOSでVPNを設定するにはどうすればよいですか？",
+        "answer": "MacでのDoppler VPNの設定は1分以内で完了します：1) Mac App Storeからダウンロード、2) アプリを開く（登録不要）、3) 接続をクリック。Dopplerがすべての技術的な設定を自動的に処理します — VPNプロファイルの構成、最適なサーバーの選択、暗号化トンネルの確立を行います。"
+      },
+      "q4": {
+        "question": "Macの動作が遅くなりますか？",
+        "answer": "Doppler VPNはパフォーマンスへの影響を最小限に抑えるよう設計されています。ネイティブmacOSアプリはAppleのNetwork Extensionフレームワークを使用して効率的にトラフィックを処理します。Apple Silicon Macでは、VPN接続中のCPU使用率は1%未満です。サーバー選択は最低レイテンシに最適化されています。"
+      },
+      "q5": {
+        "question": "Doppler VPNはMac App Storeにありますか？",
+        "answer": "はい。Doppler VPNはMac App Storeで無料ダウンロードできます。Appleによる審査・承認済みです。「Doppler VPN」で検索するか、ダウンロードページの直接リンクをご利用ください。アップデートはApp Storeを通じて自動的に配信されます。"
+      },
+      "q6": {
+        "question": "ロシア、中国、イランで使えますか？",
+        "answer": "はい。DopplerはVLESS-Realityプロトコルを使用し、VPNトラフィックを通常のHTTPS Web閲覧に偽装します。これにより、ロシアのTSPU、中国のグレートファイアウォール、イランのフィルタリングインフラなどの検閲システムが検出・ブロックすることが極めて困難になります。Dopplerは検閲の厳しい地域のユーザー向けに特別に設計されています。"
+      }
+    },
+    "cta": {
+      "title": "Doppler VPN Mac版をダウンロード",
+      "subtitle": "登録不要。3日間の無料トライアルで全機能にアクセス。VLESS-Reality暗号化が接続をプライベートかつ検出不可能に保ちます。",
+      "downloadMac": "Mac App Storeでダウンロード",
+      "otherPlatforms": "他のプラットフォームでも利用可能",
+      "downloadsLink": "すべてのダウンロードを見る"
+    },
+    "related": {
+      "noRegistration": "登録不要VPN",
+      "noRegistrationDesc": "サインアップやアカウント不要でVPNを利用",
+      "vless": "VLESS-Realityプロトコル",
+      "vlessDesc": "VLESSがDPIを突破する仕組み",
+      "windows": "Windows向けVPN",
+      "windowsDesc": "Doppler VPN Windows版をダウンロード"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Doppler VPN Windows版 — 高速・プライベート・検閲耐性VPN",
+      "description": "Doppler VPN for Windowsをダウンロード。VLESS-Reality暗号化、登録不要、検閲を突破。x64およびARM64 PCに対応。"
+    },
+    "hero": {
+      "title": "Doppler VPN Windows版",
+      "subtitle": "Windows向けに開発された、高速・プライベート・検閲耐性VPN。登録不要 — インストーラーをダウンロードして数秒で接続。x64とARM64の両方のPCに対応し、自動アップデート付き。",
+      "ctaX64": "Windows版をダウンロード（x64）",
+      "ctaArm64": "Windows版をダウンロード（ARM64）"
+    },
+    "features": {
+      "title": "Windows向けDoppler VPNを選ぶ理由",
+      "subtitle": "Doppler VPNは、本格的なプライバシー保護、検閲回避、あらゆるWindowsデバイスでの信頼性の高いパフォーマンスを必要とするPCユーザーのために設計されたネイティブWindowsアプリケーションです。",
+      "nativeWindows": {
+        "title": "ネイティブWindowsアプリ",
+        "description": "クリーンでモダンなインターフェースでWindows向けに専用開発。Windows 10およびWindows 11で動作し、x64とARM64の両方のアーキテクチャに完全対応。シンプルなセットアップウィザードで数秒でインストール — 手動設定やコマンドラインツールは不要です。"
+      },
+      "dualArchitecture": {
+        "title": "x64 + ARM64サポート",
+        "description": "Doppler VPNはx64（標準的なPC、デスクトップ、ほとんどのノートPC）とARM64（Surface Pro X、SnapdragonノートPC）の両方に専用ビルドを提供。お使いのハードウェアに合ったインストーラーを選んで、あらゆるWindowsデバイスでネイティブパフォーマンスを実現します。"
+      },
+      "autoUpdates": {
+        "title": "Velopackによる自動アップデート",
+        "description": "Doppler VPNはVelopackによるシームレスなバックグラウンドアップデートを採用。新バージョンは自動的にダウンロード・適用されるため、最新のセキュリティパッチ、プロトコル改善、新機能を常に利用できます。"
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality暗号化",
+        "description": "VPNトラフィックを通常のHTTPS通信に偽装する次世代プロトコル。ファイアウォール、DPI（ディープパケットインスペクション）システム、ISPの監視ツールから接続を隠します。中国のグレートファイアウォールを突破するのと同じ技術です。"
+      },
+      "noRegistration": {
+        "title": "登録不要",
+        "description": "メールアドレス、電話番号、アカウント作成は一切不要。アプリをインストールしてすぐに接続できます。Dopplerはデバイスベースの認証を使用するため、最初のクリックからあなたの身元は完全にプライベートです。"
+      },
+      "bypassCensorship": {
+        "title": "検閲とDPIを突破",
+        "description": "ロシア、イラン、中国など、厳格なインターネット検閲のある国で動作するよう設計されています。VLESS-RealityがVPNトラフィックを通常のWeb閲覧と見分けがつかなくし、TSPUやGFWを突破します。"
+      },
+      "noLogs": {
+        "title": "厳格なノーログポリシー",
+        "description": "Dopplerは閲覧データを収集、保存、共有することは一切ありません。接続ログ、トラフィックログ、DNSクエリログはなし。識別情報を一切収集しないため、あなたを特定することはできません。"
+      },
+      "globalServers": {
+        "title": "世界6箇所のサーバー",
+        "description": "ヨーロッパをはじめとする複数の国のサーバーに接続。各サーバーはVLESS-Realityを実行し、最低レイテンシと最高スループットのためにルーティングを最適化。自動サーバー選択があなたの場所に最速のオプションを選びます。"
+      }
+    },
+    "howItWorks": {
+      "title": "WindowsでのVPN設定方法",
+      "subtitle": "1分以内に接続完了 — 専門知識は不要です。",
+      "step1": {
+        "title": "インストーラーをダウンロード",
+        "description": "お使いのシステムに合ったDoppler VPNインストーラーをダウンロード — ほとんどのPCとノートPCはx64、Surface Pro XやSnapdragonデバイスはARM64です。インストーラーは30MB以下でウイルスフリーです。"
+      },
+      "step2": {
+        "title": "セットアップウィザードを実行",
+        "description": "インストーラーをダブルクリックしてセットアップウィザードに従います。インストールは約15秒で完了。Doppler VPNはスタートメニューに追加され、Windows起動時に自動起動するオプションもあります。"
+      },
+      "step3": {
+        "title": "Doppler VPNを開く",
+        "description": "スタートメニューまたはデスクトップショートカットからアプリを起動します。サインアップ画面、登録フォーム、メール認証はありません。デバイスベースの認証により、アカウントが自動的に作成されます。"
+      },
+      "step4": {
+        "title": "登録して接続",
+        "description": "サブスクリプションプランを選んで接続をクリック。Dopplerが自動的に最適なサーバーを選択し、暗号化されたVLESS-Realityトンネルを確立し、すべてのトラフィックをルーティングします。IPアドレスが隠され、データが暗号化されます。"
+      }
+    },
+    "faq": {
+      "title": "よくある質問 — Doppler VPN Windows版",
+      "q1": {
+        "question": "対応しているWindowsのバージョンは？",
+        "answer": "Doppler VPNはWindows 10（バージョン1809以降）およびWindows 11に対応しています。x64とARM64の両方のアーキテクチャをサポート。デスクトップ、ノートPC、タブレット、互換性のあるWindowsバージョンを搭載したSurfaceデバイスで動作します。"
+      },
+      "q2": {
+        "question": "x64とARM64の違いは何ですか？",
+        "answer": "x64はIntelまたはAMDプロセッサを搭載した標準的なPC、デスクトップ、ノートPC向けです。ARM64はMicrosoft Surface Pro X、Lenovo ThinkPad X13s、その他Snapdragon搭載のWindowsノートPCなどの新しいデバイス向けです。わからない場合はx64版をダウンロードしてください — ほとんどのWindowsコンピュータで動作します。"
+      },
+      "q3": {
+        "question": "Doppler VPNはWindowsで自動アップデートされますか？",
+        "answer": "はい。Doppler VPNはVelopackによる自動バックグラウンドアップデートを使用しています。新バージョンが利用可能になると、バックグラウンドでダウンロードされ、次回アプリ起動時にアップデートが適用されます。手動操作なしで、常に最新のセキュリティパッチと機能を利用できます。"
+      },
+      "q4": {
+        "question": "スマホとPCで同じアカウントを使えますか？",
+        "answer": "はい。Doppler VPNのサブスクリプションは、Windows、iOS、Android、Macなどすべてのデバイスで利用できます。各デバイスに個別の安全なVPN接続が提供されます。1つのアカウントに最大10台のデバイスを接続できます。"
+      },
+      "q5": {
+        "question": "Windows Defenderと互換性はありますか？",
+        "answer": "はい。Doppler VPNはWindows Defenderおよびその他の主要なウイルス対策ソフトウェアと完全に互換性があります。インストーラーはデジタル署名されており、アプリが誤検知を引き起こすことはありません。DopplerはWindows ネットワーキングAPIを使用する標準的なVPNクライアントとして動作します。"
+      },
+      "q6": {
+        "question": "ロシア、中国、イランで使えますか？",
+        "answer": "はい。DopplerはVLESS-Realityプロトコルを使用し、VPNトラフィックを通常のHTTPS Web閲覧に偽装します。これにより、ロシアのTSPU、中国のグレートファイアウォール、イランのフィルタリングインフラなどの検閲システムが検出・ブロックすることが極めて困難になります。Dopplerは検閲の厳しい地域のユーザー向けに特別に設計されています。"
+      }
+    },
+    "cta": {
+      "title": "Doppler VPN Windows版をダウンロード",
+      "subtitle": "登録不要。VLESS-Reality暗号化が接続をプライベートかつ検出不可能に保ちます。x64およびARM64 PCに対応。",
+      "downloadX64": "Windows版をダウンロード（x64）",
+      "downloadArm64": "Windows版をダウンロード（ARM64）",
+      "otherPlatforms": "他のプラットフォームでも利用可能",
+      "downloadsLink": "すべてのダウンロードを見る"
+    },
+    "related": {
+      "noRegistration": "登録不要VPN",
+      "noRegistrationDesc": "サインアップやアカウント不要でVPNを利用",
+      "vless": "VLESS-Realityプロトコル",
+      "vlessDesc": "VLESSがDPIを突破する仕組み",
+      "macos": "Mac向けVPN",
+      "macosDesc": "Doppler VPN macOS版をダウンロード"
     }
   }
 }

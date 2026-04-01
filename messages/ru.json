@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Doppler VPN — Безопасный VPN и прокси без логов",
-    "description": "Doppler VPN — приватный VPN с прокси-шифрованием VLESS-Reality, защитой DNS и строгой политикой без логов. Обходит DPI и государственную цензуру. Доступен для iOS, Android, macOS и Windows."
+    "description": "Doppler VPN — быстрый приватный VPN с шифрованием VLESS-Reality. Без логов, обходит цензуру. Доступен на iOS, Android, macOS и Windows."
   },
   "nav": {
     "features": "Функции",
@@ -22,7 +22,7 @@
     "headlinePart1a": "Работает там, где другие VPN",
     "headlinePart1b": "блокируют.",
     "headlinePart2": "",
-    "subheadline": "На базе VLESS-Reality — трафик выглядит как обычный HTTPS. Невидим для DPI. Без регистрации, без логов, без слежки.",
+    "subheadline": "Doppler VPN работает на базе VLESS-Reality — ваш трафик выглядит как обычный HTTPS. Невидим для DPI. Без регистрации, без логов, без слежки.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Личные данные не требуются",
@@ -33,6 +33,8 @@
       "vless": "Протокол VLESS-Reality"
     },
     "openTelegram": "Telegram Бот",
+    "getPro": "Получить Doppler Pro",
+    "downloadApp": "Скачать приложение",
     "seePrices": "Цены",
     "getAndroid": "Скачать APK",
     "androidNote": "Также доступен как отдельный APK.",
@@ -42,9 +44,31 @@
     "desktopNote": "Подписка доступна в Telegram или iOS.",
     "downloadIosLabel": "Скачать Doppler VPN в App Store",
     "promoDiscount": "{percent}% скидка",
-    "promoCopyLabel": "Скопировать промокод {code}",
-    "getPro": "Получить Doppler Pro",
-    "downloadApp": "Скачать приложение"
+    "promoCopyLabel": "Скопировать промокод {code}"
+  },
+  "trustIndicators": {
+    "items": {
+      "noAccount": {
+        "label": "Без аккаунта",
+        "description": "Устройство — ваш ключ"
+      },
+      "zeroLogs": {
+        "label": "Без логов",
+        "description": "Мы не видим, что вы делаете"
+      },
+      "encryptedDns": {
+        "label": "DNS зашифрован",
+        "description": "Каждый запрос защищён"
+      },
+      "dpiBypass": {
+        "label": "Обход DPI",
+        "description": "Трафик выглядит как обычный HTTPS"
+      },
+      "freeTrial": {
+        "label": "3 дня бесплатно",
+        "description": "Попробуйте без риска"
+      }
+    }
   },
   "features": {
     "title": "Создан для полной конфиденциальности",
@@ -54,25 +78,21 @@
         "title": "Конфиденциальность без регистрации",
         "description": "Ваше устройство — это ваш аккаунт. Без email. Без номера телефона. Без личных данных. Конфиденциальность начинается с момента подключения."
       },
-      "adBlocker": {
-        "title": "Базовый блокировщик рекламы",
-        "description": "Встроенная блокировка рекламы на уровне DNS снижает количество рекламы и трекеров примерно на 50%. Чистый просмотр с меньшим количеством мусора прямо из коробки."
+      "vlessReality": {
+        "title": "Протокол VLESS-Reality",
+        "description": "Продвинутый протокол обхода блокировок, который делает ваш VPN-трафик неотличимым от обычного HTTPS. Не обнаруживается глубокой инспекцией пакетов, быстрый и надёжный в ограниченных сетях."
       },
       "smartRouting": {
         "title": "Умная маршрутизация",
         "description": "Интеллектуальная маршрутизация трафика по странам. Автоматически выбирает лучший серверный маршрут для скорости и надёжности в зависимости от вашего направления."
       },
+      "adBlocker": {
+        "title": "Базовый блокировщик рекламы",
+        "description": "Встроенная блокировка рекламы на уровне DNS снижает количество рекламы и трекеров примерно на 50%. Чистый просмотр с меньшим количеством мусора прямо из коробки."
+      },
       "minimalData": {
         "title": "Минимальный сбор данных",
         "description": "Мы не записываем вашу активность в интернете. Мы не отслеживаем посещаемые вами сайты. Наша архитектура требует минимум данных по своей природе."
-      },
-      "completelyFree": {
-        "title": "Полностью бесплатно",
-        "description": "Все серверы бесплатны с полным функционалом. Полное шифрование, высокая скорость, безлимитный трафик. Без ограничений скорости или объёма данных."
-      },
-      "vlessReality": {
-        "title": "Протокол VLESS-Reality",
-        "description": "Продвинутый протокол обхода блокировок, который делает ваш VPN-трафик неотличимым от обычного HTTPS. Не обнаруживается глубокой инспекцией пакетов, быстрый и надёжный в ограниченных сетях."
       },
       "dnsProtection": {
         "title": "Защита приватного DNS",
@@ -121,13 +141,12 @@
     "perYear": "в год",
     "save": "Экономия",
     "plusFeatures": {
-      "everything": "Всё из бесплатного плана",
       "premiumServers": "Премиум-серверы",
       "smartRouting": "Умная маршрутизация",
-      "devices": "До 10 устройств",
-      "support": "Приоритетная поддержка",
       "alwaysOn": "Always-On VPN",
-      "noLogs": "Политика отсутствия логов"
+      "devices": "До 10 устройств",
+      "noLogs": "Политика отсутствия логов",
+      "support": "Приоритетная поддержка"
     },
     "plusCta": "Получить Doppler Pro",
     "trialNote": "Начните с бесплатного 3-дневного пробного периода",
@@ -249,6 +268,29 @@
       }
     }
   },
+  "privacyModel": {
+    "title": "Что мы не храним",
+    "subtitle": "Приватность заложена в архитектуру, а не в обещания.",
+    "tagline": "Нельзя выдать то, чего нет.",
+    "items": {
+      "browsing": {
+        "title": "Нет логов просмотра",
+        "description": "Мы не видим, какие сайты вы открываете"
+      },
+      "ip": {
+        "title": "Нет логов IP",
+        "description": "Ваш настоящий IP нигде не сохраняется"
+      },
+      "dns": {
+        "title": "Нет логов DNS",
+        "description": "Запросы шифруются и удаляются сразу после обработки"
+      },
+      "account": {
+        "title": "Нет базы аккаунтов",
+        "description": "Авторизация по устройству — личные данные не нужны и не хранятся"
+      }
+    }
+  },
   "cta": {
     "doppler": {
       "titleItalic": "",
@@ -256,7 +298,9 @@
       "titlePlayful": "VPN",
       "subtitle": "VPN с приоритетом конфиденциальности без регистрации. Мгновенное подключение с шифрованием VLESS-Reality.",
       "cta": "Получить Doppler Pro",
-      "downloads": "Загрузки"
+      "downloads": "Загрузки",
+      "learnIos": "VPN для iOS",
+      "learnAndroid": "VPN для Android"
     }
   },
   "footer": {
@@ -264,6 +308,7 @@
     "product": "Продукт",
     "pricing": "Цены",
     "download": "Скачать",
+    "blog": "Блог",
     "legal": "Правовая информация",
     "privacy": "Политика конфиденциальности",
     "terms": "Условия использования",
@@ -274,13 +319,14 @@
     "connect": "Связаться",
     "telegram": "@dopplercreatebot",
     "email": "support@simnetiq.store",
-    "blog": "Блог",
     "bypassCensorship": "Как мы обходим цензуру",
     "about": "О нас",
     "vlessVpn": "Протокол VLESS",
     "noRegistration": "VPN без регистрации",
     "vpnForIos": "VPN для iOS",
-    "vpnForAndroid": "VPN для Android"
+    "vpnForAndroid": "VPN для Android",
+    "vpnForMacos": "VPN для Mac",
+    "vpnForWindows": "VPN для Windows"
   },
   "privacy": {
     "title": "Политика конфиденциальности",
@@ -482,9 +528,6 @@
         "playStore": "Google Play"
       }
     },
-    "share": "Поделиться статьёй",
-    "copyLink": "Копировать ссылку",
-    "copied": "Скопировано!",
     "stickyBar": {
       "message": "Защитите свой интернет. Doppler VPN не требует регистрации и не ведёт логов. Попробуйте бесплатно 3 дня.",
       "cta": "Попробовать 3 дня бесплатно",
@@ -497,16 +540,15 @@
       "downloadIos": "Скачать для iOS",
       "downloadAndroid": "Скачать для Android",
       "downloadDesktop": "Скачать приложение"
-    }
+    },
+    "share": "Поделиться статьёй",
+    "copyLink": "Копировать ссылку",
+    "copied": "Скопировано!"
   },
   "guide": {
     "title": "Руководство по настройке",
     "subtitle": "Подключитесь за несколько минут. Выберите ваше устройство.",
     "chooseDevice": "Выбрать устройство",
-    "backToGuides": "Все руководства",
-    "seePricing": "Смотреть тарифы",
-    "nextStep": "Далее",
-    "prevStep": "Назад",
     "android": {
       "title": "Настройка Android",
       "subtitle": "Настройте Doppler VPN на вашем Android-устройстве",
@@ -607,7 +649,11 @@
       "miniApp": "Мини-приложение подписки",
       "miniAppDesc": "Оформляйте и управляйте подпиской через наше мини-приложение Telegram с безопасной оплатой Paddle."
     },
+    "backToGuides": "Все руководства",
+    "seePricing": "Смотреть тарифы",
     "downloadApps": "Скачать приложение",
+    "nextStep": "Далее",
+    "prevStep": "Назад",
     "learnMore": "Подробнее",
     "protocolsCard": {
       "title": "Протоколы VPN",
@@ -656,17 +702,17 @@
       "step1": "Скачайте Doppler VPN из App Store",
       "step2": "Откройте приложение — аккаунт создастся автоматически",
       "step3": "Выберите тариф и подпишитесь",
-      "step4": "Нажмите «Подключить» — вы защищены!"
+      "step4": "Нажмите «Подключить» — вы защищены!",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Скачать в Google Play",
-      "buttonApk": "Скачать APK (Отдельный)",
-      "meta": "APK · v1.2.0 · 95 МБ",
       "step1": "Скачайте Doppler VPN из Google Play или APK",
       "step2": "Откройте приложение — аккаунт создастся автоматически",
       "step3": "Выберите тариф и подпишитесь",
-      "step4": "Нажмите «Подключить» — вы защищены!"
+      "step4": "Нажмите «Подключить» — вы защищены!",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -674,45 +720,193 @@
       "step1": "Скачайте Doppler VPN из Mac App Store",
       "step2": "Откройте приложение — аккаунт создастся автоматически",
       "step3": "Выберите тариф и подпишитесь",
-      "step4": "Нажмите «Подключить» — вы защищены!"
+      "step4": "Нажмите «Подключить» — вы защищены!",
+      "learnMore": "Подробнее о VPN для Mac"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "Скоро",
-      "inDevelopment": "Сейчас в разработке",
-      "waitlistDescription": "Мы создаём нативный клиент для Windows с тем же шифрованием VLESS-Reality. Присоединяйтесь к списку ожидания, чтобы получить уведомление, когда он будет готов.",
-      "waitlistPrivacy": "Мы используем ваш email только для уведомления о выходе версии для Windows. Никакого спама."
-    },
-    "waitlist": {
-      "placeholder": "your@email.com",
-      "button": "Уведомить меня",
-      "success": "Вы в списке! Мы отправим вам письмо, когда всё будет готово.",
-      "error": "Что-то пошло не так. Пожалуйста, попробуйте ещё раз."
+      "buttonX64": "Скачать для Windows (x64)",
+      "buttonArm64": "Скачать для Windows (ARM64)",
+      "step1": "Скачайте установщик для вашей системы (x64 для большинства ПК)",
+      "step2": "Запустите установщик и следуйте инструкциям мастера",
+      "step3": "Откройте Doppler VPN — аккаунт создастся автоматически",
+      "step4": "Выберите тариф, подпишитесь и подключитесь!",
+      "learnMore": "Подробнее о VPN для Windows"
     }
   },
-  "servers": {
-    "title": "Глобальная сеть серверов",
-    "subtitle": "Выбирайте из нескольких локаций по всему миру. Все серверы поддерживают два протокола.",
-    "servers": "сервера",
-    "server": "сервер",
-    "protocols": "Протоколы",
-    "locations": {
-      "germany": {
-        "city": "Франкфурт",
-        "country": "Германия"
-      },
-      "russia": {
-        "city": "Москва",
-        "country": "Россия"
-      },
-      "france": {
-        "city": "Париж",
-        "country": "Франция"
-      },
-      "japan": {
-        "city": "Токио",
-        "country": "Япония"
+  "support": {
+    "title": "Центр помощи и поддержка",
+    "subtitle": "Найдите ответы на частые вопросы о VPN, устраните проблемы с подключением или свяжитесь с нашей службой поддержки.",
+    "faq": {
+      "title": "Часто задаваемые вопросы",
+      "items": {
+        "what": {
+          "question": "Что такое Doppler VPN?",
+          "answer": "Doppler VPN — это быстрый и приватный VPN-сервис на технологии VLESS-Reality. Работает на iOS, Android, macOS и Windows."
+        },
+        "cost": {
+          "question": "Сколько это стоит?",
+          "answer": "Doppler Pro стоит $4/мес, $20/6 мес (скидка 17%) или $35/год (скидка 27%). Единоразовый платёж, без автопродления."
+        },
+        "subscribe": {
+          "question": "Как подписаться?",
+          "answer": "Перейдите на страницу подписки, введите email, выберите тариф и оплатите через Paddle. Подписка Pro активируется мгновенно."
+        },
+        "multiDevice": {
+          "question": "Можно ли использовать один аккаунт на нескольких устройствах?",
+          "answer": "Да! Doppler Pro поддерживает до 10 устройств на одном аккаунте."
+        },
+        "accountId": {
+          "question": "Что такое мой Account ID?",
+          "answer": "Ваш Account ID (VPN-XXXX-XXXX-XXXX) — это ключ ко всем устройствам. Создаётся при первом использовании приложения или подписке через сайт."
+        },
+        "refund": {
+          "question": "Есть ли возврат средств?",
+          "answer": "Да, мы предоставляем гарантию возврата денег в течение 30 дней. Свяжитесь с поддержкой для оформления возврата."
+        },
+        "privacy": {
+          "question": "Мои данные в безопасности?",
+          "answer": "Безусловно. У Doppler VPN строгая политика отсутствия логов. Мы не собираем и не храним данные о вашем сёрфинге."
+        },
+        "platforms": {
+          "question": "Какие платформы поддерживаются?",
+          "answer": "iOS, Android, macOS (нативное приложение Doppler) и Windows (через клиент v2rayN)."
+        }
       }
+    },
+    "troubleshooting": {
+      "title": "Устранение неполадок",
+      "items": {
+        "wontConnect": {
+          "question": "VPN не подключается",
+          "answer": "Попробуйте сменить сервер. Настройки → выберите другой сервер. Если проблема сохраняется, перезапустите приложение."
+        },
+        "drops": {
+          "question": "Соединение часто обрывается",
+          "answer": "Включите Always-On VPN в настройках. Также проверьте интернет-соединение."
+        },
+        "battery": {
+          "question": "Расход батареи на мобильном",
+          "answer": "Некоторый расход батареи — это нормально. Отключите Always-On, если VPN нужен лишь иногда."
+        },
+        "noSub": {
+          "question": "Приложение показывает 'Нет подписки'",
+          "answer": "Убедитесь, что используете правильный Account ID. Если только что купили — подождите несколько секунд и перезапустите приложение."
+        }
+      }
+    },
+    "deleteAccount": {
+      "title": "Удалить аккаунт",
+      "step1": "Откройте приложение Doppler VPN",
+      "step2": "Перейдите в Настройки → Аккаунт",
+      "step3": "Нажмите «Удалить аккаунт»",
+      "step4": "Подтвердите удаление",
+      "warning": "Удаление аккаунта необратимо. Все данные, время подписки и конфигурации серверов будут удалены. Это действие нельзя отменить.",
+      "alternative": "Если нет доступа к приложению, обратитесь в поддержку для удаления аккаунта."
+    },
+    "contact": {
+      "title": "Свяжитесь с нами",
+      "telegram": "Telegram",
+      "telegramBot": "@DopplerSupportBot",
+      "email": "Эл. почта",
+      "emailAddress": "support@simnetiq.store",
+      "responseTime": "Обычно отвечаем в течение 24 часов."
+    },
+    "account": {
+      "title": "Управление аккаунтом",
+      "signInTitle": "Войдите для управления аккаунтом",
+      "enterAccountId": "Введите ID аккаунта",
+      "enterEmail": "Введите email",
+      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
+      "emailPlaceholder": "ваш@email.com",
+      "signIn": "Войти",
+      "noAccount": "Нет аккаунта?",
+      "getStarted": "Начать",
+      "signOut": "Выйти",
+      "statusTitle": "Статус аккаунта",
+      "memberSince": "Участник с",
+      "tier": "Тариф",
+      "tierFree": "Бесплатный",
+      "tierMonthly": "Pro ежемесячный",
+      "tierSixMonth": "Pro на 6 месяцев",
+      "tierYearly": "Pro годовой",
+      "expires": "Истекает",
+      "expiresIn": "через {days} дней",
+      "expired": "Истёк",
+      "active": "Активен",
+      "expiringSoon": "Скоро истечёт",
+      "contactTitle": "Контактная информация",
+      "contactMethod": "Способ связи",
+      "contactValue": "Контакт",
+      "verified": "Подтверждён",
+      "unverified": "Не подтверждён",
+      "changeContact": "Изменить",
+      "saveContact": "Сохранить",
+      "cancelEdit": "Отмена",
+      "subscriptionTitle": "Управление подпиской",
+      "managePaddle": "Управление через Paddle",
+      "manageAppStore": "Управление в App Store",
+      "managePlayStore": "Управление в Google Play",
+      "invoicesTitle": "Счета",
+      "downloadInvoice": "Скачать PDF",
+      "noInvoices": "Счетов нет",
+      "notFound": "Аккаунт не найден",
+      "fetchError": "Не удалось загрузить аккаунт"
+    },
+    "ticket": {
+      "title": "Отправить запрос",
+      "subtitle": "Мы ответим в течение 24 часов",
+      "topicLabel": "Тема",
+      "topics": {
+        "connection_issues": "Проблемы с подключением",
+        "subscription_billing": "Подписка и оплата",
+        "account": "Аккаунт",
+        "feature_request": "Запрос функции",
+        "other": "Другое"
+      },
+      "subjectLabel": "Тема",
+      "subjectPlaceholder": "Кратко опишите проблему",
+      "descriptionLabel": "Описание",
+      "descriptionPlaceholder": "Расскажите, что произошло...",
+      "emailLabel": "Email для ответа",
+      "emailPlaceholder": "ваш@email.com",
+      "accountIdLabel": "ID аккаунта (необязательно)",
+      "submit": "Отправить запрос",
+      "submitting": "Отправка...",
+      "successTitle": "Запрос отправлен",
+      "successMessage": "Тикет {ticketNumber} создан. Ответим на {email} в течение 24 часов.",
+      "errorGeneric": "Не удалось отправить запрос. Попробуйте ещё раз.",
+      "close": "Закрыть"
+    },
+    "restore": {
+      "title": "Восстановление аккаунта",
+      "subtitle": "Введите email или Telegram, привязанный к аккаунту",
+      "emailTab": "Email",
+      "telegramTab": "Telegram",
+      "emailPlaceholder": "ваш@email.com",
+      "sendAccountId": "Отправить ID аккаунта",
+      "sending": "Отправка...",
+      "emailSuccess": "Если аккаунт с таким email существует, мы отправили ID аккаунта. Проверьте почту.",
+      "emailNotFound": "Аккаунт не найден. Нужна помощь?",
+      "submitTicket": "Создать тикет",
+      "telegramMessage": "Мы найдём ваш аккаунт через Telegram-бот",
+      "openTelegramBot": "Открыть Telegram-бот",
+      "appSubscribers": "Оплата через App Store или Google Play?",
+      "appStoreLink": "Управление подпиской App Store",
+      "playStoreLink": "Управление подпиской Google Play",
+      "close": "Закрыть"
+    },
+    "business": {
+      "title": "Деловые запросы",
+      "subtitle": "Партнёрство, пресса, корпоративные клиенты"
+    },
+    "actions": {
+      "submitRequest": "Отправить запрос",
+      "submitRequestDesc": "Получите помощь от нашей команды",
+      "restoreAccount": "Восстановить аккаунт",
+      "restoreAccountDesc": "Получить ID аккаунта",
+      "businessContact": "Деловые запросы",
+      "businessContactDesc": "Партнёрство, пресса, корпоративные клиенты"
     }
   },
   "guideProtocols": {
@@ -841,6 +1035,31 @@
     "openBot": "Открыть Telegram Бота",
     "viewProtocols": "Руководство по VPN Протоколам"
   },
+  "servers": {
+    "title": "Глобальная сеть серверов",
+    "subtitle": "Выбирайте из нескольких локаций по всему миру. Все серверы поддерживают два протокола.",
+    "servers": "сервера",
+    "server": "сервер",
+    "protocols": "Протоколы",
+    "locations": {
+      "germany": {
+        "city": "Франкфурт",
+        "country": "Германия"
+      },
+      "russia": {
+        "city": "Москва",
+        "country": "Россия"
+      },
+      "france": {
+        "city": "Париж",
+        "country": "Франция"
+      },
+      "japan": {
+        "city": "Токио",
+        "country": "Япония"
+      }
+    }
+  },
   "deleteAccount": {
     "title": "Удаление аккаунта",
     "metaDescription": "Узнайте, как удалить аккаунт Doppler VPN и какие данные будут удалены.",
@@ -864,39 +1083,6 @@
         "content": "Если у вас есть вопросы об удалении данных или вам нужна помощь, свяжитесь с нами по адресу support@dopplervpn.org."
       }
     }
-  },
-  "checkout": {
-    "title": "Перейти на Doppler Pro",
-    "subtitle": "Выберите план и оплатите через Paddle.",
-    "accountLabel": "Аккаунт",
-    "monthly": "Месяц",
-    "sixMonth": "6 месяцев",
-    "yearly": "Год",
-    "perMonth": "/мес",
-    "save": "Скидка",
-    "bestValue": "Лучшее предложение",
-    "subscribe": "Подписаться",
-    "processing": "Обработка...",
-    "features": "Pro функции",
-    "feat1": "Премиум серверы по всему миру",
-    "feat2": "Технология Smart Route",
-    "feat3": "Always-On VPN",
-    "feat4": "Без ограничения сессий",
-    "feat5": "Приоритетная поддержка",
-    "promoPlaceholder": "Промокод",
-    "promoApply": "Применить",
-    "promoRemove": "Удалить",
-    "promoOff": "скидка",
-    "promoInvalid": "Недействительный промокод",
-    "promoFailed": "Не удалось проверить код",
-    "footerNote": "Безопасная оплата через Paddle. Отмена в любое время.",
-    "terms": "Условия использования",
-    "privacy": "Политика конфиденциальности",
-    "error": "Что-то пошло не так. Попробуйте снова.",
-    "invalidAccount": "Неверный ID аккаунта",
-    "successTitle": "Оплата прошла успешно!",
-    "successDescription": "Ваша подписка Doppler Pro активна.",
-    "returnToApp": "Вернуться в приложение"
   },
   "subscribe": {
     "title": "Doppler Pro",
@@ -945,9 +1131,9 @@
     "securedBy": "Оплата через Paddle",
     "accountFound": "Аккаунт найден",
     "accountFoundNote": "Это не ваш аккаунт? Напишите @DopplerVerifyBot в Telegram для верификации.",
-    "accountNotFound": "Аккаунт не найден. Проверьте правильность ID.",
     "creatingAccount": "Создаём ваш аккаунт...",
     "lookingUp": "Ищем аккаунт...",
+    "accountNotFound": "Аккаунт не найден. Проверьте правильность ID.",
     "verifyingAccount": "Проверка...",
     "dashboard": {
       "title": "Ваш аккаунт",
@@ -957,6 +1143,8 @@
       "telegram": "Telegram",
       "verified": "Подтверждено",
       "unverified": "Не подтверждено",
+      "noContacts": "Нет привязанных контактов",
+      "contactsOptional": "Необязательно — только для восстановления аккаунта",
       "subscription": "Подписка",
       "freeTier": "Нет активной подписки",
       "proActive": "Doppler Pro",
@@ -964,21 +1152,6 @@
       "getPro": "Оформить Doppler Pro",
       "extend": "Продлить подписку",
       "expressSupport": "Приоритетная поддержка",
-      "connectEmail": "Привязать Email",
-      "connectEmailPlaceholder": "Введите email",
-      "connectTelegram": "Привязать через Telegram",
-      "contactSaved": "Контакт сохранён",
-      "save": "Сохранить",
-      "copied": "Скопировано!",
-      "logout": "Войти в другой аккаунт",
-      "deleteAccount": "Удалить аккаунт",
-      "restorePurchases": "Восстановить покупки",
-      "restorePurchasesDesc": "Если вы оформляли подписку через App Store или Google Play, управляйте ей здесь.",
-      "restoreAppStore": "Подписки App Store",
-      "restorePlayStore": "Подписки Google Play",
-      "noContacts": "Нет привязанных контактов",
-      "contactsOptional": "Необязательно — только для восстановления аккаунта",
-      "forgotAccountId": "Забыли ID аккаунта?",
       "premiumSupportDesc": "Как Pro-подписчик, ваш запрос обрабатывается в первую очередь.",
       "ticketSubject": "Тема",
       "ticketSubjectPlaceholder": "Кратко опишите проблему",
@@ -994,7 +1167,20 @@
       "expiredPro": "Pro-подписка истекла {date}",
       "renewPro": "Продлить Pro",
       "ticketEmailLabel": "Email для ответа",
-      "ticketEmailRequired": "Введите корректный email"
+      "ticketEmailRequired": "Введите корректный email",
+      "connectEmail": "Привязать Email",
+      "connectTelegram": "Привязать через Telegram",
+      "deleteAccount": "Удалить аккаунт",
+      "logout": "Войти в другой аккаунт",
+      "contactSaved": "Контакт сохранён",
+      "connectEmailPlaceholder": "Введите email",
+      "save": "Сохранить",
+      "copied": "Скопировано!",
+      "forgotAccountId": "Забыли ID аккаунта?",
+      "restorePurchases": "Восстановить покупки",
+      "restorePurchasesDesc": "Если вы оформляли подписку через App Store или Google Play, управляйте ей здесь.",
+      "restoreAppStore": "Подписки App Store",
+      "restorePlayStore": "Подписки Google Play"
     }
   },
   "subscribeSuccess": {
@@ -1022,179 +1208,153 @@
     "errorTitle": "Проблема с оплатой",
     "errorDesc": "Если с вас списали деньги, подписка скоро активируется. Свяжитесь с поддержкой, если этого не произошло."
   },
-  "support": {
-    "title": "Центр помощи и поддержка",
-    "subtitle": "Найдите ответы на частые вопросы о VPN, устраните проблемы с подключением или свяжитесь с нашей службой поддержки.",
-    "faq": {
-      "title": "Часто задаваемые вопросы",
-      "items": {
-        "what": {
-          "question": "Что такое Doppler VPN?",
-          "answer": "Doppler VPN — это быстрый и приватный VPN-сервис на технологии VLESS-Reality. Работает на iOS, Android, macOS и Windows."
-        },
-        "cost": {
-          "question": "Сколько это стоит?",
-          "answer": "Doppler Pro стоит $4/мес, $20/6 мес (скидка 17%) или $35/год (скидка 27%). Единоразовый платёж, без автопродления."
-        },
-        "subscribe": {
-          "question": "Как подписаться?",
-          "answer": "Перейдите на страницу подписки, введите email, выберите тариф и оплатите через Paddle. Подписка Pro активируется мгновенно."
-        },
-        "multiDevice": {
-          "question": "Можно ли использовать один аккаунт на нескольких устройствах?",
-          "answer": "Да! Doppler Pro поддерживает до 10 устройств на одном аккаунте."
-        },
-        "accountId": {
-          "question": "Что такое мой Account ID?",
-          "answer": "Ваш Account ID (VPN-XXXX-XXXX-XXXX) — это ключ ко всем устройствам. Создаётся при первом использовании приложения или подписке через сайт."
-        },
-        "refund": {
-          "question": "Есть ли возврат средств?",
-          "answer": "Да, мы предоставляем гарантию возврата денег в течение 30 дней. Свяжитесь с поддержкой для оформления возврата."
-        },
-        "privacy": {
-          "question": "Мои данные в безопасности?",
-          "answer": "Безусловно. У Doppler VPN строгая политика отсутствия логов. Мы не собираем и не храним данные о вашем сёрфинге."
-        },
-        "platforms": {
-          "question": "Какие платформы поддерживаются?",
-          "answer": "iOS, Android, macOS (нативное приложение Doppler) и Windows (через клиент v2rayN)."
-        }
-      }
-    },
-    "troubleshooting": {
-      "title": "Устранение неполадок",
-      "items": {
-        "wontConnect": {
-          "question": "VPN не подключается",
-          "answer": "Попробуйте сменить сервер. Настройки → выберите другой сервер. Если проблема сохраняется, перезапустите приложение."
-        },
-        "drops": {
-          "question": "Соединение часто обрывается",
-          "answer": "Включите Always-On VPN в настройках. Также проверьте интернет-соединение."
-        },
-        "battery": {
-          "question": "Расход батареи на мобильном",
-          "answer": "Некоторый расход батареи — это нормально. Отключите Always-On, если VPN нужен лишь иногда."
-        },
-        "noSub": {
-          "question": "Приложение показывает 'Нет подписки'",
-          "answer": "Убедитесь, что используете правильный Account ID. Если только что купили — подождите несколько секунд и перезапустите приложение."
-        }
-      }
-    },
-    "deleteAccount": {
-      "title": "Удалить аккаунт",
-      "step1": "Откройте приложение Doppler VPN",
-      "step2": "Перейдите в Настройки → Аккаунт",
-      "step3": "Нажмите «Удалить аккаунт»",
-      "step4": "Подтвердите удаление",
-      "warning": "Удаление аккаунта необратимо. Все данные, время подписки и конфигурации серверов будут удалены. Это действие нельзя отменить.",
-      "alternative": "Если нет доступа к приложению, обратитесь в поддержку для удаления аккаунта."
-    },
-    "contact": {
-      "title": "Свяжитесь с нами",
-      "telegram": "Telegram",
-      "telegramBot": "@DopplerSupportBot",
-      "email": "Эл. почта",
-      "emailAddress": "support@simnetiq.store",
-      "responseTime": "Обычно отвечаем в течение 24 часов."
-    },
-    "actions": {
-      "submitRequest": "Отправить запрос",
-      "submitRequestDesc": "Получите помощь от нашей команды",
-      "restoreAccount": "Восстановить аккаунт",
-      "restoreAccountDesc": "Получить ID аккаунта",
-      "businessContact": "Деловые запросы",
-      "businessContactDesc": "Партнёрство, пресса, корпоративные клиенты"
-    },
-    "account": {
-      "title": "Управление аккаунтом",
-      "signInTitle": "Войдите для управления аккаунтом",
-      "enterAccountId": "Введите ID аккаунта",
-      "enterEmail": "Введите email",
-      "accountIdPlaceholder": "VPN-XXXX-XXXX-XXXX",
-      "emailPlaceholder": "ваш@email.com",
-      "signIn": "Войти",
-      "noAccount": "Нет аккаунта?",
-      "getStarted": "Начать",
-      "signOut": "Выйти",
-      "statusTitle": "Статус аккаунта",
-      "memberSince": "Участник с",
-      "tier": "Тариф",
-      "tierFree": "Бесплатный",
-      "tierMonthly": "Pro ежемесячный",
-      "tierSixMonth": "Pro на 6 месяцев",
-      "tierYearly": "Pro годовой",
-      "expires": "Истекает",
-      "expiresIn": "через {days} дней",
-      "expired": "Истёк",
-      "active": "Активен",
-      "expiringSoon": "Скоро истечёт",
-      "contactTitle": "Контактная информация",
-      "contactMethod": "Способ связи",
-      "contactValue": "Контакт",
-      "verified": "Подтверждён",
-      "unverified": "Не подтверждён",
-      "changeContact": "Изменить",
-      "saveContact": "Сохранить",
-      "cancelEdit": "Отмена",
-      "subscriptionTitle": "Управление подпиской",
-      "managePaddle": "Управление через Paddle",
-      "manageAppStore": "Управление в App Store",
-      "managePlayStore": "Управление в Google Play",
-      "invoicesTitle": "Счета",
-      "downloadInvoice": "Скачать PDF",
-      "noInvoices": "Счетов нет",
-      "notFound": "Аккаунт не найден",
-      "fetchError": "Не удалось загрузить аккаунт"
-    },
-    "ticket": {
-      "title": "Отправить запрос",
-      "subtitle": "Мы ответим в течение 24 часов",
-      "topicLabel": "Тема",
-      "topics": {
-        "connection_issues": "Проблемы с подключением",
-        "subscription_billing": "Подписка и оплата",
-        "account": "Аккаунт",
-        "feature_request": "Запрос функции",
-        "other": "Другое"
+  "checkout": {
+    "title": "Перейти на Doppler Pro",
+    "subtitle": "Выберите план и оплатите через Paddle.",
+    "accountLabel": "Аккаунт",
+    "monthly": "Месяц",
+    "sixMonth": "6 месяцев",
+    "yearly": "Год",
+    "perMonth": "/мес",
+    "save": "Скидка",
+    "bestValue": "Лучшее предложение",
+    "subscribe": "Подписаться",
+    "processing": "Обработка...",
+    "features": "Pro функции",
+    "feat1": "Премиум серверы по всему миру",
+    "feat2": "Технология Smart Route",
+    "feat3": "Always-On VPN",
+    "feat4": "Без ограничения сессий",
+    "feat5": "Приоритетная поддержка",
+    "promoPlaceholder": "Промокод",
+    "promoApply": "Применить",
+    "promoRemove": "Удалить",
+    "promoOff": "скидка",
+    "promoInvalid": "Недействительный промокод",
+    "promoFailed": "Не удалось проверить код",
+    "footerNote": "Безопасная оплата через Paddle. Отмена в любое время.",
+    "terms": "Условия использования",
+    "privacy": "Политика конфиденциальности",
+    "error": "Что-то пошло не так. Попробуйте снова.",
+    "invalidAccount": "Неверный ID аккаунта",
+    "successTitle": "Оплата прошла успешно!",
+    "successDescription": "Ваша подписка Doppler Pro активна.",
+    "returnToApp": "Вернуться в приложение",
+    "closeTab": "You can close this tab.",
+    "verifying": "Verifying payment...",
+    "verifyingDescription": "Please wait while we confirm your payment.",
+    "errorTitle": "Payment Issue",
+    "errorDescription": "We couldn't confirm your payment. If you were charged, your subscription will activate shortly.",
+    "apply": "Apply",
+    "promoApplied": "applied",
+    "promoError": "Invalid promo code"
+  },
+  "technicalHowItWorks": {
+    "title": "Как Doppler защищает трафик",
+    "subtitle": "Соединение шифруется и проходит через сеть Doppler. Логи не ведутся.",
+    "flow": {
+      "step1": {
+        "title": "Ваше устройство",
+        "description": "Подключение начинается с устройства — аккаунт не нужен"
       },
-      "subjectLabel": "Тема",
-      "subjectPlaceholder": "Кратко опишите проблему",
-      "descriptionLabel": "Описание",
-      "descriptionPlaceholder": "Расскажите, что произошло...",
-      "emailLabel": "Email для ответа",
-      "emailPlaceholder": "ваш@email.com",
-      "accountIdLabel": "ID аккаунта (необязательно)",
-      "submit": "Отправить запрос",
-      "submitting": "Отправка...",
-      "successTitle": "Запрос отправлен",
-      "successMessage": "Тикет {ticketNumber} создан. Ответим на {email} в течение 24 часов.",
-      "errorGeneric": "Не удалось отправить запрос. Попробуйте ещё раз.",
-      "close": "Закрыть"
+      "step2": {
+        "title": "Туннель VLESS-Reality",
+        "description": "Трафик шифруется и выглядит как обычный HTTPS"
+      },
+      "step3": {
+        "title": "Сервер Doppler",
+        "description": "Проходит через нашу инфраструктуру без записи логов"
+      },
+      "step4": {
+        "title": "Открытый интернет",
+        "description": "Свободный доступ к сайтам — никто не видит, что вы делаете"
+      }
+    }
+  },
+  "useCases": {
+    "title": "Для кого Doppler",
+    "subtitle": "Для тех, кому нужен VPN, который реально работает.",
+    "items": {
+      "restricted": {
+        "title": "Закрытые сети",
+        "description": "Когда провайдер или государство блокирует VPN — Doppler обходит блокировки."
+      },
+      "travelers": {
+        "title": "Публичный Wi-Fi",
+        "description": "Отель, аэропорт, кафе — трафик зашифрован, DNS-запросы защищены. Никто в сети не видит, что вы делаете."
+      },
+      "journalists": {
+        "title": "Журналисты и исследователи",
+        "description": "Доступ к заблокированным источникам без следов. Нет аккаунта — нет привязки к личности."
+      },
+      "developers": {
+        "title": "Разработчики и удалёнщики",
+        "description": "Стабильные шифрованные туннели, которые не режут и не блокируют. Работает через корпоративные и государственные файрволы."
+      }
+    }
+  },
+  "comparisonTable": {
+    "title": "Doppler vs обычные VPN",
+    "subtitle": "Не все VPN одинаковы.",
+    "headers": {
+      "feature": "Параметр",
+      "traditional": "Обычный VPN",
+      "doppler": "Doppler"
     },
-    "restore": {
-      "title": "Восстановление аккаунта",
-      "subtitle": "Введите email или Telegram, привязанный к аккаунту",
-      "emailTab": "Email",
-      "telegramTab": "Telegram",
-      "emailPlaceholder": "ваш@email.com",
-      "sendAccountId": "Отправить ID аккаунта",
-      "sending": "Отправка...",
-      "emailSuccess": "Если аккаунт с таким email существует, мы отправили ID аккаунта. Проверьте почту.",
-      "emailNotFound": "Аккаунт не найден. Нужна помощь?",
-      "submitTicket": "Создать тикет",
-      "telegramMessage": "Мы найдём ваш аккаунт через Telegram-бот",
-      "openTelegramBot": "Открыть Telegram-бот",
-      "appSubscribers": "Оплата через App Store или Google Play?",
-      "appStoreLink": "Управление подпиской App Store",
-      "playStoreLink": "Управление подпиской Google Play",
-      "close": "Закрыть"
-    },
-    "business": {
-      "title": "Деловые запросы",
-      "subtitle": "Партнёрство, пресса, корпоративные клиенты"
+    "rows": {
+      "account": {
+        "feature": "Аккаунт",
+        "traditional": "Email + пароль",
+        "doppler": "Не нужен"
+      },
+      "fingerprint": {
+        "feature": "Отпечаток трафика",
+        "traditional": "Виден для DPI",
+        "doppler": "Неотличим от HTTPS"
+      },
+      "protocol": {
+        "feature": "Протокол",
+        "traditional": "OpenVPN / WireGuard",
+        "doppler": "VLESS-Reality"
+      },
+      "dns": {
+        "feature": "Шифрование DNS",
+        "traditional": "Иногда",
+        "doppler": "Всегда"
+      },
+      "censorship": {
+        "feature": "Обход блокировок",
+        "traditional": "Частично",
+        "doppler": "Из коробки"
+      },
+      "logs": {
+        "feature": "Логи",
+        "traditional": "Как повезёт",
+        "doppler": "Нет и не будет"
+      }
+    }
+  },
+  "censorshipResistance": {
+    "title": "Создан для обхода государственной цензуры",
+    "subtitle": "Doppler обходит ТСПУ, DPI, TLS-отпечатки и активное зондирование — те самые системы, которыми Россия, Китай и Иран блокируют VPN.",
+    "learnMore": "Полное техническое руководство",
+    "items": {
+      "dpi": {
+        "title": "Обходит глубокий анализ пакетов",
+        "description": "ТСПУ и DPI-оборудование используют машинное обучение для обнаружения VPN-трафика. VLESS-Reality не создаёт никаких сигнатур — обнаруживать нечего."
+      },
+      "tls": {
+        "title": "Настоящее TLS-рукопожатие",
+        "description": "Doppler выполняет реальное TLS-рукопожатие с настоящим сертификатом сайта. DPI видит обычное HTTPS-соединение, а не VPN-туннель."
+      },
+      "fingerprint": {
+        "title": "Проходит активное зондирование",
+        "description": "Когда цензоры зондируют наши серверы, те отвечают как легитимные сайты. VPN-туннель активируется только для аутентифицированных клиентов."
+      },
+      "regions": {
+        "title": "Заблокирован Россией — работает",
+        "description": "Наш домен в реестре Роскомнадзора. Мы продолжаем работать. Скачивайте через Telegram-бота, когда сайт заблокирован."
+      }
     }
   },
   "bypassCensorship": {
@@ -1360,6 +1520,24 @@
         "fingerprint": "Нет"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Может ли Doppler VPN обойти государственную цензуру?",
+        "answer": "Да. Doppler использует VLESS-Reality, который делает VPN-трафик неотличимым от обычного HTTPS. Обходит DPI, ТСПУ и Великий файервол без обнаруживаемых VPN-сигнатур."
+      },
+      "q2": {
+        "question": "Работает ли Doppler VPN в России, Китае и Иране?",
+        "answer": "Да. Doppler создан специально для регионов с цензурой. Наш домен заблокирован Роскомнадзором, что доказывает работоспособность нашей технологии. Пользователи в России, Китае и Иране подключаются ежедневно через нашу ротируемую инфраструктуру."
+      },
+      "q3": {
+        "question": "Чем VLESS-Reality лучше OpenVPN или WireGuard для обхода цензуры?",
+        "answer": "OpenVPN и WireGuard имеют характерные сигнатуры пакетов, которые DPI-системы определяют мгновенно. VLESS-Reality выполняет настоящее TLS-рукопожатие с реальным сертификатом веб-сайта, делая соединение действительно неотличимым от обычного HTTPS-просмотра."
+      },
+      "q4": {
+        "question": "Что произойдёт, если серверы Doppler заблокируют?",
+        "answer": "Doppler автоматически ротирует конечные точки серверов и IP-адреса. Если одна точка идентифицирована, сеть адаптируется. Наш Telegram-бот обеспечивает мгновенный доступ к обновлённым конфигурациям серверов."
+      }
+    },
     "cta": {
       "title": "Мы никого не бросаем",
       "subtitle": "Doppler VPN создан специально для ограниченных сетей. Мы постоянно совершенствуем инфраструктуру, ротируем серверы и обновляем протоколы, чтобы опережать каждый новый метод блокировки. Ваша свобода в интернете — не предмет торга.",
@@ -1369,161 +1547,6 @@
       "telegramChannelRu": "Обновления (Русский)",
       "telegramChannelEn": "Обновления (English)",
       "button": "Скачать Doppler"
-    }
-  },
-  "trustIndicators": {
-    "items": {
-      "noAccount": {
-        "label": "Без аккаунта",
-        "description": "Устройство — ваш ключ"
-      },
-      "zeroLogs": {
-        "label": "Без логов",
-        "description": "Мы не видим, что вы делаете"
-      },
-      "encryptedDns": {
-        "label": "DNS зашифрован",
-        "description": "Каждый запрос защищён"
-      },
-      "dpiBypass": {
-        "label": "Обход DPI",
-        "description": "Трафик выглядит как обычный HTTPS"
-      },
-      "freeTrial": {
-        "label": "3 дня бесплатно",
-        "description": "Попробуйте без риска"
-      }
-    }
-  },
-  "technicalHowItWorks": {
-    "title": "Как Doppler защищает трафик",
-    "subtitle": "Соединение шифруется и проходит через сеть Doppler. Логи не ведутся.",
-    "flow": {
-      "step1": {
-        "title": "Ваше устройство",
-        "description": "Подключение начинается с устройства — аккаунт не нужен"
-      },
-      "step2": {
-        "title": "Туннель VLESS-Reality",
-        "description": "Трафик шифруется и выглядит как обычный HTTPS"
-      },
-      "step3": {
-        "title": "Сервер Doppler",
-        "description": "Проходит через нашу инфраструктуру без записи логов"
-      },
-      "step4": {
-        "title": "Открытый интернет",
-        "description": "Свободный доступ к сайтам — никто не видит, что вы делаете"
-      }
-    }
-  },
-  "censorshipResistance": {
-    "title": "Создан для обхода государственной цензуры",
-    "subtitle": "Doppler обходит ТСПУ, DPI, TLS-отпечатки и активное зондирование — те самые системы, которыми Россия, Китай и Иран блокируют VPN.",
-    "learnMore": "Полное техническое руководство",
-    "items": {
-      "dpi": {
-        "title": "Обходит глубокий анализ пакетов",
-        "description": "ТСПУ и DPI-оборудование используют машинное обучение для обнаружения VPN-трафика. VLESS-Reality не создаёт никаких сигнатур — обнаруживать нечего."
-      },
-      "tls": {
-        "title": "Настоящее TLS-рукопожатие",
-        "description": "Doppler выполняет реальное TLS-рукопожатие с настоящим сертификатом сайта. DPI видит обычное HTTPS-соединение, а не VPN-туннель."
-      },
-      "fingerprint": {
-        "title": "Проходит активное зондирование",
-        "description": "Когда цензоры зондируют наши серверы, те отвечают как легитимные сайты. VPN-туннель активируется только для аутентифицированных клиентов."
-      },
-      "regions": {
-        "title": "Заблокирован Россией — работает",
-        "description": "Наш домен в реестре Роскомнадзора. Мы продолжаем работать. Скачивайте через Telegram-бота, когда сайт заблокирован."
-      }
-    }
-  },
-  "useCases": {
-    "title": "Для кого Doppler",
-    "subtitle": "Для тех, кому нужен VPN, который реально работает.",
-    "items": {
-      "restricted": {
-        "title": "Закрытые сети",
-        "description": "Когда провайдер или государство блокирует VPN — Doppler обходит блокировки."
-      },
-      "travelers": {
-        "title": "Публичный Wi-Fi",
-        "description": "Отель, аэропорт, кафе — трафик зашифрован, DNS-запросы защищены. Никто в сети не видит, что вы делаете."
-      },
-      "journalists": {
-        "title": "Журналисты и исследователи",
-        "description": "Доступ к заблокированным источникам без следов. Нет аккаунта — нет привязки к личности."
-      },
-      "developers": {
-        "title": "Разработчики и удалёнщики",
-        "description": "Стабильные шифрованные туннели, которые не режут и не блокируют. Работает через корпоративные и государственные файрволы."
-      }
-    }
-  },
-  "comparisonTable": {
-    "title": "Doppler vs обычные VPN",
-    "subtitle": "Не все VPN одинаковы.",
-    "headers": {
-      "feature": "Параметр",
-      "traditional": "Обычный VPN",
-      "doppler": "Doppler"
-    },
-    "rows": {
-      "account": {
-        "feature": "Аккаунт",
-        "traditional": "Email + пароль",
-        "doppler": "Не нужен"
-      },
-      "fingerprint": {
-        "feature": "Отпечаток трафика",
-        "traditional": "Виден для DPI",
-        "doppler": "Неотличим от HTTPS"
-      },
-      "protocol": {
-        "feature": "Протокол",
-        "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
-      },
-      "dns": {
-        "feature": "Шифрование DNS",
-        "traditional": "Иногда",
-        "doppler": "Всегда"
-      },
-      "censorship": {
-        "feature": "Обход блокировок",
-        "traditional": "Частично",
-        "doppler": "Из коробки"
-      },
-      "logs": {
-        "feature": "Логи",
-        "traditional": "Как повезёт",
-        "doppler": "Нет и не будет"
-      }
-    }
-  },
-  "privacyModel": {
-    "title": "Что мы не храним",
-    "subtitle": "Приватность заложена в архитектуру, а не в обещания.",
-    "tagline": "Нельзя выдать то, чего нет.",
-    "items": {
-      "browsing": {
-        "title": "Нет логов просмотра",
-        "description": "Мы не видим, какие сайты вы открываете"
-      },
-      "ip": {
-        "title": "Нет логов IP",
-        "description": "Ваш настоящий IP нигде не сохраняется"
-      },
-      "dns": {
-        "title": "Нет логов DNS",
-        "description": "Запросы шифруются и удаляются сразу после обработки"
-      },
-      "account": {
-        "title": "Нет базы аккаунтов",
-        "description": "Авторизация по устройству — личные данные не нужны и не хранятся"
-      }
     }
   },
   "about": {
@@ -1727,6 +1750,24 @@
         "description": "Теперь вы защищены шифрованием военного уровня. Ваш реальный IP скрыт, ваш трафик нечитаем, и никто — даже мы — не знает, кто вы. Настоящий анонимный VPN без регистрации."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Как Doppler VPN работает без регистрации?",
+        "answer": "Doppler использует аутентификацию на основе устройства. При открытии приложения на вашем устройстве локально генерируется криптографический ключ. Этот ключ аутентифицирует вас на серверах — без электронной почты, номера телефона или аккаунта."
+      },
+      "q2": {
+        "question": "Безопасен ли VPN без аккаунта?",
+        "answer": "Да, безопаснее. Традиционные аккаунты создают базы данных, которые могут быть взломаны или затребованы по судебному запросу. Doppler не хранит личные данные — нечего утечь или передать."
+      },
+      "q3": {
+        "question": "Могу ли я использовать Doppler на нескольких устройствах без аккаунта?",
+        "answer": "Да. Каждое устройство генерирует свой уникальный ключ. Ваша подписка работает на нескольких устройствах. По желанию можно привязать устройства через email для восстановления, но это никогда не обязательно."
+      },
+      "q4": {
+        "question": "Какие данные собирает Doppler?",
+        "answer": "Doppler не собирает вашу электронную почту, номер телефона, имя, историю просмотров, IP-логи или временные метки подключений. Мы физически не можем передать данные, которые никогда не хранили."
+      }
+    },
     "cta": {
       "title": "Готовы к VPN, который вас не знает?",
       "subtitle": "Присоединяйтесь к тысячам пользователей, выбравших VPN без регистрации. Без электронной почты, без создания аккаунта, без риска для персональных данных. Скачайте Doppler и подключитесь за секунды — совершенно бесплатно, полностью анонимно.",
@@ -1901,6 +1942,24 @@
         "description": "Полноценный VPN-опыт VLESS-Reality доступен на iOS (App Store), Android (Google Play) и через нашего Telegram-бота для доступа на основе конфигураций. Каждая платформа использует один и тот же оптимизированный движок Xray-core и одну и ту же серверную инфраструктуру."
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Что такое протокол VLESS-Reality?",
+        "answer": "VLESS-Reality — это прокси-протокол нового поколения, который делает VPN-трафик неотличимым от обычного HTTPS-просмотра. Он выполняет настоящее TLS-рукопожатие с реальным сертификатом веб-сайта, побеждая глубокую инспекцию пакетов и системы цензуры."
+      },
+      "q2": {
+        "question": "VLESS-Reality быстрее WireGuard?",
+        "answer": "VLESS-Reality имеет сопоставимую скорость с WireGuard при минимальных накладных расходах. Главное преимущество — не сырая скорость, а необнаруживаемость — WireGuard мгновенно блокируется DPI-системами, тогда как VLESS-Reality проходит незамеченным."
+      },
+      "q3": {
+        "question": "Нужно ли настраивать Xray для использования VLESS?",
+        "answer": "Не с Doppler. Традиционная настройка VLESS требует редактирования JSON-конфигураций и управления ключами. Doppler обрабатывает всю конфигурацию автоматически — конфигурации серверов безопасно распределяются и ротируются."
+      },
+      "q4": {
+        "question": "Какие платформы поддерживают VLESS-Reality?",
+        "answer": "Doppler VPN предлагает VLESS-Reality на iOS (App Store), Android (Google Play и APK) и Telegram-боте для доступа через конфигурацию. Все платформы используют один и тот же оптимизированный движок Xray-core."
+      }
+    },
     "cta": {
       "title": "Попробуйте VLESS VPN, который просто работает",
       "subtitle": "Скачайте Doppler и оцените VLESS-Reality — протокол, созданный быть невидимым. Одно касание. Без настройки. Без компромиссов.",
@@ -1921,170 +1980,103 @@
   },
   "vpnForIos": {
     "metadata": {
-      "title": "Бесплатный VPN для iPhone и iPad — без регистрации | Doppler VPN",
-      "description": "Скачайте Doppler VPN для iOS — лучший бесплатный VPN для iPhone и iPad в 2026 году. Без регистрации, без аккаунта. Протокол VLESS-Reality, блокировщик рекламы и постоянная защита."
+      "title": "Doppler VPN для iPhone и iPad — быстрый, приватный и устойчивый к блокировкам",
+      "description": "Скачайте Doppler VPN для iOS. Шифрование VLESS-Reality, без регистрации, обход блокировок в России, Иране и Китае. 3 дня бесплатного пробного периода."
     },
     "hero": {
       "title": "Doppler VPN для iPhone и iPad",
-      "subtitle": "Бесплатный, безопасный VPN без регистрации. Скачайте из App Store."
+      "subtitle": "Быстрый, приватный и устойчивый к блокировкам VPN, созданный для iOS. Регистрация не требуется — скачайте из App Store и подключитесь за секунды. 3 дня бесплатного пробного периода с полным доступом ко всем функциям.",
+      "cta": "Скачать из App Store"
     },
     "features": {
-      "title": "Почему Doppler для iOS?",
+      "title": "Почему стоит выбрать Doppler VPN для iOS?",
+      "subtitle": "Doppler VPN создан специально для пользователей iPhone и iPad, которым нужна настоящая приватность без потери скорости и удобства.",
+      "vlessEncryption": {
+        "title": "Шифрование VLESS-Reality",
+        "description": "Протокол нового поколения, который маскирует VPN-трафик под обычный HTTPS. Ваше соединение невидимо для файрволов, систем глубокой инспекции пакетов (DPI) и средств мониторинга провайдера. Та же технология, которая обходит «Великий файрвол» Китая."
+      },
       "noRegistration": {
         "title": "Без регистрации",
-        "description": "Начните использовать VPN мгновенно — без электронной почты, без номера телефона, без создания аккаунта. Просто скачайте и подключитесь."
+        "description": "Без электронной почты, без номера телефона, без создания аккаунта. Просто скачайте приложение и подключитесь мгновенно. Doppler использует аутентификацию на основе устройства, поэтому ваша личность остаётся полностью конфиденциальной с первого нажатия."
       },
-      "vlessProtocol": {
-        "title": "Протокол VLESS-Reality",
-        "description": "Шифрование нового поколения, маскирующее VPN-трафик под обычный HTTPS. Не обнаруживается файрволами и системами DPI."
+      "oneTapConnect": {
+        "title": "Подключение в одно касание",
+        "description": "Нажмите одну кнопку — и Doppler автоматически выберет самый быстрый сервер, создаст зашифрованный туннель и защитит весь ваш трафик. Умный выбор сервера оптимизирует скорость и надёжность."
       },
-      "adBlocker": {
-        "title": "Встроенный блокировщик рекламы",
-        "description": "Блокировка навязчивой рекламы, трекеров и вредоносных доменов на уровне DNS. Более быстрый сёрфинг с меньшим расходом данных."
+      "bypassCensorship": {
+        "title": "Обход цензуры и DPI",
+        "description": "Создан для работы в странах с жёсткой интернет-цензурой — Россия, Иран, Китай и не только. VLESS-Reality делает VPN-трафик неотличимым от обычного веб-трафика, обходя ТСПУ и GFW."
       },
-      "alwaysOn": {
-        "title": "Постоянный VPN",
-        "description": "Автоматическое переподключение при переключении между Wi-Fi и мобильной сетью. Ваше соединение защищено круглосуточно."
+      "noLogs": {
+        "title": "Строгая политика без логов",
+        "description": "Doppler никогда не собирает, не хранит и не передаёт ваши данные о просмотрах. Без логов подключений, без логов трафика, без логов DNS-запросов. Мы не можем вас идентифицировать, потому что никогда не собираем идентифицирующую информацию."
       },
-      "smartRouting": {
-        "title": "Умная маршрутизация",
-        "description": "Интеллектуальный выбор сервера подбирает самый быстрый доступный узел. Оптимизировано для стриминга, игр и повседневного сёрфинга."
+      "globalServers": {
+        "title": "6 серверов по всему миру",
+        "description": "Подключайтесь к серверам в нескольких странах Европы и за её пределами. Каждый сервер работает на VLESS-Reality с оптимизированной маршрутизацией для минимальной задержки и максимальной пропускной способности."
       },
-      "dnsProtection": {
-        "title": "DNS-защита",
-        "description": "Зашифрованные DNS-запросы не позволяют вашему провайдеру видеть, какие сайты вы посещаете. Полная защита от утечек DNS."
+      "freeTrial": {
+        "title": "3 дня бесплатно",
+        "description": "Попробуйте Doppler VPN с полным доступом ко всем функциям в течение 3 дней — без предварительной привязки карты. После пробного периода выберите месячный, полугодовой или годовой тариф от $3.33/мес."
+      },
+      "iphoneIpad": {
+        "title": "Работает на iPhone и iPad",
+        "description": "Нативное iOS-приложение, построенное на фреймворке Apple Network Extension. Полная поддержка iPhone (8 и новее), всех моделей iPad и Mac на Apple Silicon через совместимость с приложениями iPad. Поддержка iPadOS Split View и многозадачности."
       }
     },
     "howItWorks": {
-      "title": "Как это работает на iOS",
-      "subtitle": "Без создания аккаунта, без электронной почты, без номера телефона — всего четыре простых шага.",
+      "title": "Как настроить VPN на iPhone",
+      "subtitle": "Подключитесь менее чем за 30 секунд — никаких технических знаний не требуется.",
       "step1": {
         "title": "Скачайте из App Store",
-        "description": "Найдите «Doppler VPN» или нажмите на ссылку ниже. Приложение бесплатное и весит менее 30 МБ."
+        "description": "Найдите «Doppler VPN» в App Store или нажмите кнопку загрузки ниже. Приложение бесплатное и весит менее 30 МБ. Совместимо с iOS 16 и новее."
       },
       "step2": {
         "title": "Откройте приложение",
-        "description": "Запустите Doppler VPN. Никакого экрана регистрации, никакой формы входа. Приложение готово к использованию сразу."
+        "description": "Запустите Doppler VPN на iPhone или iPad. Никакого экрана регистрации, никакой формы входа, никакого подтверждения по почте. Аккаунт создаётся автоматически через аутентификацию на основе устройства."
       },
       "step3": {
-        "title": "Нажмите «Подключиться»",
-        "description": "Нажмите кнопку подключения. Doppler автоматически выберет лучший сервер и установит безопасный туннель VLESS-Reality."
+        "title": "Выберите тариф",
+        "description": "Начните 3-дневный бесплатный период или выберите подписку. Месячный ($6.99), полугодовой ($29.99) или годовой ($39.99) тарифы. Управление подпиской — через App Store."
       },
       "step4": {
-        "title": "Сёрфите безопасно",
-        "description": "Вот и всё. Ваш трафик зашифрован, ваш IP скрыт, а реклама заблокирована. Свободно используйте любые приложения и сайты."
-      }
-    },
-    "iosFeatures": {
-      "title": "Возможности для iOS",
-      "subtitle": "Нативное приложение для экосистемы Apple с глубокой системной интеграцией.",
-      "networkExtension": {
-        "title": "Network Extension (системный VPN)",
-        "description": "Doppler использует фреймворк Apple Network Extension для работы в качестве полноценного системного VPN. Весь трафик от каждого приложения проходит через зашифрованный туннель — не только трафик браузера. Это обеспечивает тот же уровень защиты, который Apple требует для корпоративных VPN-решений."
-      },
-      "alwaysOnVpn": {
-        "title": "Постоянный VPN",
-        "description": "Включите режим «Всегда включён», и Doppler автоматически переподключается при каждом обрыве соединения. Переключение с Wi-Fi на сотовую сеть? Пробуждение телефона из сна? VPN восстанавливается менее чем за секунду, и вы никогда не остаётесь без защиты."
-      },
-      "perAppVpn": {
-        "title": "VPN для отдельных приложений",
-        "description": "Выбирайте, какие приложения направлять через VPN-туннель, а какие подключать напрямую. Оставьте банковские приложения в локальной сети, а браузеры и мессенджеры защитите через VPN."
-      },
-      "widget": {
-        "title": "Виджет домашнего экрана",
-        "description": "Добавьте виджет Doppler на домашний экран или экран блокировки для мгновенного просмотра статуса подключения и переключения в одно касание. Видите текущий сервер, время подключения и статус защиты одним взглядом."
-      },
-      "ipadSplitView": {
-        "title": "Поддержка Split View на iPad",
-        "description": "Полная поддержка многозадачности на iPad. Используйте Doppler VPN рядом с другими приложениями в режиме Split View или Slide Over. Статус VPN всегда виден в строке состояния, независимо от активного приложения."
-      }
-    },
-    "privacy": {
-      "title": "Приватность на устройствах Apple",
-      "subtitle": "Doppler дополняет то, что Apple уже защищает, и заполняет пробелы, для которых предназначен VPN.",
-      "intro": "Apple лидирует в отрасли по защите конфиденциальности на уровне устройства — App Tracking Transparency, Mail Privacy Protection и интеллектуальная защита от отслеживания в Safari. Но есть уровень, который Apple не может защитить: ваш сетевой трафик.",
-      "appleProtects": {
-        "title": "Что защищает Apple",
-        "item1": "Отслеживание на уровне приложений (запросы ATT)",
-        "item2": "Шифрование данных на устройстве (Secure Enclave)",
-        "item3": "Блокировка трекеров в Safari",
-        "item4": "Защита от пиксельного отслеживания в почте"
-      },
-      "dopplerAdds": {
-        "title": "Что добавляет Doppler VPN",
-        "item1": "Скрывает ваш реальный IP-адрес от всех сайтов и сервисов",
-        "item2": "Шифрует весь сетевой трафик с помощью VLESS-Reality (необнаружим)",
-        "item3": "Блокирует DNS-трекинг и рекламные домены",
-        "item4": "Предотвращает мониторинг трафика и дросселинг со стороны провайдера"
-      },
-      "noLogs": "Doppler использует аутентификацию на основе устройства — без аккаунтов, без электронной почты, без логов. Мы не можем вас идентифицировать, потому что никогда не собираем идентифицирующую информацию."
-    },
-    "compatibility": {
-      "title": "Системные требования и совместимость",
-      "os": {
-        "label": "Операционная система",
-        "value": "iOS 16.0 или новее"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8 и новее (все модели с поддержкой iOS 16)"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "Все модели iPad с iPadOS 16 или новее"
-      },
-      "mac": {
-        "label": "Mac (Apple Silicon)",
-        "value": "M1, M2, M3, M4 Mac через совместимость с приложениями iPad"
-      },
-      "size": {
-        "label": "Размер приложения",
-        "value": "Менее 30 МБ"
-      },
-      "battery": {
-        "label": "Влияние на батарею",
-        "value": "Минимальное — VLESS — легковесный протокол с низкой нагрузкой на процессор"
-      },
-      "data": {
-        "label": "Дополнительный расход данных",
-        "value": "Менее 2% дополнительного расхода данных по сравнению с незашифрованным сёрфингом"
+        "title": "Нажмите «Подключиться»",
+        "description": "Нажмите кнопку подключения. Doppler автоматически выберет лучший сервер, создаст зашифрованный туннель VLESS-Reality и направит через него весь ваш трафик. Ваш IP скрыт, а данные зашифрованы."
       }
     },
     "faq": {
-      "title": "Часто задаваемые вопросы",
+      "title": "Частые вопросы — Doppler VPN для iOS",
       "q1": {
-        "question": "Doppler VPN действительно бесплатен на iOS?",
-        "answer": "Да. Doppler VPN предлагает бесплатный тариф с доступом к основным функциям VPN. Премиум-планы открывают доступ к дополнительным серверам, более высокой скорости и продвинутым функциям, таким как VPN для отдельных приложений."
+        "question": "Работает ли Doppler VPN на iPad?",
+        "answer": "Да. Doppler VPN работает на всех моделях iPad с iPadOS 16 и новее. Приложение полностью поддерживает многозадачность iPad, включая Split View и Slide Over. Ваша подписка распространяется на iPhone и iPad — используйте один аккаунт на всех устройствах Apple."
       },
       "q2": {
-        "question": "Нужно ли создавать аккаунт?",
-        "answer": "Нет. Doppler использует аутентификацию на основе устройства. Регистрация не нужна, электронная почта не требуется, номер телефона не нужен. Просто скачайте и подключитесь."
+        "question": "Как настроить VPN на iPhone?",
+        "answer": "Настройка Doppler VPN на iPhone занимает менее 30 секунд: 1) Скачайте из App Store, 2) Откройте приложение (регистрация не нужна), 3) Нажмите «Подключиться». Doppler сам выполнит всю техническую настройку — создаст VPN-профиль, выберет лучший сервер и установит зашифрованный туннель."
       },
       "q3": {
-        "question": "Doppler работает в Китае, России или Иране?",
-        "answer": "Да. Doppler использует протокол VLESS-Reality, который маскирует VPN-трафик под обычный HTTPS. Это делает крайне затруднительным его обнаружение и блокировку системами цензуры, такими как «Великий файрвол» или ТСПУ."
+        "question": "Doppler VPN бесплатен для iOS?",
+        "answer": "Doppler VPN предлагает 3 дня бесплатного пробного периода с полным доступом ко всем функциям. После пробного периода доступны три тарифа: месячный ($6.99), полугодовой ($29.99, экономия 28%) или годовой ($39.99, экономия 52%). Все подписки управляются через App Store."
       },
       "q4": {
-        "question": "VPN замедлит мой iPhone?",
-        "answer": "Практически незаметно. VLESS-Reality — один из самых легковесных VPN-протоколов. Большинство пользователей отмечают снижение скорости менее чем на 5%. Влияние на батарею минимально благодаря эффективной обработке пакетов."
+        "question": "Работает ли VPN в России, Китае и Иране?",
+        "answer": "Да. Doppler использует протокол VLESS-Reality, который маскирует VPN-трафик под обычный HTTPS. Это делает крайне затруднительным обнаружение и блокировку системами цензуры — ТСПУ в России, «Великим файрволом» в Китае и инфраструктурой фильтрации в Иране. Doppler специально создан для пользователей в регионах с жёсткой цензурой."
       },
       "q5": {
-        "question": "Doppler работает со стриминговыми приложениями?",
-        "answer": "Да. Умная маршрутизация Doppler оптимизирована для стриминга. Приложение автоматически выбирает серверы с лучшей производительностью для видеоконтента."
+        "question": "Как отменить подписку?",
+        "answer": "Чтобы отменить подписку Doppler VPN на iOS: откройте Настройки > нажмите на ваш Apple ID > Подписки > Doppler VPN > Отменить подписку. Доступ сохраняется до конца текущего оплаченного периода. Все платежи обрабатывает Apple — Doppler никогда не хранит вашу платёжную информацию."
       },
       "q6": {
-        "question": "Можно ли использовать Doppler на iPad и iPhone одновременно?",
-        "answer": "Да. Ваша подписка работает на нескольких устройствах Apple. Каждое устройство получает собственное безопасное соединение."
+        "question": "Можно ли использовать один аккаунт на нескольких устройствах Apple?",
+        "answer": "Да. Ваша подписка Doppler VPN работает на нескольких устройствах Apple — iPhone, iPad и даже Mac на Apple Silicon через совместимость с приложениями iPad. Каждое устройство получает собственное защищённое VPN-соединение. К одному аккаунту можно подключить до 10 устройств."
       }
     },
     "cta": {
-      "title": "Скачайте Doppler VPN для iOS",
-      "subtitle": "Бесплатная загрузка. Без регистрации. Без банковской карты. Подключение за секунды.",
+      "title": "Скачайте Doppler VPN для iPhone и iPad",
+      "subtitle": "Без регистрации. 3 дня бесплатного пробного периода с полным доступом. Шифрование VLESS-Reality сохраняет ваше соединение приватным и необнаруживаемым.",
       "downloadIos": "Скачать из App Store",
-      "downloadAndroid": "Скачать из Google Play",
-      "telegramBot": "Через Telegram-бота",
-      "telegramChannelRu": "Telegram-канал (RU)",
-      "telegramChannelEn": "Telegram-канал (EN)"
+      "otherPlatforms": "Доступен на других платформах",
+      "downloadsLink": "Все загрузки"
     },
     "related": {
       "noRegistration": "VPN без регистрации",
@@ -2092,7 +2084,7 @@
       "vless": "Протокол VLESS-Reality",
       "vlessDesc": "Узнайте, как VLESS обходит глубокую инспекцию пакетов",
       "android": "VPN для Android",
-      "androidDesc": "Установите Doppler VPN из Google Play или APK"
+      "androidDesc": "Установите Doppler VPN из Google Play"
     }
   },
   "vpnForAndroid": {
@@ -2103,56 +2095,42 @@
     "hero": {
       "title": "Doppler VPN для Android",
       "subtitle": "Бесплатный VPN без регистрации. Без аккаунта, без электронной почты, без персональных данных. Доступен в Google Play и в виде APK для регионов, где Play Store ограничен.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "Скачать APK"
+      "cta": "Get it on Google Play"
     },
     "features": {
       "title": "Почему Doppler для Android?",
       "subtitle": "Создан специально для пользователей Android, которым нужна приватность без компромиссов. Без регистрации, без сбора данных, без ограничений.",
+      "vlessEncryption": {
+        "title": "VLESS-Reality Encryption",
+        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring. The same technology used to bypass the Great Firewall of China."
+      },
       "noRegistration": {
         "title": "Без регистрации",
         "description": "Откройте приложение и подключитесь мгновенно. Без электронной почты, без номера телефона, без создания аккаунта. Ваша личность остаётся приватной с самого первого касания."
       },
-      "vlessReality": {
-        "title": "Протокол VLESS-Reality",
-        "description": "Шифрование военного уровня, делающее ваш VPN-трафик неотличимым от обычного HTTPS. Не обнаруживается системами DPI и государственными файрволами."
+      "oneTapConnect": {
+        "title": "One-Tap Connect",
+        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
       },
-      "adBlocker": {
-        "title": "Встроенный блокировщик рекламы",
-        "description": "Блокировка рекламы, трекеров и вредоносных доменов на уровне DNS. Более быстрый сёрфинг, меньший расход данных и лучшее время работы батареи на вашем Android-устройстве."
+      "bypassCensorship": {
+        "title": "Bypass Censorship & DPI",
+        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
       },
-      "alwaysOn": {
-        "title": "Постоянный VPN",
-        "description": "Использует встроенную функцию Android «Постоянный VPN», чтобы ваше соединение было защищено 24/7, даже после перезагрузки или смены сети."
+      "noLogs": {
+        "title": "Strict No-Logs Policy",
+        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
       },
-      "apkSideload": {
-        "title": "Установка APK",
-        "description": "Нет доступа к Google Play? Скачайте APK напрямую и установите вручную. Идеально для пользователей в России, Иране, Китае и других регионах с цензурой."
+      "globalServers": {
+        "title": "6 Global Server Locations",
+        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
       },
-      "dnsProtection": {
-        "title": "DNS-защита",
-        "description": "Все DNS-запросы шифруются и направляются через безопасные серверы. Предотвращает утечки DNS и не позволяет вашему провайдеру видеть, какие сайты вы посещаете."
-      }
-    },
-    "install": {
-      "title": "Два способа установки",
-      "subtitle": "Выберите способ установки, который лучше подходит для вашей ситуации. Оба дают одинаковый полнофункциональный VPN.",
-      "playStore": {
-        "title": "Google Play Store",
-        "badge": "Рекомендуется",
-        "benefit1": "Установка в одно касание, автоматические обновления",
-        "benefit2": "Проверено Google Play Protect",
-        "benefit3": "Удобное управление подпиской",
-        "cta": "Скачать из Google Play"
+      "freeTrial": {
+        "title": "3-Day Free Trial",
+        "description": "Try Doppler VPN with full access to all features for 3 days. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month. Manage your subscription through Google Play."
       },
-      "apk": {
-        "title": "Прямая загрузка APK",
-        "badge": "Для ограниченных регионов",
-        "benefit1": "Работает там, где Google Play заблокирован",
-        "benefit2": "Не требуется аккаунт Google",
-        "benefit3": "Те же функции, что и в версии из Play Store",
-        "note": "Идеально для пользователей в России, Иране, Китае и других странах, где Google Play Store ограничен или VPN-приложения удалены из магазина.",
-        "cta": "Получить APK через Telegram-бота"
+      "batteryEfficient": {
+        "title": "Battery-Efficient Background Service",
+        "description": "Doppler uses Android's native Always-On VPN framework with minimal battery impact. Less than 2% additional drain even with 24/7 protection enabled. Optimized for Samsung, Xiaomi, OnePlus, Pixel, and all major Android brands."
       }
     },
     "howItWorks": {
@@ -2175,86 +2153,39 @@
         "description": "Ваше соединение теперь зашифровано и необнаружимо. Получите доступ к любому сайту, приложению или сервису без ограничений."
       }
     },
-    "androidFeatures": {
-      "title": "Возможности для Android",
-      "subtitle": "Doppler VPN максимально использует возможности Android для обеспечения максимально безопасного и бесперебойного опыта.",
-      "alwaysOnVpn": {
-        "title": "Постоянный VPN",
-        "description": "Включите встроенную настройку Android «Постоянный VPN», чтобы Doppler всегда был подключён. Перейдите в Настройки > Сеть и интернет > VPN > Doppler VPN > включите «Постоянная VPN». Устройство автоматически переподключится после перезагрузки или смены сети."
+    "faq": {
+      "title": "Frequently Asked Questions — Doppler VPN for Android",
+      "q1": {
+        "question": "Does Doppler VPN work on Samsung devices?",
+        "answer": "Yes. Doppler VPN is fully compatible with all Samsung Galaxy phones and tablets running Android 8.0 (Oreo) or later. This includes the Galaxy S series, Galaxy A series, Galaxy Z Fold, Galaxy Z Flip, and Galaxy Tab. Doppler integrates with Samsung's Always-On VPN settings for 24/7 protection."
       },
-      "splitTunneling": {
-        "title": "Раздельное туннелирование",
-        "description": "Выбирайте, какие приложения проходят через VPN, а какие используют обычное соединение. Направляйте банковские приложения напрямую, а браузеры защищайте через VPN. Настройте правила VPN для каждого приложения в настройках Doppler."
+      "q2": {
+        "question": "Does Doppler VPN drain battery?",
+        "answer": "No. Doppler VPN uses less than 2% additional battery even with Always-On VPN enabled. The VLESS-Reality protocol is designed for efficiency with minimal CPU overhead. For the best experience, exclude Doppler from Android's battery optimization in Settings > Apps > Doppler VPN > Battery > Unrestricted."
       },
-      "quickSettings": {
-        "title": "Плитка быстрых настроек",
-        "description": "Добавьте Doppler VPN в панель быстрых настроек Android. Подключайтесь и отключайтесь одним свайпом и нажатием — без необходимости открывать приложение. Доступно на Android 8.0 и выше."
+      "q3": {
+        "question": "How do I set up VPN on Android?",
+        "answer": "Setting up Doppler VPN on Android takes under 30 seconds: 1) Download from Google Play, 2) Open the app (no registration needed), 3) Tap Connect. Doppler handles all the technical setup automatically — it configures the VPN profile, selects the best server, and establishes an encrypted tunnel."
       },
-      "batteryOptimization": {
-        "title": "Оптимизация батареи",
-        "description": "Doppler потребляет минимум заряда. Для лучшей работы постоянного VPN исключите Doppler из оптимизации батареи Android: Настройки > Приложения > Doppler VPN > Батарея > Без ограничений. Это предотвратит принудительное закрытие VPN-соединения в фоновом режиме."
+      "q4": {
+        "question": "Does it work in Russia, China, and Iran?",
+        "answer": "Yes. Doppler uses the VLESS-Reality protocol, which disguises VPN traffic as regular HTTPS web browsing. This makes it extremely difficult for censorship systems like Russia's TSPU, China's Great Firewall, or Iran's filtering infrastructure to detect and block. Doppler is specifically designed for users in heavily censored regions."
       },
-      "androidTv": {
-        "title": "Поддержка Android TV",
-        "description": "Установите APK Doppler VPN на Android TV или ТВ-приставку для защиты стримингового трафика. Смотрите контент с географическими ограничениями на большом экране с тем же шифрованием VLESS-Reality."
-      }
-    },
-    "sideloading": {
-      "title": "Руководство по установке APK",
-      "badge": "Для регионов с цензурой",
-      "intro": "Если вы находитесь в стране, где Google Play ограничен или VPN-приложения удалены из магазина, вы можете установить Doppler VPN напрямую из APK-файла. Следуйте этим шагам.",
-      "step1": {
-        "title": "Разрешите неизвестные источники",
-        "description": "Перейдите в Настройки > Приложения > Специальный доступ > Установка неизвестных приложений. Выберите ваш браузер или файловый менеджер и включите «Разрешить из этого источника»."
+      "q5": {
+        "question": "How do I cancel my subscription?",
+        "answer": "To cancel your Doppler VPN subscription on Android: Open Google Play > tap your profile icon > Payments & subscriptions > Subscriptions > Doppler VPN > Cancel subscription. Your access continues until the end of the current billing period."
       },
-      "step2": {
-        "title": "Скачайте APK",
-        "description": "Получите последнюю версию APK Doppler VPN от нашего официального Telegram-бота @dopplercreatebot. Это гарантирует, что вы всегда получаете подлинный, немодифицированный файл."
-      },
-      "step3": {
-        "title": "Установите APK",
-        "description": "Откройте скачанный .apk файл и нажмите «Установить». Android может показать предупреждение о неизвестных приложениях — это нормально для приложений, устанавливаемых вручную."
-      },
-      "step4": {
-        "title": "Проверьте и подключитесь",
-        "description": "Откройте Doppler VPN и убедитесь, что приложение работает корректно. Приложение должно подключаться без требования аккаунта или регистрации — просто нажмите «Подключиться»."
-      },
-      "security": {
-        "title": "Примечание о безопасности",
-        "description": "Скачивайте APK Doppler VPN только от нашего официального Telegram-бота (@dopplercreatebot) или с официального сайта (www.dopplervpn.org). Никогда не устанавливайте APK-файлы из сторонних источников — они могут содержать вредоносное ПО или модифицированный код."
-      }
-    },
-    "requirements": {
-      "title": "Системные требования",
-      "os": {
-        "title": "Операционная система",
-        "value": "Android 8.0 (Oreo) или выше"
-      },
-      "battery": {
-        "title": "Влияние на батарею",
-        "value": "Минимальное — менее 2% дополнительного расхода батареи при включённом постоянном VPN"
-      },
-      "storage": {
-        "title": "Хранилище",
-        "value": "Размер приложения менее 15 МБ, потребление ОЗУ менее 5 МБ при подключении"
-      },
-      "permissions": {
-        "title": "Необходимые разрешения",
-        "value": "Только разрешение на VPN-подключение — без доступа к контактам, фото или файлам"
-      },
-      "compatibility": {
-        "title": "Совместимые устройства"
+      "q6": {
+        "question": "Can I use Doppler VPN on Android TV?",
+        "answer": "Yes. You can install Doppler VPN on Android TV devices and TV boxes to protect your streaming traffic. Access geo-restricted content on the big screen with the same VLESS-Reality encryption used on mobile."
       }
     },
     "cta": {
       "title": "Скачайте Doppler VPN для Android",
       "subtitle": "Бесплатный, приватный и необнаружимый. Без регистрации, без аккаунта, без сбора данных. Скачайте из Google Play или получите APK для ограниченных регионов.",
-      "googlePlay": "Google Play Store",
-      "downloadApk": "Скачать APK",
-      "alsoOnIos": "Также доступен для iOS",
-      "telegramBot": "Telegram-бот",
-      "telegramChannelRu": "Telegram-канал (RU)",
-      "telegramChannelEn": "Telegram-канал (EN)"
+      "downloadAndroid": "Get it on Google Play",
+      "otherPlatforms": "Available on other platforms",
+      "downloadsLink": "View all downloads"
     },
     "related": {
       "noRegistration": "VPN без регистрации",
@@ -2263,6 +2194,226 @@
       "vlessDesc": "Узнайте, как VLESS обходит глубокую инспекцию пакетов",
       "ios": "VPN для iOS",
       "iosDesc": "Скачайте Doppler VPN для iPhone и iPad"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Doppler VPN для Mac — быстрый, приватный и устойчивый к блокировкам",
+      "description": "Скачайте Doppler VPN для macOS из Mac App Store. Шифрование VLESS-Reality, без регистрации, обход блокировок. Нативная поддержка Apple Silicon."
+    },
+    "hero": {
+      "title": "Doppler VPN для Mac",
+      "subtitle": "Быстрый, приватный VPN с обходом блокировок, созданный специально для macOS. Без регистрации — скачайте из Mac App Store и подключитесь за секунды. Подписка действует на iPhone, iPad и Mac.",
+      "cta": "Скачать в Mac App Store"
+    },
+    "features": {
+      "title": "Почему Doppler VPN для macOS?",
+      "subtitle": "Doppler VPN — нативное приложение для macOS, созданное для пользователей Mac, которым нужна настоящая приватность, обход цензуры и бесшовная интеграция с экосистемой Apple.",
+      "nativeMac": {
+        "title": "Нативное приложение для macOS",
+        "description": "Разработано специально для macOS с использованием Network Extension от Apple. Работает нативно на Apple Silicon (M1/M2/M3/M4) и Intel Mac. Интегрируется с системными настройками macOS, строкой меню и центром уведомлений для удобной работы с VPN на рабочем столе."
+      },
+      "macAppStore": {
+        "title": "Распространение через Mac App Store",
+        "description": "Скачивайте напрямую из Mac App Store — проверено и одобрено Apple. Автоматические обновления, простая установка и удобное управление подпиской через Apple ID. Без сторонней загрузки и ручной настройки."
+      },
+      "vlessEncryption": {
+        "title": "Шифрование VLESS-Reality",
+        "description": "Протокол нового поколения, маскирующий VPN-трафик под обычный HTTPS. Ваше соединение невидимо для файрволов, систем DPI и средств мониторинга провайдера. Та же технология, которая обходит Великий китайский файрвол."
+      },
+      "noRegistration": {
+        "title": "Без регистрации",
+        "description": "Без email, без номера телефона, без создания аккаунта. Просто скачайте приложение и подключитесь мгновенно. Doppler использует аутентификацию по устройству — ваша личность остается полностью конфиденциальной с первого клика."
+      },
+      "oneClickConnect": {
+        "title": "Подключение одним кликом",
+        "description": "Нажмите одну кнопку — Doppler автоматически выберет самый быстрый сервер, установит зашифрованный туннель и защитит весь трафик вашего Mac. Умный выбор сервера оптимизирует скорость и надежность — работает прямо из строки меню."
+      },
+      "bypassCensorship": {
+        "title": "Обход цензуры и DPI",
+        "description": "Создан для работы в странах с жесткой интернет-цензурой — Россия, Иран, Китай и другие. VLESS-Reality делает VPN-трафик неотличимым от обычного веб-серфинга, обходя TSPU и GFW."
+      },
+      "noLogs": {
+        "title": "Строгая политика без логов",
+        "description": "Doppler никогда не собирает, не хранит и не передает данные о вашем серфинге. Без логов подключений, без логов трафика, без логов DNS-запросов. Мы не можем вас идентифицировать, потому что не собираем идентифицирующую информацию."
+      },
+      "crossDevice": {
+        "title": "Синхронизация на всех устройствах Apple",
+        "description": "Одна подписка распространяется на Mac, iPhone и iPad. Статус аккаунта и подписки синхронизируется автоматически на всех устройствах Apple. Переключайтесь между устройствами без повторной подписки или настройки — ваш VPN готов везде."
+      }
+    },
+    "howItWorks": {
+      "title": "Как настроить VPN на Mac",
+      "subtitle": "Подключитесь менее чем за минуту — технические знания не нужны.",
+      "step1": {
+        "title": "Скачайте из Mac App Store",
+        "description": "Найдите «Doppler VPN» в Mac App Store или нажмите кнопку загрузки ниже. Приложение бесплатно и работает на macOS 14 Sonoma и новее. Поддерживает Apple Silicon и Intel Mac."
+      },
+      "step2": {
+        "title": "Откройте приложение",
+        "description": "Запустите Doppler VPN на вашем Mac. Нет экрана регистрации, нет формы входа, нет подтверждения email. Аккаунт создается автоматически с помощью аутентификации по устройству."
+      },
+      "step3": {
+        "title": "Выберите тариф",
+        "description": "Начните с 3-дневного бесплатного пробного периода или выберите подписку. Доступны варианты: месячная ($6.99), на 6 месяцев ($29.99) или годовая ($39.99). Управляйте подпиской через App Store."
+      },
+      "step4": {
+        "title": "Нажмите «Подключить»",
+        "description": "Нажмите кнопку подключения. Doppler автоматически выберет лучший сервер, установит зашифрованный туннель VLESS-Reality и направит через него весь ваш трафик. Ваш IP скрыт, а данные зашифрованы."
+      }
+    },
+    "faq": {
+      "title": "Часто задаваемые вопросы — Doppler VPN для Mac",
+      "q1": {
+        "question": "Работает ли Doppler VPN на Mac с Apple Silicon?",
+        "answer": "Да. Doppler VPN работает нативно на Apple Silicon (M1, M2, M3, M4) и Intel Mac. Приложение — универсальный бинарник, оптимизированный для обеих архитектур, что обеспечивает максимальную производительность и минимальное влияние на батарею MacBook."
+      },
+      "q2": {
+        "question": "Могу ли я использовать один аккаунт на iPhone, iPad и Mac?",
+        "answer": "Да. Подписка Doppler VPN действует на всех ваших устройствах Apple — iPhone, iPad и Mac. Каждое устройство получает собственное защищенное VPN-подключение. К одному аккаунту можно подключить до 10 устройств, а статус подписки синхронизируется автоматически через Apple ID."
+      },
+      "q3": {
+        "question": "Как настроить VPN на macOS?",
+        "answer": "Настройка Doppler VPN на Mac занимает меньше минуты: 1) скачайте из Mac App Store, 2) откройте приложение (регистрация не нужна), 3) нажмите «Подключить». Doppler автоматически выполняет всю техническую настройку — создает VPN-профиль, выбирает лучший сервер и устанавливает зашифрованный туннель."
+      },
+      "q4": {
+        "question": "Замедлит ли это мой Mac?",
+        "answer": "Doppler VPN разработан с минимальным влиянием на производительность. Нативное приложение для macOS использует Network Extension от Apple для эффективной обработки трафика. На Mac с Apple Silicon приложение использует менее 1% CPU при активном VPN-подключении. Выбор сервера оптимизирован для минимальной задержки."
+      },
+      "q5": {
+        "question": "Есть ли Doppler VPN в Mac App Store?",
+        "answer": "Да. Doppler VPN доступен для бесплатного скачивания в Mac App Store. Приложение проверено и одобрено Apple. Найдите «Doppler VPN» или используйте прямую ссылку на нашей странице загрузок. Обновления доставляются автоматически через App Store."
+      },
+      "q6": {
+        "question": "Работает ли в России, Китае и Иране?",
+        "answer": "Да. Doppler использует протокол VLESS-Reality, который маскирует VPN-трафик под обычный HTTPS. Это делает крайне сложным для систем цензуры — TSPU в России, Великого файрвола Китая или инфраструктуры фильтрации Ирана — обнаружение и блокировку. Doppler специально разработан для пользователей в странах с жесткой цензурой."
+      }
+    },
+    "cta": {
+      "title": "Скачайте Doppler VPN для Mac",
+      "subtitle": "Без регистрации. 3-дневный бесплатный пробный период с полным доступом. Шифрование VLESS-Reality обеспечивает приватность и невидимость вашего соединения.",
+      "downloadMac": "Скачать в Mac App Store",
+      "otherPlatforms": "Доступен на других платформах",
+      "downloadsLink": "Все загрузки"
+    },
+    "related": {
+      "noRegistration": "VPN без регистрации",
+      "noRegistrationDesc": "Используйте VPN без создания аккаунта",
+      "vless": "Протокол VLESS-Reality",
+      "vlessDesc": "Узнайте, как VLESS обходит глубокую инспекцию пакетов",
+      "windows": "VPN для Windows",
+      "windowsDesc": "Скачайте Doppler VPN для Windows"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Doppler VPN для Windows — быстрый, приватный и устойчивый к блокировкам",
+      "description": "Скачайте Doppler VPN для Windows. Шифрование VLESS-Reality, без регистрации, обход блокировок. Поддержка x64 и ARM64."
+    },
+    "hero": {
+      "title": "Doppler VPN для Windows",
+      "subtitle": "Быстрый, приватный VPN с обходом блокировок, созданный для Windows. Без регистрации — скачайте установщик и подключитесь за секунды. Поддержка x64 и ARM64 с автоматическими обновлениями.",
+      "ctaX64": "Скачать для Windows (x64)",
+      "ctaArm64": "Скачать для Windows (ARM64)"
+    },
+    "features": {
+      "title": "Почему Doppler VPN для Windows?",
+      "subtitle": "Doppler VPN — нативное приложение для Windows, созданное для пользователей ПК, которым нужна настоящая приватность, обход цензуры и стабильная работа на любом устройстве с Windows.",
+      "nativeWindows": {
+        "title": "Нативное приложение для Windows",
+        "description": "Разработано специально для Windows с чистым современным интерфейсом. Работает на Windows 10 и Windows 11 с полной поддержкой архитектур x64 и ARM64. Устанавливается за секунды с помощью простого мастера — без ручной настройки и командной строки."
+      },
+      "dualArchitecture": {
+        "title": "Поддержка x64 + ARM64",
+        "description": "Doppler VPN предоставляет отдельные сборки для x64 (стандартные ПК, десктопы и большинство ноутбуков) и ARM64 (Surface Pro X, ноутбуки на Snapdragon). Выберите нужный установщик для вашего оборудования и получите нативную производительность на любом устройстве Windows."
+      },
+      "autoUpdates": {
+        "title": "Автоматические обновления через Velopack",
+        "description": "Doppler VPN использует Velopack для бесшовных фоновых обновлений. Новые версии скачиваются и устанавливаются автоматически — у вас всегда последние патчи безопасности, улучшения протокола и новые функции без каких-либо действий с вашей стороны."
+      },
+      "vlessEncryption": {
+        "title": "Шифрование VLESS-Reality",
+        "description": "Протокол нового поколения, маскирующий VPN-трафик под обычный HTTPS. Ваше соединение невидимо для файрволов, систем DPI и средств мониторинга провайдера. Та же технология, которая обходит Великий китайский файрвол."
+      },
+      "noRegistration": {
+        "title": "Без регистрации",
+        "description": "Без email, без номера телефона, без создания аккаунта. Просто установите приложение и подключитесь мгновенно. Doppler использует аутентификацию по устройству — ваша личность остается полностью конфиденциальной с первого клика."
+      },
+      "bypassCensorship": {
+        "title": "Обход цензуры и DPI",
+        "description": "Создан для работы в странах с жесткой интернет-цензурой — Россия, Иран, Китай и другие. VLESS-Reality делает VPN-трафик неотличимым от обычного веб-серфинга, обходя TSPU и GFW."
+      },
+      "noLogs": {
+        "title": "Строгая политика без логов",
+        "description": "Doppler никогда не собирает, не хранит и не передает данные о вашем серфинге. Без логов подключений, без логов трафика, без логов DNS-запросов. Мы не можем вас идентифицировать, потому что не собираем идентифицирующую информацию."
+      },
+      "globalServers": {
+        "title": "6 серверов по всему миру",
+        "description": "Подключайтесь к серверам в нескольких странах Европы и не только. Каждый сервер работает на VLESS-Reality с оптимизированной маршрутизацией для минимальной задержки и максимальной пропускной способности. Автоматический выбор сервера подберет самый быстрый вариант для вашего местоположения."
+      }
+    },
+    "howItWorks": {
+      "title": "Как настроить VPN на Windows",
+      "subtitle": "Подключитесь менее чем за минуту — технические знания не нужны.",
+      "step1": {
+        "title": "Скачайте установщик",
+        "description": "Скачайте установщик Doppler VPN для вашей системы — x64 для большинства ПК и ноутбуков, ARM64 для Surface Pro X и устройств на Snapdragon. Размер установщика менее 30 МБ, без вирусов."
+      },
+      "step2": {
+        "title": "Запустите мастер установки",
+        "description": "Дважды кликните по установщику и следуйте инструкциям мастера. Установка занимает около 15 секунд. Doppler VPN добавляется в меню «Пуск» и может запускаться вместе с Windows."
+      },
+      "step3": {
+        "title": "Откройте Doppler VPN",
+        "description": "Запустите приложение из меню «Пуск» или с ярлыка на рабочем столе. Нет экрана регистрации, нет формы входа, нет подтверждения email. Аккаунт создается автоматически с помощью аутентификации по устройству."
+      },
+      "step4": {
+        "title": "Оформите подписку и подключитесь",
+        "description": "Выберите тарифный план и нажмите «Подключить». Doppler автоматически выберет лучший сервер, установит зашифрованный туннель VLESS-Reality и направит через него весь ваш трафик. Ваш IP скрыт, а данные зашифрованы."
+      }
+    },
+    "faq": {
+      "title": "Часто задаваемые вопросы — Doppler VPN для Windows",
+      "q1": {
+        "question": "Какие версии Windows поддерживаются?",
+        "answer": "Doppler VPN поддерживает Windows 10 (версия 1809 и новее) и Windows 11. Поддерживаются обе архитектуры — x64 и ARM64. Приложение работает на десктопах, ноутбуках, планшетах и устройствах Surface с совместимыми версиями Windows."
+      },
+      "q2": {
+        "question": "В чем разница между x64 и ARM64?",
+        "answer": "x64 — для большинства стандартных ПК, десктопов и ноутбуков с процессорами Intel или AMD. ARM64 — для новых устройств, таких как Microsoft Surface Pro X, Lenovo ThinkPad X13s и других ноутбуков на Snapdragon. Если не уверены — скачайте версию x64, она подходит для большинства компьютеров на Windows."
+      },
+      "q3": {
+        "question": "Обновляется ли Doppler VPN автоматически на Windows?",
+        "answer": "Да. Doppler VPN использует Velopack для автоматических фоновых обновлений. Когда выходит новая версия, она скачивается в фоне и применяется при следующем запуске приложения. У вас всегда последние патчи безопасности и новые функции без каких-либо действий."
+      },
+      "q4": {
+        "question": "Могу ли я использовать один аккаунт на телефоне и ПК?",
+        "answer": "Да. Подписка Doppler VPN действует на всех ваших устройствах — Windows, iOS, Android и Mac. Каждое устройство получает собственное защищенное VPN-подключение. К одному аккаунту можно подключить до 10 устройств."
+      },
+      "q5": {
+        "question": "Совместим ли он с Windows Defender?",
+        "answer": "Да. Doppler VPN полностью совместим с Windows Defender и другими популярными антивирусами. Установщик имеет цифровую подпись, и приложение не вызывает ложных срабатываний. Doppler работает как стандартный VPN-клиент, используя сетевые API Windows."
+      },
+      "q6": {
+        "question": "Работает ли в России, Китае и Иране?",
+        "answer": "Да. Doppler использует протокол VLESS-Reality, который маскирует VPN-трафик под обычный HTTPS. Это делает крайне сложным для систем цензуры — TSPU в России, Великого файрвола Китая или инфраструктуры фильтрации Ирана — обнаружение и блокировку. Doppler специально разработан для пользователей в странах с жесткой цензурой."
+      }
+    },
+    "cta": {
+      "title": "Скачайте Doppler VPN для Windows",
+      "subtitle": "Без регистрации. Шифрование VLESS-Reality обеспечивает приватность и невидимость вашего соединения. Поддержка x64 и ARM64.",
+      "downloadX64": "Скачать для Windows (x64)",
+      "downloadArm64": "Скачать для Windows (ARM64)",
+      "otherPlatforms": "Доступен на других платформах",
+      "downloadsLink": "Все загрузки"
+    },
+    "related": {
+      "noRegistration": "VPN без регистрации",
+      "noRegistrationDesc": "Используйте VPN без создания аккаунта",
+      "vless": "Протокол VLESS-Reality",
+      "vlessDesc": "Узнайте, как VLESS обходит глубокую инспекцию пакетов",
+      "macos": "VPN для Mac",
+      "macosDesc": "Скачайте Doppler VPN для macOS"
     }
   }
 }

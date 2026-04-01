@@ -6,7 +6,6 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema } from "@/components/seo/json-ld";
-import { WaitlistForm } from "@/components/downloads/waitlist-form";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -59,10 +58,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
-  androidApk: "/downloads/doppler-vpn-v1.2.0.apk",
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  windowsX64: "https://www.dopplervpn.org/download/doppler-vpn-windows-x64.exe",
-  windowsArm64: "https://www.dopplervpn.org/download/doppler-vpn-windows-arm64.exe",
+  windowsX64: "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-x64-Setup.exe",
+  windowsArm64: "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-arm64-Setup.exe",
 };
 
 /* ── Icons ────────────────────────────────────────────────────────── */
@@ -205,16 +203,6 @@ export default async function DownloadsPage({ params }: PageProps) {
                 {t("android.buttonPlayStore")}
               </a>
 
-              <a
-                href={URLS.androidApk}
-                download
-                className="group flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
-              >
-                <DownloadIcon className="w-4 h-4" />
-                {t("android.buttonApk")}
-              </a>
-              <p className="text-xs text-text-muted text-center mt-1.5">{t("android.meta")}</p>
-
               <SetupSteps
                 steps={[t("android.step1"), t("android.step2"), t("android.step3"), t("android.step4")]}
               />
@@ -254,36 +242,58 @@ export default async function DownloadsPage({ params }: PageProps) {
                 steps={[t("mac.step1"), t("mac.step2"), t("mac.step3"), t("mac.step4")]}
               />
 
-              <p className="mt-4 text-xs text-text-muted/70 italic">
+              <Link
+                href="/vpn-for-macos"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
+              >
+                {t("mac.learnMore")}
+                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </Link>
+              <p className="mt-2 text-xs text-text-muted/70 italic">
                 {t("syncNote")}
               </p>
             </div>
 
-            {/* ── Windows (In Development) ────────────────────────── */}
-            <div className="rounded-2xl border border-accent-gold/20 bg-bg-secondary/50 p-6 relative overflow-hidden">
-              {/* "Coming Soon" corner ribbon effect */}
-              <div className="absolute top-0 end-0 bg-accent-gold/15 text-accent-gold text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-es-xl border-s border-b border-accent-gold/20">
-                {t("windows.comingSoon")}
-              </div>
-
+            {/* ── Windows ──────────────────────────────────────────── */}
+            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted">
                   <WindowsIcon className="w-5 h-5" />
                 </div>
-                <div>
-                  <h2 className="text-xl font-semibold text-text-primary">{t("windows.title")}</h2>
-                  <p className="text-xs text-accent-gold">{t("windows.inDevelopment")}</p>
-                </div>
+                <h2 className="text-xl font-semibold text-text-primary">{t("windows.title")}</h2>
               </div>
 
-              <p className="text-sm text-text-muted mb-4 leading-relaxed">
-                {t("windows.waitlistDescription")}
-              </p>
+              <a
+                href={URLS.windowsX64}
+                download
+                className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
+              >
+                <DownloadIcon className="w-4 h-4" />
+                {t("windows.buttonX64")}
+              </a>
 
-              <WaitlistForm platform="windows" />
+              <a
+                href={URLS.windowsArm64}
+                download
+                className="group flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
+              >
+                <DownloadIcon className="w-4 h-4" />
+                {t("windows.buttonArm64")}
+              </a>
 
-              <p className="mt-4 text-xs text-text-muted/60">
-                {t("windows.waitlistPrivacy")}
+              <SetupSteps
+                steps={[t("windows.step1"), t("windows.step2"), t("windows.step3"), t("windows.step4")]}
+              />
+
+              <Link
+                href="/vpn-for-windows"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
+              >
+                {t("windows.learnMore")}
+                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </Link>
+              <p className="mt-2 text-xs text-text-muted/70 italic">
+                {t("syncNote")}
               </p>
             </div>
           </div>

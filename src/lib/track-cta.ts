@@ -10,6 +10,8 @@ export type CtaLocation =
   | "vless-vpn"
   | "vpn-for-ios"
   | "vpn-for-android"
+  | "vpn-for-macos"
+  | "vpn-for-windows"
   | "footer"
   | "downloads";
 

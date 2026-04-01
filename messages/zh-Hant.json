@@ -22,7 +22,7 @@
     "headlinePart1a": "在其他 VPN 被封鎖的地方",
     "headlinePart1b": "依然暢通。",
     "headlinePart2": "",
-    "subheadline": "基於 VLESS-Reality 打造，您的流量看起來就像一般 HTTPS。深度封包檢測無法識別。無需註冊、無日誌、無追蹤。",
+    "subheadline": "Doppler VPN 採用 VLESS-Reality 技術，讓您的流量看起來與一般 HTTPS 無異。深度封包檢測無法識別。無需註冊、無日誌、無追蹤。",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "無需提供個人資料",
@@ -298,7 +298,9 @@
       "titlePlayful": "",
       "subtitle": "安全、私密的 VPN，無需註冊。透過 VLESS-Reality 加密和 DNS 保護即時連線。",
       "cta": "取得 Doppler Pro",
-      "downloads": "下載專區"
+      "downloads": "下載專區",
+      "learnIos": "iOS VPN",
+      "learnAndroid": "Android VPN"
     }
   },
   "footer": {
@@ -322,7 +324,9 @@
     "vlessVpn": "VLESS 協定",
     "noRegistration": "免註冊 VPN",
     "vpnForIos": "iOS VPN",
-    "vpnForAndroid": "Android VPN"
+    "vpnForAndroid": "Android VPN",
+    "vpnForMacos": "Mac VPN",
+    "vpnForWindows": "Windows VPN"
   },
   "privacy": {
     "title": "隱私權政策",
@@ -698,17 +702,17 @@
       "step1": "從 App Store 下載 Doppler VPN",
       "step2": "開啟 App — 帳戶自動建立",
       "step3": "選擇方案並訂閱",
-      "step4": "點擊「連線」— 您已受到保護！"
+      "step4": "點擊「連線」— 您已受到保護！",
+      "learnMore": "Learn more about VPN for iOS"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "在 Google Play 下載",
-      "buttonApk": "下載 APK（獨立安裝）",
-      "meta": "APK · v1.2.0 · 95 MB",
       "step1": "從 Google Play 或 APK 下載 Doppler VPN",
       "step2": "開啟 App — 帳戶自動建立",
       "step3": "選擇方案並訂閱",
-      "step4": "點擊「連線」— 您已受到保護！"
+      "step4": "點擊「連線」— 您已受到保護！",
+      "learnMore": "Learn more about VPN for Android"
     },
     "mac": {
       "title": "macOS",
@@ -716,20 +720,18 @@
       "step1": "從 Mac App Store 下載 Doppler VPN",
       "step2": "開啟 App — 帳戶自動建立",
       "step3": "選擇方案並訂閱",
-      "step4": "點擊「連線」— 您已受到保護！"
+      "step4": "點擊「連線」— 您已受到保護！",
+      "learnMore": "進一步了解 Mac VPN"
     },
     "windows": {
       "title": "Windows",
-      "comingSoon": "即將推出",
-      "inDevelopment": "目前開發中",
-      "waitlistDescription": "我們正在打造原生 Windows 客戶端，搭載同樣的 VLESS-Reality 加密。加入候補名單，我們會在準備好時通知您。",
-      "waitlistPrivacy": "我們僅會使用您的電子郵件通知您 Windows 版本發布。絕不發送垃圾郵件。"
-    },
-    "waitlist": {
-      "placeholder": "your@email.com",
-      "button": "通知我",
-      "success": "您已加入名單！準備好時我們會寄信通知您。",
-      "error": "發生錯誤，請重試。"
+      "buttonX64": "下載 Windows 版 (x64)",
+      "buttonArm64": "下載 Windows 版 (ARM64)",
+      "step1": "下載適合您系統的安裝程式（大多數電腦請選 x64）",
+      "step2": "執行安裝程式並依照精靈指示操作",
+      "step3": "開啟 Doppler VPN — 帳戶自動建立",
+      "step4": "選擇方案、訂閱並連線！",
+      "learnMore": "進一步了解 Windows VPN"
     }
   },
   "support": {
@@ -1518,6 +1520,24 @@
         "fingerprint": "無"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPN能否繞過政府審查？",
+        "answer": "能。Doppler使用VLESS-Reality，使VPN流量與普通HTTPS無法區分。無需任何可偵測的VPN簽章即可繞過DPI、TSPU和防火長城。"
+      },
+      "q2": {
+        "question": "Doppler VPN在俄羅斯、中國和伊朗能用嗎？",
+        "answer": "能。Doppler專為受審查地區打造。我們的網域已被Roskomnadzor封鎖，這證明了我們的技術有效。"
+      },
+      "q3": {
+        "question": "是什麼使VLESS-Reality在繞過審查方面優於OpenVPN或WireGuard？",
+        "answer": "OpenVPN和WireGuard具有DPI系統能立即識別的獨特封包簽章。VLESS-Reality使用真實網站憑證執行真正的TLS握手。"
+      },
+      "q4": {
+        "question": "如果Doppler伺服器被封鎖會怎樣？",
+        "answer": "Doppler會自動輪換伺服器端點和IP位址。如果一個端點被識別，網路會自動適應。我們的Telegram機器人提供即時存取更新的伺服器設定。"
+      }
+    },
     "cta": {
       "title": "我們不會拋下任何人",
       "subtitle": "Doppler VPN 專為受限網路而建。我們持續改進基礎設施、輪換伺服器並更新協定，以領先每一種新的封鎖技術。您的網路自由不容妥協。",
@@ -1730,6 +1750,24 @@
         "description": "你現在受到軍事級加密保護。你的真實 IP 被隱藏，流量不可讀取，沒有人——包括我們——知道你是誰。真正免註冊的匿名 VPN。"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "Doppler VPN如何在無需註冊的情況下運作？",
+        "answer": "Doppler使用基於裝置的身份驗證。開啟應用程式時，裝置會在本機產生加密金鑰。此金鑰在伺服器上驗證您的身份 — 無需電子郵件、電話號碼或帳戶。"
+      },
+      "q2": {
+        "question": "沒有帳戶的VPN安全嗎？",
+        "answer": "是的，更安全。傳統帳戶建立的資料庫可能被駭客攻擊或被法院傳喚。Doppler不儲存任何個人資料。"
+      },
+      "q3": {
+        "question": "沒有帳戶可以在多台裝置上使用Doppler嗎？",
+        "answer": "可以。每台裝置產生自己的唯一金鑰。您的訂閱在多台裝置上有效。您可以選擇用恢復電郵關聯裝置，但從不強制要求。"
+      },
+      "q4": {
+        "question": "Doppler收集什麼資料？",
+        "answer": "Doppler不收集您的電子郵件、電話號碼、姓名、瀏覽歷史、IP日誌或連線時間戳。我們物理上無法交出從未儲存的資料。"
+      }
+    },
     "cta": {
       "title": "準備好使用不認識你的 VPN 了嗎？",
       "subtitle": "加入數千名選擇免註冊 VPN 的使用者。無需電子郵件、無需建立帳號、無需冒個人資料風險。下載 Doppler，數秒即可連線——免費試用 3 天。",
@@ -1904,6 +1942,24 @@
         "description": "完整的 VLESS-Reality VPN 體驗可在 iOS（App Store）、Android（Google Play）以及透過我們的 Telegram 機器人取得設定檔。每個平台使用相同的最佳化 Xray-core 引擎和相同的伺服器基礎架構。"
       }
     },
+    "faq": {
+      "q1": {
+        "question": "什麼是VLESS-Reality協定？",
+        "answer": "VLESS-Reality是下一代代理協定，使VPN流量與普通HTTPS瀏覽無法區分。它使用真實網站憑證執行真正的TLS握手，擊敗深度封包檢測和審查系統。"
+      },
+      "q2": {
+        "question": "VLESS-Reality比WireGuard快嗎？",
+        "answer": "VLESS-Reality與WireGuard具有相當的速度，開銷最小。關鍵優勢不是原始速度而是不可偵測性 — WireGuard被DPI系統立即阻止，而VLESS-Reality不被發現地通過。"
+      },
+      "q3": {
+        "question": "使用VLESS需要設定Xray嗎？",
+        "answer": "使用Doppler不需要。傳統的VLESS設定需要編輯JSON設定和管理金鑰。Doppler自動處理所有設定 — 伺服器設定安全分發並定期輪換。"
+      },
+      "q4": {
+        "question": "哪些平台支援VLESS-Reality？",
+        "answer": "Doppler VPN在iOS（App Store）、Android（Google Play和APK）和Telegram機器人上提供VLESS-Reality，用於基於設定的存取。"
+      }
+    },
     "cta": {
       "title": "試試開箱即用的 VLESS VPN 應用程式",
       "subtitle": "下載 Doppler，體驗 VLESS-Reality——為隱形而生的協定。一鍵操作。無需設定。毫不妥協。",
@@ -1929,165 +1985,98 @@
     },
     "hero": {
       "title": "適用於 iPhone 和 iPad 的 Doppler VPN",
-      "subtitle": "免註冊的安全 VPN。從 App Store 下載。含 3 天免費試用。"
+      "subtitle": "免註冊的安全 VPN。從 App Store 下載。含 3 天免費試用。",
+      "cta": "從 App Store 下載"
     },
     "features": {
       "title": "為什麼選擇 Doppler iOS 版？",
+      "subtitle": "Doppler VPN 專為追求真正隱私、同時不願犧牲速度或使用體驗的 iPhone 和 iPad 使用者而設計。",
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代協定，將 VPN 流量偽裝為一般 HTTPS 瀏覽。你的連線對防火牆、深度封包檢測系統和 ISP 監控工具完全隱形。這正是用來突破中國防火長城的同一技術。"
+      },
       "noRegistration": {
         "title": "免註冊",
-        "description": "即刻使用 VPN——無需電子郵件、手機號碼或建立帳號。下載即可連線。"
+        "description": "無需電子郵件、手機號碼或建立帳號。只要下載應用程式即可立即連線。Doppler 使用基於裝置的驗證，從第一次點擊起，你的身份就保持完全私密。"
       },
-      "vlessProtocol": {
-        "title": "VLESS-Reality 協定",
-        "description": "新一代加密技術將 VPN 流量偽裝為一般 HTTPS 瀏覽。防火牆和 DPI 系統無法偵測。"
+      "oneTapConnect": {
+        "title": "一鍵連線",
+        "description": "按下一個按鈕，Doppler 就會自動選擇最快的伺服器、建立加密通道並保護你的所有流量。智慧伺服器選擇針對速度和穩定性進行最佳化。"
       },
-      "adBlocker": {
-        "title": "內建廣告阻擋",
-        "description": "在 DNS 層級攔截侵入性廣告、追蹤器和惡意網域。瀏覽更快，流量更省。"
+      "bypassCensorship": {
+        "title": "突破審查與 DPI",
+        "description": "專為網路審查嚴格的國家設計——俄羅斯、伊朗、中國等地區。VLESS-Reality 讓你的 VPN 流量與一般網頁瀏覽無法區分，輕鬆突破 TSPU 和 GFW。"
       },
-      "alwaysOn": {
-        "title": "始終連線 VPN",
-        "description": "在 Wi-Fi 和行動網路之間切換時自動重新連線。全天候保護你的連線。"
+      "noLogs": {
+        "title": "嚴格零日誌政策",
+        "description": "Doppler 絕不收集、儲存或分享你的瀏覽資料。無連線日誌、無流量日誌、無 DNS 查詢日誌。我們無法識別你的身份，因為我們從不收集任何識別資訊。"
       },
-      "smartRouting": {
-        "title": "智慧路由",
-        "description": "智慧伺服器選擇為你挑選最快的可用節點。為串流、遊戲和日常瀏覽最佳化。"
+      "globalServers": {
+        "title": "6 個全球伺服器節點",
+        "description": "連接歐洲及其他地區多個國家的伺服器。每台伺服器都執行 VLESS-Reality，並透過最佳化路由實現最低延遲和最高吞吐量。"
       },
-      "dnsProtection": {
-        "title": "DNS 保護",
-        "description": "加密的 DNS 查詢防止 ISP 看到你造訪的網站。包含完整的 DNS 洩漏防護。"
+      "freeTrial": {
+        "title": "3 天免費試用",
+        "description": "免費試用 Doppler VPN 3 天，完整存取所有功能——無需預先提供信用卡。試用結束後，可選擇月付、半年付或年付方案，每月最低 $3.33 起。"
+      },
+      "iphoneIpad": {
+        "title": "支援 iPhone 和 iPad",
+        "description": "原生 iOS 應用程式，採用 Apple 的 Network Extension 框架。完整支援 iPhone（8 及更新機型）、所有 iPad 機型，以及透過 iPad 應用程式相容性在 Apple Silicon Mac 上使用。支援 iPadOS 分割顯示和多工處理。"
       }
     },
     "howItWorks": {
-      "title": "在 iOS 上如何使用",
-      "subtitle": "無需建立帳號、無需電子郵件、無需手機號碼——只需四個簡單步驟。",
+      "title": "如何在 iPhone 上設定 VPN",
+      "subtitle": "30 秒內即可連線——無需任何技術知識。",
       "step1": {
         "title": "從 App Store 下載",
-        "description": "搜尋「Doppler VPN」或點擊下方連結。下載免費，應用程式不到 30 MB。"
+        "description": "在 App Store 搜尋「Doppler VPN」或點擊下方的下載按鈕。應用程式免費下載，大小不到 30 MB，相容 iOS 16 及更新版本。"
       },
       "step2": {
         "title": "開啟應用程式",
-        "description": "啟動 Doppler VPN。沒有註冊畫面、沒有登記表單。應用程式即開即用。"
+        "description": "在 iPhone 或 iPad 上啟動 Doppler VPN。沒有註冊畫面、沒有登記表單、無需電子郵件驗證。系統會透過基於裝置的驗證自動建立你的帳號。"
       },
       "step3": {
-        "title": "點擊連線",
-        "description": "按下連線按鈕。Doppler 自動選擇最佳伺服器並建立安全的 VLESS-Reality 通道。"
+        "title": "選擇方案",
+        "description": "開始 3 天免費試用或選擇訂閱方案。可選月付（$6.99）、半年付（$29.99）或年付（$39.99）。透過 App Store 直接管理訂閱。"
       },
       "step4": {
-        "title": "安全瀏覽",
-        "description": "就這麼簡單。你的流量已加密、IP 已隱藏、廣告已阻擋。自由使用任何應用程式或網站。"
-      }
-    },
-    "iosFeatures": {
-      "title": "iOS 專屬功能",
-      "subtitle": "原生建構於 Apple 生態系統，深度系統整合。",
-      "networkExtension": {
-        "title": "Network Extension（系統級 VPN）",
-        "description": "Doppler 使用 Apple 的 Network Extension 框架作為真正的系統級 VPN 運行。來自每個應用程式的所有流量都通過加密通道——不僅僅是瀏覽器流量。這提供了與 Apple 對企業 VPN 解決方案相同標準的保護。"
-      },
-      "alwaysOnVpn": {
-        "title": "始終連線 VPN",
-        "description": "啟用始終連線模式，Doppler 會在連線中斷時自動重新連線。從 Wi-Fi 切換到行動網路？從睡眠中喚醒手機？VPN 在一秒內重新建立，你永遠不會暴露。"
-      },
-      "perAppVpn": {
-        "title": "按應用程式 VPN",
-        "description": "選擇哪些應用程式透過 VPN 通道路由，哪些直接連線。將銀行應用程式保持在本地網路上，同時透過 VPN 保護瀏覽器和通訊應用程式。"
-      },
-      "widget": {
-        "title": "主畫面小工具",
-        "description": "將 Doppler 小工具加入主畫面或鎖定畫面，即時查看連線狀態並一鍵切換。一目了然地查看目前伺服器、連線時間和保護狀態。"
-      },
-      "ipadSplitView": {
-        "title": "iPad 分割顯示支援",
-        "description": "完全支援 iPad 多工處理。在分割顯示或滑動置前中與其他應用程式同時使用 Doppler VPN。無論前景是哪個應用程式，VPN 狀態始終在狀態列中可見。"
-      }
-    },
-    "privacy": {
-      "title": "Apple 裝置上的隱私保護",
-      "subtitle": "Doppler 補充了 Apple 已有的保護——並填補了 VPN 專門解決的空白。",
-      "intro": "Apple 在裝置級隱私方面處於業界領先——App 追蹤透明度、郵件隱私保護和 Safari 智慧防追蹤。但有一層 Apple 無法保護：你的網路流量。",
-      "appleProtects": {
-        "title": "Apple 保護的內容",
-        "item1": "應用程式級追蹤（ATT 提示）",
-        "item2": "裝置端資料加密（Secure Enclave）",
-        "item3": "Safari 追蹤器攔截",
-        "item4": "郵件像素追蹤防護"
-      },
-      "dopplerAdds": {
-        "title": "Doppler VPN 增加的保護",
-        "item1": "對每個網站和服務隱藏你的真實 IP 位址",
-        "item2": "使用 VLESS-Reality 加密所有網路流量（無法偵測）",
-        "item3": "攔截 DNS 層級的追蹤和廣告網域",
-        "item4": "防止 ISP 流量監控和限速"
-      },
-      "noLogs": "Doppler 使用基於裝置的驗證——沒有帳號、沒有電子郵件、沒有日誌。我們無法識別你，因為我們從未收集過可識別身份的資訊。"
-    },
-    "compatibility": {
-      "title": "系統需求與相容性",
-      "os": {
-        "label": "作業系統",
-        "value": "iOS 16.0 或更高版本"
-      },
-      "iphone": {
-        "label": "iPhone",
-        "value": "iPhone 8 及更新機型（所有支援 iOS 16 的型號）"
-      },
-      "ipad": {
-        "label": "iPad",
-        "value": "所有執行 iPadOS 16 或更高版本的 iPad 型號"
-      },
-      "mac": {
-        "label": "Mac（Apple Silicon）",
-        "value": "M1、M2、M3、M4 Mac 透過 iPad 應用程式相容"
-      },
-      "size": {
-        "label": "應用程式大小",
-        "value": "不到 30 MB"
-      },
-      "battery": {
-        "label": "電池影響",
-        "value": "極小——VLESS 是一種輕量級協定，CPU 開銷低"
-      },
-      "data": {
-        "label": "資料開銷",
-        "value": "與未加密瀏覽相比，額外資料使用不到 2%"
+        "title": "點擊連線",
+        "description": "按下連線按鈕。Doppler 自動選擇最佳伺服器、建立加密的 VLESS-Reality 通道並路由你的所有流量。你的 IP 已隱藏，資料已加密。"
       }
     },
     "faq": {
-      "title": "常見問題",
+      "title": "常見問題 — Doppler VPN iOS 版",
       "q1": {
-        "question": "Doppler VPN 在 iOS 上提供免費試用嗎？",
-        "answer": "是的。每位新使用者都可獲得 3 天免費試用，完整存取所有功能。試用結束後，選擇適合你的方案——月付、半年付或年付。"
+        "question": "Doppler VPN 可以在 iPad 上使用嗎？",
+        "answer": "可以。Doppler VPN 支援所有執行 iPadOS 16 或更新版本的 iPad 機型。應用程式完整支援 iPad 多工功能，包括分割顯示和滑動置前。你的訂閱同時適用於 iPhone 和 iPad——在所有 Apple 裝置上使用同一帳號。"
       },
       "q2": {
-        "question": "我需要建立帳號嗎？",
-        "answer": "不需要。Doppler 使用基於裝置的驗證。無需註冊、無需電子郵件、無需手機號碼。只需下載並連線。"
+        "question": "如何在 iPhone 上設定 VPN？",
+        "answer": "在 iPhone 上設定 Doppler VPN 不到 30 秒：1) 從 App Store 下載，2) 開啟應用程式（無需註冊），3) 點擊連線。Doppler 會自動處理所有技術設定——配置 VPN 描述檔、選擇最佳伺服器並建立加密通道。"
       },
       "q3": {
-        "question": "Doppler 在中國、俄羅斯或伊朗可以使用嗎？",
-        "answer": "可以。Doppler 使用 VLESS-Reality 協定，將 VPN 流量偽裝為一般 HTTPS。這使得防火長城或 TSPU 等審查系統極難偵測和封鎖。"
+        "question": "Doppler VPN 在 iOS 上免費嗎？",
+        "answer": "Doppler VPN 提供 3 天免費試用，完整存取所有功能。試用結束後，可選擇三種訂閱方案：月付（$6.99）、半年付（$29.99，省 28%）或年付（$39.99，省 52%）。所有訂閱透過 App Store 管理。"
       },
       "q4": {
-        "question": "VPN 會拖慢我的 iPhone 嗎？",
-        "answer": "幾乎感覺不到。VLESS-Reality 是目前最輕量的 VPN 協定之一。大多數使用者速度下降不到 5%。得益於高效的封包處理，電池影響極小。"
+        "question": "在俄羅斯、中國和伊朗能用嗎？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 協定，將 VPN 流量偽裝為一般 HTTPS 網頁瀏覽。這使得俄羅斯的 TSPU、中國的防火長城或伊朗的過濾系統極難偵測和封鎖。Doppler 專為重度審查地區的使用者設計。"
       },
       "q5": {
-        "question": "Doppler 能用於串流應用程式嗎？",
-        "answer": "可以。Doppler 的智慧路由針對串流進行了最佳化。應用程式自動選擇影片內容表現最佳的伺服器。"
+        "question": "如何取消訂閱？",
+        "answer": "在 iOS 上取消 Doppler VPN 訂閱：開啟「設定」> 點擊你的 Apple ID >「訂閱項目」> Doppler VPN >「取消訂閱」。在目前計費週期結束前，你仍可繼續使用。Apple 負責處理所有帳單——Doppler 絕不儲存你的付款資訊。"
       },
       "q6": {
-        "question": "我可以在 iPad 和 iPhone 上同時使用 Doppler 嗎？",
-        "answer": "可以。你的訂閱適用於多台 Apple 裝置。每台裝置獲得獨立的安全連線。"
+        "question": "可以在多台 Apple 裝置上使用同一帳號嗎？",
+        "answer": "可以。你的 Doppler VPN 訂閱適用於多台 Apple 裝置——iPhone、iPad，甚至透過 iPad 應用程式相容性在 Apple Silicon Mac 上使用。每台裝置獲得獨立的安全 VPN 連線。單一帳號最多可連接 10 台裝置。"
       }
     },
     "cta": {
-      "title": "取得 Doppler VPN iOS 版",
-      "subtitle": "無需註冊。3 天免費試用。數秒即可連線。",
+      "title": "下載適用於 iPhone 和 iPad 的 Doppler VPN",
+      "subtitle": "無需註冊。3 天免費試用，完整存取所有功能。VLESS-Reality 加密讓你的連線保持私密且無法偵測。",
       "downloadIos": "從 App Store 下載",
-      "downloadAndroid": "在 Google Play 取得",
-      "telegramBot": "透過 Telegram 機器人使用",
-      "telegramChannelRu": "Telegram 頻道（俄語）",
-      "telegramChannelEn": "Telegram 頻道（英語）"
+      "otherPlatforms": "也可在其他平台使用",
+      "downloadsLink": "查看所有下載"
     },
     "related": {
       "noRegistration": "免註冊 VPN",
@@ -2106,158 +2095,97 @@
     "hero": {
       "title": "適用於 Android 的 Doppler VPN",
       "subtitle": "免註冊 VPN。無需帳號、電子郵件或個人資料。可在 Google Play 和 APK 取得。含 3 天免費試用。",
-      "googlePlay": "Google Play 商店",
-      "downloadApk": "下載 APK"
+      "cta": "在 Google Play 下載"
     },
     "features": {
       "title": "為什麼選擇 Doppler Android 版？",
-      "subtitle": "專為需要無妥協隱私的 Android 使用者打造。無需註冊、不收集資料、沒有限制。",
+      "subtitle": "Doppler VPN 專為追求真正隱私、同時不願犧牲速度、電池續航或使用體驗的 Android 使用者而設計。",
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代協定，將 VPN 流量偽裝為一般 HTTPS 瀏覽。你的連線對防火牆、深度封包檢測系統和 ISP 監控完全隱形。這正是用來突破中國防火長城的同一技術。"
+      },
       "noRegistration": {
         "title": "免註冊",
-        "description": "開啟應用程式即可連線。無需電子郵件、手機號碼或建立帳號。從第一次點擊起，你的身份就保持私密。"
+        "description": "無需電子郵件、手機號碼或建立帳號。從 Google Play 下載，開啟應用程式即可立即連線。Doppler 使用基於裝置的驗證，讓你的身份保持完全私密。"
       },
-      "vlessReality": {
-        "title": "VLESS-Reality 協定",
-        "description": "軍事級加密讓你的 VPN 流量看起來像一般 HTTPS 瀏覽。DPI 系統和政府防火牆無法偵測。"
+      "oneTapConnect": {
+        "title": "一鍵連線",
+        "description": "按下一個按鈕，Doppler 就會自動選擇最快的伺服器、建立加密通道並保護你的所有流量。智慧伺服器選擇針對速度和穩定性進行最佳化。"
       },
-      "adBlocker": {
-        "title": "內建廣告阻擋",
-        "description": "在 DNS 層級攔截廣告、追蹤器和惡意網域。瀏覽更快、流量更省，Android 裝置電池續航更長。"
+      "bypassCensorship": {
+        "title": "突破審查與 DPI",
+        "description": "專為網路審查嚴格的國家設計——俄羅斯、伊朗、中國等地區。VLESS-Reality 讓你的 VPN 流量與一般網頁瀏覽無法區分，輕鬆突破 TSPU 和 GFW。"
       },
-      "alwaysOn": {
-        "title": "始終連線 VPN",
-        "description": "使用 Android 原生的始終連線 VPN 功能，確保全天候連線保護，即使重新開機或網路切換也不中斷。"
+      "noLogs": {
+        "title": "嚴格零日誌政策",
+        "description": "Doppler 絕不收集、儲存或分享你的瀏覽資料。無連線日誌、無流量日誌、無 DNS 查詢日誌。我們無法識別你的身份，因為我們從不收集任何識別資訊。"
       },
-      "apkSideload": {
-        "title": "APK 側載安裝",
-        "description": "無法存取 Google Play？直接下載 APK 並手動安裝。非常適合俄羅斯、伊朗、中國等受審查地區的使用者。"
+      "globalServers": {
+        "title": "6 個全球伺服器節點",
+        "description": "連接歐洲及其他地區多個國家的伺服器。每台伺服器都執行 VLESS-Reality，並透過最佳化路由實現最低延遲和最高吞吐量。"
       },
-      "dnsProtection": {
-        "title": "DNS 保護",
-        "description": "所有 DNS 查詢都經過加密並透過安全伺服器路由。防止 DNS 洩漏，阻止 ISP 查看你造訪的網站。"
-      }
-    },
-    "install": {
-      "title": "兩種安裝方式",
-      "subtitle": "選擇最適合你狀況的安裝方式。兩種方式都提供相同的完整 VPN 體驗。",
-      "playStore": {
-        "title": "Google Play 商店",
-        "badge": "推薦",
-        "benefit1": "一鍵安裝，自動更新",
-        "benefit2": "經 Google Play Protect 驗證",
-        "benefit3": "無縫訂閱管理",
-        "cta": "在 Google Play 取得"
+      "freeTrial": {
+        "title": "3 天免費試用",
+        "description": "免費試用 Doppler VPN 3 天，完整存取所有功能。試用結束後，可選擇月付、半年付或年付方案，每月最低 $3.33 起。透過 Google Play 管理訂閱。"
       },
-      "apk": {
-        "title": "直接下載 APK",
-        "badge": "適用於受限地區",
-        "benefit1": "Google Play 被封鎖時仍可使用",
-        "benefit2": "無需 Google 帳號",
-        "benefit3": "與 Play 商店版功能完全一致",
-        "note": "適合俄羅斯、伊朗、中國等 Google Play 商店受限或 VPN 應用程式被下架的國家的使用者。",
-        "cta": "透過 Telegram 機器人取得 APK"
+      "batteryEfficient": {
+        "title": "省電背景服務",
+        "description": "Doppler 使用 Android 原生的永久開啟 VPN 框架，電池影響極小。即使開啟全天候保護，額外耗電也不到 2%。已針對 Samsung、Xiaomi、OnePlus、Pixel 及所有主要 Android 品牌進行最佳化。"
       }
     },
     "howItWorks": {
-      "title": "在 Android 上如何使用",
-      "subtitle": "從下載到安全瀏覽不到 30 秒。無需帳號、電子郵件或設定精靈。",
+      "title": "如何在 Android 上設定 VPN",
+      "subtitle": "30 秒內即可連線——無需任何技術知識。",
       "step1": {
-        "title": "下載應用程式",
-        "description": "從 Google Play 安裝 Doppler VPN 或直接下載 APK。應用程式輕量——不到 15 MB。"
+        "title": "從 Google Play 下載",
+        "description": "在 Google Play 商店搜尋「Doppler VPN」或點擊下方的下載按鈕。應用程式免費下載，輕量不到 15 MB，相容 Android 8.0（Oreo）及更新版本。"
       },
       "step2": {
         "title": "開啟應用程式",
-        "description": "啟動 Doppler VPN。沒有註冊畫面、沒有登記表單。應用程式即開即用。"
+        "description": "在 Android 手機或平板上啟動 Doppler VPN。沒有註冊畫面、沒有登記表單、無需電子郵件驗證。系統會透過基於裝置的驗證自動建立你的帳號。"
       },
       "step3": {
+        "title": "訂閱方案",
+        "description": "開始 3 天免費試用或選擇訂閱方案。可選月付（$6.99）、半年付（$29.99）或年付（$39.99）。透過 Google Play 直接管理訂閱。"
+      },
+      "step4": {
         "title": "點擊連線",
-        "description": "按下連線按鈕。Doppler 自動選擇最快的可用伺服器並建立 VLESS-Reality 通道。"
-      },
-      "step4": {
-        "title": "自由瀏覽",
-        "description": "你的連線現已加密且無法偵測。無限制存取任何網站、應用程式或服務。"
+        "description": "按下連線按鈕。Doppler 自動選擇最佳伺服器、建立加密的 VLESS-Reality 通道並路由你的所有流量。你的 IP 已隱藏，資料已加密。"
       }
     },
-    "androidFeatures": {
-      "title": "Android 專屬功能",
-      "subtitle": "Doppler VPN 充分利用 Android 的能力，提供最安全、最流暢的體驗。",
-      "alwaysOnVpn": {
-        "title": "始終連線 VPN",
-        "description": "啟用 Android 內建的始終連線 VPN 設定，讓 Doppler 隨時保持連線。前往 設定 > 網路和網際網路 > VPN > Doppler VPN > 開啟始終開啟。你的裝置會在重新開機或網路變更後自動重新連線。"
+    "faq": {
+      "title": "常見問題 — Doppler VPN Android 版",
+      "q1": {
+        "question": "Doppler VPN 可以在 Samsung 裝置上使用嗎？",
+        "answer": "可以。Doppler VPN 完全相容所有執行 Android 8.0（Oreo）或更新版本的 Samsung Galaxy 手機和平板。包括 Galaxy S 系列、Galaxy A 系列、Galaxy Z Fold、Galaxy Z Flip 和 Galaxy Tab。Doppler 整合了 Samsung 的永久開啟 VPN 設定，提供全天候保護。"
       },
-      "splitTunneling": {
-        "title": "分流通道",
-        "description": "選擇哪些應用程式走 VPN、哪些使用一般連線。將銀行應用程式直接路由，同時保護瀏覽器。在 Doppler 的設定中配置按應用程式 VPN 規則。"
+      "q2": {
+        "question": "Doppler VPN 會耗電嗎？",
+        "answer": "不會。即使啟用永久開啟 VPN，Doppler VPN 的額外耗電也不到 2%。VLESS-Reality 協定專為高效率設計，CPU 負載極低。為獲得最佳體驗，請在「設定」>「應用程式」> Doppler VPN >「電池」>「不受限制」中將 Doppler 排除在 Android 電池最佳化之外。"
       },
-      "quickSettings": {
-        "title": "快速設定圖塊",
-        "description": "將 Doppler VPN 加入 Android 快速設定面板。一滑一點即可連線或中斷——無需開啟應用程式。適用於 Android 8.0 及以上版本。"
+      "q3": {
+        "question": "如何在 Android 上設定 VPN？",
+        "answer": "在 Android 上設定 Doppler VPN 不到 30 秒：1) 從 Google Play 下載，2) 開啟應用程式（無需註冊），3) 點擊連線。Doppler 會自動處理所有技術設定——配置 VPN 描述檔、選擇最佳伺服器並建立加密通道。"
       },
-      "batteryOptimization": {
-        "title": "電池最佳化",
-        "description": "Doppler 耗電極少。為獲得最佳的始終連線體驗，請將 Doppler 排除在 Android 電池最佳化之外：設定 > 應用程式 > Doppler VPN > 電池 > 不受限制。這可以防止 Android 在背景終止 VPN 連線。"
+      "q4": {
+        "question": "在俄羅斯、中國和伊朗能用嗎？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 協定，將 VPN 流量偽裝為一般 HTTPS 網頁瀏覽。這使得俄羅斯的 TSPU、中國的防火長城或伊朗的過濾系統極難偵測和封鎖。Doppler 專為重度審查地區的使用者設計。"
       },
-      "androidTv": {
-        "title": "Android TV 支援",
-        "description": "在你的 Android TV 或電視盒子上側載安裝 Doppler VPN APK，保護串流流量。在大螢幕上使用相同的 VLESS-Reality 加密存取受地區限制的內容。"
-      }
-    },
-    "sideloading": {
-      "title": "APK 側載安裝指南",
-      "badge": "適用於受審查地區",
-      "intro": "如果你所在的國家 Google Play 受限或 VPN 應用程式已從商店下架，你可以直接從 APK 檔案安裝 Doppler VPN。請仔細依照以下步驟操作。",
-      "step1": {
-        "title": "啟用不明來源",
-        "description": "前往 設定 > 應用程式 > 特殊應用程式存取 > 安裝不明應用程式。選擇你的瀏覽器或檔案管理工具，開啟「允許來自此來源」。"
+      "q5": {
+        "question": "如何取消訂閱？",
+        "answer": "在 Android 上取消 Doppler VPN 訂閱：開啟 Google Play > 點擊個人資料圖示 >「付款和訂閱」>「訂閱」> Doppler VPN >「取消訂閱」。在目前計費週期結束前，你仍可繼續使用。"
       },
-      "step2": {
-        "title": "下載 APK",
-        "description": "從我們的官方 Telegram 機器人 @dopplercreatebot 取得最新的 Doppler VPN APK。這確保你始終取得正版、未修改的檔案。"
-      },
-      "step3": {
-        "title": "安裝 APK",
-        "description": "開啟下載的 .apk 檔案並點擊「安裝」。Android 可能會顯示關於不明應用程式的警告——這對於側載安裝的應用程式是正常的。"
-      },
-      "step4": {
-        "title": "驗證並連線",
-        "description": "開啟 Doppler VPN 並驗證應用程式正常運作。應用程式應該無需任何帳號或註冊即可連線——只需點擊連線。"
-      },
-      "security": {
-        "title": "安全提示",
-        "description": "僅從我們的官方 Telegram 機器人（@dopplercreatebot）或官方網站（www.dopplervpn.org）下載 Doppler VPN APK。切勿從第三方來源安裝 APK 檔案——可能包含惡意軟體或被修改的程式碼。"
-      }
-    },
-    "requirements": {
-      "title": "系統需求",
-      "os": {
-        "title": "作業系統",
-        "value": "Android 8.0（Oreo）或更高版本"
-      },
-      "battery": {
-        "title": "電池影響",
-        "value": "極小——啟用始終連線 VPN 後額外電量消耗不到 2%"
-      },
-      "storage": {
-        "title": "儲存空間",
-        "value": "應用程式不到 15 MB，連線時記憶體占用不到 5 MB"
-      },
-      "permissions": {
-        "title": "所需權限",
-        "value": "僅需 VPN 連線權限——不存取聯絡人、照片或檔案"
-      },
-      "compatibility": {
-        "title": "相容裝置"
+      "q6": {
+        "question": "可以在 Android TV 上使用 Doppler VPN 嗎？",
+        "answer": "可以。你可以在 Android TV 裝置和電視盒上安裝 Doppler VPN 來保護串流流量。在大螢幕上使用與行動裝置相同的 VLESS-Reality 加密來存取地區限制內容。"
       }
     },
     "cta": {
-      "title": "立即取得 Doppler VPN Android 版",
-      "subtitle": "私密且無法偵測。免註冊、無需帳號、不收集資料。免費試用 3 天。從 Google Play 下載或取得適用於受限地區的 APK。",
-      "googlePlay": "Google Play 商店",
-      "downloadApk": "下載 APK",
-      "alsoOnIos": "同時提供 iOS 版本",
-      "telegramBot": "Telegram 機器人",
-      "telegramChannelRu": "Telegram 頻道（俄語）",
-      "telegramChannelEn": "Telegram 頻道（英語）"
+      "title": "下載適用於 Android 的 Doppler VPN",
+      "subtitle": "無需註冊。3 天免費試用，完整存取所有功能。VLESS-Reality 加密讓你的連線保持私密且無法偵測。",
+      "downloadAndroid": "在 Google Play 下載",
+      "otherPlatforms": "也可在其他平台使用",
+      "downloadsLink": "查看所有下載"
     },
     "related": {
       "noRegistration": "免註冊 VPN",
@@ -2266,6 +2194,226 @@
       "vlessDesc": "了解 VLESS 如何擊敗深度封包檢測",
       "ios": "iOS VPN",
       "iosDesc": "下載適用於 iPhone 和 iPad 的 Doppler VPN"
+    }
+  },
+  "vpnForMacos": {
+    "metadata": {
+      "title": "Doppler VPN Mac 版 — 快速、隱私、抗審查",
+      "description": "從 Mac App Store 下載 Doppler VPN macOS 版。VLESS-Reality 加密、無需註冊、突破審查封鎖。原生支援 Apple Silicon。"
+    },
+    "hero": {
+      "title": "Doppler VPN Mac 版",
+      "subtitle": "專為 macOS 打造的快速、隱私、抗審查 VPN。無需註冊 — 從 Mac App Store 下載，幾秒內即可連線。訂閱可在 iPhone、iPad 和 Mac 之間共用。",
+      "cta": "在 Mac App Store 下載"
+    },
+    "features": {
+      "title": "為什麼選擇 Doppler VPN macOS 版？",
+      "subtitle": "Doppler VPN 是原生 macOS 應用程式，專為需要真正隱私保護、突破審查及無縫整合 Apple 生態系統的 Mac 使用者而設計。",
+      "nativeMac": {
+        "title": "原生 macOS App",
+        "description": "使用 Apple Network Extension 框架專為 macOS 打造。原生支援 Apple Silicon（M1/M2/M3/M4）和 Intel Mac。整合 macOS 系統偏好設定、選單列和通知中心，提供流暢的桌面 VPN 體驗。"
+      },
+      "macAppStore": {
+        "title": "Mac App Store 上架",
+        "description": "直接從 Mac App Store 下載 — 經 Apple 審核驗證安全。自動更新、輕鬆安裝，並透過 Apple ID 無縫管理訂閱。無需側載或手動設定。"
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代協定，將 VPN 流量偽裝為一般 HTTPS 瀏覽。您的連線對防火牆、深度封包檢測系統和 ISP 監控工具完全不可見。與突破中國防火長城的技術相同。"
+      },
+      "noRegistration": {
+        "title": "無需註冊",
+        "description": "不需要電子郵件、電話號碼或建立帳戶。只需下載 App 即可立即連線。Doppler 使用裝置驗證機制，從第一次點擊起您的身份就完全保密。"
+      },
+      "oneClickConnect": {
+        "title": "一鍵連線",
+        "description": "只需點擊一個按鈕，Doppler 即自動選擇最快的伺服器、建立加密通道，並保護 Mac 的所有流量。智慧伺服器選擇針對速度與穩定性最佳化 — 可直接從選單列操作。"
+      },
+      "bypassCensorship": {
+        "title": "突破審查與 DPI",
+        "description": "專為網路審查嚴格的國家設計 — 俄羅斯、伊朗、中國等。VLESS-Reality 讓您的 VPN 流量與正常網頁瀏覽無法區分，可擊敗 TSPU 和 GFW。"
+      },
+      "noLogs": {
+        "title": "嚴格無日誌政策",
+        "description": "Doppler 絕不收集、儲存或分享您的瀏覽資料。無連線日誌、無流量日誌、無 DNS 查詢日誌。我們無法識別您的身份，因為我們從不收集可識別資訊。"
+      },
+      "crossDevice": {
+        "title": "跨 Apple 裝置同步",
+        "description": "一份訂閱涵蓋您的 Mac、iPhone 和 iPad。帳戶和訂閱狀態在所有 Apple 裝置間自動同步。切換裝置無需重新訂閱或重新設定 — 您的 VPN 隨時就緒。"
+      }
+    },
+    "howItWorks": {
+      "title": "如何在 Mac 上設定 VPN",
+      "subtitle": "不到一分鐘即可連線 — 無需任何技術知識。",
+      "step1": {
+        "title": "從 Mac App Store 下載",
+        "description": "在 Mac App Store 搜尋「Doppler VPN」或點擊下方下載按鈕。App 可免費下載，適用於 macOS 14 Sonoma 及更新版本。同時支援 Apple Silicon 和 Intel Mac。"
+      },
+      "step2": {
+        "title": "開啟 App",
+        "description": "在 Mac 上啟動 Doppler VPN。沒有註冊頁面、沒有表單、不需要電子郵件驗證。您的帳戶會透過裝置驗證自動建立。"
+      },
+      "step3": {
+        "title": "選擇方案",
+        "description": "開始 3 天免費試用或選擇訂閱方案。提供月繳（$6.99）、半年（$29.99）或年繳（$39.99）選項。可直接透過 App Store 管理訂閱。"
+      },
+      "step4": {
+        "title": "點擊連線",
+        "description": "按下連線按鈕。Doppler 會自動選擇最佳伺服器、建立 VLESS-Reality 加密通道，並將所有流量導入其中。您的 IP 已隱藏，資料已加密。"
+      }
+    },
+    "faq": {
+      "title": "常見問題 — Doppler VPN Mac 版",
+      "q1": {
+        "question": "Doppler VPN 是否支援 Apple Silicon Mac？",
+        "answer": "是的。Doppler VPN 原生支援 Apple Silicon（M1、M2、M3、M4）和 Intel Mac。App 為通用二進位檔，針對兩種架構最佳化，確保最佳效能及 MacBook 筆電上最低的電池影響。"
+      },
+      "q2": {
+        "question": "iPhone、iPad 和 Mac 可以共用同一帳戶嗎？",
+        "answer": "可以。Doppler VPN 訂閱適用於您所有的 Apple 裝置 — iPhone、iPad 和 Mac。每個裝置都有獨立的安全 VPN 連線。最多 10 個裝置可連結至同一帳戶，訂閱狀態會透過 Apple ID 自動同步。"
+      },
+      "q3": {
+        "question": "如何在 macOS 上設定 VPN？",
+        "answer": "在 Mac 上設定 Doppler VPN 不到一分鐘：1）從 Mac App Store 下載；2）開啟 App（無需註冊）；3）點擊連線。Doppler 會自動處理所有技術設定 — 設定 VPN 設定檔、選擇最佳伺服器並建立加密通道。"
+      },
+      "q4": {
+        "question": "會拖慢 Mac 的速度嗎？",
+        "answer": "Doppler VPN 的設計以最低效能影響為目標。原生 macOS App 使用 Apple Network Extension 框架高效處理流量。Apple Silicon Mac 在 VPN 連線時 CPU 使用率低於 1%。伺服器選擇針對最低延遲最佳化。"
+      },
+      "q5": {
+        "question": "Doppler VPN 有在 Mac App Store 上架嗎？",
+        "answer": "有的。Doppler VPN 可在 Mac App Store 免費下載，已通過 Apple 審核並獲批准。您可搜尋「Doppler VPN」或使用下載頁面上的直接連結。更新會透過 App Store 自動推送。"
+      },
+      "q6": {
+        "question": "在俄羅斯、中國和伊朗能用嗎？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 協定，將 VPN 流量偽裝為一般 HTTPS 網頁瀏覽。這使得俄羅斯 TSPU、中國防火長城或伊朗過濾系統等審查機制極難偵測和封鎖。Doppler 專為重度審查地區的使用者而設計。"
+      }
+    },
+    "cta": {
+      "title": "下載 Doppler VPN Mac 版",
+      "subtitle": "無需註冊。3 天免費試用，完整功能。VLESS-Reality 加密讓您的連線保持私密且無法偵測。",
+      "downloadMac": "在 Mac App Store 下載",
+      "otherPlatforms": "也支援其他平台",
+      "downloadsLink": "查看所有下載"
+    },
+    "related": {
+      "noRegistration": "免註冊 VPN",
+      "noRegistrationDesc": "無需任何註冊或帳戶即可使用 VPN",
+      "vless": "VLESS-Reality 協定",
+      "vlessDesc": "了解 VLESS 如何擊敗深度封包檢測",
+      "windows": "Windows VPN",
+      "windowsDesc": "下載 Doppler VPN Windows 版"
+    }
+  },
+  "vpnForWindows": {
+    "metadata": {
+      "title": "Doppler VPN Windows 版 — 快速、隱私、抗審查",
+      "description": "下載 Doppler VPN Windows 版。VLESS-Reality 加密、無需註冊、突破審查封鎖。支援 x64 和 ARM64 電腦。"
+    },
+    "hero": {
+      "title": "Doppler VPN Windows 版",
+      "subtitle": "專為 Windows 打造的快速、隱私、抗審查 VPN。無需註冊 — 下載安裝程式，幾秒內即可連線。支援 x64 和 ARM64 電腦，自動更新。",
+      "ctaX64": "下載 Windows 版 (x64)",
+      "ctaArm64": "下載 Windows 版 (ARM64)"
+    },
+    "features": {
+      "title": "為什麼選擇 Doppler VPN Windows 版？",
+      "subtitle": "Doppler VPN 是原生 Windows 應用程式，專為需要真正隱私保護、突破審查及在任何 Windows 裝置上穩定運作的電腦使用者而設計。",
+      "nativeWindows": {
+        "title": "原生 Windows App",
+        "description": "專為 Windows 打造，介面簡潔現代。支援 Windows 10 和 Windows 11，完整支援 x64 和 ARM64 架構。透過簡易安裝精靈數秒即可安裝 — 無需手動設定或命令列工具。"
+      },
+      "dualArchitecture": {
+        "title": "x64 + ARM64 支援",
+        "description": "Doppler VPN 提供 x64（標準電腦、桌機和大多數筆電）和 ARM64（Surface Pro X、Snapdragon 筆電）的專屬版本。為您的硬體選擇正確的安裝程式，在任何 Windows 裝置上獲得原生效能。"
+      },
+      "autoUpdates": {
+        "title": "透過 Velopack 自動更新",
+        "description": "Doppler VPN 使用 Velopack 進行無縫背景更新。新版本會自動下載並套用 — 您隨時擁有最新的安全修補、協定改進和功能，無需動手。"
+      },
+      "vlessEncryption": {
+        "title": "VLESS-Reality 加密",
+        "description": "新一代協定，將 VPN 流量偽裝為一般 HTTPS 瀏覽。您的連線對防火牆、深度封包檢測系統和 ISP 監控工具完全不可見。與突破中國防火長城的技術相同。"
+      },
+      "noRegistration": {
+        "title": "無需註冊",
+        "description": "不需要電子郵件、電話號碼或建立帳戶。只需安裝 App 即可立即連線。Doppler 使用裝置驗證機制，從第一次點擊起您的身份就完全保密。"
+      },
+      "bypassCensorship": {
+        "title": "突破審查與 DPI",
+        "description": "專為網路審查嚴格的國家設計 — 俄羅斯、伊朗、中國等。VLESS-Reality 讓您的 VPN 流量與正常網頁瀏覽無法區分，可擊敗 TSPU 和 GFW。"
+      },
+      "noLogs": {
+        "title": "嚴格無日誌政策",
+        "description": "Doppler 絕不收集、儲存或分享您的瀏覽資料。無連線日誌、無流量日誌、無 DNS 查詢日誌。我們無法識別您的身份，因為我們從不收集可識別資訊。"
+      },
+      "globalServers": {
+        "title": "6 個全球伺服器節點",
+        "description": "連接歐洲及其他地區的多國伺服器。每台伺服器皆運行 VLESS-Reality，路由經過最佳化以實現最低延遲和最高吞吐量。自動伺服器選擇會為您的位置挑選最快的選項。"
+      }
+    },
+    "howItWorks": {
+      "title": "如何在 Windows 上設定 VPN",
+      "subtitle": "不到一分鐘即可連線 — 無需任何技術知識。",
+      "step1": {
+        "title": "下載安裝程式",
+        "description": "下載適合您系統的 Doppler VPN 安裝程式 — 大多數電腦和筆電選 x64，Surface Pro X 和 Snapdragon 裝置選 ARM64。安裝檔小於 30 MB，安全無毒。"
+      },
+      "step2": {
+        "title": "執行安裝精靈",
+        "description": "雙擊安裝程式並依照精靈指示操作。安裝約需 15 秒。Doppler VPN 會新增至開始選單，可選擇隨 Windows 啟動時自動開啟。"
+      },
+      "step3": {
+        "title": "開啟 Doppler VPN",
+        "description": "從開始選單或桌面捷徑啟動 App。沒有註冊頁面、沒有表單、不需要電子郵件驗證。您的帳戶會透過裝置驗證自動建立。"
+      },
+      "step4": {
+        "title": "訂閱並連線",
+        "description": "選擇訂閱方案並點擊連線。Doppler 會自動選擇最佳伺服器、建立 VLESS-Reality 加密通道，並將所有流量導入其中。您的 IP 已隱藏，資料已加密。"
+      }
+    },
+    "faq": {
+      "title": "常見問題 — Doppler VPN Windows 版",
+      "q1": {
+        "question": "支援哪些 Windows 版本？",
+        "answer": "Doppler VPN 支援 Windows 10（1809 版本及更新）和 Windows 11。同時支援 x64 和 ARM64 架構。適用於桌上型電腦、筆記型電腦、平板電腦和執行相容 Windows 版本的 Surface 裝置。"
+      },
+      "q2": {
+        "question": "x64 和 ARM64 有什麼差別？",
+        "answer": "x64 適用於大多數搭載 Intel 或 AMD 處理器的標準電腦、桌機和筆電。ARM64 適用於 Microsoft Surface Pro X、Lenovo ThinkPad X13s 等搭載 Snapdragon 的新型 Windows 筆電。如果不確定，請下載 x64 版本 — 適用於絕大多數 Windows 電腦。"
+      },
+      "q3": {
+        "question": "Doppler VPN 在 Windows 上會自動更新嗎？",
+        "answer": "會的。Doppler VPN 使用 Velopack 進行自動背景更新。當有新版本時，會在背景下載並在下次啟動 App 時套用更新。您無需任何手動操作即可隨時擁有最新的安全修補和功能。"
+      },
+      "q4": {
+        "question": "手機和電腦可以共用同一帳戶嗎？",
+        "answer": "可以。Doppler VPN 訂閱適用於您所有的裝置 — Windows、iOS、Android 和 Mac。每個裝置都有獨立的安全 VPN 連線。最多 10 個裝置可連結至同一帳戶。"
+      },
+      "q5": {
+        "question": "與 Windows Defender 相容嗎？",
+        "answer": "相容。Doppler VPN 與 Windows Defender 及其他主流防毒軟體完全相容。安裝程式經數位簽章，App 不會觸發誤報。Doppler 使用 Windows 網路 API 作為標準 VPN 用戶端運作。"
+      },
+      "q6": {
+        "question": "在俄羅斯、中國和伊朗能用嗎？",
+        "answer": "可以。Doppler 使用 VLESS-Reality 協定，將 VPN 流量偽裝為一般 HTTPS 網頁瀏覽。這使得俄羅斯 TSPU、中國防火長城或伊朗過濾系統等審查機制極難偵測和封鎖。Doppler 專為重度審查地區的使用者而設計。"
+      }
+    },
+    "cta": {
+      "title": "下載 Doppler VPN Windows 版",
+      "subtitle": "無需註冊。VLESS-Reality 加密讓您的連線保持私密且無法偵測。支援 x64 和 ARM64 電腦。",
+      "downloadX64": "下載 Windows 版 (x64)",
+      "downloadArm64": "下載 Windows 版 (ARM64)",
+      "otherPlatforms": "也支援其他平台",
+      "downloadsLink": "查看所有下載"
+    },
+    "related": {
+      "noRegistration": "免註冊 VPN",
+      "noRegistrationDesc": "無需任何註冊或帳戶即可使用 VPN",
+      "vless": "VLESS-Reality 協定",
+      "vlessDesc": "了解 VLESS 如何擊敗深度封包檢測",
+      "macos": "Mac VPN",
+      "macosDesc": "下載 Doppler VPN macOS 版"
     }
   }
 }
