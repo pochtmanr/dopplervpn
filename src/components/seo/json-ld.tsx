@@ -23,8 +23,10 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
     description: t("description"),
     sameAs: [
       "https://apps.apple.com/app/doppler-vpn-fast-secure/id6744068438",
+      "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
       "https://t.me/dopplervpn",
       "https://t.me/dopplervpnen",
+      "https://www.linkedin.com/company/109536645/",
     ],
   };
 
@@ -66,33 +68,6 @@ export async function ProductSchema({ locale }: LocaleProps) {
           returnMethod: "https://schema.org/ReturnByMail",
           returnFees: "https://schema.org/FreeReturn",
         },
-        shippingDetails: {
-          "@type": "OfferShippingDetails",
-          shippingRate: {
-            "@type": "MonetaryAmount",
-            value: "0",
-            currency: "USD",
-          },
-          shippingDestination: {
-            "@type": "DefinedRegion",
-            addressCountry: "US",
-          },
-          deliveryTime: {
-            "@type": "ShippingDeliveryTime",
-            handlingTime: {
-              "@type": "QuantitativeValue",
-              minValue: 0,
-              maxValue: 0,
-              unitCode: "DAY",
-            },
-            transitTime: {
-              "@type": "QuantitativeValue",
-              minValue: 0,
-              maxValue: 0,
-              unitCode: "DAY",
-            },
-          },
-        },
       },
       {
         "@type": "Offer",
@@ -108,33 +83,6 @@ export async function ProductSchema({ locale }: LocaleProps) {
           merchantReturnDays: 30,
           returnMethod: "https://schema.org/ReturnByMail",
           returnFees: "https://schema.org/FreeReturn",
-        },
-        shippingDetails: {
-          "@type": "OfferShippingDetails",
-          shippingRate: {
-            "@type": "MonetaryAmount",
-            value: "0",
-            currency: "USD",
-          },
-          shippingDestination: {
-            "@type": "DefinedRegion",
-            addressCountry: "US",
-          },
-          deliveryTime: {
-            "@type": "ShippingDeliveryTime",
-            handlingTime: {
-              "@type": "QuantitativeValue",
-              minValue: 0,
-              maxValue: 0,
-              unitCode: "DAY",
-            },
-            transitTime: {
-              "@type": "QuantitativeValue",
-              minValue: 0,
-              maxValue: 0,
-              unitCode: "DAY",
-            },
-          },
         },
       },
     ],
@@ -175,6 +123,50 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
       ft("smartRouting.title"),
     ],
   };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
+    />
+  );
+}
+
+interface PlatformAppSchemaProps {
+  name: string;
+  description: string;
+  operatingSystem: string;
+  applicationCategory?: string;
+  price?: string;
+  downloadUrl?: string;
+}
+
+export function PlatformAppSchema({
+  name,
+  description,
+  operatingSystem,
+  applicationCategory = "UtilitiesApplication",
+  price = "0",
+  downloadUrl,
+}: PlatformAppSchemaProps) {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name,
+    description,
+    operatingSystem,
+    applicationCategory,
+    image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
+    offers: {
+      "@type": "Offer",
+      price,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+  };
+  if (downloadUrl) {
+    schema.downloadUrl = downloadUrl;
+  }
 
   return (
     <script
@@ -246,8 +238,8 @@ export function ArticleSchema({
   description,
   url,
   image = "https://www.dopplervpn.org/images/og-banner.jpg",
-  datePublished = "2025-03-01",
-  dateModified = "2025-06-15",
+  datePublished = "2026-04-01",
+  dateModified = "2026-04-01",
 }: ArticleSchemaProps) {
   const schema = {
     "@context": "https://schema.org",

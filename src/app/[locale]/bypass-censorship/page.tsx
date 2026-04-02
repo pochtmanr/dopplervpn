@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, ArticleSchema, FAQSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 
 interface PageProps {
@@ -61,6 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const faqKeys = ["q1", "q2", "q3", "q4"] as const;
 const protocolRows = ["openvpn", "wireguard", "vless"] as const;
 const comparisonCols = ["detectability", "speed", "censorship", "fingerprint"] as const;
 
@@ -135,6 +136,12 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
         headline={mt("title")}
         description={mt("description")}
         url={`${baseUrl}/${locale}/bypass-censorship`}
+      />
+      <FAQSchema
+        items={faqKeys.map((key) => ({
+          question: t(`faq.${key}.question`),
+          answer: t(`faq.${key}.answer`),
+        }))}
       />
       <Navbar />
       <main className="overflow-x-hidden">

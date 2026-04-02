@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema, ArticleSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, ArticleSchema, FAQSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { Link } from "@/i18n/navigation";
 
@@ -62,6 +62,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+const faqKeys = ["q1", "q2", "q3", "q4"] as const;
 const comparisonProtocols = ["vless", "wireguard", "openvpn", "shadowsocks", "trojan"] as const;
 const comparisonCols = ["dpiResistance", "speed", "latency", "batteryImpact", "setupComplexity", "censorshipBypass"] as const;
 const howItWorksSteps = ["step1", "step2", "step3", "step4"] as const;
@@ -139,6 +140,12 @@ export default async function VlessVpnPage({ params }: PageProps) {
         headline={mt("title")}
         description={mt("description")}
         url={`${baseUrl}/${locale}/vless-vpn`}
+      />
+      <FAQSchema
+        items={faqKeys.map((key) => ({
+          question: t(`faq.${key}.question`),
+          answer: t(`faq.${key}.answer`),
+        }))}
       />
       <Navbar />
       <main className="overflow-x-hidden">

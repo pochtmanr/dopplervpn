@@ -55,6 +55,28 @@ export function CTA() {
                 </svg>
               </Link>
             </div>
+
+            {/* Platform-specific SEO links */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 pt-1">
+              <Link
+                href="/vpn-for-ios"
+                className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-accent-teal transition-colors"
+              >
+                {t("doppler.learnIos")}
+                <svg className="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </Link>
+              <Link
+                href="/vpn-for-android"
+                className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-accent-teal transition-colors"
+              >
+                {t("doppler.learnAndroid")}
+                <svg className="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+              </Link>
+            </div>
           </Reveal>
 
           {/* Image Column */}

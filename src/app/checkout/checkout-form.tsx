@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { initializePaddle, type Paddle } from '@paddle/paddle-js';
 
 const PLANS = [
   { id: 'monthly', label: '1 Month', price: '$6.99', perMonth: '$6.99/mo', save: null, best: false },
@@ -41,10 +42,21 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanId>('yearly');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const paddleRef = useRef<Paddle | null>(null);
 
   const validAccountId = accountId && /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(accountId)
     ? accountId
     : null;
+
+  useEffect(() => {
+    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
+    const environment = (process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT || 'sandbox') as 'sandbox' | 'production';
+    if (!token) return;
+
+    initializePaddle({ token, environment }).then((instance) => {
+      if (instance) paddleRef.current = instance;
+    });
+  }, []);
 
   async function handleSubscribe() {
     if (!validAccountId) {
@@ -56,24 +68,40 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
     setError(null);
 
     try {
-      const res = await fetch('/api/checkout/stripe', {
+      const res = await fetch('/api/paddle/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           planId: selectedPlan,
           accountId: validAccountId,
-          locale: 'en',
         }),
       });
 
       const data = await res.json();
 
-      if (!res.ok || !data.url) {
+      if (!res.ok || !data.priceId) {
         setError(data.error || 'Failed to start checkout. Please try again.');
         return;
       }
 
-      window.location.href = data.url;
+      if (!paddleRef.current) {
+        setError('Payment system not ready. Please refresh and try again.');
+        return;
+      }
+
+      paddleRef.current.Checkout.open({
+        items: [{ priceId: data.priceId, quantity: 1 }],
+        customData: {
+          account_id: data.accountId,
+          plan_id: selectedPlan,
+          source: 'web_checkout',
+        },
+        settings: {
+          displayMode: 'overlay',
+          theme: 'dark',
+          successUrl: `${window.location.origin}/checkout/success?account_id=${data.accountId}`,
+        },
+      });
     } catch {
       setError('Network error. Please check your connection and try again.');
     } finally {
@@ -176,7 +204,7 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
         </button>
 
         <p className="text-center text-zinc-500 text-xs mt-4">
-          Secure payment via Stripe · One-time payment · No auto-renewal
+          Secure payment via Paddle · One-time payment · No auto-renewal
         </p>
       </div>
     </div>

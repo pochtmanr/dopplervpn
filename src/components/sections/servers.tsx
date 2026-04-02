@@ -3,7 +3,7 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { getFlagUrl } from "@/lib/languages";
 
-/* ─── Server location data (from Supabase vpn_servers, updated 2026-03-06) ─── */
+/* ─── Server location data (from Supabase vpn_servers, updated 2026-04-01) ─── */
 interface ServerLocation {
   country: string;
   city: string;
@@ -13,9 +13,10 @@ interface ServerLocation {
 }
 
 const serverLocations: ServerLocation[] = [
+  { country: "Poland", city: "Warsaw", count: 1, protocol: "VLESS-Reality", countryCode: "pl" },
   { country: "Germany", city: "Frankfurt", count: 1, protocol: "VLESS-Reality", countryCode: "de" },
   { country: "Netherlands", city: "Amsterdam", count: 1, protocol: "VLESS-Reality", countryCode: "nl" },
-  { country: "Russia", city: "Moscow", count: 2, protocol: "VLESS-Reality", countryCode: "ru" },
+  { country: "Russia", city: "Saint Petersburg", count: 1, protocol: "VLESS-Reality", countryCode: "ru" },
   { country: "Singapore", city: "Singapore", count: 1, protocol: "VLESS-Reality", countryCode: "sg" },
   { country: "United States", city: "Dallas", count: 1, protocol: "VLESS-Reality", countryCode: "us" },
 ];
@@ -64,7 +65,7 @@ export function Servers() {
     <Section id="servers">
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {serverLocations.map((location, i) => (
           <Reveal key={location.country + location.city} delay={i * 50}>
             <ServerCard location={location} t={t} />

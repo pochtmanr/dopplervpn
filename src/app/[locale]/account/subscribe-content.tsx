@@ -1,7 +1,8 @@
 'use client';
 
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { initializePaddle, type Paddle, type CheckoutEventNames } from '@paddle/paddle-js';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
@@ -143,6 +144,32 @@ interface AccountInfo {
 function SubscribeInner() {
   const t = useTranslations('subscribe');
   const locale = useLocale();
+
+  /* ── Paddle instance ─────────────────────────────────────────── */
+  const paddleRef = useRef<Paddle | null>(null);
+
+  useEffect(() => {
+    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
+    const environment = (process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT || 'sandbox') as 'sandbox' | 'production';
+    if (!token) return;
+
+    initializePaddle({
+      token,
+      environment,
+      eventCallback: (event) => {
+        if (event.name === 'checkout.completed' as CheckoutEventNames) {
+          // Checkout completed — Paddle webhook will update Supabase
+          // Refresh account info after a short delay to let webhook process
+          setTimeout(() => {
+            const savedId = localStorage.getItem('doppler_account_id');
+            if (savedId) fetchAccountInfo(savedId);
+          }, 3000);
+        }
+      },
+    }).then((instance) => {
+      if (instance) paddleRef.current = instance;
+    });
+  }, []);
 
   /* ── Step state ────────────────────────────────────────────────── */
   const [step, setStep] = useState<1 | 2>(1);
@@ -429,24 +456,47 @@ function SubscribeInner() {
     setLoading(true);
     setError('');
     try {
+      // 1. Validate account and get Paddle price ID from server
       const body = {
         planId: selected,
         accountId: accountId.trim().toUpperCase(),
-        promoId: promoApplied?.promo_id || null,
-        locale,
       };
 
-      const res = await fetch('/api/checkout/stripe', {
+      const res = await fetch('/api/paddle/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
       const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
+
+      if (!res.ok || !data.priceId) {
         setError(data.error || t('error'));
+        return;
       }
+
+      // 2. Open Paddle overlay checkout client-side
+      if (!paddleRef.current) {
+        setError('Payment system not ready. Please refresh and try again.');
+        return;
+      }
+
+      paddleRef.current.Checkout.open({
+        items: [{ priceId: data.priceId, quantity: 1 }],
+        customData: {
+          account_id: data.accountId,
+          plan_id: selected,
+          source: 'web_subscribe',
+          email: knownEmail || '',
+        },
+        customer: knownEmail ? { email: knownEmail } : undefined,
+        settings: {
+          displayMode: 'overlay',
+          theme: 'dark',
+          locale: locale as 'en' | 'de' | 'es' | 'fr' | 'ru' | 'ja' | 'pt' | 'nl' | 'it' | 'sv' | 'zh-Hans' | 'zh-Hant' || 'en',
+          successUrl: `${window.location.origin}/${locale}/account?payment=success`,
+        },
+        ...(promoApplied ? { discountCode: promoApplied.code } : {}),
+      });
     } catch {
       setError(t('error'));
     } finally {
@@ -1122,7 +1172,7 @@ function SubscribeInner() {
 
                       {error && <p className="text-center text-xs text-red-400">{error}</p>}
 
-                      {/* Secured by Stripe */}
+                      {/* Secured by Paddle */}
                       <div className="flex items-center justify-center gap-1.5">
                         <ShieldIcon className="w-3.5 h-3.5 text-text-muted/50" />
                         <span className="text-[11px] text-text-muted/50">{t('securedBy')}</span>

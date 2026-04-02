@@ -35,6 +35,7 @@ export function Hero() {
             <h1
               className="hero-animate hero-animate-delay-1 text-5xl sm:text-6xl md:text-6xl lg:text-7xl text-text-primary leading-tight"
             >
+              <span className="sr-only">Doppler VPN — </span>
               <span
                 className="block"
                 style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 300 } : { fontFamily: "var(--font-serif)" }}

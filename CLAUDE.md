@@ -11,7 +11,7 @@ Next.js 15 web app serving as the public marketing site, admin panel, and blog p
 - **Backend:** Supabase (ref: `fzlrhmjdjjzcgstaeblu`)
 - **AI:** OpenAI `gpt-5-mini` for blog content generation
 - **Animation:** Framer Motion
-- **Deployment:** Vercel (dopplervpn.org) — GitHub: pochtmanr/dopplerland
+- **Deployment:** Vercel (dopplervpn.org) — GitHub: pochtmanr/dopplervpn
 
 ## Architecture
 
