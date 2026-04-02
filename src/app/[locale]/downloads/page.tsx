@@ -59,8 +59,8 @@ const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  windowsX64: "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-x64-Setup.exe",
-  windowsArm64: "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-arm64-Setup.exe",
+  windowsX64: "/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe",
+  windowsArm64: "/api/windows/download/DopplerVPN-1.0.0-arm64-Setup.exe",
 };
 
 /* ── Icons ────────────────────────────────────────────────────────── */

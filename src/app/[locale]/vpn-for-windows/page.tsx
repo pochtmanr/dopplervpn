@@ -15,8 +15,8 @@ interface PageProps {
 const baseUrl = "https://www.dopplervpn.org";
 
 const URLS = {
-  windowsX64: "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-x64-Setup.exe",
-  windowsArm64: "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-arm64-Setup.exe",
+  windowsX64: "/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe",
+  windowsArm64: "/api/windows/download/DopplerVPN-1.0.0-arm64-Setup.exe",
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
