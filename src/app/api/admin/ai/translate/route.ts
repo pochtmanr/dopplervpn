@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { translateContent } from "@/lib/openai/translate";
+import { translateContent } from "@/lib/ai/translate";
 
 export async function POST(request: Request) {
   const { admin, error } = await requireAdmin();

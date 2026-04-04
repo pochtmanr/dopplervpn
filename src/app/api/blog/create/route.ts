@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { translateContent, SUPPORTED_LOCALES } from "@/lib/openai/translate";
+import { translateContent, SUPPORTED_LOCALES } from "@/lib/ai/translate";
 import { requireBlogApiKey, isAllowedWebhookUrl } from "@/lib/api-auth";
 import { rateLimit } from "@/lib/rate-limit";
 import { NextRequest } from "next/server";
