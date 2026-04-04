@@ -1,7 +1,7 @@
 import "server-only";
 import { getOpenAI } from "../openai/client";
 
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
 const LANGUAGE_NAMES: Record<string, string> = {
   he: "Hebrew",
