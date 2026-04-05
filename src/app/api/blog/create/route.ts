@@ -4,7 +4,7 @@ import { translateContent, SUPPORTED_LOCALES } from "@/lib/ai/translate";
 import { requireBlogApiKey, isAllowedWebhookUrl } from "@/lib/api-auth";
 import { rateLimit } from "@/lib/rate-limit";
 import { NextRequest } from "next/server";
-import { CURATED_TAG_SLUGS } from "@/lib/blog-tags";
+import { CURATED_TAG_SLUGS, TOPIC_CATEGORY_TAG_MAP } from "@/lib/blog-tags";
 
 // Allow up to 5 minutes for AI generation + translating all languages
 export const maxDuration = 300;
@@ -173,30 +173,44 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: transError.message }, { status: 500 });
   }
 
-  // Attach tags if provided (only curated tags allowed)
+  // Collect tag slugs: from explicit tags + topic_category mapping
+  const tagSlugs = new Set<string>();
+
+  // Map topic_category to curated tags (primary source for automated posts)
+  if (topic_category && TOPIC_CATEGORY_TAG_MAP[topic_category]) {
+    for (const slug of TOPIC_CATEGORY_TAG_MAP[topic_category]) {
+      tagSlugs.add(slug);
+    }
+  }
+
+  // Add explicit tags if they match curated slugs
   if (tags && tags.length > 0) {
-    const skippedTags: string[] = [];
     for (const tagName of tags) {
       const tagSlug = slugify(tagName);
-      if (!CURATED_TAG_SLUGS.includes(tagSlug)) {
-        skippedTags.push(tagName);
-        continue;
-      }
-      const { data: tag } = await db
-        .from("blog_tags")
-        .upsert({ slug: tagSlug }, { onConflict: "slug" })
-        .select("id")
-        .single();
-
-      if (tag) {
-        await db.from("blog_post_tags").insert({
-          post_id: post.id,
-          tag_id: tag.id,
-        });
+      if (CURATED_TAG_SLUGS.includes(tagSlug)) {
+        tagSlugs.add(tagSlug);
       }
     }
-    if (skippedTags.length > 0) {
-      console.warn(`[blog/create] Skipped non-curated tags: ${skippedTags.join(", ")}`);
+  }
+
+  // Ensure at least "news" tag on automated posts
+  if (tagSlugs.size === 0 && template_type) {
+    tagSlugs.add("news");
+  }
+
+  // Attach tags to post
+  for (const tagSlug of tagSlugs) {
+    const { data: tag } = await db
+      .from("blog_tags")
+      .upsert({ slug: tagSlug }, { onConflict: "slug" })
+      .select("id")
+      .single();
+
+    if (tag) {
+      await db.from("blog_post_tags").insert({
+        post_id: post.id,
+        tag_id: tag.id,
+      });
     }
   }
 
