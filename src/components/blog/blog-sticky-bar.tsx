@@ -72,6 +72,8 @@ export function BlogStickyBar({
   const config = {
     ios: { href: APP_STORE_URL, icon: <AppleIcon /> },
     android: { href: GOOGLE_PLAY_URL, icon: <PlayIcon /> },
+    mac: { href: APP_STORE_URL, icon: <AppleIcon /> },
+    windows: { href: `/${locale}/downloads`, icon: <DownloadIcon /> },
     desktop: { href: `/${locale}/downloads`, icon: <DownloadIcon /> },
   }[platform];
 

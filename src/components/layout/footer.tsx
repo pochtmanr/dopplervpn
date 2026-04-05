@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DopplerLogo } from "./doppler-logo";
+import { CookieSettingsButton } from "./cookie-settings-button";
 
 export async function Footer() {
   const t = await getTranslations("footer");
@@ -168,6 +169,33 @@ export async function Footer() {
                 >
                   {t("refundPolicy")}
                 </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dpa"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("dataProcessing")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/subprocessors"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("subprocessors")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/delete-account"
+                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                >
+                  {t("deleteAccount")}
+                </Link>
+              </li>
+              <li>
+                <CookieSettingsButton label={t("cookieSettings")} />
               </li>
               <li>
                 <Link

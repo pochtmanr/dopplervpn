@@ -11,6 +11,7 @@ const APP_STORE_URL =
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
 const ANDROID_APK = "/downloads/doppler-vpn-v1.2.0.apk";
+const WINDOWS_X64_URL = "/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe";
 
 interface HeroCTAsProps {
   platform: Platform;
@@ -20,9 +21,11 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
   const t = useTranslations("hero");
 
   const downloadConfig = {
-    ios: { href: APP_STORE_URL, label: t("downloadIos"), external: true, icon: <AppleIcon /> },
-    android: { href: GOOGLE_PLAY_URL, label: t("downloadAndroid"), external: true, icon: <PlayIcon /> },
-    desktop: { href: "/downloads" as const, label: t("downloadApp"), external: false, icon: <DownloadIcon /> },
+    ios: { href: APP_STORE_URL, label: t("downloadIos"), external: true, download: false, icon: <AppleIcon /> },
+    android: { href: GOOGLE_PLAY_URL, label: t("downloadAndroid"), external: true, download: false, icon: <PlayIcon /> },
+    mac: { href: APP_STORE_URL, label: t("downloadMac"), external: true, download: false, icon: <AppleIcon /> },
+    windows: { href: WINDOWS_X64_URL, label: t("downloadWindows"), external: false, download: true, icon: <WindowsIcon /> },
+    desktop: { href: "/downloads" as const, label: t("downloadApp"), external: false, download: false, icon: <DownloadIcon /> },
   }[platform];
 
   const handlePrimaryClick = () => trackCta("hero", platform);
@@ -38,6 +41,16 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
       href={downloadConfig.href}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={handlePrimaryClick}
+      className={primaryClass}
+    >
+      {downloadConfig.icon}
+      {downloadConfig.label}
+    </a>
+  ) : downloadConfig.download ? (
+    <a
+      href={downloadConfig.href}
+      download
       onClick={handlePrimaryClick}
       className={primaryClass}
     >
@@ -90,6 +103,14 @@ function PlayIcon() {
   return (
     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+    </svg>
+  );
+}
+
+function WindowsIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M3 12V6.75l6-1.32v6.48L3 12zm17-9v8.75l-10 .08V5.67L20 3zM3 13l6 .09v6.81l-6-1.15V13zm7 .18l10 .08V21l-10-1.76V13.18z" />
     </svg>
   );
 }

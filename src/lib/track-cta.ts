@@ -17,7 +17,7 @@ export type CtaLocation =
 
 export function trackCta(
   location: CtaLocation,
-  platform: "ios" | "android" | "desktop",
+  platform: "ios" | "android" | "mac" | "windows" | "desktop",
   pagePath?: string,
   locale?: string
 ) {

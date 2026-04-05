@@ -2,7 +2,7 @@
 
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { initializePaddle, type Paddle, type CheckoutEventNames } from '@paddle/paddle-js';
+import type { RevolutCheckoutInstance } from '@revolut/checkout';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
@@ -145,29 +145,12 @@ function SubscribeInner() {
   const t = useTranslations('subscribe');
   const locale = useLocale();
 
-  /* ── Paddle instance ─────────────────────────────────────────── */
-  const paddleRef = useRef<Paddle | null>(null);
+  /* ── Revolut checkout ref ──────────────────────────────────────── */
+  const revolutLoaderRef = useRef<((token: string, mode?: 'prod' | 'sandbox') => Promise<RevolutCheckoutInstance>) | null>(null);
 
   useEffect(() => {
-    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
-    const environment = (process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT || 'sandbox') as 'sandbox' | 'production';
-    if (!token) return;
-
-    initializePaddle({
-      token,
-      environment,
-      eventCallback: (event) => {
-        if (event.name === 'checkout.completed' as CheckoutEventNames) {
-          // Checkout completed — Paddle webhook will update Supabase
-          // Refresh account info after a short delay to let webhook process
-          setTimeout(() => {
-            const savedId = localStorage.getItem('doppler_account_id');
-            if (savedId) fetchAccountInfo(savedId);
-          }, 3000);
-        }
-      },
-    }).then((instance) => {
-      if (instance) paddleRef.current = instance;
+    import('@revolut/checkout').then((mod) => {
+      revolutLoaderRef.current = mod.default;
     });
   }, []);
 
@@ -456,46 +439,46 @@ function SubscribeInner() {
     setLoading(true);
     setError('');
     try {
-      // 1. Validate account and get Paddle price ID from server
+      // 1. Validate account and create Revolut order
       const body = {
-        planId: selected,
-        accountId: accountId.trim().toUpperCase(),
+        account_id: accountId.trim().toUpperCase(),
+        plan_id: selected,
+        email: knownEmail || '',
+        ...(promoApplied ? { promo_code: promoApplied.code, promo_id: promoApplied.promo_id } : {}),
       };
 
-      const res = await fetch('/api/paddle/checkout', {
+      const res = await fetch('/api/revolut/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
       const data = await res.json();
 
-      if (!res.ok || !data.priceId) {
+      if (!res.ok || !data.order_token) {
         setError(data.error || t('error'));
         return;
       }
 
-      // 2. Open Paddle overlay checkout client-side
-      if (!paddleRef.current) {
+      // 2. Open Revolut checkout
+      if (!revolutLoaderRef.current) {
         setError('Payment system not ready. Please refresh and try again.');
         return;
       }
 
-      paddleRef.current.Checkout.open({
-        items: [{ priceId: data.priceId, quantity: 1 }],
-        customData: {
-          account_id: data.accountId,
-          plan_id: selected,
-          source: 'web_subscribe',
-          email: knownEmail || '',
+      const instance = await revolutLoaderRef.current(data.order_token, data.mode || 'sandbox');
+
+      instance.payWithPopup({
+        onSuccess: () => {
+          // Revolut webhook will update Supabase
+          setTimeout(() => {
+            const savedId = localStorage.getItem('doppler_account_id');
+            if (savedId) fetchAccountInfo(savedId);
+          }, 3000);
+          window.location.href = `/${locale}/account?payment=success`;
         },
-        customer: knownEmail ? { email: knownEmail } : undefined,
-        settings: {
-          displayMode: 'overlay',
-          theme: 'dark',
-          locale: locale as 'en' | 'de' | 'es' | 'fr' | 'ru' | 'ja' | 'pt' | 'nl' | 'it' | 'sv' | 'zh-Hans' | 'zh-Hant' || 'en',
-          successUrl: `${window.location.origin}/${locale}/account?payment=success`,
+        onError: (err) => {
+          setError(err?.message || t('error'));
         },
-        ...(promoApplied ? { discountCode: promoApplied.code } : {}),
       });
     } catch {
       setError(t('error'));
@@ -1172,7 +1155,7 @@ function SubscribeInner() {
 
                       {error && <p className="text-center text-xs text-red-400">{error}</p>}
 
-                      {/* Secured by Paddle */}
+                      {/* Secured by Revolut */}
                       <div className="flex items-center justify-center gap-1.5">
                         <ShieldIcon className="w-3.5 h-3.5 text-text-muted/50" />
                         <span className="text-[11px] text-text-muted/50">{t('securedBy')}</span>

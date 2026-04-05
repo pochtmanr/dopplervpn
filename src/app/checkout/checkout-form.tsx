@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { initializePaddle, type Paddle } from '@paddle/paddle-js';
+import { useState, useRef, useCallback } from 'react';
 
 const PLANS = [
   { id: 'monthly', label: '1 Month', price: '$6.99', perMonth: '$6.99/mo', save: null, best: false },
@@ -42,23 +41,15 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanId>('yearly');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const paddleRef = useRef<Paddle | null>(null);
+  const [success, setSuccess] = useState(false);
+  const checkoutContainerRef = useRef<HTMLDivElement>(null);
+  const checkoutInstanceRef = useRef<{ destroy: () => void } | null>(null);
 
   const validAccountId = accountId && /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(accountId)
     ? accountId
     : null;
 
-  useEffect(() => {
-    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN;
-    const environment = (process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT || 'sandbox') as 'sandbox' | 'production';
-    if (!token) return;
-
-    initializePaddle({ token, environment }).then((instance) => {
-      if (instance) paddleRef.current = instance;
-    });
-  }, []);
-
-  async function handleSubscribe() {
+  const handleSubscribe = useCallback(async () => {
     if (!validAccountId) {
       setError('No valid account ID found. Please open this page from the Doppler VPN app.');
       return;
@@ -67,46 +58,74 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
     setLoading(true);
     setError(null);
 
+    // Clean up any previous checkout instance
+    if (checkoutInstanceRef.current) {
+      checkoutInstanceRef.current.destroy();
+      checkoutInstanceRef.current = null;
+    }
+
     try {
-      const res = await fetch('/api/paddle/checkout', {
+      const res = await fetch('/api/revolut/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          planId: selectedPlan,
-          accountId: validAccountId,
+          account_id: validAccountId,
+          plan_id: selectedPlan,
         }),
       });
 
       const data = await res.json();
 
-      if (!res.ok || !data.priceId) {
+      if (!res.ok || !data.order_token) {
         setError(data.error || 'Failed to start checkout. Please try again.');
+        setLoading(false);
         return;
       }
 
-      if (!paddleRef.current) {
-        setError('Payment system not ready. Please refresh and try again.');
-        return;
+      const { default: RevolutCheckout } = await import('@revolut/checkout');
+      const instance = await RevolutCheckout(data.order_token, data.mode || 'sandbox');
+
+      if (checkoutContainerRef.current) {
+        checkoutContainerRef.current.innerHTML = '';
+
+        const card = instance.createCardField({
+          target: checkoutContainerRef.current,
+          onSuccess: () => {
+            setSuccess(true);
+            setLoading(false);
+          },
+          onError: (err) => {
+            setError(err?.message || 'Payment failed. Please try again.');
+            setLoading(false);
+          },
+          onCancel: () => {
+            setLoading(false);
+          },
+        });
+
+        checkoutInstanceRef.current = card;
       }
 
-      paddleRef.current.Checkout.open({
-        items: [{ priceId: data.priceId, quantity: 1 }],
-        customData: {
-          account_id: data.accountId,
-          plan_id: selectedPlan,
-          source: 'web_checkout',
-        },
-        settings: {
-          displayMode: 'overlay',
-          theme: 'dark',
-          successUrl: `${window.location.origin}/checkout/success?account_id=${data.accountId}`,
-        },
-      });
+      setLoading(false);
     } catch {
       setError('Network error. Please check your connection and try again.');
-    } finally {
       setLoading(false);
     }
+  }, [validAccountId, selectedPlan]);
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center p-4">
+        <div className="w-full max-w-md text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-600/20 text-green-400 mb-4">
+            <CheckIcon />
+          </div>
+          <h1 className="text-2xl font-bold text-white mb-2">Payment Successful!</h1>
+          <p className="text-zinc-400 mb-4">Your Doppler VPN Pro subscription is now active.</p>
+          <p className="text-zinc-500 text-sm">Open the Doppler VPN app to start using Pro features.</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -187,6 +206,9 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
           ))}
         </ul>
 
+        {/* Revolut checkout container */}
+        <div ref={checkoutContainerRef} className="mb-4" />
+
         {/* Error */}
         {error && (
           <div className="bg-red-950/40 border border-red-800/50 rounded-xl px-4 py-3 mb-4 text-red-300 text-sm">
@@ -200,11 +222,11 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
           disabled={loading || !validAccountId}
           className="w-full py-4 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-base"
         >
-          {loading ? 'Redirecting to checkout…' : 'Subscribe Now'}
+          {loading ? 'Processing...' : 'Subscribe Now'}
         </button>
 
         <p className="text-center text-zinc-500 text-xs mt-4">
-          Secure payment via Paddle · One-time payment · No auto-renewal
+          Secure payment via Revolut · One-time payment · No auto-renewal
         </p>
       </div>
     </div>

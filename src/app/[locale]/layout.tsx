@@ -11,7 +11,7 @@ import {
   WebsiteSchema,
   SoftwareApplicationSchema,
 } from "@/components/seo/json-ld";
-import { Analytics } from "@vercel/analytics/react";
+import { AnalyticsConsent } from "@/components/analytics-consent";
 import { CookieConsent } from "@/components/cookie-consent";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/app/globals.css";
@@ -157,7 +157,7 @@ export default async function LocaleLayout({
             <CookieConsent />
           </NextIntlClientProvider>
         </ThemeProvider>
-        <Analytics />
+        <AnalyticsConsent />
       </body>
     </html>
   );

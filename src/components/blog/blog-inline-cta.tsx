@@ -21,6 +21,8 @@ export function BlogInlineCta() {
   const config = {
     ios: { href: APP_STORE_URL, label: t("downloadIos"), icon: <AppleIcon /> },
     android: { href: GOOGLE_PLAY_URL, label: t("downloadAndroid"), icon: <PlayIcon /> },
+    mac: { href: APP_STORE_URL, label: t("downloadIos"), icon: <AppleIcon /> },
+    windows: { href: "/downloads", label: t("downloadDesktop"), icon: <DownloadIcon /> },
     desktop: { href: "/downloads", label: t("downloadDesktop"), icon: <DownloadIcon /> },
   }[platform];
 

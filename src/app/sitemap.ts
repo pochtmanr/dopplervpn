@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = postsRaw as SitemapPost[] | null;
 
   // Static pages — one entry per page with hreflang alternates
-  const staticPages = ["", "/downloads", "/privacy", "/terms", "/refund", "/blog", "/support", "/about", "/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android", "/vpn-for-macos", "/vpn-for-windows"];
+  const staticPages = ["", "/downloads", "/privacy", "/terms", "/refund", "/dpa", "/subprocessors", "/blog", "/support", "/about", "/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android", "/vpn-for-macos", "/vpn-for-windows"];
 
   const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
     url: `${baseUrl}/en${page}`,

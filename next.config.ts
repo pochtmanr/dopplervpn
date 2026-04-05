@@ -41,11 +41,6 @@ const nextConfig: NextConfig = {
         destination: "/:locale/downloads",
         permanent: true,
       },
-      {
-        source: "/:locale/delete-account",
-        destination: "/:locale/support",
-        permanent: true,
-      },
       // Non-locale versions
       {
         source: "/guide/:device",
@@ -55,11 +50,6 @@ const nextConfig: NextConfig = {
       {
         source: "/guide",
         destination: "/en/downloads",
-        permanent: true,
-      },
-      {
-        source: "/delete-account",
-        destination: "/en/support",
         permanent: true,
       },
     ];
