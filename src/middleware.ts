@@ -12,6 +12,15 @@ const ADMIN_LOGIN_PATH = "/admin-dvpn/login";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Force non-www to www with a permanent redirect (308)
+  // Belt-and-suspenders: vercel.json also does this, but has been returning 307
+  const host = request.headers.get("host") || "";
+  if (host === "dopplervpn.org") {
+    const url = new URL(request.url);
+    url.host = "www.dopplervpn.org";
+    return NextResponse.redirect(url, 308);
+  }
+
   const isAdminPage = pathname.startsWith(ADMIN_PAGE_PREFIX);
   const isAdminApi = pathname.startsWith(ADMIN_API_PREFIX);
 
