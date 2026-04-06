@@ -87,24 +87,28 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Check for deleted blog posts — return 410 Gone so Google stops recrawling
+  // Return 410 Gone ONLY for explicitly deleted blog posts.
+  // Drafts / missing posts fall through to normal 404 handling.
   const blogMatch = pathname.match(/^\/[a-z]{2}(?:-[a-zA-Z]+)?\/blog\/([a-z0-9-]+)$/);
   if (blogMatch) {
     const slug = blogMatch[1];
-    const { createClient } = await import("@supabase/supabase-js");
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-    // Check if slug exists but isn't published (deleted/draft)
-    const { data: post } = await supabase
-      .from("blog_posts")
-      .select("status")
-      .eq("slug", slug)
-      .single();
+    try {
+      const { createClient } = await import("@supabase/supabase-js");
+      const supabase = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+      );
+      const { data: post } = await supabase
+        .from("blog_posts")
+        .select("status")
+        .eq("slug", slug)
+        .maybeSingle();
 
-    if (post && post.status !== "published") {
-      return new NextResponse("Gone", { status: 410 });
+      if (post && post.status === "deleted") {
+        return new NextResponse("Gone", { status: 410 });
+      }
+    } catch {
+      // DB error — fall through, never 410 on failure
     }
   }
 

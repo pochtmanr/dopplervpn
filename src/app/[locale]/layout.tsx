@@ -72,6 +72,7 @@ export async function generateMetadata({
   alternateLanguages["x-default"] = "https://www.dopplervpn.org/en";
 
   return {
+    metadataBase: new URL("https://www.dopplervpn.org"),
     title: {
       default: title,
       template: "%s | Doppler VPN",

@@ -1,11 +1,8 @@
 import type { MetadataRoute } from "next";
 import { createStaticClient } from "@/lib/supabase/server";
+import { routing } from "@/i18n/routing";
 
 const baseUrl = "https://www.dopplervpn.org";
-
-// Priority locales for sitemap — keeps crawl budget focused on a new domain.
-// All 44 locales still work via hreflang tags in the layout; they just aren't in the sitemap.
-const sitemapLocales = ["en", "ru", "es", "de", "fr", "pt", "zh", "ar"] as const;
 
 interface SitemapPost {
   slug: string;
@@ -15,48 +12,97 @@ interface SitemapPost {
 function buildAlternates(path: string) {
   return {
     languages: Object.fromEntries([
-      ...sitemapLocales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ...routing.locales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
       ["x-default", `${baseUrl}/en${path}`],
     ]),
   };
 }
 
+function priorityFor(page: string): number {
+  if (page === "") return 1;
+  if (page === "/blog") return 0.9;
+  if (page === "/downloads") return 0.8;
+  if (
+    [
+      "/bypass-censorship",
+      "/no-registration-vpn",
+      "/vless-vpn",
+      "/vpn-for-ios",
+      "/vpn-for-android",
+      "/vpn-for-macos",
+      "/vpn-for-windows",
+    ].includes(page)
+  )
+    return 0.7;
+  if (page === "/support" || page === "/about") return 0.6;
+  return 0.5;
+}
+
+function changeFreqFor(page: string): "weekly" | "daily" | "monthly" {
+  if (page === "") return "weekly";
+  if (page === "/blog") return "daily";
+  return "monthly";
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = createStaticClient();
 
-  // Fetch all published blog posts
   const { data: postsRaw } = await supabase
     .from("blog_posts")
     .select("slug, updated_at")
     .eq("status", "published");
 
-  const posts = postsRaw as SitemapPost[] | null;
+  const posts = (postsRaw as SitemapPost[] | null) ?? [];
 
-  // Static pages — one entry per page with hreflang alternates
-  const staticPages = ["", "/downloads", "/privacy", "/terms", "/refund", "/dpa", "/subprocessors", "/blog", "/support", "/about", "/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android", "/vpn-for-macos", "/vpn-for-windows"];
+  const staticPages = [
+    "",
+    "/downloads",
+    "/privacy",
+    "/terms",
+    "/refund",
+    "/dpa",
+    "/subprocessors",
+    "/blog",
+    "/support",
+    "/about",
+    "/bypass-censorship",
+    "/no-registration-vpn",
+    "/vless-vpn",
+    "/vpn-for-ios",
+    "/vpn-for-android",
+    "/vpn-for-macos",
+    "/vpn-for-windows",
+  ];
 
-  const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
-    url: `${baseUrl}/en${page}`,
-    lastModified: new Date(),
-    changeFrequency:
-      page === ""
-        ? ("weekly" as const)
-        : page === "/blog"
-          ? ("daily" as const)
-          : ("monthly" as const),
-    priority:
-      page === "" ? 1 : page === "/blog" ? 0.9 : page === "/downloads" ? 0.8 : ["/bypass-censorship", "/no-registration-vpn", "/vless-vpn", "/vpn-for-ios", "/vpn-for-android", "/vpn-for-macos", "/vpn-for-windows"].includes(page) ? 0.7 : page === "/support" ? 0.6 : page === "/about" ? 0.6 : 0.5,
-    alternates: buildAlternates(page),
-  }));
+  const now = new Date();
 
-  // Blog post pages — one entry per post with hreflang alternates
-  const blogEntries: MetadataRoute.Sitemap = (posts || []).map((post) => ({
-    url: `${baseUrl}/en/blog/${post.slug}`,
-    lastModified: new Date(post.updated_at),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-    alternates: buildAlternates(`/blog/${post.slug}`),
-  }));
+  // Static pages — one entry per locale × path
+  const staticEntries: MetadataRoute.Sitemap = [];
+  for (const locale of routing.locales) {
+    for (const page of staticPages) {
+      staticEntries.push({
+        url: `${baseUrl}/${locale}${page}`,
+        lastModified: now,
+        changeFrequency: changeFreqFor(page),
+        priority: priorityFor(page),
+        alternates: buildAlternates(page),
+      });
+    }
+  }
+
+  // Blog posts — one entry per locale × post
+  const blogEntries: MetadataRoute.Sitemap = [];
+  for (const locale of routing.locales) {
+    for (const post of posts) {
+      blogEntries.push({
+        url: `${baseUrl}/${locale}/blog/${post.slug}`,
+        lastModified: new Date(post.updated_at),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+        alternates: buildAlternates(`/blog/${post.slug}`),
+      });
+    }
+  }
 
   return [...staticEntries, ...blogEntries];
 }
