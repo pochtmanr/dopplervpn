@@ -12,8 +12,13 @@ const ADMIN_LOGIN_PATH = "/admin-dvpn/login";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Force non-www to www with a permanent redirect (308)
-  // Belt-and-suspenders: vercel.json also does this, but has been returning 307
+  // Force non-www to www with a permanent redirect (308).
+  // IMPORTANT: This middleware branch is the ACTUAL workhorse for apex-root
+  // redirection. vercel.json has two redirect rules, but the second uses
+  // `/:path((?!api/).*)` which does NOT match the empty root path `/`.
+  // The first rule in vercel.json covers `/`, but has been returning 307 in
+  // practice (see SEO audit 2026-04). If you touch either file, keep the
+  // other in sync — see vercel.json and this block together.
   const host = request.headers.get("host") || "";
   if (host === "dopplervpn.org") {
     const url = new URL(request.url);
@@ -89,6 +94,14 @@ export async function middleware(request: NextRequest) {
 
   // Return 410 Gone ONLY for explicitly deleted blog posts.
   // Drafts / missing posts fall through to normal 404 handling.
+  //
+  // NOTE (2026-04): blog_posts.status currently only has "published" — there
+  // is no soft-delete convention in the schema yet. This branch is a no-op
+  // until a "deleted" status (or deleted_at column) is introduced. Kept as
+  // scaffolding so the 410 path is ready when soft-delete lands.
+  //
+  // TODO: move this to a Server Component / RSC lookup so we avoid a Supabase
+  // cold-start + RTT on every blog pageview in middleware.
   const blogMatch = pathname.match(/^\/[a-z]{2}(?:-[a-zA-Z]+)?\/blog\/([a-z0-9-]+)$/);
   if (blogMatch) {
     const slug = blogMatch[1];
@@ -107,8 +120,9 @@ export async function middleware(request: NextRequest) {
       if (post && post.status === "deleted") {
         return new NextResponse("Gone", { status: 410 });
       }
-    } catch {
+    } catch (err) {
       // DB error — fall through, never 410 on failure
+      console.error("[middleware] blog status lookup failed:", err);
     }
   }
 

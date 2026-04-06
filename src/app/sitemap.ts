@@ -4,10 +4,35 @@ import { routing } from "@/i18n/routing";
 
 const baseUrl = "https://www.dopplervpn.org";
 
+// Stable per-build timestamp for static pages — avoids lastmod churn within
+// a single build while still updating on each deploy.
+const BUILD_TIME = new Date();
+
 interface SitemapPost {
   slug: string;
-  updated_at: string;
+  updated_at: string | null;
+  created_at: string | null;
 }
+
+const staticPages = [
+  "",
+  "/downloads",
+  "/privacy",
+  "/terms",
+  "/refund",
+  "/dpa",
+  "/subprocessors",
+  "/blog",
+  "/support",
+  "/about",
+  "/bypass-censorship",
+  "/no-registration-vpn",
+  "/vless-vpn",
+  "/vpn-for-ios",
+  "/vpn-for-android",
+  "/vpn-for-macos",
+  "/vpn-for-windows",
+];
 
 function buildAlternates(path: string) {
   return {
@@ -44,65 +69,58 @@ function changeFreqFor(page: string): "weekly" | "daily" | "monthly" {
   return "monthly";
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+// Next.js 15 generateSitemaps() — one shard per locale to stay well under
+// Vercel's 19.07 MB ISR fallback body cap. Each shard carries full 44-locale
+// hreflang, so total body ~= (17 static + N blog) × 45 alternates per shard.
+export async function generateSitemaps() {
+  return routing.locales.map((_locale, id) => ({ id }));
+}
+
+export default async function sitemap({
+  id,
+}: {
+  id: number;
+}): Promise<MetadataRoute.Sitemap> {
+  const locale = routing.locales[id];
+  if (!locale) return [];
+
   const supabase = createStaticClient();
 
-  const { data: postsRaw } = await supabase
-    .from("blog_posts")
-    .select("slug, updated_at")
-    .eq("status", "published");
+  let posts: SitemapPost[] = [];
+  try {
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("slug, updated_at, created_at")
+      .eq("status", "published");
 
-  const posts = (postsRaw as SitemapPost[] | null) ?? [];
-
-  const staticPages = [
-    "",
-    "/downloads",
-    "/privacy",
-    "/terms",
-    "/refund",
-    "/dpa",
-    "/subprocessors",
-    "/blog",
-    "/support",
-    "/about",
-    "/bypass-censorship",
-    "/no-registration-vpn",
-    "/vless-vpn",
-    "/vpn-for-ios",
-    "/vpn-for-android",
-    "/vpn-for-macos",
-    "/vpn-for-windows",
-  ];
-
-  const now = new Date();
-
-  // Static pages — one entry per locale × path
-  const staticEntries: MetadataRoute.Sitemap = [];
-  for (const locale of routing.locales) {
-    for (const page of staticPages) {
-      staticEntries.push({
-        url: `${baseUrl}/${locale}${page}`,
-        lastModified: now,
-        changeFrequency: changeFreqFor(page),
-        priority: priorityFor(page),
-        alternates: buildAlternates(page),
-      });
+    if (error) {
+      console.error("[sitemap] blog fetch failed:", error);
+    } else {
+      posts = (data as SitemapPost[] | null) ?? [];
     }
+  } catch (err) {
+    console.error("[sitemap] blog fetch threw:", err);
   }
 
-  // Blog posts — one entry per locale × post
-  const blogEntries: MetadataRoute.Sitemap = [];
-  for (const locale of routing.locales) {
-    for (const post of posts) {
-      blogEntries.push({
-        url: `${baseUrl}/${locale}/blog/${post.slug}`,
-        lastModified: new Date(post.updated_at),
-        changeFrequency: "weekly" as const,
-        priority: 0.8,
-        alternates: buildAlternates(`/blog/${post.slug}`),
-      });
-    }
-  }
+  const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
+    url: `${baseUrl}/${locale}${page}`,
+    lastModified: BUILD_TIME,
+    changeFrequency: changeFreqFor(page),
+    priority: priorityFor(page),
+    alternates: buildAlternates(page),
+  }));
+
+  const blogEntries: MetadataRoute.Sitemap = posts.map((post) => {
+    const lastmodSource = post.updated_at ?? post.created_at;
+    const lastModified = lastmodSource ? new Date(lastmodSource) : BUILD_TIME;
+    return {
+      url: `${baseUrl}/${locale}/blog/${post.slug}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      alternates: buildAlternates(`/blog/${post.slug}`),
+    };
+  });
 
   return [...staticEntries, ...blogEntries];
 }
