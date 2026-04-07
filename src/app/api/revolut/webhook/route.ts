@@ -42,21 +42,38 @@ export async function POST(req: NextRequest) {
   const signatureHeader = req.headers.get('revolut-signature') || '';
   const timestamp = req.headers.get('revolut-request-timestamp') || '';
 
-  log('received', { bytes: rawBody.length, hasSig: !!signatureHeader, hasTs: !!timestamp });
+  log('received', {
+    bytes: rawBody.length,
+    hasSig: !!signatureHeader,
+    hasTs: !!timestamp,
+    tsRaw: timestamp, // log raw value so format is visible in Vercel logs
+    sigPrefix: signatureHeader.slice(0, 10),
+  });
 
   if (!signatureHeader || !timestamp) {
     log('reject_missing_headers', {});
     return NextResponse.json({ error: 'Missing signature or timestamp header' }, { status: 400 });
   }
 
-  // Reject events older than 5 minutes (replay protection).
-  // Revolut may send timestamp as unix-millis string OR ISO 8601 — accept both.
-  const numericTs = Number(timestamp);
-  const eventTime = Number.isFinite(numericTs) && numericTs > 0
-    ? numericTs
-    : new Date(timestamp).getTime();
-  if (!Number.isFinite(eventTime) || Math.abs(Date.now() - eventTime) > 5 * 60 * 1000) {
-    log('reject_timestamp_skew', { timestamp });
+  // Replay-protection timestamp check. Revolut docs only say "UNIX timestamp"
+  // without specifying seconds vs milliseconds, and some integrations have
+  // historically seen ISO 8601 values. Detect all three by magnitude.
+  //   - seconds  => ~1.7e9  (10 digits)
+  //   - millis   => ~1.7e12 (13 digits)
+  //   - ISO      => parsed via Date()
+  let eventTime = NaN;
+  const num = Number(timestamp);
+  if (Number.isFinite(num) && num > 0) {
+    eventTime = num < 1e12 ? num * 1000 : num;
+  } else {
+    eventTime = new Date(timestamp).getTime();
+  }
+
+  const skewMs = Math.abs(Date.now() - eventTime);
+  // Be permissive (15 min) so clock drift / queued retries don't get rejected.
+  // Signature verification is the real security boundary.
+  if (!Number.isFinite(eventTime) || skewMs > 15 * 60 * 1000) {
+    log('reject_timestamp_skew', { timestamp, eventTime, skewMs });
     return NextResponse.json({ error: 'Timestamp out of tolerance' }, { status: 400 });
   }
 
