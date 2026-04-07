@@ -444,6 +444,7 @@ function SubscribeInner() {
         account_id: accountId.trim().toUpperCase(),
         plan_id: selected,
         email: knownEmail || '',
+        locale,
         ...(promoApplied ? { promo_code: promoApplied.code, promo_id: promoApplied.promo_id } : {}),
       };
 
@@ -476,12 +477,12 @@ function SubscribeInner() {
 
       instance.payWithPopup({
         onSuccess: () => {
-          window.location.href = `/checkout/success?${successParams.toString()}`;
+          window.location.href = `/${locale}/checkout/success?${successParams.toString()}`;
         },
         onError: (err) => {
           const errParams = new URLSearchParams(successParams);
           errParams.set('reason', err?.message || 'card_field_error');
-          window.location.href = `/checkout/success?${errParams.toString()}`;
+          window.location.href = `/${locale}/checkout/success?${errParams.toString()}`;
         },
       });
     } catch {

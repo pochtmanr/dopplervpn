@@ -9,6 +9,22 @@ const PLAN_DAYS: Record<string, number> = {
   yearly: 365,
 };
 
+const PLAN_LABELS: Record<string, string> = {
+  monthly: 'Doppler VPN Pro — 1 Month',
+  '6month': 'Doppler VPN Pro — 6 Months',
+  yearly: 'Doppler VPN Pro — 1 Year',
+};
+
+function detectPaymentMethod(order: { payments?: Array<{ payment_method?: { type?: string } }> } | undefined): string {
+  const t = order?.payments?.[0]?.payment_method?.type;
+  if (!t) return 'revolut';
+  const lower = t.toLowerCase();
+  if (lower.includes('apple')) return 'apple_pay';
+  if (lower.includes('google')) return 'google_pay';
+  if (lower.includes('card')) return 'card';
+  return lower;
+}
+
 function log(stage: string, data: Record<string, unknown>) {
   console.log(`[revolut-webhook] ${stage}`, JSON.stringify(data));
 }
@@ -211,22 +227,31 @@ export async function POST(req: NextRequest) {
           console.error('[revolut-webhook] invoice_insert_failed', orderId, invoiceErr);
         }
 
-        // Welcome email
+        // Receipt email (transactional). Must NEVER block the 200 response —
+        // Revolut retries non-2xx responses and would double-extend the sub.
         if (customerEmail) {
-          try {
-            const { sendWelcomeEmail } = await import('@/lib/email');
-            await sendWelcomeEmail({
-              to: customerEmail,
-              accountId,
-              planName: `Doppler Pro — ${planId}`,
-              expiresAt: newExpiry.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              }),
-            });
-          } catch (emailErr) {
-            console.error('[revolut-webhook] welcome_email_failed', emailErr);
+          if (process.env.RECEIPT_EMAILS_ENABLED !== 'true') {
+            log('receipt_disabled', { orderId });
+          } else {
+            try {
+              const { sendReceiptEmail } = await import('@/lib/email');
+              await sendReceiptEmail({
+                to: customerEmail,
+                accountId,
+                planId,
+                planLabel: PLAN_LABELS[planId] || `Doppler VPN Pro — ${planId}`,
+                amount: order?.amount ?? 0,
+                currency: order?.currency || 'USD',
+                startsAt: effectiveStart,
+                expiresAt: newExpiry,
+                orderId,
+                paymentMethod: detectPaymentMethod(order),
+                locale: metadata.locale || 'en',
+              });
+              log('receipt_sent', { orderId });
+            } catch (emailErr) {
+              console.error('[revolut-webhook] receipt_email_failed', emailErr);
+            }
           }
         }
 

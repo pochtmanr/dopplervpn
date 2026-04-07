@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { createOrder } from '@/lib/revolut';
 import { rateLimit } from '@/lib/rate-limit';
+import { routing } from '@/i18n/routing';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,7 +25,10 @@ export async function POST(req: NextRequest) {
   if (rl) return rl;
 
   try {
-    const { account_id: rawAccountId, plan_id: planId, email, promo_code, promo_id } = await req.json();
+    const { account_id: rawAccountId, plan_id: planId, email, promo_code, promo_id, locale: rawLocale } = await req.json();
+    const locale = typeof rawLocale === 'string' && (routing.locales as readonly string[]).includes(rawLocale)
+      ? rawLocale
+      : 'en';
 
     const plan = PLAN_AMOUNTS[planId];
     if (!plan) {
@@ -140,6 +144,7 @@ export async function POST(req: NextRequest) {
       {
         account_id: accountId,
         plan_id: planId,
+        locale,
         ...(email ? { email } : {}),
         ...(validatedPromoId ? { promo_id: validatedPromoId, promo_code: validatedPromoCode! } : {}),
       },

@@ -41,14 +41,17 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanId>('yearly');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [walletAvailable, setWalletAvailable] = useState(false);
   const checkoutContainerRef = useRef<HTMLDivElement>(null);
+  const walletContainerRef = useRef<HTMLDivElement>(null);
   const checkoutInstanceRef = useRef<{ destroy: () => void } | null>(null);
+  const walletInstanceRef = useRef<{ destroy: () => void } | null>(null);
 
   const goToSuccess = useCallback(
     (orderId: string, planId: PlanId, account: string | null) => {
       const params = new URLSearchParams({ order_id: orderId, plan: planId });
       if (account) params.set('account_id', account);
-      window.location.href = `/checkout/success?${params.toString()}`;
+      window.location.href = `/en/checkout/success?${params.toString()}`;
     },
     [],
   );
@@ -71,6 +74,11 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
       checkoutInstanceRef.current.destroy();
       checkoutInstanceRef.current = null;
     }
+    if (walletInstanceRef.current) {
+      walletInstanceRef.current.destroy();
+      walletInstanceRef.current = null;
+    }
+    setWalletAvailable(false);
 
     try {
       const res = await fetch('/api/revolut/create-order', {
@@ -79,6 +87,7 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
         body: JSON.stringify({
           account_id: validAccountId,
           plan_id: selectedPlan,
+          locale: 'en',
         }),
       });
 
@@ -93,10 +102,46 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
       const { default: RevolutCheckout } = await import('@revolut/checkout');
       const instance = await RevolutCheckout(data.order_token, data.mode || 'sandbox');
 
+      const orderId: string = data.order_id;
+
+      // Apple Pay / Google Pay (Payment Request) — render above the card field.
+      // Revolut's widget detects browser support; we additionally hide the
+      // container if canMakePayment() resolves to null.
+      if (walletContainerRef.current) {
+        walletContainerRef.current.innerHTML = '';
+        try {
+          const pr = instance.paymentRequest({
+            target: walletContainerRef.current,
+            requestPayerEmail: false,
+            requestPayerName: false,
+            requestPayerPhone: false,
+            requestShipping: false,
+            onSuccess: () => {
+              goToSuccess(orderId, selectedPlan, validAccountId);
+            },
+            onError: (err) => {
+              setError(err?.message || 'Wallet payment failed. Please try card.');
+            },
+            onCancel: () => {
+              // user dismissed wallet sheet — leave card field available
+            },
+          });
+          const supported = await pr.canMakePayment();
+          if (supported) {
+            await pr.render();
+            setWalletAvailable(true);
+            walletInstanceRef.current = pr;
+          } else {
+            pr.destroy();
+          }
+        } catch (walletErr) {
+          console.warn('paymentRequest init failed', walletErr);
+        }
+      }
+
       if (checkoutContainerRef.current) {
         checkoutContainerRef.current.innerHTML = '';
 
-        const orderId: string = data.order_id;
         const card = instance.createCardField({
           target: checkoutContainerRef.current,
           onSuccess: () => {
@@ -114,7 +159,7 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
               reason: err?.message || 'card_field_error',
             });
             if (validAccountId) params.set('account_id', validAccountId);
-            window.location.href = `/checkout/success?${params.toString()}`;
+            window.location.href = `/en/checkout/success?${params.toString()}`;
           },
           onCancel: () => {
             setLoading(false);
@@ -208,6 +253,16 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
             </li>
           ))}
         </ul>
+
+        {/* Apple Pay / Google Pay (only visible when supported) */}
+        <div ref={walletContainerRef} className={walletAvailable ? 'mb-3' : 'hidden'} />
+        {walletAvailable && (
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex-1 h-px bg-zinc-800" />
+            <span className="text-zinc-500 text-xs uppercase tracking-wide">or pay with card</span>
+            <div className="flex-1 h-px bg-zinc-800" />
+          </div>
+        )}
 
         {/* Revolut checkout container */}
         <div ref={checkoutContainerRef} className="mb-4" />

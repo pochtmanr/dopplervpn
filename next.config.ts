@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/checkout/success",
+        destination: "/en/checkout/success",
+        permanent: true,
+      },
+      {
         source: "/:locale/download",
         destination: "/:locale/downloads",
         permanent: true,
@@ -60,6 +65,13 @@ const nextConfig: NextConfig = {
         source: "/.well-known/apple-app-site-association",
         headers: [
           { key: "Content-Type", value: "application/json" },
+        ],
+      },
+      {
+        // Apple Pay domain verification (served from public/.well-known/)
+        source: "/.well-known/apple-developer-merchantid-domain-association",
+        headers: [
+          { key: "Content-Type", value: "text/plain" },
         ],
       },
       {
