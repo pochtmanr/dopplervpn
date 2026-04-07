@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 const IOS_URL = 'https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773';
 const ANDROID_PLAY_URL = 'https://play.google.com/store/apps/details?id=org.dopplervpn.android';
@@ -327,12 +328,12 @@ function ErrorShell({
           >
             Contact support
           </a>
-          <a
+          <Link
             href="/checkout"
             className="flex-1 text-center px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-900 font-semibold text-white transition-colors"
           >
             Back to checkout
-          </a>
+          </Link>
         </div>
 
         <p className="text-center text-zinc-600 text-xs mt-6">
