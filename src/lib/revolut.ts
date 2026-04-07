@@ -33,6 +33,15 @@ async function revolutFetch(path: string, options: RequestInit = {}) {
   return res.json();
 }
 
+export interface RevolutOrderPayment {
+  id?: string;
+  state?: string;
+  payment_method?: {
+    type?: string;
+    subtype?: string;
+  };
+}
+
 export interface RevolutOrder {
   id: string;
   token: string;
@@ -40,6 +49,7 @@ export interface RevolutOrder {
   amount: number;
   currency: string;
   metadata?: Record<string, string>;
+  payments?: RevolutOrderPayment[];
 }
 
 export async function createOrder(
