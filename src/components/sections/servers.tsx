@@ -19,6 +19,7 @@ const serverLocations: ServerLocation[] = [
   { country: "Russia", city: "Saint Petersburg", count: 1, protocol: "VLESS-Reality", countryCode: "ru" },
   { country: "Singapore", city: "Singapore", count: 1, protocol: "VLESS-Reality", countryCode: "sg" },
   { country: "United States", city: "Dallas", count: 1, protocol: "VLESS-Reality", countryCode: "us" },
+  { country: "Israel", city: "Tel Aviv", count: 1, protocol: "VLESS-Reality", countryCode: "il" },
 ];
 
 /* ─── Protocol badge ─── */

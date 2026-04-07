@@ -41,9 +41,17 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanId>('yearly');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const checkoutContainerRef = useRef<HTMLDivElement>(null);
   const checkoutInstanceRef = useRef<{ destroy: () => void } | null>(null);
+
+  const goToSuccess = useCallback(
+    (orderId: string, planId: PlanId, account: string | null) => {
+      const params = new URLSearchParams({ order_id: orderId, plan: planId });
+      if (account) params.set('account_id', account);
+      window.location.href = `/checkout/success?${params.toString()}`;
+    },
+    [],
+  );
 
   const validAccountId = accountId && /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(accountId)
     ? accountId
@@ -88,15 +96,25 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
       if (checkoutContainerRef.current) {
         checkoutContainerRef.current.innerHTML = '';
 
+        const orderId: string = data.order_id;
         const card = instance.createCardField({
           target: checkoutContainerRef.current,
           onSuccess: () => {
-            setSuccess(true);
-            setLoading(false);
+            // Hand off to /checkout/success which polls the verify-order
+            // endpoint until the webhook flips the account to pro (or fails).
+            goToSuccess(orderId, selectedPlan, validAccountId);
           },
           onError: (err) => {
             setError(err?.message || 'Payment failed. Please try again.');
             setLoading(false);
+            // Send to error UI with the order id so support can trace it.
+            const params = new URLSearchParams({
+              order_id: orderId,
+              plan: selectedPlan,
+              reason: err?.message || 'card_field_error',
+            });
+            if (validAccountId) params.set('account_id', validAccountId);
+            window.location.href = `/checkout/success?${params.toString()}`;
           },
           onCancel: () => {
             setLoading(false);
@@ -112,21 +130,6 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
       setLoading(false);
     }
   }, [validAccountId, selectedPlan]);
-
-  if (success) {
-    return (
-      <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center p-4">
-        <div className="w-full max-w-md text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-600/20 text-green-400 mb-4">
-            <CheckIcon />
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Payment Successful!</h1>
-          <p className="text-zinc-400 mb-4">Your Doppler VPN Pro subscription is now active.</p>
-          <p className="text-zinc-500 text-sm">Open the Doppler VPN app to start using Pro features.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center p-4">

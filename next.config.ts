@@ -156,6 +156,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "**.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "**.techcrunch.com",
+      },
+      {
+        protocol: "https",
+        hostname: "techcrunch.com",
+      },
     ],
   },
 };

@@ -467,17 +467,21 @@ function SubscribeInner() {
 
       const instance = await revolutLoaderRef.current(data.order_token, data.mode || 'sandbox');
 
+      const orderId: string = data.order_id;
+      const successParams = new URLSearchParams({
+        order_id: orderId,
+        plan: selected,
+        account_id: body.account_id,
+      });
+
       instance.payWithPopup({
         onSuccess: () => {
-          // Revolut webhook will update Supabase
-          setTimeout(() => {
-            const savedId = localStorage.getItem('doppler_account_id');
-            if (savedId) fetchAccountInfo(savedId);
-          }, 3000);
-          window.location.href = `/${locale}/account?payment=success`;
+          window.location.href = `/checkout/success?${successParams.toString()}`;
         },
         onError: (err) => {
-          setError(err?.message || t('error'));
+          const errParams = new URLSearchParams(successParams);
+          errParams.set('reason', err?.message || 'card_field_error');
+          window.location.href = `/checkout/success?${errParams.toString()}`;
         },
       });
     } catch {
@@ -990,7 +994,8 @@ function SubscribeInner() {
                       {/* Price preview + CTA */}
                       <div className="px-6 pb-6 space-y-4">
                         <div className="flex items-baseline gap-1.5 justify-center">
-                          <span className="text-3xl font-bold text-text-primary">$2.99</span>
+                          <span className="text-xs text-text-muted uppercase tracking-wide">from</span>
+                          <span className="text-3xl font-bold text-text-primary">$3.33</span>
                           <span className="text-sm text-text-muted">{t('perMonth')}</span>
                         </div>
                         <button

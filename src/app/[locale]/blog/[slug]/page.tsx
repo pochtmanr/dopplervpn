@@ -12,7 +12,6 @@ import {
   BlogBreadcrumb,
   BlogContent,
   BlogRelatedPosts,
-  BlogCta,
 } from "@/components/blog";
 import { ShareButtons } from "@/components/blog/share-buttons";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
@@ -361,6 +360,7 @@ export default async function BlogPostPage({ params }: Props) {
                 priority
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 className="object-cover"
+                unoptimized
               />
             </div>
           )}
@@ -397,26 +397,6 @@ export default async function BlogPostPage({ params }: Props) {
               readMoreText={t("readMore")}
             />
 
-            {/* Sentinel for sticky bar auto-hide */}
-            <div id="blog-cta-sentinel" aria-hidden="true" />
-
-            {/* CTA */}
-            <BlogCta
-              title={t("cta.title")}
-              subtitle={t("cta.subtitle")}
-              doppler={{
-                name: t("cta.doppler.name"),
-                tagline: t("cta.doppler.tagline"),
-                appStore: t("cta.doppler.appStore"),
-                playStore: t("cta.doppler.playStore"),
-              }}
-              simnetiq={{
-                name: t("cta.simnetiq.name"),
-                tagline: t("cta.simnetiq.tagline"),
-                appStore: t("cta.simnetiq.appStore"),
-                playStore: t("cta.simnetiq.playStore"),
-              }}
-            />
           </div>
         </Section>
       </main>
