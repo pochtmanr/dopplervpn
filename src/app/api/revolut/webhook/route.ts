@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
-import { getOrder } from '@/lib/revolut';
+import { getOrder, type RevolutOrder } from '@/lib/revolut';
 import crypto from 'crypto';
 
 const PLAN_DAYS: Record<string, number> = {
@@ -15,7 +15,7 @@ const PLAN_LABELS: Record<string, string> = {
   yearly: 'Doppler VPN Pro — 1 Year',
 };
 
-function detectPaymentMethod(order: { payments?: Array<{ payment_method?: { type?: string } }> } | undefined): string {
+function detectPaymentMethod(order: RevolutOrder | undefined | null): string {
   const t = order?.payments?.[0]?.payment_method?.type;
   if (!t) return 'revolut';
   const lower = t.toLowerCase();
