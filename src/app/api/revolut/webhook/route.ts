@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { getOrder } from '@/lib/revolut';
 import crypto from 'crypto';
 
 const PLAN_DAYS: Record<string, number> = {
@@ -8,12 +9,15 @@ const PLAN_DAYS: Record<string, number> = {
   yearly: 365,
 };
 
+function log(stage: string, data: Record<string, unknown>) {
+  console.log(`[revolut-webhook] ${stage}`, JSON.stringify(data));
+}
+
 function verifySignature(rawBody: string, signatureHeader: string, timestamp: string): boolean {
   const secret = process.env.REVOLUT_WEBHOOK_SECRET;
   if (!secret) throw new Error('REVOLUT_WEBHOOK_SECRET is not configured');
 
   // Revolut sends: Revolut-Signature: v1=<hmac_hex>[,v1=<hmac_hex>...]
-  // Timestamp comes from separate Revolut-Request-Timestamp header
   // Payload to sign: "v1.<timestamp>.<rawBody>"
   const signatures = signatureHeader.split(',').map((s) => s.trim());
   const payload = `v1.${timestamp}.${rawBody}`;
@@ -38,44 +42,56 @@ export async function POST(req: NextRequest) {
   const signatureHeader = req.headers.get('revolut-signature') || '';
   const timestamp = req.headers.get('revolut-request-timestamp') || '';
 
+  log('received', { bytes: rawBody.length, hasSig: !!signatureHeader, hasTs: !!timestamp });
+
   if (!signatureHeader || !timestamp) {
+    log('reject_missing_headers', {});
     return NextResponse.json({ error: 'Missing signature or timestamp header' }, { status: 400 });
   }
 
-  // Reject events older than 5 minutes to prevent replay attacks
-  const eventTime = new Date(timestamp).getTime();
-  if (Number.isNaN(eventTime) || Math.abs(Date.now() - eventTime) > 5 * 60 * 1000) {
+  // Reject events older than 5 minutes (replay protection).
+  // Revolut may send timestamp as unix-millis string OR ISO 8601 — accept both.
+  const numericTs = Number(timestamp);
+  const eventTime = Number.isFinite(numericTs) && numericTs > 0
+    ? numericTs
+    : new Date(timestamp).getTime();
+  if (!Number.isFinite(eventTime) || Math.abs(Date.now() - eventTime) > 5 * 60 * 1000) {
+    log('reject_timestamp_skew', { timestamp });
     return NextResponse.json({ error: 'Timestamp out of tolerance' }, { status: 400 });
   }
 
   try {
     if (!verifySignature(rawBody, signatureHeader, timestamp)) {
+      log('reject_bad_signature', {});
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
   } catch (err) {
-    console.error('Revolut webhook signature error:', err);
+    console.error('[revolut-webhook] signature_error', err);
     return NextResponse.json({ error: 'Signature verification failed' }, { status: 400 });
   }
 
-  const event = JSON.parse(rawBody);
+  let event: { event?: string; order_id?: string; merchant_order_ext_ref?: string };
+  try {
+    event = JSON.parse(rawBody);
+  } catch {
+    log('reject_invalid_json', {});
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+
+  log('parsed', { event: event.event, order_id: event.order_id });
+
   const supabase = createUntypedAdminClient();
 
   try {
     switch (event.event) {
       case 'ORDER_COMPLETED': {
-        const order = event.order || event.data;
-        const orderId = order?.id;
-        const metadata = order?.metadata as Record<string, string> | undefined;
-        const accountId = metadata?.account_id;
-        const planId = metadata?.plan_id || 'monthly';
-        const customerEmail = metadata?.email;
-
-        if (!accountId) {
-          console.error('Revolut webhook: missing account_id in metadata', orderId);
-          return NextResponse.json({ error: 'Missing account_id' }, { status: 400 });
+        const orderId = event.order_id;
+        if (!orderId) {
+          log('reject_missing_order_id', {});
+          return NextResponse.json({ error: 'Missing order_id' }, { status: 400 });
         }
 
-        // Idempotency: check if order already processed
+        // Idempotency: check if this order has already been processed
         const { data: existingInvoice } = await supabase
           .from('vpn_invoices')
           .select('id')
@@ -83,7 +99,43 @@ export async function POST(req: NextRequest) {
           .maybeSingle();
 
         if (existingInvoice) {
+          log('idempotent_skip', { orderId });
           return NextResponse.json({ received: true, deduplicated: true });
+        }
+
+        // Revolut webhook only carries {event, order_id, merchant_order_ext_ref}.
+        // Fetch the full order to read metadata (account_id, plan_id, email, promo).
+        let order;
+        try {
+          order = await getOrder(orderId);
+        } catch (fetchErr) {
+          console.error('[revolut-webhook] order_fetch_failed', orderId, fetchErr);
+          return NextResponse.json({ error: 'Order fetch failed' }, { status: 502 });
+        }
+
+        const metadata = (order?.metadata || {}) as Record<string, string>;
+        const accountId = metadata.account_id;
+        const planId = metadata.plan_id || 'monthly';
+        const customerEmail = metadata.email;
+
+        log('order_fetched', {
+          orderId,
+          state: order?.state,
+          accountId,
+          planId,
+          amount: order?.amount,
+        });
+
+        if (!accountId) {
+          console.error('[revolut-webhook] missing account_id in order metadata', orderId);
+          return NextResponse.json({ error: 'Missing account_id' }, { status: 400 });
+        }
+
+        // Only process completed orders. Revolut may send the event slightly
+        // before/after state transitions; treat anything other than COMPLETED as no-op.
+        if (order?.state && order.state !== 'COMPLETED' && order.state !== 'completed') {
+          log('not_completed_yet', { orderId, state: order.state });
+          return NextResponse.json({ received: true, ignored: true, state: order.state });
         }
 
         // Look up account
@@ -94,13 +146,12 @@ export async function POST(req: NextRequest) {
           .single();
 
         if (accountError || !account) {
-          console.error('Revolut webhook: account not found for', accountId);
+          console.error('[revolut-webhook] account_not_found', accountId, accountError);
           return NextResponse.json({ error: 'Account not found' }, { status: 400 });
         }
 
         const days = PLAN_DAYS[planId] || 30;
 
-        // Calculate new expiry (extend if currently active)
         const currentExpiry = account.subscription_expires_at
           ? new Date(account.subscription_expires_at)
           : null;
@@ -109,7 +160,6 @@ export async function POST(req: NextRequest) {
         const newExpiry = new Date(effectiveStart);
         newExpiry.setDate(newExpiry.getDate() + days);
 
-        // Update account
         const { error: updateErr } = await supabase
           .from('accounts')
           .update({
@@ -120,21 +170,31 @@ export async function POST(req: NextRequest) {
           })
           .eq('id', account.id);
 
-        if (updateErr) throw new Error(`Account update failed: ${updateErr.message}`);
+        if (updateErr) {
+          console.error('[revolut-webhook] account_update_failed', accountId, updateErr);
+          throw new Error(`Account update failed: ${updateErr.message}`);
+        }
 
-        // Log invoice
-        await supabase.from('vpn_invoices').insert({
+        log('account_upgraded', { accountId, newExpiry: newExpiry.toISOString() });
+
+        // Log invoice (also seals idempotency for future deliveries).
+        // NOTE: vpn_invoices schema = {id, telegram_user_id, plan, amount,
+        // currency, status, provider, provider_payment_id, created_at}.
+        // No `notes` column — do NOT add fields without checking the schema.
+        const { error: invoiceErr } = await supabase.from('vpn_invoices').insert({
           telegram_user_id: 0,
-          plan: planId,
+          plan: `${planId}:${accountId}`,
           amount: order?.amount ?? 0,
           currency: order?.currency || 'USD',
           status: 'paid',
           provider: 'revolut',
           provider_payment_id: orderId,
-          notes: `web_subscribe:${accountId}`,
         });
+        if (invoiceErr) {
+          console.error('[revolut-webhook] invoice_insert_failed', orderId, invoiceErr);
+        }
 
-        // Send welcome email
+        // Welcome email
         if (customerEmail) {
           try {
             const { sendWelcomeEmail } = await import('@/lib/email');
@@ -149,52 +209,44 @@ export async function POST(req: NextRequest) {
               }),
             });
           } catch (emailErr) {
-            console.error('Welcome email failed:', emailErr);
+            console.error('[revolut-webhook] welcome_email_failed', emailErr);
           }
         }
 
-        // Record promo redemption if applicable
-        if (metadata?.promo_id) {
+        // Promo redemption
+        if (metadata.promo_id) {
           try {
             await supabase.rpc('increment_promo_redemptions', { p_promo_id: metadata.promo_id });
-
             await supabase.from('promo_redemptions').insert({
               promo_code_id: metadata.promo_id,
               account_id: accountId,
               redeemed_at: new Date().toISOString(),
             });
-
-            console.log(`[PROMO] Redeemed ${metadata.promo_code} for account ${accountId}`);
+            log('promo_redeemed', { code: metadata.promo_code, accountId });
           } catch (promoErr) {
-            console.error('[PROMO] Redemption recording failed (payment still succeeded):', promoErr);
+            console.error('[revolut-webhook] promo_redemption_failed', promoErr);
           }
         }
 
         const paymentAmount = order?.amount ?? 0;
-        console.log(
-          `Revolut: account ${accountId} upgraded to pro until ${newExpiry.toISOString()}`,
-        );
-        console.log(
-          `[TAX-SPLIT] Payment ${orderId}: $${(paymentAmount / 100).toFixed(2)} received. Manual action: transfer $${(paymentAmount * 0.25 / 100).toFixed(2)} (25%) to Tax Reserve pocket in Revolut.`,
-        );
+        log('done', {
+          orderId,
+          accountId,
+          tax_reserve_usd: ((paymentAmount * 0.25) / 100).toFixed(2),
+        });
         break;
       }
 
       case 'ORDER_PAYMENT_FAILED': {
-        const order = event.order || event.data;
-        const metadata = order?.metadata as Record<string, string> | undefined;
-        const accountId = metadata?.account_id;
-        if (accountId) {
-          console.warn(`Revolut: payment failed for ${accountId}, order ${order?.id}`);
-        }
+        log('payment_failed', { orderId: event.order_id });
         break;
       }
 
       default:
-        console.log('Revolut webhook: unhandled event', event.event);
+        log('unhandled_event', { event: event.event });
     }
   } catch (error) {
-    console.error('Revolut webhook processing error:', error);
+    console.error('[revolut-webhook] processing_error', error);
     return NextResponse.json({ error: 'Processing failed' }, { status: 500 });
   }
 
