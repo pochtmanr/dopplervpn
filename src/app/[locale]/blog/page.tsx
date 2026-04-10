@@ -9,6 +9,9 @@ import { BreadcrumbSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
 
+// Revalidate blog index every 5 minutes (ISR) to reduce serverless invocations
+export const revalidate = 300;
+
 type Props = {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ tag?: string }>;

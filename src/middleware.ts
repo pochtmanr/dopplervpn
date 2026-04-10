@@ -92,40 +92,6 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Return 410 Gone ONLY for explicitly deleted blog posts.
-  // Drafts / missing posts fall through to normal 404 handling.
-  //
-  // NOTE (2026-04): blog_posts.status currently only has "published" — there
-  // is no soft-delete convention in the schema yet. This branch is a no-op
-  // until a "deleted" status (or deleted_at column) is introduced. Kept as
-  // scaffolding so the 410 path is ready when soft-delete lands.
-  //
-  // TODO: move this to a Server Component / RSC lookup so we avoid a Supabase
-  // cold-start + RTT on every blog pageview in middleware.
-  const blogMatch = pathname.match(/^\/[a-z]{2}(?:-[a-zA-Z]+)?\/blog\/([a-z0-9-]+)$/);
-  if (blogMatch) {
-    const slug = blogMatch[1];
-    try {
-      const { createClient } = await import("@supabase/supabase-js");
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      );
-      const { data: post } = await supabase
-        .from("blog_posts")
-        .select("status")
-        .eq("slug", slug)
-        .maybeSingle();
-
-      if (post && post.status === "deleted") {
-        return new NextResponse("Gone", { status: 410 });
-      }
-    } catch (err) {
-      // DB error — fall through, never 410 on failure
-      console.error("[middleware] blog status lookup failed:", err);
-    }
-  }
-
   // Public routes — i18n middleware
   return intlMiddleware(request);
 }

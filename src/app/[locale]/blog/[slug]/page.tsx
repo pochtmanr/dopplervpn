@@ -18,6 +18,9 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
 import type { Metadata } from "next";
 
+// Revalidate blog posts every 5 minutes (ISR) to reduce serverless invocations
+export const revalidate = 300;
+
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
@@ -360,7 +363,6 @@ export default async function BlogPostPage({ params }: Props) {
                 priority
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 className="object-cover"
-                unoptimized
               />
             </div>
           )}

@@ -95,19 +95,10 @@ export async function GET(_req: NextRequest, context: RouteContext) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // Fallback: if no redirect, stream the response directly
-  if (assetRes.ok && assetRes.body) {
-    return new NextResponse(assetRes.body, {
-      headers: {
-        "Content-Type": "application/octet-stream",
-        "Content-Disposition": `attachment; filename="${file}"`,
-        "Cache-Control": "public, max-age=3600, s-maxage=3600",
-      },
-    });
-  }
-
+  // Never stream the binary through Vercel — it burns Fast Origin Transfer quota.
+  // If GitHub didn't redirect, treat it as an error.
   return NextResponse.json(
-    { error: "Failed to fetch download" },
+    { error: "Failed to obtain download redirect" },
     { status: 502 }
   );
 }

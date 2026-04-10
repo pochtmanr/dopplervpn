@@ -181,10 +181,25 @@ interface FAQSchemaProps {
 }
 
 export function FAQSchema({ items }: FAQSchemaProps) {
+  // Deduplicate by normalized question text. Google Search Console flags
+  // repeated questions inside a single FAQPage as "Duplicate field 'FAQPage'",
+  // which invalidates the entire rich-result item. This guard is also defensive
+  // against translators producing identical question strings across namespaces
+  // (e.g. support faq + troubleshooting on /support).
+  const seen = new Set<string>();
+  const uniqueItems = items.filter((item) => {
+    const key = item.question.trim().toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  if (uniqueItems.length === 0) return null;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
+    mainEntity: uniqueItems.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
