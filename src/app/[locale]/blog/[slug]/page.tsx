@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { createClient, createStaticClient } from "@/lib/supabase/server";
+import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { notFound } from "next/navigation";
@@ -18,8 +18,9 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
 import type { Metadata } from "next";
 
-// Revalidate blog posts every 5 minutes (ISR) to reduce serverless invocations
-export const revalidate = 300;
+// Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
+// Use on-demand revalidation (revalidatePath) when publishing/updating posts.
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -62,7 +63,8 @@ interface PostMetadata {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const supabase = await createClient();
+  // Cookie-less client: keep this route fully static/ISR. See getPostData below.
+  const supabase = createStaticClient();
   const baseUrl = "https://www.dopplervpn.org";
 
   const { data } = await supabase
@@ -168,7 +170,11 @@ interface PostFull {
 }
 
 async function getPostData(locale: string, slug: string) {
-  const supabase = await createClient();
+  // Cookie-less client: blog content is 100% public. Using the cookie-aware
+  // `createClient()` here would call `cookies()` and opt the entire route
+  // into force-dynamic SSR, nullifying `revalidate` and burning Fast Origin
+  // Transfer on every crawler hit across 43 locales.
+  const supabase = createStaticClient();
 
   const { data, error } = await supabase
     .from("blog_posts")
@@ -353,7 +359,9 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </header>
 
-          {/* Featured Image */}
+          {/* Featured Image — `unoptimized` bypasses Vercel's /_next/image
+              pipeline so crawler fetches of remote blog images don't burn
+              Fast Origin Transfer quota on a Hobby plan. */}
           {post.imageUrl && (
             <div className="relative aspect-[21/9] mb-10 rounded-2xl overflow-hidden">
               <Image
@@ -363,6 +371,7 @@ export default async function BlogPostPage({ params }: Props) {
                 priority
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 className="object-cover"
+                unoptimized
               />
             </div>
           )}

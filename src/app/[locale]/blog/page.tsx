@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { createClient } from "@/lib/supabase/server";
+import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -9,8 +9,9 @@ import { BreadcrumbSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
 
-// Revalidate blog index every 5 minutes (ISR) to reduce serverless invocations
-export const revalidate = 300;
+// Revalidate blog index every 24h (ISR) to reduce serverless invocations.
+// Use on-demand revalidation (revalidatePath) when publishing/updating posts.
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -87,7 +88,12 @@ interface PostData {
 }
 
 async function getBlogData(locale: string, tagSlug: string | undefined) {
-  const supabase = await createClient();
+  // Use the cookie-less client: blog content is 100% public and we want this
+  // page to stay statically rendered / ISR-cached. Calling the cookie-aware
+  // `createClient()` here would opt the entire route into force-dynamic SSR
+  // and nullify the `revalidate` above — burning Fast Origin Transfer on
+  // every crawler hit across all locales.
+  const supabase = createStaticClient();
 
   // Fetch all tags with translations
   const { data: tagsRaw } = await supabase

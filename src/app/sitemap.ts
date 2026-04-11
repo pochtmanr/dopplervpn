@@ -2,6 +2,11 @@ import type { MetadataRoute } from "next";
 import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
 
+// Rebuild sitemap shards at most once per day. Without this, every crawler
+// hit to /sitemap/N.xml re-runs the Supabase query and re-serializes a full
+// 45-language hreflang map per entry — burning Fast Origin Transfer fast.
+export const revalidate = 86400;
+
 const baseUrl = "https://www.dopplervpn.org";
 
 // Stable per-build timestamp for static pages — avoids lastmod churn within
