@@ -1,7 +1,8 @@
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createStaticClient } from "@/lib/supabase/server";
-import { routing } from "@/i18n/routing";
+import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -19,7 +20,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return BLOG_LOCALES.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
@@ -35,7 +36,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     alternates: {
       canonical: `${baseUrl}/${locale}/blog${tagSuffix}`,
       languages: Object.fromEntries([
-        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/blog${tagSuffix}`]),
+        ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog${tagSuffix}`]),
         ["x-default", `${baseUrl}/en/blog${tagSuffix}`],
       ]),
     },
@@ -115,14 +116,17 @@ async function getBlogData(locale: string, tagSlug: string | undefined) {
       tag.slug,
   }));
 
-  // Build posts query — fetch target locale + English for fallback
+  // Strict per-locale query: only show posts that have a translation in the
+  // requested locale. `!inner` turns the join into a filter instead of a
+  // fallback. Eliminates duplicate English content served under translated
+  // URLs — the primary cause of the Feb–Apr 2026 indexing penalty.
   const { data: postsRaw } = await supabase
     .from("blog_posts")
     .select(`
       slug,
       image_url,
       published_at,
-      blog_post_translations (
+      blog_post_translations!inner (
         locale,
         title,
         excerpt,
@@ -139,17 +143,14 @@ async function getBlogData(locale: string, tagSlug: string | undefined) {
       )
     `)
     .eq("status", "published")
-    .in("blog_post_translations.locale", locale === "en" ? ["en"] : [locale, "en"])
+    .eq("blog_post_translations.locale", locale)
     .order("published_at", { ascending: false });
 
   const postsData = postsRaw as PostData[] | null;
 
-  // Filter by tag if specified — prefer target locale, fall back to English
   let posts = (postsData || [])
     .map((post) => {
-      const translation =
-        post.blog_post_translations.find((t) => t.locale === locale) ||
-        post.blog_post_translations.find((t) => t.locale === "en");
+      const translation = post.blog_post_translations.find((t) => t.locale === locale);
       if (!translation) return null;
 
       const postTags = (post.blog_post_tags || []).map((pt) => ({
@@ -183,6 +184,7 @@ async function getBlogData(locale: string, tagSlug: string | undefined) {
 
 export default async function BlogIndexPage({ params, searchParams }: Props) {
   const { locale } = await params;
+  if (!isBlogLocale(locale)) notFound();
   const { tag: tagSlug } = await searchParams;
   setRequestLocale(locale);
 

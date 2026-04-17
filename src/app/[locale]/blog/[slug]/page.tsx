@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createStaticClient } from "@/lib/supabase/server";
-import { routing } from "@/i18n/routing";
+import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -27,23 +27,26 @@ type Props = {
 };
 
 export async function generateStaticParams() {
+  // One path per (locale, slug) only where a translation actually exists.
+  // Before this change, params were generated for all 44 locales × all
+  // slugs, which fanned out to English-fallback pages under 23 non-blog
+  // locales — the root of the Google duplicate-canonical penalty.
   const supabase = createStaticClient();
-  const { data: posts } = await supabase
+  const { data } = await supabase
     .from("blog_posts")
-    .select("slug")
+    .select("slug, blog_post_translations!inner(locale)")
     .eq("status", "published")
-    .returns<{ slug: string }[]>();
+    .in("blog_post_translations.locale", BLOG_LOCALES as readonly string[])
+    .returns<{ slug: string; blog_post_translations: { locale: string }[] }[]>();
 
   const params: { locale: string; slug: string }[] = [];
-
-  if (posts) {
-    for (const post of posts) {
-      for (const locale of routing.locales) {
-        params.push({ locale, slug: post.slug });
+  for (const post of data ?? []) {
+    for (const t of post.blog_post_translations) {
+      if (isBlogLocale(t.locale)) {
+        params.push({ locale: t.locale, slug: post.slug });
       }
     }
   }
-
   return params;
 }
 
@@ -73,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `
       slug,
       image_url,
-      blog_post_translations (
+      blog_post_translations!inner (
         title,
         excerpt,
         meta_title,
@@ -86,35 +89,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     )
     .eq("slug", slug)
     .eq("status", "published")
-    .in("blog_post_translations.locale", locale === "en" ? ["en"] : [locale, "en"])
+    .eq("blog_post_translations.locale", locale)
     .single();
 
   const post = data as PostMetadata | null;
 
   if (!post || post.blog_post_translations.length === 0) return { title: "Not Found" };
 
-  const translation =
-    post.blog_post_translations.find((t) => t.locale === locale) ||
-    post.blog_post_translations[0];
+  const translation = post.blog_post_translations[0];
   const title = translation.meta_title || translation.title;
   const description = translation.meta_description || translation.excerpt;
+
+  // hreflang alternates reference only locales that actually have blog
+  // translations — emitting the full 44-locale set created duplicate-canonical
+  // noise for locales where the URL served English fallback content.
+  const languages = Object.fromEntries([
+    ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog/${slug}`]),
+    ["x-default", `${baseUrl}/en/blog/${slug}`],
+  ]);
 
   return {
     title,
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/blog/${slug}`,
-      languages: Object.fromEntries([
-        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/blog/${slug}`]),
-        ["x-default", `${baseUrl}/en/blog/${slug}`],
-      ]),
+      languages,
     },
     openGraph: {
       title: translation.og_title || title,
       description: translation.og_description || description,
       url: `${baseUrl}/${locale}/blog/${slug}`,
       locale: ogLocaleMap[locale] || "en_US",
-      alternateLocale: routing.locales
+      alternateLocale: BLOG_LOCALES
         .filter((l) => l !== locale)
         .map((l) => ogLocaleMap[l] || l),
       type: "article",
@@ -185,7 +191,7 @@ async function getPostData(locale: string, slug: string) {
       author_name,
       published_at,
       updated_at,
-      blog_post_translations (
+      blog_post_translations!inner (
         title,
         excerpt,
         content,
@@ -222,16 +228,18 @@ async function getPostData(locale: string, slug: string) {
     )
     .eq("slug", slug)
     .eq("status", "published")
-    .in("blog_post_translations.locale", locale === "en" ? ["en"] : [locale, "en"])
+    .eq("blog_post_translations.locale", locale)
     .single();
 
   const post = data as PostFull | null;
 
   if (!post || error || post.blog_post_translations.length === 0) return null;
 
-  const translation =
-    post.blog_post_translations.find((t) => t.locale === locale) ||
-    post.blog_post_translations.find((t) => t.locale === "en")!;
+  // Only accept the target-locale translation. No English fallback — a
+  // post without a translation in the requested locale should 404 so the
+  // URL stops competing with /en/blog/<slug> for the same content.
+  const translation = post.blog_post_translations.find((t) => t.locale === locale);
+  if (!translation) return null;
 
   const tags = (post.blog_post_tags || []).map((pt) => ({
     slug: pt.blog_tags.slug,
@@ -292,6 +300,7 @@ function estimateReadingTime(content: string): number {
 
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
+  if (!isBlogLocale(locale)) notFound();
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "blog" });

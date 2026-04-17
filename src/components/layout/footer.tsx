@@ -1,10 +1,13 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DopplerLogo } from "./doppler-logo";
 import { CookieSettingsButton } from "./cookie-settings-button";
+import { isBlogLocale } from "@/i18n/blog-locales";
 
 export async function Footer() {
   const t = await getTranslations("footer");
+  const locale = await getLocale();
+  const showBlogLink = isBlogLocale(locale);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -81,14 +84,16 @@ export async function Footer() {
                   {t("download")}
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-text-muted hover:text-text-primary transition-colors text-sm"
-                >
-                  {t("blog")}
-                </Link>
-              </li>
+              {showBlogLink && (
+                <li>
+                  <Link
+                    href="/blog"
+                    className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                  >
+                    {t("blog")}
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link
                   href="/bypass-censorship"

@@ -29,6 +29,18 @@ const nextConfig: NextConfig = {
         destination: "/:locale/downloads",
         permanent: true,
       },
+      // /subscribe was moved to /account (Mar 2026). GSC Coverage
+      // 2026-04-17 shows 11 locale variants still being crawled as 404.
+      {
+        source: "/:locale/subscribe",
+        destination: "/:locale/account",
+        permanent: true,
+      },
+      {
+        source: "/subscribe",
+        destination: "/en/account",
+        permanent: true,
+      },
       {
         source: "/downloads/doppler-vpn-v1.2.0.apk",
         destination:

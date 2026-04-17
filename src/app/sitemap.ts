@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
+import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 
 // Rebuild sitemap shards at most once per day. Without this, every crawler
 // hit to /sitemap/N.xml re-runs the Supabase query and re-serializes a full
@@ -48,6 +49,18 @@ function buildAlternates(path: string) {
   };
 }
 
+// Blog URLs only exist for the 21 locales with real translations; the other
+// 23 locales 308-redirect to /en/blog via middleware. Alternates and URL
+// emission must reflect that or Google sees duplicate-canonical noise again.
+function buildBlogAlternates(path: string) {
+  return {
+    languages: Object.fromEntries([
+      ...BLOG_LOCALES.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ["x-default", `${baseUrl}/en${path}`],
+    ]),
+  };
+}
+
 function priorityFor(page: string): number {
   if (page === "") return 1;
   if (page === "/blog") return 0.9;
@@ -90,30 +103,42 @@ export default async function sitemap({
   if (!locale) return [];
 
   const supabase = createStaticClient();
+  const localeHasBlog = isBlogLocale(locale);
 
   let posts: SitemapPost[] = [];
-  try {
-    const { data, error } = await supabase
-      .from("blog_posts")
-      .select("slug, updated_at, created_at")
-      .eq("status", "published");
+  if (localeHasBlog) {
+    try {
+      // Strict join: only emit URLs for posts that have a translation in
+      // this locale. A post without a target-locale translation will 404
+      // under that path, and listing 404s in a sitemap is a quality hit.
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("slug, updated_at, created_at, blog_post_translations!inner(locale)")
+        .eq("status", "published")
+        .eq("blog_post_translations.locale", locale);
 
-    if (error) {
-      console.error("[sitemap] blog fetch failed:", error);
-    } else {
-      posts = (data as SitemapPost[] | null) ?? [];
+      if (error) {
+        console.error("[sitemap] blog fetch failed:", error);
+      } else {
+        posts = (data as SitemapPost[] | null) ?? [];
+      }
+    } catch (err) {
+      console.error("[sitemap] blog fetch threw:", err);
     }
-  } catch (err) {
-    console.error("[sitemap] blog fetch threw:", err);
   }
 
-  const staticEntries: MetadataRoute.Sitemap = staticPages.map((page) => ({
-    url: `${baseUrl}/${locale}${page}`,
-    lastModified: BUILD_TIME,
-    changeFrequency: changeFreqFor(page),
-    priority: priorityFor(page),
-    alternates: buildAlternates(page),
-  }));
+  const staticEntries: MetadataRoute.Sitemap = staticPages
+    // Omit the blog index from non-blog locales — middleware 308-redirects
+    // /:locale/blog to /en/blog for those, so listing them would advertise
+    // redirects rather than canonical URLs.
+    .filter((page) => page !== "/blog" || localeHasBlog)
+    .map((page) => ({
+      url: `${baseUrl}/${locale}${page}`,
+      lastModified: BUILD_TIME,
+      changeFrequency: changeFreqFor(page),
+      priority: priorityFor(page),
+      alternates: page === "/blog" ? buildBlogAlternates(page) : buildAlternates(page),
+    }));
 
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => {
     const lastmodSource = post.updated_at ?? post.created_at;
@@ -123,7 +148,7 @@ export default async function sitemap({
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.8,
-      alternates: buildAlternates(`/blog/${post.slug}`),
+      alternates: buildBlogAlternates(`/blog/${post.slug}`),
     };
   });
 
