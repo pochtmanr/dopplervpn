@@ -168,29 +168,24 @@ export async function Footer() {
             </ul>
           </div>
 
-          {/* Legal — collapsed disclosure */}
+          {/* Legal */}
           <div>
-            <details className="group">
-              <summary className="flex items-center justify-between cursor-pointer list-none font-semibold text-text-primary mb-4 hover:text-accent-teal transition-colors">
-                <span>{t("legal")}</span>
-                <ChevronDown className="ms-2 group-open:rotate-180" />
-              </summary>
-              <ul className="space-y-3">
-                {legalLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-text-muted hover:text-text-primary transition-colors text-sm"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <CookieSettingsButton label={t("cookieSettings")} />
+            <h3 className="font-semibold text-text-primary mb-4">{t("legal")}</h3>
+            <ul className="space-y-3">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-text-muted hover:text-text-primary transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
-              </ul>
-            </details>
+              ))}
+              <li>
+                <CookieSettingsButton label={t("cookieSettings")} />
+              </li>
+            </ul>
           </div>
         </div>
 
