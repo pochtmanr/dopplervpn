@@ -55,10 +55,13 @@ export function CensorshipResistance() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/95 via-bg-primary/60 to-transparent" />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-4 -end-3 text-accent-teal/20 group-hover:text-accent-teal/30 transition-colors duration-300 [&>svg]:!w-28 [&>svg]:!h-28"
+                >
+                  {icons[icon]}
+                </span>
                 <div className="relative p-6">
-                  <div className="w-10 h-10 rounded-xl bg-accent-teal/15 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4">
-                    {icons[icon]}
-                  </div>
                   <h3 className="text-lg font-semibold text-text-primary mb-1.5">
                     {t(`items.${key}.title`)}
                   </h3>
@@ -74,16 +77,23 @@ export function CensorshipResistance() {
                 </div>
               </Link>
             ) : (
-              <div className="h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 hover:border-accent-teal/20 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4">
+              <div className="group relative h-full rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300">
+                <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+                <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-4 -end-3 text-accent-teal/10 group-hover:text-accent-teal/20 transition-colors duration-300 [&>svg]:!w-28 [&>svg]:!h-28"
+                >
                   {icons[icon]}
+                </span>
+                <div className="relative">
+                  <h3 className="text-lg font-semibold text-text-primary mb-1.5">
+                    {t(`items.${key}.title`)}
+                  </h3>
+                  <p className="text-sm text-text-muted leading-relaxed">
+                    {t(`items.${key}.description`)}
+                  </p>
                 </div>
-                <h3 className="text-lg font-semibold text-text-primary mb-1.5">
-                  {t(`items.${key}.title`)}
-                </h3>
-                <p className="text-sm text-text-muted leading-relaxed">
-                  {t(`items.${key}.description`)}
-                </p>
               </div>
             )}
           </Reveal>

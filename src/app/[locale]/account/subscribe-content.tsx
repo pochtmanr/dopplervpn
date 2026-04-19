@@ -3,6 +3,7 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import type { RevolutCheckoutInstance } from '@revolut/checkout';
+import { trackGetPro } from '@/lib/track-cta';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
@@ -124,6 +125,42 @@ function LogOutIcon({ className = 'w-4 h-4' }: { className?: string }) {
     </svg>
   );
 }
+
+function SparkleIcon({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+    </svg>
+  );
+}
+
+/* ── Feature icons (match landing pricing section) ──────────────────── */
+const featureIcons: React.ReactNode[] = [
+  // feat1 — premium servers
+  <svg key="f1" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" />
+  </svg>,
+  // feat2 — smart route
+  <svg key="f2" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+  </svg>,
+  // feat3 — always on
+  <svg key="f3" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+  </svg>,
+  // feat4 — devices
+  <svg key="f4" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+  </svg>,
+  // feat5 — no logs
+  <svg key="f5" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+  </svg>,
+  // feat6 — priority support
+  <svg key="f6" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+  </svg>,
+];
 
 /* ── Account info type ──────────────────────────────────────────────── */
 
@@ -436,6 +473,7 @@ function SubscribeInner() {
 
   /* ── Step 2: Subscribe ─────────────────────────────────────────── */
   const handleSubscribe = async () => {
+    trackGetPro('account-subscribe');
     setLoading(true);
     setError('');
     try {
@@ -504,6 +542,158 @@ function SubscribeInner() {
   const isActivePro = isPro;
   // Expired pro: rawTier was pro/premium but effective tier is free (server already computed)
   const isExpiredPro = !isPro && accountInfo?.rawTier === 'pro';
+
+  /* ── Plans view (reused as "slide 2" inside paywall card) ─────── */
+  const plansView = (
+    <>
+      {/* Plan cards */}
+      <div className="space-y-3">
+        {PLANS.map((plan) => {
+          const isSelected = selected === plan.id;
+          const discountedCents = getDiscountedCents(plan.cents);
+          const originalPrice = formatCents(plan.cents);
+          const finalPrice = formatCents(discountedCents);
+          const monthly = perMonth(discountedCents, plan.months);
+
+          const labelMap: Record<string, string> = {
+            monthly: t('monthly'),
+            '6month': t('sixMonth'),
+            yearly: t('yearly'),
+          };
+
+          return (
+            <button
+              key={plan.id}
+              type="button"
+              onClick={() => setSelected(plan.id as PlanId)}
+              className={`relative w-full rounded-xl border p-4 text-left transition-all ${
+                isSelected
+                  ? 'border-accent-teal bg-accent-teal/5 ring-1 ring-accent-teal/30'
+                  : 'border-overlay/10 bg-bg-secondary/40 hover:border-overlay/20'
+              }`}
+            >
+              {plan.best && (
+                <span className="absolute -top-2.5 end-4 inline-flex items-center px-2.5 py-0.5 rounded-full bg-accent-teal text-[10px] font-bold uppercase tracking-wider text-white">
+                  {t('bestValue')}
+                </span>
+              )}
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                      isSelected ? 'border-accent-teal bg-accent-teal' : 'border-overlay/20'
+                    }`}
+                  >
+                    {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                  </div>
+
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-text-primary">
+                        {labelMap[plan.id]}
+                      </span>
+                      {plan.save && (
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-accent-teal/15 text-accent-teal text-[10px] font-bold">
+                          {t('save')} {plan.save}%
+                        </span>
+                      )}
+                    </div>
+                    {plan.months > 1 && (
+                      <span className="text-xs text-text-muted">
+                        {monthly}{t('perMonth')}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="text-end">
+                  {promoApplied && discountedCents !== plan.cents ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-text-muted line-through">{originalPrice}</span>
+                      <span className="text-lg font-bold text-text-primary">{finalPrice}</span>
+                    </div>
+                  ) : (
+                    <span className="text-lg font-bold text-text-primary">{originalPrice}</span>
+                  )}
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Promo code */}
+      <div>
+        {promoApplied ? (
+          <div className="flex items-center justify-between rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-4 py-3">
+            <div className="flex items-center gap-2">
+              <CheckIcon className="w-4 h-4 text-accent-teal" />
+              <span className="text-sm text-text-primary">
+                <span className="font-semibold">{promoApplied.code}</span>
+                {' '}&mdash; {promoApplied.discount_percent}% {t('promoOff')}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={removePromo}
+              className="text-xs text-text-muted hover:text-text-primary transition-colors"
+            >
+              {t('promoRemove')}
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={promoCode}
+                onChange={(e) => { setPromoCode(e.target.value.toUpperCase()); setPromoError(''); }}
+                placeholder={t('promoPlaceholder')}
+                className="flex-1 rounded-xl border border-overlay/10 bg-bg-secondary/40 px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all"
+              />
+              <button
+                type="button"
+                onClick={applyPromo}
+                disabled={promoLoading || !promoCode.trim()}
+                className="rounded-xl border border-overlay/10 bg-bg-secondary/40 px-4 py-2.5 text-sm font-medium text-text-primary hover:border-overlay/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              >
+                {promoLoading ? <SpinnerIcon className="w-4 h-4" /> : t('promoApply')}
+              </button>
+            </div>
+            {promoError && <p className="text-xs text-red-400 ps-1">{promoError}</p>}
+          </div>
+        )}
+      </div>
+
+      {/* Subscribe button */}
+      <button
+        type="button"
+        onClick={handleSubscribe}
+        disabled={loading}
+        className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+      >
+        {loading ? (
+          <>
+            <SpinnerIcon className="w-4 h-4" />
+            {t('processing')}
+          </>
+        ) : (
+          <>
+            {t('subscribe')} &mdash; {formatCents(finalCents)}
+          </>
+        )}
+      </button>
+
+      {error && <p className="text-center text-xs text-red-400">{error}</p>}
+
+      {/* Secured by Revolut */}
+      <div className="flex items-center justify-center gap-1.5">
+        <ShieldIcon className="w-3.5 h-3.5 text-text-muted/50" />
+        <span className="text-[11px] text-text-muted/50">{t('securedBy')}</span>
+      </div>
+    </>
+  );
 
   /* ── Render ────────────────────────────────────────────────────── */
   return (
@@ -959,228 +1149,112 @@ function SubscribeInner() {
                       </div>
                     </div>
                   ) : (
-                    /* ── Paywall-style card for non-subscribers ──── */
-                    <div className="rounded-2xl border border-accent-teal/20 bg-gradient-to-b from-accent-teal/5 via-bg-secondary/60 to-bg-secondary/40 overflow-hidden">
-                      {/* Header with gradient accent */}
-                      <div className="relative px-6 pt-6 pb-5">
-                        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-teal/40 to-transparent" />
-                        <div className="flex items-center gap-3 mb-2">
-                          <ShieldIcon className="w-7 h-7 text-accent-teal" />
-                          <h3 className="text-xl font-bold text-text-primary">{t('dashboard.proActive')}</h3>
-                        </div>
-                        {isExpiredPro && accountInfo?.expiresAt && (
-                          <p className="text-sm text-yellow-400">
-                            {t('dashboard.expiredPro', { date: formatDate(accountInfo.expiresAt, locale) })}
-                          </p>
-                        )}
-                        {!isExpiredPro && (
-                          <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
-                        )}
-                      </div>
+                    /* ── Paywall-style card — two-slide layout ──── */
+                    <div className="relative rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/5 via-bg-secondary/60 to-accent-gold/[0.03] overflow-hidden">
+                      {/* Top accent line */}
+                      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
 
-                      {/* Features list — paywall style */}
-                      <div className="px-6 pb-5">
-                        <ul className="space-y-3">
-                          {features.map((feat) => (
-                            <li key={feat} className="flex items-center gap-3">
-                              <div className="flex items-center justify-center w-5 h-5 rounded-full bg-accent-teal/15">
-                                <CheckIcon className="w-3 h-3 text-accent-teal" />
+                      {!showPlans ? (
+                        /* ── Slide 1: Features + Get Pro CTA ───── */
+                        <div key="paywall-features" className="slide-in-from-left">
+                          {/* Header */}
+                          <div className="px-6 pt-6 pb-4">
+                            <div className="flex items-center gap-3 mb-2">
+                              <ShieldIcon className="w-7 h-7 text-accent-teal" />
+                              <h3 className="text-xl font-bold text-text-primary">{t('dashboard.proActive')}</h3>
+                            </div>
+                            {isExpiredPro && accountInfo?.expiresAt && (
+                              <p className="text-sm text-yellow-400">
+                                {t('dashboard.expiredPro', { date: formatDate(accountInfo.expiresAt, locale) })}
+                              </p>
+                            )}
+                            {!isExpiredPro && (
+                              <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
+                            )}
+                          </div>
+
+                          {/* Price — left-aligned serif, matches landing pricing */}
+                          <div className="px-6 pb-6">
+                            <div className="flex flex-col items-start gap-1.5">
+                              <span className="text-[11px] font-semibold uppercase tracking-widest text-text-muted">
+                                from
+                              </span>
+                              <div className="flex items-baseline gap-1">
+                                <span
+                                  className="text-6xl sm:text-7xl font-semibold text-text-primary tracking-tight leading-none"
+                                  style={{ fontFamily: 'var(--font-serif)', fontStyle: 'normal' }}
+                                >
+                                  $3.33
+                                </span>
+                                <span className="text-lg sm:text-xl text-text-muted">{t('perMonth')}</span>
                               </div>
-                              <span className="text-sm text-text-primary">{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                            </div>
+                          </div>
 
-                      {/* Price preview + CTA */}
-                      <div className="px-6 pb-6 space-y-4">
-                        <div className="flex items-baseline gap-1.5 justify-center">
-                          <span className="text-xs text-text-muted uppercase tracking-wide">from</span>
-                          <span className="text-3xl font-bold text-text-primary">$3.33</span>
-                          <span className="text-sm text-text-muted">{t('perMonth')}</span>
+                          {/* Features list — gradient teal icon boxes */}
+                          <div className="px-6 pb-6">
+                            <ul className="space-y-3">
+                              {features.map((feat, i) => (
+                                <li key={feat} className="flex items-center gap-3 text-text-primary text-sm">
+                                  <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-teal/20 to-accent-teal/5 border border-accent-teal/25 text-accent-teal flex items-center justify-center flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                                    {featureIcons[i] ?? <CheckIcon className="w-4 h-4" />}
+                                  </span>
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          {/* CTA — matches landing plusCta: shine, sparkle, arrow */}
+                          <div className="px-6 pb-6 space-y-3">
+                            <button
+                              type="button"
+                              onClick={() => { trackGetPro('account-paywall'); setShowPlans(true); }}
+                              className="group relative w-full inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base sm:text-lg font-semibold bg-accent-teal text-white shadow-[0_10px_30px_-10px_rgba(0,140,140,0.45)] hover:shadow-[0_12px_36px_-10px_rgba(0,140,140,0.6)] transition-shadow duration-200 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
+                            >
+                              <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent rtl:scale-x-[-1]" />
+                              <SparkleIcon className="w-5 h-5 relative" />
+                              <span className="relative">
+                                {isExpiredPro ? t('dashboard.renewPro') : t('dashboard.getPro')}
+                              </span>
+                              <ArrowRightIcon className="w-5 h-5 relative transition-transform duration-200 group-hover:translate-x-1" />
+                            </button>
+                            <p className="text-xs text-text-muted/60 text-center">{t('footerNote')}</p>
+                          </div>
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => setShowPlans(!showPlans)}
-                          className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3.5 text-base transition-colors flex items-center justify-center gap-2"
-                        >
-                          {isExpiredPro ? t('dashboard.renewPro') : t('dashboard.getPro')}
-                          <ArrowRightIcon className="w-4 h-4" />
-                        </button>
-                        <p className="text-xs text-text-muted/60 text-center">{t('footerNote')}</p>
-                      </div>
+                      ) : (
+                        /* ── Slide 2: Plans, promo, subscribe ───── */
+                        <div key="paywall-plans" className="slide-in-from-right">
+                          {/* Header with back arrow */}
+                          <div className="flex items-center gap-3 px-6 pt-6 pb-5">
+                            <button
+                              type="button"
+                              onClick={() => setShowPlans(false)}
+                              aria-label="Back"
+                              className="flex items-center justify-center w-9 h-9 rounded-full border border-overlay/10 bg-bg-secondary/40 text-text-muted hover:text-text-primary hover:border-overlay/25 transition-colors"
+                            >
+                              <svg className="w-4 h-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                              </svg>
+                            </button>
+                            <div className="flex items-center gap-2">
+                              <ShieldIcon className="w-5 h-5 text-accent-teal" />
+                              <h3 className="text-lg font-bold text-text-primary">{t('dashboard.proActive')}</h3>
+                            </div>
+                          </div>
+
+                          <div className="px-6 pb-6 space-y-5">
+                            {plansView}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
 
-                  {/* ── Plan cards (inline, toggle) ──────────────── */}
-                  {showPlans && (
-                    <div className="space-y-5">
-                      {/* Plan cards */}
-                      <div className="space-y-3">
-                        {PLANS.map((plan) => {
-                          const isSelected = selected === plan.id;
-                          const discountedCents = getDiscountedCents(plan.cents);
-                          const originalPrice = formatCents(plan.cents);
-                          const finalPrice = formatCents(discountedCents);
-                          const monthly = perMonth(discountedCents, plan.months);
-
-                          const labelMap: Record<string, string> = {
-                            monthly: t('monthly'),
-                            '6month': t('sixMonth'),
-                            yearly: t('yearly'),
-                          };
-
-                          return (
-                            <button
-                              key={plan.id}
-                              type="button"
-                              onClick={() => setSelected(plan.id as PlanId)}
-                              className={`relative w-full rounded-xl border p-4 text-left transition-all ${
-                                isSelected
-                                  ? 'border-accent-teal bg-accent-teal/5 ring-1 ring-accent-teal/30'
-                                  : 'border-overlay/10 bg-bg-secondary/40 hover:border-overlay/20'
-                              }`}
-                            >
-                              {plan.best && (
-                                <span className="absolute -top-2.5 end-4 inline-flex items-center px-2.5 py-0.5 rounded-full bg-accent-teal text-[10px] font-bold uppercase tracking-wider text-white">
-                                  {t('bestValue')}
-                                </span>
-                              )}
-
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                  <div
-                                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
-                                      isSelected
-                                        ? 'border-accent-teal bg-accent-teal'
-                                        : 'border-overlay/20'
-                                    }`}
-                                  >
-                                    {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
-                                  </div>
-
-                                  <div>
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-sm font-semibold text-text-primary">
-                                        {labelMap[plan.id]}
-                                      </span>
-                                      {plan.save && (
-                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded bg-accent-teal/15 text-accent-teal text-[10px] font-bold">
-                                          {t('save')} {plan.save}%
-                                        </span>
-                                      )}
-                                    </div>
-                                    {plan.months > 1 && (
-                                      <span className="text-xs text-text-muted">
-                                        {monthly}{t('perMonth')}
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-
-                                <div className="text-end">
-                                  {promoApplied && discountedCents !== plan.cents ? (
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-xs text-text-muted line-through">{originalPrice}</span>
-                                      <span className="text-lg font-bold text-text-primary">{finalPrice}</span>
-                                    </div>
-                                  ) : (
-                                    <span className="text-lg font-bold text-text-primary">{originalPrice}</span>
-                                  )}
-                                </div>
-                              </div>
-                            </button>
-                          );
-                        })}
-                      </div>
-
-                      {/* Promo code */}
-                      <div>
-                        {promoApplied ? (
-                          <div className="flex items-center justify-between rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-4 py-3">
-                            <div className="flex items-center gap-2">
-                              <CheckIcon className="w-4 h-4 text-accent-teal" />
-                              <span className="text-sm text-text-primary">
-                                <span className="font-semibold">{promoApplied.code}</span>
-                                {' '}&mdash; {promoApplied.discount_percent}% {t('promoOff')}
-                              </span>
-                            </div>
-                            <button
-                              type="button"
-                              onClick={removePromo}
-                              className="text-xs text-text-muted hover:text-text-primary transition-colors"
-                            >
-                              {t('promoRemove')}
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="space-y-2">
-                            <div className="flex gap-2">
-                              <input
-                                type="text"
-                                value={promoCode}
-                                onChange={(e) => {
-                                  setPromoCode(e.target.value.toUpperCase());
-                                  setPromoError('');
-                                }}
-                                placeholder={t('promoPlaceholder')}
-                                className="flex-1 rounded-xl border border-overlay/10 bg-bg-secondary/40 px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all"
-                              />
-                              <button
-                                type="button"
-                                onClick={applyPromo}
-                                disabled={promoLoading || !promoCode.trim()}
-                                className="rounded-xl border border-overlay/10 bg-bg-secondary/40 px-4 py-2.5 text-sm font-medium text-text-primary hover:border-overlay/20 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-                              >
-                                {promoLoading ? <SpinnerIcon className="w-4 h-4" /> : t('promoApply')}
-                              </button>
-                            </div>
-                            {promoError && <p className="text-xs text-red-400 ps-1">{promoError}</p>}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Subscribe button */}
-                      <button
-                        type="button"
-                        onClick={handleSubscribe}
-                        disabled={loading}
-                        className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
-                      >
-                        {loading ? (
-                          <>
-                            <SpinnerIcon className="w-4 h-4" />
-                            {t('processing')}
-                          </>
-                        ) : (
-                          <>
-                            {t('subscribe')} &mdash; {formatCents(finalCents)}
-                          </>
-                        )}
-                      </button>
-
-                      {error && <p className="text-center text-xs text-red-400">{error}</p>}
-
-                      {/* Secured by Revolut */}
-                      <div className="flex items-center justify-center gap-1.5">
-                        <ShieldIcon className="w-3.5 h-3.5 text-text-muted/50" />
-                        <span className="text-[11px] text-text-muted/50">{t('securedBy')}</span>
-                      </div>
-
-                      {/* Features */}
-                      <div className="rounded-xl border border-overlay/10 bg-bg-secondary/40 p-5">
-                        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-muted mb-3">
-                          {t('features')}
-                        </h3>
-                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                          {features.map((feat) => (
-                            <li key={feat} className="flex items-center gap-2.5">
-                              <CheckIcon className="w-4 h-4 text-accent-teal shrink-0" />
-                              <span className="text-sm text-text-primary">{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                  {/* ── Plan cards (Active Pro extend flow only) ─── */}
+                  {showPlans && isActivePro && (
+                    <div className="space-y-5 slide-in-from-right">
+                      {plansView}
                     </div>
                   )}
 

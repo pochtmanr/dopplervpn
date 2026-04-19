@@ -3,7 +3,7 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { getFlagUrl } from "@/lib/languages";
 
-/* ─── Server location data (from Supabase vpn_servers, updated 2026-04-01) ─── */
+/* ─── Server location data (from Supabase vpn_servers, updated 2026-04-16) ─── */
 interface ServerLocation {
   country: string;
   city: string;
@@ -18,7 +18,6 @@ const serverLocations: ServerLocation[] = [
   { country: "Netherlands", city: "Amsterdam", count: 1, protocol: "VLESS-Reality", countryCode: "nl" },
   { country: "Russia", city: "Saint Petersburg", count: 1, protocol: "VLESS-Reality", countryCode: "ru" },
   { country: "Singapore", city: "Singapore", count: 1, protocol: "VLESS-Reality", countryCode: "sg" },
-  { country: "United States", city: "Dallas", count: 1, protocol: "VLESS-Reality", countryCode: "us" },
   { country: "Israel", city: "Tel Aviv", count: 1, protocol: "VLESS-Reality", countryCode: "il" },
 ];
 

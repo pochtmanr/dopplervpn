@@ -2,16 +2,26 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Colors — dark mode defaults */
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #141414;
-  --color-bg-card: oklch(0.1 0 0 / 0.8);
-  --color-text-primary: #f5f5f5;
-  --color-text-muted: #c5c5c5;
-  --color-accent-gold: #E1DECF;
-  --color-accent-teal: #008C8C;
+  /* ─── Colors — dark mode defaults ─────────────────────────────────── */
+  --color-bg-primary:        #141414;   /* was #0a0a0a — now the single flat dark */
+  --color-bg-secondary:      #1C1C1C;   /* was #141414 — cards, nav, footer */
+  --color-bg-elevated:       #242424;   /* popovers, modals, hover */
+  --color-bg-pressed:        #2E2E2E;   /* pressed / strong hover */
+  --color-bg-card:           oklch(0.18 0 0 / 0.75);
+
+  --color-text-primary:      #F5F5F5;
+  --color-text-muted:        #C5C5C5;
+  --color-text-tertiary:     #8A8A8A;   /* meta, footnotes */
+
+  --color-accent-gold:       #E1DECF;
+  --color-accent-teal:       #008C8C;
   --color-accent-teal-light: #00ABAB;
-  --color-overlay: #ffffff;
+
+  --color-accent-violet:     #8B7FD9;   /* Pro tier, premium */
+  --color-accent-amber:      #F4C95D;   /* warnings, highlights */
+  --color-danger:            #F06763;   /* destructive only */
+
+  --color-overlay:           #FFFFFF;
 
   /* Typography - Font variables are set by next/font in layout.tsx */
   /* Space Grotesk - main site font; Rubik for Cyrillic via --font-cyrillic */
@@ -29,17 +39,72 @@
   --radius-full: 9999px;
 }
 
+/* Violet + amber + red scales — for tints/shades + alpha overlays */
+:root {
+  /* Violet scale — 500 is canonical */
+  --violet-50:  #F0EEFA;
+  --violet-100: #DCD8F1;
+  --violet-200: #C4BDE8;
+  --violet-300: #ABA2DE;
+  --violet-400: #9888D4;
+  --violet-500: #8B7FD9;
+  --violet-600: #6F62BF;
+  --violet-700: #544AA0;
+  --violet-800: #3C347A;
+  --violet-900: #262150;
+  --violet-a10: rgba(139, 127, 217, 0.10);
+  --violet-a20: rgba(139, 127, 217, 0.20);
+  --violet-a30: rgba(139, 127, 217, 0.30);
+  --violet-a40: rgba(139, 127, 217, 0.40);
+
+  /* Amber scale */
+  --amber-50:   #FEF7E3;
+  --amber-100:  #FCEBB8;
+  --amber-200:  #FADF8D;
+  --amber-300:  #F8D374;
+  --amber-400:  #F6CE66;
+  --amber-500:  #F4C95D;
+  --amber-600:  #D4A947;
+  --amber-700:  #A88434;
+  --amber-800:  #7A5F22;
+  --amber-900:  #4D3B14;
+  --amber-a10:  rgba(244, 201, 93, 0.10);
+  --amber-a20:  rgba(244, 201, 93, 0.20);
+  --amber-a30:  rgba(244, 201, 93, 0.30);
+
+  /* Red (danger) */
+  --red-500: #F06763;
+  --red-600: #D94E4A;
+  --red-700: #B03B37;
+  --red-a10: rgba(240, 103, 99, 0.10);
+  --red-a20: rgba(240, 103, 99, 0.20);
+
+  /* Shadow glows for the new accents */
+  --shadow-violet: 0 10px 25px -5px rgba(139, 127, 217, 0.25);
+  --shadow-amber:  0 10px 25px -5px rgba(244, 201, 93, 0.20);
+}
+
 /* Light mode overrides */
 .light {
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f2f2f2;
-  --color-bg-card: oklch(0.97 0 0 / 0.8);
-  --color-text-primary: #1a1a1a;
-  --color-text-muted: #6b6b6b;
-  --color-accent-gold: #7A6B42;
-  --color-accent-teal: #007070;
+  --color-bg-primary:        #FAFAF8;   /* warm cream */
+  --color-bg-secondary:      #F2F1ED;
+  --color-bg-elevated:       #E8E7E2;
+  --color-bg-pressed:        #DEDCD6;
+  --color-bg-card:           oklch(0.97 0.005 80 / 0.85);
+
+  --color-text-primary:      #1A1A1A;
+  --color-text-muted:        #5C5C5C;
+  --color-text-tertiary:     #8A8A8A;
+
+  --color-accent-gold:       #7A6B42;
+  --color-accent-teal:       #007070;
   --color-accent-teal-light: #008080;
-  --color-overlay: #000000;
+
+  --color-accent-violet:     #544AA0;   /* WCAG AA on cream */
+  --color-accent-amber:      #A88434;   /* WCAG AA on cream */
+  --color-danger:            #B03B37;
+
+  --color-overlay:           #000000;
 }
 
 /* Base styles */
@@ -137,6 +202,22 @@ body {
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* Horizontal slide transitions (card "slide" panels) */
+@keyframes slide-in-from-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-from-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.slide-in-from-right {
+  animation: slide-in-from-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.slide-in-from-left {
+  animation: slide-in-from-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Reduced motion — accessibility */

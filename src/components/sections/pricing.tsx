@@ -2,11 +2,12 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
+import { trackGetPro } from "@/lib/track-cta";
 
 type Duration = "monthly" | "sixMonth" | "annual";
 
@@ -134,7 +135,10 @@ function PriceDisplay({ duration, t }: PriceDisplayProps) {
     <div className="flex flex-col items-center lg:items-start gap-2 transition-opacity duration-150">
       {/* Main price row — price, /mo, and savings badge inline */}
       <div className="flex items-baseline gap-1">
-        <span className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary">
+        <span
+          className="text-5xl md:text-7xl lg:text-8xl font-semibold text-text-primary tracking-tight leading-none"
+          style={{ fontFamily: "var(--font-serif)", fontStyle: "normal" }}
+        >
           {formatPrice(priceData.monthly)}
         </span>
         <span className="text-lg lg:text-2xl text-text-muted">/mo</span>
@@ -167,23 +171,38 @@ function PriceDisplay({ duration, t }: PriceDisplayProps) {
   );
 }
 
-function CheckIcon({ className }: { className: string }) {
-  return (
-    <svg
-      className={`w-5 h-5 flex-shrink-0 ${className}`}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m4.5 12.75 6 6 9-13.5"
-      />
+const featureIcons: Record<(typeof plusFeatureKeys)[number], React.ReactNode> = {
+  premiumServers: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" />
     </svg>
-  );
-}
+  ),
+  smartRouting: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+    </svg>
+  ),
+  alwaysOn: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+    </svg>
+  ),
+  devices: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+    </svg>
+  ),
+  noLogs: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+    </svg>
+  ),
+  support: (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+    </svg>
+  ),
+};
 
 function ShieldIcon() {
   return (
@@ -241,7 +260,7 @@ export function Pricing() {
                 </div>
 
                 {/* Duration Selector */}
-                <div className="mb-8 lg:mb-10 max-w-md mx-auto lg:mx-0 w-full">
+                <div className="mb-4 lg:mb-5 max-w-md mx-auto lg:mx-0 w-full">
                   <DurationSelector
                     selected={selectedDuration}
                     onSelect={setSelectedDuration}
@@ -250,7 +269,7 @@ export function Pricing() {
                 </div>
 
                 {/* Price Display */}
-                <div className="text-center lg:text-start mb-8 lg:mb-0 min-h-[140px] lg:min-h-[160px] flex items-center justify-center lg:justify-start flex-1">
+                <div className="text-center lg:text-start mb-8 lg:mb-0 flex items-center justify-center lg:justify-start flex-1">
                   <PriceDisplay duration={selectedDuration} t={t} />
                 </div>
 
@@ -269,14 +288,14 @@ export function Pricing() {
               {/* Right column — features + CTA (2/5 width on desktop) */}
               <div className="lg:col-span-2 p-6 sm:p-8 lg:p-12 lg:border-s border-t lg:border-t-0 border-overlay/5 bg-bg-secondary/30 flex flex-col">
                 {/* Features list — desktop only */}
-                <ul className="hidden lg:block space-y-4 mb-8 flex-1">
+                <ul className="hidden lg:block space-y-3 mb-8 flex-1">
                   {plusFeatureKeys.map((feature) => (
                     <li
                       key={feature}
                       className="flex items-center gap-3 text-text-primary text-sm lg:text-base"
                     >
-                      <span className="w-8 h-8 rounded-lg bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center flex-shrink-0">
-                        <CheckIcon className="text-accent-teal" />
+                      <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-teal/20 to-accent-teal/5 border border-accent-teal/25 text-accent-teal flex items-center justify-center flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                        {featureIcons[feature]}
                       </span>
                       {t(`plusFeatures.${feature}`)}
                     </li>
@@ -284,14 +303,20 @@ export function Pricing() {
                 </ul>
 
                 {/* CTA */}
-                <Button
-                  variant="primary"
-                  className="w-full"
-                  size="lg"
+                <Link
                   href="/account"
+                  onClick={() => trackGetPro("pricing")}
+                  className="group relative w-full inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-lg font-semibold bg-accent-teal text-white shadow-[0_10px_30px_-10px_rgba(0,140,140,0.45)] hover:shadow-[0_12px_36px_-10px_rgba(0,140,140,0.6)] transition-shadow duration-200 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
                 >
-                  {t("plusCta")}
-                </Button>
+                  <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent rtl:scale-x-[-1]" />
+                  <svg className="w-5 h-5 relative" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+                  </svg>
+                  <span className="relative">{t("plusCta")}</span>
+                  <svg className="w-5 h-5 relative transition-transform duration-200 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                  </svg>
+                </Link>
 
                 {/* Notes — mobile only */}
                 <div className="lg:hidden flex flex-col items-center gap-1.5 mt-4">

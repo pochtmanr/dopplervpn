@@ -116,12 +116,12 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
   const stageColors = [
     "border-accent-teal/30 bg-accent-teal/5",
     "border-accent-gold/30 bg-accent-gold/5",
-    "border-red-500/30 bg-red-500/5",
+    "border-danger/30 bg-danger/5",
   ];
   const stageLabelColors = [
     "bg-accent-teal/15 text-accent-teal",
     "bg-accent-gold/15 text-accent-gold",
-    "bg-red-500/15 text-red-400",
+    "bg-danger/15 text-danger",
   ];
 
   return (
@@ -174,7 +174,7 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
             {/* TSPU Overview */}
             <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 md:p-8 mb-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400">
+                <div className="w-10 h-10 rounded-xl bg-accent-amber/10 border border-accent-amber/20 flex items-center justify-center text-accent-amber">
                   <EyeIcon />
                 </div>
                 <h3 className="text-xl font-semibold text-text-primary">
@@ -191,9 +191,9 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
             {/* 4 Detection Methods */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               {detectionMethods.map((method, i) => (
-                <div key={method} className="rounded-2xl border border-red-500/10 bg-red-500/[0.02] p-6">
+                <div key={method} className="rounded-2xl border border-accent-amber/10 bg-accent-amber/[0.02] p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center text-red-400 text-sm font-semibold">
+                    <span className="w-8 h-8 rounded-lg bg-accent-amber/10 flex items-center justify-center text-accent-amber text-sm font-semibold">
                       {i + 1}
                     </span>
                     <h3 className="text-lg font-semibold text-text-primary">
@@ -227,12 +227,12 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
               {defenseKeys.map((key) => (
                 <div key={key} className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
                   <div className="flex items-center gap-3 md:w-56 shrink-0">
-                    <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <div className="w-8 h-8 rounded-lg bg-accent-amber/10 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-accent-amber" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                       </svg>
                     </div>
-                    <span className="text-sm font-medium text-red-400">{t(`defeats.${key}.attack`)}</span>
+                    <span className="text-sm font-medium text-accent-amber">{t(`defeats.${key}.attack`)}</span>
                   </div>
                   <div className="hidden md:flex items-center">
                     <ArrowIcon />

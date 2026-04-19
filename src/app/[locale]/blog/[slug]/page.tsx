@@ -16,6 +16,7 @@ import {
 import { ShareButtons } from "@/components/blog/share-buttons";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
+import { NotFoundContent } from "@/components/not-found-content";
 import type { Metadata } from "next";
 
 // Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
@@ -298,6 +299,27 @@ function estimateReadingTime(content: string): number {
   return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
+async function findAvailableTranslationLocale(slug: string): Promise<string | null> {
+  // Called only after the requested-locale fetch missed — figure out whether
+  // the post exists at all and, if so, which locale to offer as a fallback
+  // link. Prefer English, then any blog-supported locale.
+  const supabase = createStaticClient();
+  const { data } = await supabase
+    .from("blog_posts")
+    .select("blog_post_translations(locale)")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single<{ blog_post_translations: { locale: string }[] }>();
+
+  const locales = (data?.blog_post_translations ?? [])
+    .map((t) => t.locale)
+    .filter((l) => isBlogLocale(l));
+
+  if (locales.length === 0) return null;
+  if (locales.includes("en")) return "en";
+  return locales[0];
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!isBlogLocale(locale)) notFound();
@@ -307,6 +329,19 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getPostData(locale, slug);
 
   if (!post) {
+    // Post is missing in the requested locale. Check if it exists in another
+    // locale — if so, render the "not available in this language" UI with a
+    // link to the fallback translation. Otherwise show the generic 404.
+    const fallbackLocale = await findAvailableTranslationLocale(slug);
+    if (fallbackLocale && fallbackLocale !== locale) {
+      return (
+        <NotFoundContent
+          locale={locale}
+          variant="missing-translation"
+          englishHref={`/${fallbackLocale}/blog/${slug}`}
+        />
+      );
+    }
     notFound();
   }
 
@@ -344,7 +379,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags.map((tag) => (
-                  <Badge key={tag.slug} variant="teal">
+                  <Badge key={tag.slug} variant="auto" seed={tag.slug}>
                     {tag.name}
                   </Badge>
                 ))}
@@ -394,7 +429,7 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="mt-10 pt-6 border-t border-overlay/10">
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <Badge key={tag.slug} variant="default">
+                    <Badge key={tag.slug} variant="auto" seed={tag.slug}>
                       {tag.name}
                     </Badge>
                   ))}

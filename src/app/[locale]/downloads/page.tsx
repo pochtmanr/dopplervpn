@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema } from "@/components/seo/json-ld";
+import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -158,7 +159,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                 <h2 className="text-xl font-semibold text-text-primary">{t("ios.title")}</h2>
               </div>
 
-              <a
+              <TrackedDownloadLink
+                platform="ios"
                 href={URLS.ios}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -166,7 +168,7 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("ios.button")}
-              </a>
+              </TrackedDownloadLink>
 
               <SetupSteps
                 steps={[t("ios.step1"), t("ios.step2"), t("ios.step3"), t("ios.step4")]}
@@ -193,7 +195,9 @@ export default async function DownloadsPage({ params }: PageProps) {
                 <h2 className="text-xl font-semibold text-text-primary">{t("android.title")}</h2>
               </div>
 
-              <a
+              <TrackedDownloadLink
+                platform="android"
+                variant="android-play"
                 href={URLS.androidPlayStore}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -201,7 +205,7 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("android.buttonPlayStore")}
-              </a>
+              </TrackedDownloadLink>
 
               <SetupSteps
                 steps={[t("android.step1"), t("android.step2"), t("android.step3"), t("android.step4")]}
@@ -228,7 +232,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                 <h2 className="text-xl font-semibold text-text-primary">{t("mac.title")}</h2>
               </div>
 
-              <a
+              <TrackedDownloadLink
+                platform="mac"
                 href={URLS.mac}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -236,7 +241,7 @@ export default async function DownloadsPage({ params }: PageProps) {
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("mac.button")}
-              </a>
+              </TrackedDownloadLink>
 
               <SetupSteps
                 steps={[t("mac.step1"), t("mac.step2"), t("mac.step3"), t("mac.step4")]}
@@ -263,23 +268,27 @@ export default async function DownloadsPage({ params }: PageProps) {
                 <h2 className="text-xl font-semibold text-text-primary">{t("windows.title")}</h2>
               </div>
 
-              <a
+              <TrackedDownloadLink
+                platform="windows"
+                variant="windows-x64"
                 href={URLS.windowsX64}
                 download
                 className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("windows.buttonX64")}
-              </a>
+              </TrackedDownloadLink>
 
-              <a
+              <TrackedDownloadLink
+                platform="windows"
+                variant="windows-arm64"
                 href={URLS.windowsArm64}
                 download
                 className="group flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
               >
                 <DownloadIcon className="w-4 h-4" />
                 {t("windows.buttonArm64")}
-              </a>
+              </TrackedDownloadLink>
 
               <SetupSteps
                 steps={[t("windows.step1"), t("windows.step2"), t("windows.step3"), t("windows.step4")]}

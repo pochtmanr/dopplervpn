@@ -71,7 +71,7 @@ export function BlogCard({
             {tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-3">
                 {tags.slice(0, 2).map((tag) => (
-                  <Badge key={tag.slug} variant="teal" className="text-xs">
+                  <Badge key={tag.slug} variant="auto" seed={tag.slug} className="text-xs">
                     {tag.name}
                   </Badge>
                 ))}
