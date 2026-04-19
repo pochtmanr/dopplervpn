@@ -28,10 +28,12 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
     desktop: { href: "/downloads" as const, label: t("downloadApp"), external: false, download: false, icon: <DownloadIcon /> },
   }[platform];
 
-  const handlePrimaryClick = () => trackCta("hero", platform);
+  const primaryVariant =
+    platform === "android" ? "android-play" : platform === "windows" ? "windows-x64" : undefined;
+  const handlePrimaryClick = () => trackCta("hero", platform, primaryVariant);
 
   const primaryClass =
-    "inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal text-bg-primary hover:bg-accent-teal/90 rounded-lg transition-colors text-sm font-medium pulse-glow-once";
+    "inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal text-white hover:bg-accent-teal/90 rounded-lg transition-colors text-sm font-medium pulse-glow-once";
 
   const secondaryClass =
     "inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center border border-overlay/20 text-text-muted hover:text-text-primary hover:border-overlay/40 rounded-lg transition-colors text-sm font-medium";
@@ -75,7 +77,7 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
         <a
           href={ANDROID_APK}
           download
-          onClick={() => trackCta("hero", "android")}
+          onClick={() => trackCta("hero", "android", "android-apk")}
           className={secondaryClass}
         >
           {t("getAndroid")}

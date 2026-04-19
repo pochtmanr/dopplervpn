@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { localeConfig, getFlagUrl } from "@/lib/languages";
+import { trackGetPro } from "@/lib/track-cta";
 
 interface DesktopNavProps {
   logo: ReactNode;
@@ -141,7 +142,8 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
 
             <Link
               href="/account"
-              className="ml-1 px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors"
+              onClick={() => { if (!hasAccount) trackGetPro("nav-desktop"); }}
+              className="ml-1 px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
             >
               {hasAccount ? t("account") : t("getPro")}
             </Link>
