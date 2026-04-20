@@ -216,11 +216,9 @@ function SubscribeInner() {
   const [premiumTicketSuccess, setPremiumTicketSuccess] = useState<string | null>(null);
   const [premiumTicketError, setPremiumTicketError] = useState('');
 
-  /* ── Delete account state ────────────────────────────────────── */
-  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-
   /* ── Plan & checkout state ─────────────────────────────────────── */
   const [selected, setSelected] = useState<PlanId>('yearly');
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'crypto'>('card');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -476,10 +474,37 @@ function SubscribeInner() {
     trackGetPro('account-subscribe');
     setLoading(true);
     setError('');
+
+    const normalizedAccountId = accountId.trim().toUpperCase();
+
     try {
-      // 1. Validate account and create Revolut order
+      if (paymentMethod === 'crypto') {
+        // Crypto flow — create OxaPay invoice and redirect to hosted payment page.
+        // Promo codes are not yet wired through the OxaPay route; ignore silently.
+        const res = await fetch('/api/oxapay/create-invoice', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            account_id: normalizedAccountId,
+            plan_id: selected,
+            email: knownEmail || undefined,
+            locale,
+          }),
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.payment_url) {
+          setError(data.error || t('error'));
+          return;
+        }
+
+        window.location.href = data.payment_url;
+        return;
+      }
+
+      // Card flow — Revolut
       const body = {
-        account_id: accountId.trim().toUpperCase(),
+        account_id: normalizedAccountId,
         plan_id: selected,
         email: knownEmail || '',
         locale,
@@ -498,7 +523,6 @@ function SubscribeInner() {
         return;
       }
 
-      // 2. Open Revolut checkout
       if (!revolutLoaderRef.current) {
         setError('Payment system not ready. Please refresh and try again.');
         return;
@@ -511,6 +535,7 @@ function SubscribeInner() {
         order_id: orderId,
         plan: selected,
         account_id: body.account_id,
+        provider: 'revolut',
       });
 
       instance.payWithPopup({
@@ -666,6 +691,45 @@ function SubscribeInner() {
         )}
       </div>
 
+      {/* Payment method selector */}
+      <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-bg-secondary/40 border border-overlay/10">
+        <button
+          type="button"
+          onClick={() => { setPaymentMethod('card'); setError(''); }}
+          className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${
+            paymentMethod === 'card'
+              ? 'bg-accent-teal text-white'
+              : 'text-text-muted hover:text-text-primary'
+          }`}
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+          </svg>
+          Card
+        </button>
+        <button
+          type="button"
+          onClick={() => { setPaymentMethod('crypto'); setError(''); }}
+          className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${
+            paymentMethod === 'crypto'
+              ? 'bg-accent-teal text-white'
+              : 'text-text-muted hover:text-text-primary'
+          }`}
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25h4.5a2.25 2.25 0 010 4.5H9m0 0h5a2.25 2.25 0 010 4.5H9m0-9v9m2-9V6m0 13.5V18" />
+          </svg>
+          Crypto
+        </button>
+      </div>
+
+      {paymentMethod === 'crypto' && (
+        <p className="text-xs text-text-muted text-center">
+          Pay with USDT (TRC20), BTC, TON and more. You&apos;ll be redirected to OxaPay.
+        </p>
+      )}
+
       {/* Subscribe button */}
       <button
         type="button"
@@ -678,6 +742,8 @@ function SubscribeInner() {
             <SpinnerIcon className="w-4 h-4" />
             {t('processing')}
           </>
+        ) : paymentMethod === 'crypto' ? (
+          <>Pay with crypto &mdash; {formatCents(finalCents)}</>
         ) : (
           <>
             {t('subscribe')} &mdash; {formatCents(finalCents)}
@@ -687,10 +753,12 @@ function SubscribeInner() {
 
       {error && <p className="text-center text-xs text-red-400">{error}</p>}
 
-      {/* Secured by Revolut */}
+      {/* Secured by ... */}
       <div className="flex items-center justify-center gap-1.5">
         <ShieldIcon className="w-3.5 h-3.5 text-text-muted/50" />
-        <span className="text-[11px] text-text-muted/50">{t('securedBy')}</span>
+        <span className="text-[11px] text-text-muted/50">
+          {paymentMethod === 'crypto' ? 'Secured by OxaPay' : t('securedBy')}
+        </span>
       </div>
     </>
   );
@@ -1061,40 +1129,23 @@ function SubscribeInner() {
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className="flex items-center justify-center gap-2 w-full rounded-xl border border-overlay/15 bg-bg-secondary/40 px-4 py-3 text-sm font-medium text-text-muted hover:text-text-primary hover:border-overlay/25 transition-colors"
+                      className="flex items-center justify-center gap-2 w-full rounded-xl border border-accent-gold/15 bg-accent-gold/[0.03] px-4 py-3 text-sm font-medium text-accent-gold/75 hover:text-accent-gold hover:border-accent-gold/30 hover:bg-accent-gold/[0.07] transition-colors"
                     >
                       <LogOutIcon className="w-4 h-4" />
                       {t('dashboard.logout')}
                     </button>
 
-                    {isActivePro ? (
-                      <>
-                        <button
-                          type="button"
-                          onClick={() => setDeleteConfirmOpen(!deleteConfirmOpen)}
-                          className="flex items-center justify-center gap-2 w-full rounded-xl border border-red-500/15 px-4 py-3 text-sm font-medium text-red-400/70 hover:text-red-400 hover:border-red-500/25 hover:bg-red-500/5 transition-colors"
-                        >
-                          {t('dashboard.deleteAccount')}
-                        </button>
-                        {deleteConfirmOpen && (
-                          <div className="rounded-xl border border-red-500/15 bg-red-500/5 px-4 py-3 space-y-2">
-                            <p className="text-sm text-red-300">{t('dashboard.deleteWarningPro')}</p>
-                            <a
-                              href={`/${locale}/support#delete-account`}
-                              className="inline-flex text-sm text-red-400 underline underline-offset-2 hover:text-red-300 transition-colors"
-                            >
-                              {t('dashboard.deleteConfirm')}
-                            </a>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <a
-                        href={`/${locale}/support#delete-account`}
-                        className="flex items-center justify-center gap-2 w-full rounded-xl border border-red-500/15 px-4 py-3 text-sm font-medium text-red-400/70 hover:text-red-400 hover:border-red-500/25 hover:bg-red-500/5 transition-colors"
-                      >
-                        {t('dashboard.deleteAccount')}
-                      </a>
+                    <a
+                      href={`/${locale}/support#delete-account`}
+                      className="flex items-center justify-center gap-2 w-full rounded-xl border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm font-medium text-danger/75 hover:text-danger hover:border-danger/35 hover:bg-danger/[0.08] transition-colors"
+                    >
+                      {t('dashboard.deleteAccount')}
+                    </a>
+
+                    {isActivePro && (
+                      <p className="text-xs text-text-tertiary px-1 leading-relaxed">
+                        {t('dashboard.deleteProSupportNote')}
+                      </p>
                     )}
                   </div>
                 </div>

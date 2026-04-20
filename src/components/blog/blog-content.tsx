@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { isRtlLocale } from "@/i18n/routing";
@@ -11,10 +11,30 @@ interface BlogContentProps {
   locale: string;
 }
 
+// Find the source line (1-indexed) of the Nth ATX-style H2 in markdown,
+// ignoring headings inside fenced code blocks. Returns null if fewer exist.
+function findNthH2Line(markdown: string, n: number): number | null {
+  const lines = markdown.split("\n");
+  let inFence = false;
+  let count = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^\s{0,3}(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    if (/^\s{0,3}##\s+\S/.test(line) && !/^\s{0,3}###/.test(line)) {
+      count++;
+      if (count === n) return i + 1;
+    }
+  }
+  return null;
+}
+
 export function BlogContent({ content, locale }: BlogContentProps) {
   const isRtl = isRtlLocale(locale);
-  const h2CountRef = useRef(0);
-  h2CountRef.current = 0; // Reset on each render call (safe for Strict Mode)
+  const thirdH2Line = useMemo(() => findNthH2Line(content, 3), [content]);
 
   return (
     <article
@@ -104,13 +124,14 @@ export function BlogContent({ content, locale }: BlogContentProps) {
               {children}
             </a>
           ),
-          h2: ({ children, ...props }) => {
-            h2CountRef.current++;
-            const count = h2CountRef.current;
+          h2: ({ node, children, ...props }) => {
+            const isThirdH2 =
+              thirdH2Line !== null &&
+              node?.position?.start.line === thirdH2Line;
             return (
               <>
                 <h2 {...props}>{children}</h2>
-                {count === 3 && <BlogInlineCta />}
+                {isThirdH2 && <BlogInlineCta />}
               </>
             );
           },

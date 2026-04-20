@@ -49,21 +49,34 @@ const featureLayout: { key: string; colSpan: string; hasImage?: boolean; imagePa
   { key: "dnsProtection", colSpan: "md:col-span-3", isWide: true },
 ];
 
-/* ─── Standard feature card ─── */
-function FeatureCard({ featureKey, title, description }: { featureKey: string; title: string; description: string }) {
+/* ─── Card CTA label (matches censorship-resistance regions card) ─── */
+function CardCta({ label }: { label: string }) {
   return (
-    <div className="h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 hover:border-accent-teal/20 transition-colors">
+    <span className="mt-4 inline-flex items-center gap-2 text-accent-teal group-hover:text-accent-gold transition-colors text-sm font-medium">
+      {label}
+      <svg className="w-4 h-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+      </svg>
+    </span>
+  );
+}
+
+/* ─── Standard feature card ─── */
+function FeatureCard({ featureKey, title, description, ctaLabel }: { featureKey: string; title: string; description: string; ctaLabel?: string }) {
+  return (
+    <div className="group h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 hover:border-accent-teal/20 transition-colors">
       <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4">
         {featureIcons[featureKey]}
       </div>
       <h3 className="text-lg font-semibold text-text-primary mb-1.5">{title}</h3>
       <p className="text-sm text-text-muted leading-relaxed">{description}</p>
+      {ctaLabel && <CardCta label={ctaLabel} />}
     </div>
   );
 }
 
 /* ─── Featured card with background image ─── */
-function FeaturedCard({ featureKey, title, description, imagePath }: { featureKey: string; title: string; description: string; imagePath: string }) {
+function FeaturedCard({ featureKey, title, description, imagePath, ctaLabel }: { featureKey: string; title: string; description: string; imagePath: string; ctaLabel?: string }) {
   return (
     <div className="relative h-full min-h-[280px] rounded-2xl overflow-hidden border border-overlay/10 group">
       <Image
@@ -80,6 +93,7 @@ function FeaturedCard({ featureKey, title, description, imagePath }: { featureKe
         </div>
         <h3 className="text-lg font-semibold text-text-primary mb-1.5">{title}</h3>
         <p className="text-sm text-text-muted leading-relaxed">{description}</p>
+        {ctaLabel && <CardCta label={ctaLabel} />}
       </div>
     </div>
   );
@@ -110,12 +124,14 @@ export function Features() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {featureLayout.map(({ key, colSpan, hasImage, imagePath, isWide, href }, i) => {
+          const ctaLabel = href ? t("seeFullInfo") : undefined;
           const card = hasImage && imagePath ? (
             <FeaturedCard
               featureKey={key}
               title={t(`items.${key}.title`)}
               description={t(`items.${key}.description`)}
               imagePath={imagePath}
+              ctaLabel={ctaLabel}
             />
           ) : isWide ? (
             <WideCard
@@ -128,6 +144,7 @@ export function Features() {
               featureKey={key}
               title={t(`items.${key}.title`)}
               description={t(`items.${key}.description`)}
+              ctaLabel={ctaLabel}
             />
           );
 

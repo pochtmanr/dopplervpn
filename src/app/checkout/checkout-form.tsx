@@ -9,6 +9,7 @@ const PLANS = [
 ] as const;
 
 type PlanId = (typeof PLANS)[number]['id'];
+type PaymentMethod = 'card' | 'crypto';
 
 const FEATURES = [
   'Unlimited bandwidth',
@@ -33,43 +34,53 @@ function ShieldIcon() {
   );
 }
 
+function CardIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" strokeWidth={2} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+    </svg>
+  );
+}
+
+function CryptoIcon() {
+  return (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" strokeWidth={2} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 8.25h4.5a2.25 2.25 0 010 4.5H9m0 0h5a2.25 2.25 0 010 4.5H9m0-9v9m2-9V6m0 13.5V18" />
+    </svg>
+  );
+}
+
 interface CheckoutFormProps {
   accountId: string | null;
 }
 
 export function CheckoutForm({ accountId }: CheckoutFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanId>('yearly');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [walletAvailable, setWalletAvailable] = useState(false);
+  const [cardInitialized, setCardInitialized] = useState(false);
   const checkoutContainerRef = useRef<HTMLDivElement>(null);
   const walletContainerRef = useRef<HTMLDivElement>(null);
   const checkoutInstanceRef = useRef<{ destroy: () => void } | null>(null);
   const walletInstanceRef = useRef<{ destroy: () => void } | null>(null);
 
+  const validAccountId = accountId && /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(accountId)
+    ? accountId
+    : null;
+
   const goToSuccess = useCallback(
-    (orderId: string, planId: PlanId, account: string | null) => {
-      const params = new URLSearchParams({ order_id: orderId, plan: planId });
+    (orderId: string, planId: PlanId, account: string | null, provider: 'revolut' | 'oxapay') => {
+      const params = new URLSearchParams({ order_id: orderId, plan: planId, provider });
       if (account) params.set('account_id', account);
       window.location.href = `/en/checkout/success?${params.toString()}`;
     },
     [],
   );
 
-  const validAccountId = accountId && /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(accountId)
-    ? accountId
-    : null;
-
-  const handleSubscribe = useCallback(async () => {
-    if (!validAccountId) {
-      setError('No valid account ID found. Please open this page from the Doppler VPN app.');
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    // Clean up any previous checkout instance
+  const resetCardWidget = useCallback(() => {
     if (checkoutInstanceRef.current) {
       checkoutInstanceRef.current.destroy();
       checkoutInstanceRef.current = null;
@@ -79,6 +90,20 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
       walletInstanceRef.current = null;
     }
     setWalletAvailable(false);
+    setCardInitialized(false);
+    if (checkoutContainerRef.current) checkoutContainerRef.current.innerHTML = '';
+    if (walletContainerRef.current) walletContainerRef.current.innerHTML = '';
+  }, []);
+
+  const handleCardCheckout = useCallback(async () => {
+    if (!validAccountId) {
+      setError('No valid account ID found. Please open this page from the Doppler VPN app.');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    resetCardWidget();
 
     try {
       const res = await fetch('/api/revolut/create-order', {
@@ -104,9 +129,6 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
 
       const orderId: string = data.order_id;
 
-      // Apple Pay / Google Pay (Payment Request) — render above the card field.
-      // Revolut's widget detects browser support; we additionally hide the
-      // container if canMakePayment() resolves to null.
       if (walletContainerRef.current) {
         walletContainerRef.current.innerHTML = '';
         try {
@@ -116,15 +138,11 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
             requestPayerName: false,
             requestPayerPhone: false,
             requestShipping: false,
-            onSuccess: () => {
-              goToSuccess(orderId, selectedPlan, validAccountId);
-            },
+            onSuccess: () => goToSuccess(orderId, selectedPlan, validAccountId, 'revolut'),
             onError: (err) => {
               setError(err?.message || 'Wallet payment failed. Please try card.');
             },
-            onCancel: () => {
-              // user dismissed wallet sheet — leave card field available
-            },
+            onCancel: () => {},
           });
           const supported = await pr.canMakePayment();
           if (supported) {
@@ -141,32 +159,25 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
 
       if (checkoutContainerRef.current) {
         checkoutContainerRef.current.innerHTML = '';
-
         const card = instance.createCardField({
           target: checkoutContainerRef.current,
-          onSuccess: () => {
-            // Hand off to /checkout/success which polls the verify-order
-            // endpoint until the webhook flips the account to pro (or fails).
-            goToSuccess(orderId, selectedPlan, validAccountId);
-          },
+          onSuccess: () => goToSuccess(orderId, selectedPlan, validAccountId, 'revolut'),
           onError: (err) => {
             setError(err?.message || 'Payment failed. Please try again.');
             setLoading(false);
-            // Send to error UI with the order id so support can trace it.
             const params = new URLSearchParams({
               order_id: orderId,
               plan: selectedPlan,
+              provider: 'revolut',
               reason: err?.message || 'card_field_error',
             });
             if (validAccountId) params.set('account_id', validAccountId);
             window.location.href = `/en/checkout/success?${params.toString()}`;
           },
-          onCancel: () => {
-            setLoading(false);
-          },
+          onCancel: () => setLoading(false),
         });
-
         checkoutInstanceRef.current = card;
+        setCardInitialized(true);
       }
 
       setLoading(false);
@@ -174,7 +185,60 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
       setError('Network error. Please check your connection and try again.');
       setLoading(false);
     }
+  }, [validAccountId, selectedPlan, goToSuccess, resetCardWidget]);
+
+  const handleCryptoCheckout = useCallback(async () => {
+    if (!validAccountId) {
+      setError('No valid account ID found. Please open this page from the Doppler VPN app.');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch('/api/oxapay/create-invoice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          account_id: validAccountId,
+          plan_id: selectedPlan,
+          locale: 'en',
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.payment_url) {
+        setError(data.error || 'Failed to create crypto invoice. Please try again.');
+        setLoading(false);
+        return;
+      }
+
+      window.location.href = data.payment_url;
+    } catch {
+      setError('Network error. Please check your connection and try again.');
+      setLoading(false);
+    }
   }, [validAccountId, selectedPlan]);
+
+  const handleMethodChange = useCallback(
+    (method: PaymentMethod) => {
+      if (method === paymentMethod) return;
+      setPaymentMethod(method);
+      setError(null);
+      resetCardWidget();
+    },
+    [paymentMethod, resetCardWidget],
+  );
+
+  const handleSubscribe = useCallback(() => {
+    if (paymentMethod === 'card') {
+      handleCardCheckout();
+    } else {
+      handleCryptoCheckout();
+    }
+  }, [paymentMethod, handleCardCheckout, handleCryptoCheckout]);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center p-4">
@@ -254,9 +318,40 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
           ))}
         </ul>
 
-        {/* Apple Pay / Google Pay (only visible when supported) */}
-        <div ref={walletContainerRef} className={walletAvailable ? 'mb-3' : 'hidden'} />
-        {walletAvailable && (
+        {/* Payment method selector */}
+        <div className="grid grid-cols-2 gap-2 mb-5 p-1 rounded-xl bg-zinc-900 border border-zinc-800">
+          <button
+            type="button"
+            onClick={() => handleMethodChange('card')}
+            className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${
+              paymentMethod === 'card'
+                ? 'bg-blue-600 text-white'
+                : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            <CardIcon />
+            Card
+          </button>
+          <button
+            type="button"
+            onClick={() => handleMethodChange('crypto')}
+            className={`flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors ${
+              paymentMethod === 'crypto'
+                ? 'bg-blue-600 text-white'
+                : 'text-zinc-400 hover:text-white'
+            }`}
+          >
+            <CryptoIcon />
+            Crypto
+          </button>
+        </div>
+
+        {/* Apple Pay / Google Pay (card only, when supported) */}
+        <div
+          ref={walletContainerRef}
+          className={paymentMethod === 'card' && walletAvailable ? 'mb-3' : 'hidden'}
+        />
+        {paymentMethod === 'card' && walletAvailable && (
           <div className="flex items-center gap-3 mb-3">
             <div className="flex-1 h-px bg-zinc-800" />
             <span className="text-zinc-500 text-xs uppercase tracking-wide">or pay with card</span>
@@ -264,8 +359,19 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
           </div>
         )}
 
-        {/* Revolut checkout container */}
-        <div ref={checkoutContainerRef} className="mb-4" />
+        {/* Revolut card field (card only) */}
+        <div
+          ref={checkoutContainerRef}
+          className={paymentMethod === 'card' && cardInitialized ? 'mb-4' : 'mb-4 hidden'}
+        />
+
+        {/* Crypto hint */}
+        {paymentMethod === 'crypto' && (
+          <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-900/60 px-4 py-3 text-sm text-zinc-300">
+            Pay with USDT (TRC20), BTC, TON and other crypto. You&apos;ll be redirected to OxaPay to
+            complete the payment, then brought back here.
+          </div>
+        )}
 
         {/* Error */}
         {error && (
@@ -277,14 +383,22 @@ export function CheckoutForm({ accountId }: CheckoutFormProps) {
         {/* CTA */}
         <button
           onClick={handleSubscribe}
-          disabled={loading || !validAccountId}
+          disabled={loading || !validAccountId || (paymentMethod === 'card' && cardInitialized)}
           className="w-full py-4 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-base"
         >
-          {loading ? 'Processing...' : 'Subscribe Now'}
+          {loading
+            ? 'Processing...'
+            : paymentMethod === 'card'
+              ? cardInitialized
+                ? 'Enter card details above'
+                : 'Continue with Card'
+              : 'Continue with Crypto'}
         </button>
 
         <p className="text-center text-zinc-500 text-xs mt-4">
-          Secure payment via Revolut · One-time payment · No auto-renewal
+          {paymentMethod === 'card'
+            ? 'Secure payment via Revolut · One-time payment · No auto-renewal'
+            : 'Secure crypto payment via OxaPay · One-time payment · No auto-renewal'}
         </p>
       </div>
     </div>

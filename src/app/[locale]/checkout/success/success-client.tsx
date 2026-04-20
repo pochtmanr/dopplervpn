@@ -31,6 +31,9 @@ export function SuccessClient() {
   const orderId = params.get('order_id');
   const accountId = params.get('account_id');
   const plan = params.get('plan');
+  const provider = (params.get('provider') === 'oxapay' ? 'oxapay' : 'revolut') as
+    | 'revolut'
+    | 'oxapay';
   const t = useTranslations('success');
 
   const [data, setData] = useState<VerifyResponse | null>(null);
@@ -44,9 +47,12 @@ export function SuccessClient() {
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | null = null;
 
+    const verifyPath =
+      provider === 'oxapay' ? '/api/oxapay/verify-invoice' : '/api/revolut/verify-order';
+
     const poll = async () => {
       try {
-        const url = new URL('/api/revolut/verify-order', window.location.origin);
+        const url = new URL(verifyPath, window.location.origin);
         url.searchParams.set('order_id', orderId);
         if (accountId) url.searchParams.set('account_id', accountId);
 
@@ -82,7 +88,7 @@ export function SuccessClient() {
       cancelled = true;
       if (timer) clearTimeout(timer);
     };
-  }, [orderId, accountId]);
+  }, [orderId, accountId, provider]);
 
   if (!orderId) {
     return (

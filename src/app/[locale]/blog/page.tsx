@@ -14,36 +14,52 @@ import type { Metadata } from "next";
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
 export const revalidate = 86400;
 
+const PAGE_SIZE = 18;
+
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ tag?: string }>;
+  searchParams: Promise<{ tag?: string; page?: string }>;
 };
 
 export function generateStaticParams() {
   return BLOG_LOCALES.map((locale) => ({ locale }));
 }
 
+function parsePageParam(raw: string | undefined): number {
+  const n = raw ? parseInt(raw, 10) : 1;
+  return Number.isFinite(n) && n >= 1 ? n : 1;
+}
+
+function buildQuerySuffix(tag: string | undefined, page: number): string {
+  const params = new URLSearchParams();
+  if (tag) params.set("tag", tag);
+  if (page > 1) params.set("page", String(page));
+  const qs = params.toString();
+  return qs ? `?${qs}` : "";
+}
+
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const { tag } = await searchParams;
+  const { tag, page: pageRaw } = await searchParams;
+  const page = parsePageParam(pageRaw);
   const t = await getTranslations({ locale, namespace: "blog" });
   const baseUrl = "https://www.dopplervpn.org";
-  const tagSuffix = tag ? `?tag=${encodeURIComponent(tag)}` : "";
+  const suffix = buildQuerySuffix(tag, page);
 
   return {
     title: t("indexTitle"),
     description: t("indexDescription"),
     alternates: {
-      canonical: `${baseUrl}/${locale}/blog${tagSuffix}`,
+      canonical: `${baseUrl}/${locale}/blog${suffix}`,
       languages: Object.fromEntries([
-        ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog${tagSuffix}`]),
-        ["x-default", `${baseUrl}/en/blog${tagSuffix}`],
+        ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog${suffix}`]),
+        ["x-default", `${baseUrl}/en/blog${suffix}`],
       ]),
     },
     openGraph: {
       title: t("indexTitle"),
       description: t("indexDescription"),
-      url: `${baseUrl}/${locale}/blog${tagSuffix}`,
+      url: `${baseUrl}/${locale}/blog${suffix}`,
       siteName: "Doppler VPN",
       locale: locale,
       type: "website",
@@ -185,11 +201,21 @@ async function getBlogData(locale: string, tagSlug: string | undefined) {
 export default async function BlogIndexPage({ params, searchParams }: Props) {
   const { locale } = await params;
   if (!isBlogLocale(locale)) notFound();
-  const { tag: tagSlug } = await searchParams;
+  const { tag: tagSlug, page: pageRaw } = await searchParams;
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "blog" });
-  const { posts, tags } = await getBlogData(locale, tagSlug);
+  const { posts } = await getBlogData(locale, tagSlug);
+
+  const requestedPage = parsePageParam(pageRaw);
+  const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+  // Out-of-range page numbers should 404 (avoids duplicate thin content for SEO).
+  if (requestedPage > totalPages && posts.length > 0) notFound();
+  const currentPage = Math.min(requestedPage, totalPages);
+  const pagePosts = posts.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
 
   const baseUrl = "https://www.dopplervpn.org";
 
@@ -208,12 +234,12 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
 
           <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
             <BlogIndexContent
-              posts={posts}
-              tags={tags}
-              activeTagSlug={tagSlug || null}
+              posts={pagePosts}
               locale={locale}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              tagSlug={tagSlug ?? null}
               translations={{
-                allPosts: t("allPosts"),
                 readMore: t("readMore"),
                 noPosts: t("noPosts"),
                 noPostsDescription: t("noPostsDescription"),
