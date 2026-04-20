@@ -3,10 +3,14 @@ import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { getOrder, type RevolutOrder } from '@/lib/revolut';
 import crypto from 'crypto';
 
+// Days credited on a successful web payment.
+// Web checkout cannot replicate the 3-day RevenueCat trial available on
+// iOS/Android, so every web plan includes bonus days on top of the base
+// subscription length: 30+7 / 180+14 / 365+30.
 const PLAN_DAYS: Record<string, number> = {
-  monthly: 30,
-  '6month': 180,
-  yearly: 365,
+  monthly: 37,
+  '6month': 194,
+  yearly: 395,
 };
 
 const PLAN_LABELS: Record<string, string> = {

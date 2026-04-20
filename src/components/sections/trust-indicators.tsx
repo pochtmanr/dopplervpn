@@ -56,6 +56,9 @@ export function TrustIndicators() {
               </div>
             ))}
           </div>
+          <p className="mt-6 text-center text-[11px] text-text-muted/80 leading-relaxed">
+            {t("footnote")}
+          </p>
         </Reveal>
       </div>
     </section>

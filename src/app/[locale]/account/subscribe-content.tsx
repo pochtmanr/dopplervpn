@@ -571,6 +571,31 @@ function SubscribeInner() {
   /* ── Plans view (reused as "slide 2" inside paywall card) ─────── */
   const plansView = (
     <>
+      {/* Web bonus notice — be honest: no 3-day trial on web, bonus days instead. */}
+      <div className="rounded-xl border border-accent-teal/20 bg-accent-teal/5 p-4 space-y-3">
+        <div className="flex items-center gap-2 text-sm font-semibold text-accent-teal">
+          <SparkleIcon className="w-4 h-4" />
+          {t('webBonus.title')}
+        </div>
+        <p className="text-xs text-text-muted leading-relaxed">
+          {t('webBonus.subtitle')}
+        </p>
+        <ul className="text-xs text-text-primary space-y-1.5">
+          <li className="flex items-center gap-2">
+            <CheckIcon className="w-3.5 h-3.5 text-accent-teal shrink-0" />
+            {t('webBonus.monthly')}
+          </li>
+          <li className="flex items-center gap-2">
+            <CheckIcon className="w-3.5 h-3.5 text-accent-teal shrink-0" />
+            {t('webBonus.sixMonth')}
+          </li>
+          <li className="flex items-center gap-2">
+            <CheckIcon className="w-3.5 h-3.5 text-accent-teal shrink-0" />
+            {t('webBonus.yearly')}
+          </li>
+        </ul>
+      </div>
+
       {/* Plan cards */}
       <div className="space-y-3">
         {PLANS.map((plan) => {
