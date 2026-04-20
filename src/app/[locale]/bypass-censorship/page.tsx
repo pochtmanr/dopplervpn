@@ -2,10 +2,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, ArticleSchema, FAQSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
+import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -102,6 +104,15 @@ function ArrowIcon() {
     <svg className="w-4 h-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
     </svg>
+  );
+}
+
+function CryptoBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <div className="flex items-center gap-2 rounded-xl border border-overlay/10 bg-bg-secondary/60 px-3 py-2 text-sm text-text-primary">
+      {icon}
+      <span>{label}</span>
+    </div>
   );
 }
 
@@ -285,6 +296,35 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
                     <div className="text-xs text-text-muted mt-0.5">{t(`blocked.${stat}label`)}</div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Crypto Payment ───────────────────────────────────── */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <div className="rounded-2xl border border-accent-teal/20 bg-accent-teal/[0.03] p-8 md:p-10 grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-3">
+                <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary mb-4">
+                  {t("cryptoPayment.title")}
+                </h2>
+                <p className="text-text-muted leading-relaxed mb-6">
+                  {t("cryptoPayment.body")}
+                </p>
+                <Link
+                  href="/pay-with-crypto"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
+                >
+                  {t("cryptoPayment.cta")}
+                  <ArrowIcon />
+                </Link>
+              </div>
+              <div className="md:col-span-2 grid grid-cols-2 gap-3">
+                <CryptoBadge icon={<BtcIcon size={28} />} label={t("cryptoPayment.btc")} />
+                <CryptoBadge icon={<EthIcon size={28} />} label={t("cryptoPayment.eth")} />
+                <CryptoBadge icon={<UsdtIcon size={28} />} label={t("cryptoPayment.usdt")} />
+                <CryptoBadge icon={<UsdcIcon size={28} />} label={t("cryptoPayment.usdc")} />
               </div>
             </div>
           </div>
