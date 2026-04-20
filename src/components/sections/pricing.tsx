@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 import { trackGetPro } from "@/lib/track-cta";
+import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 
 type Duration = "monthly" | "sixMonth" | "annual";
 
@@ -326,6 +327,23 @@ export function Pricing() {
                   <p className="text-text-muted text-xs text-center">
                     {t("guarantee")}
                   </p>
+                </div>
+
+                {/* Crypto payment note */}
+                <div className="text-center text-xs text-text-muted mt-4 flex flex-col items-center gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <BtcIcon size={16} />
+                    <EthIcon size={16} />
+                    <UsdtIcon size={16} />
+                    <UsdcIcon size={16} />
+                  </div>
+                  <span>
+                    {t("cryptoPaymentNote")}
+                    {" · "}
+                    <Link href="/pay-with-crypto" className="text-accent-teal hover:underline">
+                      {t("cryptoPaymentLearnMore")} →
+                    </Link>
+                  </span>
                 </div>
 
                 {/* Tax note — always visible */}
