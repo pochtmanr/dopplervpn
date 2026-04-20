@@ -726,7 +726,7 @@ function SubscribeInner() {
 
       {paymentMethod === 'crypto' && (
         <p className="text-xs text-text-muted text-center">
-          Pay with USDT (TRC20), BTC, TON and more. You&apos;ll be redirected to OxaPay.
+          Pay with BTC, ETH, USDT, and USDC. You&apos;ll be redirected to OxaPay.
         </p>
       )}
 
