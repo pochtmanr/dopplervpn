@@ -33,6 +33,7 @@ const staticPages = [
   "/about",
   "/bypass-censorship",
   "/no-registration-vpn",
+  "/pay-with-crypto",
   "/vless-vpn",
   "/vpn-for-ios",
   "/vpn-for-android",
@@ -69,6 +70,7 @@ function priorityFor(page: string): number {
     [
       "/bypass-censorship",
       "/no-registration-vpn",
+      "/pay-with-crypto",
       "/vless-vpn",
       "/vpn-for-ios",
       "/vpn-for-android",
