@@ -16,9 +16,10 @@ const featureIcons: Record<string, React.ReactNode> = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
     </svg>
   ),
-  adBlocker: (
+  cryptoPayment: (
     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+      <circle cx="12" cy="12" r="9" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10 8.5h3.25a2 2 0 0 1 0 4H10m0 0h3.5a2 2 0 0 1 0 4H10m0-8v9M9 6.5v2m0 7v2m3-11.5v2m0 7v2" />
     </svg>
   ),
   smartRouting: (
@@ -44,7 +45,7 @@ const featureLayout: { key: string; colSpan: string; hasImage?: boolean; imagePa
   { key: "noRegistration", colSpan: "md:col-span-2", hasImage: true, imagePath: "/images/features/1.avif", href: "/no-registration-vpn" },
   { key: "vlessReality", colSpan: "", href: "/vless-vpn" },
   { key: "smartRouting", colSpan: "" },
-  { key: "adBlocker", colSpan: "" },
+  { key: "cryptoPayment", colSpan: "", href: "/pay-with-crypto" },
   { key: "minimalData", colSpan: "" },
   { key: "dnsProtection", colSpan: "md:col-span-3", isWide: true },
 ];
