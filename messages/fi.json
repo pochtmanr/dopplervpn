@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "Maksu kryptolla",
     "features": "Ominaisuudet",
     "pricing": "Hinnoittelu",
     "faq": "UKK",
@@ -190,9 +191,9 @@
         "title": "Älykäs VPN-reititys",
         "description": "Älykäs liikenteen reititys maittain. Valitsee automaattisesti parhaan VPN-palvelinreitin nopeuden ja luotettavuuden perusteella."
       },
-      "adBlocker": {
-        "title": "Sisäänrakennettu mainosten esto",
-        "description": "DNS-tason mainosten esto vähentää noin 50 % mainoksista ja seuraimista. Puhtaampi selaus vähemmällä hälinällä, sisäänrakennettuna VPN:ään."
+      "cryptoPayment": {
+        "title": "Maksa Bitcoinilla ja kryptolla",
+        "description": "Anonyymit VPN-maksut BTC:llä, ETH:llä, USDT:llä ja USDC:llä. Ei korttia, ei nimeä, ei jälkeä — tilauksesi toimii kaikilla laitteillasi."
       },
       "minimalData": {
         "title": "Tiukka lokittomuuskäytäntö",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "Voit maksaa myös kryptolla — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "Lue lisää",
     "title": "Selkeä ja läpinäkyvä hinnoittelu",
     "subtitle": "Premium-suojaus kaikille laitteillesi.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "Maksa anonyymisti — jopa estetyiltä alueilta",
+      "body": "Kun pankkiasi tarkkaillaan tai kansainväliset korttisi eivät toimi, Bitcoin ja stablecoinit toimivat silti. Doppler hyväksyy BTC:n, ETH:n, USDT:n ja USDC:n — ilman pankkia, ilman tunnistautumista, ilman jälkeä.",
+      "cta": "Maksa kryptolla",
+      "btc": "Bitcoin",
+      "eth": "Ethereum",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "Internet-sensuuriopas — Miten VPN:t estetään ja miten pysyt yhteydessä",
       "description": "Tekninen opas siitä, miten hallitukset estävät VPN:iä ja välityspalvelimia DPI:n, TSPU:n ja koneoppimisen avulla — ja miten VLESS-Reality-välityspalvelin ohittaa jokaisen tunnistusmenetelmän. Valmistaudu tiukkeneviin rajoituksiin."
@@ -1706,6 +1718,80 @@
       "nameLabel": "Yritys",
       "websiteLabel": "Verkkosivusto",
       "contactLabel": "Yhteystiedot"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "Osta VPN Bitcoinilla — Maksa anonyymisti | Doppler VPN",
+      "description": "Maksa Doppler VPN Bitcoinilla, Ethereumilla, USDT:llä tai USDC:llä. Anonyymi kryptomaksu, ei korttia tai sähköpostia. Toimii iPhonessa, Androidissa, Macissa ja Windowsissa."
+    },
+    "hero": {
+      "title": "Osta VPN Bitcoinilla, Ethereumilla ja stablecoineilla",
+      "subtitle": "Maksa Doppler VPN kryptolla. Ei korttia, ei sähköpostia, ei jälkeä — tilauksesi on sidottu anonyymiin tilitunnukseen, joka toimii kaikilla laitteilla.",
+      "cta": "Osta kryptolla"
+    },
+    "coins": {
+      "heading": "Hyväksytyt kryptovaluutat",
+      "subheading": "Doppler hyväksyy neljä suosituinta kryptovaluuttaa. Maksa mistä tahansa lompakosta.",
+      "btcName": "Bitcoin",
+      "btcTicker": "BTC",
+      "btcNetwork": "Bitcoin-verkko",
+      "ethName": "Ethereum",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum mainnet",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "Miksi maksaa VPN kryptolla",
+      "anonymousTitle": "Anonyymi suunnittelultaan",
+      "anonymousBody": "Kortilla ostettu VPN on sidottu pankkitietoihisi, nimeen ja laskutusosoitteeseen. Bitcoinilla ostettu VPN on sidottu vain lompakkoon — ei mihinkään muuhun.",
+      "worksTitle": "Toimii, kun kortit eivät",
+      "worksBody": "Kansainväliset korttimaksut estetään rajalla Venäjällä, Iranissa ja monissa muissa maissa. Bitcoin ja stablecoinit eivät pyydä pankiltasi lupaa.",
+      "permanentTitle": "Ei chargebackeja, ei katkoksia",
+      "permanentBody": "Kryptomaksut ovat lopullisia — ei yllätyksiä erääntyneestä kortista matkalla, ei peruutuksia petoslippujen takia. Maksa kerran, pysy yhteydessä."
+    },
+    "howItWorks": {
+      "heading": "Miten se toimii",
+      "subheading": "Lompakosta yhdistettyyn VPN:ään kolmessa vaiheessa.",
+      "step1Title": "Valitse paketti",
+      "step1Body": "Avaa Doppler-tilisivusi ja valitse kuukausittainen, puolivuosittainen tai vuosittainen.",
+      "step2Title": "Valitse kolikko",
+      "step2Body": "Valitse Bitcoin, Ethereum, USDT tai USDC. Näytämme laskun tarkalla summalla ja lompakon osoitteella.",
+      "step3Title": "Lähetä maksu",
+      "step3Body": "Lähetä mistä tahansa lompakosta. Stablecoinit vahvistuvat minuuteissa, Bitcoin noin kymmenessä. VPN:si aktivoituu automaattisesti — ei sähköpostia, kuittia tai seurantaa.",
+      "cta": "Kryptomaksu"
+    },
+    "devices": {
+      "heading": "Toimii kaikilla laitteillasi",
+      "body": "Kryptomaksu on saatavilla vain verkossa — Apple ja Google vaativat omia laskutusjärjestelmiään sovellusten sisällä, joten emme voi hyväksyä kryptoa App Storen tai Google Playn kautta. Sen sijaan Doppler-tilauksesi on sidottu anonyymiin tilitunnukseen (VPN-XXXX-XXXX-XXXX). Maksa kerran verkossa ja syötä sitten tilitunnus iPhonessa, Androidissa, Macissa tai Windowsissa — tilaus synkronoituu kaikkialla.",
+      "ios": "iPhone ja iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "Usein kysytyt kysymykset",
+      "q1Question": "Voinko ostaa VPN:n Bitcoinilla?",
+      "q1Answer": "Kyllä. Doppler hyväksyy verkossa Bitcoinin (BTC) sekä Ethereumin (ETH), Tetherin (USDT) ja USD Coinin (USDC). Mene tilisivullesi, valitse paketti ja valitse „Maksa kryptolla“.",
+      "q2Question": "Onko kryptomaksu todella anonyymi?",
+      "q2Answer": "Kyllä. Emme kysy nimeä, sähköpostia tai laskutusosoitetta. Ainoa tallennettu tunniste on lompakkosi on-chain-tapahtuma, ja Doppler-tilisi on satunnaisesti luotu ID (VPN-XXXX-XXXX-XXXX), joka elää laitteessasi.",
+      "q3Question": "Mitä kryptovaluuttoja Doppler hyväksyy?",
+      "q3Answer": "BTC, ETH, USDT (TRC20 / ERC20) ja USDC (ERC20 / Polygon). Emme hyväksy muita kolikoita laskeutumissivulla tänään.",
+      "q4Question": "Voinko maksaa kryptolla iOS- tai Android-sovelluksessa?",
+      "q4Answer": "Et. Apple ja Google vaativat omia in-app-laskutusjärjestelmiään digitaalisille tilauksille, joten kryptomaksu on saatavilla vain verkossa. Maksa kerran Dopplerin verkkosivustolla ja syötä sitten tilitunnus millä tahansa laitteella — tilaus synkronoituu iPhonen, Androidin, Macin ja Windowsin välillä.",
+      "q5Question": "Kuinka kauan kestää, että VPN aktivoituu maksun jälkeen?",
+      "q5Answer": "Stablecoinit (USDT, USDC) vahvistuvat tyypillisesti 1–3 minuutissa. Bitcoin vaatii tavallisesti yhden verkkovahvistuksen, noin kymmenen minuuttia. Kun maksu on vahvistettu, tilauksesi aktivoituu automaattisesti."
+    },
+    "cta": {
+      "title": "Valmis maksamaan kryptolla?",
+      "subtitle": "Avaa tili, valitse paketti ja maksa anonyymisti Bitcoinilla, Ethereumilla, USDT:llä tai USDC:llä.",
+      "primary": "Osta kryptolla",
+      "secondary": "Kysymyksiä? Ota yhteyttä @DopplerSupportBot"
     }
   },
   "noRegistrationVpn": {

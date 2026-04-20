@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "Plaćanje kriptom",
     "features": "Značajke",
     "pricing": "Cijene",
     "faq": "FAQ",
@@ -190,9 +191,9 @@
         "title": "Pametno VPN usmjeravanje",
         "description": "Inteligentno usmjeravanje prometa po zemljama. Automatski odabire najbolju VPN putanju za brzinu i pouzdanost na temelju vaše destinacije."
       },
-      "adBlocker": {
-        "title": "Ugrađeni blokator oglasa",
-        "description": "Blokiranje oglasa na DNS razini smanjuje oko 50% oglasa i tragača. Čišće pregledavanje s manje smetnji, ugrađeno izravno u vaš VPN."
+      "cryptoPayment": {
+        "title": "Plaćajte Bitcoinom i kripto valutama",
+        "description": "Anonimna plaćanja VPN-a s BTC, ETH, USDT i USDC. Bez kartice, bez imena, bez tragova — pretplata radi na svim vašim uređajima."
       },
       "minimalData": {
         "title": "Stroga politika bez zapisnika",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "Možete platiti i kriptom — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "Saznajte više",
     "title": "Jednostavne, transparentne cijene",
     "subtitle": "Premium zaštita za sve vaše uređaje.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "Plaćajte anonimno — čak i iz blokiranih regija",
+      "body": "Kad vam je banka pod nadzorom ili međunarodne kartice ne rade, Bitcoin i stablecoini i dalje rade. Doppler prihvaća BTC, ETH, USDT i USDC — bez banke, bez isprava, bez tragova.",
+      "cta": "Platite kriptom",
+      "btc": "Bitcoin",
+      "eth": "Ethereum",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "Vodič za internetsku cenzuru — Kako se VPN-ovi blokiraju i kako ostati povezan",
       "description": "Tehnički vodič o tome kako vlade blokiraju VPN-ove i proxyje koristeći DPI, TSPU i ML — te kako VLESS-Reality proxy zaobilazi svaku metodu detekcije. Pripremite se za rastuća ograničenja."
@@ -1706,6 +1718,80 @@
       "nameLabel": "Tvrtka",
       "websiteLabel": "Web stranica",
       "contactLabel": "Kontakt"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "Kupite VPN Bitcoinom — Anonimno plaćanje | Doppler VPN",
+      "description": "Platite Doppler VPN Bitcoinom, Ethereumom, USDT-om ili USDC-om. Anonimna kripto naplata, bez kartice ili emaila. Radi na iPhoneu, Androidu, Macu i Windowsu."
+    },
+    "hero": {
+      "title": "Kupite VPN Bitcoinom, Ethereumom i stablecoinima",
+      "subtitle": "Plaćajte Doppler VPN kriptom. Bez kartice, bez emaila, bez tragova — pretplata je povezana s anonimnim ID-om računa koji radi na svakom uređaju.",
+      "cta": "Kupi kriptom"
+    },
+    "coins": {
+      "heading": "Prihvaćene kripto valute",
+      "subheading": "Doppler prihvaća četiri najpopularnije kripto valute. Plaćajte iz bilo kojeg novčanika.",
+      "btcName": "Bitcoin",
+      "btcTicker": "BTC",
+      "btcNetwork": "Bitcoin mreža",
+      "ethName": "Ethereum",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum mainnet",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "Zašto platiti VPN kriptom",
+      "anonymousTitle": "Anoniman po dizajnu",
+      "anonymousBody": "VPN kupljen karticom povezan je s vašim bankovnim zapisom, imenom i adresom za naplatu. VPN kupljen Bitcoinom povezan je samo s novčanikom — ništa više.",
+      "worksTitle": "Radi kad kartice ne",
+      "worksBody": "Međunarodna plaćanja karticom blokirana su na granici u Rusiji, Iranu i mnogim drugim zemljama. Bitcoin i stablecoini ne traže dopuštenje vaše banke.",
+      "permanentTitle": "Bez chargebackova, bez prekida",
+      "permanentBody": "Kripto plaćanja su konačna — bez iznenađenja s isteklom karticom na putu, bez otkaza zbog oznaka prijevare. Platite jednom, ostanite povezani."
+    },
+    "howItWorks": {
+      "heading": "Kako funkcionira",
+      "subheading": "Od novčanika do povezanog VPN-a u tri koraka.",
+      "step1Title": "Odaberite plan",
+      "step1Body": "Otvorite stranicu svog Doppler računa i odaberite mjesečni, polugodišnji ili godišnji.",
+      "step2Title": "Odaberite kovanicu",
+      "step2Body": "Odaberite Bitcoin, Ethereum, USDT ili USDC. Prikazat ćemo račun s točnim iznosom i adresom novčanika.",
+      "step3Title": "Pošaljite uplatu",
+      "step3Body": "Pošaljite iz bilo kojeg novčanika. Stablecoini se potvrđuju u minutama, Bitcoin za desetak. Vaš VPN se automatski aktivira — bez emaila, potvrde ili praćenja.",
+      "cta": "Kripto plaćanje"
+    },
+    "devices": {
+      "heading": "Radi na svim vašim uređajima",
+      "body": "Kripto plaćanje dostupno je samo na webu — Apple i Google zahtijevaju vlastite sustave naplate unutar aplikacija, pa ne možemo prihvatiti kripto putem App Storea ili Google Playa. Umjesto toga, vaša Doppler pretplata povezana je s anonimnim ID-om računa (VPN-XXXX-XXXX-XXXX). Platite jednom na webu pa unesite ID računa na iPhone, Android, Mac ili Windows — pretplata se sinkronizira posvuda.",
+      "ios": "iPhone i iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "Česta pitanja",
+      "q1Question": "Mogu li kupiti VPN Bitcoinom?",
+      "q1Answer": "Da. Doppler na webu prihvaća Bitcoin (BTC) te Ethereum (ETH), Tether (USDT) i USD Coin (USDC). Idite na stranicu računa, odaberite plan i odaberite „Platite kriptom“.",
+      "q2Question": "Je li plaćanje kriptom stvarno anonimno?",
+      "q2Answer": "Da. Ne tražimo ime, email ili adresu za naplatu. Jedini zabilježeni identifikator je on-chain transakcija vašeg novčanika, a Doppler račun je nasumično generirani ID (VPN-XXXX-XXXX-XXXX) koji živi na vašem uređaju.",
+      "q3Question": "Koje kripto valute Doppler prihvaća?",
+      "q3Answer": "BTC, ETH, USDT (TRC20 / ERC20) i USDC (ERC20 / Polygon). Trenutno ne prihvaćamo druge kovanice na landing stranici.",
+      "q4Question": "Mogu li platiti kriptom unutar iOS ili Android aplikacije?",
+      "q4Answer": "Ne. Apple i Google zahtijevaju vlastite in-app sustave naplate za digitalne pretplate, stoga je kripto plaćanje dostupno samo na webu. Platite jednom na Doppler web stranici pa unesite ID računa na bilo kojem uređaju — pretplata se sinkronizira između iPhonea, Androida, Maca i Windowsa.",
+      "q5Question": "Koliko traje aktivacija VPN-a nakon uplate?",
+      "q5Answer": "Stablecoini (USDT, USDC) obično se potvrde u 1–3 minute. Bitcoin obično treba jednu potvrdu mreže, oko deset minuta. Kada se uplata potvrdi, pretplata se automatski aktivira."
+    },
+    "cta": {
+      "title": "Spremni za plaćanje kriptom?",
+      "subtitle": "Otvorite račun, odaberite plan i platite anonimno Bitcoinom, Ethereumom, USDT-om ili USDC-om.",
+      "primary": "Kupi kriptom",
+      "secondary": "Imate pitanja? Pišite @DopplerSupportBot"
     }
   },
   "noRegistrationVpn": {

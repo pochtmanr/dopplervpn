@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "암호화폐 결제",
     "features": "기능",
     "pricing": "가격",
     "faq": "FAQ",
@@ -190,9 +191,9 @@
         "title": "스마트 라우팅",
         "description": "국가별 지능형 트래픽 라우팅. 목적지에 따라 속도와 안정성을 위한 최적의 서버 경로를 자동으로 선택합니다."
       },
-      "adBlocker": {
-        "title": "기본 광고 차단기",
-        "description": "내장 DNS 수준 광고 차단으로 약 50%의 광고와 추적기를 줄여줍니다. 설치 즉시 더 깔끔한 브라우징 경험을 제공합니다."
+      "cryptoPayment": {
+        "title": "비트코인과 암호화폐로 결제",
+        "description": "BTC, ETH, USDT, USDC로 익명 VPN 결제. 카드, 이름, 흔적 없음 — 구독은 모든 기기에서 사용할 수 있습니다."
       },
       "minimalData": {
         "title": "최소 데이터 수집",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "암호화폐로도 결제 가능 — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "자세히 보기",
     "title": "간단하고 투명한 요금제",
     "subtitle": "모든 기기를 위한 프리미엄 보호.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "익명으로 결제 — 차단된 지역에서도",
+      "body": "은행이 감시되거나 해외 카드가 작동하지 않더라도, 비트코인과 스테이블코인은 계속 작동합니다. Doppler는 BTC, ETH, USDT, USDC를 받습니다 — 은행, 신분증, 흔적 없이.",
+      "cta": "암호화폐로 결제",
+      "btc": "비트코인",
+      "eth": "이더리움",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "인터넷 검열 가이드 — VPN이 차단되는 원리와 연결을 유지하는 방법",
       "description": "정부가 DPI, TSPU, 머신러닝을 이용해 VPN과 프록시를 차단하는 방법, 그리고 VLESS-Reality 프록시가 모든 탐지 방식을 우회하는 원리에 대한 기술 가이드. 강화되는 규제에 대비하세요."
@@ -1706,6 +1718,80 @@
       "nameLabel": "회사",
       "websiteLabel": "웹사이트",
       "contactLabel": "연락처"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "비트코인으로 VPN 구매 — 익명 결제 | Doppler VPN",
+      "description": "Doppler VPN을 비트코인, 이더리움, USDT 또는 USDC로 결제하세요. 익명 암호화폐 결제, 카드나 이메일 불필요. iPhone, Android, Mac, Windows에서 작동."
+    },
+    "hero": {
+      "title": "비트코인, 이더리움, 스테이블코인으로 VPN 구매",
+      "subtitle": "Doppler VPN을 암호화폐로 결제하세요. 카드 없이, 이메일 없이, 흔적 없이 — 구독은 익명 계정 ID에 연결되어 모든 기기에서 작동합니다.",
+      "cta": "암호화폐로 구매"
+    },
+    "coins": {
+      "heading": "지원되는 암호화폐",
+      "subheading": "Doppler는 가장 널리 사용되는 네 가지 암호화폐를 받습니다. 어떤 지갑에서도 결제 가능.",
+      "btcName": "비트코인",
+      "btcTicker": "BTC",
+      "btcNetwork": "Bitcoin 네트워크",
+      "ethName": "이더리움",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum 메인넷",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "VPN을 암호화폐로 결제해야 하는 이유",
+      "anonymousTitle": "기본적으로 익명",
+      "anonymousBody": "카드로 구매한 VPN은 은행 기록, 이름, 청구 주소와 연결됩니다. 비트코인으로 구매한 VPN은 지갑에만 연결되며, 그 이상은 없습니다.",
+      "worksTitle": "카드가 안 될 때도 작동",
+      "worksBody": "국제 카드 결제는 러시아, 이란 및 여러 국가에서 국경에서 차단됩니다. 비트코인과 스테이블코인은 은행의 허가를 요청하지 않습니다.",
+      "permanentTitle": "차지백 없음, 중단 없음",
+      "permanentBody": "암호화폐 결제는 최종적입니다 — 여행 중 카드 만료의 놀라움도, 사기 플래그에 의한 취소도 없습니다. 한 번 결제하면 계속 연결됩니다."
+    },
+    "howItWorks": {
+      "heading": "작동 방식",
+      "subheading": "지갑에서 연결된 VPN까지, 세 단계로.",
+      "step1Title": "플랜 선택",
+      "step1Body": "Doppler 계정 페이지를 열고 월간, 6개월 또는 연간 중 선택하세요.",
+      "step2Title": "코인 선택",
+      "step2Body": "Bitcoin, Ethereum, USDT 또는 USDC를 선택하세요. 정확한 금액과 지갑 주소가 포함된 인보이스가 표시됩니다.",
+      "step3Title": "결제 전송",
+      "step3Body": "어떤 지갑에서든 전송하세요. 스테이블코인은 몇 분, 비트코인은 약 10분이면 확인됩니다. VPN이 자동으로 활성화됩니다 — 이메일, 영수증, 후속 조치 없이.",
+      "cta": "암호화폐 결제"
+    },
+    "devices": {
+      "heading": "모든 기기에서 작동",
+      "body": "암호화폐 결제는 웹에서만 가능합니다 — Apple과 Google은 앱 내에서 자체 결제 시스템을 요구하므로 App Store나 Google Play를 통해 암호화폐를 받을 수 없습니다. 대신 Doppler 구독은 익명 계정 ID(VPN-XXXX-XXXX-XXXX)에 연결됩니다. 웹에서 한 번 결제한 후 iPhone, Android, Mac 또는 Windows에 계정 ID를 입력하면 구독이 어디서나 동기화됩니다.",
+      "ios": "iPhone·iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "자주 묻는 질문",
+      "q1Question": "비트코인으로 VPN을 살 수 있나요?",
+      "q1Answer": "네. Doppler는 웹에서 비트코인(BTC)과 이더리움(ETH), Tether(USDT), USD Coin(USDC)을 받습니다. 계정 페이지로 가서 플랜을 선택하고 \"암호화폐로 결제\"를 선택하세요.",
+      "q2Question": "암호화폐 결제는 정말 익명인가요?",
+      "q2Answer": "네. 이름, 이메일, 청구 주소를 요청하지 않습니다. 기록되는 유일한 식별자는 지갑의 온체인 거래이며, Doppler 계정은 기기에 저장되는 임의 생성 ID(VPN-XXXX-XXXX-XXXX)입니다.",
+      "q3Question": "Doppler는 어떤 암호화폐를 받나요?",
+      "q3Answer": "BTC, ETH, USDT(TRC20 / ERC20), USDC(ERC20 / Polygon)입니다. 현재 랜딩 페이지에서 다른 코인은 받지 않습니다.",
+      "q4Question": "iOS 또는 Android 앱 내에서 암호화폐로 결제할 수 있나요?",
+      "q4Answer": "아니요. Apple과 Google은 디지털 구독에 대해 자체 인앱 결제 시스템을 요구하므로 암호화폐 결제는 웹에서만 가능합니다. Doppler 웹사이트에서 한 번 결제한 후 어떤 기기에든 계정 ID를 입력하세요 — 구독은 iPhone, Android, Mac, Windows 간에 동기화됩니다.",
+      "q5Question": "결제 후 VPN이 활성화되는 데 얼마나 걸리나요?",
+      "q5Answer": "스테이블코인(USDT, USDC)은 보통 1~3분 내에 확인됩니다. Bitcoin은 보통 한 번의 네트워크 확인, 약 10분이 걸립니다. 결제가 확인되면 구독이 자동으로 활성화됩니다."
+    },
+    "cta": {
+      "title": "암호화폐로 결제할 준비가 되셨나요?",
+      "subtitle": "계정을 열고 플랜을 선택하여 비트코인, 이더리움, USDT 또는 USDC로 익명 결제하세요.",
+      "primary": "암호화폐로 구매",
+      "secondary": "질문이 있으신가요? @DopplerSupportBot 에 문의하세요"
     }
   },
   "noRegistrationVpn": {

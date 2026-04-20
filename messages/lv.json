@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "Maksājums kripto",
     "features": "Iespējas",
     "pricing": "Cenas",
     "faq": "BUJ",
@@ -190,9 +191,9 @@
         "title": "Vieds VPN maršrutēšana",
         "description": "Inteliģenta datu plūsmas maršrutēšana pēc valsts. Automātiski izvēlas labāko VPN servera ceļu ātrumam un uzticamībai atkarībā no jūsu galamērķa."
       },
-      "adBlocker": {
-        "title": "Iebūvēts reklāmu bloķētājs",
-        "description": "DNS līmeņa reklāmu bloķēšana samazina aptuveni 50% reklāmu un izsekotāju. Tīrāka pārlūkošana ar mazāku jucekli, iebūvēta tieši jūsu VPN."
+      "cryptoPayment": {
+        "title": "Maksājiet ar Bitcoin un kripto",
+        "description": "Anonīmi VPN maksājumi ar BTC, ETH, USDT un USDC. Nav kartes, nav vārda, nav pēdu — abonements darbojas visās jūsu ierīcēs."
       },
       "minimalData": {
         "title": "Stingra politika bez žurnāliem",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "Varat arī maksāt ar kripto — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "Uzzināt vairāk",
     "title": "Vienkāršas, caurspīdīgas cenas",
     "subtitle": "Premium aizsardzība visām jūsu ierīcēm.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "Maksājiet anonīmi — pat no bloķētiem reģioniem",
+      "body": "Kad jūsu banka ir uzraudzīta vai starptautiskās kartes nedarbojas, Bitcoin un stablecoini joprojām darbojas. Doppler pieņem BTC, ETH, USDT un USDC — bez bankas, bez ID, bez pēdām.",
+      "cta": "Maksāt ar kripto",
+      "btc": "Bitcoin",
+      "eth": "Ethereum",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "Interneta cenzūras ceļvedis — Kā VPN tiek bloķēti un kā palikt pieslēgtam",
       "description": "Tehniskais ceļvedis par to, kā valdības bloķē VPN un starpniekserverus, izmantojot DPI, TSPU un ML — un kā VLESS-Reality starpniekserveris apiet katru noteikšanas metodi. Sagatavojieties pieaugošiem ierobežojumiem."
@@ -1706,6 +1718,80 @@
       "nameLabel": "Uzņēmums",
       "websiteLabel": "Vietne",
       "contactLabel": "Kontakti"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "Pērciet VPN ar Bitcoin — Anonīms maksājums | Doppler VPN",
+      "description": "Maksājiet Doppler VPN ar Bitcoin, Ethereum, USDT vai USDC. Anonīma kripto norēķināšanās, bez kartes vai e-pasta. Darbojas uz iPhone, Android, Mac un Windows."
+    },
+    "hero": {
+      "title": "Pērciet VPN ar Bitcoin, Ethereum un stablecoiniem",
+      "subtitle": "Maksājiet Doppler VPN ar kripto. Bez kartes, bez e-pasta, bez pēdām — abonements ir saistīts ar anonīmu konta ID, kas darbojas uz katras ierīces.",
+      "cta": "Pirkt ar kripto"
+    },
+    "coins": {
+      "heading": "Pieņemtās kriptovalūtas",
+      "subheading": "Doppler pieņem četras izplatītākās kriptovalūtas. Maksājiet no jebkura maka.",
+      "btcName": "Bitcoin",
+      "btcTicker": "BTC",
+      "btcNetwork": "Bitcoin tīkls",
+      "ethName": "Ethereum",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum mainnet",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "Kāpēc maksāt par VPN ar kripto",
+      "anonymousTitle": "Anonīmitāte pēc noklusējuma",
+      "anonymousBody": "Ar karti iegādāts VPN ir saistīts ar jūsu bankas ierakstu, vārdu un norēķinu adresi. Ar Bitcoin iegādāts VPN ir saistīts tikai ar maku — nekā vairāk.",
+      "worksTitle": "Darbojas, kad kartes nedarbojas",
+      "worksBody": "Starptautiskie karšu maksājumi tiek bloķēti uz robežas Krievijā, Irānā un daudzās citās valstīs. Bitcoin un stablecoini neprasa atļauju jūsu bankai.",
+      "permanentTitle": "Bez chargeback, bez pārtraukumiem",
+      "permanentBody": "Kripto maksājumi ir galīgi — bez pārsteigumiem ar derīguma termiņa zaudējušu karti ceļojumā, bez atcelšanas krāpniecības karogu dēļ. Samaksājiet vienreiz, palieciet savienoti."
+    },
+    "howItWorks": {
+      "heading": "Kā tas darbojas",
+      "subheading": "No maka līdz pievienotam VPN trīs soļos.",
+      "step1Title": "Izvēlieties plānu",
+      "step1Body": "Atveriet savu Doppler konta lapu un izvēlieties mēneša, pusgada vai gada plānu.",
+      "step2Title": "Izvēlieties monētu",
+      "step2Body": "Izvēlieties Bitcoin, Ethereum, USDT vai USDC. Mēs parādīsim rēķinu ar precīzu summu un maka adresi.",
+      "step3Title": "Nosūtiet maksājumu",
+      "step3Body": "Nosūtiet no jebkura maka. Stablecoini apstiprina dažās minūtēs, Bitcoin aptuveni desmit. Jūsu VPN aktivizējas automātiski — bez e-pasta, kvīts vai sekošanas.",
+      "cta": "Sākt kripto norēķināšanos"
+    },
+    "devices": {
+      "heading": "Darbojas uz visām jūsu ierīcēm",
+      "body": "Kripto norēķināšanās ir pieejama tikai tīmeklī — Apple un Google pieprasa savas rēķinu izrakstīšanas sistēmas lietotnēs, tāpēc mēs nevaram pieņemt kripto caur App Store vai Google Play. Tā vietā jūsu Doppler abonements ir saistīts ar anonīmu konta ID (VPN-XXXX-XXXX-XXXX). Maksājiet vienreiz tīmeklī, pēc tam ievadiet konta ID uz iPhone, Android, Mac vai Windows — abonements sinhronizējas visur.",
+      "ios": "iPhone un iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "Biežāk uzdotie jautājumi",
+      "q1Question": "Vai varu nopirkt VPN ar Bitcoin?",
+      "q1Answer": "Jā. Doppler tīmeklī pieņem Bitcoin (BTC), kā arī Ethereum (ETH), Tether (USDT) un USD Coin (USDC). Dodieties uz konta lapu, izvēlieties plānu un izvēlieties „Maksāt ar kripto“.",
+      "q2Question": "Vai kripto maksājums patiešām ir anonīms?",
+      "q2Answer": "Jā. Mēs neprasām vārdu, e-pastu vai norēķinu adresi. Vienīgais reģistrētais identifikators ir jūsu maka on-chain darījums, un Doppler konts ir nejauši ģenerēts ID (VPN-XXXX-XXXX-XXXX), kas dzīvo jūsu ierīcē.",
+      "q3Question": "Kuras kriptovalūtas pieņem Doppler?",
+      "q3Answer": "BTC, ETH, USDT (TRC20 / ERC20) un USDC (ERC20 / Polygon). Šodien landing lapā citas monētas nepieņemam.",
+      "q4Question": "Vai varu maksāt ar kripto iOS vai Android lietotnē?",
+      "q4Answer": "Nē. Apple un Google pieprasa savas lietotnē integrētās rēķinu sistēmas digitālajām abonēšanām, tāpēc kripto norēķināšanās ir pieejama tikai tīmeklī. Maksājiet vienreiz Doppler vietnē, pēc tam ievadiet konta ID jebkurā ierīcē — abonements sinhronizējas starp iPhone, Android, Mac un Windows.",
+      "q5Question": "Cik ilgi pēc maksājuma tiek aktivizēts VPN?",
+      "q5Answer": "Stablecoini (USDT, USDC) parasti apstiprinās 1–3 minūtēs. Bitcoin parasti prasa vienu tīkla apstiprinājumu, aptuveni desmit minūtes. Kad maksājums ir apstiprināts, abonements aktivizējas automātiski."
+    },
+    "cta": {
+      "title": "Vai esat gatavs maksāt ar kripto?",
+      "subtitle": "Atveriet kontu, izvēlieties plānu un anonīmi maksājiet ar Bitcoin, Ethereum, USDT vai USDC.",
+      "primary": "Pirkt ar kripto",
+      "secondary": "Jautājumi? Rakstiet @DopplerSupportBot"
     }
   },
   "noRegistrationVpn": {

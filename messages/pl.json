@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "Płatność kryptowalutą",
     "features": "Funkcje",
     "pricing": "Cennik",
     "faq": "FAQ",
@@ -190,9 +191,9 @@
         "title": "Inteligentny routing VPN",
         "description": "Inteligentne trasowanie ruchu według kraju. Automatycznie wybiera najlepszą ścieżkę serwera VPN pod kątem szybkości i niezawodności."
       },
-      "adBlocker": {
-        "title": "Wbudowany bloker reklam",
-        "description": "Blokowanie reklam na poziomie DNS redukuje około 50% reklam i trackerów. Czystsze przeglądanie z mniejszym bałaganem, wbudowane bezpośrednio w VPN."
+      "cryptoPayment": {
+        "title": "Płać Bitcoinem i kryptowalutami",
+        "description": "Anonimowe płatności VPN przez BTC, ETH, USDT i USDC. Bez karty, bez nazwiska, bez śladu — subskrypcja działa na wszystkich twoich urządzeniach."
       },
       "minimalData": {
         "title": "Ścisła polityka braku logów",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "Zapłać też kryptowalutą — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "Dowiedz się więcej",
     "title": "Prosty, przejrzysty cennik",
     "subtitle": "Ochrona premium dla wszystkich Twoich urządzeń.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "Płać anonimowo — nawet z zablokowanych regionów",
+      "body": "Gdy twój bank jest obserwowany, a międzynarodowe karty nie działają, Bitcoin i stablecoiny nadal tak. Doppler akceptuje BTC, ETH, USDT i USDC — bez banku, bez dokumentów, bez śladu.",
+      "cta": "Płać kryptowalutą",
+      "btc": "Bitcoin",
+      "eth": "Ethereum",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "Przewodnik po cenzurze internetu — jak blokowane są VPN-y i jak zachować połączenie",
       "description": "Techniczny przewodnik o tym, jak rządy blokują VPN-y i proxy za pomocą DPI, TSPU i uczenia maszynowego — oraz jak proxy VLESS-Reality omija każdą metodę wykrywania. Przygotuj się na narastające ograniczenia."
@@ -1706,6 +1718,80 @@
       "nameLabel": "Firma",
       "websiteLabel": "Strona internetowa",
       "contactLabel": "Kontakt"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "Kup VPN za Bitcoina — Płać anonimowo | Doppler VPN",
+      "description": "Zapłać za Doppler VPN Bitcoinem, Ethereum, USDT lub USDC. Anonimowy checkout kryptowalutowy, bez karty ani e-maila. Działa na iPhone, Android, Mac i Windows."
+    },
+    "hero": {
+      "title": "Kup VPN za Bitcoina, Ethereum i stablecoiny",
+      "subtitle": "Zapłać za Doppler VPN kryptowalutą. Bez karty, bez e-maila, bez śladu — subskrypcja jest powiązana z anonimowym ID konta, który działa na każdym urządzeniu.",
+      "cta": "Kup kryptowalutą"
+    },
+    "coins": {
+      "heading": "Akceptowane kryptowaluty",
+      "subheading": "Doppler akceptuje cztery najpopularniejsze kryptowaluty. Płać z dowolnego portfela.",
+      "btcName": "Bitcoin",
+      "btcTicker": "BTC",
+      "btcNetwork": "Sieć Bitcoin",
+      "ethName": "Ethereum",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum mainnet",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "Dlaczego płacić za VPN kryptowalutą",
+      "anonymousTitle": "Anonimowość z założenia",
+      "anonymousBody": "VPN kupiony kartą jest powiązany z twoim wyciągiem bankowym, nazwiskiem i adresem rozliczeniowym. VPN kupiony za Bitcoina jest powiązany tylko z portfelem — i niczym więcej.",
+      "worksTitle": "Działa, gdy karty zawodzą",
+      "worksBody": "Międzynarodowe płatności kartą są blokowane na granicy w Rosji, Iranie i wielu innych krajach. Bitcoin i stablecoiny nie pytają twojego banku o zgodę.",
+      "permanentTitle": "Bez chargebacków, bez przerw",
+      "permanentBody": "Płatności kryptowalutą są ostateczne — żadnych niespodzianek z wygasłą kartą w podróży, żadnych anulowań przez flagi fraudowe. Zapłać raz i pozostań połączony."
+    },
+    "howItWorks": {
+      "heading": "Jak to działa",
+      "subheading": "Z portfela do połączonego VPN w trzech krokach.",
+      "step1Title": "Wybierz plan",
+      "step1Body": "Otwórz stronę swojego konta Doppler i wybierz miesięczny, półroczny lub roczny.",
+      "step2Title": "Wybierz monetę",
+      "step2Body": "Wybierz Bitcoin, Ethereum, USDT lub USDC. Pokażemy fakturę z dokładną kwotą i adresem portfela.",
+      "step3Title": "Wyślij płatność",
+      "step3Body": "Wyślij z dowolnego portfela. Stablecoiny potwierdzają się w minuty, Bitcoin w około dziesięć. Twój VPN aktywuje się automatycznie — bez e-maila, bez paragonu, bez follow-upu.",
+      "cta": "Rozpocznij checkout kryptowalutowy"
+    },
+    "devices": {
+      "heading": "Działa na wszystkich twoich urządzeniach",
+      "body": "Checkout kryptowalutowy jest dostępny tylko w wersji webowej — Apple i Google wymagają własnych systemów rozliczeniowych w aplikacjach, więc nie możemy akceptować kryptowalut przez App Store lub Google Play. Zamiast tego twoja subskrypcja Doppler jest powiązana z anonimowym ID konta (VPN-XXXX-XXXX-XXXX). Zapłać raz w sieci, a następnie wpisz swój ID konta na iPhone, Android, Mac lub Windows — subskrypcja synchronizuje się wszędzie.",
+      "ios": "iPhone i iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "Najczęstsze pytania",
+      "q1Question": "Czy mogę kupić VPN za Bitcoina?",
+      "q1Answer": "Tak. Doppler akceptuje Bitcoina (BTC) oraz Ethereum (ETH), Tether (USDT) i USD Coin (USDC) w sieci. Wejdź na stronę swojego konta, wybierz plan i wybierz „Płać kryptowalutą”.",
+      "q2Question": "Czy płatność kryptowalutą jest anonimowa?",
+      "q2Answer": "Tak. Nie pytamy o nazwisko, e-mail ani adres rozliczeniowy. Jedynym zarejestrowanym identyfikatorem jest transakcja on-chain twojego portfela, a twoje konto Doppler to losowo wygenerowany ID (VPN-XXXX-XXXX-XXXX), który żyje na twoim urządzeniu.",
+      "q3Question": "Jakie kryptowaluty akceptuje Doppler?",
+      "q3Answer": "BTC, ETH, USDT (TRC20 / ERC20) i USDC (ERC20 / Polygon). Obecnie nie akceptujemy innych monet na stronie.",
+      "q4Question": "Czy mogę płacić kryptowalutą w aplikacji iOS lub Android?",
+      "q4Answer": "Nie. Apple i Google wymagają własnych systemów rozliczeniowych in-app dla subskrypcji cyfrowych, więc checkout kryptowalutowy jest dostępny tylko w sieci. Zapłać raz na stronie Doppler, a następnie wpisz ID konta na dowolnym urządzeniu — subskrypcja synchronizuje się między iPhone, Android, Mac i Windows.",
+      "q5Question": "Ile trwa aktywacja VPN po płatności?",
+      "q5Answer": "Stablecoiny (USDT, USDC) zwykle potwierdzają się w 1–3 minuty. Bitcoin zazwyczaj potrzebuje jednego potwierdzenia sieci, około dziesięciu minut. Po potwierdzeniu płatności subskrypcja aktywuje się automatycznie."
+    },
+    "cta": {
+      "title": "Gotowy na płatność kryptowalutą?",
+      "subtitle": "Otwórz konto, wybierz plan i zapłać anonimowo Bitcoinem, Ethereum, USDT lub USDC.",
+      "primary": "Kup kryptowalutą",
+      "secondary": "Masz pytania? Napisz do @DopplerSupportBot"
     }
   },
   "noRegistrationVpn": {

@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "Platba kryptem",
     "features": "Funkce",
     "pricing": "Ceník",
     "faq": "Časté dotazy",
@@ -190,9 +191,9 @@
         "title": "Chytré VPN směrování",
         "description": "Inteligentní směrování provozu podle země. Automaticky vybere nejlepší cestu přes VPN server pro optimální rychlost a spolehlivost."
       },
-      "adBlocker": {
-        "title": "Vestavěný blokátor reklam",
-        "description": "Blokování reklam na úrovni DNS odstraní přibližně 50 % reklam a sledovacích prvků. Čistější prohlížení s menším množstvím rušivých prvků přímo ve vaší VPN."
+      "cryptoPayment": {
+        "title": "Plaťte Bitcoinem a kryptem",
+        "description": "Anonymní platby VPN přes BTC, ETH, USDT a USDC. Bez karty, beze jména, bez stop — předplatné funguje na všech vašich zařízeních."
       },
       "minimalData": {
         "title": "Přísná politika bez logů",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "Můžete platit i kryptem — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "Zjistit více",
     "title": "Jednoduchý a transparentní ceník",
     "subtitle": "Prémiová ochrana pro všechna vaše zařízení.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "Plaťte anonymně — i z blokovaných regionů",
+      "body": "Když je vaše banka pod dohledem nebo mezinárodní karty nefungují, Bitcoin a stablecoiny fungují dál. Doppler přijímá BTC, ETH, USDT a USDC — bez banky, bez dokladů, bez stop.",
+      "cta": "Platit kryptem",
+      "btc": "Bitcoin",
+      "eth": "Ethereum",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "Průvodce cenzurou internetu — Jak se blokují VPN a jak zůstat připojeni",
       "description": "Technický průvodce o tom, jak vlády blokují VPN a proxy pomocí DPI, TSPU a ML — a jak VLESS-Reality proxy obchází všechny detekční metody. Připravte se na rostoucí omezení."
@@ -1706,6 +1718,80 @@
       "nameLabel": "Společnost",
       "websiteLabel": "Web",
       "contactLabel": "Kontakt"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "Kupte VPN za Bitcoin — Anonymní platba | Doppler VPN",
+      "description": "Zaplaťte Doppler VPN Bitcoinem, Ethereem, USDT nebo USDC. Anonymní krypto checkout, bez karty nebo e-mailu. Funguje na iPhone, Android, Mac a Windows."
+    },
+    "hero": {
+      "title": "Kupte VPN za Bitcoin, Ethereum a stablecoiny",
+      "subtitle": "Plaťte Doppler VPN kryptem. Bez karty, bez e-mailu, bez stop — předplatné je svázáno s anonymním ID účtu, které funguje na každém zařízení.",
+      "cta": "Koupit kryptem"
+    },
+    "coins": {
+      "heading": "Přijímané kryptoměny",
+      "subheading": "Doppler přijímá čtyři nejrozšířenější kryptoměny. Plaťte z libovolné peněženky.",
+      "btcName": "Bitcoin",
+      "btcTicker": "BTC",
+      "btcNetwork": "Síť Bitcoin",
+      "ethName": "Ethereum",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum mainnet",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "Proč platit za VPN kryptem",
+      "anonymousTitle": "Anonymita z principu",
+      "anonymousBody": "VPN koupená kartou je svázána s vaším bankovním záznamem, jménem a fakturační adresou. VPN koupená Bitcoinem je svázána pouze s peněženkou — nic víc.",
+      "worksTitle": "Funguje, když karty ne",
+      "worksBody": "Mezinárodní platby kartou jsou na hranici blokovány v Rusku, Íránu a mnoha dalších zemích. Bitcoin a stablecoiny se vaší banky neptají.",
+      "permanentTitle": "Bez chargebacků, bez výpadků",
+      "permanentBody": "Krypto platby jsou konečné — žádné překvapení s prošlou kartou na cestách, žádné zrušení kvůli podezření z podvodu. Zaplaťte jednou a zůstaňte připojeni."
+    },
+    "howItWorks": {
+      "heading": "Jak to funguje",
+      "subheading": "Od peněženky k připojené VPN ve třech krocích.",
+      "step1Title": "Vyberte plán",
+      "step1Body": "Otevřete stránku svého účtu Doppler a vyberte měsíční, půlroční nebo roční.",
+      "step2Title": "Vyberte minci",
+      "step2Body": "Vyberte Bitcoin, Ethereum, USDT nebo USDC. Zobrazíme fakturu s přesnou částkou a adresou peněženky.",
+      "step3Title": "Odešlete platbu",
+      "step3Body": "Odešlete z libovolné peněženky. Stablecoiny se potvrdí během minut, Bitcoin asi za deset. Vaše VPN se automaticky aktivuje — bez e-mailu, bez účtenky, bez sledování.",
+      "cta": "Krypto checkout"
+    },
+    "devices": {
+      "heading": "Funguje na všech vašich zařízeních",
+      "body": "Krypto checkout je dostupný jen ve webové verzi — Apple a Google vyžadují vlastní fakturační systémy uvnitř aplikací, takže krypto nelze přijímat přes App Store ani Google Play. Vaše předplatné Doppler je místo toho svázáno s anonymním ID účtu (VPN-XXXX-XXXX-XXXX). Zaplaťte jednou na webu a pak zadejte ID účtu na iPhone, Android, Mac nebo Windows — předplatné se synchronizuje všude.",
+      "ios": "iPhone a iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "Často kladené otázky",
+      "q1Question": "Mohu koupit VPN za Bitcoin?",
+      "q1Answer": "Ano. Doppler na webu přijímá Bitcoin (BTC), Ethereum (ETH), Tether (USDT) a USD Coin (USDC). Přejděte na stránku účtu, vyberte plán a zvolte „Platit kryptem“.",
+      "q2Question": "Je platba kryptem skutečně anonymní?",
+      "q2Answer": "Ano. Nežádáme o jméno, e-mail ani fakturační adresu. Jediným zaznamenaným identifikátorem je on-chain transakce vaší peněženky, a váš účet Doppler je náhodně vygenerované ID (VPN-XXXX-XXXX-XXXX), které žije na vašem zařízení.",
+      "q3Question": "Jaké kryptoměny Doppler přijímá?",
+      "q3Answer": "BTC, ETH, USDT (TRC20 / ERC20) a USDC (ERC20 / Polygon). Jiné mince na landing stránce zatím nepřijímáme.",
+      "q4Question": "Mohu platit kryptem v aplikaci iOS nebo Android?",
+      "q4Answer": "Ne. Apple a Google vyžadují vlastní in-app fakturační systémy pro digitální předplatné, takže krypto checkout je dostupný jen na webu. Zaplaťte jednou na stránkách Doppler a pak zadejte ID účtu na jakémkoli zařízení — předplatné se synchronizuje mezi iPhone, Android, Mac a Windows.",
+      "q5Question": "Jak dlouho trvá aktivace VPN po platbě?",
+      "q5Answer": "Stablecoiny (USDT, USDC) se obvykle potvrdí do 1–3 minut. Bitcoin obvykle vyžaduje jedno síťové potvrzení, asi deset minut. Jakmile je platba potvrzena, předplatné se automaticky aktivuje."
+    },
+    "cta": {
+      "title": "Připraveni platit kryptem?",
+      "subtitle": "Otevřete účet, vyberte plán a plaťte anonymně Bitcoinem, Ethereem, USDT nebo USDC.",
+      "primary": "Koupit kryptem",
+      "secondary": "Máte dotazy? Napište @DopplerSupportBot"
     }
   },
   "noRegistrationVpn": {

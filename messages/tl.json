@@ -108,6 +108,7 @@
     }
   },
   "nav": {
+    "payWithCrypto": "Magbayad gamit crypto",
     "features": "Mga Tampok",
     "pricing": "Presyo",
     "faq": "FAQ",
@@ -190,9 +191,9 @@
         "title": "Smart Routing",
         "description": "Matalinong pag-route ng traffic ayon sa bansa. Awtomatikong pinipili ang pinakamainam na server path para sa bilis at reliability batay sa iyong destinasyon."
       },
-      "adBlocker": {
-        "title": "Basic na Ad Blocker",
-        "description": "Ang built-in na DNS-level ad blocking ay binabawasan ang halos 50% ng mga ads at trackers. Mas malinis na browsing na may mas kaunting kalat, handa nang gamitin agad."
+      "cryptoPayment": {
+        "title": "Magbayad gamit ang Bitcoin at crypto",
+        "description": "Anonymous na VPN payments gamit ang BTC, ETH, USDT, at USDC. Walang card, walang pangalan, walang bakas — gumagana ang subscription mo sa lahat ng device."
       },
       "minimalData": {
         "title": "Minimal na Pagkolekta ng Data",
@@ -228,6 +229,8 @@
     }
   },
   "pricing": {
+    "cryptoPaymentNote": "Pwede ring magbayad gamit ang crypto — BTC, ETH, USDT, USDC",
+    "cryptoPaymentLearnMore": "Alamin pa",
     "title": "Simple at transparent na presyo",
     "subtitle": "Premium na proteksyon para sa lahat ng iyong device.",
     "plusBadge": "Doppler Pro",
@@ -1473,6 +1476,15 @@
     }
   },
   "bypassCensorship": {
+    "cryptoPayment": {
+      "title": "Magbayad nang anonymous — kahit sa mga blocked na rehiyon",
+      "body": "Kapag binabantayan ang bangko mo o hindi gumagana ang international cards, patuloy na gumagana ang Bitcoin at stablecoins. Tinatanggap ng Doppler ang BTC, ETH, USDT, at USDC — walang bangko, walang ID, walang bakas.",
+      "cta": "Magbayad gamit crypto",
+      "btc": "Bitcoin",
+      "eth": "Ethereum",
+      "usdt": "Tether",
+      "usdc": "USD Coin"
+    },
     "metadata": {
       "title": "Gabay sa Internet Censorship — Paano Bino-block ang mga VPN at Paano Manatiling Konektado",
       "description": "Teknikal na gabay kung paano bino-block ng mga gobyerno ang mga VPN at proxy gamit ang DPI, TSPU, at ML — at paano binabypass ng VLESS-Reality proxy ang bawat paraan ng detection. Maghanda para sa papaigting na mga restriksyon."
@@ -1706,6 +1718,80 @@
       "nameLabel": "Kumpanya",
       "websiteLabel": "Website",
       "contactLabel": "Makipag-ugnayan"
+    }
+  },
+  "payWithCrypto": {
+    "metadata": {
+      "title": "Bumili ng VPN gamit ang Bitcoin — Anonymous na bayad | Doppler VPN",
+      "description": "Magbayad ng Doppler VPN gamit ang Bitcoin, Ethereum, USDT, o USDC. Anonymous na crypto checkout, walang card o email. Gumagana sa iPhone, Android, Mac, at Windows."
+    },
+    "hero": {
+      "title": "Bumili ng VPN gamit ang Bitcoin, Ethereum, at Stablecoins",
+      "subtitle": "Magbayad ng Doppler VPN gamit crypto. Walang card, walang email, walang bakas — nakakonekta ang subscription mo sa isang anonymous na account ID na gumagana sa bawat device.",
+      "cta": "Bumili gamit crypto"
+    },
+    "coins": {
+      "heading": "Mga Cryptocurrency na Tinatanggap Namin",
+      "subheading": "Tinatanggap ng Doppler ang apat na pinakalaganap na cryptocurrency. Magbayad mula sa anumang wallet.",
+      "btcName": "Bitcoin",
+      "btcTicker": "BTC",
+      "btcNetwork": "Bitcoin network",
+      "ethName": "Ethereum",
+      "ethTicker": "ETH",
+      "ethNetwork": "Ethereum mainnet",
+      "usdtName": "Tether",
+      "usdtTicker": "USDT",
+      "usdtNetwork": "TRC20 · ERC20",
+      "usdcName": "USD Coin",
+      "usdcTicker": "USDC",
+      "usdcNetwork": "ERC20 · Polygon"
+    },
+    "why": {
+      "heading": "Bakit dapat magbayad ng VPN gamit ang crypto",
+      "anonymousTitle": "Anonymous by design",
+      "anonymousBody": "Ang VPN na binili mo gamit card ay nakatali sa bank record, pangalan, at billing address mo. Ang VPN na binili gamit Bitcoin ay nakatali lamang sa wallet — wala nang iba.",
+      "worksTitle": "Gumagana kapag hindi na ang card",
+      "worksBody": "Ang mga international card payment ay na-block sa border sa Russia, Iran, at marami pang bansa. Hindi naghihintay ng pahintulot ng bangko mo ang Bitcoin at stablecoins.",
+      "permanentTitle": "Walang chargeback, walang pagkaputol",
+      "permanentBody": "Final ang crypto payments — walang sorpresang expired card sa biyahe, walang cancellations dahil sa fraud flags. Bayaran mo nang isang beses, konektado ka forever."
+    },
+    "howItWorks": {
+      "heading": "Paano ito gumagana",
+      "subheading": "Mula wallet patungo sa konektadong VPN sa tatlong hakbang.",
+      "step1Title": "Pumili ng plan",
+      "step1Body": "Buksan ang account page ng Doppler at pumili ng monthly, six-month, o yearly.",
+      "step2Title": "Pumili ng coin",
+      "step2Body": "Piliin ang Bitcoin, Ethereum, USDT, o USDC. Ipapakita namin ang invoice na may eksaktong halaga at wallet address.",
+      "step3Title": "Mag-send ng bayad",
+      "step3Body": "Mag-send mula anumang wallet. Nakaconfirm ang stablecoins sa loob ng ilang minuto, Bitcoin mga sampu. Awtomatikong nagi-activate ang VPN mo — walang email, walang resibo, walang follow-up.",
+      "cta": "Crypto checkout"
+    },
+    "devices": {
+      "heading": "Gumagana sa lahat ng device mo",
+      "body": "Available lamang sa web ang crypto checkout — hinihiling ng Apple at Google na gamitin ang kanilang sariling billing system sa loob ng apps, kaya hindi namin matatanggap ang crypto sa pamamagitan ng App Store o Google Play. Sa halip, nakatali ang subscription mo sa Doppler sa isang anonymous na account ID (VPN-XXXX-XXXX-XXXX). Magbayad minsan sa web, pagkatapos ilagay ang account ID sa iPhone, Android, Mac, o Windows — magsi-sync ang subscription kahit saan.",
+      "ios": "iPhone at iPad",
+      "android": "Android",
+      "mac": "macOS",
+      "windows": "Windows"
+    },
+    "faq": {
+      "heading": "Mga madalas itanong",
+      "q1Question": "Pwede ba akong bumili ng VPN gamit Bitcoin?",
+      "q1Answer": "Oo. Tinatanggap ng Doppler ang Bitcoin (BTC) pati ang Ethereum (ETH), Tether (USDT), at USD Coin (USDC) sa web. Pumunta sa account page, pumili ng plan, at piliin ang \"Magbayad gamit crypto\".",
+      "q2Question": "Tunay bang anonymous ang bayad gamit crypto?",
+      "q2Answer": "Oo. Hindi kami nagtatanong ng pangalan, email, o billing address. Ang tanging naka-record na identifier ay ang on-chain transaction ng wallet mo, at ang Doppler account mo ay randomly generated na ID (VPN-XXXX-XXXX-XXXX) na nasa device mo.",
+      "q3Question": "Anong mga cryptocurrencies ang tinatanggap ng Doppler?",
+      "q3Answer": "BTC, ETH, USDT (TRC20 / ERC20), at USDC (ERC20 / Polygon). Hindi pa kami tumatanggap ng ibang coins sa landing page ngayon.",
+      "q4Question": "Pwede ba akong magbayad gamit crypto sa loob ng iOS o Android app?",
+      "q4Answer": "Hindi. Hinihingi ng Apple at Google ang sariling in-app billing nila para sa digital subscriptions, kaya web-only ang crypto checkout. Magbayad minsan sa Doppler website, pagkatapos ilagay ang account ID sa kahit anong device — magsi-sync ang subscription sa iPhone, Android, Mac, at Windows.",
+      "q5Question": "Gaano katagal bago ma-activate ang VPN ko pagkatapos magbayad?",
+      "q5Answer": "Kadalasan ay na-confirm ang stablecoins (USDT, USDC) sa loob ng 1–3 minuto. Karaniwang isang network confirmation ang Bitcoin, mga sampung minuto. Kapag na-confirm ang bayad, awtomatikong na-activate ang subscription mo."
+    },
+    "cta": {
+      "title": "Handa nang magbayad gamit crypto?",
+      "subtitle": "Buksan ang account mo, pumili ng plan, at magbayad nang anonymous gamit ang Bitcoin, Ethereum, USDT, o USDC.",
+      "primary": "Bumili gamit crypto",
+      "secondary": "May tanong? Tanungin ang @DopplerSupportBot"
     }
   },
   "noRegistrationVpn": {
