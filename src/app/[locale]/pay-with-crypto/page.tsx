@@ -142,7 +142,7 @@ export default async function PayWithCryptoPage({ params }: PageProps) {
                 {t("hero.cta")}
                 <ArrowIcon />
               </Link>
-              <span className="text-text-muted text-sm">{t("hero.secondaryNote")}</span>
+
             </div>
           </div>
         </section>
