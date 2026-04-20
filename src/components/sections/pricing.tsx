@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 import { trackGetPro } from "@/lib/track-cta";
 import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
+import { VisaIcon, MastercardIcon } from "@/components/icons/cards";
 
 type Duration = "monthly" | "sixMonth" | "annual";
 
@@ -329,13 +330,20 @@ export function Pricing() {
                   </p>
                 </div>
 
-                {/* Crypto payment note */}
+                {/* Payment methods */}
                 <div className="text-center text-xs text-text-muted mt-4 flex flex-col items-center gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <BtcIcon size={16} />
-                    <EthIcon size={16} />
-                    <UsdtIcon size={16} />
-                    <UsdcIcon size={16} />
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
+                      <VisaIcon width={28} height={18} />
+                      <MastercardIcon width={28} height={18} />
+                    </div>
+                    <div className="w-px h-4 bg-overlay/20" />
+                    <div className="flex items-center gap-1.5">
+                      <BtcIcon size={18} />
+                      <EthIcon size={18} />
+                      <UsdtIcon size={18} />
+                      <UsdcIcon size={18} />
+                    </div>
                   </div>
                   <span>
                     {t("cryptoPaymentNote")}

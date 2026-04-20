@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
+import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 
 /* ─── Feature icons (teal stroke style) ─── */
 const featureIcons: Record<string, React.ReactNode> = {
@@ -62,13 +63,29 @@ function CardCta({ label }: { label: string }) {
   );
 }
 
+/* ─── Crypto coin stack (for the cryptoPayment feature card) ─── */
+function CryptoIconStack() {
+  return (
+    <div className="flex items-center mb-4 h-10">
+      <BtcIcon size={40} className="relative z-40 drop-shadow-sm" />
+      <EthIcon size={40} className="relative z-30 -ms-3 drop-shadow-sm" />
+      <UsdtIcon size={40} className="relative z-20 -ms-3 drop-shadow-sm" />
+      <UsdcIcon size={40} className="relative z-10 -ms-3 drop-shadow-sm" />
+    </div>
+  );
+}
+
 /* ─── Standard feature card ─── */
 function FeatureCard({ featureKey, title, description, ctaLabel }: { featureKey: string; title: string; description: string; ctaLabel?: string }) {
   return (
     <div className="group h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 hover:border-accent-teal/20 transition-colors">
-      <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4">
-        {featureIcons[featureKey]}
-      </div>
+      {featureKey === "cryptoPayment" ? (
+        <CryptoIconStack />
+      ) : (
+        <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4">
+          {featureIcons[featureKey]}
+        </div>
+      )}
       <h3 className="text-lg font-semibold text-text-primary mb-1.5">{title}</h3>
       <p className="text-sm text-text-muted leading-relaxed">{description}</p>
       {ctaLabel && <CardCta label={ctaLabel} />}
