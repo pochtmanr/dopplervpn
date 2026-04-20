@@ -117,7 +117,7 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
     featureList: [
       ft("noRegistration.title"),
       ft("vlessReality.title"),
-      ft("adBlocker.title"),
+      ft("cryptoPayment.title"),
       ft("dnsProtection.title"),
       ft("minimalData.title"),
       ft("smartRouting.title"),
