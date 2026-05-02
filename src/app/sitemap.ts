@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { unstable_cache } from "next/cache";
 import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
@@ -19,6 +20,51 @@ interface SitemapPost {
   updated_at: string | null;
   created_at: string | null;
 }
+
+type PostsByLocale = Record<string, SitemapPost[]>;
+
+// Fetch every published post + its translations once, group by locale, and
+// share the result across all 44 shards via the Next.js data cache.
+//
+// Why: GSC 2026-04-25 crawl reported 14/44 shards "Couldn't fetch". Root
+// cause: Googlebot fetches every shard listed in /sitemap.xml in parallel.
+// On cold ISR each shard ran its own Supabase query (44 round-trips at
+// once) and serialized 45-locale hreflang maps for ~100 posts. Vercel
+// concurrency + per-fetch crawler timeout dropped a chunk of shards.
+// With unstable_cache one query feeds all 44 shards for 24h.
+const fetchPostsByLocale = unstable_cache(
+  async (): Promise<PostsByLocale> => {
+    const supabase = createStaticClient();
+    const { data, error } = await supabase
+      .from("blog_posts")
+      .select("slug, updated_at, created_at, blog_post_translations!inner(locale)")
+      .eq("status", "published");
+
+    if (error) {
+      // Throw so unstable_cache does not memoize a degraded result for 24h.
+      throw new Error(`[sitemap] blog fetch failed: ${error.message}`);
+    }
+
+    // Supabase typegen mistypes one-to-many embeds as a single object on the
+    // parent — the runtime always returns an array (see blog_post page.tsx).
+    type Row = SitemapPost & { blog_post_translations: { locale: string }[] };
+    const byLocale: PostsByLocale = {};
+    for (const row of (data ?? []) as unknown as Row[]) {
+      const post: SitemapPost = {
+        slug: row.slug,
+        updated_at: row.updated_at,
+        created_at: row.created_at,
+      };
+      for (const t of row.blog_post_translations) {
+        if (!byLocale[t.locale]) byLocale[t.locale] = [];
+        byLocale[t.locale].push(post);
+      }
+    }
+    return byLocale;
+  },
+  ["sitemap-blog-posts-by-locale"],
+  { revalidate: 86400, tags: ["sitemap"] }
+);
 
 const staticPages = [
   "",
@@ -104,28 +150,18 @@ export default async function sitemap({
   const locale = routing.locales[id];
   if (!locale) return [];
 
-  const supabase = createStaticClient();
   const localeHasBlog = isBlogLocale(locale);
 
   let posts: SitemapPost[] = [];
   if (localeHasBlog) {
     try {
-      // Strict join: only emit URLs for posts that have a translation in
-      // this locale. A post without a target-locale translation will 404
-      // under that path, and listing 404s in a sitemap is a quality hit.
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .select("slug, updated_at, created_at, blog_post_translations!inner(locale)")
-        .eq("status", "published")
-        .eq("blog_post_translations.locale", locale);
-
-      if (error) {
-        console.error("[sitemap] blog fetch failed:", error);
-      } else {
-        posts = (data as SitemapPost[] | null) ?? [];
-      }
+      const byLocale = await fetchPostsByLocale();
+      posts = byLocale[locale] ?? [];
     } catch (err) {
-      console.error("[sitemap] blog fetch threw:", err);
+      // Degrade to static-only entries rather than 500ing the shard.
+      // A 500 makes Google retry the whole sitemap; an emptier-than-usual
+      // 200 just suppresses blog URLs for one ISR cycle.
+      console.error("[sitemap] falling back to static-only entries:", err);
     }
   }
 
