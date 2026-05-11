@@ -78,6 +78,7 @@ const staticPages = [
   "/support",
   "/about",
   "/bypass-censorship",
+  "/giveaway",
   "/no-registration-vpn",
   "/pay-with-crypto",
   "/vless-vpn",

@@ -64,6 +64,56 @@ const URLS = {
   windowsArm64: "/api/windows/download/DopplerVPN-1.0.0-arm64-Setup.exe",
 };
 
+/* ── Release Updates ─────────────────────────────────────────────── */
+// Shown as a small "Last updated: <date>" subtitle under each download button.
+// To register a new release: bump the date below. To attach a release note,
+// add a discriminator (e.g. "performanceFix") + a matching translation key
+// `releaseNotePerformanceFix` in messages/*.json, then add a branch in
+// UpdateInfo below to render it.
+
+type Release = {
+  date: string;
+  note: "connectionFix" | null;
+  status?: "review";
+};
+
+const RELEASES: Record<"ios" | "android" | "mac" | "windows", Release> = {
+  ios:     { date: "2026-04-08", note: null },
+  android: { date: "2026-05-03", note: null },
+  mac:     { date: "2026-05-11", note: "connectionFix", status: "review" },
+  windows: { date: "2026-05-11", note: "connectionFix" },
+};
+
+function UpdateInfo({
+  release,
+  locale,
+  t,
+}: {
+  release: Release;
+  locale: string;
+  t: (key: string) => string;
+}) {
+  const formatted = new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+    new Date(release.date),
+  );
+  return (
+    <div className="mt-3 leading-snug">
+      <p className="text-xs">
+        <span className="text-text-muted/60">{t("lastUpdated")}: </span>
+        <span className="text-text-muted">{formatted}</span>
+        {release.status === "review" && (
+          <span className="text-accent-gold/90"> · {t("statusPendingReview")}</span>
+        )}
+      </p>
+      {release.note === "connectionFix" && (
+        <p className="mt-1 text-xs text-text-muted/70">
+          {t("releaseNoteConnectionFix")}
+        </p>
+      )}
+    </div>
+  );
+}
+
 /* ── Icons ────────────────────────────────────────────────────────── */
 
 function AppleIcon({ className = "w-6 h-6" }: { className?: string }) {
@@ -170,6 +220,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                 {t("ios.button")}
               </TrackedDownloadLink>
 
+              <UpdateInfo release={RELEASES.ios} locale={locale} t={t} />
+
               <SetupSteps
                 steps={[t("ios.step1"), t("ios.step2"), t("ios.step3"), t("ios.step4")]}
               />
@@ -207,6 +259,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                 {t("android.buttonPlayStore")}
               </TrackedDownloadLink>
 
+              <UpdateInfo release={RELEASES.android} locale={locale} t={t} />
+
               <SetupSteps
                 steps={[t("android.step1"), t("android.step2"), t("android.step3"), t("android.step4")]}
               />
@@ -242,6 +296,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                 <DownloadIcon className="w-4 h-4" />
                 {t("mac.button")}
               </TrackedDownloadLink>
+
+              <UpdateInfo release={RELEASES.mac} locale={locale} t={t} />
 
               <SetupSteps
                 steps={[t("mac.step1"), t("mac.step2"), t("mac.step3"), t("mac.step4")]}
@@ -289,6 +345,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                 <DownloadIcon className="w-4 h-4" />
                 {t("windows.buttonArm64")}
               </TrackedDownloadLink>
+
+              <UpdateInfo release={RELEASES.windows} locale={locale} t={t} />
 
               <SetupSteps
                 steps={[t("windows.step1"), t("windows.step2"), t("windows.step3"), t("windows.step4")]}

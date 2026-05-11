@@ -1,5 +1,6 @@
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 import { HeroCTAsWrapper } from "@/components/hero/hero-ctas-wrapper";
 import { HeroParallax } from "@/components/hero/hero-parallax";
 
@@ -24,11 +25,15 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="space-y-6 text-center lg:text-start">
-            {/* Tagline Badge */}
+            {/* Giveaway CTA chip — replaces the old tagline. Remove when the giveaway ends. */}
             <div className="hero-animate">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-accent-teal/10 text-accent-teal border border-accent-teal/20">
-                {t("tagline")}
-              </span>
+              <Link
+                href="/giveaway"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-accent-teal/10 text-accent-teal border border-accent-teal/20 hover:bg-accent-teal/20 hover:border-accent-teal/40 hover:text-accent-gold transition-colors"
+              >
+                {t("giveawayChip")}
+                <span className="inline-block rtl:-scale-x-100" aria-hidden="true">→</span>
+              </Link>
             </div>
 
             {/* Headline — server-rendered, no hydration delay */}
