@@ -53,10 +53,11 @@ function CryptoIcon() {
 
 interface CheckoutFormProps {
   accountId: string | null;
+  initialPlan?: PlanId;
 }
 
-export function CheckoutForm({ accountId }: CheckoutFormProps) {
-  const [selectedPlan, setSelectedPlan] = useState<PlanId>('yearly');
+export function CheckoutForm({ accountId, initialPlan = 'yearly' }: CheckoutFormProps) {
+  const [selectedPlan, setSelectedPlan] = useState<PlanId>(initialPlan);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
