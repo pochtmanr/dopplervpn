@@ -1,5 +1,5 @@
 export { Hero } from "./hero";
-export { TrustIndicators } from "./trust-indicators";
+export { PlatformsAvailable } from "./platforms-available";
 export { Features } from "./features";
 export { CensorshipResistance } from "./censorship-resistance";
 export { UseCases } from "./use-cases";

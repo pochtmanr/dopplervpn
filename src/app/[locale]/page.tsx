@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { FAQSchema } from "@/components/seo/json-ld";
 import {
   Hero,
-  TrustIndicators,
+  PlatformsAvailable,
   Features,
   CensorshipResistance,
   UseCases,
@@ -136,7 +136,7 @@ export default async function HomePage({ params }: PageProps) {
       <FAQSchema items={faqItems} />
       <main className="overflow-x-hidden">
         <Hero />
-        <TrustIndicators />
+        <PlatformsAvailable />
         <TechnicalHowItWorks />
         <Features />
         <SpeedComparison />
