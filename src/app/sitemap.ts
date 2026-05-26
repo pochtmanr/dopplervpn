@@ -86,7 +86,35 @@ const staticPages = [
   "/vpn-for-android",
   "/vpn-for-macos",
   "/vpn-for-windows",
+  // SEO long-tail landing pages
+  "/vpn-for-uae",
+  "/vpn-for-iran",
+  "/vpn-for-china",
+  "/vpn-for-russia",
+  "/vpn-for-turkey",
+  "/vpn-for-telegram-calls-uae",
+  "/vpn-for-whatsapp-calls-uae",
+  "/vpn-for-instagram-russia",
+  "/vpn-for-travelers-china",
+  "/vpn-for-tiktok-ban",
+  "/vpn-for-public-wifi-iphone",
+  "/vless-vpn-android",
 ];
+
+const seoLandingPages = new Set([
+  "/vpn-for-uae",
+  "/vpn-for-iran",
+  "/vpn-for-china",
+  "/vpn-for-russia",
+  "/vpn-for-turkey",
+  "/vpn-for-telegram-calls-uae",
+  "/vpn-for-whatsapp-calls-uae",
+  "/vpn-for-instagram-russia",
+  "/vpn-for-travelers-china",
+  "/vpn-for-tiktok-ban",
+  "/vpn-for-public-wifi-iphone",
+  "/vless-vpn-android",
+]);
 
 function buildAlternates(path: string) {
   return {
@@ -126,6 +154,7 @@ function priorityFor(page: string): number {
     ].includes(page)
   )
     return 0.7;
+  if (seoLandingPages.has(page)) return 0.7;
   if (page === "/support" || page === "/about") return 0.6;
   return 0.5;
 }
