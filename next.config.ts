@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["next-intl"],
   },
+  async rewrites() {
+    return [
+      // /sitemap.xml is the canonical URL referenced by robots.ts + GSC, but
+      // serving it from src/app/sitemap.xml/route.ts conflicts in dev with
+      // sitemap.ts's metadata route (both share the `sitemap.xml` segment).
+      // The custom index handler lives at /sitemap-index and is rewritten
+      // here so the public URL stays /sitemap.xml.
+      { source: "/sitemap.xml", destination: "/sitemap-index" },
+    ];
+  },
   async redirects() {
     return [
       {

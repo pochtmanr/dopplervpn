@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema, ArticleSchema, FAQSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 
@@ -143,10 +143,17 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
           { name: t("hero.title"), url: `${baseUrl}/${locale}/bypass-censorship` },
         ]}
       />
+      <WebPageSchema
+        url={`${baseUrl}/${locale}/bypass-censorship`}
+        name={mt("title")}
+        description={mt("description")}
+      />
       <ArticleSchema
         headline={mt("title")}
         description={mt("description")}
         url={`${baseUrl}/${locale}/bypass-censorship`}
+        datePublished="2026-03-11"
+        dateModified="2026-04-20"
       />
       <FAQSchema
         items={faqKeys.map((key) => ({

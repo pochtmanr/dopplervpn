@@ -6,7 +6,7 @@ import { SupportFaq } from "./faq";
 import { SupportContent } from "./support-content";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { FAQSchema, BreadcrumbSchema } from "@/components/seo/json-ld";
+import { FAQSchema, BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -104,6 +104,11 @@ export default async function SupportPage({ params }: PageProps) {
           { name: "Home", url: `${baseUrl}/${locale}` },
           { name: t("title"), url: `${baseUrl}/${locale}/support` },
         ]}
+      />
+      <WebPageSchema
+        url={`${baseUrl}/${locale}/support`}
+        name={t("title")}
+        description={t("subtitle")}
       />
       <Navbar />
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">

@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema, ArticleSchema, FAQSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 
 interface PageProps {
@@ -108,10 +108,16 @@ export default async function PayWithCryptoPage({ params }: PageProps) {
           { name: t("hero.title"), url: `${baseUrl}/${locale}/pay-with-crypto` },
         ]}
       />
+      <WebPageSchema
+        url={`${baseUrl}/${locale}/pay-with-crypto`}
+        name={mt("title")}
+        description={mt("description")}
+      />
       <ArticleSchema
         headline={mt("title")}
         description={mt("description")}
         url={`${baseUrl}/${locale}/pay-with-crypto`}
+        datePublished="2026-04-20"
       />
       <FAQSchema
         items={faqKeys.map((key) => ({

@@ -21,6 +21,7 @@ export default async function Page({ params }: PageProps) {
       slug={SLUG}
       namespace={NAMESPACE}
       primaryPlatform="android"
+      datePublished="2026-05-26"
       related={[
         { href: "/vless-vpn", titleKey: "vlessTitle", descKey: "vlessDesc" },
         { href: "/vpn-for-android", titleKey: "androidTitle", descKey: "androidDesc" },

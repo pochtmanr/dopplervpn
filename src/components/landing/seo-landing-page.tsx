@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
-import { BreadcrumbSchema, FAQSchema, ArticleSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import type { CtaLocation } from "@/lib/track-cta";
 
@@ -42,6 +42,12 @@ export interface SeoLandingPageProps {
   stepCount?: number;
   /** Up to 3 internal links shown above the final CTA. */
   related: RelatedLink[];
+  /** ISO 8601 date the page first shipped (e.g. "2026-05-26"). Required so
+   *  ArticleSchema emits a real freshness signal — never default. */
+  datePublished: string;
+  /** ISO 8601 date of the most recent material content change. Defaults to
+   *  `datePublished`. Bump when the user-visible copy changes. */
+  dateModified?: string;
 }
 
 function ShieldIcon() {
@@ -168,6 +174,8 @@ export async function SeoLandingPage({
   faqCount = 6,
   stepCount = 4,
   related,
+  datePublished,
+  dateModified,
 }: SeoLandingPageProps) {
   setRequestLocale(locale);
   const t = await getTranslations(namespace);
@@ -186,7 +194,18 @@ export async function SeoLandingPage({
           { name: t("hero.title"), url: pageUrl },
         ]}
       />
-      <ArticleSchema headline={mt("title")} description={mt("description")} url={pageUrl} />
+      <WebPageSchema
+        url={pageUrl}
+        name={mt("title")}
+        description={mt("description")}
+      />
+      <ArticleSchema
+        headline={mt("title")}
+        description={mt("description")}
+        url={pageUrl}
+        datePublished={datePublished}
+        dateModified={dateModified}
+      />
       <FAQSchema
         items={faqKeys.map((key) => ({
           question: t(`faq.${key}.question`),

@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema, ArticleSchema, FAQSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { Link } from "@/i18n/navigation";
 
@@ -136,10 +136,17 @@ export default async function VlessVpnPage({ params }: PageProps) {
           { name: t("hero.title"), url: `${baseUrl}/${locale}/vless-vpn` },
         ]}
       />
+      <WebPageSchema
+        url={`${baseUrl}/${locale}/vless-vpn`}
+        name={mt("title")}
+        description={mt("description")}
+      />
       <ArticleSchema
         headline={mt("title")}
         description={mt("description")}
         url={`${baseUrl}/${locale}/vless-vpn`}
+        datePublished="2026-03-11"
+        dateModified="2026-04-02"
       />
       <FAQSchema
         items={faqKeys.map((key) => ({

@@ -1,5 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import { ogLocaleMap } from "@/lib/og-locale-map";
+import { RATING_DATA } from "@/lib/ratings";
+
+const aggregateRating = RATING_DATA
+  ? {
+      "@type": "AggregateRating",
+      ratingValue: RATING_DATA.ratingValue,
+      ratingCount: RATING_DATA.ratingCount,
+      bestRating: RATING_DATA.bestRating,
+      worstRating: RATING_DATA.worstRating,
+    }
+  : undefined;
 
 /** Escape closing script tags to prevent XSS when injecting JSON into <script> */
 function safeJsonLd(obj: unknown): string {
@@ -42,7 +53,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
   const t = await getTranslations({ locale, namespace: "metadata" });
   const pt = await getTranslations({ locale, namespace: "pricing" });
 
-  const schema = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: "Doppler VPN",
@@ -52,6 +63,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
       "@type": "Brand",
       name: "Doppler VPN",
     },
+    ...(aggregateRating ? { aggregateRating } : {}),
     offers: [
       {
         "@type": "Offer",
@@ -100,7 +112,7 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
   const t = await getTranslations({ locale, namespace: "metadata" });
   const ft = await getTranslations({ locale, namespace: "features.items" });
 
-  const schema = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     name: "Doppler VPN",
@@ -111,9 +123,11 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
     inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
     offers: {
       "@type": "Offer",
-      price: "0",
+      price: "7.99",
       priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
     },
+    ...(aggregateRating ? { aggregateRating } : {}),
     featureList: [
       ft("noRegistration.title"),
       ft("vlessReality.title"),
@@ -217,6 +231,51 @@ export function FAQSchema({ items }: FAQSchemaProps) {
   );
 }
 
+interface WebPageSchemaProps {
+  url: string;
+  name: string;
+  description: string;
+  /** Optional — when omitted, the page is implicitly part of the WebSite
+   *  defined by `WebsiteSchema`. Pass a different URL to associate the page
+   *  with a sub-collection (e.g. the blog index) for cleaner entity graphs. */
+  isPartOf?: string;
+  /** Use "CollectionPage" for index/listing pages (blog, downloads) to
+   *  match the entity Google expects. Defaults to "WebPage". */
+  type?: "WebPage" | "CollectionPage";
+  inLanguage?: string;
+}
+
+export function WebPageSchema({
+  url,
+  name,
+  description,
+  isPartOf,
+  type = "WebPage",
+  inLanguage,
+}: WebPageSchemaProps) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": url,
+    url,
+    name,
+    description,
+    ...(inLanguage ? { inLanguage } : {}),
+    isPartOf: {
+      "@type": "WebSite",
+      url: isPartOf ?? "https://www.dopplervpn.org",
+      name: "Doppler VPN",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(schema) }}
+    />
+  );
+}
+
 export async function WebsiteSchema({ locale }: LocaleProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -243,18 +302,22 @@ interface ArticleSchemaProps {
   headline: string;
   description: string;
   url: string;
-  image?: string;
-  datePublished?: string;
+  /** ISO 8601 date (e.g. "2026-05-26"). Required — schemas with stale/fake
+   *  dates poison freshness signals for YMYL content. */
+  datePublished: string;
+  /** Defaults to `datePublished` when omitted. Bump whenever the page's
+   *  user-visible content materially changes. */
   dateModified?: string;
+  image?: string;
 }
 
 export function ArticleSchema({
   headline,
   description,
   url,
+  datePublished,
+  dateModified,
   image = "https://www.dopplervpn.org/images/og-banner.jpg",
-  datePublished = "2026-04-01",
-  dateModified = "2026-04-01",
 }: ArticleSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -263,7 +326,7 @@ export function ArticleSchema({
     description,
     image,
     datePublished,
-    dateModified,
+    dateModified: dateModified ?? datePublished,
     author: {
       "@type": "Organization",
       name: "Doppler VPN",

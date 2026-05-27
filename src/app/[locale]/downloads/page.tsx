@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 interface PageProps {
@@ -179,6 +179,12 @@ export default async function DownloadsPage({ params }: PageProps) {
           { name: "Home", url: `${baseUrl}/${locale}` },
           { name: t("title"), url: `${baseUrl}/${locale}/downloads` },
         ]}
+      />
+      <WebPageSchema
+        url={`${baseUrl}/${locale}/downloads`}
+        name={t("title")}
+        description={t("subtitle")}
+        type="CollectionPage"
       />
       <Navbar />
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">

@@ -57,6 +57,14 @@ export async function Footer() {
     { href: "/vpn-for-android", label: t("vpnForAndroid") },
   ];
 
+  const locationLinks: LinkItem[] = [
+    { href: "/vpn-for-uae", label: t("vpnForUae") },
+    { href: "/vpn-for-iran", label: t("vpnForIran") },
+    { href: "/vpn-for-china", label: t("vpnForChina") },
+    { href: "/vpn-for-russia", label: t("vpnForRussia") },
+    { href: "/vpn-for-turkey", label: t("vpnForTurkey") },
+  ];
+
   const supportLinks: LinkItem[] = [
     { href: "/support", label: t("helpCenter") },
     { href: "/about", label: t("about") },
@@ -82,7 +90,7 @@ export async function Footer() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Desktop layout — md and up */}
-        <div className="hidden md:grid grid-cols-5 gap-12">
+        <div className="hidden md:grid grid-cols-6 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2">
             <Link href="/" className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
@@ -126,6 +134,12 @@ export async function Footer() {
           <div>
             <h3 className="font-semibold text-text-primary mb-4">{t("product")}</h3>
             <LinkList links={productLinks} />
+          </div>
+
+          {/* Locations */}
+          <div>
+            <h3 className="font-semibold text-text-primary mb-4">{t("locationsHeading")}</h3>
+            <LinkList links={locationLinks} />
           </div>
 
           {/* Support */}
@@ -237,6 +251,16 @@ export async function Footer() {
             </summary>
             <div className="pt-3 pb-1">
               <LinkList links={productLinks} />
+            </div>
+          </details>
+
+          <details className="group border-t border-overlay/5 pt-4">
+            <summary className="flex items-center justify-between cursor-pointer list-none font-semibold text-text-primary py-2">
+              <span>{t("locationsHeading")}</span>
+              <ChevronDown className="ms-2 group-open:rotate-180" />
+            </summary>
+            <div className="pt-3 pb-1">
+              <LinkList links={locationLinks} />
             </div>
           </details>
 

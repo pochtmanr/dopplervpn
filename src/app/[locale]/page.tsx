@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { FAQSchema } from "@/components/seo/json-ld";
+import { FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import {
   Hero,
   PlatformsAvailable,
@@ -120,9 +120,10 @@ export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [posts, t] = await Promise.all([
+  const [posts, t, mt] = await Promise.all([
     getLatestPosts(locale),
     getTranslations({ locale, namespace: "faq" }),
+    getTranslations({ locale, namespace: "metadata" }),
   ]);
 
   const faqItems = faqKeys.map((key) => ({
@@ -133,6 +134,11 @@ export default async function HomePage({ params }: PageProps) {
   return (
     <>
       <Navbar />
+      <WebPageSchema
+        url={`https://www.dopplervpn.org/${locale}`}
+        name={mt("title")}
+        description={mt("description")}
+      />
       <FAQSchema items={faqItems} />
       <main className="overflow-x-hidden">
         <Hero />

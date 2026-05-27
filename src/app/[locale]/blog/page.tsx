@@ -6,7 +6,7 @@ import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section, SectionHeader } from "@/components/ui/section";
-import { BreadcrumbSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
 
@@ -226,6 +226,12 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
           { name: t("breadcrumb.home"), url: `${baseUrl}/${locale}` },
           { name: t("title"), url: `${baseUrl}/${locale}/blog` },
         ]}
+      />
+      <WebPageSchema
+        url={`${baseUrl}/${locale}/blog`}
+        name={t("title")}
+        description={t("subtitle")}
+        type="CollectionPage"
       />
       <Navbar />
       <main className="min-h-screen pt-20">

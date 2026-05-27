@@ -20,6 +20,7 @@ export default async function Page({ params }: PageProps) {
       locale={locale}
       slug={SLUG}
       namespace={NAMESPACE}
+      datePublished="2026-05-26"
       related={[
         { href: "/vpn-for-uae", titleKey: "uaeHubTitle", descKey: "uaeHubDesc" },
         { href: "/vpn-for-whatsapp-calls-uae", titleKey: "whatsappCallsTitle", descKey: "whatsappCallsDesc" },
