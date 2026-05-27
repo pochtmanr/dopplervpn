@@ -167,7 +167,14 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
               aria-haspopup="true"
               aria-controls="language-panel"
             >
-              <img src={getFlagUrl(currentLang.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover" />
+              <img
+                src={getFlagUrl(currentLang.countryCode)}
+                alt=""
+                width={20}
+                height={20}
+                decoding="async"
+                className="w-5 h-5 rounded-full object-cover"
+              />
               <span>{currentLang.label}</span>
               <svg
                 className={`w-3 h-3 transition-transform duration-200 ${
@@ -236,7 +243,15 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
                       aria-label={`Switch to ${config.name}`}
                     >
                       {config.countryCode && (
-                        <img src={getFlagUrl(config.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover shrink-0" />
+                        <img
+                          src={getFlagUrl(config.countryCode)}
+                          alt=""
+                          width={20}
+                          height={20}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-5 h-5 rounded-full object-cover shrink-0"
+                        />
                       )}
                       <span className="font-medium truncate">{config.name}</span>
                       {isActive && (

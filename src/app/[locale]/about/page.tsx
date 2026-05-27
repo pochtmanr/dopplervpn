@@ -5,6 +5,7 @@ import { BreadcrumbSchema } from "@/components/seo/json-ld";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section } from "@/components/ui/section";
+import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -167,7 +168,9 @@ export default async function AboutPage({ params }: Props) {
                 <dt className="text-text-muted font-medium min-w-[120px]">
                   {t("company.contactLabel")}
                 </dt>
-                <dd className="text-text-primary">support@simnetiq.store</dd>
+                <dd className="text-text-primary">
+                  <ObfuscatedEmail user="support" domain="simnetiq.store" />
+                </dd>
               </div>
             </dl>
           </div>

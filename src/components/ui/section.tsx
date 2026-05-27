@@ -28,6 +28,7 @@ interface SectionHeaderProps {
   subtitle?: string;
   centered?: boolean;
   className?: string;
+  headingLevel?: "h2" | "h3";
 }
 
 export function SectionHeader({
@@ -35,14 +36,16 @@ export function SectionHeader({
   subtitle,
   centered = true,
   className = "",
+  headingLevel = "h2",
 }: SectionHeaderProps) {
+  const Heading = headingLevel;
   return (
     <div
       className={`mb-12 md:mb-16 ${centered ? "text-center" : ""} ${className}`}
     >
-      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-4">
+      <Heading className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-4">
         {title}
-      </h2>
+      </Heading>
       {subtitle && (
         <p className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto">
           {subtitle}

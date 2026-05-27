@@ -9,7 +9,7 @@ export function ComparisonTable() {
 
   return (
     <Section id="comparison">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
 
       <Reveal>
         <div className="overflow-x-auto rounded-2xl border border-overlay/10">

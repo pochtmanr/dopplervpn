@@ -37,7 +37,7 @@ export function UseCases() {
 
   return (
     <Section id="use-cases">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.map(({ key, icon }, i) => (

@@ -33,12 +33,16 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-// Rubik - Google Sans alternative for Cyrillic locales (ru, uk)
+// Rubik - Google Sans alternative for Cyrillic locales (ru, uk, bg).
+// preload: false because only 3 of 21 locales apply rubik.variable; for the
+// other 18 the preload hint would be a wasted request. Cyrillic pages still
+// load the font via CSS at parse time, just without the <link rel="preload">.
 const rubik = Rubik({
   subsets: ["latin", "cyrillic"],
   variable: "--font-rubik",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
+  preload: false,
 });
 
 

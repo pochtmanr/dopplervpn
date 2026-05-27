@@ -35,7 +35,15 @@ function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<t
     <div className="group rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
-          <img src={getFlagUrl(location.countryCode)} alt={location.country} className="w-8 h-8 rounded-full object-cover" />
+          <img
+            src={getFlagUrl(location.countryCode)}
+            alt={location.country}
+            width={32}
+            height={32}
+            loading="lazy"
+            decoding="async"
+            className="w-8 h-8 rounded-full object-cover"
+          />
           <div>
             <h3 className="text-base font-semibold text-text-primary">
               {location.city}
@@ -62,7 +70,7 @@ export function Servers() {
 
   return (
     <Section id="servers">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {serverLocations.map((location, i) => (

@@ -39,9 +39,9 @@ export function PlatformsAvailable() {
             <p className="text-xs uppercase tracking-wider text-text-tertiary mb-1">
               {t("eyebrow")}
             </p>
-            <h2 className="text-lg md:text-xl text-text-primary font-medium">
+            <h3 className="text-lg md:text-xl text-text-primary font-medium">
               {t("title")}
-            </h2>
+            </h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {platforms.map(({ key, href, store, icon }) => (

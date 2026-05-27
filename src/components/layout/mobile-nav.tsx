@@ -142,7 +142,14 @@ export function MobileNav() {
             aria-controls="mobile-language-list"
           >
             <span className="flex items-center gap-2">
-              <img src={getFlagUrl(currentLang.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover" />
+              <img
+                src={getFlagUrl(currentLang.countryCode)}
+                alt=""
+                width={20}
+                height={20}
+                decoding="async"
+                className="w-5 h-5 rounded-full object-cover"
+              />
               {currentLang.name}
             </span>
             <svg
@@ -181,7 +188,15 @@ export function MobileNav() {
                       aria-label={`Switch to ${config.name}`}
                     >
                       {config.countryCode && (
-                        <img src={getFlagUrl(config.countryCode)} alt="" className="w-5 h-5 rounded-full object-cover shrink-0" />
+                        <img
+                          src={getFlagUrl(config.countryCode)}
+                          alt=""
+                          width={20}
+                          height={20}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-5 h-5 rounded-full object-cover shrink-0"
+                        />
                       )}
                       <span className="font-medium truncate">{config.name}</span>
                       {isActive && (

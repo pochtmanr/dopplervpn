@@ -7,6 +7,7 @@ import { SupportContent } from "./support-content";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { FAQSchema, BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
+import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -209,18 +210,19 @@ export default async function SupportPage({ params }: PageProps) {
                   </div>
                 </a>
 
-                <a
-                  href="mailto:support@simnetiq.store"
-                  className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 p-4 transition-all"
-                >
+                <div className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 p-4 transition-all">
                   <div className="w-10 h-10 rounded-xl bg-accent-teal/15 border border-accent-teal/25 flex items-center justify-center text-accent-teal shrink-0">
                     <EmailIcon />
                   </div>
                   <div>
                     <div className="text-sm font-medium text-text-primary">{t("contact.email")}</div>
-                    <div className="text-xs text-text-muted">{t("contact.emailAddress")}</div>
+                    <ObfuscatedEmail
+                      user="support"
+                      domain="simnetiq.store"
+                      className="text-xs text-text-muted hover:text-accent-teal transition-colors"
+                    />
                   </div>
-                </a>
+                </div>
 
                 <p className="text-xs text-text-muted/70 text-center pt-2">
                   {t("contact.responseTime")}

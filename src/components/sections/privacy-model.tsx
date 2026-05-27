@@ -33,7 +33,7 @@ export function PrivacyModel() {
 
   return (
     <Section id="privacy-model">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.map((key, i) => (
