@@ -2,6 +2,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DopplerLogo } from "./doppler-logo";
 import { CookieSettingsButton } from "./cookie-settings-button";
+import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import { isBlogLocale } from "@/i18n/blog-locales";
 
 type LinkItem = { href: string; label: string };
@@ -44,6 +45,9 @@ export async function Footer() {
   const t = await getTranslations("footer");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
+  // Tools ship English-only until the namespaces are hand-translated
+  // (see /[locale]/tools/page.tsx generateStaticParams).
+  const showToolsLink = locale === "en";
   const currentYear = new Date().getFullYear();
 
   const productLinks: LinkItem[] = [
@@ -55,6 +59,7 @@ export async function Footer() {
     { href: "/no-registration-vpn", label: t("noRegistration") },
     { href: "/vpn-for-ios", label: t("vpnForIos") },
     { href: "/vpn-for-android", label: t("vpnForAndroid") },
+    ...(showToolsLink ? [{ href: "/tools", label: t("tools") }] : []),
   ];
 
   const locationLinks: LinkItem[] = [
@@ -171,13 +176,11 @@ export async function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="mailto:support@simnetiq.store"
+                <ObfuscatedEmail
+                  user="support"
+                  domain="simnetiq.store"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm"
-                  dir="ltr"
-                >
-                  {t("email")}
-                </a>
+                />
               </li>
             </ul>
           </div>
@@ -317,13 +320,11 @@ export async function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="mailto:support@simnetiq.store"
+                <ObfuscatedEmail
+                  user="support"
+                  domain="simnetiq.store"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm"
-                  dir="ltr"
-                >
-                  {t("email")}
-                </a>
+                />
               </li>
             </ul>
           </details>

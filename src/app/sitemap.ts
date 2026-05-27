@@ -99,7 +99,19 @@ const staticPages = [
   "/vpn-for-tiktok-ban",
   "/vpn-for-public-wifi-iphone",
   "/vless-vpn-android",
+  // Free privacy tools (passive backlink magnets)
+  "/tools",
+  "/tools/what-is-my-ip",
+  "/tools/webrtc-leak-test",
+  "/tools/dns-leak-test",
 ];
+
+const toolPages = new Set([
+  "/tools",
+  "/tools/what-is-my-ip",
+  "/tools/webrtc-leak-test",
+  "/tools/dns-leak-test",
+]);
 
 const seoLandingPages = new Set([
   "/vpn-for-uae",
@@ -122,6 +134,18 @@ function buildAlternates(path: string) {
       ...routing.locales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
       ["x-default", `${baseUrl}/en${path}`],
     ]),
+  };
+}
+
+// Tools currently ship only in English (see /[locale]/tools/page.tsx and the
+// Phase 2.3 localization backlog). Don't advertise alternate-locale URLs
+// the build doesn't actually generate.
+function buildEnOnlyAlternates(path: string) {
+  return {
+    languages: {
+      en: `${baseUrl}/en${path}`,
+      "x-default": `${baseUrl}/en${path}`,
+    },
   };
 }
 
@@ -155,6 +179,7 @@ function priorityFor(page: string): number {
   )
     return 0.7;
   if (seoLandingPages.has(page)) return 0.7;
+  if (toolPages.has(page)) return 0.8;
   if (page === "/support" || page === "/about") return 0.6;
   return 0.5;
 }
@@ -200,13 +225,25 @@ export default async function sitemap({
     // /:locale/blog to /en/blog for those, so listing them would advertise
     // redirects rather than canonical URLs.
     .filter((page) => page !== "/blog" || localeHasBlog)
-    .map((page) => ({
-      url: `${baseUrl}/${locale}${page}`,
-      lastModified: BUILD_TIME,
-      changeFrequency: changeFreqFor(page),
-      priority: priorityFor(page),
-      alternates: page === "/blog" ? buildBlogAlternates(page) : buildAlternates(page),
-    }));
+    // Tools are English-only for now; non-EN locale URLs don't exist.
+    .filter((page) => !toolPages.has(page) || locale === "en")
+    .map((page) => {
+      let alternates;
+      if (page === "/blog") {
+        alternates = buildBlogAlternates(page);
+      } else if (toolPages.has(page)) {
+        alternates = buildEnOnlyAlternates(page);
+      } else {
+        alternates = buildAlternates(page);
+      }
+      return {
+        url: `${baseUrl}/${locale}${page}`,
+        lastModified: BUILD_TIME,
+        changeFrequency: changeFreqFor(page),
+        priority: priorityFor(page),
+        alternates,
+      };
+    });
 
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => {
     const lastmodSource = post.updated_at ?? post.created_at;
