@@ -8,6 +8,12 @@ import type { CtaLocation } from "@/lib/track-cta";
 
 const baseUrl = "https://www.dopplervpn.org";
 
+// Locales that have q7/q8/q9 translated. Until a locale lands in this set
+// the page renders the legacy 6 FAQ items even if the caller asks for more,
+// avoiding next-intl MISSING_MESSAGE errors on the non-EN builds. Bump as
+// translations land (Phase 2.3).
+const EXPANDED_FAQ_LOCALES = new Set(["en"]);
+
 const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
@@ -171,7 +177,10 @@ export async function SeoLandingPage({
   namespace,
   primaryPlatform = "all",
   featureCount = 4,
-  faqCount = 6,
+  // 9 hits the AI-Overview fan-out density target without diluting page focus
+  // (blueprint section 2.1 — 540-word grounding window). Pages with fewer
+  // FAQ keys should pass their own faqCount explicitly.
+  faqCount = 9,
   stepCount = 4,
   related,
   datePublished,
@@ -183,7 +192,10 @@ export async function SeoLandingPage({
 
   const featureKeys = Array.from({ length: featureCount }, (_, i) => `feature${i + 1}`);
   const stepKeys = Array.from({ length: stepCount }, (_, i) => `step${i + 1}`);
-  const faqKeys = Array.from({ length: faqCount }, (_, i) => `q${i + 1}`);
+  const effectiveFaqCount = EXPANDED_FAQ_LOCALES.has(locale)
+    ? faqCount
+    : Math.min(faqCount, 6);
+  const faqKeys = Array.from({ length: effectiveFaqCount }, (_, i) => `q${i + 1}`);
   const pageUrl = `${baseUrl}/${locale}/${slug}`;
 
   return (

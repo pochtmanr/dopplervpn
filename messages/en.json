@@ -2792,6 +2792,18 @@
       "q6": {
         "question": "Can I use Doppler for streaming Netflix, Disney+, or BBC iPlayer in the UAE?",
         "answer": "Yes. Connect to a server in the country whose Netflix catalog you want. Doppler is not a streaming-specific VPN, but the VLESS-Reality protocol is not detected by streaming services' VPN-blocking lists the way commercial VPN IP ranges are."
+      },
+      "q7": {
+        "question": "Will my UAE employer see that I'm using a VPN?",
+        "answer": "On a personal device over personal mobile data, no — VLESS-Reality traffic looks like ordinary HTTPS to your carrier. On a corporate-issued laptop or a corporate Wi-Fi network, your employer's network monitoring can see destination IPs (though not content). For corporate networks, check your employer's acceptable-use policy before using Doppler."
+      },
+      "q8": {
+        "question": "Can I use Doppler from inside a UAE corporate or hotel Wi-Fi network?",
+        "answer": "Usually yes. Doppler connects over standard HTTPS ports (443), which are open on virtually every network — even those that block other VPN protocols on principle. Guests at some Etisalat-managed hotel networks have needed to switch entry nodes; the app makes that a one-tap action."
+      },
+      "q9": {
+        "question": "Does Doppler unblock Skype, Zoom, and Microsoft Teams calls in the UAE?",
+        "answer": "Yes. The UAE blocks VoIP across Skype, Zoom video calls, Microsoft Teams, Google Meet, Discord voice, and FaceTime — not just WhatsApp and Telegram. Doppler restores all of them on the same connection. Latency through our nearest servers (Bahrain, Qatar, India) is typically under 70 ms — fine for HD video calls."
       }
     },
     "cta": {
@@ -2892,6 +2904,18 @@
       "q6": {
         "question": "Does Doppler work on Snapp, Tapsi, or Iranian banking apps?",
         "answer": "Yes — VPN-only-when-needed is supported. Doppler can be toggled on for blocked apps and off for Iranian services that geo-restrict foreign IPs. iOS and Android both support per-app VPN profiles via Always-On VPN settings."
+      },
+      "q7": {
+        "question": "How do I install Doppler if the App Store is restricted in Iran?",
+        "answer": "Apple has reinstated the App Store in Iran for most categories, so a direct install usually works. If the App Store is unreachable, you can install Doppler via the Telegram bot @dopplercreatebot — it issues a signed configuration profile that works on any iPhone without an App Store account. On Android, install the APK directly from dopplervpn.org/en/downloads."
+      },
+      "q8": {
+        "question": "Will Doppler unblock Instagram, WhatsApp, Signal, and Telegram in Iran?",
+        "answer": "Yes. Instagram (blocked since September 2022), WhatsApp, Signal, Telegram, Twitter / X, Facebook, YouTube, Spotify, and most Western services are all reachable through Doppler. The same connection unblocks the entire blocklist — you do not need a separate tool per app."
+      },
+      "q9": {
+        "question": "Does Doppler work over mobile data from Hamrah-e-Avval or Irancell?",
+        "answer": "Yes. VLESS-Reality is transport-agnostic and works on any IP connection: MCI (Hamrah-e-Avval) 4G and 5G, Irancell 4G/5G, Rightel, ADSL from Shatel or Pars Online, and home fiber. The protocol's TLS-like signature looks identical regardless of carrier."
       }
     },
     "cta": {
@@ -2992,6 +3016,18 @@
       "q6": {
         "question": "What if Doppler stops working in China?",
         "answer": "Try switching entry nodes (Tokyo → Singapore → Hong Kong) from the app. If all fail, the Doppler Telegram bot publishes emergency configuration updates and new server endpoints. Bot access works in China because Telegram's MTProto traffic is routed differently from app traffic; the bot stays reachable."
+      },
+      "q7": {
+        "question": "How does Doppler bypass the Great Firewall?",
+        "answer": "VLESS-Reality, the protocol Doppler uses, disguises its traffic as ordinary HTTPS to a legitimate-looking external site. The Chinese DPI (deep packet inspection) systems run by the GFW cannot distinguish a Doppler connection from a routine TLS handshake with, for example, Microsoft or Cloudflare. There is no recognizable VPN signature to block."
+      },
+      "q8": {
+        "question": "Do I need a VPN to use Google, Gmail, or YouTube in China?",
+        "answer": "Yes. Google, Gmail, YouTube, Maps, Drive, Photos, Calendar, and every Google service are blocked in mainland China. Doppler unblocks all of them. The block does not apply in Hong Kong or Macau, but if you travel between the mainland and either SAR you'll want the VPN ready for the mainland leg."
+      },
+      "q9": {
+        "question": "Why don't other VPNs work in China?",
+        "answer": "Most VPNs use OpenVPN, WireGuard, IKEv2, or L2TP — protocols the GFW has fingerprinted and reliably blocks within seconds of a handshake. Some commercial VPNs add obfuscation, but they reuse a small number of server IPs that get IP-blocked in waves. Doppler's VLESS-Reality is purpose-built for environments where conventional VPNs fail."
       }
     },
     "cta": {
@@ -3092,6 +3128,18 @@
       "q6": {
         "question": "Does Doppler work on Yota and other smaller carriers?",
         "answer": "Yes. VLESS-Reality is transport-agnostic and works on any IP connection, including Yota's 4G/5G, Tele2, regional cable ISPs, and public Wi-Fi."
+      },
+      "q7": {
+        "question": "Why have other VPNs stopped working in Russia in 2026?",
+        "answer": "Roskomnadzor expanded VPN-protocol DPI throughout 2024–2026, fingerprinting and blocking OpenVPN, WireGuard, IKEv2, L2TP, and most obfuscation layers used by mainstream commercial VPNs. Doppler's VLESS-Reality protocol disguises traffic as plain HTTPS to legitimate sites, so the DPI has nothing recognizable to block."
+      },
+      "q8": {
+        "question": "Can I still access YouTube, Instagram, and Facebook from Russia?",
+        "answer": "Yes, all three are reachable through Doppler. YouTube has been heavily throttled since July 2024 (Russia-wide and effectively unusable without a VPN). Instagram has been blocked since March 2022 and Facebook since the same week. Doppler restores normal speed and access to all of them on the same subscription."
+      },
+      "q9": {
+        "question": "Will using Doppler attract attention from authorities?",
+        "answer": "Personal VPN use is not a criminal offense in Russia; the relevant laws target VPN providers operating inside Russia, not individual users. Doppler's traffic looks like ordinary TLS to outside observers — there is nothing for an ISP or DPI to flag. Avoid posting about VPN use on Russian platforms (VK, Odnoklassniki) as a sensible precaution."
       }
     },
     "cta": {
@@ -3192,6 +3240,18 @@
       "q6": {
         "question": "Can I stream Netflix Turkey or Netflix US?",
         "answer": "Yes. Connect to a Turkish server (if we add one) to see the Turkish Netflix catalog, or to a US server for the US catalog. VLESS-Reality is not on Netflix's commercial VPN blocklists the way OpenVPN-based services are."
+      },
+      "q7": {
+        "question": "Will Doppler unblock Twitter / X, Wikipedia, and blocked news outlets?",
+        "answer": "Yes. Twitter / X has been intermittently throttled by BTK during politically sensitive periods; Wikipedia was blocked between 2017 and 2020 and has been throttled since; outlets like Bianet, Cumhuriyet, and DW Türkçe see periodic blocks. Doppler keeps all of them reachable on the same subscription."
+      },
+      "q8": {
+        "question": "How does Doppler handle BTK deep packet inspection?",
+        "answer": "BTK's DPI fingerprints OpenVPN, IKEv2, and most commercial VPN signatures within seconds. VLESS-Reality, the protocol Doppler uses, mimics a normal HTTPS handshake to a legitimate external site, so there is no VPN signature to detect. The encrypted payload looks like any other TLS connection to Microsoft, Cloudflare, or AWS."
+      },
+      "q9": {
+        "question": "Can I use Doppler while connecting to Turkish banking and government apps?",
+        "answer": "Yes, with per-app VPN profiles. Turkish banks (Garanti, İş Bankası, Akbank) and e-Devlet sometimes block foreign IPs as a fraud-prevention measure. Toggle Doppler off temporarily for those apps, or use Android / iOS per-app VPN to route only the blocked apps through Doppler."
       }
     },
     "cta": {
@@ -3292,6 +3352,18 @@
       "q6": {
         "question": "What's the cheapest plan that works?",
         "answer": "Monthly is $6.99 — less than a BOTIM or C'me telco add-on. The 6-month and annual plans drop the effective cost to $5.00 and $3.33 per month respectively. The 3-day free trial gives you full access with no credit card."
+      },
+      "q7": {
+        "question": "Does Doppler unblock all Telegram features in the UAE, or just calls?",
+        "answer": "All of them. Telegram is partially throttled in the UAE — text messages usually arrive but voice and video calls are blocked at the network level. Doppler routes all Telegram traffic through the tunnel, so voice calls, video calls, group calls, file transfers, channels, bots, and secret chats all work normally."
+      },
+      "q8": {
+        "question": "Will Doppler work for Telegram secret chats and self-destructing media?",
+        "answer": "Yes. Secret chats use end-to-end encryption between two specific devices and need a stable connection — exactly what Doppler provides. The VPN tunnel does not interfere with Telegram's E2E layer; it just keeps the underlying network reachable."
+      },
+      "q9": {
+        "question": "How does Doppler compare to BOTIM for UAE calling?",
+        "answer": "BOTIM is licensed by the TDRA and works without a VPN, but it costs AED 50–60/month and only unblocks itself — not WhatsApp, Telegram, FaceTime, Signal, or anything else. Doppler is $6.99/month (~AED 26), unblocks every VoIP app, and works for everything else (Skype, Zoom, Teams) on the same connection."
       }
     },
     "cta": {
@@ -3392,6 +3464,18 @@
       "q6": {
         "question": "How does the price compare to BOTIM?",
         "answer": "Doppler monthly is $6.99 (~AED 26). BOTIM through Etisalat is AED 50–60/month per user — and only unblocks BOTIM, not WhatsApp itself. Doppler covers your entire device for less. A 6-month or annual Doppler subscription drops the monthly cost further."
+      },
+      "q7": {
+        "question": "Will WhatsApp video calls work in HD with Doppler?",
+        "answer": "Yes. Our nearest exit nodes (Bahrain, Qatar, India) deliver under-70 ms latency from the UAE, which WhatsApp uses to negotiate HD video. Group video calls with up to 32 participants work the same as on an unblocked network."
+      },
+      "q8": {
+        "question": "Will my WhatsApp account get banned for using a VPN?",
+        "answer": "No. WhatsApp does not ban accounts for VPN use — millions of users in censored networks (India, China, Iran, Russia, UAE) connect through VPNs every day. The terms-of-service ban applies to bulk-messaging abuse, not personal VPN use. Doppler's traffic looks like ordinary HTTPS to WhatsApp's servers; they cannot tell you're tunneling."
+      },
+      "q9": {
+        "question": "Can I switch Doppler off after the call to save battery?",
+        "answer": "Yes, but you don't need to. VLESS-Reality's idle overhead is minimal — under 1% battery per hour on a modern phone — and the app supports per-app VPN, so you can route only WhatsApp through the tunnel and leave everything else on your normal connection. Both options work; do whichever feels less intrusive."
       }
     },
     "cta": {
@@ -3492,6 +3576,18 @@
       "q6": {
         "question": "Does it also unblock Facebook, X (Twitter), and LinkedIn?",
         "answer": "Yes. The same Doppler subscription that unblocks Instagram also unblocks Facebook (blocked March 4, 2022), X / Twitter (blocked March 4, 2022), LinkedIn (blocked since 2016), and Western news outlets like BBC, DW, and Meduza."
+      },
+      "q7": {
+        "question": "Why is Instagram blocked in Russia?",
+        "answer": "Roskomnadzor blocked Instagram on March 14, 2022, ten days after parent company Meta was designated an extremist organization. The trigger was a temporary policy change Meta announced allowing posts calling for violence against Russian military forces during the invasion of Ukraine. The block has remained in place since."
+      },
+      "q8": {
+        "question": "Can I use Instagram DMs, shopping, and saved content through Doppler?",
+        "answer": "Yes. Doppler restores full Instagram functionality: feed, stories, reels, IGTV, DMs, voice messages, video calls, shopping, saved posts, and ads-manager access for creators. There is no feature gating — what you had before March 2022 is exactly what you get back."
+      },
+      "q9": {
+        "question": "Will Doppler work for Instagram Live and going viral from Russia?",
+        "answer": "Yes. Instagram Live, reels uploads, and the algorithm that surfaces viral content all work over Doppler. Latency through our nearest servers (Helsinki, Frankfurt) is typically 30–60 ms from European Russia — fine for going live without delay or buffering."
       }
     },
     "cta": {
@@ -3596,6 +3692,18 @@
       "q6": {
         "question": "What if Doppler stops working during my trip?",
         "answer": "First, switch entry nodes from the app — Tokyo → Singapore → Hong Kong. If that doesn't help, the Doppler Telegram bot publishes emergency endpoint updates. The bot reaches China reliably because Telegram's MTProto traffic uses different routing from app traffic."
+      },
+      "q7": {
+        "question": "What apps and services are blocked in China that I'll need a VPN for?",
+        "answer": "Google (search, Gmail, Maps, Drive, YouTube, Photos), Meta (Facebook, Instagram, WhatsApp, Threads), X / Twitter, Telegram, Signal, Reddit, Discord, Slack, Wikipedia, the New York Times, the BBC, Bloomberg, the Wall Street Journal, Dropbox, OneDrive, iCloud Mail (sometimes), Spotify, Netflix, Twitch, and most non-Chinese cloud platforms. Doppler unblocks all of them."
+      },
+      "q8": {
+        "question": "Should I tell colleagues or family I'll be using a VPN in China?",
+        "answer": "Use common sense. Do not discuss VPN use on Chinese platforms (WeChat, Weibo, DingTalk) — those conversations are inspected. Telling colleagues over a non-Chinese channel (Signal, WhatsApp through Doppler, in person) is fine. Enforcement against tourists for personal VPN use is essentially nonexistent."
+      },
+      "q9": {
+        "question": "Will Chinese border control or customs check my phone for VPN apps?",
+        "answer": "Routine border control does not inspect phones. The phone-search policy applies in specific contexts: entry from certain high-risk regions, journalist or activist profiles, or random secondary screening. For ordinary tourists and business travelers, this is not a realistic concern. If you're worried, install Doppler from the App Store at home (it appears as \"Doppler VPN\") and don't volunteer the fact."
       }
     },
     "cta": {
@@ -3696,6 +3804,18 @@
       "q6": {
         "question": "Does it work for TikTok Live and creator tools?",
         "answer": "Yes. TikTok Live, the creator dashboard, analytics, ads manager, and creator monetization all work over Doppler. Streaming latency is typically under 200 ms — fine for Live broadcasts."
+      },
+      "q7": {
+        "question": "Is TikTok banned in my country right now?",
+        "answer": "As of 2026: banned in India (since June 2020), Nepal (November 2023), Kyrgyzstan, and on government devices in the US, UK, EU institutions, Canada, and Australia. Heavy throttling or partial blocks exist in Pakistan and several Indian states. Doppler bypasses all of these for personal use — set the entry node to a permissive country and TikTok works normally."
+      },
+      "q8": {
+        "question": "How do I install TikTok if it's removed from my App Store?",
+        "answer": "On iOS, sign out of your local App Store account and sign in with one registered in a country where TikTok is still listed (US, UK, Brazil). On Android, install the APK directly from APKMirror or the TikTok APK from the official tiktok.com download page — both are signed by ByteDance and safe. Doppler then handles the network-level access."
+      },
+      "q9": {
+        "question": "Will Doppler keep TikTok working if it's banned for \"national security\"?",
+        "answer": "Yes. Network-level bans (ISP blocks, government firewalls) are exactly what VLESS-Reality is built to defeat. App-store removals require the install workaround above. If ByteDance ever shuts down the app for a region entirely on the server side, no VPN can fix that — but as of 2026 every active ban operates at the network or app-store layer, not the server layer."
       }
     },
     "cta": {
@@ -3796,6 +3916,18 @@
       "q6": {
         "question": "Does Doppler work on my iPad and Mac too?",
         "answer": "Yes. The same subscription covers iPhone, iPad, and Mac. Install on each device with the same Apple ID — there's no device-count cap for personal use."
+      },
+      "q7": {
+        "question": "What can an attacker actually do on unsecured public Wi-Fi?",
+        "answer": "Plenty. SSL-stripping downgrades HTTPS connections so they can read your traffic. Evil-twin hotspots impersonate \"Starbucks_WiFi\" and route everything through their machine. Packet sniffers on the same network see unencrypted DNS queries, app-update checks, and metadata even when the actual page traffic is HTTPS. A VPN turns the entire connection into a single encrypted tunnel that none of these attacks can read."
+      },
+      "q8": {
+        "question": "Does Doppler also encrypt my DNS queries?",
+        "answer": "Yes. Doppler routes every DNS query through the encrypted tunnel to our resolvers, blocking the most common public-Wi-Fi attack: a malicious resolver telling your browser that \"chase.com\" lives at an attacker-controlled IP. This protection is on by default and cannot be bypassed by browsers using DNS-over-HTTPS."
+      },
+      "q9": {
+        "question": "What's the difference between using Doppler and just using cellular data?",
+        "answer": "Cellular data is more trustworthy than random public Wi-Fi, but your carrier still sees every domain you visit (T-Mobile, Verizon, and AT&T have all sold this data in the past). Doppler encrypts your DNS and traffic against the carrier too. And cellular is not free abroad — Doppler on hotel Wi-Fi avoids international roaming entirely."
       }
     },
     "cta": {
@@ -3896,6 +4028,18 @@
       "q6": {
         "question": "Does Doppler support per-app VPN like v2rayNG?",
         "answer": "Yes. Android's per-app VPN API works the same way for Doppler. In the app, enable per-app mode and select which apps tunnel through VLESS. Everything else uses your normal connection."
+      },
+      "q7": {
+        "question": "What's the difference between VLESS, VMess, and Trojan?",
+        "answer": "All three are protocols from the v2ray / Xray family. VMess is the original — encrypted but with a recognizable header that newer DPI can fingerprint. Trojan disguises traffic as HTTPS but has its own subtle signatures. VLESS is the modern replacement: lighter, faster, and when combined with Reality, indistinguishable from a legitimate TLS connection to a real external website. Doppler ships VLESS-Reality on every platform."
+      },
+      "q8": {
+        "question": "Does Doppler include the Reality TLS handshake, or just plain VLESS?",
+        "answer": "Both. Doppler's Android client implements the full VLESS-Reality stack: the Reality handshake forges a TLS connection that appears to terminate at a chosen \"steal\" target (a real site like Microsoft.com or Cloudflare), but actually establishes the VPN tunnel underneath. Without Reality, plain VLESS is still better than VMess, but Reality is what makes the protocol survive aggressive DPI in China, Iran, and Russia."
+      },
+      "q9": {
+        "question": "How is Doppler different from configuring VLESS in v2rayNG manually?",
+        "answer": "Functionally similar, ergonomically very different. v2rayNG requires you to source server JSON configs, paste them in, manage subscriptions, troubleshoot routing rules, and update the app and configs separately. Doppler handles all of that: one-tap connection, automatic server selection, push-updated endpoints when an entry node gets blocked, and a billing relationship instead of a hunt for free configs that stop working."
       }
     },
     "cta": {
