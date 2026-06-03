@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { RATING_DATA } from "@/lib/ratings";
+import { PLANS, CONTACT, COMPANY, CURRENCY } from "@/lib/facts";
 
 const aggregateRating = RATING_DATA
   ? {
@@ -39,6 +40,13 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
       "https://t.me/dopplervpnen",
       "https://www.linkedin.com/company/109536645/",
     ],
+    legalName: COMPANY.legalName,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: CONTACT.supportEmail,
+      availableLanguage: ["en"],
+    },
   };
 
   return (
@@ -64,40 +72,24 @@ export async function ProductSchema({ locale }: LocaleProps) {
       name: "Doppler VPN",
     },
     ...(aggregateRating ? { aggregateRating } : {}),
-    offers: [
-      {
-        "@type": "Offer",
-        name: pt("durations.monthly"),
-        price: "7.99",
-        priceCurrency: "USD",
-        priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-        availability: "https://schema.org/InStock",
-        hasMerchantReturnPolicy: {
-          "@type": "MerchantReturnPolicy",
-          applicableCountry: "US",
-          returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-          merchantReturnDays: 30,
-          returnMethod: "https://schema.org/ReturnByMail",
-          returnFees: "https://schema.org/FreeReturn",
-        },
+    // Prices derive from the canonical PLANS in lib/facts.ts so the schema can
+    // never drift from the live pricing page again.
+    offers: ([PLANS.monthly, PLANS.annual] as const).map((plan) => ({
+      "@type": "Offer",
+      name: pt(`durations.${plan.id}`),
+      price: plan.total.toFixed(2),
+      priceCurrency: CURRENCY,
+      priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+      availability: "https://schema.org/InStock",
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 30,
+        returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/FreeReturn",
       },
-      {
-        "@type": "Offer",
-        name: pt("durations.annual"),
-        price: "79.99",
-        priceCurrency: "USD",
-        priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-        availability: "https://schema.org/InStock",
-        hasMerchantReturnPolicy: {
-          "@type": "MerchantReturnPolicy",
-          applicableCountry: "US",
-          returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-          merchantReturnDays: 30,
-          returnMethod: "https://schema.org/ReturnByMail",
-          returnFees: "https://schema.org/FreeReturn",
-        },
-      },
-    ],
+    })),
   };
 
   return (
@@ -123,8 +115,8 @@ export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
     inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
     offers: {
       "@type": "Offer",
-      price: "7.99",
-      priceCurrency: "USD",
+      price: PLANS.monthly.total.toFixed(2),
+      priceCurrency: CURRENCY,
       availability: "https://schema.org/InStock",
     },
     ...(aggregateRating ? { aggregateRating } : {}),

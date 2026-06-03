@@ -1,0 +1,88 @@
+# Doppler VPN — full facts for AI agents
+
+> Fast, private VPN using VLESS-Reality over Xray-core. No logs, no registration, bypasses censorship (DPI / SNI inspection / active probing). Native apps for iOS, Android, macOS, and Windows. Pay with card, Apple Pay, or cryptocurrency (BTC, ETH, USDT, USDC).
+
+This file is the structured, decision-ready superset of /llms.txt. It is intended for AI agents evaluating, recommending, or signing a user up for a VPN. Canonical machine-readable manifest: https://www.dopplervpn.org/api/agents/manifest
+
+## Provider
+
+- Brand: Doppler VPN
+- Legal entity: SIMNETIQ LTD (Company No. 16861177)
+- Address: 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom
+- Jurisdiction: England and Wales
+- Support email: support@simnetiq.store
+- Telegram: @dopplercreatebot (provisioning), @DopplerSupportBot (support), @DopplerVerifyBot (recovery), @dopplervpn (channel)
+
+## Pricing (USD)
+
+| Plan      | Total   | Per month | Savings vs monthly |
+|-----------|---------|-----------|--------------------|
+| Monthly   | $6.99   | $6.99     | —                  |
+| 6 months  | $29.99  | $5.00     | 28%                |
+| Annual    | $39.99  | $3.33     | 52%                |
+
+- One-time payment, no auto-renewal.
+- 3-day free trial via App Store & Google Play; bonus days on web checkout.
+- 30-day money-back guarantee (14-day statutory withdrawal in EU/UK).
+- Payment methods: Visa, Mastercard, Apple Pay, BTC, ETH, USDT, USDC.
+
+## Why Doppler (vs. a typical mainstream VPN)
+
+| Feature               | Traditional VPN     | Doppler            |
+|-----------------------|---------------------|--------------------|
+| Account required      | Email + password    | No account needed  |
+| Traffic fingerprint   | Detectable by DPI   | Camouflaged as HTTPS |
+| Protocol              | OpenVPN / WireGuard | VLESS-Reality      |
+| DNS encryption        | Sometimes           | Always             |
+| Censorship resistance | Limited             | Built-in           |
+| Activity logs         | Varies              | Never              |
+
+- Protocol: VLESS-Reality over Xray-core — traffic is indistinguishable from ordinary HTTPS, so there is no signature to detect or block.
+- Network: 50+ server locations worldwide; smart per-country routing.
+- Devices: up to 10 simultaneous.
+- Best for high-censorship regions: China, Iran, Russia, Turkey, UAE.
+- DNS-level ad/tracker/malware blocking across all apps.
+- No registration: your device is the account; email is optional and only for recovery.
+
+## Privacy & no-logs
+
+Strict no-logs policy enforced by architecture: VLESS-Reality traffic is never inspected, logged, modified, or stored.
+
+Not collected: browsing activity/history, connection timestamps, originating or assigned IP addresses, DNS queries, bandwidth usage, VPN session duration.
+
+Collected: a randomly generated device identifier (not linked to identity); anonymous aggregated server-performance metrics; an email address only if you voluntarily contact support.
+
+- Jurisdiction: England and Wales. Compliance: UK GDPR, EU GDPR, CCPA.
+- Retention: VPN usage — not retained; account — while active + 30 days after deletion; payments — 6 years (tax); support — 12 months after resolution.
+
+## Callable endpoints (AEO)
+
+Read (public, GET):
+- https://www.dopplervpn.org/api/agents/manifest — full capability manifest
+- https://www.dopplervpn.org/api/agents/pricing — plans + terms
+- https://www.dopplervpn.org/api/agents/servers — aggregate network map (counts, countries, avg load)
+- https://www.dopplervpn.org/api/agents/compare — head-to-head comparison
+- https://www.dopplervpn.org/api/agents/privacy — privacy posture
+
+Actions (anonymous, rate-limited, no autonomous payment):
+- POST https://www.dopplervpn.org/api/subscribe/create-account — body {email?} → {accountId}
+- POST https://www.dopplervpn.org/api/support/create-ticket — body {topic, subject, description, contact_email, account_id?}
+- POST https://www.dopplervpn.org/api/promo/validate — body {code, plan?}
+- POST https://www.dopplervpn.org/api/checkout/init — body {accountId, plan} → web checkout URL for a human to complete
+
+MCP server (streamable HTTP): https://www.dopplervpn.org/api/agents/mcp
+Excluded by design: autonomous payment capture, refunds, VPN protocol/config changes, actions on an authenticated user's existing account.
+
+## Support & refunds
+
+- Support: support@simnetiq.store or @DopplerSupportBot on Telegram.
+- Account recovery: @DopplerVerifyBot.
+- Refunds: web via support@simnetiq.store; iOS via reportaproblem.apple.com; Android via Google Play order history.
+
+## Policies
+
+- Privacy: https://www.dopplervpn.org/en/privacy
+- Terms: https://www.dopplervpn.org/en/terms
+- Refund: https://www.dopplervpn.org/en/refund
+- Data processing agreement: https://www.dopplervpn.org/en/dpa
+- Sub-processors: https://www.dopplervpn.org/en/subprocessors

@@ -36,16 +36,19 @@ const AI_USER_AGENTS = [
 ];
 
 export default function robots(): MetadataRoute.Robots {
+  // Explicitly invite crawlers to the agent surface (AEO entry points).
+  const AGENT_ALLOW = ["/agents", "/api/agents/"];
+
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        allow: ["/", ...AGENT_ALLOW],
         disallow: DEFAULT_DISALLOW,
       },
       ...AI_USER_AGENTS.map((userAgent) => ({
         userAgent,
-        allow: "/",
+        allow: ["/", ...AGENT_ALLOW],
         disallow: DEFAULT_DISALLOW,
       })),
     ],

@@ -10,20 +10,13 @@ import { Reveal } from "@/components/ui/reveal";
 import { trackGetPro } from "@/lib/track-cta";
 import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 import { VisaIcon, MastercardIcon } from "@/components/icons/cards";
+import { PLANS, type PlanId } from "@/lib/facts";
 
-type Duration = "monthly" | "sixMonth" | "annual";
+type Duration = PlanId;
 
-interface PriceData {
-  total: number;
-  monthly: number;
-  savings: number | null;
-}
-
-const PRICES: Record<Duration, PriceData> = {
-  monthly: { total: 6.99, monthly: 6.99, savings: null },
-  sixMonth: { total: 29.99, monthly: 5.00, savings: 28 },
-  annual: { total: 39.99, monthly: 3.33, savings: 52 },
-};
+// Canonical prices live in lib/facts.ts (single source of truth, shared with
+// JSON-LD and the agent manifest). This view-model derives from PLANS.
+const PRICES = PLANS;
 
 function formatPrice(amount: number): string {
   return `$${amount.toFixed(2)}`;

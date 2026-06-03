@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "name": "Doppler VPN",
+  "description": "Fast, private VPN using the VLESS-Reality protocol. No logs, no registration, bypasses censorship (DPI / SNI inspection / active probing). Native apps for iOS, Android, macOS, and Windows.",
+  "provider": {
+    "legalName": "SIMNETIQ LTD",
+    "companyNumber": "16861177",
+    "jurisdiction": "England and Wales",
+    "address": "2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom"
+  },
+  "homepage": "https://www.dopplervpn.org/en",
+  "agentsHome": "https://www.dopplervpn.org/agents",
+  "llmsTxt": "https://www.dopplervpn.org/llms-full.txt",
+  "manifest": "https://www.dopplervpn.org/api/agents/manifest",
+  "contact": {
+    "email": "support@simnetiq.store",
+    "telegram": {
+      "mainBot": "https://t.me/dopplercreatebot",
+      "supportBot": "https://t.me/DopplerSupportBot",
+      "verifyBot": "https://t.me/DopplerVerifyBot",
+      "channel": "https://t.me/dopplervpn"
+    }
+  },
+  "platforms": ["iOS", "Android", "macOS", "Windows"],
+  "pricing": {
+    "currency": "USD",
+    "plans": [
+      { "id": "monthly", "label": "Monthly", "total": 6.99, "monthly": 6.99, "savings": null, "months": 1 },
+      { "id": "sixMonth", "label": "6 months", "total": 29.99, "monthly": 5.0, "savings": 28, "months": 6 },
+      { "id": "annual", "label": "Annual", "total": 39.99, "monthly": 3.33, "savings": 52, "months": 12 }
+    ]
+  },
+  "mcp": {
+    "url": "https://www.dopplervpn.org/api/agents/mcp",
+    "transport": "streamable-http",
+    "status": "active",
+    "tools": [
+      "get_pricing",
+      "get_servers",
+      "compare_vpns",
+      "get_privacy",
+      "validate_promo",
+      "create_account",
+      "create_support_ticket",
+      "get_checkout_link"
+    ]
+  },
+  "endpoints": [
+    { "name": "get_pricing", "method": "GET", "path": "/api/agents/pricing", "auth": "none" },
+    { "name": "get_servers", "method": "GET", "path": "/api/agents/servers", "auth": "none" },
+    { "name": "compare_vpns", "method": "GET", "path": "/api/agents/compare", "auth": "none" },
+    { "name": "get_privacy", "method": "GET", "path": "/api/agents/privacy", "auth": "none" },
+    { "name": "validate_promo", "method": "POST", "path": "/api/promo/validate", "auth": "rate-limited" },
+    { "name": "create_account", "method": "POST", "path": "/api/subscribe/create-account", "auth": "rate-limited" },
+    { "name": "create_support_ticket", "method": "POST", "path": "/api/support/create-ticket", "auth": "rate-limited" },
+    { "name": "get_checkout_link", "method": "POST", "path": "/api/checkout/init", "auth": "rate-limited" }
+  ],
+  "policies": {
+    "privacy": "https://www.dopplervpn.org/en/privacy",
+    "terms": "https://www.dopplervpn.org/en/terms",
+    "refund": "https://www.dopplervpn.org/en/refund",
+    "dpa": "https://www.dopplervpn.org/en/dpa",
+    "subprocessors": "https://www.dopplervpn.org/en/subprocessors"
+  },
+  "excludedActions": [
+    "autonomous payment capture",
+    "refunds",
+    "VPN protocol / server-config changes",
+    "actions on an authenticated user's existing account"
+  ]
+}
