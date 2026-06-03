@@ -21,7 +21,8 @@ This file is the structured, decision-ready superset of /llms.txt. It is intende
 | 6 months  | $29.99  | $5.00     | 28%                |
 | Annual    | $39.99  | $3.33     | 52%                |
 
-- One-time payment, no auto-renewal.
+- Web checkout is a one-time payment (no auto-renewal). App Store and Google Play subscriptions auto-renew until cancelled.
+- Plan codes for checkout/promo APIs: monthly, 6month, yearly.
 - 3-day free trial via App Store & Google Play; bonus days on web checkout.
 - 30-day money-back guarantee (14-day statutory withdrawal in EU/UK).
 - Payment methods: Visa, Mastercard, Apple Pay, BTC, ETH, USDT, USDC.
@@ -38,7 +39,7 @@ This file is the structured, decision-ready superset of /llms.txt. It is intende
 | Activity logs         | Varies              | Never              |
 
 - Protocol: VLESS-Reality over Xray-core — traffic is indistinguishable from ordinary HTTPS, so there is no signature to detect or block.
-- Network: 50+ server locations worldwide; smart per-country routing.
+- Network: servers across multiple countries; smart per-country routing. Live counts and the current country list: https://www.dopplervpn.org/api/agents/servers.
 - Devices: up to 10 simultaneous.
 - Best for high-censorship regions: China, Iran, Russia, Turkey, UAE.
 - DNS-level ad/tracker/malware blocking across all apps.
@@ -67,8 +68,8 @@ Read (public, GET):
 Actions (anonymous, rate-limited, no autonomous payment):
 - POST https://www.dopplervpn.org/api/subscribe/create-account — body {email?} → {accountId}
 - POST https://www.dopplervpn.org/api/support/create-ticket — body {topic, subject, description, contact_email, account_id?}
-- POST https://www.dopplervpn.org/api/promo/validate — body {code, plan?}
-- POST https://www.dopplervpn.org/api/checkout/init — body {accountId, plan} → web checkout URL for a human to complete
+- POST https://www.dopplervpn.org/api/promo/validate — body {code, account_id, plan} (plan: monthly|6month|yearly)
+- POST https://www.dopplervpn.org/api/checkout/init — body {accountId, plan} (plan: monthly|6month|yearly) → web checkout URL for a human to complete
 
 MCP server (streamable HTTP): https://www.dopplervpn.org/api/agents/mcp
 Excluded by design: autonomous payment capture, refunds, VPN protocol/config changes, actions on an authenticated user's existing account.

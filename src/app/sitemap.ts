@@ -9,6 +9,13 @@ import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 // 45-language hreflang map per entry — burning Fast Origin Transfer fast.
 export const revalidate = 86400;
 
+// Cold/blocking regeneration of a shard (Supabase fetch + serializing a full
+// 45-locale hreflang map per entry) must never hit the default function
+// timeout. Googlebot fetches all 44 shards in parallel; a clipped regen is what
+// produced the 2026-04 "Couldn't fetch" report. 60s is the safe ceiling across
+// Vercel plans and is clamped down automatically where lower.
+export const maxDuration = 60;
+
 const baseUrl = "https://www.dopplervpn.org";
 
 // Stable per-build timestamp for static pages — avoids lastmod churn within
@@ -257,5 +264,16 @@ export default async function sitemap({
     };
   });
 
-  return [...staticEntries, ...blogEntries];
+  // Non-localized agent-surface URLs (one canonical URL each, no /:locale
+  // prefix). Emit once — in the en shard — to avoid 44× duplication.
+  const agentSurfaceEntries: MetadataRoute.Sitemap =
+    locale === "en"
+      ? [
+          { url: `${baseUrl}/agents`, lastModified: BUILD_TIME, changeFrequency: "monthly" as const, priority: 0.6 },
+          { url: `${baseUrl}/llms.txt`, lastModified: BUILD_TIME, changeFrequency: "monthly" as const, priority: 0.5 },
+          { url: `${baseUrl}/llms-full.txt`, lastModified: BUILD_TIME, changeFrequency: "monthly" as const, priority: 0.5 },
+        ]
+      : [];
+
+  return [...staticEntries, ...blogEntries, ...agentSurfaceEntries];
 }

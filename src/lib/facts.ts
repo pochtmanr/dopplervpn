@@ -41,6 +41,12 @@ export type PlanId = "monthly" | "sixMonth" | "annual";
 
 export interface Plan {
   id: PlanId;
+  /**
+   * Plan code expected by the checkout/promo APIs and MCP tools
+   * (`/api/checkout/init`, `/api/promo/validate`). Differs from `id`, which the
+   * web pricing UI uses. Agents must send THIS value, not `id`.
+   */
+  checkoutPlanId: "monthly" | "6month" | "yearly";
   /** Human label, e.g. "Monthly". */
   label: string;
   /** Total charged for the billing period, USD. */
@@ -55,12 +61,14 @@ export interface Plan {
 
 /**
  * Canonical prices. Monthly is the headline rate ($6.99); the longer plans are
- * one-time payments (no auto-renewal) at a per-month discount.
+ * a per-month discount. On web checkout these are one-time payments (no
+ * auto-renewal); the App Store / Google Play equivalents auto-renew.
+ * `checkoutPlanId` is the code the checkout/promo APIs expect (see Plan).
  */
 export const PLANS: Record<PlanId, Plan> = {
-  monthly: { id: "monthly", label: "Monthly", total: 6.99, monthly: 6.99, savings: null, months: 1 },
-  sixMonth: { id: "sixMonth", label: "6 months", total: 29.99, monthly: 5.0, savings: 28, months: 6 },
-  annual: { id: "annual", label: "Annual", total: 39.99, monthly: 3.33, savings: 52, months: 12 },
+  monthly: { id: "monthly", checkoutPlanId: "monthly", label: "Monthly", total: 6.99, monthly: 6.99, savings: null, months: 1 },
+  sixMonth: { id: "sixMonth", checkoutPlanId: "6month", label: "6 months", total: 29.99, monthly: 5.0, savings: 28, months: 6 },
+  annual: { id: "annual", checkoutPlanId: "yearly", label: "Annual", total: 39.99, monthly: 3.33, savings: 52, months: 12 },
 } as const;
 
 export const CURRENCY = "USD";
@@ -70,7 +78,8 @@ export const TERMS = {
   freeTrialDays: 3,
   trialNote: "3-day free trial via App Store & Google Play. Bonus days on web checkout.",
   moneyBackGuaranteeDays: 30,
-  guarantee: "One-time payment. No auto-renewal. 30-day money-back guarantee.",
+  guarantee:
+    "Web checkout is a one-time payment with no auto-renewal. App Store and Google Play subscriptions auto-renew until cancelled. 30-day money-back guarantee.",
   euWithdrawalDays: 14,
   paymentMethods: ["Visa", "Mastercard", "Apple Pay", "BTC", "ETH", "USDT", "USDC"],
 } as const;
@@ -117,7 +126,7 @@ export const PLATFORMS = ["iOS", "Android", "macOS", "Windows"] as const;
 /** Quick facts agents ask for when ranking VPNs. */
 export const HIGHLIGHTS = {
   protocol: "VLESS-Reality over Xray-core",
-  serverLocations: "50+ locations worldwide",
+  serverLocations: "Servers across multiple countries (live count at /api/agents/servers)",
   maxDevices: 10,
   noLogs: true,
   noRegistration: true,

@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: {
-      canonical: `${baseUrl}/${locale}/${SLUG}`,
+      canonical: `${baseUrl}/en/${SLUG}`,
       languages: {
         en: `${baseUrl}/en/${SLUG}`,
         "x-default": `${baseUrl}/en/${SLUG}`,
@@ -61,6 +62,8 @@ export function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
+  // English-only tool page; redirect other locales to the canonical /en URL.
+  if (locale !== "en") permanentRedirect(`/en/${SLUG}`);
   setRequestLocale(locale);
 
   const t = await getTranslations("toolsWebrtcLeak");
