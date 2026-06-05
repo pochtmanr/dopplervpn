@@ -3,21 +3,23 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { getFlagUrl } from "@/lib/languages";
 
-/* ─── Server location data (from Supabase vpn_servers, updated 2026-05-01) ─── */
+/* ─── Server location data (from Supabase vpn_servers, updated 2026-06-05) ─── */
 interface ServerLocation {
-  country: string;
-  city: string;
+  key: string;
   count: number;
   protocol: string;
   countryCode: string;
 }
 
 const serverLocations: ServerLocation[] = [
-  { country: "Poland", city: "Warsaw", count: 1, protocol: "VLESS-Reality", countryCode: "pl" },
-  { country: "Russia", city: "Saint Petersburg", count: 1, protocol: "VLESS-Reality", countryCode: "ru" },
-  { country: "Singapore", city: "Singapore", count: 1, protocol: "VLESS-Reality", countryCode: "sg" },
-  { country: "Canada", city: "Toronto", count: 1, protocol: "VLESS-Reality", countryCode: "ca" },
-  { country: "Australia", city: "Sydney", count: 1, protocol: "VLESS-Reality", countryCode: "au" },
+  { key: "australia", count: 1, protocol: "VLESS-Reality", countryCode: "au" },
+  { key: "canada", count: 1, protocol: "VLESS-Reality", countryCode: "ca" },
+  { key: "israel", count: 1, protocol: "VLESS-Reality", countryCode: "il" },
+  { key: "netherlands", count: 1, protocol: "VLESS-Reality", countryCode: "nl" },
+  { key: "poland", count: 1, protocol: "VLESS-Reality", countryCode: "pl" },
+  { key: "singapore", count: 1, protocol: "VLESS-Reality", countryCode: "sg" },
+  { key: "sweden", count: 1, protocol: "VLESS-Reality", countryCode: "se" },
+  { key: "us", count: 1, protocol: "VLESS-Reality", countryCode: "us" },
 ];
 
 /* ─── Protocol badge ─── */
@@ -37,7 +39,7 @@ function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<t
         <div className="flex items-center gap-3">
           <img
             src={getFlagUrl(location.countryCode)}
-            alt={location.country}
+            alt={t(`locations.${location.key}.country`)}
             width={32}
             height={32}
             loading="lazy"
@@ -46,10 +48,10 @@ function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<t
           />
           <div>
             <h3 className="text-base font-semibold text-text-primary">
-              {location.city}
+              {t(`locations.${location.key}.city`)}
             </h3>
             <p className="text-xs text-text-muted">
-              {location.country}
+              {t(`locations.${location.key}.country`)}
             </p>
           </div>
         </div>
@@ -74,7 +76,7 @@ export function Servers() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {serverLocations.map((location, i) => (
-          <Reveal key={location.country + location.city} delay={i * 50}>
+          <Reveal key={location.key} delay={i * 50}>
             <ServerCard location={location} t={t} />
           </Reveal>
         ))}
