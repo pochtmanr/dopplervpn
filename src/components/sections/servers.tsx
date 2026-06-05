@@ -34,33 +34,32 @@ function ProtocolBadge({ protocol }: { protocol: string }) {
 /* ─── Server card ─── */
 function ServerCard({ location, t }: { location: ServerLocation; t: ReturnType<typeof useTranslations> }) {
   return (
-    <div className="group rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors">
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-3">
-          <img
-            src={getFlagUrl(location.countryCode)}
-            alt={t(`locations.${location.key}.country`)}
-            width={32}
-            height={32}
-            loading="lazy"
-            decoding="async"
-            className="w-8 h-8 rounded-full object-cover"
-          />
-          <div>
-            <h3 className="text-base font-semibold text-text-primary">
-              {t(`locations.${location.key}.city`)}
-            </h3>
-            <p className="text-xs text-text-muted">
-              {t(`locations.${location.key}.country`)}
-            </p>
-          </div>
-        </div>
-        <span className="text-xs text-text-muted bg-overlay/5 px-2 py-1 rounded-full">
-          {location.count} {location.count > 1 ? t("servers") : t("server")}
-        </span>
+    <div className="group relative overflow-hidden rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors">
+      {/* Full-height country flag on the trailing edge, ~30° angled cut */}
+      <div className="server-flag-clip absolute inset-y-0 end-0 w-24" aria-hidden="true">
+        <img
+          src={getFlagUrl(location.countryCode)}
+          alt=""
+          width={96}
+          height={96}
+          loading="lazy"
+          decoding="async"
+          className="w-full h-full object-cover scale-150"
+        />
       </div>
-      <div className="flex flex-wrap gap-1.5">
-        <ProtocolBadge protocol={location.protocol} />
+      <div className="relative pe-24">
+        <h3 className="text-base font-semibold text-text-primary">
+          {t(`locations.${location.key}.city`)}
+        </h3>
+        <p className="text-xs text-text-muted">
+          {t(`locations.${location.key}.country`)}
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-1.5">
+          <ProtocolBadge protocol={location.protocol} />
+          <span className="text-xs text-text-muted bg-overlay/5 px-2 py-1 rounded-full">
+            {location.count} {location.count > 1 ? t("servers") : t("server")}
+          </span>
+        </div>
       </div>
     </div>
   );
