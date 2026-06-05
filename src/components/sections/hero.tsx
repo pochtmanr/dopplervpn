@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
@@ -11,6 +12,22 @@ export function Hero() {
   const t = useTranslations("hero");
   const locale = useLocale();
   const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
+
+  // Word-by-word blur-up cascade timing (seconds), matched to the reference hero.
+  const WORD_BASE_DELAY = 0.1;
+  const WORD_STAGGER = 0.07;
+
+  const splitWords = (text: string) => text.split(/\s+/).filter(Boolean);
+
+  // Line 1: part1a (italic in serif mode) + part1b. Line 2: gradient part2 (optional).
+  const line1Words = [
+    ...splitWords(t("headlinePart1a")).map((word) => ({ word, italic: !useFallbackFont })),
+    ...splitWords(t("headlinePart1b")).map((word) => ({ word, italic: false })),
+  ];
+  const line2Words = splitWords(t("headlinePart2"));
+  const headlineFontStyle = useFallbackFont
+    ? { fontFamily: "var(--font-body)", fontWeight: 300 }
+    : { fontFamily: "var(--font-serif)" };
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -39,27 +56,33 @@ export function Hero() {
               </Link>
             </div>
 
-            {/* Headline — server-rendered, no hydration delay */}
-            <h1
-              className="hero-animate hero-animate-delay-1 text-5xl sm:text-6xl md:text-6xl lg:text-7xl text-text-primary leading-tight"
-            >
+            {/* Headline — server-rendered (no hydration delay); words cascade via pure-CSS blur-up */}
+            <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl text-text-primary leading-tight">
               <span className="sr-only">Doppler VPN — </span>
-              <span
-                className="block"
-                style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 300 } : { fontFamily: "var(--font-serif)" }}
-              >
-                {useFallbackFont ? (
-                  <>{t("headlinePart1a")} {t("headlinePart1b")}</>
-                ) : (
-                  <><span className="italic">{t("headlinePart1a")}</span>{" "}<span>{t("headlinePart1b")}</span></>
-                )}
+              <span className="block" style={headlineFontStyle}>
+                {line1Words.map(({ word, italic }, i) => (
+                  <Fragment key={`l1-${i}`}>
+                    <span
+                      className={italic ? "hero-word italic" : "hero-word"}
+                      style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
+                    >
+                      {word}
+                    </span>{" "}
+                  </Fragment>
+                ))}
               </span>
-              {t("headlinePart2") && (
-                <span
-                  className="block mt-0 bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                  style={useFallbackFont ? { fontFamily: "var(--font-body)", fontWeight: 300 } : { fontFamily: "var(--font-serif)" }}
-                >
-                  {t("headlinePart2")}
+              {line2Words.length > 0 && (
+                <span className="block mt-0" style={headlineFontStyle}>
+                  {line2Words.map((word, j) => (
+                    <Fragment key={`l2-${j}`}>
+                      <span
+                        className="hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
+                        style={{ animationDelay: `${WORD_BASE_DELAY + (line1Words.length + j) * WORD_STAGGER}s` }}
+                      >
+                        {word}
+                      </span>{" "}
+                    </Fragment>
+                  ))}
                 </span>
               )}
             </h1>

@@ -6,6 +6,10 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["next-intl"],
+    // Inline CSS into the HTML <head> so the two stylesheet requests no longer
+    // block first paint (PSI: render-blocking CSS, ~720ms). Also surfaces the
+    // @font-face rules immediately, shortening the font critical-path chain.
+    inlineCss: true,
   },
   async rewrites() {
     return [
