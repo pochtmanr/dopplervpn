@@ -1374,6 +1374,7 @@
     "promoError": "Invalid promo code"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Comprueba tu seguridad web con nuestras herramientas gratuitas de privacidad",
     "title": "Cómo Doppler protege tu tráfico",
     "subtitle": "Tu conexión se cifra y se enruta por la red de Doppler. Sin logs.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Por qué pedimos cero información personal.",
       "vlessTitle": "Acerca de VLESS-Reality",
       "vlessDesc": "El protocolo detrás del cifrado de Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Herramientas de Privacidad Gratuitas — Doppler VPN",
+      "description": "Herramientas gratuitas y de propósito único para poner a prueba tu privacidad: comprobador de IP, test de fugas WebRTC, test de fugas DNS. Sin rastreo, sin email."
+    },
+    "title": "Herramientas de privacidad gratuitas",
+    "subtitle": "Tres comprobaciones rápidas de las fugas que más importan.",
+    "tools": {
+      "ipChecker": {
+        "title": "¿Cuál es mi IP?",
+        "description": "Mira la IP pública, el país y el proveedor que tu tráfico está exponiendo ahora mismo.",
+        "cta": "Comprobar la IP"
+      },
+      "webrtcLeak": {
+        "title": "Test de fugas WebRTC",
+        "description": "WebRTC puede revelar tu IP real incluso a través de una VPN. Comprueba si la tuya lo hace.",
+        "cta": "Ejecutar el test WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test de fugas DNS",
+        "description": "Si tus consultas DNS se saltan el túnel VPN, tu proveedor sigue viendo cada sitio que visitas.",
+        "cta": "Ejecutar el test DNS"
+      }
+    },
+    "cta": {
+      "title": "¿Las herramientas encontraron una fuga?",
+      "description": "El túnel VLESS-Reality de Doppler enruta tanto el tráfico IP como las consultas DNS por el canal cifrado, con bloqueo integrado de fugas WebRTC e IPv6.",
+      "button": "Probar Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "¿Cuál es mi IP? — Consulta gratuita de IP y proveedor",
+      "description": "Comprobador gratuito de dirección IP: ve al instante tu IP pública, país, región, ciudad y proveedor. Sin rastreo. Sin email. Funciona en iPhone, Android, Mac y Windows."
+    },
+    "hero": {
+      "title": "¿Cuál es mi IP?",
+      "subtitle": "Tu dirección IP pública tal como la ve cada sitio web que visitas, junto con la geografía y el proveedor asociados a ella. Actualiza después de conectarte a una VPN para verificar que el cambio surtió efecto."
+    },
+    "widget": {
+      "yourIp": "Tu dirección IP",
+      "country": "País",
+      "region": "Región",
+      "city": "Ciudad",
+      "isp": "Proveedor de internet",
+      "asn": "ASN",
+      "unknown": "Desconocido",
+      "refresh": "Actualizar",
+      "refreshing": "Actualizando…",
+      "copied": "Copiado",
+      "copy": "Copiar",
+      "loading": "Detectando tu IP…",
+      "error": "No pudimos detectar tu IP. Recarga la página o inténtalo de nuevo en un momento."
+    },
+    "explainer": {
+      "whatTitle": "¿Qué es una dirección IP?",
+      "whatBody": "Cada dispositivo en internet lleva una dirección numérica — una IP pública — que lo identifica ante cada servidor con el que habla. IPv4 se ve como 203.0.113.42; IPv6 es más larga y usa dos puntos. Tu IP la asigna tu proveedor y cambia cuando cambias de red (Wi-Fi de casa, datos móviles, Wi-Fi de una cafetería).",
+      "exposeTitle": "Qué expone tu IP",
+      "exposeBody": "Una IP por sí sola revela tu país, región, ciudad y proveedor — a veces con precisión de unas pocas manzanas. Combinada con el User-Agent y los datos de tiempo que envía cada navegador, basta para que las redes publicitarias creen tu huella digital y te rastreen entre sitios. Las plataformas de streaming la usan para aplicar licencias regionales. Los censores la usan para imponer bloqueos geográficos.",
+      "vpnTitle": "Cómo una VPN cambia tu IP",
+      "vpnBody": "Cuando te conectas a una VPN, todo tu tráfico sale a internet con la IP del servidor VPN, no con la tuya. Los sitios web ven el país, el proveedor y la geografía del servidor VPN en lugar de los tuyos reales. Una VPN bien configurada también enruta las consultas DNS por el mismo túnel, de modo que tu proveedor no puede ver qué sitios visitas aunque transporte los paquetes cifrados."
+    },
+    "checklist": {
+      "title": "Si estás conectado a Doppler VPN, esta página debería mostrar:",
+      "items": {
+        "item1": "Una IP que no coincide con la que veías antes de conectarte.",
+        "item2": "Un país que corresponde al servidor que elegiste (p. ej., Alemania, Países Bajos, Singapur).",
+        "item3": "Un proveedor listado como empresa de hosting (Hetzner, Vultr, OVH) en lugar de tu proveedor doméstico.",
+        "item4": "Ninguna mención de tu ciudad o región reales."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "¿Para qué se usa mi dirección IP?",
+        "answer": "Cada servidor con el que hablas usa tu IP para enviarte las respuestas, y la mayoría la registra. Permite la geolocalización (hasta la ciudad), las licencias regionales de contenido, la personalización de anuncios, la detección de fraude y — en redes censuradas — la aplicación de listas de bloqueo. El anonimato en línea empieza por no revelar este número directamente."
+      },
+      "q2": {
+        "question": "¿Es mi dirección IP información privada?",
+        "answer": "Se transmite a cada sitio web que visitas, así que no es secreta. Pero es un dato personal según el RGPD y la mayoría de leyes de privacidad, porque puede vincularse a una persona. Trátala como el nombre de tu calle: no es información clasificada, pero no se la das a desconocidos a la ligera."
+      },
+      "q3": {
+        "question": "¿Cómo oculto mi IP?",
+        "answer": "Una VPN es la herramienta estándar: sustituye tu IP por la del servidor. Tor oculta tu IP a través de varios relés a costa de velocidad. Los servicios de proxy la ocultan solo para el tráfico del navegador. Cambiar a datos móviles cambia tu IP, pero no tu identidad. El Wi-Fi público comparte una IP con todos los de la red, pero no está cifrado."
+      },
+      "q4": {
+        "question": "¿Por qué mi IP se ve distinta en diferentes sitios web?",
+        "answer": "No debería — a menos que estés detrás de una VPN con túnel dividido (algunas apps pasan por la VPN y otras por tu proveedor), en una red corporativa con varias IP de salida, o viendo IPv4 en un sitio e IPv6 en otro. Algunos sitios usan API de terceros para consultar la IP que pueden devolver metadatos ligeramente distintos."
+      },
+      "q5": {
+        "question": "¿Pueden rastrearme incluso con una VPN si mi IP está oculta?",
+        "answer": "Sí. La huella digital del navegador (fuentes, tamaño de pantalla, plugins, renderizado de canvas) identifica dispositivos sin necesidad de IP. Las cookies y los inicios de sesión te siguen entre redes. Las VPN solo resuelven la capa de IP y DNS; el resto depende del navegador. Usa la navegación privada, bloquea las cookies de terceros y considera navegadores anti-huella para una protección completa."
+      },
+      "q6": {
+        "question": "¿Doppler registra mi IP?",
+        "answer": "No. Doppler no guarda registros de conexión, historiales de IP ni consultas DNS. El servidor VPN ve tu IP real solo el tiempo necesario para enrutar el tráfico — nunca se escribe en disco. Las auditorías independientes y una política sin registros son las únicas garantías significativas aquí; \"lo prometemos\" no basta, y nosotros publicamos cómo está montada nuestra infraestructura."
+      },
+      "q7": {
+        "question": "¿Qué es un ASN?",
+        "answer": "Un Número de Sistema Autónomo identifica al operador de red dueño del bloque de IP. AS7922 es Comcast; AS24940 es Hetzner; AS16509 es Amazon AWS. Los ASN son públicos y permiten saber si una IP pertenece a un proveedor residencial, un operador móvil, una empresa de hosting (los nodos de salida de las VPN, normalmente) o una red corporativa."
+      },
+      "q8": {
+        "question": "¿Por qué la ubicación de mi IP parece incorrecta?",
+        "answer": "Las bases de datos de geolocalización por IP (MaxMind, IP2Location) aciertan el país en ~99% de los casos y la ciudad en ~70%. Van semanas por detrás de la realidad: un bloque de IP recién asignado puede aparecer con la ubicación del propietario anterior. Las IP de servidores VPN a veces se ubican mal. Si tu IP doméstica muestra la ciudad equivocada, tu proveedor probablemente asigna bloques por toda el área metropolitana."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test de fugas WebRTC",
+      "webrtcDesc": "WebRTC puede revelar tu IP real incluso cuando esta página muestra la de la VPN. Pruébalo.",
+      "dnsTitle": "Test de fugas DNS",
+      "dnsDesc": "Ocultar tu IP no basta si tus consultas DNS siguen filtrándose.",
+      "vlessTitle": "VPN VLESS-Reality",
+      "vlessDesc": "El protocolo que Doppler usa para evitar ser detectado y bloqueado."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test de fugas WebRTC — Comprueba si tu VPN oculta tu IP real",
+      "description": "Test gratuito de fugas WebRTC. Detecta si tu navegador está filtrando tu IP real a través de STUN incluso con una VPN conectada. Tarda 2 segundos. Ningún dato sale de tu dispositivo."
+    },
+    "hero": {
+      "title": "Test de fugas WebRTC",
+      "subtitle": "Los navegadores pueden revelar tu IP real a través de WebRTC incluso cuando una VPN la oculta de los sitios web. Este test comprueba si el tuyo lo hace — completamente en tu navegador, sin enviar datos a ninguna parte."
+    },
+    "widget": {
+      "publicIp": "IP pública (la que ven los sitios web)",
+      "webrtcIps": "IP descubiertas por WebRTC",
+      "leakedTitle": "WebRTC está filtrando tu IP",
+      "leakedBody": "WebRTC detectó una o más IP que difieren de la IP pública. Si estás usando una VPN, esto significa que un sitio web que use WebRTC todavía puede ver tu dirección real.",
+      "safeTitle": "No se detectó fuga de WebRTC",
+      "safeBody": "WebRTC informó la misma IP que la pública, o ninguna IP en absoluto. Ahora mismo no estás filtrando tu dirección real a través de WebRTC.",
+      "noWebrtc": "Tu navegador tiene WebRTC desactivado o no se resolvió ninguna dirección. Ese es un estado seguro.",
+      "unknown": "Desconocido",
+      "refresh": "Repetir el test",
+      "refreshing": "Probando…",
+      "loading": "Sondeando WebRTC…",
+      "error": "El test no pudo ejecutarse. Recarga la página e inténtalo de nuevo."
+    },
+    "explainer": {
+      "whatTitle": "¿Qué es una fuga de WebRTC?",
+      "whatBody": "WebRTC es una función del navegador para audio, vídeo y datos entre pares — la usan Google Meet, Discord y muchas aplicaciones web. Para establecer una conexión P2P, el navegador usa servidores STUN para descubrir sus propias direcciones IP, incluidas las locales y las que están detrás de NAT. Un sitio web puede pedirle al navegador que ejecute este descubrimiento en silencio y leer las IP resultantes mediante JavaScript, eludiendo por completo la VPN.",
+      "howTitle": "Cómo funciona el test",
+      "howBody": "Tu navegador crea una RTCPeerConnection ficticia, llama a createOffer y lee los candidatos ICE resultantes. Los candidatos ICE incluyen todas las IP que el navegador puede encontrar — incluida la tuya real, incluso cuando una VPN está tunelizando todo el resto del tráfico. El test se ejecuta localmente; no se envía nada a nuestros servidores.",
+      "fixTitle": "Cómo solucionar una fuga de WebRTC",
+      "fixBody": "Tres opciones: (1) Usa una VPN que bloquee proactivamente las fugas de WebRTC (las apps de Doppler para iOS y Android desactivan WebRTC fuera del túnel). (2) Instala una extensión del navegador que desactive WebRTC (uBlock Origin tiene una opción para esto). (3) En Firefox, pon media.peerconnection.enabled en false en about:config. Desactivar WebRTC romperá las videollamadas en el navegador; usa una app nativa en su lugar."
+    },
+    "faq": {
+      "q1": {
+        "question": "¿Qué es WebRTC?",
+        "answer": "WebRTC es un estándar del W3C integrado en todos los navegadores modernos para la comunicación entre pares de audio, vídeo y datos en tiempo real. Impulsa Google Meet, Discord web, el cliente web de Zoom y la mayoría de los videochats de navegador. Las mismas API que permiten las llamadas P2P también permiten a JavaScript descubrir tus direcciones de red locales."
+      },
+      "q2": {
+        "question": "¿Por qué WebRTC filtra mi IP real incluso a través de una VPN?",
+        "answer": "Porque la pila de WebRTC opera por debajo de la capa de aplicación y consulta la interfaz de red directamente mediante STUN. Una VPN tuneliza el tráfico en la capa IP, pero no bloquea las llamadas de descubrimiento de direcciones de WebRTC. La dirección filtrada viaja dentro del túnel cifrado — pero luego el navegador se la entrega al JavaScript de la página, que puede enviarla a cualquier parte."
+      },
+      "q3": {
+        "question": "¿Qué navegadores están afectados?",
+        "answer": "Todos con la configuración predeterminada: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave incluye un ajuste contra la fuga de IP por WebRTC que viene desactivado por defecto. Firefox permite desactivar WebRTC por completo desde about:config. Safari en iOS está parcialmente mitigado desde iOS 14, pero no del todo cerrado."
+      },
+      "q4": {
+        "question": "¿Doppler VPN bloquea las fugas de WebRTC?",
+        "answer": "Sí. Nuestros clientes de iOS y Android ejecutan un kill-switch local que bloquea todo el tráfico UDP fuera del túnel, lo que impide que el descubrimiento STUN llegue a servidores externos. En escritorio, recomendamos combinar la VPN con el interruptor de WebRTC de uBlock Origin o desactivarlo a nivel de navegador para una cobertura total."
+      },
+      "q5": {
+        "question": "¿Desactivar WebRTC romperá sitios web?",
+        "answer": "Rompe las videollamadas en el navegador (Meet, Zoom web, Discord web) y algunas herramientas colaborativas. No afecta a la navegación normal, el streaming ni nada que no necesite conexiones entre pares. Las apps nativas de esos servicios no dependen de WebRTC."
+      },
+      "q6": {
+        "question": "¿Es privado este test?",
+        "answer": "Sí. El test se ejecuta íntegramente en tu navegador usando la API estándar RTCPeerConnection. Ni la IP, ni el resultado, ni los metadatos salen de tu dispositivo. Ni siquiera registramos que ejecutaste el test."
+      }
+    },
+    "related": {
+      "ipTitle": "¿Cuál es mi IP?",
+      "ipDesc": "Mira la IP y la geografía que cada sitio web ve ahora mismo.",
+      "dnsTitle": "Test de fugas DNS",
+      "dnsDesc": "Si WebRTC está limpio pero el DNS se filtra, los sitios siguen sabiendo a dónde vas.",
+      "censorshipTitle": "Cómo funciona la censura de VPN",
+      "censorshipDesc": "Por qué las fugas de WebRTC y DNS son catastróficas en redes restringidas."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test de fugas DNS — Verifica que el DNS de tu VPN sea privado",
+      "description": "Guía gratuita de test de fugas DNS. Descubre si tus consultas DNS se enrutan por el túnel VPN o se filtran a tu proveedor. Instrucciones paso a paso y soluciones."
+    },
+    "hero": {
+      "title": "Test de fugas DNS",
+      "subtitle": "Si tus consultas DNS se saltan el túnel VPN, tu proveedor de internet sigue viendo cada sitio que visitas — incluso con la VPN conectada. Aquí te explicamos cómo comprobarlo y solucionarlo."
+    },
+    "widget": {
+      "title": "Test de fugas DNS recomendado",
+      "description": "No ejecutamos nuestra propia sonda DNS porque hacerlo bien requiere subdominios comodín controlados en varios resolutores. Usa la herramienta de terceros de confianza de abajo — es independiente y no requiere cuenta.",
+      "primaryButton": "Abrir dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Abrir browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Haz clic en \"Extended test\" en dnsleaktest.com. El resultado debería listar solo los servidores DNS de tu proveedor de VPN — no los de tu proveedor de internet. Si ves Comcast, Verizon, Vodafone o cualquier otro proveedor de consumo en los resultados, tu DNS se está filtrando."
+    },
+    "explainer": {
+      "whatTitle": "¿Qué es una fuga de DNS?",
+      "whatBody": "Cuando escribes una URL, tu dispositivo primero le pide a un servidor DNS la dirección IP de ese dominio. Si la consulta DNS pasa por el túnel VPN, tu proveedor solo ve tráfico cifrado. Si se salta el túnel — una fuga de DNS — tu proveedor ve cada dominio que visitas, aunque la conexión que sigue esté cifrada. Las redes censuradas suelen inspeccionar las consultas DNS para aplicar listas de bloqueo, así que una fuga de DNS es fatal en esos entornos.",
+      "causesTitle": "¿Qué causa las fugas de DNS?",
+      "causesBody": "Tres causas comunes: (1) El cliente VPN configura su propio resolutor DNS, pero el sistema operativo lo ignora y usa el resolutor asignado por la red local. (2) El tráfico IPv6 no se tuneliza, así que las consultas DNS por IPv6 se filtran alrededor de la VPN. (3) Navegadores como Chrome y Firefox pueden usar enrutamiento DNS \"inteligente\" (DNS-over-HTTPS) que ignora por completo la configuración DNS del sistema.",
+      "fixTitle": "Cómo solucionar una fuga de DNS",
+      "fixBody": "Usa una VPN que posea su propia infraestructura DNS y fuerce todas las consultas DNS por el túnel (Doppler lo hace por defecto en todas las plataformas). Desactiva IPv6 en la configuración de red de tu sistema si tu VPN no admite tunelización IPv6. En tu navegador, configura DNS-over-HTTPS para usar el mismo proveedor que tu VPN, o desactívalo. En routers, configura como DNS ascendente un resolutor que respete la privacidad (Quad9, Cloudflare 1.1.1.1) solo si no usas una VPN a nivel de dispositivo."
+    },
+    "checklist": {
+      "title": "Las garantías DNS de Doppler:",
+      "items": {
+        "item1": "Todas las consultas DNS se fuerzan por el túnel VPN — sin fugas por el DNS del sistema.",
+        "item2": "IPv6 se tuneliza o se bloquea, nunca se filtra.",
+        "item3": "Nuestros resolutores DNS no registran las consultas.",
+        "item4": "Bloqueamos los intentos de eludir el DNS mediante DNS-over-HTTPS desde los navegadores cuando el kill-switch está activado."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "¿Por qué una fuga de DNS es peor que una fuga de IP?",
+        "answer": "Una fuga de IP revela una dirección. Una fuga de DNS revela cada dominio que visitas — cada sitio, cada llamada a una API, cada endpoint de analítica — en texto plano a tu proveedor y a cualquiera en el camino. Para los usuarios de redes censuradas, las listas de bloqueo a nivel de DNS son el mecanismo de control más común, lo que convierte las fugas de DNS en el fallo que delata a la gente."
+      },
+      "q2": {
+        "question": "¿Cómo sé si mi DNS se está filtrando ahora mismo?",
+        "answer": "Ejecuta el test extendido en dnsleaktest.com. Emite varias consultas a subdominios comodín y te dice qué resolutores las respondieron. Si ves el nombre de tu proveedor (o cualquier nombre que no coincida con tu proveedor de VPN), el DNS se está filtrando. Repite el test con y sin la VPN para confirmarlo."
+      },
+      "q3": {
+        "question": "¿Doppler VPN filtra el DNS?",
+        "answer": "No. Empujamos nuestros propios resolutores por el túnel en todas las plataformas y bloqueamos el retorno al DNS del sistema. También desactivamos la elusión por DNS-over-HTTPS de los navegadores cuando nuestro kill-switch está activo. Los tests independientes en dnsleaktest.com y browserleaks.com lo confirman — compruébalo tú mismo."
+      },
+      "q4": {
+        "question": "¿Qué es DNS-over-HTTPS (DoH) y qué relación tiene con las fugas?",
+        "answer": "DoH es un protocolo que envía las consultas DNS por una conexión HTTPS cifrada, saltándose el resolutor DNS del sistema. Navegadores como Chrome y Firefox usan DoH por defecto, a menudo enviando las consultas a Google o Cloudflare sin importar tu VPN. Eso es una fuga, a menos que tu VPN lo gestione explícitamente. Doppler intercepta los intentos de DoH y los enruta por el túnel."
+      },
+      "q5": {
+        "question": "¿Necesito un servicio DNS aparte si uso una VPN?",
+        "answer": "No. Una VPN bien configurada gestiona el DNS por ti. Usar un servicio DNS aparte (Quad9, Cloudflare) encima de una VPN puede de hecho causar fugas si el sistema enruta la consulta DNS fuera del túnel. Confía en los resolutores de la VPN — y si no confías en ellos, usa otra VPN."
+      },
+      "q6": {
+        "question": "¿Cada cuánto debería hacer el test de fugas de DNS?",
+        "answer": "Después de cada configuración de VPN o actualización del sistema. Las configuraciones de túnel pueden romperse en silencio — una actualización del sistema puede cambiar tu pila de red a una ruta con fugas sin avisarte. Una comprobación trimestral es una cadencia razonable para usuarios habituales; semanal si vives en una red fuertemente censurada donde el coste de una fuga es alto."
+      }
+    },
+    "related": {
+      "ipTitle": "¿Cuál es mi IP?",
+      "ipDesc": "Mira exactamente qué está ocultando tu VPN de los sitios web.",
+      "webrtcTitle": "Test de fugas WebRTC",
+      "webrtcDesc": "IP oculta, DNS oculto, pero una fuga de WebRTC todavía te expone.",
+      "bypassTitle": "Eludir la censura de internet",
+      "bypassDesc": "Las fugas de DNS son la forma en que las listas de bloqueo te atrapan. Lee cómo Doppler las evita."
     }
   },
   "vlessVpnAndroid": {

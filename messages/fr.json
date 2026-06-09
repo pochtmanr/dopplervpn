@@ -1374,6 +1374,7 @@
     "promoError": "Invalid promo code"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Vérifiez votre sécurité web avec nos outils de confidentialité gratuits",
     "title": "Comment Doppler protège ton trafic",
     "subtitle": "Ta connexion est chiffrée et routée via le réseau Doppler. Aucun log.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Pourquoi nous ne demandons aucune information personnelle.",
       "vlessTitle": "À propos de VLESS-Reality",
       "vlessDesc": "Le protocole derrière le chiffrement de Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Outils de Confidentialité Gratuits — Doppler VPN",
+      "description": "Des outils gratuits et ciblés pour tester votre confidentialité : vérificateur d'IP, test de fuite WebRTC, test de fuite DNS. Sans pistage, sans e-mail."
+    },
+    "title": "Outils de confidentialité gratuits",
+    "subtitle": "Trois vérifications rapides des fuites qui comptent le plus.",
+    "tools": {
+      "ipChecker": {
+        "title": "Quelle est mon IP ?",
+        "description": "Découvrez l'IP publique, le pays et le fournisseur d'accès que votre trafic expose en ce moment même.",
+        "cta": "Vérifier mon IP"
+      },
+      "webrtcLeak": {
+        "title": "Test de fuite WebRTC",
+        "description": "WebRTC peut révéler votre véritable IP même à travers un VPN. Vérifiez si c'est le cas chez vous.",
+        "cta": "Lancer le test WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test de fuite DNS",
+        "description": "Si vos requêtes DNS contournent le tunnel VPN, votre FAI voit toujours chaque site que vous visitez.",
+        "cta": "Lancer le test DNS"
+      }
+    },
+    "cta": {
+      "title": "Les outils ont détecté une fuite ?",
+      "description": "Le tunnel VLESS-Reality de Doppler achemine le trafic IP et les requêtes DNS par le canal chiffré, avec blocage intégré des fuites WebRTC et IPv6.",
+      "button": "Essayer Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Quelle est mon IP ? — Vérification gratuite d'IP et de FAI",
+      "description": "Vérificateur d'adresse IP gratuit — voyez instantanément votre IP publique, votre pays, votre région, votre ville et votre FAI. Sans pistage. Sans e-mail. Fonctionne sur iPhone, Android, Mac et Windows."
+    },
+    "hero": {
+      "title": "Quelle est mon IP ?",
+      "subtitle": "Votre adresse IP publique telle que la voit chaque site que vous visitez — avec la géographie et le FAI qui y sont rattachés. Actualisez après vous être connecté à un VPN pour vérifier que le changement a bien pris effet."
+    },
+    "widget": {
+      "yourIp": "Votre adresse IP",
+      "country": "Pays",
+      "region": "Région",
+      "city": "Ville",
+      "isp": "Fournisseur d'accès",
+      "asn": "ASN",
+      "unknown": "Inconnu",
+      "refresh": "Actualiser",
+      "refreshing": "Actualisation…",
+      "copied": "Copié",
+      "copy": "Copier",
+      "loading": "Détection de votre IP…",
+      "error": "Impossible de détecter votre IP. Rechargez la page ou réessayez dans un instant."
+    },
+    "explainer": {
+      "whatTitle": "Qu'est-ce qu'une adresse IP ?",
+      "whatBody": "Chaque appareil sur internet porte une adresse numérique — une IP publique — qui l'identifie auprès de chaque serveur avec lequel il communique. L'IPv4 ressemble à 203.0.113.42 ; l'IPv6 est plus longue et utilise des deux-points. Votre IP est attribuée par votre FAI et change lorsque vous changez de réseau (Wi-Fi domestique, données mobiles, Wi-Fi d'un café).",
+      "exposeTitle": "Ce que votre IP révèle",
+      "exposeBody": "Une IP seule révèle votre pays, votre région, votre ville et votre FAI — parfois à quelques pâtés de maisons près. Combinée au User-Agent et aux données temporelles qu'envoie chaque navigateur, elle suffit aux régies publicitaires pour créer votre empreinte et vous pister de site en site. Les plateformes de streaming s'en servent pour appliquer les licences régionales. Les censeurs s'en servent pour imposer des blocages géographiques.",
+      "vpnTitle": "Comment un VPN change votre IP",
+      "vpnBody": "Quand vous vous connectez à un VPN, tout votre trafic sort sur internet avec l'IP du serveur VPN — pas la vôtre. Les sites voient le pays, le FAI et la géographie du serveur VPN à la place des vôtres. Un VPN correctement configuré achemine aussi les requêtes DNS par le même tunnel, de sorte que votre FAI ne peut pas voir quels sites vous visitez, même s'il transporte les paquets chiffrés."
+    },
+    "checklist": {
+      "title": "Si vous êtes connecté à Doppler VPN, cette page devrait afficher :",
+      "items": {
+        "item1": "Une IP qui ne correspond pas à celle que vous voyiez avant la connexion.",
+        "item2": "Un pays correspondant au serveur que vous avez choisi (par ex. Allemagne, Pays-Bas, Singapour).",
+        "item3": "Un FAI affiché comme hébergeur (Hetzner, Vultr, OVH) plutôt que votre FAI domestique.",
+        "item4": "Aucune mention de votre véritable ville ou région."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "À quoi sert mon adresse IP ?",
+        "answer": "Chaque serveur avec lequel vous communiquez utilise votre IP pour vous renvoyer ses réponses, et la plupart l'enregistrent. Elle permet la géolocalisation (jusqu'à la ville), les licences régionales de contenu, la personnalisation publicitaire, la détection de fraude et — dans les réseaux censurés — l'application des listes de blocage. L'anonymat en ligne commence par ne pas révéler ce numéro directement."
+      },
+      "q2": {
+        "question": "Mon adresse IP est-elle une donnée privée ?",
+        "answer": "Elle est transmise à chaque site que vous visitez, ce n'est donc pas un secret. Mais c'est une donnée personnelle au sens du RGPD et de la plupart des lois sur la vie privée, car elle peut être reliée à un individu. Traitez-la comme le nom de votre rue : pas classée secrète, mais vous ne la donnez pas au premier venu."
+      },
+      "q3": {
+        "question": "Comment masquer mon IP ?",
+        "answer": "Le VPN est l'outil standard — il remplace votre IP par celle du serveur. Tor masque votre IP à travers plusieurs relais au prix de la vitesse. Les services de proxy ne la masquent que pour le trafic du navigateur. Passer en données mobiles change votre IP, mais pas votre identité. Le Wi-Fi public partage une IP avec tout le monde sur le réseau, mais n'est pas chiffré."
+      },
+      "q4": {
+        "question": "Pourquoi mon IP semble-t-elle différente selon les sites ?",
+        "answer": "Cela ne devrait pas arriver — sauf si vous êtes derrière un VPN en tunnel partagé (certaines applis passent par le VPN, d'autres par votre FAI), sur un réseau d'entreprise avec plusieurs IP de sortie, ou si un site voit votre IPv4 et un autre votre IPv6. Certains sites utilisent des API tierces de géolocalisation d'IP qui peuvent renvoyer des métadonnées légèrement différentes."
+      },
+      "q5": {
+        "question": "Peut-on me pister même avec un VPN si mon IP est masquée ?",
+        "answer": "Oui. L'empreinte du navigateur (polices, taille d'écran, plugins, rendu canvas) identifie les appareils sans IP. Les cookies et les connexions vous suivent d'un réseau à l'autre. Les VPN ne règlent que la couche IP et DNS ; le reste relève du navigateur. Utilisez la navigation privée, bloquez les cookies tiers et envisagez un navigateur anti-empreinte pour une protection complète."
+      },
+      "q6": {
+        "question": "Doppler enregistre-t-il mon IP ?",
+        "answer": "Non. Doppler ne conserve ni journaux de connexion, ni historiques d'IP, ni requêtes DNS. Le serveur VPN ne voit votre véritable IP que le temps d'acheminer le trafic — elle n'est jamais écrite sur disque. Les audits indépendants et une politique sans logs sont les seules garanties qui comptent ici ; « promis » ne suffit pas, et nous publions le détail de notre infrastructure."
+      },
+      "q7": {
+        "question": "Qu'est-ce qu'un ASN ?",
+        "answer": "Un numéro de système autonome identifie l'opérateur réseau propriétaire du bloc d'IP. AS7922, c'est Comcast ; AS24940, Hetzner ; AS16509, Amazon AWS. Les ASN sont publics et permettent de savoir si une IP appartient à un FAI résidentiel, un opérateur mobile, un hébergeur (les nœuds de sortie VPN, en général) ou un réseau d'entreprise."
+      },
+      "q8": {
+        "question": "Pourquoi la localisation de mon IP semble-t-elle fausse ?",
+        "answer": "Les bases de géolocalisation d'IP (MaxMind, IP2Location) sont exactes au niveau du pays dans ~99 % des cas et de la ville dans ~70 %. Elles ont des semaines de retard sur la réalité : un bloc d'IP fraîchement attribué peut s'afficher à l'emplacement de son ancien propriétaire. Les IP de serveurs VPN sont parfois mal localisées. Si votre IP domestique affiche la mauvaise ville, votre FAI répartit probablement ses blocs sur toute une métropole."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test de fuite WebRTC",
+      "webrtcDesc": "WebRTC peut révéler votre véritable IP même quand cette page affiche celle du VPN. Testez-le.",
+      "dnsTitle": "Test de fuite DNS",
+      "dnsDesc": "Masquer votre IP ne suffit pas si vos requêtes DNS fuient encore.",
+      "vlessTitle": "VPN VLESS-Reality",
+      "vlessDesc": "Le protocole qu'utilise Doppler pour éviter d'être détecté et bloqué."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test de Fuite WebRTC — Vérifiez que votre VPN masque votre véritable IP",
+      "description": "Test de fuite WebRTC gratuit. Détecte si votre navigateur divulgue votre véritable IP via STUN même avec un VPN connecté. S'exécute en 2 secondes. Aucune donnée ne quitte votre appareil."
+    },
+    "hero": {
+      "title": "Test de fuite WebRTC",
+      "subtitle": "Les navigateurs peuvent révéler votre véritable IP via WebRTC même quand un VPN la masque aux sites web. Ce test vérifie si c'est le cas chez vous — entièrement dans votre navigateur, sans envoyer de données nulle part."
+    },
+    "widget": {
+      "publicIp": "IP publique (vue par les sites)",
+      "webrtcIps": "IP découvertes par WebRTC",
+      "leakedTitle": "WebRTC divulgue votre IP",
+      "leakedBody": "WebRTC a détecté une ou plusieurs IP différentes de l'IP publique. Si vous utilisez un VPN, cela signifie qu'un site utilisant WebRTC peut encore voir votre véritable adresse.",
+      "safeTitle": "Aucune fuite WebRTC détectée",
+      "safeBody": "WebRTC a signalé la même IP que l'IP publique, ou aucune IP du tout. Vous ne divulguez pas votre véritable adresse via WebRTC en ce moment.",
+      "noWebrtc": "Votre navigateur a désactivé WebRTC ou aucune adresse n'a été résolue. C'est un état sûr.",
+      "unknown": "Inconnu",
+      "refresh": "Relancer le test",
+      "refreshing": "Test en cours…",
+      "loading": "Sondage de WebRTC…",
+      "error": "Le test n'a pas pu s'exécuter. Rechargez la page et réessayez."
+    },
+    "explainer": {
+      "whatTitle": "Qu'est-ce qu'une fuite WebRTC ?",
+      "whatBody": "WebRTC est une fonctionnalité du navigateur pour l'audio, la vidéo et les données en pair-à-pair — utilisée par Google Meet, Discord et de nombreuses applis web. Pour établir une connexion P2P, le navigateur interroge des serveurs STUN afin de découvrir ses propres adresses IP, y compris locales et derrière NAT. Un site peut demander au navigateur d'exécuter cette découverte en silence et lire les IP obtenues via JavaScript, en contournant complètement le VPN.",
+      "howTitle": "Comment fonctionne le test",
+      "howBody": "Votre navigateur crée une RTCPeerConnection factice, appelle createOffer et lit les candidats ICE obtenus. Les candidats ICE incluent toutes les IP que le navigateur peut trouver — y compris la vôtre, même quand un VPN tunnelise tout le reste du trafic. Le test s'exécute en local ; rien n'est envoyé à nos serveurs.",
+      "fixTitle": "Comment corriger une fuite WebRTC",
+      "fixBody": "Trois options : (1) Utilisez un VPN qui bloque proactivement les fuites WebRTC (les applis iOS et Android de Doppler désactivent WebRTC hors du tunnel). (2) Installez une extension de navigateur qui désactive WebRTC (uBlock Origin propose cette option). (3) Sur Firefox, passez media.peerconnection.enabled à false dans about:config. Désactiver WebRTC cassera les appels vidéo dans le navigateur ; utilisez plutôt une appli native."
+    },
+    "faq": {
+      "q1": {
+        "question": "Qu'est-ce que WebRTC ?",
+        "answer": "WebRTC est un standard du W3C intégré à tous les navigateurs modernes pour la communication pair-à-pair audio, vidéo et données en temps réel. Il fait tourner Google Meet, Discord web, le client web de Zoom et la plupart des visioconférences en navigateur. Les API qui permettent les appels P2P permettent aussi à JavaScript de découvrir vos adresses réseau locales."
+      },
+      "q2": {
+        "question": "Pourquoi WebRTC divulgue-t-il ma véritable IP même via un VPN ?",
+        "answer": "Parce que la pile WebRTC opère sous la couche applicative et interroge l'interface réseau directement via STUN. Un VPN tunnelise le trafic au niveau IP mais ne bloque pas les appels de découverte d'adresses de WebRTC. L'adresse divulguée voyage dans le tunnel chiffré — mais le navigateur la remet ensuite au JavaScript de la page, qui peut l'envoyer n'importe où."
+      },
+      "q3": {
+        "question": "Quels navigateurs sont concernés ?",
+        "answer": "Tous, avec les réglages par défaut : Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave inclut un réglage contre la fuite d'IP par WebRTC, désactivé par défaut. Firefox permet de désactiver entièrement WebRTC via about:config. Safari sur iOS est partiellement protégé depuis iOS 14, mais pas totalement."
+      },
+      "q4": {
+        "question": "Doppler VPN bloque-t-il les fuites WebRTC ?",
+        "answer": "Oui. Nos clients iOS et Android exécutent un kill-switch local qui bloque tout le trafic UDP hors du tunnel, ce qui empêche la découverte STUN d'atteindre des serveurs externes. Sur ordinateur, nous recommandons d'associer le VPN au blocage WebRTC d'uBlock Origin ou à une désactivation au niveau du navigateur pour une couverture totale."
+      },
+      "q5": {
+        "question": "Désactiver WebRTC cassera-t-il des sites ?",
+        "answer": "Cela casse les appels vidéo en navigateur (Meet, Zoom web, Discord web) et certains outils collaboratifs. Cela n'affecte ni la navigation normale, ni le streaming, ni rien qui ne nécessite pas de connexions pair-à-pair. Les applis natives de ces services ne dépendent pas de WebRTC."
+      },
+      "q6": {
+        "question": "Ce test est-il privé ?",
+        "answer": "Oui. Le test s'exécute entièrement dans votre navigateur via l'API standard RTCPeerConnection. Ni IP, ni résultat, ni métadonnées ne quittent votre appareil. Nous n'enregistrons même pas le fait que vous avez lancé le test."
+      }
+    },
+    "related": {
+      "ipTitle": "Quelle est mon IP ?",
+      "ipDesc": "Voyez l'IP et la géographie que chaque site voit en ce moment.",
+      "dnsTitle": "Test de fuite DNS",
+      "dnsDesc": "Si WebRTC est propre mais que le DNS fuit, les sites savent toujours où vous allez.",
+      "censorshipTitle": "Comment fonctionne la censure des VPN",
+      "censorshipDesc": "Pourquoi les fuites WebRTC et DNS sont catastrophiques dans les réseaux restreints."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test de Fuite DNS — Vérifiez que le DNS de votre VPN est privé",
+      "description": "Guide gratuit de test de fuite DNS. Découvrez si vos requêtes DNS passent par le tunnel VPN ou fuient vers votre FAI. Instructions pas à pas et solutions."
+    },
+    "hero": {
+      "title": "Test de fuite DNS",
+      "subtitle": "Si vos requêtes DNS contournent le tunnel VPN, votre fournisseur d'accès voit toujours chaque site que vous visitez — même avec le VPN connecté. Voici comment le vérifier et y remédier."
+    },
+    "widget": {
+      "title": "Test de fuite DNS recommandé",
+      "description": "Nous n'exploitons pas notre propre sonde DNS, car bien le faire exige des sous-domaines génériques contrôlés sur plusieurs résolveurs. Utilisez l'outil tiers de confiance ci-dessous — il est indépendant et ne demande aucun compte.",
+      "primaryButton": "Ouvrir dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Ouvrir browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Cliquez sur « Extended test » sur dnsleaktest.com. Le résultat ne devrait lister que le ou les serveurs DNS de votre fournisseur VPN — pas votre FAI. Si vous voyez Comcast, Verizon, Vodafone ou tout autre FAI grand public dans les résultats, votre DNS fuit."
+    },
+    "explainer": {
+      "whatTitle": "Qu'est-ce qu'une fuite DNS ?",
+      "whatBody": "Quand vous saisissez une URL, votre appareil demande d'abord à un serveur DNS l'adresse IP de ce domaine. Si la requête DNS passe par le tunnel VPN, votre FAI ne voit que du trafic chiffré. Si elle contourne le tunnel — une fuite DNS — votre FAI voit chaque domaine que vous visitez, même si la connexion qui suit est chiffrée. Les réseaux censurés inspectent souvent les requêtes DNS pour appliquer leurs listes de blocage : une fuite DNS y est donc fatale.",
+      "causesTitle": "Quelles sont les causes des fuites DNS ?",
+      "causesBody": "Trois causes courantes : (1) Le client VPN définit son propre résolveur DNS, mais l'OS l'ignore et utilise celui attribué par le réseau local. (2) Le trafic IPv6 n'est pas tunnelisé, donc les requêtes DNS en IPv6 contournent le VPN. (3) Des navigateurs comme Chrome et Firefox peuvent utiliser un routage DNS « intelligent » (DNS-over-HTTPS) qui ignore complètement les réglages DNS du système.",
+      "fixTitle": "Comment corriger une fuite DNS",
+      "fixBody": "Utilisez un VPN qui possède sa propre infrastructure DNS et force toutes les requêtes DNS dans le tunnel (Doppler le fait par défaut sur toutes les plateformes). Désactivez l'IPv6 dans les réglages réseau de votre OS si votre VPN ne prend pas en charge le tunneling IPv6. Dans votre navigateur, configurez le DNS-over-HTTPS sur le même fournisseur que votre VPN, ou désactivez-le. Sur un routeur, ne définissez un résolveur respectueux de la vie privée (Quad9, Cloudflare 1.1.1.1) en DNS amont que si vous n'utilisez pas de VPN au niveau de l'appareil."
+    },
+    "checklist": {
+      "title": "Les garanties DNS de Doppler :",
+      "items": {
+        "item1": "Toutes les requêtes DNS sont forcées dans le tunnel VPN — aucune fuite par le DNS système.",
+        "item2": "L'IPv6 est tunnelisé ou bloqué, jamais divulgué.",
+        "item3": "Nos résolveurs DNS n'enregistrent pas les requêtes.",
+        "item4": "Nous bloquons les tentatives de contournement par DNS-over-HTTPS des navigateurs quand le kill-switch est actif."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Pourquoi une fuite DNS est-elle pire qu'une fuite d'IP ?",
+        "answer": "Une fuite d'IP révèle une adresse. Une fuite DNS révèle chaque domaine que vous visitez — chaque site, chaque appel d'API, chaque point de collecte analytique — en clair, à votre FAI et à quiconque se trouve sur le chemin. Pour les utilisateurs des réseaux censurés, les listes de blocage au niveau DNS sont le mécanisme de contrôle le plus répandu, ce qui fait des fuites DNS la défaillance qui fait prendre les gens."
+      },
+      "q2": {
+        "question": "Comment savoir si mon DNS fuit en ce moment ?",
+        "answer": "Lancez le test étendu sur dnsleaktest.com. Il émet plusieurs requêtes vers des sous-domaines génériques et vous indique quels résolveurs y ont répondu. Si vous voyez le nom de votre FAI (ou tout nom qui ne correspond pas à votre fournisseur VPN), le DNS fuit. Répétez le test avec et sans le VPN pour confirmer."
+      },
+      "q3": {
+        "question": "Doppler VPN laisse-t-il fuir le DNS ?",
+        "answer": "Non. Nous poussons nos propres résolveurs dans le tunnel sur chaque plateforme et bloquons le repli vers le DNS système. Nous désactivons aussi le contournement DNS-over-HTTPS des navigateurs quand notre kill-switch est actif. Les tests indépendants sur dnsleaktest.com et browserleaks.com le confirment — vérifiez par vous-même."
+      },
+      "q4": {
+        "question": "Qu'est-ce que le DNS-over-HTTPS (DoH) et quel rapport avec les fuites ?",
+        "answer": "Le DoH est un protocole qui envoie les requêtes DNS via une connexion HTTPS chiffrée, en contournant le résolveur DNS du système. Des navigateurs comme Chrome et Firefox utilisent le DoH par défaut, envoyant souvent les requêtes à Google ou Cloudflare sans tenir compte de votre VPN. C'est une fuite, sauf si votre VPN la gère explicitement. Doppler intercepte les tentatives de DoH et les achemine par le tunnel."
+      },
+      "q5": {
+        "question": "Ai-je besoin d'un service DNS séparé si j'utilise un VPN ?",
+        "answer": "Non. Un VPN bien configuré gère le DNS pour vous. Utiliser un service DNS séparé (Quad9, Cloudflare) par-dessus un VPN peut en réalité provoquer des fuites si l'OS route la requête DNS hors du tunnel. Faites confiance aux résolveurs du VPN — et si vous ne leur faites pas confiance, changez de VPN."
+      },
+      "q6": {
+        "question": "À quelle fréquence tester les fuites DNS ?",
+        "answer": "Après chaque configuration de VPN ou mise à jour de l'OS. Les configurations de tunnel peuvent se casser en silence — une mise à jour système peut faire basculer votre pile réseau vers un chemin qui fuit sans vous prévenir. Un contrôle trimestriel est une cadence raisonnable pour un usage continu ; hebdomadaire si vous vivez dans un réseau fortement censuré où le coût d'une fuite est élevé."
+      }
+    },
+    "related": {
+      "ipTitle": "Quelle est mon IP ?",
+      "ipDesc": "Voyez exactement ce que votre VPN cache aux sites web.",
+      "webrtcTitle": "Test de fuite WebRTC",
+      "webrtcDesc": "IP masquée, DNS masqué, mais une fuite WebRTC vous expose encore.",
+      "bypassTitle": "Contourner la censure d'internet",
+      "bypassDesc": "C'est par les fuites DNS que les listes de blocage vous attrapent. Découvrez comment Doppler les évite."
     }
   },
   "vlessVpnAndroid": {
