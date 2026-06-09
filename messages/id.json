@@ -1374,6 +1374,7 @@
     "promoError": "Kode promo tidak valid"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Periksa keamanan web Anda dengan alat privasi gratis kami",
     "title": "Bagaimana Doppler Melindungi Lalu Lintas Anda",
     "subtitle": "Koneksi Anda dienkripsi dan diarahkan melalui jaringan Doppler. Tanpa log.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Mengapa kami tidak meminta informasi pribadi.",
       "vlessTitle": "Tentang VLESS-Reality",
       "vlessDesc": "Protokol di balik enkripsi Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Alat Privasi Gratis — Doppler VPN",
+      "description": "Alat gratis dengan satu fungsi untuk menguji privasi Anda: pemeriksa IP, tes kebocoran WebRTC, tes kebocoran DNS. Tanpa pelacakan, tanpa email."
+    },
+    "title": "Alat privasi gratis",
+    "subtitle": "Tiga pemeriksaan cepat untuk kebocoran yang paling penting.",
+    "tools": {
+      "ipChecker": {
+        "title": "Berapa IP saya?",
+        "description": "Lihat IP publik, negara, dan ISP yang sedang diekspos oleh lalu lintas Anda saat ini.",
+        "cta": "Jalankan pemeriksaan IP"
+      },
+      "webrtcLeak": {
+        "title": "Tes kebocoran WebRTC",
+        "description": "WebRTC bisa membocorkan IP asli Anda bahkan lewat VPN. Periksa apakah milik Anda begitu.",
+        "cta": "Jalankan tes WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Tes kebocoran DNS",
+        "description": "Jika kueri DNS Anda melewati terowongan VPN, ISP tetap melihat setiap situs yang Anda kunjungi.",
+        "cta": "Jalankan tes DNS"
+      }
+    },
+    "cta": {
+      "title": "Alat menemukan kebocoran?",
+      "description": "Terowongan VLESS-Reality Doppler merutekan lalu lintas IP dan kueri DNS melalui saluran terenkripsi, dengan pemblokiran kebocoran WebRTC dan IPv6 bawaan.",
+      "button": "Coba Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Berapa IP saya? — Pencarian IP & ISP Gratis",
+      "description": "Pemeriksa alamat IP gratis — langsung lihat IP publik, negara, wilayah, kota, dan ISP Anda. Tanpa pelacakan. Tanpa email. Berfungsi di iPhone, Android, Mac, Windows."
+    },
+    "hero": {
+      "title": "Berapa IP saya?",
+      "subtitle": "Alamat IP publik Anda sebagaimana dilihat setiap situs yang Anda kunjungi — beserta geografi dan ISP yang menyertainya. Segarkan setelah terhubung ke VPN untuk memastikan perubahannya berlaku."
+    },
+    "widget": {
+      "yourIp": "Alamat IP Anda",
+      "country": "Negara",
+      "region": "Wilayah",
+      "city": "Kota",
+      "isp": "Penyedia internet",
+      "asn": "ASN",
+      "unknown": "Tidak diketahui",
+      "refresh": "Segarkan",
+      "refreshing": "Menyegarkan…",
+      "copied": "Tersalin",
+      "copy": "Salin",
+      "loading": "Mendeteksi IP Anda…",
+      "error": "IP Anda tidak terdeteksi. Muat ulang halaman atau coba lagi sebentar lagi."
+    },
+    "explainer": {
+      "whatTitle": "Apa itu alamat IP?",
+      "whatBody": "Setiap perangkat di internet membawa alamat numerik — IP publik — yang mengidentifikasinya ke setiap server yang diajak bicara. IPv4 terlihat seperti 203.0.113.42; IPv6 lebih panjang dan memakai titik dua. IP Anda diberikan oleh ISP dan berubah saat Anda berganti jaringan (Wi-Fi rumah, data seluler, Wi-Fi kafe).",
+      "exposeTitle": "Apa yang diekspos IP Anda",
+      "exposeBody": "IP saja sudah mengungkap negara, wilayah, kota, dan ISP Anda — kadang hingga akurasi beberapa blok. Dipadukan dengan User-Agent dan data waktu yang dikirim setiap peramban, itu cukup bagi jaringan iklan untuk membuat sidik jari dan melacak Anda lintas situs. Platform streaming memakainya untuk menegakkan lisensi regional. Penyensor memakainya untuk memberlakukan blokir geografis.",
+      "vpnTitle": "Bagaimana VPN mengubah IP Anda",
+      "vpnBody": "Saat terhubung ke VPN, semua lalu lintas Anda keluar ke internet dengan IP server VPN — bukan milik Anda. Situs web melihat negara, ISP, dan geografi server VPN alih-alih milik Anda yang asli. VPN yang dikonfigurasi dengan benar juga merutekan kueri DNS melalui terowongan yang sama, sehingga ISP tidak bisa melihat situs mana yang Anda kunjungi meski ia membawa paket terenkripsi."
+    },
+    "checklist": {
+      "title": "Jika Anda terhubung ke Doppler VPN, halaman ini seharusnya menampilkan:",
+      "items": {
+        "item1": "IP yang tidak cocok dengan yang Anda lihat sebelum terhubung.",
+        "item2": "Negara yang sesuai dengan server pilihan Anda (mis. Jerman, Belanda, Singapura).",
+        "item3": "ISP yang tercatat sebagai penyedia hosting (Hetzner, Vultr, OVH), bukan ISP rumah Anda.",
+        "item4": "Tidak ada penyebutan kota atau wilayah asli Anda."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Untuk apa alamat IP saya digunakan?",
+        "answer": "Setiap server yang Anda hubungi memakai IP Anda untuk mengirim balasan, dan kebanyakan mencatatnya. IP memungkinkan geolokasi (sampai tingkat kota), lisensi konten regional, personalisasi iklan, deteksi penipuan, dan — di jaringan tersensor — penegakan daftar blokir. Anonimitas daring dimulai dengan tidak mengungkap angka ini secara langsung."
+      },
+      "q2": {
+        "question": "Apakah alamat IP saya informasi pribadi?",
+        "answer": "Ia dikirim ke setiap situs yang Anda kunjungi, jadi bukan rahasia. Tapi ia adalah data pribadi menurut GDPR dan kebanyakan undang-undang privasi karena bisa dikaitkan dengan individu. Perlakukan seperti nama jalan rumah Anda: tidak rahasia, tapi tidak Anda berikan ke orang asing sembarangan."
+      },
+      "q3": {
+        "question": "Bagaimana menyembunyikan IP saya?",
+        "answer": "VPN adalah alat standar — ia mengganti IP Anda dengan milik server. Tor menyembunyikan IP lewat beberapa relai dengan mengorbankan kecepatan. Layanan proxy hanya menyembunyikannya untuk lalu lintas peramban. Berpindah ke data seluler mengubah IP, tapi bukan identitas Anda. Wi-Fi publik berbagi satu IP dengan semua orang di jaringan, tapi tidak terenkripsi."
+      },
+      "q4": {
+        "question": "Kenapa IP saya tampak berbeda di situs yang berbeda?",
+        "answer": "Seharusnya tidak — kecuali Anda di balik VPN dengan split tunneling (sebagian aplikasi lewat VPN, sebagian lewat ISP), di jaringan korporat dengan beberapa IP keluar, atau melihat IPv4 di satu situs dan IPv6 di situs lain. Beberapa situs memakai API pencarian IP pihak ketiga yang bisa mengembalikan metadata sedikit berbeda."
+      },
+      "q5": {
+        "question": "Apakah saya tetap bisa dilacak dengan VPN jika IP saya tersembunyi?",
+        "answer": "Ya. Sidik jari peramban (fon, ukuran layar, plugin, render canvas) mengidentifikasi perangkat tanpa IP. Cookie dan login mengikuti Anda lintas jaringan. VPN hanya menyelesaikan lapisan IP dan DNS; sisanya urusan peramban. Gunakan penjelajahan pribadi, blokir cookie pihak ketiga, dan pertimbangkan peramban anti-sidik-jari untuk perlindungan penuh."
+      },
+      "q6": {
+        "question": "Apakah Doppler mencatat IP saya?",
+        "answer": "Tidak. Doppler tidak menyimpan log koneksi, riwayat IP, atau kueri DNS. Server VPN melihat IP asli Anda hanya selama diperlukan untuk merutekan lalu lintas — tidak pernah ditulis ke disk. Audit independen dan kebijakan tanpa log adalah satu-satunya jaminan yang berarti di sini; \"kami janji\" tidak cukup, dan kami memublikasikan susunan infrastruktur kami."
+      },
+      "q7": {
+        "question": "Apa itu ASN?",
+        "answer": "Autonomous System Number mengidentifikasi operator jaringan pemilik blok IP. AS7922 adalah Comcast; AS24940 adalah Hetzner; AS16509 adalah Amazon AWS. ASN bersifat publik dan memberi tahu apakah suatu IP milik ISP rumahan, operator seluler, penyedia hosting (biasanya simpul keluar VPN), atau jaringan korporat."
+      },
+      "q8": {
+        "question": "Kenapa lokasi IP saya tampak salah?",
+        "answer": "Basis data geolokasi IP (MaxMind, IP2Location) akurat di tingkat negara ~99% dan tingkat kota ~70%. Mereka tertinggal berminggu-minggu dari kenyataan: blok IP yang baru dialokasikan bisa tampil sebagai lokasi pemilik sebelumnya. IP server VPN kadang salah lokasi. Jika IP rumah Anda menunjukkan kota yang salah, ISP Anda mungkin membagi blok ke seluruh area metropolitan."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Tes kebocoran WebRTC",
+      "webrtcDesc": "WebRTC bisa membocorkan IP asli Anda bahkan saat halaman ini menampilkan IP VPN. Uji.",
+      "dnsTitle": "Tes kebocoran DNS",
+      "dnsDesc": "Menyembunyikan IP tidak cukup jika kueri DNS Anda masih bocor.",
+      "vlessTitle": "VPN VLESS-Reality",
+      "vlessDesc": "Protokol yang dipakai Doppler agar tidak terdeteksi dan terblokir."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Tes Kebocoran WebRTC — Periksa Apakah VPN Menyembunyikan IP Asli Anda",
+      "description": "Tes kebocoran WebRTC gratis. Mendeteksi apakah peramban membocorkan IP asli Anda lewat STUN bahkan saat VPN terhubung. Selesai dalam 2 detik. Tidak ada data yang keluar dari perangkat."
+    },
+    "hero": {
+      "title": "Tes kebocoran WebRTC",
+      "subtitle": "Peramban bisa mengungkap IP asli Anda lewat WebRTC bahkan saat VPN menyembunyikannya dari situs web. Tes ini memeriksa apakah peramban Anda begitu — sepenuhnya di peramban Anda, tanpa mengirim data ke mana pun."
+    },
+    "widget": {
+      "publicIp": "IP publik (dilihat situs web)",
+      "webrtcIps": "IP yang ditemukan WebRTC",
+      "leakedTitle": "WebRTC membocorkan IP Anda",
+      "leakedBody": "WebRTC mendeteksi satu atau lebih IP yang berbeda dari IP publik. Jika Anda memakai VPN, artinya situs yang menggunakan WebRTC masih bisa melihat alamat asli Anda.",
+      "safeTitle": "Tidak ada kebocoran WebRTC terdeteksi",
+      "safeBody": "WebRTC melaporkan IP yang sama dengan IP publik, atau tidak melaporkan IP sama sekali. Saat ini alamat asli Anda tidak bocor lewat WebRTC.",
+      "noWebrtc": "Peramban Anda menonaktifkan WebRTC atau tidak ada alamat yang ter-resolve. Itu kondisi aman.",
+      "unknown": "Tidak diketahui",
+      "refresh": "Jalankan ulang tes",
+      "refreshing": "Menguji…",
+      "loading": "Memeriksa WebRTC…",
+      "error": "Tes gagal dijalankan. Muat ulang halaman dan coba lagi."
+    },
+    "explainer": {
+      "whatTitle": "Apa itu kebocoran WebRTC?",
+      "whatBody": "WebRTC adalah fitur peramban untuk audio, video, dan data peer-to-peer — dipakai Google Meet, Discord, dan banyak aplikasi web. Untuk membangun koneksi P2P, peramban memakai server STUN guna menemukan alamat IP-nya sendiri, termasuk alamat lokal dan di balik NAT. Sebuah situs bisa menyuruh peramban menjalankan penemuan ini diam-diam dan membaca IP hasilnya lewat JavaScript — sepenuhnya melewati VPN.",
+      "howTitle": "Cara kerja tes",
+      "howBody": "Peramban Anda membuat RTCPeerConnection palsu, memanggil createOffer, dan membaca kandidat ICE yang dihasilkan. Kandidat ICE memuat semua IP yang bisa ditemukan peramban — termasuk IP asli Anda, bahkan saat VPN menerowongkan semua lalu lintas lain. Tes berjalan lokal; tidak ada yang dikirim ke server kami.",
+      "fixTitle": "Cara memperbaiki kebocoran WebRTC",
+      "fixBody": "Tiga pilihan: (1) Pakai VPN yang proaktif memblokir kebocoran WebRTC (aplikasi iOS dan Android Doppler menonaktifkan WebRTC di luar terowongan). (2) Pasang ekstensi peramban yang menonaktifkan WebRTC (uBlock Origin punya opsinya). (3) Di Firefox, setel media.peerconnection.enabled ke false di about:config. Menonaktifkan WebRTC akan merusak panggilan video di peramban; pakai aplikasi asli sebagai gantinya."
+    },
+    "faq": {
+      "q1": {
+        "question": "Apa itu WebRTC?",
+        "answer": "WebRTC adalah standar W3C yang tertanam di setiap peramban modern untuk komunikasi audio, video, dan data peer-to-peer secara real-time. Ia menggerakkan Google Meet, Discord web, klien web Zoom, dan kebanyakan obrolan video berbasis peramban. API yang sama yang memungkinkan panggilan P2P juga membiarkan JavaScript menemukan alamat jaringan lokal Anda."
+      },
+      "q2": {
+        "question": "Kenapa WebRTC membocorkan IP asli saya bahkan lewat VPN?",
+        "answer": "Karena tumpukan WebRTC beroperasi di bawah lapisan aplikasi dan menanyai antarmuka jaringan langsung lewat STUN. VPN menerowongkan lalu lintas di lapisan IP tapi tidak memblokir panggilan penemuan alamat WebRTC. Alamat yang bocor berjalan di dalam terowongan terenkripsi — tapi peramban lalu menyerahkannya ke JavaScript di halaman, yang bisa mengirimnya ke mana saja."
+      },
+      "q3": {
+        "question": "Peramban mana saja yang terdampak?",
+        "answer": "Semuanya pada pengaturan bawaan: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave punya pengaturan anti-kebocoran IP WebRTC yang bawaannya nonaktif. Firefox memungkinkan menonaktifkan WebRTC sepenuhnya lewat about:config. Safari iOS sebagian teratasi sejak iOS 14 tapi belum tertutup penuh."
+      },
+      "q4": {
+        "question": "Apakah Doppler VPN memblokir kebocoran WebRTC?",
+        "answer": "Ya. Klien iOS dan Android kami menjalankan kill-switch lokal yang memblokir semua lalu lintas UDP di luar terowongan, sehingga penemuan STUN tidak mencapai server eksternal. Di desktop, kami sarankan memadukan VPN dengan sakelar WebRTC uBlock Origin atau menonaktifkan di tingkat peramban untuk cakupan penuh."
+      },
+      "q5": {
+        "question": "Apakah menonaktifkan WebRTC merusak situs web?",
+        "answer": "Ia merusak panggilan video di peramban (Meet, Zoom web, Discord web) dan sebagian alat kolaborasi. Tidak memengaruhi penjelajahan biasa, streaming, atau apa pun yang tidak butuh koneksi peer-to-peer. Aplikasi asli layanan tersebut tidak bergantung pada WebRTC."
+      },
+      "q6": {
+        "question": "Apakah tes ini privat?",
+        "answer": "Ya. Tes berjalan sepenuhnya di peramban Anda memakai API standar RTCPeerConnection. Tidak ada IP, hasil, maupun metadata yang keluar dari perangkat. Kami bahkan tidak mencatat bahwa Anda menjalankan tes."
+      }
+    },
+    "related": {
+      "ipTitle": "Berapa IP saya?",
+      "ipDesc": "Lihat IP dan geografi yang dilihat setiap situs saat ini.",
+      "dnsTitle": "Tes kebocoran DNS",
+      "dnsDesc": "Jika WebRTC bersih tapi DNS bocor, situs tetap tahu ke mana Anda pergi.",
+      "censorshipTitle": "Cara kerja sensor VPN",
+      "censorshipDesc": "Kenapa kebocoran WebRTC dan DNS fatal di jaringan terbatas."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Tes Kebocoran DNS — Pastikan DNS VPN Anda Privat",
+      "description": "Panduan tes kebocoran DNS gratis. Cari tahu apakah kueri DNS Anda dirutekan lewat terowongan VPN atau bocor ke ISP. Instruksi langkah demi langkah dan solusinya."
+    },
+    "hero": {
+      "title": "Tes kebocoran DNS",
+      "subtitle": "Jika kueri DNS Anda melewati terowongan VPN, penyedia internet tetap melihat setiap situs yang Anda kunjungi — bahkan saat VPN terhubung. Begini cara memeriksa dan memperbaikinya."
+    },
+    "widget": {
+      "title": "Tes kebocoran DNS yang disarankan",
+      "description": "Kami tidak menjalankan probe DNS sendiri karena melakukannya dengan baik membutuhkan subdomain wildcard terkontrol di beberapa resolver. Gunakan alat pihak ketiga tepercaya di bawah — independen dan tanpa akun.",
+      "primaryButton": "Buka dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Buka browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Klik \"Extended test\" di dnsleaktest.com. Hasilnya seharusnya hanya menampilkan server DNS penyedia VPN Anda — bukan ISP Anda. Jika Anda melihat Comcast, Verizon, Vodafone, atau ISP konsumen lain di hasil, DNS Anda bocor."
+    },
+    "explainer": {
+      "whatTitle": "Apa itu kebocoran DNS?",
+      "whatBody": "Saat Anda mengetik URL, perangkat lebih dulu menanyakan alamat IP domain itu ke server DNS. Jika kueri DNS lewat terowongan VPN, ISP hanya melihat lalu lintas terenkripsi. Jika ia melewati terowongan — kebocoran DNS — ISP melihat setiap domain yang Anda kunjungi, meski koneksi berikutnya terenkripsi. Jaringan tersensor sering memeriksa kueri DNS untuk menegakkan daftar blokir, jadi kebocoran DNS fatal di lingkungan itu.",
+      "causesTitle": "Apa penyebab kebocoran DNS?",
+      "causesBody": "Tiga penyebab umum: (1) Klien VPN menyetel resolver DNS-nya sendiri tapi OS mengabaikannya dan memakai resolver yang diberikan jaringan lokal. (2) Lalu lintas IPv6 tidak diterowongkan, sehingga kueri DNS IPv6 bocor melewati VPN. (3) Peramban seperti Chrome dan Firefox bisa memakai perutean DNS \"pintar\" (DNS-over-HTTPS) yang sepenuhnya melewati pengaturan DNS sistem.",
+      "fixTitle": "Cara memperbaiki kebocoran DNS",
+      "fixBody": "Pakai VPN yang punya infrastruktur DNS sendiri dan memaksa semua kueri DNS lewat terowongan (Doppler melakukannya secara bawaan di semua platform). Nonaktifkan IPv6 di pengaturan jaringan OS jika VPN Anda tidak mendukung penerowongan IPv6. Di peramban, setel DNS-over-HTTPS ke penyedia yang sama dengan VPN Anda, atau nonaktifkan. Di router, setel DNS hulu ke resolver yang menghormati privasi (Quad9, Cloudflare 1.1.1.1) hanya jika Anda tidak menjalankan VPN di tingkat perangkat."
+    },
+    "checklist": {
+      "title": "Jaminan DNS Doppler:",
+      "items": {
+        "item1": "Semua kueri DNS dipaksa lewat terowongan VPN — tanpa kebocoran DNS sistem.",
+        "item2": "IPv6 diterowongkan atau diblokir, tidak pernah bocor.",
+        "item3": "Resolver DNS kami tidak mencatat kueri.",
+        "item4": "Kami memblokir upaya bypass DNS-over-HTTPS dari peramban saat kill-switch aktif."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Kenapa kebocoran DNS lebih buruk daripada kebocoran IP?",
+        "answer": "Kebocoran IP mengungkap satu alamat. Kebocoran DNS mengungkap setiap domain yang Anda kunjungi — setiap situs, setiap panggilan API, setiap endpoint analitik — dalam teks polos ke ISP dan siapa pun di jalurnya. Bagi pengguna jaringan tersensor, daftar blokir tingkat DNS adalah mekanisme penegakan paling umum, yang menjadikan kebocoran DNS kesalahan yang membuat orang tertangkap."
+      },
+      "q2": {
+        "question": "Bagaimana tahu DNS saya sedang bocor sekarang?",
+        "answer": "Jalankan tes diperluas di dnsleaktest.com. Ia mengirim beberapa kueri ke subdomain wildcard dan memberi tahu resolver mana yang menjawabnya. Jika Anda melihat nama ISP Anda (atau nama apa pun yang tidak cocok dengan penyedia VPN), DNS bocor. Ulangi tes dengan dan tanpa VPN untuk memastikan."
+      },
+      "q3": {
+        "question": "Apakah Doppler VPN membocorkan DNS?",
+        "answer": "Tidak. Kami mendorong resolver kami sendiri lewat terowongan di setiap platform dan memblokir fallback ke DNS sistem. Kami juga menonaktifkan bypass DNS-over-HTTPS peramban saat kill-switch kami aktif. Tes independen di dnsleaktest.com dan browserleaks.com mengonfirmasinya — silakan verifikasi sendiri."
+      },
+      "q4": {
+        "question": "Apa itu DNS-over-HTTPS (DoH) dan apa kaitannya dengan kebocoran?",
+        "answer": "DoH adalah protokol yang mengirim kueri DNS lewat koneksi HTTPS terenkripsi, melewati resolver DNS sistem. Peramban seperti Chrome dan Firefox memakai DoH secara bawaan, sering merutekan kueri ke Google atau Cloudflare tanpa peduli VPN Anda. Ini kebocoran kecuali VPN menanganinya secara eksplisit. Doppler mencegat upaya DoH dan merutekannya lewat terowongan."
+      },
+      "q5": {
+        "question": "Perlukah layanan DNS terpisah jika saya memakai VPN?",
+        "answer": "Tidak. VPN yang terkonfigurasi baik menangani DNS untuk Anda. Memakai layanan DNS terpisah (Quad9, Cloudflare) di atas VPN justru bisa menyebabkan kebocoran jika OS merutekan kueri DNS di luar terowongan. Percayai resolver VPN — jika tidak percaya, pakai VPN lain."
+      },
+      "q6": {
+        "question": "Seberapa sering saya harus menguji kebocoran DNS?",
+        "answer": "Setelah setiap penyiapan VPN atau pembaruan OS. Konfigurasi terowongan bisa rusak diam-diam — pembaruan sistem bisa mengalihkan tumpukan jaringan Anda ke jalur yang bocor tanpa memberi tahu. Pemeriksaan triwulanan adalah ritme wajar bagi pengguna tetap; mingguan jika Anda tinggal di jaringan yang disensor ketat dengan risiko kebocoran tinggi."
+      }
+    },
+    "related": {
+      "ipTitle": "Berapa IP saya?",
+      "ipDesc": "Lihat persis apa yang disembunyikan VPN Anda dari situs web.",
+      "webrtcTitle": "Tes kebocoran WebRTC",
+      "webrtcDesc": "IP tersembunyi, DNS tersembunyi, tapi kebocoran WebRTC tetap mengekspos Anda.",
+      "bypassTitle": "Lewati sensor internet",
+      "bypassDesc": "Kebocoran DNS adalah cara daftar blokir menangkap Anda. Baca cara Doppler menghindarinya."
     }
   },
   "vlessVpnAndroid": {
