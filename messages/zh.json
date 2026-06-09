@@ -423,6 +423,7 @@
     "vpnForRussia": "俄罗斯 VPN",
     "vpnForTurkey": "土耳其 VPN",
     "tools": "免费隐私工具",
+    "tools": "免费隐私工具",
     "securityPage": "安全性"
   },
   "privacy": {
@@ -1375,6 +1376,7 @@
     "promoError": "Invalid promo code"
   },
   "technicalHowItWorks": {
+    "toolsCta": "使用我们的免费隐私工具检测您的网络安全",
     "title": "Doppler如何保护你的流量",
     "subtitle": "连接经过加密并通过Doppler边缘网络路由。不记录任何日志。",
     "flow": {
@@ -3884,6 +3886,256 @@
       "noRegDesc": "我们为何要求零个人信息。",
       "vlessTitle": "关于VLESS-Reality",
       "vlessDesc": "Doppler加密背后的协议。"
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "免费隐私工具 — Doppler VPN",
+      "description": "免费的专用隐私检测工具：IP 查询、WebRTC 泄漏测试、DNS 泄漏测试。无跟踪，无需邮箱。"
+    },
+    "title": "免费隐私工具",
+    "subtitle": "三项快速检测，覆盖最关键的泄漏。",
+    "tools": {
+      "ipChecker": {
+        "title": "我的 IP 是什么？",
+        "description": "查看您的流量此刻正在暴露的公网 IP、国家和运营商。",
+        "cta": "开始 IP 检测"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC 泄漏测试",
+        "description": "即使使用 VPN，WebRTC 也可能泄露您的真实 IP。检测一下您的浏览器是否如此。",
+        "cta": "开始 WebRTC 测试"
+      },
+      "dnsLeak": {
+        "title": "DNS 泄漏测试",
+        "description": "如果 DNS 查询绕过了 VPN 隧道，您的运营商仍能看到您访问的每个网站。",
+        "cta": "开始 DNS 测试"
+      }
+    },
+    "cta": {
+      "title": "工具发现了泄漏？",
+      "description": "Doppler 的 VLESS-Reality 隧道将 IP 流量和 DNS 查询全部通过加密通道传输，并内置 WebRTC 与 IPv6 泄漏拦截。",
+      "button": "试用 Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "我的 IP 是什么？— 免费 IP 与运营商查询",
+      "description": "免费 IP 地址查询 — 即时查看您的公网 IP、国家、地区、城市和运营商。无跟踪。无需邮箱。支持 iPhone、Android、Mac、Windows。"
+    },
+    "hero": {
+      "title": "我的 IP 是什么？",
+      "subtitle": "这是您访问的每个网站所看到的公网 IP 地址，以及与之关联的地理位置和运营商。连接 VPN 后刷新页面，确认地址已经更换。"
+    },
+    "widget": {
+      "yourIp": "您的 IP 地址",
+      "country": "国家",
+      "region": "地区",
+      "city": "城市",
+      "isp": "网络运营商",
+      "asn": "ASN",
+      "unknown": "未知",
+      "refresh": "刷新",
+      "refreshing": "正在刷新…",
+      "copied": "已复制",
+      "copy": "复制",
+      "loading": "正在检测您的 IP…",
+      "error": "无法检测您的 IP。请刷新页面或稍后再试。"
+    },
+    "explainer": {
+      "whatTitle": "什么是 IP 地址？",
+      "whatBody": "互联网上的每台设备都带有一个数字地址——公网 IP——它向所有与之通信的服务器标识这台设备。IPv4 形如 203.0.113.42；IPv6 更长并使用冒号。您的 IP 由运营商分配，并随网络切换而改变（家庭 Wi-Fi、移动数据、咖啡馆 Wi-Fi）。",
+      "exposeTitle": "您的 IP 暴露了什么",
+      "exposeBody": "仅凭一个 IP 就能看出您的国家、地区、城市和运营商——有时精确到几个街区。再结合每个浏览器发送的 User-Agent 和时间数据，广告网络足以为您建立指纹并跨网站跟踪您。流媒体平台用它执行地区版权限制，审查机构用它实施地理封锁。",
+      "vpnTitle": "VPN 如何改变您的 IP",
+      "vpnBody": "连接 VPN 后，您的所有流量都以 VPN 服务器的 IP 进入互联网，而不是您自己的。网站看到的是 VPN 服务器的国家、运营商和地理位置，而非您的真实信息。正确配置的 VPN 还会让 DNS 查询走同一条隧道，这样运营商即便传输着加密数据包，也无法知道您访问了哪些网站。"
+    },
+    "checklist": {
+      "title": "如果您已连接 Doppler VPN，本页应显示：",
+      "items": {
+        "item1": "与连接前看到的不一致的 IP。",
+        "item2": "与所选服务器匹配的国家（如德国、荷兰、新加坡）。",
+        "item3": "显示为托管服务商（Hetzner、Vultr、OVH）而非您家庭运营商的 ISP。",
+        "item4": "完全不出现您真实的城市或地区。"
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "我的 IP 地址被用来做什么？",
+        "answer": "与您通信的每台服务器都用您的 IP 回传响应，而且大多数都会记录它。它支撑着地理定位（可精确到城市）、地区内容授权、广告个性化、欺诈检测，在受审查的网络中还被用于执行封锁名单。网上匿名的第一步，就是不直接暴露这个数字。"
+      },
+      "q2": {
+        "question": "我的 IP 地址算隐私信息吗？",
+        "answer": "它会发送给您访问的每个网站，所以并不是秘密。但根据 GDPR 和大多数隐私法律，它属于个人数据，因为它可以关联到具体个人。把它当作您家所在的街道名：不算机密，但您不会随便告诉陌生人。"
+      },
+      "q3": {
+        "question": "如何隐藏我的 IP？",
+        "answer": "VPN 是标准工具——它用服务器的 IP 替换您的 IP。Tor 通过多层中继隐藏 IP，但牺牲速度。代理服务只为浏览器流量隐藏 IP。切换到移动数据会改变 IP，但改变不了您的身份。公共 Wi-Fi 让网络中所有人共享一个 IP，但不加密。"
+      },
+      "q4": {
+        "question": "为什么我的 IP 在不同网站上显示不同？",
+        "answer": "正常情况下不应该——除非您使用了分流隧道的 VPN（部分应用走 VPN，部分走运营商）、处于有多个出口 IP 的企业网络，或者一个网站显示 IPv4 而另一个显示 IPv6。有些网站使用第三方 IP 查询接口，返回的元数据可能略有差异。"
+      },
+      "q5": {
+        "question": "IP 隐藏后，用着 VPN 还会被跟踪吗？",
+        "answer": "会。浏览器指纹（字体、屏幕尺寸、插件、canvas 渲染）无需 IP 即可识别设备。Cookie 和登录状态会跨网络跟随您。VPN 只解决 IP 和 DNS 层面的问题，其余取决于浏览器。请使用隐私浏览模式、拦截第三方 Cookie，并考虑使用抗指纹浏览器以获得完整防护。"
+      },
+      "q6": {
+        "question": "Doppler 会记录我的 IP 吗？",
+        "answer": "不会。Doppler 不存储连接日志、IP 历史或 DNS 查询。VPN 服务器只在路由流量所需的瞬间看到您的真实 IP——绝不写入磁盘。这里唯一有意义的保证是独立审计和无日志政策；光说\"我们承诺\"是不够的，所以我们公开了自己的架构。"
+      },
+      "q7": {
+        "question": "什么是 ASN？",
+        "answer": "自治系统号标识拥有该 IP 段的网络运营者。AS7922 是 Comcast；AS24940 是 Hetzner；AS16509 是 Amazon AWS。ASN 是公开的，可以用来判断一个 IP 属于家庭宽带运营商、移动运营商、托管服务商（VPN 出口节点通常如此）还是企业网络。"
+      },
+      "q8": {
+        "question": "为什么我的 IP 定位看起来不对？",
+        "answer": "IP 地理定位数据库（MaxMind、IP2Location）在国家层面约 99% 准确，城市层面约 70%。它们落后现实数周：新分配的 IP 段可能仍显示为前任所有者的位置。VPN 服务器的 IP 有时也会被错误定位。如果您的家庭 IP 显示了错误的城市，那多半是运营商把 IP 段分布在了整个都市圈。"
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC 泄漏测试",
+      "webrtcDesc": "即使本页显示的是 VPN 的 IP，WebRTC 仍可能泄露您的真实 IP。测一测。",
+      "dnsTitle": "DNS 泄漏测试",
+      "dnsDesc": "如果 DNS 查询仍在泄漏，仅隐藏 IP 是不够的。",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Doppler 用来避免被检测和封锁的协议。"
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC 泄漏测试 — 检测 VPN 是否隐藏了您的真实 IP",
+      "description": "免费 WebRTC 泄漏测试。检测即使连接了 VPN，浏览器是否仍通过 STUN 泄露您的真实 IP。2 秒完成。数据不离开您的设备。"
+    },
+    "hero": {
+      "title": "WebRTC 泄漏测试",
+      "subtitle": "即使 VPN 已对网站隐藏了您的真实 IP，浏览器仍可能通过 WebRTC 将其泄露。本测试检测您的浏览器是否如此——完全在浏览器内运行，不向任何地方发送数据。"
+    },
+    "widget": {
+      "publicIp": "公网 IP（网站所见）",
+      "webrtcIps": "WebRTC 发现的 IP",
+      "leakedTitle": "WebRTC 正在泄露您的 IP",
+      "leakedBody": "WebRTC 检测到一个或多个与公网 IP 不同的地址。如果您正在使用 VPN，这意味着使用 WebRTC 的网站仍能看到您的真实地址。",
+      "safeTitle": "未检测到 WebRTC 泄漏",
+      "safeBody": "WebRTC 报告的 IP 与公网 IP 相同，或未报告任何 IP。您目前没有通过 WebRTC 泄露真实地址。",
+      "noWebrtc": "您的浏览器已禁用 WebRTC，或未解析出任何地址。这是安全状态。",
+      "unknown": "未知",
+      "refresh": "重新测试",
+      "refreshing": "测试中…",
+      "loading": "正在探测 WebRTC…",
+      "error": "测试未能运行。请刷新页面后重试。"
+    },
+    "explainer": {
+      "whatTitle": "什么是 WebRTC 泄漏？",
+      "whatBody": "WebRTC 是浏览器的点对点音频、视频和数据功能——Google Meet、Discord 和许多网页应用都在使用。为建立 P2P 连接，浏览器会通过 STUN 服务器发现自己的 IP 地址，包括本地地址和 NAT 后的地址。网站可以让浏览器悄悄执行这一发现过程，并通过 JavaScript 读取结果中的 IP——完全绕过 VPN。",
+      "howTitle": "测试原理",
+      "howBody": "您的浏览器创建一个虚拟的 RTCPeerConnection，调用 createOffer 并读取生成的 ICE 候选。ICE 候选包含浏览器能找到的所有 IP——包括您的真实 IP，即使 VPN 正在隧道化其余全部流量。测试在本地运行；不会向我们的服务器发送任何内容。",
+      "fixTitle": "如何修复 WebRTC 泄漏",
+      "fixBody": "三种方案：（1）使用主动拦截 WebRTC 泄漏的 VPN（Doppler 的 iOS 和 Android 应用会在隧道之外禁用 WebRTC）。（2）安装禁用 WebRTC 的浏览器扩展（uBlock Origin 有此选项）。（3）在 Firefox 的 about:config 中将 media.peerconnection.enabled 设为 false。禁用 WebRTC 会让浏览器内的视频通话失效；请改用原生应用。"
+    },
+    "faq": {
+      "q1": {
+        "question": "什么是 WebRTC？",
+        "answer": "WebRTC 是内置于所有现代浏览器的 W3C 标准，用于实时点对点音频、视频和数据通信。它支撑着 Google Meet、网页版 Discord、Zoom 网页客户端和大多数浏览器视频聊天。让 P2P 通话成为可能的那些 API，同样允许 JavaScript 发现您的本地网络地址。"
+      },
+      "q2": {
+        "question": "为什么即使通过 VPN，WebRTC 仍会泄露我的真实 IP？",
+        "answer": "因为 WebRTC 协议栈工作在应用层之下，会通过 STUN 直接查询网络接口。VPN 在 IP 层隧道化流量，但不会拦截 WebRTC 的地址发现调用。泄露的地址虽然在加密隧道内传输——但浏览器随后会把它交给页面上的 JavaScript，后者可以将其发往任何地方。"
+      },
+      "q3": {
+        "question": "哪些浏览器受影响？",
+        "answer": "默认设置下全部受影响：Chrome、Edge、Firefox、Safari、Brave、Opera、Arc。Brave 提供 WebRTC IP 泄漏防护设置，但默认关闭。Firefox 可通过 about:config 完全禁用 WebRTC。iOS Safari 自 iOS 14 起部分缓解，但并未完全堵死。"
+      },
+      "q4": {
+        "question": "Doppler VPN 能拦截 WebRTC 泄漏吗？",
+        "answer": "能。我们的 iOS 和 Android 客户端运行本地终止开关，拦截隧道外的所有 UDP 流量，使 STUN 发现无法到达外部服务器。在桌面端，建议将 VPN 与 uBlock Origin 的 WebRTC 开关或浏览器级禁用配合使用，以实现全面防护。"
+      },
+      "q5": {
+        "question": "禁用 WebRTC 会影响网站吗？",
+        "answer": "会影响浏览器内的视频通话（Meet、网页版 Zoom、网页版 Discord）和部分协作工具。普通浏览、流媒体以及任何不需要点对点连接的功能不受影响。这些服务的原生应用不依赖 WebRTC。"
+      },
+      "q6": {
+        "question": "这个测试保护隐私吗？",
+        "answer": "是的。测试完全在您的浏览器内通过标准 RTCPeerConnection API 运行。IP、结果和元数据都不会离开您的设备。我们甚至不记录您运行过测试这件事。"
+      }
+    },
+    "related": {
+      "ipTitle": "我的 IP 是什么？",
+      "ipDesc": "查看每个网站此刻看到的 IP 和地理位置。",
+      "dnsTitle": "DNS 泄漏测试",
+      "dnsDesc": "WebRTC 没问题但 DNS 泄漏的话，网站依然知道您去了哪里。",
+      "censorshipTitle": "VPN 审查如何运作",
+      "censorshipDesc": "为什么在受限网络中 WebRTC 和 DNS 泄漏是灾难性的。"
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS 泄漏测试 — 验证您 VPN 的 DNS 是否私密",
+      "description": "免费 DNS 泄漏测试指南。查明您的 DNS 查询是走 VPN 隧道，还是泄漏给了运营商。含分步说明与修复方法。"
+    },
+    "hero": {
+      "title": "DNS 泄漏测试",
+      "subtitle": "如果 DNS 查询绕过了 VPN 隧道，即使 VPN 已连接，运营商仍能看到您访问的每个网站。下面是检测与修复方法。"
+    },
+    "widget": {
+      "title": "推荐的 DNS 泄漏测试",
+      "description": "我们没有自建 DNS 探测，因为要做好它需要在多个解析器上部署受控的通配符子域。请使用下方可信的第三方工具——它独立运营且无需注册。",
+      "primaryButton": "打开 dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "打开 browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "在 dnsleaktest.com 上点击 \"Extended test\"。结果应只列出您 VPN 提供商的 DNS 服务器——而不是您的运营商。如果结果中出现 Comcast、Verizon、Vodafone 或任何其他家用运营商，说明您的 DNS 正在泄漏。"
+    },
+    "explainer": {
+      "whatTitle": "什么是 DNS 泄漏？",
+      "whatBody": "当您输入网址时，设备会先向 DNS 服务器询问该域名的 IP 地址。如果 DNS 查询走 VPN 隧道，运营商只能看到加密流量。如果它绕过隧道——即 DNS 泄漏——运营商就能看到您访问的每个域名，尽管后续连接是加密的。受审查的网络通常会检查 DNS 查询来执行封锁名单，因此在那种环境下 DNS 泄漏是致命的。",
+      "causesTitle": "DNS 泄漏的成因",
+      "causesBody": "三个常见原因：（1）VPN 客户端设置了自己的 DNS 解析器，但操作系统忽略它并使用本地网络分配的解析器。（2）IPv6 流量未被隧道化，IPv6 DNS 查询绕过了 VPN。（3）Chrome、Firefox 等浏览器可能使用\"智能\" DNS 路由（DNS-over-HTTPS），完全绕过系统 DNS 设置。",
+      "fixTitle": "如何修复 DNS 泄漏",
+      "fixBody": "使用自有 DNS 基础设施、并强制所有 DNS 查询走隧道的 VPN（Doppler 在所有平台上默认如此）。如果您的 VPN 不支持 IPv6 隧道，请在系统网络设置中关闭 IPv6。在浏览器中，将 DNS-over-HTTPS 设为与 VPN 相同的提供商，或直接关闭。在路由器上，只有当设备层面没有运行 VPN 时，才将上游 DNS 设为尊重隐私的解析器（Quad9、Cloudflare 1.1.1.1）。"
+    },
+    "checklist": {
+      "title": "Doppler 的 DNS 保证：",
+      "items": {
+        "item1": "所有 DNS 查询强制走 VPN 隧道——不存在系统 DNS 泄漏。",
+        "item2": "IPv6 要么隧道化，要么拦截，绝不泄漏。",
+        "item3": "我们的 DNS 解析器不记录查询。",
+        "item4": "终止开关开启时，我们会拦截浏览器的 DNS-over-HTTPS 绕过尝试。"
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "为什么 DNS 泄漏比 IP 泄漏更严重？",
+        "answer": "IP 泄漏暴露一个地址。DNS 泄漏则以明文向运营商和路径上的所有人暴露您访问的每个域名——每个网站、每次 API 调用、每个分析端点。对受审查网络中的用户来说，DNS 层面的封锁名单是最常见的执法手段，这使 DNS 泄漏成为最容易让人暴露的失误。"
+      },
+      "q2": {
+        "question": "如何判断我的 DNS 现在是否在泄漏？",
+        "answer": "在 dnsleaktest.com 运行扩展测试。它向通配符子域发出多次查询，并告诉您是哪些解析器作出了应答。如果看到您运营商的名字（或任何与 VPN 提供商不符的名字），DNS 就在泄漏。分别在连接和断开 VPN 的情况下重复测试以确认。"
+      },
+      "q3": {
+        "question": "Doppler VPN 会泄漏 DNS 吗？",
+        "answer": "不会。我们在所有平台上把自有解析器推送进隧道，并阻止回退到系统 DNS。终止开关激活时，我们还会禁用浏览器的 DNS-over-HTTPS 绕过。dnsleaktest.com 和 browserleaks.com 上的独立测试可以证实这一点——欢迎亲自验证。"
+      },
+      "q4": {
+        "question": "什么是 DNS-over-HTTPS（DoH）？它和泄漏有什么关系？",
+        "answer": "DoH 是一种通过加密 HTTPS 连接发送 DNS 查询的协议，会绕过系统 DNS 解析器。Chrome 和 Firefox 等浏览器默认使用 DoH，常常无视您的 VPN 而把查询发给 Google 或 Cloudflare。除非 VPN 明确处理，否则这就是泄漏。Doppler 会拦截 DoH 尝试并将其引入隧道。"
+      },
+      "q5": {
+        "question": "用了 VPN 还需要单独的 DNS 服务吗？",
+        "answer": "不需要。配置得当的 VPN 会替您处理 DNS。在 VPN 之上再叠加单独的 DNS 服务（Quad9、Cloudflare），反而可能在操作系统将 DNS 查询路由出隧道时造成泄漏。请信任 VPN 的解析器——如果信不过，就换一家 VPN。"
+      },
+      "q6": {
+        "question": "应该多久测一次 DNS 泄漏？",
+        "answer": "每次配置 VPN 或系统更新之后。隧道配置可能悄无声息地失效——一次系统更新就可能在不通知您的情况下把网络栈切换到泄漏路径。常规用户每季度检查一次比较合理；如果您身处审查严格、泄漏代价高昂的网络，则每周一次。"
+      }
+    },
+    "related": {
+      "ipTitle": "我的 IP 是什么？",
+      "ipDesc": "确切了解您的 VPN 向网站隐藏了什么。",
+      "webrtcTitle": "WebRTC 泄漏测试",
+      "webrtcDesc": "IP 隐藏了，DNS 隐藏了，但 WebRTC 泄漏仍会暴露您。",
+      "bypassTitle": "绕过网络审查",
+      "bypassDesc": "封锁名单正是靠 DNS 泄漏抓到您的。了解 Doppler 如何避免。"
     }
   },
   "vlessVpnAndroid": {
