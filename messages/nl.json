@@ -1374,6 +1374,7 @@
     "promoError": "Ongeldige promotiecode"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Controleer je webbeveiliging met onze gratis privacytools",
     "title": "Hoe Doppler VPN Je Verkeer Beschermt",
     "subtitle": "Je verbinding wordt versleuteld en gerouteerd via Doppler's edge-netwerk. Er wordt niets gelogd.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Waarom we om geen persoonlijke informatie vragen.",
       "vlessTitle": "Over VLESS-Reality",
       "vlessDesc": "Het protocol achter de encryptie van Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Gratis Privacytools — Doppler VPN",
+      "description": "Gratis, gerichte tools om je privacy te testen: IP-checker, WebRTC-lektest, DNS-lektest. Geen tracking, geen e-mail."
+    },
+    "title": "Gratis privacytools",
+    "subtitle": "Drie snelle checks voor de lekken die er het meest toe doen.",
+    "tools": {
+      "ipChecker": {
+        "title": "Wat is mijn IP?",
+        "description": "Bekijk welk publiek IP, land en provider je verkeer op dit moment blootgeeft.",
+        "cta": "IP-check uitvoeren"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC-lektest",
+        "description": "WebRTC kan je echte IP onthullen, zelfs via een VPN. Controleer of dat bij jou gebeurt.",
+        "cta": "WebRTC-test uitvoeren"
+      },
+      "dnsLeak": {
+        "title": "DNS-lektest",
+        "description": "Als je DNS-verzoeken de VPN-tunnel omzeilen, ziet je provider nog steeds elke site die je bezoekt.",
+        "cta": "DNS-test uitvoeren"
+      }
+    },
+    "cta": {
+      "title": "Hebben de tools een lek gevonden?",
+      "description": "Dopplers VLESS-Reality-tunnel leidt zowel IP-verkeer als DNS-verzoeken door het versleutelde kanaal, met ingebouwde blokkering van WebRTC- en IPv6-lekken.",
+      "button": "Probeer Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Wat is mijn IP? — Gratis IP- & provider-lookup",
+      "description": "Gratis IP-adreschecker — zie direct je publieke IP, land, regio, stad en provider. Geen tracking. Geen e-mail. Werkt op iPhone, Android, Mac en Windows."
+    },
+    "hero": {
+      "title": "Wat is mijn IP?",
+      "subtitle": "Je publieke IP-adres zoals elke website die je bezoekt het ziet — plus de geografie en provider die eraan vastzitten. Ververs na het verbinden met een VPN om te controleren of de wissel is gelukt."
+    },
+    "widget": {
+      "yourIp": "Je IP-adres",
+      "country": "Land",
+      "region": "Regio",
+      "city": "Stad",
+      "isp": "Internetprovider",
+      "asn": "ASN",
+      "unknown": "Onbekend",
+      "refresh": "Vernieuwen",
+      "refreshing": "Vernieuwen…",
+      "copied": "Gekopieerd",
+      "copy": "Kopiëren",
+      "loading": "Je IP detecteren…",
+      "error": "Je IP kon niet worden gedetecteerd. Ververs de pagina of probeer het zo opnieuw."
+    },
+    "explainer": {
+      "whatTitle": "Wat is een IP-adres?",
+      "whatBody": "Elk apparaat op internet draagt een numeriek adres — een publiek IP — dat het identificeert bij elke server waarmee het praat. IPv4 ziet eruit als 203.0.113.42; IPv6 is langer en gebruikt dubbele punten. Je IP wordt toegewezen door je provider en verandert wanneer je van netwerk wisselt (wifi thuis, mobiele data, café-wifi).",
+      "exposeTitle": "Wat je IP blootgeeft",
+      "exposeBody": "Een IP alleen al onthult je land, regio, stad en provider — soms tot op een paar straten nauwkeurig. Gecombineerd met de User-Agent en timinggegevens die elke browser meestuurt, is dat genoeg voor advertentienetwerken om je te fingerprinten en over sites heen te volgen. Streamingplatforms gebruiken het voor regionale licenties. Censors gebruiken het voor geografische blokkades.",
+      "vpnTitle": "Hoe een VPN je IP verandert",
+      "vpnBody": "Wanneer je verbinding maakt met een VPN, verlaat al je verkeer het internet via het IP van de VPN-server — niet het jouwe. Websites zien het land, de provider en de geografie van de VPN-server in plaats van je echte gegevens. Een goed geconfigureerde VPN leidt ook DNS-verzoeken door dezelfde tunnel, zodat je provider niet kan zien welke sites je bezoekt, ook al vervoert hij de versleutelde pakketten."
+    },
+    "checklist": {
+      "title": "Als je verbonden bent met Doppler VPN, zou deze pagina moeten tonen:",
+      "items": {
+        "item1": "Een IP dat niet overeenkomt met wat je vóór het verbinden zag.",
+        "item2": "Een land dat overeenkomt met de gekozen server (bijv. Duitsland, Nederland, Singapore).",
+        "item3": "Een provider die als hostingbedrijf vermeld staat (Hetzner, Vultr, OVH) in plaats van je thuisprovider.",
+        "item4": "Geen vermelding van je echte stad of regio."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Waar wordt mijn IP-adres voor gebruikt?",
+        "answer": "Elke server waarmee je praat gebruikt je IP om antwoorden terug te sturen, en de meeste loggen het. Het maakt geolocatie mogelijk (tot op stadsniveau), regionale contentlicenties, advertentiepersonalisatie, fraudedetectie en — in gecensureerde netwerken — het afdwingen van blokkadelijsten. Anonimiteit online begint met dit nummer niet direct prijsgeven."
+      },
+      "q2": {
+        "question": "Is mijn IP-adres privé-informatie?",
+        "answer": "Het wordt doorgegeven aan elke website die je bezoekt, dus geheim is het niet. Maar het is wel een persoonsgegeven volgens de AVG en de meeste privacywetten, omdat het aan een individu te koppelen is. Behandel het als je straatnaam: niet geheim, maar je geeft hem niet zomaar aan vreemden."
+      },
+      "q3": {
+        "question": "Hoe verberg ik mijn IP?",
+        "answer": "Een VPN is het standaardgereedschap — het vervangt je IP door dat van de server. Tor verbergt je IP via meerdere relays ten koste van snelheid. Proxydiensten verbergen het alleen voor browserverkeer. Overschakelen naar mobiele data verandert je IP, maar niet je identiteit. Openbare wifi deelt één IP met iedereen op het netwerk, maar is onversleuteld."
+      },
+      "q4": {
+        "question": "Waarom ziet mijn IP er op verschillende websites anders uit?",
+        "answer": "Dat hoort niet — tenzij je achter een VPN met split tunneling zit (sommige apps gaan door de VPN, andere via je provider), op een bedrijfsnetwerk met meerdere uitgaande IP's, of op de ene site IPv4 en op de andere IPv6 ziet. Sommige sites gebruiken externe IP-lookup-API's die net iets andere metadata kunnen teruggeven."
+      },
+      "q5": {
+        "question": "Kan ik zelfs met een VPN gevolgd worden als mijn IP verborgen is?",
+        "answer": "Ja. Browserfingerprinting (lettertypen, schermgrootte, plugins, canvas-rendering) identificeert apparaten zonder IP. Cookies en logins volgen je over netwerken heen. VPN's lossen alleen de IP- en DNS-laag op; de rest ligt bij de browser. Gebruik privé-browsen, blokkeer third-party cookies en overweeg anti-fingerprinting-browsers voor het volledige plaatje."
+      },
+      "q6": {
+        "question": "Logt Doppler mijn IP?",
+        "answer": "Nee. Doppler bewaart geen verbindingslogs, IP-geschiedenis of DNS-verzoeken. De VPN-server ziet je echte IP alleen lang genoeg om verkeer te routeren — het wordt nooit naar schijf geschreven. Onafhankelijke audits en een no-logs-beleid zijn hier de enige betekenisvolle garanties; \"we beloven het\" is niet genoeg, en wij publiceren onze opzet."
+      },
+      "q7": {
+        "question": "Wat is een ASN?",
+        "answer": "Een Autonomous System Number identificeert de netwerkbeheerder die eigenaar is van het IP-blok. AS7922 is Comcast; AS24940 is Hetzner; AS16509 is Amazon AWS. ASN's zijn openbaar en laten zien of een IP bij een consumentenprovider, een mobiele operator, een hostingbedrijf (meestal VPN-exitnodes) of een bedrijfsnetwerk hoort."
+      },
+      "q8": {
+        "question": "Waarom klopt de locatie van mijn IP niet?",
+        "answer": "IP-geolocatiedatabases (MaxMind, IP2Location) zitten op landniveau in ~99% van de gevallen goed en op stadsniveau in ~70%. Ze lopen weken achter op de werkelijkheid: een vers toegewezen IP-blok kan nog de locatie van de vorige eigenaar tonen. IP's van VPN-servers worden soms verkeerd geplaatst. Toont je thuis-IP de verkeerde stad, dan verdeelt je provider zijn blokken waarschijnlijk over een hele regio."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC-lektest",
+      "webrtcDesc": "WebRTC kan je echte IP onthullen, zelfs als deze pagina dat van de VPN toont. Test het.",
+      "dnsTitle": "DNS-lektest",
+      "dnsDesc": "Je IP verbergen is niet genoeg als je DNS-verzoeken nog lekken.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Het protocol dat Doppler gebruikt om detectie en blokkering te vermijden."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC-lektest — Controleer of je VPN je echte IP verbergt",
+      "description": "Gratis WebRTC-lektest. Detecteert of je browser je echte IP via STUN lekt, zelfs met een verbonden VPN. Klaar in 2 seconden. Geen data verlaat je apparaat."
+    },
+    "hero": {
+      "title": "WebRTC-lektest",
+      "subtitle": "Browsers kunnen je echte IP via WebRTC onthullen, zelfs wanneer een VPN het voor websites verbergt. Deze test controleert of de jouwe dat doet — volledig in je browser, zonder dat er data ergens heen wordt gestuurd."
+    },
+    "widget": {
+      "publicIp": "Publiek IP (gezien door websites)",
+      "webrtcIps": "Door WebRTC ontdekte IP's",
+      "leakedTitle": "WebRTC lekt je IP",
+      "leakedBody": "WebRTC heeft een of meer IP's gevonden die afwijken van het publieke IP. Als je een VPN gebruikt, betekent dit dat een website met WebRTC je echte adres nog steeds kan zien.",
+      "safeTitle": "Geen WebRTC-lek gedetecteerd",
+      "safeBody": "WebRTC meldde hetzelfde IP als het publieke, of helemaal geen IP. Je lekt op dit moment je echte adres niet via WebRTC.",
+      "noWebrtc": "Je browser heeft WebRTC uitgeschakeld of er zijn geen adressen opgelost. Dat is een veilige toestand.",
+      "unknown": "Onbekend",
+      "refresh": "Test opnieuw uitvoeren",
+      "refreshing": "Testen…",
+      "loading": "WebRTC peilen…",
+      "error": "De test kon niet draaien. Ververs de pagina en probeer opnieuw."
+    },
+    "explainer": {
+      "whatTitle": "Wat is een WebRTC-lek?",
+      "whatBody": "WebRTC is een browserfunctie voor peer-to-peer audio, video en data — gebruikt door Google Meet, Discord en veel webapps. Om een P2P-verbinding op te zetten gebruiken browsers STUN-servers om hun eigen IP-adressen te achterhalen, inclusief lokale adressen en adressen achter NAT. Een website kan de browser deze ontdekking stilletjes laten uitvoeren en de gevonden IP's via JavaScript uitlezen — volledig om de VPN heen.",
+      "howTitle": "Hoe de test werkt",
+      "howBody": "Je browser maakt een nep-RTCPeerConnection, roept createOffer aan en leest de resulterende ICE-kandidaten uit. ICE-kandidaten bevatten elk IP dat de browser kan vinden — inclusief je echte, zelfs wanneer een VPN al het andere verkeer tunnelt. De test draait lokaal; er wordt niets naar onze servers gestuurd.",
+      "fixTitle": "Hoe je een WebRTC-lek verhelpt",
+      "fixBody": "Drie opties: (1) Gebruik een VPN die WebRTC-lekken proactief blokkeert (Dopplers iOS- en Android-apps schakelen WebRTC buiten de tunnel uit). (2) Installeer een browserextensie die WebRTC uitschakelt (uBlock Origin heeft hiervoor een optie). (3) Zet in Firefox media.peerconnection.enabled op false in about:config. WebRTC uitschakelen breekt videogesprekken in de browser; gebruik dan een native app."
+    },
+    "faq": {
+      "q1": {
+        "question": "Wat is WebRTC?",
+        "answer": "WebRTC is een W3C-standaard die in elke moderne browser zit voor realtime peer-to-peer audio-, video- en datacommunicatie. Het drijft Google Meet, Discord web, de Zoom-webclient en de meeste browsergebaseerde videochats aan. Dezelfde API's die P2P-gesprekken mogelijk maken, laten JavaScript ook je lokale netwerkadressen ontdekken."
+      },
+      "q2": {
+        "question": "Waarom lekt WebRTC mijn echte IP, zelfs via een VPN?",
+        "answer": "Omdat de WebRTC-stack onder de applicatielaag werkt en de netwerkinterface rechtstreeks via STUN bevraagt. Een VPN tunnelt verkeer op de IP-laag, maar blokkeert WebRTC's adresontdekking niet. Het gelekte adres reist binnen de versleutelde tunnel — maar de browser geeft het daarna aan het JavaScript op de pagina, dat het overal naartoe kan sturen."
+      },
+      "q3": {
+        "question": "Welke browsers zijn getroffen?",
+        "answer": "Allemaal, met standaardinstellingen: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave heeft een instelling tegen WebRTC-IP-lekken die standaard uit staat. In Firefox kun je WebRTC volledig uitschakelen via about:config. Safari op iOS is sinds iOS 14 deels afgeschermd, maar niet volledig dicht."
+      },
+      "q4": {
+        "question": "Blokkeert Doppler VPN WebRTC-lekken?",
+        "answer": "Ja. Onze iOS- en Android-clients draaien een lokale kill-switch die al het UDP-verkeer buiten de tunnel blokkeert, waardoor STUN-ontdekking externe servers niet bereikt. Op desktop raden we aan de VPN te combineren met de WebRTC-schakelaar van uBlock Origin of uitschakeling op browserniveau voor volledige dekking."
+      },
+      "q5": {
+        "question": "Breekt het uitschakelen van WebRTC websites?",
+        "answer": "Het breekt videogesprekken in de browser (Meet, Zoom web, Discord web) en sommige samenwerkingstools. Het raakt normaal browsen, streamen en alles wat geen peer-to-peer-verbindingen nodig heeft niet. De native apps van die diensten zijn niet afhankelijk van WebRTC."
+      },
+      "q6": {
+        "question": "Is deze test privé?",
+        "answer": "Ja. De test draait volledig in je browser via de standaard RTCPeerConnection-API. Geen IP, geen resultaat en geen metadata verlaat je apparaat. We loggen niet eens dát je de test hebt uitgevoerd."
+      }
+    },
+    "related": {
+      "ipTitle": "Wat is mijn IP?",
+      "ipDesc": "Bekijk het IP en de geografie die elke website op dit moment ziet.",
+      "dnsTitle": "DNS-lektest",
+      "dnsDesc": "Als WebRTC schoon is maar DNS lekt, weten websites nog steeds waar je heen gaat.",
+      "censorshipTitle": "Hoe VPN-censuur werkt",
+      "censorshipDesc": "Waarom WebRTC- en DNS-lekken rampzalig zijn in beperkte netwerken."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS-lektest — Controleer of de DNS van je VPN privé is",
+      "description": "Gratis DNS-lektestgids. Ontdek of je DNS-verzoeken door de VPN-tunnel gaan of naar je provider lekken. Stapsgewijze instructies en oplossingen."
+    },
+    "hero": {
+      "title": "DNS-lektest",
+      "subtitle": "Als je DNS-verzoeken de VPN-tunnel omzeilen, ziet je internetprovider nog steeds elke site die je bezoekt — zelfs met de VPN verbonden. Zo controleer en verhelp je dat."
+    },
+    "widget": {
+      "title": "Aanbevolen DNS-lektest",
+      "description": "We draaien geen eigen DNS-probe, omdat het goed doen gecontroleerde wildcard-subdomeinen over meerdere resolvers vereist. Gebruik de vertrouwde externe tool hieronder — hij is onafhankelijk en vereist geen account.",
+      "primaryButton": "Open dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Open browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Klik op \"Extended test\" op dnsleaktest.com. Het resultaat zou alleen de DNS-server(s) van je VPN-aanbieder moeten tonen — niet je internetprovider. Zie je Comcast, Verizon, Vodafone of een andere consumentenprovider in de resultaten, dan lekt je DNS."
+    },
+    "explainer": {
+      "whatTitle": "Wat is een DNS-lek?",
+      "whatBody": "Wanneer je een URL intypt, vraagt je apparaat eerst aan een DNS-server het IP-adres van dat domein. Gaat het DNS-verzoek door de VPN-tunnel, dan ziet je provider alleen versleuteld verkeer. Omzeilt het de tunnel — een DNS-lek — dan ziet je provider elk domein dat je bezoekt, ook al is de verbinding daarna versleuteld. Gecensureerde netwerken inspecteren vaak DNS-verzoeken om blokkadelijsten af te dwingen, dus daar is een DNS-lek fataal.",
+      "causesTitle": "Wat veroorzaakt DNS-lekken?",
+      "causesBody": "Drie veelvoorkomende oorzaken: (1) De VPN-client stelt zijn eigen DNS-resolver in, maar het besturingssysteem negeert die en gebruikt de resolver van het lokale netwerk. (2) IPv6-verkeer wordt niet getunneld, waardoor IPv6-DNS-verzoeken om de VPN heen lekken. (3) Browsers als Chrome en Firefox kunnen \"slimme\" DNS-routering (DNS-over-HTTPS) gebruiken die de systeem-DNS-instellingen volledig omzeilt.",
+      "fixTitle": "Hoe je een DNS-lek verhelpt",
+      "fixBody": "Gebruik een VPN met eigen DNS-infrastructuur die alle DNS-verzoeken door de tunnel dwingt (Doppler doet dit standaard op elk platform). Schakel IPv6 uit in je netwerkinstellingen als je VPN geen IPv6-tunneling ondersteunt. Stel in je browser DNS-over-HTTPS in op dezelfde aanbieder als je VPN, of schakel het uit. Stel op routers alleen een privacyvriendelijke resolver (Quad9, Cloudflare 1.1.1.1) als upstream-DNS in als je geen VPN op apparaatniveau draait."
+    },
+    "checklist": {
+      "title": "Dopplers DNS-garanties:",
+      "items": {
+        "item1": "Alle DNS-verzoeken worden door de VPN-tunnel gedwongen — geen lekken via systeem-DNS.",
+        "item2": "IPv6 wordt getunneld of geblokkeerd, nooit gelekt.",
+        "item3": "Onze DNS-resolvers loggen geen verzoeken.",
+        "item4": "We blokkeren DNS-over-HTTPS-omzeilingspogingen van browsers wanneer de kill-switch aanstaat."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Waarom is een DNS-lek erger dan een IP-lek?",
+        "answer": "Een IP-lek onthult één adres. Een DNS-lek onthult elk domein dat je bezoekt — elke site, elke API-aanroep, elk analytics-eindpunt — in platte tekst aan je provider en iedereen onderweg. Voor gebruikers in gecensureerde netwerken zijn blokkadelijsten op DNS-niveau het meest gebruikte handhavingsmechanisme, wat DNS-lekken de fout maakt waardoor mensen tegen de lamp lopen."
+      },
+      "q2": {
+        "question": "Hoe weet ik of mijn DNS nu lekt?",
+        "answer": "Draai de uitgebreide test op dnsleaktest.com. Die stuurt meerdere verzoeken naar wildcard-subdomeinen en vertelt welke resolvers ze beantwoordden. Zie je de naam van je provider (of een naam die niet bij je VPN-aanbieder past), dan lekt je DNS. Herhaal de test met en zonder VPN ter bevestiging."
+      },
+      "q3": {
+        "question": "Lekt Doppler VPN DNS?",
+        "answer": "Nee. We duwen onze eigen resolvers door de tunnel op elk platform en blokkeren terugval naar systeem-DNS. We schakelen ook de DNS-over-HTTPS-omzeiling van browsers uit wanneer onze kill-switch actief is. Onafhankelijke lektests op dnsleaktest.com en browserleaks.com bevestigen dit — controleer het gerust."
+      },
+      "q4": {
+        "question": "Wat is DNS-over-HTTPS (DoH) en wat heeft het met lekken te maken?",
+        "answer": "DoH is een protocol dat DNS-verzoeken over een versleutelde HTTPS-verbinding stuurt en zo de systeem-DNS-resolver omzeilt. Browsers als Chrome en Firefox gebruiken DoH standaard en sturen verzoeken vaak naar Google of Cloudflare, ongeacht je VPN. Dat is een lek, tenzij je VPN het expliciet afhandelt. Doppler onderschept DoH-pogingen en leidt ze door de tunnel."
+      },
+      "q5": {
+        "question": "Heb ik een aparte DNS-dienst nodig als ik een VPN gebruik?",
+        "answer": "Nee. Een goed geconfigureerde VPN regelt DNS voor je. Een aparte DNS-dienst (Quad9, Cloudflare) bovenop een VPN kan juist lekken veroorzaken als het besturingssysteem het DNS-verzoek om de tunnel heen routeert. Vertrouw op de resolvers van de VPN — en vertrouw je die niet, gebruik dan een andere VPN."
+      },
+      "q6": {
+        "question": "Hoe vaak moet ik op DNS-lekken testen?",
+        "answer": "Na elke VPN-installatie of OS-update. Tunnelconfiguraties kunnen stilletjes kapotgaan — een systeemupdate kan je netwerkstack ongemerkt naar een lekkend pad omzetten. Elk kwartaal controleren is een redelijk ritme voor vaste gebruikers; wekelijks als je in een zwaar gecensureerd netwerk leeft waar de prijs van een lek hoog is."
+      }
+    },
+    "related": {
+      "ipTitle": "Wat is mijn IP?",
+      "ipDesc": "Bekijk precies wat je VPN voor websites verbergt.",
+      "webrtcTitle": "WebRTC-lektest",
+      "webrtcDesc": "IP verborgen, DNS verborgen, maar een WebRTC-lek verraadt je alsnog.",
+      "bypassTitle": "Internetcensuur omzeilen",
+      "bypassDesc": "Via DNS-lekken vangen blokkadelijsten je. Lees hoe Doppler ze vermijdt."
     }
   },
   "vlessVpnAndroid": {

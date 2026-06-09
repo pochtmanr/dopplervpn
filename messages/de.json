@@ -1374,6 +1374,7 @@
     "promoError": "Invalid promo code"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Prüfen Sie Ihre Web-Sicherheit mit unseren kostenlosen Datenschutz-Tools",
     "title": "So schützt Doppler deinen Traffic",
     "subtitle": "Deine Verbindung wird verschlüsselt und über das Doppler-Netzwerk geleitet. Nichts wird gespeichert.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Warum wir keine persönlichen Daten anfordern.",
       "vlessTitle": "Über VLESS-Reality",
       "vlessDesc": "Das Protokoll hinter Dopplers Verschlüsselung."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Kostenlose Datenschutz-Tools — Doppler VPN",
+      "description": "Kostenlose, fokussierte Tools zum Testen Ihrer Privatsphäre: IP-Checker, WebRTC-Leak-Test, DNS-Leak-Test. Kein Tracking, keine E-Mail."
+    },
+    "title": "Kostenlose Datenschutz-Tools",
+    "subtitle": "Drei schnelle Checks für die Lecks, die am meisten zählen.",
+    "tools": {
+      "ipChecker": {
+        "title": "Wie ist meine IP?",
+        "description": "Sehen Sie, welche öffentliche IP, welches Land und welchen Provider Ihr Traffic gerade preisgibt.",
+        "cta": "IP-Check starten"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC-Leak-Test",
+        "description": "WebRTC kann Ihre echte IP selbst durch ein VPN hindurch verraten. Prüfen Sie, ob das bei Ihnen passiert.",
+        "cta": "WebRTC-Test starten"
+      },
+      "dnsLeak": {
+        "title": "DNS-Leak-Test",
+        "description": "Wenn Ihre DNS-Anfragen am VPN-Tunnel vorbeilaufen, sieht Ihr Provider weiterhin jede Website, die Sie besuchen.",
+        "cta": "DNS-Test starten"
+      }
+    },
+    "cta": {
+      "title": "Haben die Tools ein Leck gefunden?",
+      "description": "Dopplers VLESS-Reality-Tunnel leitet sowohl IP-Traffic als auch DNS-Anfragen durch den verschlüsselten Kanal — mit eingebauter Blockierung von WebRTC- und IPv6-Lecks.",
+      "button": "Doppler VPN ausprobieren"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Wie ist meine IP? — Kostenlose IP- & Provider-Abfrage",
+      "description": "Kostenloser IP-Adress-Checker — sehen Sie sofort Ihre öffentliche IP, Land, Region, Stadt und Provider. Kein Tracking. Keine E-Mail. Funktioniert auf iPhone, Android, Mac und Windows."
+    },
+    "hero": {
+      "title": "Wie ist meine IP?",
+      "subtitle": "Ihre öffentliche IP-Adresse, wie jede besuchte Website sie sieht — samt der damit verknüpften Geografie und dem Provider. Aktualisieren Sie nach dem Verbinden mit einem VPN, um zu prüfen, ob der Wechsel funktioniert hat."
+    },
+    "widget": {
+      "yourIp": "Ihre IP-Adresse",
+      "country": "Land",
+      "region": "Region",
+      "city": "Stadt",
+      "isp": "Internetanbieter",
+      "asn": "ASN",
+      "unknown": "Unbekannt",
+      "refresh": "Aktualisieren",
+      "refreshing": "Wird aktualisiert…",
+      "copied": "Kopiert",
+      "copy": "Kopieren",
+      "loading": "IP wird ermittelt…",
+      "error": "Ihre IP konnte nicht ermittelt werden. Laden Sie die Seite neu oder versuchen Sie es gleich noch einmal."
+    },
+    "explainer": {
+      "whatTitle": "Was ist eine IP-Adresse?",
+      "whatBody": "Jedes Gerät im Internet trägt eine numerische Adresse — eine öffentliche IP —, die es gegenüber jedem Server identifiziert, mit dem es kommuniziert. IPv4 sieht aus wie 203.0.113.42; IPv6 ist länger und verwendet Doppelpunkte. Ihre IP wird von Ihrem Provider vergeben und ändert sich beim Netzwechsel (Heim-WLAN, Mobilfunk, Café-WLAN).",
+      "exposeTitle": "Was Ihre IP preisgibt",
+      "exposeBody": "Schon die IP allein verrät Ihr Land, Ihre Region, Ihre Stadt und Ihren Provider — manchmal auf wenige Häuserblocks genau. Kombiniert mit dem User-Agent und den Timing-Daten, die jeder Browser sendet, reicht das Werbenetzwerken, um Sie per Fingerprint über Websites hinweg zu verfolgen. Streaming-Plattformen setzen sie für regionale Lizenzen ein. Zensoren nutzen sie für geografische Sperren.",
+      "vpnTitle": "Wie ein VPN Ihre IP ändert",
+      "vpnBody": "Wenn Sie sich mit einem VPN verbinden, verlässt Ihr gesamter Traffic das Internet über die IP des VPN-Servers — nicht über Ihre. Websites sehen Land, Provider und Geografie des VPN-Servers statt Ihrer echten Daten. Ein korrekt konfiguriertes VPN leitet auch DNS-Anfragen durch denselben Tunnel, sodass Ihr Provider nicht sieht, welche Seiten Sie besuchen, obwohl er die verschlüsselten Pakete transportiert."
+    },
+    "checklist": {
+      "title": "Wenn Sie mit Doppler VPN verbunden sind, sollte diese Seite zeigen:",
+      "items": {
+        "item1": "Eine IP, die nicht mit der übereinstimmt, die Sie vor dem Verbinden gesehen haben.",
+        "item2": "Ein Land, das dem gewählten Server entspricht (z. B. Deutschland, Niederlande, Singapur).",
+        "item3": "Einen Provider, der als Hosting-Anbieter gelistet ist (Hetzner, Vultr, OVH), statt Ihres Heimanbieters.",
+        "item4": "Keine Erwähnung Ihrer echten Stadt oder Region."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Wofür wird meine IP-Adresse verwendet?",
+        "answer": "Jeder Server, mit dem Sie kommunizieren, nutzt Ihre IP, um Antworten zurückzusenden — und die meisten protokollieren sie. Sie ermöglicht Geolokalisierung (bis auf Stadtebene), regionale Content-Lizenzen, Werbepersonalisierung, Betrugserkennung und — in zensierten Netzen — die Durchsetzung von Sperrlisten. Anonymität im Netz beginnt damit, diese Nummer nicht direkt preiszugeben."
+      },
+      "q2": {
+        "question": "Ist meine IP-Adresse eine private Information?",
+        "answer": "Sie wird an jede besuchte Website übermittelt, geheim ist sie also nicht. Aber sie ist personenbezogenes Datum nach DSGVO und den meisten Datenschutzgesetzen, weil sie einer Person zugeordnet werden kann. Behandeln Sie sie wie Ihren Straßennamen: nicht geheim, aber man gibt sie Fremden nicht leichtfertig."
+      },
+      "q3": {
+        "question": "Wie verberge ich meine IP?",
+        "answer": "Ein VPN ist das Standardwerkzeug — es ersetzt Ihre IP durch die des Servers. Tor verbirgt Ihre IP über mehrere Relays auf Kosten der Geschwindigkeit. Proxy-Dienste verbergen sie nur für Browser-Traffic. Ein Wechsel zu Mobilfunkdaten ändert Ihre IP, aber nicht Ihre Identität. Öffentliches WLAN teilt eine IP mit allen im Netz, ist aber unverschlüsselt."
+      },
+      "q4": {
+        "question": "Warum sieht meine IP auf verschiedenen Websites unterschiedlich aus?",
+        "answer": "Das sollte sie nicht — außer Sie sind hinter einem VPN mit Split-Tunneling (manche Apps laufen durchs VPN, andere über Ihren Provider), in einem Firmennetz mit mehreren Ausgangs-IPs, oder Sie sehen auf einer Seite IPv4 und auf einer anderen IPv6. Manche Seiten nutzen Drittanbieter-APIs zur IP-Abfrage, die leicht abweichende Metadaten liefern können."
+      },
+      "q5": {
+        "question": "Kann ich trotz VPN verfolgt werden, wenn meine IP verborgen ist?",
+        "answer": "Ja. Browser-Fingerprinting (Schriften, Bildschirmgröße, Plugins, Canvas-Rendering) identifiziert Geräte ohne IP. Cookies und Logins folgen Ihnen über Netzwerke hinweg. VPNs lösen nur die IP- und DNS-Ebene; der Rest liegt beim Browser. Nutzen Sie privates Surfen, blockieren Sie Drittanbieter-Cookies und ziehen Sie Anti-Fingerprinting-Browser für den vollen Schutz in Betracht."
+      },
+      "q6": {
+        "question": "Protokolliert Doppler meine IP?",
+        "answer": "Nein. Doppler speichert keine Verbindungsprotokolle, IP-Historien oder DNS-Anfragen. Der VPN-Server sieht Ihre echte IP nur so lange, wie es zum Routen des Traffics nötig ist — auf die Festplatte geschrieben wird sie nie. Unabhängige Audits und eine No-Logs-Politik sind hier die einzigen belastbaren Garantien; \"wir versprechen es\" reicht nicht, und wir legen unser Setup offen."
+      },
+      "q7": {
+        "question": "Was ist eine ASN?",
+        "answer": "Eine Autonomous System Number identifiziert den Netzbetreiber, dem der IP-Block gehört. AS7922 ist Comcast; AS24940 ist Hetzner; AS16509 ist Amazon AWS. ASNs sind öffentlich und verraten, ob eine IP zu einem Privatkunden-Provider, einem Mobilfunkanbieter, einem Hosting-Anbieter (meist VPN-Exit-Knoten) oder einem Firmennetz gehört."
+      },
+      "q8": {
+        "question": "Warum wirkt mein IP-Standort falsch?",
+        "answer": "IP-Geolokalisierungsdatenbanken (MaxMind, IP2Location) stimmen auf Länderebene zu ~99 % und auf Stadtebene zu ~70 %. Sie hinken der Realität Wochen hinterher: Ein frisch vergebener IP-Block kann noch als Standort des Vorbesitzers erscheinen. IPs von VPN-Servern werden manchmal falsch verortet. Zeigt Ihre Heim-IP die falsche Stadt, vergibt Ihr Provider seine Blöcke vermutlich über eine ganze Metropolregion."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC-Leak-Test",
+      "webrtcDesc": "WebRTC kann Ihre echte IP verraten, selbst wenn diese Seite die des VPN zeigt. Testen Sie es.",
+      "dnsTitle": "DNS-Leak-Test",
+      "dnsDesc": "Die IP zu verbergen reicht nicht, wenn Ihre DNS-Anfragen weiter durchsickern.",
+      "vlessTitle": "VLESS-Reality-VPN",
+      "vlessDesc": "Das Protokoll, mit dem Doppler Erkennung und Blockierung entgeht."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC-Leak-Test — Prüfen Sie, ob Ihr VPN Ihre echte IP verbirgt",
+      "description": "Kostenloser WebRTC-Leak-Test. Erkennt, ob Ihr Browser Ihre echte IP über STUN preisgibt — selbst bei verbundenem VPN. Läuft in 2 Sekunden. Keine Daten verlassen Ihr Gerät."
+    },
+    "hero": {
+      "title": "WebRTC-Leak-Test",
+      "subtitle": "Browser können Ihre echte IP über WebRTC preisgeben, selbst wenn ein VPN sie vor Websites verbirgt. Dieser Test prüft, ob Ihrer das tut — vollständig im Browser, ohne dass Daten irgendwohin gesendet werden."
+    },
+    "widget": {
+      "publicIp": "Öffentliche IP (von Websites gesehen)",
+      "webrtcIps": "Über WebRTC entdeckte IPs",
+      "leakedTitle": "WebRTC gibt Ihre IP preis",
+      "leakedBody": "WebRTC hat eine oder mehrere IPs entdeckt, die von der öffentlichen IP abweichen. Wenn Sie ein VPN nutzen, kann eine Website mit WebRTC also weiterhin Ihre echte Adresse sehen.",
+      "safeTitle": "Kein WebRTC-Leck erkannt",
+      "safeBody": "WebRTC hat dieselbe IP wie die öffentliche gemeldet — oder gar keine. Ihre echte Adresse sickert derzeit nicht über WebRTC durch.",
+      "noWebrtc": "Ihr Browser hat WebRTC deaktiviert oder es wurden keine Adressen aufgelöst. Das ist ein sicherer Zustand.",
+      "unknown": "Unbekannt",
+      "refresh": "Test wiederholen",
+      "refreshing": "Wird getestet…",
+      "loading": "WebRTC wird geprüft…",
+      "error": "Der Test konnte nicht ausgeführt werden. Laden Sie die Seite neu und versuchen Sie es erneut."
+    },
+    "explainer": {
+      "whatTitle": "Was ist ein WebRTC-Leck?",
+      "whatBody": "WebRTC ist eine Browser-Funktion für Peer-to-Peer-Audio, -Video und -Daten — genutzt von Google Meet, Discord und vielen Web-Apps. Um eine P2P-Verbindung aufzubauen, ermitteln Browser über STUN-Server ihre eigenen IP-Adressen, einschließlich lokaler und hinter NAT liegender Adressen. Eine Website kann den Browser diese Ermittlung still ausführen lassen und die IPs per JavaScript auslesen — komplett am VPN vorbei.",
+      "howTitle": "So funktioniert der Test",
+      "howBody": "Ihr Browser erstellt eine Schein-RTCPeerConnection, ruft createOffer auf und liest die resultierenden ICE-Kandidaten aus. ICE-Kandidaten enthalten jede IP, die der Browser finden kann — auch Ihre echte, selbst wenn ein VPN allen übrigen Traffic tunnelt. Der Test läuft lokal; nichts wird an unsere Server gesendet.",
+      "fixTitle": "So beheben Sie ein WebRTC-Leck",
+      "fixBody": "Drei Möglichkeiten: (1) Nutzen Sie ein VPN, das WebRTC-Lecks proaktiv blockiert (Dopplers iOS- und Android-Apps deaktivieren WebRTC außerhalb des Tunnels). (2) Installieren Sie eine Browser-Erweiterung, die WebRTC deaktiviert (uBlock Origin bietet dafür eine Option). (3) Setzen Sie in Firefox media.peerconnection.enabled in about:config auf false. Das Deaktivieren von WebRTC bricht Videoanrufe im Browser; nutzen Sie stattdessen eine native App."
+    },
+    "faq": {
+      "q1": {
+        "question": "Was ist WebRTC?",
+        "answer": "WebRTC ist ein W3C-Standard, der in jedem modernen Browser steckt und Peer-to-Peer-Kommunikation für Audio, Video und Daten in Echtzeit ermöglicht. Er treibt Google Meet, Discord im Web, den Zoom-Web-Client und die meisten browserbasierten Videochats an. Dieselben APIs, die P2P-Anrufe ermöglichen, lassen JavaScript auch Ihre lokalen Netzwerkadressen ermitteln."
+      },
+      "q2": {
+        "question": "Warum verrät WebRTC meine echte IP selbst durch ein VPN?",
+        "answer": "Weil der WebRTC-Stack unterhalb der Anwendungsschicht arbeitet und die Netzwerkschnittstelle direkt über STUN abfragt. Ein VPN tunnelt Traffic auf IP-Ebene, blockiert aber WebRTCs Adressermittlung nicht. Die durchgesickerte Adresse reist zwar im verschlüsselten Tunnel — doch der Browser übergibt sie dann dem JavaScript der Seite, das sie überallhin senden kann."
+      },
+      "q3": {
+        "question": "Welche Browser sind betroffen?",
+        "answer": "Alle mit Standardeinstellungen: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave bietet eine Einstellung gegen WebRTC-IP-Lecks, die standardmäßig aus ist. In Firefox lässt sich WebRTC über about:config komplett deaktivieren. iOS-Safari ist seit iOS 14 teilweise abgesichert, aber nicht vollständig."
+      },
+      "q4": {
+        "question": "Blockiert Doppler VPN WebRTC-Lecks?",
+        "answer": "Ja. Unsere iOS- und Android-Clients nutzen einen lokalen Kill-Switch, der allen UDP-Traffic außerhalb des Tunnels blockiert — damit erreicht die STUN-Ermittlung keine externen Server. Am Desktop empfehlen wir, das VPN mit dem WebRTC-Schalter von uBlock Origin oder einer Deaktivierung im Browser zu kombinieren, um alles abzudecken."
+      },
+      "q5": {
+        "question": "Bricht das Deaktivieren von WebRTC Websites?",
+        "answer": "Es bricht Videoanrufe im Browser (Meet, Zoom Web, Discord Web) und einige Kollaborationstools. Normales Surfen, Streaming und alles, was keine Peer-to-Peer-Verbindungen braucht, bleibt unberührt. Die nativen Apps dieser Dienste sind nicht auf WebRTC angewiesen."
+      },
+      "q6": {
+        "question": "Ist dieser Test privat?",
+        "answer": "Ja. Der Test läuft vollständig in Ihrem Browser über die Standard-API RTCPeerConnection. Weder IP noch Ergebnis noch Metadaten verlassen Ihr Gerät. Wir protokollieren nicht einmal, dass Sie den Test ausgeführt haben."
+      }
+    },
+    "related": {
+      "ipTitle": "Wie ist meine IP?",
+      "ipDesc": "Sehen Sie die IP und Geografie, die jede Website gerade sieht.",
+      "dnsTitle": "DNS-Leak-Test",
+      "dnsDesc": "Ist WebRTC sauber, aber DNS leckt, wissen Websites trotzdem, wohin Sie gehen.",
+      "censorshipTitle": "Wie VPN-Zensur funktioniert",
+      "censorshipDesc": "Warum WebRTC- und DNS-Lecks in restriktiven Netzen katastrophal sind."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS-Leak-Test — Prüfen Sie, ob das DNS Ihres VPN privat ist",
+      "description": "Kostenlose Anleitung zum DNS-Leak-Test. Finden Sie heraus, ob Ihre DNS-Anfragen durch den VPN-Tunnel laufen oder zu Ihrem Provider durchsickern. Schritt-für-Schritt-Anleitung und Behebung."
+    },
+    "hero": {
+      "title": "DNS-Leak-Test",
+      "subtitle": "Wenn Ihre DNS-Anfragen am VPN-Tunnel vorbeilaufen, sieht Ihr Internetanbieter weiterhin jede Website, die Sie besuchen — selbst bei verbundenem VPN. So prüfen und beheben Sie das."
+    },
+    "widget": {
+      "title": "Empfohlener DNS-Leak-Test",
+      "description": "Wir betreiben keine eigene DNS-Sonde, denn um das gut zu machen, braucht es kontrollierte Wildcard-Subdomains über mehrere Resolver hinweg. Nutzen Sie das bewährte Dritt-Tool unten — es ist unabhängig und erfordert kein Konto.",
+      "primaryButton": "dnsleaktest.com öffnen",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "browserleaks.com/dns öffnen",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Klicken Sie auf dnsleaktest.com auf \"Extended test\". Das Ergebnis sollte nur die DNS-Server Ihres VPN-Anbieters auflisten — nicht Ihren Internetanbieter. Sehen Sie Comcast, Verizon, Vodafone oder einen anderen Endkunden-Provider in den Ergebnissen, leckt Ihr DNS."
+    },
+    "explainer": {
+      "whatTitle": "Was ist ein DNS-Leck?",
+      "whatBody": "Wenn Sie eine URL eingeben, fragt Ihr Gerät zuerst einen DNS-Server nach der IP-Adresse dieser Domain. Läuft die DNS-Anfrage durch den VPN-Tunnel, sieht Ihr Provider nur verschlüsselten Traffic. Umgeht sie den Tunnel — ein DNS-Leck —, sieht Ihr Provider jede Domain, die Sie besuchen, auch wenn die anschließende Verbindung verschlüsselt ist. Zensierte Netze inspizieren oft DNS-Anfragen, um Sperrlisten durchzusetzen — dort ist ein DNS-Leck fatal.",
+      "causesTitle": "Was verursacht DNS-Lecks?",
+      "causesBody": "Drei häufige Ursachen: (1) Der VPN-Client setzt seinen eigenen DNS-Resolver, aber das Betriebssystem ignoriert ihn und nutzt den vom lokalen Netz zugewiesenen Resolver. (2) IPv6-Traffic wird nicht getunnelt, sodass IPv6-DNS-Anfragen am VPN vorbeisickern. (3) Browser wie Chrome und Firefox können \"intelligentes\" DNS-Routing (DNS-over-HTTPS) nutzen, das die System-DNS-Einstellungen komplett umgeht.",
+      "fixTitle": "So beheben Sie ein DNS-Leck",
+      "fixBody": "Nutzen Sie ein VPN mit eigener DNS-Infrastruktur, das alle DNS-Anfragen durch den Tunnel zwingt (Doppler tut das standardmäßig auf jeder Plattform). Deaktivieren Sie IPv6 in den Netzwerkeinstellungen Ihres Systems, falls Ihr VPN kein IPv6-Tunneling unterstützt. Stellen Sie im Browser DNS-over-HTTPS auf denselben Anbieter wie Ihr VPN — oder schalten Sie es ab. Auf Routern setzen Sie nur dann einen datenschutzfreundlichen Resolver (Quad9, Cloudflare 1.1.1.1) als Upstream-DNS, wenn Sie kein VPN auf Geräteebene betreiben."
+    },
+    "checklist": {
+      "title": "Dopplers DNS-Garantien:",
+      "items": {
+        "item1": "Alle DNS-Anfragen werden durch den VPN-Tunnel gezwungen — keine System-DNS-Lecks.",
+        "item2": "IPv6 wird entweder getunnelt oder blockiert, niemals geleakt.",
+        "item3": "Unsere DNS-Resolver protokollieren keine Anfragen.",
+        "item4": "Bei aktivem Kill-Switch blockieren wir DNS-over-HTTPS-Umgehungsversuche der Browser."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Warum ist ein DNS-Leck schlimmer als ein IP-Leck?",
+        "answer": "Ein IP-Leck verrät eine Adresse. Ein DNS-Leck verrät jede Domain, die Sie besuchen — jede Website, jeden API-Aufruf, jeden Analytics-Endpunkt — im Klartext an Ihren Provider und jeden auf dem Weg. Für Nutzer in zensierten Netzen sind DNS-Sperrlisten der häufigste Durchsetzungsmechanismus — DNS-Lecks sind deshalb der Fehler, durch den Menschen auffliegen."
+      },
+      "q2": {
+        "question": "Wie erkenne ich, ob mein DNS gerade leckt?",
+        "answer": "Führen Sie den erweiterten Test auf dnsleaktest.com aus. Er stellt mehrere Anfragen an Wildcard-Subdomains und zeigt, welche Resolver geantwortet haben. Sehen Sie den Namen Ihres Providers (oder irgendeinen Namen, der nicht zu Ihrem VPN-Anbieter passt), leckt das DNS. Wiederholen Sie den Test mit und ohne VPN zur Bestätigung."
+      },
+      "q3": {
+        "question": "Leckt Doppler VPN DNS?",
+        "answer": "Nein. Wir schieben unsere eigenen Resolver auf jeder Plattform durch den Tunnel und blockieren den Rückfall auf System-DNS. Bei aktivem Kill-Switch deaktivieren wir zudem die DNS-over-HTTPS-Umgehung der Browser. Unabhängige Tests auf dnsleaktest.com und browserleaks.com bestätigen das — prüfen Sie es gerne selbst."
+      },
+      "q4": {
+        "question": "Was ist DNS-over-HTTPS (DoH) und was hat es mit Lecks zu tun?",
+        "answer": "DoH ist ein Protokoll, das DNS-Anfragen über eine verschlüsselte HTTPS-Verbindung sendet und dabei den System-DNS-Resolver umgeht. Browser wie Chrome und Firefox nutzen DoH standardmäßig und schicken Anfragen oft an Google oder Cloudflare — unabhängig von Ihrem VPN. Das ist ein Leck, sofern Ihr VPN es nicht explizit behandelt. Doppler fängt DoH-Versuche ab und leitet sie durch den Tunnel."
+      },
+      "q5": {
+        "question": "Brauche ich einen separaten DNS-Dienst, wenn ich ein VPN nutze?",
+        "answer": "Nein. Ein gut konfiguriertes VPN übernimmt DNS für Sie. Ein separater DNS-Dienst (Quad9, Cloudflare) zusätzlich zum VPN kann sogar Lecks verursachen, wenn das Betriebssystem die DNS-Anfrage am Tunnel vorbeiroutet. Vertrauen Sie den Resolvern des VPN — und wenn Sie ihnen nicht vertrauen, nehmen Sie ein anderes VPN."
+      },
+      "q6": {
+        "question": "Wie oft sollte ich auf DNS-Lecks testen?",
+        "answer": "Nach jeder VPN-Einrichtung und jedem Systemupdate. Tunnel-Konfigurationen können still kaputtgehen — ein Systemupdate kann Ihren Netzwerk-Stack unbemerkt auf einen leckenden Pfad umstellen. Vierteljährliche Checks sind für Dauernutzer ein vernünftiger Rhythmus; wöchentlich, wenn Sie in einem stark zensierten Netz leben, wo ein Leck teuer werden kann."
+      }
+    },
+    "related": {
+      "ipTitle": "Wie ist meine IP?",
+      "ipDesc": "Sehen Sie genau, was Ihr VPN vor Websites verbirgt.",
+      "webrtcTitle": "WebRTC-Leak-Test",
+      "webrtcDesc": "IP verborgen, DNS verborgen — doch ein WebRTC-Leck verrät Sie trotzdem.",
+      "bypassTitle": "Internetzensur umgehen",
+      "bypassDesc": "Über DNS-Lecks fangen Sperrlisten Sie ein. Lesen Sie, wie Doppler sie vermeidet."
     }
   },
   "vlessVpnAndroid": {

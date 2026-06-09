@@ -1374,6 +1374,7 @@
     "promoError": "Codice promo non valido"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Controlla la tua sicurezza web con i nostri strumenti gratuiti per la privacy",
     "title": "Come Doppler VPN Protegge il Tuo Traffico",
     "subtitle": "La tua connessione è crittografata e instradata attraverso la rete edge di Doppler. Nulla viene registrato.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Perché chiediamo zero informazioni personali.",
       "vlessTitle": "Informazioni su VLESS-Reality",
       "vlessDesc": "Il protocollo dietro la crittografia di Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Strumenti Gratuiti per la Privacy — Doppler VPN",
+      "description": "Strumenti gratuiti e mirati per mettere alla prova la tua privacy: verifica IP, test di perdita WebRTC, test di perdita DNS. Niente tracciamento, niente email."
+    },
+    "title": "Strumenti gratuiti per la privacy",
+    "subtitle": "Tre controlli rapidi sulle perdite che contano di più.",
+    "tools": {
+      "ipChecker": {
+        "title": "Qual è il mio IP?",
+        "description": "Scopri l'IP pubblico, il paese e il provider che il tuo traffico sta esponendo in questo momento.",
+        "cta": "Verifica l'IP"
+      },
+      "webrtcLeak": {
+        "title": "Test di perdita WebRTC",
+        "description": "WebRTC può rivelare il tuo vero IP anche attraverso una VPN. Controlla se succede anche a te.",
+        "cta": "Avvia il test WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test di perdita DNS",
+        "description": "Se le tue query DNS aggirano il tunnel VPN, il tuo provider continua a vedere ogni sito che visiti.",
+        "cta": "Avvia il test DNS"
+      }
+    },
+    "cta": {
+      "title": "Gli strumenti hanno trovato una perdita?",
+      "description": "Il tunnel VLESS-Reality di Doppler instrada sia il traffico IP sia le query DNS attraverso il canale cifrato, con blocco integrato delle perdite WebRTC e IPv6.",
+      "button": "Prova Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Qual è il mio IP? — Verifica gratuita di IP e provider",
+      "description": "Verifica gratuita dell'indirizzo IP: scopri all'istante il tuo IP pubblico, paese, regione, città e provider. Niente tracciamento. Niente email. Funziona su iPhone, Android, Mac e Windows."
+    },
+    "hero": {
+      "title": "Qual è il mio IP?",
+      "subtitle": "Il tuo indirizzo IP pubblico come lo vede ogni sito che visiti — insieme alla geografia e al provider che vi sono associati. Aggiorna dopo esserti connesso a una VPN per verificare che il cambio sia avvenuto."
+    },
+    "widget": {
+      "yourIp": "Il tuo indirizzo IP",
+      "country": "Paese",
+      "region": "Regione",
+      "city": "Città",
+      "isp": "Provider internet",
+      "asn": "ASN",
+      "unknown": "Sconosciuto",
+      "refresh": "Aggiorna",
+      "refreshing": "Aggiornamento…",
+      "copied": "Copiato",
+      "copy": "Copia",
+      "loading": "Rilevamento dell'IP…",
+      "error": "Impossibile rilevare il tuo IP. Ricarica la pagina o riprova tra un istante."
+    },
+    "explainer": {
+      "whatTitle": "Che cos'è un indirizzo IP?",
+      "whatBody": "Ogni dispositivo su internet porta un indirizzo numerico — un IP pubblico — che lo identifica presso ogni server con cui comunica. L'IPv4 somiglia a 203.0.113.42; l'IPv6 è più lungo e usa i due punti. Il tuo IP è assegnato dal provider e cambia quando cambi rete (Wi-Fi di casa, dati mobili, Wi-Fi del bar).",
+      "exposeTitle": "Che cosa espone il tuo IP",
+      "exposeBody": "Un IP da solo rivela paese, regione, città e provider — a volte con la precisione di pochi isolati. Combinato con lo User-Agent e i dati temporali che ogni browser invia, basta alle reti pubblicitarie per creare la tua impronta e tracciarti tra i siti. Le piattaforme di streaming lo usano per applicare le licenze regionali. I censori lo usano per imporre blocchi geografici.",
+      "vpnTitle": "Come una VPN cambia il tuo IP",
+      "vpnBody": "Quando ti connetti a una VPN, tutto il tuo traffico esce su internet con l'IP del server VPN — non con il tuo. I siti vedono il paese, il provider e la geografia del server VPN al posto dei tuoi reali. Una VPN configurata correttamente instrada anche le query DNS nello stesso tunnel, così il provider non può vedere quali siti visiti pur trasportando i pacchetti cifrati."
+    },
+    "checklist": {
+      "title": "Se sei connesso a Doppler VPN, questa pagina dovrebbe mostrare:",
+      "items": {
+        "item1": "Un IP che non corrisponde a quello che vedevi prima di connetterti.",
+        "item2": "Un paese corrispondente al server che hai scelto (es. Germania, Paesi Bassi, Singapore).",
+        "item3": "Un provider indicato come hosting (Hetzner, Vultr, OVH) anziché il tuo operatore di casa.",
+        "item4": "Nessuna menzione della tua vera città o regione."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "A cosa serve il mio indirizzo IP?",
+        "answer": "Ogni server con cui comunichi usa il tuo IP per rimandarti le risposte, e la maggior parte lo registra. Permette la geolocalizzazione (fino alla città), le licenze regionali sui contenuti, la personalizzazione degli annunci, il rilevamento delle frodi e — nelle reti censurate — l'applicazione delle liste di blocco. L'anonimato online comincia dal non rivelare direttamente questo numero."
+      },
+      "q2": {
+        "question": "Il mio indirizzo IP è un'informazione privata?",
+        "answer": "Viene trasmesso a ogni sito che visiti, quindi non è un segreto. Ma è un dato personale secondo il GDPR e la maggior parte delle leggi sulla privacy, perché può essere collegato a una persona. Trattalo come il nome della tua via: non è riservato, ma non lo dai al primo che passa."
+      },
+      "q3": {
+        "question": "Come nascondo il mio IP?",
+        "answer": "La VPN è lo strumento standard: sostituisce il tuo IP con quello del server. Tor nasconde il tuo IP attraverso più relay a scapito della velocità. I servizi proxy lo nascondono solo per il traffico del browser. Passare ai dati mobili cambia il tuo IP, ma non la tua identità. Il Wi-Fi pubblico condivide un IP con tutti sulla rete, ma non è cifrato."
+      },
+      "q4": {
+        "question": "Perché il mio IP appare diverso su siti diversi?",
+        "answer": "Non dovrebbe — a meno che tu non sia dietro una VPN con split tunneling (alcune app passano dalla VPN, altre dal provider), in una rete aziendale con più IP di uscita, o non veda IPv4 su un sito e IPv6 su un altro. Alcuni siti usano API di terze parti per la ricerca dell'IP che possono restituire metadati leggermente diversi."
+      },
+      "q5": {
+        "question": "Possono tracciarmi anche con una VPN se il mio IP è nascosto?",
+        "answer": "Sì. Il fingerprinting del browser (font, dimensioni dello schermo, plugin, rendering canvas) identifica i dispositivi senza bisogno dell'IP. Cookie e accessi ti seguono da una rete all'altra. Le VPN risolvono solo il livello IP e DNS; il resto dipende dal browser. Usa la navigazione privata, blocca i cookie di terze parti e valuta browser anti-fingerprinting per una protezione completa."
+      },
+      "q6": {
+        "question": "Doppler registra il mio IP?",
+        "answer": "No. Doppler non conserva log di connessione, cronologie IP o query DNS. Il server VPN vede il tuo vero IP solo per il tempo necessario a instradare il traffico — non viene mai scritto su disco. Gli audit indipendenti e una politica no-log sono le uniche garanzie che contano; \"lo promettiamo\" non basta, e noi pubblichiamo come è fatta la nostra infrastruttura."
+      },
+      "q7": {
+        "question": "Che cos'è un ASN?",
+        "answer": "Un Autonomous System Number identifica l'operatore di rete proprietario del blocco di IP. AS7922 è Comcast; AS24940 è Hetzner; AS16509 è Amazon AWS. Gli ASN sono pubblici e permettono di capire se un IP appartiene a un provider residenziale, a un operatore mobile, a un hosting (di solito i nodi di uscita delle VPN) o a una rete aziendale."
+      },
+      "q8": {
+        "question": "Perché la posizione del mio IP sembra sbagliata?",
+        "answer": "I database di geolocalizzazione IP (MaxMind, IP2Location) sono precisi a livello di paese nel ~99% dei casi e di città nel ~70%. Restano indietro di settimane rispetto alla realtà: un blocco IP appena assegnato può apparire con la posizione del proprietario precedente. Gli IP dei server VPN a volte sono geolocalizzati male. Se il tuo IP di casa mostra la città sbagliata, probabilmente il provider distribuisce i blocchi su un'intera area metropolitana."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test di perdita WebRTC",
+      "webrtcDesc": "WebRTC può rivelare il tuo vero IP anche quando questa pagina mostra quello della VPN. Provalo.",
+      "dnsTitle": "Test di perdita DNS",
+      "dnsDesc": "Nascondere l'IP non basta se le tue query DNS continuano a trapelare.",
+      "vlessTitle": "VPN VLESS-Reality",
+      "vlessDesc": "Il protocollo che Doppler usa per evitare di essere rilevato e bloccato."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test di Perdita WebRTC — Verifica se la tua VPN nasconde il tuo vero IP",
+      "description": "Test gratuito di perdita WebRTC. Rileva se il browser sta facendo trapelare il tuo vero IP tramite STUN anche con la VPN connessa. Dura 2 secondi. Nessun dato lascia il tuo dispositivo."
+    },
+    "hero": {
+      "title": "Test di perdita WebRTC",
+      "subtitle": "I browser possono rivelare il tuo vero IP tramite WebRTC anche quando una VPN lo nasconde ai siti. Questo test verifica se il tuo lo fa — interamente nel browser, senza inviare dati da nessuna parte."
+    },
+    "widget": {
+      "publicIp": "IP pubblico (visto dai siti)",
+      "webrtcIps": "IP scoperti da WebRTC",
+      "leakedTitle": "WebRTC sta facendo trapelare il tuo IP",
+      "leakedBody": "WebRTC ha rilevato uno o più IP diversi dall'IP pubblico. Se usi una VPN, significa che un sito che usa WebRTC può ancora vedere il tuo vero indirizzo.",
+      "safeTitle": "Nessuna perdita WebRTC rilevata",
+      "safeBody": "WebRTC ha riportato lo stesso IP di quello pubblico, o nessun IP. In questo momento non stai facendo trapelare il tuo vero indirizzo tramite WebRTC.",
+      "noWebrtc": "Il tuo browser ha disattivato WebRTC o non è stato risolto alcun indirizzo. È uno stato sicuro.",
+      "unknown": "Sconosciuto",
+      "refresh": "Ripeti il test",
+      "refreshing": "Test in corso…",
+      "loading": "Analisi di WebRTC…",
+      "error": "Il test non è riuscito a partire. Ricarica la pagina e riprova."
+    },
+    "explainer": {
+      "whatTitle": "Che cos'è una perdita WebRTC?",
+      "whatBody": "WebRTC è una funzione del browser per audio, video e dati peer-to-peer — usata da Google Meet, Discord e molte app web. Per stabilire una connessione P2P, il browser usa server STUN per scoprire i propri indirizzi IP, compresi quelli locali e dietro NAT. Un sito può chiedere al browser di eseguire questa scoperta in silenzio e leggere gli IP risultanti via JavaScript, aggirando del tutto la VPN.",
+      "howTitle": "Come funziona il test",
+      "howBody": "Il browser crea una RTCPeerConnection fittizia, chiama createOffer e legge i candidati ICE risultanti. I candidati ICE includono ogni IP che il browser riesce a trovare — compreso quello vero, anche quando una VPN sta incanalando tutto il resto del traffico. Il test gira in locale; nulla viene inviato ai nostri server.",
+      "fixTitle": "Come risolvere una perdita WebRTC",
+      "fixBody": "Tre opzioni: (1) Usa una VPN che blocchi proattivamente le perdite WebRTC (le app Doppler per iOS e Android disattivano WebRTC fuori dal tunnel). (2) Installa un'estensione del browser che disattivi WebRTC (uBlock Origin ha un'opzione apposta). (3) Su Firefox, imposta media.peerconnection.enabled su false in about:config. Disattivare WebRTC romperà le videochiamate nel browser; usa un'app nativa al suo posto."
+    },
+    "faq": {
+      "q1": {
+        "question": "Che cos'è WebRTC?",
+        "answer": "WebRTC è uno standard W3C integrato in ogni browser moderno per la comunicazione peer-to-peer di audio, video e dati in tempo reale. Alimenta Google Meet, Discord web, il client web di Zoom e la maggior parte delle videochat da browser. Le stesse API che permettono le chiamate P2P consentono anche a JavaScript di scoprire i tuoi indirizzi di rete locali."
+      },
+      "q2": {
+        "question": "Perché WebRTC fa trapelare il mio vero IP anche attraverso una VPN?",
+        "answer": "Perché lo stack WebRTC opera sotto il livello applicativo e interroga l'interfaccia di rete direttamente via STUN. Una VPN incanala il traffico a livello IP ma non blocca le chiamate di scoperta degli indirizzi di WebRTC. L'indirizzo trapelato viaggia dentro il tunnel cifrato — ma poi il browser lo consegna al JavaScript della pagina, che può inviarlo ovunque."
+      },
+      "q3": {
+        "question": "Quali browser sono interessati?",
+        "answer": "Tutti, con le impostazioni predefinite: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave include un'impostazione contro la perdita di IP via WebRTC, disattivata di default. Firefox permette di disattivare WebRTC del tutto via about:config. Safari su iOS è parzialmente mitigato da iOS 14, ma non del tutto."
+      },
+      "q4": {
+        "question": "Doppler VPN blocca le perdite WebRTC?",
+        "answer": "Sì. I nostri client iOS e Android eseguono un kill-switch locale che blocca tutto il traffico UDP fuori dal tunnel, impedendo alla scoperta STUN di raggiungere server esterni. Su desktop consigliamo di abbinare la VPN all'interruttore WebRTC di uBlock Origin o alla disattivazione a livello di browser per una copertura totale."
+      },
+      "q5": {
+        "question": "Disattivare WebRTC romperà i siti?",
+        "answer": "Rompe le videochiamate nel browser (Meet, Zoom web, Discord web) e alcuni strumenti collaborativi. Non influisce sulla navigazione normale, sullo streaming né su nulla che non richieda connessioni peer-to-peer. Le app native di quei servizi non dipendono da WebRTC."
+      },
+      "q6": {
+        "question": "Questo test è privato?",
+        "answer": "Sì. Il test gira interamente nel tuo browser usando l'API standard RTCPeerConnection. Né IP, né risultato, né metadati lasciano il tuo dispositivo. Non registriamo nemmeno il fatto che tu l'abbia eseguito."
+      }
+    },
+    "related": {
+      "ipTitle": "Qual è il mio IP?",
+      "ipDesc": "Guarda l'IP e la geografia che ogni sito vede in questo momento.",
+      "dnsTitle": "Test di perdita DNS",
+      "dnsDesc": "Se WebRTC è pulito ma il DNS trapela, i siti sanno comunque dove vai.",
+      "censorshipTitle": "Come funziona la censura delle VPN",
+      "censorshipDesc": "Perché le perdite WebRTC e DNS sono catastrofiche nelle reti con restrizioni."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test di Perdita DNS — Verifica che il DNS della tua VPN sia privato",
+      "description": "Guida gratuita al test di perdita DNS. Scopri se le tue query DNS passano dal tunnel VPN o trapelano verso il provider. Istruzioni passo passo e rimedi."
+    },
+    "hero": {
+      "title": "Test di perdita DNS",
+      "subtitle": "Se le tue query DNS aggirano il tunnel VPN, il tuo provider continua a vedere ogni sito che visiti — anche con la VPN connessa. Ecco come verificarlo e risolvere."
+    },
+    "widget": {
+      "title": "Test di perdita DNS consigliato",
+      "description": "Non gestiamo una nostra sonda DNS perché farlo bene richiede sottodomini wildcard controllati su più resolver. Usa lo strumento di terze parti affidabile qui sotto — è indipendente e non richiede account.",
+      "primaryButton": "Apri dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Apri browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Clicca \"Extended test\" su dnsleaktest.com. Il risultato dovrebbe elencare solo i server DNS del tuo provider VPN — non il tuo provider internet. Se nei risultati vedi Comcast, Verizon, Vodafone o qualsiasi altro provider consumer, il tuo DNS sta trapelando."
+    },
+    "explainer": {
+      "whatTitle": "Che cos'è una perdita DNS?",
+      "whatBody": "Quando digiti un URL, il dispositivo chiede prima a un server DNS l'indirizzo IP di quel dominio. Se la query DNS passa dal tunnel VPN, il provider vede solo traffico cifrato. Se aggira il tunnel — una perdita DNS — il provider vede ogni dominio che visiti, anche se la connessione successiva è cifrata. Le reti censurate spesso ispezionano le query DNS per applicare le liste di blocco, quindi in quegli ambienti una perdita DNS è fatale.",
+      "causesTitle": "Che cosa causa le perdite DNS?",
+      "causesBody": "Tre cause comuni: (1) Il client VPN imposta il proprio resolver DNS, ma il sistema operativo lo ignora e usa quello assegnato dalla rete locale. (2) Il traffico IPv6 non è incanalato, quindi le query DNS IPv6 trapelano aggirando la VPN. (3) Browser come Chrome e Firefox possono usare un instradamento DNS \"intelligente\" (DNS-over-HTTPS) che ignora del tutto le impostazioni DNS di sistema.",
+      "fixTitle": "Come risolvere una perdita DNS",
+      "fixBody": "Usa una VPN che possieda la propria infrastruttura DNS e forzi tutte le query DNS nel tunnel (Doppler lo fa di default su ogni piattaforma). Disattiva l'IPv6 nelle impostazioni di rete del sistema se la tua VPN non supporta il tunneling IPv6. Nel browser, imposta il DNS-over-HTTPS sullo stesso provider della VPN, oppure disattivalo. Sui router, imposta come DNS upstream un resolver rispettoso della privacy (Quad9, Cloudflare 1.1.1.1) solo se non usi una VPN a livello di dispositivo."
+    },
+    "checklist": {
+      "title": "Le garanzie DNS di Doppler:",
+      "items": {
+        "item1": "Tutte le query DNS sono forzate nel tunnel VPN — niente perdite dal DNS di sistema.",
+        "item2": "L'IPv6 viene incanalato o bloccato, mai fatto trapelare.",
+        "item3": "I nostri resolver DNS non registrano le query.",
+        "item4": "Con il kill-switch attivo blocchiamo i tentativi dei browser di aggirare il DNS via DNS-over-HTTPS."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Perché una perdita DNS è peggiore di una perdita di IP?",
+        "answer": "Una perdita di IP rivela un indirizzo. Una perdita DNS rivela ogni dominio che visiti — ogni sito, ogni chiamata API, ogni endpoint di analytics — in chiaro al tuo provider e a chiunque lungo il percorso. Per gli utenti delle reti censurate, le liste di blocco a livello DNS sono il meccanismo di controllo più diffuso: è la perdita DNS l'errore che fa scoprire le persone."
+      },
+      "q2": {
+        "question": "Come capisco se il mio DNS sta trapelando in questo momento?",
+        "answer": "Esegui il test esteso su dnsleaktest.com. Invia diverse query a sottodomini wildcard e ti dice quali resolver hanno risposto. Se vedi il nome del tuo provider (o un nome che non corrisponde alla tua VPN), il DNS sta trapelando. Ripeti il test con e senza VPN per conferma."
+      },
+      "q3": {
+        "question": "Doppler VPN fa trapelare il DNS?",
+        "answer": "No. Spingiamo i nostri resolver attraverso il tunnel su ogni piattaforma e blocchiamo il ritorno al DNS di sistema. Disattiviamo anche l'aggiramento via DNS-over-HTTPS dei browser quando il nostro kill-switch è attivo. I test indipendenti su dnsleaktest.com e browserleaks.com lo confermano — verifica pure tu stesso."
+      },
+      "q4": {
+        "question": "Che cos'è il DNS-over-HTTPS (DoH) e che rapporto ha con le perdite?",
+        "answer": "Il DoH è un protocollo che invia le query DNS su una connessione HTTPS cifrata, aggirando il resolver DNS di sistema. Browser come Chrome e Firefox usano il DoH di default, spesso instradando le query verso Google o Cloudflare a prescindere dalla tua VPN. È una perdita, a meno che la VPN non la gestisca esplicitamente. Doppler intercetta i tentativi di DoH e li instrada nel tunnel."
+      },
+      "q5": {
+        "question": "Mi serve un servizio DNS separato se uso una VPN?",
+        "answer": "No. Una VPN ben configurata gestisce il DNS per te. Usare un servizio DNS separato (Quad9, Cloudflare) sopra una VPN può anzi causare perdite, se il sistema instrada la query DNS fuori dal tunnel. Fidati dei resolver della VPN — e se non ti fidi, cambia VPN."
+      },
+      "q6": {
+        "question": "Ogni quanto dovrei testare le perdite DNS?",
+        "answer": "Dopo ogni configurazione della VPN o aggiornamento del sistema. Le configurazioni del tunnel possono rompersi in silenzio — un aggiornamento di sistema può spostare lo stack di rete su un percorso che trapela senza avvisarti. Un controllo trimestrale è una cadenza ragionevole per chi la usa stabilmente; settimanale se vivi in una rete pesantemente censurata, dove il costo di una perdita è alto."
+      }
+    },
+    "related": {
+      "ipTitle": "Qual è il mio IP?",
+      "ipDesc": "Guarda esattamente che cosa la tua VPN nasconde ai siti.",
+      "webrtcTitle": "Test di perdita WebRTC",
+      "webrtcDesc": "IP nascosto, DNS nascosto, ma una perdita WebRTC ti espone comunque.",
+      "bypassTitle": "Aggirare la censura di internet",
+      "bypassDesc": "Le perdite DNS sono il modo in cui le liste di blocco ti scoprono. Leggi come Doppler le evita."
     }
   },
   "vlessVpnAndroid": {
