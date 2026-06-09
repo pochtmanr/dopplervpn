@@ -36,6 +36,7 @@ function FaqItem({
         onClick={onToggle}
         className="w-full py-6 flex items-center justify-between text-start gap-4 group"
         aria-expanded={isOpen}
+        aria-controls={`faq-panel-${faqKey}`}
       >
         <span className="font-display text-lg md:text-xl font-medium text-text-primary group-hover:text-accent-gold transition-colors">
           {t(`items.${faqKey}.question`)}
@@ -61,6 +62,7 @@ function FaqItem({
       </button>
 
       <div
+        id={`faq-panel-${faqKey}`}
         className={`grid transition-[grid-template-rows] duration-200 ease-out ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}

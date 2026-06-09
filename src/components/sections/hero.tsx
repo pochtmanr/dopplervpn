@@ -100,34 +100,34 @@ export function Hero() {
             </div>
 
             {/* Trust Badges */}
-            <div
+            <ul
               className="hero-animate hero-animate-delay-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 pt-4 text-xs text-text-muted"
             >
-              <span className="flex items-center gap-1.5">
+              <li className="flex items-center gap-1.5">
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
                 {t("trustBadges.noData")}
-              </span>
-              <span className="flex items-center gap-1.5">
+              </li>
+              <li className="flex items-center gap-1.5">
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
                 {t("trustBadges.noLogs")}
-              </span>
-              <span className="flex items-center gap-1.5">
+              </li>
+              <li className="flex items-center gap-1.5">
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
                 {t("trustBadges.unlimited")}
-              </span>
-              <span className="flex items-center gap-1.5">
+              </li>
+              <li className="flex items-center gap-1.5">
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
                 {t("trustBadges.vless")}
-              </span>
-            </div>
+              </li>
+            </ul>
           </div>
 
           {/* Right Column - Devices with parallax */}

@@ -22,6 +22,7 @@ export default async function Page({ params }: PageProps) {
       namespace={NAMESPACE}
       primaryPlatform="android"
       datePublished="2026-05-26"
+      dateModified="2026-06-09"
       related={[
         { href: "/vless-vpn", titleKey: "vlessTitle", descKey: "vlessDesc" },
         { href: "/vpn-for-android", titleKey: "androidTitle", descKey: "androidDesc" },

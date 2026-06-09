@@ -50,7 +50,7 @@ export function SpeedComparison() {
 
   return (
     <Section id="speed-comparison">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       <Reveal>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">

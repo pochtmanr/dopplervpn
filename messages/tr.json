@@ -422,7 +422,8 @@
     "vpnForChina": "Çin için VPN",
     "vpnForRussia": "Rusya için VPN",
     "vpnForTurkey": "Türkiye için VPN",
-    "tools": "Ücretsiz gizlilik araçları"
+    "tools": "Ücretsiz gizlilik araçları",
+    "securityPage": "Güvenlik"
   },
   "privacy": {
     "title": "Gizlilik Politikası",
@@ -2707,6 +2708,69 @@
     "colPrivacy": "Gizlilik Politikası",
     "viewPolicy": "Görüntüle",
     "notice": "Yeni alt işlemciler eklemeden en az 30 gün önce kullanıcılarımızı bilgilendiririz. Alt işlemcilerimiz hakkında sorularınız varsa support@simnetiq.store adresiyle iletişime geçin."
+  },
+  "security": {
+    "metadata": {
+      "title": "Güvenlik ve Kayıtsız (No-Logs) Mimari",
+      "description": "Doppler VPN trafiğinizi nasıl korur: Xray-core üzerinde VLESS-Reality, TLS 1.3 şifreleme, tasarımla güvence altına alınmış kayıtsız mimari, anonim hesaplar ve sorumlu güvenlik açığı bildirimi."
+    },
+    "title": "Doppler VPN'de Güvenlik",
+    "securityLink": "Doppler'in trafiğinizi nasıl koruduğunu okuyun",
+    "lastUpdated": "Son güncelleme: 9 Haziran 2026",
+    "intro": "Bu sayfa, Doppler VPN'in trafiğinizi ve kimliğinizi nasıl koruduğunu somut teknik terimlerle açıklar: hangi protokolü çalıştırdığımız, neyin şifrelendiği, neleri sakladığımız — ve tasarım gereği neleri saklayamadığımız — ve bir güvenlik açığını nasıl bildirebileceğiniz.",
+    "sections": {
+      "protocol": {
+        "title": "Protokol: Xray-core üzerinde VLESS-Reality",
+        "p1": "Doppler VPN, Xray-core üzerinde Reality taşıma katmanıyla VLESS protokolünü çalıştırır. El sıkışmaları parmak izi gibi tanınabilen ve derin paket incelemesi (DPI) tarafından rutin olarak engellenen OpenVPN, WireGuard veya IKEv2'nin aksine Reality, bağlantınızı gerçekten var olan bir web sitesiyle kurulan sıradan bir TLS 1.3 oturumundan ayırt edilemez hale getirir.",
+        "p2": "El sıkışma sırasında Reality, gerçek bir hedef sitenin TLS sertifikasını sunar; bu nedenle SNI denetimi veya aktif sondalama yapan sansür sistemleri, meşru bir alan adına kurulmuş geçerli bir TLS bağlantısı görür. Doppler'in, yaygın VPN protokollerinin tespit edilip engellendiği ağlarda çalışmaya devam etmesinin nedeni budur.",
+        "link": "VLESS-Reality protokolünün tam açıklamasını okuyun"
+      },
+      "encryption": {
+        "title": "Aktarım sırasında şifreleme",
+        "p1": "Tüm tünel trafiği, çevrimiçi bankacılığı koruyan kriptografiyle aynı olan X25519 anahtar değişimli TLS 1.3 ile korunur. DNS sorguları şifreli tünelin içinde çözümlenir; bu sayede internet sağlayıcınız veya yerel ağınız ziyaret ettiğiniz alan adlarını göremez, kaydedemez veya değiştiremez.",
+        "p2": "XTLS Vision akış kontrolü, zaten TLS ile korunan trafiğin ikinci kez şifrelenmesini önler. Bu hem hızı artırır hem de DPI sistemlerinin aradığı katmanlı şifreleme parmak izini ortadan kaldırır."
+      },
+      "noLogs": {
+        "title": "Kayıtsız (no-logs) mimari",
+        "intro": "Kayıt tutmama politikamız yalnızca bir vaatle değil, mimarinin kendisiyle güvence altındadır: VPN trafiği asla incelenmez, kaydedilmez, değiştirilmez veya saklanmaz.",
+        "neverTitle": "Asla saklamadıklarımız",
+        "never1": "Gezinme etkinliği veya geçmişi",
+        "never2": "Bağlantı zaman damgaları",
+        "never3": "Kaynak veya atanan IP adresleri",
+        "never4": "DNS sorguları",
+        "never5": "Bant genişliği kullanımı",
+        "never6": "VPN oturum süresi",
+        "onlyTitle": "Sakladığımız tek şeyler",
+        "only1": "Rastgele oluşturulan bir cihaz tanımlayıcısı (kimliğinizle ilişkilendirilmez)",
+        "only2": "Anonim, toplulaştırılmış sunucu performans ölçümleri",
+        "only3": "Bir e-posta adresi — yalnızca destek ekibiyle gönüllü olarak iletişime geçerseniz",
+        "retentionTitle": "Veri saklama",
+        "retention1": "VPN kullanım verileri: saklanmaz (kayıtsız)",
+        "retention2": "Hesap verileri: hesap aktif olduğu sürece, silindikten sonra 30 gün daha",
+        "retention3": "Ödeme kayıtları: 6 yıl (vergi ve muhasebe mevzuatı)",
+        "retention4": "Destek yazışmaları: çözümden sonra 12 ay"
+      },
+      "account": {
+        "title": "Kayıt gerektirmeyen hesap modeli",
+        "p1": "Asla e-posta veya telefon numarasıyla hesap oluşturmazsınız. Cihazınız VPN-XXXX-XXXX-XXXX biçiminde rastgele bir hesap kimliği üretir ve aboneliğiniz bu kimliktir. Sızabilecek bir kimlik yoktur, çünkü en başından hiçbir kimlik bilgisi toplanmaz.",
+        "link": "Kayıtsız model hakkında daha fazla bilgi edinin"
+      },
+      "infrastructure": {
+        "title": "Altyapı ve web sitesi güvenliği",
+        "p1": "Sunucu yapılandırmaları sunucu tarafında saklanır ve kimlik doğrulamalı API'ler üzerinden iletilir — asla uygulamaların içine gömülmez. Web sitesi HSTS preload ile HTTPS, Content-Security-Policy, sıkı Referrer ve Permissions politikaları ve çerçeve içine alınma engeli uygular.",
+        "p2": "Ödemeler Revolut (kartlar, Apple Pay) ve OxaPay (kripto para) tarafından işlenir. Kart bilgileri hiçbir zaman Doppler sunucularına ulaşmaz."
+      },
+      "disclosure": {
+        "title": "Sorumlu güvenlik açığı bildirimi",
+        "p1": "Bir güvenlik açığı mı buldunuz? Bunu duymak isteriz. Aşağıdaki adresten bize ulaşın veya makine tarafından okunabilir güvenlik iletişim dosyamıza (RFC 9116) bakın. Bildirimleri 72 saat içinde yanıtlamayı hedefliyoruz.",
+        "securityTxt": "security.txt dosyamızı görüntüleyin"
+      },
+      "jurisdiction": {
+        "title": "Yargı yetkisi ve şirket",
+        "p1": "Doppler VPN, İngiltere ve Galler'de kayıtlı ve Birleşik Krallık GDPR'sine tabi olan SIMNETIQ LTD (şirket numarası 16861177) tarafından işletilmektedir. Kayıtsız mimari sayesinde, yasal taleplere karşılık teslim edilebilecek herhangi bir gezinme etkinliği verisi yoktur.",
+        "related": "İlgili belgeler:"
+      }
+    }
   },
   "platformsAvailable": {
     "eyebrow": "Mevcut platformlar",

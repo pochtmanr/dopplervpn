@@ -21,6 +21,7 @@ export default async function Page({ params }: PageProps) {
       slug={SLUG}
       namespace={NAMESPACE}
       datePublished="2026-05-26"
+      dateModified="2026-06-09"
       related={[
         { href: "/vpn-for-instagram-russia", titleKey: "instagramTitle", descKey: "instagramDesc" },
         { href: "/bypass-censorship", titleKey: "censorshipTitle", descKey: "censorshipDesc" },

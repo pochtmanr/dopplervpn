@@ -71,7 +71,7 @@ export function Servers() {
 
   return (
     <Section id="servers">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {serverLocations.map((location, i) => (

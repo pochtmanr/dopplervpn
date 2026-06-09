@@ -9,7 +9,7 @@ export function TechnicalHowItWorks() {
 
   return (
     <Section id="how-doppler-works">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} headingLevel="h3" />
+      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       {/* Flow Steps as Cards with Arrows */}
       <div

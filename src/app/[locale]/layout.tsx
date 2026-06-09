@@ -12,6 +12,7 @@ import {
   SoftwareApplicationSchema,
 } from "@/components/seo/json-ld";
 import { AnalyticsConsent } from "@/components/analytics-consent";
+import { SpeedInsightsConsent } from "@/components/speed-insights-consent";
 import { CookieConsent } from "@/components/cookie-consent";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/app/globals.css";
@@ -163,6 +164,7 @@ export default async function LocaleLayout({
           </NextIntlClientProvider>
         </ThemeProvider>
         <AnalyticsConsent />
+        <SpeedInsightsConsent />
       </body>
     </html>
   );

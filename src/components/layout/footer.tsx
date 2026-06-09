@@ -4,6 +4,7 @@ import { DopplerLogo } from "./doppler-logo";
 import { CookieSettingsButton } from "./cookie-settings-button";
 import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import { isBlogLocale } from "@/i18n/blog-locales";
+import { isSecurityLocale } from "@/i18n/security-locales";
 
 type LinkItem = { href: string; label: string };
 
@@ -48,6 +49,9 @@ export async function Footer() {
   // Tools ship English-only until the namespaces are hand-translated
   // (see /[locale]/tools/page.tsx generateStaticParams).
   const showToolsLink = locale === "en";
+  // /security ships in the hand-translated core-market locales only
+  // (see /[locale]/security/page.tsx generateStaticParams).
+  const showSecurityLink = isSecurityLocale(locale);
   const currentYear = new Date().getFullYear();
 
   const productLinks: LinkItem[] = [
@@ -73,6 +77,7 @@ export async function Footer() {
   const supportLinks: LinkItem[] = [
     { href: "/support", label: t("helpCenter") },
     { href: "/about", label: t("about") },
+    ...(showSecurityLink ? [{ href: "/security", label: t("securityPage") }] : []),
   ];
 
   const legalLinks: LinkItem[] = [
@@ -161,6 +166,13 @@ export async function Footer() {
                   {t("about")}
                 </Link>
               </li>
+              {showSecurityLink && (
+                <li>
+                  <Link href="/security" className="text-text-muted hover:text-text-primary transition-colors text-sm">
+                    {t("securityPage")}
+                  </Link>
+                </li>
+              )}
               <li>
                 <a
                   href="https://t.me/DopplerSupportBot"

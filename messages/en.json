@@ -422,7 +422,8 @@
     "vpnForChina": "VPN for China",
     "vpnForRussia": "VPN for Russia",
     "vpnForTurkey": "VPN for Turkey",
-    "tools": "Free privacy tools"
+    "tools": "Free privacy tools",
+    "securityPage": "Security"
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -2713,6 +2714,69 @@
     "colPrivacy": "Privacy Policy",
     "viewPolicy": "View",
     "notice": "We notify users at least 30 days before adding new subprocessors. If you have questions about our subprocessors, contact support@simnetiq.store."
+  },
+  "security": {
+    "metadata": {
+      "title": "Security & No-Logs Architecture",
+      "description": "How Doppler VPN secures your traffic: VLESS-Reality over Xray-core, TLS 1.3 encryption, a no-logs architecture enforced by design, anonymous accounts, and responsible disclosure."
+    },
+    "title": "Security at Doppler VPN",
+    "securityLink": "Read how Doppler secures your traffic",
+    "lastUpdated": "Last updated: June 9, 2026",
+    "intro": "This page explains, in concrete technical terms, how Doppler VPN protects your traffic and your identity: the protocol we run, what is encrypted, what we store — and what we deliberately cannot store — and how to report a vulnerability.",
+    "sections": {
+      "protocol": {
+        "title": "Protocol: VLESS-Reality over Xray-core",
+        "p1": "Doppler VPN runs the VLESS protocol with the Reality transport on Xray-core. Unlike OpenVPN, WireGuard, or IKEv2 — whose handshakes are fingerprintable and routinely blocked by deep packet inspection (DPI) — Reality makes your connection indistinguishable from an ordinary TLS 1.3 session with a real, existing website.",
+        "p2": "During the handshake, Reality presents the TLS certificate of a genuine destination site, so censors performing SNI inspection or active probing see valid TLS to a legitimate domain. This is why Doppler keeps working in networks where mainstream VPN protocols are detected and dropped.",
+        "link": "Read the full VLESS-Reality protocol explainer"
+      },
+      "encryption": {
+        "title": "Encryption in transit",
+        "p1": "All tunnel traffic is protected by TLS 1.3 with an X25519 key exchange — the same cryptography that protects online banking. DNS queries are resolved inside the encrypted tunnel, so your ISP or local network cannot see, log, or tamper with the domains you visit.",
+        "p2": "XTLS Vision flow control avoids double-encrypting traffic that is already TLS-protected. That improves speed and removes the layered-encryption fingerprint that DPI systems look for."
+      },
+      "noLogs": {
+        "title": "No-logs architecture",
+        "intro": "Our no-logs policy is enforced by architecture, not just by promise: VPN traffic is never inspected, logged, modified, or stored.",
+        "neverTitle": "What we never store",
+        "never1": "Browsing activity or history",
+        "never2": "Connection timestamps",
+        "never3": "Originating or assigned IP addresses",
+        "never4": "DNS queries",
+        "never5": "Bandwidth usage",
+        "never6": "VPN session duration",
+        "onlyTitle": "The only things we store",
+        "only1": "A randomly generated device identifier (not linked to your identity)",
+        "only2": "Anonymous, aggregated server performance metrics",
+        "only3": "An email address — only if you voluntarily contact support",
+        "retentionTitle": "Data retention",
+        "retention1": "VPN usage data: not retained (no-logs)",
+        "retention2": "Account data: while active, plus 30 days after deletion",
+        "retention3": "Payment records: 6 years (tax and accounting law)",
+        "retention4": "Support correspondence: 12 months after resolution"
+      },
+      "account": {
+        "title": "No-registration account model",
+        "p1": "You never create an account with an email or phone number. Your device generates a random account ID in the form VPN-XXXX-XXXX-XXXX, and that ID is your subscription. There is no identity to leak, because none is collected in the first place.",
+        "link": "Learn more about the no-registration model"
+      },
+      "infrastructure": {
+        "title": "Infrastructure & website security",
+        "p1": "Server configurations are stored server-side and delivered over authenticated APIs — never embedded in the apps. The website enforces HTTPS with HSTS preload, a Content-Security-Policy, strict referrer and permissions policies, and frame denial.",
+        "p2": "Payments are processed by Revolut (cards, Apple Pay) and OxaPay (cryptocurrency). Card details never touch Doppler servers."
+      },
+      "disclosure": {
+        "title": "Responsible disclosure",
+        "p1": "Found a vulnerability? We want to hear about it. Contact us at the address below, or see our machine-readable security contact file (RFC 9116). We aim to acknowledge reports within 72 hours.",
+        "securityTxt": "View our security.txt"
+      },
+      "jurisdiction": {
+        "title": "Jurisdiction & company",
+        "p1": "Doppler VPN is operated by SIMNETIQ LTD (company number 16861177), registered in England and Wales and subject to UK GDPR. Because of the no-logs architecture, there is no browsing activity to hand over in response to legal requests.",
+        "related": "Related documents:"
+      }
+    }
   },
   "platformsAvailable": {
     "eyebrow": "Available on",

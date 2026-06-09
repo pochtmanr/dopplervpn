@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { BreadcrumbSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
+import { isSecurityLocale } from "@/i18n/security-locales";
 import type { CtaLocation } from "@/lib/track-cta";
 
 const baseUrl = "https://www.dopplervpn.org";
@@ -189,6 +190,10 @@ export async function SeoLandingPage({
   setRequestLocale(locale);
   const t = await getTranslations(namespace);
   const mt = await getTranslations({ locale, namespace: `${namespace}.metadata` });
+  // The `security` namespace only exists in the hand-translated locales;
+  // fetch it conditionally so the other locales never hit MISSING_MESSAGE.
+  const showSecurityLink = isSecurityLocale(locale);
+  const ts = showSecurityLink ? await getTranslations("security") : null;
 
   const featureKeys = Array.from({ length: featureCount }, (_, i) => `feature${i + 1}`);
   const stepKeys = Array.from({ length: stepCount }, (_, i) => `step${i + 1}`);
@@ -402,6 +407,17 @@ export async function SeoLandingPage({
                 {t("cta.telegramChannelRu")}
               </a>
             </div>
+
+            {showSecurityLink && ts && (
+              <p className="mt-8 text-sm">
+                <Link
+                  href="/security"
+                  className="text-text-muted hover:text-accent-teal transition-colors underline underline-offset-4"
+                >
+                  {ts("securityLink")} →
+                </Link>
+              </p>
+            )}
           </div>
         </section>
       </main>

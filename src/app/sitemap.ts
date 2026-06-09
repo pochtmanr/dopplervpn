@@ -3,6 +3,7 @@ import { unstable_cache } from "next/cache";
 import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
+import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
 
 // Rebuild sitemap shards at most once per day. Without this, every crawler
 // hit to /sitemap/N.xml re-runs the Supabase query and re-serializes a full
@@ -84,6 +85,7 @@ const staticPages = [
   "/blog",
   "/support",
   "/about",
+  "/security",
   "/bypass-censorship",
   "/giveaway",
   "/no-registration-vpn",
@@ -156,6 +158,17 @@ function buildEnOnlyAlternates(path: string) {
   };
 }
 
+// /security ships in the hand-translated core-market locales only; other
+// locales 308-redirect to /en/security (see /[locale]/security/page.tsx).
+function buildSecurityAlternates(path: string) {
+  return {
+    languages: Object.fromEntries([
+      ...SECURITY_LOCALES.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ["x-default", `${baseUrl}/en${path}`],
+    ]),
+  };
+}
+
 // Blog URLs only exist for the 21 locales with real translations; the other
 // 23 locales 308-redirect to /en/blog via middleware. Alternates and URL
 // emission must reflect that or Google sees duplicate-canonical noise again.
@@ -187,6 +200,7 @@ function priorityFor(page: string): number {
     return 0.7;
   if (seoLandingPages.has(page)) return 0.7;
   if (toolPages.has(page)) return 0.8;
+  if (page === "/security") return 0.7;
   if (page === "/support" || page === "/about") return 0.6;
   return 0.5;
 }
@@ -234,12 +248,16 @@ export default async function sitemap({
     .filter((page) => page !== "/blog" || localeHasBlog)
     // Tools are English-only for now; non-EN locale URLs don't exist.
     .filter((page) => !toolPages.has(page) || locale === "en")
+    // /security exists only in its hand-translated locales.
+    .filter((page) => page !== "/security" || isSecurityLocale(locale))
     .map((page) => {
       let alternates;
       if (page === "/blog") {
         alternates = buildBlogAlternates(page);
       } else if (toolPages.has(page)) {
         alternates = buildEnOnlyAlternates(page);
+      } else if (page === "/security") {
+        alternates = buildSecurityAlternates(page);
       } else {
         alternates = buildAlternates(page);
       }

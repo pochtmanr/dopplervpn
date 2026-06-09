@@ -137,6 +137,8 @@ export function GET() {
       refund: `${SITE_URL}/en/refund`,
       dpa: `${SITE_URL}/en/dpa`,
       subprocessors: `${SITE_URL}/en/subprocessors`,
+      security: `${SITE_URL}/en/security`,
+      securityTxt: `${SITE_URL}/.well-known/security.txt`,
     },
     excludedActions: [
       "autonomous payment capture",

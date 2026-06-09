@@ -22,6 +22,7 @@ export default async function Page({ params }: PageProps) {
       namespace={NAMESPACE}
       primaryPlatform="ios"
       datePublished="2026-05-26"
+      dateModified="2026-06-09"
       related={[
         { href: "/vpn-for-ios", titleKey: "iosTitle", descKey: "iosDesc" },
         { href: "/no-registration-vpn", titleKey: "noRegTitle", descKey: "noRegDesc" },

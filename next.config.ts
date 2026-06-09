@@ -3,6 +3,31 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const isDev = process.env.NODE_ENV === "development";
+
+// Static CSP (no nonces — nonces would force dynamic rendering and kill the
+// statically generated marketing pages). 'unsafe-inline' is unavoidable:
+// Next.js hydration, next-themes' theme script, and JSON-LD all inline
+// scripts, and experimental.inlineCss inlines styles. The policy's value is
+// origin allowlisting: only self, Vercel Analytics, and Revolut Checkout
+// (embed.js + popup iframes; sandbox origin kept for REVOLUT_ENVIRONMENT).
+// 'unsafe-eval' is dev-only (React Refresh needs it).
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://merchant.revolut.com https://sandbox-merchant.revolut.com`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://va.vercel-scripts.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
+  "frame-src https://merchant.revolut.com https://sandbox-merchant.revolut.com",
+  "worker-src 'self' blob:",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["next-intl"],
@@ -113,6 +138,7 @@ const nextConfig: NextConfig = {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
           },
+          { key: "Content-Security-Policy", value: csp },
         ],
       },
     ];
