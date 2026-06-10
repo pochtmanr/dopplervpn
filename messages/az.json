@@ -1374,6 +1374,7 @@
     "promoError": "Yanlış promo kod"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Pulsuz məxfilik alətlərimizlə veb təhlükəsizliyinizi yoxlayın",
     "title": "Doppler VPN Trafikinizi Necə Qoruyur",
     "subtitle": "Bağlantınız Doppler-in kənar şəbəkəsi vasitəsilə şifrələnir və yönləndirilir. Heç nə qeyd edilmir.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Niyə sıfır şəxsi məlumat tələb edirik.",
       "vlessTitle": "VLESS-Reality Haqqında",
       "vlessDesc": "Doppler-in şifrələməsinin arxasında olan protokol."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Pulsuz Məxfilik Alətləri — Doppler VPN",
+      "description": "Məxfiliyinizi yoxlamaq üçün pulsuz, birməqsədli alətlər: IP yoxlayıcı, WebRTC sızma testi, DNS sızma testi. İzləmə yoxdur, e-poçt tələb olunmur."
+    },
+    "title": "Pulsuz məxfilik alətləri",
+    "subtitle": "Ən vacib sızmalar üçün üç sürətli yoxlama.",
+    "tools": {
+      "ipChecker": {
+        "title": "IP ünvanım nədir?",
+        "description": "Trafikinizin hazırda hansı ictimai IP-ni, ölkəni və provayderi açıqladığını görün.",
+        "cta": "IP yoxlamasını başlat"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC sızma testi",
+        "description": "WebRTC VPN-dən keçsə belə həqiqi IP-nizi açıqlaya bilər. Brauzerinizin belə edib-etmədiyini yoxlayın.",
+        "cta": "WebRTC testini başlat"
+      },
+      "dnsLeak": {
+        "title": "DNS sızma testi",
+        "description": "DNS sorğularınız VPN tunelindən yan keçirsə, provayderiniz ziyarət etdiyiniz hər saytı hələ də görür.",
+        "cta": "DNS testini başlat"
+      }
+    },
+    "cta": {
+      "title": "Alətlər sızma tapdı?",
+      "description": "Doppler-in VLESS-Reality tuneli həm IP trafikini, həm də DNS sorğularını şifrələnmiş kanaldan keçirir; WebRTC və IPv6 sızmalarının bloklanması daxilidir.",
+      "button": "Doppler VPN-i sınayın"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "IP ünvanım nədir? — Pulsuz IP və provayder axtarışı",
+      "description": "Pulsuz IP ünvanı yoxlayıcısı — ictimai IP-nizi, ölkənizi, bölgənizi, şəhərinizi və provayderinizi dərhal görün. İzləmə yoxdur. E-poçt yoxdur. iPhone, Android, Mac, Windows-da işləyir."
+    },
+    "hero": {
+      "title": "IP ünvanım nədir?",
+      "subtitle": "Ziyarət etdiyiniz hər vebsaytın gördüyü ictimai IP ünvanınız — ona bağlı coğrafiya və provayderlə birlikdə. Dəyişikliyin qüvvəyə mindiyini yoxlamaq üçün VPN-ə qoşulduqdan sonra yeniləyin."
+    },
+    "widget": {
+      "yourIp": "IP ünvanınız",
+      "country": "Ölkə",
+      "region": "Bölgə",
+      "city": "Şəhər",
+      "isp": "İnternet provayderi",
+      "asn": "ASN",
+      "unknown": "Naməlum",
+      "refresh": "Yenilə",
+      "refreshing": "Yenilənir…",
+      "copied": "Kopyalandı",
+      "copy": "Kopyala",
+      "loading": "IP-niz müəyyən edilir…",
+      "error": "IP-nizi müəyyən etmək mümkün olmadı. Səhifəni yeniləyin və ya bir azdan yenidən cəhd edin."
+    },
+    "explainer": {
+      "whatTitle": "IP ünvanı nədir?",
+      "whatBody": "İnternetdəki hər cihaz rəqəmsal ünvan — ictimai IP — daşıyır və bu, onu əlaqə saxladığı hər serverə tanıdır. IPv4 belə görünür: 203.0.113.42; IPv6 daha uzundur və iki nöqtədən istifadə edir. IP-nizi provayderiniz təyin edir və şəbəkəni dəyişəndə (ev Wi-Fi-ı, mobil internet, kafe Wi-Fi-ı) dəyişir.",
+      "exposeTitle": "IP-niz nəyi açıqlayır",
+      "exposeBody": "Təkcə IP ölkənizi, bölgənizi, şəhərinizi və provayderinizi açıqlayır — bəzən bir neçə məhəllə dəqiqliyi ilə. Hər brauzerin göndərdiyi User-Agent və vaxt məlumatları ilə birlikdə bu, reklam şəbəkələrinin barmaq izinizi yaradıb saytlar arasında sizi izləməsinə kifayət edir. Striminq platformaları bundan regional lisenziyaları tətbiq etmək üçün istifadə edir. Senzorlar coğrafi blokları tətbiq etmək üçün.",
+      "vpnTitle": "VPN IP-nizi necə dəyişir",
+      "vpnBody": "VPN-ə qoşulanda bütün trafikiniz internetə VPN serverinin IP-si ilə çıxır — sizinki ilə yox. Vebsaytlar həqiqi məlumatlarınız əvəzinə VPN serverinin ölkəsini, provayderini və coğrafiyasını görür. Düzgün qurulmuş VPN DNS sorğularını da eyni tuneldən keçirir, beləliklə provayderiniz şifrələnmiş paketləri daşısa da, hansı saytları ziyarət etdiyinizi görə bilmir."
+    },
+    "checklist": {
+      "title": "Doppler VPN-ə qoşulmusunuzsa, bu səhifədə bunlar görünməlidir:",
+      "items": {
+        "item1": "Qoşulmadan əvvəl gördüyünüzlə uyğun gəlməyən IP.",
+        "item2": "Seçdiyiniz serverə uyğun ölkə (məs. Almaniya, Niderland, Sinqapur).",
+        "item3": "Ev provayderiniz əvəzinə hostinq şirkəti kimi göstərilən provayder (Hetzner, Vultr, OVH).",
+        "item4": "Həqiqi şəhərinizin və ya bölgənizin heç bir qeydi."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "IP ünvanım nə üçün istifadə olunur?",
+        "answer": "Əlaqə saxladığınız hər server cavabları geri göndərmək üçün IP-nizdən istifadə edir və əksəriyyəti onu qeyd edir. O, geolokasiyaya (şəhər səviyyəsinədək), regional kontent lisenziyalarına, reklamların fərdiləşdirilməsinə, fırıldaqçılığın aşkarlanmasına və — senzuralı şəbəkələrdə — blok siyahılarının tətbiqinə imkan verir. Onlayn anonimlik bu rəqəmi birbaşa açıqlamamaqdan başlayır."
+      },
+      "q2": {
+        "question": "IP ünvanım şəxsi məlumatdır?",
+        "answer": "O, ziyarət etdiyiniz hər vebsayta ötürülür, yəni sirr deyil. Lakin GDPR və əksər məxfilik qanunlarına görə şəxsi məlumatdır, çünki konkret şəxslə əlaqələndirilə bilər. Ona küçənizin adı kimi yanaşın: məxfi deyil, amma yad adamlara elə-belə vermirsiniz."
+      },
+      "q3": {
+        "question": "IP-mi necə gizlədim?",
+        "answer": "VPN standart alətdir — IP-nizi serverin IP-si ilə əvəz edir. Tor IP-nizi sürət hesabına bir neçə relay vasitəsilə gizlədir. Proksi xidmətləri yalnız brauzer trafiki üçün gizlədir. Mobil internetə keçmək IP-nizi dəyişir, amma kimliyinizi yox. İctimai Wi-Fi bir IP-ni şəbəkədəki hər kəslə bölüşür, lakin şifrələnməyib."
+      },
+      "q4": {
+        "question": "IP-m niyə müxtəlif saytlarda fərqli görünür?",
+        "answer": "Belə olmamalıdır — yalnız bölünmüş tunelli VPN arxasındasınızsa (bəzi tətbiqlər VPN-dən, digərləri provayderdən keçir), bir neçə çıxış IP-li korporativ şəbəkədəsinizsə və ya bir saytda IPv4, digərində IPv6 görürsünüzsə. Bəzi saytlar bir az fərqli metadata qaytara bilən üçüncü tərəf IP axtarış API-lərindən istifadə edir."
+      },
+      "q5": {
+        "question": "IP gizlidirsə, VPN ilə belə izlənə bilərəm?",
+        "answer": "Bəli. Brauzer barmaq izi (şriftlər, ekran ölçüsü, plaginlər, canvas renderi) cihazları IP olmadan tanıyır. Kuki və girişlər şəbəkələr arasında sizi izləyir. VPN yalnız IP və DNS qatını həll edir; qalanı brauzerin üzərinə düşür. Məxfi rejimdən istifadə edin, üçüncü tərəf kukilərini bloklayın və tam qorunma üçün barmaq izinə qarşı brauzerləri nəzərdən keçirin."
+      },
+      "q6": {
+        "question": "Doppler IP-mi qeyd edir?",
+        "answer": "Xeyr. Doppler bağlantı loqlarını, IP tarixçəsini və DNS sorğularını saxlamır. VPN serveri həqiqi IP-nizi yalnız trafiki yönləndirmək üçün lazım olan müddətdə görür — diskə heç vaxt yazılmır. Burada mənalı zəmanət yalnız müstəqil auditlər və loqsuz siyasətdir; \"söz veririk\" kifayət deyil, biz isə infrastrukturumuzu açıqlayırıq."
+      },
+      "q7": {
+        "question": "ASN nədir?",
+        "answer": "Avtonom Sistem Nömrəsi IP blokunun sahibi olan şəbəkə operatorunu müəyyən edir. AS7922 — Comcast; AS24940 — Hetzner; AS16509 — Amazon AWS. ASN-lər ictimaidir və IP-nin ev provayderinə, mobil operatora, hostinq şirkətinə (adətən VPN çıxış nöqtələri) və ya korporativ şəbəkəyə aid olduğunu göstərir."
+      },
+      "q8": {
+        "question": "IP məkanım niyə səhv görünür?",
+        "answer": "IP geolokasiya bazaları (MaxMind, IP2Location) ölkə səviyyəsində ~99%, şəhər səviyyəsində ~70% dəqiqdir. Reallıqdan həftələrlə geri qalırlar: yeni ayrılmış IP bloku əvvəlki sahibin məkanında görünə bilər. VPN serverlərinin IP-ləri də bəzən səhv yerləşdirilir. Ev IP-niz səhv şəhər göstərirsə, provayderiniz çox güman ki, blokları bütün aglomerasiyaya paylayır."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC sızma testi",
+      "webrtcDesc": "Bu səhifə VPN-in IP-sini göstərsə belə, WebRTC həqiqi IP-nizi açıqlaya bilər. Yoxlayın.",
+      "dnsTitle": "DNS sızma testi",
+      "dnsDesc": "DNS sorğularınız hələ də sızırsa, IP-ni gizlətmək kifayət deyil.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Doppler-in aşkarlanmadan və bloklanmadan qaçmaq üçün istifadə etdiyi protokol."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC Sızma Testi — VPN-inizin həqiqi IP-nizi gizlədib-gizlətmədiyini yoxlayın",
+      "description": "Pulsuz WebRTC sızma testi. VPN qoşulu olsa belə brauzerinizin STUN vasitəsilə həqiqi IP-nizi sızdırıb-sızdırmadığını aşkarlayır. 2 saniyəyə işləyir. Heç bir məlumat cihazınızdan çıxmır."
+    },
+    "hero": {
+      "title": "WebRTC sızma testi",
+      "subtitle": "VPN həqiqi IP-nizi vebsaytlardan gizlətsə belə, brauzerlər onu WebRTC vasitəsilə açıqlaya bilər. Bu test sizinkinin belə edib-etmədiyini yoxlayır — tamamilə brauzerinizdə, heç yerə məlumat göndərmədən."
+    },
+    "widget": {
+      "publicIp": "İctimai IP (vebsaytların gördüyü)",
+      "webrtcIps": "WebRTC-nin aşkarladığı IP-lər",
+      "leakedTitle": "WebRTC IP-nizi sızdırır",
+      "leakedBody": "WebRTC ictimai IP-dən fərqlənən bir və ya bir neçə IP aşkarladı. VPN istifadə edirsinizsə, bu o deməkdir ki, WebRTC istifadə edən sayt həqiqi ünvanınızı hələ də görə bilər.",
+      "safeTitle": "WebRTC sızması aşkarlanmadı",
+      "safeBody": "WebRTC ictimai IP ilə eyni IP-ni bildirdi və ya heç bir IP bildirmədi. Hazırda həqiqi ünvanınız WebRTC vasitəsilə sızmır.",
+      "noWebrtc": "Brauzeriniz WebRTC-ni söndürüb və ya heç bir ünvan tapılmadı. Bu, təhlükəsiz vəziyyətdir.",
+      "unknown": "Naməlum",
+      "refresh": "Testi təkrarla",
+      "refreshing": "Test edilir…",
+      "loading": "WebRTC yoxlanılır…",
+      "error": "Testi işə salmaq mümkün olmadı. Səhifəni yeniləyib yenidən cəhd edin."
+    },
+    "explainer": {
+      "whatTitle": "WebRTC sızması nədir?",
+      "whatBody": "WebRTC brauzerin peer-to-peer audio, video və data funksiyasıdır — Google Meet, Discord və bir çox veb tətbiq ondan istifadə edir. P2P bağlantı qurmaq üçün brauzer STUN serverlərindən istifadə edərək öz IP ünvanlarını, o cümlədən lokal və NAT arxasındakı ünvanları aşkarlayır. Sayt brauzerdən bu aşkarlamanı səssizcə işə salmasını istəyə və alınan IP-ləri JavaScript ilə oxuya bilər — VPN-i tamamilə yan keçərək.",
+      "howTitle": "Test necə işləyir",
+      "howBody": "Brauzeriniz saxta RTCPeerConnection yaradır, createOffer-i çağırır və alınan ICE namizədlərini oxuyur. ICE namizədləri brauzerin tapa bildiyi hər IP-ni — VPN bütün digər trafiki tunellədiyi halda belə həqiqi IP-nizi də — ehtiva edir. Test lokal işləyir; serverlərimizə heç nə göndərilmir.",
+      "fixTitle": "WebRTC sızmasını necə aradan qaldırmalı",
+      "fixBody": "Üç yol: (1) WebRTC sızmalarını fəal şəkildə bloklayan VPN istifadə edin (Doppler-in iOS və Android tətbiqləri tuneldən kənarda WebRTC-ni söndürür). (2) WebRTC-ni söndürən brauzer genişlənməsi quraşdırın (uBlock Origin-də belə seçim var). (3) Firefox-da about:config-də media.peerconnection.enabled-i false edin. WebRTC-ni söndürmək brauzerdəki video zəngləri pozacaq; əvəzində yerli tətbiqdən istifadə edin."
+    },
+    "faq": {
+      "q1": {
+        "question": "WebRTC nədir?",
+        "answer": "WebRTC hər müasir brauzerə daxil edilmiş W3C standartıdır və real vaxtda peer-to-peer audio, video və data rabitəsini təmin edir. Google Meet, veb Discord, Zoom veb klienti və brauzer əsaslı video söhbətlərin əksəriyyəti onunla işləyir. P2P zəngləri mümkün edən eyni API-lər JavaScript-ə lokal şəbəkə ünvanlarınızı aşkarlamağa da imkan verir."
+      },
+      "q2": {
+        "question": "WebRTC niyə VPN-dən keçsə belə həqiqi IP-mi sızdırır?",
+        "answer": "Çünki WebRTC steki tətbiq qatının altında işləyir və şəbəkə interfeysini birbaşa STUN vasitəsilə sorğulayır. VPN trafiki IP qatında tunelləyir, lakin WebRTC-nin ünvan aşkarlama çağırışlarını bloklamır. Sızan ünvan şifrələnmiş tunelin içində gedir — amma sonra brauzer onu səhifədəki JavaScript-ə verir və o, ünvanı istənilən yerə göndərə bilər."
+      },
+      "q3": {
+        "question": "Hansı brauzerlər təsirlənir?",
+        "answer": "Defolt parametrlərlə hamısı: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave-də defolt olaraq sönülü WebRTC IP sızma parametri var. Firefox about:config vasitəsilə WebRTC-ni tamamilə söndürməyə imkan verir. iOS Safari iOS 14-dən qismən qorunur, amma tam bağlanmayıb."
+      },
+      "q4": {
+        "question": "Doppler VPN WebRTC sızmalarını bloklayır?",
+        "answer": "Bəli. iOS və Android klientlərimiz tuneldən kənar bütün UDP trafikini bloklayan lokal kill-switch işlədir və bu, STUN aşkarlamasının xarici serverlərə çatmasının qarşısını alır. Masaüstündə tam qorunma üçün VPN-i uBlock Origin-in WebRTC açarı və ya brauzer səviyyəsində söndürmə ilə birləşdirməyi tövsiyə edirik."
+      },
+      "q5": {
+        "question": "WebRTC-ni söndürmək saytları pozacaq?",
+        "answer": "Brauzerdəki video zəngləri (Meet, veb Zoom, veb Discord) və bəzi əməkdaşlıq alətlərini pozur. Adi gəzintiyə, striminqə və peer-to-peer bağlantı tələb etməyən heç nəyə təsir etmir. Həmin xidmətlərin yerli tətbiqləri WebRTC-dən asılı deyil."
+      },
+      "q6": {
+        "question": "Bu test məxfidir?",
+        "answer": "Bəli. Test standart RTCPeerConnection API-si ilə tamamilə brauzerinizdə işləyir. Nə IP, nə nəticə, nə də metadata cihazınızdan çıxır. Testi işlətdiyinizi belə qeyd etmirik."
+      }
+    },
+    "related": {
+      "ipTitle": "IP ünvanım nədir?",
+      "ipDesc": "Hər vebsaytın hazırda gördüyü IP-ni və coğrafiyanı görün.",
+      "dnsTitle": "DNS sızma testi",
+      "dnsDesc": "WebRTC təmizdirsə, amma DNS sızırsa, saytlar hara getdiyinizi yenə bilir.",
+      "censorshipTitle": "VPN senzurası necə işləyir",
+      "censorshipDesc": "Məhdud şəbəkələrdə WebRTC və DNS sızmaları niyə fəlakətlidir."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS Sızma Testi — VPN-inizin DNS-inin məxfi olduğunu yoxlayın",
+      "description": "Pulsuz DNS sızma testi bələdçisi. DNS sorğularınızın VPN tunelindən keçdiyini, yoxsa provayderə sızdığını öyrənin. Addım-addım təlimatlar və həllər."
+    },
+    "hero": {
+      "title": "DNS sızma testi",
+      "subtitle": "DNS sorğularınız VPN tunelindən yan keçirsə, internet provayderiniz ziyarət etdiyiniz hər saytı hələ də görür — VPN qoşulu olsa belə. Yoxlamaq və düzəltmək üsulu budur."
+    },
+    "widget": {
+      "title": "Tövsiyə olunan DNS sızma testi",
+      "description": "Öz DNS zondumuzu işlətmirik, çünki bunu yaxşı etmək bir neçə resolver üzərində idarə olunan wildcard alt-domenlər tələb edir. Aşağıdakı etibarlı üçüncü tərəf alətindən istifadə edin — müstəqildir və hesab tələb etmir.",
+      "primaryButton": "dnsleaktest.com-u aç",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "browserleaks.com/dns-i aç",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "dnsleaktest.com-da \"Extended test\"ə klikləyin. Nəticədə yalnız VPN provayderinizin DNS serverləri olmalıdır — internet provayderiniz yox. Nəticələrdə Comcast, Verizon, Vodafone və ya hər hansı digər adi provayder görsəniz, DNS-iniz sızır."
+    },
+    "explainer": {
+      "whatTitle": "DNS sızması nədir?",
+      "whatBody": "URL yazanda cihazınız əvvəlcə DNS serverindən həmin domenin IP ünvanını soruşur. DNS sorğusu VPN tunelindən keçirsə, provayderiniz yalnız şifrələnmiş trafik görür. Tuneldən yan keçirsə — DNS sızması — sonrakı bağlantı şifrələnmiş olsa belə, provayderiniz ziyarət etdiyiniz hər domeni görür. Senzuralı şəbəkələr blok siyahılarını tətbiq etmək üçün DNS sorğularını tez-tez yoxlayır, ona görə də belə mühitlərdə DNS sızması ölümcüldür.",
+      "causesTitle": "DNS sızmalarının səbəbləri",
+      "causesBody": "Üç ümumi səbəb: (1) VPN klienti öz DNS resolverini təyin edir, lakin ƏS onu nəzərə almır və lokal şəbəkənin verdiyi resolverdən istifadə edir. (2) IPv6 trafiki tunellənmir və IPv6 DNS sorğuları VPN-in yanından sızır. (3) Chrome və Firefox kimi brauzerlər sistemin DNS parametrlərini tamamilə yan keçən \"ağıllı\" DNS marşrutlaşdırmasından (DNS-over-HTTPS) istifadə edə bilər.",
+      "fixTitle": "DNS sızmasını necə aradan qaldırmalı",
+      "fixBody": "Öz DNS infrastrukturuna malik və bütün DNS sorğularını tuneldən keçməyə məcbur edən VPN istifadə edin (Doppler hər platformada bunu defolt edir). VPN-iniz IPv6 tunellənməsini dəstəkləmirsə, ƏS-in şəbəkə parametrlərində IPv6-nı söndürün. Brauzerdə DNS-over-HTTPS-i VPN-inizlə eyni provayderə qoyun və ya söndürün. Routerlərdə məxfiliyə hörmət edən resolveri (Quad9, Cloudflare 1.1.1.1) yuxarı DNS kimi yalnız cihaz səviyyəsində VPN işlətmirsinizsə təyin edin."
+    },
+    "checklist": {
+      "title": "Doppler-in DNS zəmanətləri:",
+      "items": {
+        "item1": "Bütün DNS sorğuları məcburi olaraq VPN tunelindən keçir — sistem DNS-i ilə sızma yoxdur.",
+        "item2": "IPv6 ya tunellənir, ya bloklanır — heç vaxt sızmır.",
+        "item3": "DNS resolverlərimiz sorğuları qeyd etmir.",
+        "item4": "Kill-switch aktiv olanda brauzerlərin DNS-over-HTTPS ilə yan keçmə cəhdlərini bloklayırıq."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "DNS sızması niyə IP sızmasından pisdir?",
+        "answer": "IP sızması bir ünvanı açıqlayır. DNS sızması ziyarət etdiyiniz hər domeni — hər saytı, hər API çağırışını, hər analitika nöqtəsini — açıq mətnlə provayderinizə və yoldakı hər kəsə açıqlayır. Senzuralı şəbəkələrin istifadəçiləri üçün DNS səviyyəli blok siyahıları ən geniş yayılmış tətbiq mexanizmidir; insanları ələ verən səhv məhz DNS sızmasıdır."
+      },
+      "q2": {
+        "question": "DNS-imin indi sızıb-sızmadığını necə bilim?",
+        "answer": "dnsleaktest.com-da genişləndirilmiş testi işlədin. O, wildcard alt-domenlərə bir neçə sorğu göndərir və hansı resolverlərin cavab verdiyini göstərir. Provayderinizin adını (və ya VPN provayderinizlə uyğun gəlməyən hər hansı adı) görsəniz, DNS sızır. Təsdiq üçün testi VPN ilə və VPN-siz təkrarlayın."
+      },
+      "q3": {
+        "question": "Doppler VPN DNS sızdırır?",
+        "answer": "Xeyr. Hər platformada öz resolverlərimizi tuneldən ötürür və sistem DNS-inə qayıdışı bloklayırıq. Kill-switch aktiv olanda brauzerlərin DNS-over-HTTPS yan keçməsini də söndürürük. dnsleaktest.com və browserleaks.com-dakı müstəqil testlər bunu təsdiqləyir — özünüz yoxlaya bilərsiniz."
+      },
+      "q4": {
+        "question": "DNS-over-HTTPS (DoH) nədir və sızmalarla nə əlaqəsi var?",
+        "answer": "DoH DNS sorğularını şifrələnmiş HTTPS bağlantısı ilə göndərən və sistem DNS resolverini yan keçən protokoldur. Chrome və Firefox kimi brauzerlər DoH-u defolt istifadə edir və sorğuları çox vaxt VPN-inizdən asılı olmayaraq Google və ya Cloudflare-ə yönləndirir. VPN bunu açıq şəkildə idarə etmirsə, bu sızmadır. Doppler DoH cəhdlərini tutub tuneldən keçirir."
+      },
+      "q5": {
+        "question": "VPN istifadə edirəmsə, ayrıca DNS xidmətinə ehtiyac var?",
+        "answer": "Xeyr. Yaxşı qurulmuş VPN DNS-i sizin üçün idarə edir. VPN üzərinə ayrıca DNS xidməti (Quad9, Cloudflare) qoymaq, ƏS sorğunu tuneldən kənara yönləndirsə, əksinə sızmaya səbəb ola bilər. VPN-in resolverlərinə güvənin — güvənmirsinizsə, başqa VPN istifadə edin."
+      },
+      "q6": {
+        "question": "DNS sızmalarını nə qədər tez-tez yoxlamalıyam?",
+        "answer": "Hər VPN quraşdırmasından və ya ƏS yeniləməsindən sonra. Tunel konfiqurasiyaları səssizcə poza bilər — sistem yeniləməsi xəbər vermədən şəbəkə stekini sızan yola keçirə bilər. Daimi istifadəçilər üçün rüblük yoxlama məqbul tempdir; sızmanın bahalı olduğu sərt senzuralı şəbəkədə yaşayırsınızsa — həftəlik."
+      }
+    },
+    "related": {
+      "ipTitle": "IP ünvanım nədir?",
+      "ipDesc": "VPN-inizin vebsaytlardan tam olaraq nəyi gizlətdiyini görün.",
+      "webrtcTitle": "WebRTC sızma testi",
+      "webrtcDesc": "IP gizli, DNS gizli, amma WebRTC sızması sizi yenə açıqlayır.",
+      "bypassTitle": "İnternet senzurasından yan keçin",
+      "bypassDesc": "Blok siyahıları sizi məhz DNS sızmaları ilə tutur. Doppler-in onlardan necə qaçdığını oxuyun."
     }
   },
   "vlessVpnAndroid": {
