@@ -1374,6 +1374,7 @@
     "promoError": "Codi promocional no vàlid"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Comprova la teva seguretat web amb les nostres eines gratuïtes de privacitat",
     "title": "Com Doppler VPN protegeix el teu tràfic",
     "subtitle": "La teva connexió es xifra i es dirigeix a través de la xarxa perimetral de Doppler. No es registra res.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Per què demanem zero informació personal.",
       "vlessTitle": "Sobre VLESS-Reality",
       "vlessDesc": "El protocol darrere del xifratge de Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Eines Gratuïtes de Privacitat — Doppler VPN",
+      "description": "Eines gratuïtes i específiques per posar a prova la teva privacitat: comprovador d'IP, test de fuites WebRTC, test de fuites DNS. Sense seguiment, sense correu."
+    },
+    "title": "Eines gratuïtes de privacitat",
+    "subtitle": "Tres comprovacions ràpides per a les fuites que més importen.",
+    "tools": {
+      "ipChecker": {
+        "title": "Quina és la meva IP?",
+        "description": "Mira la IP pública, el país i el proveïdor que el teu trànsit està exposant ara mateix.",
+        "cta": "Executa la comprovació d'IP"
+      },
+      "webrtcLeak": {
+        "title": "Test de fuites WebRTC",
+        "description": "WebRTC pot revelar la teva IP real fins i tot a través d'una VPN. Comprova si la teva ho fa.",
+        "cta": "Executa el test WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test de fuites DNS",
+        "description": "Si les teves consultes DNS esquiven el túnel VPN, el teu proveïdor continua veient cada lloc que visites.",
+        "cta": "Executa el test DNS"
+      }
+    },
+    "cta": {
+      "title": "Les eines han trobat una fuita?",
+      "description": "El túnel VLESS-Reality de Doppler encamina tant el trànsit IP com les consultes DNS pel canal xifrat, amb bloqueig integrat de fuites WebRTC i IPv6.",
+      "button": "Prova Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Quina és la meva IP? — Consulta gratuïta d'IP i proveïdor",
+      "description": "Comprovador gratuït d'adreça IP: mira a l'instant la teva IP pública, país, regió, ciutat i proveïdor. Sense seguiment. Sense correu. Funciona a iPhone, Android, Mac i Windows."
+    },
+    "hero": {
+      "title": "Quina és la meva IP?",
+      "subtitle": "La teva adreça IP pública tal com la veu cada web que visites — amb la geografia i el proveïdor que hi van lligats. Actualitza després de connectar-te a una VPN per verificar que el canvi ha tingut efecte."
+    },
+    "widget": {
+      "yourIp": "La teva adreça IP",
+      "country": "País",
+      "region": "Regió",
+      "city": "Ciutat",
+      "isp": "Proveïdor d'internet",
+      "asn": "ASN",
+      "unknown": "Desconegut",
+      "refresh": "Actualitza",
+      "refreshing": "Actualitzant…",
+      "copied": "Copiat",
+      "copy": "Copia",
+      "loading": "Detectant la teva IP…",
+      "error": "No hem pogut detectar la teva IP. Recarrega la pàgina o torna-ho a provar d'aquí a un moment."
+    },
+    "explainer": {
+      "whatTitle": "Què és una adreça IP?",
+      "whatBody": "Cada dispositiu a internet porta una adreça numèrica — una IP pública — que l'identifica davant de cada servidor amb què parla. L'IPv4 s'assembla a 203.0.113.42; l'IPv6 és més llarga i fa servir dos punts. La teva IP l'assigna el proveïdor i canvia quan canvies de xarxa (Wi-Fi de casa, dades mòbils, Wi-Fi d'una cafeteria).",
+      "exposeTitle": "Què exposa la teva IP",
+      "exposeBody": "Una IP per si sola revela el teu país, regió, ciutat i proveïdor — de vegades amb una precisió de poques illes de cases. Combinada amb el User-Agent i les dades de temps que envia cada navegador, n'hi ha prou perquè les xarxes publicitàries creïn la teva empremta i et segueixin entre llocs. Les plataformes de streaming la fan servir per aplicar llicències regionals. Els censors, per imposar bloquejos geogràfics.",
+      "vpnTitle": "Com canvia la teva IP una VPN",
+      "vpnBody": "Quan et connectes a una VPN, tot el teu trànsit surt a internet amb la IP del servidor VPN — no amb la teva. Els webs veuen el país, el proveïdor i la geografia del servidor VPN en lloc dels teus reals. Una VPN ben configurada també encamina les consultes DNS pel mateix túnel, de manera que el proveïdor no pot veure quins llocs visites encara que transporti els paquets xifrats."
+    },
+    "checklist": {
+      "title": "Si estàs connectat a Doppler VPN, aquesta pàgina hauria de mostrar:",
+      "items": {
+        "item1": "Una IP que no coincideix amb la que veies abans de connectar-te.",
+        "item2": "Un país que correspon al servidor que has triat (p. ex. Alemanya, Països Baixos, Singapur).",
+        "item3": "Un proveïdor llistat com a empresa d'allotjament (Hetzner, Vultr, OVH) en lloc del teu proveïdor domèstic.",
+        "item4": "Cap menció de la teva ciutat o regió reals."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Per a què es fa servir la meva adreça IP?",
+        "answer": "Cada servidor amb què parles fa servir la teva IP per retornar-te les respostes, i la majoria la registren. Permet la geolocalització (fins a la ciutat), les llicències regionals de contingut, la personalització d'anuncis, la detecció de frau i — a les xarxes censurades — l'aplicació de llistes de bloqueig. L'anonimat en línia comença per no revelar aquest número directament."
+      },
+      "q2": {
+        "question": "És informació privada la meva adreça IP?",
+        "answer": "Es transmet a cada web que visites, així que no és cap secret. Però és una dada personal segons el RGPD i la majoria de lleis de privacitat, perquè es pot vincular a una persona. Tracta-la com el nom del teu carrer: no és classificada, però no la dones a desconeguts a la lleugera."
+      },
+      "q3": {
+        "question": "Com amago la meva IP?",
+        "answer": "Una VPN és l'eina estàndard: substitueix la teva IP per la del servidor. Tor amaga la teva IP a través de diversos relés a costa de velocitat. Els serveis de proxy només l'amaguen per al trànsit del navegador. Passar a dades mòbils canvia la teva IP, però no la teva identitat. El Wi-Fi públic comparteix una IP amb tothom de la xarxa, però no està xifrat."
+      },
+      "q4": {
+        "question": "Per què la meva IP es veu diferent en webs diferents?",
+        "answer": "No hauria de passar — tret que estiguis darrere d'una VPN amb túnel dividit (algunes apps van per la VPN, d'altres pel proveïdor), en una xarxa corporativa amb diverses IP de sortida, o vegis IPv4 en un lloc i IPv6 en un altre. Alguns webs fan servir API de tercers per consultar la IP que poden retornar metadades lleugerament diferents."
+      },
+      "q5": {
+        "question": "Em poden seguir fins i tot amb una VPN si la meva IP està amagada?",
+        "answer": "Sí. L'empremta del navegador (tipus de lletra, mida de pantalla, connectors, renderitzat de canvas) identifica dispositius sense IP. Les galetes i els inicis de sessió et segueixen entre xarxes. Les VPN només resolen la capa d'IP i DNS; la resta depèn del navegador. Fes servir la navegació privada, bloqueja les galetes de tercers i considera navegadors antiempremta per a la protecció completa."
+      },
+      "q6": {
+        "question": "Doppler registra la meva IP?",
+        "answer": "No. Doppler no guarda registres de connexió, historials d'IP ni consultes DNS. El servidor VPN veu la teva IP real només el temps necessari per encaminar el trànsit — mai no s'escriu al disc. Les auditories independents i una política sense registres són les úniques garanties significatives aquí; \"ho prometem\" no és prou, i nosaltres publiquem com està muntada la nostra infraestructura."
+      },
+      "q7": {
+        "question": "Què és un ASN?",
+        "answer": "Un número de sistema autònom identifica l'operador de xarxa propietari del bloc d'IP. AS7922 és Comcast; AS24940 és Hetzner; AS16509 és Amazon AWS. Els ASN són públics i permeten saber si una IP pertany a un proveïdor residencial, un operador mòbil, una empresa d'allotjament (els nodes de sortida de VPN, normalment) o una xarxa corporativa."
+      },
+      "q8": {
+        "question": "Per què la ubicació de la meva IP sembla incorrecta?",
+        "answer": "Les bases de dades de geolocalització d'IP (MaxMind, IP2Location) encerten el país en ~99% dels casos i la ciutat en ~70%. Van setmanes per darrere de la realitat: un bloc d'IP acabat d'assignar pot aparèixer amb la ubicació del propietari anterior. Les IP de servidors VPN de vegades es localitzen malament. Si la teva IP domèstica mostra una ciutat equivocada, el proveïdor probablement reparteix els blocs per tota l'àrea metropolitana."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test de fuites WebRTC",
+      "webrtcDesc": "WebRTC pot revelar la teva IP real fins i tot quan aquesta pàgina mostra la de la VPN. Prova-ho.",
+      "dnsTitle": "Test de fuites DNS",
+      "dnsDesc": "Amagar la IP no és prou si les teves consultes DNS encara s'escapen.",
+      "vlessTitle": "VPN VLESS-Reality",
+      "vlessDesc": "El protocol que Doppler fa servir per evitar ser detectat i bloquejat."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test de Fuites WebRTC — Comprova si la teva VPN amaga la teva IP real",
+      "description": "Test gratuït de fuites WebRTC. Detecta si el navegador filtra la teva IP real per STUN encara que la VPN estigui connectada. Triga 2 segons. Cap dada no surt del dispositiu."
+    },
+    "hero": {
+      "title": "Test de fuites WebRTC",
+      "subtitle": "Els navegadors poden revelar la teva IP real per WebRTC fins i tot quan una VPN l'amaga dels webs. Aquest test comprova si el teu ho fa — completament al navegador, sense enviar dades enlloc."
+    },
+    "widget": {
+      "publicIp": "IP pública (la que veuen els webs)",
+      "webrtcIps": "IP descobertes per WebRTC",
+      "leakedTitle": "WebRTC està filtrant la teva IP",
+      "leakedBody": "WebRTC ha detectat una o més IP diferents de la pública. Si fas servir una VPN, vol dir que un web que utilitzi WebRTC encara pot veure la teva adreça real.",
+      "safeTitle": "No s'ha detectat cap fuita WebRTC",
+      "safeBody": "WebRTC ha informat de la mateixa IP que la pública, o de cap. Ara mateix no estàs filtrant la teva adreça real per WebRTC.",
+      "noWebrtc": "El teu navegador té WebRTC desactivat o no s'ha resolt cap adreça. És un estat segur.",
+      "unknown": "Desconegut",
+      "refresh": "Repeteix el test",
+      "refreshing": "Provant…",
+      "loading": "Sondejant WebRTC…",
+      "error": "El test no s'ha pogut executar. Recarrega la pàgina i torna-ho a provar."
+    },
+    "explainer": {
+      "whatTitle": "Què és una fuita WebRTC?",
+      "whatBody": "WebRTC és una funció del navegador per a àudio, vídeo i dades d'igual a igual — la fan servir Google Meet, Discord i moltes aplicacions web. Per establir una connexió P2P, el navegador utilitza servidors STUN per descobrir les seves pròpies adreces IP, incloses les locals i les que són darrere de NAT. Un web pot demanar al navegador que executi aquest descobriment en silenci i llegir les IP resultants amb JavaScript — esquivant la VPN del tot.",
+      "howTitle": "Com funciona el test",
+      "howBody": "El teu navegador crea una RTCPeerConnection fictícia, crida createOffer i llegeix els candidats ICE resultants. Els candidats ICE inclouen totes les IP que el navegador pot trobar — inclosa la teva real, fins i tot quan una VPN canalitza tota la resta del trànsit. El test s'executa localment; no s'envia res als nostres servidors.",
+      "fixTitle": "Com arreglar una fuita WebRTC",
+      "fixBody": "Tres opcions: (1) Fes servir una VPN que bloquegi proactivament les fuites WebRTC (les apps de Doppler per a iOS i Android desactiven WebRTC fora del túnel). (2) Instal·la una extensió del navegador que desactivi WebRTC (uBlock Origin té una opció per fer-ho). (3) Al Firefox, posa media.peerconnection.enabled a false a about:config. Desactivar WebRTC trencarà les videotrucades al navegador; fes servir una app nativa en el seu lloc."
+    },
+    "faq": {
+      "q1": {
+        "question": "Què és WebRTC?",
+        "answer": "WebRTC és un estàndard del W3C integrat a tots els navegadors moderns per a la comunicació d'igual a igual d'àudio, vídeo i dades en temps real. Fa funcionar Google Meet, Discord web, el client web de Zoom i la majoria de videoxats de navegador. Les mateixes API que fan possibles les trucades P2P també permeten que JavaScript descobreixi les teves adreces de xarxa locals."
+      },
+      "q2": {
+        "question": "Per què WebRTC filtra la meva IP real fins i tot a través d'una VPN?",
+        "answer": "Perquè la pila WebRTC opera per sota de la capa d'aplicació i consulta la interfície de xarxa directament per STUN. Una VPN canalitza el trànsit a la capa IP però no bloqueja les crides de descobriment d'adreces de WebRTC. L'adreça filtrada viatja dins del túnel xifrat — però el navegador després la lliura al JavaScript de la pàgina, que la pot enviar a qualsevol lloc."
+      },
+      "q3": {
+        "question": "Quins navegadors estan afectats?",
+        "answer": "Tots, amb la configuració per defecte: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave inclou un ajust contra la fuita d'IP per WebRTC desactivat per defecte. Firefox permet desactivar WebRTC del tot via about:config. El Safari d'iOS està parcialment mitigat des d'iOS 14, però no tancat del tot."
+      },
+      "q4": {
+        "question": "Doppler VPN bloqueja les fuites WebRTC?",
+        "answer": "Sí. Els nostres clients d'iOS i Android executen un kill-switch local que bloqueja tot el trànsit UDP fora del túnel, cosa que impedeix que el descobriment STUN arribi a servidors externs. A l'escriptori recomanem combinar la VPN amb l'interruptor WebRTC d'uBlock Origin o la desactivació al navegador per a una cobertura total."
+      },
+      "q5": {
+        "question": "Desactivar WebRTC trencarà webs?",
+        "answer": "Trenca les videotrucades al navegador (Meet, Zoom web, Discord web) i algunes eines col·laboratives. No afecta la navegació normal, el streaming ni res que no necessiti connexions d'igual a igual. Les apps natives d'aquests serveis no depenen de WebRTC."
+      },
+      "q6": {
+        "question": "És privat aquest test?",
+        "answer": "Sí. El test s'executa completament al teu navegador amb l'API estàndard RTCPeerConnection. Ni la IP, ni el resultat, ni les metadades surten del dispositiu. Ni tan sols registrem que has executat el test."
+      }
+    },
+    "related": {
+      "ipTitle": "Quina és la meva IP?",
+      "ipDesc": "Mira la IP i la geografia que cada web veu ara mateix.",
+      "dnsTitle": "Test de fuites DNS",
+      "dnsDesc": "Si WebRTC està net però el DNS s'escapa, els webs igualment saben on vas.",
+      "censorshipTitle": "Com funciona la censura de VPN",
+      "censorshipDesc": "Per què les fuites WebRTC i DNS són catastròfiques a les xarxes restringides."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test de Fuites DNS — Verifica que el DNS de la teva VPN sigui privat",
+      "description": "Guia gratuïta de test de fuites DNS. Descobreix si les teves consultes DNS passen pel túnel VPN o s'escapen cap al proveïdor. Instruccions pas a pas i solucions."
+    },
+    "hero": {
+      "title": "Test de fuites DNS",
+      "subtitle": "Si les teves consultes DNS esquiven el túnel VPN, el teu proveïdor d'internet continua veient cada lloc que visites — fins i tot amb la VPN connectada. Així es comprova i s'arregla."
+    },
+    "widget": {
+      "title": "Test de fuites DNS recomanat",
+      "description": "No mantenim la nostra pròpia sonda DNS perquè fer-ho bé requereix subdominis comodí controlats en diversos resolutors. Fes servir l'eina de tercers de confiança de sota — és independent i no demana compte.",
+      "primaryButton": "Obre dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Obre browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Fes clic a \"Extended test\" a dnsleaktest.com. El resultat només hauria de llistar els servidors DNS del teu proveïdor de VPN — no el teu proveïdor d'internet. Si veus Comcast, Verizon, Vodafone o qualsevol altre proveïdor de consum als resultats, el teu DNS s'escapa."
+    },
+    "explainer": {
+      "whatTitle": "Què és una fuita DNS?",
+      "whatBody": "Quan escrius una URL, el dispositiu primer pregunta a un servidor DNS l'adreça IP d'aquell domini. Si la consulta DNS passa pel túnel VPN, el proveïdor només veu trànsit xifrat. Si esquiva el túnel — una fuita DNS — el proveïdor veu cada domini que visites, encara que la connexió següent estigui xifrada. Les xarxes censurades sovint inspeccionen les consultes DNS per aplicar llistes de bloqueig, així que una fuita DNS hi és fatal.",
+      "causesTitle": "Què causa les fuites DNS?",
+      "causesBody": "Tres causes habituals: (1) El client VPN configura el seu propi resolutor DNS però el sistema operatiu l'ignora i fa servir el de la xarxa local. (2) El trànsit IPv6 no es canalitza, així que les consultes DNS per IPv6 s'escapen al voltant de la VPN. (3) Navegadors com Chrome i Firefox poden fer servir encaminament DNS \"intel·ligent\" (DNS-over-HTTPS) que esquiva del tot la configuració DNS del sistema.",
+      "fixTitle": "Com arreglar una fuita DNS",
+      "fixBody": "Fes servir una VPN amb infraestructura DNS pròpia que forci totes les consultes DNS pel túnel (Doppler ho fa per defecte a totes les plataformes). Desactiva l'IPv6 a la configuració de xarxa si la teva VPN no suporta el túnel IPv6. Al navegador, configura el DNS-over-HTTPS amb el mateix proveïdor que la VPN, o desactiva'l. Als encaminadors, posa com a DNS amunt un resolutor respectuós amb la privacitat (Quad9, Cloudflare 1.1.1.1) només si no fas servir VPN a nivell de dispositiu."
+    },
+    "checklist": {
+      "title": "Les garanties DNS de Doppler:",
+      "items": {
+        "item1": "Totes les consultes DNS es forcen pel túnel VPN — sense fuites pel DNS del sistema.",
+        "item2": "L'IPv6 es canalitza o es bloqueja, mai no s'escapa.",
+        "item3": "Els nostres resolutors DNS no registren consultes.",
+        "item4": "Bloquegem els intents d'esquivar-ho amb DNS-over-HTTPS dels navegadors quan el kill-switch és actiu."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Per què una fuita DNS és pitjor que una fuita d'IP?",
+        "answer": "Una fuita d'IP revela una adreça. Una fuita DNS revela cada domini que visites — cada lloc, cada crida d'API, cada punt d'analítica — en text pla al teu proveïdor i a qualsevol del camí. Per als usuaris de xarxes censurades, les llistes de bloqueig a nivell DNS són el mecanisme d'aplicació més habitual, cosa que fa de les fuites DNS l'error que delata la gent."
+      },
+      "q2": {
+        "question": "Com sé si el meu DNS s'escapa ara mateix?",
+        "answer": "Executa el test estès a dnsleaktest.com. Emet diverses consultes a subdominis comodí i et diu quins resolutors hi han respost. Si veus el nom del teu proveïdor (o qualsevol nom que no coincideixi amb el teu proveïdor de VPN), el DNS s'escapa. Repeteix el test amb i sense la VPN per confirmar-ho."
+      },
+      "q3": {
+        "question": "Doppler VPN filtra el DNS?",
+        "answer": "No. Empenyem els nostres propis resolutors pel túnel a cada plataforma i bloquegem la tornada al DNS del sistema. També desactivem l'esquivament per DNS-over-HTTPS dels navegadors quan el nostre kill-switch és actiu. Els tests independents a dnsleaktest.com i browserleaks.com ho confirmen — comprova-ho tu mateix."
+      },
+      "q4": {
+        "question": "Què és el DNS-over-HTTPS (DoH) i quina relació té amb les fuites?",
+        "answer": "El DoH és un protocol que envia les consultes DNS per una connexió HTTPS xifrada, esquivant el resolutor DNS del sistema. Navegadors com Chrome i Firefox fan servir DoH per defecte, sovint enviant les consultes a Google o Cloudflare independentment de la teva VPN. Això és una fuita, tret que la VPN ho gestioni explícitament. Doppler intercepta els intents de DoH i els encamina pel túnel."
+      },
+      "q5": {
+        "question": "Necessito un servei DNS separat si faig servir una VPN?",
+        "answer": "No. Una VPN ben configurada gestiona el DNS per tu. Fer servir un servei DNS separat (Quad9, Cloudflare) damunt d'una VPN pot de fet causar fuites si el sistema encamina la consulta DNS fora del túnel. Confia en els resolutors de la VPN — i si no hi confies, fes servir una altra VPN."
+      },
+      "q6": {
+        "question": "Cada quant hauria de fer el test de fuites DNS?",
+        "answer": "Després de cada configuració de VPN o actualització del sistema. Les configuracions de túnel es poden trencar en silenci — una actualització del sistema pot canviar la pila de xarxa cap a un camí amb fuites sense avisar-te. Una comprovació trimestral és una cadència raonable per a usuaris habituals; setmanal si vius en una xarxa fortament censurada on el cost d'una fuita és alt."
+      }
+    },
+    "related": {
+      "ipTitle": "Quina és la meva IP?",
+      "ipDesc": "Mira exactament què està amagant la teva VPN dels webs.",
+      "webrtcTitle": "Test de fuites WebRTC",
+      "webrtcDesc": "IP amagada, DNS amagat, però una fuita WebRTC encara t'exposa.",
+      "bypassTitle": "Esquiva la censura d'internet",
+      "bypassDesc": "Les fuites DNS són com t'atrapen les llistes de bloqueig. Llegeix com Doppler les evita."
     }
   },
   "vlessVpnAndroid": {

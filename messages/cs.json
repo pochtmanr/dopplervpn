@@ -1374,6 +1374,7 @@
     "promoError": "Neplatný slevový kód"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Prověřte svou bezpečnost na webu našimi bezplatnými nástroji pro soukromí",
     "title": "Jak Doppler VPN chrání váš provoz",
     "subtitle": "Vaše připojení je šifrováno a směrováno přes hraniční síť Doppleru. Nic se nezaznamenává.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Proč nepožadujeme žádné osobní údaje.",
       "vlessTitle": "O VLESS-Reality",
       "vlessDesc": "Protokol za šifrováním Dopplera."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Bezplatné nástroje pro soukromí — Doppler VPN",
+      "description": "Bezplatné jednoúčelové nástroje pro otestování vašeho soukromí: kontrola IP, test úniku WebRTC, test úniku DNS. Žádné sledování, žádný e-mail."
+    },
+    "title": "Bezplatné nástroje pro soukromí",
+    "subtitle": "Tři rychlé kontroly úniků, na kterých záleží nejvíc.",
+    "tools": {
+      "ipChecker": {
+        "title": "Jaká je moje IP?",
+        "description": "Podívejte se, jakou veřejnou IP, zemi a poskytovatele váš provoz právě teď odhaluje.",
+        "cta": "Spustit kontrolu IP"
+      },
+      "webrtcLeak": {
+        "title": "Test úniku WebRTC",
+        "description": "WebRTC může prozradit vaši skutečnou IP i přes VPN. Zkontrolujte, jestli to dělá i váš prohlížeč.",
+        "cta": "Spustit test WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test úniku DNS",
+        "description": "Pokud vaše DNS dotazy obcházejí VPN tunel, poskytovatel stále vidí každý web, který navštívíte.",
+        "cta": "Spustit test DNS"
+      }
+    },
+    "cta": {
+      "title": "Nástroje našly únik?",
+      "description": "Tunel VLESS-Reality od Doppleru vede IP provoz i DNS dotazy šifrovaným kanálem a má vestavěné blokování úniků WebRTC a IPv6.",
+      "button": "Vyzkoušet Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Jaká je moje IP? — Bezplatné zjištění IP a poskytovatele",
+      "description": "Bezplatná kontrola IP adresy — okamžitě zjistíte svou veřejnou IP, zemi, kraj, město a poskytovatele. Žádné sledování. Žádný e-mail. Funguje na iPhonu, Androidu, Macu i Windows."
+    },
+    "hero": {
+      "title": "Jaká je moje IP?",
+      "subtitle": "Vaše veřejná IP adresa tak, jak ji vidí každý web, který navštívíte — spolu s geografií a poskytovatelem, kteří jsou k ní přiřazeni. Po připojení k VPN stránku obnovte a ověřte, že se změna projevila."
+    },
+    "widget": {
+      "yourIp": "Vaše IP adresa",
+      "country": "Země",
+      "region": "Kraj",
+      "city": "Město",
+      "isp": "Poskytovatel internetu",
+      "asn": "ASN",
+      "unknown": "Neznámé",
+      "refresh": "Obnovit",
+      "refreshing": "Obnovuji…",
+      "copied": "Zkopírováno",
+      "copy": "Kopírovat",
+      "loading": "Zjišťuji vaši IP…",
+      "error": "Vaši IP se nepodařilo zjistit. Obnovte stránku nebo to za chvíli zkuste znovu."
+    },
+    "explainer": {
+      "whatTitle": "Co je IP adresa?",
+      "whatBody": "Každé zařízení na internetu nese číselnou adresu — veřejnou IP — která ho identifikuje vůči každému serveru, se kterým komunikuje. IPv4 vypadá jako 203.0.113.42; IPv6 je delší a používá dvojtečky. IP vám přiděluje poskytovatel a mění se při změně sítě (domácí Wi-Fi, mobilní data, Wi-Fi v kavárně).",
+      "exposeTitle": "Co vaše IP odhaluje",
+      "exposeBody": "Samotná IP prozrazuje vaši zemi, kraj, město a poskytovatele — někdy s přesností na pár bloků. V kombinaci s User-Agentem a časovými údaji, které posílá každý prohlížeč, to reklamním sítím stačí k vytvoření vašeho otisku a sledování napříč weby. Streamovací platformy ji používají k vymáhání regionálních licencí. Cenzoři k prosazování geografických blokací.",
+      "vpnTitle": "Jak VPN mění vaši IP",
+      "vpnBody": "Když se připojíte k VPN, veškerý váš provoz vychází na internet s IP adresou VPN serveru — ne s vaší. Weby vidí zemi, poskytovatele a geografii VPN serveru místo vašich skutečných údajů. Správně nastavená VPN vede stejným tunelem i DNS dotazy, takže poskytovatel nevidí, jaké weby navštěvujete, přestože přenáší šifrované pakety."
+    },
+    "checklist": {
+      "title": "Pokud jste připojeni k Doppler VPN, tato stránka by měla ukazovat:",
+      "items": {
+        "item1": "IP, která neodpovídá té, kterou jste viděli před připojením.",
+        "item2": "Zemi odpovídající zvolenému serveru (např. Německo, Nizozemsko, Singapur).",
+        "item3": "Poskytovatele uvedeného jako hostingovou firmu (Hetzner, Vultr, OVH), ne vašeho domácího operátora.",
+        "item4": "Žádnou zmínku o vašem skutečném městě nebo kraji."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "K čemu se moje IP adresa používá?",
+        "answer": "Každý server, se kterým komunikujete, používá vaši IP k odesílání odpovědí, a většina si ji zaznamenává. Umožňuje geolokaci (až na úroveň města), regionální licencování obsahu, personalizaci reklam, odhalování podvodů a — v cenzurovaných sítích — vymáhání blokačních seznamů. Online anonymita začíná tím, že toto číslo přímo neodhalujete."
+      },
+      "q2": {
+        "question": "Je moje IP adresa soukromá informace?",
+        "answer": "Posílá se každému webu, který navštívíte, takže to není tajemství. Podle GDPR a většiny zákonů o ochraně soukromí je to ale osobní údaj, protože ji lze spojit s konkrétní osobou. Berte ji jako název své ulice: není tajná, ale cizím lidem ji jen tak nedáváte."
+      },
+      "q3": {
+        "question": "Jak skryju svou IP?",
+        "answer": "Standardním nástrojem je VPN — nahradí vaši IP adresou serveru. Tor skrývá IP přes několik uzlů za cenu rychlosti. Proxy služby ji skrývají jen pro provoz prohlížeče. Přepnutí na mobilní data změní IP, ale ne vaši identitu. Veřejná Wi-Fi sdílí jednu IP se všemi v síti, ale není šifrovaná."
+      },
+      "q4": {
+        "question": "Proč moje IP vypadá na různých webech různě?",
+        "answer": "Nemělo by — pokud nejste za VPN s rozděleným tunelováním (některé aplikace jdou přes VPN, jiné přes poskytovatele), ve firemní síti s více výstupními IP, nebo nevidíte na jednom webu IPv4 a na jiném IPv6. Některé weby používají externí API pro zjištění IP, která mohou vracet mírně odlišná metadata."
+      },
+      "q5": {
+        "question": "Mohou mě sledovat i s VPN, když je moje IP skrytá?",
+        "answer": "Ano. Otisk prohlížeče (písma, velikost obrazovky, doplňky, vykreslování canvas) identifikuje zařízení i bez IP. Cookies a přihlášení vás sledují napříč sítěmi. VPN řeší jen vrstvu IP a DNS; zbytek je na prohlížeči. Používejte anonymní režim, blokujte cookies třetích stran a pro úplnou ochranu zvažte prohlížeče s ochranou proti otiskům."
+      },
+      "q6": {
+        "question": "Zaznamenává Doppler moji IP?",
+        "answer": "Ne. Doppler neukládá záznamy o připojení, historii IP ani DNS dotazy. VPN server vidí vaši skutečnou IP jen po dobu nutnou ke směrování provozu — na disk se nikdy nezapisuje. Jedinou smysluplnou zárukou jsou nezávislé audity a politika bez logů; \"slibujeme\" nestačí, a proto zveřejňujeme, jak je naše infrastruktura postavená."
+      },
+      "q7": {
+        "question": "Co je ASN?",
+        "answer": "Číslo autonomního systému identifikuje provozovatele sítě, kterému patří blok IP adres. AS7922 je Comcast; AS24940 je Hetzner; AS16509 je Amazon AWS. ASN jsou veřejná a prozradí, jestli IP patří domácímu poskytovateli, mobilnímu operátorovi, hostingové firmě (obvykle výstupní uzly VPN) nebo firemní síti."
+      },
+      "q8": {
+        "question": "Proč vypadá poloha mé IP špatně?",
+        "answer": "Geolokační databáze IP (MaxMind, IP2Location) jsou na úrovni země přesné v ~99 % případů a na úrovni města v ~70 %. Za realitou zaostávají o týdny: čerstvě přidělený blok IP se může zobrazovat na místě předchozího vlastníka. IP VPN serverů bývají někdy umístěny špatně. Pokud vaše domácí IP ukazuje špatné město, poskytovatel nejspíš rozděluje bloky po celé aglomeraci."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test úniku WebRTC",
+      "webrtcDesc": "WebRTC může prozradit vaši skutečnou IP, i když tato stránka ukazuje IP VPN. Otestujte to.",
+      "dnsTitle": "Test úniku DNS",
+      "dnsDesc": "Skrýt IP nestačí, pokud vaše DNS dotazy stále unikají.",
+      "vlessTitle": "VPN s VLESS-Reality",
+      "vlessDesc": "Protokol, kterým se Doppler vyhýbá odhalení a blokování."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test úniku WebRTC — Zjistěte, jestli VPN skrývá vaši skutečnou IP",
+      "description": "Bezplatný test úniku WebRTC. Odhalí, jestli prohlížeč přes STUN prozrazuje vaši skutečnou IP, i když je VPN připojená. Trvá 2 sekundy. Žádná data neopouštějí zařízení."
+    },
+    "hero": {
+      "title": "Test úniku WebRTC",
+      "subtitle": "Prohlížeče mohou vaši skutečnou IP prozradit přes WebRTC, i když ji VPN před weby skrývá. Tento test zjistí, jestli to dělá i ten váš — celý běží v prohlížeči a nikam neposílá žádná data."
+    },
+    "widget": {
+      "publicIp": "Veřejná IP (viditelná pro weby)",
+      "webrtcIps": "IP objevené přes WebRTC",
+      "leakedTitle": "WebRTC prozrazuje vaši IP",
+      "leakedBody": "WebRTC zjistilo jednu nebo více IP odlišných od veřejné. Pokud používáte VPN, znamená to, že web používající WebRTC stále vidí vaši skutečnou adresu.",
+      "safeTitle": "Únik WebRTC nezjištěn",
+      "safeBody": "WebRTC nahlásilo stejnou IP jako veřejnou, nebo žádnou. Vaše skutečná adresa teď přes WebRTC neuniká.",
+      "noWebrtc": "Váš prohlížeč má WebRTC vypnuté, nebo se žádné adresy nepodařilo zjistit. To je bezpečný stav.",
+      "unknown": "Neznámé",
+      "refresh": "Spustit test znovu",
+      "refreshing": "Testuji…",
+      "loading": "Zkoumám WebRTC…",
+      "error": "Test se nepodařilo spustit. Obnovte stránku a zkuste to znovu."
+    },
+    "explainer": {
+      "whatTitle": "Co je únik WebRTC?",
+      "whatBody": "WebRTC je funkce prohlížeče pro peer-to-peer zvuk, video a data — používají ji Google Meet, Discord a mnoho webových aplikací. K navázání P2P spojení prohlížeč pomocí STUN serverů zjišťuje vlastní IP adresy, včetně lokálních a těch za NATem. Web může prohlížeč požádat, aby toto zjišťování spustil potichu, a získané IP přečíst přes JavaScript — zcela mimo VPN.",
+      "howTitle": "Jak test funguje",
+      "howBody": "Prohlížeč vytvoří fiktivní RTCPeerConnection, zavolá createOffer a přečte výsledné ICE kandidáty. ICE kandidáti obsahují každou IP, kterou prohlížeč dokáže najít — včetně vaší skutečné, i když VPN tuneluje veškerý ostatní provoz. Test běží lokálně; na naše servery se nic neposílá.",
+      "fixTitle": "Jak opravit únik WebRTC",
+      "fixBody": "Tři možnosti: (1) Používejte VPN, která úniky WebRTC aktivně blokuje (aplikace Doppler pro iOS a Android vypínají WebRTC mimo tunel). (2) Nainstalujte rozšíření prohlížeče, které WebRTC vypne (uBlock Origin má takovou volbu). (3) Ve Firefoxu nastavte media.peerconnection.enabled na false v about:config. Vypnutí WebRTC rozbije videohovory v prohlížeči; používejte místo nich nativní aplikaci."
+    },
+    "faq": {
+      "q1": {
+        "question": "Co je WebRTC?",
+        "answer": "WebRTC je standard W3C zabudovaný do každého moderního prohlížeče pro peer-to-peer komunikaci zvukem, videem a daty v reálném čase. Pohání Google Meet, webový Discord, webový klient Zoomu a většinu videochatů v prohlížeči. Stejná API, která umožňují P2P hovory, dovolují JavaScriptu zjišťovat i vaše lokální síťové adresy."
+      },
+      "q2": {
+        "question": "Proč WebRTC prozrazuje mou skutečnou IP i přes VPN?",
+        "answer": "Protože stack WebRTC pracuje pod aplikační vrstvou a dotazuje se síťového rozhraní přímo přes STUN. VPN tuneluje provoz na vrstvě IP, ale volání WebRTC pro zjišťování adres neblokuje. Uniklá adresa cestuje uvnitř šifrovaného tunelu — prohlížeč ji ale pak předá JavaScriptu na stránce, který ji může poslat kamkoli."
+      },
+      "q3": {
+        "question": "Kterých prohlížečů se to týká?",
+        "answer": "Ve výchozím nastavení všech: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave má nastavení proti úniku IP přes WebRTC, ve výchozím stavu vypnuté. Firefox umožňuje WebRTC úplně vypnout přes about:config. Safari na iOS je od iOS 14 částečně ošetřené, ale ne zcela."
+      },
+      "q4": {
+        "question": "Blokuje Doppler VPN úniky WebRTC?",
+        "answer": "Ano. Naši klienti pro iOS a Android používají lokální kill-switch, který blokuje veškerý UDP provoz mimo tunel, takže STUN zjišťování se k externím serverům nedostane. Na desktopu doporučujeme kombinovat VPN s přepínačem WebRTC v uBlock Origin nebo s vypnutím na úrovni prohlížeče pro úplné pokrytí."
+      },
+      "q5": {
+        "question": "Rozbije vypnutí WebRTC weby?",
+        "answer": "Rozbije videohovory v prohlížeči (Meet, webový Zoom, webový Discord) a některé nástroje pro spolupráci. Běžné prohlížení, streamování ani nic, co nepotřebuje peer-to-peer spojení, neovlivní. Nativní aplikace těchto služeb na WebRTC nezávisejí."
+      },
+      "q6": {
+        "question": "Je tento test soukromý?",
+        "answer": "Ano. Test běží celý ve vašem prohlížeči přes standardní API RTCPeerConnection. Žádná IP, výsledek ani metadata zařízení neopouštějí. Ani si nezaznamenáváme, že jste test spustili."
+      }
+    },
+    "related": {
+      "ipTitle": "Jaká je moje IP?",
+      "ipDesc": "Podívejte se, jakou IP a geografii právě teď vidí každý web.",
+      "dnsTitle": "Test úniku DNS",
+      "dnsDesc": "Když je WebRTC čisté, ale DNS uniká, weby stejně vědí, kam chodíte.",
+      "censorshipTitle": "Jak funguje cenzura VPN",
+      "censorshipDesc": "Proč jsou úniky WebRTC a DNS v omezených sítích katastrofální."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test úniku DNS — Ověřte, že DNS vaší VPN je soukromé",
+      "description": "Bezplatný průvodce testem úniku DNS. Zjistěte, jestli vaše DNS dotazy procházejí VPN tunelem, nebo unikají k poskytovateli. Návod krok za krokem a řešení."
+    },
+    "hero": {
+      "title": "Test úniku DNS",
+      "subtitle": "Pokud vaše DNS dotazy obcházejí VPN tunel, poskytovatel internetu stále vidí každý web, který navštívíte — i s připojenou VPN. Tady je návod, jak to zkontrolovat a opravit."
+    },
+    "widget": {
+      "title": "Doporučený test úniku DNS",
+      "description": "Vlastní DNS sondu neprovozujeme, protože k jejímu kvalitnímu provedení jsou potřeba řízené wildcard subdomény na několika resolverech. Použijte důvěryhodný nástroj třetí strany níže — je nezávislý a nevyžaduje účet.",
+      "primaryButton": "Otevřít dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Otevřít browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Na dnsleaktest.com klikněte na \"Extended test\". Výsledek by měl obsahovat jen DNS servery vašeho poskytovatele VPN — ne vašeho operátora. Pokud ve výsledcích vidíte Comcast, Verizon, Vodafone nebo jiného běžného poskytovatele, vaše DNS uniká."
+    },
+    "explainer": {
+      "whatTitle": "Co je únik DNS?",
+      "whatBody": "Když zadáte URL, zařízení se nejprve zeptá DNS serveru na IP adresu dané domény. Pokud DNS dotaz prochází VPN tunelem, poskytovatel vidí jen šifrovaný provoz. Pokud tunel obejde — únik DNS — poskytovatel vidí každou doménu, kterou navštívíte, přestože následné spojení je šifrované. Cenzurované sítě často kontrolují DNS dotazy kvůli vymáhání blokačních seznamů, takže tam je únik DNS fatální.",
+      "causesTitle": "Co úniky DNS způsobuje?",
+      "causesBody": "Tři běžné příčiny: (1) VPN klient nastaví vlastní DNS resolver, ale systém ho ignoruje a používá resolver přidělený místní sítí. (2) Provoz IPv6 se netuneluje, takže IPv6 DNS dotazy unikají kolem VPN. (3) Prohlížeče jako Chrome a Firefox mohou používat \"chytré\" směrování DNS (DNS-over-HTTPS), které systémové nastavení DNS zcela obchází.",
+      "fixTitle": "Jak opravit únik DNS",
+      "fixBody": "Používejte VPN s vlastní DNS infrastrukturou, která všechny DNS dotazy vynucuje tunelem (Doppler to dělá ve výchozím nastavení na každé platformě). Pokud vaše VPN nepodporuje tunelování IPv6, vypněte IPv6 v síťovém nastavení systému. V prohlížeči nastavte DNS-over-HTTPS na stejného poskytovatele jako VPN, nebo ho vypněte. Na routerech nastavujte jako nadřazený DNS resolver respektující soukromí (Quad9, Cloudflare 1.1.1.1) jen tehdy, když na úrovni zařízení VPN neběží."
+    },
+    "checklist": {
+      "title": "DNS záruky Doppleru:",
+      "items": {
+        "item1": "Všechny DNS dotazy jsou vynuceny VPN tunelem — žádné úniky přes systémové DNS.",
+        "item2": "IPv6 se buď tuneluje, nebo blokuje, nikdy neuniká.",
+        "item3": "Naše DNS resolvery dotazy nezaznamenávají.",
+        "item4": "Při zapnutém kill-switchi blokujeme pokusy prohlížečů o obejití přes DNS-over-HTTPS."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Proč je únik DNS horší než únik IP?",
+        "answer": "Únik IP prozradí jednu adresu. Únik DNS prozradí každou doménu, kterou navštívíte — každý web, každé volání API, každý analytický endpoint — v čitelné podobě vašemu poskytovateli a komukoli po cestě. Pro uživatele v cenzurovaných sítích jsou blokační seznamy na úrovni DNS nejběžnějším vymáhacím mechanismem, takže právě úniky DNS jsou chybou, kvůli které lidi dopadnou."
+      },
+      "q2": {
+        "question": "Jak poznám, jestli moje DNS právě uniká?",
+        "answer": "Spusťte rozšířený test na dnsleaktest.com. Vyšle několik dotazů na wildcard subdomény a ukáže, které resolvery na ně odpověděly. Pokud vidíte jméno svého poskytovatele (nebo jakékoli jméno neodpovídající vašemu poskytovateli VPN), DNS uniká. Pro potvrzení test zopakujte s VPN i bez ní."
+      },
+      "q3": {
+        "question": "Uniká DNS u Doppler VPN?",
+        "answer": "Ne. Na každé platformě protlačujeme tunelem vlastní resolvery a blokujeme návrat k systémovému DNS. Při aktivním kill-switchi také vypínáme obcházení přes DNS-over-HTTPS v prohlížečích. Nezávislé testy na dnsleaktest.com a browserleaks.com to potvrzují — klidně si to ověřte."
+      },
+      "q4": {
+        "question": "Co je DNS-over-HTTPS (DoH) a jak souvisí s úniky?",
+        "answer": "DoH je protokol, který posílá DNS dotazy šifrovaným HTTPS spojením a obchází systémový DNS resolver. Prohlížeče jako Chrome a Firefox používají DoH ve výchozím nastavení a dotazy často směrují na Google nebo Cloudflare bez ohledu na vaši VPN. To je únik, pokud ho VPN výslovně neřeší. Doppler pokusy o DoH zachytává a vede je tunelem."
+      },
+      "q5": {
+        "question": "Potřebuji samostatnou DNS službu, když používám VPN?",
+        "answer": "Ne. Dobře nastavená VPN řeší DNS za vás. Samostatná DNS služba (Quad9, Cloudflare) nad VPN může úniky naopak způsobit, pokud systém pošle DNS dotaz mimo tunel. Důvěřujte resolverům VPN — a pokud jim nedůvěřujete, použijte jinou VPN."
+      },
+      "q6": {
+        "question": "Jak často mám testovat úniky DNS?",
+        "answer": "Po každém nastavení VPN nebo aktualizaci systému. Konfigurace tunelu se může rozbít potichu — systémová aktualizace může síťový stack bez upozornění přepnout na děravou cestu. Čtvrtletní kontrola je pro stálé uživatele rozumný rytmus; týdenní, pokud žijete v silně cenzurované síti, kde je cena úniku vysoká."
+      }
+    },
+    "related": {
+      "ipTitle": "Jaká je moje IP?",
+      "ipDesc": "Podívejte se přesně, co vaše VPN před weby skrývá.",
+      "webrtcTitle": "Test úniku WebRTC",
+      "webrtcDesc": "IP skrytá, DNS skryté, ale únik WebRTC vás stejně prozradí.",
+      "bypassTitle": "Obejděte internetovou cenzuru",
+      "bypassDesc": "Právě přes úniky DNS vás blokační seznamy chytí. Přečtěte si, jak se jim Doppler vyhýbá."
     }
   },
   "vlessVpnAndroid": {
