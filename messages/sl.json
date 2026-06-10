@@ -1374,6 +1374,7 @@
     "promoError": "Neveljavna promocijska koda"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Preverite svojo spletno varnost z našimi brezplačnimi orodji za zasebnost",
     "title": "Kako Doppler VPN ščiti vaš promet",
     "subtitle": "Vaša povezava je šifrirana in usmerjena prek Dopplerjevega robnega omrežja. Nič se ne beleži.",
     "flow": {
@@ -3920,6 +3921,256 @@
       "androidDesc": "Poln nabor funkcij za Android.",
       "censorshipTitle": "Kako deluje cenzura VPN",
       "censorshipDesc": "Kaj rešuje VLESS-Reality in kako."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Brezplačna orodja za zasebnost — Doppler VPN",
+      "description": "Brezplačna enonamenska orodja za preverjanje vaše zasebnosti: preverjanje IP, test uhajanja WebRTC, test uhajanja DNS. Brez sledenja, brez e-pošte."
+    },
+    "title": "Brezplačna orodja za zasebnost",
+    "subtitle": "Trije hitri preizkusi za uhajanja, ki so najpomembnejša.",
+    "tools": {
+      "ipChecker": {
+        "title": "Kakšen je moj IP?",
+        "description": "Poglejte javni IP, državo in ponudnika, ki jih vaš promet razkriva prav zdaj.",
+        "cta": "Zaženi preverjanje IP"
+      },
+      "webrtcLeak": {
+        "title": "Test uhajanja WebRTC",
+        "description": "WebRTC lahko razkrije vaš pravi IP tudi prek VPN. Preverite, ali ga vaš.",
+        "cta": "Zaženi test WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test uhajanja DNS",
+        "description": "Če vaše poizvedbe DNS obidejo tunel VPN, vaš ponudnik še vedno vidi vsako stran, ki jo obiščete.",
+        "cta": "Zaženi test DNS"
+      }
+    },
+    "cta": {
+      "title": "So orodja našla uhajanje?",
+      "description": "Dopplerjev tunel VLESS-Reality usmerja IP promet in poizvedbe DNS skozi šifriran kanal z vgrajenim blokiranjem uhajanj WebRTC in IPv6.",
+      "button": "Preizkusite Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Kakšen je moj IP? — Brezplačno preverjanje IP in ISP",
+      "description": "Brezplačno preverjanje naslova IP — takoj si oglejte svoj javni IP, državo, regijo, mesto in ponudnika. Brez sledenja. Brez e-pošte. Deluje na iPhonu, Androidu, Macu in Windowsih."
+    },
+    "hero": {
+      "title": "Kakšen je moj IP?",
+      "subtitle": "Vaš javni naslov IP, kot ga vidi vsaka spletna stran, ki jo obiščete — skupaj z geografijo in ponudnikom, ki sta z njim povezana. Po povezavi z VPN osvežite stran in preverite, da je sprememba uveljavljena."
+    },
+    "widget": {
+      "yourIp": "Vaš naslov IP",
+      "country": "Država",
+      "region": "Regija",
+      "city": "Mesto",
+      "isp": "Ponudnik interneta",
+      "asn": "ASN",
+      "unknown": "Neznano",
+      "refresh": "Osveži",
+      "refreshing": "Osveževanje…",
+      "copied": "Kopirano",
+      "copy": "Kopiraj",
+      "loading": "Zaznavamo vaš IP…",
+      "error": "Vašega IP ni bilo mogoče zaznati. Osvežite stran ali poskusite znova čez trenutek."
+    },
+    "explainer": {
+      "whatTitle": "Kaj je naslov IP?",
+      "whatBody": "Vsaka naprava na internetu nosi številčni naslov — javni IP — ki jo identificira pri vsakem strežniku, s katerim komunicira. IPv4 je videti kot 203.0.113.42; IPv6 je daljši in uporablja dvopičja. Vaš IP dodeli vaš ponudnik in se spremeni, ko zamenjate omrežje (domači Wi-Fi, mobilni podatki, Wi-Fi v kavarni).",
+      "exposeTitle": "Kaj vaš IP razkriva",
+      "exposeBody": "Že sam IP razkrije vašo državo, regijo, mesto in ponudnika — včasih na nekaj ulic natančno. V kombinaciji z User-Agentom in časovnimi podatki, ki jih pošilja vsak brskalnik, to oglaševalskim omrežjem zadošča za prstni odtis in sledenje med stranmi. Pretočne platforme z njim uveljavljajo regionalne licence. Cenzorji z njim uveljavljajo geografske blokade.",
+      "vpnTitle": "Kako VPN spremeni vaš IP",
+      "vpnBody": "Ko se povežete z VPN, ves vaš promet izstopi na internet z naslovom IP strežnika VPN — ne z vašim. Spletne strani vidijo državo, ponudnika in geografijo strežnika VPN namesto vaših pravih. Pravilno nastavljen VPN skozi isti tunel usmerja tudi poizvedbe DNS, tako da vaš ponudnik ne vidi, katere strani obiskujete, čeprav prenaša šifrirane pakete."
+    },
+    "checklist": {
+      "title": "Če ste povezani z Doppler VPN, bi morala ta stran prikazovati:",
+      "items": {
+        "item1": "IP, ki se ne ujema s tistim, ki ste ga videli pred povezavo.",
+        "item2": "Državo, ki ustreza strežniku, ki ste ga izbrali (npr. Nemčija, Nizozemska, Singapur).",
+        "item3": "Ponudnika, navedenega kot gostiteljsko podjetje (Hetzner, Vultr, OVH), ne vašega domačega ISP.",
+        "item4": "Nobene omembe vašega pravega mesta ali regije."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Za kaj se uporablja moj naslov IP?",
+        "answer": "Vsak strežnik, s katerim komunicirate, uporablja vaš IP za pošiljanje odgovorov nazaj in večina ga beleži. Omogoča geolokacijo (do ravni mesta), regionalno licenciranje vsebin, personalizacijo oglasov, zaznavanje goljufij in — v cenzuriranih omrežjih — uveljavljanje seznamov blokiranj. Anonimnost na spletu se začne s tem, da te številke ne razkrivate neposredno."
+      },
+      "q2": {
+        "question": "Je moj naslov IP zasebni podatek?",
+        "answer": "Oddaja se vsaki spletni strani, ki jo obiščete, zato ni skrivnost. Je pa osebni podatek po GDPR in večini zakonov o zasebnosti, ker ga je mogoče povezati s posameznikom. Obravnavajte ga kot ime svoje ulice: ni zaupno, a ga neznancem ne dajete kar tako."
+      },
+      "q3": {
+        "question": "Kako skrijem svoj IP?",
+        "answer": "Standardno orodje je VPN — vaš IP nadomesti s strežnikovim. Tor skrije vaš IP prek več posrednikov na račun hitrosti. Storitve proxy ga skrijejo le za promet brskalnika. Preklop na mobilne podatke spremeni vaš IP, ne pa identitete. Javni Wi-Fi deli IP z vsemi v omrežju, vendar ni šifriran."
+      },
+      "q4": {
+        "question": "Zakaj je moj IP na različnih straneh videti drugačen?",
+        "answer": "Ne bi smel biti — razen če ste za VPN z deljenim tuneliranjem (nekatere aplikacije gredo skozi VPN, druge skozi ISP), za poslovnim omrežjem z več izhodnimi IP-ji ali pa na eni strani vidite IPv4, na drugi IPv6. Nekatere strani uporabljajo zunanje API-je za iskanje IP, ki lahko vrnejo nekoliko drugačne metapodatke."
+      },
+      "q5": {
+        "question": "Ali mi je mogoče slediti tudi z VPN, če je moj IP skrit?",
+        "answer": "Da. Prstni odtis brskalnika (pisave, velikost zaslona, vtičniki, izrisovanje canvasa) prepozna naprave brez IP. Piškotki in prijave vam sledijo med omrežji. VPN reši le plast IP in DNS; preostalo je na brskalniku. Uporabljajte zasebno brskanje, blokirajte piškotke tretjih oseb in razmislite o brskalnikih z zaščito pred prstnimi odtisi."
+      },
+      "q6": {
+        "question": "Ali Doppler beleži moj IP?",
+        "answer": "Ne. Doppler ne shranjuje dnevnikov povezav, zgodovine IP ali poizvedb DNS. Strežnik VPN vidi vaš pravi IP le toliko časa, kolikor je potrebno za usmerjanje prometa — nikoli se ne zapiše na disk. Edino smiselno jamstvo so neodvisne revizije in politika brez dnevnikov; »obljubimo« ni dovolj, zato svojo postavitev objavljamo."
+      },
+      "q7": {
+        "question": "Kaj je ASN?",
+        "answer": "Autonomous System Number identificira omrežnega operaterja, ki ima v lasti blok naslovov IP. AS7922 je Comcast; AS24940 je Hetzner; AS16509 je Amazon AWS. ASN-ji so javni in omogočajo razločiti, ali IP pripada rezidenčnemu ponudniku, mobilnemu operaterju, gostiteljskemu podjetju (običajno izhodna vozlišča VPN) ali poslovnemu omrežju."
+      },
+      "q8": {
+        "question": "Zakaj je lokacija mojega IP videti napačna?",
+        "answer": "Geolokacijske baze IP (MaxMind, IP2Location) so na ravni države točne v ~99 % primerov, na ravni mesta pa v ~70 %. Za resničnostjo zaostajajo tedne: sveže dodeljen blok IP se lahko prikazuje kot lokacija prejšnjega lastnika. IP-ji strežnikov VPN so včasih napačno locirani. Če vaš domači IP kaže napačno mesto, vaš ponudnik verjetno dodeljuje bloke po celotnem mestnem območju."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test uhajanja WebRTC",
+      "webrtcDesc": "WebRTC lahko razkrije vaš pravi IP, tudi ko ta stran kaže IP od VPN. Preizkusite.",
+      "dnsTitle": "Test uhajanja DNS",
+      "dnsDesc": "Skriti IP ni dovolj, če vaše poizvedbe DNS še vedno uhajajo.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokol, ki ga Doppler uporablja, da se izogne zaznavanju in blokiranju."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test uhajanja WebRTC — Preverite, ali vaš VPN skriva pravi IP",
+      "description": "Brezplačen test uhajanja WebRTC. Zazna, ali vaš brskalnik prek STUN razkriva vaš pravi IP, tudi ko je VPN povezan. Traja 2 sekundi. Nobeni podatki ne zapustijo vaše naprave."
+    },
+    "hero": {
+      "title": "Test uhajanja WebRTC",
+      "subtitle": "Brskalniki lahko prek WebRTC razkrijejo vaš pravi IP, tudi ko ga VPN skriva pred spletnimi stranmi. Ta test preveri, ali to počne vaš — v celoti poteka v vašem brskalniku in nikamor ne pošilja podatkov."
+    },
+    "widget": {
+      "publicIp": "Javni IP (kot ga vidijo spletne strani)",
+      "webrtcIps": "IP-ji, odkriti prek WebRTC",
+      "leakedTitle": "WebRTC razkriva vaš IP",
+      "leakedBody": "WebRTC je zaznal enega ali več IP-jev, ki se razlikujejo od javnega IP. Če uporabljate VPN, to pomeni, da spletna stran z WebRTC še vedno vidi vaš pravi naslov.",
+      "safeTitle": "Uhajanje WebRTC ni bilo zaznano",
+      "safeBody": "WebRTC je sporočil enak IP kot javni ali pa nobenega. Trenutno prek WebRTC ne razkrivate svojega pravega naslova.",
+      "noWebrtc": "Vaš brskalnik ima WebRTC onemogočen ali pa ni bil razrešen noben naslov. To je varno stanje.",
+      "unknown": "Neznano",
+      "refresh": "Ponovi test",
+      "refreshing": "Testiranje…",
+      "loading": "Preverjanje WebRTC…",
+      "error": "Testa ni bilo mogoče zagnati. Osvežite stran in poskusite znova."
+    },
+    "explainer": {
+      "whatTitle": "Kaj je uhajanje WebRTC?",
+      "whatBody": "WebRTC je funkcija brskalnika za zvok, video in podatke peer-to-peer — uporabljajo jo Google Meet, Discord in številne spletne aplikacije. Za vzpostavitev povezave P2P brskalniki uporabljajo strežnike STUN, da odkrijejo lastne naslove IP, vključno z lokalnimi in tistimi za NAT-om. Spletna stran lahko brskalnik tiho prosi, naj izvede to odkrivanje, in dobljene IP-je prebere prek JavaScripta — povsem mimo VPN.",
+      "howTitle": "Kako test deluje",
+      "howBody": "Vaš brskalnik ustvari navidezni RTCPeerConnection, pokliče createOffer in prebere dobljene kandidate ICE. Kandidati ICE vsebujejo vsak IP, ki ga brskalnik lahko najde — vključno z vašim pravim, tudi ko VPN tunelira ves drugi promet. Test poteka lokalno; na naše strežnike se nič ne pošilja.",
+      "fixTitle": "Kako odpraviti uhajanje WebRTC",
+      "fixBody": "Tri možnosti: (1) Uporabite VPN, ki proaktivno blokira uhajanja WebRTC (Dopplerjevi aplikaciji za iOS in Android onemogočita WebRTC zunaj tunela). (2) Namestite razširitev brskalnika, ki onemogoči WebRTC (uBlock Origin ima to možnost). (3) V Firefoxu v about:config nastavite media.peerconnection.enabled na false. Onemogočanje WebRTC pokvari videoklice v brskalniku; namesto tega uporabite domačo aplikacijo."
+    },
+    "faq": {
+      "q1": {
+        "question": "Kaj je WebRTC?",
+        "answer": "WebRTC je standard W3C, vgrajen v vsak sodoben brskalnik za komunikacijo peer-to-peer z zvokom, videom in podatki v realnem času. Poganja Google Meet, spletni Discord, spletnega odjemalca Zoom in večino videoklepetov v brskalniku. Isti API-ji, ki omogočajo klice P2P, JavaScriptu dovoljujejo odkrivanje naslovov vašega lokalnega omrežja."
+      },
+      "q2": {
+        "question": "Zakaj WebRTC razkriva moj pravi IP tudi prek VPN?",
+        "answer": "Ker sklad WebRTC deluje pod aplikacijsko plastjo in prek STUN neposredno sprašuje omrežni vmesnik. VPN tunelira promet na plasti IP, vendar ne blokira klicev WebRTC za odkrivanje naslovov. Uhajajoči naslov potuje znotraj šifriranega tunela — brskalnik pa ga nato preda JavaScriptu na strani, ki ga lahko pošlje kamor koli."
+      },
+      "q3": {
+        "question": "Kateri brskalniki so prizadeti?",
+        "answer": "Pri privzetih nastavitvah vsi: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave vključuje nastavitev uhajanja IP prek WebRTC, ki je privzeto onemogočena. Firefox omogoča popolno onemogočanje WebRTC prek about:config. Safari na iOS je od iOS 14 delno zaščiten, a ne povsem."
+      },
+      "q4": {
+        "question": "Ali Doppler VPN blokira uhajanja WebRTC?",
+        "answer": "Da. Naša odjemalca za iOS in Android uporabljata lokalni kill-switch, ki blokira ves promet UDP zunaj tunela, s čimer prepreči, da bi odkrivanje STUN doseglo zunanje strežnike. Na namizju priporočamo kombinacijo VPN s stikalom WebRTC v uBlock Origin ali onemogočanjem na ravni brskalnika."
+      },
+      "q5": {
+        "question": "Bo onemogočanje WebRTC pokvarilo spletne strani?",
+        "answer": "Pokvari videoklice v brskalniku (Meet, spletni Zoom, spletni Discord) in nekatera orodja za sodelovanje. Ne vpliva na običajno brskanje, pretakanje ali kar koli, kar ne potrebuje povezav peer-to-peer. Domače aplikacije teh storitev se ne zanašajo na WebRTC."
+      },
+      "q6": {
+        "question": "Je ta test zaseben?",
+        "answer": "Da. Test v celoti poteka v vašem brskalniku prek standardnega API-ja RTCPeerConnection. Noben IP, rezultat ali metapodatek ne zapusti vaše naprave. Ne beležimo niti tega, da ste test zagnali."
+      }
+    },
+    "related": {
+      "ipTitle": "Kakšen je moj IP?",
+      "ipDesc": "Poglejte IP in geografijo, ki ju prav zdaj vidi vsaka spletna stran.",
+      "dnsTitle": "Test uhajanja DNS",
+      "dnsDesc": "Če je WebRTC čist, DNS pa uhaja, strani še vedno vedo, kam hodite.",
+      "censorshipTitle": "Kako deluje cenzura VPN",
+      "censorshipDesc": "Zakaj sta uhajanji WebRTC in DNS v omejenih omrežjih katastrofalni."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test uhajanja DNS — Preverite, da je DNS vašega VPN zaseben",
+      "description": "Brezplačen vodnik za test uhajanja DNS. Ugotovite, ali so vaše poizvedbe DNS usmerjene skozi tunel VPN ali uhajajo k vašemu ponudniku. Navodila po korakih in odprava."
+    },
+    "hero": {
+      "title": "Test uhajanja DNS",
+      "subtitle": "Če vaše poizvedbe DNS obidejo tunel VPN, vaš ponudnik interneta še vedno vidi vsako stran, ki jo obiščete — tudi s povezanim VPN. Tukaj je opisano, kako to preverite in odpravite."
+    },
+    "widget": {
+      "title": "Priporočeni test uhajanja DNS",
+      "description": "Lastne sonde DNS ne izvajamo, ker dobra izvedba zahteva nadzorovane nadomestne (wildcard) poddomene prek več razreševalnikov. Uporabite zaupanja vredno orodje tretje osebe spodaj — je neodvisno in ne zahteva računa.",
+      "primaryButton": "Odpri dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Odpri browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Na dnsleaktest.com kliknite »Extended test«. Rezultat bi moral navajati le strežnike DNS vašega ponudnika VPN — ne vašega ISP. Če v rezultatih vidite Comcast, Verizon, Vodafone ali katerega koli drugega potrošniškega ponudnika, vaš DNS uhaja."
+    },
+    "explainer": {
+      "whatTitle": "Kaj je uhajanje DNS?",
+      "whatBody": "Ko vnesete URL, vaša naprava najprej vpraša strežnik DNS za naslov IP te domene. Če gre poizvedba DNS skozi tunel VPN, vaš ponudnik vidi le šifriran promet. Če tunel obide — uhajanje DNS — vaš ponudnik vidi vsako domeno, ki jo obiščete, čeprav je povezava, ki sledi, šifrirana. Cenzurirana omrežja pogosto pregledujejo poizvedbe DNS za uveljavljanje seznamov blokiranj, zato je uhajanje DNS v takih okoljih usodno.",
+      "causesTitle": "Kaj povzroča uhajanja DNS?",
+      "causesBody": "Trije pogosti vzroki: (1) Odjemalec VPN nastavi svoj razreševalnik DNS, vendar ga OS prezre in uporabi razreševalnik, ki ga dodeli lokalno omrežje. (2) Promet IPv6 ni tuneliran, zato poizvedbe DNS prek IPv6 uhajajo mimo VPN. (3) Brskalniki, kot sta Chrome in Firefox, lahko uporabljajo »pametno« usmerjanje DNS (DNS-over-HTTPS), ki povsem obide sistemske nastavitve DNS.",
+      "fixTitle": "Kako odpraviti uhajanje DNS",
+      "fixBody": "Uporabite VPN, ki ima lastno infrastrukturo DNS in vse poizvedbe DNS prisili skozi tunel (Doppler to privzeto počne na vsaki platformi). Če vaš VPN ne podpira tuneliranja IPv6, onemogočite IPv6 v omrežnih nastavitvah OS. V brskalniku nastavite DNS-over-HTTPS na istega ponudnika kot vaš VPN ali ga onemogočite. Na usmerjevalnikih nastavite nadrejeni DNS na razreševalnik, ki spoštuje zasebnost (Quad9, Cloudflare 1.1.1.1), le če VPN ne teče na ravni naprave."
+    },
+    "checklist": {
+      "title": "Dopplerjeva jamstva za DNS:",
+      "items": {
+        "item1": "Vse poizvedbe DNS so prisiljene skozi tunel VPN — brez uhajanj prek sistemskega DNS.",
+        "item2": "IPv6 je bodisi tuneliran bodisi blokiran, nikoli ne uhaja.",
+        "item3": "Naši razreševalniki DNS ne beležijo poizvedb.",
+        "item4": "Ko je kill-switch vklopljen, blokiramo poskuse brskalnikov, da bi ga obšli prek DNS-over-HTTPS."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Zakaj je uhajanje DNS hujše od uhajanja IP?",
+        "answer": "Uhajanje IP razkrije en naslov. Uhajanje DNS razkrije vsako domeno, ki jo obiščete — vsako stran, vsak klic API, vsako analitično končno točko — v čistem besedilu vašemu ponudniku in vsem na poti. Za uporabnike v cenzuriranih omrežjih so seznami blokiranj na ravni DNS najpogostejši mehanizem uveljavljanja, zaradi česar je uhajanje DNS napaka, zaradi katere ljudje nasedejo."
+      },
+      "q2": {
+        "question": "Kako ugotovim, ali moj DNS prav zdaj uhaja?",
+        "answer": "Zaženite razširjeni test na dnsleaktest.com. Pošlje več poizvedb na nadomestne poddomene in vam pove, kateri razreševalniki so nanje odgovorili. Če vidite ime svojega ISP (ali katero koli ime, ki se ne ujema z vašim ponudnikom VPN), DNS uhaja. Test ponovite z VPN in brez njega, da potrdite."
+      },
+      "q3": {
+        "question": "Ali pri Doppler VPN uhaja DNS?",
+        "answer": "Ne. Na vsaki platformi skozi tunel potiskamo lastne razreševalnike in blokiramo preklop na sistemski DNS. Ko je naš kill-switch aktiven, onemogočimo tudi obvod brskalnikov prek DNS-over-HTTPS. Neodvisni testi na dnsleaktest.com in browserleaks.com to potrjujejo — preverite sami."
+      },
+      "q4": {
+        "question": "Kaj je DNS-over-HTTPS (DoH) in kako je povezan z uhajanji?",
+        "answer": "DoH je protokol, ki pošilja poizvedbe DNS prek šifrirane povezave HTTPS in obide sistemski razreševalnik DNS. Brskalniki, kot sta Chrome in Firefox, DoH uporabljajo privzeto in poizvedbe pogosto usmerjajo na Google ali Cloudflare ne glede na vaš VPN. To je uhajanje, razen če ga vaš VPN izrecno obravnava. Doppler poskuse DoH prestreže in jih usmeri skozi tunel."
+      },
+      "q5": {
+        "question": "Ali potrebujem ločeno storitev DNS, če uporabljam VPN?",
+        "answer": "Ne. Dobro nastavljen VPN poskrbi za DNS namesto vas. Ločena storitev DNS (Quad9, Cloudflare) poleg VPN lahko uhajanja celo povzroči, če OS poizvedbo DNS usmeri mimo tunela. Zaupajte razreševalnikom svojega VPN — če jim ne zaupate, uporabite drug VPN."
+      },
+      "q6": {
+        "question": "Kako pogosto naj testiram uhajanja DNS?",
+        "answer": "Po vsaki nastavitvi VPN ali posodobitvi OS. Konfiguracije tuneliranja se lahko tiho pokvarijo — sistemska posodobitev lahko vaš omrežni sklad preklopi na puščajočo pot, ne da bi vas obvestila. Za stalne uporabnike je razumen četrtletni ritem; tedenski, če živite v močno cenzuriranem omrežju, kjer je cena uhajanja visoka."
+      }
+    },
+    "related": {
+      "ipTitle": "Kakšen je moj IP?",
+      "ipDesc": "Poglejte natančno, kaj vaš VPN skriva pred spletnimi stranmi.",
+      "webrtcTitle": "Test uhajanja WebRTC",
+      "webrtcDesc": "Skrit IP, skrit DNS, a uhajanje WebRTC vas vseeno razkrije.",
+      "bypassTitle": "Obid internetne cenzure",
+      "bypassDesc": "Prav prek uhajanj DNS vas ujamejo seznami blokiranj. Preberite, kako se jim Doppler izogiba."
     }
   }
 }

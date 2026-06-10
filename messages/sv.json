@@ -1374,6 +1374,7 @@
     "promoError": "Ogiltig kampanjkod"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Kontrollera din webbsäkerhet med våra kostnadsfria integritetsverktyg",
     "title": "Hur Doppler VPN skyddar din trafik",
     "subtitle": "Din anslutning krypteras och dirigeras genom Dopplers edge-nätverk. Ingenting loggas.",
     "flow": {
@@ -3920,6 +3921,256 @@
       "androidDesc": "Full Android-funktionsuppsättning.",
       "censorshipTitle": "Hur VPN-censur fungerar",
       "censorshipDesc": "Vad VLESS-Reality löser och hur."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Kostnadsfria integritetsverktyg — Doppler VPN",
+      "description": "Kostnadsfria verktyg med ett enda syfte: testa din integritet med IP-koll, WebRTC-läckagetest och DNS-läckagetest. Ingen spårning, ingen e-post."
+    },
+    "title": "Kostnadsfria integritetsverktyg",
+    "subtitle": "Tre snabba kontroller av de läckor som betyder mest.",
+    "tools": {
+      "ipChecker": {
+        "title": "Vad är min IP?",
+        "description": "Se vilken publik IP, vilket land och vilken operatör din trafik avslöjar just nu.",
+        "cta": "Kör IP-kontrollen"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC-läckagetest",
+        "description": "WebRTC kan avslöja din riktiga IP även genom en VPN. Kontrollera om din gör det.",
+        "cta": "Kör WebRTC-testet"
+      },
+      "dnsLeak": {
+        "title": "DNS-läckagetest",
+        "description": "Om dina DNS-frågor går utanför VPN-tunneln ser din internetleverantör fortfarande varje sajt du besöker.",
+        "cta": "Kör DNS-testet"
+      }
+    },
+    "cta": {
+      "title": "Hittade verktygen en läcka?",
+      "description": "Dopplers VLESS-Reality-tunnel leder både IP-trafik och DNS-frågor genom den krypterade kanalen, med inbyggd blockering av WebRTC- och IPv6-läckor.",
+      "button": "Prova Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Vad är min IP? — Kostnadsfri IP- och ISP-uppslagning",
+      "description": "Kostnadsfri IP-kontroll — se direkt din publika IP, land, region, stad och internetleverantör. Ingen spårning. Ingen e-post. Fungerar på iPhone, Android, Mac och Windows."
+    },
+    "hero": {
+      "title": "Vad är min IP?",
+      "subtitle": "Din publika IP-adress som varje webbplats du besöker ser den — plus geografin och operatören som hör till. Uppdatera sidan efter att du anslutit till en VPN för att bekräfta att bytet slagit igenom."
+    },
+    "widget": {
+      "yourIp": "Din IP-adress",
+      "country": "Land",
+      "region": "Region",
+      "city": "Stad",
+      "isp": "Internetleverantör",
+      "asn": "ASN",
+      "unknown": "Okänt",
+      "refresh": "Uppdatera",
+      "refreshing": "Uppdaterar…",
+      "copied": "Kopierad",
+      "copy": "Kopiera",
+      "loading": "Identifierar din IP…",
+      "error": "Kunde inte identifiera din IP. Uppdatera sidan eller försök igen om en stund."
+    },
+    "explainer": {
+      "whatTitle": "Vad är en IP-adress?",
+      "whatBody": "Varje enhet på internet bär en numerisk adress — en publik IP — som identifierar den för varje server den pratar med. IPv4 ser ut som 203.0.113.42; IPv6 är längre och använder kolon. Din IP tilldelas av din internetleverantör och ändras när du byter nätverk (hemma-Wi-Fi, mobildata, café-Wi-Fi).",
+      "exposeTitle": "Vad din IP avslöjar",
+      "exposeBody": "Enbart IP-adressen avslöjar ditt land, din region, din stad och din operatör — ibland med några kvarters noggrannhet. I kombination med User-Agent och tidsdata som varje webbläsare skickar räcker det för att annonsnätverk ska kunna fingeravtrycka och spåra dig mellan sajter. Streamingplattformar använder den för att upprätthålla regionala licenser. Censurmyndigheter använder den för geografiska blockeringar.",
+      "vpnTitle": "Hur en VPN ändrar din IP",
+      "vpnBody": "När du ansluter till en VPN lämnar all din trafik internet via VPN-serverns IP — inte din. Webbplatser ser VPN-serverns land, operatör och geografi i stället för dina riktiga. En korrekt konfigurerad VPN leder även DNS-frågor genom samma tunnel, så din internetleverantör kan inte se vilka sajter du besöker trots att den transporterar de krypterade paketen."
+    },
+    "checklist": {
+      "title": "Om du är ansluten till Doppler VPN bör den här sidan visa:",
+      "items": {
+        "item1": "En IP som inte stämmer med den du såg innan du anslöt.",
+        "item2": "Ett land som motsvarar servern du valde (t.ex. Tyskland, Nederländerna, Singapore).",
+        "item3": "En operatör listad som hostingleverantör (Hetzner, Vultr, OVH) i stället för din hemma-ISP.",
+        "item4": "Inget omnämnande av din riktiga stad eller region."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Vad används min IP-adress till?",
+        "answer": "Varje server du pratar med använder din IP för att skicka svar tillbaka, och de flesta loggar den. Den möjliggör geolokalisering (ner till stadsnivå), regional innehållslicensiering, annonsanpassning, bedrägeridetektering och — i censurerade nätverk — blockeringslistor. Anonymitet på nätet börjar med att inte avslöja det här numret direkt."
+      },
+      "q2": {
+        "question": "Är min IP-adress privat information?",
+        "answer": "Den sänds till varje webbplats du besöker, så den är inte hemlig. Men den är en personuppgift enligt GDPR och de flesta integritetslagar eftersom den kan kopplas till en individ. Behandla den som din gatuadress: inte hemligstämplad, men inget du delar ut till främlingar i onödan."
+      },
+      "q3": {
+        "question": "Hur döljer jag min IP?",
+        "answer": "En VPN är standardverktyget — den ersätter din IP med serverns. Tor döljer din IP genom flera reläer på bekostnad av hastighet. Proxytjänster döljer den enbart för webbläsartrafik. Att byta till mobildata ändrar din IP men inte din identitet. Publikt Wi-Fi delar en IP med alla i nätverket men är okrypterat."
+      },
+      "q4": {
+        "question": "Varför ser min IP olika ut på olika webbplatser?",
+        "answer": "Det borde den inte göra — om du inte sitter bakom en VPN med delad tunnling (vissa appar går genom VPN, andra genom din ISP), bakom ett företagsnätverk med flera utgångs-IP, eller ser IPv4 på en sajt och IPv6 på en annan. Vissa sajter använder externa IP-uppslagstjänster som kan returnera något olika metadata."
+      },
+      "q5": {
+        "question": "Kan jag spåras även med VPN när min IP är dold?",
+        "answer": "Ja. Webbläsarfingeravtryck (typsnitt, skärmstorlek, tillägg, canvas-rendering) identifierar enheter utan IP. Cookies och inloggningar följer dig mellan nätverk. VPN löser bara IP- och DNS-lagret; resten ligger på webbläsaren. Använd privat surfning, blockera tredjepartscookies och överväg webbläsare med skydd mot fingeravtryck."
+      },
+      "q6": {
+        "question": "Loggar Doppler min IP?",
+        "answer": "Nej. Doppler sparar inga anslutningsloggar, IP-historik eller DNS-frågor. VPN-servern ser din riktiga IP bara så länge det krävs för att dirigera trafiken — den skrivs aldrig till disk. Oberoende granskningar och en no-logs-policy är de enda meningsfulla garantierna här; ”vi lovar” räcker inte, och vi publicerar vår uppsättning."
+      },
+      "q7": {
+        "question": "Vad är ett ASN?",
+        "answer": "Ett Autonomous System Number identifierar nätoperatören som äger IP-blocket. AS7922 är Comcast; AS24940 är Hetzner; AS16509 är Amazon AWS. ASN är offentliga och låter dig avgöra om en IP tillhör en konsument-ISP, en mobiloperatör, en hostingleverantör (vanligt för VPN-utgångsnoder) eller ett företagsnätverk."
+      },
+      "q8": {
+        "question": "Varför ser min IP-position fel ut?",
+        "answer": "IP-geolokaliseringsdatabaser (MaxMind, IP2Location) är korrekta på landsnivå i ~99 % av fallen och på stadsnivå i ~70 %. De släpar efter verkligheten med veckor: ett nyligen tilldelat IP-block kan visas som den tidigare ägarens plats. VPN-servrars IP felplaceras ibland. Om din hemma-IP visar fel stad tilldelar din leverantör förmodligen block över ett helt storstadsområde."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC-läckagetest",
+      "webrtcDesc": "WebRTC kan avslöja din riktiga IP även när den här sidan visar VPN:ens. Testa det.",
+      "dnsTitle": "DNS-läckagetest",
+      "dnsDesc": "Att dölja din IP räcker inte om dina DNS-frågor fortfarande läcker.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokollet Doppler använder för att undvika att upptäckas och blockeras."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC-läckagetest — Kontrollera om din VPN döljer din riktiga IP",
+      "description": "Kostnadsfritt WebRTC-läckagetest. Upptäcker om din webbläsare läcker din riktiga IP via STUN även när en VPN är ansluten. Tar 2 sekunder. Ingen data lämnar din enhet."
+    },
+    "hero": {
+      "title": "WebRTC-läckagetest",
+      "subtitle": "Webbläsare kan avslöja din riktiga IP via WebRTC även när en VPN döljer den för webbplatser. Det här testet kontrollerar om din gör det — helt i din webbläsare, utan att någon data skickas någonstans."
+    },
+    "widget": {
+      "publicIp": "Publik IP (som webbplatser ser)",
+      "webrtcIps": "IP-adresser upptäckta via WebRTC",
+      "leakedTitle": "WebRTC läcker din IP",
+      "leakedBody": "WebRTC upptäckte en eller flera IP-adresser som skiljer sig från den publika IP-adressen. Om du använder VPN betyder det att en webbplats som använder WebRTC fortfarande kan se din riktiga adress.",
+      "safeTitle": "Ingen WebRTC-läcka upptäcktes",
+      "safeBody": "WebRTC rapporterade samma IP som den publika, eller ingen alls. Du läcker inte din riktiga adress via WebRTC just nu.",
+      "noWebrtc": "Din webbläsare har inaktiverat WebRTC eller så kunde inga adresser hittas. Det är ett säkert läge.",
+      "unknown": "Okänt",
+      "refresh": "Kör testet igen",
+      "refreshing": "Testar…",
+      "loading": "Undersöker WebRTC…",
+      "error": "Testet kunde inte köras. Uppdatera sidan och försök igen."
+    },
+    "explainer": {
+      "whatTitle": "Vad är en WebRTC-läcka?",
+      "whatBody": "WebRTC är en webbläsarfunktion för peer-to-peer-ljud, -video och -data — den används av Google Meet, Discord och många webbappar. För att etablera en P2P-anslutning använder webbläsare STUN-servrar för att ta reda på sina egna IP-adresser, inklusive lokala adresser och adresser bakom NAT. En webbplats kan be webbläsaren köra den här upptäckten i tysthet och läsa av IP-adresserna via JavaScript — helt förbi VPN:en.",
+      "howTitle": "Hur testet fungerar",
+      "howBody": "Din webbläsare skapar en fingerad RTCPeerConnection, anropar createOffer och läser av de resulterande ICE-kandidaterna. ICE-kandidater innehåller varje IP webbläsaren kan hitta — inklusive din riktiga, även när en VPN tunnlar all annan trafik. Testet körs lokalt; inget skickas till våra servrar.",
+      "fixTitle": "Så åtgärdar du en WebRTC-läcka",
+      "fixBody": "Tre alternativ: (1) Använd en VPN som proaktivt blockerar WebRTC-läckor (Dopplers iOS- och Android-appar inaktiverar WebRTC utanför tunneln). (2) Installera ett webbläsartillägg som inaktiverar WebRTC (uBlock Origin har ett alternativ för detta). (3) I Firefox: sätt media.peerconnection.enabled till false i about:config. Att inaktivera WebRTC gör att videosamtal i webbläsaren slutar fungera; använd en native-app i stället."
+    },
+    "faq": {
+      "q1": {
+        "question": "Vad är WebRTC?",
+        "answer": "WebRTC är en W3C-standard inbyggd i alla moderna webbläsare för peer-to-peer-kommunikation med ljud, video och data i realtid. Den driver Google Meet, Discord på webben, Zooms webbklient och de flesta webbläsarbaserade videochattar. Samma API:er som möjliggör P2P-samtal låter också JavaScript ta reda på adresserna i ditt lokala nätverk."
+      },
+      "q2": {
+        "question": "Varför läcker WebRTC min riktiga IP även genom en VPN?",
+        "answer": "Eftersom WebRTC-stacken arbetar under applikationslagret och frågar nätverksgränssnittet direkt via STUN. En VPN tunnlar trafik på IP-lagret men blockerar inte WebRTC:s adressupptäckt. Den läckta adressen färdas inuti den krypterade tunneln — men webbläsaren lämnar sedan över den till JavaScript på sidan, som kan skicka den vart som helst."
+      },
+      "q3": {
+        "question": "Vilka webbläsare påverkas?",
+        "answer": "Alla, med standardinställningar: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave har en inställning för WebRTC-IP-läckor som är avstängd som standard. I Firefox kan WebRTC stängas av helt via about:config. Safari på iOS är delvis åtgärdat sedan iOS 14 men inte helt."
+      },
+      "q4": {
+        "question": "Blockerar Doppler VPN WebRTC-läckor?",
+        "answer": "Ja. Våra iOS- och Android-klienter kör en lokal kill-switch som blockerar all UDP-trafik utanför tunneln, vilket hindrar STUN-upptäckten från att nå externa servrar. På datorn rekommenderar vi att kombinera VPN:en med uBlock Origins WebRTC-inställning eller att stänga av WebRTC i webbläsaren för fullt skydd."
+      },
+      "q5": {
+        "question": "Slutar webbplatser fungera om jag stänger av WebRTC?",
+        "answer": "Det stoppar webbläsarbaserade videosamtal (Meet, Zoom på webben, Discord på webben) och vissa samarbetsverktyg. Det påverkar inte vanlig surfning, streaming eller något som inte behöver peer-to-peer-anslutningar. Native-apparna för de tjänsterna är inte beroende av WebRTC."
+      },
+      "q6": {
+        "question": "Är det här testet privat?",
+        "answer": "Ja. Testet körs helt i din webbläsare med det standardiserade RTCPeerConnection-API:et. Ingen IP, inget resultat och inga metadata lämnar din enhet. Vi loggar inte ens att du körde testet."
+      }
+    },
+    "related": {
+      "ipTitle": "Vad är min IP?",
+      "ipDesc": "Se vilken IP och geografi varje webbplats ser just nu.",
+      "dnsTitle": "DNS-läckagetest",
+      "dnsDesc": "Om WebRTC är rent men DNS läcker vet webbplatser fortfarande vart du går.",
+      "censorshipTitle": "Hur VPN-censur fungerar",
+      "censorshipDesc": "Varför WebRTC- och DNS-läckor är katastrofala i begränsade nätverk."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS-läckagetest — Verifiera att din VPN:s DNS är privat",
+      "description": "Kostnadsfri guide till DNS-läckagetest. Ta reda på om dina DNS-frågor går genom VPN-tunneln eller läcker till din internetleverantör. Steg-för-steg-instruktioner och åtgärder."
+    },
+    "hero": {
+      "title": "DNS-läckagetest",
+      "subtitle": "Om dina DNS-frågor går utanför VPN-tunneln ser din internetleverantör fortfarande varje sajt du besöker — även med VPN:en ansluten. Så här kontrollerar och åtgärdar du det."
+    },
+    "widget": {
+      "title": "Rekommenderat DNS-läckagetest",
+      "description": "Vi kör ingen egen DNS-sond eftersom det kräver kontrollerade wildcard-underdomäner över flera resolvrar för att göras väl. Använd det betrodda tredjepartsverktyget nedan — det är oberoende och kräver inget konto.",
+      "primaryButton": "Öppna dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Öppna browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Klicka på ”Extended test” på dnsleaktest.com. Resultatet ska bara lista din VPN-leverantörs DNS-servrar — inte din ISP:s. Om du ser Comcast, Verizon, Vodafone eller någon annan konsument-ISP i resultaten läcker din DNS."
+    },
+    "explainer": {
+      "whatTitle": "Vad är en DNS-läcka?",
+      "whatBody": "När du skriver in en URL frågar din enhet först en DNS-server efter domänens IP-adress. Om DNS-frågan går genom VPN-tunneln ser din internetleverantör bara krypterad trafik. Om den går utanför tunneln — en DNS-läcka — ser din leverantör varje domän du besöker, trots att anslutningen som följer är krypterad. Censurerade nätverk inspekterar ofta DNS-frågor för att upprätthålla blockeringslistor, så en DNS-läcka är förödande i sådana miljöer.",
+      "causesTitle": "Vad orsakar DNS-läckor?",
+      "causesBody": "Tre vanliga orsaker: (1) VPN-klienten anger sin egen DNS-resolver men operativsystemet ignorerar den och använder resolvern som det lokala nätverket tilldelat. (2) IPv6-trafik tunnlas inte, så IPv6-DNS-frågor läcker förbi VPN:en. (3) Webbläsare som Chrome och Firefox kan använda ”smart” DNS-dirigering (DNS-over-HTTPS) som helt kringgår systemets DNS-inställningar.",
+      "fixTitle": "Så åtgärdar du en DNS-läcka",
+      "fixBody": "Använd en VPN som äger sin DNS-infrastruktur och tvingar alla DNS-frågor genom tunneln (Doppler gör det som standard på alla plattformar). Stäng av IPv6 i operativsystemets nätverksinställningar om din VPN inte stöder IPv6-tunnling. Ställ in webbläsarens DNS-over-HTTPS på samma leverantör som din VPN, eller stäng av det. På routrar: ange en integritetsvänlig resolver (Quad9, Cloudflare 1.1.1.1) som uppströms-DNS endast om du inte kör VPN på enhetsnivå."
+    },
+    "checklist": {
+      "title": "Dopplers DNS-garantier:",
+      "items": {
+        "item1": "Alla DNS-frågor tvingas genom VPN-tunneln — inga system-DNS-läckor.",
+        "item2": "IPv6 tunnlas eller blockeras, läcker aldrig.",
+        "item3": "Våra DNS-resolvrar loggar inga frågor.",
+        "item4": "Vi blockerar webbläsares försök att kringgå via DNS-over-HTTPS när kill-switchen är på."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Varför är en DNS-läcka värre än en IP-läcka?",
+        "answer": "En IP-läcka avslöjar en adress. En DNS-läcka avslöjar varje domän du besöker — varje sajt, varje API-anrop, varje analysslutpunkt — i klartext för din internetleverantör och alla på vägen. För användare i censurerade nätverk är blockeringslistor på DNS-nivå den vanligaste tillsynsmekanismen, vilket gör DNS-läckor till det fel som får folk att åka fast."
+      },
+      "q2": {
+        "question": "Hur vet jag om min DNS läcker just nu?",
+        "answer": "Kör det utökade testet på dnsleaktest.com. Det skickar flera frågor till wildcard-underdomäner och berättar vilka resolvrar som svarade. Om du ser din ISP:s namn (eller något namn som inte matchar din VPN-leverantör) läcker din DNS. Upprepa testet med och utan VPN för att bekräfta."
+      },
+      "q3": {
+        "question": "Läcker Doppler VPN DNS?",
+        "answer": "Nej. Vi skickar våra egna resolvrar genom tunneln på alla plattformar och blockerar återfall till systemets DNS. Vi stänger också av webbläsares DNS-over-HTTPS-kringgående när vår kill-switch är aktiv. Oberoende läckagetester på dnsleaktest.com och browserleaks.com bekräftar detta — verifiera gärna själv."
+      },
+      "q4": {
+        "question": "Vad är DNS-over-HTTPS (DoH) och hur hänger det ihop med läckor?",
+        "answer": "DoH är ett protokoll som skickar DNS-frågor över en krypterad HTTPS-anslutning och kringgår systemets DNS-resolver. Webbläsare som Chrome och Firefox använder DoH som standard och skickar ofta frågorna till Google eller Cloudflare oavsett din VPN. Det är en läcka om inte din VPN uttryckligen hanterar det. Doppler fångar upp DoH-försök och leder dem genom tunneln."
+      },
+      "q5": {
+        "question": "Behöver jag en separat DNS-tjänst om jag använder VPN?",
+        "answer": "Nej. En välkonfigurerad VPN sköter DNS åt dig. En separat DNS-tjänst (Quad9, Cloudflare) ovanpå en VPN kan faktiskt orsaka läckor om operativsystemet skickar DNS-frågan utanför tunneln. Lita på VPN:ens resolvrar — om du inte litar på dem, byt VPN."
+      },
+      "q6": {
+        "question": "Hur ofta bör jag testa för DNS-läckor?",
+        "answer": "Efter varje VPN-installation eller OS-uppdatering. Tunnlingskonfigurationer kan gå sönder i tysthet — en systemuppdatering kan flytta din nätverksstack till en läckande väg utan att säga till. Kvartalsvisa kontroller är en rimlig rytm för vanliga användare; veckovisa om du bor i ett hårt censurerat nätverk där priset för en läcka är högt."
+      }
+    },
+    "related": {
+      "ipTitle": "Vad är min IP?",
+      "ipDesc": "Se exakt vad din VPN döljer för webbplatser.",
+      "webrtcTitle": "WebRTC-läckagetest",
+      "webrtcDesc": "Dold IP, dold DNS — men en WebRTC-läcka avslöjar dig ändå.",
+      "bypassTitle": "Kringgå internetcensur",
+      "bypassDesc": "DNS-läckor är så blockeringslistor fångar dig. Läs hur Doppler undviker dem."
     }
   }
 }
