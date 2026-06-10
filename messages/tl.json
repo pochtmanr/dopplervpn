@@ -1374,6 +1374,7 @@
     "promoError": "Hindi wastong promo code"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Suriin ang seguridad ng iyong web gamit ang aming libreng privacy tools",
     "title": "Paano Pinoprotektahan ng Doppler ang Trapiko Mo",
     "subtitle": "Ang koneksyon mo ay encrypted at dina-route sa network ng Doppler. Walang nilo-log.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Bakit kami humihingi ng zero personal info.",
       "vlessTitle": "Tungkol sa VLESS-Reality",
       "vlessDesc": "Ang protocol sa likod ng encryption ng Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Libreng Privacy Tools — Doppler VPN",
+      "description": "Libre at iisa ang gamit na mga tool para subukan ang iyong privacy: IP checker, WebRTC leak test, DNS leak test. Walang tracking, walang email."
+    },
+    "title": "Libreng privacy tools",
+    "subtitle": "Tatlong mabilis na pagsusuri para sa mga pinakamahalagang leak.",
+    "tools": {
+      "ipChecker": {
+        "title": "Ano ang IP ko?",
+        "description": "Tingnan ang pampublikong IP, bansa, at ISP na inilalantad ng iyong traffic ngayon mismo.",
+        "cta": "Patakbuhin ang IP check"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC leak test",
+        "description": "Maaaring ibunyag ng WebRTC ang totoo mong IP kahit may VPN. Suriin kung ganoon ang sa iyo.",
+        "cta": "Patakbuhin ang WebRTC test"
+      },
+      "dnsLeak": {
+        "title": "DNS leak test",
+        "description": "Kung lumalampas sa VPN tunnel ang iyong mga DNS query, nakikita pa rin ng iyong ISP ang bawat site na binibisita mo.",
+        "cta": "Patakbuhin ang DNS test"
+      }
+    },
+    "cta": {
+      "title": "May nakitang leak ang mga tool?",
+      "description": "Ang VLESS-Reality tunnel ng Doppler ay nagruruta ng IP traffic at mga DNS query sa naka-encrypt na channel, na may built-in na pagharang sa WebRTC at IPv6 leak.",
+      "button": "Subukan ang Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Ano ang IP ko? — Libreng IP at ISP Lookup",
+      "description": "Libreng IP address checker — agad makita ang iyong pampublikong IP, bansa, rehiyon, lungsod, at ISP. Walang tracking. Walang email. Gumagana sa iPhone, Android, Mac, Windows."
+    },
+    "hero": {
+      "title": "Ano ang IP ko?",
+      "subtitle": "Ang iyong pampublikong IP address ayon sa nakikita ng bawat website na binibisita mo — kasama ang heograpiya at ISP na nakakabit dito. I-refresh pagkatapos kumonekta sa VPN para matiyak na nagbago ito."
+    },
+    "widget": {
+      "yourIp": "Ang iyong IP address",
+      "country": "Bansa",
+      "region": "Rehiyon",
+      "city": "Lungsod",
+      "isp": "Internet provider",
+      "asn": "ASN",
+      "unknown": "Hindi alam",
+      "refresh": "I-refresh",
+      "refreshing": "Nire-refresh…",
+      "copied": "Nakopya",
+      "copy": "Kopyahin",
+      "loading": "Tinutukoy ang iyong IP…",
+      "error": "Hindi matukoy ang iyong IP. I-refresh ang pahina o subukan ulit mamaya."
+    },
+    "explainer": {
+      "whatTitle": "Ano ang IP address?",
+      "whatBody": "Bawat device sa internet ay may numerong address — isang pampublikong IP — na nagpapakilala rito sa bawat server na kausap nito. Ang IPv4 ay mukhang 203.0.113.42; mas mahaba ang IPv6 at gumagamit ng colon. Ang iyong IP ay itinatalaga ng ISP at nagbabago kapag nagpalit ka ng network (Wi-Fi sa bahay, mobile data, Wi-Fi sa café).",
+      "exposeTitle": "Ano ang inilalantad ng iyong IP",
+      "exposeBody": "Ang IP lang ay nagbubunyag na ng iyong bansa, rehiyon, lungsod, at ISP — minsan hanggang sa ilang kanto lang ang layo. Kapag pinagsama sa User-Agent at timing data na ipinapadala ng bawat browser, sapat na ito para makabuo ang mga ad network ng fingerprint mo at masundan ka sa iba't ibang site. Ginagamit ito ng mga streaming platform para ipatupad ang panrehiyong lisensya. Ginagamit ito ng mga censor para sa pagharang ayon sa lokasyon.",
+      "vpnTitle": "Paano binabago ng VPN ang iyong IP",
+      "vpnBody": "Kapag kumonekta ka sa VPN, lumalabas sa internet ang lahat ng iyong traffic gamit ang IP ng VPN server — hindi ang sa iyo. Nakikita ng mga website ang bansa, ISP, at heograpiya ng VPN server sa halip na ang totoo mong impormasyon. Ang maayos na naka-configure na VPN ay nagruruta rin ng mga DNS query sa parehong tunnel, kaya hindi makikita ng iyong ISP kung anong mga site ang binibisita mo kahit ito ang nagdadala ng mga naka-encrypt na packet."
+    },
+    "checklist": {
+      "title": "Kung nakakonekta ka sa Doppler VPN, dapat ipakita ng pahinang ito:",
+      "items": {
+        "item1": "IP na hindi tugma sa nakita mo bago kumonekta.",
+        "item2": "Bansang tumutugma sa server na pinili mo (hal. Germany, Netherlands, Singapore).",
+        "item3": "ISP na nakalista bilang hosting provider (Hetzner, Vultr, OVH) sa halip na ang iyong ISP sa bahay.",
+        "item4": "Walang banggit sa totoo mong lungsod o rehiyon."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Saan ginagamit ang aking IP address?",
+        "answer": "Bawat server na kausap mo ay gumagamit ng iyong IP para magpadala ng sagot pabalik, at karamihan ay nagre-record nito. Nagbibigay-daan ito sa geolocation (hanggang lungsod), panrehiyong lisensya ng content, pag-personalize ng ads, pagtukoy ng panloloko, at — sa mga censored na network — pagpapatupad ng blocklist. Nagsisimula ang online anonymity sa hindi direktang pagbubunyag ng numerong ito."
+      },
+      "q2": {
+        "question": "Pribadong impormasyon ba ang aking IP address?",
+        "answer": "Ipinapadala ito sa bawat website na binibisita mo, kaya hindi ito sekreto. Pero personal data ito sa ilalim ng GDPR at karamihan ng batas sa privacy dahil maiuugnay ito sa isang tao. Ituring ito tulad ng pangalan ng kalye mo: hindi classified, pero hindi mo basta ibinibigay sa mga estranghero."
+      },
+      "q3": {
+        "question": "Paano ko itatago ang aking IP?",
+        "answer": "Ang VPN ang karaniwang kasangkapan — pinapalitan nito ang iyong IP ng sa server. Itinatago ng Tor ang iyong IP sa maraming relay kapalit ng bilis. Itinatago ito ng mga proxy service para lang sa browser traffic. Ang paglipat sa mobile data ay nagpapalit ng IP mo, pero hindi ng pagkakakilanlan mo. Ang pampublikong Wi-Fi ay nagbabahagi ng isang IP sa lahat sa network pero hindi naka-encrypt."
+      },
+      "q4": {
+        "question": "Bakit magkaiba ang aking IP sa iba't ibang website?",
+        "answer": "Hindi dapat — maliban kung nasa likod ka ng VPN na may split tunneling (ang ilang app ay dumadaan sa VPN, ang iba sa ISP mo), nasa corporate network na may maraming exit IP, o nakakakita ng IPv4 sa isang site at IPv6 sa iba. May mga site na gumagamit ng third-party na IP-lookup API na maaaring magbalik ng bahagyang magkaibang metadata."
+      },
+      "q5": {
+        "question": "Masusundan pa rin ba ako kahit may VPN kung nakatago ang aking IP?",
+        "answer": "Oo. Kinikilala ng browser fingerprinting (mga font, laki ng screen, plugin, canvas rendering) ang mga device kahit walang IP. Sinusundan ka ng cookies at login sa iba't ibang network. Ang VPN ay sumasagot lang sa IP at DNS layer; nasa browser ang iba. Gumamit ng private browsing, harangan ang third-party cookies, at isaalang-alang ang anti-fingerprinting browser para sa buong proteksyon."
+      },
+      "q6": {
+        "question": "Nilo-log ba ng Doppler ang aking IP?",
+        "answer": "Hindi. Walang iniimbak ang Doppler na connection log, kasaysayan ng IP, o mga DNS query. Nakikita lang ng VPN server ang totoo mong IP habang nirururuta ang traffic — hindi ito kailanman naisusulat sa disk. Ang mga independiyenteng audit at no-logs policy lang ang makabuluhang garantiya rito; hindi sapat ang \"pangako namin,\" at inilalathala namin ang aming setup."
+      },
+      "q7": {
+        "question": "Ano ang ASN?",
+        "answer": "Tinutukoy ng Autonomous System Number ang network operator na may-ari ng IP block. Ang AS7922 ay Comcast; ang AS24940 ay Hetzner; ang AS16509 ay Amazon AWS. Pampubliko ang mga ASN at masasabi nito kung ang isang IP ay sa residential ISP, mobile carrier, hosting provider (kadalasang VPN exit node), o corporate network."
+      },
+      "q8": {
+        "question": "Bakit mali ang lokasyon ng aking IP?",
+        "answer": "Ang mga IP geolocation database (MaxMind, IP2Location) ay tama sa antas ng bansa nang ~99% at sa antas ng lungsod nang ~70%. Linggo-linggo silang nahuhuli sa katotohanan: ang bagong italagang IP block ay maaaring lumabas bilang lokasyon ng dating may-ari. Minsan ding mali ang lokasyon ng mga IP ng VPN server. Kung mali ang lungsod na ipinapakita ng IP mo sa bahay, malamang na ikinakalat ng ISP mo ang mga block sa buong metro area."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC leak test",
+      "webrtcDesc": "Maaaring ibunyag ng WebRTC ang totoo mong IP kahit IP ng VPN ang ipinapakita ng pahinang ito. Subukan.",
+      "dnsTitle": "DNS leak test",
+      "dnsDesc": "Hindi sapat ang pagtatago ng IP kung tumutulo pa rin ang iyong mga DNS query.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Ang protocol na ginagamit ng Doppler para hindi matukoy at maharang."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC Leak Test — Suriin Kung Itinatago ng VPN ang Totoo Mong IP",
+      "description": "Libreng WebRTC leak test. Tinutukoy kung tumutulo ang totoo mong IP sa browser sa pamamagitan ng STUN kahit nakakonekta ang VPN. Tapos sa 2 segundo. Walang data na umaalis sa device."
+    },
+    "hero": {
+      "title": "WebRTC leak test",
+      "subtitle": "Maaaring ibunyag ng mga browser ang totoo mong IP sa pamamagitan ng WebRTC kahit itinatago ito ng VPN sa mga website. Sinusuri ng test na ito kung ganoon ang sa iyo — buo sa iyong browser, walang ipinapadalang data kahit saan."
+    },
+    "widget": {
+      "publicIp": "Pampublikong IP (nakikita ng mga website)",
+      "webrtcIps": "Mga IP na natuklasan ng WebRTC",
+      "leakedTitle": "Tumutulo ang iyong IP sa WebRTC",
+      "leakedBody": "Nakakita ang WebRTC ng isa o higit pang IP na iba sa pampublikong IP. Kung naka-VPN ka, ibig sabihin nito ay nakikita pa rin ng website na gumagamit ng WebRTC ang totoo mong address.",
+      "safeTitle": "Walang natuklasang WebRTC leak",
+      "safeBody": "Iniulat ng WebRTC ang parehong IP gaya ng pampubliko, o walang IP. Hindi tumutulo ang totoo mong address sa WebRTC ngayon.",
+      "noWebrtc": "Naka-disable ang WebRTC sa iyong browser o walang na-resolve na address. Ligtas na kalagayan iyon.",
+      "unknown": "Hindi alam",
+      "refresh": "Ulitin ang test",
+      "refreshing": "Sinusubok…",
+      "loading": "Sinusuri ang WebRTC…",
+      "error": "Hindi tumakbo ang test. I-refresh ang pahina at subukan ulit."
+    },
+    "explainer": {
+      "whatTitle": "Ano ang WebRTC leak?",
+      "whatBody": "Ang WebRTC ay feature ng browser para sa peer-to-peer na audio, video, at data — ginagamit ng Google Meet, Discord, at maraming web app. Para makabuo ng P2P na koneksyon, gumagamit ang browser ng mga STUN server para tuklasin ang sarili nitong mga IP address, kasama ang mga lokal at nasa likod ng NAT. Maaaring hilingin ng isang website sa browser na tahimik na patakbuhin ang pagtuklas na ito at basahin ang mga nakuhang IP sa JavaScript — lampas nang tuluyan sa VPN.",
+      "howTitle": "Paano gumagana ang test",
+      "howBody": "Gumagawa ang iyong browser ng pekeng RTCPeerConnection, tumatawag ng createOffer, at binabasa ang mga nabuong ICE candidate. Kasama sa mga ICE candidate ang bawat IP na mahahanap ng browser — pati ang totoo mong IP, kahit tinutunnel ng VPN ang lahat ng ibang traffic. Lokal na tumatakbo ang test; walang ipinapadala sa aming mga server.",
+      "fixTitle": "Paano ayusin ang WebRTC leak",
+      "fixBody": "Tatlong opsyon: (1) Gumamit ng VPN na aktibong humaharang sa WebRTC leak (dini-disable ng mga iOS at Android app ng Doppler ang WebRTC sa labas ng tunnel). (2) Mag-install ng browser extension na nagdi-disable ng WebRTC (may opsyon ang uBlock Origin para rito). (3) Sa Firefox, itakda ang media.peerconnection.enabled sa false sa about:config. Masisira ng pag-disable ng WebRTC ang mga video call sa browser; gumamit na lang ng native app."
+    },
+    "faq": {
+      "q1": {
+        "question": "Ano ang WebRTC?",
+        "answer": "Ang WebRTC ay pamantayan ng W3C na nakapaloob sa bawat modernong browser para sa real-time na peer-to-peer na komunikasyon ng audio, video, at data. Pinapatakbo nito ang Google Meet, Discord web, web client ng Zoom, at karamihan ng video chat sa browser. Ang parehong mga API na nagpapahintulot sa P2P na tawag ay nagpapahintulot din sa JavaScript na tuklasin ang iyong mga lokal na network address."
+      },
+      "q2": {
+        "question": "Bakit tumutulo sa WebRTC ang totoo kong IP kahit may VPN?",
+        "answer": "Dahil gumagana ang WebRTC stack sa ilalim ng application layer at direktang tinatanong ang network interface sa STUN. Tinutunnel ng VPN ang traffic sa IP layer pero hindi hinaharangan ang mga tawag ng WebRTC sa pagtuklas ng address. Ang tumulong address ay bumibiyahe sa loob ng naka-encrypt na tunnel — pero ibinibigay ito ng browser sa JavaScript ng pahina, na maaaring magpadala nito kahit saan."
+      },
+      "q3": {
+        "question": "Anong mga browser ang apektado?",
+        "answer": "Lahat sa default na setting: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. May setting ang Brave laban sa WebRTC IP leak na naka-off bilang default. Sa Firefox, maaaring tuluyang i-disable ang WebRTC sa about:config. Bahagyang naayos ang Safari sa iOS mula iOS 14 pero hindi pa tuluyang sarado."
+      },
+      "q4": {
+        "question": "Hinaharang ba ng Doppler VPN ang WebRTC leak?",
+        "answer": "Oo. Ang aming mga iOS at Android client ay nagpapatakbo ng lokal na kill-switch na humaharang sa lahat ng UDP traffic sa labas ng tunnel, kaya hindi nakakarating sa mga panlabas na server ang STUN discovery. Sa desktop, inirerekomenda naming ipares ang VPN sa WebRTC toggle ng uBlock Origin o pag-disable sa antas ng browser para sa buong saklaw."
+      },
+      "q5": {
+        "question": "Masisira ba ng pag-disable ng WebRTC ang mga website?",
+        "answer": "Masisira nito ang mga video call sa browser (Meet, Zoom web, Discord web) at ilang collaborative tool. Hindi nito apektado ang karaniwang pag-browse, streaming, o anumang hindi nangangailangan ng peer-to-peer na koneksyon. Hindi umaasa sa WebRTC ang mga native app ng mga serbisyong iyon."
+      },
+      "q6": {
+        "question": "Pribado ba ang test na ito?",
+        "answer": "Oo. Tumatakbo ang test nang buo sa iyong browser gamit ang karaniwang RTCPeerConnection API. Walang IP, resulta, o metadata na umaalis sa iyong device. Hindi rin namin nilo-log na pinatakbo mo ang test."
+      }
+    },
+    "related": {
+      "ipTitle": "Ano ang IP ko?",
+      "ipDesc": "Tingnan ang IP at heograpiyang nakikita ng bawat website ngayon mismo.",
+      "dnsTitle": "DNS leak test",
+      "dnsDesc": "Kung malinis ang WebRTC pero tumutulo ang DNS, alam pa rin ng mga site kung saan ka pumupunta.",
+      "censorshipTitle": "Paano gumagana ang censorship sa VPN",
+      "censorshipDesc": "Bakit sakuna ang WebRTC at DNS leak sa mga pinaghihigpitang network."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS Leak Test — Tiyaking Pribado ang DNS ng Iyong VPN",
+      "description": "Libreng gabay sa DNS leak test. Alamin kung dumadaan sa VPN tunnel ang iyong mga DNS query o tumutulo sa ISP mo. May sunud-sunod na tagubilin at solusyon."
+    },
+    "hero": {
+      "title": "DNS leak test",
+      "subtitle": "Kung lumalampas sa VPN tunnel ang iyong mga DNS query, nakikita pa rin ng iyong internet provider ang bawat site na binibisita mo — kahit nakakonekta ang VPN. Ganito ang pagsusuri at pag-aayos."
+    },
+    "widget": {
+      "title": "Inirerekomendang DNS leak test",
+      "description": "Hindi kami nagpapatakbo ng sariling DNS probe dahil ang mahusay na paggawa nito ay nangangailangan ng kontroladong wildcard subdomain sa maraming resolver. Gamitin ang mapagkakatiwalaang third-party na tool sa ibaba — independiyente ito at hindi nangangailangan ng account.",
+      "primaryButton": "Buksan ang dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Buksan ang browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "I-click ang \"Extended test\" sa dnsleaktest.com. Dapat ilista lang ng resulta ang (mga) DNS server ng iyong VPN provider — hindi ang ISP mo. Kung makikita mo ang Comcast, Verizon, Vodafone, o iba pang consumer ISP sa mga resulta, tumutulo ang DNS mo."
+    },
+    "explainer": {
+      "whatTitle": "Ano ang DNS leak?",
+      "whatBody": "Kapag nag-type ka ng URL, tinatanong muna ng iyong device ang DNS server kung ano ang IP address ng domain na iyon. Kung dumadaan sa VPN tunnel ang DNS query, naka-encrypt na traffic lang ang nakikita ng iyong ISP. Kung lumalampas ito sa tunnel — isang DNS leak — nakikita ng iyong ISP ang bawat domain na binibisita mo, kahit naka-encrypt ang kasunod na koneksyon. Madalas siyasatin ng mga censored na network ang mga DNS query para ipatupad ang blocklist, kaya nakamamatay ang DNS leak sa mga ganoong kapaligiran.",
+      "causesTitle": "Ano ang sanhi ng DNS leak?",
+      "causesBody": "Tatlong karaniwang sanhi: (1) Itinatakda ng VPN client ang sarili nitong DNS resolver pero binabalewala ito ng OS at ginagamit ang resolver na itinalaga ng lokal na network. (2) Hindi tinutunnel ang IPv6 traffic, kaya tumutulo ang mga IPv6 DNS query palibot sa VPN. (3) Ang mga browser tulad ng Chrome at Firefox ay maaaring gumamit ng \"matalinong\" DNS routing (DNS-over-HTTPS) na tuluyang lumalampas sa mga DNS setting ng system.",
+      "fixTitle": "Paano ayusin ang DNS leak",
+      "fixBody": "Gumamit ng VPN na may sariling DNS infrastructure at pinipilit ang lahat ng DNS query sa tunnel (ginagawa ito ng Doppler bilang default sa bawat platform). I-disable ang IPv6 sa mga network setting ng iyong OS kung hindi sinusuportahan ng VPN mo ang IPv6 tunneling. Sa browser, itakda ang DNS-over-HTTPS sa parehong provider ng iyong VPN, o i-disable ito. Sa mga router, itakda lang ang upstream DNS sa resolver na gumagalang sa privacy (Quad9, Cloudflare 1.1.1.1) kung hindi ka nagpapatakbo ng VPN sa antas ng device."
+    },
+    "checklist": {
+      "title": "Mga garantiya ng Doppler sa DNS:",
+      "items": {
+        "item1": "Lahat ng DNS query ay pinipilit sa VPN tunnel — walang leak sa system DNS.",
+        "item2": "Ang IPv6 ay tinutunnel o hinaharang, hindi kailanman tumutulo.",
+        "item3": "Hindi nilo-log ng aming mga DNS resolver ang mga query.",
+        "item4": "Hinaharang namin ang mga pagtatangkang lumampas gamit ang DNS-over-HTTPS mula sa mga browser kapag naka-on ang kill-switch."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Bakit mas masama ang DNS leak kaysa IP leak?",
+        "answer": "Isang address ang ibinubunyag ng IP leak. Ibinubunyag ng DNS leak ang bawat domain na binibisita mo — bawat site, bawat API call, bawat analytics endpoint — sa plain text sa iyong ISP at kahit sino sa daan. Para sa mga user sa censored na network, ang blocklist sa antas ng DNS ang pinakakaraniwang paraan ng pagpapatupad, kaya ang DNS leak ang pagkakamaling nagpapahuli sa mga tao."
+      },
+      "q2": {
+        "question": "Paano ko malalaman kung tumutulo ang DNS ko ngayon?",
+        "answer": "Patakbuhin ang extended test sa dnsleaktest.com. Nagpapadala ito ng ilang query sa mga wildcard subdomain at sinasabi kung aling mga resolver ang sumagot. Kung makikita mo ang pangalan ng iyong ISP (o anumang pangalang hindi tugma sa iyong VPN provider), tumutulo ang DNS. Ulitin ang test nang may VPN at wala para makumpirma."
+      },
+      "q3": {
+        "question": "Tumutulo ba ang DNS ng Doppler VPN?",
+        "answer": "Hindi. Itinutulak namin ang sarili naming mga resolver sa tunnel sa bawat platform at hinaharang ang pagbalik sa system DNS. Dini-disable rin namin ang DNS-over-HTTPS bypass ng mga browser kapag aktibo ang aming kill-switch. Kinukumpirma ito ng mga independiyenteng test sa dnsleaktest.com at browserleaks.com — malayang patunayan."
+      },
+      "q4": {
+        "question": "Ano ang DNS-over-HTTPS (DoH) at ano ang kaugnayan nito sa mga leak?",
+        "answer": "Ang DoH ay protocol na nagpapadala ng mga DNS query sa naka-encrypt na HTTPS na koneksyon, lampas sa system DNS resolver. Ginagamit ng mga browser tulad ng Chrome at Firefox ang DoH bilang default, na madalas nagruruta ng mga query sa Google o Cloudflare anuman ang iyong VPN. Leak ito maliban kung tahasang hinahawakan ng VPN mo. Hinaharang ng Doppler ang mga pagtatangkang DoH at nirururuta ang mga ito sa tunnel."
+      },
+      "q5": {
+        "question": "Kailangan ko ba ng hiwalay na DNS service kung gumagamit ako ng VPN?",
+        "answer": "Hindi. Inaasikaso ng maayos na naka-configure na VPN ang DNS para sa iyo. Ang paggamit ng hiwalay na DNS service (Quad9, Cloudflare) sa ibabaw ng VPN ay maaari pa ngang magdulot ng leak kung irururuta ng OS ang DNS query palabas ng tunnel. Magtiwala sa mga resolver ng VPN — kung hindi ka nagtitiwala, gumamit ng ibang VPN."
+      },
+      "q6": {
+        "question": "Gaano kadalas ako dapat mag-test ng DNS leak?",
+        "answer": "Pagkatapos ng bawat setup ng VPN o update ng OS. Maaaring masira nang tahimik ang tunneling configuration — maaaring ilipat ng system update ang iyong network stack sa tumutulong daan nang walang abiso. Makatuwirang ritmo ang quarterly check para sa mga regular na user; lingguhan kung nakatira ka sa matinding censored na network kung saan mataas ang kapalit ng leak."
+      }
+    },
+    "related": {
+      "ipTitle": "Ano ang IP ko?",
+      "ipDesc": "Tingnan nang eksakto kung ano ang itinatago ng iyong VPN sa mga website.",
+      "webrtcTitle": "WebRTC leak test",
+      "webrtcDesc": "Nakatago ang IP, nakatago ang DNS, pero inilalantad ka pa rin ng WebRTC leak.",
+      "bypassTitle": "Lampasan ang censorship sa internet",
+      "bypassDesc": "Sa DNS leak ka nahuhuli ng mga blocklist. Basahin kung paano ito iniiwasan ng Doppler."
     }
   },
   "vlessVpnAndroid": {
