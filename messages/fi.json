@@ -1374,6 +1374,7 @@
     "promoError": "Virheellinen kampanjakoodi"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Tarkista verkkoturvallisuutesi ilmaisilla yksityisyystyökaluillamme",
     "title": "Miten Doppler VPN suojaa liikenteesi",
     "subtitle": "Yhteytesi salataan ja reititetään Dopplerin reunaverkon kautta. Mitään ei kirjata.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Miksi emme kysy henkilökohtaisia tietoja.",
       "vlessTitle": "Tietoa VLESS-Reality:",
       "vlessDesc": "Protokolla Dopplerin salauksen takana."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Ilmaiset yksityisyystyökalut — Doppler VPN",
+      "description": "Ilmaisia, yhteen tarkoitukseen tehtyjä työkaluja yksityisyytesi testaamiseen: IP-tarkistus, WebRTC-vuototesti, DNS-vuototesti. Ei seurantaa, ei sähköpostia."
+    },
+    "title": "Ilmaiset yksityisyystyökalut",
+    "subtitle": "Kolme nopeaa tarkistusta tärkeimmille vuodoille.",
+    "tools": {
+      "ipChecker": {
+        "title": "Mikä on IP-osoitteeni?",
+        "description": "Katso, minkä julkisen IP:n, maan ja operaattorin liikenteesi paljastaa juuri nyt.",
+        "cta": "Suorita IP-tarkistus"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC-vuototesti",
+        "description": "WebRTC voi paljastaa oikean IP-osoitteesi jopa VPN:n läpi. Tarkista, tekeekö selaimesi niin.",
+        "cta": "Suorita WebRTC-testi"
+      },
+      "dnsLeak": {
+        "title": "DNS-vuototesti",
+        "description": "Jos DNS-kyselysi ohittavat VPN-tunnelin, operaattorisi näkee yhä jokaisen sivuston, jolla käyt.",
+        "cta": "Suorita DNS-testi"
+      }
+    },
+    "cta": {
+      "title": "Löysivätkö työkalut vuodon?",
+      "description": "Dopplerin VLESS-Reality-tunneli ohjaa sekä IP-liikenteen että DNS-kyselyt salatun kanavan kautta, ja siinä on sisäänrakennettu WebRTC- ja IPv6-vuotojen esto.",
+      "button": "Kokeile Doppler VPN:ää"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Mikä on IP-osoitteeni? — Ilmainen IP- ja operaattorihaku",
+      "description": "Ilmainen IP-osoitteen tarkistus — näe heti julkinen IP:si, maa, alue, kaupunki ja operaattori. Ei seurantaa. Ei sähköpostia. Toimii iPhonella, Androidilla, Macilla ja Windowsilla."
+    },
+    "hero": {
+      "title": "Mikä on IP-osoitteeni?",
+      "subtitle": "Julkinen IP-osoitteesi sellaisena kuin jokainen vierailemasi sivusto sen näkee — sekä siihen liittyvä maantiede ja operaattori. Päivitä VPN-yhteyden jälkeen varmistaaksesi, että vaihto onnistui."
+    },
+    "widget": {
+      "yourIp": "IP-osoitteesi",
+      "country": "Maa",
+      "region": "Alue",
+      "city": "Kaupunki",
+      "isp": "Internetoperaattori",
+      "asn": "ASN",
+      "unknown": "Tuntematon",
+      "refresh": "Päivitä",
+      "refreshing": "Päivitetään…",
+      "copied": "Kopioitu",
+      "copy": "Kopioi",
+      "loading": "Tunnistetaan IP-osoitettasi…",
+      "error": "IP-osoitettasi ei voitu tunnistaa. Lataa sivu uudelleen tai yritä hetken kuluttua."
+    },
+    "explainer": {
+      "whatTitle": "Mikä on IP-osoite?",
+      "whatBody": "Jokainen internetin laite kantaa numeerista osoitetta — julkista IP:tä — joka tunnistaa sen jokaiselle palvelimelle, jonka kanssa se viestii. IPv4 näyttää tältä: 203.0.113.42; IPv6 on pidempi ja käyttää kaksoispisteitä. Operaattorisi määrittää IP:si, ja se vaihtuu verkkoa vaihtaessa (kodin Wi-Fi, mobiilidata, kahvilan Wi-Fi).",
+      "exposeTitle": "Mitä IP-osoitteesi paljastaa",
+      "exposeBody": "Pelkkä IP paljastaa maasi, alueesi, kaupunkisi ja operaattorisi — joskus muutaman korttelin tarkkuudella. Yhdistettynä User-Agentiin ja ajoitustietoihin, joita jokainen selain lähettää, se riittää mainosverkostoille sormenjälkesi luomiseen ja seuraamiseesi sivustojen välillä. Suoratoistopalvelut käyttävät sitä aluelisenssien valvontaan. Sensuroijat maantieteellisiin estoihin.",
+      "vpnTitle": "Miten VPN muuttaa IP-osoitteesi",
+      "vpnBody": "Kun yhdistät VPN:ään, kaikki liikenteesi lähtee internetiin VPN-palvelimen IP:llä — ei omallasi. Sivustot näkevät VPN-palvelimen maan, operaattorin ja maantieteen oikeiden tietojesi sijaan. Oikein määritetty VPN ohjaa myös DNS-kyselyt saman tunnelin läpi, joten operaattorisi ei näe, millä sivustoilla käyt, vaikka se kuljettaa salatut paketit."
+    },
+    "checklist": {
+      "title": "Jos olet yhteydessä Doppler VPN:ään, tämän sivun pitäisi näyttää:",
+      "items": {
+        "item1": "IP, joka ei vastaa ennen yhdistämistä näkemääsi.",
+        "item2": "Maa, joka vastaa valitsemaasi palvelinta (esim. Saksa, Alankomaat, Singapore).",
+        "item3": "Operaattori, joka on listattu hosting-yhtiönä (Hetzner, Vultr, OVH) eikä kotioperaattorinasi.",
+        "item4": "Ei mitään mainintaa oikeasta kaupungistasi tai alueestasi."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Mihin IP-osoitettani käytetään?",
+        "answer": "Jokainen palvelin, jonka kanssa viestit, käyttää IP:täsi vastausten lähettämiseen, ja useimmat kirjaavat sen. Se mahdollistaa paikannuksen (kaupunkitasolle asti), alueelliset sisältölisenssit, mainosten personoinnin, petosten tunnistuksen ja — sensuroiduissa verkoissa — estolistojen valvonnan. Verkkoanonymiteetti alkaa siitä, ettei tätä numeroa paljasteta suoraan."
+      },
+      "q2": {
+        "question": "Onko IP-osoitteeni yksityistä tietoa?",
+        "answer": "Se lähetetään jokaiselle vierailemallesi sivustolle, joten se ei ole salaisuus. Mutta se on GDPR:n ja useimpien yksityisyyslakien mukaan henkilötieto, koska se voidaan yhdistää yksittäiseen henkilöön. Kohtele sitä kuin kadunnimeäsi: ei salainen, mutta et anna sitä vieraille noin vain."
+      },
+      "q3": {
+        "question": "Miten piilotan IP-osoitteeni?",
+        "answer": "VPN on vakiotyökalu — se korvaa IP:si palvelimen IP:llä. Tor piilottaa IP:si useiden välityspisteiden kautta nopeuden kustannuksella. Välityspalvelut piilottavat sen vain selainliikenteeltä. Mobiilidataan vaihtaminen muuttaa IP:si, mutta ei henkilöllisyyttäsi. Julkinen Wi-Fi jakaa yhden IP:n kaikkien verkossa olevien kanssa, mutta on salaamaton."
+      },
+      "q4": {
+        "question": "Miksi IP:ni näyttää erilaiselta eri sivustoilla?",
+        "answer": "Ei pitäisi — ellet ole jaetun tunneloinnin VPN:n takana (osa sovelluksista kulkee VPN:n, osa operaattorin kautta), yritysverkossa, jossa on useita lähtö-IP:itä, tai näe IPv4:ää yhdellä sivustolla ja IPv6:ta toisella. Jotkin sivustot käyttävät kolmansien osapuolten IP-haku-API:ja, jotka voivat palauttaa hieman erilaisia metatietoja."
+      },
+      "q5": {
+        "question": "Voiko minua seurata VPN:stä huolimatta, jos IP:ni on piilossa?",
+        "answer": "Kyllä. Selaimen sormenjälki (fontit, näytön koko, lisäosat, canvas-renderöinti) tunnistaa laitteet ilman IP:tä. Evästeet ja kirjautumiset seuraavat sinua verkkojen välillä. VPN ratkaisee vain IP- ja DNS-kerroksen; loput riippuu selaimesta. Käytä yksityistä selausta, estä kolmansien osapuolten evästeet ja harkitse sormenjälkiä estäviä selaimia täyttä suojaa varten."
+      },
+      "q6": {
+        "question": "Kirjaako Doppler IP-osoitteeni?",
+        "answer": "Ei. Doppler ei tallenna yhteyslokeja, IP-historiaa eikä DNS-kyselyitä. VPN-palvelin näkee oikean IP:si vain liikenteen reitittämiseen tarvittavan ajan — sitä ei koskaan kirjoiteta levylle. Ainoat merkitykselliset takeet ovat riippumattomat auditoinnit ja lokiton käytäntö; \"lupaamme\" ei riitä, ja me julkaisemme infrastruktuurimme rakenteen."
+      },
+      "q7": {
+        "question": "Mikä on ASN?",
+        "answer": "Autonomisen järjestelmän numero tunnistaa verkko-operaattorin, joka omistaa IP-lohkon. AS7922 on Comcast; AS24940 on Hetzner; AS16509 on Amazon AWS. ASN:t ovat julkisia ja kertovat, kuuluuko IP kotioperaattorille, mobiilioperaattorille, hosting-yhtiölle (yleensä VPN:n poistumissolmut) vai yritysverkolle."
+      },
+      "q8": {
+        "question": "Miksi IP:ni sijainti näyttää väärältä?",
+        "answer": "IP-paikannustietokannat (MaxMind, IP2Location) ovat maatasolla tarkkoja ~99 %:ssa ja kaupunkitasolla ~70 %:ssa tapauksista. Ne laahaavat viikkoja todellisuuden perässä: juuri jaettu IP-lohko voi näkyä edellisen omistajan sijainnissa. VPN-palvelinten IP:t paikannetaan joskus väärin. Jos kotisi IP näyttää väärää kaupunkia, operaattorisi todennäköisesti jakaa lohkoja koko seudulle."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC-vuototesti",
+      "webrtcDesc": "WebRTC voi paljastaa oikean IP:si, vaikka tämä sivu näyttää VPN:n osoitteen. Testaa.",
+      "dnsTitle": "DNS-vuototesti",
+      "dnsDesc": "IP:n piilottaminen ei riitä, jos DNS-kyselysi yhä vuotavat.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokolla, jolla Doppler välttää tunnistuksen ja estot."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC-vuototesti — Tarkista, piilottaako VPN oikean IP-osoitteesi",
+      "description": "Ilmainen WebRTC-vuototesti. Tunnistaa, vuotaako selaimesi oikean IP:si STUN:in kautta, vaikka VPN olisi yhdistettynä. Valmis 2 sekunnissa. Mitään dataa ei lähde laitteeltasi."
+    },
+    "hero": {
+      "title": "WebRTC-vuototesti",
+      "subtitle": "Selaimet voivat paljastaa oikean IP:si WebRTC:n kautta, vaikka VPN piilottaa sen sivustoilta. Tämä testi tarkistaa, tekeekö sinun selaimesi niin — kokonaan selaimessasi, lähettämättä dataa minnekään."
+    },
+    "widget": {
+      "publicIp": "Julkinen IP (sivustojen näkemä)",
+      "webrtcIps": "WebRTC:n löytämät IP:t",
+      "leakedTitle": "WebRTC vuotaa IP-osoitettasi",
+      "leakedBody": "WebRTC havaitsi yhden tai useamman IP:n, joka eroaa julkisesta. Jos käytät VPN:ää, WebRTC:tä käyttävä sivusto voi yhä nähdä oikean osoitteesi.",
+      "safeTitle": "WebRTC-vuotoa ei havaittu",
+      "safeBody": "WebRTC ilmoitti saman IP:n kuin julkinen, tai ei mitään. Oikea osoitteesi ei vuoda WebRTC:n kautta juuri nyt.",
+      "noWebrtc": "Selaimesi on poistanut WebRTC:n käytöstä tai osoitteita ei löytynyt. Se on turvallinen tila.",
+      "unknown": "Tuntematon",
+      "refresh": "Suorita testi uudelleen",
+      "refreshing": "Testataan…",
+      "loading": "Tutkitaan WebRTC:tä…",
+      "error": "Testiä ei voitu suorittaa. Lataa sivu uudelleen ja yritä uudestaan."
+    },
+    "explainer": {
+      "whatTitle": "Mikä on WebRTC-vuoto?",
+      "whatBody": "WebRTC on selaimen ominaisuus vertaisverkossa kulkevalle äänelle, videolle ja datalle — sitä käyttävät Google Meet, Discord ja monet verkkosovellukset. P2P-yhteyden muodostamiseksi selain käyttää STUN-palvelimia omien IP-osoitteidensa selvittämiseen, mukaan lukien paikalliset ja NAT:in takana olevat osoitteet. Sivusto voi pyytää selainta suorittamaan tämän selvityksen hiljaa ja lukea saadut IP:t JavaScriptillä — ohittaen VPN:n kokonaan.",
+      "howTitle": "Miten testi toimii",
+      "howBody": "Selaimesi luo valheellisen RTCPeerConnectionin, kutsuu createOfferia ja lukee saadut ICE-ehdokkaat. ICE-ehdokkaat sisältävät jokaisen IP:n, jonka selain löytää — myös oikean osoitteesi, vaikka VPN tunneloisi kaiken muun liikenteen. Testi toimii paikallisesti; mitään ei lähetetä palvelimillemme.",
+      "fixTitle": "Miten WebRTC-vuoto korjataan",
+      "fixBody": "Kolme vaihtoehtoa: (1) Käytä VPN:ää, joka estää WebRTC-vuodot ennakoivasti (Dopplerin iOS- ja Android-sovellukset poistavat WebRTC:n käytöstä tunnelin ulkopuolella). (2) Asenna selainlaajennus, joka poistaa WebRTC:n käytöstä (uBlock Originissa on tähän asetus). (3) Firefoxissa aseta media.peerconnection.enabled arvoon false about:configissa. WebRTC:n poistaminen rikkoo videopuhelut selaimessa; käytä niihin natiivisovellusta."
+    },
+    "faq": {
+      "q1": {
+        "question": "Mikä on WebRTC?",
+        "answer": "WebRTC on W3C-standardi, joka on sisäänrakennettu jokaiseen moderniin selaimeen reaaliaikaista vertaisviestintää varten äänellä, videolla ja datalla. Se pyörittää Google Meetiä, verkko-Discordia, Zoomin verkkoasiakasta ja useimpia selainpohjaisia videokeskusteluja. Samat API:t, jotka mahdollistavat P2P-puhelut, antavat JavaScriptin myös selvittää paikalliset verkko-osoitteesi."
+      },
+      "q2": {
+        "question": "Miksi WebRTC vuotaa oikean IP:ni jopa VPN:n läpi?",
+        "answer": "Koska WebRTC-pino toimii sovelluskerroksen alapuolella ja kysyy verkkoliitännältä suoraan STUN:in kautta. VPN tunneloi liikenteen IP-kerroksessa, mutta ei estä WebRTC:n osoitteenselvityskutsuja. Vuotanut osoite kulkee salatussa tunnelissa — mutta selain luovuttaa sen sitten sivun JavaScriptille, joka voi lähettää sen minne tahansa."
+      },
+      "q3": {
+        "question": "Mitkä selaimet ovat alttiita?",
+        "answer": "Oletusasetuksilla kaikki: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Bravessa on WebRTC-IP-vuodon estoasetus, joka on oletuksena pois päältä. Firefoxissa WebRTC:n voi poistaa kokonaan about:configin kautta. iOS:n Safari on osittain suojattu iOS 14:stä lähtien, mutta ei täysin."
+      },
+      "q4": {
+        "question": "Estääkö Doppler VPN WebRTC-vuodot?",
+        "answer": "Kyllä. iOS- ja Android-sovelluksemme käyttävät paikallista kill-switchiä, joka estää kaiken UDP-liikenteen tunnelin ulkopuolella, jolloin STUN-selvitys ei tavoita ulkoisia palvelimia. Työpöydällä suosittelemme yhdistämään VPN:n uBlock Originin WebRTC-kytkimeen tai selaintason poistoon täyden kattavuuden saamiseksi."
+      },
+      "q5": {
+        "question": "Rikkooko WebRTC:n poistaminen sivustoja?",
+        "answer": "Se rikkoo videopuhelut selaimessa (Meet, verkko-Zoom, verkko-Discord) ja jotkin yhteistyökalut. Se ei vaikuta tavalliseen selaamiseen, suoratoistoon tai mihinkään, mikä ei tarvitse vertaisyhteyksiä. Näiden palveluiden natiivisovellukset eivät ole riippuvaisia WebRTC:stä."
+      },
+      "q6": {
+        "question": "Onko tämä testi yksityinen?",
+        "answer": "Kyllä. Testi toimii kokonaan selaimessasi standardilla RTCPeerConnection-API:lla. IP, tulos tai metatiedot eivät poistu laitteeltasi. Emme edes kirjaa, että suoritit testin."
+      }
+    },
+    "related": {
+      "ipTitle": "Mikä on IP-osoitteeni?",
+      "ipDesc": "Katso, minkä IP:n ja maantieteen jokainen sivusto näkee juuri nyt.",
+      "dnsTitle": "DNS-vuototesti",
+      "dnsDesc": "Jos WebRTC on puhdas mutta DNS vuotaa, sivustot tietävät yhä, minne menet.",
+      "censorshipTitle": "Miten VPN-sensuuri toimii",
+      "censorshipDesc": "Miksi WebRTC- ja DNS-vuodot ovat katastrofaalisia rajoitetuissa verkoissa."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS-vuototesti — Varmista, että VPN:si DNS on yksityinen",
+      "description": "Ilmainen DNS-vuototestin opas. Selvitä, kulkevatko DNS-kyselysi VPN-tunnelin kautta vai vuotavatko ne operaattorille. Vaiheittaiset ohjeet ja korjaukset."
+    },
+    "hero": {
+      "title": "DNS-vuototesti",
+      "subtitle": "Jos DNS-kyselysi ohittavat VPN-tunnelin, internetoperaattorisi näkee yhä jokaisen sivuston, jolla käyt — vaikka VPN on yhdistettynä. Näin tarkistat ja korjaat asian."
+    },
+    "widget": {
+      "title": "Suositeltu DNS-vuototesti",
+      "description": "Emme ylläpidä omaa DNS-luotainta, koska sen tekeminen hyvin vaatii hallittuja wildcard-aliverkkotunnuksia useilla resolvereilla. Käytä alla olevaa luotettua kolmannen osapuolen työkalua — se on riippumaton eikä vaadi tiliä.",
+      "primaryButton": "Avaa dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Avaa browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Napsauta \"Extended test\" dnsleaktest.comissa. Tuloksessa pitäisi näkyä vain VPN-palveluntarjoajasi DNS-palvelimet — ei internetoperaattorisi. Jos näet tuloksissa Comcastin, Verizonin, Vodafonen tai muun kuluttajaoperaattorin, DNS:si vuotaa."
+    },
+    "explainer": {
+      "whatTitle": "Mikä on DNS-vuoto?",
+      "whatBody": "Kun kirjoitat URL-osoitteen, laitteesi kysyy ensin DNS-palvelimelta kyseisen verkkotunnuksen IP-osoitetta. Jos DNS-kysely kulkee VPN-tunnelin kautta, operaattorisi näkee vain salattua liikennettä. Jos se ohittaa tunnelin — DNS-vuoto — operaattorisi näkee jokaisen verkkotunnuksen, jolla käyt, vaikka itse yhteys olisi salattu. Sensuroidut verkot tarkastavat usein DNS-kyselyitä estolistojen valvomiseksi, joten niissä DNS-vuoto on kohtalokas.",
+      "causesTitle": "Mikä aiheuttaa DNS-vuotoja?",
+      "causesBody": "Kolme yleistä syytä: (1) VPN-asiakas asettaa oman DNS-resolverin, mutta käyttöjärjestelmä ohittaa sen ja käyttää paikallisen verkon määräämää resolveria. (2) IPv6-liikennettä ei tunneloida, joten IPv6-DNS-kyselyt vuotavat VPN:n ohi. (3) Selaimet kuten Chrome ja Firefox voivat käyttää \"älykästä\" DNS-reititystä (DNS-over-HTTPS), joka ohittaa järjestelmän DNS-asetukset kokonaan.",
+      "fixTitle": "Miten DNS-vuoto korjataan",
+      "fixBody": "Käytä VPN:ää, jolla on oma DNS-infrastruktuuri ja joka pakottaa kaikki DNS-kyselyt tunneliin (Doppler tekee näin oletuksena jokaisella alustalla). Poista IPv6 käytöstä järjestelmän verkkoasetuksissa, jos VPN:si ei tue IPv6-tunnelointia. Aseta selaimessa DNS-over-HTTPS samalle palveluntarjoajalle kuin VPN, tai poista se käytöstä. Reitittimissä aseta ylävirran DNS:ksi yksityisyyttä kunnioittava resolveri (Quad9, Cloudflare 1.1.1.1) vain, jos et käytä VPN:ää laitetasolla."
+    },
+    "checklist": {
+      "title": "Dopplerin DNS-takuut:",
+      "items": {
+        "item1": "Kaikki DNS-kyselyt pakotetaan VPN-tunneliin — ei vuotoja järjestelmän DNS:n kautta.",
+        "item2": "IPv6 joko tunneloidaan tai estetään, se ei koskaan vuoda.",
+        "item3": "DNS-resolverimme eivät kirjaa kyselyitä.",
+        "item4": "Estämme selainten DNS-over-HTTPS-ohitusyritykset, kun kill-switch on päällä."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Miksi DNS-vuoto on pahempi kuin IP-vuoto?",
+        "answer": "IP-vuoto paljastaa yhden osoitteen. DNS-vuoto paljastaa jokaisen verkkotunnuksen, jolla käyt — jokaisen sivuston, API-kutsun ja analytiikkapisteen — selkokielisenä operaattorillesi ja kaikille matkan varrella. Sensuroitujen verkkojen käyttäjille DNS-tason estolistat ovat yleisin valvontamekanismi, mikä tekee DNS-vuodoista virheen, josta ihmiset jäävät kiinni."
+      },
+      "q2": {
+        "question": "Mistä tiedän, vuotaako DNS:ni juuri nyt?",
+        "answer": "Suorita laajennettu testi dnsleaktest.comissa. Se lähettää useita kyselyitä wildcard-aliverkkotunnuksiin ja kertoo, mitkä resolverit niihin vastasivat. Jos näet operaattorisi nimen (tai minkä tahansa nimen, joka ei vastaa VPN-palveluntarjoajaasi), DNS vuotaa. Toista testi VPN:n kanssa ja ilman varmistaaksesi."
+      },
+      "q3": {
+        "question": "Vuotaako Doppler VPN DNS:ää?",
+        "answer": "Ei. Työnnämme omat resolverimme tunnelin läpi jokaisella alustalla ja estämme paluun järjestelmän DNS:ään. Poistamme myös selainten DNS-over-HTTPS-ohituksen käytöstä, kun kill-switchimme on aktiivinen. Riippumattomat testit dnsleaktest.comissa ja browserleaks.comissa vahvistavat tämän — tarkista vapaasti itse."
+      },
+      "q4": {
+        "question": "Mikä on DNS-over-HTTPS (DoH) ja miten se liittyy vuotoihin?",
+        "answer": "DoH on protokolla, joka lähettää DNS-kyselyt salatun HTTPS-yhteyden yli ohittaen järjestelmän DNS-resolverin. Selaimet kuten Chrome ja Firefox käyttävät DoH:ta oletuksena ja ohjaavat kyselyt usein Googlelle tai Cloudflarelle VPN:stäsi riippumatta. Se on vuoto, ellei VPN:si käsittele sitä erikseen. Doppler sieppaa DoH-yritykset ja ohjaa ne tunnelin läpi."
+      },
+      "q5": {
+        "question": "Tarvitsenko erillisen DNS-palvelun, jos käytän VPN:ää?",
+        "answer": "Et. Hyvin määritetty VPN hoitaa DNS:n puolestasi. Erillinen DNS-palvelu (Quad9, Cloudflare) VPN:n päällä voi itse asiassa aiheuttaa vuotoja, jos järjestelmä reitittää DNS-kyselyn tunnelin ohi. Luota VPN:n resolvereihin — ja jos et luota niihin, käytä toista VPN:ää."
+      },
+      "q6": {
+        "question": "Kuinka usein DNS-vuotoja pitäisi testata?",
+        "answer": "Jokaisen VPN-asennuksen tai käyttöjärjestelmäpäivityksen jälkeen. Tunnelointimääritykset voivat rikkoutua hiljaa — järjestelmäpäivitys voi vaihtaa verkkopinosi vuotavalle polulle ilmoittamatta. Neljännesvuosittainen tarkistus on järkevä tahti vakiokäyttäjille; viikoittainen, jos asut voimakkaasti sensuroidussa verkossa, jossa vuodon hinta on korkea."
+      }
+    },
+    "related": {
+      "ipTitle": "Mikä on IP-osoitteeni?",
+      "ipDesc": "Katso tarkalleen, mitä VPN:si piilottaa sivustoilta.",
+      "webrtcTitle": "WebRTC-vuototesti",
+      "webrtcDesc": "IP piilossa, DNS piilossa, mutta WebRTC-vuoto paljastaa sinut silti.",
+      "bypassTitle": "Kierrä internetsensuuri",
+      "bypassDesc": "DNS-vuotojen kautta estolistat nappaavat sinut. Lue, miten Doppler välttää ne."
     }
   },
   "vlessVpnAndroid": {

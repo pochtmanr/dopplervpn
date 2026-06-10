@@ -1374,6 +1374,7 @@
     "promoError": "Kehtetu sooduskood"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Kontrollige oma veebiturvalisust meie tasuta privaatsustööriistadega",
     "title": "Kuidas Doppler VPN kaitseb teie liiklust",
     "subtitle": "Teie ühendus on krüpteeritud ja suunatud läbi Doppleri servervõrgu. Midagi ei logita.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Miks me palume null isikuandmeid.",
       "vlessTitle": "VLESS-Reality kohta",
       "vlessDesc": "Protokoll, mis toetab Doppleri krüpteerimist."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Tasuta privaatsustööriistad — Doppler VPN",
+      "description": "Tasuta sihtotstarbelised tööriistad teie privaatsuse testimiseks: IP-kontroll, WebRTC lekketest, DNS-i lekketest. Ei mingit jälgimist, e-posti pole vaja."
+    },
+    "title": "Tasuta privaatsustööriistad",
+    "subtitle": "Kolm kiiret kontrolli kõige olulisemate lekete jaoks.",
+    "tools": {
+      "ipChecker": {
+        "title": "Mis on minu IP?",
+        "description": "Vaadake, millist avalikku IP-d, riiki ja teenusepakkujat teie liiklus praegu paljastab.",
+        "cta": "Käivita IP-kontroll"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC lekketest",
+        "description": "WebRTC võib paljastada teie tegeliku IP isegi läbi VPN-i. Kontrollige, kas teie brauser teeb seda.",
+        "cta": "Käivita WebRTC test"
+      },
+      "dnsLeak": {
+        "title": "DNS-i lekketest",
+        "description": "Kui teie DNS-päringud lähevad VPN-tunnelist mööda, näeb teenusepakkuja endiselt iga lehte, mida külastate.",
+        "cta": "Käivita DNS-i test"
+      }
+    },
+    "cta": {
+      "title": "Tööriistad leidsid lekke?",
+      "description": "Doppleri VLESS-Reality tunnel suunab nii IP-liikluse kui ka DNS-päringud läbi krüptitud kanali ning sisaldab sisseehitatud WebRTC ja IPv6 lekete blokeerimist.",
+      "button": "Proovige Doppler VPN-i"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Mis on minu IP? — Tasuta IP ja teenusepakkuja otsing",
+      "description": "Tasuta IP-aadressi kontroll — nähke kohe oma avalikku IP-d, riiki, piirkonda, linna ja teenusepakkujat. Ei mingit jälgimist. E-posti pole vaja. Töötab iPhone'is, Androidis, Macis, Windowsis."
+    },
+    "hero": {
+      "title": "Mis on minu IP?",
+      "subtitle": "Teie avalik IP-aadress sellisena, nagu iga külastatav veebileht seda näeb — koos sellega seotud geograafia ja teenusepakkujaga. Värskendage pärast VPN-iga ühendamist, et veenduda muudatuse jõustumises."
+    },
+    "widget": {
+      "yourIp": "Teie IP-aadress",
+      "country": "Riik",
+      "region": "Piirkond",
+      "city": "Linn",
+      "isp": "Internetiteenuse pakkuja",
+      "asn": "ASN",
+      "unknown": "Teadmata",
+      "refresh": "Värskenda",
+      "refreshing": "Värskendamine…",
+      "copied": "Kopeeritud",
+      "copy": "Kopeeri",
+      "loading": "Teie IP tuvastamine…",
+      "error": "Teie IP-d ei õnnestunud tuvastada. Laadige leht uuesti või proovige hetke pärast uuesti."
+    },
+    "explainer": {
+      "whatTitle": "Mis on IP-aadress?",
+      "whatBody": "Iga internetis olev seade kannab numbrilist aadressi — avalikku IP-d —, mis identifitseerib ta iga serveri jaoks, millega ta suhtleb. IPv4 näeb välja nagu 203.0.113.42; IPv6 on pikem ja kasutab kooloneid. Teie IP määrab teenusepakkuja ja see muutub võrgu vahetamisel (kodune Wi-Fi, mobiilne andmeside, kohviku Wi-Fi).",
+      "exposeTitle": "Mida teie IP paljastab",
+      "exposeBody": "Ainuüksi IP paljastab teie riigi, piirkonna, linna ja teenusepakkuja — mõnikord paari kvartali täpsusega. Koos User-Agenti ja ajastusandmetega, mida iga brauser saadab, piisab sellest, et reklaamivõrgustikud saaksid luua teie sõrmejälje ja jälgida teid lehtede vahel. Voogedastusplatvormid kasutavad seda piirkondlike litsentside jõustamiseks. Tsensorid geograafiliste blokeeringute kehtestamiseks.",
+      "vpnTitle": "Kuidas VPN teie IP-d muudab",
+      "vpnBody": "VPN-iga ühendudes väljub kogu teie liiklus internetti VPN-serveri IP-ga — mitte teie omaga. Veebilehed näevad teie tegelike andmete asemel VPN-serveri riiki, teenusepakkujat ja geograafiat. Õigesti seadistatud VPN suunab ka DNS-päringud läbi sama tunneli, nii et teenusepakkuja ei näe, milliseid lehti külastate, kuigi ta kannab krüptitud pakette."
+    },
+    "checklist": {
+      "title": "Kui olete ühendatud Doppler VPN-iga, peaks see leht näitama:",
+      "items": {
+        "item1": "IP-d, mis ei ühti sellega, mida nägite enne ühendamist.",
+        "item2": "Riiki, mis vastab valitud serverile (nt Saksamaa, Holland, Singapur).",
+        "item3": "Teenusepakkujat, mis on kirjas kui majutusettevõte (Hetzner, Vultr, OVH), mitte teie kodune operaator.",
+        "item4": "Mitte ühtegi viidet teie tegelikule linnale või piirkonnale."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Milleks minu IP-aadressi kasutatakse?",
+        "answer": "Iga server, millega suhtlete, kasutab teie IP-d vastuste tagasisaatmiseks ja enamik logib selle. See võimaldab geolokatsiooni (linna täpsusega), piirkondlikku sisu litsentsimist, reklaamide isikupärastamist, pettuste tuvastamist ja — tsenseeritud võrkudes — blokeerimisnimekirjade jõustamist. Anonüümsus võrgus algab sellest, et seda numbrit otse ei paljastata."
+      },
+      "q2": {
+        "question": "Kas minu IP-aadress on privaatne teave?",
+        "answer": "See edastatakse igale veebilehele, mida külastate, seega pole see saladus. Kuid GDPR-i ja enamiku privaatsusseaduste järgi on see isikuandmed, sest selle saab siduda konkreetse inimesega. Suhtuge sellesse nagu oma tänavanimesse: pole salastatud, aga võõrastele seda niisama ei anta."
+      },
+      "q3": {
+        "question": "Kuidas oma IP-d peita?",
+        "answer": "VPN on standardne tööriist — see asendab teie IP serveri omaga. Tor peidab teie IP mitme releekanali kaudu kiiruse arvelt. Puhverserveriteenused peidavad selle ainult brauseriliikluse jaoks. Mobiilsele andmesidele lülitumine muudab IP-d, kuid mitte teie identiteeti. Avalik Wi-Fi jagab ühte IP-d kõigiga võrgus, kuid pole krüptitud."
+      },
+      "q4": {
+        "question": "Miks mu IP näeb eri lehtedel erinev välja?",
+        "answer": "Ei tohiks — välja arvatud juhul, kui olete jagatud tunneliga VPN-i taga (osa rakendusi läheb läbi VPN-i, osa teenusepakkuja kaudu), mitme väljund-IP-ga ettevõttevõrgus või näete ühel lehel IPv4 ja teisel IPv6. Mõned lehed kasutavad kolmandate osapoolte IP-otsingu API-sid, mis võivad tagastada veidi erinevaid metaandmeid."
+      },
+      "q5": {
+        "question": "Kas mind saab jälgida ka VPN-iga, kui mu IP on peidetud?",
+        "answer": "Jah. Brauseri sõrmejälg (fondid, ekraani suurus, pistikprogrammid, canvas-renderdamine) tuvastab seadmed ka ilma IP-ta. Küpsised ja sisselogimised järgnevad teile võrkude vahel. VPN lahendab ainult IP- ja DNS-kihi; ülejäänu sõltub brauserist. Kasutage privaatset sirvimist, blokeerige kolmandate osapoolte küpsised ja kaaluge täieliku kaitse jaoks sõrmejäljevastaseid brausereid."
+      },
+      "q6": {
+        "question": "Kas Doppler logib minu IP-d?",
+        "answer": "Ei. Doppler ei salvesta ühenduslogisid, IP-ajalugu ega DNS-päringuid. VPN-server näeb teie tegelikku IP-d ainult nii kaua, kui on vaja liikluse suunamiseks — seda ei kirjutata kunagi kettale. Ainsad sisukad garantiid on sõltumatud auditid ja logivaba poliitika; \"me lubame\" ei piisa, ja meie avaldame oma taristu ülesehituse."
+      },
+      "q7": {
+        "question": "Mis on ASN?",
+        "answer": "Autonoomse süsteemi number identifitseerib võrguoperaatori, kellele IP-plokk kuulub. AS7922 on Comcast; AS24940 on Hetzner; AS16509 on Amazon AWS. ASN-id on avalikud ja näitavad, kas IP kuulub kodusele teenusepakkujale, mobiilioperaatorile, majutusettevõttele (tavaliselt VPN-i väljundsõlmed) või ettevõttevõrgule."
+      },
+      "q8": {
+        "question": "Miks mu IP asukoht tundub vale?",
+        "answer": "IP geolokatsiooni andmebaasid (MaxMind, IP2Location) on riigi tasandil täpsed ~99% ja linna tasandil ~70% juhtudest. Need jäävad tegelikkusest nädalaid maha: värskelt eraldatud IP-plokk võib kuvada eelmise omaniku asukohta. VPN-serverite IP-d paigutatakse vahel valesti. Kui teie kodune IP näitab vale linna, jaotab teenusepakkuja plokke ilmselt üle kogu linnastu."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC lekketest",
+      "webrtcDesc": "WebRTC võib paljastada teie tegeliku IP isegi siis, kui see leht näitab VPN-i oma. Testige.",
+      "dnsTitle": "DNS-i lekketest",
+      "dnsDesc": "IP peitmisest ei piisa, kui teie DNS-päringud ikka lekivad.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokoll, mida Doppler kasutab tuvastamise ja blokeerimise vältimiseks."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC lekketest — Kontrollige, kas VPN peidab teie tegelikku IP-d",
+      "description": "Tasuta WebRTC lekketest. Tuvastab, kas brauser lekitab teie tegelikku IP-d STUN-i kaudu isegi ühendatud VPN-iga. Valmis 2 sekundiga. Ükski andmebait ei lahku teie seadmest."
+    },
+    "hero": {
+      "title": "WebRTC lekketest",
+      "subtitle": "Brauserid võivad teie tegeliku IP WebRTC kaudu paljastada isegi siis, kui VPN seda veebilehtede eest varjab. See test kontrollib, kas teie oma teeb seda — täielikult teie brauseris, saatmata andmeid kuhugi."
+    },
+    "widget": {
+      "publicIp": "Avalik IP (veebilehtede nähtav)",
+      "webrtcIps": "WebRTC leitud IP-d",
+      "leakedTitle": "WebRTC lekitab teie IP-d",
+      "leakedBody": "WebRTC tuvastas ühe või mitu IP-d, mis erinevad avalikust IP-st. Kui kasutate VPN-i, tähendab see, et WebRTC-d kasutav veebileht näeb endiselt teie tegelikku aadressi.",
+      "safeTitle": "WebRTC leket ei tuvastatud",
+      "safeBody": "WebRTC teatas sama IP nagu avalik, või ei teatanud ühtegi. Teie tegelik aadress ei leki praegu WebRTC kaudu.",
+      "noWebrtc": "Teie brauser on WebRTC keelanud või aadresse ei leitud. See on turvaline seisund.",
+      "unknown": "Teadmata",
+      "refresh": "Käivita test uuesti",
+      "refreshing": "Testimine…",
+      "loading": "WebRTC kontrollimine…",
+      "error": "Testi ei õnnestunud käivitada. Laadige leht uuesti ja proovige uuesti."
+    },
+    "explainer": {
+      "whatTitle": "Mis on WebRTC leke?",
+      "whatBody": "WebRTC on brauseri funktsioon otseühenduses (peer-to-peer) heli, video ja andmete edastamiseks — seda kasutavad Google Meet, Discord ja paljud veebirakendused. P2P-ühenduse loomiseks kasutab brauser STUN-servereid, et avastada omaenda IP-aadressid, sealhulgas kohalikud ja NAT-i tagused. Veebileht võib lasta brauseril seda avastamist vaikselt teha ja lugeda saadud IP-d JavaScripti kaudu — VPN-ist täielikult mööda minnes.",
+      "howTitle": "Kuidas test töötab",
+      "howBody": "Teie brauser loob fiktiivse RTCPeerConnectioni, kutsub createOfferi ja loeb saadud ICE-kandidaate. ICE-kandidaadid sisaldavad iga IP-d, mille brauser leiab — sealhulgas teie tegelikku, isegi kui VPN tunneldab kogu muu liikluse. Test töötab kohapeal; meie serveritesse ei saadeta midagi.",
+      "fixTitle": "Kuidas WebRTC leket parandada",
+      "fixBody": "Kolm võimalust: (1) Kasutage VPN-i, mis blokeerib WebRTC lekkeid ennetavalt (Doppleri iOS-i ja Androidi rakendused keelavad WebRTC väljaspool tunnelit). (2) Paigaldage brauserilaiendus, mis WebRTC keelab (uBlock Originil on selleks valik). (3) Firefoxis määrake about:config-is media.peerconnection.enabled väärtuseks false. WebRTC keelamine rikub brauseris videokõned; kasutage selle asemel rakendust."
+    },
+    "faq": {
+      "q1": {
+        "question": "Mis on WebRTC?",
+        "answer": "WebRTC on W3C standard, mis on sisse ehitatud igasse kaasaegsesse brauserisse reaalajas otseühenduse heli-, video- ja andmesideks. See toidab Google Meeti, veebi-Discordi, Zoomi veebiklienti ja enamikku brauseripõhiseid videovestlusi. Samad API-d, mis võimaldavad P2P-kõnesid, lasevad JavaScriptil avastada ka teie kohalikud võrguaadressid."
+      },
+      "q2": {
+        "question": "Miks WebRTC lekitab mu tegelikku IP-d isegi läbi VPN-i?",
+        "answer": "Sest WebRTC pinu töötab rakenduskihist allpool ja pärib võrguliidest otse STUN-i kaudu. VPN tunneldab liiklust IP-kihil, kuid ei blokeeri WebRTC aadresside avastamise päringuid. Lekkinud aadress liigub krüptitud tunnelis — kuid brauser annab selle seejärel lehe JavaScriptile, mis võib selle saata ükskõik kuhu."
+      },
+      "q3": {
+        "question": "Millised brauserid on mõjutatud?",
+        "answer": "Vaikeseadetega kõik: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave'il on WebRTC IP-lekke vastane seade, mis on vaikimisi väljas. Firefox võimaldab WebRTC about:config-i kaudu täielikult keelata. iOS-i Safari on alates iOS 14-st osaliselt kaitstud, kuid mitte täielikult."
+      },
+      "q4": {
+        "question": "Kas Doppler VPN blokeerib WebRTC lekked?",
+        "answer": "Jah. Meie iOS-i ja Androidi kliendid kasutavad kohalikku kill-switchi, mis blokeerib kogu UDP-liikluse väljaspool tunnelit, takistades STUN-i avastamist jõudmast välistesse serveritesse. Töölaual soovitame täieliku katte jaoks kombineerida VPN-i uBlock Origini WebRTC lülitiga või brauseri tasemel keelamisega."
+      },
+      "q5": {
+        "question": "Kas WebRTC keelamine rikub veebilehed?",
+        "answer": "See rikub brauseris videokõned (Meet, veebi-Zoom, veebi-Discord) ja mõned koostöövahendid. Tavalist sirvimist, voogedastust ega midagi muud, mis ei vaja otseühendusi, see ei mõjuta. Nende teenuste rakendused WebRTC-st ei sõltu."
+      },
+      "q6": {
+        "question": "Kas see test on privaatne?",
+        "answer": "Jah. Test töötab täielikult teie brauseris standardse RTCPeerConnection API kaudu. Ei IP, tulemus ega metaandmed ei lahku seadmest. Me ei logi isegi seda, et testi käivitasite."
+      }
+    },
+    "related": {
+      "ipTitle": "Mis on minu IP?",
+      "ipDesc": "Vaadake IP-d ja geograafiat, mida iga veebileht praegu näeb.",
+      "dnsTitle": "DNS-i lekketest",
+      "dnsDesc": "Kui WebRTC on puhas, aga DNS lekib, teavad lehed ikka, kuhu lähete.",
+      "censorshipTitle": "Kuidas VPN-i tsensuur töötab",
+      "censorshipDesc": "Miks WebRTC ja DNS-i lekked on piiratud võrkudes katastroofilised."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS-i lekketest — Veenduge, et teie VPN-i DNS on privaatne",
+      "description": "Tasuta DNS-i lekketesti juhend. Saage teada, kas teie DNS-päringud liiguvad läbi VPN-tunneli või lekivad teenusepakkujale. Sammhaaval juhised ja lahendused."
+    },
+    "hero": {
+      "title": "DNS-i lekketest",
+      "subtitle": "Kui teie DNS-päringud lähevad VPN-tunnelist mööda, näeb internetiteenuse pakkuja endiselt iga lehte, mida külastate — isegi ühendatud VPN-iga. Nii saab seda kontrollida ja parandada."
+    },
+    "widget": {
+      "title": "Soovitatav DNS-i lekketest",
+      "description": "Me ei käita oma DNS-sondi, sest selle hästi tegemine nõuab kontrollitud wildcard-alamdomeene mitmes resolveris. Kasutage allolevat usaldusväärset kolmanda osapoole tööriista — see on sõltumatu ega nõua kontot.",
+      "primaryButton": "Ava dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Ava browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Klõpsake dnsleaktest.com-is \"Extended test\". Tulemus peaks näitama ainult teie VPN-pakkuja DNS-servereid — mitte teie internetiteenuse pakkujat. Kui näete tulemustes Comcasti, Verizoni, Vodafone'i või mõnda muud tavateenusepakkujat, teie DNS lekib."
+    },
+    "explainer": {
+      "whatTitle": "Mis on DNS-i leke?",
+      "whatBody": "Kui sisestate URL-i, küsib seade kõigepealt DNS-serverilt selle domeeni IP-aadressi. Kui DNS-päring liigub läbi VPN-tunneli, näeb teenusepakkuja ainult krüptitud liiklust. Kui see tunnelist mööda läheb — DNS-i leke —, näeb teenusepakkuja iga domeeni, mida külastate, kuigi järgnev ühendus on krüptitud. Tsenseeritud võrgud kontrollivad sageli DNS-päringuid blokeerimisnimekirjade jõustamiseks, seega on DNS-i leke seal saatuslik.",
+      "causesTitle": "Mis põhjustab DNS-i lekkeid?",
+      "causesBody": "Kolm levinud põhjust: (1) VPN-klient määrab oma DNS-resolveri, kuid operatsioonisüsteem ignoreerib seda ja kasutab kohaliku võrgu määratud resolverit. (2) IPv6-liiklust ei tunneldata, mistõttu IPv6 DNS-päringud lekivad VPN-ist mööda. (3) Brauserid nagu Chrome ja Firefox võivad kasutada \"nutikat\" DNS-marsruutimist (DNS-over-HTTPS), mis läheb süsteemi DNS-seadetest täielikult mööda.",
+      "fixTitle": "Kuidas DNS-i leket parandada",
+      "fixBody": "Kasutage VPN-i, millel on oma DNS-taristu ja mis sunnib kõik DNS-päringud läbi tunneli (Doppler teeb seda vaikimisi igal platvormil). Kui teie VPN ei toeta IPv6 tunneldamist, lülitage IPv6 süsteemi võrguseadetes välja. Brauseris määrake DNS-over-HTTPS samale pakkujale kui VPN või lülitage see välja. Ruuterites määrake ülem-DNS-iks privaatsust austav resolver (Quad9, Cloudflare 1.1.1.1) ainult siis, kui te ei kasuta VPN-i seadme tasemel."
+    },
+    "checklist": {
+      "title": "Doppleri DNS-i garantiid:",
+      "items": {
+        "item1": "Kõik DNS-päringud sunnitakse läbi VPN-tunneli — süsteemi DNS-i kaudu lekkeid pole.",
+        "item2": "IPv6 kas tunneldatakse või blokeeritakse, see ei leki kunagi.",
+        "item3": "Meie DNS-resolverid päringuid ei logi.",
+        "item4": "Sisselülitatud kill-switchi korral blokeerime brauserite DNS-over-HTTPS-i möödaviigukatsed."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Miks on DNS-i leke hullem kui IP leke?",
+        "answer": "IP leke paljastab ühe aadressi. DNS-i leke paljastab iga domeeni, mida külastate — iga lehe, iga API-kutse, iga analüütika otspunkti — avatekstina teie teenusepakkujale ja kõigile teel olijatele. Tsenseeritud võrkude kasutajate jaoks on DNS-i taseme blokeerimisnimekirjad kõige levinum jõustamismehhanism, mistõttu just DNS-i lekked on viga, mille tõttu inimesed vahele jäävad."
+      },
+      "q2": {
+        "question": "Kuidas teada saada, kas mu DNS praegu lekib?",
+        "answer": "Käivitage dnsleaktest.com-is laiendatud test. See saadab mitu päringut wildcard-alamdomeenidele ja näitab, millised resolverid neile vastasid. Kui näete oma teenusepakkuja nime (või mis tahes nime, mis ei ühti teie VPN-pakkujaga), DNS lekib. Kinnitamiseks korrake testi VPN-iga ja ilma."
+      },
+      "q3": {
+        "question": "Kas Doppler VPN lekitab DNS-i?",
+        "answer": "Ei. Suuname omaenda resolverid igal platvormil läbi tunneli ja blokeerime tagasilanguse süsteemi DNS-ile. Aktiivse kill-switchi korral keelame ka brauserite DNS-over-HTTPS-i möödaviigu. Sõltumatud testid dnsleaktest.com-is ja browserleaks.com-is kinnitavad seda — kontrollige julgelt ise."
+      },
+      "q4": {
+        "question": "Mis on DNS-over-HTTPS (DoH) ja kuidas see lekkimisega seostub?",
+        "answer": "DoH on protokoll, mis saadab DNS-päringud üle krüptitud HTTPS-ühenduse, minnes süsteemi DNS-resolverist mööda. Brauserid nagu Chrome ja Firefox kasutavad DoH-d vaikimisi, suunates päringud sageli Google'ile või Cloudflare'ile teie VPN-ist hoolimata. See on leke, kui VPN seda selgesõnaliselt ei käsitle. Doppler püüab DoH-katsed kinni ja suunab need läbi tunneli."
+      },
+      "q5": {
+        "question": "Kas VPN-i kasutades on vaja eraldi DNS-teenust?",
+        "answer": "Ei. Hästi seadistatud VPN haldab DNS-i teie eest. Eraldi DNS-teenus (Quad9, Cloudflare) VPN-i peal võib tegelikult lekkeid põhjustada, kui süsteem suunab DNS-päringu tunnelist mööda. Usaldage VPN-i resolvereid — ja kui te neid ei usalda, kasutage teist VPN-i."
+      },
+      "q6": {
+        "question": "Kui tihti peaksin DNS-i lekkeid testima?",
+        "answer": "Pärast iga VPN-i seadistust või operatsioonisüsteemi uuendust. Tunneli seadistused võivad vaikselt katki minna — süsteemiuuendus võib võrgupinu hoiatamata lekkivale teele lülitada. Kvartaalne kontroll on püsikasutajatele mõistlik rütm; iganädalane, kui elate tugevalt tsenseeritud võrgus, kus lekke hind on kõrge."
+      }
+    },
+    "related": {
+      "ipTitle": "Mis on minu IP?",
+      "ipDesc": "Vaadake täpselt, mida teie VPN veebilehtede eest varjab.",
+      "webrtcTitle": "WebRTC lekketest",
+      "webrtcDesc": "IP peidetud, DNS peidetud, kuid WebRTC leke paljastab teid ikkagi.",
+      "bypassTitle": "Internetitsensuurist möödumine",
+      "bypassDesc": "Just DNS-i lekete kaudu blokeerimisnimekirjad teid tabavad. Lugege, kuidas Doppler neid väldib."
     }
   },
   "vlessVpnAndroid": {
