@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { trackPurchaseResult } from '@/lib/track-cta';
 
 const IOS_URL = 'https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773';
 const ANDROID_PLAY_URL = 'https://play.google.com/store/apps/details?id=org.dopplervpn.android';
@@ -63,7 +64,19 @@ export function SuccessClient() {
         setData(body);
         setElapsed(Date.now() - startedAt.current);
 
-        if (body.status === 'paid' || body.status === 'failed') return;
+        if (body.status === 'paid' || body.status === 'failed') {
+          const trackedKey = `tracked_purchase_${orderId}`;
+          if (!sessionStorage.getItem(trackedKey)) {
+            sessionStorage.setItem(trackedKey, '1');
+            trackPurchaseResult(
+              body.status,
+              plan,
+              provider,
+              body.status === 'failed' ? body.reason || body.revolut_state : undefined,
+            );
+          }
+          return;
+        }
 
         if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
           setTimedOut(true);

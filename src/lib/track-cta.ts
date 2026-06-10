@@ -57,8 +57,7 @@ export type GetProLocation =
   | "pricing"
   | "nav-desktop"
   | "nav-mobile"
-  | "account-paywall"
-  | "account-subscribe";
+  | "account-paywall";
 
 export function trackGetPro(
   location: GetProLocation,
@@ -69,5 +68,44 @@ export function trackGetPro(
     location,
     page_path: pagePath ?? (typeof window !== "undefined" ? window.location.pathname : ""),
     locale: locale ?? "",
+  });
+}
+
+export function trackAccountIdentified(
+  mode: "new" | "existing",
+  locale?: string
+) {
+  track("account_identified", {
+    mode,
+    page_path: typeof window !== "undefined" ? window.location.pathname : "",
+    locale: locale ?? "",
+  });
+}
+
+export function trackCheckoutStarted(
+  plan: string,
+  paymentMethod: "card" | "crypto",
+  hasPromo: boolean,
+  locale?: string
+) {
+  track("checkout_started", {
+    plan,
+    payment_method: paymentMethod,
+    promo: hasPromo,
+    page_path: typeof window !== "undefined" ? window.location.pathname : "",
+    locale: locale ?? "",
+  });
+}
+
+export function trackPurchaseResult(
+  status: "paid" | "failed",
+  plan: string | null,
+  provider: string | null,
+  reason?: string
+) {
+  track(status === "paid" ? "purchase_completed" : "purchase_failed", {
+    plan: plan ?? "",
+    provider: provider ?? "",
+    ...(status === "failed" ? { reason: reason ?? "" } : {}),
   });
 }

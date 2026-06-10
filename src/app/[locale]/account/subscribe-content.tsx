@@ -3,7 +3,7 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import type { RevolutCheckoutInstance } from '@revolut/checkout';
-import { trackGetPro } from '@/lib/track-cta';
+import { trackGetPro, trackAccountIdentified, trackCheckoutStarted } from '@/lib/track-cta';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
@@ -332,6 +332,7 @@ function SubscribeInner() {
         setIdentifyError(data.error || t('error'));
         return;
       }
+      trackAccountIdentified('new', locale);
       setAccountId(data.accountId);
       localStorage.setItem('doppler_account_id', data.accountId);
       setExistingAccount(false);
@@ -363,6 +364,7 @@ function SubscribeInner() {
         return;
       }
       const data = await res.json();
+      trackAccountIdentified('existing', locale);
       setAccountInfo(data);
       localStorage.setItem('doppler_account_id', normalized);
       setStep(2);
@@ -471,7 +473,7 @@ function SubscribeInner() {
 
   /* ── Step 2: Subscribe ─────────────────────────────────────────── */
   const handleSubscribe = async () => {
-    trackGetPro('account-subscribe');
+    trackCheckoutStarted(selected, paymentMethod, !!promoApplied, locale);
     setLoading(true);
     setError('');
 
