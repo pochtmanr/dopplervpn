@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
+import { Link } from "@/i18n/navigation";
 
 const flowSteps = ["step1", "step2", "step3", "step4"] as const;
 
@@ -58,6 +59,20 @@ export function TechnicalHowItWorks() {
           </div>
         ))}
       </div>
+
+      <Reveal delay={200}>
+        <div className="mt-10 text-center">
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-2 text-accent-teal text-sm font-medium hover:underline"
+          >
+            {t("toolsCta")}
+            <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </Link>
+        </div>
+      </Reveal>
     </Section>
   );
 }

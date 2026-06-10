@@ -1,11 +1,11 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -29,11 +29,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: {
-      canonical: `${baseUrl}/en/${SLUG}`,
-      languages: {
-        en: `${baseUrl}/en/${SLUG}`,
-        "x-default": `${baseUrl}/en/${SLUG}`,
-      },
+      canonical: `${baseUrl}/${locale}/${SLUG}`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/${SLUG}`]),
+        ["x-default", `${baseUrl}/en/${SLUG}`],
+      ]),
     },
     openGraph: {
       title,
@@ -53,19 +53,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// Tool pages ship English-only initially. Hand-localizing the 4 tool
-// namespaces (~50 keys each × 43 locales) is a substantial batch that lives
-// in the Phase 2.3 localization track — when those land, swap this back to
-// `routing.locales.map(...)`.
 export function generateStaticParams() {
-  return [{ locale: "en" }];
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
-  // Tool pages ship English-only (see generateStaticParams); send any other
-  // locale to the canonical /en URL instead of rendering a half-translated page.
-  if (locale !== "en") permanentRedirect(`/en/${SLUG}`);
   setRequestLocale(locale);
 
   const t = await getTranslations("toolsHub");

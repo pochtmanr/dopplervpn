@@ -146,18 +146,6 @@ function buildAlternates(path: string) {
   };
 }
 
-// Tools currently ship only in English (see /[locale]/tools/page.tsx and the
-// Phase 2.3 localization backlog). Don't advertise alternate-locale URLs
-// the build doesn't actually generate.
-function buildEnOnlyAlternates(path: string) {
-  return {
-    languages: {
-      en: `${baseUrl}/en${path}`,
-      "x-default": `${baseUrl}/en${path}`,
-    },
-  };
-}
-
 // /security ships in the hand-translated core-market locales only; other
 // locales 308-redirect to /en/security (see /[locale]/security/page.tsx).
 function buildSecurityAlternates(path: string) {
@@ -246,16 +234,12 @@ export default async function sitemap({
     // /:locale/blog to /en/blog for those, so listing them would advertise
     // redirects rather than canonical URLs.
     .filter((page) => page !== "/blog" || localeHasBlog)
-    // Tools are English-only for now; non-EN locale URLs don't exist.
-    .filter((page) => !toolPages.has(page) || locale === "en")
     // /security exists only in its hand-translated locales.
     .filter((page) => page !== "/security" || isSecurityLocale(locale))
     .map((page) => {
       let alternates;
       if (page === "/blog") {
         alternates = buildBlogAlternates(page);
-      } else if (toolPages.has(page)) {
-        alternates = buildEnOnlyAlternates(page);
       } else if (page === "/security") {
         alternates = buildSecurityAlternates(page);
       } else {

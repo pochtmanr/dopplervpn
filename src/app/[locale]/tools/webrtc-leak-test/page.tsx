@@ -1,5 +1,4 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -11,6 +10,7 @@ import {
   WebPageSchema,
 } from "@/components/seo/json-ld";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { WebRtcLeakWidget } from "@/components/tools/webrtc-leak-widget";
 
 interface PageProps {
@@ -30,11 +30,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: {
-      canonical: `${baseUrl}/en/${SLUG}`,
-      languages: {
-        en: `${baseUrl}/en/${SLUG}`,
-        "x-default": `${baseUrl}/en/${SLUG}`,
-      },
+      canonical: `${baseUrl}/${locale}/${SLUG}`,
+      languages: Object.fromEntries([
+        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/${SLUG}`]),
+        ["x-default", `${baseUrl}/en/${SLUG}`],
+      ]),
     },
     openGraph: {
       title,
@@ -54,16 +54,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// English-only until the tool namespaces are hand-translated. See sibling
-// /tools/page.tsx for context.
 export function generateStaticParams() {
-  return [{ locale: "en" }];
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
-  // English-only tool page; redirect other locales to the canonical /en URL.
-  if (locale !== "en") permanentRedirect(`/en/${SLUG}`);
   setRequestLocale(locale);
 
   const t = await getTranslations("toolsWebrtcLeak");
