@@ -1395,6 +1395,7 @@
     "promoError": "Neteisingas nuolaidos kodas"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Patikrinkite savo saugumą internete su nemokamais privatumo įrankiais",
     "title": "Kaip Doppler VPN apsaugo jusu srauta",
     "subtitle": "Jusu ryšys yra užšifruotas ir nukreipiamas per Doppler kraštinio tinklo infrastruktura. Niekas neregistruojama.",
     "flow": {
@@ -3841,6 +3842,256 @@
       "noRegDesc": "Kodėl prašome jokių asmeninių duomenų.",
       "vlessTitle": "Apie VLESS-Reality",
       "vlessDesc": "Protokolas, atsakingas už Doppler šifravimą."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Nemokami privatumo įrankiai — Doppler VPN",
+      "description": "Nemokami, vienos paskirties įrankiai jūsų privatumui patikrinti: IP tikrinimas, WebRTC nutekėjimo testas, DNS nutekėjimo testas. Jokio sekimo, jokio el. pašto."
+    },
+    "title": "Nemokami privatumo įrankiai",
+    "subtitle": "Trys greitos patikros svarbiausiems nutekėjimams.",
+    "tools": {
+      "ipChecker": {
+        "title": "Koks mano IP?",
+        "description": "Pažiūrėkite, kokį viešą IP, šalį ir tiekėją jūsų srautas atskleidžia šiuo metu.",
+        "cta": "Paleisti IP patikrą"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC nutekėjimo testas",
+        "description": "WebRTC gali atskleisti tikrąjį jūsų IP net per VPN. Patikrinkite, ar jūsų naršyklė tai daro.",
+        "cta": "Paleisti WebRTC testą"
+      },
+      "dnsLeak": {
+        "title": "DNS nutekėjimo testas",
+        "description": "Jei DNS užklausos aplenkia VPN tunelį, tiekėjas vis tiek mato kiekvieną jūsų lankomą svetainę.",
+        "cta": "Paleisti DNS testą"
+      }
+    },
+    "cta": {
+      "title": "Įrankiai rado nutekėjimą?",
+      "description": "Doppler VLESS-Reality tunelis nukreipia ir IP srautą, ir DNS užklausas per šifruotą kanalą su integruotu WebRTC ir IPv6 nutekėjimų blokavimu.",
+      "button": "Išbandyti Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Koks mano IP? — Nemokama IP ir tiekėjo paieška",
+      "description": "Nemokamas IP adreso tikrinimas — iškart pamatykite savo viešą IP, šalį, regioną, miestą ir tiekėją. Jokio sekimo. Jokio el. pašto. Veikia iPhone, Android, Mac, Windows."
+    },
+    "hero": {
+      "title": "Koks mano IP?",
+      "subtitle": "Jūsų viešas IP adresas toks, kokį mato kiekviena lankoma svetainė — kartu su prie jo pririšta geografija ir tiekėju. Prisijungę prie VPN atnaujinkite puslapį ir įsitikinkite, kad pakeitimas įsigaliojo."
+    },
+    "widget": {
+      "yourIp": "Jūsų IP adresas",
+      "country": "Šalis",
+      "region": "Regionas",
+      "city": "Miestas",
+      "isp": "Interneto tiekėjas",
+      "asn": "ASN",
+      "unknown": "Nežinoma",
+      "refresh": "Atnaujinti",
+      "refreshing": "Atnaujinama…",
+      "copied": "Nukopijuota",
+      "copy": "Kopijuoti",
+      "loading": "Nustatomas jūsų IP…",
+      "error": "Nepavyko nustatyti jūsų IP. Perkraukite puslapį arba pabandykite dar kartą po akimirkos."
+    },
+    "explainer": {
+      "whatTitle": "Kas yra IP adresas?",
+      "whatBody": "Kiekvienas interneto įrenginys turi skaitinį adresą — viešą IP — kuris identifikuoja jį kiekvienam serveriui, su kuriuo jis bendrauja. IPv4 atrodo kaip 203.0.113.42; IPv6 ilgesnis ir naudoja dvitaškius. IP jums priskiria tiekėjas, ir jis keičiasi keičiant tinklą (namų Wi-Fi, mobilieji duomenys, kavinės Wi-Fi).",
+      "exposeTitle": "Ką atskleidžia jūsų IP",
+      "exposeBody": "Vien IP atskleidžia jūsų šalį, regioną, miestą ir tiekėją — kartais kelių kvartalų tikslumu. Kartu su User-Agent ir laiko duomenimis, kuriuos siunčia kiekviena naršyklė, to pakanka, kad reklamos tinklai sukurtų jūsų atspaudą ir sektų jus tarp svetainių. Transliacijų platformos juo įgyvendina regionines licencijas. Cenzoriai — geografinius blokavimus.",
+      "vpnTitle": "Kaip VPN keičia jūsų IP",
+      "vpnBody": "Prisijungus prie VPN visas jūsų srautas į internetą išeina su VPN serverio IP — ne jūsų. Svetainės mato VPN serverio šalį, tiekėją ir geografiją vietoj tikrųjų jūsų duomenų. Tinkamai sukonfigūruotas VPN tuo pačiu tuneliu nukreipia ir DNS užklausas, todėl tiekėjas nemato, kokias svetaines lankote, nors ir perduoda šifruotus paketus."
+    },
+    "checklist": {
+      "title": "Jei esate prisijungę prie Doppler VPN, šis puslapis turėtų rodyti:",
+      "items": {
+        "item1": "IP, kuris nesutampa su matytu prieš prisijungiant.",
+        "item2": "Šalį, atitinkančią pasirinktą serverį (pvz., Vokietija, Nyderlandai, Singapūras).",
+        "item3": "Tiekėją, nurodytą kaip prieglobos įmonę (Hetzner, Vultr, OVH), o ne jūsų namų operatorių.",
+        "item4": "Jokio jūsų tikrojo miesto ar regiono paminėjimo."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Kam naudojamas mano IP adresas?",
+        "answer": "Kiekvienas serveris, su kuriuo bendraujate, naudoja jūsų IP atsakymams grąžinti, ir dauguma jį registruoja. Jis įgalina geolokaciją (iki miesto lygmens), regioninį turinio licencijavimą, reklamų personalizavimą, sukčiavimo aptikimą ir — cenzūruojamuose tinkluose — blokavimo sąrašų vykdymą. Anonimiškumas internete prasideda nuo to, kad šio skaičiaus neatskleidžiate tiesiogiai."
+      },
+      "q2": {
+        "question": "Ar mano IP adresas yra privati informacija?",
+        "answer": "Jis perduodamas kiekvienai lankomai svetainei, taigi nėra paslaptis. Bet pagal BDAR ir daugumą privatumo įstatymų tai asmens duomenys, nes jį galima susieti su konkrečiu asmeniu. Elkitės su juo kaip su savo gatvės pavadinimu: ne paslaptis, bet nepažįstamiems šiaip sau neduodate."
+      },
+      "q3": {
+        "question": "Kaip paslėpti savo IP?",
+        "answer": "VPN — standartinis įrankis: jis pakeičia jūsų IP serverio adresu. Tor slepia IP per kelis mazgus greičio sąskaita. Tarpinio serverio paslaugos slepia jį tik naršyklės srautui. Perjungimas į mobiliuosius duomenis pakeičia IP, bet ne jūsų tapatybę. Viešas Wi-Fi dalijasi vienu IP su visais tinkle, bet yra nešifruotas."
+      },
+      "q4": {
+        "question": "Kodėl mano IP skirtingose svetainėse atrodo skirtingai?",
+        "answer": "Neturėtų — nebent esate už VPN su padalintu tuneliavimu (dalis programų eina per VPN, kitos per tiekėją), įmonės tinkle su keliais išeinančiais IP arba vienoje svetainėje matote IPv4, o kitoje IPv6. Kai kurios svetainės naudoja trečiųjų šalių IP paieškos API, kurios gali grąžinti šiek tiek skirtingus metaduomenis."
+      },
+      "q5": {
+        "question": "Ar mane gali sekti net su VPN, jei mano IP paslėptas?",
+        "answer": "Taip. Naršyklės atspaudas (šriftai, ekrano dydis, papildiniai, canvas atvaizdavimas) identifikuoja įrenginius be IP. Slapukai ir prisijungimai seka jus per tinklus. VPN išsprendžia tik IP ir DNS lygmenį; visa kita priklauso nuo naršyklės. Naudokite privatų naršymą, blokuokite trečiųjų šalių slapukus ir visapusiškai apsaugai apsvarstykite naršykles su apsauga nuo atspaudų."
+      },
+      "q6": {
+        "question": "Ar Doppler registruoja mano IP?",
+        "answer": "Ne. Doppler nesaugo ryšio žurnalų, IP istorijos ar DNS užklausų. VPN serveris jūsų tikrąjį IP mato tik tiek, kiek reikia srautui nukreipti — jis niekada neįrašomas į diską. Vienintelės prasmingos garantijos čia — nepriklausomi auditai ir politika be žurnalų; \"pažadame\" nepakanka, o mes skelbiame savo infrastruktūros sandarą."
+      },
+      "q7": {
+        "question": "Kas yra ASN?",
+        "answer": "Autonominės sistemos numeris identifikuoja tinklo operatorių, kuriam priklauso IP blokas. AS7922 — Comcast; AS24940 — Hetzner; AS16509 — Amazon AWS. ASN yra vieši ir parodo, ar IP priklauso namų tiekėjui, mobiliojo ryšio operatoriui, prieglobos įmonei (paprastai VPN išėjimo mazgai) ar įmonės tinklui."
+      },
+      "q8": {
+        "question": "Kodėl mano IP vieta atrodo neteisinga?",
+        "answer": "IP geolokacijos duomenų bazės (MaxMind, IP2Location) šalies lygmeniu tikslios ~99 %, miesto — ~70 % atvejų. Jos savaitėmis atsilieka nuo realybės: ką tik priskirtas IP blokas gali rodyti ankstesnio savininko vietą. VPN serverių IP kartais lokalizuojami klaidingai. Jei jūsų namų IP rodo ne tą miestą, tiekėjas greičiausiai skirsto blokus po visą aglomeraciją."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC nutekėjimo testas",
+      "webrtcDesc": "WebRTC gali atskleisti tikrąjį jūsų IP net tada, kai šis puslapis rodo VPN adresą. Išbandykite.",
+      "dnsTitle": "DNS nutekėjimo testas",
+      "dnsDesc": "Paslėpti IP nepakanka, jei DNS užklausos vis dar nuteka.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokolas, kuriuo Doppler išvengia aptikimo ir blokavimo."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC nutekėjimo testas — Patikrinkite, ar VPN slepia tikrąjį jūsų IP",
+      "description": "Nemokamas WebRTC nutekėjimo testas. Nustato, ar naršyklė per STUN nutekina tikrąjį jūsų IP net prijungus VPN. Įvykdomas per 2 sekundes. Jokie duomenys nepalieka įrenginio."
+    },
+    "hero": {
+      "title": "WebRTC nutekėjimo testas",
+      "subtitle": "Naršyklės gali atskleisti tikrąjį jūsų IP per WebRTC net tada, kai VPN jį slepia nuo svetainių. Šis testas patikrina, ar jūsų naršyklė tai daro — viskas vyksta naršyklėje, niekur nesiunčiant duomenų."
+    },
+    "widget": {
+      "publicIp": "Viešas IP (matomas svetainėms)",
+      "webrtcIps": "WebRTC aptikti IP",
+      "leakedTitle": "WebRTC nutekina jūsų IP",
+      "leakedBody": "WebRTC aptiko vieną ar kelis IP, kurie skiriasi nuo viešojo. Jei naudojate VPN, tai reiškia, kad WebRTC naudojanti svetainė vis dar gali matyti tikrąjį jūsų adresą.",
+      "safeTitle": "WebRTC nutekėjimo neaptikta",
+      "safeBody": "WebRTC pranešė tą patį IP kaip viešasis arba jokio. Šiuo metu tikrasis jūsų adresas per WebRTC nenuteka.",
+      "noWebrtc": "Jūsų naršyklė išjungė WebRTC arba adresų nerasta. Tai saugi būsena.",
+      "unknown": "Nežinoma",
+      "refresh": "Kartoti testą",
+      "refreshing": "Testuojama…",
+      "loading": "Tikrinamas WebRTC…",
+      "error": "Testo nepavyko paleisti. Perkraukite puslapį ir bandykite dar kartą."
+    },
+    "explainer": {
+      "whatTitle": "Kas yra WebRTC nutekėjimas?",
+      "whatBody": "WebRTC — naršyklės funkcija lygiarangiam garsui, vaizdui ir duomenims — ją naudoja Google Meet, Discord ir daugybė žiniatinklio programų. P2P ryšiui užmegzti naršyklė per STUN serverius išsiaiškina savo IP adresus, įskaitant vietinius ir esančius už NAT. Svetainė gali tyliai paprašyti naršyklės atlikti šį aptikimą ir per JavaScript perskaityti gautus IP — visiškai aplenkdama VPN.",
+      "howTitle": "Kaip veikia testas",
+      "howBody": "Jūsų naršyklė sukuria fiktyvų RTCPeerConnection, iškviečia createOffer ir perskaito gautus ICE kandidatus. ICE kandidatuose yra visi IP, kuriuos naršyklė gali rasti — įskaitant tikrąjį jūsų, net kai VPN tuneliuoja visą kitą srautą. Testas vykdomas lokaliai; į mūsų serverius niekas nesiunčiama.",
+      "fixTitle": "Kaip pašalinti WebRTC nutekėjimą",
+      "fixBody": "Trys variantai: (1) Naudokite VPN, kuris aktyviai blokuoja WebRTC nutekėjimus (Doppler iOS ir Android programos išjungia WebRTC už tunelio ribų). (2) Įdiekite naršyklės plėtinį, išjungiantį WebRTC (uBlock Origin turi tokią parinktį). (3) Firefox naršyklėje about:config nustatykite media.peerconnection.enabled į false. Išjungus WebRTC naršyklėje nebeveiks vaizdo skambučiai; vietoj jų naudokite programėlę."
+    },
+    "faq": {
+      "q1": {
+        "question": "Kas yra WebRTC?",
+        "answer": "WebRTC — W3C standartas, įdiegtas kiekvienoje modernioje naršyklėje lygiarangiam garso, vaizdo ir duomenų ryšiui realiuoju laiku. Juo veikia Google Meet, žiniatinklio Discord, Zoom žiniatinklio klientas ir dauguma naršyklinių vaizdo pokalbių. Tie patys API, kurie įgalina P2P skambučius, leidžia JavaScript aptikti ir jūsų vietinius tinklo adresus."
+      },
+      "q2": {
+        "question": "Kodėl WebRTC nutekina tikrąjį mano IP net per VPN?",
+        "answer": "Nes WebRTC dėklas veikia žemiau taikomojo lygmens ir tiesiogiai apklausia tinklo sąsają per STUN. VPN tuneliuoja srautą IP lygmenyje, bet neblokuoja WebRTC adresų aptikimo užklausų. Nutekėjęs adresas keliauja šifruotu tuneliu — bet tada naršyklė perduoda jį puslapio JavaScript, kuris gali jį išsiųsti bet kur."
+      },
+      "q3": {
+        "question": "Kurias naršykles tai veikia?",
+        "answer": "Su numatytaisiais nustatymais — visas: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave turi apsaugos nuo WebRTC IP nutekėjimo nustatymą, numatytai išjungtą. Firefox leidžia visiškai išjungti WebRTC per about:config. iOS Safari nuo iOS 14 iš dalies apsaugota, bet ne visiškai."
+      },
+      "q4": {
+        "question": "Ar Doppler VPN blokuoja WebRTC nutekėjimus?",
+        "answer": "Taip. Mūsų iOS ir Android klientai naudoja vietinį kill-switch, blokuojantį visą UDP srautą už tunelio ribų, todėl STUN aptikimas nepasiekia išorinių serverių. Kompiuteryje visapusiškai apsaugai rekomenduojame VPN derinti su uBlock Origin WebRTC jungikliu arba išjungimu naršyklės lygmeniu."
+      },
+      "q5": {
+        "question": "Ar išjungus WebRTC suges svetainės?",
+        "answer": "Suges vaizdo skambučiai naršyklėje (Meet, žiniatinklio Zoom, žiniatinklio Discord) ir kai kurie bendradarbiavimo įrankiai. Įprastam naršymui, transliacijoms ar bet kam, kam nereikia lygiarangių ryšių, įtakos nebus. Šių paslaugų programėlės nuo WebRTC nepriklauso."
+      },
+      "q6": {
+        "question": "Ar šis testas privatus?",
+        "answer": "Taip. Testas visas vyksta jūsų naršyklėje per standartinį RTCPeerConnection API. Nei IP, nei rezultatas, nei metaduomenys nepalieka įrenginio. Mes net neregistruojame, kad paleidote testą."
+      }
+    },
+    "related": {
+      "ipTitle": "Koks mano IP?",
+      "ipDesc": "Pažiūrėkite, kokį IP ir geografiją šiuo metu mato kiekviena svetainė.",
+      "dnsTitle": "DNS nutekėjimo testas",
+      "dnsDesc": "Jei WebRTC švarus, bet DNS nuteka, svetainės vis tiek žino, kur einate.",
+      "censorshipTitle": "Kaip veikia VPN cenzūra",
+      "censorshipDesc": "Kodėl WebRTC ir DNS nutekėjimai riboto tinklo sąlygomis yra katastrofiški."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS nutekėjimo testas — Įsitikinkite, kad jūsų VPN DNS privatus",
+      "description": "Nemokamas DNS nutekėjimo testo vadovas. Sužinokite, ar DNS užklausos keliauja VPN tuneliu, ar nuteka tiekėjui. Nuoseklios instrukcijos ir sprendimai."
+    },
+    "hero": {
+      "title": "DNS nutekėjimo testas",
+      "subtitle": "Jei DNS užklausos aplenkia VPN tunelį, interneto tiekėjas vis tiek mato kiekvieną jūsų lankomą svetainę — net prijungus VPN. Štai kaip tai patikrinti ir ištaisyti."
+    },
+    "widget": {
+      "title": "Rekomenduojamas DNS nutekėjimo testas",
+      "description": "Savo DNS zondo nevykdome, nes norint tai padaryti gerai, reikia valdomų pakaitos simbolių padomenių keliuose sprendikliuose. Naudokite patikimą trečiosios šalies įrankį žemiau — jis nepriklausomas ir nereikalauja paskyros.",
+      "primaryButton": "Atidaryti dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Atidaryti browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Svetainėje dnsleaktest.com spustelėkite \"Extended test\". Rezultate turėtų būti tik jūsų VPN tiekėjo DNS serveriai — ne jūsų interneto tiekėjas. Jei rezultatuose matote Comcast, Verizon, Vodafone ar bet kurį kitą buitinį tiekėją, jūsų DNS nuteka."
+    },
+    "explainer": {
+      "whatTitle": "Kas yra DNS nutekėjimas?",
+      "whatBody": "Įvedus URL, įrenginys pirmiausia klausia DNS serverio to domeno IP adreso. Jei DNS užklausa eina VPN tuneliu, tiekėjas mato tik šifruotą srautą. Jei ji aplenkia tunelį — DNS nutekėjimas — tiekėjas mato kiekvieną jūsų lankomą domeną, nors tolesnis ryšys ir šifruotas. Cenzūruojami tinklai dažnai tikrina DNS užklausas blokavimo sąrašams vykdyti, todėl ten DNS nutekėjimas pražūtingas.",
+      "causesTitle": "Kas sukelia DNS nutekėjimus?",
+      "causesBody": "Trys dažnos priežastys: (1) VPN klientas nustato savo DNS sprendiklį, bet OS jį ignoruoja ir naudoja vietinio tinklo priskirtą. (2) IPv6 srautas netuneliuojamas, todėl IPv6 DNS užklausos nuteka pro VPN. (3) Naršyklės kaip Chrome ir Firefox gali naudoti \"išmanų\" DNS maršrutizavimą (DNS-over-HTTPS), kuris visiškai aplenkia sistemos DNS nustatymus.",
+      "fixTitle": "Kaip pašalinti DNS nutekėjimą",
+      "fixBody": "Naudokite VPN su nuosava DNS infrastruktūra, kuris visas DNS užklausas priverstinai siunčia tuneliu (Doppler tai daro numatytai kiekvienoje platformoje). Jei jūsų VPN nepalaiko IPv6 tuneliavimo, išjunkite IPv6 sistemos tinklo nustatymuose. Naršyklėje DNS-over-HTTPS nustatykite tam pačiam tiekėjui kaip VPN arba išjunkite. Maršrutizatoriuose privatumą gerbiantį sprendiklį (Quad9, Cloudflare 1.1.1.1) kaip aukštesnįjį DNS nustatykite tik tada, kai įrenginio lygmeniu VPN nenaudojate."
+    },
+    "checklist": {
+      "title": "Doppler DNS garantijos:",
+      "items": {
+        "item1": "Visos DNS užklausos priverstinai eina VPN tuneliu — jokių nutekėjimų per sistemos DNS.",
+        "item2": "IPv6 arba tuneliuojamas, arba blokuojamas — niekada nenuteka.",
+        "item3": "Mūsų DNS sprendikliai užklausų neregistruoja.",
+        "item4": "Įjungus kill-switch blokuojame naršyklių bandymus apeiti per DNS-over-HTTPS."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Kodėl DNS nutekėjimas blogesnis už IP nutekėjimą?",
+        "answer": "IP nutekėjimas atskleidžia vieną adresą. DNS nutekėjimas atskleidžia kiekvieną jūsų lankomą domeną — kiekvieną svetainę, kiekvieną API iškvietimą, kiekvieną analitikos tašką — atviru tekstu jūsų tiekėjui ir visiems kelyje. Cenzūruojamų tinklų naudotojams DNS lygmens blokavimo sąrašai — dažniausias vykdymo mechanizmas, todėl būtent DNS nutekėjimai yra klaida, dėl kurios žmonės įkliūva."
+      },
+      "q2": {
+        "question": "Kaip sužinoti, ar mano DNS nuteka dabar?",
+        "answer": "Paleiskite išplėstinį testą dnsleaktest.com. Jis siunčia kelias užklausas į pakaitos simbolių padomenius ir parodo, kurie sprendikliai atsakė. Jei matote savo tiekėjo pavadinimą (ar bet kokį pavadinimą, nesutampantį su jūsų VPN tiekėju), DNS nuteka. Patvirtinimui pakartokite testą su VPN ir be jo."
+      },
+      "q3": {
+        "question": "Ar Doppler VPN nutekina DNS?",
+        "answer": "Ne. Kiekvienoje platformoje savo sprendiklius stumiame tuneliu ir blokuojame grįžimą prie sistemos DNS. Aktyvavus mūsų kill-switch taip pat išjungiame naršyklių DNS-over-HTTPS apėjimą. Nepriklausomi testai dnsleaktest.com ir browserleaks.com tai patvirtina — drąsiai pasitikrinkite."
+      },
+      "q4": {
+        "question": "Kas yra DNS-over-HTTPS (DoH) ir kaip jis susijęs su nutekėjimais?",
+        "answer": "DoH — protokolas, siunčiantis DNS užklausas šifruotu HTTPS ryšiu ir aplenkiantis sistemos DNS sprendiklį. Naršyklės kaip Chrome ir Firefox DoH naudoja numatytai, dažnai siųsdamos užklausas Google ar Cloudflare nepriklausomai nuo jūsų VPN. Tai nutekėjimas, nebent VPN tai aiškiai tvarko. Doppler perima DoH bandymus ir nukreipia juos tuneliu."
+      },
+      "q5": {
+        "question": "Ar naudojant VPN reikia atskiros DNS paslaugos?",
+        "answer": "Ne. Gerai sukonfigūruotas VPN DNS tvarko už jus. Atskira DNS paslauga (Quad9, Cloudflare) virš VPN gali kaip tik sukelti nutekėjimų, jei sistema DNS užklausą nukreips pro tunelį. Pasitikėkite VPN sprendikliais — o jei jais nepasitikite, naudokite kitą VPN."
+      },
+      "q6": {
+        "question": "Kaip dažnai tikrinti DNS nutekėjimus?",
+        "answer": "Po kiekvieno VPN diegimo ar OS atnaujinimo. Tunelio konfigūracija gali sugesti tyliai — sistemos atnaujinimas be įspėjimo gali perjungti tinklo dėklą į nutekantį kelią. Nuolatiniams naudotojams ketvirtinė patikra — protingas ritmas; savaitinė, jei gyvenate stipriai cenzūruojamame tinkle, kur nutekėjimo kaina aukšta."
+      }
+    },
+    "related": {
+      "ipTitle": "Koks mano IP?",
+      "ipDesc": "Pažiūrėkite, ką tiksliai jūsų VPN slepia nuo svetainių.",
+      "webrtcTitle": "WebRTC nutekėjimo testas",
+      "webrtcDesc": "IP paslėptas, DNS paslėptas, bet WebRTC nutekėjimas vis tiek jus išduoda.",
+      "bypassTitle": "Apeikite interneto cenzūrą",
+      "bypassDesc": "Būtent per DNS nutekėjimus blokavimo sąrašai jus pagauna. Skaitykite, kaip Doppler jų išvengia."
     }
   },
   "vlessVpnAndroid": {

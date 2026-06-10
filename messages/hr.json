@@ -1374,6 +1374,7 @@
     "promoError": "Nevažeći promo kod"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Provjerite svoju web-sigurnost našim besplatnim alatima za privatnost",
     "title": "Kako Doppler VPN štiti vaš promet",
     "subtitle": "Vaša veza je šifrirana i usmjerena kroz Dopplerovu rubnu mrežu. Ništa se ne bilježi.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Zašto tražimo nulti osobne podatke.",
       "vlessTitle": "O VLESS-Reality",
       "vlessDesc": "Protokol iza Dopplerove enkripcije."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Besplatni alati za privatnost — Doppler VPN",
+      "description": "Besplatni, namjenski alati za testiranje vaše privatnosti: provjera IP-a, test curenja WebRTC-a, test curenja DNS-a. Bez praćenja, bez e-pošte."
+    },
+    "title": "Besplatni alati za privatnost",
+    "subtitle": "Tri brze provjere za curenja koja su najvažnija.",
+    "tools": {
+      "ipChecker": {
+        "title": "Koji je moj IP?",
+        "description": "Pogledajte koju javnu IP adresu, državu i pružatelja vaš promet upravo sada otkriva.",
+        "cta": "Pokreni provjeru IP-a"
+      },
+      "webrtcLeak": {
+        "title": "Test curenja WebRTC-a",
+        "description": "WebRTC može otkriti vašu pravu IP adresu čak i kroz VPN. Provjerite radi li to vaš preglednik.",
+        "cta": "Pokreni WebRTC test"
+      },
+      "dnsLeak": {
+        "title": "Test curenja DNS-a",
+        "description": "Ako vaši DNS upiti zaobilaze VPN tunel, pružatelj i dalje vidi svaku stranicu koju posjetite.",
+        "cta": "Pokreni DNS test"
+      }
+    },
+    "cta": {
+      "title": "Alati su pronašli curenje?",
+      "description": "Dopplerov VLESS-Reality tunel usmjerava i IP promet i DNS upite kroz šifrirani kanal, s ugrađenim blokiranjem curenja WebRTC-a i IPv6.",
+      "button": "Isprobajte Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Koji je moj IP? — Besplatna provjera IP-a i pružatelja",
+      "description": "Besplatna provjera IP adrese — odmah vidite svoju javnu IP adresu, državu, regiju, grad i pružatelja. Bez praćenja. Bez e-pošte. Radi na iPhoneu, Androidu, Macu, Windowsima."
+    },
+    "hero": {
+      "title": "Koji je moj IP?",
+      "subtitle": "Vaša javna IP adresa onakva kakvu je vidi svaka stranica koju posjetite — zajedno s geografijom i pružateljem vezanima uz nju. Osvježite nakon spajanja na VPN kako biste potvrdili da je promjena stupila na snagu."
+    },
+    "widget": {
+      "yourIp": "Vaša IP adresa",
+      "country": "Država",
+      "region": "Regija",
+      "city": "Grad",
+      "isp": "Pružatelj interneta",
+      "asn": "ASN",
+      "unknown": "Nepoznato",
+      "refresh": "Osvježi",
+      "refreshing": "Osvježavanje…",
+      "copied": "Kopirano",
+      "copy": "Kopiraj",
+      "loading": "Otkrivanje vaše IP adrese…",
+      "error": "Nismo uspjeli otkriti vašu IP adresu. Osvježite stranicu ili pokušajte ponovno za trenutak."
+    },
+    "explainer": {
+      "whatTitle": "Što je IP adresa?",
+      "whatBody": "Svaki uređaj na internetu nosi brojčanu adresu — javnu IP adresu — koja ga identificira prema svakom poslužitelju s kojim komunicira. IPv4 izgleda kao 203.0.113.42; IPv6 je duži i koristi dvotočke. Vašu IP adresu dodjeljuje pružatelj i mijenja se kad promijenite mrežu (kućni Wi-Fi, mobilni podaci, Wi-Fi u kafiću).",
+      "exposeTitle": "Što vaša IP adresa otkriva",
+      "exposeBody": "Sama IP adresa otkriva vašu državu, regiju, grad i pružatelja — ponekad s točnošću od nekoliko ulica. U kombinaciji s User-Agentom i vremenskim podacima koje svaki preglednik šalje, to je oglašivačkim mrežama dovoljno da izrade vaš otisak i prate vas po stranicama. Streaming platforme njome provode regionalne licence. Cenzori provode geografske blokade.",
+      "vpnTitle": "Kako VPN mijenja vašu IP adresu",
+      "vpnBody": "Kad se spojite na VPN, sav vaš promet izlazi na internet s IP adresom VPN poslužitelja — ne s vašom. Stranice vide državu, pružatelja i geografiju VPN poslužitelja umjesto vaših stvarnih podataka. Ispravno konfiguriran VPN usmjerava i DNS upite kroz isti tunel, pa pružatelj ne može vidjeti koje stranice posjećujete iako prenosi šifrirane pakete."
+    },
+    "checklist": {
+      "title": "Ako ste spojeni na Doppler VPN, ova stranica trebala bi prikazivati:",
+      "items": {
+        "item1": "IP koji se ne podudara s onim koji ste vidjeli prije spajanja.",
+        "item2": "Državu koja odgovara odabranom poslužitelju (npr. Njemačka, Nizozemska, Singapur).",
+        "item3": "Pružatelja navedenog kao tvrtku za hosting (Hetzner, Vultr, OVH), a ne vašeg kućnog operatera.",
+        "item4": "Nikakav spomen vašeg stvarnog grada ili regije."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Za što se koristi moja IP adresa?",
+        "answer": "Svaki poslužitelj s kojim komunicirate koristi vašu IP adresu za slanje odgovora, a većina je bilježi. Omogućuje geolokaciju (do razine grada), regionalno licenciranje sadržaja, personalizaciju oglasa, otkrivanje prijevara i — u cenzuriranim mrežama — provođenje popisa blokiranja. Anonimnost na mreži počinje time da taj broj ne otkrivate izravno."
+      },
+      "q2": {
+        "question": "Je li moja IP adresa privatna informacija?",
+        "answer": "Šalje se svakoj stranici koju posjetite, pa nije tajna. No prema GDPR-u i većini zakona o privatnosti to je osobni podatak jer se može povezati s pojedincem. Tretirajte je kao naziv svoje ulice: nije povjerljiva, ali je ne dajete strancima bez razloga."
+      },
+      "q3": {
+        "question": "Kako sakriti svoju IP adresu?",
+        "answer": "VPN je standardni alat — zamjenjuje vašu IP adresu poslužiteljevom. Tor skriva IP kroz više releja po cijenu brzine. Proxy usluge skrivaju je samo za promet preglednika. Prelazak na mobilne podatke mijenja IP, ali ne i vaš identitet. Javni Wi-Fi dijeli jednu IP adresu sa svima na mreži, ali nije šifriran."
+      },
+      "q4": {
+        "question": "Zašto moja IP adresa izgleda drugačije na različitim stranicama?",
+        "answer": "Ne bi smjela — osim ako niste iza VPN-a s podijeljenim tuneliranjem (neke aplikacije idu kroz VPN, druge kroz pružatelja), u korporativnoj mreži s više izlaznih IP adresa, ili vidite IPv4 na jednoj stranici i IPv6 na drugoj. Neke stranice koriste API-je trećih strana za provjeru IP-a koji mogu vratiti malo drugačije metapodatke."
+      },
+      "q5": {
+        "question": "Mogu li me pratiti čak i s VPN-om ako je moja IP adresa skrivena?",
+        "answer": "Da. Otisak preglednika (fontovi, veličina zaslona, dodaci, canvas renderiranje) identificira uređaje bez IP-a. Kolačići i prijave prate vas kroz mreže. VPN rješava samo sloj IP-a i DNS-a; ostalo ovisi o pregledniku. Koristite privatno pregledavanje, blokirajte kolačiće trećih strana i razmislite o preglednicima protiv otisaka za potpunu zaštitu."
+      },
+      "q6": {
+        "question": "Bilježi li Doppler moju IP adresu?",
+        "answer": "Ne. Doppler ne pohranjuje zapisnike veza, povijest IP adresa ni DNS upite. VPN poslužitelj vidi vašu pravu IP adresu samo onoliko koliko je potrebno za usmjeravanje prometa — nikad se ne zapisuje na disk. Jedina smislena jamstva ovdje su neovisne revizije i politika bez zapisnika; \"obećavamo\" nije dovoljno, a mi objavljujemo ustroj svoje infrastrukture."
+      },
+      "q7": {
+        "question": "Što je ASN?",
+        "answer": "Broj autonomnog sustava identificira mrežnog operatera koji posjeduje IP blok. AS7922 je Comcast; AS24940 je Hetzner; AS16509 je Amazon AWS. ASN-ovi su javni i otkrivaju pripada li IP kućnom pružatelju, mobilnom operateru, tvrtki za hosting (obično izlazni čvorovi VPN-a) ili korporativnoj mreži."
+      },
+      "q8": {
+        "question": "Zašto lokacija moje IP adrese izgleda pogrešno?",
+        "answer": "Baze za geolokaciju IP-a (MaxMind, IP2Location) točne su na razini države u ~99 % slučajeva, a grada u ~70 %. Tjednima kasne za stvarnošću: svježe dodijeljeni IP blok može prikazivati lokaciju prethodnog vlasnika. IP adrese VPN poslužitelja ponekad su pogrešno locirane. Ako vaša kućna IP adresa prikazuje pogrešan grad, pružatelj vjerojatno raspoređuje blokove po cijelom širem području."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test curenja WebRTC-a",
+      "webrtcDesc": "WebRTC može otkriti vašu pravu IP adresu čak i kad ova stranica prikazuje VPN-ovu. Testirajte.",
+      "dnsTitle": "Test curenja DNS-a",
+      "dnsDesc": "Skrivanje IP-a nije dovoljno ako vaši DNS upiti i dalje cure.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokol kojim Doppler izbjegava otkrivanje i blokiranje."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test curenja WebRTC-a — Provjerite skriva li VPN vašu pravu IP adresu",
+      "description": "Besplatan test curenja WebRTC-a. Otkriva curi li vaš preglednik pravu IP adresu putem STUN-a čak i sa spojenim VPN-om. Gotov za 2 sekunde. Nikakvi podaci ne napuštaju uređaj."
+    },
+    "hero": {
+      "title": "Test curenja WebRTC-a",
+      "subtitle": "Preglednici mogu otkriti vašu pravu IP adresu putem WebRTC-a čak i kad je VPN skriva od stranica. Ovaj test provjerava radi li to vaš — u potpunosti u vašem pregledniku, bez slanja podataka bilo kamo."
+    },
+    "widget": {
+      "publicIp": "Javna IP (koju vide stranice)",
+      "webrtcIps": "IP adrese koje je otkrio WebRTC",
+      "leakedTitle": "WebRTC curi vašu IP adresu",
+      "leakedBody": "WebRTC je otkrio jednu ili više IP adresa koje se razlikuju od javne. Ako koristite VPN, to znači da stranica koja koristi WebRTC i dalje može vidjeti vašu pravu adresu.",
+      "safeTitle": "Curenje WebRTC-a nije otkriveno",
+      "safeBody": "WebRTC je prijavio istu IP adresu kao javnu, ili nijednu. Vaša prava adresa trenutno ne curi putem WebRTC-a.",
+      "noWebrtc": "Vaš preglednik je onemogućio WebRTC ili adrese nisu pronađene. To je sigurno stanje.",
+      "unknown": "Nepoznato",
+      "refresh": "Ponovi test",
+      "refreshing": "Testiranje…",
+      "loading": "Ispitivanje WebRTC-a…",
+      "error": "Test se nije mogao pokrenuti. Osvježite stranicu i pokušajte ponovno."
+    },
+    "explainer": {
+      "whatTitle": "Što je curenje WebRTC-a?",
+      "whatBody": "WebRTC je značajka preglednika za peer-to-peer zvuk, video i podatke — koriste je Google Meet, Discord i mnoge web-aplikacije. Za uspostavu P2P veze preglednik koristi STUN poslužitelje kako bi otkrio vlastite IP adrese, uključujući lokalne i one iza NAT-a. Stranica može tiho zatražiti od preglednika da pokrene to otkrivanje i pročitati dobivene IP adrese JavaScriptom — potpuno zaobilazeći VPN.",
+      "howTitle": "Kako test radi",
+      "howBody": "Vaš preglednik stvara lažni RTCPeerConnection, poziva createOffer i čita dobivene ICE kandidate. ICE kandidati uključuju svaku IP adresu koju preglednik može pronaći — uključujući vašu pravu, čak i kad VPN tunelira sav ostali promet. Test se izvodi lokalno; ništa se ne šalje našim poslužiteljima.",
+      "fixTitle": "Kako popraviti curenje WebRTC-a",
+      "fixBody": "Tri mogućnosti: (1) Koristite VPN koji proaktivno blokira curenja WebRTC-a (Dopplerove aplikacije za iOS i Android onemogućuju WebRTC izvan tunela). (2) Instalirajte proširenje preglednika koje onemogućuje WebRTC (uBlock Origin ima takvu opciju). (3) U Firefoxu postavite media.peerconnection.enabled na false u about:config. Onemogućavanje WebRTC-a pokvarit će videopozive u pregledniku; koristite umjesto toga nativnu aplikaciju."
+    },
+    "faq": {
+      "q1": {
+        "question": "Što je WebRTC?",
+        "answer": "WebRTC je W3C standard ugrađen u svaki moderni preglednik za peer-to-peer komunikaciju zvukom, videom i podacima u stvarnom vremenu. Pokreće Google Meet, web Discord, Zoomov web klijent i većinu videochatova u pregledniku. Isti API-ji koji omogućuju P2P pozive dopuštaju JavaScriptu da otkrije i vaše lokalne mrežne adrese."
+      },
+      "q2": {
+        "question": "Zašto WebRTC curi moju pravu IP adresu čak i kroz VPN?",
+        "answer": "Zato što WebRTC stog radi ispod aplikacijskog sloja i izravno ispituje mrežno sučelje putem STUN-a. VPN tunelira promet na IP sloju, ali ne blokira WebRTC-ove pozive za otkrivanje adresa. Procurjela adresa putuje unutar šifriranog tunela — no preglednik je zatim predaje JavaScriptu na stranici, koji je može poslati bilo kamo."
+      },
+      "q3": {
+        "question": "Koji su preglednici pogođeni?",
+        "answer": "Svi sa zadanim postavkama: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave ima postavku protiv curenja IP-a putem WebRTC-a koja je zadano isključena. Firefox dopušta potpuno isključivanje WebRTC-a kroz about:config. Safari na iOS-u djelomično je zaštićen od iOS-a 14, ali ne potpuno."
+      },
+      "q4": {
+        "question": "Blokira li Doppler VPN curenja WebRTC-a?",
+        "answer": "Da. Naši klijenti za iOS i Android pokreću lokalni kill-switch koji blokira sav UDP promet izvan tunela, čime STUN otkrivanje ne dopire do vanjskih poslužitelja. Na računalu preporučujemo kombinirati VPN s WebRTC prekidačem uBlock Origina ili isključivanjem na razini preglednika za potpunu pokrivenost."
+      },
+      "q5": {
+        "question": "Hoće li isključivanje WebRTC-a pokvariti stranice?",
+        "answer": "Pokvarit će videopozive u pregledniku (Meet, web Zoom, web Discord) i neke alate za suradnju. Ne utječe na uobičajeno pregledavanje, streaming ni išta što ne treba peer-to-peer veze. Nativne aplikacije tih usluga ne ovise o WebRTC-u."
+      },
+      "q6": {
+        "question": "Je li ovaj test privatan?",
+        "answer": "Da. Test se u cijelosti izvodi u vašem pregledniku standardnim API-jem RTCPeerConnection. Ni IP, ni rezultat, ni metapodaci ne napuštaju uređaj. Ne bilježimo čak ni to da ste pokrenuli test."
+      }
+    },
+    "related": {
+      "ipTitle": "Koji je moj IP?",
+      "ipDesc": "Pogledajte IP i geografiju koje svaka stranica vidi upravo sada.",
+      "dnsTitle": "Test curenja DNS-a",
+      "dnsDesc": "Ako je WebRTC čist, ali DNS curi, stranice i dalje znaju kamo idete.",
+      "censorshipTitle": "Kako funkcionira cenzura VPN-a",
+      "censorshipDesc": "Zašto su curenja WebRTC-a i DNS-a katastrofalna u ograničenim mrežama."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test curenja DNS-a — Provjerite je li DNS vašeg VPN-a privatan",
+      "description": "Besplatan vodič za test curenja DNS-a. Saznajte idu li vaši DNS upiti kroz VPN tunel ili cure prema pružatelju. Upute korak po korak i rješenja."
+    },
+    "hero": {
+      "title": "Test curenja DNS-a",
+      "subtitle": "Ako vaši DNS upiti zaobilaze VPN tunel, pružatelj interneta i dalje vidi svaku stranicu koju posjetite — čak i sa spojenim VPN-om. Evo kako to provjeriti i popraviti."
+    },
+    "widget": {
+      "title": "Preporučeni test curenja DNS-a",
+      "description": "Ne vodimo vlastitu DNS sondu jer dobro izvođenje zahtijeva kontrolirane wildcard poddomene na više razrješavača. Koristite pouzdani alat treće strane u nastavku — neovisan je i ne traži račun.",
+      "primaryButton": "Otvori dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Otvori browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Kliknite \"Extended test\" na dnsleaktest.com. Rezultat bi trebao prikazati samo DNS poslužitelje vašeg VPN pružatelja — ne vašeg operatera. Ako u rezultatima vidite Comcast, Verizon, Vodafone ili bilo kojeg drugog potrošačkog pružatelja, vaš DNS curi."
+    },
+    "explainer": {
+      "whatTitle": "Što je curenje DNS-a?",
+      "whatBody": "Kad upišete URL, uređaj najprije pita DNS poslužitelj za IP adresu te domene. Ako DNS upit ide kroz VPN tunel, pružatelj vidi samo šifrirani promet. Ako zaobiđe tunel — curenje DNS-a — pružatelj vidi svaku domenu koju posjetite, iako je sljedeća veza šifrirana. Cenzurirane mreže često pregledavaju DNS upite radi provođenja popisa blokiranja, pa je ondje curenje DNS-a kobno.",
+      "causesTitle": "Što uzrokuje curenja DNS-a?",
+      "causesBody": "Tri česta uzroka: (1) VPN klijent postavlja vlastiti DNS razrješavač, ali sustav ga ignorira i koristi razrješavač dodijeljen lokalnom mrežom. (2) IPv6 promet se ne tunelira, pa IPv6 DNS upiti cure pokraj VPN-a. (3) Preglednici poput Chromea i Firefoxa mogu koristiti \"pametno\" DNS usmjeravanje (DNS-over-HTTPS) koje potpuno zaobilazi sustavne DNS postavke.",
+      "fixTitle": "Kako popraviti curenje DNS-a",
+      "fixBody": "Koristite VPN s vlastitom DNS infrastrukturom koji sve DNS upite prisiljava kroz tunel (Doppler to radi zadano na svakoj platformi). Isključite IPv6 u mrežnim postavkama sustava ako vaš VPN ne podržava IPv6 tuneliranje. U pregledniku postavite DNS-over-HTTPS na istog pružatelja kao VPN, ili ga isključite. Na usmjerivačima postavite razrješavač koji poštuje privatnost (Quad9, Cloudflare 1.1.1.1) kao nadređeni DNS samo ako ne koristite VPN na razini uređaja."
+    },
+    "checklist": {
+      "title": "Dopplerova DNS jamstva:",
+      "items": {
+        "item1": "Svi DNS upiti prisilno idu kroz VPN tunel — bez curenja kroz sustavni DNS.",
+        "item2": "IPv6 se ili tunelira ili blokira, nikad ne curi.",
+        "item3": "Naši DNS razrješavači ne bilježe upite.",
+        "item4": "S uključenim kill-switchem blokiramo pokušaje zaobilaženja putem DNS-over-HTTPS-a iz preglednika."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Zašto je curenje DNS-a gore od curenja IP-a?",
+        "answer": "Curenje IP-a otkriva jednu adresu. Curenje DNS-a otkriva svaku domenu koju posjetite — svaku stranicu, svaki API poziv, svaku analitičku točku — u čistom tekstu vašem pružatelju i svima na putu. Za korisnike u cenzuriranim mrežama popisi blokiranja na razini DNS-a najčešći su mehanizam provedbe, zbog čega su curenja DNS-a pogreška zbog koje ljudi bivaju otkriveni."
+      },
+      "q2": {
+        "question": "Kako znati curi li moj DNS upravo sada?",
+        "answer": "Pokrenite prošireni test na dnsleaktest.com. Šalje nekoliko upita na wildcard poddomene i pokazuje koji su razrješavači odgovorili. Ako vidite ime svog pružatelja (ili bilo koje ime koje ne odgovara vašem VPN pružatelju), DNS curi. Ponovite test s VPN-om i bez njega za potvrdu."
+      },
+      "q3": {
+        "question": "Curi li DNS kod Doppler VPN-a?",
+        "answer": "Ne. Na svakoj platformi guramo vlastite razrješavače kroz tunel i blokiramo povratak na sustavni DNS. Također isključujemo zaobilaženje putem DNS-over-HTTPS-a u preglednicima kad je naš kill-switch aktivan. Neovisni testovi na dnsleaktest.com i browserleaks.com to potvrđuju — slobodno provjerite."
+      },
+      "q4": {
+        "question": "Što je DNS-over-HTTPS (DoH) i kakve veze ima s curenjima?",
+        "answer": "DoH je protokol koji šalje DNS upite šifriranom HTTPS vezom, zaobilazeći sustavni DNS razrješavač. Preglednici poput Chromea i Firefoxa koriste DoH zadano, često usmjeravajući upite Googleu ili Cloudflareu bez obzira na vaš VPN. To je curenje osim ako ga VPN izričito ne obrađuje. Doppler presreće DoH pokušaje i usmjerava ih kroz tunel."
+      },
+      "q5": {
+        "question": "Trebam li zasebnu DNS uslugu ako koristim VPN?",
+        "answer": "Ne. Dobro konfiguriran VPN rješava DNS umjesto vas. Zasebna DNS usluga (Quad9, Cloudflare) povrh VPN-a zapravo može uzrokovati curenja ako sustav usmjeri DNS upit mimo tunela. Vjerujte VPN-ovim razrješavačima — a ako im ne vjerujete, koristite drugi VPN."
+      },
+      "q6": {
+        "question": "Koliko često testirati curenja DNS-a?",
+        "answer": "Nakon svakog postavljanja VPN-a ili ažuriranja sustava. Konfiguracije tunela mogu se tiho pokvariti — ažuriranje sustava može bez upozorenja prebaciti mrežni stog na put koji curi. Tromjesečna provjera razuman je ritam za stalne korisnike; tjedna ako živite u snažno cenzuriranoj mreži gdje je cijena curenja visoka."
+      }
+    },
+    "related": {
+      "ipTitle": "Koji je moj IP?",
+      "ipDesc": "Pogledajte što točno vaš VPN skriva od stranica.",
+      "webrtcTitle": "Test curenja WebRTC-a",
+      "webrtcDesc": "IP skriven, DNS skriven, ali curenje WebRTC-a vas svejedno razotkriva.",
+      "bypassTitle": "Zaobiđite internetsku cenzuru",
+      "bypassDesc": "Upravo vas curenjima DNS-a popisi blokiranja hvataju. Pročitajte kako ih Doppler izbjegava."
     }
   },
   "vlessVpnAndroid": {

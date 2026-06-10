@@ -1374,6 +1374,7 @@
     "promoError": "Érvénytelen promóciós kód"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Ellenőrizze webes biztonságát ingyenes adatvédelmi eszközeinkkel",
     "title": "Hogyan védi a forgalmadat a Doppler VPN",
     "subtitle": "A kapcsolatod titkosítva van és a Doppler edge hálózatán keresztül továbbítódik. Semmi nem kerül naplózásra.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Miért kérjük, hogy semmilyen személyes információt ne adjon meg.",
       "vlessTitle": "A VLESS-Reality-ről",
       "vlessDesc": "A Doppler titkosításának hátterében álló protokoll."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Ingyenes adatvédelmi eszközök — Doppler VPN",
+      "description": "Ingyenes, egycélú eszközök az adatvédelme teszteléséhez: IP-ellenőrző, WebRTC-szivárgásteszt, DNS-szivárgásteszt. Nincs követés, nincs e-mail."
+    },
+    "title": "Ingyenes adatvédelmi eszközök",
+    "subtitle": "Három gyors ellenőrzés a legfontosabb szivárgásokra.",
+    "tools": {
+      "ipChecker": {
+        "title": "Mi az IP-címem?",
+        "description": "Nézze meg, milyen nyilvános IP-t, országot és szolgáltatót fed fel a forgalma éppen most.",
+        "cta": "IP-ellenőrzés futtatása"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC-szivárgásteszt",
+        "description": "A WebRTC még VPN-en keresztül is felfedheti a valódi IP-jét. Ellenőrizze, hogy az Ön böngészője is ezt teszi-e.",
+        "cta": "WebRTC-teszt futtatása"
+      },
+      "dnsLeak": {
+        "title": "DNS-szivárgásteszt",
+        "description": "Ha a DNS-lekérdezések megkerülik a VPN-alagutat, a szolgáltatója továbbra is látja az összes meglátogatott oldalt.",
+        "cta": "DNS-teszt futtatása"
+      }
+    },
+    "cta": {
+      "title": "Az eszközök szivárgást találtak?",
+      "description": "A Doppler VLESS-Reality alagútja az IP-forgalmat és a DNS-lekérdezéseket is a titkosított csatornán vezeti át, beépített WebRTC- és IPv6-szivárgásblokkolással.",
+      "button": "Próbálja ki a Doppler VPN-t"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Mi az IP-címem? — Ingyenes IP- és szolgáltatókereső",
+      "description": "Ingyenes IP-cím-ellenőrző — azonnal láthatja nyilvános IP-jét, országát, régióját, városát és szolgáltatóját. Nincs követés. Nincs e-mail. Működik iPhone-on, Androidon, Macen, Windowson."
+    },
+    "hero": {
+      "title": "Mi az IP-címem?",
+      "subtitle": "Az Ön nyilvános IP-címe úgy, ahogy minden meglátogatott weboldal látja — a hozzá tartozó földrajzi adatokkal és szolgáltatóval együtt. VPN-csatlakozás után frissítsen, hogy megbizonyosodjon a váltás sikeréről."
+    },
+    "widget": {
+      "yourIp": "Az Ön IP-címe",
+      "country": "Ország",
+      "region": "Régió",
+      "city": "Város",
+      "isp": "Internetszolgáltató",
+      "asn": "ASN",
+      "unknown": "Ismeretlen",
+      "refresh": "Frissítés",
+      "refreshing": "Frissítés…",
+      "copied": "Másolva",
+      "copy": "Másolás",
+      "loading": "IP-cím észlelése…",
+      "error": "Nem sikerült észlelni az IP-címét. Töltse újra az oldalt, vagy próbálja meg kicsit később."
+    },
+    "explainer": {
+      "whatTitle": "Mi az az IP-cím?",
+      "whatBody": "Az interneten minden eszköz egy numerikus címet visel — nyilvános IP-t —, amely azonosítja minden szerver felé, amellyel kommunikál. Az IPv4 így néz ki: 203.0.113.42; az IPv6 hosszabb, és kettőspontokat használ. Az IP-t a szolgáltatója osztja ki, és hálózatváltáskor (otthoni Wi-Fi, mobilnet, kávézói Wi-Fi) megváltozik.",
+      "exposeTitle": "Mit árul el az IP-címe",
+      "exposeBody": "Már önmagában az IP elárulja az országát, régióját, városát és szolgáltatóját — néha néhány háztömbnyi pontossággal. A böngészők által küldött User-Agenttel és időzítési adatokkal kombinálva ez elég ahhoz, hogy a hirdetési hálózatok ujjlenyomatot készítsenek Önről, és oldalakon át kövessék. A streamingplatformok a regionális licencek betartatására, a cenzorok földrajzi blokkolásra használják.",
+      "vpnTitle": "Hogyan változtatja meg az IP-jét a VPN",
+      "vpnBody": "Amikor VPN-hez csatlakozik, a teljes forgalma a VPN-szerver IP-címével lép ki az internetre — nem az Önével. A weboldalak a VPN-szerver országát, szolgáltatóját és földrajzát látják a valódi adatai helyett. A megfelelően beállított VPN a DNS-lekérdezéseket is ugyanazon az alagúton vezeti át, így a szolgáltató nem látja, milyen oldalakat látogat, hiába továbbítja a titkosított csomagokat."
+    },
+    "checklist": {
+      "title": "Ha csatlakozott a Doppler VPN-hez, ennek az oldalnak ezt kell mutatnia:",
+      "items": {
+        "item1": "Olyan IP-t, amely nem egyezik a csatlakozás előtt látottal.",
+        "item2": "A kiválasztott szervernek megfelelő országot (pl. Németország, Hollandia, Szingapúr).",
+        "item3": "Hosztingcégként feltüntetett szolgáltatót (Hetzner, Vultr, OVH) az otthoni szolgáltatója helyett.",
+        "item4": "Semmilyen utalást a valódi városára vagy régiójára."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Mire használják az IP-címemet?",
+        "answer": "Minden szerver, amellyel kommunikál, az IP-jét használja a válaszok visszaküldésére, és a legtöbb naplózza is. Lehetővé teszi a geolokációt (városszintig), a regionális tartalomlicencelést, a hirdetések személyre szabását, a csalásfelderítést, és — cenzúrázott hálózatokban — a tiltólisták érvényesítését. Az online névtelenség azzal kezdődik, hogy ezt a számot nem fedi fel közvetlenül."
+      },
+      "q2": {
+        "question": "Magáninformáció az IP-címem?",
+        "answer": "Minden meglátogatott oldalnak elküldésre kerül, tehát nem titok. De a GDPR és a legtöbb adatvédelmi törvény szerint személyes adat, mert egy személyhez köthető. Kezelje úgy, mint az utcája nevét: nem titkos, de idegeneknek nem adja oda csak úgy."
+      },
+      "q3": {
+        "question": "Hogyan rejthetem el az IP-met?",
+        "answer": "A VPN a bevett eszköz — az Ön IP-jét a szerverére cseréli. A Tor több továbbítóponton keresztül rejti el az IP-t a sebesség rovására. A proxyszolgáltatások csak a böngészőforgalomra rejtik el. A mobilnetre váltás megváltoztatja az IP-t, de az identitását nem. A nyilvános Wi-Fi egy IP-n osztozik mindenkivel a hálózaton, de titkosítatlan."
+      },
+      "q4": {
+        "question": "Miért tűnik másnak az IP-m különböző oldalakon?",
+        "answer": "Nem szabadna — hacsak nem osztott alagutas VPN mögött van (egyes alkalmazások a VPN-en, mások a szolgáltatón keresztül mennek), több kimeneti IP-vel rendelkező vállalati hálózaton, vagy az egyik oldalon IPv4-et, a másikon IPv6-ot lát. Egyes oldalak harmadik féltől származó IP-kereső API-kat használnak, amelyek kissé eltérő metaadatokat adhatnak vissza."
+      },
+      "q5": {
+        "question": "Követhetnek-e VPN-nel is, ha az IP-m rejtve van?",
+        "answer": "Igen. A böngésző-ujjlenyomat (betűtípusok, képernyőméret, bővítmények, canvas-renderelés) IP nélkül is azonosítja az eszközöket. A sütik és bejelentkezések hálózatokon át követik. A VPN csak az IP- és DNS-réteget oldja meg; a többi a böngészőn múlik. Használjon privát böngészést, tiltsa a harmadik féltől származó sütiket, és a teljes védelemhez fontolja meg az ujjlenyomat-védett böngészőket."
+      },
+      "q6": {
+        "question": "Naplózza a Doppler az IP-met?",
+        "answer": "Nem. A Doppler nem tárol kapcsolati naplókat, IP-előzményeket vagy DNS-lekérdezéseket. A VPN-szerver csak addig látja a valódi IP-jét, amíg a forgalom továbbításához szükséges — soha nem kerül lemezre. Az egyetlen érdemi garancia itt a független auditok és a naplómentes szabályzat; a \"megígérjük\" nem elég, mi pedig közzétesszük az infrastruktúránk felépítését."
+      },
+      "q7": {
+        "question": "Mi az az ASN?",
+        "answer": "Az autonóm rendszer száma azonosítja a hálózatüzemeltetőt, amelyé az IP-blokk. Az AS7922 a Comcast; az AS24940 a Hetzner; az AS16509 az Amazon AWS. Az ASN-ek nyilvánosak, és elárulják, hogy egy IP lakossági szolgáltatóé, mobilszolgáltatóé, hosztingcégé (általában VPN-kilépési pontok) vagy vállalati hálózaté."
+      },
+      "q8": {
+        "question": "Miért tűnik rossznak az IP-m helye?",
+        "answer": "Az IP-geolokációs adatbázisok (MaxMind, IP2Location) országszinten ~99%-ban, városszinten ~70%-ban pontosak. Hetekkel le vannak maradva a valóságtól: egy frissen kiosztott IP-blokk az előző tulajdonos helyét mutathatja. A VPN-szerverek IP-it néha rosszul lokalizálják. Ha az otthoni IP-je rossz várost mutat, a szolgáltatója valószínűleg az egész agglomerációban osztja szét a blokkokat."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC-szivárgásteszt",
+      "webrtcDesc": "A WebRTC akkor is felfedheti a valódi IP-jét, ha ez az oldal a VPN-ét mutatja. Tesztelje.",
+      "dnsTitle": "DNS-szivárgásteszt",
+      "dnsDesc": "Az IP elrejtése nem elég, ha a DNS-lekérdezések továbbra is szivárognak.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "A protokoll, amellyel a Doppler elkerüli az észlelést és a blokkolást."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC-szivárgásteszt — Ellenőrizze, hogy a VPN elrejti-e a valódi IP-jét",
+      "description": "Ingyenes WebRTC-szivárgásteszt. Kimutatja, hogy a böngészője STUN-on keresztül kiszivárogtatja-e a valódi IP-jét csatlakoztatott VPN mellett is. 2 másodperc alatt lefut. Semmilyen adat nem hagyja el az eszközét."
+    },
+    "hero": {
+      "title": "WebRTC-szivárgásteszt",
+      "subtitle": "A böngészők a WebRTC-n keresztül akkor is felfedhetik a valódi IP-jét, amikor a VPN elrejti azt a weboldalak elől. Ez a teszt ellenőrzi, hogy az Öné is ezt teszi-e — teljes egészében a böngészőjében, anélkül, hogy bárhová adatot küldene."
+    },
+    "widget": {
+      "publicIp": "Nyilvános IP (amit a weboldalak látnak)",
+      "webrtcIps": "WebRTC által felfedezett IP-k",
+      "leakedTitle": "A WebRTC kiszivárogtatja az IP-jét",
+      "leakedBody": "A WebRTC egy vagy több, a nyilvánostól eltérő IP-t észlelt. Ha VPN-t használ, ez azt jelenti, hogy egy WebRTC-t használó weboldal továbbra is láthatja a valódi címét.",
+      "safeTitle": "Nem észlelhető WebRTC-szivárgás",
+      "safeBody": "A WebRTC ugyanazt az IP-t jelentette, mint a nyilvános, vagy egyet sem. A valódi címe jelenleg nem szivárog a WebRTC-n keresztül.",
+      "noWebrtc": "A böngészője letiltotta a WebRTC-t, vagy nem sikerült címeket feloldani. Ez biztonságos állapot.",
+      "unknown": "Ismeretlen",
+      "refresh": "Teszt újrafuttatása",
+      "refreshing": "Tesztelés…",
+      "loading": "WebRTC vizsgálata…",
+      "error": "A teszt nem tudott lefutni. Töltse újra az oldalt, és próbálja újra."
+    },
+    "explainer": {
+      "whatTitle": "Mi az a WebRTC-szivárgás?",
+      "whatBody": "A WebRTC a böngészők peer-to-peer hang-, video- és adatfunkciója — a Google Meet, a Discord és sok webalkalmazás használja. A P2P-kapcsolat felépítéséhez a böngésző STUN-szerverekkel deríti fel a saját IP-címeit, beleértve a helyi és NAT mögötti címeket is. Egy weboldal némán lefuttathatja ezt a felderítést a böngészővel, és JavaScripttel kiolvashatja a kapott IP-ket — teljesen megkerülve a VPN-t.",
+      "howTitle": "Hogyan működik a teszt",
+      "howBody": "A böngészője létrehoz egy ál-RTCPeerConnectiont, meghívja a createOffert, és kiolvassa a kapott ICE-jelölteket. Az ICE-jelöltek minden IP-t tartalmaznak, amelyet a böngésző megtalál — beleértve a valódit is, még akkor is, ha a VPN minden más forgalmat alagútba terel. A teszt helyben fut; semmi nem kerül a szervereinkre.",
+      "fixTitle": "Hogyan javítható a WebRTC-szivárgás",
+      "fixBody": "Három lehetőség: (1) Használjon olyan VPN-t, amely proaktívan blokkolja a WebRTC-szivárgásokat (a Doppler iOS- és Android-alkalmazásai az alagúton kívül letiltják a WebRTC-t). (2) Telepítsen WebRTC-t letiltó böngészőbővítményt (az uBlock Originban van ilyen opció). (3) Firefoxban állítsa a media.peerconnection.enabled értékét false-ra az about:configban. A WebRTC letiltása tönkreteszi a böngészős videohívásokat; használjon helyettük natív alkalmazást."
+    },
+    "faq": {
+      "q1": {
+        "question": "Mi az a WebRTC?",
+        "answer": "A WebRTC a W3C szabványa, amely minden modern böngészőbe be van építve a valós idejű peer-to-peer hang-, video- és adatkommunikációhoz. Ez hajtja a Google Meetet, a webes Discordot, a Zoom webes kliensét és a legtöbb böngészős videochatet. Ugyanazok az API-k, amelyek lehetővé teszik a P2P-hívásokat, a JavaScriptnek is megengedik a helyi hálózati címek felderítését."
+      },
+      "q2": {
+        "question": "Miért szivárogtatja ki a WebRTC a valódi IP-met még VPN-en keresztül is?",
+        "answer": "Mert a WebRTC-verem az alkalmazási réteg alatt működik, és a STUN-on keresztül közvetlenül kérdezi le a hálózati interfészt. A VPN az IP-rétegen tereli alagútba a forgalmat, de a WebRTC címfelderítő hívásait nem blokkolja. A kiszivárgott cím a titkosított alagútban utazik — de a böngésző ezután átadja az oldal JavaScriptjének, amely bárhová elküldheti."
+      },
+      "q3": {
+        "question": "Mely böngészők érintettek?",
+        "answer": "Alapbeállításokkal mind: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. A Brave-ben van WebRTC-IP-szivárgás elleni beállítás, amely alapból ki van kapcsolva. A Firefoxban a WebRTC teljesen letiltható az about:configon keresztül. Az iOS Safari az iOS 14 óta részben védett, de nem teljesen."
+      },
+      "q4": {
+        "question": "Blokkolja a Doppler VPN a WebRTC-szivárgásokat?",
+        "answer": "Igen. iOS- és Android-klienseink helyi vészkapcsolót futtatnak, amely az alagúton kívüli teljes UDP-forgalmat blokkolja, így a STUN-felderítés nem éri el a külső szervereket. Asztali gépen a teljes lefedettséghez javasoljuk a VPN-t az uBlock Origin WebRTC-kapcsolójával vagy böngészőszintű letiltással kombinálni."
+      },
+      "q5": {
+        "question": "Tönkreteszi a WebRTC letiltása a weboldalakat?",
+        "answer": "A böngészős videohívásokat (Meet, webes Zoom, webes Discord) és néhány együttműködési eszközt igen. A normál böngészést, a streamelést és semmit, ami nem igényel peer-to-peer kapcsolatot, nem érinti. E szolgáltatások natív alkalmazásai nem függnek a WebRTC-től."
+      },
+      "q6": {
+        "question": "Privát ez a teszt?",
+        "answer": "Igen. A teszt teljes egészében a böngészőjében fut a szabványos RTCPeerConnection API-val. Sem IP, sem eredmény, sem metaadat nem hagyja el az eszközét. Még azt sem naplózzuk, hogy lefuttatta a tesztet."
+      }
+    },
+    "related": {
+      "ipTitle": "Mi az IP-címem?",
+      "ipDesc": "Nézze meg, milyen IP-t és földrajzot lát éppen most minden weboldal.",
+      "dnsTitle": "DNS-szivárgásteszt",
+      "dnsDesc": "Ha a WebRTC tiszta, de a DNS szivárog, az oldalak akkor is tudják, merre jár.",
+      "censorshipTitle": "Hogyan működik a VPN-cenzúra",
+      "censorshipDesc": "Miért katasztrofálisak a WebRTC- és DNS-szivárgások a korlátozott hálózatokban."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS-szivárgásteszt — Győződjön meg róla, hogy a VPN DNS-e privát",
+      "description": "Ingyenes DNS-szivárgásteszt útmutató. Derítse ki, hogy a DNS-lekérdezései a VPN-alagúton mennek-e át, vagy a szolgáltatóhoz szivárognak. Lépésről lépésre útmutató és megoldások."
+    },
+    "hero": {
+      "title": "DNS-szivárgásteszt",
+      "subtitle": "Ha a DNS-lekérdezései megkerülik a VPN-alagutat, az internetszolgáltatója továbbra is látja az összes meglátogatott oldalt — csatlakoztatott VPN mellett is. Így ellenőrizheti és javíthatja."
+    },
+    "widget": {
+      "title": "Ajánlott DNS-szivárgásteszt",
+      "description": "Nem üzemeltetünk saját DNS-szondát, mert a színvonalas megvalósításhoz több feloldón átívelő, ellenőrzött wildcard aldomainek kellenek. Használja az alábbi megbízható, külső eszközt — független, és nem kér fiókot.",
+      "primaryButton": "dnsleaktest.com megnyitása",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "browserleaks.com/dns megnyitása",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Kattintson az \"Extended test\"-re a dnsleaktest.com-on. Az eredményben csak a VPN-szolgáltatója DNS-szervereinek szabad szerepelniük — nem az internetszolgáltatójának. Ha Comcastot, Verizont, Vodafone-t vagy más lakossági szolgáltatót lát az eredmények között, a DNS-e szivárog."
+    },
+    "explainer": {
+      "whatTitle": "Mi az a DNS-szivárgás?",
+      "whatBody": "Amikor beír egy URL-t, az eszköze először egy DNS-szervertől kérdezi meg a domain IP-címét. Ha a DNS-lekérdezés a VPN-alagúton megy át, a szolgáltató csak titkosított forgalmat lát. Ha megkerüli az alagutat — DNS-szivárgás —, a szolgáltató minden meglátogatott domaint lát, hiába titkosított az azt követő kapcsolat. A cenzúrázott hálózatok gyakran vizsgálják a DNS-lekérdezéseket a tiltólisták betartatásához, így ott a DNS-szivárgás végzetes.",
+      "causesTitle": "Mi okozza a DNS-szivárgásokat?",
+      "causesBody": "Három gyakori ok: (1) A VPN-kliens beállítja a saját DNS-feloldóját, de az operációs rendszer figyelmen kívül hagyja, és a helyi hálózat által kiosztott feloldót használja. (2) Az IPv6-forgalom nem kerül alagútba, így az IPv6 DNS-lekérdezések a VPN mellett szivárognak. (3) Az olyan böngészők, mint a Chrome és a Firefox, \"okos\" DNS-útválasztást (DNS-over-HTTPS) használhatnak, amely teljesen megkerüli a rendszer DNS-beállításait.",
+      "fixTitle": "Hogyan javítható a DNS-szivárgás",
+      "fixBody": "Használjon saját DNS-infrastruktúrával rendelkező VPN-t, amely minden DNS-lekérdezést az alagútba kényszerít (a Doppler ezt minden platformon alapból megteszi). Kapcsolja ki az IPv6-ot a rendszer hálózati beállításaiban, ha a VPN-je nem támogatja az IPv6-alagutazást. A böngészőben állítsa a DNS-over-HTTPS-t a VPN-ével azonos szolgáltatóra, vagy kapcsolja ki. Routereken csak akkor állítson be adatvédelem-tisztelő feloldót (Quad9, Cloudflare 1.1.1.1) felsőbb DNS-ként, ha nem fut VPN az eszköz szintjén."
+    },
+    "checklist": {
+      "title": "A Doppler DNS-garanciái:",
+      "items": {
+        "item1": "Minden DNS-lekérdezés kötelezően a VPN-alagúton megy át — nincs szivárgás a rendszer DNS-én keresztül.",
+        "item2": "Az IPv6 vagy alagútba kerül, vagy blokkolva van — soha nem szivárog.",
+        "item3": "DNS-feloldóink nem naplózzák a lekérdezéseket.",
+        "item4": "Bekapcsolt vészkapcsoló mellett blokkoljuk a böngészők DNS-over-HTTPS-megkerülési kísérleteit."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Miért rosszabb a DNS-szivárgás az IP-szivárgásnál?",
+        "answer": "Az IP-szivárgás egy címet fed fel. A DNS-szivárgás minden meglátogatott domaint — minden oldalt, minden API-hívást, minden analitikai végpontot — nyílt szövegben tár a szolgáltatója és az út mentén bárki elé. A cenzúrázott hálózatok felhasználói számára a DNS-szintű tiltólisták a leggyakoribb végrehajtási mechanizmus, így a DNS-szivárgás az a hiba, amelyen az emberek lebuknak."
+      },
+      "q2": {
+        "question": "Honnan tudom, hogy a DNS-em éppen szivárog-e?",
+        "answer": "Futtassa a kibővített tesztet a dnsleaktest.com-on. Több lekérdezést küld wildcard aldomainekre, és megmutatja, mely feloldók válaszoltak. Ha a szolgáltatója nevét látja (vagy bármilyen nevet, amely nem egyezik a VPN-szolgáltatójával), a DNS szivárog. A megerősítéshez ismételje meg a tesztet VPN-nel és anélkül."
+      },
+      "q3": {
+        "question": "Szivárogtat-e DNS-t a Doppler VPN?",
+        "answer": "Nem. Minden platformon a saját feloldóinkat toljuk át az alagúton, és blokkoljuk a rendszer-DNS-re való visszaesést. Aktív vészkapcsoló mellett a böngészők DNS-over-HTTPS-megkerülését is letiltjuk. A dnsleaktest.com és a browserleaks.com független tesztjei ezt megerősítik — ellenőrizze nyugodtan."
+      },
+      "q4": {
+        "question": "Mi a DNS-over-HTTPS (DoH), és mi köze a szivárgásokhoz?",
+        "answer": "A DoH olyan protokoll, amely a DNS-lekérdezéseket titkosított HTTPS-kapcsolaton küldi, megkerülve a rendszer DNS-feloldóját. Az olyan böngészők, mint a Chrome és a Firefox, alapból DoH-t használnak, és a lekérdezéseket gyakran a Google-nek vagy a Cloudflare-nek küldik, függetlenül a VPN-jétől. Ez szivárgás, hacsak a VPN kifejezetten nem kezeli. A Doppler elfogja a DoH-kísérleteket, és az alagúton vezeti át őket."
+      },
+      "q5": {
+        "question": "Kell külön DNS-szolgáltatás, ha VPN-t használok?",
+        "answer": "Nem. Egy jól beállított VPN intézi a DNS-t Ön helyett. Egy külön DNS-szolgáltatás (Quad9, Cloudflare) a VPN tetején épp szivárgást okozhat, ha a rendszer az alagút mellett vezeti el a DNS-lekérdezést. Bízzon a VPN feloldóiban — és ha nem bízik bennük, használjon másik VPN-t."
+      },
+      "q6": {
+        "question": "Milyen gyakran teszteljem a DNS-szivárgásokat?",
+        "answer": "Minden VPN-beállítás vagy rendszerfrissítés után. Az alagútkonfigurációk csendben elromolhatnak — egy rendszerfrissítés szó nélkül szivárgó útvonalra állíthatja a hálózati vermet. Az állandó felhasználóknak a negyedéves ellenőrzés észszerű ritmus; hetente, ha erősen cenzúrázott hálózatban él, ahol a szivárgás ára magas."
+      }
+    },
+    "related": {
+      "ipTitle": "Mi az IP-címem?",
+      "ipDesc": "Nézze meg pontosan, mit rejt el a VPN-je a weboldalak elől.",
+      "webrtcTitle": "WebRTC-szivárgásteszt",
+      "webrtcDesc": "IP elrejtve, DNS elrejtve, de egy WebRTC-szivárgás így is leleplezi.",
+      "bypassTitle": "Az internetcenzúra megkerülése",
+      "bypassDesc": "A tiltólisták a DNS-szivárgásokon keresztül kapják el. Olvassa el, hogyan kerüli el őket a Doppler."
     }
   },
   "vlessVpnAndroid": {
