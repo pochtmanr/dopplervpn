@@ -1374,6 +1374,7 @@
     "promoError": "Cod promoțional invalid"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Verificați-vă securitatea web cu instrumentele noastre gratuite de confidențialitate",
     "title": "Cum Doppler VPN îți protejează traficul",
     "subtitle": "Conexiunea ta este criptată și rutată prin rețeaua edge a Doppler. Nimic nu este jurnalizat.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "De ce nu cerem informații personale.",
       "vlessTitle": "Despre VLESS-Reality",
       "vlessDesc": "Protocolul din spatele criptării Doppler."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Instrumente gratuite de confidențialitate — Doppler VPN",
+      "description": "Instrumente gratuite, dedicate, pentru a vă testa confidențialitatea: verificare IP, test de scurgeri WebRTC, test de scurgeri DNS. Fără urmărire, fără e-mail."
+    },
+    "title": "Instrumente gratuite de confidențialitate",
+    "subtitle": "Trei verificări rapide pentru scurgerile care contează cel mai mult.",
+    "tools": {
+      "ipChecker": {
+        "title": "Care este IP-ul meu?",
+        "description": "Vedeți ce IP public, ce țară și ce furnizor expune traficul dvs. chiar acum.",
+        "cta": "Rulează verificarea IP"
+      },
+      "webrtcLeak": {
+        "title": "Test de scurgeri WebRTC",
+        "description": "WebRTC vă poate dezvălui IP-ul real chiar și printr-un VPN. Verificați dacă browserul dvs. o face.",
+        "cta": "Rulează testul WebRTC"
+      },
+      "dnsLeak": {
+        "title": "Test de scurgeri DNS",
+        "description": "Dacă interogările DNS ocolesc tunelul VPN, furnizorul vede în continuare fiecare site pe care îl vizitați.",
+        "cta": "Rulează testul DNS"
+      }
+    },
+    "cta": {
+      "title": "Instrumentele au găsit o scurgere?",
+      "description": "Tunelul VLESS-Reality de la Doppler direcționează atât traficul IP, cât și interogările DNS prin canalul criptat, cu blocare integrată a scurgerilor WebRTC și IPv6.",
+      "button": "Încercați Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Care este IP-ul meu? — Căutare gratuită de IP și furnizor",
+      "description": "Verificare gratuită a adresei IP — vedeți instantaneu IP-ul public, țara, regiunea, orașul și furnizorul. Fără urmărire. Fără e-mail. Funcționează pe iPhone, Android, Mac, Windows."
+    },
+    "hero": {
+      "title": "Care este IP-ul meu?",
+      "subtitle": "Adresa dvs. IP publică așa cum o vede fiecare site pe care îl vizitați — împreună cu geografia și furnizorul asociate. Reîmprospătați după conectarea la un VPN pentru a confirma că schimbarea a avut efect."
+    },
+    "widget": {
+      "yourIp": "Adresa dvs. IP",
+      "country": "Țară",
+      "region": "Regiune",
+      "city": "Oraș",
+      "isp": "Furnizor de internet",
+      "asn": "ASN",
+      "unknown": "Necunoscut",
+      "refresh": "Reîmprospătează",
+      "refreshing": "Se reîmprospătează…",
+      "copied": "Copiat",
+      "copy": "Copiază",
+      "loading": "Se detectează IP-ul…",
+      "error": "Nu am putut detecta IP-ul. Reîncărcați pagina sau încercați din nou peste puțin timp."
+    },
+    "explainer": {
+      "whatTitle": "Ce este o adresă IP?",
+      "whatBody": "Fiecare dispozitiv de pe internet poartă o adresă numerică — un IP public — care îl identifică în fața fiecărui server cu care comunică. IPv4 arată ca 203.0.113.42; IPv6 este mai lung și folosește două puncte. IP-ul este atribuit de furnizor și se schimbă când schimbați rețeaua (Wi-Fi de acasă, date mobile, Wi-Fi de la cafenea).",
+      "exposeTitle": "Ce expune IP-ul dvs.",
+      "exposeBody": "Doar IP-ul dezvăluie țara, regiunea, orașul și furnizorul — uneori cu o precizie de câteva străzi. Combinat cu User-Agent și datele de sincronizare trimise de fiecare browser, este suficient ca rețelele publicitare să vă creeze amprenta și să vă urmărească între site-uri. Platformele de streaming îl folosesc pentru licențe regionale. Cenzorii — pentru blocaje geografice.",
+      "vpnTitle": "Cum vă schimbă un VPN IP-ul",
+      "vpnBody": "Când vă conectați la un VPN, tot traficul iese pe internet cu IP-ul serverului VPN — nu cu al dvs. Site-urile văd țara, furnizorul și geografia serverului VPN în locul celor reale. Un VPN configurat corect direcționează și interogările DNS prin același tunel, astfel încât furnizorul nu poate vedea ce site-uri vizitați, deși transportă pachetele criptate."
+    },
+    "checklist": {
+      "title": "Dacă sunteți conectat la Doppler VPN, această pagină ar trebui să arate:",
+      "items": {
+        "item1": "Un IP care nu se potrivește cu cel văzut înainte de conectare.",
+        "item2": "O țară care corespunde serverului ales (de ex. Germania, Olanda, Singapore).",
+        "item3": "Un furnizor listat ca firmă de hosting (Hetzner, Vultr, OVH), nu furnizorul dvs. de acasă.",
+        "item4": "Nicio mențiune a orașului sau regiunii dvs. reale."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "La ce este folosită adresa mea IP?",
+        "answer": "Fiecare server cu care comunicați folosește IP-ul dvs. pentru a trimite răspunsuri înapoi, iar majoritatea îl înregistrează. Permite geolocalizarea (până la nivel de oraș), licențierea regională a conținutului, personalizarea reclamelor, detectarea fraudelor și — în rețelele cenzurate — aplicarea listelor de blocare. Anonimatul online începe cu a nu dezvălui direct acest număr."
+      },
+      "q2": {
+        "question": "Este adresa mea IP o informație privată?",
+        "answer": "Este transmisă fiecărui site pe care îl vizitați, deci nu e un secret. Dar este o dată cu caracter personal conform GDPR și majorității legilor de confidențialitate, pentru că poate fi legată de o persoană. Tratați-o ca pe numele străzii dvs.: nu e clasificată, dar nu o dați străinilor oricum."
+      },
+      "q3": {
+        "question": "Cum îmi ascund IP-ul?",
+        "answer": "VPN-ul este instrumentul standard — vă înlocuiește IP-ul cu cel al serverului. Tor vă ascunde IP-ul prin mai multe relee cu prețul vitezei. Serviciile proxy îl ascund doar pentru traficul browserului. Trecerea pe date mobile schimbă IP-ul, dar nu identitatea. Wi-Fi-ul public împarte un IP cu toți cei din rețea, dar este necriptat."
+      },
+      "q4": {
+        "question": "De ce IP-ul meu arată diferit pe site-uri diferite?",
+        "answer": "Nu ar trebui — decât dacă sunteți în spatele unui VPN cu tunel divizat (unele aplicații trec prin VPN, altele prin furnizor), într-o rețea de companie cu mai multe IP-uri de ieșire, sau vedeți IPv4 pe un site și IPv6 pe altul. Unele site-uri folosesc API-uri terțe de căutare IP care pot returna metadate ușor diferite."
+      },
+      "q5": {
+        "question": "Pot fi urmărit chiar și cu un VPN dacă IP-ul meu este ascuns?",
+        "answer": "Da. Amprenta browserului (fonturi, dimensiunea ecranului, extensii, redarea canvas) identifică dispozitivele fără IP. Cookie-urile și autentificările vă urmăresc între rețele. VPN-ul rezolvă doar stratul IP și DNS; restul ține de browser. Folosiți navigarea privată, blocați cookie-urile terțe și luați în calcul browsere anti-amprentă pentru protecție completă."
+      },
+      "q6": {
+        "question": "Doppler îmi înregistrează IP-ul?",
+        "answer": "Nu. Doppler nu stochează jurnale de conexiune, istoricul IP-urilor sau interogările DNS. Serverul VPN vede IP-ul real doar cât e nevoie pentru a direcționa traficul — nu este scris niciodată pe disc. Singurele garanții cu sens sunt auditurile independente și politica fără jurnale; \"promitem\" nu e de ajuns, iar noi ne publicăm arhitectura."
+      },
+      "q7": {
+        "question": "Ce este un ASN?",
+        "answer": "Un număr de sistem autonom identifică operatorul de rețea care deține blocul de IP-uri. AS7922 este Comcast; AS24940 este Hetzner; AS16509 este Amazon AWS. ASN-urile sunt publice și arată dacă un IP aparține unui furnizor rezidențial, unui operator mobil, unei firme de hosting (de obicei noduri de ieșire VPN) sau unei rețele de companie."
+      },
+      "q8": {
+        "question": "De ce locația IP-ului meu pare greșită?",
+        "answer": "Bazele de date de geolocalizare IP (MaxMind, IP2Location) sunt precise la nivel de țară în ~99% din cazuri și la nivel de oraș în ~70%. Rămân cu săptămâni în urma realității: un bloc de IP-uri proaspăt alocat poate apărea cu locația proprietarului anterior. IP-urile serverelor VPN sunt uneori localizate greșit. Dacă IP-ul de acasă arată alt oraș, furnizorul probabil distribuie blocurile pe întreaga zonă metropolitană."
+      }
+    },
+    "related": {
+      "webrtcTitle": "Test de scurgeri WebRTC",
+      "webrtcDesc": "WebRTC vă poate dezvălui IP-ul real chiar și când această pagină îl arată pe cel al VPN-ului. Testați.",
+      "dnsTitle": "Test de scurgeri DNS",
+      "dnsDesc": "Ascunderea IP-ului nu e de ajuns dacă interogările DNS încă se scurg.",
+      "vlessTitle": "VPN VLESS-Reality",
+      "vlessDesc": "Protocolul pe care Doppler îl folosește pentru a evita detectarea și blocarea."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "Test de scurgeri WebRTC — Verificați dacă VPN-ul vă ascunde IP-ul real",
+      "description": "Test gratuit de scurgeri WebRTC. Detectează dacă browserul vă scurge IP-ul real prin STUN chiar și cu VPN conectat. Rulează în 2 secunde. Nicio dată nu părăsește dispozitivul."
+    },
+    "hero": {
+      "title": "Test de scurgeri WebRTC",
+      "subtitle": "Browserele vă pot dezvălui IP-ul real prin WebRTC chiar și când un VPN îl ascunde de site-uri. Acest test verifică dacă al dvs. o face — în întregime în browser, fără a trimite date nicăieri."
+    },
+    "widget": {
+      "publicIp": "IP public (văzut de site-uri)",
+      "webrtcIps": "IP-uri descoperite de WebRTC",
+      "leakedTitle": "WebRTC vă scurge IP-ul",
+      "leakedBody": "WebRTC a detectat unul sau mai multe IP-uri diferite de cel public. Dacă folosiți un VPN, înseamnă că un site care folosește WebRTC vă poate vedea în continuare adresa reală.",
+      "safeTitle": "Nicio scurgere WebRTC detectată",
+      "safeBody": "WebRTC a raportat același IP ca cel public, sau niciunul. Adresa dvs. reală nu se scurge prin WebRTC acum.",
+      "noWebrtc": "Browserul dvs. a dezactivat WebRTC sau nu s-au rezolvat adrese. Aceasta este o stare sigură.",
+      "unknown": "Necunoscut",
+      "refresh": "Reia testul",
+      "refreshing": "Se testează…",
+      "loading": "Se sondează WebRTC…",
+      "error": "Testul nu a putut rula. Reîncărcați pagina și încercați din nou."
+    },
+    "explainer": {
+      "whatTitle": "Ce este o scurgere WebRTC?",
+      "whatBody": "WebRTC este o funcție a browserului pentru audio, video și date peer-to-peer — folosită de Google Meet, Discord și multe aplicații web. Pentru a stabili o conexiune P2P, browserele folosesc servere STUN pentru a-și descoperi propriile adrese IP, inclusiv cele locale și cele din spatele NAT. Un site poate cere browserului să ruleze această descoperire în tăcere și să citească IP-urile rezultate prin JavaScript — ocolind complet VPN-ul.",
+      "howTitle": "Cum funcționează testul",
+      "howBody": "Browserul creează un RTCPeerConnection fictiv, apelează createOffer și citește candidații ICE rezultați. Candidații ICE includ fiecare IP pe care browserul îl poate găsi — inclusiv cel real, chiar și când un VPN tunelează tot restul traficului. Testul rulează local; nimic nu este trimis către serverele noastre.",
+      "fixTitle": "Cum remediați o scurgere WebRTC",
+      "fixBody": "Trei opțiuni: (1) Folosiți un VPN care blochează proactiv scurgerile WebRTC (aplicațiile Doppler pentru iOS și Android dezactivează WebRTC în afara tunelului). (2) Instalați o extensie de browser care dezactivează WebRTC (uBlock Origin are o opțiune pentru asta). (3) În Firefox, setați media.peerconnection.enabled pe false în about:config. Dezactivarea WebRTC strică apelurile video din browser; folosiți în schimb o aplicație nativă."
+    },
+    "faq": {
+      "q1": {
+        "question": "Ce este WebRTC?",
+        "answer": "WebRTC este un standard W3C integrat în fiecare browser modern pentru comunicare peer-to-peer în timp real cu audio, video și date. Alimentează Google Meet, Discord web, clientul web Zoom și majoritatea chat-urilor video din browser. Aceleași API-uri care fac posibile apelurile P2P permit JavaScript-ului să vă descopere și adresele de rețea locale."
+      },
+      "q2": {
+        "question": "De ce WebRTC îmi scurge IP-ul real chiar și printr-un VPN?",
+        "answer": "Pentru că stiva WebRTC operează sub stratul de aplicație și interoghează interfața de rețea direct prin STUN. Un VPN tunelează traficul la nivelul IP, dar nu blochează apelurile WebRTC de descoperire a adreselor. Adresa scursă călătorește în tunelul criptat — dar browserul o predă apoi JavaScript-ului din pagină, care o poate trimite oriunde."
+      },
+      "q3": {
+        "question": "Ce browsere sunt afectate?",
+        "answer": "Toate, cu setările implicite: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave include o setare împotriva scurgerii IP prin WebRTC, dezactivată implicit. Firefox permite dezactivarea completă a WebRTC prin about:config. Safari pe iOS este parțial protejat din iOS 14, dar nu complet."
+      },
+      "q4": {
+        "question": "Doppler VPN blochează scurgerile WebRTC?",
+        "answer": "Da. Clienții noștri iOS și Android rulează un kill-switch local care blochează tot traficul UDP în afara tunelului, împiedicând descoperirea STUN să ajungă la servere externe. Pe desktop recomandăm combinarea VPN-ului cu comutatorul WebRTC din uBlock Origin sau dezactivarea la nivel de browser pentru acoperire completă."
+      },
+      "q5": {
+        "question": "Dezactivarea WebRTC strică site-uri?",
+        "answer": "Strică apelurile video din browser (Meet, Zoom web, Discord web) și unele instrumente colaborative. Nu afectează navigarea normală, streamingul sau orice nu are nevoie de conexiuni peer-to-peer. Aplicațiile native ale acelor servicii nu depind de WebRTC."
+      },
+      "q6": {
+        "question": "Este acest test privat?",
+        "answer": "Da. Testul rulează în întregime în browserul dvs. prin API-ul standard RTCPeerConnection. Nici IP-ul, nici rezultatul, nici metadatele nu părăsesc dispozitivul. Nici măcar nu înregistrăm că ați rulat testul."
+      }
+    },
+    "related": {
+      "ipTitle": "Care este IP-ul meu?",
+      "ipDesc": "Vedeți IP-ul și geografia pe care fiecare site le vede chiar acum.",
+      "dnsTitle": "Test de scurgeri DNS",
+      "dnsDesc": "Dacă WebRTC e curat, dar DNS-ul se scurge, site-urile tot știu unde mergeți.",
+      "censorshipTitle": "Cum funcționează cenzura VPN",
+      "censorshipDesc": "De ce scurgerile WebRTC și DNS sunt catastrofale în rețelele restricționate."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "Test de scurgeri DNS — Verificați că DNS-ul VPN-ului este privat",
+      "description": "Ghid gratuit pentru testul de scurgeri DNS. Aflați dacă interogările DNS trec prin tunelul VPN sau se scurg către furnizor. Instrucțiuni pas cu pas și remedieri."
+    },
+    "hero": {
+      "title": "Test de scurgeri DNS",
+      "subtitle": "Dacă interogările DNS ocolesc tunelul VPN, furnizorul de internet vede în continuare fiecare site pe care îl vizitați — chiar și cu VPN-ul conectat. Iată cum verificați și remediați."
+    },
+    "widget": {
+      "title": "Test de scurgeri DNS recomandat",
+      "description": "Nu rulăm propria sondă DNS, pentru că a o face bine necesită subdomenii wildcard controlate pe mai multe resolvere. Folosiți instrumentul terț de încredere de mai jos — este independent și nu cere cont.",
+      "primaryButton": "Deschide dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Deschide browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Apăsați \"Extended test\" pe dnsleaktest.com. Rezultatul ar trebui să afișeze doar serverele DNS ale furnizorului VPN — nu furnizorul dvs. de internet. Dacă vedeți Comcast, Verizon, Vodafone sau alt furnizor de consum în rezultate, DNS-ul dvs. se scurge."
+    },
+    "explainer": {
+      "whatTitle": "Ce este o scurgere DNS?",
+      "whatBody": "Când tastați un URL, dispozitivul întreabă mai întâi un server DNS care e adresa IP a domeniului. Dacă interogarea DNS trece prin tunelul VPN, furnizorul vede doar trafic criptat. Dacă ocolește tunelul — o scurgere DNS — furnizorul vede fiecare domeniu vizitat, deși conexiunea ulterioară e criptată. Rețelele cenzurate inspectează adesea interogările DNS pentru a aplica liste de blocare, deci acolo o scurgere DNS e fatală.",
+      "causesTitle": "Ce cauzează scurgerile DNS?",
+      "causesBody": "Trei cauze frecvente: (1) Clientul VPN își setează propriul resolver DNS, dar sistemul de operare îl ignoră și folosește resolverul atribuit de rețeaua locală. (2) Traficul IPv6 nu este tunelat, așa că interogările DNS IPv6 se scurg pe lângă VPN. (3) Browsere precum Chrome și Firefox pot folosi rutare DNS \"inteligentă\" (DNS-over-HTTPS) care ocolește complet setările DNS ale sistemului.",
+      "fixTitle": "Cum remediați o scurgere DNS",
+      "fixBody": "Folosiți un VPN care deține infrastructură DNS proprie și forțează toate interogările DNS prin tunel (Doppler o face implicit pe fiecare platformă). Dezactivați IPv6 în setările de rețea dacă VPN-ul nu suportă tunelarea IPv6. În browser, setați DNS-over-HTTPS pe același furnizor ca VPN-ul, sau dezactivați-l. Pe routere, setați un resolver care respectă confidențialitatea (Quad9, Cloudflare 1.1.1.1) ca DNS superior doar dacă nu rulați VPN la nivel de dispozitiv."
+    },
+    "checklist": {
+      "title": "Garanțiile DNS ale Doppler:",
+      "items": {
+        "item1": "Toate interogările DNS sunt forțate prin tunelul VPN — fără scurgeri prin DNS-ul de sistem.",
+        "item2": "IPv6 este fie tunelat, fie blocat, niciodată scurs.",
+        "item3": "Resolverele noastre DNS nu înregistrează interogări.",
+        "item4": "Blocăm încercările browserelor de a ocoli prin DNS-over-HTTPS când kill-switch-ul e pornit."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "De ce o scurgere DNS e mai gravă decât una de IP?",
+        "answer": "O scurgere de IP dezvăluie o adresă. O scurgere DNS dezvăluie fiecare domeniu vizitat — fiecare site, fiecare apel API, fiecare punct de analiză — în text clar furnizorului și oricui de pe traseu. Pentru utilizatorii din rețele cenzurate, listele de blocare la nivel DNS sunt cel mai răspândit mecanism de aplicare, ceea ce face din scurgerile DNS greșeala care îi dă de gol pe oameni."
+      },
+      "q2": {
+        "question": "Cum știu dacă DNS-ul meu se scurge chiar acum?",
+        "answer": "Rulați testul extins pe dnsleaktest.com. Trimite mai multe interogări către subdomenii wildcard și vă spune ce resolvere au răspuns. Dacă vedeți numele furnizorului dvs. (sau orice nume care nu corespunde furnizorului VPN), DNS-ul se scurge. Repetați testul cu și fără VPN pentru confirmare."
+      },
+      "q3": {
+        "question": "Doppler VPN scurge DNS?",
+        "answer": "Nu. Împingem propriile resolvere prin tunel pe fiecare platformă și blocăm revenirea la DNS-ul de sistem. Dezactivăm și ocolirea prin DNS-over-HTTPS a browserelor când kill-switch-ul nostru e activ. Testele independente pe dnsleaktest.com și browserleaks.com confirmă acest lucru — verificați liber."
+      },
+      "q4": {
+        "question": "Ce este DNS-over-HTTPS (DoH) și ce legătură are cu scurgerile?",
+        "answer": "DoH este un protocol care trimite interogările DNS printr-o conexiune HTTPS criptată, ocolind resolverul DNS al sistemului. Browsere precum Chrome și Firefox folosesc DoH implicit, direcționând adesea interogările către Google sau Cloudflare indiferent de VPN-ul dvs. Asta e o scurgere, dacă VPN-ul nu o gestionează explicit. Doppler interceptează încercările DoH și le direcționează prin tunel."
+      },
+      "q5": {
+        "question": "Am nevoie de un serviciu DNS separat dacă folosesc un VPN?",
+        "answer": "Nu. Un VPN bine configurat gestionează DNS-ul pentru dvs. Un serviciu DNS separat (Quad9, Cloudflare) peste un VPN poate de fapt cauza scurgeri dacă sistemul direcționează interogarea DNS pe lângă tunel. Aveți încredere în resolverele VPN-ului — iar dacă nu aveți, folosiți alt VPN."
+      },
+      "q6": {
+        "question": "Cât de des ar trebui să testez scurgerile DNS?",
+        "answer": "După fiecare configurare a VPN-ului sau actualizare a sistemului. Configurațiile de tunel se pot strica în tăcere — o actualizare de sistem vă poate muta stiva de rețea pe o cale cu scurgeri fără avertisment. Verificările trimestriale sunt un ritm rezonabil pentru utilizatorii constanți; săptămânale dacă trăiți într-o rețea puternic cenzurată, unde prețul unei scurgeri e mare."
+      }
+    },
+    "related": {
+      "ipTitle": "Care este IP-ul meu?",
+      "ipDesc": "Vedeți exact ce ascunde VPN-ul dvs. de site-uri.",
+      "webrtcTitle": "Test de scurgeri WebRTC",
+      "webrtcDesc": "IP ascuns, DNS ascuns, dar o scurgere WebRTC tot vă expune.",
+      "bypassTitle": "Ocoliți cenzura internetului",
+      "bypassDesc": "Prin scurgeri DNS vă prind listele de blocare. Citiți cum le evită Doppler."
     }
   },
   "vlessVpnAndroid": {

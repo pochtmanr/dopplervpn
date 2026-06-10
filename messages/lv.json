@@ -1374,6 +1374,7 @@
     "promoError": "Nederīgs promo kods"
   },
   "technicalHowItWorks": {
+    "toolsCta": "Pārbaudiet savu tīmekļa drošību ar mūsu bezmaksas privātuma rīkiem",
     "title": "Kā Doppler VPN aizsargā jūsu datu plūsmu",
     "subtitle": "Jūsu savienojums ir šifrēts un novirzīts caur Doppler malas tīklu. Nekas netiek reģistrēts.",
     "flow": {
@@ -3820,6 +3821,256 @@
       "noRegDesc": "Kāpēc mēs neprasām nekādu personīgo informāciju.",
       "vlessTitle": "Par VLESS-Reality",
       "vlessDesc": "Protokols, kas ir Doppler šifrēšanas pamatā."
+    }
+  },
+  "toolsHub": {
+    "metadata": {
+      "title": "Bezmaksas privātuma rīki — Doppler VPN",
+      "description": "Bezmaksas, viena mērķa rīki jūsu privātuma pārbaudei: IP pārbaude, WebRTC noplūdes tests, DNS noplūdes tests. Bez izsekošanas, bez e-pasta."
+    },
+    "title": "Bezmaksas privātuma rīki",
+    "subtitle": "Trīs ātras pārbaudes svarīgākajām noplūdēm.",
+    "tools": {
+      "ipChecker": {
+        "title": "Kāds ir mans IP?",
+        "description": "Apskatiet, kādu publisko IP, valsti un pakalpojumu sniedzēju jūsu datplūsma atklāj šobrīd.",
+        "cta": "Palaist IP pārbaudi"
+      },
+      "webrtcLeak": {
+        "title": "WebRTC noplūdes tests",
+        "description": "WebRTC var atklāt jūsu īsto IP pat caur VPN. Pārbaudiet, vai jūsu pārlūks to dara.",
+        "cta": "Palaist WebRTC testu"
+      },
+      "dnsLeak": {
+        "title": "DNS noplūdes tests",
+        "description": "Ja DNS vaicājumi apiet VPN tuneli, pakalpojumu sniedzējs joprojām redz katru jūsu apmeklēto vietni.",
+        "cta": "Palaist DNS testu"
+      }
+    },
+    "cta": {
+      "title": "Rīki atrada noplūdi?",
+      "description": "Doppler VLESS-Reality tunelis novirza gan IP datplūsmu, gan DNS vaicājumus pa šifrētu kanālu ar iebūvētu WebRTC un IPv6 noplūžu bloķēšanu.",
+      "button": "Izmēģināt Doppler VPN"
+    }
+  },
+  "toolsIpChecker": {
+    "metadata": {
+      "title": "Kāds ir mans IP? — Bezmaksas IP un pakalpojumu sniedzēja meklēšana",
+      "description": "Bezmaksas IP adreses pārbaude — uzreiz redziet savu publisko IP, valsti, reģionu, pilsētu un pakalpojumu sniedzēju. Bez izsekošanas. Bez e-pasta. Darbojas iPhone, Android, Mac, Windows."
+    },
+    "hero": {
+      "title": "Kāds ir mans IP?",
+      "subtitle": "Jūsu publiskā IP adrese tāda, kādu to redz katra apmeklētā vietne — kopā ar tai piesaistīto ģeogrāfiju un pakalpojumu sniedzēju. Pēc pieslēgšanās VPN atsvaidziniet lapu, lai pārliecinātos, ka maiņa notikusi."
+    },
+    "widget": {
+      "yourIp": "Jūsu IP adrese",
+      "country": "Valsts",
+      "region": "Reģions",
+      "city": "Pilsēta",
+      "isp": "Interneta pakalpojumu sniedzējs",
+      "asn": "ASN",
+      "unknown": "Nezināms",
+      "refresh": "Atsvaidzināt",
+      "refreshing": "Atsvaidzina…",
+      "copied": "Nokopēts",
+      "copy": "Kopēt",
+      "loading": "Nosaka jūsu IP…",
+      "error": "Neizdevās noteikt jūsu IP. Pārlādējiet lapu vai pēc brīža mēģiniet vēlreiz."
+    },
+    "explainer": {
+      "whatTitle": "Kas ir IP adrese?",
+      "whatBody": "Katrai ierīcei internetā ir skaitliska adrese — publiskais IP —, kas to identificē katram serverim, ar kuru tā sazinās. IPv4 izskatās kā 203.0.113.42; IPv6 ir garāks un izmanto kolus. Jūsu IP piešķir pakalpojumu sniedzējs, un tas mainās, mainot tīklu (mājas Wi-Fi, mobilie dati, kafejnīcas Wi-Fi).",
+      "exposeTitle": "Ko atklāj jūsu IP",
+      "exposeBody": "IP vien atklāj jūsu valsti, reģionu, pilsētu un pakalpojumu sniedzēju — dažkārt ar dažu kvartālu precizitāti. Apvienojumā ar User-Agent un laika datiem, ko sūta katrs pārlūks, ar to pietiek, lai reklāmas tīkli izveidotu jūsu nospiedumu un izsekotu jūs starp vietnēm. Straumēšanas platformas to izmanto reģionālo licenču ieviešanai. Cenzori — ģeogrāfiskai bloķēšanai.",
+      "vpnTitle": "Kā VPN maina jūsu IP",
+      "vpnBody": "Pieslēdzoties VPN, visa jūsu datplūsma internetā iziet ar VPN servera IP — nevis jūsu. Vietnes redz VPN servera valsti, pakalpojumu sniedzēju un ģeogrāfiju jūsu īsto datu vietā. Pareizi konfigurēts VPN pa to pašu tuneli novirza arī DNS vaicājumus, tāpēc pakalpojumu sniedzējs neredz, kādas vietnes apmeklējat, lai gan pārnēsā šifrētās paketes."
+    },
+    "checklist": {
+      "title": "Ja esat pieslēdzies Doppler VPN, šai lapai jārāda:",
+      "items": {
+        "item1": "IP, kas nesakrīt ar pirms pieslēgšanās redzēto.",
+        "item2": "Valsts, kas atbilst izvēlētajam serverim (piem., Vācija, Nīderlande, Singapūra).",
+        "item3": "Pakalpojumu sniedzējs, kas norādīts kā mitināšanas uzņēmums (Hetzner, Vultr, OVH), nevis jūsu mājas operators.",
+        "item4": "Nekādas norādes uz jūsu īsto pilsētu vai reģionu."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Kam tiek izmantota mana IP adrese?",
+        "answer": "Katrs serveris, ar kuru sazināties, izmanto jūsu IP atbilžu nosūtīšanai, un vairums to reģistrē. Tā nodrošina ģeolokāciju (līdz pilsētas līmenim), reģionālo satura licencēšanu, reklāmu personalizāciju, krāpšanas atklāšanu un — cenzētos tīklos — bloķēšanas sarakstu ieviešanu. Anonimitāte tiešsaistē sākas ar šī skaitļa neatklāšanu tieši."
+      },
+      "q2": {
+        "question": "Vai mana IP adrese ir privāta informācija?",
+        "answer": "Tā tiek pārraidīta katrai apmeklētajai vietnei, tāpēc tā nav noslēpums. Bet saskaņā ar VDAR un vairumu privātuma likumu tā ir personas dati, jo to var sasaistīt ar konkrētu cilvēku. Izturieties pret to kā pret savas ielas nosaukumu: nav slepens, bet svešiniekiem to vienkārši neizpaužat."
+      },
+      "q3": {
+        "question": "Kā paslēpt savu IP?",
+        "answer": "VPN ir standarta rīks — tas aizstāj jūsu IP ar servera adresi. Tor slēpj IP caur vairākiem mezgliem uz ātruma rēķina. Starpniekservera pakalpojumi to slēpj tikai pārlūka datplūsmai. Pāreja uz mobilajiem datiem maina IP, bet ne jūsu identitāti. Publiskais Wi-Fi dala vienu IP ar visiem tīklā, bet nav šifrēts."
+      },
+      "q4": {
+        "question": "Kāpēc mans IP dažādās vietnēs izskatās atšķirīgs?",
+        "answer": "Tā nevajadzētu būt — ja vien neesat aiz VPN ar dalīto tunelēšanu (daļa lietotņu iet caur VPN, citas caur pakalpojumu sniedzēju), uzņēmuma tīklā ar vairākiem izejas IP vai neredzat IPv4 vienā vietnē un IPv6 citā. Dažas vietnes izmanto trešo pušu IP meklēšanas API, kas var atgriezt nedaudz atšķirīgus metadatus."
+      },
+      "q5": {
+        "question": "Vai mani var izsekot pat ar VPN, ja mans IP ir paslēpts?",
+        "answer": "Jā. Pārlūka nospiedums (fonti, ekrāna izmērs, spraudņi, canvas renderēšana) identificē ierīces bez IP. Sīkdatnes un pieteikšanās seko jums starp tīkliem. VPN atrisina tikai IP un DNS slāni; pārējais atkarīgs no pārlūka. Izmantojiet privāto pārlūkošanu, bloķējiet trešo pušu sīkdatnes un pilnīgai aizsardzībai apsveriet pret nospiedumiem aizsargātus pārlūkus."
+      },
+      "q6": {
+        "question": "Vai Doppler reģistrē manu IP?",
+        "answer": "Nē. Doppler neglabā savienojumu žurnālus, IP vēsturi vai DNS vaicājumus. VPN serveris jūsu īsto IP redz tikai tik ilgi, cik nepieciešams datplūsmas novirzīšanai — tas nekad netiek rakstīts diskā. Vienīgās jēgpilnās garantijas ir neatkarīgi auditi un bezžurnālu politika; ar \"mēs apsolām\" nepietiek, un mēs publicējam savas infrastruktūras uzbūvi."
+      },
+      "q7": {
+        "question": "Kas ir ASN?",
+        "answer": "Autonomās sistēmas numurs identificē tīkla operatoru, kam pieder IP bloks. AS7922 ir Comcast; AS24940 ir Hetzner; AS16509 ir Amazon AWS. ASN ir publiski un parāda, vai IP pieder mājas pakalpojumu sniedzējam, mobilajam operatoram, mitināšanas uzņēmumam (parasti VPN izejas mezgli) vai uzņēmuma tīklam."
+      },
+      "q8": {
+        "question": "Kāpēc mana IP atrašanās vieta izskatās nepareiza?",
+        "answer": "IP ģeolokācijas datubāzes (MaxMind, IP2Location) valsts līmenī ir precīzas ~99 %, pilsētas līmenī ~70 % gadījumu. Tās nedēļām atpaliek no realitātes: tikko piešķirts IP bloks var rādīt iepriekšējā īpašnieka atrašanās vietu. VPN serveru IP dažkārt tiek lokalizēti nepareizi. Ja jūsu mājas IP rāda nepareizu pilsētu, pakalpojumu sniedzējs visticamāk sadala blokus pa visu aglomerāciju."
+      }
+    },
+    "related": {
+      "webrtcTitle": "WebRTC noplūdes tests",
+      "webrtcDesc": "WebRTC var atklāt jūsu īsto IP pat tad, kad šī lapa rāda VPN adresi. Pārbaudiet.",
+      "dnsTitle": "DNS noplūdes tests",
+      "dnsDesc": "Paslēpt IP nepietiek, ja DNS vaicājumi joprojām noplūst.",
+      "vlessTitle": "VLESS-Reality VPN",
+      "vlessDesc": "Protokols, ar kuru Doppler izvairās no atklāšanas un bloķēšanas."
+    }
+  },
+  "toolsWebrtcLeak": {
+    "metadata": {
+      "title": "WebRTC noplūdes tests — Pārbaudiet, vai VPN slēpj jūsu īsto IP",
+      "description": "Bezmaksas WebRTC noplūdes tests. Nosaka, vai pārlūks caur STUN noplūdina jūsu īsto IP pat ar pieslēgtu VPN. Izpildās 2 sekundēs. Nekādi dati nepamet ierīci."
+    },
+    "hero": {
+      "title": "WebRTC noplūdes tests",
+      "subtitle": "Pārlūki var atklāt jūsu īsto IP caur WebRTC pat tad, kad VPN to slēpj no vietnēm. Šis tests pārbauda, vai jūsu pārlūks to dara — pilnībā jūsu pārlūkā, nekur nesūtot datus."
+    },
+    "widget": {
+      "publicIp": "Publiskais IP (ko redz vietnes)",
+      "webrtcIps": "WebRTC atklātie IP",
+      "leakedTitle": "WebRTC noplūdina jūsu IP",
+      "leakedBody": "WebRTC atklāja vienu vai vairākus IP, kas atšķiras no publiskā. Ja izmantojat VPN, tas nozīmē, ka vietne, kas izmanto WebRTC, joprojām var redzēt jūsu īsto adresi.",
+      "safeTitle": "WebRTC noplūde nav konstatēta",
+      "safeBody": "WebRTC ziņoja to pašu IP, kas publiskais, vai nevienu. Jūsu īstā adrese šobrīd nenoplūst caur WebRTC.",
+      "noWebrtc": "Jūsu pārlūks ir atspējojis WebRTC, vai adreses netika atrastas. Tas ir drošs stāvoklis.",
+      "unknown": "Nezināms",
+      "refresh": "Atkārtot testu",
+      "refreshing": "Testē…",
+      "loading": "Pārbauda WebRTC…",
+      "error": "Testu neizdevās palaist. Pārlādējiet lapu un mēģiniet vēlreiz."
+    },
+    "explainer": {
+      "whatTitle": "Kas ir WebRTC noplūde?",
+      "whatBody": "WebRTC ir pārlūka funkcija vienādranga audio, video un datiem — to izmanto Google Meet, Discord un daudzas tīmekļa lietotnes. Lai izveidotu P2P savienojumu, pārlūks ar STUN serveriem noskaidro savas IP adreses, ieskaitot lokālās un aiz NAT esošās. Vietne var klusībā likt pārlūkam veikt šo atklāšanu un ar JavaScript nolasīt iegūtos IP — pilnībā apejot VPN.",
+      "howTitle": "Kā tests darbojas",
+      "howBody": "Jūsu pārlūks izveido fiktīvu RTCPeerConnection, izsauc createOffer un nolasa iegūtos ICE kandidātus. ICE kandidātos ir katrs IP, ko pārlūks spēj atrast — ieskaitot jūsu īsto, pat ja VPN tunelē visu pārējo datplūsmu. Tests darbojas lokāli; uz mūsu serveriem nekas netiek sūtīts.",
+      "fixTitle": "Kā novērst WebRTC noplūdi",
+      "fixBody": "Trīs iespējas: (1) Izmantojiet VPN, kas proaktīvi bloķē WebRTC noplūdes (Doppler iOS un Android lietotnes atspējo WebRTC ārpus tuneļa). (2) Instalējiet pārlūka paplašinājumu, kas atspējo WebRTC (uBlock Origin ir šāda opcija). (3) Firefox pārlūkā about:config iestatiet media.peerconnection.enabled uz false. WebRTC atspējošana sabojās videozvanus pārlūkā; to vietā izmantojiet lietotni."
+    },
+    "faq": {
+      "q1": {
+        "question": "Kas ir WebRTC?",
+        "answer": "WebRTC ir W3C standarts, kas iebūvēts katrā modernā pārlūkā reāllaika vienādranga audio, video un datu sakariem. Tas darbina Google Meet, tīmekļa Discord, Zoom tīmekļa klientu un vairumu pārlūka videočatu. Tie paši API, kas nodrošina P2P zvanus, ļauj JavaScript atklāt arī jūsu lokālās tīkla adreses."
+      },
+      "q2": {
+        "question": "Kāpēc WebRTC noplūdina manu īsto IP pat caur VPN?",
+        "answer": "Tāpēc, ka WebRTC steks darbojas zem lietojumprogrammu slāņa un tieši vaicā tīkla saskarni caur STUN. VPN tunelē datplūsmu IP slānī, bet nebloķē WebRTC adrešu atklāšanas izsaukumus. Noplūdusī adrese ceļo šifrētajā tunelī — bet pārlūks to pēc tam nodod lapas JavaScript, kas var to nosūtīt jebkur."
+      },
+      "q3": {
+        "question": "Kurus pārlūkus tas skar?",
+        "answer": "Ar noklusējuma iestatījumiem — visus: Chrome, Edge, Firefox, Safari, Brave, Opera, Arc. Brave ir iestatījums pret WebRTC IP noplūdi, kas pēc noklusējuma ir izslēgts. Firefox ļauj pilnībā atspējot WebRTC caur about:config. iOS Safari kopš iOS 14 ir daļēji aizsargāts, bet ne pilnībā."
+      },
+      "q4": {
+        "question": "Vai Doppler VPN bloķē WebRTC noplūdes?",
+        "answer": "Jā. Mūsu iOS un Android klienti darbina lokālu kill-switch, kas bloķē visu UDP datplūsmu ārpus tuneļa, tāpēc STUN atklāšana nesasniedz ārējos serverus. Datorā pilnīgai aizsardzībai iesakām VPN apvienot ar uBlock Origin WebRTC slēdzi vai atspējošanu pārlūka līmenī."
+      },
+      "q5": {
+        "question": "Vai WebRTC atspējošana sabojās vietnes?",
+        "answer": "Tā sabojās videozvanus pārlūkā (Meet, tīmekļa Zoom, tīmekļa Discord) un dažus sadarbības rīkus. Parastu pārlūkošanu, straumēšanu vai jebko, kam nav vajadzīgi vienādranga savienojumi, tā neietekmē. Šo pakalpojumu lietotnes no WebRTC nav atkarīgas."
+      },
+      "q6": {
+        "question": "Vai šis tests ir privāts?",
+        "answer": "Jā. Tests pilnībā darbojas jūsu pārlūkā ar standarta RTCPeerConnection API. Ne IP, ne rezultāts, ne metadati nepamet ierīci. Mēs pat nereģistrējam, ka palaidāt testu."
+      }
+    },
+    "related": {
+      "ipTitle": "Kāds ir mans IP?",
+      "ipDesc": "Apskatiet IP un ģeogrāfiju, ko katra vietne redz šobrīd.",
+      "dnsTitle": "DNS noplūdes tests",
+      "dnsDesc": "Ja WebRTC ir tīrs, bet DNS noplūst, vietnes tāpat zina, kur dodaties.",
+      "censorshipTitle": "Kā darbojas VPN cenzūra",
+      "censorshipDesc": "Kāpēc WebRTC un DNS noplūdes ierobežotos tīklos ir katastrofālas."
+    }
+  },
+  "toolsDnsLeak": {
+    "metadata": {
+      "title": "DNS noplūdes tests — Pārliecinieties, ka jūsu VPN DNS ir privāts",
+      "description": "Bezmaksas DNS noplūdes testa ceļvedis. Uzziniet, vai DNS vaicājumi iet caur VPN tuneli vai noplūst pakalpojumu sniedzējam. Soli pa solim instrukcijas un risinājumi."
+    },
+    "hero": {
+      "title": "DNS noplūdes tests",
+      "subtitle": "Ja DNS vaicājumi apiet VPN tuneli, interneta pakalpojumu sniedzējs joprojām redz katru jūsu apmeklēto vietni — pat ar pieslēgtu VPN. Lūk, kā to pārbaudīt un izlabot."
+    },
+    "widget": {
+      "title": "Ieteicamais DNS noplūdes tests",
+      "description": "Mēs neuzturam savu DNS zondi, jo, lai to darītu labi, vajadzīgi kontrolēti wildcard apakšdomēni vairākos atrisinātājos. Izmantojiet uzticamo trešās puses rīku zemāk — tas ir neatkarīgs un neprasa kontu.",
+      "primaryButton": "Atvērt dnsleaktest.com",
+      "primaryHref": "https://dnsleaktest.com/",
+      "secondaryButton": "Atvērt browserleaks.com/dns",
+      "secondaryHref": "https://browserleaks.com/dns",
+      "instructions": "Vietnē dnsleaktest.com noklikšķiniet \"Extended test\". Rezultātā jābūt tikai jūsu VPN pakalpojumu sniedzēja DNS serveriem — nevis jūsu interneta operatoram. Ja rezultātos redzat Comcast, Verizon, Vodafone vai citu patērētāju operatoru, jūsu DNS noplūst."
+    },
+    "explainer": {
+      "whatTitle": "Kas ir DNS noplūde?",
+      "whatBody": "Ievadot URL, ierīce vispirms jautā DNS serverim šī domēna IP adresi. Ja DNS vaicājums iet caur VPN tuneli, pakalpojumu sniedzējs redz tikai šifrētu datplūsmu. Ja tas apiet tuneli — DNS noplūde — pakalpojumu sniedzējs redz katru jūsu apmeklēto domēnu, lai gan turpmākais savienojums ir šifrēts. Cenzēti tīkli bieži pārbauda DNS vaicājumus bloķēšanas sarakstu ieviešanai, tāpēc tur DNS noplūde ir liktenīga.",
+      "causesTitle": "Kas izraisa DNS noplūdes?",
+      "causesBody": "Trīs bieži cēloņi: (1) VPN klients iestata savu DNS atrisinātāju, bet OS to ignorē un izmanto lokālā tīkla piešķirto. (2) IPv6 datplūsma netiek tunelēta, tāpēc IPv6 DNS vaicājumi noplūst garām VPN. (3) Pārlūki kā Chrome un Firefox var izmantot \"gudro\" DNS maršrutēšanu (DNS-over-HTTPS), kas pilnībā apiet sistēmas DNS iestatījumus.",
+      "fixTitle": "Kā novērst DNS noplūdi",
+      "fixBody": "Izmantojiet VPN ar savu DNS infrastruktūru, kas visus DNS vaicājumus piespiedu kārtā sūta pa tuneli (Doppler to dara pēc noklusējuma katrā platformā). Ja jūsu VPN neatbalsta IPv6 tunelēšanu, izslēdziet IPv6 sistēmas tīkla iestatījumos. Pārlūkā iestatiet DNS-over-HTTPS uz to pašu pakalpojumu sniedzēju, kas VPN, vai izslēdziet to. Maršrutētājos privātumu cienošu atrisinātāju (Quad9, Cloudflare 1.1.1.1) kā augšupējo DNS iestatiet tikai tad, ja VPN nedarbojas ierīces līmenī."
+    },
+    "checklist": {
+      "title": "Doppler DNS garantijas:",
+      "items": {
+        "item1": "Visi DNS vaicājumi piespiedu kārtā iet caur VPN tuneli — nekādu noplūžu caur sistēmas DNS.",
+        "item2": "IPv6 tiek vai nu tunelēts, vai bloķēts — nekad nenoplūst.",
+        "item3": "Mūsu DNS atrisinātāji vaicājumus nereģistrē.",
+        "item4": "Ar ieslēgtu kill-switch mēs bloķējam pārlūku mēģinājumus apiet caur DNS-over-HTTPS."
+      }
+    },
+    "faq": {
+      "q1": {
+        "question": "Kāpēc DNS noplūde ir sliktāka par IP noplūdi?",
+        "answer": "IP noplūde atklāj vienu adresi. DNS noplūde atklāj katru jūsu apmeklēto domēnu — katru vietni, katru API izsaukumu, katru analītikas punktu — atklātā tekstā jūsu pakalpojumu sniedzējam un ikvienam ceļā. Cenzētu tīklu lietotājiem DNS līmeņa bloķēšanas saraksti ir izplatītākais izpildes mehānisms, tāpēc tieši DNS noplūdes ir kļūda, kuras dēļ cilvēki tiek notverti."
+      },
+      "q2": {
+        "question": "Kā uzzināt, vai mans DNS šobrīd noplūst?",
+        "answer": "Palaidiet paplašināto testu dnsleaktest.com. Tas nosūta vairākus vaicājumus uz wildcard apakšdomēniem un parāda, kuri atrisinātāji atbildēja. Ja redzat sava pakalpojumu sniedzēja vārdu (vai jebkuru vārdu, kas neatbilst jūsu VPN pakalpojumu sniedzējam), DNS noplūst. Apstiprināšanai atkārtojiet testu ar VPN un bez tā."
+      },
+      "q3": {
+        "question": "Vai Doppler VPN noplūdina DNS?",
+        "answer": "Nē. Katrā platformā mēs savus atrisinātājus virzām pa tuneli un bloķējam atgriešanos pie sistēmas DNS. Ar aktīvu kill-switch mēs arī atspējojam pārlūku DNS-over-HTTPS apiešanu. Neatkarīgi testi dnsleaktest.com un browserleaks.com to apstiprina — droši pārbaudiet paši."
+      },
+      "q4": {
+        "question": "Kas ir DNS-over-HTTPS (DoH), un kā tas saistīts ar noplūdēm?",
+        "answer": "DoH ir protokols, kas sūta DNS vaicājumus pa šifrētu HTTPS savienojumu, apejot sistēmas DNS atrisinātāju. Pārlūki kā Chrome un Firefox DoH izmanto pēc noklusējuma, bieži sūtot vaicājumus Google vai Cloudflare neatkarīgi no jūsu VPN. Tā ir noplūde, ja vien VPN to skaidri neapstrādā. Doppler pārtver DoH mēģinājumus un novirza tos pa tuneli."
+      },
+      "q5": {
+        "question": "Vai man vajag atsevišķu DNS pakalpojumu, ja izmantoju VPN?",
+        "answer": "Nē. Labi konfigurēts VPN DNS kārto jūsu vietā. Atsevišķs DNS pakalpojums (Quad9, Cloudflare) virs VPN faktiski var izraisīt noplūdes, ja sistēma DNS vaicājumu novirza garām tunelim. Uzticieties VPN atrisinātājiem — un, ja tiem neuzticaties, izmantojiet citu VPN."
+      },
+      "q6": {
+        "question": "Cik bieži pārbaudīt DNS noplūdes?",
+        "answer": "Pēc katras VPN iestatīšanas vai OS atjauninājuma. Tuneļa konfigurācija var klusi sabojāties — sistēmas atjauninājums bez brīdinājuma var pārslēgt tīkla steku uz noplūstošu ceļu. Pastāvīgiem lietotājiem ceturkšņa pārbaude ir saprātīgs ritms; iknedēļas, ja dzīvojat stipri cenzētā tīklā, kur noplūdes cena ir augsta."
+      }
+    },
+    "related": {
+      "ipTitle": "Kāds ir mans IP?",
+      "ipDesc": "Apskatiet, ko tieši jūsu VPN slēpj no vietnēm.",
+      "webrtcTitle": "WebRTC noplūdes tests",
+      "webrtcDesc": "IP paslēpts, DNS paslēpts, bet WebRTC noplūde jūs tāpat atklāj.",
+      "bypassTitle": "Apejiet interneta cenzūru",
+      "bypassDesc": "Tieši ar DNS noplūdēm bloķēšanas saraksti jūs notver. Lasiet, kā Doppler no tām izvairās."
     }
   },
   "vlessVpnAndroid": {
