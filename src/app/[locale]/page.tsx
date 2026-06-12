@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
 import { FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import {
   Hero,
@@ -146,17 +147,18 @@ export default async function HomePage({ params }: PageProps) {
         <TechnicalHowItWorks />
         <Features />
         <SpeedComparison />
+        <Pricing />
+        <PriceComparison />
         <CensorshipResistance />
         <ComparisonTable />
         <UseCases />
         <Servers />
-        <Pricing />
-        <PriceComparison />
         <PrivacyModel />
         <HowItWorks />
         <FAQ />
         <CTA />
         <HomeBlogSection posts={posts} locale={locale} />
+        <MobileStickyCta />
       </main>
       <Footer />
     </>

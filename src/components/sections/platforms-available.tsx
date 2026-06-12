@@ -33,7 +33,7 @@ export function PlatformsAvailable() {
 
   return (
     <section className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-site">
         <Reveal>
           <div className="text-center mb-6">
             <p className="text-xs uppercase tracking-wider text-text-tertiary mb-1">

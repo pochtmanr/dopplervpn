@@ -110,6 +110,13 @@ export function MobileNav() {
         {/* Nav links — same text size as desktop */}
         <div className="px-2 py-2 space-y-0.5">
           <Link
+            href="/#pricing"
+            onClick={close}
+            className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
+          >
+            {t("pricing")}
+          </Link>
+          <Link
             href="/downloads"
             onClick={close}
             className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"

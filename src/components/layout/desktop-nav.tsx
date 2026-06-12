@@ -117,7 +117,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     <>
       <nav
         ref={navRef}
-        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md shadow-sm shadow-overlay/5 overflow-hidden max-w-7xl rounded-full"
+        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md shadow-sm shadow-overlay/5 overflow-hidden max-w-site rounded-full"
       >
         {/* Main bar row */}
         <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 md:min-w-max">
@@ -126,6 +126,13 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
           {/* Desktop links — centered */}
           <div className="hidden md:flex items-center gap-0.5 absolute inset-0 justify-center pointer-events-none transition-opacity duration-300">
             <div className="flex items-center gap-0.5 pointer-events-auto">
+            <Link
+              href="/#pricing"
+              className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
+            >
+              {t("pricing")}
+            </Link>
+
             <Link
               href="/downloads"
               className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"

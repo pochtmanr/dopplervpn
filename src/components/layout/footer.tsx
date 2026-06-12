@@ -98,7 +98,7 @@ export async function Footer() {
         <DopplerLogo className="w-[110%] h-auto mx-auto -mb-8 text-text-primary/[0.02]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Desktop layout — md and up */}
         <div className="hidden md:grid grid-cols-6 gap-8 lg:gap-12">
           {/* Brand */}

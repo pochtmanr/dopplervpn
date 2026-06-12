@@ -27,7 +27,8 @@ export type CtaLocation =
   | "footer"
   | "downloads"
   | "landing-cta"
-  | "downloads-page";
+  | "downloads-page"
+  | "sticky-mobile";
 
 export type CtaPlatform = "ios" | "android" | "mac" | "windows" | "desktop";
 

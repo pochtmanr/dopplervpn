@@ -914,7 +914,7 @@ function SubscribeInner() {
 
       {/* ── Step 2: Account Dashboard ────────────────────────────── */}
       {step === 2 && (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {dashboardLoading ? (
             <div className="flex items-center justify-center py-20">
               <SpinnerIcon className="w-7 h-7 text-accent-teal" />
