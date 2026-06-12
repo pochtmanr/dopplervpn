@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
@@ -7,12 +8,17 @@ import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
+import { Reveal } from "@/components/ui/reveal";
+import type { CtaVariant } from "@/lib/track-cta";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
 const baseUrl = "https://www.dopplervpn.org";
+
+// Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
+const FALLBACK_FONT_LOCALES = new Set(["ru", "uk", "zh", "ja", "ko", "ar", "fa", "he", "hi", "ur", "th"]);
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -148,14 +154,28 @@ function DownloadIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-/* ── Setup Steps Component ───────────────────────────────────────── */
+function ArrowIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
+  return (
+    <svg className={`${className} rtl:-scale-x-100`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+    </svg>
+  );
+}
+
+/* ── Setup Steps — numbered list with connecting line ────────────── */
 
 function SetupSteps({ steps }: { steps: string[] }) {
   return (
-    <ol className="space-y-2.5 mt-4">
+    <ol className="mt-5">
       {steps.map((step, i) => (
-        <li key={i} className="flex items-start gap-3">
-          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent-teal/15 text-accent-teal text-xs font-semibold flex items-center justify-center mt-0.5">
+        <li key={i} className="relative flex items-start gap-3 pb-3.5 last:pb-0">
+          {i < steps.length - 1 && (
+            <span
+              className="absolute start-3 top-7 bottom-0 w-px bg-overlay/10"
+              aria-hidden="true"
+            />
+          )}
+          <span className="relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-accent-teal/15 border border-accent-teal/20 text-accent-teal text-xs font-semibold flex items-center justify-center mt-0.5">
             {i + 1}
           </span>
           <span className="text-sm text-text-muted leading-relaxed">{step}</span>
@@ -165,12 +185,88 @@ function SetupSteps({ steps }: { steps: string[] }) {
   );
 }
 
+/* ── Platform card config ────────────────────────────────────────── */
+
+type PlatformButton = {
+  labelKey: string;
+  href: string;
+  variant?: CtaVariant;
+  external?: boolean;
+  download?: boolean;
+  primary: boolean;
+};
+
+const PLATFORMS: {
+  key: "ios" | "android" | "mac" | "windows";
+  icon: ({ className }: { className?: string }) => React.JSX.Element;
+  learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
+  buttons: PlatformButton[];
+}[] = [
+  {
+    key: "ios",
+    icon: AppleIcon,
+    learnHref: "/vpn-for-ios",
+    buttons: [{ labelKey: "ios.button", href: URLS.ios, external: true, primary: true }],
+  },
+  {
+    key: "android",
+    icon: AndroidIcon,
+    learnHref: "/vpn-for-android",
+    buttons: [
+      {
+        labelKey: "android.buttonPlayStore",
+        href: URLS.androidPlayStore,
+        variant: "android-play",
+        external: true,
+        primary: true,
+      },
+    ],
+  },
+  {
+    key: "mac",
+    icon: AppleIcon,
+    learnHref: "/vpn-for-macos",
+    buttons: [{ labelKey: "mac.button", href: URLS.mac, external: true, primary: true }],
+  },
+  {
+    key: "windows",
+    icon: WindowsIcon,
+    learnHref: "/vpn-for-windows",
+    buttons: [
+      {
+        labelKey: "windows.buttonX64",
+        href: URLS.windowsX64,
+        variant: "windows-x64",
+        download: true,
+        primary: true,
+      },
+      {
+        labelKey: "windows.buttonArm64",
+        href: URLS.windowsArm64,
+        variant: "windows-arm64",
+        download: true,
+        primary: false,
+      },
+    ],
+  },
+];
+
 /* ── Page ─────────────────────────────────────────────────────────── */
 
 export default async function DownloadsPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("apps");
+
+  const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
+  const displayFontStyle = useFallbackFont
+    ? { fontFamily: "var(--font-body)", fontWeight: 300 }
+    : { fontFamily: "var(--font-serif)" };
+
+  // Word-by-word blur-up cascade (same timing as the homepage hero)
+  const WORD_BASE_DELAY = 0.1;
+  const WORD_STAGGER = 0.07;
+  const headlineWords = t("title").split(/\s+/).filter(Boolean);
 
   return (
     <>
@@ -187,227 +283,183 @@ export default async function DownloadsPage({ params }: PageProps) {
         type="CollectionPage"
       />
       <Navbar />
-      <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">
-        {/* Background blurs */}
+      <main className="relative min-h-screen bg-bg-primary pt-28 pb-20 overflow-x-hidden">
+        {/* Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
+          {/* Faint dot field — echoes the homepage DotGlobe motif */}
+          <div
+            className="absolute inset-x-0 top-0 h-[40rem]"
+            style={{
+              backgroundImage: "radial-gradient(circle, var(--color-overlay) 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+              opacity: 0.05,
+              maskImage: "radial-gradient(ellipse 70% 80% at 50% 0%, black, transparent)",
+              WebkitMaskImage: "radial-gradient(ellipse 70% 80% at 50% 0%, black, transparent)",
+            }}
+          />
         </div>
 
         <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6 lg:px-8">
           {/* ── Header ────────────────────────────────────────────── */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl font-display font-bold text-text-primary mb-4 tracking-tight">
-              {t("title")}
+          <div className="text-center mb-14">
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl text-text-primary mb-5 leading-[1.08]"
+              style={displayFontStyle}
+            >
+              {headlineWords.map((word, i) => (
+                <Fragment key={i}>
+                  <span
+                    className={i === 0 && !useFallbackFont ? "hero-word italic" : "hero-word"}
+                    style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
+                  >
+                    {word}
+                  </span>{" "}
+                </Fragment>
+              ))}
             </h1>
-            <p className="text-lg text-text-muted max-w-2xl mx-auto">
+            <p className="hero-animate hero-animate-delay-3 text-lg text-text-muted max-w-2xl mx-auto">
               {t("subtitle")}
             </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* ── iOS ──────────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted">
-                  <AppleIcon className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-semibold text-text-primary">{t("ios.title")}</h2>
-              </div>
-
-              <TrackedDownloadLink
-                platform="ios"
-                href={URLS.ios}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
-              >
-                <DownloadIcon className="w-4 h-4" />
-                {t("ios.button")}
-              </TrackedDownloadLink>
-
-              <UpdateInfo release={RELEASES.ios} locale={locale} t={t} />
-
-              <SetupSteps
-                steps={[t("ios.step1"), t("ios.step2"), t("ios.step3"), t("ios.step4")]}
-              />
-
-              <Link
-                href="/vpn-for-ios"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
-              >
-                {t("ios.learnMore", { defaultMessage: "Learn more about VPN for iOS" })}
-                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-              </Link>
-              <p className="mt-2 text-xs text-text-muted/70 italic">
-                {t("syncNote")}
-              </p>
-            </div>
-
-            {/* ── Android ──────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted">
-                  <AndroidIcon className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-semibold text-text-primary">{t("android.title")}</h2>
-              </div>
-
-              <TrackedDownloadLink
-                platform="android"
-                variant="android-play"
-                href={URLS.androidPlayStore}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
-              >
-                <DownloadIcon className="w-4 h-4" />
-                {t("android.buttonPlayStore")}
-              </TrackedDownloadLink>
-
-              <UpdateInfo release={RELEASES.android} locale={locale} t={t} />
-
-              <SetupSteps
-                steps={[t("android.step1"), t("android.step2"), t("android.step3"), t("android.step4")]}
-              />
-
-              <Link
-                href="/vpn-for-android"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
-              >
-                {t("android.learnMore", { defaultMessage: "Learn more about VPN for Android" })}
-                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-              </Link>
-              <p className="mt-2 text-xs text-text-muted/70 italic">
-                {t("syncNote")}
-              </p>
-            </div>
-
-            {/* ── macOS ────────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted">
-                  <AppleIcon className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-semibold text-text-primary">{t("mac.title")}</h2>
-              </div>
-
-              <TrackedDownloadLink
-                platform="mac"
-                href={URLS.mac}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
-              >
-                <DownloadIcon className="w-4 h-4" />
-                {t("mac.button")}
-              </TrackedDownloadLink>
-
-              <UpdateInfo release={RELEASES.mac} locale={locale} t={t} />
-
-              <SetupSteps
-                steps={[t("mac.step1"), t("mac.step2"), t("mac.step3"), t("mac.step4")]}
-              />
-
-              <Link
-                href="/vpn-for-macos"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
-              >
-                {t("mac.learnMore")}
-                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-              </Link>
-              <p className="mt-2 text-xs text-text-muted/70 italic">
-                {t("syncNote")}
-              </p>
-            </div>
-
-            {/* ── Windows ──────────────────────────────────────────── */}
-            <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted">
-                  <WindowsIcon className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-semibold text-text-primary">{t("windows.title")}</h2>
-              </div>
-
-              <TrackedDownloadLink
-                platform="windows"
-                variant="windows-x64"
-                href={URLS.windowsX64}
-                download
-                className="group flex items-center justify-center gap-2 rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 hover:bg-accent-teal/15 hover:border-accent-teal/40 transition-all text-accent-teal font-medium text-sm"
-              >
-                <DownloadIcon className="w-4 h-4" />
-                {t("windows.buttonX64")}
-              </TrackedDownloadLink>
-
-              <TrackedDownloadLink
-                platform="windows"
-                variant="windows-arm64"
-                href={URLS.windowsArm64}
-                download
-                className="group flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
-              >
-                <DownloadIcon className="w-4 h-4" />
-                {t("windows.buttonArm64")}
-              </TrackedDownloadLink>
-
-              <UpdateInfo release={RELEASES.windows} locale={locale} t={t} />
-
-              <SetupSteps
-                steps={[t("windows.step1"), t("windows.step2"), t("windows.step3"), t("windows.step4")]}
-              />
-
-              <Link
-                href="/vpn-for-windows"
-                className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
-              >
-                {t("windows.learnMore")}
-                <svg className="w-3.5 h-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-              </Link>
-              <p className="mt-2 text-xs text-text-muted/70 italic">
-                {t("syncNote")}
-              </p>
+            {/* Platform quick-jump chips */}
+            <div className="hero-animate hero-animate-delay-4 mt-8 flex flex-wrap justify-center gap-2.5">
+              {PLATFORMS.map(({ key, icon: Icon }) => (
+                <a
+                  key={key}
+                  href={`#${key}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-text-muted border border-overlay/10 bg-bg-secondary/50 hover:text-accent-teal hover:border-accent-teal/30 hover:bg-bg-secondary/80 transition-colors"
+                >
+                  <Icon className="w-4 h-4" />
+                  {t(`${key}.title`)}
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* ── Platform Cards ───────────────────────────────────── */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {PLATFORMS.map(({ key, icon: Icon, learnHref, buttons }, i) => (
+              <Reveal key={key} delay={(i % 2) * 70} className="h-full">
+                <div
+                  id={key}
+                  className="group relative h-full scroll-mt-28 overflow-hidden rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 sm:p-7 transition-all duration-300 hover:border-accent-teal/25 flex flex-col"
+                >
+                  <div
+                    className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-accent-teal/[0.06] to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    aria-hidden="true"
+                  />
+
+                  <div className="relative flex items-center gap-3.5 mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal transition-all duration-300 group-hover:bg-accent-teal/20 group-hover:shadow-[0_0_20px_rgba(0,140,140,0.25)]">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h2 className="text-2xl font-semibold text-text-primary">{t(`${key}.title`)}</h2>
+                  </div>
+
+                  <div className="relative">
+                    {buttons.map((btn) => (
+                      <TrackedDownloadLink
+                        key={btn.labelKey}
+                        platform={key}
+                        {...(btn.variant ? { variant: btn.variant } : {})}
+                        href={btn.href}
+                        {...(btn.external
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                        {...(btn.download ? { download: true } : {})}
+                        className={
+                          btn.primary
+                            ? "flex items-center justify-center gap-2 rounded-xl bg-accent-teal text-white px-4 py-3.5 hover:bg-accent-teal-light transition-all duration-200 font-semibold text-sm shadow-lg shadow-accent-teal/20 hover:shadow-accent-teal/35"
+                            : "flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
+                        }
+                      >
+                        <DownloadIcon className="w-4 h-4" />
+                        {t(btn.labelKey)}
+                      </TrackedDownloadLink>
+                    ))}
+
+                    <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
+
+                    <SetupSteps
+                      steps={[1, 2, 3, 4].map((n) => t(`${key}.step${n}`))}
+                    />
+                  </div>
+
+                  <div className="relative mt-auto pt-5">
+                    <Link
+                      href={learnHref}
+                      className="inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
+                    >
+                      {t(`${key}.learnMore`)}
+                      <span className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                        <ArrowIcon />
+                      </span>
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Pro sync note — shown once for all platforms */}
+          <Reveal>
+            <p className="mt-8 flex items-center justify-center gap-2 text-center text-sm text-text-muted">
+              <svg className="w-4 h-4 text-accent-teal flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+              {t("syncNote")}
+            </p>
+          </Reveal>
 
           {/* ── Bottom Cards ──────────────────────────────────── */}
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Bypass Censorship */}
-            <Link
-              href="/bypass-censorship"
-              className="group rounded-2xl border border-accent-teal/20 bg-accent-teal/5 p-8 sm:p-10 text-center hover:bg-accent-teal/10 hover:border-accent-teal/30 transition-all"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-accent-teal/15 border border-accent-teal/20 flex items-center justify-center text-accent-teal mx-auto mb-4">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                </svg>
-              </div>
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-text-primary mb-2">
-                {t("censorshipCard.title")}
-              </h2>
-              <p className="text-sm text-text-muted">
-                {t("censorshipCard.description")}
-              </p>
-            </Link>
+            <Reveal className="h-full">
+              <Link
+                href="/bypass-censorship"
+                className="group block h-full relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-b from-accent-teal/10 to-accent-teal/[0.03] p-8 sm:p-10 text-center hover:border-accent-teal/35 transition-all duration-300"
+              >
+                <div
+                  className="absolute -top-16 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-64 h-32 bg-accent-teal/15 rounded-full blur-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  aria-hidden="true"
+                />
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-2xl bg-accent-teal/15 border border-accent-teal/20 flex items-center justify-center text-accent-teal mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-semibold text-text-primary mb-2">
+                    {t("censorshipCard.title")}
+                  </h2>
+                  <p className="text-sm text-text-muted">
+                    {t("censorshipCard.description")}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
 
             {/* Need Help */}
-            <Link
-              href="/support"
-              className="group rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-8 sm:p-10 text-center hover:bg-bg-secondary/70 hover:border-overlay/20 transition-all"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted mx-auto mb-4">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-                </svg>
-              </div>
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-text-primary mb-2">
-                {t("needHelp")}
-              </h2>
-              <p className="text-sm text-text-muted">
-                {t("visitSupport")}
-              </p>
-            </Link>
+            <Reveal delay={70} className="h-full">
+              <Link
+                href="/support"
+                className="group block h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-8 sm:p-10 text-center hover:bg-bg-secondary/70 hover:border-overlay/20 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                  </svg>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-text-primary mb-2">
+                  {t("needHelp")}
+                </h2>
+                <p className="text-sm text-text-muted">
+                  {t("visitSupport")}
+                </p>
+              </Link>
+            </Reveal>
           </div>
         </div>
       </main>
