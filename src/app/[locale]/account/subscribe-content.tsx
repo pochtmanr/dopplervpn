@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState, useEffect, useRef } from 'react';
+import { Fragment, Suspense, useState, useEffect, useRef } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import type { RevolutCheckoutInstance } from '@revolut/checkout';
 import { trackGetPro, trackAccountIdentified, trackCheckoutStarted } from '@/lib/track-cta';
@@ -14,6 +14,9 @@ const PLANS = [
 ] as const;
 
 type PlanId = (typeof PLANS)[number]['id'];
+
+// Locales where the decorative serif breaks (no Cyrillic/CJK/Arabic glyphs) — same set as the hero
+const FALLBACK_FONT_LOCALES = new Set(['ru', 'uk', 'zh', 'ja', 'ko', 'ar', 'fa', 'he', 'hi', 'ur', 'th']);
 
 /* ── Helpers ─────────────────────────────────────────────────────────── */
 
@@ -209,6 +212,12 @@ function SubscribeInner() {
   const [contactSaving, setContactSaving] = useState(false);
   const [contactSaved, setContactSaved] = useState(false);
 
+  /* ── Delete account state ─────────────────────────────────────── */
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState('');
+  const [deletedNotice, setDeletedNotice] = useState(false);
+
   /* ── Premium support state ────────────────────────────────────── */
   const [premiumTicketOpen, setPremiumTicketOpen] = useState(false);
   const [premiumTicketForm, setPremiumTicketForm] = useState({ subject: '', description: '', contactEmail: '' });
@@ -320,6 +329,7 @@ function SubscribeInner() {
   /* ── Step 1: Create anonymous account ─────────────────────────── */
   const handleCreateAccount = async () => {
     setIdentifyError('');
+    setDeletedNotice(false);
     setIdentifyLoading(true);
     try {
       const res = await fetch('/api/subscribe/create-account', {
@@ -348,6 +358,7 @@ function SubscribeInner() {
   /* ── Step 1: Continue with existing account ─────────────────── */
   const handleContinue = async () => {
     setIdentifyError('');
+    setDeletedNotice(false);
     const normalized = accountId.trim().toUpperCase();
     const accountRegex = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
     if (!accountRegex.test(normalized)) {
@@ -426,6 +437,35 @@ function SubscribeInner() {
     setConnectEmailOpen(false);
     setConnectEmailInput('');
     setContactSaved(false);
+  };
+
+  /* ── Delete account (free accounts only — pro goes via support) ── */
+  const handleDeleteAccount = async () => {
+    setDeleteLoading(true);
+    setDeleteError('');
+    try {
+      const res = await fetch('/api/account/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ account_id: accountId }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setDeleteError(
+          data.error === 'active_subscription'
+            ? t('dashboard.deleteProSupportNote')
+            : t('error'),
+        );
+        return;
+      }
+      setDeleteModalOpen(false);
+      handleLogout();
+      setDeletedNotice(true);
+    } catch {
+      setDeleteError(t('error'));
+    } finally {
+      setDeleteLoading(false);
+    }
   };
 
   /* ── Submit premium ticket ────────────────────────────────────── */
@@ -790,125 +830,158 @@ function SubscribeInner() {
     </>
   );
 
+  /* ── Login header: hero serif voice with per-word reveal ─────── */
+  const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
+  const titleWords = t('title').split(/\s+/).filter(Boolean);
+  const titleFontStyle = useFallbackFont
+    ? { fontFamily: 'var(--font-body)', fontWeight: 300 }
+    : { fontFamily: 'var(--font-serif)' };
+
   /* ── Render ────────────────────────────────────────────────────── */
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary pt-24">
 
       {/* ── Step 1: Identify ─────────────────────────────────────── */}
       {step === 1 && (
-        <div className="mx-auto max-w-md px-4 py-8 sm:py-16">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full bg-accent-teal/10 border border-accent-teal/20">
-              <ShieldIcon className="w-4 h-4 text-accent-teal" />
-              <span className="text-xs font-semibold tracking-wider uppercase text-accent-teal">
-                Doppler VPN
-              </span>
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-display font-bold tracking-tight mb-3">
-              {t('title')}
-            </h1>
-            <p className="text-sm text-text-muted">{t('subtitle')}</p>
-          </div>
-
-          <div className="space-y-5">
-            {/* Toggle buttons */}
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => { setMode('new'); setIdentifyError(''); }}
-                className={`flex-1 rounded-xl border py-2.5 text-sm font-medium transition-all ${
-                  mode === 'new'
-                    ? 'border-accent-teal bg-accent-teal/5 text-accent-teal ring-1 ring-accent-teal/30'
-                    : 'border-overlay/10 bg-bg-secondary/50 text-text-muted hover:border-overlay/20'
-                }`}
+        <div className="mx-auto max-w-md px-4 py-12 sm:py-20">
+            {/* Header — hero serif voice, word-by-word blur fade */}
+            <div className="text-center mb-12">
+              <h1 className="text-5xl sm:text-6xl text-text-primary leading-[1.05] mb-4" style={titleFontStyle}>
+                {titleWords.map((word, i) => (
+                  <Fragment key={`tw-${i}`}>
+                    <span
+                      className={
+                        i === titleWords.length - 1 && !useFallbackFont
+                          ? 'account-word italic bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent'
+                          : 'account-word'
+                      }
+                      style={{ '--reveal-delay': `${0.05 + i * 0.06}s` } as React.CSSProperties}
+                    >
+                      {word}
+                    </span>{' '}
+                  </Fragment>
+                ))}
+              </h1>
+              <p
+                className="account-reveal text-sm sm:text-base text-text-muted"
+                style={{ '--reveal-delay': '0.25s' } as React.CSSProperties}
               >
-                {t('newUser')}
-              </button>
-              <button
-                type="button"
-                onClick={() => { setMode('existing'); setIdentifyError(''); }}
-                className={`flex-1 rounded-xl border py-2.5 text-sm font-medium transition-all ${
-                  mode === 'existing'
-                    ? 'border-accent-teal bg-accent-teal/5 text-accent-teal ring-1 ring-accent-teal/30'
-                    : 'border-overlay/10 bg-bg-secondary/50 text-text-muted hover:border-overlay/20'
-                }`}
-              >
-                {t('existingUser')}
-              </button>
+                {t('subtitle')}
+              </p>
             </div>
 
-            {mode === 'new' ? (
-              <>
-                {/* No registration explanation */}
-                <div className="rounded-xl border border-overlay/10 bg-bg-secondary/30 p-4 space-y-2">
-                  <p className="text-sm text-text-primary font-medium">{t('noRegistrationNote')}</p>
-                  <p className="text-xs text-text-muted">{t('autoDeleteNote')}</p>
+            <div className="space-y-5">
+              {/* Account deleted confirmation */}
+              {deletedNotice && (
+                <div className="rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-5 py-3 flex items-center gap-2">
+                  <CheckIcon className="w-4 h-4 text-accent-teal shrink-0" />
+                  <p className="text-sm font-medium text-accent-teal">{t('dashboard.deleteSuccess')}</p>
                 </div>
+              )}
 
-                {/* Create account button */}
+              {/* Mode toggle — segmented pill */}
+              <div className="grid grid-cols-2 gap-1 p-1 rounded-full bg-bg-secondary/40 border border-overlay/10">
                 <button
                   type="button"
-                  onClick={handleCreateAccount}
-                  disabled={identifyLoading}
-                  className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                  onClick={() => { setMode('new'); setIdentifyError(''); }}
+                  className={`rounded-full py-2.5 text-sm font-medium transition-colors ${
+                    mode === 'new'
+                      ? 'bg-accent-teal text-white'
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
                 >
-                  {identifyLoading ? (
-                    <>
-                      <SpinnerIcon className="w-4 h-4" />
-                      {t('creatingAnonymous')}
-                    </>
-                  ) : (
-                    <>
-                      <ShieldIcon className="w-4 h-4" />
-                      {t('createAccount')}
-                    </>
+                  {t('newUser')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setMode('existing'); setIdentifyError(''); }}
+                  className={`rounded-full py-2.5 text-sm font-medium transition-colors ${
+                    mode === 'existing'
+                      ? 'bg-accent-teal text-white'
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
+                >
+                  {t('existingUser')}
+                </button>
+              </div>
+
+              {/* Mode panel */}
+              <div className="space-y-5">
+                {mode === 'new' ? (
+                  <>
+                    {/* No registration explanation */}
+                    <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/30 p-5 space-y-2">
+                      <p className="text-sm text-text-primary font-medium">{t('noRegistrationNote')}</p>
+                      <p className="text-xs text-text-muted">{t('autoDeleteNote')}</p>
+                    </div>
+
+                    {/* Create account button */}
+                    <button
+                      type="button"
+                      onClick={handleCreateAccount}
+                      disabled={identifyLoading}
+                      className="w-full rounded-full bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                    >
+                      {identifyLoading ? (
+                        <>
+                          <SpinnerIcon className="w-4 h-4" />
+                          {t('creatingAnonymous')}
+                        </>
+                      ) : (
+                        <>
+                          <ShieldIcon className="w-4 h-4" />
+                          {t('createAccount')}
+                        </>
+                      )}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      value={accountId}
+                      onChange={(e) => { setAccountId(e.target.value.toUpperCase()); setIdentifyError(''); }}
+                      placeholder={t('accountPlaceholder')}
+                      className="w-full rounded-2xl border border-overlay/10 bg-bg-secondary/40 px-4 py-4 text-base font-mono tracking-widest text-center text-text-primary placeholder:text-text-muted/40 focus:border-accent-teal focus:ring-2 focus:ring-accent-teal/20 outline-none transition-all"
+                      onKeyDown={(e) => e.key === 'Enter' && handleContinue()}
+                    />
+
+                    {/* Continue button */}
+                    <button
+                      type="button"
+                      onClick={handleContinue}
+                      disabled={identifyLoading}
+                      className="w-full rounded-full bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                    >
+                      {identifyLoading ? (
+                        <>
+                          <SpinnerIcon className="w-4 h-4" />
+                          {t('verifyingAccount')}
+                        </>
+                      ) : (
+                        t('continue')
+                      )}
+                    </button>
+
+                    <div className="text-center">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          window.location.href = `/${locale}/support#restore`;
+                        }}
+                        className="text-xs text-text-muted hover:text-text-primary transition-colors"
+                      >
+                        {t('dashboard.forgotAccountId')}
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                  {identifyError && (
+                    <p className="text-xs text-red-400 text-center">{identifyError}</p>
                   )}
-                </button>
-              </>
-            ) : (
-              <>
-                <input
-                  type="text"
-                  value={accountId}
-                  onChange={(e) => { setAccountId(e.target.value.toUpperCase()); setIdentifyError(''); }}
-                  placeholder={t('accountPlaceholder')}
-                  className="w-full rounded-xl border border-overlay/10 bg-bg-secondary/50 px-4 py-3 text-sm font-mono text-text-primary placeholder:text-text-muted/50 focus:border-accent-teal focus:ring-1 focus:ring-accent-teal/30 outline-none transition-all"
-                  onKeyDown={(e) => e.key === 'Enter' && handleContinue()}
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href = `/${locale}/support#restore`;
-                  }}
-                  className="text-xs text-accent-teal hover:text-accent-teal-light transition-colors mt-1"
-                >
-                  {t("dashboard.forgotAccountId")}
-                </button>
-
-                {/* Continue button */}
-                <button
-                  type="button"
-                  onClick={handleContinue}
-                  disabled={identifyLoading}
-                  className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
-                >
-                  {identifyLoading ? (
-                    <>
-                      <SpinnerIcon className="w-4 h-4" />
-                      {t('verifyingAccount')}
-                    </>
-                  ) : (
-                    t('continue')
-                  )}
-                </button>
-              </>
-            )}
-
-            {identifyError && (
-              <p className="text-xs text-red-400 ps-1">{identifyError}</p>
-            )}
-          </div>
+              </div>
+            </div>
         </div>
       )}
 
@@ -942,12 +1015,12 @@ function SubscribeInner() {
 
               {/* ── Save your ID warning for new accounts ──────── */}
               {!existingAccount && mode === 'new' && (
-                <div className="mb-6 rounded-xl border border-amber-500/20 bg-amber-500/5 px-5 py-3.5 flex items-start gap-3">
-                  <svg className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <div className="mb-6 rounded-xl border border-accent-amber/25 bg-accent-amber/10 px-5 py-3.5 flex items-start gap-3">
+                  <svg className="w-4 h-4 text-accent-amber mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                   </svg>
                   <div>
-                    <p className="text-sm font-medium text-amber-300">{t('saveWarning')}</p>
+                    <p className="text-sm font-medium text-accent-amber">{t('saveWarning')}</p>
                     <p className="text-xs text-text-muted mt-0.5">{t('saveWarningDetail')}</p>
                   </div>
                 </div>
@@ -1162,12 +1235,22 @@ function SubscribeInner() {
                       {t('dashboard.logout')}
                     </button>
 
-                    <a
-                      href={`/${locale}/support#delete-account`}
-                      className="flex items-center justify-center gap-2 w-full rounded-xl border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm font-medium text-danger/75 hover:text-danger hover:border-danger/35 hover:bg-danger/[0.08] transition-colors"
-                    >
-                      {t('dashboard.deleteAccount')}
-                    </a>
+                    {isActivePro ? (
+                      <a
+                        href={`/${locale}/support#delete-account`}
+                        className="flex items-center justify-center gap-2 w-full rounded-xl border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm font-medium text-danger/75 hover:text-danger hover:border-danger/35 hover:bg-danger/[0.08] transition-colors"
+                      >
+                        {t('dashboard.deleteAccount')}
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => { setDeleteModalOpen(true); setDeleteError(''); }}
+                        className="flex items-center justify-center gap-2 w-full rounded-xl border border-danger/20 bg-danger/[0.04] px-4 py-3 text-sm font-medium text-danger/75 hover:text-danger hover:border-danger/35 hover:bg-danger/[0.08] transition-colors"
+                      >
+                        {t('dashboard.deleteAccount')}
+                      </button>
+                    )}
 
                     {isActivePro && (
                       <p className="text-xs text-text-tertiary px-1 leading-relaxed">
@@ -1363,6 +1446,51 @@ function SubscribeInner() {
               </div>
             </>
           )}
+        </div>
+      )}
+      {/* ── Delete Account Confirmation Modal ──────────────────── */}
+      {deleteModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={(e) => { if (e.target === e.currentTarget && !deleteLoading) setDeleteModalOpen(false); }}
+        >
+          <div className="w-full sm:max-w-md bg-bg-secondary border border-overlay/10 rounded-t-2xl sm:rounded-2xl p-6 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-danger/10 border border-danger/20 shrink-0">
+                <svg className="w-5 h-5 text-danger" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+              </div>
+              <h2 className="text-lg font-display font-bold text-text-primary">
+                {t('dashboard.deleteConfirmTitle')}
+              </h2>
+            </div>
+            <p className="text-sm text-text-muted leading-relaxed">
+              {t('dashboard.deleteConfirmBody')}
+            </p>
+            <p className="font-mono text-sm font-bold text-text-primary tracking-wide">{accountId}</p>
+            {deleteError && (
+              <p className="text-xs text-red-400">{deleteError}</p>
+            )}
+            <div className="space-y-2.5 pt-1">
+              <button
+                type="button"
+                onClick={handleDeleteAccount}
+                disabled={deleteLoading}
+                className="w-full rounded-xl bg-danger hover:bg-danger/85 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
+              >
+                {deleteLoading ? <SpinnerIcon className="w-4 h-4" /> : t('dashboard.deleteConfirm')}
+              </button>
+              <button
+                type="button"
+                onClick={() => setDeleteModalOpen(false)}
+                disabled={deleteLoading}
+                className="w-full rounded-xl border border-overlay/10 px-4 py-3 text-sm font-medium text-text-muted hover:text-text-primary hover:border-overlay/20 disabled:opacity-50 transition-colors"
+              >
+                {t('dashboard.deleteCancel')}
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {/* ── Premium Support Modal ──────────────────────────────── */}

@@ -206,6 +206,39 @@ body {
   }
 }
 
+/* Account page entrance — pure fade + blur, no vertical movement */
+@keyframes fade-blur-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+.account-reveal {
+  opacity: 0;
+  will-change: filter, opacity;
+  animation: fade-blur-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+.account-word {
+  display: inline-block;
+  opacity: 0;
+  will-change: filter, opacity;
+  animation: fade-blur-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .account-reveal,
+  .account-word {
+    opacity: 1;
+    filter: none;
+    animation: none;
+  }
+}
+
 /* Server card — full-height flag with a ~30° angled cut on its leading edge */
 .server-flag-clip {
   clip-path: polygon(66% 0, 100% 0, 100% 100%, 0 100%);
