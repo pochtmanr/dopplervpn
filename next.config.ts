@@ -108,6 +108,25 @@ const nextConfig: NextConfig = {
         destination: "/en/downloads",
         permanent: true,
       },
+      // Unprefixed page slugs (no /:locale) used to render the English
+      // homepage at HTTP 200 (i18n fallback), creating duplicate soft-404
+      // clones. 301 them to the canonical /en/* URL to recover any legacy
+      // link equity; genuine garbage (not in this list, not a locale) falls
+      // through to the [locale] layout's notFound() → 404. Keep this slug set
+      // in sync with the top-level page dirs under app/[locale] (and the
+      // staticPages list in sitemap.ts).
+      {
+        source:
+          "/:slug(downloads|privacy|terms|refund|dpa|subprocessors|blog|support|about|security|bypass-censorship|giveaway|no-registration-vpn|pay-with-crypto|vless-vpn|vless-vpn-android|vpn-for-ios|vpn-for-android|vpn-for-macos|vpn-for-windows|vpn-for-uae|vpn-for-iran|vpn-for-china|vpn-for-russia|vpn-for-turkey|vpn-for-telegram-calls-uae|vpn-for-whatsapp-calls-uae|vpn-for-instagram-russia|vpn-for-travelers-china|vpn-for-tiktok-ban|vpn-for-public-wifi-iphone|tools)",
+        destination: "/en/:slug",
+        permanent: true,
+      },
+      {
+        source:
+          "/:slug(downloads|privacy|terms|refund|dpa|subprocessors|blog|support|about|security|bypass-censorship|giveaway|no-registration-vpn|pay-with-crypto|vless-vpn|vless-vpn-android|vpn-for-ios|vpn-for-android|vpn-for-macos|vpn-for-windows|vpn-for-uae|vpn-for-iran|vpn-for-china|vpn-for-russia|vpn-for-turkey|vpn-for-telegram-calls-uae|vpn-for-whatsapp-calls-uae|vpn-for-instagram-russia|vpn-for-travelers-china|vpn-for-tiktok-ban|vpn-for-public-wifi-iphone|tools)/:rest+",
+        destination: "/en/:slug/:rest+",
+        permanent: true,
+      },
     ];
   },
   async headers() {

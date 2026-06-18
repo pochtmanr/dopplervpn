@@ -5,6 +5,14 @@ import { routing } from "@/i18n/routing";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
 
+// Prerender all 44 shards at BUILD time and serve them as static files from
+// the CDN. Googlebot fetches every shard in /sitemap.xml in parallel; when
+// shards regenerated on-demand (cold ISR after each deploy) the simultaneous
+// blocking regens timed out under the crawler and GSC reported half of them
+// "Couldn't fetch" (2026-04 and again 2026-06). force-static removes the
+// request-time work entirely — a crawl can never trigger a regen.
+export const dynamic = "force-static";
+
 // Rebuild sitemap shards at most once per day. Without this, every crawler
 // hit to /sitemap/N.xml re-runs the Supabase query and re-serializes a full
 // 45-language hreflang map per entry — burning Fast Origin Transfer fast.
@@ -19,9 +27,11 @@ export const maxDuration = 60;
 
 const baseUrl = "https://www.dopplervpn.org";
 
-// Stable per-build timestamp for static pages — avoids lastmod churn within
-// a single build while still updating on each deploy.
-const BUILD_TIME = new Date();
+// Fixed lastmod for static pages. A per-build `new Date()` made every page
+// look freshly modified on every deploy, which trains Google to distrust the
+// signal. Bump this only when the static pages' content actually changes.
+// (Blog entries below use the post's real updated_at/created_at instead.)
+const STATIC_LASTMOD = new Date("2026-06-09");
 
 interface SitemapPost {
   slug: string;
@@ -247,7 +257,7 @@ export default async function sitemap({
       }
       return {
         url: `${baseUrl}/${locale}${page}`,
-        lastModified: BUILD_TIME,
+        lastModified: STATIC_LASTMOD,
         changeFrequency: changeFreqFor(page),
         priority: priorityFor(page),
         alternates,
@@ -256,7 +266,7 @@ export default async function sitemap({
 
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => {
     const lastmodSource = post.updated_at ?? post.created_at;
-    const lastModified = lastmodSource ? new Date(lastmodSource) : BUILD_TIME;
+    const lastModified = lastmodSource ? new Date(lastmodSource) : STATIC_LASTMOD;
     return {
       url: `${baseUrl}/${locale}/blog/${post.slug}`,
       lastModified,
@@ -271,9 +281,9 @@ export default async function sitemap({
   const agentSurfaceEntries: MetadataRoute.Sitemap =
     locale === "en"
       ? [
-          { url: `${baseUrl}/agents`, lastModified: BUILD_TIME, changeFrequency: "monthly" as const, priority: 0.6 },
-          { url: `${baseUrl}/llms.txt`, lastModified: BUILD_TIME, changeFrequency: "monthly" as const, priority: 0.5 },
-          { url: `${baseUrl}/llms-full.txt`, lastModified: BUILD_TIME, changeFrequency: "monthly" as const, priority: 0.5 },
+          { url: `${baseUrl}/agents`, lastModified: STATIC_LASTMOD, changeFrequency: "monthly" as const, priority: 0.6 },
+          { url: `${baseUrl}/llms.txt`, lastModified: STATIC_LASTMOD, changeFrequency: "monthly" as const, priority: 0.5 },
+          { url: `${baseUrl}/llms-full.txt`, lastModified: STATIC_LASTMOD, changeFrequency: "monthly" as const, priority: 0.5 },
         ]
       : [];
 

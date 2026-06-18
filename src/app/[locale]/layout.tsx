@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Instrument_Serif, Space_Grotesk, Rubik } from "next/font/google";
 
-import { routing, isRtlLocale } from "@/i18n/routing";
+import { routing, isRtlLocale, type Locale } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import {
   OrganizationSchema,
@@ -135,6 +136,15 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  // Without this, i18n/request.ts silently falls any unknown first path
+  // segment back to `en`, so /downloads, /privacy, /zzz, … all rendered the
+  // English homepage at HTTP 200 with a self-referential canonical — a
+  // duplicate-content firehose for Google. Known unprefixed page slugs are
+  // 301-redirected to /en/* in next.config.ts before reaching here; anything
+  // else that is not a real locale is a genuine 404.
+  if (!routing.locales.includes(locale as Locale)) notFound();
+
   setRequestLocale(locale);
 
   const messages = await getMessages();

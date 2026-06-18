@@ -8,8 +8,14 @@ import { routing } from "@/i18n/routing";
 
 const baseUrl = "https://www.dopplervpn.org";
 
+// Serve the index as a static asset and stop emitting a per-request `now`
+// timestamp — the old `new Date()` made the index claim all 44 shards changed
+// on every fetch. Bump this only when the shard set actually changes.
+export const dynamic = "force-static";
+
+const lastmod = new Date("2026-06-09").toISOString();
+
 export function GET() {
-  const lastmod = new Date().toISOString();
   const entries = routing.locales
     .map(
       (_locale, id) =>
