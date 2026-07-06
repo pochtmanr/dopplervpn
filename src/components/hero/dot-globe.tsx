@@ -27,13 +27,11 @@ interface DotGlobeProps {
 // English fallback labels; hero.tsx passes localized names from servers.locations.*.city
 const NODES: ReadonlyArray<{ lat: number; lon: number; label: string }> = [
   { lat: 52.23, lon: 21.01, label: "Warsaw" }, // hub
-  { lat: 52.37, lon: 4.9, label: "Amsterdam" },
   { lat: 59.33, lon: 18.07, label: "Stockholm" },
   { lat: 32.08, lon: 34.78, label: "Tel Aviv" },
   { lat: 41.59, lon: -93.62, label: "Des Moines" },
   { lat: 43.65, lon: -79.38, label: "Toronto" },
-  { lat: 1.35, lon: 103.82, label: "Singapore" },
-  { lat: -33.87, lon: 151.21, label: "Sydney" },
+  { lat: 22.32, lon: 114.17, label: "Hong Kong" },
 ];
 
 // Major cities shown as small neutral markers (servers stay teal); arcs travel

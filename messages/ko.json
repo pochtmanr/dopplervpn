@@ -1154,29 +1154,21 @@
     "server": "서버",
     "protocols": "프로토콜",
     "locations": {
-      "australia": {
-        "city": "시드니",
-        "country": "호주"
-      },
       "canada": {
         "city": "토론토",
         "country": "캐나다"
+      },
+      "hongkong": {
+        "city": "홍콩",
+        "country": "홍콩"
       },
       "israel": {
         "city": "텔아비브",
         "country": "이스라엘"
       },
-      "netherlands": {
-        "city": "암스테르담",
-        "country": "네덜란드"
-      },
       "poland": {
         "city": "바르샤바",
         "country": "폴란드"
-      },
-      "singapore": {
-        "city": "싱가포르",
-        "country": "싱가포르"
       },
       "sweden": {
         "city": "스톡홀름",
@@ -4035,8 +4027,7 @@
       "whatTitle": "DNS 누출이란?",
       "whatBody": "URL을 입력하면 기기는 먼저 DNS 서버에 해당 도메인의 IP 주소를 묻습니다. DNS 쿼리가 VPN 터널을 통과하면 통신사는 암호화된 트래픽만 봅니다. 터널을 우회하면 — 이것이 DNS 누출 — 이후 연결이 암호화되어 있어도 통신사는 방문하는 모든 도메인을 봅니다. 검열 네트워크는 차단 목록 집행을 위해 DNS 쿼리를 검사하는 경우가 많아, 그런 환경에서 DNS 누출은 치명적입니다.",
       "causesTitle": "DNS 누출의 원인",
-      "causesBody": "흔한 원인 세 가지: (1) VPN 클라이언트가 자체 DNS 리졸버를 설정해도 OS가 무시하고 로컬 네트워크가 할당한 리졸버를 사용. (2) IPv6 트래픽이 터널링되지 않아 IPv6 DNS 쿼리가 VPN을 우회해 누출. (3) Chrome, Firefox 같은 브라우저가 시스템 DNS 설정을 완전히 우회하는 \"스마트\" DNS 라우팅(DNS-over-HTTPS)을 사용."
-,
+      "causesBody": "흔한 원인 세 가지: (1) VPN 클라이언트가 자체 DNS 리졸버를 설정해도 OS가 무시하고 로컬 네트워크가 할당한 리졸버를 사용. (2) IPv6 트래픽이 터널링되지 않아 IPv6 DNS 쿼리가 VPN을 우회해 누출. (3) Chrome, Firefox 같은 브라우저가 시스템 DNS 설정을 완전히 우회하는 \"스마트\" DNS 라우팅(DNS-over-HTTPS)을 사용.",
       "fixTitle": "DNS 누출 해결법",
       "fixBody": "자체 DNS 인프라를 보유하고 모든 DNS 쿼리를 터널로 강제하는 VPN을 사용하세요(Doppler는 모든 플랫폼에서 기본으로 그렇게 합니다). VPN이 IPv6 터널링을 지원하지 않으면 OS 네트워크 설정에서 IPv6를 끄세요. 브라우저에서는 DNS-over-HTTPS를 VPN과 같은 제공업체로 설정하거나 비활성화하세요. 라우터에서는 기기 수준에서 VPN을 쓰지 않는 경우에만 프라이버시를 존중하는 리졸버(Quad9, Cloudflare 1.1.1.1)를 상위 DNS로 설정하세요."
     },

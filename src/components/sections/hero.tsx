@@ -26,7 +26,7 @@ function Stars() {
 
 // servers.locations keys matching the NODES order in dot-globe.tsx (Warsaw hub first)
 const NODE_LOCATION_KEYS = [
-  "poland", "netherlands", "sweden", "israel", "us", "canada", "singapore", "australia",
+  "poland", "sweden", "israel", "us", "canada", "hongkong",
 ] as const;
 
 export function Hero() {
