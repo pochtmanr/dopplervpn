@@ -219,7 +219,6 @@ export default async function VpnForIosPage({ params }: PageProps) {
         description={mt("description")}
         operatingSystem="iOS"
         applicationCategory="UtilitiesApplication"
-        price="0"
         downloadUrl={URLS.ios}
       />
       <FAQSchema

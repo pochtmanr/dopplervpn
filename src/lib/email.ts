@@ -102,7 +102,7 @@ export async function sendWelcomeEmail({
   const safePlanName = escapeHtml(planName);
   const safeExpiresAt = escapeHtml(expiresAt);
 
-  const supportEmail = 'support@dopplervpn.org';
+  const supportEmail = 'support@simnetiq.store';
   const supportTelegram = '@DopplerSupportBot';
   const footerHtml = escapeHtml(
     interpolate(w.footer, { supportEmail, supportTelegram }),
@@ -208,7 +208,7 @@ export async function sendReceiptEmail({
   const safeExpires = escapeHtml(localeDateString(expiresAt, resolvedLocale));
 
   const subject = interpolate(r.subject, { plan: planLabel });
-  const supportEmail = 'support@dopplervpn.org';
+  const supportEmail = 'support@simnetiq.store';
   const refundText = interpolate(r.refund, { email: supportEmail });
   // Inject the support email link into the refund line.
   const refundHtml = escapeHtml(refundText).replace(
@@ -332,7 +332,7 @@ export async function sendReceiptEmail({
     r.footer,
   ].join('\n');
 
-  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || 'support@dopplervpn.org';
+  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || 'support@simnetiq.store';
 
   await transporter.sendMail({
     from: `"Doppler VPN" <${fromAddress}>`,

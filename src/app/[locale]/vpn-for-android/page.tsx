@@ -220,7 +220,6 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
         description={mt("description")}
         operatingSystem="Android"
         applicationCategory="UtilitiesApplication"
-        price="0"
         downloadUrl={URLS.androidPlayStore}
       />
       <FAQSchema

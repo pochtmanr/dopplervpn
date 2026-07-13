@@ -1,16 +1,15 @@
 # Doppler Landing + Admin
 
 ## Overview
-Next.js 15 web app serving as the public marketing site, admin panel, and blog pipeline for Doppler VPN. Deployed at `dopplervpn.org`. Includes 21-language landing, blog with AI content generation, admin dashboard, and API routes used by the Telegram bots.
+Next.js 15 web app serving as the public marketing site, admin panel, and blog pipeline for Doppler VPN. Deployed at `dopplervpn.org`. Includes 44-language landing, blog with AI content generation, admin dashboard, and API routes used by the Telegram bots.
 
 ## Tech Stack
 - **Framework:** Next.js 15 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4 + `@tailwindcss/postcss`
-- **i18n:** next-intl v3 (21 languages, URL routing via `[locale]`)
+- **i18n:** next-intl v3 (44 languages, URL routing via `[locale]`)
 - **Backend:** Supabase (ref: `fzlrhmjdjjzcgstaeblu`)
 - **AI:** OpenAI `gpt-5-mini` for blog content generation
-- **Animation:** Framer Motion
 - **Deployment:** Vercel (dopplervpn.org) — GitHub: pochtmanr/dopplervpn
 
 ## Architecture
@@ -18,16 +17,19 @@ Next.js 15 web app serving as the public marketing site, admin panel, and blog p
 ```
 src/
   app/
-    [locale]/             # All public pages (21 locale routes)
+    [locale]/             # All public pages (44 locale routes)
       page.tsx            # Landing page
       layout.tsx          # Root layout with i18n provider
       blog/               # Blog listing + post pages
       downloads/          # App download links
       support/            # Support / FAQ page
-      privacy/            # Privacy policy
-      terms/              # Terms of service
-      bypass-censorship/  # SEO landing page
-      account/            # Account management (planned)
+      account/, checkout/ # Account management + checkout success
+      tools/              # Utility tools (IP check, leak test, …)
+      # Legal: privacy/, terms/, refund/, dpa/, subprocessors/, security/,
+      #        delete-account/
+      # SEO landing pages (~20 dirs): bypass-censorship/, no-registration-vpn/,
+      #   vless-vpn/, vless-vpn-android/, pay-with-crypto/, vpn-for-{ios,android,
+      #   macos,windows}/, vpn-for-{china,iran,russia,turkey,uae,...}/, and more
     admin-dvpn/           # Admin panel (4 tabs)
       page.tsx            # Dashboard (Supabase stats)
       # Messages, VPN Users (Marzban), Posts (blog)
@@ -35,7 +37,7 @@ src/
       admin/              # Admin API routes (auth-protected)
       blog/
         create/           # POST — AI generates article (OpenAI)
-        translate/        # POST — translates to all 21 langs
+        translate/        # POST — translates to all 44 langs
         status/           # GET/POST — publish/unpublish
       vpn/                # VPN management routes
     auth/                 # Auth callback routes
@@ -49,9 +51,9 @@ src/
 ```
 
 ## Key Patterns
-- **Blog pipeline:** `POST /api/blog/create` (OpenAI generates) → `POST /api/blog/translate` (21 langs) → n8n webhook → Telegram channels + live blog
+- **Blog pipeline:** `POST /api/blog/create` (OpenAI generates) → `POST /api/blog/translate` (44 langs) → n8n webhook → Telegram channels + live blog
 - **Blog API auth:** All blog API routes require `BLOG_API_KEY` header — never expose this key
-- **i18n:** 21 JSON translation files. Use `useTranslations()` hook in Client Components, `getTranslations()` in Server Components
+- **i18n:** 44 JSON translation files. Use `useTranslations()` hook in Client Components, `getTranslations()` in Server Components
 - **Admin panel** at `/admin-dvpn` has 4 tabs: Dashboard, Messages, VPN Users, Posts — uses Supabase for data
 
 ## Backend Integration

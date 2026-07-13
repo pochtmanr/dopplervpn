@@ -41,6 +41,7 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
       "https://www.linkedin.com/company/109536645/",
     ],
     legalName: COMPANY.legalName,
+    foundingDate: COMPANY.foundingDate,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
@@ -143,7 +144,6 @@ interface PlatformAppSchemaProps {
   description: string;
   operatingSystem: string;
   applicationCategory?: string;
-  price?: string;
   downloadUrl?: string;
 }
 
@@ -152,7 +152,6 @@ export function PlatformAppSchema({
   description,
   operatingSystem,
   applicationCategory = "UtilitiesApplication",
-  price = "0",
   downloadUrl,
 }: PlatformAppSchemaProps) {
   const schema: Record<string, unknown> = {
@@ -163,12 +162,23 @@ export function PlatformAppSchema({
     operatingSystem,
     applicationCategory,
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
-    offers: {
-      "@type": "Offer",
-      price,
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-    },
+    // The app is a free download with a paid subscription. Both facts live in
+    // one offers array so this node can never contradict the sitewide
+    // SoftwareApplication/Product nodes, which price from the same PLANS.
+    offers: [
+      {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: CURRENCY,
+        availability: "https://schema.org/InStock",
+      },
+      ...([PLANS.monthly, PLANS.annual] as const).map((plan) => ({
+        "@type": "Offer",
+        price: plan.total.toFixed(2),
+        priceCurrency: CURRENCY,
+        availability: "https://schema.org/InStock",
+      })),
+    ],
   };
   if (downloadUrl) {
     schema.downloadUrl = downloadUrl;

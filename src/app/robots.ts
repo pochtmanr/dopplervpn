@@ -33,6 +33,8 @@ const AI_USER_AGENTS = [
   "Google-Extended",
   "OAI-SearchBot",
   "CCBot",
+  "Bytespider",
+  "meta-externalagent",
 ];
 
 export default function robots(): MetadataRoute.Robots {

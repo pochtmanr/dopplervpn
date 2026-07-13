@@ -18,6 +18,7 @@ export const COMPANY = {
   legalName: "SIMNETIQ LTD",
   brand: "Doppler VPN",
   companyNumber: "16861177",
+  foundingDate: "2025",
   address: "2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom",
   jurisdiction: "England and Wales",
 } as const;

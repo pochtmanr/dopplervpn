@@ -54,18 +54,6 @@ export default async function AboutPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "about" });
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Doppler VPN",
-    legalName: "Simnetiq Ltd",
-    url: "https://www.dopplervpn.org",
-    logo: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
-    description: t("meta.description"),
-    foundingDate: "2025",
-    sameAs: [],
-  };
-
   const trustIcons: Record<string, React.ReactNode> = {
     noLogs: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -93,10 +81,6 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/<\//g, "<\\/") }}
-      />
       <BreadcrumbSchema
         items={[
           { name: "Home", url: `${baseUrl}/${locale}` },

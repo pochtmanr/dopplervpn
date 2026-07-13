@@ -207,7 +207,6 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
         description={mt("description")}
         operatingSystem="Windows"
         applicationCategory="UtilitiesApplication"
-        price="0"
         downloadUrl={`${baseUrl}${URLS.windowsX64}`}
       />
       <FAQSchema

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createStaticClient } from "@/lib/supabase/server";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
+import { ogLocaleMap } from "@/lib/og-locale-map";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -61,7 +62,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       description: t("indexDescription"),
       url: `${baseUrl}/${locale}/blog${suffix}`,
       siteName: "Doppler VPN",
-      locale: locale,
+      locale: ogLocaleMap[locale] || "en_US",
       type: "website",
       images: [
         {

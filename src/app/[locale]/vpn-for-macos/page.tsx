@@ -218,7 +218,6 @@ export default async function VpnForMacosPage({ params }: PageProps) {
         description={mt("description")}
         operatingSystem="macOS"
         applicationCategory="UtilitiesApplication"
-        price="0"
         downloadUrl={URLS.mac}
       />
       <FAQSchema
