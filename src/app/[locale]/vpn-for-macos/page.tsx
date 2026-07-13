@@ -478,6 +478,8 @@ export default async function VpnForMacosPage({ params }: PageProps) {
                   { href: "/no-registration-vpn", title: "noRegistration", desc: "noRegistrationDesc" },
                   { href: "/vless-vpn", title: "vless", desc: "vlessDesc" },
                   { href: "/vpn-for-windows", title: "windows", desc: "windowsDesc" },
+                  { href: "/vpn-for-ios", title: "ios", desc: "iosDesc" },
+                  { href: "/vpn-for-android", title: "android", desc: "androidDesc" },
                 ] as const
               ).map(({ href, title, desc }, i) => (
                 <Reveal key={href} delay={i * 60} className="h-full">

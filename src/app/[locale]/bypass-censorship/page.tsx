@@ -451,6 +451,26 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* ── Related Pages ────────────────────────────────────── */}
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Link href="/vless-vpn" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
+                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.vless")}</h3>
+                <p className="text-xs text-text-muted">{t("related.vlessDesc")}</p>
+              </Link>
+              <Link href="/vless-vpn-android" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
+                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.vlessAndroid")}</h3>
+                <p className="text-xs text-text-muted">{t("related.vlessAndroidDesc")}</p>
+              </Link>
+              <Link href="/vpn-for-tiktok-ban" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
+                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.tiktokBan")}</h3>
+                <p className="text-xs text-text-muted">{t("related.tiktokBanDesc")}</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* ── Final CTA ───────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">

@@ -1,4 +1,5 @@
 import { getTranslations, getLocale } from "next-intl/server";
+import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { DopplerLogo } from "./doppler-logo";
 import { CookieSettingsButton } from "./cookie-settings-button";
@@ -6,7 +7,7 @@ import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import { isBlogLocale } from "@/i18n/blog-locales";
 import { isSecurityLocale } from "@/i18n/security-locales";
 
-type LinkItem = { href: string; label: string };
+type LinkItem = { href: string; label: string; external?: boolean };
 
 function ChevronDown({ className = "" }: { className?: string }) {
   return (
@@ -28,16 +29,29 @@ function ChevronDown({ className = "" }: { className?: string }) {
 function LinkList({ links }: { links: LinkItem[] }) {
   return (
     <ul className="space-y-3">
-      {links.map((link) => (
-        <li key={link.href}>
-          <Link
-            href={link.href}
-            className="text-text-muted hover:text-text-primary transition-colors text-sm"
-          >
-            {link.label}
-          </Link>
-        </li>
-      ))}
+      {links.map((link) =>
+        link.external ? (
+          // Pages outside [locale] (e.g. /agents) must skip the i18n Link
+          // or they get a locale prefix and 404.
+          <li key={link.href}>
+            <NextLink
+              href={link.href}
+              className="text-text-muted hover:text-text-primary transition-colors text-sm"
+            >
+              {link.label}
+            </NextLink>
+          </li>
+        ) : (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="text-text-muted hover:text-text-primary transition-colors text-sm"
+            >
+              {link.label}
+            </Link>
+          </li>
+        )
+      )}
     </ul>
   );
 }
@@ -46,9 +60,6 @@ export async function Footer() {
   const t = await getTranslations("footer");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
-  // Tools ship English-only until the namespaces are hand-translated
-  // (see /[locale]/tools/page.tsx generateStaticParams).
-  const showToolsLink = locale === "en";
   // /security ships in the hand-translated core-market locales only
   // (see /[locale]/security/page.tsx generateStaticParams).
   const showSecurityLink = isSecurityLocale(locale);
@@ -61,9 +72,18 @@ export async function Footer() {
     { href: "/bypass-censorship", label: t("bypassCensorship") },
     { href: "/vless-vpn", label: t("vlessVpn") },
     { href: "/no-registration-vpn", label: t("noRegistration") },
+    { href: "/vpn-for-tiktok-ban", label: t("vpnForTiktokBan") },
+    { href: "/tools", label: t("tools") },
+    { href: "/giveaway", label: t("giveaway") },
+    { href: "/pay-with-crypto", label: t("payWithCrypto") },
+  ];
+
+  const platformLinks: LinkItem[] = [
     { href: "/vpn-for-ios", label: t("vpnForIos") },
     { href: "/vpn-for-android", label: t("vpnForAndroid") },
-    ...(showToolsLink ? [{ href: "/tools", label: t("tools") }] : []),
+    { href: "/vpn-for-macos", label: t("vpnForMacos") },
+    { href: "/vpn-for-windows", label: t("vpnForWindows") },
+    { href: "/vless-vpn-android", label: t("vlessVpnAndroid") },
   ];
 
   const locationLinks: LinkItem[] = [
@@ -78,6 +98,7 @@ export async function Footer() {
     { href: "/support", label: t("helpCenter") },
     { href: "/about", label: t("about") },
     ...(showSecurityLink ? [{ href: "/security", label: t("securityPage") }] : []),
+    { href: "/agents", label: t("agents"), external: true },
   ];
 
   const legalLinks: LinkItem[] = [
@@ -100,7 +121,7 @@ export async function Footer() {
 
       <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Desktop layout — md and up */}
-        <div className="hidden md:grid grid-cols-6 gap-8 lg:gap-12">
+        <div className="hidden md:grid grid-cols-7 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2">
             <Link href="/" className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
@@ -146,6 +167,12 @@ export async function Footer() {
             <LinkList links={productLinks} />
           </div>
 
+          {/* Platforms */}
+          <div>
+            <h3 className="font-semibold text-text-primary mb-4">{t("platformsHeading")}</h3>
+            <LinkList links={platformLinks} />
+          </div>
+
           {/* Locations */}
           <div>
             <h3 className="font-semibold text-text-primary mb-4">{t("locationsHeading")}</h3>
@@ -173,6 +200,12 @@ export async function Footer() {
                   </Link>
                 </li>
               )}
+              <li>
+                {/* /agents lives outside [locale] — next/link, no locale prefix */}
+                <NextLink href="/agents" className="text-text-muted hover:text-text-primary transition-colors text-sm">
+                  {t("agents")}
+                </NextLink>
+              </li>
               <li>
                 <a
                   href="https://t.me/DopplerSupportBot"
@@ -266,6 +299,16 @@ export async function Footer() {
             </summary>
             <div className="pt-3 pb-1">
               <LinkList links={productLinks} />
+            </div>
+          </details>
+
+          <details className="group border-t border-overlay/5 pt-4">
+            <summary className="flex items-center justify-between cursor-pointer list-none font-semibold text-text-primary py-2">
+              <span>{t("platformsHeading")}</span>
+              <ChevronDown className="ms-2 group-open:rotate-180" />
+            </summary>
+            <div className="pt-3 pb-1">
+              <LinkList links={platformLinks} />
             </div>
           </details>
 

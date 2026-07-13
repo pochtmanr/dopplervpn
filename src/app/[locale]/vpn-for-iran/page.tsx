@@ -26,6 +26,8 @@ export default async function Page({ params }: PageProps) {
         { href: "/bypass-censorship", titleKey: "censorshipTitle", descKey: "censorshipDesc" },
         { href: "/vless-vpn", titleKey: "vlessTitle", descKey: "vlessDesc" },
         { href: "/no-registration-vpn", titleKey: "noRegTitle", descKey: "noRegDesc" },
+        { href: "/vpn-for-china", titleKey: "chinaTitle", descKey: "chinaDesc" },
+        { href: "/vpn-for-turkey", titleKey: "turkeyTitle", descKey: "turkeyDesc" },
       ]}
     />
   );

@@ -409,6 +409,14 @@ export default async function VlessVpnPage({ params }: PageProps) {
                 <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.android")}</h3>
                 <p className="text-xs text-text-muted">{t("related.androidDesc")}</p>
               </Link>
+              <Link href="/vless-vpn-android" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
+                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.vlessAndroid")}</h3>
+                <p className="text-xs text-text-muted">{t("related.vlessAndroidDesc")}</p>
+              </Link>
+              <Link href="/bypass-censorship" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
+                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.censorship")}</h3>
+                <p className="text-xs text-text-muted">{t("related.censorshipDesc")}</p>
+              </Link>
             </div>
           </div>
         </section>

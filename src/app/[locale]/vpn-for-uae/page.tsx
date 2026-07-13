@@ -26,6 +26,8 @@ export default async function Page({ params }: PageProps) {
         { href: "/vpn-for-telegram-calls-uae", titleKey: "telegramCallsTitle", descKey: "telegramCallsDesc" },
         { href: "/vpn-for-whatsapp-calls-uae", titleKey: "whatsappCallsTitle", descKey: "whatsappCallsDesc" },
         { href: "/bypass-censorship", titleKey: "censorshipTitle", descKey: "censorshipDesc" },
+        { href: "/vpn-for-turkey", titleKey: "turkeyTitle", descKey: "turkeyDesc" },
+        { href: "/vpn-for-iran", titleKey: "iranTitle", descKey: "iranDesc" },
       ]}
     />
   );

@@ -47,7 +47,7 @@ export interface SeoLandingPageProps {
   faqCount?: number;
   /** Number of how-it-works steps. Keys must be step1…stepN. */
   stepCount?: number;
-  /** Up to 3 internal links shown above the final CTA. */
+  /** Up to 6 internal links shown above the final CTA. */
   related: RelatedLink[];
   /** ISO 8601 date the page first shipped (e.g. "2026-05-26"). Required so
    *  ArticleSchema emits a real freshness signal — never default. */
@@ -356,7 +356,7 @@ export async function SeoLandingPage({
           <section className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-5xl">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {related.slice(0, 3).map((link) => (
+                {related.slice(0, 6).map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
