@@ -408,7 +408,7 @@ git commit -m "feat: add template distribution stats to blog status endpoint"
 
 ## Task 7: n8n Workflow — Topic Discovery & Scheduling
 
-**Context:** This workflow runs on VPS 72.61.87.54. Access via SSH: `sshpass -p '0hGFB,W?9.958T+(#P7t' ssh root@72.61.87.54`. n8n API key: `n8n_api_8d68fea6bff05010137ec8ef1e87b73c48ada885ee195385`.
+**Context:** This workflow originally ran on VPS 72.61.87.54; n8n has since moved to n8n.dopplervpn.org (185.203.240.174). Credentials redacted 2026-07-14 — the values previously committed here are rotated/dead. Get current access from the password manager.
 
 **IMPORTANT:** n8n Code nodes use sandbox — `$env.X` not `process.env`, `require('https')` not `fetch`, `URL` constructor not available.
 
