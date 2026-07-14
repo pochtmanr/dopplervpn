@@ -1,697 +1,451 @@
 {
-    "updatedAt": "2026-02-22T18:29:05.341Z",
-    "createdAt": "2026-02-21T20:21:30.315Z",
-    "id": "6KtZe6D5XcbVzyFS",
-    "name": "Doppler Service Monitor",
-    "description": null,
-    "active": false,
-    "isArchived": false,
-    "nodes": [
-        {
-            "parameters": {
-                "rule": {
-                    "interval": [
-                        {
-                            "triggerAtHour": 0
-                        },
-                        {
-                            "triggerAtHour": 6
-                        },
-                        {
-                            "triggerAtHour": 9
-                        },
-                        {
-                            "triggerAtHour": 12
-                        },
-                        {
-                            "triggerAtHour": 18
-                        }
-                    ]
-                }
+  "name": "Doppler Service Monitor",
+  "id": "6KtZe6D5XcbVzyFS",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 0
             },
-            "id": "schedule-trigger",
-            "name": "Schedule",
-            "type": "n8n-nodes-base.scheduleTrigger",
-            "typeVersion": 1.2,
-            "position": [
-                0,
-                0
-            ]
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "https://www.dopplervpn.org",
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "text"
-                        }
-                    }
-                }
+            {
+              "triggerAtHour": 6
             },
-            "id": "check-website",
-            "name": "Check Website",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                250,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "https://www.dopplervpn.org/api/blog/status",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "Authorization",
-                            "value": "YOUR_BLOG_API_KEY"
-                        }
-                    ]
-                },
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "json"
-                        }
-                    }
-                }
+            {
+              "triggerAtHour": 9
             },
-            "id": "check-blog-api",
-            "name": "Check Blog API",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                500,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "POST",
-                "url": "http://72.61.87.54:9090/marzban-api/admin/token",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "Content-Type",
-                            "value": "application/x-www-form-urlencoded"
-                        },
-                        {
-                            "name": "X-Marzban-Key",
-                            "value": "YOUR_MARZBAN_API_SECRET"
-                        }
-                    ]
-                },
-                "sendBody": true,
-                "specifyBody": "string",
-                "body": "username=YOUR_MARZBAN_USER&password=YOUR_MARZBAN_PASS",
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "json"
-                        }
-                    }
-                }
+            {
+              "triggerAtHour": 12
             },
-            "id": "marzban-de-auth",
-            "name": "Marzban DE Auth",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                750,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "http://72.61.87.54:9090/marzban-api/system",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "Authorization",
-                            "value": "=Bearer {{ $('Marzban DE Auth').first().json.body ? $('Marzban DE Auth').first().json.body.access_token : '' }}"
-                        },
-                        {
-                            "name": "X-Marzban-Key",
-                            "value": "YOUR_MARZBAN_API_SECRET"
-                        }
-                    ]
-                },
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "json"
-                        }
-                    }
-                }
-            },
-            "id": "marzban-de-system",
-            "name": "Marzban DE System",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                1000,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "POST",
-                "url": "http://45.10.43.204:8000/api/admin/token",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "Content-Type",
-                            "value": "application/x-www-form-urlencoded"
-                        }
-                    ]
-                },
-                "sendBody": true,
-                "specifyBody": "string",
-                "body": "username=YOUR_MARZBAN_USER&password=YOUR_MARZBAN_PASS",
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "json"
-                        }
-                    }
-                }
-            },
-            "id": "marzban-ru-auth",
-            "name": "Marzban RU Auth",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                1250,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "http://45.10.43.204:8000/api/system",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "Authorization",
-                            "value": "=Bearer {{ $('Marzban RU Auth').first().json.body ? $('Marzban RU Auth').first().json.body.access_token : '' }}"
-                        }
-                    ]
-                },
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "json"
-                        }
-                    }
-                }
-            },
-            "id": "marzban-ru-system",
-            "name": "Marzban RU System",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                1500,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "http://127.0.0.1:5678/healthz",
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "text"
-                        }
-                    }
-                }
-            },
-            "id": "check-n8n",
-            "name": "Check n8n",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                1750,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "https://www.simnetiq.store",
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "text"
-                        }
-                    }
-                }
-            },
-            "id": "check-simnetiq",
-            "name": "Check Simnetiq",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                2000,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "https://fzlrhmjdjjzcgstaeblu.supabase.co/rest/v1/blog_posts?select=id&limit=1",
-                "sendHeaders": true,
-                "headerParameters": {
-                    "parameters": [
-                        {
-                            "name": "apikey",
-                            "value": "YOUR_SUPABASE_KEY"
-                        },
-                        {
-                            "name": "Authorization",
-                            "value": "Bearer YOUR_SUPABASE_KEY"
-                        }
-                    ]
-                },
-                "options": {
-                    "timeout": 10000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "json"
-                        }
-                    }
-                }
-            },
-            "id": "check-supabase",
-            "name": "Check Supabase",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                2250,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "http://82.38.64.45:22/",
-                "options": {
-                    "timeout": 5000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "text"
-                        }
-                    }
-                }
-            },
-            "id": "check-vps-ch",
-            "name": "Check VPS CH",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                2500,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "http://82.26.193.110:22/",
-                "options": {
-                    "timeout": 5000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "text"
-                        }
-                    }
-                }
-            },
-            "id": "check-vps-uk",
-            "name": "Check VPS UK",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                2750,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "method": "GET",
-                "url": "http://82.38.68.15:22/",
-                "options": {
-                    "timeout": 5000,
-                    "response": {
-                        "response": {
-                            "fullResponse": true,
-                            "responseFormat": "text"
-                        }
-                    }
-                }
-            },
-            "id": "check-vps-us",
-            "name": "Check VPS US",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                3000,
-                0
-            ],
-            "onError": "continueRegularOutput"
-        },
-        {
-            "parameters": {
-                "jsCode": "// Format Message \u2014 pure data transformation, NO fetch/AbortController\n// All upstream nodes accessible via $() since this is a sequential chain\n\nfunction isHttpOk(data) {\n  if (!data) return false;\n  if (data.error) return false;\n  const code = data.statusCode;\n  return code >= 200 && code < 400;\n}\n\nfunction isVpsUp(data) {\n  if (!data) return false;\n  if (!data.error) return true;\n  const msg = String(data.error || '');\n  return !msg.includes('ETIMEDOUT') && !msg.includes('timeout') && !msg.includes('abort');\n}\n\nfunction formatBytes(bytes) {\n  if (!bytes || bytes === 0) return '0 B';\n  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];\n  const i = Math.floor(Math.log(Math.abs(bytes)) / Math.log(1024));\n  return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];\n}\n\nfunction get(name) {\n  try { return $(name).first().json; } catch { return null; }\n}\n\nconst website = get('Check Website');\nconst blogApi = get('Check Blog API');\nconst marzbanDE = get('Marzban DE System');\nconst marzbanRU = get('Marzban RU System');\nconst n8nNode = get('Check n8n');\nconst simnetiq = get('Check Simnetiq');\nconst supabase = get('Check Supabase');\nconst vpsCH = get('Check VPS CH');\nconst vpsUK = get('Check VPS UK');\nconst vpsUS = get('Check VPS US');\n\nconst icon = (ok) => ok ? '\\u2705' : '\\u274C';\nconst vIcon = (up) => up ? '\\ud83d\\udfe2' : '\\ud83d\\udd34';\n\nconst services = [\n  { name: 'Website', ok: isHttpOk(website) },\n  { name: 'Blog API', ok: isHttpOk(blogApi), data: blogApi },\n  { name: 'Marzban DE', ok: isHttpOk(marzbanDE), data: marzbanDE },\n  { name: 'Marzban RU', ok: isHttpOk(marzbanRU), data: marzbanRU },\n  { name: 'n8n', ok: isHttpOk(n8nNode) },\n  { name: 'Simnetiq', ok: isHttpOk(simnetiq) },\n  { name: 'Supabase', ok: isHttpOk(supabase) },\n];\n\nconst vpsList = [\n  { name: 'CH', flag: '\\ud83c\\udde8\\ud83c\\udded', up: isVpsUp(vpsCH) },\n  { name: 'UK', flag: '\\ud83c\\uddec\\ud83c\\udde7', up: isVpsUp(vpsUK) },\n  { name: 'US', flag: '\\ud83c\\uddfa\\ud83c\\uddf8', up: isVpsUp(vpsUS) },\n];\n\nconst now = new Date();\nconst hour = now.getUTCHours();\nconst isDailySummary = (hour === 9);\nconst hasFailures = services.some(s => !s.ok) || vpsList.some(v => !v.up);\nconst shouldSend = isDailySummary || hasFailures;\n\nconst ts = now.toISOString().replace('T', ' ').slice(0, 16) + ' UTC';\nconst lines = [];\n\nif (shouldSend) {\n  lines.push(isDailySummary ? '\\ud83d\\udcca <b>Daily Doppler Status</b>' : '\\ud83d\\udd34 <b>ALERT: Service Down</b>');\n  lines.push('');\n  lines.push('<b>Services</b>');\n  for (const s of services) {\n    let detail = s.ok ? 'OK' : 'Unreachable';\n    if (s.name === 'Blog API' && s.ok && s.data && s.data.body && s.data.body.stats) {\n      detail = s.data.body.stats.total_posts + ' posts, ' + s.data.body.stats.total_translations + ' translations';\n    }\n    if (s.name.startsWith('Marzban') && s.ok && s.data && s.data.body) {\n      const d = s.data.body;\n      detail = d.total_user + ' users, ' + d.users_active + ' active, \\u2193' + formatBytes(d.incoming_bandwidth) + ' \\u2191' + formatBytes(d.outgoing_bandwidth);\n    }\n    if (!s.ok && s.data && s.data.error) {\n      detail = String(s.data.error).substring(0, 60);\n    }\n    lines.push(icon(s.ok) + ' <b>' + s.name + ':</b> ' + detail);\n  }\n  lines.push('');\n  lines.push('<b>VPN Servers</b>');\n  // DE and RU covered by Marzban above\n  for (const v of vpsList) {\n    lines.push(vIcon(v.up) + ' ' + v.flag + ' <b>' + v.name + ':</b> ' + (v.up ? 'Reachable' : 'Unreachable'));\n  }\n  lines.push('');\n  lines.push('<i>' + ts + '</i>');\n}\n\nreturn [{ json: { shouldSend, message: lines.join('\\n'), isDailySummary, hasFailures } }];"
-            },
-            "id": "format-message",
-            "name": "Format Message",
-            "type": "n8n-nodes-base.code",
-            "typeVersion": 2,
-            "position": [
-                3250,
-                0
-            ]
-        },
-        {
-            "parameters": {
-                "conditions": {
-                    "options": {
-                        "caseSensitive": true,
-                        "leftValue": "",
-                        "typeValidation": "strict"
-                    },
-                    "conditions": [
-                        {
-                            "leftValue": "={{ $json.shouldSend }}",
-                            "rightValue": true,
-                            "operator": {
-                                "type": "boolean",
-                                "operation": "true"
-                            }
-                        }
-                    ],
-                    "combinator": "and"
-                }
-            },
-            "id": "if-should-send",
-            "name": "If Should Send",
-            "type": "n8n-nodes-base.if",
-            "typeVersion": 2,
-            "position": [
-                3500,
-                0
-            ]
-        },
-        {
-            "parameters": {
-                "method": "POST",
-                "url": "https://api.telegram.org/botYOUR_TELEGRAM_BOT_TOKEN/sendMessage",
-                "sendBody": true,
-                "specifyBody": "json",
-                "jsonBody": "={{ JSON.stringify({ chat_id: 218545546, text: $json.message, parse_mode: 'HTML' }) }}",
-                "options": {}
-            },
-            "id": "send-telegram",
-            "name": "Send to Roman",
-            "type": "n8n-nodes-base.httpRequest",
-            "typeVersion": 4.2,
-            "position": [
-                3750,
-                -50
-            ]
-        }
-    ],
-    "connections": {
-        "Schedule": {
-            "main": [
-                [
-                    {
-                        "node": "Check Website",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check Website": {
-            "main": [
-                [
-                    {
-                        "node": "Check Blog API",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check Blog API": {
-            "main": [
-                [
-                    {
-                        "node": "Marzban DE Auth",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Marzban DE Auth": {
-            "main": [
-                [
-                    {
-                        "node": "Marzban DE System",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Marzban DE System": {
-            "main": [
-                [
-                    {
-                        "node": "Marzban RU Auth",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Marzban RU Auth": {
-            "main": [
-                [
-                    {
-                        "node": "Marzban RU System",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Marzban RU System": {
-            "main": [
-                [
-                    {
-                        "node": "Check n8n",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check n8n": {
-            "main": [
-                [
-                    {
-                        "node": "Check Simnetiq",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check Simnetiq": {
-            "main": [
-                [
-                    {
-                        "node": "Check Supabase",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check Supabase": {
-            "main": [
-                [
-                    {
-                        "node": "Check VPS CH",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check VPS CH": {
-            "main": [
-                [
-                    {
-                        "node": "Check VPS UK",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check VPS UK": {
-            "main": [
-                [
-                    {
-                        "node": "Check VPS US",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Check VPS US": {
-            "main": [
-                [
-                    {
-                        "node": "Format Message",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "Format Message": {
-            "main": [
-                [
-                    {
-                        "node": "If Should Send",
-                        "type": "main",
-                        "index": 0
-                    }
-                ]
-            ]
-        },
-        "If Should Send": {
-            "main": [
-                [
-                    {
-                        "node": "Send to Roman",
-                        "type": "main",
-                        "index": 0
-                    }
-                ],
-                []
-            ]
-        }
-    },
-    "settings": {
-        "executionOrder": "v1",
-        "callerPolicy": "workflowsFromSameOwner",
-        "availableInMCP": false
-    },
-    "staticData": {
-        "node:Schedule (5x Daily)": {
-            "recurrenceRules": []
-        },
-        "node:Schedule": {
-            "recurrenceRules": []
-        }
-    },
-    "meta": null,
-    "pinData": null,
-    "versionId": "7a2731b4-8767-43eb-8cd3-d783dfdf2435",
-    "activeVersionId": null,
-    "versionCounter": 12,
-    "triggerCount": 1,
-    "shared": [
-        {
-            "updatedAt": "2026-02-21T20:21:30.317Z",
-            "createdAt": "2026-02-21T20:21:30.317Z",
-            "role": "workflow:owner",
-            "workflowId": "6KtZe6D5XcbVzyFS",
-            "projectId": "EONlUm0d92HHHVBN",
-            "project": {
-                "updatedAt": "2026-02-25T02:05:40.807Z",
-                "createdAt": "2026-02-15T17:41:33.246Z",
-                "id": "EONlUm0d92HHHVBN",
-                "name": "Roman Pochtman <pochtmanrca@gmail.com>",
-                "type": "personal",
-                "icon": null,
-                "description": null,
-                "creatorId": "00f12e0f-5634-430b-ab08-fd0aefa1a039",
-                "projectRelations": [
-                    {
-                        "updatedAt": "2026-02-15T17:41:33.246Z",
-                        "createdAt": "2026-02-15T17:41:33.246Z",
-                        "userId": "00f12e0f-5634-430b-ab08-fd0aefa1a039",
-                        "projectId": "EONlUm0d92HHHVBN",
-                        "user": {
-                            "updatedAt": "2026-02-26T00:55:17.000Z",
-                            "createdAt": "2026-02-25T01:40:25.011Z",
-                            "id": "00f12e0f-5634-430b-ab08-fd0aefa1a039",
-                            "email": "pochtmanrca@gmail.com",
-                            "firstName": "Roman",
-                            "lastName": "Pochtman",
-                            "personalizationAnswers": null,
-                            "settings": {
-                                "firstSuccessfulWorkflowId": "CoWsngJ0UMOjyzFL",
-                                "userActivated": true,
-                                "userActivatedAt": 1772064788001
-                            },
-                            "disabled": false,
-                            "mfaEnabled": false,
-                            "lastActiveAt": "2026-02-25",
-                            "isPending": false
-                        }
-                    }
-                ]
+            {
+              "triggerAtHour": 18
             }
+          ]
         }
-    ],
-    "tags": [],
-    "activeVersion": null
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.dopplervpn.org",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "check-website",
+      "name": "Check Website",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        250,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://admin.dopplervpn.org/api/blog/status",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth"
+      },
+      "id": "check-blog-api",
+      "name": "Check Blog API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "WfZDec3QtMKjOuo2",
+          "name": "Blog API Key (admin app)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://n8n.dopplervpn.org/healthz",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "check-n8n",
+      "name": "Check n8n",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        750,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.simnetiq.store",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "check-simnetiq",
+      "name": "Check Simnetiq",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/vpn_servers?select=id,name,city,country_code,ip_address,marzban_api_url,marzban_admin_user,marzban_admin_pass,marzban_api_key,stats_agent_url,stats_agent_token&is_active=eq.true&order=name",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "fetch-servers",
+      "name": "Fetch VPN Servers",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1250,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst safeErr = (e) => {\n  if (e == null) return 'unknown error';\n  if (typeof e === 'string') return e;\n  if (e.message || e.description) return String(e.message || e.description);\n  try { return JSON.stringify(e).slice(0, 120); } catch { return 'unknown error'; }\n};\n\n// Check every active VPN server: Marzban panel if configured, else stats agent.\n// Code sandbox has no fetch: use require('http'/'https') (NODE_FUNCTION_ALLOW_BUILTIN).\nconst http = require('http');\nconst https = require('https');\n\nfunction request(method, url, { headers = {}, body = null, timeout = 8000 } = {}) {\n  return new Promise((resolve, reject) => {\n    const m = url.match(/^(https?):\\/\\/([^\\/:]+)(?::(\\d+))?(\\/.*)?$/);\n    if (!m) return reject(new Error('bad url: ' + url));\n    const lib = m[1] === 'https' ? https : http;\n    const req = lib.request({\n      method, hostname: m[2], port: m[3] ? Number(m[3]) : (m[1] === 'https' ? 443 : 80),\n      path: m[4] || '/', headers, timeout,\n    }, (res) => {\n      let data = '';\n      res.on('data', (c) => data += c);\n      res.on('end', () => resolve({ status: res.statusCode, body: data }));\n    });\n    req.on('timeout', () => { req.destroy(new Error('timeout after ' + timeout + 'ms')); });\n    req.on('error', reject);\n    if (body) req.write(body);\n    req.end();\n  });\n}\n\nconst resp = $('Fetch VPN Servers').first().json;\nconst list = Array.isArray(resp.body) ? resp.body : null;\n\nif (!list) {\n  return [{ json: { servers: [], fetchError: safeErr(resp.error || 'vpn_servers fetch returned no array') } }];\n}\n\nconst fmtBytes = (b) => {\n  if (!b) return '0 B';\n  const u = ['B', 'KB', 'MB', 'GB', 'TB'];\n  const i = Math.min(u.length - 1, Math.floor(Math.log(Math.abs(b)) / Math.log(1024)));\n  return (b / Math.pow(1024, i)).toFixed(1) + ' ' + u[i];\n};\n\nconst out = [];\nfor (const srv of list) {\n  const base = { name: srv.name, country: srv.country_code, city: srv.city, ip: srv.ip_address };\n  try {\n    if (srv.marzban_api_url) {\n      const h = { 'Content-Type': 'application/x-www-form-urlencoded' };\n      if (srv.marzban_api_key) h['X-Marzban-Key'] = srv.marzban_api_key;\n      const tr = await request('POST', srv.marzban_api_url + '/admin/token', {\n        headers: h,\n        body: 'username=' + encodeURIComponent(srv.marzban_admin_user || '') +\n              '&password=' + encodeURIComponent(srv.marzban_admin_pass || ''),\n      });\n      if (tr.status < 200 || tr.status >= 300) { out.push({ ...base, kind: 'marzban', ok: false, detail: 'auth HTTP ' + tr.status }); continue; }\n      const token = JSON.parse(tr.body).access_token;\n      const sh = { Authorization: 'Bearer ' + token };\n      if (srv.marzban_api_key) sh['X-Marzban-Key'] = srv.marzban_api_key;\n      const sr = await request('GET', srv.marzban_api_url + '/system', { headers: sh });\n      if (sr.status < 200 || sr.status >= 300) { out.push({ ...base, kind: 'marzban', ok: false, detail: 'system HTTP ' + sr.status }); continue; }\n      const sys = JSON.parse(sr.body);\n      const memPct = sys.mem_total ? Math.round(100 * sys.mem_used / sys.mem_total) : null;\n      out.push({ ...base, kind: 'marzban', ok: true,\n        detail: (sys.total_user || 0) + ' users, ' + (sys.users_active || 0) + ' active, ↓' +\n                fmtBytes(sys.incoming_bandwidth) + ' ↑' + fmtBytes(sys.outgoing_bandwidth) +\n                (memPct === null ? '' : ', mem ' + memPct + '%') });\n    } else if (srv.stats_agent_url) {\n      const ar = await request('GET', srv.stats_agent_url, {\n        headers: { Authorization: 'Bearer ' + (srv.stats_agent_token || '') },\n      });\n      if (ar.status < 200 || ar.status >= 300) { out.push({ ...base, kind: 'agent', ok: false, detail: 'agent HTTP ' + ar.status }); continue; }\n      const st = JSON.parse(ar.body);\n      const conns = (st.xray && st.xray.connections && st.xray.connections.total) || 0;\n      const xrayUp = !!(st.xray && st.xray.active);\n      out.push({ ...base, kind: 'agent', ok: xrayUp,\n        detail: (xrayUp ? '' : 'XRAY DOWN, ') + conns + ' conns, load ' +\n                (st.cpu ? st.cpu.load1 : '?') + ', mem ' + (st.mem ? st.mem.used_pct : '?') + '%' });\n    } else {\n      out.push({ ...base, kind: 'none', ok: false, detail: 'no monitoring endpoint configured' });\n    }\n  } catch (e) {\n    out.push({ ...base, kind: srv.marzban_api_url ? 'marzban' : 'agent', ok: false, detail: safeErr(e).slice(0, 80) });\n  }\n}\nreturn [{ json: { servers: out, fetchError: null } }];\n"
+      },
+      "id": "check-vpn-servers",
+      "name": "Check VPN Servers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1500,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/rpc/cold_outreach_daily_stats",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={}"
+      },
+      "id": "check-cold-outreach",
+      "name": "Check Cold Outreach",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1625,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst safeErr = (e) => {\n  if (e == null) return 'unknown error';\n  if (typeof e === 'string') return e;\n  if (e.message || e.description) return String(e.message || e.description);\n  try { return JSON.stringify(e).slice(0, 120); } catch { return 'unknown error'; }\n};\n\n// Build the Telegram message. Same data feeds daily summary and alerts.\nconst esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\n\nfunction get(name) { try { return $(name).first().json; } catch { return null; } }\nfunction isHttpOk(d) { if (!d || d.error) return false; return d.statusCode >= 200 && d.statusCode < 400; }\nfunction errDetail(d) {\n  if (!d) return 'no data';\n  if (d.error) return safeErr(d.error).slice(0, 80);\n  return 'HTTP ' + d.statusCode;\n}\n\nconst flagMap = { PL: '\\u{1F1F5}\\u{1F1F1}', SE: '\\u{1F1F8}\\u{1F1EA}', US: '\\u{1F1FA}\\u{1F1F8}',\n  HK: '\\u{1F1ED}\\u{1F1F0}', CA: '\\u{1F1E8}\\u{1F1E6}', DE: '\\u{1F1E9}\\u{1F1EA}', IL: '\\u{1F1EE}\\u{1F1F1}',\n  RU: '\\u{1F1F7}\\u{1F1FA}', NL: '\\u{1F1F3}\\u{1F1F1}', GB: '\\u{1F1EC}\\u{1F1E7}', SG: '\\u{1F1F8}\\u{1F1EC}' };\n\nconst website = get('Check Website');\nconst blogApi = get('Check Blog API');\nconst n8nNode = get('Check n8n');\nconst simnetiq = get('Check Simnetiq');\nconst serverData = get('Check VPN Servers') || {};\nconst servers = serverData.servers || [];\nconst fetchError = serverData.fetchError || null;\n\nconst coldRaw = get('Check Cold Outreach');\nconst cold = (coldRaw && coldRaw.body) ? coldRaw.body : (coldRaw || {});\nconst hasCold = cold && typeof cold === 'object' && typeof cold.total_prospects !== 'undefined';\n\nconst icon = (ok) => ok ? '✅' : '❌';\n\nconst services = [\n  { name: 'Website', ok: isHttpOk(website), data: website },\n  { name: 'Blog API', ok: isHttpOk(blogApi), data: blogApi },\n  { name: 'n8n', ok: isHttpOk(n8nNode), data: n8nNode },\n  { name: 'Simnetiq', ok: isHttpOk(simnetiq), data: simnetiq },\n];\n\nconst hasFailures = services.some(s => !s.ok) || servers.some(s => !s.ok) || !!fetchError;\n\n// Schedule fires at Berlin-local hours (container TZ Europe/Berlin); 9 = daily summary.\nlet hour;\ntry { hour = $now.hour; } catch { hour = new Date().getHours(); }\nconst isDailySummary = hour === 9;\n\n// Alert dedupe: re-alert only when the failure set changes or 12h passed.\nconst sd = $getWorkflowStaticData('global');\nconst failing = [\n  ...services.filter(s => !s.ok).map(s => s.name),\n  ...servers.filter(s => !s.ok).map(s => s.name),\n  ...(fetchError ? ['vpn_servers fetch'] : []),\n].sort();\nconst fp = failing.join('|');\nconst lastFp = sd.lastAlertFingerprint || '';\nconst lastAt = sd.lastAlertAt || 0;\nconst nowMs = Date.now();\n\nlet shouldSend = false;\nlet header = '';\nif (isDailySummary) {\n  shouldSend = true;\n  header = '\\u{1F4CA} <b>Daily Doppler Status</b>';\n} else if (fp && (fp !== lastFp || nowMs - lastAt > 12 * 3600 * 1000)) {\n  shouldSend = true;\n  header = '\\u{1F534} <b>ALERT: Service Issue</b>';\n} else if (!fp && lastFp) {\n  shouldSend = true;\n  header = '✅ <b>Recovered — all services OK</b>';\n}\nif (shouldSend) { sd.lastAlertFingerprint = fp; sd.lastAlertAt = fp ? nowMs : 0; }\n\nconst ts = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';\nconst lines = [];\nif (shouldSend) {\n  lines.push(header);\n  lines.push('');\n  lines.push('<b>Services</b>');\n  for (const s of services) {\n    let detail = s.ok ? 'OK' : errDetail(s.data);\n    if (s.name === 'Blog API' && s.ok && s.data.body && s.data.body.stats) {\n      detail = s.data.body.stats.total_posts + ' posts, ' + s.data.body.stats.total_translations + ' translations';\n    }\n    lines.push(icon(s.ok) + ' <b>' + s.name + ':</b> ' + esc(detail));\n  }\n  lines.push('');\n  lines.push('<b>VPN Servers (' + servers.length + ')</b>');\n  if (fetchError) lines.push('❌ <b>server list:</b> ' + esc(fetchError));\n  for (const srv of servers) {\n    const flag = flagMap[srv.country] || '\\u{1F310}';\n    lines.push(icon(srv.ok) + ' ' + flag + ' <b>' + esc(srv.name) + (srv.city ? ' (' + esc(srv.city) + ')' : '') + ':</b> ' + esc(srv.detail || ''));\n  }\n  if (isDailySummary && hasCold) {\n    lines.push('');\n    lines.push('<b>Cold Outreach (last 24h)</b>');\n    lines.push('✉️ Sent: <b>' + (cold.sent_total_24h || 0) + '</b>  (S1: ' + (cold.sent_step1_24h || 0) + ' · S2: ' + (cold.sent_step2_24h || 0) + ' · S3: ' + (cold.sent_step3_24h || 0) + ')');\n    lines.push('↩️ Replies: <b>' + (cold.replies_24h || 0) + '</b>  ·  ❌ Opt-outs: <b>' + (cold.opt_outs_24h || 0) + '</b>');\n    lines.push('⏳ In queue: <b>' + (cold.in_queue || 0) + '</b>  (due now: ' + (cold.queued_due_now || 0) + ')');\n    lines.push('\\u{1F4C8} Lifetime: ' + (cold.total_prospects || 0) + ' prospects · ' + (cold.total_replied || 0) + ' replies · ' + (cold.total_opted_out || 0) + ' opt-outs');\n  }\n  lines.push('');\n  lines.push('<i>' + ts + '</i>');\n}\nreturn [{ json: { shouldSend, message: lines.join('\\n'), isDailySummary, hasFailures } }];\n"
+      },
+      "id": "format-message",
+      "name": "Format Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1750,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.shouldSend }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-should-send",
+      "name": "If Should Send",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: 218545546, text: $json.message, parse_mode: 'HTML' }) }}"
+      },
+      "id": "send-telegram",
+      "name": "Send to Roman",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2250,
+        -50
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    }
+  ],
+  "connections": {
+    "Schedule": {
+      "main": [
+        [
+          {
+            "node": "Check Website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Website": {
+      "main": [
+        [
+          {
+            "node": "Check Blog API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Blog API": {
+      "main": [
+        [
+          {
+            "node": "Check n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check n8n": {
+      "main": [
+        [
+          {
+            "node": "Check Simnetiq",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Simnetiq": {
+      "main": [
+        [
+          {
+            "node": "Fetch VPN Servers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch VPN Servers": {
+      "main": [
+        [
+          {
+            "node": "Check VPN Servers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check VPN Servers": {
+      "main": [
+        [
+          {
+            "node": "Check Cold Outreach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Cold Outreach": {
+      "main": [
+        [
+          {
+            "node": "Format Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Message": {
+      "main": [
+        [
+          {
+            "node": "If Should Send",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Should Send": {
+      "main": [
+        [
+          {
+            "node": "Send to Roman",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  }
 }

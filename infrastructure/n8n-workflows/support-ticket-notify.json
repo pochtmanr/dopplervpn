@@ -1,0 +1,378 @@
+{
+  "name": "Doppler Support Ticket Notify",
+  "id": "amEohssBxdC0dJ1x",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "tick-schedule",
+      "name": "Every Minute",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/support_tickets?select=id,ticket_number,topic,subject,description,contact_email,account_id,priority,created_at&telegram_notified_at=is.null&order=created_at.asc&limit=10",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            }
+          ]
+        }
+      },
+      "id": "tick-fetch",
+      "name": "Fetch Unnotified Tickets",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// One item per unnotified ticket; HTML-escaped for parse_mode: HTML.\nconst esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst resp = $('Fetch Unnotified Tickets').first().json;\nconst rows = Array.isArray(resp.body) ? resp.body : [];\nreturn rows.map(t => {\n  const desc = (t.description || '').trim();\n  const trimmed = desc.length > 500 ? desc.slice(0, 500) + '…' : desc;\n  const text = [\n    '\\u{1F3AB} <b>New Support Ticket</b> — <code>' + esc(t.ticket_number) + '</code>',\n    '',\n    '<b>Topic:</b> ' + esc(t.topic) + '  ·  <b>Priority:</b> ' + esc(t.priority || 'normal'),\n    '<b>Subject:</b> ' + esc(t.subject),\n    '',\n    esc(trimmed),\n    '',\n    '<b>Email:</b> ' + esc(t.contact_email),\n    '<b>Account:</b> ' + (t.account_id ? '<code>' + esc(t.account_id) + '</code>' : '—'),\n    '<i>' + esc(String(t.created_at || '').replace('T', ' ').slice(0, 16)) + ' UTC · reply to the email above</i>',\n  ].join('\\n');\n  return { json: { id: t.id, ticket_number: t.ticket_number, text } };\n});\n"
+      },
+      "id": "tick-format",
+      "name": "Format Tickets",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: 218545546, text: $json.text, parse_mode: 'HTML' }) }}"
+      },
+      "id": "tick-send",
+      "name": "Send Ticket to Roman",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tick-if-sent",
+      "name": "If Sent",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        880,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/support_tickets?id=eq.{{ $('Format Tickets').item.json.id }}",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ telegram_notified_at: $now.toISO() }) }}"
+      },
+      "id": "tick-mark",
+      "name": "Mark Notified",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        -80
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Poison-row guard: only Telegram 4xx rows proceed (plain resend + mark),\n// transient failures are dropped so the next poll retries them.\nconst out = [];\nfor (const item of $input.all()) {\n  const err = item.json && item.json.error;\n  const msg = err ? String(err.message || err.description || err) : '';\n  if (/^4\\d\\d\\b/.test(msg) || / 4\\d\\d /.test(msg) || msg.includes('400')) {\n    const src = $('Format Tickets').itemMatching($input.all().indexOf(item));\n    const plain = String(src.json.text || '').replace(/<[^>]+>/g, '');\n    out.push({ json: { id: src.json.id, ticket_number: src.json.ticket_number, plainText: plain } });\n  }\n}\nreturn out;\n"
+      },
+      "id": "tick-classify",
+      "name": "Classify Failure",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        120
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: 218545546, text: $json.plainText }) }}"
+      },
+      "id": "tick-send-plain",
+      "name": "Send Plain Fallback",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        120
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/support_tickets?id=eq.{{ $('Classify Failure').item.json.id }}",
+        "options": {
+          "timeout": 10000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ telegram_notified_at: $now.toISO() }) }}"
+      },
+      "id": "tick-mark-2",
+      "name": "Mark Notified (Fallback)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        120
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 3000
+    }
+  ],
+  "connections": {
+    "Every Minute": {
+      "main": [
+        [
+          {
+            "node": "Fetch Unnotified Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Unnotified Tickets": {
+      "main": [
+        [
+          {
+            "node": "Format Tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Tickets": {
+      "main": [
+        [
+          {
+            "node": "Send Ticket to Roman",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Ticket to Roman": {
+      "main": [
+        [
+          {
+            "node": "If Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Sent": {
+      "main": [
+        [
+          {
+            "node": "Mark Notified",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Classify Failure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify Failure": {
+      "main": [
+        [
+          {
+            "node": "Send Plain Fallback",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Plain Fallback": {
+      "main": [
+        [
+          {
+            "node": "Mark Notified (Fallback)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  }
+}
