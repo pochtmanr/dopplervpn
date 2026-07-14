@@ -53,5 +53,5 @@ run each in a fresh Opus session, in order. User approved this priority order on
 - [ ] 02 favicon — deployed: ____
 - [ ] 03 internal linking — deployed: ____
 - [x] 04 vless cluster — committed 2026-07-14, not yet pushed (fill deploy date on push); Supabase blog retitle applied 2026-07-14
-- [ ] 05 CTR rewrites — deployed: ____
+- [x] 05 CTR rewrites — committed 2026-07-14, not yet pushed (fill deploy date on push); Supabase: bypass-post en retitle + 43 locale translations inserted 2026-07-14 (21 servable per BLOG_LOCALES; locale column widened to varchar(10) for zh-Hant)
 - [ ] 06 approved proposals — deployed: ____
