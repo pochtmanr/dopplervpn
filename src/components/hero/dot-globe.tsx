@@ -32,6 +32,8 @@ const NODES: ReadonlyArray<{ lat: number; lon: number; label: string }> = [
   { lat: 41.59, lon: -93.62, label: "Des Moines" },
   { lat: 43.65, lon: -79.38, label: "Toronto" },
   { lat: 22.32, lon: 114.17, label: "Hong Kong" },
+  { lat: 35.68, lon: 139.69, label: "Tokyo" },
+  { lat: 25.2, lon: 55.27, label: "Dubai" },
 ];
 
 // Major cities shown as small neutral markers (servers stay teal); arcs travel
