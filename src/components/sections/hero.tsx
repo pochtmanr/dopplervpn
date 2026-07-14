@@ -158,7 +158,7 @@ export function Hero() {
 
             {/* Trust Badges */}
             <ul
-              className="hero-animate hero-animate-delay-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 pt-2 text-xs text-text-muted"
+              className="hero-animate hero-animate-delay-5 hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 pt-2 text-xs text-text-muted"
             >
               <li className="flex items-center gap-1.5">
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

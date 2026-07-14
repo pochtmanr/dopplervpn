@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { trackCta } from "@/lib/track-cta";
@@ -11,8 +10,6 @@ const APP_STORE_URL =
   "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
-const ANDROID_APK_FALLBACK =
-  "https://github.com/pochtmanr/DopplerAndroid/releases/latest";
 const WINDOWS_X64_URL = "/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe";
 
 interface HeroCTAsProps {
@@ -21,7 +18,6 @@ interface HeroCTAsProps {
 
 export function HeroCTAs({ platform }: HeroCTAsProps) {
   const t = useTranslations("hero");
-  const androidApkUrl = useLatestAndroidApk(platform === "android");
 
   const downloadConfig = {
     ios: { href: APP_STORE_URL, label: t("downloadIos"), external: true, download: false, icon: <AppleIcon /> },
@@ -76,18 +72,6 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 w-full">
       {downloadBtn}
-      {platform === "android" && (
-        <a
-          href={androidApkUrl ?? ANDROID_APK_FALLBACK}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackCta("hero", "android", "android-apk")}
-          className={secondaryClass}
-          aria-busy={androidApkUrl === null ? "true" : undefined}
-        >
-          {t("getAndroid")}
-        </a>
-      )}
       <a
         href="#pricing"
         className={secondaryClass}
@@ -96,27 +80,6 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
       </a>
     </div>
   );
-}
-
-function useLatestAndroidApk(enabled: boolean): string | null {
-  const [url, setUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!enabled) return;
-    const controller = new AbortController();
-    fetch("/api/android/latest", { signal: controller.signal })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: { url?: string } | null) => {
-        if (data?.url) setUrl(data.url);
-        else setUrl(ANDROID_APK_FALLBACK);
-      })
-      .catch((err) => {
-        if (err?.name !== "AbortError") setUrl(ANDROID_APK_FALLBACK);
-      });
-    return () => controller.abort();
-  }, [enabled]);
-
-  return url;
 }
 
 function AppleIcon() {

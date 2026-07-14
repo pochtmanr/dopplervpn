@@ -303,7 +303,7 @@ export default async function VpnForMacosPage({ params }: PageProps) {
                 </div>
 
                 {/* Trust badges — same trio as the homepage hero */}
-                <ul className="hero-animate hero-animate-delay-5 mt-7 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-text-muted">
+                <ul className="hero-animate hero-animate-delay-5 mt-7 hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-text-muted">
                   <li className="flex items-center gap-1.5">
                     <CheckIcon />
                     {tHero("trustBadges.noData")}
