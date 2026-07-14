@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Ktoré platformy podporujú VLESS-Reality?",
         "answer": "Doppler VPN ponúka VLESS-Reality na iOS (App Store), Androide (Google Play a APK) a Telegram bote pre prístup cez konfiguráciu."
-      }
+      },
+      "q5": {
+        "question": "Čo je VLESS a ako funguje?",
+        "answer": "VLESS je odľahčený, bezstavový proxy protokol z ekosystému Xray/V2Ray, vytvorený na obchádzanie cenzúry. Overuje vás pomocou UUID a prenáša váš prenos vnútri skutočného spojenia TLS, pričom sám pridáva takmer žiadnu réžiu. V spojení s Reality predloží spojenie pravý certifikát webovej stránky — takže pre akéhokoľvek cenzora sledujúceho linku to vyzerá, akoby ste len prehliadali bežnú stránku HTTPS."
+      },
+      "q6": {
+        "question": "Čo je VLESS Reality?",
+        "answer": "Reality je vrstva maskovania TLS pre VLESS. Namiesto použitia vlastného certifikátu si server požičia spôsob prezentácie certifikátu TLS skutočnej, dobre známej webovej stránky — takže filtrovanie založené na SNI vidí legitímny cieľ a aktívne sondy, ktoré sa pripoja k vášmu serveru, dostanú odpoveď skutočnej stránky. To poráža techniky blokovania SNI a sondovania, ktoré odhaľujú bežné siete VPN."
+      },
+      "q7": {
+        "question": "Je VLESS lepší než WireGuard alebo OpenVPN na obchádzanie cenzúry?",
+        "answer": "Na obchádzanie cenzúry áno. WireGuard a OpenVPN majú rozpoznateľné signatúry v sieťovom prenose, takže systémy DPI v Číne, Iráne a Rusku ich rýchlo odhalia a zablokujú. VLESS s Reality je nerozoznateľný od bežného HTTPS, a preto funguje tam, kde ostatné zlyhávajú. V sieťach bez cenzúry je situácia iná — WireGuard je vynikajúci a jednoduchší a VLESS tu neponúka žiadnu zvláštnu výhodu."
+      },
+      "title": "Protokol VLESS: často kladené otázky"
     },
     "cta": {
       "title": "Vyskusajte VLESS VPN aplikaciu, ktora jednoducho funguje",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS na Androide",
       "vlessAndroidDesc": "Nastavte VLESS-Reality na akomkoľvek zariadení s Androidom",
       "censorship": "Ako obchádzame cenzúru",
-      "censorshipDesc": "DPI, filtrovanie SNI — a ako ich Reality poráža"
+      "censorshipDesc": "DPI, filtrovanie SNI — a ako ich Reality poráža",
+      "deepDive": "VLESS Reality: podrobný rozbor",
+      "deepDiveDesc": "Prečítajte si úplné technické vysvetlenie, ako Reality poráža DPI"
     }
   },
   "vpnForIos": {

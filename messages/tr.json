@@ -2201,7 +2201,20 @@
       "q4": {
         "question": "Hangi platformlar VLESS-Reality'yi destekliyor?",
         "answer": "Doppler VPN, iOS (App Store), Android (Google Play ve APK) ve yapılandırma tabanlı erişim için Telegram botunda VLESS-Reality sunuyor."
-      }
+      },
+      "q5": {
+        "question": "VLESS nedir ve nasıl çalışır?",
+        "answer": "VLESS, Xray/V2Ray ekosisteminden gelen, sansürü aşmak için tasarlanmış hafif ve durumsuz (stateless) bir proxy protokolüdür. Sizi bir UUID ile kimlik doğrulamasından geçirir ve trafiğinizi gerçek bir TLS bağlantısı içinde taşır; kendisi neredeyse hiç ek yük getirmez. Reality ile birleştiğinde, bağlantı gerçek bir web sitesi sertifikası sunar — böylece hattı izleyen herhangi bir sansürcünün gözünde, sıradan bir HTTPS sitesinde geziniyormuşsunuz gibi görünür."
+      },
+      "q6": {
+        "question": "VLESS Reality nedir?",
+        "answer": "Reality, VLESS için bir TLS kamuflaj katmanıdır. Sunucu, kendi sertifikasını kullanmak yerine, gerçek ve tanınmış bir web sitesinin TLS sertifikası sunumunu ödünç alır — böylece SNI tabanlı filtreleme meşru bir hedef görür ve sunucunuza bağlanan aktif sondalar gerçek sitenin yanıtını alır. Bu, geleneksel VPN'leri yakalayan SNI engelleme ve sondalama tekniklerini etkisiz kılar."
+      },
+      "q7": {
+        "question": "Sansür açısından VLESS, WireGuard veya OpenVPN'den daha mı iyi?",
+        "answer": "Sansürü aşmak için evet. WireGuard ve OpenVPN'in tanınabilir ağ imzaları vardır, bu yüzden Çin, İran ve Rusya'daki DPI sistemleri onları hızla tespit edip engeller. Reality ile VLESS ise normal HTTPS'ten ayırt edilemez, bu nedenle diğerlerinin başarısız olduğu yerlerde çalışmaya devam eder. Sansürsüz ağlarda ise durum farklıdır — WireGuard mükemmel ve daha basittir ve orada VLESS belirgin bir avantaj sunmaz."
+      },
+      "title": "VLESS Protokolü: Sıkça Sorulan Sorular"
     },
     "cta": {
       "title": "Her Şeyi Kolaylaştıran VLESS VPN Uygulamasını Deneyin",
@@ -2222,7 +2235,9 @@
       "vlessAndroid": "Android'de VLESS",
       "vlessAndroidDesc": "VLESS-Reality'yi herhangi bir Android cihazda kurun",
       "censorship": "Sansürü Nasıl Aşıyoruz",
-      "censorshipDesc": "DPI, SNI filtreleme — ve Reality bunları nasıl aşıyor"
+      "censorshipDesc": "DPI, SNI filtreleme — ve Reality bunları nasıl aşıyor",
+      "deepDive": "VLESS Reality: Derinlemesine İnceleme",
+      "deepDiveDesc": "Reality'nin DPI'yi nasıl alt ettiğine dair tam teknik açıklamayı okuyun"
     }
   },
   "vpnForIos": {

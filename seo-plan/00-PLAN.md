@@ -52,6 +52,6 @@ run each in a fresh Opus session, in order. User approved this priority order on
 - [ ] 01 technical fixes — deployed: ____
 - [ ] 02 favicon — deployed: ____
 - [ ] 03 internal linking — deployed: ____
-- [ ] 04 vless cluster — deployed: ____
+- [x] 04 vless cluster — committed 2026-07-14, not yet pushed (fill deploy date on push); Supabase blog retitle applied 2026-07-14
 - [ ] 05 CTR rewrites — deployed: ____
 - [ ] 06 approved proposals — deployed: ____

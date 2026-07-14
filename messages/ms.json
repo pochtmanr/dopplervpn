@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Platform apa yang menyokong VLESS-Reality?",
         "answer": "Doppler VPN menawarkan VLESS-Reality di iOS (App Store), Android (Google Play dan APK), dan bot Telegram untuk akses berasaskan konfigurasi."
-      }
+      },
+      "q5": {
+        "question": "Apakah VLESS dan bagaimana ia berfungsi?",
+        "answer": "VLESS ialah protokol proksi yang ringan dan tanpa keadaan (stateless) daripada ekosistem Xray/V2Ray, dibina untuk memintas penapisan. Ia mengesahkan anda dengan UUID dan membawa trafik anda di dalam sambungan TLS sebenar, hampir tanpa menambah sebarang overhed tersendiri. Digabungkan dengan Reality, sambungan itu memaparkan sijil laman web yang sah — jadi kepada mana-mana penapis yang memerhati talian, ia kelihatan seperti anda sekadar melayari laman HTTPS biasa."
+      },
+      "q6": {
+        "question": "Apakah VLESS Reality?",
+        "answer": "Reality ialah lapisan penyamaran TLS untuk VLESS. Daripada menggunakan sijilnya sendiri, pelayan meminjam persembahan sijil TLS sebuah laman web sebenar yang terkenal — jadi penapisan berasaskan SNI melihat destinasi yang sah, dan siasatan aktif (probe) yang menyambung ke pelayan anda menerima respons laman sebenar. Ini mengalahkan teknik penyekatan SNI dan penyiasatan yang menangkap VPN konvensional."
+      },
+      "q7": {
+        "question": "Adakah VLESS lebih baik daripada WireGuard atau OpenVPN untuk memintas penapisan?",
+        "answer": "Untuk memintas penapisan, ya. WireGuard dan OpenVPN mempunyai tandatangan talian yang boleh dikenali, jadi sistem DPI di China, Iran dan Rusia mengesan serta menyekatnya dengan cepat. VLESS dengan Reality tidak dapat dibezakan daripada HTTPS biasa, itulah sebabnya ia terus berfungsi di tempat yang lain gagal. Pada rangkaian tanpa penapisan, gambarannya berbeza — WireGuard sangat baik dan lebih ringkas, dan di situ VLESS tidak menawarkan sebarang kelebihan istimewa."
+      },
+      "title": "Protokol VLESS: Soalan Lazim"
     },
     "cta": {
       "title": "Cuba Aplikasi VPN VLESS yang Terus Berfungsi",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS di Android",
       "vlessAndroidDesc": "Sediakan VLESS-Reality pada mana-mana peranti Android",
       "censorship": "Cara Kami Mengatasi Penapisan",
-      "censorshipDesc": "DPI, penapisan SNI — dan cara Reality mengalahkannya"
+      "censorshipDesc": "DPI, penapisan SNI — dan cara Reality mengalahkannya",
+      "deepDive": "VLESS Reality: Penerokaan Mendalam",
+      "deepDiveDesc": "Baca penjelasan teknikal penuh tentang cara Reality mengalahkan DPI"
     }
   },
   "vpnForIos": {

@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Hansı platformlar VLESS-Reality-ni dəstəkləyir?",
         "answer": "Doppler VPN VLESS-Reality-ni iOS (App Store), Android (Google Play və APK) və konfiqurasiya əsaslı giriş üçün Telegram botunda təmin edir. Bütün platformlar eyni optimallaşdırılmış Xray-core mühərrikini istifadə edir."
-      }
+      },
+      "q5": {
+        "question": "VLESS nədir və necə işləyir?",
+        "answer": "VLESS, Xray/V2Ray ekosistemindən gələn, senzuranı aşmaq üçün hazırlanmış yüngül və vəziyyətsiz (stateless) proxy protokoludur. Sizi UUID ilə autentifikasiya edir və trafikinizi real TLS bağlantısı daxilində daşıyır, özündən demək olar ki, heç bir əlavə yük yaratmır. Reality ilə birləşdikdə, bağlantı həqiqi veb-sayt sertifikatı təqdim edir — beləliklə xətti izləyən istənilən senzor üçün sadəcə adi bir HTTPS saytında gəzdiyiniz kimi görünür."
+      },
+      "q6": {
+        "question": "VLESS Reality nədir?",
+        "answer": "Reality VLESS üçün TLS kamuflyaj təbəqəsidir. Server öz sertifikatını istifadə etmək əvəzinə, real, tanınmış veb-saytın TLS sertifikat təqdimatını borc alır — beləliklə SNI əsaslı filtrasiya qanuni bir təyinat görür və serverinizə qoşulan aktiv zondlar real saytın cavabını alır. Bu, ənənəvi VPN-ləri tutan SNI bloklama və zondlama üsullarını təsirsiz edir."
+      },
+      "q7": {
+        "question": "Senzura baxımından VLESS WireGuard və ya OpenVPN-dən yaxşıdır?",
+        "answer": "Senzuranı aşmaq üçün bəli. WireGuard və OpenVPN-in tanına bilən şəbəkə imzaları var, ona görə də Çin, İran və Rusiyadakı DPI sistemləri onları tez aşkar edib bloklayır. Reality ilə VLESS isə adi HTTPS-dən fərqlənmir, buna görə də digərlərinin uğursuz olduğu yerlərdə işləməyə davam edir. Senzurasız şəbəkələrdə isə vəziyyət fərqlidir — WireGuard əladır və daha sadədir və orada VLESS xüsusi bir üstünlük təklif etmir."
+      },
+      "title": "VLESS Protokolu: Tez-tez Verilən Suallar"
     },
     "cta": {
       "title": "Sadəcə İşləyən VLESS VPN Tətbiqini Sınayın",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "Android-də VLESS",
       "vlessAndroidDesc": "İstənilən Android cihazında VLESS-Reality qurun",
       "censorship": "Senzuranı Necə Keçirik",
-      "censorshipDesc": "DPI, SNI filtrləmə — və Reality onları necə üstələyir"
+      "censorshipDesc": "DPI, SNI filtrləmə — və Reality onları necə üstələyir",
+      "deepDive": "VLESS Reality: Dərin Araşdırma",
+      "deepDiveDesc": "Reality-nin DPI-ni necə məğlub etdiyi barədə tam texniki izahı oxuyun"
     }
   },
   "vpnForIos": {

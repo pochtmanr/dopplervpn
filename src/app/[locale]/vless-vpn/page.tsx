@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { routing } from "@/i18n/routing";
+import { isBlogLocale } from "@/i18n/blog-locales";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-const faqKeys = ["q1", "q2", "q3", "q4"] as const;
+const faqKeys = ["q1", "q2", "q3", "q4", "q5", "q6", "q7"] as const;
 const comparisonProtocols = ["vless", "wireguard", "openvpn", "shadowsocks", "trojan"] as const;
 const comparisonCols = ["dpiResistance", "speed", "latency", "batteryImpact", "setupComplexity", "censorshipBypass"] as const;
 const howItWorksSteps = ["step1", "step2", "step3", "step4"] as const;
@@ -393,6 +394,27 @@ export default async function VlessVpnPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* ── 8. FAQ ───────────────────────────────────────────── */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-12 text-center">
+              {t("faq.title")}
+            </h2>
+            <div className="space-y-4">
+              {faqKeys.map((key) => (
+                <div key={key} className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
+                  <h3 className="text-lg font-semibold text-text-primary mb-2">
+                    {t(`faq.${key}.question`)}
+                  </h3>
+                  <p className="text-sm text-text-muted leading-relaxed">
+                    {t(`faq.${key}.answer`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── Related Pages ────────────────────────────────────── */}
         <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
@@ -417,6 +439,12 @@ export default async function VlessVpnPage({ params }: PageProps) {
                 <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.censorship")}</h3>
                 <p className="text-xs text-text-muted">{t("related.censorshipDesc")}</p>
               </Link>
+              {isBlogLocale(locale) && (
+                <Link href="/blog/vless-reality-explained" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
+                  <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.deepDive")}</h3>
+                  <p className="text-xs text-text-muted">{t("related.deepDiveDesc")}</p>
+                </Link>
+              )}
             </div>
           </div>
         </section>

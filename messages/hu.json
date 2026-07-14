@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Mely platformok támogatják a VLESS-Reality-t?",
         "answer": "A Doppler VPN VLESS-Reality-t kínál iOS-en (App Store), Androidon (Google Play és APK) és Telegram-boton konfigurációalapú hozzáféréshez."
-      }
+      },
+      "q5": {
+        "question": "Mi az a VLESS, és hogyan működik?",
+        "answer": "A VLESS egy könnyű, állapotmentes proxyprotokoll az Xray/V2Ray ökoszisztémából, amelyet a cenzúra megkerülésére terveztek. UUID segítségével azonosít, és a forgalmadat egy valódi TLS-kapcsolaton belül továbbítja, miközben szinte semmi saját többletterhelést nem ad hozzá. A Reality-vel kombinálva a kapcsolat egy valódi weboldal tanúsítványát mutatja fel — így a vonalat figyelő cenzor számára úgy tűnik, mintha egyszerűen egy hétköznapi HTTPS-oldalt böngésznél."
+      },
+      "q6": {
+        "question": "Mi az a VLESS Reality?",
+        "answer": "A Reality egy TLS-álcázó réteg a VLESS számára. Ahelyett, hogy saját tanúsítványt használna, a szerver egy valódi, jól ismert weboldal TLS-tanúsítványának bemutatását kölcsönzi — így az SNI-alapú szűrés jogos célállomást lát, a szerveredhez kapcsolódó aktív szondák pedig a valódi oldal válaszát kapják. Ez legyőzi az SNI-blokkolást és a szondázási technikákat, amelyek a hagyományos VPN-eket elkapják."
+      },
+      "q7": {
+        "question": "A VLESS jobb a cenzúra ellen, mint a WireGuard vagy az OpenVPN?",
+        "answer": "A cenzúra megkerüléséhez igen. A WireGuard és az OpenVPN felismerhető hálózati aláírással rendelkezik, ezért a kínai, iráni és orosz DPI-rendszerek gyorsan észlelik és blokkolják őket. A VLESS a Reality-vel megkülönböztethetetlen a normál HTTPS-től, ezért ott is működik tovább, ahol azok kudarcot vallanak. Cenzúrázatlan hálózatokon más a helyzet — a WireGuard kiváló és egyszerűbb, ott a VLESS nem nyújt különösebb előnyt."
+      },
+      "title": "VLESS protokoll: Gyakran ismételt kérdések"
     },
     "cta": {
       "title": "Próbálja ki a VLESS VPN alkalmazást, amely egyszerűen működik",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS Androidon",
       "vlessAndroidDesc": "Állítsa be a VLESS-Reality-t bármilyen Android-eszközön",
       "censorship": "Hogyan kerüljük meg a cenzúrát",
-      "censorshipDesc": "DPI, SNI-szűrés — és ahogy a Reality legyőzi őket"
+      "censorshipDesc": "DPI, SNI-szűrés — és ahogy a Reality legyőzi őket",
+      "deepDive": "VLESS Reality: A részletes elemzés",
+      "deepDiveDesc": "Olvasd el a teljes technikai magyarázatot arról, hogyan győzi le a Reality a DPI-t"
     }
   },
   "vpnForIos": {

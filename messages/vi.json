@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Nền tảng nào hỗ trợ VLESS-Reality?",
         "answer": "Doppler VPN cung cấp VLESS-Reality trên iOS (App Store), Android (Google Play và APK) và bot Telegram để truy cập dựa trên cấu hình."
-      }
+      },
+      "q5": {
+        "question": "VLESS là gì và nó hoạt động như thế nào?",
+        "answer": "VLESS là một giao thức proxy nhẹ, không trạng thái (stateless) thuộc hệ sinh thái Xray/V2Ray, được xây dựng để vượt kiểm duyệt. Nó xác thực bạn bằng một UUID và mang lưu lượng của bạn bên trong một kết nối TLS thật, gần như không thêm chi phí xử lý nào của riêng nó. Kết hợp với Reality, kết nối trình bày chứng chỉ của một trang web thật — nên với bất kỳ cơ quan kiểm duyệt nào đang theo dõi đường truyền, nó trông như thể bạn chỉ đang duyệt một trang HTTPS thông thường."
+      },
+      "q6": {
+        "question": "VLESS Reality là gì?",
+        "answer": "Reality là một lớp ngụy trang TLS cho VLESS. Thay vì dùng chứng chỉ của riêng mình, máy chủ mượn phần trình bày chứng chỉ TLS của một trang web thật, nổi tiếng — nên việc lọc dựa trên SNI thấy một đích đến hợp lệ, và các thăm dò chủ động (probe) kết nối tới máy chủ của bạn sẽ nhận được phản hồi của trang web thật. Điều này đánh bại các kỹ thuật chặn SNI và thăm dò vốn bắt được các VPN thông thường."
+      },
+      "q7": {
+        "question": "VLESS có tốt hơn WireGuard hay OpenVPN cho việc vượt kiểm duyệt không?",
+        "answer": "Đối với việc vượt kiểm duyệt thì có. WireGuard và OpenVPN có dấu hiệu nhận dạng trên đường truyền, nên các hệ thống DPI ở Trung Quốc, Iran và Nga phát hiện và chặn chúng nhanh chóng. VLESS với Reality không thể phân biệt được với HTTPS thông thường, đó là lý do nó vẫn hoạt động ở nơi chúng thất bại. Trên các mạng không bị kiểm duyệt thì bức tranh khác — WireGuard rất tốt và đơn giản hơn, và ở đó VLESS không mang lại lợi thế đặc biệt nào."
+      },
+      "title": "Giao thức VLESS: Câu hỏi thường gặp"
     },
     "cta": {
       "title": "Thử Ứng Dụng VPN VLESS Hoạt Động Ngay",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS trên Android",
       "vlessAndroidDesc": "Thiết lập VLESS-Reality trên mọi thiết bị Android",
       "censorship": "Cách Chúng Tôi Vượt Kiểm Duyệt",
-      "censorshipDesc": "DPI, lọc SNI — và cách Reality đánh bại chúng"
+      "censorshipDesc": "DPI, lọc SNI — và cách Reality đánh bại chúng",
+      "deepDive": "VLESS Reality: Phân tích chuyên sâu",
+      "deepDiveDesc": "Đọc giải thích kỹ thuật đầy đủ về cách Reality đánh bại DPI"
     }
   },
   "vpnForIos": {

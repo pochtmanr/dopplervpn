@@ -2037,8 +2037,8 @@
   },
   "vlessVpn": {
     "metadata": {
-      "title": "VLESS VPN App — What is VLESS-Reality Protocol & Why It Beats WireGuard",
-      "description": "Learn what the VLESS protocol is, how VLESS-Reality defeats Deep Packet Inspection, and why it outperforms WireGuard and OpenVPN for censorship bypass. Download the Doppler VLESS VPN app for iOS and Android."
+      "title": "What Is VLESS? How the Protocol Works — and the Easiest VLESS VPN",
+      "description": "VLESS is a lightweight proxy protocol from the Xray/V2Ray ecosystem — paired with Reality, it makes your traffic look like ordinary HTTPS and slips past DPI censorship. See how it works, then get it in one tap with Doppler for iOS and Android."
     },
     "hero": {
       "title": "VLESS-Reality: The Protocol Built to Be Invisible",
@@ -2192,6 +2192,7 @@
       }
     },
     "faq": {
+      "title": "VLESS Protocol: Frequently Asked Questions",
       "q1": {
         "question": "What is the VLESS-Reality protocol?",
         "answer": "VLESS-Reality is a next-generation proxy protocol that makes VPN traffic indistinguishable from regular HTTPS browsing. It performs a genuine TLS handshake using a real website certificate, defeating deep packet inspection and censorship systems."
@@ -2207,6 +2208,18 @@
       "q4": {
         "question": "Which platforms support VLESS-Reality?",
         "answer": "Doppler VPN brings VLESS-Reality to iOS (App Store), Android (Google Play and APK), and Telegram bot for config-based access. All platforms use the same optimized Xray-core engine."
+      },
+      "q5": {
+        "question": "What is VLESS and how does it work?",
+        "answer": "VLESS is a lightweight, stateless proxy protocol from the Xray/V2Ray ecosystem, built for censorship circumvention. It authenticates you with a UUID and carries your traffic inside a real TLS connection, adding almost no overhead of its own. Combined with Reality, the connection presents a genuine website certificate — so to any censor watching the wire, it looks like you are simply browsing an ordinary HTTPS site."
+      },
+      "q6": {
+        "question": "What is VLESS Reality?",
+        "answer": "Reality is a TLS camouflage layer for VLESS. Instead of using its own certificate, the server borrows the TLS certificate presentation of a real, well-known website — so SNI-based filtering sees a legitimate destination, and active probes that connect to your server receive the real site's response. This defeats the SNI blocking and probing techniques that catch conventional VPNs."
+      },
+      "q7": {
+        "question": "Is VLESS better than WireGuard or OpenVPN for censorship?",
+        "answer": "For censorship bypass, yes. WireGuard and OpenVPN have recognizable wire signatures, so DPI systems in China, Iran, and Russia detect and block them quickly. VLESS with Reality is indistinguishable from normal HTTPS, which is why it keeps working where they fail. On uncensored networks the picture is different — WireGuard is excellent and simpler, and there VLESS offers no particular advantage."
       }
     },
     "cta": {
@@ -2228,7 +2241,9 @@
       "vlessAndroid": "VLESS on Android",
       "vlessAndroidDesc": "Set up VLESS-Reality on any Android device",
       "censorship": "How We Bypass Censorship",
-      "censorshipDesc": "DPI, SNI filtering — and how Reality defeats them"
+      "censorshipDesc": "DPI, SNI filtering — and how Reality defeats them",
+      "deepDive": "VLESS Reality: The Deep Dive",
+      "deepDiveDesc": "Read the full technical explainer on how Reality defeats DPI"
     }
   },
   "vpnForIos": {

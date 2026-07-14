@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Kādas platformas atbalsta VLESS-Reality?",
         "answer": "Doppler VPN piedāvā VLESS-Reality iOS (App Store), Android (Google Play un APK) un Telegram botā konfigurācijas balstītai piekļuvei."
-      }
+      },
+      "q5": {
+        "question": "Kas ir VLESS un kā tas darbojas?",
+        "answer": "VLESS ir viegls, bezstāvokļa starpniekservera protokols no Xray/V2Ray ekosistēmas, kas izveidots cenzūras apiešanai. Tas autentificē jūs, izmantojot UUID, un pārnēsā jūsu datplūsmu īsta TLS savienojuma iekšienē, gandrīz nepievienojot savu papildu slodzi. Apvienojumā ar Reality savienojums uzrāda īstas vietnes sertifikātu — tāpēc jebkuram cenzoram, kas novēro līniju, izskatās, ka jūs vienkārši pārlūkojat parastu HTTPS vietni."
+      },
+      "q6": {
+        "question": "Kas ir VLESS Reality?",
+        "answer": "Reality ir TLS maskēšanās slānis priekš VLESS. Tā vietā, lai izmantotu savu sertifikātu, serveris aizņemas īstas, labi zināmas vietnes TLS sertifikāta uzrādīšanu — tāpēc uz SNI balstīta filtrēšana redz likumīgu galamērķi, un aktīvie zondi, kas pieslēdzas jūsu serverim, saņem īstās vietnes atbildi. Tas pārvar SNI bloķēšanas un zondēšanas metodes, kas noķer parastos VPN."
+      },
+      "q7": {
+        "question": "Vai VLESS ir labāks par WireGuard vai OpenVPN cenzūras apiešanai?",
+        "answer": "Cenzūras apiešanai — jā. WireGuard un OpenVPN ir atpazīstami tīkla paraksti, tāpēc Ķīnas, Irānas un Krievijas DPI sistēmas tos ātri atklāj un bloķē. VLESS ar Reality nav atšķirams no parasta HTTPS, tāpēc tas turpina darboties tur, kur tie neizdodas. Necenzētos tīklos aina ir citāda — WireGuard ir izcils un vienkāršāks, un tur VLESS nesniedz nekādas īpašas priekšrocības."
+      },
+      "title": "VLESS protokols: Bieži uzdotie jautājumi"
     },
     "cta": {
       "title": "Izmēģiniet VLESS VPN lietotni, kas vienkārši darbojas",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS uz Android",
       "vlessAndroidDesc": "Iestatiet VLESS-Reality jebkurā Android ierīcē",
       "censorship": "Kā mēs apejam cenzūru",
-      "censorshipDesc": "DPI, SNI filtrēšana — un kā Reality tos uzvar"
+      "censorshipDesc": "DPI, SNI filtrēšana — un kā Reality tos uzvar",
+      "deepDive": "VLESS Reality: Padziļināta analīze",
+      "deepDiveDesc": "Izlasiet pilnu tehnisko skaidrojumu par to, kā Reality pārvar DPI"
     }
   },
   "vpnForIos": {

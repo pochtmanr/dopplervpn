@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "어떤 플랫폼이 VLESS-Reality를 지원하나요?",
         "answer": "Doppler VPN은 iOS(App Store), Android(Google Play 및 APK), 구성 기반 접근을 위한 Telegram 봇에서 VLESS-Reality를 제공합니다."
-      }
+      },
+      "q5": {
+        "question": "VLESS란 무엇이며 어떻게 작동하나요?",
+        "answer": "VLESS는 Xray/V2Ray 생태계에서 나온 가볍고 상태를 저장하지 않는 프록시 프로토콜로, 검열 우회를 위해 만들어졌습니다. UUID로 사용자를 인증하고 실제 TLS 연결 안에 트래픽을 담아 전달하며, 자체 오버헤드는 거의 추가하지 않습니다. Reality와 결합하면 연결이 실제 웹사이트 인증서를 제시하므로, 통신을 감시하는 검열자에게는 단순히 평범한 HTTPS 사이트를 탐색하는 것처럼 보입니다."
+      },
+      "q6": {
+        "question": "VLESS Reality란 무엇인가요?",
+        "answer": "Reality는 VLESS를 위한 TLS 위장 계층입니다. 서버는 자체 인증서를 사용하는 대신, 실제로 잘 알려진 웹사이트의 TLS 인증서 제시를 빌려 옵니다. 그래서 SNI 기반 필터링에는 정당한 목적지로 보이고, 서버에 연결하는 능동 프로브에는 실제 사이트의 응답이 돌아갑니다. 이는 기존 VPN을 잡아내는 SNI 차단 및 프로빙 기법을 무력화합니다."
+      },
+      "q7": {
+        "question": "검열 우회에서 VLESS가 WireGuard나 OpenVPN보다 나은가요?",
+        "answer": "검열 우회에는 그렇습니다. WireGuard와 OpenVPN은 식별 가능한 통신 특징을 가지고 있어, 중국, 이란, 러시아의 DPI 시스템이 이를 빠르게 탐지하고 차단합니다. Reality를 사용하는 VLESS는 일반 HTTPS와 구별할 수 없기 때문에, 그것들이 실패하는 곳에서도 계속 작동합니다. 검열이 없는 네트워크에서는 상황이 다릅니다 — WireGuard가 뛰어나고 더 간단하며, 그곳에서는 VLESS가 특별한 이점을 제공하지 않습니다."
+      },
+      "title": "VLESS 프로토콜: 자주 묻는 질문"
     },
     "cta": {
       "title": "바로 작동하는 VLESS VPN 앱을 체험하세요",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "Android에서 VLESS",
       "vlessAndroidDesc": "모든 Android 기기에서 VLESS-Reality 설정",
       "censorship": "검열 우회 방법",
-      "censorshipDesc": "DPI, SNI 필터링 — 그리고 Reality가 이를 이기는 방법"
+      "censorshipDesc": "DPI, SNI 필터링 — 그리고 Reality가 이를 이기는 방법",
+      "deepDive": "VLESS Reality: 심층 분석",
+      "deepDiveDesc": "Reality가 어떻게 DPI를 무력화하는지에 대한 전체 기술 설명 읽기"
     }
   },
   "vpnForIos": {

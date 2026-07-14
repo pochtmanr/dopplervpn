@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Que plataformas suportam VLESS-Reality?",
         "answer": "O Doppler VPN oferece VLESS-Reality no iOS (App Store), Android (Google Play e APK) e bot do Telegram para acesso baseado em configuração."
-      }
+      },
+      "q5": {
+        "question": "O que é o VLESS e como funciona?",
+        "answer": "O VLESS é um protocolo proxy leve e sem estado do ecossistema Xray/V2Ray, criado para contornar a censura. Ele autentica você por meio de um UUID e transporta seu tráfego dentro de uma conexão TLS real, adicionando quase nenhuma sobrecarga própria. Combinado com o Reality, a conexão apresenta um certificado de site genuíno — então, para qualquer censor observando a rede, parece que você está simplesmente navegando em um site HTTPS comum."
+      },
+      "q6": {
+        "question": "O que é o VLESS Reality?",
+        "answer": "O Reality é uma camada de camuflagem TLS para o VLESS. Em vez de usar o próprio certificado, o servidor toma emprestada a apresentação do certificado TLS de um site real e conhecido — assim, a filtragem baseada em SNI vê um destino legítimo, e as sondas ativas que se conectam ao seu servidor recebem a resposta do site real. Isso derrota as técnicas de bloqueio por SNI e de sondagem que capturam as VPNs convencionais."
+      },
+      "q7": {
+        "question": "O VLESS é melhor que o WireGuard ou o OpenVPN para contornar a censura?",
+        "answer": "Para contornar a censura, sim. O WireGuard e o OpenVPN têm assinaturas reconhecíveis na rede, então os sistemas DPI na China, no Irã e na Rússia os detectam e bloqueiam rapidamente. O VLESS com Reality é indistinguível do HTTPS normal, e é por isso que continua funcionando onde eles falham. Em redes sem censura o cenário é diferente — o WireGuard é excelente e mais simples, e ali o VLESS não oferece nenhuma vantagem específica."
+      },
+      "title": "Protocolo VLESS: perguntas frequentes"
     },
     "cta": {
       "title": "Experimente o app VLESS VPN que simplesmente funciona",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS no Android",
       "vlessAndroidDesc": "Configure o VLESS-Reality em qualquer dispositivo Android",
       "censorship": "Como burlamos a censura",
-      "censorshipDesc": "DPI, filtragem SNI — e como o Reality os vence"
+      "censorshipDesc": "DPI, filtragem SNI — e como o Reality os vence",
+      "deepDive": "VLESS Reality: análise aprofundada",
+      "deepDiveDesc": "Leia a explicação técnica completa sobre como o Reality derrota o DPI"
     }
   },
   "vpnForIos": {

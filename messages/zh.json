@@ -2201,7 +2201,20 @@
       "q4": {
         "question": "哪些平台支持VLESS-Reality？",
         "answer": "Doppler VPN在iOS（App Store）、Android（Google Play和APK）和Telegram机器人上提供VLESS-Reality，用于基于配置的访问。"
-      }
+      },
+      "q5": {
+        "question": "VLESS 是什么？它是如何工作的？",
+        "answer": "VLESS 是来自 Xray/V2Ray 生态系统的轻量级无状态代理协议，专为绕过网络审查而生。它通过 UUID 验证身份，把你的流量封装在真实的 TLS 连接中传输，几乎不产生额外开销。搭配 Reality 后，连接会出示真实网站的正版证书——在审查系统看来，你只是在正常浏览一个普通的 HTTPS 网站。"
+      },
+      "q6": {
+        "question": "VLESS Reality 是什么？",
+        "answer": "Reality 是 VLESS 的 TLS 伪装层。服务器不使用自己的证书，而是借用一个真实知名网站的 TLS 证书外观——因此基于 SNI 的过滤看到的是合法目的地，而主动探测连接到你的服务器时，收到的也是那个真实网站的响应。这让拦截传统 VPN 的 SNI 封锁和探测手段全部失效。"
+      },
+      "q7": {
+        "question": "在绕过审查方面，VLESS 比 WireGuard 或 OpenVPN 更好吗？",
+        "answer": "就翻墙而言，是的。WireGuard 和 OpenVPN 有可识别的流量特征，中国、伊朗和俄罗斯的 DPI 系统能迅速检测并封锁它们。VLESS 搭配 Reality 与正常 HTTPS 无法区分，因此在它们失效的地方依然可用。在没有审查的网络上情况不同——WireGuard 优秀且更简单，VLESS 并无特别优势。"
+      },
+      "title": "VLESS 协议常见问题"
     },
     "cta": {
       "title": "试试开箱即用的 VLESS VPN 应用",
@@ -2222,7 +2235,9 @@
       "vlessAndroid": "Android 上的 VLESS",
       "vlessAndroidDesc": "在任何 Android 设备上设置 VLESS-Reality",
       "censorship": "如何绕过审查",
-      "censorshipDesc": "DPI、SNI 过滤 — 以及 Reality 如何击败它们"
+      "censorshipDesc": "DPI、SNI 过滤 — 以及 Reality 如何击败它们",
+      "deepDive": "VLESS Reality 深度解析",
+      "deepDiveDesc": "阅读完整技术解析：Reality 如何击败 DPI"
     }
   },
   "vpnForIos": {

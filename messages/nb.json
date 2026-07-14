@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Hvilke plattformer støtter VLESS-Reality?",
         "answer": "Doppler VPN tilbyr VLESS-Reality på iOS (App Store), Android (Google Play og APK) og Telegram-bot for konfigurasjonsbasert tilgang."
-      }
+      },
+      "q5": {
+        "question": "Hva er VLESS, og hvordan fungerer det?",
+        "answer": "VLESS er en lettvekts, tilstandsløs proxyprotokoll fra Xray/V2Ray-økosystemet, bygget for å omgå sensur. Den autentiserer deg med en UUID og fører trafikken din inne i en ekte TLS-tilkobling, nesten uten egen overhead. Kombinert med Reality presenterer tilkoblingen et ekte nettstedssertifikat — så for enhver sensor som overvåker linjen, ser det ut som om du bare surfer på et helt vanlig HTTPS-nettsted."
+      },
+      "q6": {
+        "question": "Hva er VLESS Reality?",
+        "answer": "Reality er et TLS-kamuflasjelag for VLESS. I stedet for å bruke sitt eget sertifikat låner serveren TLS-sertifikatpresentasjonen fra et ekte, velkjent nettsted — så SNI-basert filtrering ser en legitim destinasjon, og aktive prober som kobler seg til serveren din, får svaret fra det ekte nettstedet. Dette beseirer SNI-blokkerings- og probeteknikkene som avslører konvensjonelle VPN-er."
+      },
+      "q7": {
+        "question": "Er VLESS bedre enn WireGuard eller OpenVPN for å omgå sensur?",
+        "answer": "For å omgå sensur, ja. WireGuard og OpenVPN har gjenkjennelige signaturer på linjen, så DPI-systemer i Kina, Iran og Russland oppdager og blokkerer dem raskt. VLESS med Reality kan ikke skilles fra vanlig HTTPS, og derfor fortsetter det å fungere der de andre svikter. På usensurerte nettverk er bildet et annet — WireGuard er utmerket og enklere, og der gir VLESS ingen særlig fordel."
+      },
+      "title": "VLESS-protokollen: ofte stilte spørsmål"
     },
     "cta": {
       "title": "Prøv VLESS VPN-appen som bare fungerer",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS på Android",
       "vlessAndroidDesc": "Sett opp VLESS-Reality på hvilken som helst Android-enhet",
       "censorship": "Slik omgår vi sensur",
-      "censorshipDesc": "DPI, SNI-filtrering — og slik beseirer Reality dem"
+      "censorshipDesc": "DPI, SNI-filtrering — og slik beseirer Reality dem",
+      "deepDive": "VLESS Reality: dypdykket",
+      "deepDiveDesc": "Les hele den tekniske forklaringen på hvordan Reality beseirer DPI"
     }
   },
   "vpnForIos": {

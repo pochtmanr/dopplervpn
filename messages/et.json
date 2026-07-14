@@ -2200,7 +2200,20 @@
       "q4": {
         "question": "Millised platvormid toetavad VLESS-Reality-t?",
         "answer": "Doppler VPN pakub VLESS-Reality-t iOS-is (App Store), Androidis (Google Play ja APK) ja Telegrami botis konfiguratsioonipõhiseks juurdepääsuks."
-      }
+      },
+      "q5": {
+        "question": "Mis on VLESS ja kuidas see töötab?",
+        "answer": "VLESS on kergekaaluline olekuta puhverserveri protokoll Xray/V2Ray ökosüsteemist, mis on loodud tsensuurist möödahiilimiseks. See autendib sind UUID abil ja kannab sinu liiklust päris TLS-ühenduse sees, lisades ise peaaegu olematut lisakoormust. Koos Reality-ga esitab ühendus ehtsa veebisaidi sertifikaadi — nii et liini jälgivale tsensorile näib, nagu sirviksid sa lihtsalt tavalist HTTPS-saiti."
+      },
+      "q6": {
+        "question": "Mis on VLESS Reality?",
+        "answer": "Reality on VLESS-i jaoks mõeldud TLS-maskeeringu kiht. Selle asemel et kasutada oma sertifikaati, laenab server päris, tuntud veebisaidi TLS-sertifikaadi esitust — nii näeb SNI-põhine filtreerimine õiguspärast sihtkohta ja sinu serveriga ühenduvad aktiivsed sondid saavad päris saidi vastuse. See võidab SNI-blokeerimise ja sondeerimistehnikad, mis tavalised VPN-id kinni püüavad."
+      },
+      "q7": {
+        "question": "Kas VLESS on tsensuuri vastu parem kui WireGuard või OpenVPN?",
+        "answer": "Tsensuurist möödahiilimiseks jah. WireGuardil ja OpenVPN-il on äratuntav võrgusignatuur, seega Hiina, Iraani ja Venemaa DPI-süsteemid tuvastavad ja blokeerivad need kiiresti. VLESS koos Reality-ga on tavalisest HTTPS-ist eristamatu, mistõttu see töötab edasi seal, kus need läbi kukuvad. Tsenseerimata võrkudes on pilt teistsugune — WireGuard on suurepärane ja lihtsam ning seal ei paku VLESS erilist eelist."
+      },
+      "title": "VLESS-protokoll: Korduma kippuvad küsimused"
     },
     "cta": {
       "title": "Proovige VLESS VPN-rakendust, mis lihtsalt töötab",
@@ -2221,7 +2234,9 @@
       "vlessAndroid": "VLESS Androidis",
       "vlessAndroidDesc": "Seadistage VLESS-Reality mis tahes Android-seadmes",
       "censorship": "Kuidas me tsensuurist mööda pääseme",
-      "censorshipDesc": "DPI, SNI-filtreerimine — ja kuidas Reality neist jagu saab"
+      "censorshipDesc": "DPI, SNI-filtreerimine — ja kuidas Reality neist jagu saab",
+      "deepDive": "VLESS Reality: Põhjalik ülevaade",
+      "deepDiveDesc": "Loe täielikku tehnilist selgitust selle kohta, kuidas Reality DPI võidab"
     }
   },
   "vpnForIos": {
