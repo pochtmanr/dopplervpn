@@ -10,18 +10,18 @@ import { NextResponse } from "next/server";
  * 1. Set WINDOWS_LATEST_VERSION env var (e.g. "1.0.1")
  * 2. Set WINDOWS_DOWNLOAD_URL env var to point to the new installer
  * 3. Deploy the landing site
+ *
+ * Falls back to the current public release when the env vars are unset,
+ * so the endpoint keeps working without configuration.
  */
 
-export async function GET() {
-  const version = process.env.WINDOWS_LATEST_VERSION;
-  if (!version) {
-    throw new Error("WINDOWS_LATEST_VERSION environment variable is not set");
-  }
+const DEFAULT_VERSION = "1.0.0";
+const DEFAULT_DOWNLOAD_URL =
+  "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-x64-Setup.exe";
 
-  const url = process.env.WINDOWS_DOWNLOAD_URL;
-  if (!url) {
-    throw new Error("WINDOWS_DOWNLOAD_URL environment variable is not set");
-  }
+export async function GET() {
+  const version = process.env.WINDOWS_LATEST_VERSION ?? DEFAULT_VERSION;
+  const url = process.env.WINDOWS_DOWNLOAD_URL ?? DEFAULT_DOWNLOAD_URL;
 
   return NextResponse.json(
     {
