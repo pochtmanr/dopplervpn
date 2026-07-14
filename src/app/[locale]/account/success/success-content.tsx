@@ -109,8 +109,8 @@ export function SuccessContent() {
       key: 'windows',
       title: t('windowsTitle'),
       desc: t('windowsDesc'),
-      buttonText: t('downloadV2rayN'),
-      url: 'https://github.com/2dust/v2rayN/releases/latest',
+      buttonText: t('downloadWindows'),
+      url: '/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe',
       icon: (
         <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3 12V6.75l6-1.32v6.48L3 12zm17-9v8.75l-10 .08V5.21L20 3zM3 13l6 .09v6.81l-6-1.15V13zm17 .25V22l-10-1.91V13.1l10 .15z" />
