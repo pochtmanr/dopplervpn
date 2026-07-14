@@ -1,0 +1,17 @@
+[Unit]
+Description=Doppler VPN stats agent (metrics for n8n service monitor)
+After=network.target
+
+[Service]
+DynamicUser=yes
+EnvironmentFile=/etc/doppler-stats-agent.env
+ExecStart=/usr/bin/python3 /usr/local/bin/doppler-stats-agent.py
+Restart=always
+RestartSec=5
+MemoryMax=64M
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target
