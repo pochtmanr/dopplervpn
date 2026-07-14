@@ -18,8 +18,8 @@ interface PageProps {
 const baseUrl = "https://www.dopplervpn.org";
 
 const URLS = {
-  windowsX64: "/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe",
-  windowsArm64: "/api/windows/download/DopplerVPN-1.0.0-arm64-Setup.exe",
+  windowsX64: "/api/windows/download/latest-x64",
+  windowsArm64: "/api/windows/download/latest-arm64",
 };
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)

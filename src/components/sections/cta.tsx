@@ -8,7 +8,7 @@ import { trackCta, type CtaPlatform, type CtaVariant } from "@/lib/track-cta";
 
 const APP_STORE_URL = "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
 const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
-const WINDOWS_X64_URL = "/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe";
+const WINDOWS_X64_URL = "/api/windows/download/latest-x64";
 
 function AppleIcon() {
   return (

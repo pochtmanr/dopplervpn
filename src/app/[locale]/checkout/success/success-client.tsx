@@ -9,7 +9,7 @@ import { trackPurchaseResult } from '@/lib/track-cta';
 const IOS_URL = 'https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773';
 const ANDROID_PLAY_URL = 'https://play.google.com/store/apps/details?id=org.dopplervpn.android';
 const MAC_URL = 'https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773';
-const WINDOWS_URL = '/api/windows/download/DopplerVPN-1.0.0-x64-Setup.exe';
+const WINDOWS_URL = '/api/windows/download/latest-x64';
 const SUPPORT_EMAIL = 'support@simnetiq.store';
 
 type Status = 'pending' | 'paid' | 'failed' | 'unknown';
