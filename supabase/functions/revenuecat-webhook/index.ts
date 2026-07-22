@@ -117,6 +117,18 @@ Deno.serve(async (req: Request) => {
     `[webhook] ${type} | account=${accountId} | app_user_id=${event.app_user_id} | aliases=${JSON.stringify(event.aliases)} | txn=${originalTxnId} | product=${productId}`
   );
 
+  // RevenueCat delivers sandbox and StoreKit-test purchases through this same webhook,
+  // so without this check a dev build mints real pro: VPN-FMN9-5ZE7-7HWT held production
+  // pro off a StoreKitTest transaction. Match only an explicit SANDBOX — an absent or
+  // unrecognized environment must still grant, or a real payer could be denied access.
+  if ((event.environment ?? "").toUpperCase() === "SANDBOX") {
+    console.log(`[webhook] ${type} | account=${accountId} | skipped: sandbox event`);
+    return new Response(JSON.stringify({ success: true, skipped: "sandbox" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   try {
     switch (type) {
       case "INITIAL_PURCHASE":
