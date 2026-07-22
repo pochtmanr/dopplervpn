@@ -28,7 +28,7 @@ interface DotGlobeProps {
 const NODES: ReadonlyArray<{ lat: number; lon: number; label: string }> = [
   { lat: 52.23, lon: 21.01, label: "Warsaw" }, // hub
   { lat: 59.33, lon: 18.07, label: "Stockholm" },
-  { lat: 32.08, lon: 34.78, label: "Tel Aviv" },
+  { lat: 55.76, lon: 37.62, label: "Moscow" },
   { lat: 41.59, lon: -93.62, label: "Des Moines" },
   { lat: 43.65, lon: -79.38, label: "Toronto" },
   { lat: 22.32, lon: 114.17, label: "Hong Kong" },
