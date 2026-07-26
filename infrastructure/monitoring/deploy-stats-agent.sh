@@ -14,7 +14,15 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 SSH_USER="${SSH_USER:-azureuser}"
 
 for ip in "${FLEET[@]}"; do
-  token=$(openssl rand -hex 24)
+  # Reuse the server's existing token if it already has one, so redeploying the
+  # agent (e.g. to ship the reachability probe) does NOT rotate the token and
+  # desync vpn_servers.stats_agent_token. Only mint a new one on first deploy.
+  token=$(ssh -o StrictHostKeyChecking=accept-new "$SSH_USER@$ip" \
+    "sudo sed -n 's/^STATS_TOKEN=//p' /etc/doppler-stats-agent.env 2>/dev/null" 2>/dev/null || true)
+  token="${token//[[:space:]]/}"
+  if [ -z "$token" ]; then
+    token=$(openssl rand -hex 24)
+  fi
   scp -q -o StrictHostKeyChecking=accept-new "$DIR/stats-agent.py" "$DIR/doppler-stats-agent.service" "$SSH_USER@$ip:/tmp/"
   ssh -o StrictHostKeyChecking=accept-new "$SSH_USER@$ip" "
     sudo install -m 755 /tmp/stats-agent.py /usr/local/bin/doppler-stats-agent.py &&

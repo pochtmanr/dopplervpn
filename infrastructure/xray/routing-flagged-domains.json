@@ -1,0 +1,53 @@
+{
+  "_comment": "Doppler — flagged-domain routing fragment. Merge into each node's xray-core config (the config Marzban feeds xray). ChatGPT/OpenAI (and other datacenter-IP-flagged) domains exit through a clean upstream; EVERYTHING ELSE keeps the fast direct/freedom path. See README.md for how to merge, fill placeholders, and verify. This file is version-controlled config, NOT secrets — replace the placeholder host/user/pass at deploy time from the node's env file, never commit real credentials.",
+
+  "outbounds": [
+    {
+      "tag": "flagged-upstream",
+      "protocol": "socks",
+      "_comment": "Clean off-Azure node or static-ISP proxy. address/port/user/pass are PLACEHOLDERS — substitute from /etc/doppler-xray-upstream.env at deploy (see README). Use protocol 'http' instead of 'socks' if the provider only exposes an HTTP proxy (same settings shape).",
+      "settings": {
+        "servers": [
+          {
+            "address": "203.0.113.10",
+            "port": 1080,
+            "users": [
+              {
+                "user": "REPLACE_UPSTREAM_USER",
+                "pass": "REPLACE_UPSTREAM_PASS"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpKeepAliveIdle": 100
+        }
+      }
+    }
+  ],
+
+  "routing": {
+    "domainStrategy": "AsIs",
+    "_comment": "PREPEND these rules ahead of the node's existing rules so flagged domains match first. Requires the inbound to have sniffing enabled (destOverride: tls/http) so xray sees the SNI/host — Marzban's VLESS-Reality inbound has this on by default. 'domain:' matches the domain and all subdomains.",
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "flagged-upstream",
+        "domain": [
+          "domain:openai.com",
+          "domain:chatgpt.com",
+          "domain:chat.openai.com",
+          "domain:oaistatic.com",
+          "domain:oaiusercontent.com",
+          "domain:cdn.openai.com",
+          "domain:auth0.openai.com",
+          "domain:featureassets.org",
+          "domain:intercom.io",
+          "domain:intercomcdn.com"
+        ]
+      }
+    ]
+  }
+}

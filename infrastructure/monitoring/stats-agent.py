@@ -6,7 +6,8 @@ service monitor. Runs on bare-xray servers that have no Marzban panel.
 
 GET /stats with `Authorization: Bearer $STATS_TOKEN` returns JSON:
   xray systemd state, established connection counts per REALITY port
-  (8443-8448), optional xray traffic stats, CPU load, memory, uptime.
+  (8443-8448), optional xray traffic stats, CPU load, memory, a ChatGPT/
+  Cloudflare reachability probe (403 => this node's exit IP is flagged), uptime.
 
 Deployed via deploy-stats-agent.sh; systemd unit doppler-stats-agent.service.
 Access is restricted twice: Azure NSG allows only the n8n host as source,
@@ -17,6 +18,8 @@ import os
 import socket
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -24,6 +27,15 @@ PORT = int(os.environ.get("STATS_PORT", "9101"))
 TOKEN = os.environ.get("STATS_TOKEN", "")
 XRAY_PORTS = list(range(8443, 8449))
 XRAY_API = os.environ.get("XRAY_API", "127.0.0.1:10085")
+
+# Cloudflare/OpenAI-gated URL probed through THIS node's egress to detect a
+# flagged exit IP (403). Browser-like UA so the probe mirrors a real client.
+REACH_URL = os.environ.get("REACH_URL", "https://chatgpt.com/")
+REACH_UA = os.environ.get(
+    "REACH_UA",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+)
 
 
 def run(cmd, timeout=3):
@@ -93,6 +105,24 @@ def xray_traffic():
         return None
 
 
+def reachability():
+    """Probe a Cloudflare/OpenAI-gated URL through this node's own egress.
+
+    A 403 means the node's exit IP is flagged (the ChatGPT-403 symptom) — the
+    n8n monitor alerts on it. Never blocks /stats: hard timeout, and every
+    failure degrades to a null status with the exception name.
+    """
+    req = urllib.request.Request(REACH_URL, method="GET", headers={"User-Agent": REACH_UA})
+    try:
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            code = resp.status  # body intentionally not read — status is enough
+        return {"chatgpt_status": code, "flagged": code == 403, "error": None}
+    except urllib.error.HTTPError as e:
+        return {"chatgpt_status": e.code, "flagged": e.code == 403, "error": None}
+    except Exception as e:
+        return {"chatgpt_status": None, "flagged": False, "error": type(e).__name__}
+
+
 def cpu():
     with open("/proc/loadavg") as f:
         load1 = float(f.read().split()[0])
@@ -136,6 +166,7 @@ class Handler(BaseHTTPRequestHandler):
             },
             "cpu": cpu(),
             "mem": mem(),
+            "reachability": reachability(),
             "uptime_s": uptime(),
         }
         body = json.dumps(payload).encode()
