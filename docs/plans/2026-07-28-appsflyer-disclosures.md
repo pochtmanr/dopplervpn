@@ -214,6 +214,47 @@ git commit -m "docs: RevenueCat to AppsFlyer server-side event checklist"
 
 ---
 
+### Task 3b: Galaksion purchase-event postback
+
+Galaksion is one of the ad networks the campaigns will run on, and it needs the purchase event to optimise. Its own tracking is tracker-style S2S: a postback URL carrying its click id (`click_id={!tscode!}` in its published integration docs). It was **not** found in AppsFlyer's integrated-partner documentation, so the route depends on an answer only Galaksion can give.
+
+**Files:**
+- Modify: `../dopplerswift/docs/store/2026-07-28-revenuecat-appsflyer-integration.md` (append a Galaksion section recording whichever route applies)
+
+- [ ] **Step 1: Ask Galaksion the deciding question**
+
+"Are you an AppsFlyer integrated partner, and if so what is your partner name in the AppsFlyer Partner Marketplace?" Record the answer verbatim in the doc — the rest of this task branches on it.
+
+- [ ] **Step 2a: If integrated — dashboard only**
+
+In AppsFlyer: Partner Marketplace → find the Galaksion partner → enable → Integration tab → turn on in-app event postbacks → map the purchase event (`af_purchase`) to their event ID, sending to "All media sources" or Galaksion only as they instruct. No client code, no backend. Tick off and record the mapping.
+
+- [ ] **Step 2b: If not integrated — forward from your own backend**
+
+AppsFlyer sends standard postbacks only to integrated partners; its Push API raw-data stream is a separate paid feature. The cheaper route is a forwarder you own:
+
+RevenueCat webhook → a new route under `src/app/api/` on the landing site → HTTP GET to Galaksion's postback URL with their click id and the purchase payout.
+
+Get Galaksion's exact postback URL template and required parameters in writing before building this. Do not invent parameter names.
+
+- [ ] **Step 3: Wire the click id through — required on both routes**
+
+A Galaksion postback without Galaksion's click id cannot be attributed, and it cannot be backfilled later. Build the Galaksion attribution link so their click macro lands in an AppsFlyer passthrough parameter (`af_sub1`), which AppsFlyer echoes back on the in-app event postback. Verify with one real test click that the value survives click → install → purchase, before spending money on the campaign.
+
+- [ ] **Step 4: Add Galaksion to the subprocessors table**
+
+If Galaksion receives a click id tied to a purchase, it is processing personal data and belongs in `src/app/[locale]/subprocessors/page.tsx` beside AppsFlyer. Confirm the legal entity name and jurisdiction from their own documentation — do not guess.
+
+- [ ] **Step 5: Commit**
+
+```bash
+cd ../dopplerswift
+git add docs/store/2026-07-28-revenuecat-appsflyer-integration.md
+git commit -m "docs: record the Galaksion purchase-event postback route"
+```
+
+---
+
 ### Task 4: English policy copy
 
 **Files:**
