@@ -15,9 +15,9 @@ import { NextResponse } from "next/server";
  * so the endpoint keeps working without configuration.
  */
 
-const DEFAULT_VERSION = "1.0.0";
+const DEFAULT_VERSION = "1.0.1";
 const DEFAULT_DOWNLOAD_URL =
-  "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.0/DopplerVPN-1.0.0-x64-Setup.exe";
+  "https://github.com/pochtmanr/dopplervpn/releases/download/windows-v1.0.1/DopplerVPN-1.0.1-x64-Setup.exe";
 
 export async function GET() {
   const version = process.env.WINDOWS_LATEST_VERSION ?? DEFAULT_VERSION;

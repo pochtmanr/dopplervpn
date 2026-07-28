@@ -25,7 +25,7 @@ const REPO = "pochtmanr/dopplervpn";
 const RELEASE_BASE = `https://github.com/${REPO}/releases/download`;
 
 // Used only if the GitHub API is unreachable while resolving a latest-* alias.
-const FALLBACK_VERSION = "1.0.0";
+const FALLBACK_VERSION = "1.0.1";
 
 const INSTALLER_RE = /^DopplerVPN-(\d+\.\d+\.\d+)-(x64|arm64)-Setup\.exe$/;
 const ALIAS_RE = /^latest-(x64|arm64)$/;
