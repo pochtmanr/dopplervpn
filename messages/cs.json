@@ -240,7 +240,7 @@
       "support": "Přednostní podpora"
     },
     "plusCta": "Získat Doppler Pro",
-    "trialNote": "3denní bezplatná zkušební verze v App Store a Google Play · Bonusové dny u webových nákupů",
+    "trialNote": "3denní bezplatná zkušební verze v App Store a Google Play · Nákupem zde získáte dny zdarma: +týden k 1 měsíci, +půl měsíce k 6 měsícům, +měsíc k roku",
     "taxNote": "Ceny bez DPH. Daň se vypočítá při platbě podle vaší polohy.",
     "guarantee": "Platba na webu je jednorázová — bez automatického obnovení. 30denní záruka vrácení peněz.",
     "pricesIn": "Ceny zobrazeny v"
@@ -339,7 +339,7 @@
       },
       "trial": {
         "question": "Je k dispozici zkušební verze zdarma?",
-        "answer": "Ano! Každý nový uživatel získá 3denní zkušební verzi zdarma s plným přístupem ke všem funkcím Pro. Na všechny tarify nabízíme také 30denní záruku vrácení peněz."
+        "answer": "Záleží na tom, kde si předplatné pořídíte. V App Store a na Google Play získá každý nový uživatel 3denní zkušební verzi zdarma. Na tomto webu zkušební verze není — místo toho každý tarif obsahuje dny navíc zdarma: týden u měsíčního, půl měsíce u šestiměsíčního a měsíc u ročního. Na všechny tarify platí 30denní záruka vrácení peněz."
       },
       "whatIsIncluded": {
         "question": "Co je zahrnuto v Premium?",
@@ -2591,6 +2591,45 @@
     }
   },
   "vpnForWindows": {
+    "downloadsSmartScreenNote": "Windows může zobrazit upozornění „Systém Windows ochránil váš počítač“ — klikněte na „Další informace“ (More info) a poté na „Přesto spustit“ (Run anyway).",
+    "downloadsTrialNote": "Při nákupu zde získáte dny zdarma: týden k měsíčnímu tarifu, půl měsíce k šestiměsíčnímu a měsíc k ročnímu.",
+    "smartScreen": {
+      "title": "Windows vás může před instalací varovat",
+      "body": "Při spuštění instalátoru může Windows Defender SmartScreen zobrazit modré okno „Systém Windows ochránil váš počítač“. To je očekávané — takto budete pokračovat:",
+      "step1": "V okně s upozorněním klikněte na „Další informace“ (More info).",
+      "step2": "Kliknutím na „Přesto spustit“ (Run anyway) zahájíte instalaci.",
+      "why": "SmartScreen zobrazuje toto upozornění u každé aplikace, která ještě není podepsaná certifikátem uznávaného vydavatele. Náš certifikát pro podepisování kódu se právě vydává a jakmile bude platný, upozornění zmizí.",
+      "faqQuestion": "Proč Windows píše, že je vydavatel neznámý?",
+      "faqAnswer": "Doppler VPN pro Windows zatím není digitálně podepsaný, a proto Windows Defender SmartScreen zobrazuje upozornění „Systém Windows ochránil váš počítač“ s neznámým vydavatelem. Pro instalaci klikněte v tomto okně na „Další informace“ (More info) a poté na „Přesto spustit“ (Run anyway). Náš certifikát pro podepisování kódu se vydává a v některé z dalších verzí už se upozornění neobjeví."
+    },
+    "gallery": {
+      "title": "Pohled do aplikace pro Windows",
+      "subtitle": "Přehledná nativní desktopová aplikace — žádné konfigurační soubory, žádný příkazový řádek, žádný účet, který byste museli zakládat.",
+      "heroAlt": "Doppler VPN pro Windows v připojeném stavu s umístěním serveru a stavem připojení",
+      "accountId": {
+        "title": "Přihlášení pomocí Account ID",
+        "description": "Žádný e-mail, žádné heslo, žádné ověřování. Vaše Account ID vznikne při prvním spuštění — uschovejte si ho, abyste stejné předplatné mohli používat i na dalších zařízeních.",
+        "alt": "Přihlašovací obrazovka Doppler VPN pro Windows s Account ID"
+      },
+      "settings": {
+        "title": "Váš jazyk, vaše nastavení",
+        "description": "Aplikace je k dispozici v řadě jazyků a spuštění se systémem Windows, automatické připojení i kill switch jsou na jedno kliknutí.",
+        "alt": "Obrazovka nastavení Doppler VPN pro Windows s otevřeným výběrem jazyka"
+      },
+      "devices": {
+        "title": "Přehled aktivních zařízení",
+        "description": "Jedno předplatné pokryje několik zařízení. Kdykoli uvidíte, co je připojené, a zařízení, které už nepoužíváte, můžete odebrat.",
+        "alt": "Obrazovka aktivních zařízení Doppler VPN pro Windows se seznamem připojených zařízení"
+      }
+    },
+    "trial": {
+      "webTitle": "Nákup na tomto webu — dny navíc zdarma",
+      "webMonthly": "1 měsíc — týden zdarma",
+      "webSixMonth": "6 měsíců — půl měsíce zdarma",
+      "webYearly": "1 rok — měsíc zdarma",
+      "storesTitle": "Kupujete přes App Store nebo Google Play?",
+      "stores": "Předplatné pořízené přes App Store nebo Google Play místo toho začíná 3denní bezplatnou zkušební dobou. Dny zdarma uvedené výše platí pro nákupy na tomto webu."
+    },
     "metadata": {
       "title": "Doppler VPN pro Windows — Rychlá, soukromá a odolná vůči cenzuře",
       "description": "Stáhněte Doppler VPN pro Windows. Šifrování VLESS-Reality, bez registrace, obcházení cenzury. Podpora x64 a ARM64 PC."
@@ -2642,7 +2681,7 @@
       "subtitle": "Připojte se za méně než minutu — nejsou potřeba žádné technické znalosti.",
       "step1": {
         "title": "Stáhněte instalátor",
-        "description": "Stáhněte instalátor Doppler VPN pro svůj systém — x64 pro většinu PC a notebooků, ARM64 pro Surface Pro X a zařízení se Snapdragonem. Instalátor má méně než 30 MB a je bez virů."
+        "description": "Stáhněte instalátor Doppler VPN pro svůj systém — x64 pro většinu PC a notebooků, ARM64 pro Surface Pro X a zařízení se Snapdragonem. Instalátor má zhruba 80 MB, protože obsahuje vše, co aplikace potřebuje — nic dalšího instalovat nemusíte."
       },
       "step2": {
         "title": "Spusťte průvodce instalací",

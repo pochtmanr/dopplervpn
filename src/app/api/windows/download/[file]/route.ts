@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
+import { CLICK_ID_SOURCE_COOKIE, readClickIdCookie } from "@/lib/click-id";
+import { firePostback } from "@/lib/postback";
 
 /**
  * GET /api/windows/download/:file
@@ -25,6 +27,7 @@ const REPO = "pochtmanr/dopplervpn";
 const RELEASE_BASE = `https://github.com/${REPO}/releases/download`;
 
 // Used only if the GitHub API is unreachable while resolving a latest-* alias.
+// Keep in step with the newest published windows-v* release.
 const FALLBACK_VERSION = "1.0.1";
 
 const INSTALLER_RE = /^DopplerVPN-(\d+\.\d+\.\d+)-(x64|arm64)-Setup\.exe$/;
@@ -103,26 +106,73 @@ function installerUrl(version: string, arch: Arch): string {
 
 type RouteContext = { params: Promise<{ file: string }> };
 
-export async function GET(_req: NextRequest, context: RouteContext) {
+/**
+ * A download click is the conversion event for the paid Windows campaign. Every
+ * download button on the site points at this route, so reporting it here covers
+ * the homepage hero, /downloads, /vpn-for-windows, the footer and the sticky CTA
+ * without touching any button markup.
+ *
+ * Runs in `after()` so a slow tracker never delays the user's redirect. Returns
+ * whether a conversion was reported, because that has to change the caching of
+ * the response — see cacheHeaders below.
+ */
+function reportDownloadConversion(req: NextRequest, arch: Arch): boolean {
+  const clickId = readClickIdCookie(req);
+  if (!clickId) return false;
+
+  after(() =>
+    firePostback({
+      clickId,
+      goal: "download",
+      meta: {
+        source: req.cookies.get(CLICK_ID_SOURCE_COOKIE)?.value ?? null,
+        arch,
+        pagePath: req.headers.get("referer"),
+      },
+    })
+  );
+  return true;
+}
+
+/**
+ * Organic downloads keep the shared 5-minute cache. Attributed ones must not be
+ * cached at all: a CDN hit would serve the redirect without running this handler,
+ * so every conversion after the first in a window would go unreported — and the
+ * response is per-visitor anyway once a click id is involved.
+ */
+function cacheHeaders(attributed: boolean): Record<string, string> {
+  return {
+    "Cache-Control": attributed
+      ? "private, no-store"
+      : "public, max-age=300, s-maxage=300",
+  };
+}
+
+export async function GET(req: NextRequest, context: RouteContext) {
   const { file } = await context.params;
 
   const alias = ALIAS_RE.exec(file);
   if (alias) {
     const arch = alias[1] as Arch;
     const version = await resolveLatestVersion();
+    const attributed = reportDownloadConversion(req, arch);
     // Never stream the binary through Vercel — it burns Fast Origin Transfer quota.
     return NextResponse.redirect(installerUrl(version, arch), {
       status: 302,
       // Short cache: a new release should go live within minutes, not hours.
-      headers: { "Cache-Control": "public, max-age=300, s-maxage=300" },
+      headers: cacheHeaders(attributed),
     });
   }
 
   const exact = INSTALLER_RE.exec(file);
   if (exact) {
     const [, version, arch] = exact;
+    const attributed = reportDownloadConversion(req, arch as Arch);
     // Version-derived tag, so links minted for older releases keep resolving.
-    return NextResponse.redirect(installerUrl(version, arch as Arch), 302);
+    return NextResponse.redirect(installerUrl(version, arch as Arch), {
+      status: 302,
+      headers: cacheHeaders(attributed),
+    });
   }
 
   return NextResponse.json({ error: `File "${file}" not found` }, { status: 404 });

@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { verifyWebhookSignature, type OxaPayWebhookPayload } from '@/lib/oxapay';
+import { firePostback } from '@/lib/postback';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -101,7 +102,7 @@ export async function POST(req: NextRequest) {
     // row for planId since OxaPay does not echo it back.
     const { data: invoice, error: invoiceErr } = await supabase
       .from('vpn_invoices')
-      .select('id, status, plan, amount, currency')
+      .select('id, status, plan, amount, currency, click_id')
       .eq('provider_payment_id', orderId)
       .eq('provider', 'oxapay')
       .maybeSingle();
@@ -183,6 +184,17 @@ export async function POST(req: NextRequest) {
     if (flipErr) {
       console.error('[oxapay-webhook] invoice_flip_failed', orderId, flipErr);
     }
+
+    // Report the purchase to the ad network. Placed after the idempotency guard
+    // above so an OxaPay retry can't double-count, and inside after() so a slow
+    // tracker can never delay the 200 OxaPay is waiting for.
+    after(() =>
+      firePostback({
+        clickId: invoice.click_id,
+        goal: 'purchase',
+        meta: { pagePath: `oxapay:${planId}` },
+      })
+    );
 
     // Best-effort receipt email (never blocks the 200 response).
     if (event.email && process.env.RECEIPT_EMAILS_ENABLED === 'true') {

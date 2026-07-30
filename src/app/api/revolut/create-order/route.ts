@@ -3,6 +3,7 @@ import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { createOrder } from '@/lib/revolut';
 import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
+import { readClickIdCookie } from '@/lib/click-id';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -137,6 +138,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Paid-campaign attribution. Revolut has no pending invoice row to hang this
+    // on — the row is only inserted by the webhook — so the click id travels in
+    // the order metadata, which the webhook reads back via getOrder().
+    const clickId = readClickIdCookie(req);
+
     const order = await createOrder(
       finalAmount,
       'USD',
@@ -145,6 +151,7 @@ export async function POST(req: NextRequest) {
         account_id: accountId,
         plan_id: planId,
         locale,
+        ...(clickId ? { click_id: clickId } : {}),
         ...(email ? { email } : {}),
         ...(validatedPromoId ? { promo_id: validatedPromoId, promo_code: validatedPromoCode! } : {}),
       },

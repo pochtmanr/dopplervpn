@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
@@ -67,6 +68,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 const stepKeys = ["step1", "step2", "step3", "step4"] as const;
 const faqKeys = ["q1", "q2", "q3", "q4", "q5", "q6"] as const;
+
+// Screenshots of the Windows client, in the order a new user meets these screens.
+const galleryShots = [
+  { key: "accountId", src: "/images/windows-account-id.avif" },
+  { key: "settings", src: "/images/windows-settings.avif" },
+  { key: "devices", src: "/images/windows-devices.avif" },
+] as const;
 
 /* ── Icons ────────────────────────────────────────────────────────── */
 
@@ -150,6 +158,47 @@ function CheckIcon() {
   );
 }
 
+function ShieldExclamationIcon() {
+  return (
+    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0 8.026a11.959 11.959 0 0 1-8.402-3.026A11.99 11.99 0 0 1 3 9.749c0-1.31.21-2.571.598-3.751h.152c3.196 0 6.1-1.248 8.25-3.285 2.15 2.037 5.054 3.285 8.25 3.285h.152c.389 1.18.598 2.44.598 3.751 0 2.15-.566 4.169-1.556 5.916A11.959 11.959 0 0 1 12 20.776ZM12 15.75h.007v.008H12v-.008Z" />
+    </svg>
+  );
+}
+
+/* ── SmartScreen notice ───────────────────────────────────────────── */
+// The shipped installer is not code-signed yet, so Windows Defender SmartScreen
+// blocks it with an "Unknown publisher" dialog. Users who don't know how to get
+// past that simply never install, so this has to be visible before they click —
+// and it has to explain WHY, or it reads like advice to ignore a virus warning.
+
+function SmartScreenNotice({ t }: { t: (key: string) => string }) {
+  return (
+    <div className="hero-animate hero-animate-delay-4 mt-6 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] p-4 text-start">
+      <div className="flex items-center gap-2 text-sm font-semibold text-accent-gold">
+        <ShieldExclamationIcon />
+        {t("smartScreen.title")}
+      </div>
+      <p className="mt-2 text-xs text-text-muted leading-relaxed">
+        {t("smartScreen.body")}
+      </p>
+      <ol className="mt-3 space-y-1.5 text-xs text-text-primary">
+        <li className="flex gap-2">
+          <span className="text-accent-gold font-semibold shrink-0">1.</span>
+          {t("smartScreen.step1")}
+        </li>
+        <li className="flex gap-2">
+          <span className="text-accent-gold font-semibold shrink-0">2.</span>
+          {t("smartScreen.step2")}
+        </li>
+      </ol>
+      <p className="mt-3 text-xs text-text-muted leading-relaxed">
+        {t("smartScreen.why")}
+      </p>
+    </div>
+  );
+}
+
 /* ── Feature bento layout ─────────────────────────────────────────── */
 // Featured cards span two columns and carry an oversized watermark icon.
 
@@ -194,6 +243,21 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
   const WORD_STAGGER = 0.07;
   const headlineWords = t("hero.title").split(/\s+/).filter(Boolean);
 
+  // "Why does Windows warn about this?" is the top objection for an unsigned
+  // installer, so it gets an FAQ slot — and through FAQSchema, rich-result
+  // eligibility on exactly that query. Its copy lives with the rest of the
+  // SmartScreen strings rather than as a faq.q7 so the whole block stays together.
+  const faqItems = [
+    ...faqKeys.map((key) => ({
+      question: t(`faq.${key}.question`),
+      answer: t(`faq.${key}.answer`),
+    })),
+    {
+      question: t("smartScreen.faqQuestion"),
+      answer: t("smartScreen.faqAnswer"),
+    },
+  ];
+
   return (
     <>
       <BreadcrumbSchema
@@ -209,15 +273,10 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
         applicationCategory="UtilitiesApplication"
         downloadUrl={`${baseUrl}${URLS.windowsX64}`}
       />
-      <FAQSchema
-        items={faqKeys.map((key) => ({
-          question: t(`faq.${key}.question`),
-          answer: t(`faq.${key}.answer`),
-        }))}
-      />
+      <FAQSchema items={faqItems} />
       <Navbar />
       <main className="overflow-x-hidden">
-        {/* ── Hero — centered (no Windows screenshot yet) ──────── */}
+        {/* ── Hero — copy + app screenshot ─────────────────────── */}
         <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
@@ -234,73 +293,95 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
               }}
             />
           </div>
-          <div className="relative z-10 mx-auto max-w-site text-center">
-            {/* Headline — serif blur-up cascade, last word in gradient italic */}
-            <h1
-              className="mx-auto max-w-4xl text-5xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05]"
-              style={displayFontStyle}
-            >
-              {headlineWords.map((word, i) => {
-                const isLast = i === headlineWords.length - 1;
-                return (
-                  <Fragment key={i}>
-                    <span
-                      className={
-                        isLast
-                          ? `hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent${useFallbackFont ? "" : " italic"}`
-                          : "hero-word"
-                      }
-                      style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
-                    >
-                      {word}
-                    </span>{" "}
-                  </Fragment>
-                );
-              })}
-            </h1>
+          <div className="relative z-10 mx-auto max-w-site">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Text */}
+              <div className="text-center lg:text-start">
+                {/* Headline — serif blur-up cascade, last word in gradient italic */}
+                <h1
+                  className="text-5xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05]"
+                  style={displayFontStyle}
+                >
+                  {headlineWords.map((word, i) => {
+                    const isLast = i === headlineWords.length - 1;
+                    return (
+                      <Fragment key={i}>
+                        <span
+                          className={
+                            isLast
+                              ? `hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent${useFallbackFont ? "" : " italic"}`
+                              : "hero-word"
+                          }
+                          style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
+                        >
+                          {word}
+                        </span>{" "}
+                      </Fragment>
+                    );
+                  })}
+                </h1>
 
-            <p className="hero-animate hero-animate-delay-2 mt-6 text-text-muted text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-              {t("hero.subtitle")}
-            </p>
+                <p className="hero-animate hero-animate-delay-2 mt-6 text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                  {t("hero.subtitle")}
+                </p>
 
-            <div className="hero-animate hero-animate-delay-3 mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href={URLS.windowsX64}
-                download
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold bg-accent-teal text-white hover:bg-accent-teal-light transition-all duration-200 shadow-lg shadow-accent-teal/25 hover:shadow-accent-teal/40 hover:-translate-y-0.5"
-              >
-                <DownloadIcon />
-                {t("hero.ctaX64")}
-              </a>
-              <a
-                href={URLS.windowsArm64}
-                download
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold border border-overlay/20 text-text-primary hover:border-accent-teal/30 hover:bg-accent-teal/5 transition-colors"
-              >
-                <DownloadIcon />
-                {t("hero.ctaArm64")}
-              </a>
+                <div className="hero-animate hero-animate-delay-3 mt-10 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <a
+                    href={URLS.windowsX64}
+                    download
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold bg-accent-teal text-white hover:bg-accent-teal-light transition-all duration-200 shadow-lg shadow-accent-teal/25 hover:shadow-accent-teal/40 hover:-translate-y-0.5"
+                  >
+                    <DownloadIcon />
+                    {t("hero.ctaX64")}
+                  </a>
+                  <a
+                    href={URLS.windowsArm64}
+                    download
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold border border-overlay/20 text-text-primary hover:border-accent-teal/30 hover:bg-accent-teal/5 transition-colors"
+                  >
+                    <DownloadIcon />
+                    {t("hero.ctaArm64")}
+                  </a>
+                </div>
+
+                {/* SmartScreen heads-up — sits immediately under the download
+                    buttons, which is where someone who just clicked looks next. */}
+                <SmartScreenNotice t={t} />
+
+                <p className="hero-animate hero-animate-delay-4 mt-5 text-xs text-text-muted">
+                  {tHero("socialProof.users")}
+                </p>
+
+                {/* Trust badges — same trio as the homepage hero */}
+                <ul className="hero-animate hero-animate-delay-5 mt-7 hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-text-muted">
+                  <li className="flex items-center gap-1.5">
+                    <CheckIcon />
+                    {tHero("trustBadges.noData")}
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <CheckIcon />
+                    {tHero("trustBadges.noLogs")}
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <CheckIcon />
+                    {tHero("trustBadges.vless")}
+                  </li>
+                </ul>
+              </div>
+
+              {/* Screenshot — layered glow presentation */}
+              <div className="hero-animate hero-animate-delay-3 relative flex justify-center lg:justify-end">
+                <div className="absolute w-[22rem] h-[22rem] bg-accent-teal/15 rounded-full blur-3xl" aria-hidden="true" />
+                <Image
+                  src="/images/windows-hero.avif"
+                  alt={t("gallery.heroAlt")}
+                  width={986}
+                  height={693}
+                  className="relative w-full max-w-lg lg:max-w-2xl rounded-2xl ring-1 ring-overlay/10 shadow-2xl shadow-black/40"
+                  priority
+                />
+              </div>
             </div>
-
-            <p className="hero-animate hero-animate-delay-4 mt-5 text-xs text-text-muted">
-              {tHero("socialProof.users")}
-            </p>
-
-            {/* Trust badges — same trio as the homepage hero */}
-            <ul className="hero-animate hero-animate-delay-5 mt-7 hidden sm:flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-text-muted">
-              <li className="flex items-center gap-1.5">
-                <CheckIcon />
-                {tHero("trustBadges.noData")}
-              </li>
-              <li className="flex items-center gap-1.5">
-                <CheckIcon />
-                {tHero("trustBadges.noLogs")}
-              </li>
-              <li className="flex items-center gap-1.5">
-                <CheckIcon />
-                {tHero("trustBadges.vless")}
-              </li>
-            </ul>
           </div>
         </section>
 
@@ -359,6 +440,46 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                   </Reveal>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Inside the app — screenshot gallery ──────────────── */}
+        {/* Left unbanded so it alternates with the How-It-Works band below. */}
+        <section className="pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-site">
+            <Reveal>
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 text-center">
+                {t("gallery.title")}
+              </h2>
+              <p className="text-text-muted text-lg max-w-3xl mx-auto text-center mb-14 leading-relaxed">
+                {t("gallery.subtitle")}
+              </p>
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryShots.map(({ key, src }, i) => (
+                <Reveal key={key} delay={i * 80} className="h-full">
+                  <figure className="group h-full flex flex-col rounded-2xl border border-overlay/10 bg-bg-secondary/50 overflow-hidden transition-all duration-300 hover:border-accent-teal/30">
+                    <Image
+                      src={src}
+                      alt={t(`gallery.${key}.alt`)}
+                      width={986}
+                      height={693}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="w-full h-auto border-b border-overlay/10"
+                    />
+                    <figcaption className="p-5">
+                      <h3 className="text-base font-semibold text-text-primary mb-1.5">
+                        {t(`gallery.${key}.title`)}
+                      </h3>
+                      <p className="text-sm text-text-muted leading-relaxed">
+                        {t(`gallery.${key}.description`)}
+                      </p>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
@@ -422,12 +543,7 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
 
             <Reveal delay={80}>
               <div className="rounded-2xl border border-overlay/10 bg-bg-secondary/40 px-6 sm:px-8">
-                <Accordion
-                  items={faqKeys.map((key) => ({
-                    question: t(`faq.${key}.question`),
-                    answer: t(`faq.${key}.answer`),
-                  }))}
-                />
+                <Accordion items={faqItems} />
               </div>
             </Reveal>
           </div>
@@ -501,6 +617,32 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                       <DownloadIcon />
                       {t("cta.downloadArm64")}
                     </a>
+                  </div>
+
+                  {/* Trial terms — mirrors what the payment webhooks actually
+                      credit (30+7 / 180+14 / 365+30 days) and the store trial. */}
+                  <div className="mx-auto mb-10 max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4 text-start">
+                    <div className="rounded-xl border border-accent-teal/20 bg-accent-teal/5 p-5">
+                      <h3 className="text-sm font-semibold text-accent-teal mb-3">
+                        {t("trial.webTitle")}
+                      </h3>
+                      <ul className="space-y-2 text-sm text-text-primary">
+                        {(["webMonthly", "webSixMonth", "webYearly"] as const).map((key) => (
+                          <li key={key} className="flex items-center gap-2">
+                            <CheckIcon />
+                            {t(`trial.${key}`)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="rounded-xl border border-overlay/10 bg-bg-secondary/50 p-5">
+                      <h3 className="text-sm font-semibold text-text-primary mb-3">
+                        {t("trial.storesTitle")}
+                      </h3>
+                      <p className="text-sm text-text-muted leading-relaxed">
+                        {t("trial.stores")}
+                      </p>
+                    </div>
                   </div>
 
                   <p className="text-sm text-text-muted mb-2">{t("cta.otherPlatforms")}</p>

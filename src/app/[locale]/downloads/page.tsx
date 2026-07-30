@@ -87,7 +87,7 @@ const RELEASES: Record<"ios" | "android" | "mac" | "windows", Release> = {
   ios:     { date: "2026-04-08", note: null },
   android: { date: "2026-05-03", note: null },
   mac:     { date: "2026-05-11", note: "connectionFix", status: "review" },
-  windows: { date: "2026-05-11", note: "connectionFix" },
+  windows: { date: "2026-07-28", note: "connectionFix" },
 };
 
 function UpdateInfo({
@@ -201,6 +201,12 @@ const PLATFORMS: {
   icon: ({ className }: { className?: string }) => React.JSX.Element;
   learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
   buttons: PlatformButton[];
+  /**
+   * Short caveats shown under the download buttons. Keys resolve against the
+   * platform's own namespace (e.g. vpnForWindows), not `apps`, so the copy lives
+   * next to the rest of that platform's strings.
+   */
+  notes?: string[];
 }[] = [
   {
     key: "ios",
@@ -232,6 +238,10 @@ const PLATFORMS: {
     key: "windows",
     icon: WindowsIcon,
     learnHref: "/vpn-for-windows",
+    // Windows-only: the installer isn't code-signed yet, so SmartScreen blocks it
+    // and people give up at the warning. The trial line is here because this card
+    // is the last stop before a paid campaign visitor leaves for the download.
+    notes: ["downloadsSmartScreenNote", "downloadsTrialNote"],
     buttons: [
       {
         labelKey: "windows.buttonX64",
@@ -257,6 +267,8 @@ export default async function DownloadsPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("apps");
+  // Platform-specific caveats live in the platform's own namespace — see `notes`.
+  const tWindows = await getTranslations("vpnForWindows");
 
   const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
   const displayFontStyle = useFallbackFont
@@ -340,7 +352,7 @@ export default async function DownloadsPage({ params }: PageProps) {
 
           {/* ── Platform Cards ───────────────────────────────────── */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {PLATFORMS.map(({ key, icon: Icon, learnHref, buttons }, i) => (
+            {PLATFORMS.map(({ key, icon: Icon, learnHref, buttons, notes }, i) => (
               <Reveal key={key} delay={(i % 2) * 70} className="h-full">
                 <div
                   id={key}
@@ -381,6 +393,19 @@ export default async function DownloadsPage({ params }: PageProps) {
                     ))}
 
                     <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
+
+                    {notes && (
+                      <ul className="mt-3 space-y-1.5">
+                        {notes.map((noteKey) => (
+                          <li
+                            key={noteKey}
+                            className="text-xs text-text-muted leading-relaxed rounded-lg border border-accent-gold/20 bg-accent-gold/[0.05] px-3 py-2"
+                          >
+                            {tWindows(noteKey)}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
 
                     <SetupSteps
                       steps={[1, 2, 3, 4].map((n) => t(`${key}.step${n}`))}

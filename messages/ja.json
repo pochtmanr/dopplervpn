@@ -240,7 +240,7 @@
       "support": "優先サポート"
     },
     "plusCta": "Doppler Proを入手",
-    "trialNote": "App Store と Google Play で 3 日間無料 · ウェブ購入にはボーナス日数",
+    "trialNote": "App Store と Google Play で 3 日間無料 · 当サイトでの購入は無料日数付き：1か月に+1週間、6か月に+半月、1年に+1か月",
     "taxNote": "表示価格は税抜きです。税額はご利用地域に応じてお支払い時に計算されます。",
     "guarantee": "ウェブでの支払いは一回払い — 自動更新なし。30日間返金保証。",
     "pricesIn": "表示価格の通貨"
@@ -339,7 +339,7 @@
       },
       "trial": {
         "question": "無料トライアルはありますか？",
-        "answer": "はい！すべての新規ユーザーは、すべてのプレミアム機能へのフルアクセス付きの7日間無料トライアルを受けられます。トライアルは終了の少なくとも24時間前にキャンセルしない限り、有料サブスクリプションに移行します。30日間の返金保証も提供しています。"
+        "answer": "どこで登録するかによって異なります。App StoreとGoogle Playでは、すべての新規ユーザーが3日間の無料トライアルを利用できます。当サイトにはトライアルはなく、代わりに各プランに無料日数が付きます。1か月プランは1週間、6か月プランは半月、1年プランは1か月です。すべてのプランに30日間の返金保証が適用されます。"
       },
       "whatIsIncluded": {
         "question": "プレミアムには何が含まれますか？",
@@ -2591,6 +2591,45 @@
     }
   },
   "vpnForWindows": {
+    "downloadsSmartScreenNote": "Windows に「Windows によって PC が保護されました」と表示される場合があります。「詳細情報」（More info）をクリックし、続けて「実行」（Run anyway）をクリックしてください。",
+    "downloadsTrialNote": "当サイトでのご購入には無料日数が付きます：1か月プランに1週間、6か月プランに半月、1年プランに1か月。",
+    "smartScreen": {
+      "title": "インストール前に Windows が警告を表示することがあります",
+      "body": "インストーラーを実行すると、Windows Defender SmartScreen が青い「Windows によって PC が保護されました」画面を表示することがあります。想定どおりの動作です。次の手順で続行してください。",
+      "step1": "警告画面で「詳細情報」（More info）をクリックします。",
+      "step2": "「実行」（Run anyway）をクリックしてインストールを開始します。",
+      "why": "SmartScreen は、発行元の証明書でコード署名されていないアプリすべてにこの警告を表示します。当社のコード署名証明書は現在発行手続き中で、適用され次第この警告は表示されなくなります。",
+      "faqQuestion": "なぜ Windows は発行元不明と表示するのですか？",
+      "faqAnswer": "Windows 版 Doppler VPN はまだコード署名されていないため、Windows Defender SmartScreen が「Windows によって PC が保護されました」と発行元不明の警告を表示します。インストールするには、その画面で「詳細情報」（More info）をクリックし、続けて「実行」（Run anyway）をクリックしてください。コード署名証明書は発行手続き中で、今後のリリースでこの警告は表示されなくなります。"
+    },
+    "gallery": {
+      "title": "Windows アプリの画面",
+      "subtitle": "すっきりしたネイティブのデスクトップアプリ。設定ファイルもコマンドラインも不要で、アカウント作成も必要ありません。",
+      "heroAlt": "接続中の Windows 版 Doppler VPN。サーバーの地域と接続状態が表示されている",
+      "accountId": {
+        "title": "Account ID でサインイン",
+        "description": "メールもパスワードも認証も不要です。Account ID は初回起動時に生成されます。ほかの端末で同じサブスクリプションを使うために保管しておいてください。",
+        "alt": "Account ID を使う Windows 版 Doppler VPN のサインイン画面"
+      },
+      "settings": {
+        "title": "言語も設定も自分好みに",
+        "description": "アプリは多くの言語に対応。Windows 起動時の自動起動、自動接続、キルスイッチもワンクリックで設定できます。",
+        "alt": "言語セレクターを開いた Windows 版 Doppler VPN の設定画面"
+      },
+      "devices": {
+        "title": "利用中の端末を確認",
+        "description": "1つのサブスクリプションで複数の端末に対応。接続中の端末をいつでも確認でき、使わなくなった端末は削除できます。",
+        "alt": "接続中の端末が並ぶ Windows 版 Doppler VPN の利用中端末画面"
+      }
+    },
+    "trial": {
+      "webTitle": "当サイトでのご購入 — 無料日数を追加",
+      "webMonthly": "1か月 — 1週間無料",
+      "webSixMonth": "6か月 — 半月無料",
+      "webYearly": "1年 — 1か月無料",
+      "storesTitle": "App Store や Google Play で購入する場合",
+      "stores": "App Store または Google Play で購入したサブスクリプションは、代わりに3日間の無料トライアルから始まります。上記の無料日数は当サイトでのご購入に適用されます。"
+    },
     "metadata": {
       "title": "Doppler VPN Windows版 — 高速・プライベート・検閲耐性VPN",
       "description": "Doppler VPN for Windowsをダウンロード。VLESS-Reality暗号化、登録不要、検閲を突破。x64およびARM64 PCに対応。"
@@ -2642,7 +2681,7 @@
       "subtitle": "1分以内に接続完了 — 専門知識は不要です。",
       "step1": {
         "title": "インストーラーをダウンロード",
-        "description": "お使いのシステムに合ったDoppler VPNインストーラーをダウンロード — ほとんどのPCとノートPCはx64、Surface Pro XやSnapdragonデバイスはARM64です。インストーラーは30MB以下でウイルスフリーです。"
+        "description": "お使いのシステムに合ったDoppler VPNインストーラーをダウンロード — ほとんどのPCとノートPCはx64、Surface Pro XやSnapdragonデバイスはARM64です。インストーラーは約80MBです。アプリに必要なものをすべて同梱しているため、ほかに用意するものはありません。"
       },
       "step2": {
         "title": "セットアップウィザードを実行",

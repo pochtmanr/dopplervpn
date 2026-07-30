@@ -4,6 +4,7 @@ import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { createInvoice } from '@/lib/oxapay';
 import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
+import { readClickIdCookie } from '@/lib/click-id';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -106,6 +107,9 @@ export async function POST(req: NextRequest) {
       status: 'pending',
       provider: 'oxapay',
       provider_payment_id: orderId,
+      // Paid-campaign attribution. The webhook is a server-to-server call with no
+      // cookies, so the click id has to be stashed here to survive to confirmation.
+      click_id: readClickIdCookie(req),
     });
     if (insertErr) {
       console.error('[oxapay-create] pending_invoice_insert_failed', insertErr);

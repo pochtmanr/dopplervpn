@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { getOrder, type RevolutOrder } from '@/lib/revolut';
+import { firePostback } from '@/lib/postback';
 import crypto from 'crypto';
 
 // Days credited on a successful web payment.
@@ -226,10 +227,22 @@ export async function POST(req: NextRequest) {
           status: 'paid',
           provider: 'revolut',
           provider_payment_id: orderId,
+          click_id: metadata.click_id ?? null,
         });
         if (invoiceErr) {
           console.error('[revolut-webhook] invoice_insert_failed', orderId, invoiceErr);
         }
+
+        // Report the purchase to the ad network. The idempotency check at the top
+        // of this case means a Revolut retry returns before reaching here, and
+        // after() keeps a slow tracker from delaying the 200 Revolut waits for.
+        after(() =>
+          firePostback({
+            clickId: metadata.click_id,
+            goal: 'purchase',
+            meta: { locale: metadata.locale, pagePath: `revolut:${planId}` },
+          })
+        );
 
         // Receipt email (transactional). Must NEVER block the 200 response —
         // Revolut retries non-2xx responses and would double-extend the sub.

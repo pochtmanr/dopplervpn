@@ -240,7 +240,7 @@
       "support": "Priorisierter Support"
     },
     "plusCta": "Doppler Pro holen",
-    "trialNote": "3 Tage kostenlos im App Store & Google Play · Bonustage beim Web-Kauf",
+    "trialNote": "3 Tage kostenlos im App Store & Google Play · Kauf hier mit Gratistagen: +1 Woche bei 1 Monat, +ein halber Monat bei 6 Monaten, +1 Monat bei 1 Jahr",
     "taxNote": "Preise ohne MwSt. Die MwSt. wird beim Bezahlvorgang basierend auf deinem Standort berechnet.",
     "guarantee": "Die Zahlung im Web ist eine Einmalzahlung — keine automatische Verlängerung. 30-Tage-Geld-zurück-Garantie.",
     "pricesIn": "Preise angezeigt in"
@@ -339,7 +339,7 @@
       },
       "trial": {
         "question": "Gibt es eine kostenlose Testversion?",
-        "answer": "Ja! Jeder neue Nutzer erhält eine 7-tägige kostenlose Testversion mit vollem Zugang zu allen Premium-Funktionen. Die Testversion wird automatisch in ein kostenpflichtiges Abonnement umgewandelt, sofern nicht mindestens 24 Stunden vor Ablauf gekündigt wird. Wir bieten auch eine 30-Tage-Geld-zurück-Garantie."
+        "answer": "Das hängt davon ab, wo du abonnierst. Im App Store und bei Google Play erhält jeder neue Nutzer 3 Tage kostenlose Testphase. Auf dieser Website gibt es keine Testphase — stattdessen enthält jeder Tarif Gratistage: 1 Woche beim Monatstarif, ein halber Monat beim 6-Monats-Tarif und 1 Monat beim Jahrestarif. Für alle Tarife gilt eine 30-Tage-Geld-zurück-Garantie."
       },
       "whatIsIncluded": {
         "question": "Was ist in Premium enthalten?",
@@ -2591,6 +2591,45 @@
     }
   },
   "vpnForWindows": {
+    "downloadsSmartScreenNote": "Windows zeigt möglicherweise die Warnung „Der Computer wurde durch Windows geschützt“ — klicken Sie auf „Weitere Informationen“ (More info) und dann auf „Trotzdem ausführen“ (Run anyway).",
+    "downloadsTrialNote": "Beim Kauf hier gibt es Gratistage obendrauf: 1 Woche beim 1-Monats-Plan, ein halber Monat bei 6 Monaten, 1 Monat beim Jahresplan.",
+    "smartScreen": {
+      "title": "Windows warnt Sie eventuell vor der Installation",
+      "body": "Beim Ausführen des Installationsprogramms kann Windows Defender SmartScreen ein blaues Fenster mit „Der Computer wurde durch Windows geschützt“ anzeigen. Das ist zu erwarten — so geht es weiter:",
+      "step1": "Klicken Sie im Warnfenster auf „Weitere Informationen“ (More info).",
+      "step2": "Klicken Sie auf „Trotzdem ausführen“ (Run anyway), um die Installation zu starten.",
+      "why": "SmartScreen zeigt diesen Hinweis bei jeder Anwendung, die noch nicht mit einem anerkannten Herausgeberzertifikat signiert ist. Unser Code-Signing-Zertifikat wird gerade ausgestellt; danach verschwindet die Warnung.",
+      "faqQuestion": "Warum meldet Windows einen unbekannten Herausgeber?",
+      "faqAnswer": "Doppler VPN für Windows ist noch nicht signiert, deshalb zeigt Windows Defender SmartScreen die Warnung „Der Computer wurde durch Windows geschützt“ mit unbekanntem Herausgeber. Klicken Sie zum Installieren auf „Weitere Informationen“ (More info) und anschließend auf „Trotzdem ausführen“ (Run anyway). Unser Code-Signing-Zertifikat wird ausgestellt, und die Warnung entfällt in einer künftigen Version."
+    },
+    "gallery": {
+      "title": "Ein Blick in die Windows-App",
+      "subtitle": "Eine aufgeräumte, native Desktop-App — keine Konfigurationsdateien, keine Kommandozeile, kein Konto, das angelegt werden muss.",
+      "heroAlt": "Doppler VPN für Windows im verbundenen Zustand mit Serverstandort und Verbindungsstatus",
+      "accountId": {
+        "title": "Anmeldung mit einer Account-ID",
+        "description": "Keine E-Mail, kein Passwort, keine Bestätigung. Ihre Account-ID wird beim ersten Start erzeugt — bewahren Sie sie auf, um dasselbe Abo auf Ihren anderen Geräten zu nutzen.",
+        "alt": "Anmeldebildschirm von Doppler VPN für Windows mit einer Account-ID"
+      },
+      "settings": {
+        "title": "Ihre Sprache, Ihre Einstellungen",
+        "description": "Die App gibt es in zahlreichen Sprachen; Autostart mit Windows, automatische Verbindung und Kill Switch sind einen Klick entfernt.",
+        "alt": "Einstellungsbildschirm von Doppler VPN für Windows mit geöffneter Sprachauswahl"
+      },
+      "devices": {
+        "title": "Aktive Geräte im Blick",
+        "description": "Ein Abo deckt mehrere Geräte ab. Sehen Sie jederzeit, was verbunden ist, und entfernen Sie ein Gerät, das Sie nicht mehr nutzen.",
+        "alt": "Bildschirm mit den aktiven Geräten von Doppler VPN für Windows"
+      }
+    },
+    "trial": {
+      "webTitle": "Kauf auf dieser Website — Gratistage inklusive",
+      "webMonthly": "1 Monat — 1 Woche gratis",
+      "webSixMonth": "6 Monate — ein halber Monat gratis",
+      "webYearly": "1 Jahr — 1 Monat gratis",
+      "storesTitle": "Kauf über App Store oder Google Play?",
+      "stores": "Abos aus dem App Store oder von Google Play starten stattdessen mit 3 Tagen kostenloser Testphase. Die Gratistage oben gelten für Käufe auf dieser Website."
+    },
     "metadata": {
       "title": "Doppler VPN für Windows — Schnell, privat & zensurresistent",
       "description": "Laden Sie Doppler VPN für Windows herunter. VLESS-Reality-Verschlüsselung, ohne Registrierung, umgeht Zensur. Unterstützt x64 und ARM64 PCs."
@@ -2642,7 +2681,7 @@
       "subtitle": "In weniger als einer Minute verbunden — kein technisches Wissen erforderlich.",
       "step1": {
         "title": "Installer herunterladen",
-        "description": "Lade den Doppler VPN Installer für dein System herunter — x64 für die meisten PCs und Laptops, ARM64 für Surface Pro X und Snapdragon-Geräte. Der Installer ist unter 30 MB groß und virenfrei."
+        "description": "Lade den Doppler VPN Installer für dein System herunter — x64 für die meisten PCs und Laptops, ARM64 für Surface Pro X und Snapdragon-Geräte. Der Installer ist rund 80 MB groß, weil er alles Nötige bereits mitbringt — du musst nichts weiter installieren."
       },
       "step2": {
         "title": "Installationsassistent starten",

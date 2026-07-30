@@ -3,8 +3,40 @@ import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { GONE_BLOG_SLUGS, parseBlogSlug } from "./lib/blog-gone-slugs";
 import { isBlogLocale } from "./i18n/blog-locales";
+import {
+  CLICK_ID_COOKIE,
+  CLICK_ID_MAX_AGE_SECONDS,
+  CLICK_ID_SOURCE_COOKIE,
+  readClickIdParam,
+} from "./lib/click-id";
 
 const intlMiddleware = createIntlMiddleware(routing);
+
+/**
+ * Persist a paid-campaign click id so the conversion postback can echo it back
+ * later (see src/lib/postback.ts). Capturing here rather than on one landing page
+ * means the agency can point ads at any URL on the site.
+ *
+ * httpOnly is deliberate: every reader is server-side, so client JS has no reason
+ * to see it. Last-click wins — a fresh click id overwrites the stored one, which
+ * is what affiliate networks expect.
+ */
+function captureClickId(request: NextRequest, response: NextResponse): NextResponse {
+  const hit = readClickIdParam(request.nextUrl.searchParams);
+  if (!hit) return response;
+
+  const options = {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    maxAge: CLICK_ID_MAX_AGE_SECONDS,
+    path: "/",
+  } as const;
+
+  response.cookies.set(CLICK_ID_COOKIE, hit.clickId, options);
+  response.cookies.set(CLICK_ID_SOURCE_COOKIE, hit.source, options);
+  return response;
+}
 
 export async function middleware(request: NextRequest) {
   // Force non-www to www with a permanent redirect (308).
@@ -56,8 +88,11 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // Public routes — i18n middleware
-  return intlMiddleware(request);
+  // Public routes — i18n middleware.
+  // Click-id capture rides on this response only: the redirects above all preserve
+  // the query string, so the follow-up request captures it on the final URL. That
+  // also avoids setting a host-only cookie on the apex that www would never see.
+  return captureClickId(request, intlMiddleware(request));
 }
 
 export const config = {
