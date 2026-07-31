@@ -120,44 +120,93 @@ don't re-date a file you didn't touch.
 
 ---
 
-## Issue 3 — Windows release, then the landing version constants (ordered)
+## Issue 3 — Get the current Windows app onto the website
 
-**Do not bump the landing constants before the release exists.** They are what
-tells installed clients an update is available, and pointing them at a version
-that hasn't shipped produces an update banner whose button does nothing.
+### Read this first: the state is NOT "from scratch"
 
-Order:
+- `feat/supabase-host-failover` **is already merged into `main`** (merge commit
+  `b9667f9`). `main` carries both the Store-readiness work and the UI polish /
+  WelcomePage that landed separately. Build from `main`.
+- **Azure Artifact Signing is already configured.** All six GitHub secrets are
+  set and authenticate correctly. Do **not** re-enter them.
+- **The blocker is a 403 at the sign call**, not at auth. Per
+  `dopplerWindows/docs/HANDOFF-windows-session.md` it is one of exactly two
+  portal-side things:
+  1. the app registration is missing the **"Artifact Signing Certificate
+     Profile Signer"** role on the Artifact Signing account → Access control (IAM);
+  2. identity validation is not yet **Completed**.
+- **`v1.0.1` shipped UNSIGNED** and is live, forced by the repo variable
+  `SKIP_AZURE_SIGNING=true`. **Delete that variable once Azure works** or every
+  future release stays unsigned — and an unsigned submission is an automatic
+  10.2.9 rejection.
+- `docs/HANDOFF-final-release.md` names a certificate profile `doppler-vpn-de`.
+  Confirm that is the intended name given the publisher is **SIMNETIQ LTD**.
 
-1. **Smoke-test the current build.** GitHub Actions → *Release Windows* → Run
-   workflow on `feat/supabase-host-failover` (`workflow_dispatch` builds and
-   signs but publishes no release). Download the `doppler-windows-installers`
-   artifact and run Part B of
-   `dopplerWindows/docs/store/05-submission-walkthrough.md` on Windows —
-   tests 5 (kill switch + uninstall while connected) and 10 (demo account) are
-   the ones that historically fail.
-   - Installer properties should show Company = **SIMNETIQ LTD**.
-   - There will be **no Digital Signatures tab** until Azure signing is live;
-     the workflow fails open by design. That is expected, not a bug.
-2. **Azure Artifact Signing** — follow `dopplerWindows/docs/audit/AZURE-SIGNING-SETUP.md`.
-   The identity validation must name **SIMNETIQ LTD** (company no. 16861177),
-   whichever Azure tenant hosts the subscription. Start it early; validation
-   takes days. Then set the six GitHub secrets and re-run `workflow_dispatch`.
-3. **Verify signatures**: run `installer/verify-signatures.ps1` over both
-   publish dirs on Windows. Every PE file must pass — Store policy 10.2.9
-   requires the installer *and everything inside it* to be signed.
-4. **Merge to `main`** (the branch is not merged yet), then tag
-   `windows-v1.0.2` and let CI publish. Attach the installers to a
-   `windows-v1.0.2` release on the **public** `pochtmanr/dopplervpn` repo —
-   the private Windows repo's assets need auth, which is why downloads are
-   served from the public one.
-5. **Only now**, bump both constants in `landing`:
+### The thing that actually puts the app on the website
+
+**Two GitHub repos are involved and CI only touches one of them.**
+
+- CI's `Create Release` step (`softprops/action-gh-release`) has **no
+  `repository:` parameter**, so tagging publishes the installers to
+  **`pochtmanr/dopplerWindows`** — the private repo.
+- The website resolves downloads from **`pochtmanr/dopplervpn`** — the public
+  repo (`landing/src/app/api/windows/download/[file]/route.ts:26`), because the
+  private repo's release assets require auth.
+
+**So tagging alone does not update the website.** Copying the installers to a
+matching `windows-v<x.y.z>` release on the public repo is a manual step. If it
+is skipped, dopplervpn.org keeps serving v1.0.1 and nobody gets an error.
+
+Once that public release exists, the `latest-x64` / `latest-arm64` aliases pick
+it up automatically within 5 minutes — **the download page needs no code
+change**. Only the in-app update banner needs the constant bump.
+
+### Order
+
+1. **Smoke-test.** Actions → *Release Windows* → Run workflow on `main`
+   (`workflow_dispatch` builds and signs but publishes no release). Download the
+   `doppler-windows-installers` artifact and run Part B of
+   `dopplerWindows/docs/store/05-submission-walkthrough.md` — tests 5 (kill
+   switch + uninstall while connected) and 10 (demo account) historically fail.
+   - Installer properties → Details should show Company = **SIMNETIQ LTD**.
+   - No Digital Signatures tab until the 403 is resolved. Expected, not a bug.
+2. **Clear the 403** — check the IAM role first, then identity validation. Then
+   delete the `SKIP_AZURE_SIGNING` repo variable and re-run `workflow_dispatch`.
+3. **Verify signatures** on Windows: `installer/verify-signatures.ps1` over both
+   publish dirs. Every PE file must pass. In CI this gate runs `WarnOnly` when
+   `SIGNING_MODE=none`, so a green run does **not** by itself prove signing —
+   read the step output.
+4. **Tag the release** on the Windows repo:
+   ```bash
+   cd dopplerWindows && git tag windows-v1.0.2 && git push origin windows-v1.0.2
+   ```
+5. **Mirror the installers to the public repo — the step CI does not do:**
+   ```bash
+   gh release download windows-v1.0.2 -R pochtmanr/dopplerWindows -p '*.exe' -D /tmp/dvpn
+   gh release create windows-v1.0.2 /tmp/dvpn/*.exe \
+     -R pochtmanr/dopplervpn \
+     --title "Doppler VPN for Windows — v1.0.2" --notes "..."
+   ```
+   Verify: `gh release list -R pochtmanr/dopplervpn` shows `windows-v1.0.2` as
+   Latest, and
+   `curl -sIL https://www.dopplervpn.org/api/windows/download/latest-x64 | grep -i location`
+   resolves to the 1.0.2 asset.
+6. **Only now**, bump both constants in `landing`:
    - `src/app/api/windows/update/route.ts` → `DEFAULT_VERSION = "1.0.2"`
    - `src/app/api/windows/download/[file]/route.ts` → `FALLBACK_VERSION = "1.0.2"`
 
-   The download route resolves `latest-x64` from the GitHub API, so the URLs
-   themselves need no change; `FALLBACK_VERSION` is only used if that API is
-   unreachable. Latest published release is currently `windows-v1.0.1`
-   (`gh release list -R pochtmanr/dopplervpn`).
+   `FALLBACK_VERSION` is used only when the GitHub API is unreachable.
+   `DEFAULT_VERSION` is what triggers the in-app update banner — bumping it
+   before step 5 gives existing users a banner whose button downloads the old
+   version.
+
+### Worth proposing, not doing unasked
+
+Steps 4–5 are two manual actions that must not drift apart, and forgetting step
+5 fails silently. Consider adding a `repository:`-targeted second release step
+(or a `gh release create` step) to `release.yml` so one tag publishes to both
+repos. It needs a PAT with write access to `pochtmanr/dopplervpn` stored as a
+secret — flag the trade-off rather than adding the token unilaterally.
 
 ---
 
@@ -183,6 +232,13 @@ for(const f of fs.readdirSync('./messages')){if(f==='en.json')continue;
 console.log('parity check done');"
 ```
 
-- Commit in coherent tranches with real messages; push `landing` to `main` and
-  `dopplerWindows` to its branch. State plainly what you verified by running
-  versus what you inferred by reading.
+- `gh release list -R pochtmanr/dopplervpn` shows the new `windows-v*` release
+  as Latest, and `https://www.dopplervpn.org/api/windows/download/latest-x64`
+  redirects to that version's installer.
+- The `SKIP_AZURE_SIGNING` repo variable is deleted, and a tagged release run
+  shows the Azure signing steps actually executing (not skipped).
+- Commit in coherent tranches with real messages; push both repos to `main`
+  (`dopplerWindows` is now on `main`, the feature branch is merged). State
+  plainly what you verified by running versus what you inferred by reading —
+  and note that a Mac cannot build this app, so anything about runtime
+  behaviour is inference until tested on Windows.
