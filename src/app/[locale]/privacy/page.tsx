@@ -87,7 +87,9 @@ export default async function PrivacyPage({ params }: PageProps) {
                   <h2 className="font-display text-2xl font-semibold text-text-primary mb-4">
                     {t(`sections.${key}.title`)}
                   </h2>
-                  <p className="text-text-muted leading-relaxed">
+                  {/* whitespace-pre-line: several sections are multi-paragraph and
+                      separate them with blank lines in the message catalogue. */}
+                  <p className="text-text-muted leading-relaxed whitespace-pre-line">
                     {t(`sections.${key}.content`)}
                   </p>
                 </div>
