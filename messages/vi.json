@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Đang xác nhận thanh toán của bạn…",
-      "body": "Revolut đã chấp nhận khoản thanh toán. Chúng tôi đang kích hoạt gói Doppler VPN Pro của bạn.",
+      "body": "{processor} đã chấp nhận khoản thanh toán. Chúng tôi đang kích hoạt gói Doppler VPN Pro của bạn.",
       "orderId": "Mã đơn hàng",
       "elapsed": "Đã trôi qua: {seconds}s · vui lòng không đóng cửa sổ này"
     },
@@ -44,10 +44,10 @@
       "missingBody": "Chúng tôi không tìm thấy mã đơn hàng trong liên kết này. Nếu bạn vừa thanh toán, vui lòng liên hệ bộ phận hỗ trợ và cung cấp email bạn đã dùng để chúng tôi xác nhận giao dịch.",
       "missingReason": "Không có tham số order_id trong URL",
       "failedTitle": "Thanh toán không thành công",
-      "failedBody": "Revolut báo cáo thanh toán không thành công. Bạn chưa bị tính phí. Vui lòng quay lại trang thanh toán và thử lại, hoặc liên hệ hỗ trợ nếu sự cố vẫn tiếp diễn.",
+      "failedBody": "{processor} báo cáo thanh toán không thành công. Bạn chưa bị tính phí. Vui lòng quay lại trang thanh toán và thử lại, hoặc liên hệ hỗ trợ nếu sự cố vẫn tiếp diễn.",
       "failedReasonUnknown": "Lỗi không xác định",
       "timeoutTitle": "Chúng tôi vẫn đang xác nhận thanh toán của bạn",
-      "timeoutBody": "Revolut đã nhận khoản thanh toán nhưng hệ thống của chúng tôi vẫn chưa nhận được xác nhận. Điều này hầu như luôn chỉ là tạm thời — tài khoản của bạn sẽ được nâng cấp tự động trong vài phút. Nếu không, hãy gửi mã đơn hàng bên dưới cho chúng tôi và chúng tôi sẽ xử lý ngay.",
+      "timeoutBody": "{processor} đã nhận khoản thanh toán nhưng hệ thống của chúng tôi vẫn chưa nhận được xác nhận. Điều này hầu như luôn chỉ là tạm thời — tài khoản của bạn sẽ được nâng cấp tự động trong vài phút. Nếu không, hãy gửi mã đơn hàng bên dưới cho chúng tôi và chúng tôi sẽ xử lý ngay.",
       "timeoutReason": "Webhook bị chậm",
       "diagnosticHeading": "Thông tin chẩn đoán",
       "statusLabel": "Trạng thái",
@@ -103,7 +103,8 @@
         "card": "Thẻ (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Tiền mã hóa (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Làm thế nào để yêu cầu hoàn tiền?",
-        "answer": "Chúng tôi cung cấp hoàn tiền 14 ngày cho khách hàng EU/UK và đảm bảo hoàn tiền thiện chí 30 ngày cho tất cả khách hàng khác. Đối với đăng ký web (qua Revolut), liên hệ support@simnetiq.store. Đối với iOS, truy cập reportaproblem.apple.com. Đối với Android, mở Google Play > Tài khoản > Lịch sử đơn hàng. Xem Chính Sách Hoàn Tiền đầy đủ tại dopplervpn.org/refund."
+        "answer": "Chúng tôi cung cấp hoàn tiền 14 ngày cho khách hàng EU/UK và đảm bảo hoàn tiền thiện chí 30 ngày cho tất cả khách hàng khác. Đối với đăng ký web — thanh toán bằng thẻ qua Revolut hoặc bằng tiền mã hóa qua OxaPay — liên hệ support@simnetiq.store. Đối với iOS, truy cập reportaproblem.apple.com. Đối với Android, mở Google Play > Tài khoản > Lịch sử đơn hàng. Xem Chính Sách Hoàn Tiền đầy đủ tại dopplervpn.org/refund."
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "Chính Sách Bảo Mật",
-    "lastUpdated": "Cập nhật lần cuối: Tháng 7 năm 2026",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 8 năm 2026",
     "intro": "Chính Sách Bảo Mật này giải thích cách SIMNETIQ LTD (\"Công ty\", \"chúng tôi\", \"của chúng tôi\"), công ty đăng ký tại Anh và xứ Wales (Số công ty 16861177), có trụ sở đăng ký tại 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom, thu thập, sử dụng và bảo vệ thông tin của bạn khi sử dụng DopplerVPN (ứng dụng VPN trên iOS, macOS, Android và Windows) và công cụ tạo video AI (gọi chung là \"Dịch vụ\"). Chúng tôi cam kết bảo vệ quyền riêng tư theo UK GDPR, EU GDPR, CCPA và tất cả luật bảo vệ dữ liệu hiện hành.",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Cookie và Theo Dõi",
-        "content": "Website (dopplervpn.org) sử dụng cookie thiết yếu và cookie phân tích ẩn danh. Chúng tôi không sử dụng cookie quảng cáo hoặc theo dõi xuyên trang. Bạn có thể kiểm soát qua cài đặt trình duyệt. Ứng dụng VPN và AI không sử dụng cookie."
+        "content": "Website (dopplervpn.org) sử dụng cookie thiết yếu cần thiết để website hoạt động và cookie phân tích ẩn danh để hiểu lưu lượng truy cập ở dạng tổng hợp. Nếu bạn đến từ một quảng cáo trả phí, chúng tôi còn lưu một cookie của chính chúng tôi chứa mã định danh lượt nhấp mà mạng quảng cáo đã gắn vào liên kết bạn theo, cùng tên tham số mà mã đó đi kèm. Cookie này được giữ tối đa 90 ngày và chỉ phục vụ một mục đích: khi bạn tải ứng dụng hoặc mua gói đăng ký, máy chủ của chúng tôi báo cáo chuyển đổi đó về mạng quảng cáo để quảng cáo được ghi nhận đúng. Mã định danh đó do mạng quảng cáo tạo ra chứ không phải do chúng tôi, và không bao giờ được liên kết với tài khoản VPN hay lưu lượng của bạn. Chúng tôi không đặt cookie quảng cáo của bên thứ ba và không sử dụng công nghệ theo dõi xuyên trang. Bạn có thể kiểm soát tùy chọn cookie qua cài đặt trình duyệt. Ứng dụng VPN và AI của chúng tôi không sử dụng cookie."
       },
       "children": {
         "title": "11. Quyền Riêng Tư Trẻ Em",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "Điều Khoản Dịch Vụ",
-    "lastUpdated": "Cập nhật lần cuối: Tháng 3 năm 2026",
-    "intro": "Các Điều Khoản Dịch Vụ này (\"Điều Khoản\") tạo thành thỏa thuận ràng buộc pháp lý giữa bạn (\"Người dùng\", \"bạn\") và SIMNETIQ LTD (\"Công ty\", \"chúng tôi\"), công ty đăng ký tại Anh và xứ Wales (Số 16861177), trụ sở tại 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. Các Điều Khoản này điều chỉnh việc truy cập và sử dụng DopplerVPN, công cụ tạo video AI, và tất cả website, ứng dụng và dịch vụ liên quan (gọi chung là \"Dịch vụ\"). Bằng việc sử dụng Dịch vụ, bạn đồng ý tuân theo các Điều Khoản này. Nếu không đồng ý, bạn không được sử dụng Dịch vụ.",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 8 năm 2026",
+    "intro": "Các Điều Khoản Dịch Vụ này (\"Điều Khoản\") tạo thành thỏa thuận ràng buộc pháp lý giữa bạn (\"Người dùng\", \"bạn\") và SIMNETIQ LTD (\"Công ty\", \"chúng tôi\"), công ty đăng ký tại Anh và xứ Wales (Số 16861177), trụ sở tại 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. Các Điều Khoản này điều chỉnh việc truy cập và sử dụng DopplerVPN (ứng dụng VPN của chúng tôi có trên iOS, macOS, Android và Windows), công cụ tạo video AI, và tất cả website, ứng dụng và dịch vụ liên quan (gọi chung là \"Dịch vụ\"). Bằng việc sử dụng Dịch vụ, bạn đồng ý tuân theo các Điều Khoản này. Nếu không đồng ý, bạn không được sử dụng Dịch vụ.",
     "sections": {
       "service": {
         "title": "1. Mô Tả Dịch Vụ",
-        "content": "Chúng tôi cung cấp hai loại dịch vụ số: (a) DopplerVPN — ứng dụng VPN mã hóa kết nối bằng VLESS-Reality, ẩn IP, chặn quảng cáo DNS và lọc nội dung với kiểm soát phụ huynh. Có trên iOS, Android và Windows. (b) Tạo Video AI — công cụ web tạo nội dung video bằng AI. Cả hai cung cấp dưới dạng SaaS theo đăng ký. Dịch vụ cung cấp \"nguyên trạng\" và \"khi có sẵn\" không có bảo đảm nào."
+        "content": "Chúng tôi cung cấp hai loại dịch vụ số: (a) DopplerVPN — ứng dụng VPN mã hóa kết nối bằng VLESS-Reality, ẩn IP, chặn quảng cáo cấp DNS và lọc nội dung với kiểm soát phụ huynh. Có trên iOS, macOS, Android và Windows. Mức độ lưu lượng thiết bị mà ứng dụng đảm nhận khác nhau theo nền tảng: trên iOS, macOS và Android, ứng dụng tạo đường hầm toàn hệ thống nên toàn bộ lưu lượng của thiết bị đi qua đó; trên Windows, ứng dụng cấu hình proxy hệ thống của Windows nên các ứng dụng tuân theo thiết lập đó sẽ đi qua VPN, còn các ứng dụng bỏ qua thiết lập này vẫn dùng kết nối thông thường của bạn. (b) Tạo Video AI — công cụ web tạo nội dung video bằng AI. Cả hai cung cấp dưới dạng SaaS theo đăng ký. Dịch vụ cung cấp \"nguyên trạng\" và \"khi có sẵn\" không có bảo đảm nào."
       },
       "eligibility": {
         "title": "2. Điều Kiện",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. Đăng Ký, Thanh Toán và Hóa Đơn",
-        "content": "Truy cập tính năng premium yêu cầu đăng ký trả phí. DopplerVPN Premium gồm máy chủ premium ở nhiều quốc gia, chặn quảng cáo DNS, lọc nội dung và tối đa 10 thiết bị. Thanh toán: đăng ký web được xử lý bởi Revolut Ltd; đăng ký di động qua Apple App Store hoặc Google Play Store. Tự động gia hạn nếu không hủy trước 24 giờ. Bạn có thể hủy bất cứ lúc nào: đăng ký web liên hệ support@simnetiq.store; di động qua cài đặt cửa hàng ứng dụng. Hủy có hiệu lực cuối kỳ thanh toán. Giá có thể thay đổi; chúng tôi sẽ thông báo trước."
+        "content": "Truy cập tính năng premium yêu cầu đăng ký trả phí. DopplerVPN Premium gồm máy chủ VPN premium ở nhiều quốc gia, chặn quảng cáo cấp DNS, lọc nội dung với kiểm soát phụ huynh và kết nối tối đa 10 thiết bị cùng lúc. Đăng ký có chu kỳ thanh toán hàng tháng, 6 tháng và hàng năm. Xử lý thanh toán: đăng ký mua trên website của chúng tôi được xử lý bởi Revolut Ltd (thanh toán thẻ) hoặc OxaPay (thanh toán tiền mã hóa); đăng ký di động được xử lý qua Apple App Store (iOS và macOS) hoặc Google Play Store (Android). Việc gia hạn khác nhau giữa hai kênh. Đăng ký mua trên website là giao dịch một lần cho khoảng thời gian bạn chọn: nó không tự động gia hạn, chúng tôi không lưu bất kỳ phương tiện nào để tính phí bạn lần nữa, và quyền truy cập đơn giản là kết thúc khi hết thời hạn trừ khi bạn mua tiếp. Đăng ký di động tự động gia hạn vào cuối mỗi kỳ thanh toán trừ khi được hủy ít nhất 24 giờ trước ngày gia hạn; bạn có thể hủy bất cứ lúc nào trong cài đặt cửa hàng ứng dụng của thiết bị, và việc hủy có hiệu lực vào cuối kỳ thanh toán hiện tại — bạn vẫn được sử dụng cho đến khi đó. Với mọi thắc mắc về giao dịch mua trên website, hãy liên hệ support@simnetiq.store. Giá có thể thay đổi theo thời gian; chúng tôi sẽ thông báo hợp lý trước khi việc tăng giá có hiệu lực. Mọi mức giá đều hiển thị đã bao gồm thuế áp dụng khi luật pháp yêu cầu."
       },
       "usage": {
         "title": "5. Sử Dụng Chấp Nhận Được",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "Chính Sách Hoàn Tiền",
-    "lastUpdated": "Cập nhật lần cuối: Tháng 3 năm 2026",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 8 năm 2026",
     "intro": "Chính Sách Hoàn Tiền này áp dụng cho tất cả giao dịch mua đăng ký DopplerVPN và công cụ tạo video AI qua SIMNETIQ LTD (Số 16861177), đăng ký tại 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. Chúng tôi muốn bạn hoàn toàn hài lòng. Nếu không, vui lòng xem điều khoản hoàn tiền bên dưới.",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "Cho khách hàng ngoài EU/EEA và UK, chúng tôi cung cấp bảo đảm hoàn tiền 30 ngày. Nếu không hài lòng, yêu cầu hoàn tiền đầy đủ trong 30 ngày từ ngày mua đầu tiên. Chỉ áp dụng cho lần mua đầu, tối đa một lần hoàn tiền mỗi khách hàng. Liên hệ support@simnetiq.store. Hoàn tiền trong 14 ngày làm việc."
       },
       "webSubscriptions": {
-        "title": "4. Đăng Ký Web (qua Revolut)",
-        "content": "Đăng ký web cho DopplerVPN được xử lý bởi Revolut Ltd, đơn vị xử lý thanh toán của chúng tôi. Revolut xử lý thanh toán một cách an toàn. Để yêu cầu hoàn tiền cho đăng ký web: liên hệ support@simnetiq.store với số đơn hàng hoặc biên lai. Hoàn tiền được xử lý và sẽ xuất hiện trên sao kê của bạn trong 5-10 ngày làm việc tùy thuộc nhà cung cấp thanh toán."
+        "title": "4. Đăng Ký Web (Revolut và OxaPay)",
+        "content": "Đăng ký web cho DopplerVPN được thanh toán bằng thẻ, do Revolut Ltd xử lý, hoặc bằng tiền mã hóa, do OxaPay xử lý. Để yêu cầu hoàn tiền cho đăng ký web, liên hệ support@simnetiq.store kèm số đơn hàng hoặc biên lai. Hoàn tiền bằng thẻ được trả về chính chiếc thẻ bạn đã dùng và xuất hiện trên sao kê trong 5–10 ngày làm việc, tùy ngân hàng của bạn. Giao dịch tiền mã hóa không thể đảo ngược trên mạng lưới, nên khoản hoàn tiền bằng tiền mã hóa được gửi dưới dạng một giao dịch chuyển mới tới địa chỉ ví bạn cung cấp cho chúng tôi, bằng đúng đồng tiền bạn đã thanh toán. Chúng tôi hoàn lại số tiền đã nhận; phí mạng lưới và mọi biến động tỷ giá giữa thời điểm bạn thanh toán và thời điểm hoàn tiền không được bù đắp."
       },
       "mobileSubscriptions": {
         "title": "5. Đăng Ký Di Động (App Store & Google Play)",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. Phí Gia Hạn",
-        "content": "Đăng ký tự động gia hạn cuối mỗi kỳ thanh toán. Nếu không muốn bị tính phí gia hạn, hủy trước 24 giờ trước khi kết thúc kỳ thanh toán. Đăng ký web: liên hệ support@simnetiq.store. Di động: hủy qua cài đặt App Store hoặc Google Play. Nếu bị tính phí gia hạn không mong muốn, liên hệ trong 14 ngày và chúng tôi sẽ hoàn phần chưa sử dụng."
+        "content": "Việc gia hạn khác nhau tùy theo nơi bạn mua đăng ký. Đăng ký mua trên website của chúng tôi là giao dịch một lần cho khoảng thời gian bạn đã chọn: nó không tự động gia hạn, chúng tôi không lưu phương thức thanh toán nào để tính phí bạn lần nữa, và quyền truy cập đơn giản là kết thúc khi hết thời hạn — không có gì để hủy và không có khoản phí gia hạn nào để hoàn. Đăng ký mua qua Apple App Store hoặc Google Play tự động gia hạn vào cuối mỗi kỳ thanh toán; nếu không muốn bị tính phí gia hạn, hãy hủy ít nhất 24 giờ trước khi kết thúc kỳ hiện tại trong cài đặt App Store hoặc Google Play của thiết bị. Nếu bị tính phí gia hạn ngoài ý muốn, hãy liên hệ support@simnetiq.store trong vòng 14 ngày kể từ khi bị tính phí, chúng tôi sẽ hỗ trợ bạn nhận hoàn tiền cho phần chưa sử dụng của kỳ gia hạn thông qua cửa hàng ứng dụng tương ứng."
       },
       "exclusions": {
         "title": "7. Loại Trừ Hoàn Tiền",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. Cách Yêu Cầu Hoàn Tiền",
-        "content": "Liên hệ chúng tôi với: tên hoặc mã tài khoản, email liên kết mua hàng, số đơn hàng hoặc biên lai (từ Revolut, Apple hoặc Google), ngày mua, và lý do (tùy chọn nhưng hữu ích). Gửi đến: support@simnetiq.store. Chúng tôi xác nhận trong 2 ngày làm việc và xử lý hoàn tiền trong 14 ngày làm việc."
+        "content": "Liên hệ chúng tôi với: tên hoặc mã tài khoản, email liên kết mua hàng, số đơn hàng hoặc biên lai (từ Revolut, OxaPay, Apple hoặc Google), ngày mua, và lý do (tùy chọn nhưng hữu ích). Gửi đến: support@simnetiq.store. Chúng tôi xác nhận trong 2 ngày làm việc và xử lý hoàn tiền trong 14 ngày làm việc."
       },
       "contact": {
         "title": "9. Liên Hệ",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "Đăng ký như thế nào?",
-          "answer": "Truy cập trang đăng ký, nhập email, chọn gói và thanh toán qua Revolut. Gói Pro được kích hoạt ngay lập tức."
+          "answer": "Truy cập trang đăng ký, nhập email, chọn gói và thanh toán bằng thẻ qua Revolut hoặc bằng tiền mã hóa qua OxaPay. Gói Pro được kích hoạt ngay lập tức."
         },
         "multiDevice": {
           "question": "Có thể dùng một tài khoản trên nhiều thiết bị?",
@@ -1128,7 +1129,7 @@
       "savings": "Tiết kiệm lên đến 35% so với cửa hàng ứng dụng",
       "step1": "Mở @dopplercreatebot trong Telegram",
       "step2": "Nhấn \"Đăng ký\" và chọn gói của bạn",
-      "step3": "Thanh toán an toàn qua Revolut — sử dụng mã LAUNCH20 để được giảm 20%"
+      "step3": "Thanh toán an toàn bằng thẻ (Revolut) hoặc tiền mã hóa (OxaPay) — sử dụng mã LAUNCH20 để được giảm 20%"
     },
     "manageSection": "Quản lý đăng ký của bạn",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "giảm giá",
     "promoInvalid": "Mã khuyến mãi không hợp lệ",
     "promoFailed": "Không thể xác thực mã",
-    "footerNote": "Thanh toán một lần qua Revolut. Không tự động gia hạn. Đảm bảo hoàn tiền 30 ngày.",
+    "footerNote": "Thanh toán một lần bằng thẻ (Revolut) hoặc tiền mã hóa (OxaPay). Không tự động gia hạn. Đảm bảo hoàn tiền 30 ngày.",
     "webBonus": {
       "title": "Ưu đãi web — ngày miễn phí bao gồm",
       "subtitle": "Dùng thử miễn phí 3 ngày chỉ có trên App Store và Google Play. Để bù đắp trên web, mỗi gói đều kèm theo ngày miễn phí bổ sung:",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "Đăng ký App Store",
       "restorePlayStore": "Đăng ký Google Play",
       "deleteProSupportNote": "Tài khoản của bạn có gói Pro đang hoạt động. Vui lòng liên hệ hỗ trợ để xóa."
-    }
+    },
+    "securedByCrypto": "Được bảo mật bởi OxaPay"
   },
   "subscribeSuccess": {
     "title": "Tất Cả Đã Sẵn Sàng!",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "Nâng cấp lên Doppler Pro",
-    "subtitle": "Chọn gói của bạn và đăng ký an toàn qua Revolut.",
+    "subtitle": "Chọn gói của bạn và thanh toán an toàn bằng thẻ (Revolut) hoặc tiền mã hóa (OxaPay).",
     "accountLabel": "Tài khoản",
     "monthly": "Hàng tháng",
     "sixMonth": "6 Tháng",
@@ -1372,7 +1374,7 @@
     "promoOff": "giảm giá",
     "promoInvalid": "Mã khuyến mãi không hợp lệ",
     "promoFailed": "Không thể xác minh mã",
-    "footerNote": "Thanh toán an toàn qua Revolut. Hủy bất cứ lúc nào.",
+    "footerNote": "Thanh toán an toàn bằng thẻ (Revolut) hoặc tiền mã hóa (OxaPay). Hủy bất cứ lúc nào.",
     "terms": "Điều Khoản Dịch Vụ",
     "privacy": "Chính Sách Bảo Mật",
     "error": "Đã xảy ra lỗi. Vui lòng thử lại.",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "Thỏa Thuận Xử Lý Dữ Liệu",
-    "lastUpdated": "Cập nhật lần cuối: Tháng 4 năm 2026",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 8 năm 2026",
     "intro": "Thỏa Thuận Xử Lý Dữ Liệu (\"DPA\") này là một phần của thỏa thuận giữa bạn và SIMNETIQ LTD (Số công ty 16861177), đăng ký tại 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom, điều chỉnh việc xử lý dữ liệu cá nhân liên quan đến dịch vụ Doppler VPN.",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. Các Loại Dữ Liệu Cá Nhân Được Xử Lý",
-        "content": "Các danh mục dữ liệu cá nhân sau có thể được xử lý: mã định danh tài khoản (định dạng VPN-XXXX-XXXX-XXXX được tạo ngẫu nhiên), địa chỉ email (khi tự nguyện cung cấp để khôi phục tài khoản hoặc hỗ trợ), mã định danh thiết bị (ẩn danh, không liên kết với danh tính cá nhân), hồ sơ thanh toán (được xử lý bởi nhà cung cấp thanh toán bên thứ ba — Revolut, Apple, Google), và thư từ hỗ trợ (liên lạc qua email với đội hỗ trợ). Chúng tôi không xử lý dữ liệu nhạy cảm hoặc thuộc danh mục đặc biệt."
+        "content": "Các danh mục dữ liệu cá nhân sau có thể được xử lý: mã định danh tài khoản (định dạng VPN-XXXX-XXXX-XXXX được tạo ngẫu nhiên), địa chỉ email hoặc tên người dùng trên ứng dụng nhắn tin (khi tự nguyện cung cấp để khôi phục tài khoản hoặc hỗ trợ), mã định danh thiết bị và tên thiết bị do hệ điều hành báo cáo, mã thông báo xác thực riêng cho từng thiết bị (chỉ lưu dưới dạng băm SHA-256), bản ghi xác thực và giới hạn tần suất đối với các yêu cầu gửi tới API của chúng tôi (gồm địa chỉ IP, mã tài khoản, mã thiết bị và dấu thời gian), hồ sơ thanh toán (được xử lý bởi nhà cung cấp thanh toán bên thứ ba — Revolut và OxaPay cho giao dịch mua trên website, Apple và Google cho giao dịch mua trong ứng dụng di động), mã định danh phân bổ lượt cài đặt khi tính năng phân bổ trên di động đang hoạt động, và thư từ hỗ trợ (liên lạc qua email với đội hỗ trợ). Chúng tôi không xử lý dữ liệu nhạy cảm hoặc thuộc danh mục đặc biệt, và không xử lý dữ liệu lưu lượng VPN — xem Mục 5."
       },
       "security": {
         "title": "5. Các Biện Pháp Bảo Mật",
-        "content": "Chúng tôi áp dụng các biện pháp kỹ thuật và tổ chức phù hợp để đảm bảo an toàn dữ liệu cá nhân, bao gồm: mã hóa VLESS-Reality cho tất cả lưu lượng VPN, mã hóa TLS cho tất cả liên lạc web, kiểm soát truy cập nghiêm ngặt trên hệ thống sản xuất theo nguyên tắc quyền tối thiểu, kiểm toán bảo mật và đánh giá hạ tầng định kỳ, tối thiểu hóa dữ liệu theo thiết kế trên tất cả dịch vụ, và chính sách không lưu nhật ký nghiêm ngặt cho việc sử dụng VPN — chúng tôi không lưu trữ, kiểm tra hoặc giữ lại bất kỳ dữ liệu nào đi qua đường hầm VPN."
+        "content": "Chúng tôi áp dụng các biện pháp kỹ thuật và tổ chức phù hợp để đảm bảo an toàn dữ liệu cá nhân, bao gồm: mã hóa VLESS-Reality cho tất cả lưu lượng VPN, mã hóa TLS cho tất cả liên lạc web, kiểm soát truy cập nghiêm ngặt trên hệ thống sản xuất theo nguyên tắc quyền tối thiểu, mã thông báo xác thực riêng cho từng thiết bị chỉ được lưu dưới dạng băm SHA-256 và có thể thu hồi riêng lẻ, kiểm toán bảo mật và đánh giá hạ tầng định kỳ, tối thiểu hóa dữ liệu theo thiết kế trên tất cả dịch vụ, và chính sách không lưu nhật ký nghiêm ngặt cho việc sử dụng VPN — chúng tôi không lưu trữ, kiểm tra hoặc giữ lại bất kỳ dữ liệu nào đi qua đường hầm VPN. Cam kết không lưu nhật ký đó áp dụng cho lưu lượng VPN; nó không áp dụng cho các bản ghi xác thực và giới hạn tần suất mô tả ở Mục 4, vốn chỉ ghi nhận rằng một thiết bị đã gửi yêu cầu tới API của chúng tôi và được lưu trong thời hạn nêu ở Mục 9."
       },
       "subprocessors": {
         "title": "6. Nghĩa Vụ Bên Xử Lý Phụ",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. Lưu Trữ Dữ Liệu",
-        "content": "Dữ liệu cá nhân chỉ được lưu trữ miễn là cần thiết cho các mục đích nêu trong DPA này: thông tin tài khoản được lưu khi tài khoản đang hoạt động và 30 ngày sau khi xóa để cho phép khôi phục, hồ sơ thanh toán được lưu trữ 6 năm theo luật thuế và kế toán UK, thư từ hỗ trợ được lưu 12 tháng sau khi giải quyết, và dữ liệu sử dụng VPN KHÔNG được lưu trữ — chính sách không lưu nhật ký nghĩa là chúng tôi không có khả năng kỹ thuật để liên kết hoạt động mạng cụ thể với người dùng cá nhân."
+        "content": "Dữ liệu cá nhân chỉ được lưu trữ miễn là cần thiết cho các mục đích nêu trong DPA này: thông tin tài khoản và danh sách thiết bị liên quan được lưu trong thời gian tài khoản còn tồn tại và bị xóa ngay lập tức khi tài khoản bị xóa, ngoại trừ việc tài khoản có gói đăng ký trả phí đang hoạt động không thể bị xóa cho đến khi gói đó hết hạn hoặc bị hủy; các bản ghi xác thực và giới hạn tần suất mô tả ở Mục 4 được lưu tối đa 90 ngày rồi bị xóa vĩnh viễn; hồ sơ thanh toán được lưu trữ 6 năm theo luật thuế và kế toán UK; thư từ hỗ trợ được lưu 12 tháng sau khi giải quyết; và dữ liệu sử dụng VPN KHÔNG được lưu trữ — chính sách không lưu nhật ký nghĩa là chúng tôi không có khả năng kỹ thuật để liên kết hoạt động mạng cụ thể với người dùng cá nhân."
       },
       "transfers": {
         "title": "10. Chuyển Dữ Liệu Quốc Tế",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "Bên Xử Lý Phụ",
-    "lastUpdated": "Cập nhật lần cuối: Tháng 4 năm 2026",
+    "lastUpdated": "Cập nhật lần cuối: Tháng 8 năm 2026",
     "intro": "Các nhà cung cấp dịch vụ bên thứ ba (bên xử lý phụ) sau đây xử lý dữ liệu cá nhân thay mặt cho SIMNETIQ LTD liên quan đến dịch vụ Doppler VPN. Mỗi bên xử lý phụ bị ràng buộc bởi các điều khoản xử lý dữ liệu tương đương với Thỏa Thuận Xử Lý Dữ Liệu của chúng tôi.",
     "colName": "Bên Xử Lý Phụ",
     "colPurpose": "Mục Đích",

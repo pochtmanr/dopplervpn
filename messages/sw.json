@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Tunathibitisha malipo yako…",
-      "body": "Revolut imekubali malipo. Tunaendelea kuwasha usajili wako wa Doppler VPN Pro sasa hivi.",
+      "body": "{processor} imekubali malipo. Tunaendelea kuwasha usajili wako wa Doppler VPN Pro sasa hivi.",
       "orderId": "Nambari ya oda",
       "elapsed": "Imepita: sekunde {seconds} · tafadhali usifunge dirisha hili"
     },
@@ -44,10 +44,10 @@
       "missingBody": "Hatuwezi kupata nambari ya oda kwenye kiungo hiki. Ikiwa umelipa hivi punde, tafadhali wasiliana na timu ya msaada na utuletee barua pepe uliyotumia ili tuweze kuthibitisha ununuzi wako.",
       "missingReason": "Hakuna kigezo cha order_id kwenye URL",
       "failedTitle": "Malipo hayajafanikiwa",
-      "failedBody": "Revolut imeripoti malipo kuwa hayakufanikiwa. Hujakatwa hata senti. Tafadhali rudi kwenye ukurasa wa malipo ujaribu tena, au wasiliana na msaada ikiwa tatizo litaendelea.",
+      "failedBody": "{processor} imeripoti malipo kuwa hayakufanikiwa. Hujakatwa hata senti. Tafadhali rudi kwenye ukurasa wa malipo ujaribu tena, au wasiliana na msaada ikiwa tatizo litaendelea.",
       "failedReasonUnknown": "Hitilafu isiyojulikana",
       "timeoutTitle": "Bado tunathibitisha malipo yako",
-      "timeoutBody": "Revolut imechukua malipo lakini mfumo wetu bado haujapokea uthibitisho. Mara nyingi hili ni la muda mfupi tu — akaunti yako itapandishwa hadhi kiotomatiki ndani ya dakika chache. Ikiwa halitatokea, tutumie nambari ya oda iliyo hapa chini na tutarekebisha mara moja.",
+      "timeoutBody": "{processor} imechukua malipo lakini mfumo wetu bado haujapokea uthibitisho. Mara nyingi hili ni la muda mfupi tu — akaunti yako itapandishwa hadhi kiotomatiki ndani ya dakika chache. Ikiwa halitatokea, tutumie nambari ya oda iliyo hapa chini na tutarekebisha mara moja.",
       "timeoutReason": "Uwasilishaji wa webhook umechelewa",
       "diagnosticHeading": "Maelezo ya uchunguzi",
       "statusLabel": "Hali",
@@ -103,7 +103,8 @@
         "card": "Kadi (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Sarafu ya kidijitali (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Ninaiombaje kurudishiwa pesa?",
-        "answer": "Tunatoa kurudishiwa pesa kwa siku 14 kwa wateja wa EU/UK na dhamana ya kurudisha pesa kwa siku 30 kwa nia njema kwa wateja wengine wote. Kwa usajili wa wavuti (kupitia Revolut), wasiliana nasi kwa support@simnetiq.store. Kwa iOS, tembelea reportaproblem.apple.com. Kwa Android, fungua Google Play > Akaunti > Historia ya maagizo. Tazama Sera yetu kamili ya Kurudishiwa Pesa katika dopplervpn.org/refund kwa maelezo."
+        "answer": "Tunatoa kurudishiwa pesa kwa siku 14 kwa wateja wa EU/UK na dhamana ya kurudisha pesa kwa siku 30 kwa nia njema kwa wateja wengine wote. Kwa usajili wa wavuti — uliolipwa kwa kadi kupitia Revolut au kwa sarafu ya kidijitali kupitia OxaPay — wasiliana nasi kwa support@simnetiq.store. Kwa iOS, tembelea reportaproblem.apple.com. Kwa Android, fungua Google Play > Akaunti > Historia ya maagizo. Tazama Sera yetu kamili ya Kurudishiwa Pesa katika dopplervpn.org/refund kwa maelezo."
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "Sera ya Faragha",
-    "lastUpdated": "Imesasishwa mwisho: Julai 2026",
+    "lastUpdated": "Imesasishwa mwisho: Agosti 2026",
     "intro": "Sera hii ya Faragha inaeleza jinsi SIMNETIQ LTD (\"Kampuni\", \"sisi\", \"yetu\"), kampuni iliyosajiliwa nchini Uingereza na Wales (Nambari ya Kampuni 16861177), yenye ofisi iliyosajiliwa katika 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom, inavyokusanya, kutumia, na kulinda taarifa zako unapotumia DopplerVPN (programu yetu ya VPN inayopatikana kwenye iOS, macOS, Android, na Windows) na zana yetu ya kutengeneza video kwa AI (kwa pamoja, \"Huduma\"). Tumejitolea kulinda faragha yako kulingana na UK GDPR, EU GDPR, CCPA, na sheria zote zinazotumika za ulinzi wa data.",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Vidakuzi na Ufuatiliaji",
-        "content": "Tovuti yetu (dopplervpn.org) inatumia vidakuzi muhimu na vidakuzi vya uchanganuzi visivyojulikana. Hatutumii vidakuzi vya matangazo au teknolojia ya ufuatiliaji wa tovuti mbalimbali. Unaweza kudhibiti mapendeleo kupitia mipangilio ya kivinjari chako. Programu zetu za VPN na AI hazitumii vidakuzi."
+        "content": "Tovuti yetu (dopplervpn.org) inatumia vidakuzi muhimu vinavyohitajika ili tovuti ifanye kazi vizuri na vidakuzi vya uchanganuzi visivyojulikana ili kuelewa trafiki ya tovuti kwa ujumla. Ukifika kutoka tangazo lililolipiwa, tunahifadhi pia kidakuzi cha upande wa kwanza chenye kitambulisho cha mbofyo ambacho mtandao wa matangazo uliweka kwenye kiungo ulichofuata, pamoja na jina la kigezo kilichokifikisha. Kinahifadhiwa kwa hadi siku 90 na kina kusudi moja tu: unapopakua programu au kununua usajili, seva yetu huripoti ubadilishaji huo kwa mtandao huo ili tangazo lipewe sifa. Kitambulisho hicho hutengenezwa na mtandao huo, si sisi, na hakiunganishwi kamwe na akaunti yako ya VPN wala na trafiki yako. Hatuweki vidakuzi vya matangazo vya wahusika wengine wala hatutumii teknolojia ya ufuatiliaji wa tovuti mbalimbali. Unaweza kudhibiti mapendeleo ya vidakuzi kupitia mipangilio ya kivinjari chako. Programu zetu za VPN na AI hazitumii vidakuzi."
       },
       "children": {
         "title": "11. Faragha ya Watoto",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "Masharti ya Huduma",
-    "lastUpdated": "Imesasishwa mwisho: Machi 2026",
-    "intro": "Masharti haya ya Huduma (\"Masharti\") yanaunda makubaliano yenye nguvu ya kisheria kati yako (\"Mtumiaji\", \"wewe\") na SIMNETIQ LTD (\"Kampuni\", \"sisi\"), kampuni iliyosajiliwa nchini Uingereza na Wales (Nambari 16861177), ofisi iliyosajiliwa 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. Masharti haya yanadhibiti ufikiaji na matumizi yako ya DopplerVPN, zana ya kutengeneza video kwa AI, na tovuti, programu na huduma zote zinazohusiana (kwa pamoja, \"Huduma\"). Kwa kupata au kutumia Huduma zetu, unakubaliana kufungwa na Masharti haya. Usipokubaliana, hupaswi kutumia Huduma.",
+    "lastUpdated": "Imesasishwa mwisho: Agosti 2026",
+    "intro": "Masharti haya ya Huduma (\"Masharti\") yanaunda makubaliano yenye nguvu ya kisheria kati yako (\"Mtumiaji\", \"wewe\") na SIMNETIQ LTD (\"Kampuni\", \"sisi\"), kampuni iliyosajiliwa nchini Uingereza na Wales (Nambari 16861177), ofisi iliyosajiliwa 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. Masharti haya yanadhibiti ufikiaji na matumizi yako ya DopplerVPN (programu yetu ya VPN inayopatikana kwenye iOS, macOS, Android na Windows), zana ya kutengeneza video kwa AI, na tovuti, programu na huduma zote zinazohusiana (kwa pamoja, \"Huduma\"). Kwa kupata au kutumia Huduma zetu, unakubaliana kufungwa na Masharti haya. Usipokubaliana, hupaswi kutumia Huduma.",
     "sections": {
       "service": {
         "title": "1. Maelezo ya Huduma",
-        "content": "Tunatoa aina mbili za huduma za kidijitali: (a) DopplerVPN — programu ya VPN inayosimba muunganisho wako kwa itifaki ya VLESS-Reality, kuficha IP yako, na kutoa kuzuia matangazo ya DNS na uchujaji wa maudhui wenye udhibiti wa wazazi. Inapatikana kwenye iOS, Android na Windows. (b) Kutengeneza Video kwa AI — zana ya wavuti inayotumia akili bandia kutengeneza maudhui ya video. Huduma zote mbili zinatolewa kama SaaS kwa usajili. Huduma zinatolewa \"kama zilivyo\" na \"kama zinavyopatikana\" bila dhamana yoyote."
+        "content": "Tunatoa aina mbili za huduma za kidijitali: (a) DopplerVPN — programu ya VPN inayosimba muunganisho wako kwa itifaki ya VLESS-Reality, kuficha IP yako, na kutoa kuzuia matangazo ya DNS na uchujaji wa maudhui wenye udhibiti wa wazazi. Inapatikana kwenye iOS, macOS, Android na Windows. Kiasi cha trafiki ya kifaa chako kinachobebwa na programu hutofautiana kulingana na jukwaa: kwenye iOS, macOS na Android programu huanzisha handaki linalofunika mfumo mzima, hivyo trafiki ya kifaa chote hupitishwa humo; kwenye Windows programu husanidi seva mbadala ya mfumo wa Windows, hivyo programu zinazoheshimu mpangilio huo hupitishwa kwenye VPN, huku programu zinazoupuuza zikiendelea kutumia muunganisho wako wa kawaida. (b) Kutengeneza Video kwa AI — zana ya wavuti inayotumia akili bandia kutengeneza maudhui ya video. Huduma zote mbili zinatolewa kama SaaS kwa usajili. Huduma zinatolewa \"kama zilivyo\" na \"kama zinavyopatikana\" bila dhamana yoyote."
       },
       "eligibility": {
         "title": "2. Ustahiki",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. Usajili, Malipo, na Bili",
-        "content": "Ufikiaji wa vipengele vya premium unahitaji usajili wa kulipa. DopplerVPN Premium inajumuisha ufikiaji wa seva za premium za VPN katika nchi kadhaa, kuzuia matangazo ya kiwango cha DNS, uchujaji wa maudhui wenye udhibiti wa wazazi, na muunganisho wa hadi vifaa 10 kwa wakati mmoja. Usajili unapatikana kwa mizunguko ya bili ya kila mwezi, miezi 6, na kila mwaka. Usindikaji wa malipo: usajili wa wavuti unashughulikiwa na Revolut Ltd. Usajili wa simu unashughulikiwa kupitia Apple App Store (iOS) au Google Play Store (Android). Usajili unajirudia kiotomatiki mwishoni mwa kila kipindi cha bili isipokuwa usitishwe angalau saa 24 kabla ya tarehe ya upyaji. Unaweza kusitisha usajili wako wakati wowote: kwa usajili wa wavuti, kwa kuwasiliana nasi kwa support@simnetiq.store; kwa usajili wa simu, kupitia mipangilio ya duka la programu la kifaa chako. Usitishaji huanza kutumika mwishoni mwa kipindi cha sasa cha bili — utaendelea kuwa na ufikiaji hadi wakati huo. Bei zinaweza kubadilika mara kwa mara; tutatoa taarifa ya awali ya mabadiliko ya bei kabla hayajatekelezwa."
+        "content": "Ufikiaji wa vipengele vya premium unahitaji usajili wa kulipa. DopplerVPN Premium inajumuisha ufikiaji wa seva za premium za VPN katika nchi kadhaa, kuzuia matangazo ya kiwango cha DNS, uchujaji wa maudhui wenye udhibiti wa wazazi, na muunganisho wa hadi vifaa 10 kwa wakati mmoja. Usajili unapatikana kwa mizunguko ya bili ya kila mwezi, miezi 6, na kila mwaka. Usindikaji wa malipo: usajili unaonunuliwa kwenye tovuti yetu unashughulikiwa na Revolut Ltd (malipo ya kadi) au OxaPay (malipo ya sarafu ya kidijitali); usajili wa simu unashughulikiwa kupitia Apple App Store (iOS na macOS) au Google Play Store (Android). Upyaji hufanya kazi tofauti katika njia hizo mbili. Usajili unaonunuliwa kwenye tovuti yetu ni ununuzi wa mara moja wa kipindi unachochagua: haujirudii kiotomatiki, hatuhifadhi njia yoyote ya kukukata pesa tena, na ufikiaji unaisha tu kipindi kinapokwisha isipokuwa ununue mwingine. Usajili wa simu hujirudia kiotomatiki mwishoni mwa kila kipindi cha bili isipokuwa usitishwe angalau saa 24 kabla ya tarehe ya upyaji; unaweza kuusitisha wakati wowote kupitia mipangilio ya duka la programu la kifaa chako, na usitishaji huanza kutumika mwishoni mwa kipindi cha sasa cha bili — utaendelea kuwa na ufikiaji hadi wakati huo. Kwa swali lolote kuhusu ununuzi uliofanywa kwenye tovuti yetu, wasiliana nasi kwa support@simnetiq.store. Bei zinaweza kubadilika mara kwa mara; tutatoa taarifa ya awali ya mabadiliko ya bei kabla hayajatekelezwa."
       },
       "usage": {
         "title": "5. Matumizi Yanayokubalika",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "Sera ya Kurudishiwa Pesa",
-    "lastUpdated": "Imesasishwa mwisho: Machi 2026",
+    "lastUpdated": "Imesasishwa mwisho: Agosti 2026",
     "intro": "Sera hii ya Kurudishiwa Pesa inatumika kwa ununuzi wote wa usajili wa DopplerVPN na zana ya kutengeneza video kwa AI kupitia SIMNETIQ LTD (Nambari 16861177), iliyosajiliwa katika 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. Tunataka ufurahie Huduma zetu kikamilifu. Usipofurahia, tafadhali pitia masharti ya kurudishiwa pesa hapa chini.",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "Kwa wateja nje ya EU/EEA na UK, tunatoa dhamana ya siku 30 ya kurudishiwa pesa. Ikiwa hujaridhika, omba kurudishiwa pesa kamili ndani ya siku 30 tangu ununuzi wako wa kwanza. Inatumika kwa ununuzi wa kwanza tu na imepunguzwa kwa kurudishiwa pesa moja kwa kila mteja. Wasiliana na support@simnetiq.store. Kurudishiwa pesa ndani ya siku 14 za kazi."
       },
       "webSubscriptions": {
-        "title": "4. Usajili wa Wavuti (kupitia Revolut)",
-        "content": "Usajili wa wavuti kwa DopplerVPN unashughulikiwa na Revolut Ltd, msindikaji wetu wa malipo. Revolut hushughulikia usindikaji wa malipo kwa usalama. Ili kuomba kurudishiwa pesa: wasiliana nasi kwa support@simnetiq.store na nambari ya agizo au risiti yako. Kurudishiwa pesa kutashughulikiwa na kuonekana katika taarifa yako ndani ya siku 5-10 za kazi kulingana na mtoa huduma wako wa malipo."
+        "title": "4. Usajili wa Wavuti (Revolut na OxaPay)",
+        "content": "Usajili wa wavuti kwa DopplerVPN hulipwa ama kwa kadi, yanayoshughulikiwa na Revolut Ltd, au kwa sarafu ya kidijitali, yanayoshughulikiwa na OxaPay. Ili kuomba kurudishiwa pesa kwa usajili wa wavuti: wasiliana nasi kwa support@simnetiq.store na nambari ya agizo au risiti yako. Marejesho ya kadi hurudishwa kwenye kadi uliyolipia na huonekana katika taarifa yako ndani ya siku 5-10 za kazi kulingana na benki yako. Malipo ya sarafu ya kidijitali hayawezi kutenguliwa kwenye mtandao, hivyo kurudishiwa pesa kwa krypto hutumwa kama muamala mpya kwenda anwani ya pochi utakayotupatia, kwa sarafu ile ile uliyolipia. Tunarudisha kiasi tulichopokea; ada za mtandao na mabadiliko yoyote ya kiwango cha ubadilishaji kati ya malipo yako na marejesho hayajumuishwi."
       },
       "mobileSubscriptions": {
         "title": "5. Usajili wa Programu ya Simu (App Store na Google Play)",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. Ada za Upya",
-        "content": "Usajili unajirudia kiotomatiki mwishoni mwa kila kipindi cha bili. Ikiwa hutaki kutozwa kwa upyaji, lazima usitishe usajili wako angalau saa 24 kabla ya mwisho wa kipindi cha sasa cha bili. Kwa usajili wa wavuti: wasiliana nasi kwa support@simnetiq.store. Kwa usajili wa simu: sitisha kupitia mipangilio ya App Store au Google Play ya kifaa chako. Ukitozwa kwa upyaji usiokusudiwa, wasiliana nasi ndani ya siku 14 za ada ya upyaji na tutashughulikia kurudishiwa pesa kwa sehemu isiyotumika ya kipindi cha upyaji."
+        "content": "Upyaji hufanya kazi tofauti kulingana na mahali ulipoununua usajili. Usajili unaonunuliwa kwenye tovuti yetu ni ununuzi wa mara moja wa kipindi ulichochagua: haujirudii kiotomatiki, hatuhifadhi njia yoyote ya malipo ambayo tungeweza kukukata pesa tena, na ufikiaji unaisha tu kipindi kinapokwisha — hakuna cha kusitisha wala ada ya upyaji ya kurudishwa. Usajili unaonunuliwa kupitia Apple App Store au Google Play hujirudia kiotomatiki mwishoni mwa kila kipindi cha bili; ikiwa hutaki kutozwa kwa upyaji, usitishe angalau saa 24 kabla ya mwisho wa kipindi cha sasa kupitia mipangilio ya App Store au Google Play ya kifaa chako. Ukitozwa kwa upyaji usiokusudiwa, wasiliana nasi kwa support@simnetiq.store ndani ya siku 14 tangu ada hiyo ya upyaji, nasi tutakusaidia kupata kurudishiwa pesa kwa sehemu isiyotumika ya kipindi cha upyaji kupitia duka husika la programu."
       },
       "exclusions": {
         "title": "7. Kutojumuishwa kwa Kurudishiwa Pesa",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. Jinsi ya Kuomba Kurudishiwa Pesa",
-        "content": "Ili kuomba, wasiliana nasi na: jina au kitambulisho cha akaunti, barua pepe inayohusiana na ununuzi, nambari ya agizo au risiti (kutoka Revolut, Apple, au Google), tarehe ya ununuzi, na sababu (si lazima). Tuma kwa: support@simnetiq.store. Tunatambua ndani ya siku 2 za kazi na kushughulikia ndani ya siku 14 za kazi."
+        "content": "Ili kuomba, wasiliana nasi na: jina au kitambulisho cha akaunti, barua pepe inayohusiana na ununuzi, nambari ya agizo au risiti (kutoka Revolut, OxaPay, Apple, au Google), tarehe ya ununuzi, na sababu (si lazima). Tuma kwa: support@simnetiq.store. Tunatambua ndani ya siku 2 za kazi na kushughulikia ndani ya siku 14 za kazi."
       },
       "contact": {
         "title": "9. Wasiliana Nasi",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "Ninajisajilije?",
-          "answer": "Tembelea ukurasa wetu wa usajili, weka barua pepe, chagua mpango na ulipe kupitia Revolut. Usajili wako wa Pro utawashwa mara moja."
+          "answer": "Tembelea ukurasa wetu wa usajili, weka barua pepe, chagua mpango na ulipe kwa kadi kupitia Revolut au kwa sarafu ya kidijitali kupitia OxaPay. Usajili wako wa Pro utawashwa mara moja."
         },
         "multiDevice": {
           "question": "Naweza kutumia akaunti moja kwenye vifaa vingi?",
@@ -1128,7 +1129,7 @@
       "savings": "Hifadhi hadi 35% ikilinganishwa na maduka ya programu",
       "step1": "Fungua @dopplercreatebot katika Telegram",
       "step2": "Gusa \"Jiunge\" na uchague mpango wako",
-      "step3": "Lipa kwa usalama kupitia Revolut — tumia nambari LAUNCH20 kwa punguzo la 20%"
+      "step3": "Lipa kwa usalama kwa kadi (Revolut) au kwa krypto (OxaPay) — tumia nambari LAUNCH20 kwa punguzo la 20%"
     },
     "manageSection": "Kusimamia usajili wako",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "punguzo",
     "promoInvalid": "Nambari ya promo si sahihi",
     "promoFailed": "Imeshindwa kuthibitisha nambari",
-    "footerNote": "Malipo ya mara moja kupitia Revolut. Hakuna upya wa kiotomatiki. Dhamana ya kurudisha pesa siku 30.",
+    "footerNote": "Malipo ya mara moja kwa kadi (Revolut) au krypto (OxaPay). Hakuna upya wa kiotomatiki. Dhamana ya kurudisha pesa siku 30.",
     "webBonus": {
       "title": "Zawadi ya mtandao — siku za bure zimejumuishwa",
       "subtitle": "Jaribio la bure la siku 3 linapatikana tu katika App Store na Google Play. Ili kufidia kwenye mtandao, kila mpango unajumuisha siku za ziada za bure:",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "Usajili wa App Store",
       "restorePlayStore": "Usajili wa Google Play",
       "deleteProSupportNote": "Akaunti yako ina usajili wa Pro unaotumika. Tafadhali wasiliana na usaidizi ili kuifuta."
-    }
+    },
+    "securedByCrypto": "Imelindwa na OxaPay"
   },
   "subscribeSuccess": {
     "title": "Umeweza Tayari!",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "Boresha hadi Doppler Pro",
-    "subtitle": "Chagua mpango wako na usajili kwa usalama kupitia Revolut.",
+    "subtitle": "Chagua mpango wako na ulipe kwa usalama kwa kadi (Revolut) au kwa krypto (OxaPay).",
     "accountLabel": "Akaunti",
     "monthly": "Kila Mwezi",
     "sixMonth": "Miezi 6",
@@ -1372,7 +1374,7 @@
     "promoOff": "punguzo",
     "promoInvalid": "Msimbo wa promo si sahihi",
     "promoFailed": "Imeshindwa kuthibitisha msimbo",
-    "footerNote": "Malipo salama kupitia Revolut. Sitisha wakati wowote.",
+    "footerNote": "Malipo salama kwa kadi (Revolut) au krypto (OxaPay). Sitisha wakati wowote.",
     "terms": "Masharti ya Huduma",
     "privacy": "Sera ya Faragha",
     "error": "Kitu kimekwenda vibaya. Tafadhali jaribu tena.",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "Makubaliano ya Usindikaji wa Data",
-    "lastUpdated": "Imesasishwa mwisho: Aprili 2026",
+    "lastUpdated": "Imesasishwa mwisho: Agosti 2026",
     "intro": "Makubaliano haya ya Usindikaji wa Data (\"DPA\") ni sehemu ya makubaliano kati yako na SIMNETIQ LTD (Nambari ya Kampuni 16861177), iliyosajiliwa katika 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom, yanayosimamia usindikaji wa data ya kibinafsi kuhusiana na huduma za Doppler VPN.",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. Aina za Data ya Kibinafsi Inayoshughulikiwa",
-        "content": "Makundi yafuatayo ya data ya kibinafsi yanaweza kushughulikiwa: vitambulisho vya akaunti (muundo wa VPN-XXXX-XXXX-XXXX uliozalishwa kwa nasibu), anwani za barua pepe (zinapotolewa kwa hiari kwa urejeshaji wa akaunti au msaada), vitambulisho vya kifaa (visivyojulikana, visivyounganishwa na utambulisho wa kibinafsi), rekodi za malipo (zinazoshughulikiwa na watoa huduma wa tatu wa malipo — Revolut, Apple, Google), na mawasiliano ya msaada (mawasiliano ya barua pepe na timu yetu ya msaada). Hatushughulikii data nyeti au ya kategoria maalum."
+        "content": "Makundi yafuatayo ya data ya kibinafsi yanaweza kushughulikiwa: vitambulisho vya akaunti (muundo wa VPN-XXXX-XXXX-XXXX uliozalishwa kwa nasibu), anwani za barua pepe au majina ya watumiaji katika programu za ujumbe (zinapotolewa kwa hiari kwa urejeshaji wa akaunti au msaada), vitambulisho vya kifaa na majina ya vifaa yanayoripotiwa na mfumo wa uendeshaji, tokeni za uthibitishaji za kila kifaa (zinazohifadhiwa kama hashi za SHA-256 pekee), rekodi za uthibitishaji na za kikomo cha maombi yanayotumwa kwa API yetu (zenye anwani ya IP, kitambulisho cha akaunti, kitambulisho cha kifaa, na muhuri wa muda), rekodi za malipo (zinazoshughulikiwa na watoa huduma wa tatu wa malipo — Revolut na OxaPay kwa ununuzi unaofanywa kwenye tovuti yetu, Apple na Google kwa ununuzi unaofanywa katika programu zetu za simu), vitambulisho vya kuhusisha usakinishaji pale ambapo uhusishaji wa simu unatumika, na mawasiliano ya msaada (mawasiliano ya barua pepe na timu yetu ya msaada). Hatushughulikii data nyeti au ya kategoria maalum, na hatushughulikii data ya trafiki ya VPN — tazama Kifungu cha 5."
       },
       "security": {
         "title": "5. Hatua za Usalama",
-        "content": "Tunatekeleza hatua sahihi za kiufundi na za shirika kuhakikisha usalama wa data ya kibinafsi, ikiwa ni pamoja na: usimbaji fiche wa VLESS-Reality kwa trafiki yote ya VPN, usimbaji wa TLS kwa mawasiliano yote ya wavuti, udhibiti mkali wa ufikiaji kwenye mifumo ya uzalishaji kwa kanuni ya haki ya chini kabisa, ukaguzi wa usalama wa mara kwa mara na mapitio ya miundombinu, kupunguza data kwa muundo katika huduma zote, na sera kali ya kutoweka kumbukumbu kwa matumizi ya VPN — hatuhifadhi, kuchunguza, au kuweka data yoyote inayopitia handaki yetu ya VPN."
+        "content": "Tunatekeleza hatua sahihi za kiufundi na za shirika kuhakikisha usalama wa data ya kibinafsi, ikiwa ni pamoja na: usimbaji fiche wa VLESS-Reality kwa trafiki yote ya VPN, usimbaji wa TLS kwa mawasiliano yote ya wavuti, udhibiti mkali wa ufikiaji kwenye mifumo ya uzalishaji kwa kanuni ya haki ya chini kabisa, tokeni za uthibitishaji za kila kifaa zinazohifadhiwa kama hashi za SHA-256 pekee na zinazoweza kubatilishwa moja moja, ukaguzi wa usalama wa mara kwa mara na mapitio ya miundombinu, kupunguza data kwa muundo katika huduma zote, na sera kali ya kutoweka kumbukumbu kwa matumizi ya VPN — hatuhifadhi, kuchunguza, au kuweka data yoyote inayopitia handaki yetu ya VPN. Ahadi hiyo ya kutoweka kumbukumbu inahusu trafiki ya VPN; haihusu rekodi za uthibitishaji na za kikomo cha maombi zilizoelezwa katika Kifungu cha 4, ambazo huonyesha kuwa kifaa kilituma ombi kwa API yetu na huhifadhiwa kwa muda ulioainishwa katika Kifungu cha 9."
       },
       "subprocessors": {
         "title": "6. Wajibu wa Wasindikaji Wadogo",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. Uhifadhi wa Data",
-        "content": "Data ya kibinafsi inahifadhiwa tu kwa muda unaohitajika kwa madhumuni yaliyoainishwa katika DPA hii: taarifa za akaunti huhifadhiwa akaunti ikiwa hai na kwa siku 30 baada ya kufuta ili kuruhusu urejeshaji, rekodi za malipo huhifadhiwa kwa miaka 6 kama inavyohitajika na sheria ya kodi na uhasibu ya UK, mawasiliano ya msaada huhifadhiwa kwa miezi 12 baada ya kutatuliwa, na data ya matumizi ya VPN HAIHIFADHIWI — sera yetu ya kutoweka kumbukumbu inamaanisha hatuna uwezo wa kiufundi wa kuunganisha shughuli maalum za mtandao na watumiaji binafsi."
+        "content": "Data ya kibinafsi inahifadhiwa tu kwa muda unaohitajika kwa madhumuni yaliyoainishwa katika DPA hii: taarifa za akaunti na orodha ya vifaa vinavyohusiana huhifadhiwa muda wote akaunti ikiwepo na hufutwa mara moja akaunti inapofutwa, isipokuwa kwamba akaunti yenye usajili hai wa kulipa haiwezi kufutwa hadi usajili huo utakapokwisha au kusitishwa; rekodi za uthibitishaji na za kikomo cha maombi zilizoelezwa katika Kifungu cha 4 huhifadhiwa kwa hadi siku 90 kisha hufutwa kabisa; rekodi za malipo huhifadhiwa kwa miaka 6 kama inavyohitajika na sheria ya kodi na uhasibu ya UK; mawasiliano ya msaada huhifadhiwa kwa miezi 12 baada ya kutatuliwa; na data ya matumizi ya VPN HAIHIFADHIWI — sera yetu ya kutoweka kumbukumbu inamaanisha hatuna uwezo wa kiufundi wa kuunganisha shughuli maalum za mtandao na watumiaji binafsi."
       },
       "transfers": {
         "title": "10. Uhamisho wa Data wa Kimataifa",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "Wasindikaji Wadogo",
-    "lastUpdated": "Imesasishwa mwisho: Aprili 2026",
+    "lastUpdated": "Imesasishwa mwisho: Agosti 2026",
     "intro": "Watoa huduma wa tatu wafuatao (wasindikaji wadogo) wanashughulikia data ya kibinafsi kwa niaba ya SIMNETIQ LTD kuhusiana na huduma za Doppler VPN. Kila msindikaji mdogo amefungwa na masharti ya usindikaji wa data sawa na Makubaliano yetu ya Usindikaji wa Data.",
     "colName": "Msindikaji Mdogo",
     "colPurpose": "Madhumuni",

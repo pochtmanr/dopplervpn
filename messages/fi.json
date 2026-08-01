@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Vahvistamme maksuasi…",
-      "body": "Revolut on hyväksynyt veloituksen. Aktivoimme Doppler VPN Pro -tilaustasi parhaillaan.",
+      "body": "{processor} on hyväksynyt maksun. Aktivoimme Doppler VPN Pro -tilaustasi parhaillaan.",
       "orderId": "Tilauksen tunnus",
       "elapsed": "Kulunut: {seconds} s · älä sulje tätä ikkunaa"
     },
@@ -44,10 +44,10 @@
       "missingBody": "Tästä linkistä ei löydy tilauksen tunnusta. Jos olet juuri maksanut, ota yhteyttä tukeen ja kerro käyttämäsi sähköpostiosoite, niin voimme vahvistaa ostoksesi.",
       "missingReason": "URL-osoitteesta puuttuu order_id-parametri",
       "failedTitle": "Maksu ei mennyt läpi",
-      "failedBody": "Revolut ilmoitti maksun epäonnistuneeksi. Sinulta ei ole veloitettu mitään. Palaa kassalle ja yritä uudelleen, tai ota yhteyttä tukeen, jos ongelma jatkuu.",
+      "failedBody": "{processor} ilmoitti maksun epäonnistuneeksi. Sinulta ei ole veloitettu mitään. Palaa kassalle ja yritä uudelleen, tai ota yhteyttä tukeen, jos ongelma jatkuu.",
       "failedReasonUnknown": "Tuntematon virhe",
       "timeoutTitle": "Vahvistamme yhä maksuasi",
-      "timeoutBody": "Revolut on vastaanottanut maksun, mutta järjestelmämme ei ole vielä saanut vahvistusta. Tämä on lähes aina väliaikaista — tilisi päivittyy automaattisesti muutamassa minuutissa. Jos näin ei käy, lähetä meille alla oleva tilauksen tunnus, niin korjaamme asian heti.",
+      "timeoutBody": "{processor} on vastaanottanut maksun, mutta järjestelmämme ei ole vielä saanut vahvistusta. Tämä on lähes aina väliaikaista — tilisi päivittyy automaattisesti muutamassa minuutissa. Jos näin ei käy, lähetä meille alla oleva tilauksen tunnus, niin korjaamme asian heti.",
       "timeoutReason": "Webhookin toimitus on viivästynyt",
       "diagnosticHeading": "Diagnostiikkatiedot",
       "statusLabel": "Tila",
@@ -103,7 +103,8 @@
         "card": "Kortti (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Kryptovaluutta (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Miten pyydän hyvitystä?",
-        "answer": "Tarjoamme 14 päivän hyvityksen EU/UK-asiakkaille ja 30 päivän rahat takaisin -takuun kaikille muille asiakkaille. Verkkotilauksille (Revolutin kautta), ota yhteyttä osoitteeseen support@simnetiq.store. iOS:lle käy osoitteessa reportaproblem.apple.com. Androidille avaa Google Play > Tili > Tilaushistoria. Katso täydelliset hyvitysehdot osoitteesta dopplervpn.org/refund."
+        "answer": "Tarjoamme 14 päivän hyvityksen EU/UK-asiakkaille ja 30 päivän rahat takaisin -takuun kaikille muille asiakkaille. Verkkotilauksille — jotka on maksettu kortilla Revolutin kautta tai kryptovaluutalla OxaPayn kautta — ota yhteyttä osoitteeseen support@simnetiq.store. iOS:lle käy osoitteessa reportaproblem.apple.com. Androidille avaa Google Play > Tili > Tilaushistoria. Katso täydelliset hyvitysehdot osoitteesta dopplervpn.org/refund."
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "Tietosuojakäytäntö",
-    "lastUpdated": "Päivitetty viimeksi: heinäkuu 2026",
+    "lastUpdated": "Päivitetty viimeksi: elokuu 2026",
     "intro": "Tämä tietosuojakäytäntö selittää, miten SIMNETIQ LTD (\"Yhtiö\", \"me\", \"meitä\" tai \"meidän\"), Englannissa ja Walesissa rekisteröity yhtiö (yritystunnus 16861177), jonka rekisteröity osoite on 2 Frederick Street, Kings Cross, London, WC1X 0ND, Yhdistynyt kuningaskunta, kerää, käyttää ja suojaa tietojasi käyttäessäsi DopplerVPN:ää (VPN-sovelluksemme saatavilla iOS:lle, macOS:lle, Androidille ja Windowsille) ja tekoälypohjaista videonluontityökaluamme (yhteisnimitykseltään \"Palvelut\"). Olemme sitoutuneet suojaamaan yksityisyyttäsi Yhdistyneen kuningaskunnan yleisen tietosuoja-asetuksen (UK GDPR), EU:n yleisen tietosuoja-asetuksen (EU GDPR), California Consumer Privacy Act (CCPA) -lain ja kaikkien muiden sovellettavien tietosuojalakien mukaisesti.",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Evästeet ja seuranta",
-        "content": "Verkkosivustomme (dopplervpn.org) käyttää verkkosivuston toimintaan tarvittavia välttämättömiä evästeitä ja anonyymejä analytiikkaevästeitä verkkoliikenteen ymmärtämiseksi koottuna. Emme käytä mainosevästeitä tai sivustorajat ylittäviä seurantateknologioita. Voit hallita evästeasetuksia selaimen asetuksista. VPN- ja tekoälysovelluksemme eivät käytä evästeitä."
+        "content": "Verkkosivustomme (dopplervpn.org) käyttää verkkosivuston toimintaan tarvittavia välttämättömiä evästeitä ja anonyymejä analytiikkaevästeitä verkkoliikenteen ymmärtämiseksi koottuna. Jos saavut maksetun mainoksen kautta, tallennamme lisäksi ensimmäisen osapuolen evästeen, joka sisältää mainosverkoston seuraamaasi linkkiin lisäämän klikkitunnisteen sekä sen parametrin nimen, jossa tunniste saapui. Sitä säilytetään enintään 90 päivää ja sillä on yksi ainoa tarkoitus: kun lataat sovelluksen tai ostat tilauksen, palvelimemme ilmoittaa tämän konversion takaisin verkostolle, jotta mainos voidaan hyvittää. Tunnisteen luo mainosverkosto eikä me, eikä sitä koskaan yhdistetä VPN-tiliisi tai liikenteeseesi. Emme aseta kolmansien osapuolten mainosevästeitä emmekä käytä sivustorajat ylittäviä seurantateknologioita. Voit hallita evästeasetuksia selaimen asetuksista. VPN- ja tekoälysovelluksemme eivät käytä evästeitä."
       },
       "children": {
         "title": "11. Lasten yksityisyys",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "Käyttöehdot",
-    "lastUpdated": "Päivitetty viimeksi: maaliskuu 2026",
-    "intro": "Nämä käyttöehdot (\"Ehdot\") muodostavat oikeudellisesti sitovan sopimuksen sinun (\"Käyttäjä\", \"sinä\" tai \"sinun\") ja SIMNETIQ LTD:n (\"Yhtiö\", \"me\", \"meitä\" tai \"meidän\") välillä. SIMNETIQ LTD on Englannissa ja Walesissa rekisteröity yhtiö (yritystunnus 16861177), jonka rekisteröity osoite on 2 Frederick Street, Kings Cross, London, WC1X 0ND, Yhdistynyt kuningaskunta. Nämä Ehdot säätelevät pääsyäsi ja käyttöäsi DopplerVPN:ään (VPN-sovelluksemme saatavilla iOS:lle, Androidille ja Windowsille), tekoälypohjaiseen videonluontityökaluumme ja kaikkiin liittyviin verkkosivustoihin, sovelluksiin ja palveluihin (yhteisnimitykseltään \"Palvelut\"). Käyttämällä mitä tahansa Palveluistamme hyväksyt nämä Ehdot. Jos et hyväksy, et saa käyttää Palveluita.",
+    "lastUpdated": "Päivitetty viimeksi: elokuu 2026",
+    "intro": "Nämä käyttöehdot (\"Ehdot\") muodostavat oikeudellisesti sitovan sopimuksen sinun (\"Käyttäjä\", \"sinä\" tai \"sinun\") ja SIMNETIQ LTD:n (\"Yhtiö\", \"me\", \"meitä\" tai \"meidän\") välillä. SIMNETIQ LTD on Englannissa ja Walesissa rekisteröity yhtiö (yritystunnus 16861177), jonka rekisteröity osoite on 2 Frederick Street, Kings Cross, London, WC1X 0ND, Yhdistynyt kuningaskunta. Nämä Ehdot säätelevät pääsyäsi ja käyttöäsi DopplerVPN:ään (VPN-sovelluksemme saatavilla iOS:lle, macOS:lle, Androidille ja Windowsille), tekoälypohjaiseen videonluontityökaluumme ja kaikkiin liittyviin verkkosivustoihin, sovelluksiin ja palveluihin (yhteisnimitykseltään \"Palvelut\"). Käyttämällä mitä tahansa Palveluistamme hyväksyt nämä Ehdot. Jos et hyväksy, et saa käyttää Palveluita.",
     "sections": {
       "service": {
         "title": "1. Palvelun kuvaus",
-        "content": "Tarjoamme kahdenlaisia digitaalisia palveluita: (a) DopplerVPN — virtuaalisen yksityisverkon sovellus, joka salaa internet-yhteytesi VLESS-Reality-protokollalla, piilottaa IP-osoitteesi ja tarjoaa DNS-tason mainosten eston ja sisältösuodatuksen vanhempainvalvonnalla. DopplerVPN on saatavilla iOS:lle, Androidille ja Windowsille. (b) Tekoäly-videonluonti — verkkoselainpohjainen työkalu, joka käyttää tekoälyä videoiden luomiseen käyttäjän antamien ohjeiden ja asetusten perusteella. Molemmat Palvelut tarjotaan tilaukseen perustuvana ohjelmistopalveluna (\"SaaS\"). Palvelut tarjotaan \"sellaisena kuin ne ovat\" ja \"saatavuuden mukaan\" ilman minkäänlaisia takuita, olivatpa ne nimenomaisia tai oletettuja, mukaan lukien mutta ei rajoittuen oletettuihin takuisiin myyntikelpoisuudesta, sopivuudesta tiettyyn tarkoitukseen ja loukkaamattomuudesta."
+        "content": "Tarjoamme kahdenlaisia digitaalisia palveluita: (a) DopplerVPN — virtuaalisen yksityisverkon sovellus, joka salaa internet-yhteytesi VLESS-Reality-protokollalla, piilottaa IP-osoitteesi ja tarjoaa DNS-tason mainosten eston ja sisältösuodatuksen vanhempainvalvonnalla. DopplerVPN on saatavilla iOS:lle, macOS:lle, Androidille ja Windowsille. Se, kuinka suuren osan laitteesi liikenteestä sovellus välittää, riippuu alustasta: iOS:llä, macOS:llä ja Androidilla se muodostaa järjestelmänlaajuisen tunnelin, jolloin koko laitteen liikenne kulkee sen kautta; Windowsissa se määrittää Windowsin järjestelmävälityspalvelimen, jolloin tuota asetusta noudattavat sovellukset ohjataan VPN:n kautta, kun taas asetuksen sivuuttavat sovellukset käyttävät edelleen tavallista yhteyttäsi. (b) Tekoäly-videonluonti — verkkoselainpohjainen työkalu, joka käyttää tekoälyä videoiden luomiseen käyttäjän antamien ohjeiden ja asetusten perusteella. Molemmat Palvelut tarjotaan tilaukseen perustuvana ohjelmistopalveluna (\"SaaS\"). Palvelut tarjotaan \"sellaisena kuin ne ovat\" ja \"saatavuuden mukaan\" ilman minkäänlaisia takuita, olivatpa ne nimenomaisia tai oletettuja, mukaan lukien mutta ei rajoittuen oletettuihin takuisiin myyntikelpoisuudesta, sopivuudesta tiettyyn tarkoitukseen ja loukkaamattomuudesta."
       },
       "eligibility": {
         "title": "2. Kelpoisuus",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. Tilaukset, maksut ja laskutus",
-        "content": "Premium-ominaisuuksien käyttö edellyttää maksullista tilausta. DopplerVPN Premium sisältää pääsyn premium-VPN-palvelimiin useissa maissa, DNS-tason mainosten eston, sisältösuodatuksen vanhempainvalvonnalla ja yhteyden jopa 10 laitteella samanaikaisesti. Tilaukset ovat saatavilla kuukausi-, 6 kuukauden ja vuosipohjaisina. Maksunkäsittely: verkkotilauksia käsittelee Revolut (Revolut Ltd), maksunkäsittelijämme. Revolut käsittelee maksut turvallisesti. Mobiilitilauksia käsitellään Apple App Storen (iOS) tai Google Play Storen (Android) kautta. Tilaukset uusiutuvat automaattisesti kunkin laskutusjakson lopussa, ellei niitä peruuteta vähintään 24 tuntia ennen uusiutumispäivää. Voit peruuttaa tilauksesi milloin tahansa: verkkotilauksille Revolut-tilisi kautta tai ottamalla yhteyttä meihin; mobiilitilauksille laitteesi sovelluskaupan asetuksista. Peruutus astuu voimaan nykyisen laskutusjakson lopussa — sinulla on pääsy siihen asti. Hinnat voivat muuttua ajoittain; annamme kohtuullisen ennakkoilmoituksen hinnankorotuksista ennen niiden voimaantuloa. Kaikki hinnat näytetään sisältäen sovellettavat verot, kun laki sitä vaatii."
+        "content": "Premium-ominaisuuksien käyttö edellyttää maksullista tilausta. DopplerVPN Premium sisältää pääsyn premium-VPN-palvelimiin useissa maissa, DNS-tason mainosten eston, sisältösuodatuksen vanhempainvalvonnalla ja yhteyden jopa 10 laitteella samanaikaisesti. Tilaukset ovat saatavilla kuukausi-, 6 kuukauden ja vuosipohjaisina. Maksunkäsittely: verkkosivustoltamme ostettuja tilauksia käsittelee Revolut Ltd (korttimaksut) tai OxaPay (kryptovaluuttamaksut); mobiilitilauksia käsitellään Apple App Storen (iOS ja macOS) tai Google Play Storen (Android) kautta. Uusiutuminen toimii näissä kahdessa kanavassa eri tavalla. Verkkosivustoltamme ostettu tilaus on kertaluonteinen osto valitsemallesi jaksolle: se ei uusiudu automaattisesti, emme säilytä mitään keinoa veloittaa sinua uudelleen, ja käyttöoikeus yksinkertaisesti päättyy jakson umpeutuessa, ellet osta uutta. Mobiilitilaus uusiutuu automaattisesti kunkin laskutusjakson lopussa, ellei sitä peruuteta vähintään 24 tuntia ennen uusiutumispäivää; voit peruuttaa sen milloin tahansa laitteesi sovelluskaupan asetuksista, ja peruutus astuu voimaan nykyisen laskutusjakson lopussa — sinulla on pääsy siihen asti. Verkkosivustollamme tehtyä ostoa koskevissa kysymyksissä ota yhteyttä osoitteeseen support@simnetiq.store. Hinnat voivat muuttua ajoittain; annamme kohtuullisen ennakkoilmoituksen hinnankorotuksista ennen niiden voimaantuloa. Kaikki hinnat näytetään sisältäen sovellettavat verot, kun laki sitä vaatii."
       },
       "usage": {
         "title": "5. Hyväksyttävä käyttö",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "Hyvityskäytäntö",
-    "lastUpdated": "Päivitetty viimeksi: maaliskuu 2026",
+    "lastUpdated": "Päivitetty viimeksi: elokuu 2026",
     "intro": "Tämä hyvityskäytäntö koskee kaikkia DopplerVPN-tilausten ja tekoälypohjaisen videonluontityökalumme ostoksia, jotka on tehty SIMNETIQ LTD:n (yritystunnus 16861177) kautta, rekisteröity osoitteeseen 2 Frederick Street, Kings Cross, London, WC1X 0ND, Yhdistynyt kuningaskunta. Haluamme, että olet täysin tyytyväinen Palveluihimme. Jos et ole, tutustu alla oleviin hyvitysehtoihin.",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "EU/ETA:n ja Yhdistyneen kuningaskunnan ulkopuolisille asiakkaille tarjoamme 30 päivän rahat takaisin -takuun kaikille tilausostoille. Jos et ole tyytyväinen Palveluihimme mistä tahansa syystä, voit pyytää täyttä hyvitystä 30 päivän kuluessa alkuperäisestä ostopäivästä. Tämä goodwill-hyvitys koskee vain ensiostoksia ja on rajoitettu yhteen hyvitykseen asiakasta kohti. Ota yhteyttä osoitteeseen support@simnetiq.store tilaustietojesi kanssa pyytääksesi hyvitystä. Hyvitykset käsitellään 14 arkipäivän kuluessa alkuperäistä maksutapaa käyttäen."
       },
       "webSubscriptions": {
-        "title": "4. Verkkotilaukset (Revolutin kautta)",
-        "content": "DopplerVPN:n ja tekoäly-videonluontityökalun verkkotilauksia käsittelee Revolut (Revolut Ltd), maksunkäsittelijämme. Revolut käsittelee maksut turvallisesti. Verkkotilauksen hyvityksen pyytämiseksi: ota yhteyttä osoitteeseen support@simnetiq.store tilausnumerollasi tai kuittillasi. Hyvitykset käsitellään ja ne näkyvät tiliotteellasi 5–10 arkipäivän kuluessa maksuntarjoajastasi riippuen."
+        "title": "4. Verkkotilaukset (Revolut ja OxaPay)",
+        "content": "DopplerVPN:n verkkotilaukset maksetaan joko kortilla, jonka käsittelee Revolut Ltd, tai kryptovaluutalla, jonka käsittelee OxaPay. Verkkotilauksen hyvityksen pyytämiseksi ota yhteyttä osoitteeseen support@simnetiq.store tilausnumerollasi tai kuitillasi. Korttihyvitykset palautetaan sille kortille, jolla maksoit, ja ne näkyvät tiliotteellasi 5–10 arkipäivän kuluessa pankistasi riippuen. Kryptovaluuttamaksuja ei voi peruuttaa verkossa, joten kryptohyvitys lähetetään uutena siirtona antamaasi lompakko-osoitteeseen samassa valuutassa, jolla maksoit. Hyvitämme sen summan, jonka vastaanotimme; verkkomaksuja ja maksun ja hyvityksen välisiä valuuttakurssin muutoksia ei korvata."
       },
       "mobileSubscriptions": {
         "title": "5. Mobiilisovellustilaukset (App Store ja Google Play)",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. Uusimismaksut",
-        "content": "Tilaukset uusiutuvat automaattisesti kunkin laskutusjakson lopussa. Jos et halua, että sinulta veloitetaan uusimismaksu, sinun on peruutettava tilauksesi vähintään 24 tuntia ennen nykyisen laskutusjakson päättymistä. Verkkotilauksille: peruuta Revolut-tilisi kautta tai ota yhteyttä meihin. Mobiilitilauksille: peruuta laitteesi App Store- tai Google Play -asetuksista. Jos sinulta veloitetaan uusimismaksu, jota et aikonut, ota yhteyttä meihin 14 päivän kuluessa uusimisveloituksesta ja käsittelemme hyvityksen uusimisjakson käyttämättömästä osasta."
+        "content": "Uusiutuminen toimii eri tavalla sen mukaan, mistä ostit tilauksen. Verkkosivustoltamme ostettu tilaus on kertaluonteinen osto valitsemallesi jaksolle: se ei uusiudu automaattisesti, emme säilytä mitään maksutapaa veloittaaksemme sinua uudelleen, ja käyttöoikeus yksinkertaisesti päättyy jakson umpeutuessa — mitään ei tarvitse peruuttaa eikä hyvitettävää uusimisveloitusta ole. Apple App Storen tai Google Playn kautta ostettu tilaus uusiutuu automaattisesti kunkin laskutusjakson lopussa; jos et halua, että sinulta veloitetaan uusimismaksu, peruuta se vähintään 24 tuntia ennen nykyisen jakson päättymistä laitteesi App Store- tai Google Play -asetuksista. Jos sinulta veloitetaan uusimismaksu, jota et aikonut, ota yhteyttä osoitteeseen support@simnetiq.store 14 päivän kuluessa uusimisveloituksesta, niin autamme sinua saamaan hyvityksen uusimisjakson käyttämättömästä osasta kyseisen sovelluskaupan kautta."
       },
       "exclusions": {
         "title": "7. Hyvityspoikkeukset",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. Näin pyydät hyvitystä",
-        "content": "Hyvityksen pyytämiseksi ota yhteyttä meihin seuraavilla tiedoilla: nimesi tai tilitunnisteesi, ostoosi liittyvä sähköpostiosoite, tilausnumerosi tai kuittisi (Revolutilta, Applelta tai Googlelta), ostopäivä ja hyvityspyyntösi syy (valinnainen mutta hyödyllinen). Lähetä pyyntösi osoitteeseen: support@simnetiq.store. Pyrimme vahvistamaan kaikki hyvityspyynnöt 2 arkipäivän kuluessa ja käsittelemään hyväksytyt hyvitykset 14 arkipäivän kuluessa."
+        "content": "Hyvityksen pyytämiseksi ota yhteyttä meihin seuraavilla tiedoilla: nimesi tai tilitunnisteesi, ostoosi liittyvä sähköpostiosoite, tilausnumerosi tai kuittisi (Revolutilta, OxaPaylta, Applelta tai Googlelta), ostopäivä ja hyvityspyyntösi syy (valinnainen mutta hyödyllinen). Lähetä pyyntösi osoitteeseen: support@simnetiq.store. Pyrimme vahvistamaan kaikki hyvityspyynnöt 2 arkipäivän kuluessa ja käsittelemään hyväksytyt hyvitykset 14 arkipäivän kuluessa."
       },
       "contact": {
         "title": "9. Ota yhteyttä",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "Miten tilaan?",
-          "answer": "Käy tilaussivullamme, syötä sähköpostisi, valitse paketti ja maksa Revolutin kautta. Pro-tilauksesi aktivoituu välittömästi."
+          "answer": "Käy tilaussivullamme, syötä sähköpostisi, valitse paketti ja maksa kortilla Revolutin kautta tai kryptovaluutalla OxaPayn kautta. Pro-tilauksesi aktivoituu välittömästi."
         },
         "multiDevice": {
           "question": "Voinko käyttää yhtä tiliä useilla laitteilla?",
@@ -1128,7 +1129,7 @@
       "savings": "Säästä jopa 35 % verrattuna sovelluskauppoihin",
       "step1": "Avaa @dopplercreatebot Telegramissa",
       "step2": "Napauta \"Tilaa\" ja valitse pakettisi",
-      "step3": "Maksa turvallisesti Revolutin kautta — käytä koodia LAUNCH20 ja saat 20 % alennuksen"
+      "step3": "Maksa turvallisesti kortilla (Revolut) tai kryptovaluutalla (OxaPay) — käytä koodia LAUNCH20 ja saat 20 % alennuksen"
     },
     "manageSection": "Tilauksen hallinta",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "alennus",
     "promoInvalid": "Virheellinen kampanjakoodi",
     "promoFailed": "Koodin vahvistus epäonnistui",
-    "footerNote": "Kertamaksu Revolutin kautta. Ei automaattista uusintaa. 30 päivän rahat takaisin -takuu.",
+    "footerNote": "Kertamaksu kortilla (Revolut) tai kryptovaluutalla (OxaPay). Ei automaattista uusintaa. 30 päivän rahat takaisin -takuu.",
     "webBonus": {
       "title": "Verkkobonus — ilmaiset päivät sisältyvät",
       "subtitle": "3 päivän ilmainen kokeilu on saatavilla vain App Storessa ja Google Playssä. Verkossa tämän kompensoimiseksi jokainen tilaus sisältää lisäpäiviä ilmaiseksi:",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "App Store -tilaukset",
       "restorePlayStore": "Google Play -tilaukset",
       "deleteProSupportNote": "Tililläsi on aktiivinen Pro-tilaus. Poista se ottamalla yhteyttä tukeen."
-    }
+    },
+    "securedByCrypto": "Suojattu OxaPaylla"
   },
   "subscribeSuccess": {
     "title": "Kaikki on valmista!",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "Päivitä Doppler Prohon",
-    "subtitle": "Valitse pakettisi ja tilaa turvallisesti Revolutin kautta.",
+    "subtitle": "Valitse pakettisi ja maksa turvallisesti kortilla (Revolut) tai kryptovaluutalla (OxaPay).",
     "accountLabel": "Tili",
     "monthly": "Kuukausi",
     "sixMonth": "6 kuukautta",
@@ -1372,7 +1374,7 @@
     "promoOff": "alennus",
     "promoInvalid": "Virheellinen kampanjakoodi",
     "promoFailed": "Koodin vahvistus epäonnistui",
-    "footerNote": "Turvallinen maksu Revolutin kautta. Peruuta milloin tahansa.",
+    "footerNote": "Turvallinen maksu kortilla (Revolut) tai kryptovaluutalla (OxaPay). Peruuta milloin tahansa.",
     "terms": "Käyttöehdot",
     "privacy": "Tietosuojakäytäntö",
     "error": "Jokin meni pieleen. Yritä uudelleen.",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "Tietojenkäsittelysopimus",
-    "lastUpdated": "Päivitetty viimeksi: huhtikuu 2026",
+    "lastUpdated": "Päivitetty viimeksi: elokuu 2026",
     "intro": "Tämä tietojenkäsittelysopimus (\"DPA\") on osa sinun ja SIMNETIQ LTD:n (yritystunnus 16861177, rekisteröity osoite 2 Frederick Street, Kings Cross, London, WC1X 0ND, Yhdistynyt kuningaskunta) välistä sopimusta, joka säätelee henkilötietojen käsittelyä Doppler VPN -palveluiden yhteydessä.",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. Käsiteltävät henkilötietotyypit",
-        "content": "Seuraavia henkilötietoluokkia voidaan käsitellä: tilitunnisteet (satunnaisesti luodussa VPN-XXXX-XXXX-XXXX-muodossa), sähköpostiosoitteet (kun vapaaehtoisesti annettu tilin palautusta tai tukea varten), laitetunnisteet (anonyymejä, ei yhdistetty henkilöllisyyteen), maksutiedot (kolmansien osapuolten maksuntarjoajien — Revolut, Apple, Google — käsittelemiä) sekä tukiviestintä (sähköpostiviestit tukitiimimme kanssa). Emme käsittele arkaluonteisia tai erityisten henkilötietoluokkien tietoja."
+        "content": "Seuraavia henkilötietoluokkia voidaan käsitellä: tilitunnisteet (satunnaisesti luodussa VPN-XXXX-XXXX-XXXX-muodossa), sähköpostiosoitteet tai viestisovellusten käyttäjätunnukset (kun ne on vapaaehtoisesti annettu tilin palautusta tai tukea varten), laitetunnisteet ja käyttöjärjestelmän ilmoittamat laitenimet, laitekohtaiset todennustunnisteet (säilytetään ainoastaan SHA-256-tiivisteinä), API-pyyntöihimme liittyvät todennus- ja pyyntörajoitustietueet (jotka sisältävät IP-osoitteen, tilitunnisteen, laitetunnisteen ja aikaleiman), maksutiedot (kolmansien osapuolten maksuntarjoajien käsittelemiä — Revolut ja OxaPay verkkosivustollamme tehdyistä ostoista, Apple ja Google mobiilisovelluksissamme tehdyistä ostoista), asennusattribuution tunnisteet silloin kun mobiiliattribuutio on käytössä, sekä tukiviestintä (sähköpostiviestit tukitiimimme kanssa). Emme käsittele arkaluonteisia tai erityisten henkilötietoluokkien tietoja emmekä käsittele VPN-liikennetietoja — katso kohta 5."
       },
       "security": {
         "title": "5. Turvatoimenpiteet",
-        "content": "Toteutamme asianmukaiset tekniset ja organisatoriset toimenpiteet henkilötietojen turvallisuuden varmistamiseksi, mukaan lukien: VLESS-Reality-salaus kaikelle VPN-liikenteelle, TLS-salaus kaikelle verkkoviestinnälle, tiukat pääsynhallintakontrollit tuotantojärjestelmissä vähimmän oikeuden periaatteella, säännölliset tietoturvatarkastukset ja infrastruktuuriarvioinnit, tietojen minimointi suunnittelun perusteella kaikissa palveluissa sekä tiukka lokittomuuskäytäntö VPN-käytölle — emme tallenna, tarkastele tai säilytä mitään VPN-tunnelin kautta kulkevaa dataa."
+        "content": "Toteutamme asianmukaiset tekniset ja organisatoriset toimenpiteet henkilötietojen turvallisuuden varmistamiseksi, mukaan lukien: VLESS-Reality-salaus kaikelle VPN-liikenteelle, TLS-salaus kaikelle verkkoviestinnälle, tiukat pääsynhallintakontrollit tuotantojärjestelmissä vähimmän oikeuden periaatteella, laitekohtaiset todennustunnisteet, jotka säilytetään ainoastaan SHA-256-tiivisteinä ja jotka voidaan mitätöidä yksitellen, säännölliset tietoturvatarkastukset ja infrastruktuuriarvioinnit, tietojen minimointi suunnittelun perusteella kaikissa palveluissa sekä tiukka lokittomuuskäytäntö VPN-käytölle — emme tallenna, tarkastele tai säilytä mitään VPN-tunnelin kautta kulkevaa dataa. Tämä lokittomuuslupaus koskee VPN-liikennettä; se ei koske kohdassa 4 kuvattuja todennus- ja pyyntörajoitustietueita, jotka kirjaavat, että laite teki pyynnön API:llemme, ja joita säilytetään kohdassa 9 määritellyn ajan."
       },
       "subprocessors": {
         "title": "6. Alikäsittelijöiden velvoitteet",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. Tietojen säilytys",
-        "content": "Henkilötietoja säilytetään vain niin kauan kuin on tarpeen tässä DPA:ssa mainittuihin tarkoituksiin: tilitiedot säilytetään tilin ollessa aktiivinen ja 30 päivää poistamisen jälkeen palautuksen mahdollistamiseksi, maksutiedot säilytetään 6 vuotta Yhdistyneen kuningaskunnan vero- ja kirjanpitolainsäädännön edellyttämällä tavalla, tukiviestintä säilytetään 12 kuukautta ratkaisun jälkeen ja VPN-käyttötietoja EI säilytetä — lokittomuuskäytäntömme tarkoittaa, ettei meillä ole teknistä mahdollisuutta yhdistää tiettyä verkkoaktiviteettia yksittäisiin käyttäjiin."
+        "content": "Henkilötietoja säilytetään vain niin kauan kuin on tarpeen tässä DPA:ssa mainittuihin tarkoituksiin: tilitiedot ja niihin liittyvä laiteluettelo säilytetään niin kauan kuin tili on olemassa ja poistetaan välittömästi, kun tili poistetaan, paitsi että tiliä, jolla on voimassa oleva maksullinen tilaus, ei voi poistaa ennen kuin tilaus on päättynyt tai peruutettu; kohdassa 4 kuvattuja todennus- ja pyyntörajoitustietueita säilytetään enintään 90 päivää, minkä jälkeen ne poistetaan pysyvästi; maksutiedot säilytetään 6 vuotta Yhdistyneen kuningaskunnan vero- ja kirjanpitolainsäädännön edellyttämällä tavalla; tukiviestintä säilytetään 12 kuukautta ratkaisun jälkeen; ja VPN-käyttötietoja EI säilytetä — lokittomuuskäytäntömme tarkoittaa, ettei meillä ole teknistä mahdollisuutta yhdistää tiettyä verkkoaktiviteettia yksittäisiin käyttäjiin."
       },
       "transfers": {
         "title": "10. Kansainväliset tiedonsiirrot",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "Alikäsittelijät",
-    "lastUpdated": "Päivitetty viimeksi: huhtikuu 2026",
+    "lastUpdated": "Päivitetty viimeksi: elokuu 2026",
     "intro": "Seuraavat kolmannen osapuolen palveluntarjoajat (alikäsittelijät) käsittelevät henkilötietoja SIMNETIQ LTD:n puolesta Doppler VPN -palveluiden yhteydessä. Jokaista alikäsittelijää sitovat tietojenkäsittelysopimustamme vastaavat tietojenkäsittelyehdot.",
     "colName": "Alikäsittelijä",
     "colPurpose": "Tarkoitus",

@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Je betaling wordt bevestigd…",
-      "body": "Revolut heeft de betaling geaccepteerd. We activeren nu je Doppler VPN Pro-abonnement.",
+      "body": "{processor} heeft de betaling geaccepteerd. We activeren nu je Doppler VPN Pro-abonnement.",
       "orderId": "Bestel-ID",
       "elapsed": "Verstreken: {seconds} s · sluit dit venster niet"
     },
@@ -44,10 +44,10 @@
       "missingBody": "We kunnen geen bestel-ID in deze link vinden. Als je net hebt betaald, neem dan contact op met support en vermeld het e-mailadres dat je hebt gebruikt, zodat we je aankoop kunnen bevestigen.",
       "missingReason": "Geen order_id-parameter in URL",
       "failedTitle": "Betaling is niet gelukt",
-      "failedBody": "Revolut meldde dat de betaling is mislukt. Er is niets afgeschreven. Ga terug naar de afrekenpagina en probeer het opnieuw, of neem contact op met support als het probleem blijft bestaan.",
+      "failedBody": "{processor} meldde dat de betaling is mislukt. Er is niets afgeschreven. Ga terug naar de afrekenpagina en probeer het opnieuw, of neem contact op met support als het probleem blijft bestaan.",
       "failedReasonUnknown": "Onbekende fout",
       "timeoutTitle": "We bevestigen je betaling nog steeds",
-      "timeoutBody": "Revolut heeft de betaling ontvangen, maar ons systeem heeft de bevestiging nog niet binnen. Dit is bijna altijd tijdelijk — je account wordt binnen enkele minuten automatisch bijgewerkt. Gebeurt dat niet, stuur ons dan de bestel-ID hieronder en we lossen het direct op.",
+      "timeoutBody": "{processor} heeft de betaling ontvangen, maar ons systeem heeft de bevestiging nog niet binnen. Dit is bijna altijd tijdelijk — je account wordt binnen enkele minuten automatisch bijgewerkt. Gebeurt dat niet, stuur ons dan de bestel-ID hieronder en we lossen het direct op.",
       "timeoutReason": "Vertraging in webhook-bezorging",
       "diagnosticHeading": "Diagnostische informatie",
       "statusLabel": "Status",
@@ -103,7 +103,8 @@
         "card": "Kaart (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Cryptovaluta (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Hoe vraag ik een terugbetaling aan?",
-        "answer": "Terugbetalingen worden verwerkt door Apple of Google. Voor iOS: bezoek reportaproblem.apple.com en log in met je Apple ID. Voor Android: open Google Play > Account > Bestelgeschiedenis. Terugbetalingen worden doorgaans binnen 48 uur verwerkt."
+        "answer": "We bieden een terugbetaling binnen 14 dagen voor klanten in de EU/het VK en een coulante niet-goed-geld-terug-garantie van 30 dagen voor alle andere klanten. Voor webabonnementen — betaald met een kaart via Revolut of in cryptovaluta via OxaPay — neem contact met ons op via support@simnetiq.store. Voor iOS: bezoek reportaproblem.apple.com. Voor Android: open Google Play > Account > Bestelgeschiedenis. Zie ons volledige restitutiebeleid op dopplervpn.org/refund voor details."
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "Privacybeleid",
-    "lastUpdated": "Laatst bijgewerkt: juli 2026",
+    "lastUpdated": "Laatst bijgewerkt: augustus 2026",
     "intro": "Dit Privacybeleid legt uit hoe SIMNETIQ LTD (\"Bedrijf\", \"wij\", \"ons\" of \"onze\"), een in Engeland en Wales geregistreerd bedrijf (Bedrijfsnummer 16861177), met statutaire zetel te 2 Frederick Street, Kings Cross, Londen, WC1X 0ND, Verenigd Koninkrijk, uw informatie verzamelt, gebruikt en beschermt wanneer u DopplerVPN (onze VPN-applicatie beschikbaar op iOS, macOS, Android en Windows) en ons AI-gebaseerd videogeneratiehulpmiddel (gezamenlijk de \"Diensten\") gebruikt. Wij zijn toegewijd aan de bescherming van uw privacy in overeenstemming met de Britse Algemene Verordening Gegevensbescherming (UK GDPR), de EU Algemene Verordening Gegevensbescherming (EU GDPR), de California Consumer Privacy Act (CCPA) en alle andere toepasselijke wetgeving inzake gegevensbescherming.",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Cookies en Tracking",
-        "content": "Onze website (dopplervpn.org) maakt gebruik van essentiële cookies die nodig zijn voor het goed functioneren van de website en anonieme analytische cookies om het websiteverkeer in geaggregeerde vorm te begrijpen. Wij gebruiken geen advertentiecookies of cross-site trackingtechnologieën. U kunt cookievoorkeuren beheren via uw browserinstellingen. Onze VPN- en AI-applicaties maken geen gebruik van cookies."
+        "content": "Onze website (dopplervpn.org) maakt gebruik van essentiële cookies die nodig zijn voor het goed functioneren van de website en anonieme analytische cookies om het websiteverkeer in geaggregeerde vorm te begrijpen. Als u via een betaalde advertentie binnenkomt, slaan wij ook een first-party cookie op met de klik-identificatie die het advertentienetwerk aan de door u gevolgde link heeft toegevoegd, samen met de naam van de parameter waarmee deze binnenkwam. Deze wordt maximaal 90 dagen bewaard en dient één doel: wanneer u de app downloadt of een abonnement koopt, meldt onze server die conversie terug aan het netwerk zodat de advertentie kan worden toegerekend. Die identificatie wordt door het netwerk gegenereerd en niet door ons, en wordt nooit gekoppeld aan uw VPN-account of aan uw verkeer. Wij plaatsen geen advertentiecookies van derden en gebruiken geen cross-site trackingtechnologieën. U kunt cookievoorkeuren beheren via uw browserinstellingen. Onze VPN- en AI-applicaties maken geen gebruik van cookies."
       },
       "children": {
         "title": "11. Privacy van Kinderen",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "Algemene Voorwaarden",
-    "lastUpdated": "Laatst bijgewerkt: maart 2026",
-    "intro": "Deze Algemene Voorwaarden (\"Voorwaarden\") vormen een juridisch bindende overeenkomst tussen u (\"Gebruiker\", \"u\" of \"uw\") en SIMNETIQ LTD (\"Bedrijf\", \"wij\", \"ons\" of \"onze\"), een in Engeland en Wales geregistreerd bedrijf (Bedrijfsnummer 16861177), met statutaire zetel te 2 Frederick Street, Kings Cross, Londen, WC1X 0ND, Verenigd Koninkrijk. Deze Voorwaarden regelen uw toegang tot en gebruik van DopplerVPN (onze VPN-applicatie beschikbaar op iOS, Android en Windows), ons AI-gebaseerd videogeneratiehulpmiddel en alle gerelateerde websites, applicaties en diensten (gezamenlijk de \"Diensten\"). Door toegang te krijgen tot of gebruik te maken van een van onze Diensten, gaat u akkoord met deze Voorwaarden. Als u niet akkoord gaat, mag u de Diensten niet gebruiken.",
+    "lastUpdated": "Laatst bijgewerkt: augustus 2026",
+    "intro": "Deze Algemene Voorwaarden (\"Voorwaarden\") vormen een juridisch bindende overeenkomst tussen u (\"Gebruiker\", \"u\" of \"uw\") en SIMNETIQ LTD (\"Bedrijf\", \"wij\", \"ons\" of \"onze\"), een in Engeland en Wales geregistreerd bedrijf (Bedrijfsnummer 16861177), met statutaire zetel te 2 Frederick Street, Kings Cross, Londen, WC1X 0ND, Verenigd Koninkrijk. Deze Voorwaarden regelen uw toegang tot en gebruik van DopplerVPN (onze VPN-applicatie beschikbaar op iOS, macOS, Android en Windows), ons AI-gebaseerd videogeneratiehulpmiddel en alle gerelateerde websites, applicaties en diensten (gezamenlijk de \"Diensten\"). Door toegang te krijgen tot of gebruik te maken van een van onze Diensten, gaat u akkoord met deze Voorwaarden. Als u niet akkoord gaat, mag u de Diensten niet gebruiken.",
     "sections": {
       "service": {
         "title": "1. Dienstbeschrijving",
-        "content": "Wij bieden twee categorieën digitale diensten: (a) DopplerVPN — een virtual private network-applicatie die uw internetverbinding versleutelt met het VLESS-Reality protocol, uw IP-adres maskeert en DNS-niveau adblocker en inhoudsfiltering met ouderlijk toezicht biedt. DopplerVPN is beschikbaar op iOS, Android en Windows. (b) AI-videogeneratie — een webgebaseerd hulpmiddel dat kunstmatige intelligentie gebruikt om videocontent te genereren op basis van door de gebruiker opgegeven prompts en instellingen. Beide Diensten worden aangeboden op abonnementsbasis als software-as-a-service (\"SaaS\"). De Diensten worden geleverd \"zoals ze zijn\" en \"zoals beschikbaar\" zonder garanties van welke aard dan ook, hetzij uitdrukkelijk of stilzwijgend, inclusief maar niet beperkt tot stilzwijgende garanties van verkoopbaarheid, geschiktheid voor een bepaald doel en niet-inbreuk."
+        "content": "Wij bieden twee categorieën digitale diensten: (a) DopplerVPN — een virtual private network-applicatie die uw internetverbinding versleutelt met het VLESS-Reality protocol, uw IP-adres maskeert en DNS-niveau adblocker en inhoudsfiltering met ouderlijk toezicht biedt. DopplerVPN is beschikbaar op iOS, macOS, Android en Windows. Hoeveel van het verkeer van uw apparaat de applicatie draagt, verschilt per platform: op iOS, macOS en Android brengt zij een systeembrede tunnel tot stand, waardoor het verkeer van het gehele apparaat erdoorheen wordt geleid; op Windows configureert zij de systeemproxy van Windows, waardoor applicaties die die instelling respecteren via de VPN worden geleid, terwijl applicaties die deze negeren uw normale verbinding blijven gebruiken. (b) AI-videogeneratie — een webgebaseerd hulpmiddel dat kunstmatige intelligentie gebruikt om videocontent te genereren op basis van door de gebruiker opgegeven prompts en instellingen. Beide Diensten worden aangeboden op abonnementsbasis als software-as-a-service (\"SaaS\"). De Diensten worden geleverd \"zoals ze zijn\" en \"zoals beschikbaar\" zonder garanties van welke aard dan ook, hetzij uitdrukkelijk of stilzwijgend, inclusief maar niet beperkt tot stilzwijgende garanties van verkoopbaarheid, geschiktheid voor een bepaald doel en niet-inbreuk."
       },
       "eligibility": {
         "title": "2. Geschiktheid",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. Abonnementen, Betalingen en Facturering",
-        "content": "Toegang tot premiumfuncties vereist een betaald abonnement. DopplerVPN Premium omvat toegang tot premium VPN-servers in meerdere landen, DNS-niveau adblocker, inhoudsfiltering met ouderlijk toezicht en verbinding op maximaal 10 apparaten tegelijkertijd. Abonnementen zijn beschikbaar met maandelijkse, halfjaarlijkse en jaarlijkse factureringscycli. Betalingsverwerking: webabonnementen worden verwerkt door Revolut Ltd. Mobiele abonnementen worden verwerkt via Apple App Store (iOS) of Google Play Store (Android). Abonnementen worden automatisch verlengd aan het einde van elke factureringsperiode, tenzij minimaal 24 uur voor de verlengingsdatum wordt opgezegd. U kunt uw abonnement op elk moment opzeggen: voor webabonnementen door contact met ons op te nemen via support@simnetiq.store; voor mobiele abonnementen via de app store-instellingen van uw apparaat. Opzegging gaat in aan het einde van de lopende factureringsperiode — u behoudt toegang tot dat moment. Prijzen kunnen van tijd tot tijd wijzigen; wij zullen u tijdig op de hoogte stellen van prijsverhogingen voordat deze van kracht worden. Alle prijzen worden weergegeven inclusief toepasselijke belastingen waar wettelijk vereist."
+        "content": "Toegang tot premiumfuncties vereist een betaald abonnement. DopplerVPN Premium omvat toegang tot premium VPN-servers in meerdere landen, DNS-niveau adblocker, inhoudsfiltering met ouderlijk toezicht en verbinding op maximaal 10 apparaten tegelijkertijd. Abonnementen zijn beschikbaar met maandelijkse, halfjaarlijkse en jaarlijkse factureringscycli. Betalingsverwerking: abonnementen die op onze website worden gekocht, worden verwerkt door Revolut Ltd (kaartbetalingen) of door OxaPay (betalingen in cryptovaluta); mobiele abonnementen worden verwerkt via de Apple App Store (iOS en macOS) of de Google Play Store (Android). De verlenging werkt bij de twee kanalen verschillend. Een op onze website gekocht abonnement is een eenmalige aankoop van de door u gekozen periode: het wordt niet automatisch verlengd, wij bewaren geen enkel middel om u opnieuw te belasten, en de toegang eindigt eenvoudigweg wanneer de periode afloopt, tenzij u een nieuwe aankoop doet. Een mobiel abonnement wordt automatisch verlengd aan het einde van elke factureringsperiode, tenzij het minimaal 24 uur voor de verlengingsdatum wordt opgezegd; u kunt het op elk moment opzeggen via de app store-instellingen van uw apparaat, en de opzegging gaat in aan het einde van de lopende factureringsperiode — u behoudt toegang tot dat moment. Voor vragen over een aankoop die op onze website is gedaan, kunt u contact met ons opnemen via support@simnetiq.store. Prijzen kunnen van tijd tot tijd wijzigen; wij zullen u tijdig op de hoogte stellen van prijsverhogingen voordat deze van kracht worden. Alle prijzen worden weergegeven inclusief toepasselijke belastingen waar wettelijk vereist."
       },
       "usage": {
         "title": "5. Acceptabel Gebruik",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "Restitutiebeleid",
-    "lastUpdated": "Laatst bijgewerkt: maart 2026",
+    "lastUpdated": "Laatst bijgewerkt: augustus 2026",
     "intro": "Dit Restitutiebeleid is van toepassing op alle aankopen van DopplerVPN-abonnementen en ons AI-gebaseerd videogeneratiehulpmiddel via SIMNETIQ LTD (Bedrijfsnummer 16861177), geregistreerd te 2 Frederick Street, Kings Cross, Londen, WC1X 0ND, Verenigd Koninkrijk. Wij willen dat u volledig tevreden bent met onze Diensten. Als dat niet het geval is, raadpleeg dan de onderstaande restitutievoorwaarden.",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "Voor klanten buiten de EU/EER en het VK bieden wij een 30-dagen coulance geld-terug-garantie op alle abonnementsaankopen. Als u om welke reden dan ook niet tevreden bent met onze Diensten, kunt u binnen 30 dagen na uw oorspronkelijke aankoopdatum een volledige restitutie aanvragen. Deze coulancerestitutie geldt alleen voor eerste aankopen en is beperkt tot één restitutie per klant. Om een restitutie aan te vragen, neemt u contact met ons op via support@simnetiq.store met uw bestelgegevens. Restituties worden verwerkt binnen 14 werkdagen via de oorspronkelijke betaalmethode."
       },
       "webSubscriptions": {
-        "title": "4. Webabonnementen (via Revolut)",
-        "content": "Webabonnementen voor DopplerVPN worden verwerkt door Revolut Ltd, onze betalingsverwerker. Revolut verwerkt betalingen op een veilige manier. Om een restitutie voor een webabonnement aan te vragen: neem contact met ons op via support@simnetiq.store met uw bestelnummer of ontvangstbewijs. Restituties worden verwerkt en verschijnen binnen 5–10 werkdagen op uw afschrift, afhankelijk van uw betalingsprovider."
+        "title": "4. Webabonnementen (Revolut en OxaPay)",
+        "content": "Webabonnementen voor DopplerVPN worden betaald met een kaart, verwerkt door Revolut Ltd, of in cryptovaluta, verwerkt door OxaPay. Om een restitutie voor een webabonnement aan te vragen, neemt u contact met ons op via support@simnetiq.store met uw bestelnummer of ontvangstbewijs. Restituties van kaartbetalingen worden teruggestort op de kaart waarmee u hebt betaald en verschijnen binnen 5–10 werkdagen op uw afschrift, afhankelijk van uw bank. Betalingen in cryptovaluta kunnen niet op het netwerk worden teruggedraaid, daarom wordt een cryptorestitutie verzonden als een nieuwe overboeking naar een walletadres dat u ons opgeeft, in dezelfde munt waarmee u hebt betaald. Wij betalen het bedrag terug dat wij hebben ontvangen; netwerkkosten en eventuele wisselkoersverschillen tussen uw betaling en de restitutie worden niet vergoed."
       },
       "mobileSubscriptions": {
         "title": "5. Mobiele App-abonnementen (App Store & Google Play)",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. Verlengingskosten",
-        "content": "Abonnementen worden automatisch verlengd aan het einde van elke factureringsperiode. Als u niet in rekening gebracht wilt worden voor een verlenging, moet u uw abonnement minimaal 24 uur voor het einde van de lopende factureringsperiode opzeggen. Voor webabonnementen: neem contact met ons op via support@simnetiq.store. Voor mobiele abonnementen: opzeggen via de App Store- of Google Play-instellingen van uw apparaat. Als u een verlenging in rekening wordt gebracht die u niet beoogde, neem dan binnen 14 dagen na de verlengingskosten contact met ons op en wij verwerken een restitutie voor het ongebruikte deel van de verlengingsperiode."
+        "content": "De verlenging werkt anders, afhankelijk van waar u het abonnement hebt gekocht. Een op onze website gekocht abonnement is een eenmalige aankoop van de door u gekozen periode: het wordt niet automatisch verlengd, wij bewaren geen betaalmiddel waarmee wij u opnieuw kunnen belasten, en de toegang eindigt eenvoudigweg wanneer de periode afloopt — er valt niets op te zeggen en er zijn geen verlengingskosten om te restitueren. Een via de Apple App Store of Google Play gekocht abonnement wordt aan het einde van elke factureringsperiode automatisch verlengd; als u niet in rekening gebracht wilt worden voor een verlenging, zegt u het minimaal 24 uur voor het einde van de lopende periode op via de App Store- of Google Play-instellingen van uw apparaat. Als u verlengingskosten in rekening worden gebracht die u niet beoogde, neem dan binnen 14 dagen na die kosten contact met ons op via support@simnetiq.store; wij helpen u dan om via de betreffende app store een restitutie te verkrijgen voor het ongebruikte deel van de verlengingsperiode."
       },
       "exclusions": {
         "title": "7. Uitsluitingen van Restitutie",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. Hoe een Restitutie Aanvragen",
-        "content": "Om een restitutie aan te vragen, neemt u contact met ons op met de volgende informatie: uw naam of account-ID, het e-mailadres gekoppeld aan uw aankoop, uw bestelnummer of ontvangstbewijs (van Revolut, Apple of Google), de aankoopdatum en de reden voor uw restitutieverzoek (optioneel maar nuttig). Stuur uw verzoek naar: support@simnetiq.store. Wij streven ernaar alle restitutieverzoeken binnen 2 werkdagen te bevestigen en goedgekeurde restituties binnen 14 werkdagen te verwerken."
+        "content": "Om een restitutie aan te vragen, neemt u contact met ons op met de volgende informatie: uw naam of account-ID, het e-mailadres gekoppeld aan uw aankoop, uw bestelnummer of ontvangstbewijs (van Revolut, OxaPay, Apple of Google), de aankoopdatum en de reden voor uw restitutieverzoek (optioneel maar nuttig). Stuur uw verzoek naar: support@simnetiq.store. Wij streven ernaar alle restitutieverzoeken binnen 2 werkdagen te bevestigen en goedgekeurde restituties binnen 14 werkdagen te verwerken."
       },
       "contact": {
         "title": "9. Contact",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "Hoe neem ik een abonnement?",
-          "answer": "Bezoek onze abonnementspagina, voer je e-mailadres in, kies een plan en betaal via Revolut. Je Pro-abonnement wordt direct geactiveerd."
+          "answer": "Bezoek onze abonnementspagina, voer je e-mailadres in, kies een plan en betaal met een kaart via Revolut of in cryptovaluta via OxaPay. Je Pro-abonnement wordt direct geactiveerd."
         },
         "multiDevice": {
           "question": "Kan ik één account op meerdere apparaten gebruiken?",
@@ -1128,7 +1129,7 @@
       "savings": "Bespaar tot 35% t.o.v. app stores",
       "step1": "Open @dopplercreatebot in Telegram",
       "step2": "Tik op \"Abonneren\" en kies je plan",
-      "step3": "Betaal veilig via Revolut — gebruik code LAUNCH20 voor 20% korting"
+      "step3": "Betaal veilig met kaart (Revolut) of in crypto (OxaPay) — gebruik code LAUNCH20 voor 20% korting"
     },
     "manageSection": "Je abonnement beheren",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "korting",
     "promoInvalid": "Ongeldige promotiecode",
     "promoFailed": "Code kon niet worden gevalideerd",
-    "footerNote": "Eenmalige betaling via Revolut. Geen automatische verlenging. 30 dagen geld-terug-garantie.",
+    "footerNote": "Eenmalige betaling met kaart (Revolut) of crypto (OxaPay). Geen automatische verlenging. 30 dagen geld-terug-garantie.",
     "webBonus": {
       "title": "Webbonus — gratis dagen inbegrepen",
       "subtitle": "De 3-daagse gratis proefperiode is alleen beschikbaar in de App Store en Google Play. Als compensatie bevat elk webabonnement extra gratis dagen:",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "App Store-abonnementen",
       "restorePlayStore": "Google Play-abonnementen",
       "deleteProSupportNote": "Je account heeft een actief Pro-abonnement. Neem contact op met support om het te verwijderen."
-    }
+    },
+    "securedByCrypto": "Beveiligd door OxaPay"
   },
   "subscribeSuccess": {
     "title": "Alles Is Geregeld!",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "Upgrade naar Doppler Pro",
-    "subtitle": "Kies je plan en abonneer veilig via Revolut.",
+    "subtitle": "Kies je plan en betaal veilig met kaart (Revolut) of in crypto (OxaPay).",
     "accountLabel": "Account",
     "monthly": "Maandelijks",
     "sixMonth": "6 Maanden",
@@ -1372,7 +1374,7 @@
     "promoOff": "korting",
     "promoInvalid": "Ongeldige promotiecode",
     "promoFailed": "Code kon niet worden gevalideerd",
-    "footerNote": "Veilige betaling via Revolut. Op elk moment opzegbaar.",
+    "footerNote": "Veilige betaling met kaart (Revolut) of crypto (OxaPay). Op elk moment opzegbaar.",
     "terms": "Algemene Voorwaarden",
     "privacy": "Privacybeleid",
     "error": "Er ging iets mis. Probeer het opnieuw.",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "Gegevensverwerkingsovereenkomst",
-    "lastUpdated": "Laatst bijgewerkt: april 2026",
+    "lastUpdated": "Laatst bijgewerkt: augustus 2026",
     "intro": "Deze Gegevensverwerkingsovereenkomst (\"GVO\") maakt deel uit van de overeenkomst tussen u en SIMNETIQ LTD (Bedrijfsnummer 16861177), geregistreerd te 2 Frederick Street, Kings Cross, Londen, WC1X 0ND, Verenigd Koninkrijk, met betrekking tot de verwerking van persoonsgegevens in verband met Doppler VPN-diensten.",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. Categorieën Verwerkte Persoonsgegevens",
-        "content": "De volgende categorieën persoonsgegevens kunnen worden verwerkt: accountidentificatoren (willekeurig gegenereerd in VPN-XXXX-XXXX-XXXX-formaat), e-mailadressen (wanneer vrijwillig verstrekt voor accountherstel of ondersteuning), apparaatidentificatoren (anoniem, niet gekoppeld aan persoonlijke identiteit), betalingsgegevens (verwerkt door externe betalingsproviders — Revolut, Apple, Google), en ondersteuningscorrespondentie (e-mailcommunicatie met ons ondersteuningsteam). Wij verwerken geen gevoelige of bijzondere categorieën persoonsgegevens."
+        "content": "De volgende categorieën persoonsgegevens kunnen worden verwerkt: accountidentificatoren (willekeurig gegenereerd in VPN-XXXX-XXXX-XXXX-formaat), e-mailadressen of gebruikersnamen van berichtendiensten (wanneer vrijwillig verstrekt voor accountherstel of ondersteuning), apparaatidentificatoren en apparaatnamen zoals gerapporteerd door het besturingssysteem, authenticatietokens per apparaat (uitsluitend opgeslagen als SHA-256-hashes), authenticatie- en rate-limitgegevens van verzoeken aan onze API (met een IP-adres, een accountidentificatie, een apparaatidentificatie en een tijdstempel), betalingsgegevens (verwerkt door externe betalingsproviders — Revolut en OxaPay voor aankopen via onze website, Apple en Google voor aankopen in onze mobiele apps), installatie-attributie-identificatoren wanneer mobiele attributie actief is, en ondersteuningscorrespondentie (e-mailcommunicatie met ons ondersteuningsteam). Wij verwerken geen gevoelige of bijzondere categorieën persoonsgegevens en wij verwerken geen VPN-verkeersgegevens — zie Sectie 5."
       },
       "security": {
         "title": "5. Beveiligingsmaatregelen",
-        "content": "Wij implementeren passende technische en organisatorische maatregelen om de beveiliging van persoonsgegevens te waarborgen, waaronder: VLESS-Reality-encryptie voor al het VPN-verkeer, TLS-encryptie voor alle webcommunicatie, strikte toegangscontroles op productiesystemen volgens het principe van minimale bevoegdheden, regelmatige beveiligingsaudits en infrastructuurbeoordelingen, gegevensminimalisering by design in alle diensten, en een strikt no-logs beleid voor VPN-gebruik — wij slaan geen gegevens op die door onze VPN-tunnel passeren, inspecteren of bewaren deze niet."
+        "content": "Wij implementeren passende technische en organisatorische maatregelen om de beveiliging van persoonsgegevens te waarborgen, waaronder: VLESS-Reality-encryptie voor al het VPN-verkeer, TLS-encryptie voor alle webcommunicatie, strikte toegangscontroles op productiesystemen volgens het principe van minimale bevoegdheden, authenticatietokens per apparaat die uitsluitend als SHA-256-hashes worden opgeslagen en afzonderlijk kunnen worden ingetrokken, regelmatige beveiligingsaudits en infrastructuurbeoordelingen, gegevensminimalisering by design in alle diensten, en een strikt no-logs beleid voor VPN-gebruik — wij slaan geen gegevens op die door onze VPN-tunnel passeren, inspecteren of bewaren deze niet. Die no-logs-toezegging geldt voor VPN-verkeer; zij geldt niet voor de authenticatie- en rate-limitgegevens beschreven in Sectie 4, die vastleggen dat een apparaat een verzoek aan onze API heeft gedaan en die worden bewaard gedurende de in Sectie 9 genoemde periode."
       },
       "subprocessors": {
         "title": "6. Verplichtingen Subverwerkers",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. Bewaartermijnen",
-        "content": "Persoonsgegevens worden alleen bewaard zolang dit noodzakelijk is voor de in deze GVO vermelde doeleinden: accountinformatie wordt bewaard zolang het account actief is en gedurende 30 dagen na verwijdering om herstel mogelijk te maken, betalingsgegevens worden bewaard gedurende 6 jaar zoals vereist door de Britse belasting- en boekhoudwetgeving, ondersteuningscorrespondentie wordt bewaard gedurende 12 maanden na afhandeling, en VPN-gebruiksgegevens worden NIET bewaard — ons no-logs beleid betekent dat wij technisch niet in staat zijn om specifieke netwerkactiviteit te koppelen aan individuele gebruikers."
+        "content": "Persoonsgegevens worden alleen bewaard zolang dit noodzakelijk is voor de in deze GVO vermelde doeleinden: accountinformatie en de bijbehorende apparatenlijst worden bewaard zolang het account bestaat en worden onmiddellijk verwijderd wanneer het account wordt verwijderd, met dien verstande dat een account met een actief betaald abonnement niet kan worden verwijderd voordat dat abonnement is verlopen of opgezegd; de authenticatie- en rate-limitgegevens beschreven in Sectie 4 worden maximaal 90 dagen bewaard en daarna permanent verwijderd; betalingsgegevens worden bewaard gedurende 6 jaar zoals vereist door de Britse belasting- en boekhoudwetgeving; ondersteuningscorrespondentie wordt bewaard gedurende 12 maanden na afhandeling; en VPN-gebruiksgegevens worden NIET bewaard — ons no-logs beleid betekent dat wij technisch niet in staat zijn om specifieke netwerkactiviteit te koppelen aan individuele gebruikers."
       },
       "transfers": {
         "title": "10. Internationale Gegevensoverdrachten",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "Subverwerkers",
-    "lastUpdated": "Laatst bijgewerkt: april 2026",
+    "lastUpdated": "Laatst bijgewerkt: augustus 2026",
     "intro": "De volgende externe dienstverleners (subverwerkers) verwerken persoonsgegevens namens SIMNETIQ LTD in verband met Doppler VPN-diensten. Elke subverwerker is gebonden aan gegevensverwerkingsvoorwaarden die gelijkwaardig zijn aan onze Gegevensverwerkingsovereenkomst.",
     "colName": "Subverwerker",
     "colPurpose": "Doel",

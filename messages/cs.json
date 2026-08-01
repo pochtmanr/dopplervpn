@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Potvrzujeme vaši platbu…",
-      "body": "Revolut platbu přijal. Právě aktivujeme vaše předplatné Doppler VPN Pro.",
+      "body": "{processor} platbu přijal. Právě aktivujeme vaše předplatné Doppler VPN Pro.",
       "orderId": "Číslo objednávky",
       "elapsed": "Uplynulo: {seconds} s · neuzavírejte toto okno"
     },
@@ -44,10 +44,10 @@
       "missingBody": "V tomto odkazu nemůžeme najít ID objednávky. Pokud jste právě zaplatili, kontaktujte prosím podporu a uveďte e-mail, který jste použili, abychom mohli platbu potvrdit.",
       "missingReason": "V URL chybí parametr order_id",
       "failedTitle": "Platba neproběhla",
-      "failedBody": "Revolut nahlásil platbu jako neúspěšnou. Nic vám nebylo účtováno. Vraťte se prosím k pokladně a zkuste to znovu, případně kontaktujte podporu, pokud problém přetrvává.",
+      "failedBody": "{processor} nahlásil platbu jako neúspěšnou. Nic vám nebylo účtováno. Vraťte se prosím k pokladně a zkuste to znovu, případně kontaktujte podporu, pokud problém přetrvává.",
       "failedReasonUnknown": "Neznámá chyba",
       "timeoutTitle": "Stále potvrzujeme vaši platbu",
-      "timeoutBody": "Revolut platbu přijal, ale náš systém zatím nedostal potvrzení. Téměř vždy se jedná o dočasný stav — váš účet bude automaticky upgradován během několika minut. Pokud se tak nestane, pošlete nám níže uvedené ID objednávky a okamžitě to vyřešíme.",
+      "timeoutBody": "{processor} platbu přijal, ale náš systém zatím nedostal potvrzení. Téměř vždy se jedná o dočasný stav — váš účet bude automaticky upgradován během několika minut. Pokud se tak nestane, pošlete nám níže uvedené ID objednávky a okamžitě to vyřešíme.",
       "timeoutReason": "Doručení webhooku se zpozdilo",
       "diagnosticHeading": "Diagnostické informace",
       "statusLabel": "Stav",
@@ -103,7 +103,8 @@
         "card": "Karta (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Kryptoměna (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Jak mohu požádat o vrácení peněz?",
-        "answer": "Nabízíme 14denní vrácení peněz pro zákazníky z EU/UK a 30denní dobrou vůli záruku vrácení peněz pro všechny ostatní zákazníky. Pro webová předplatná (přes Revolut) nás kontaktujte na support@simnetiq.store. Pro iOS navštivte reportaproblem.apple.com. Pro Android otevřete Google Play > Účet > Historie objednávek. Úplné podrobnosti najdete v našich Zásadách vrácení peněz na dopplervpn.org/refund."
+        "answer": "Nabízíme 14denní vrácení peněz pro zákazníky z EU/UK a 30denní dobrou vůli záruku vrácení peněz pro všechny ostatní zákazníky. Pro webová předplatná — hrazená kartou přes Revolut nebo kryptoměnou přes OxaPay — nás kontaktujte na support@simnetiq.store. Pro iOS navštivte reportaproblem.apple.com. Pro Android otevřete Google Play > Účet > Historie objednávek. Úplné podrobnosti najdete v našich Zásadách vrácení peněz na dopplervpn.org/refund."
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "Zásady ochrany osobních údajů",
-    "lastUpdated": "Poslední aktualizace: červenec 2026",
+    "lastUpdated": "Poslední aktualizace: srpen 2026",
     "intro": "Tyto Zásady ochrany osobních údajů vysvětlují, jak společnost SIMNETIQ LTD („Společnost“, „my“, „nás“ nebo „naše“), společnost registrovaná v Anglii a Walesu (registrační číslo 16861177), se sídlem 2 Frederick Street, Kings Cross, London, WC1X 0ND, Spojené království, shromažďuje, používá a chrání vaše údaje, když používáte DopplerVPN (naši aplikaci VPN dostupnou pro iOS, macOS, Android a Windows) a náš nástroj pro generování videa využívající umělou inteligenci (společně „Služby“). Zavazujeme se chránit vaše soukromí v souladu s Obecným nařízením o ochraně osobních údajů Spojeného království (UK GDPR), Obecným nařízením o ochraně osobních údajů EU (EU GDPR), kalifornským zákonem o ochraně soukromí spotřebitelů (CCPA) a všemi dalšími platnými zákony o ochraně osobních údajů.",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Soubory cookie a sledování",
-        "content": "Naše webové stránky (dopplervpn.org) používají nezbytné soubory cookie potřebné pro správné fungování webu a anonymní analytické soubory cookie, které nám umožňují porozumět návštěvnosti webu v souhrnné podobě. Nepoužíváme reklamní soubory cookie ani technologie sledování napříč weby. Předvolby souborů cookie můžete spravovat v nastavení svého prohlížeče. Naše aplikace VPN a AI soubory cookie nepoužívají."
+        "content": "Naše webové stránky (dopplervpn.org) používají nezbytné soubory cookie potřebné pro správné fungování webu a anonymní analytické soubory cookie, které nám umožňují porozumět návštěvnosti webu v souhrnné podobě. Pokud k nám přijdete z placené reklamy, ukládáme také soubor cookie první strany s identifikátorem kliknutí, který reklamní síť připojila k odkazu, jenž jste použili, spolu s názvem parametru, v němž dorazil. Uchováváme jej nejdéle 90 dní a slouží jedinému účelu: když si stáhnete aplikaci nebo koupíte předplatné, náš server tuto konverzi ohlásí zpět síti, aby mohla být reklama započítána. Tento identifikátor vytváří reklamní síť, nikoli my, a nikdy se nespojuje s vaším účtem VPN ani s vaším provozem. Neumísťujeme žádné reklamní soubory cookie třetích stran a nepoužíváme žádné technologie sledování napříč weby. Předvolby souborů cookie můžete spravovat v nastavení svého prohlížeče. Naše aplikace VPN a AI soubory cookie nepoužívají."
       },
       "children": {
         "title": "11. Ochrana soukromí dětí",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "Terms of Service",
-    "lastUpdated": "Last updated: March 2026",
-    "intro": "These Terms of Service (\"Terms\") constitute a legally binding agreement between you (\"User\", \"you\", or \"your\") and SIMNETIQ LTD (\"Company\", \"we\", \"us\", or \"our\"), a company registered in England and Wales (Company Number 16861177), with its registered office at 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. These Terms govern your access to and use of DopplerVPN (our VPN application available on iOS, Android, and Windows), our AI-powered video generation tool, and all related websites, applications, and services (collectively, the \"Services\"). By accessing or using any of our Services, you agree to be bound by these Terms. If you do not agree, you must not use the Services.",
+    "lastUpdated": "Last updated: August 2026",
+    "intro": "These Terms of Service (\"Terms\") constitute a legally binding agreement between you (\"User\", \"you\", or \"your\") and SIMNETIQ LTD (\"Company\", \"we\", \"us\", or \"our\"), a company registered in England and Wales (Company Number 16861177), with its registered office at 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. These Terms govern your access to and use of DopplerVPN (our VPN application available on iOS, macOS, Android, and Windows), our AI-powered video generation tool, and all related websites, applications, and services (collectively, the \"Services\"). By accessing or using any of our Services, you agree to be bound by these Terms. If you do not agree, you must not use the Services.",
     "sections": {
       "service": {
         "title": "1. Service Description",
-        "content": "We provide two categories of digital services: (a) DopplerVPN — a virtual private network application that encrypts your internet connection using the VLESS-Reality protocol, masks your IP address, and provides DNS-level ad blocking and content filtering with parental controls. DopplerVPN is available on iOS, Android, and Windows. (b) AI Video Generation — a web-based tool that uses artificial intelligence to generate video content based on user-provided prompts and settings. Both Services are provided on a subscription basis as software-as-a-service (\"SaaS\"). The Services are provided \"as is\" and \"as available\" without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement."
+        "content": "We provide two categories of digital services: (a) DopplerVPN — a virtual private network application that encrypts your internet connection using the VLESS-Reality protocol, masks your IP address, and provides DNS-level ad blocking and content filtering with parental controls. DopplerVPN is available on iOS, macOS, Android, and Windows. How much of your device's traffic the application carries differs by platform: on iOS, macOS, and Android it establishes a system-wide tunnel, so traffic from the whole device is routed through it; on Windows it configures the Windows system proxy, so applications that honour that setting are routed through the VPN while applications that ignore it continue to use your normal connection. (b) AI Video Generation — a web-based tool that uses artificial intelligence to generate video content based on user-provided prompts and settings. Both Services are provided on a subscription basis as software-as-a-service (\"SaaS\"). The Services are provided \"as is\" and \"as available\" without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement."
       },
       "eligibility": {
         "title": "2. Eligibility",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. Subscriptions, Payments, and Billing",
-        "content": "Access to premium features requires a paid subscription. DopplerVPN Premium includes access to premium VPN servers in multiple countries, DNS-level ad blocking, content filtering with parental controls, and connection on up to 10 devices simultaneously. Subscriptions are available on monthly, 6-month, and annual billing cycles. Payment processing: web subscriptions are processed by Revolut Ltd. Mobile subscriptions are processed through Apple App Store (iOS) or Google Play Store (Android). Subscriptions auto-renew at the end of each billing period unless cancelled at least 24 hours before the renewal date. You may cancel your subscription at any time: for web subscriptions, by contacting us at support@simnetiq.store; for mobile subscriptions, through your device's app store settings. Cancellation takes effect at the end of the current billing period — you will continue to have access until then. Prices may change from time to time; we will provide reasonable notice of price increases before they take effect. All prices are displayed inclusive of applicable taxes where required by law."
+        "content": "Access to premium features requires a paid subscription. DopplerVPN Premium includes access to premium VPN servers in multiple countries, DNS-level ad blocking, content filtering with parental controls, and connection on up to 10 devices simultaneously. Subscriptions are available on monthly, 6-month, and annual billing cycles. Payment processing: subscriptions bought on our website are processed by Revolut Ltd (card payments) or by OxaPay (cryptocurrency payments); mobile subscriptions are processed through the Apple App Store (iOS and macOS) or the Google Play Store (Android). Renewal works differently on the two channels. A subscription bought on our website is a one-off purchase of the period you select: it does not auto-renew, we do not store any means of charging you again, and access simply ends when the period expires unless you buy another. A mobile subscription auto-renews at the end of each billing period unless cancelled at least 24 hours before the renewal date; you may cancel it at any time through your device's app store settings, and cancellation takes effect at the end of the current billing period — you will continue to have access until then. For any question about a purchase made on our website, contact us at support@simnetiq.store. Prices may change from time to time; we will provide reasonable notice of price increases before they take effect. All prices are displayed inclusive of applicable taxes where required by law."
       },
       "usage": {
         "title": "5. Acceptable Use",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "Refund Policy",
-    "lastUpdated": "Last updated: March 2026",
+    "lastUpdated": "Last updated: August 2026",
     "intro": "This Refund Policy applies to all purchases of DopplerVPN subscriptions and our AI-powered video generation tool made through SIMNETIQ LTD (Company Number 16861177), registered at 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom. We want you to be completely satisfied with our Services. If you are not, please review the refund terms below.",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "For customers outside the EU/EEA and UK, we offer a 30-day goodwill money-back guarantee on all subscription purchases. If you are not satisfied with our Services for any reason, you may request a full refund within 30 days of your initial purchase date. This goodwill refund applies to first-time purchases only and is limited to one refund per customer. To request a refund, contact us at support@simnetiq.store with your order details. Refunds will be processed within 14 business days using the original payment method."
       },
       "webSubscriptions": {
-        "title": "4. Web Subscriptions (via Revolut)",
-        "content": "Web subscriptions for DopplerVPN are processed by Revolut Ltd, our payment processor. Revolut handles payment processing securely. To request a refund for a web subscription: contact us at support@simnetiq.store with your order number or receipt. Refunds are processed and will appear on your statement within 5–10 business days depending on your payment provider."
+        "title": "4. Web Subscriptions (Revolut and OxaPay)",
+        "content": "Web subscriptions for DopplerVPN are paid either by card, processed by Revolut Ltd, or in cryptocurrency, processed by OxaPay. To request a refund for a web subscription, contact us at support@simnetiq.store with your order number or receipt. Card refunds are returned to the card you paid with and appear on your statement within 5–10 business days, depending on your bank. Cryptocurrency payments cannot be reversed on the network, so a crypto refund is sent as a new transfer to a wallet address you give us, in the same coin you paid with. We refund the amount we received; network fees and any change in exchange rate between your payment and the refund are not covered."
       },
       "mobileSubscriptions": {
         "title": "5. Mobile App Subscriptions (App Store & Google Play)",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. Renewal Charges",
-        "content": "Subscriptions auto-renew at the end of each billing period. If you do not wish to be charged for a renewal, you must cancel your subscription at least 24 hours before the end of the current billing period. For web subscriptions: contact us at support@simnetiq.store. For mobile subscriptions: cancel through your device's App Store or Google Play settings. If you are charged for a renewal you did not intend, contact us within 14 days of the renewal charge and we will process a refund for the unused portion of the renewal period."
+        "content": "Renewal works differently depending on where you bought the subscription. A subscription bought on our website is a one-off purchase of the period you selected: it does not auto-renew, we hold no payment method with which to charge you again, and access simply ends when the period expires — there is nothing to cancel and no renewal charge to refund. A subscription bought through the Apple App Store or Google Play auto-renews at the end of each billing period; if you do not wish to be charged for a renewal, cancel it at least 24 hours before the end of the current period through your device's App Store or Google Play settings. If you are charged for a renewal you did not intend, contact us at support@simnetiq.store within 14 days of the renewal charge and we will help you obtain a refund for the unused portion of the renewal period through the relevant app store."
       },
       "exclusions": {
         "title": "7. Refund Exclusions",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. How to Request a Refund",
-        "content": "To request a refund, please contact us with the following information: your name or account identifier, the email address associated with your purchase, your order number or receipt (from Revolut, Apple, or Google), the date of purchase, and the reason for your refund request (optional but helpful). Send your request to: support@simnetiq.store. We aim to acknowledge all refund requests within 2 business days and process approved refunds within 14 business days."
+        "content": "To request a refund, please contact us with the following information: your name or account identifier, the email address associated with your purchase, your order number or receipt (from Revolut, OxaPay, Apple, or Google), the date of purchase, and the reason for your refund request (optional but helpful). Send your request to: support@simnetiq.store. We aim to acknowledge all refund requests within 2 business days and process approved refunds within 14 business days."
       },
       "contact": {
         "title": "9. Contact Us",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "Jak si mohu předplatit?",
-          "answer": "Navštivte naši stránku pro předplatné, zadejte svůj e-mail, vyberte tarif a zaplaťte přes Revolut. Vaše předplatné Pro se aktivuje okamžitě."
+          "answer": "Navštivte naši stránku pro předplatné, zadejte svůj e-mail, vyberte tarif a zaplaťte kartou přes Revolut nebo kryptoměnou přes OxaPay. Vaše předplatné Pro se aktivuje okamžitě."
         },
         "multiDevice": {
           "question": "Mohu používat jeden účet na více zařízeních?",
@@ -1128,7 +1129,7 @@
       "savings": "Ušetřete až 35 % oproti obchodům s aplikacemi",
       "step1": "Otevřete @dopplercreatebot v Telegramu",
       "step2": "Klepněte na „Subscribe“ a zvolte tarif",
-      "step3": "Zaplaťte bezpečně přes Revolut — použijte kód LAUNCH20 pro 20% slevu"
+      "step3": "Zaplaťte bezpečně kartou (Revolut) nebo kryptoměnou (OxaPay) — použijte kód LAUNCH20 pro 20% slevu"
     },
     "manageSection": "Správa předplatného",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "sleva",
     "promoInvalid": "Neplatný slevový kód",
     "promoFailed": "Nepodařilo se ověřit kód",
-    "footerNote": "Jednorázová platba přes Revolut. Bez automatického obnovení. 30denní záruka vrácení peněz.",
+    "footerNote": "Jednorázová platba kartou (Revolut) nebo kryptoměnou (OxaPay). Bez automatického obnovení. 30denní záruka vrácení peněz.",
     "webBonus": {
       "title": "Webový bonus — dny zdarma v ceně",
       "subtitle": "3denní bezplatná zkušební verze je k dispozici pouze v App Store a Google Play. Jako kompenzace na webu každý plán zahrnuje dny navíc zdarma:",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "Předplatné v App Store",
       "restorePlayStore": "Předplatné v Google Play",
       "deleteProSupportNote": "Váš účet má aktivní předplatné Pro. Pro smazání kontaktujte podporu."
-    }
+    },
+    "securedByCrypto": "Zabezpečeno OxaPay"
   },
   "subscribeSuccess": {
     "title": "Vše je připraveno!",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "Upgrade na Doppler Pro",
-    "subtitle": "Zvolte tarif a předplaťte si bezpečně přes Revolut.",
+    "subtitle": "Zvolte tarif a zaplaťte bezpečně kartou (Revolut) nebo kryptoměnou (OxaPay).",
     "accountLabel": "Účet",
     "monthly": "Měsíční",
     "sixMonth": "6 měsíců",
@@ -1372,7 +1374,7 @@
     "promoOff": "sleva",
     "promoInvalid": "Neplatný slevový kód",
     "promoFailed": "Nepodařilo se ověřit kód",
-    "footerNote": "Bezpečná platba přes Revolut. Možnost zrušení kdykoli.",
+    "footerNote": "Bezpečná platba kartou (Revolut) nebo kryptoměnou (OxaPay). Možnost zrušení kdykoli.",
     "terms": "Obchodní podmínky",
     "privacy": "Zásady ochrany osobních údajů",
     "error": "Něco se pokazilo. Zkuste to prosím znovu.",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "Smlouva o zpracování osobních údajů",
-    "lastUpdated": "Poslední aktualizace: duben 2026",
+    "lastUpdated": "Poslední aktualizace: srpen 2026",
     "intro": "Tato Smlouva o zpracování osobních údajů (\"DPA\") je součástí smlouvy mezi vámi a společností SIMNETIQ LTD (Company Number 16861177), se sídlem 2 Frederick Street, Kings Cross, London, WC1X 0ND, Spojené království, upravující zpracování osobních údajů v souvislosti se službami Doppler VPN.",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. Typy zpracovávaných osobních údajů",
-        "content": "Mohou být zpracovávány následující kategorie osobních údajů: identifikátory účtů (náhodně generovaný formát VPN-XXXX-XXXX-XXXX), e-mailové adresy (pokud jsou dobrovolně poskytnuty pro obnovu účtu nebo podporu), identifikátory zařízení (anonymní, nespojené s osobní identitou), platební záznamy (zpracovávané poskytovateli platebních služeb třetích stran — Revolut, Apple, Google) a korespondence s podporou (e-mailová komunikace s naším týmem podpory). Nezpracováváme citlivé údaje ani údaje zvláštní kategorie."
+        "content": "Mohou být zpracovávány následující kategorie osobních údajů: identifikátory účtů (náhodně generovaný formát VPN-XXXX-XXXX-XXXX), e-mailové adresy nebo identifikátory v komunikačních aplikacích (pokud jsou dobrovolně poskytnuty pro obnovu účtu nebo podporu), identifikátory zařízení a názvy zařízení hlášené operačním systémem, autentizační tokeny pro jednotlivá zařízení (uchovávané pouze jako otisky SHA-256), autentizační záznamy a záznamy o omezení počtu požadavků na naše API (obsahující IP adresu, identifikátor účtu, identifikátor zařízení a časové razítko), platební záznamy (zpracovávané poskytovateli platebních služeb třetích stran — Revolut a OxaPay u nákupů na našich webových stránkách, Apple a Google u nákupů v našich mobilních aplikacích), identifikátory atribuce instalací, je-li mobilní atribuce aktivní, a korespondence s podporou (e-mailová komunikace s naším týmem podpory). Nezpracováváme citlivé údaje ani údaje zvláštní kategorie a nezpracováváme údaje o provozu VPN — viz oddíl 5."
       },
       "security": {
         "title": "5. Bezpečnostní opatření",
-        "content": "Zavádíme odpovídající technická a organizační opatření k zajištění bezpečnosti osobních údajů, včetně: šifrování VLESS-Reality pro veškerý provoz VPN, šifrování TLS pro veškerou webovou komunikaci, přísných kontrol přístupu k produkčním systémům s principem nejmenších oprávnění, pravidelných bezpečnostních auditů a kontrol infrastruktury, minimalizace dat ve všech službách a přísné politiky bez logů pro používání VPN — neukládáme, nekontrolujem ani neuchováváme žádná data procházející naším VPN tunelem."
+        "content": "Zavádíme odpovídající technická a organizační opatření k zajištění bezpečnosti osobních údajů, včetně: šifrování VLESS-Reality pro veškerý provoz VPN, šifrování TLS pro veškerou webovou komunikaci, přísných kontrol přístupu k produkčním systémům s principem nejmenších oprávnění, autentizačních tokenů pro jednotlivá zařízení, které uchováváme pouze jako otisky SHA-256 a které lze jednotlivě zneplatnit, pravidelných bezpečnostních auditů a kontrol infrastruktury, minimalizace dat ve všech službách a přísné politiky bez logů pro používání VPN — neukládáme, nekontrolujeme ani neuchováváme žádná data procházející naším VPN tunelem. Tento závazek bez logů se vztahuje na provoz VPN; nevztahuje se na autentizační záznamy a záznamy o omezení počtu požadavků popsané v oddíle 4, které zaznamenávají, že zařízení odeslalo požadavek na naše API, a uchovávají se po dobu stanovenou v oddíle 9."
       },
       "subprocessors": {
         "title": "6. Povinnosti subdodavatelů",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. Uchovávání údajů",
-        "content": "Osobní údaje jsou uchovávány pouze po dobu nezbytnou pro účely uvedené v této DPA: informace o účtu jsou uchovávány po dobu aktivního účtu a 30 dní po smazání pro umožnění obnovy, platební záznamy jsou uchovávány po dobu 6 let dle požadavků britského daňového a účetního práva, korespondence s podporou je uchovávána po dobu 12 měsíců po vyřešení a údaje o využívání VPN NEJSOU uchovávány — naše politika bez logů znamená, že nemáme technickou schopnost přiřadit konkrétní síťovou aktivitu k jednotlivým uživatelům."
+        "content": "Osobní údaje jsou uchovávány pouze po dobu nezbytnou pro účely uvedené v této DPA: informace o účtu a související seznam zařízení jsou uchovávány po dobu existence účtu a jsou smazány okamžitě při smazání účtu, s výjimkou účtu s aktivním placeným předplatným, který nelze smazat, dokud toto předplatné nevyprší nebo není zrušeno; autentizační záznamy a záznamy o omezení počtu požadavků popsané v oddíle 4 jsou uchovávány nejdéle 90 dní a poté trvale smazány; platební záznamy jsou uchovávány po dobu 6 let dle požadavků britského daňového a účetního práva; korespondence s podporou je uchovávána po dobu 12 měsíců po vyřešení; a údaje o využívání VPN NEJSOU uchovávány — naše politika bez logů znamená, že nemáme technickou schopnost přiřadit konkrétní síťovou aktivitu k jednotlivým uživatelům."
       },
       "transfers": {
         "title": "10. Mezinárodní přenosy údajů",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "Subdodavatelé",
-    "lastUpdated": "Poslední aktualizace: duben 2026",
+    "lastUpdated": "Poslední aktualizace: srpen 2026",
     "intro": "Následující poskytovatelé služeb třetích stran (subdodavatelé) zpracovávají osobní údaje jménem společnosti SIMNETIQ LTD v souvislosti se službami Doppler VPN. Každý subdodavatel je vázán podmínkami zpracování údajů rovnocennými naší Smlouvě o zpracování osobních údajů.",
     "colName": "Subdodavatel",
     "colPurpose": "Účel",

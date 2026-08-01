@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "正在確認您的付款…",
-      "body": "Revolut 已接受扣款，我們正在為您啟用 Doppler VPN Pro 訂閱。",
+      "body": "{processor} 已接受扣款，我們正在為您啟用 Doppler VPN Pro 訂閱。",
       "orderId": "訂單編號",
       "elapsed": "已等待 {seconds} 秒 · 請勿關閉此視窗"
     },
@@ -44,10 +44,10 @@
       "missingBody": "我們在此連結中找不到訂單編號。若您剛完成付款，請聯絡客服並提供您使用的電子郵件，我們會為您確認訂單。",
       "missingReason": "URL 中缺少 order_id 參數",
       "failedTitle": "付款未完成",
-      "failedBody": "Revolut 回報付款失敗，您並未被扣款。請返回結帳頁面重試，若問題持續請聯絡客服。",
+      "failedBody": "{processor} 回報付款失敗，您並未被扣款。請返回結帳頁面重試，若問題持續請聯絡客服。",
       "failedReasonUnknown": "未知錯誤",
       "timeoutTitle": "我們仍在確認您的付款",
-      "timeoutBody": "Revolut 已完成扣款，但我們的系統尚未收到確認。這幾乎都是暫時性問題——您的帳戶通常會在幾分鐘內自動升級。若未升級，請透過下方訂單編號與我們聯絡，我們會立即處理。",
+      "timeoutBody": "{processor} 已完成扣款，但我們的系統尚未收到確認。這幾乎都是暫時性問題——您的帳戶通常會在幾分鐘內自動升級。若未升級，請透過下方訂單編號與我們聯絡，我們會立即處理。",
       "timeoutReason": "Webhook 傳送延遲",
       "diagnosticHeading": "診斷資訊",
       "statusLabel": "狀態",
@@ -103,7 +103,8 @@
         "card": "信用卡（Revolut）",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "加密貨幣（OxaPay）"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "如何申請退款？",
-        "answer": "退款由 Apple 或 Google 處理。iOS 用戶請前往 reportaproblem.apple.com 並使用 Apple ID 登入。Android 用戶請開啟 Google Play > 帳戶 > 訂單記錄。退款通常在 48 小時內處理完成。"
+        "answer": "我們為歐盟／英國客戶提供 14 天退款，並為其他所有客戶提供 30 天善意退款保證。網頁訂閱——透過 Revolut 以信用卡付款或透過 OxaPay 以加密貨幣付款——請聯絡 support@simnetiq.store。iOS 用戶請前往 reportaproblem.apple.com。Android 用戶請開啟 Google Play > 帳戶 > 訂單記錄。詳情請參閱我們完整的退款政策：dopplervpn.org/refund。"
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "隱私權政策",
-    "lastUpdated": "最後更新：2026 年 7 月",
+    "lastUpdated": "最後更新：2026 年 8 月",
     "intro": "本隱私權政策說明 SIMNETIQ LTD（以下簡稱「公司」、「我們」），一家在英格蘭及威爾斯註冊的公司（公司編號 16861177），註冊地址為 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom，在您使用 DopplerVPN（適用於 iOS、macOS、Android 及 Windows 的 VPN 應用程式）以及我們的 AI 影片生成工具（統稱「服務」）時，如何收集、使用及保護您的資訊。我們致力於遵循英國《一般資料保護規範》（UK GDPR）、歐盟《一般資料保護規範》（EU GDPR）、《加州消費者隱私法》（CCPA）及所有其他適用的資料保護法律來保障您的隱私。",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Cookie 及追蹤",
-        "content": "我們的網站 (dopplervpn.org) 使用網站正常運作所必需的基本 Cookie，以及用於瞭解彙整網站流量的匿名分析 Cookie。我們不使用廣告 Cookie 或跨站追蹤技術。您可以透過瀏覽器設定控制 Cookie 偏好。我們的 VPN 及 AI 應用程式不使用 Cookie。"
+        "content": "我們的網站 (dopplervpn.org) 使用網站正常運作所必需的基本 Cookie，以及用於瞭解彙整網站流量的匿名分析 Cookie。若您是透過付費廣告連到本站，我們還會儲存一個第一方 Cookie，其中存放廣告聯播網附加在您所點擊連結上的點擊識別碼，以及該識別碼所使用的參數名稱。它最多保留 90 天，且僅有一個用途：當您下載應用程式或購買訂閱時，我們的伺服器會將該轉換回報給廣告聯播網，讓該廣告獲得正確歸因。該識別碼由廣告聯播網產生而非由我們產生，且絕不會與您的 VPN 帳戶或您的流量相互連結。我們不設置任何第三方廣告 Cookie，也不使用跨站追蹤技術。您可以透過瀏覽器設定控制 Cookie 偏好。我們的 VPN 及 AI 應用程式不使用 Cookie。"
       },
       "children": {
         "title": "11. 兒童隱私",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "服務條款",
-    "lastUpdated": "最後更新：2026 年 3 月",
-    "intro": "本服務條款（以下簡稱「條款」）構成您（「使用者」、「您」）與 SIMNETIQ LTD（「公司」、「我們」）之間具有法律約束力的協議。SIMNETIQ LTD 是一家在英格蘭及威爾斯註冊的公司（公司編號 16861177），註冊地址為 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom。本條款管轄您對 DopplerVPN（適用於 iOS、Android 及 Windows 的 VPN 應用程式）、我們的 AI 影片生成工具以及所有相關網站、應用程式及服務（統稱「服務」）的存取和使用。存取或使用我們的任何服務即表示您同意受本條款的約束。如果您不同意，則不得使用本服務。",
+    "lastUpdated": "最後更新：2026 年 8 月",
+    "intro": "本服務條款（以下簡稱「條款」）構成您（「使用者」、「您」）與 SIMNETIQ LTD（「公司」、「我們」）之間具有法律約束力的協議。SIMNETIQ LTD 是一家在英格蘭及威爾斯註冊的公司（公司編號 16861177），註冊地址為 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom。本條款管轄您對 DopplerVPN（適用於 iOS、macOS、Android 及 Windows 的 VPN 應用程式）、我們的 AI 影片生成工具以及所有相關網站、應用程式及服務（統稱「服務」）的存取和使用。存取或使用我們的任何服務即表示您同意受本條款的約束。如果您不同意，則不得使用本服務。",
     "sections": {
       "service": {
         "title": "1. 服務說明",
-        "content": "我們提供兩類數位服務：(a) DopplerVPN — 使用 VLESS-Reality 協定加密您的網路連線、隱藏您的 IP 位址，並提供 DNS 層級廣告阻擋及含家長控制之內容過濾的虛擬私人網路應用程式。DopplerVPN 適用於 iOS、Android 及 Windows。(b) AI 影片生成 — 根據使用者提供的提示詞及設定，使用人工智慧生成影片內容的網頁工具。兩項服務均以軟體即服務 (SaaS) 的訂閱模式提供。本服務以「現狀」及「可用時」提供，不附帶任何明示或暗示的保證，包括但不限於對適銷性、特定用途適用性及非侵權的默示保證。"
+        "content": "我們提供兩類數位服務：(a) DopplerVPN — 使用 VLESS-Reality 協定加密您的網路連線、隱藏您的 IP 位址，並提供 DNS 層級廣告阻擋及含家長控制之內容過濾的虛擬私人網路應用程式。DopplerVPN 適用於 iOS、macOS、Android 及 Windows。應用程式承載您裝置多少流量因平台而異：在 iOS、macOS 及 Android 上，它會建立系統層級通道，因此整台裝置的流量都會經由它傳輸；在 Windows 上，它會設定 Windows 系統 Proxy，因此遵循該設定的應用程式會經由 VPN 傳輸，而忽略該設定的應用程式則繼續使用您原本的連線。(b) AI 影片生成 — 根據使用者提供的提示詞及設定，使用人工智慧生成影片內容的網頁工具。兩項服務均以軟體即服務 (SaaS) 的訂閱模式提供。本服務以「現狀」及「可用時」提供，不附帶任何明示或暗示的保證，包括但不限於對適銷性、特定用途適用性及非侵權的默示保證。"
       },
       "eligibility": {
         "title": "2. 資格條件",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. 訂閱、付款與帳單",
-        "content": "使用進階功能需要付費訂閱。DopplerVPN Premium 包含遍布多個國家的進階 VPN 伺服器存取權限、DNS 層級廣告阻擋、含家長控制的內容過濾，以及最多 10 台裝置同時連線。訂閱提供月繳、6 個月及年繳計費週期。付款處理：網頁訂閱由 Revolut Ltd 處理。行動端訂閱透過 Apple App Store (iOS) 或 Google Play Store (Android) 處理。訂閱在每個計費週期結束時自動續訂，除非在續訂日期前至少 24 小時取消。您可隨時取消訂閱：網頁訂閱可聯繫 support@simnetiq.store 取消；行動端訂閱可透過裝置的應用程式商店設定取消。取消將在當期計費週期結束時生效 — 届時前您仍可繼續使用。價格可能不時變動；我們將在價格調漲生效前提供合理通知。所有價格在法律要求時含稅顯示。"
+        "content": "使用進階功能需要付費訂閱。DopplerVPN Premium 包含遍布多個國家的進階 VPN 伺服器存取權限、DNS 層級廣告阻擋、含家長控制的內容過濾，以及最多 10 台裝置同時連線。訂閱提供月繳、6 個月及年繳計費週期。付款處理：在我們網站上購買的訂閱由 Revolut Ltd（信用卡付款）或 OxaPay（加密貨幣付款）處理；行動端訂閱透過 Apple App Store（iOS 及 macOS）或 Google Play Store（Android）處理。兩種通路的續訂方式並不相同。在我們網站上購買的訂閱是您所選期間的一次性購買：它不會自動續訂，我們不會保存任何可再次向您收費的方式，期間屆滿後存取權限即告結束，除非您另行購買。行動端訂閱在每個計費週期結束時自動續訂，除非在續訂日期前至少 24 小時取消；您可隨時透過裝置的應用程式商店設定取消，取消將在當期計費週期結束時生效——在此之前您仍可繼續使用。若對在我們網站上完成的購買有任何疑問，請聯絡 support@simnetiq.store。價格可能不時變動；我們將在價格調漲生效前提供合理通知。所有價格在法律要求時含稅顯示。"
       },
       "usage": {
         "title": "5. 合理使用",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "退款政策",
-    "lastUpdated": "最後更新：2026 年 3 月",
+    "lastUpdated": "最後更新：2026 年 8 月",
     "intro": "本退款政策適用於透過 SIMNETIQ LTD（公司編號 16861177），註冊地址為 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom 購買的所有 DopplerVPN 訂閱及 AI 影片生成工具。我們希望您對我們的服務完全滿意。如果您不滿意，請參閱以下退款條款。",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "對於歐盟/歐洲經濟區及英國以外的客戶，我們為所有訂閱購買提供 30 天善意退款保證。如果您因任何原因對我們的服務不滿意，您可以在首次購買之日起 30 天內申請全額退款。此善意退款僅適用於首次購買，且每位客戶限一次。如需申請退款，請攜帶您的訂單詳情聯繫 support@simnetiq.store。退款將在 14 個工作日內使用原始付款方式處理。"
       },
       "webSubscriptions": {
-        "title": "4. 網頁訂閱（透過 Revolut）",
-        "content": "DopplerVPN 的網頁訂閱由我們的付款處理商 Revolut Ltd 處理。Revolut 安全地處理付款。申請網頁訂閱退款：請攜帶您的訂單號或收據聯繫 support@simnetiq.store。退款將在 5-10 個工作日內顯示在您的帳單上，具體取決於您的付款提供商。"
+        "title": "4. 網頁訂閱（Revolut 與 OxaPay）",
+        "content": "DopplerVPN 的網頁訂閱可透過信用卡付款（由 Revolut Ltd 處理），或以加密貨幣付款（由 OxaPay 處理）。申請網頁訂閱退款，請攜帶您的訂單號或收據聯絡 support@simnetiq.store。信用卡退款會退回您付款時使用的卡片，並依您的銀行而定在 5–10 個工作日內顯示在您的帳單上。加密貨幣付款無法在鏈上撤銷，因此加密貨幣退款會以一筆新的轉帳發送至您提供給我們的錢包位址，幣種與您付款時相同。我們退還實際收到的金額；網路手續費以及您付款與退款之間的匯率變動不在退還範圍內。"
       },
       "mobileSubscriptions": {
         "title": "5. 行動應用程式訂閱（App Store 及 Google Play）",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. 續訂扣費",
-        "content": "訂閱在每個計費週期結束時自動續訂。如果您不希望被收取續訂費用，您必須在當期計費週期結束前至少 24 小時取消訂閱。對於網頁訂閱：請聯繫 support@simnetiq.store。對於行動端訂閱：透過裝置的 App Store 或 Google Play 設定取消。如果您被收取了非預期的續訂費用，請在續訂扣費後 14 天內聯繫我們，我們將為續訂期間未使用的部分處理退款。"
+        "content": "續訂方式視您購買訂閱的管道而定。在我們網站上購買的訂閱屬於您所選期間的一次性購買：不會自動續訂，我們並未保留可再次向您收費的付款方式，期間屆滿後存取權限即行終止——沒有任何需要取消的項目，也沒有可供退還的續訂費用。透過 Apple App Store 或 Google Play 購買的訂閱，則會在每個計費週期結束時自動續訂；若您不希望被收取續訂費用，請至遲於當期結束前 24 小時，透過裝置的 App Store 或 Google Play 設定取消。倘若您遭收取非您本意的續訂費用，請於扣款後 14 天內來信 support@simnetiq.store 與我們聯絡，我們將協助您透過相應的應用程式商店取得續訂期間未使用部分的退款。"
       },
       "exclusions": {
         "title": "7. 退款例外",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. 如何申請退款",
-        "content": "申請退款時，請提供以下資訊：您的姓名或帳戶識別碼、與購買關聯的電子郵件地址、訂單號或收據（來自 Revolut、Apple 或 Google）、購買日期，以及退款原因（可選但有助於處理）。請將請求發送至：support@simnetiq.store。我們將在 2 個工作日內確認收到所有退款請求，並在 14 個工作日內處理已核准的退款。"
+        "content": "申請退款時，請提供以下資訊：您的姓名或帳戶識別碼、與購買關聯的電子郵件地址、訂單號或收據（來自 Revolut、OxaPay、Apple 或 Google）、購買日期，以及退款原因（可選但有助於處理）。請將請求發送至：support@simnetiq.store。我們將在 2 個工作日內確認收到所有退款請求，並在 14 個工作日內處理已核准的退款。"
       },
       "contact": {
         "title": "9. 聯繫我們",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "如何訂閱？",
-          "answer": "前往我們的訂閱頁面，輸入電子郵件，選擇方案，透過 Revolut 付款。您的 Pro 訂閱即時啟用。"
+          "answer": "前往我們的訂閱頁面，輸入電子郵件，選擇方案，透過 Revolut 以信用卡付款或透過 OxaPay 以加密貨幣付款。您的 Pro 訂閱即時啟用。"
         },
         "multiDevice": {
           "question": "一個帳戶可以在多台裝置上使用嗎？",
@@ -1128,7 +1129,7 @@
       "savings": "比應用程式商店最高省 35%",
       "step1": "在 Telegram 中開啟 @dopplercreatebot",
       "step2": "點擊「Subscribe」並選擇方案",
-      "step3": "透過 Revolut 安全付款 — 使用優惠碼 LAUNCH20 享 8 折"
+      "step3": "透過信用卡（Revolut）或加密貨幣（OxaPay）安全付款 — 使用優惠碼 LAUNCH20 享 8 折"
     },
     "manageSection": "管理您的訂閱",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "折扣",
     "promoInvalid": "無效的優惠碼",
     "promoFailed": "優惠碼驗證失敗",
-    "footerNote": "透過 Revolut 一次性付款。不自動續訂。30 天退款保證。",
+    "footerNote": "透過信用卡（Revolut）或加密貨幣（OxaPay）一次性付款。不自動續訂。30 天退款保證。",
     "webBonus": {
       "title": "網頁端專享優惠 — 免費贈送天數",
       "subtitle": "3 天免費試用僅在 App Store 和 Google Play 提供。作為替代，網頁端的每個方案都將獲得額外贈送天數：",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "App Store 訂閱",
       "restorePlayStore": "Google Play 訂閱",
       "deleteProSupportNote": "您的帳戶有有效的 Pro 訂閱。請聯絡客服以刪除。"
-    }
+    },
+    "securedByCrypto": "付款由 OxaPay 保障"
   },
   "subscribeSuccess": {
     "title": "一切就緒！",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "升級至 Doppler Pro",
-    "subtitle": "選擇方案，透過 Revolut 安全訂閱。",
+    "subtitle": "選擇方案，透過信用卡（Revolut）或加密貨幣（OxaPay）安全付款。",
     "accountLabel": "帳戶",
     "monthly": "月繳",
     "sixMonth": "6 個月",
@@ -1372,7 +1374,7 @@
     "promoOff": "折扣",
     "promoInvalid": "無效的優惠碼",
     "promoFailed": "優惠碼驗證失敗",
-    "footerNote": "透過 Revolut 安全付款。隨時取消。",
+    "footerNote": "透過信用卡（Revolut）或加密貨幣（OxaPay）安全付款。隨時取消。",
     "terms": "服務條款",
     "privacy": "隱私權政策",
     "error": "發生錯誤，請重試。",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "資料處理協議",
-    "lastUpdated": "最後更新：2026 年 4 月",
+    "lastUpdated": "最後更新：2026 年 8 月",
     "intro": "本資料處理協議（「DPA」）構成您與 SIMNETIQ LTD（公司編號 16861177），註冊地址為 2 Frederick Street, Kings Cross, London, WC1X 0ND, United Kingdom 之間協議的一部分，規範與 Doppler VPN 服務相關的個人資料處理。",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. 處理的個人資料類型",
-        "content": "以下類別的個人資料可能被處理：帳戶識別碼（隨機產生的 VPN-XXXX-XXXX-XXXX 格式）、電子郵件地址（僅在主動提供用於帳戶復原或客服時）、裝置識別碼（匿名，不與個人身份連結）、付款記錄（由第三方付款提供商處理 — Revolut、Apple、Google），以及客服通訊（與客服團隊的電子郵件往來）。我們不處理敏感或特殊類別的資料。"
+        "content": "以下類別的個人資料可能被處理：帳戶識別碼（隨機產生的 VPN-XXXX-XXXX-XXXX 格式）、電子郵件地址或通訊軟體帳號（在主動提供用於帳戶復原或客服時）、作業系統回報的裝置識別碼及裝置名稱、各裝置專屬的驗證權杖（僅以 SHA-256 雜湊形式儲存）、向我們 API 發出請求的驗證與速率限制記錄（包含 IP 位址、帳戶識別碼、裝置識別碼及時間戳記）、付款記錄（由第三方付款提供商處理 — 網站購買為 Revolut 及 OxaPay，行動應用程式內購買為 Apple 及 Google）、行動歸因啟用時的安裝歸因識別碼，以及客服通訊（與客服團隊的電子郵件往來）。我們不處理敏感或特殊類別的資料，也不處理 VPN 流量資料 — 請參閱第 5 節。"
       },
       "security": {
         "title": "5. 安全措施",
-        "content": "我們實施適當的技術及組織措施以確保個人資料的安全，包括：所有 VPN 流量使用 VLESS-Reality 加密、所有網頁通訊使用 TLS 加密、正式環境系統遵循最小權限原則進行嚴格存取控制、定期安全稽核與基礎架構審查、所有服務的資料最小化設計，以及嚴格的 VPN 使用無日誌政策 — 我們不儲存、檢視或保留任何通過 VPN 通道傳輸的資料。"
+        "content": "我們實施適當的技術及組織措施以確保個人資料的安全，包括：所有 VPN 流量使用 VLESS-Reality 加密、所有網頁通訊使用 TLS 加密、正式環境系統遵循最小權限原則進行嚴格存取控制、各裝置專屬的驗證權杖僅以 SHA-256 雜湊形式儲存且可個別撤銷、定期安全稽核與基礎架構審查、所有服務的資料最小化設計，以及嚴格的 VPN 使用無日誌政策 — 我們不儲存、檢視或保留任何通過 VPN 通道傳輸的資料。該無日誌承諾涵蓋 VPN 流量；但不涵蓋第 4 節所述的驗證與速率限制記錄，該等記錄僅顯示某台裝置曾向我們的 API 發出請求，並依第 9 節所訂期限保留。"
       },
       "subprocessors": {
         "title": "6. 子處理者義務",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. 資料保留",
-        "content": "個人資料僅在本 DPA 所述目的所需的期限內保留：帳戶資訊在帳戶活躍期間及刪除後 30 天內保留以便復原、付款記錄依英國稅務及會計法律要求保留 6 年、客服通訊在解決後保留 12 個月，且 VPN 使用資料不予保留 — 我們的無日誌政策意味著我們在技術上無法將特定網路活動與個別使用者相關聯。"
+        "content": "個人資料僅在本 DPA 所述目的所需的期限內保留：帳戶資訊及其關聯的裝置清單在帳戶存續期間保留，並在帳戶被刪除時立即刪除，但持有有效付費訂閱的帳戶在該訂閱到期或被取消之前無法刪除；第 4 節所述的驗證與速率限制記錄最多保留 90 天，其後永久刪除；付款記錄依英國稅務及會計法律要求保留 6 年；客服通訊在解決後保留 12 個月；且 VPN 使用資料不予保留 — 我們的無日誌政策意味著我們在技術上無法將特定網路活動與個別使用者相關聯。"
       },
       "transfers": {
         "title": "10. 國際資料傳輸",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "子處理者",
-    "lastUpdated": "最後更新：2026 年 4 月",
+    "lastUpdated": "最後更新：2026 年 8 月",
     "intro": "以下第三方服務提供商（子處理者）代表 SIMNETIQ LTD 處理與 Doppler VPN 服務相關的個人資料。每個子處理者均受與我們資料處理協議同等之資料處理條款約束。",
     "colName": "子處理者",
     "colPurpose": "目的",

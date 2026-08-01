@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Ödemeniz onaylanıyor…",
-      "body": "Revolut ödemeyi kabul etti. Doppler VPN Pro aboneliğinizi şimdi etkinleştiriyoruz.",
+      "body": "{processor} ödemeyi kabul etti. Doppler VPN Pro aboneliğinizi şimdi etkinleştiriyoruz.",
       "orderId": "Sipariş Kimliği",
       "elapsed": "Geçen süre: {seconds}sn · bu pencereyi kapatmayın"
     },
@@ -44,10 +44,10 @@
       "missingBody": "Bu bağlantıda bir sipariş kimliği bulamıyoruz. Henüz ödeme yaptıysanız, lütfen kullandığınız e-posta adresiyle birlikte destekle iletişime geçin; satın alımınızı doğrulayalım.",
       "missingReason": "URL'de order_id parametresi yok",
       "failedTitle": "Ödeme tamamlanamadı",
-      "failedBody": "Revolut ödemeyi başarısız olarak bildirdi. Hesabınızdan ücret alınmadı. Lütfen ödeme sayfasına dönüp tekrar deneyin veya sorun devam ederse destekle iletişime geçin.",
+      "failedBody": "{processor} ödemeyi başarısız olarak bildirdi. Hesabınızdan ücret alınmadı. Lütfen ödeme sayfasına dönüp tekrar deneyin veya sorun devam ederse destekle iletişime geçin.",
       "failedReasonUnknown": "Bilinmeyen hata",
       "timeoutTitle": "Ödemenizi hâlâ onaylıyoruz",
-      "timeoutBody": "Revolut ödemeyi aldı ancak sistemimiz henüz onay almadı. Bu durum neredeyse her zaman geçicidir — hesabınız birkaç dakika içinde otomatik olarak yükseltilecek. Yükseltilmezse aşağıdaki sipariş kimliğini bize iletin, hemen düzeltelim.",
+      "timeoutBody": "{processor} ödemeyi aldı ancak sistemimiz henüz onay almadı. Bu durum neredeyse her zaman geçicidir — hesabınız birkaç dakika içinde otomatik olarak yükseltilecek. Yükseltilmezse aşağıdaki sipariş kimliğini bize iletin, hemen düzeltelim.",
       "timeoutReason": "Webhook teslimi gecikti",
       "diagnosticHeading": "Tanılama bilgileri",
       "statusLabel": "Durum",
@@ -103,7 +103,8 @@
         "card": "Kart (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Kripto para (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Para iadesi nasıl talep ederim?",
-        "answer": "AB/İngiltere müşterileri için 14 günlük iade hakkı ve diğer tüm müşteriler için 30 günlük iyi niyet para iade garantisi sunuyoruz. Web abonelikleri (Revolut ile) için support@simnetiq.store adresinden bize ulaşın. iOS için reportaproblem.apple.com adresini ziyaret edin. Android için Google Play > Hesap > Sipariş geçmişi'ni açın. Ayrıntılar için dopplervpn.org/refund adresindeki İade Politikamızı inceleyin."
+        "answer": "AB/İngiltere müşterileri için 14 günlük iade hakkı ve diğer tüm müşteriler için 30 günlük iyi niyet para iade garantisi sunuyoruz. Kartla Revolut üzerinden veya kripto parayla OxaPay üzerinden ödenen web abonelikleri için support@simnetiq.store adresinden bize ulaşın. iOS için reportaproblem.apple.com adresini ziyaret edin. Android için Google Play > Hesap > Sipariş geçmişi'ni açın. Ayrıntılar için dopplervpn.org/refund adresindeki İade Politikamızı inceleyin."
       }
     }
   },
@@ -439,7 +440,7 @@
   },
   "privacy": {
     "title": "Gizlilik Politikası",
-    "lastUpdated": "Son güncelleme: Temmuz 2026",
+    "lastUpdated": "Son güncelleme: Ağustos 2026",
     "intro": "Bu Gizlilik Politikası, İngiltere ve Galler'de kayıtlı bir şirket olan SIMNETIQ LTD (\"Şirket\", \"biz\", \"bize\" veya \"bizim\") (Şirket Numarası 16861177), kayıtlı adresi 2 Frederick Street, Kings Cross, Londra, WC1X 0ND, Birleşik Krallık, DopplerVPN (iOS, macOS, Android ve Windows'ta mevcut VPN uygulamamız) ve yapay zeka destekli video oluşturma aracımızı (toplu olarak \"Hizmetler\") kullandığınızda bilgilerinizi nasıl topladığını, kullandığını ve koruduğunu açıklar. Gizliliğinizi Birleşik Krallık Genel Veri Koruma Yönetmeliği (UK GDPR), AB Genel Veri Koruma Yönetmeliği (EU GDPR), Kaliforniya Tüketici Gizlilik Yasası (CCPA) ve diğer tüm geçerli veri koruma yasalarına uygun olarak korumaya kararlıyız.",
     "sections": {
       "noLogs": {
@@ -480,7 +481,7 @@
       },
       "cookies": {
         "title": "10. Çerezler ve İzleme",
-        "content": "Web sitemiz (dopplervpn.org), web sitesinin düzgün çalışması için gerekli olan temel çerezleri ve web sitesi trafiğini toplu olarak anlamak için anonim analiz çerezlerini kullanır. Reklam çerezleri veya siteler arası izleme teknolojileri kullanmıyoruz. Çerez tercihlerinizi tarayıcı ayarlarınız üzerinden kontrol edebilirsiniz. VPN ve AI uygulamalarımız çerez kullanmaz."
+        "content": "Web sitemiz (dopplervpn.org), web sitesinin düzgün çalışması için gerekli olan temel çerezleri ve web sitesi trafiğini toplu olarak anlamak için anonim analiz çerezlerini kullanır. Ücretli bir reklam üzerinden geldiyseniz, tıkladığınız bağlantıya reklam ağının eklediği tıklama tanımlayıcısını ve bu tanımlayıcının hangi parametreyle geldiğinin adını tutan bir birinci taraf çerezi de saklarız. Bu çerez en fazla 90 gün saklanır ve tek bir amaca hizmet eder: uygulamayı indirdiğinizde veya bir abonelik satın aldığınızda, sunucumuz bu dönüşümü, reklamın kredilendirilebilmesi için ağa geri bildirir. Söz konusu tanımlayıcı bizim tarafımızdan değil, ağ tarafından oluşturulur ve hiçbir zaman VPN hesabınızla ya da trafiğinizle ilişkilendirilmez. Üçüncü taraf reklam çerezleri kullanmıyor ve siteler arası izleme teknolojilerinden yararlanmıyoruz. Çerez tercihlerinizi tarayıcı ayarlarınız üzerinden kontrol edebilirsiniz. VPN ve AI uygulamalarımız çerez kullanmaz."
       },
       "children": {
         "title": "11. Çocukların Gizliliği",
@@ -498,12 +499,12 @@
   },
   "terms": {
     "title": "Hizmet Şartları",
-    "lastUpdated": "Son güncelleme: Mart 2026",
-    "intro": "Bu Hizmet Şartları (\"Şartlar\"), siz (\"Kullanıcı\", \"siz\" veya \"sizin\") ile İngiltere ve Galler'de kayıtlı bir şirket olan SIMNETIQ LTD (\"Şirket\", \"biz\", \"bize\" veya \"bizim\") (Şirket Numarası 16861177), kayıtlı adresi 2 Frederick Street, Kings Cross, Londra, WC1X 0ND, Birleşik Krallık, arasında yasal olarak bağlayıcı bir anlaşma oluşturur. Bu Şartlar, DopplerVPN (iOS, Android ve Windows'ta mevcut VPN uygulamamız), yapay zeka destekli video oluşturma aracımız ve tüm ilgili web siteleri, uygulamalar ve hizmetlere (toplu olarak \"Hizmetler\") erişiminizi ve kullanımınızı düzenler. Hizmetlerimizden herhangi birine erişerek veya kullanarak, bu Şartlara bağlı olmayı kabul edersiniz. Kabul etmiyorsanız, Hizmetleri kullanmamalısınız.",
+    "lastUpdated": "Son güncelleme: Ağustos 2026",
+    "intro": "Bu Hizmet Şartları (\"Şartlar\"), siz (\"Kullanıcı\", \"siz\" veya \"sizin\") ile İngiltere ve Galler'de kayıtlı bir şirket olan SIMNETIQ LTD (\"Şirket\", \"biz\", \"bize\" veya \"bizim\") (Şirket Numarası 16861177), kayıtlı adresi 2 Frederick Street, Kings Cross, Londra, WC1X 0ND, Birleşik Krallık, arasında yasal olarak bağlayıcı bir anlaşma oluşturur. Bu Şartlar, DopplerVPN (iOS, macOS, Android ve Windows'ta mevcut VPN uygulamamız), yapay zeka destekli video oluşturma aracımız ve tüm ilgili web siteleri, uygulamalar ve hizmetlere (toplu olarak \"Hizmetler\") erişiminizi ve kullanımınızı düzenler. Hizmetlerimizden herhangi birine erişerek veya kullanarak, bu Şartlara bağlı olmayı kabul edersiniz. Kabul etmiyorsanız, Hizmetleri kullanmamalısınız.",
     "sections": {
       "service": {
         "title": "1. Hizmet Açıklaması",
-        "content": "İki kategori dijital hizmet sunuyoruz: (a) DopplerVPN — VLESS-Reality protokolü kullanarak internet bağlantınızı şifreleyen, IP adresinizi maskeleyen ve DNS düzeyinde reklam engelleme ile ebeveyn kontrolü dahil içerik filtreleme sağlayan bir sanal özel ağ uygulaması. DopplerVPN, iOS, Android ve Windows'ta mevcuttur. (b) AI Video Oluşturma — kullanıcı tarafından sağlanan istemler ve ayarlara dayalı video içeriği oluşturmak için yapay zeka kullanan web tabanlı bir araç. Her iki Hizmet de abonelik bazında hizmet olarak yazılım (\"SaaS\") olarak sunulmaktadır. Hizmetler, satılabilirlik, belirli bir amaca uygunluk ve ihlal etmeme dahil ancak bunlarla sınırlı olmamak üzere, açık veya zımni hiçbir garanti olmaksızın \"olduğu gibi\" ve \"mevcut olduğu şekliyle\" sağlanmaktadır."
+        "content": "İki kategori dijital hizmet sunuyoruz: (a) DopplerVPN — VLESS-Reality protokolü kullanarak internet bağlantınızı şifreleyen, IP adresinizi maskeleyen ve DNS düzeyinde reklam engelleme ile ebeveyn kontrolü dahil içerik filtreleme sağlayan bir sanal özel ağ uygulaması. DopplerVPN, iOS, macOS, Android ve Windows'ta mevcuttur. Uygulamanın cihazınızın trafiğinin ne kadarını taşıdığı platforma göre değişir: iOS, macOS ve Android'de sistem genelinde bir tünel kurar, böylece cihazın tüm trafiği bu tünel üzerinden yönlendirilir; Windows'ta ise Windows sistem proxy'sini yapılandırır, dolayısıyla bu ayara uyan uygulamalar VPN üzerinden yönlendirilirken bu ayarı yok sayan uygulamalar normal bağlantınızı kullanmaya devam eder. (b) AI Video Oluşturma — kullanıcı tarafından sağlanan istemler ve ayarlara dayalı video içeriği oluşturmak için yapay zeka kullanan web tabanlı bir araç. Her iki Hizmet de abonelik bazında hizmet olarak yazılım (\"SaaS\") olarak sunulmaktadır. Hizmetler, satılabilirlik, belirli bir amaca uygunluk ve ihlal etmeme dahil ancak bunlarla sınırlı olmamak üzere, açık veya zımni hiçbir garanti olmaksızın \"olduğu gibi\" ve \"mevcut olduğu şekliyle\" sağlanmaktadır."
       },
       "eligibility": {
         "title": "2. Uygunluk",
@@ -515,7 +516,7 @@
       },
       "subscription": {
         "title": "4. Abonelikler, Ödemeler ve Faturalandırma",
-        "content": "Premium özelliklere erişim için ücretli abonelik gerekmektedir. DopplerVPN Premium, birden fazla ülkedeki premium VPN sunucularına erişim, DNS düzeyinde reklam engelleme, ebeveyn kontrolü ile içerik filtreleme ve aynı anda 10 cihaza kadar bağlantı içerir. Abonelikler aylık, 6 aylık ve yıllık faturalandırma döngüleriyle mevcuttur. Ödeme işleme: web abonelikleri Revolut Ltd tarafından işlenir. Mobil abonelikler Apple App Store (iOS) veya Google Play Store (Android) üzerinden işlenir. Abonelikler, yenileme tarihinden en az 24 saat önce iptal edilmedikçe her faturalandırma döneminin sonunda otomatik olarak yenilenir. Aboneliğinizi istediğiniz zaman iptal edebilirsiniz: web abonelikleri için support@simnetiq.store adresinden bizimle iletişime geçerek; mobil abonelikler için cihazınızın uygulama mağazası ayarları üzerinden. İptal, mevcut faturalandırma döneminin sonunda geçerli olur — o zamana kadar erişiminiz devam eder. Fiyatlar zaman zaman değişebilir; fiyat artışlarından önce makul bir süre önceden bildirim yapacağız. Tüm fiyatlar, yasaların gerektirdiği durumlarda geçerli vergiler dahil olarak gösterilir."
+        "content": "Premium özelliklere erişim için ücretli abonelik gerekmektedir. DopplerVPN Premium, birden fazla ülkedeki premium VPN sunucularına erişim, DNS düzeyinde reklam engelleme, ebeveyn kontrolü ile içerik filtreleme ve aynı anda 10 cihaza kadar bağlantı içerir. Abonelikler aylık, 6 aylık ve yıllık faturalandırma döngüleriyle mevcuttur. Ödeme işleme: web sitemizden satın alınan abonelikler Revolut Ltd (kart ödemeleri) veya OxaPay (kripto para ödemeleri) tarafından işlenir; mobil abonelikler Apple App Store (iOS ve macOS) veya Google Play Store (Android) üzerinden işlenir. Yenileme iki kanalda farklı çalışır. Web sitemizden satın alınan bir abonelik, seçtiğiniz döneme ait tek seferlik bir satın alımdır: otomatik olarak yenilenmez, sizden yeniden ücret tahsil etmemizi sağlayacak hiçbir bilgiyi saklamayız ve yeni bir satın alım yapmadığınız sürece dönem sona erdiğinde erişim de sona erer. Mobil abonelik ise, yenileme tarihinden en az 24 saat önce iptal edilmedikçe her faturalandırma döneminin sonunda otomatik olarak yenilenir; bunu istediğiniz zaman cihazınızın uygulama mağazası ayarlarından iptal edebilirsiniz ve iptal, mevcut faturalandırma döneminin sonunda geçerli olur — o zamana kadar erişiminiz devam eder. Web sitemizden yapılan bir satın alımla ilgili her türlü soru için support@simnetiq.store adresinden bize ulaşın. Fiyatlar zaman zaman değişebilir; fiyat artışlarından önce makul bir süre önceden bildirim yapacağız. Tüm fiyatlar, yasaların gerektirdiği durumlarda geçerli vergiler dahil olarak gösterilir."
       },
       "usage": {
         "title": "5. Kabul Edilebilir Kullanım",
@@ -557,7 +558,7 @@
   },
   "refund": {
     "title": "İade Politikası",
-    "lastUpdated": "Son güncelleme: Mart 2026",
+    "lastUpdated": "Son güncelleme: Ağustos 2026",
     "intro": "Bu İade Politikası, SIMNETIQ LTD (Şirket Numarası 16861177), kayıtlı adresi 2 Frederick Street, Kings Cross, Londra, WC1X 0ND, Birleşik Krallık aracılığıyla yapılan tüm DopplerVPN abonelikleri ve yapay zeka destekli video oluşturma aracı satın alımlarına uygulanır. Hizmetlerimizden tamamen memnun olmanızı istiyoruz. Değilseniz, lütfen aşağıdaki iade koşullarını inceleyin.",
     "sections": {
       "euRights": {
@@ -573,8 +574,8 @@
         "content": "AB/AEA ve Birleşik Krallık dışındaki müşteriler için, tüm abonelik satın alımlarında 30 günlük iyi niyet para iade garantisi sunuyoruz. Herhangi bir nedenle Hizmetlerimizden memnun değilseniz, ilk satın alma tarihinizden itibaren 30 gün içinde tam iade talep edebilirsiniz. Bu iyi niyet iadesi yalnızca ilk satın alımlar için geçerlidir ve müşteri başına bir iade ile sınırlıdır. İade talep etmek için sipariş bilgilerinizle birlikte support@simnetiq.store adresinden bizimle iletişime geçin. İadeler, orijinal ödeme yöntemiyle 14 iş günü içinde işlenecektir."
       },
       "webSubscriptions": {
-        "title": "4. Web Abonelikleri (Revolut ile)",
-        "content": "DopplerVPN için web abonelikleri, ödeme işlemcimiz Revolut Ltd tarafından işlenir. Revolut ödeme işlemlerini güvenli bir şekilde yürütür. Bir web aboneliği için iade talep etmek üzere: sipariş numaranız veya makbuzunuzla birlikte support@simnetiq.store adresinden bizimle iletişime geçin. İadeler işlenir ve ödeme sağlayıcınıza bağlı olarak 5-10 iş günü içinde hesap ekstrenizde görünecektir."
+        "title": "4. Web Abonelikleri (Revolut ve OxaPay)",
+        "content": "DopplerVPN için web abonelikleri ya kartla — Revolut Ltd tarafından işlenerek — ya da kripto parayla — OxaPay tarafından işlenerek — ödenir. Bir web aboneliği için iade talep etmek üzere sipariş numaranız veya makbuzunuzla birlikte support@simnetiq.store adresinden bizimle iletişime geçin. Kart iadeleri, ödeme yaptığınız karta geri gönderilir ve bankanıza bağlı olarak 5–10 iş günü içinde hesap ekstrenizde görünür. Kripto para ödemeleri ağ üzerinde geri alınamaz; bu nedenle kripto iadesi, bize bildireceğiniz bir cüzdan adresine, ödeme yaptığınız kripto biriminin aynısıyla yeni bir transfer olarak gönderilir. Bize ulaşan tutarı iade ederiz; ağ ücretleri ve ödemeniz ile iade arasındaki kur değişimleri kapsam dışıdır."
       },
       "mobileSubscriptions": {
         "title": "5. Mobil Uygulama Abonelikleri (App Store ve Google Play)",
@@ -582,7 +583,7 @@
       },
       "renewals": {
         "title": "6. Yenileme Ücretleri",
-        "content": "Abonelikler her faturalandırma döneminin sonunda otomatik olarak yenilenir. Yenileme ücreti alınmasını istemiyorsanız, aboneliğinizi mevcut faturalandırma döneminin bitiminden en az 24 saat önce iptal etmelisiniz. Web abonelikleri için: support@simnetiq.store adresinden bizimle iletişime geçin. Mobil abonelikler için: cihazınızın App Store veya Google Play ayarları üzerinden iptal edin. İstemediğiniz bir yenileme ücreti tahsil edildiyse, yenileme ücretinden sonraki 14 gün içinde bizimle iletişime geçin ve yenileme döneminin kullanılmayan kısmı için iade işleyeceğiz."
+        "content": "Yenileme, aboneliği nereden satın aldığınıza bağlı olarak farklı işler. Web sitemizden satın alınan bir abonelik, seçtiğiniz döneme ait tek seferlik bir satın alımdır: otomatik olarak yenilenmez, sizden yeniden ücret tahsil etmemizi sağlayacak hiçbir ödeme yöntemi saklamayız ve dönem sona erdiğinde erişim de sona erer — iptal edilecek bir şey ve iadesi yapılacak bir yenileme ücreti yoktur. Apple App Store veya Google Play üzerinden satın alınan bir abonelik ise her faturalandırma döneminin sonunda otomatik olarak yenilenir; bir yenileme için ücret tahsil edilmesini istemiyorsanız, mevcut dönemin bitiminden en az 24 saat önce cihazınızın App Store veya Google Play ayarları üzerinden iptal edin. İstemediğiniz bir yenileme için ücret tahsil edildiyse, yenileme ücretinden sonraki 14 gün içinde support@simnetiq.store adresinden bizimle iletişime geçin; ilgili uygulama mağazası aracılığıyla yenileme döneminin kullanılmayan kısmı için iade almanıza yardımcı olacağız."
       },
       "exclusions": {
         "title": "7. İade İstisnaları",
@@ -590,7 +591,7 @@
       },
       "howTo": {
         "title": "8. İade Nasıl Talep Edilir",
-        "content": "İade talep etmek için aşağıdaki bilgilerle bizimle iletişime geçin: adınız veya hesap tanımlayıcınız, satın alımınızla ilişkili e-posta adresi, sipariş numaranız veya makbuzunuz (Revolut, Apple veya Google'dan), satın alma tarihi ve iade talebinizin nedeni (isteğe bağlı ancak yararlı). Talebinizi şu adrese gönderin: support@simnetiq.store. Tüm iade taleplerini 2 iş günü içinde onaylamayı ve onaylanan iadeleri 14 iş günü içinde işlemeyi hedefliyoruz."
+        "content": "İade talep etmek için aşağıdaki bilgilerle bizimle iletişime geçin: adınız veya hesap tanımlayıcınız, satın alımınızla ilişkili e-posta adresi, sipariş numaranız veya makbuzunuz (Revolut, OxaPay, Apple veya Google'dan), satın alma tarihi ve iade talebinizin nedeni (isteğe bağlı ancak yararlı). Talebinizi şu adrese gönderin: support@simnetiq.store. Tüm iade taleplerini 2 iş günü içinde onaylamayı ve onaylanan iadeleri 14 iş günü içinde işlemeyi hedefliyoruz."
       },
       "contact": {
         "title": "9. Bize Ulaşın",
@@ -869,7 +870,7 @@
         },
         "subscribe": {
           "question": "Nasıl abone olabilirim?",
-          "answer": "Abone sayfamızı ziyaret edin, e-postanızı girin, plan seçin ve Revolut ile ödeyin. Pro aboneliğiniz anında etkinleşir."
+          "answer": "Abone sayfamızı ziyaret edin, e-postanızı girin, plan seçin ve kartla Revolut üzerinden ya da kripto parayla OxaPay üzerinden ödeyin. Pro aboneliğiniz anında etkinleşir."
         },
         "multiDevice": {
           "question": "Bir hesabı birden fazla cihazda kullanabilir miyim?",
@@ -1129,7 +1130,7 @@
       "savings": "Uygulama mağazalarına göre %35'e kadar tasarruf edin",
       "step1": "Telegram'da @dopplercreatebot'u açın",
       "step2": "\"Abone Ol\"a dokunun ve planınızı seçin",
-      "step3": "Revolut üzerinden güvenli bir şekilde ödeme yapın — %20 indirim için LAUNCH20 kodunu kullanın"
+      "step3": "Kartla (Revolut) veya kriptoyla (OxaPay) güvenli bir şekilde ödeme yapın — %20 indirim için LAUNCH20 kodunu kullanın"
     },
     "manageSection": "Aboneliğinizi yönetme",
     "manage": {
@@ -1253,7 +1254,7 @@
     "promoOff": "indirim",
     "promoInvalid": "Geçersiz promo kodu",
     "promoFailed": "Kod doğrulanamadı",
-    "footerNote": "Revolut üzerinden tek seferlik ödeme. Otomatik yenileme yok. 30 günlük para iade garantisi.",
+    "footerNote": "Kartla (Revolut) veya kriptoyla (OxaPay) tek seferlik ödeme. Otomatik yenileme yok. 30 günlük para iade garantisi.",
     "webBonus": {
       "title": "Web bonusu — ücretsiz günler dahil",
       "subtitle": "3 günlük ücretsiz deneme yalnızca App Store ve Google Play'de mevcuttur. Web'de bunu telafi etmek için her plana ekstra ücretsiz günler dahildir:",
@@ -1322,7 +1323,8 @@
       "restoreAppStore": "App Store Abonelikleri",
       "restorePlayStore": "Google Play Abonelikleri",
       "deleteProSupportNote": "Hesabınızda aktif bir Pro aboneliği var. Silmek için lütfen destekle iletişime geçin."
-    }
+    },
+    "securedByCrypto": "OxaPay ile güvende"
   },
   "subscribeSuccess": {
     "title": "Her Şey Hazır!",
@@ -1351,7 +1353,7 @@
   },
   "checkout": {
     "title": "Doppler Pro'ya yukseltin",
-    "subtitle": "Planınızı seçin ve Revolut ile güvenle ödeyin.",
+    "subtitle": "Planınızı seçin ve kartla (Revolut) veya kriptoyla (OxaPay) güvenle ödeyin.",
     "accountLabel": "Hesap",
     "monthly": "Aylık",
     "sixMonth": "6 Ay",
@@ -1373,7 +1375,7 @@
     "promoOff": "indirim",
     "promoInvalid": "Gecersiz promosyon kodu",
     "promoFailed": "Kod dogrulanamadı",
-    "footerNote": "Revolut ile güvenli ödeme. İstediğiniz zaman iptal edin.",
+    "footerNote": "Kartla (Revolut) veya kriptoyla (OxaPay) güvenli ödeme. İstediğiniz zaman iptal edin.",
     "terms": "Kullanım Sartları",
     "privacy": "Gizlilik Politikası",
     "error": "Bir seyler yanlıs gitti. Lutfen tekrar deneyin.",
@@ -2747,7 +2749,7 @@
   },
   "dpa": {
     "title": "Veri İşleme Sözleşmesi",
-    "lastUpdated": "Son güncelleme: Nisan 2026",
+    "lastUpdated": "Son güncelleme: Ağustos 2026",
     "intro": "Bu Veri İşleme Sözleşmesi (\"DPA\"), Doppler VPN hizmetleriyle bağlantılı olarak kişisel verilerin işlenmesini düzenleyen, siz ve SIMNETIQ LTD (Şirket Numarası 16861177), kayıtlı adresi 2 Frederick Street, Kings Cross, Londra, WC1X 0ND, Birleşik Krallık arasındaki sözleşmenin bir parçasını oluşturur.",
     "sections": {
       "scope": {
@@ -2764,11 +2766,11 @@
       },
       "dataTypes": {
         "title": "4. İşlenen Kişisel Veri Türleri",
-        "content": "Aşağıdaki kişisel veri kategorileri işlenebilir: hesap tanımlayıcıları (rastgele oluşturulmuş VPN-XXXX-XXXX-XXXX formatında), e-posta adresleri (hesap kurtarma veya destek için gönüllü olarak sağlandığında), cihaz tanımlayıcıları (anonim, kişisel kimliğe bağlı değil), ödeme kayıtları (üçüncü taraf ödeme sağlayıcıları tarafından işlenir — Revolut, Apple, Google) ve destek yazışmaları (destek ekibimizle e-posta iletişimleri). Hassas veya özel kategori veriler işlenmez."
+        "content": "Aşağıdaki kişisel veri kategorileri işlenebilir: hesap tanımlayıcıları (rastgele oluşturulmuş VPN-XXXX-XXXX-XXXX formatında), e-posta adresleri veya mesajlaşma kullanıcı adları (hesap kurtarma veya destek için gönüllü olarak sağlandığında), işletim sistemi tarafından bildirilen cihaz tanımlayıcıları ve cihaz adları, cihaz başına kimlik doğrulama belirteçleri (yalnızca SHA-256 özetleri olarak saklanır), API'mize yapılan isteklere ilişkin kimlik doğrulama ve hız sınırlama kayıtları (bir IP adresi, bir hesap tanımlayıcısı, bir cihaz tanımlayıcısı ve bir zaman damgası içerir), ödeme kayıtları (üçüncü taraf ödeme sağlayıcıları tarafından işlenir — web sitemizden yapılan satın alımlar için Revolut ve OxaPay, mobil uygulamalarımızdan yapılan satın alımlar için Apple ve Google), mobil ilişkilendirmenin etkin olduğu durumlarda kurulum ilişkilendirme tanımlayıcıları ve destek yazışmaları (destek ekibimizle e-posta iletişimleri). Hassas veya özel kategori veriler işlenmez ve VPN trafik verileri işlenmez — bkz. Bölüm 5."
       },
       "security": {
         "title": "5. Güvenlik Önlemleri",
-        "content": "Kişisel verilerin güvenliğini sağlamak için uygun teknik ve organizasyonel önlemler uyguluyoruz: tüm VPN trafiği için VLESS-Reality şifreleme, tüm web iletişimleri için TLS şifreleme, en az ayrıcalık ilkesiyle üretim sistemlerinde sıkı erişim kontrolleri, düzenli güvenlik denetimleri ve altyapı incelemeleri, tüm hizmetlerde tasarım gereği veri minimizasyonu ve VPN kullanımı için sıkı kayıt tutmama politikası — VPN tünelimizden geçen hiçbir veriyi saklamıyor, incelemiyor veya tutmuyoruz."
+        "content": "Kişisel verilerin güvenliğini sağlamak için uygun teknik ve organizasyonel önlemler uyguluyoruz: tüm VPN trafiği için VLESS-Reality şifreleme, tüm web iletişimleri için TLS şifreleme, en az ayrıcalık ilkesiyle üretim sistemlerinde sıkı erişim kontrolleri, yalnızca SHA-256 özetleri olarak saklanan ve tek tek iptal edilebilen cihaz başına kimlik doğrulama belirteçleri, düzenli güvenlik denetimleri ve altyapı incelemeleri, tüm hizmetlerde tasarım gereği veri minimizasyonu ve VPN kullanımı için sıkı kayıt tutmama politikası — VPN tünelimizden geçen hiçbir veriyi saklamıyor, incelemiyor veya tutmuyoruz. Bu kayıt tutmama taahhüdü VPN trafiğini kapsar; Bölüm 4'te açıklanan ve bir cihazın API'mize istek yaptığını kaydeden kimlik doğrulama ve hız sınırlama kayıtlarını kapsamaz; bu kayıtlar Bölüm 9'da belirtilen süre boyunca saklanır."
       },
       "subprocessors": {
         "title": "6. Alt İşlemci Yükümlülükleri",
@@ -2784,7 +2786,7 @@
       },
       "retention": {
         "title": "9. Veri Saklama",
-        "content": "Kişisel veriler yalnızca bu DPA'da belirtilen amaçlar için gerekli olduğu sürece saklanır: hesap bilgileri hesap aktif olduğu sürece ve kurtarma imkanı sağlamak için silme işleminden sonra 30 güne kadar saklanır; ödeme kayıtları Birleşik Krallık vergi ve muhasebe mevzuatının gerektirdiği şekilde 6 yıl boyunca saklanır; destek yazışmaları çözümden sonra 12 aya kadar saklanır; ve VPN kullanım verileri SAKLANMAZ — kayıt tutmama politikamız, belirli ağ etkinliğini bireysel kullanıcılarla ilişkilendirmek için teknik kapasitemizin olmadığı anlamına gelir."
+        "content": "Kişisel veriler yalnızca bu DPA'da belirtilen amaçlar için gerekli olduğu sürece saklanır: hesap bilgileri ve ilişkili cihaz listesi hesap var olduğu sürece saklanır ve hesap silindiğinde derhal silinir; ancak etkin ücretli aboneliği olan bir hesap, bu abonelik sona erene veya iptal edilene kadar silinemez; Bölüm 4'te açıklanan kimlik doğrulama ve hız sınırlama kayıtları en fazla 90 gün saklanır ve ardından kalıcı olarak silinir; ödeme kayıtları Birleşik Krallık vergi ve muhasebe mevzuatının gerektirdiği şekilde 6 yıl boyunca saklanır; destek yazışmaları çözümden sonra 12 aya kadar saklanır; ve VPN kullanım verileri SAKLANMAZ — kayıt tutmama politikamız, belirli ağ etkinliğini bireysel kullanıcılarla ilişkilendirmek için teknik kapasitemizin olmadığı anlamına gelir."
       },
       "transfers": {
         "title": "10. Uluslararası Veri Transferleri",
@@ -2802,7 +2804,7 @@
   },
   "subprocessors": {
     "title": "Alt İşlemciler",
-    "lastUpdated": "Son güncelleme: Nisan 2026",
+    "lastUpdated": "Son güncelleme: Ağustos 2026",
     "intro": "Aşağıdaki üçüncü taraf hizmet sağlayıcıları (alt işlemciler), Doppler VPN hizmetleriyle bağlantılı olarak SIMNETIQ LTD adına kişisel verileri işlemektedir. Her alt işlemci, Veri İşleme Sözleşmemize eşdeğer veri işleme koşullarıyla bağlıdır.",
     "colName": "Alt İşlemci",
     "colPurpose": "Amaç",

@@ -13,7 +13,7 @@
     },
     "pending": {
       "title": "Bekræfter din betaling…",
-      "body": "Revolut har godkendt betalingen. Vi aktiverer dit Doppler VPN Pro-abonnement nu.",
+      "body": "{processor} har godkendt betalingen. Vi aktiverer dit Doppler VPN Pro-abonnement nu.",
       "orderId": "Ordre-ID",
       "elapsed": "Forløbet: {seconds} s · luk ikke dette vindue"
     },
@@ -44,10 +44,10 @@
       "missingBody": "Vi kan ikke finde et ordre-ID i dette link. Hvis du lige har betalt, så kontakt venligst support og angiv den e-mail, du brugte, så vi kan bekræfte dit køb.",
       "missingReason": "Ingen order_id-parameter i URL'en",
       "failedTitle": "Betalingen gik ikke igennem",
-      "failedBody": "Revolut rapporterede betalingen som mislykket. Du er ikke blevet trukket. Gå tilbage til kassen og prøv igen, eller kontakt support, hvis problemet fortsætter.",
+      "failedBody": "{processor} rapporterede betalingen som mislykket. Du er ikke blevet trukket. Gå tilbage til kassen og prøv igen, eller kontakt support, hvis problemet fortsætter.",
       "failedReasonUnknown": "Ukendt fejl",
       "timeoutTitle": "Vi bekræfter stadig din betaling",
-      "timeoutBody": "Revolut har modtaget betalingen, men vores system har endnu ikke fået bekræftelse. Det er næsten altid midlertidigt — din konto opgraderes automatisk i løbet af få minutter. Hvis det ikke sker, så send os ordre-ID'et nedenfor, så ordner vi det med det samme.",
+      "timeoutBody": "{processor} har modtaget betalingen, men vores system har endnu ikke fået bekræftelse. Det er næsten altid midlertidigt — din konto opgraderes automatisk i løbet af få minutter. Hvis det ikke sker, så send os ordre-ID'et nedenfor, så ordner vi det med det samme.",
       "timeoutReason": "Webhook-levering forsinket",
       "diagnosticHeading": "Diagnostiske oplysninger",
       "statusLabel": "Status",
@@ -103,7 +103,8 @@
         "card": "Kort (Revolut)",
         "apple_pay": "Apple Pay",
         "google_pay": "Google Pay",
-        "revolut": "Revolut"
+        "revolut": "Revolut",
+        "crypto": "Kryptovaluta (OxaPay)"
       }
     }
   },
@@ -355,7 +356,7 @@
       },
       "refund": {
         "question": "Hvordan anmoder jeg om refusion?",
-        "answer": "Vi tilbyder 14 dages refusion for EU/britiske kunder og 30 dages pengene-tilbage-garanti for alle andre kunder. For webabonnementer (via Revolut), kontakt os på support@simnetiq.store. For iOS, besøg reportaproblem.apple.com. For Android, åbn Google Play > Konto > Ordrehistorik. Se vores fulde refusionspolitik på dopplervpn.org/refund for detaljer."
+        "answer": "Vi tilbyder 14 dages refusion for EU/britiske kunder og 30 dages pengene-tilbage-garanti for alle andre kunder. For webabonnementer — betalt med kort via Revolut eller i kryptovaluta via OxaPay — kontakt os på support@simnetiq.store. For iOS, besøg reportaproblem.apple.com. For Android, åbn Google Play > Konto > Ordrehistorik. Se vores fulde refusionspolitik på dopplervpn.org/refund for detaljer."
       }
     }
   },
@@ -438,7 +439,7 @@
   },
   "privacy": {
     "title": "Privatlivspolitik",
-    "lastUpdated": "Sidst opdateret: juli 2026",
+    "lastUpdated": "Sidst opdateret: august 2026",
     "intro": "Denne privatlivspolitik forklarer, hvordan SIMNETIQ LTD (\"Selskabet\", \"vi\", \"os\" eller \"vores\"), et selskab registreret i England og Wales (virksomhedsnummer 16861177), med registreret adresse på 2 Frederick Street, Kings Cross, London, WC1X 0ND, Storbritannien, indsamler, anvender og beskytter dine oplysninger, når du bruger DopplerVPN (vores VPN-applikation tilgængelig på iOS, macOS, Android og Windows) og vores AI-drevne videogenereringsværktøj (samlet \"Tjenesterne\"). Vi er forpligtet til at beskytte dit privatliv i overensstemmelse med den britiske databeskyttelsesforordning (UK GDPR), EUs databeskyttelsesforordning (EU GDPR), California Consumer Privacy Act (CCPA) og alle andre gældende databeskyttelseslove.",
     "sections": {
       "noLogs": {
@@ -479,7 +480,7 @@
       },
       "cookies": {
         "title": "10. Cookies og sporing",
-        "content": "Vores hjemmeside (dopplervpn.org) anvender nødvendige cookies, der er påkrævet for hjemmesidens funktion, og anonyme analysecookies til at forstå webtrafik i aggregeret form. Vi anvender ikke reklamecookies eller sporingsteknologier på tværs af hjemmesider. Du kan kontrollere cookiepræferencer via din browserindstillinger. Vores VPN- og AI-applikationer anvender ikke cookies."
+        "content": "Vores hjemmeside (dopplervpn.org) anvender nødvendige cookies, der er påkrævet for hjemmesidens funktion, og anonyme analysecookies til at forstå webtrafik i aggregeret form. Hvis du kommer fra en betalt annonce, gemmer vi desuden en førstepartscookie med det klik-id, som annoncenetværket har sat på det link, du fulgte, sammen med navnet på den parameter, det ankom i. Den opbevares i op til 90 dage og har ét formål: når du downloader appen eller køber et abonnement, rapporterer vores server denne konvertering tilbage til netværket, så annoncen kan krediteres. Id'et genereres af netværket og ikke af os, og det sammenkædes aldrig med din VPN-konto eller din trafik. Vi sætter ingen tredjeparts reklamecookies og bruger ingen sporingsteknologier på tværs af hjemmesider. Du kan kontrollere cookiepræferencer via dine browserindstillinger. Vores VPN- og AI-applikationer anvender ikke cookies."
       },
       "children": {
         "title": "11. Børns privatliv",
@@ -497,12 +498,12 @@
   },
   "terms": {
     "title": "Servicevilkår",
-    "lastUpdated": "Sidst opdateret: marts 2026",
-    "intro": "Disse servicevilkår (\"Vilkårene\") udgør en juridisk bindende aftale mellem dig (\"Bruger\", \"du\" eller \"din\") og SIMNETIQ LTD (\"Selskabet\", \"vi\", \"os\" eller \"vores\"), et selskab registreret i England og Wales (virksomhedsnummer 16861177), med registreret adresse på 2 Frederick Street, Kings Cross, London, WC1X 0ND, Storbritannien. Disse Vilkår regulerer din adgang til og brug af DopplerVPN (vores VPN-applikation tilgængelig på iOS, Android og Windows), vores AI-drevne videogenereringsværktøj og alle relaterede hjemmesider, applikationer og tjenester (samlet \"Tjenesterne\"). Ved at tilgå eller bruge nogen af vores Tjenester accepterer du at være bundet af disse Vilkår. Hvis du ikke accepterer, må du ikke bruge Tjenesterne.",
+    "lastUpdated": "Sidst opdateret: august 2026",
+    "intro": "Disse servicevilkår (\"Vilkårene\") udgør en juridisk bindende aftale mellem dig (\"Bruger\", \"du\" eller \"din\") og SIMNETIQ LTD (\"Selskabet\", \"vi\", \"os\" eller \"vores\"), et selskab registreret i England og Wales (virksomhedsnummer 16861177), med registreret adresse på 2 Frederick Street, Kings Cross, London, WC1X 0ND, Storbritannien. Disse Vilkår regulerer din adgang til og brug af DopplerVPN (vores VPN-applikation tilgængelig på iOS, macOS, Android og Windows), vores AI-drevne videogenereringsværktøj og alle relaterede hjemmesider, applikationer og tjenester (samlet \"Tjenesterne\"). Ved at tilgå eller bruge nogen af vores Tjenester accepterer du at være bundet af disse Vilkår. Hvis du ikke accepterer, må du ikke bruge Tjenesterne.",
     "sections": {
       "service": {
         "title": "1. Tjenestebeskrivelse",
-        "content": "Vi leverer to kategorier af digitale tjenester: (a) DopplerVPN — en virtuel privat netværksapplikation, der krypterer din internetforbindelse med VLESS-Reality-protokollen, skjuler din IP-adresse og tilbyder DNS-niveau adblocking og indholdsfiltrering med forældrekontrol. DopplerVPN er tilgængelig på iOS, Android og Windows. (b) AI-videogenerering — et webbaseret værktøj, der bruger kunstig intelligens til at generere videoindhold baseret på brugerens prompts og indstillinger. Begge Tjenester leveres som abonnementsbaseret software-as-a-service (\"SaaS\"). Tjenesterne leveres \"som de er\" og \"som tilgængelige\" uden garantier af nogen art, hverken udtrykkelige eller underforståede, herunder men ikke begrænset til underforståede garantier om salgbarhed, egnethed til et bestemt formål og ikke-krænkelse."
+        "content": "Vi leverer to kategorier af digitale tjenester: (a) DopplerVPN — en virtuel privat netværksapplikation, der krypterer din internetforbindelse med VLESS-Reality-protokollen, skjuler din IP-adresse og tilbyder DNS-niveau adblocking og indholdsfiltrering med forældrekontrol. DopplerVPN er tilgængelig på iOS, macOS, Android og Windows. Hvor stor en del af din enheds trafik applikationen fører, afhænger af platformen: på iOS, macOS og Android opretter den en systemdækkende tunnel, så trafik fra hele enheden ledes gennem den; på Windows konfigurerer den Windows' systemproxy, så programmer, der respekterer den indstilling, ledes gennem VPN'en, mens programmer, der ignorerer den, fortsat bruger din normale forbindelse. (b) AI-videogenerering — et webbaseret værktøj, der bruger kunstig intelligens til at generere videoindhold baseret på brugerens prompts og indstillinger. Begge Tjenester leveres som abonnementsbaseret software-as-a-service (\"SaaS\"). Tjenesterne leveres \"som de er\" og \"som tilgængelige\" uden garantier af nogen art, hverken udtrykkelige eller underforståede, herunder men ikke begrænset til underforståede garantier om salgbarhed, egnethed til et bestemt formål og ikke-krænkelse."
       },
       "eligibility": {
         "title": "2. Berettigelse",
@@ -514,7 +515,7 @@
       },
       "subscription": {
         "title": "4. Abonnementer, betalinger og fakturering",
-        "content": "Adgang til premiumfunktioner kræver et betalt abonnement. DopplerVPN Premium inkluderer adgang til premium VPN-servere i flere lande, DNS-niveau adblocking, indholdsfiltrering med forældrekontrol og forbindelse på op til 10 enheder samtidigt. Abonnementer er tilgængelige på månedlig, 6-måneders og årlig basis. Betalingsbehandling: webabonnementer behandles af Revolut Ltd. Mobilabonnementer behandles via Apple App Store (iOS) eller Google Play Store (Android). Abonnementer fornyes automatisk ved udgangen af hver faktureringsperiode, medmindre de opsiges mindst 24 timer før fornyelsesdatoen. Du kan opsige dit abonnement når som helst: for webabonnementer ved at kontakte os på support@simnetiq.store; for mobilabonnementer via din enheds app-butikindstillinger. Opsigelsen træder i kraft ved udgangen af den aktuelle faktureringsperiode — du har fortsat adgang indtil da. Priser kan ændres fra tid til anden; vi giver rimeligt forhåndsvarsel om prisforhøjelser, før de træder i kraft. Alle priser vises inklusive gældende afgifter, hvor det kræves af lov."
+        "content": "Adgang til premiumfunktioner kræver et betalt abonnement. DopplerVPN Premium inkluderer adgang til premium VPN-servere i flere lande, DNS-niveau adblocking, indholdsfiltrering med forældrekontrol og forbindelse på op til 10 enheder samtidigt. Abonnementer er tilgængelige på månedlig, 6-måneders og årlig basis. Betalingsbehandling: abonnementer købt på vores hjemmeside behandles af Revolut Ltd (kortbetalinger) eller af OxaPay (kryptovalutabetalinger); mobilabonnementer behandles via Apple App Store (iOS og macOS) eller Google Play Store (Android). Fornyelse fungerer forskelligt på de to kanaler. Et abonnement købt på vores hjemmeside er et engangskøb af den periode, du vælger: det fornyes ikke automatisk, vi gemmer intet betalingsmiddel til at trække dig igen, og adgangen ophører simpelthen, når perioden udløber, medmindre du køber et nyt. Et mobilabonnement fornyes automatisk ved udgangen af hver faktureringsperiode, medmindre det opsiges mindst 24 timer før fornyelsesdatoen; du kan opsige det når som helst via din enheds app-butikindstillinger, og opsigelsen træder i kraft ved udgangen af den aktuelle faktureringsperiode — du har fortsat adgang indtil da. Har du spørgsmål til et køb foretaget på vores hjemmeside, så kontakt os på support@simnetiq.store. Priser kan ændres fra tid til anden; vi giver rimeligt forhåndsvarsel om prisforhøjelser, før de træder i kraft. Alle priser vises inklusive gældende afgifter, hvor det kræves af lov."
       },
       "usage": {
         "title": "5. Acceptabel brug",
@@ -556,7 +557,7 @@
   },
   "refund": {
     "title": "Refusionspolitik",
-    "lastUpdated": "Sidst opdateret: marts 2026",
+    "lastUpdated": "Sidst opdateret: august 2026",
     "intro": "Denne refusionspolitik gælder alle køb af DopplerVPN-abonnementer og vores AI-drevne videogenereringsværktøj foretaget gennem SIMNETIQ LTD (virksomhedsnummer 16861177), registreret på 2 Frederick Street, Kings Cross, London, WC1X 0ND, Storbritannien. Vi ønsker, at du er fuldt tilfreds med vores Tjenester. Hvis du ikke er det, bedes du gennemgå refusionsvilkårene nedenfor.",
     "sections": {
       "euRights": {
@@ -572,8 +573,8 @@
         "content": "For kunder uden for EU/EØS og Storbritannien tilbyder vi en 30 dages pengene-tilbage-garanti på alle abonnementskøb. Hvis du ikke er tilfreds med vores Tjenester af nogen grund, kan du anmode om fuld refusion inden for 30 dage fra din oprindelige købsdato. Denne goodwill-refusion gælder kun førstegangskøb og er begrænset til én refusion per kunde. Kontakt os på support@simnetiq.store med dine ordreoplysninger for at anmode om refusion. Refusioner behandles inden for 14 hverdage via den oprindelige betalingsmetode."
       },
       "webSubscriptions": {
-        "title": "4. Webabonnementer (via Revolut)",
-        "content": "Webabonnementer til DopplerVPN behandles af Revolut Ltd, vores betalingsformidler. Revolut håndterer betalingsbehandlingen sikkert. For at anmode om refusion af et webabonnement: kontakt os på support@simnetiq.store med dit ordrenummer eller kvittering. Refusioner behandles og vil fremgå af din kontoudtog inden for 5–10 hverdage afhængigt af din betalingsudbyder."
+        "title": "4. Webabonnementer (Revolut og OxaPay)",
+        "content": "Webabonnementer til DopplerVPN betales enten med kort, som behandles af Revolut Ltd, eller i kryptovaluta, som behandles af OxaPay. For at anmode om refusion af et webabonnement, kontakt os på support@simnetiq.store med dit ordrenummer eller kvittering. Kortrefusioner føres tilbage til det kort, du betalte med, og fremgår af dit kontoudtog inden for 5–10 hverdage afhængigt af din bank. Kryptovalutabetalinger kan ikke tilbageføres på netværket, så en kryptorefusion sendes som en ny overførsel til en wallet-adresse, du oplyser, i den samme mønt, du betalte med. Vi refunderer det beløb, vi modtog; netværksgebyrer og eventuelle kursændringer mellem din betaling og refusionen er ikke dækket."
       },
       "mobileSubscriptions": {
         "title": "5. Mobilappabonnementer (App Store og Google Play)",
@@ -581,7 +582,7 @@
       },
       "renewals": {
         "title": "6. Fornyelsesbetaling",
-        "content": "Abonnementer fornyes automatisk ved udgangen af hver faktureringsperiode. Hvis du ikke ønsker at blive opkrævet for en fornyelse, skal du opsige dit abonnement mindst 24 timer før udgangen af den aktuelle faktureringsperiode. For webabonnementer: kontakt os på support@simnetiq.store. For mobilabonnementer: opsig via din enheds App Store- eller Google Play-indstillinger. Hvis du bliver opkrævet for en fornyelse, du ikke havde til hensigt, kontakt os inden for 14 dage fra fornyelsesbetaling, og vi behandler en refusion for den ubrugte del af fornyelsesperioden."
+        "content": "Fornyelse fungerer forskelligt afhængigt af, hvor du har købt abonnementet. Et abonnement købt på vores hjemmeside er et engangskøb af den periode, du valgte: det fornyes ikke automatisk, vi gemmer intet betalingsmiddel til at trække dig igen, og adgangen ophører simpelthen, når perioden udløber — der er intet at opsige og ingen fornyelsesbetaling at refundere. Et abonnement købt via Apple App Store eller Google Play fornyes automatisk ved udgangen af hver faktureringsperiode; hvis du ikke ønsker at blive opkrævet for en fornyelse, skal du opsige det mindst 24 timer før udgangen af den aktuelle periode via din enheds App Store- eller Google Play-indstillinger. Hvis du bliver opkrævet for en fornyelse, du ikke havde til hensigt, så kontakt os på support@simnetiq.store inden for 14 dage fra fornyelsesbetalingen, og vi hjælper dig med at få en refusion for den ubrugte del af fornyelsesperioden via den relevante app-butik."
       },
       "exclusions": {
         "title": "7. Undtagelser fra refusion",
@@ -589,7 +590,7 @@
       },
       "howTo": {
         "title": "8. Sådan anmoder du om refusion",
-        "content": "For at anmode om refusion, kontakt os med følgende oplysninger: dit navn eller kontoidentifikator, e-mailadressen tilknyttet dit køb, dit ordrenummer eller kvittering (fra Revolut, Apple eller Google), købsdatoen og årsagen til din refusionsanmodning (valgfrit men nyttigt). Send din anmodning til: support@simnetiq.store. Vi tilstræber at bekræfte alle refusionsanmodninger inden for 2 hverdage og behandle godkendte refusioner inden for 14 hverdage."
+        "content": "For at anmode om refusion, kontakt os med følgende oplysninger: dit navn eller kontoidentifikator, e-mailadressen tilknyttet dit køb, dit ordrenummer eller kvittering (fra Revolut, OxaPay, Apple eller Google), købsdatoen og årsagen til din refusionsanmodning (valgfrit men nyttigt). Send din anmodning til: support@simnetiq.store. Vi tilstræber at bekræfte alle refusionsanmodninger inden for 2 hverdage og behandle godkendte refusioner inden for 14 hverdage."
       },
       "contact": {
         "title": "9. Kontakt os",
@@ -868,7 +869,7 @@
         },
         "subscribe": {
           "question": "Hvordan abonnerer jeg?",
-          "answer": "Besøg vores abonnementsside, indtast din e-mail, vælg et abonnement og betal via Revolut. Dit Pro-abonnement aktiveres øjeblikkeligt."
+          "answer": "Besøg vores abonnementsside, indtast din e-mail, vælg et abonnement og betal med kort via Revolut eller i kryptovaluta via OxaPay. Dit Pro-abonnement aktiveres øjeblikkeligt."
         },
         "multiDevice": {
           "question": "Kan jeg bruge én konto på flere enheder?",
@@ -1128,7 +1129,7 @@
       "savings": "Spar op til 35% i forhold til app-butikker",
       "step1": "Åbn @dopplercreatebot i Telegram",
       "step2": "Tryk \"Abonnér\" og vælg dit abonnement",
-      "step3": "Betal sikkert via Revolut — brug koden LAUNCH20 for 20% rabat"
+      "step3": "Betal sikkert med kort (Revolut) eller i krypto (OxaPay) — brug koden LAUNCH20 for 20% rabat"
     },
     "manageSection": "Administrér dit abonnement",
     "manage": {
@@ -1252,7 +1253,7 @@
     "promoOff": "rabat",
     "promoInvalid": "Ugyldig rabatkode",
     "promoFailed": "Kunne ikke validere koden",
-    "footerNote": "Engangsbetaling via Revolut. Ingen automatisk fornyelse. 30 dages pengene-tilbage-garanti.",
+    "footerNote": "Engangsbetaling med kort (Revolut) eller krypto (OxaPay). Ingen automatisk fornyelse. 30 dages pengene-tilbage-garanti.",
     "webBonus": {
       "title": "Webbonus — gratis dage inkluderet",
       "subtitle": "Den 3-dages gratis prøveperiode er kun tilgængelig i App Store og Google Play. Som kompensation på webben inkluderer hvert abonnement ekstra gratis dage:",
@@ -1321,7 +1322,8 @@
       "restoreAppStore": "App Store-abonnementer",
       "restorePlayStore": "Google Play-abonnementer",
       "deleteProSupportNote": "Din konto har et aktivt Pro-abonnement. Kontakt support for at slette den."
-    }
+    },
+    "securedByCrypto": "Sikret af OxaPay"
   },
   "subscribeSuccess": {
     "title": "Du er klar!",
@@ -1350,7 +1352,7 @@
   },
   "checkout": {
     "title": "Opgradér til Doppler Pro",
-    "subtitle": "Vælg dit abonnement og abonnér sikkert via Revolut.",
+    "subtitle": "Vælg dit abonnement og betal sikkert med kort (Revolut) eller i krypto (OxaPay).",
     "accountLabel": "Konto",
     "monthly": "Månedlig",
     "sixMonth": "6 måneder",
@@ -1372,7 +1374,7 @@
     "promoOff": "rabat",
     "promoInvalid": "Ugyldig rabatkode",
     "promoFailed": "Kunne ikke validere koden",
-    "footerNote": "Sikker betaling via Revolut. Opsig når som helst.",
+    "footerNote": "Sikker betaling med kort (Revolut) eller krypto (OxaPay). Opsig når som helst.",
     "terms": "Servicevilkår",
     "privacy": "Privatlivspolitik",
     "error": "Noget gik galt. Prøv venligst igen.",
@@ -2746,7 +2748,7 @@
   },
   "dpa": {
     "title": "Databehandlingsaftale",
-    "lastUpdated": "Sidst opdateret: april 2026",
+    "lastUpdated": "Sidst opdateret: august 2026",
     "intro": "Denne databehandlingsaftale (\"DPA\") udgør en del af aftalen mellem dig og SIMNETIQ LTD (virksomhedsnummer 16861177), registreret på 2 Frederick Street, Kings Cross, London, WC1X 0ND, Storbritannien, der regulerer behandlingen af personoplysninger i forbindelse med Doppler VPN-tjenester.",
     "sections": {
       "scope": {
@@ -2763,11 +2765,11 @@
       },
       "dataTypes": {
         "title": "4. Typer af personoplysninger, der behandles",
-        "content": "Følgende kategorier af personoplysninger kan blive behandlet: kontoidentifikatorer (tilfældigt genereret VPN-XXXX-XXXX-XXXX-format), e-mailadresser (når de frivilligt oplyses til kontogendannelse eller support), enhedsidentifikatorer (anonyme, ikke knyttet til personlig identitet), betalingsposter (behandlet af tredjepartsbetalingsudbydere — Revolut, Apple, Google) og supportkorrespondance (e-mailkommunikation med vores supportteam). Vi behandler ikke følsomme eller særlige kategorier af personoplysninger."
+        "content": "Følgende kategorier af personoplysninger kan blive behandlet: kontoidentifikatorer (tilfældigt genereret VPN-XXXX-XXXX-XXXX-format), e-mailadresser eller beskedtjeneste-håndtag (når de frivilligt oplyses til kontogendannelse eller support), enhedsidentifikatorer og enhedsnavne som oplyst af operativsystemet, autentifikationstokens pr. enhed (kun opbevaret som SHA-256-hashes), autentifikations- og rategrænseposter for forespørgsler til vores API (indeholdende en IP-adresse, en kontoidentifikator, en enhedsidentifikator og et tidsstempel), betalingsposter (behandlet af tredjepartsbetalingsudbydere — Revolut og OxaPay for køb foretaget på vores hjemmeside, Apple og Google for køb foretaget i vores mobilapps), installationsattributionsidentifikatorer hvor mobil attribution er aktiv, og supportkorrespondance (e-mailkommunikation med vores supportteam). Vi behandler ikke følsomme eller særlige kategorier af personoplysninger, og vi behandler ikke VPN-trafikdata — se afsnit 5."
       },
       "security": {
         "title": "5. Sikkerhedsforanstaltninger",
-        "content": "Vi implementerer passende tekniske og organisatoriske foranstaltninger for at sikre personoplysningers sikkerhed, herunder: VLESS-Reality-kryptering for al VPN-trafik, TLS-kryptering for al webkommunikation, strenge adgangskontroller på produktionssystemer med princippet om mindst mulig rettighed, regelmæssige sikkerhedsrevisioner og infrastrukturgennemgange, dataminimering som designprincip på tværs af alle tjenester samt en streng no-logs-politik for VPN-brug — vi gemmer, inspicerer eller opbevarer ikke data, der passerer gennem vores VPN-tunnel."
+        "content": "Vi implementerer passende tekniske og organisatoriske foranstaltninger for at sikre personoplysningers sikkerhed, herunder: VLESS-Reality-kryptering for al VPN-trafik, TLS-kryptering for al webkommunikation, strenge adgangskontroller på produktionssystemer med princippet om mindst mulig rettighed, autentifikationstokens pr. enhed, der kun opbevares som SHA-256-hashes og kan tilbagekaldes enkeltvis, regelmæssige sikkerhedsrevisioner og infrastrukturgennemgange, dataminimering som designprincip på tværs af alle tjenester samt en streng no-logs-politik for VPN-brug — vi gemmer, inspicerer eller opbevarer ikke data, der passerer gennem vores VPN-tunnel. Dette no-logs-tilsagn dækker VPN-trafik; det dækker ikke de autentifikations- og rategrænseposter, der er beskrevet i afsnit 4, som registrerer, at en enhed har foretaget en forespørgsel til vores API, og som opbevares i den periode, der er fastsat i afsnit 9."
       },
       "subprocessors": {
         "title": "6. Underdatabehandlerforpligtelser",
@@ -2783,7 +2785,7 @@
       },
       "retention": {
         "title": "9. Dataopbevaring",
-        "content": "Personoplysninger opbevares kun så længe det er nødvendigt for de formål, der er angivet i denne DPA: kontooplysninger opbevares, mens kontoen er aktiv, og i 30 dage efter sletning for at muliggøre gendannelse, betalingsposter opbevares i 6 år som krævet af britisk skatte- og regnskabslovgivning, supportkorrespondance opbevares i 12 måneder efter løsning, og VPN-brugsdata opbevares IKKE — vores no-logs-politik betyder, at vi ikke har den tekniske mulighed for at knytte specifik netværksaktivitet til individuelle brugere."
+        "content": "Personoplysninger opbevares kun så længe det er nødvendigt for de formål, der er angivet i denne DPA: kontooplysninger og den tilknyttede enhedsliste opbevares, så længe kontoen findes, og slettes øjeblikkeligt, når kontoen slettes, bortset fra at en konto med et aktivt betalt abonnement ikke kan slettes, før abonnementet er udløbet eller opsagt; de autentifikations- og rategrænseposter, der er beskrevet i afsnit 4, opbevares i op til 90 dage og slettes derefter permanent; betalingsposter opbevares i 6 år som krævet af britisk skatte- og regnskabslovgivning; supportkorrespondance opbevares i 12 måneder efter løsning; og VPN-brugsdata opbevares IKKE — vores no-logs-politik betyder, at vi ikke har den tekniske mulighed for at knytte specifik netværksaktivitet til individuelle brugere."
       },
       "transfers": {
         "title": "10. Internationale dataoverførsler",
@@ -2801,7 +2803,7 @@
   },
   "subprocessors": {
     "title": "Underdatabehandlere",
-    "lastUpdated": "Sidst opdateret: april 2026",
+    "lastUpdated": "Sidst opdateret: august 2026",
     "intro": "Følgende tredjepartstjenesteudbydere (underdatabehandlere) behandler personoplysninger på vegne af SIMNETIQ LTD i forbindelse med Doppler VPN-tjenester. Hver underdatabehandler er bundet af databehandlingsvilkår svarende til vores databehandlingsaftale.",
     "colName": "Underdatabehandler",
     "colPurpose": "Formål",
