@@ -152,7 +152,13 @@ export async function sendWelcomeEmail({
 
 /* ── Receipt email ──────────────────────────────────────────────── */
 
-export type ReceiptPaymentMethod = 'card' | 'apple_pay' | 'google_pay' | 'revolut' | string;
+export type ReceiptPaymentMethod =
+  | 'card'
+  | 'apple_pay'
+  | 'google_pay'
+  | 'revolut'
+  | 'crypto'
+  | string;
 
 interface ReceiptEmailParams {
   to: string;

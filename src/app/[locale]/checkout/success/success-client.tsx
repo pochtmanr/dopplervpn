@@ -35,6 +35,9 @@ export function SuccessClient() {
   const provider = (params.get('provider') === 'oxapay' ? 'oxapay' : 'revolut') as
     | 'revolut'
     | 'oxapay';
+  // Payer-facing copy names the processor that actually took the money — a
+  // crypto payer must not be told "Revolut reported the payment as failed".
+  const processor = provider === 'oxapay' ? 'OxaPay' : 'Revolut';
   const t = useTranslations('success');
 
   const [data, setData] = useState<VerifyResponse | null>(null);
@@ -131,7 +134,7 @@ export function SuccessClient() {
     return (
       <ErrorShell
         title={t('errors.failedTitle')}
-        body={t('errors.failedBody')}
+        body={t('errors.failedBody', { processor })}
         orderId={orderId}
         accountId={accountId}
         reason={data.reason || data.revolut_state || t('errors.failedReasonUnknown')}
@@ -143,7 +146,7 @@ export function SuccessClient() {
     return (
       <ErrorShell
         title={t('errors.timeoutTitle')}
-        body={t('errors.timeoutBody')}
+        body={t('errors.timeoutBody', { processor })}
         orderId={orderId}
         accountId={accountId}
         reason={data?.reason || t('errors.timeoutReason')}
@@ -152,12 +155,20 @@ export function SuccessClient() {
     );
   }
 
-  return <PendingShell orderId={orderId} elapsed={elapsed} />;
+  return <PendingShell orderId={orderId} elapsed={elapsed} processor={processor} />;
 }
 
 /* ─────────── shells ─────────── */
 
-function PendingShell({ orderId, elapsed }: { orderId: string; elapsed: number }) {
+function PendingShell({
+  orderId,
+  elapsed,
+  processor,
+}: {
+  orderId: string;
+  elapsed: number;
+  processor: string;
+}) {
   const t = useTranslations('success');
   const seconds = Math.floor(elapsed / 1000);
   return (
@@ -167,7 +178,7 @@ function PendingShell({ orderId, elapsed }: { orderId: string; elapsed: number }
           <Spinner />
         </div>
         <h1 className="text-2xl font-bold mb-2">{t('pending.title')}</h1>
-        <p className="text-text-muted text-sm mb-6">{t('pending.body')}</p>
+        <p className="text-text-muted text-sm mb-6">{t('pending.body', { processor })}</p>
         <div className="bg-bg-secondary/60 border border-overlay/10 rounded-xl px-4 py-3 mb-4 text-start">
           <div className="text-text-muted/70 text-xs uppercase tracking-wide mb-1">{t('pending.orderId')}</div>
           <div className="font-mono text-text-primary text-xs break-all">{orderId}</div>
@@ -359,8 +370,9 @@ function ErrorShell({
           >
             {t('errors.contactSupport')}
           </a>
+          {/* There is no /[locale]/checkout page — the paywall lives on /account. */}
           <Link
-            href={`/${locale}/checkout`}
+            href={`/${locale}/account`}
             className="flex-1 text-center px-5 py-3 rounded-xl bg-bg-secondary border border-overlay/10 hover:bg-bg-secondary/80 font-semibold text-text-primary transition-colors"
           >
             {t('errors.backCheckout')}

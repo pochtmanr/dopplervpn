@@ -67,6 +67,16 @@ const SUBPROCESSORS = [
     privacy: "https://www.revolut.com/legal/privacy",
   },
   {
+    name: "OxaPay",
+    purpose: "Payment processing (web — cryptocurrency)",
+    // OxaPay publishes its terms and privacy notice in the footer of its
+    // homepage and does not disclose an operating entity or a registered
+    // jurisdiction; we state that rather than guess at one.
+    location: "Not disclosed by the provider",
+    data: "Cryptocurrency transaction records, email, order references",
+    privacy: "https://oxapay.com/",
+  },
+  {
     name: "Apple Inc.",
     purpose: "iOS payment processing",
     location: "United States",
@@ -86,6 +96,14 @@ const SUBPROCESSORS = [
     location: "United States",
     data: "Anonymous purchase identifiers",
     privacy: "https://www.revenuecat.com/privacy",
+  },
+  {
+    name: "AppsFlyer Ltd",
+    purpose:
+      "Mobile install attribution (opt-in in the EEA and UK; switchable off elsewhere)",
+    location: "Israel (HQ)",
+    data: "App-generated random identifier, account ID, app and OS version, IP address",
+    privacy: "https://www.appsflyer.com/legal/privacy-policy/",
   },
   {
     name: "Hostinger International Ltd",

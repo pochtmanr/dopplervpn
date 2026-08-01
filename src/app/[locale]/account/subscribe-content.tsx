@@ -824,7 +824,7 @@ function SubscribeInner() {
       <div className="flex items-center justify-center gap-1.5">
         <ShieldIcon className="w-3.5 h-3.5 text-text-muted/50" />
         <span className="text-[11px] text-text-muted/50">
-          {paymentMethod === 'crypto' ? 'Secured by OxaPay' : t('securedBy')}
+          {paymentMethod === 'crypto' ? t('securedByCrypto') : t('securedBy')}
         </span>
       </div>
     </>
