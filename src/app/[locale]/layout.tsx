@@ -123,8 +123,14 @@ export async function generateMetadata({
       canonical: `https://www.dopplervpn.org/${locale}`,
       languages: alternateLanguages,
     },
+    // Two proofs per engine on purpose. The HTML files in /public
+    // (yandex_*.html, BingSiteAuth.xml, the Google one) verify the site root,
+    // but the root 308-redirects apex -> www and / -> /<locale>, and some
+    // verifiers refuse to follow that. The meta tags render on every localized
+    // page, so whichever URL the engine checks, one of the two methods holds.
     verification: {
       google: "vfzTLNRXO6Wqg4yP5UTzG8jlnVilqSxwsW4cEAOvqx8",
+      yandex: "b63f47e62d39cfe2",
     },
   };
 }
