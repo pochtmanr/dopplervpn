@@ -53,6 +53,18 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
+  // Serve robots.txt under a locale prefix too. Naver Search Advisor resolves
+  // our site root through the `/` -> `/<locale>` redirect and then looks for
+  // robots.txt relative to THAT — /ko/robots.txt — which 404s, so it reported
+  // "robots.txt does not exist" even though /robots.txt is a healthy 200.
+  // Standards-compliant crawlers only ever read the origin-root copy, so this
+  // rewrite is inert for them and costs nothing.
+  if (/^\/[a-z]{2}(?:-[A-Za-z]+)?\/robots\.txt$/.test(request.nextUrl.pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/robots.txt";
+    return NextResponse.rewrite(url);
+  }
+
   // Blog is only translated into 21 of the 44 site locales. Visiting the
   // blog under a non-translated locale used to fall back to English content
   // at a localized URL, creating duplicate pages that Google's "chose
