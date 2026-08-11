@@ -26,6 +26,13 @@ function ChevronDown({ className = "" }: { className?: string }) {
   );
 }
 
+// `prefetch={false}` throughout: the App Router prefetches every <Link> that
+// enters the viewport, and the whole footer enters the viewport on any scroll
+// to the bottom. That fired ~20 RSC requests per page view, each one hitting a
+// locale-prefixed path and so also invoking the i18n middleware — a large
+// share of the Aug 2026 edge-request bill for near-zero navigation benefit,
+// since footer links are low-intent. Conversion paths (pricing, downloads,
+// checkout CTAs) deliberately keep their default prefetch.
 function LinkList({ links }: { links: LinkItem[] }) {
   return (
     <ul className="space-y-3">
@@ -36,6 +43,7 @@ function LinkList({ links }: { links: LinkItem[] }) {
           <li key={link.href}>
             <NextLink
               href={link.href}
+              prefetch={false}
               className="text-text-muted hover:text-text-primary transition-colors text-sm"
             >
               {link.label}
@@ -45,6 +53,7 @@ function LinkList({ links }: { links: LinkItem[] }) {
           <li key={link.href}>
             <Link
               href={link.href}
+              prefetch={false}
               className="text-text-muted hover:text-text-primary transition-colors text-sm"
             >
               {link.label}
@@ -124,7 +133,7 @@ export async function Footer() {
         <div className="hidden md:grid grid-cols-7 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
+            <Link href="/" prefetch={false} className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
               <DopplerLogo className="w-8 h-8" />
               <span className="font-display text-xl font-semibold text-text-primary">
                 Doppler VPN
@@ -184,25 +193,25 @@ export async function Footer() {
             <h3 className="font-semibold text-text-primary mb-4">{t("supportTitle")}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/support" className="text-text-muted hover:text-text-primary transition-colors text-sm">
+                <Link href="/support" prefetch={false} className="text-text-muted hover:text-text-primary transition-colors text-sm">
                   {t("helpCenter")}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-text-muted hover:text-text-primary transition-colors text-sm">
+                <Link href="/about" prefetch={false} className="text-text-muted hover:text-text-primary transition-colors text-sm">
                   {t("about")}
                 </Link>
               </li>
               {showSecurityLink && (
                 <li>
-                  <Link href="/security" className="text-text-muted hover:text-text-primary transition-colors text-sm">
+                  <Link href="/security" prefetch={false} className="text-text-muted hover:text-text-primary transition-colors text-sm">
                     {t("securityPage")}
                   </Link>
                 </li>
               )}
               <li>
                 {/* /agents lives outside [locale] — next/link, no locale prefix */}
-                <NextLink href="/agents" className="text-text-muted hover:text-text-primary transition-colors text-sm">
+                <NextLink href="/agents" prefetch={false} className="text-text-muted hover:text-text-primary transition-colors text-sm">
                   {t("agents")}
                 </NextLink>
               </li>
@@ -238,6 +247,7 @@ export async function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    prefetch={false}
                     className="text-text-muted hover:text-text-primary transition-colors text-sm"
                   >
                     {link.label}
@@ -255,7 +265,7 @@ export async function Footer() {
         <div className="md:hidden space-y-6">
           {/* Brand block stays open at top */}
           <div>
-            <Link href="/" className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
+            <Link href="/" prefetch={false} className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
               <DopplerLogo className="w-8 h-8" />
               <span className="font-display text-xl font-semibold text-text-primary">
                 Doppler VPN
@@ -342,6 +352,7 @@ export async function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    prefetch={false}
                     className="text-text-muted hover:text-text-primary transition-colors text-sm"
                   >
                     {link.label}

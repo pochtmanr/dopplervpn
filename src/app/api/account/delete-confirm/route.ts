@@ -1,11 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { rateLimit } from '@/lib/rate-limit';
+
+// delete-request mints the token with crypto.randomUUID(), so anything that
+// isn't a UUID can be rejected before it reaches the database.
+const TOKEN_REGEX =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function POST(req: NextRequest) {
   try {
+    // This route is unauthenticated and destructive: a valid token deletes the
+    // account outright. A v4 UUID is not realistically guessable, so the
+    // exposure is not token brute-force — it is that every unfiltered POST was
+    // costing a function invocation and a Supabase lookup, with nothing
+    // bounding the rate. Note this limiter is per-instance and best-effort
+    // (see lib/rate-limit.ts); the Vercel WAF rule on this path is what
+    // actually holds against a distributed caller.
+    const rl = rateLimit(req, {
+      limit: 10,
+      windowMs: 60 * 60 * 1000,
+      prefix: 'account-delete-confirm',
+    });
+    if (rl) return rl;
+
     const { token } = await req.json();
 
-    if (!token || typeof token !== 'string') {
+    if (!token || typeof token !== 'string' || !TOKEN_REGEX.test(token)) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 400 });
     }
 

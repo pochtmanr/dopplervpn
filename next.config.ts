@@ -144,6 +144,36 @@ const nextConfig: NextConfig = {
           { key: "Content-Type", value: "text/plain" },
         ],
       },
+      // Vercel serves everything in public/ as `max-age=0, must-revalidate` by
+      // default, so the browser re-validates every file on every navigation.
+      // A 304 is still a billed edge request, and `x-vercel-cache: HIT` does
+      // not change that. With ~44 flag SVGs rendered per page (see
+      // layout/desktop-nav.tsx) this was the dominant per-view request
+      // multiplier. These files are not content-hashed, so anything given a
+      // long TTL must be renamed rather than edited in place to roll out.
+      // Order matters: every matching rule is applied and the LAST value for a
+      // given header key wins, so the broad rule goes first and the narrower
+      // /flags override goes after it.
+      {
+        // Art and icons change occasionally — a day of browser caching kills
+        // the revalidation storm while keeping edits visible within 24h.
+        source: "/:path(images/.*|fonts/.*|.*\\.(?:png|jpg|jpeg|webp|avif|svg|woff2?))",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        // Flag SVGs are keyed by ISO code and never change content, so they can
+        // be cached indefinitely. Adding a flag means adding a new filename,
+        // which sidesteps the no-content-hash caveat above.
+        source: "/flags/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
       {
         // Security headers for all routes
         source: "/:path*",
@@ -163,91 +193,39 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Every optimized <Image> in the app points at a local /images/* file.
+    // The only remote images are blog OG art, and those render with
+    // `unoptimized` (see [locale]/blog/[slug]/page.tsx and blog/blog-card.tsx),
+    // which bypasses /_next/image entirely — the live blog already serves
+    // images from hosts that were never in this list. So the 19 external
+    // hostnames that used to live here were dead config.
+    //
+    // They were not harmless dead config. Every hostname here is a host an
+    // attacker can hand to /_next/image, and the list included **.cloudfront.net,
+    // **.amazonaws.com, **.wp.com and **.wordpress.com — anyone can get a
+    // subdomain on all four. That made the optimizer an open image proxy with
+    // an unbounded URL space: every unique URL is a cache MISS, a billed edge
+    // request, and a transformation. Verified Aug 2026 (a fabricated
+    // cloudfront URL returned 502 "tried to fetch" rather than 400 "rejected")
+    // and it is the best explanation for the 4.1K-requests-in-50-minutes spike.
+    //
+    // Keep this list minimal. Do not re-add a wildcard hostname.
     remotePatterns: [
       {
         protocol: "https",
         hostname: "fzlrhmjdjjzcgstaeblu.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.pixabay.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.pexels.com",
-      },
-      // Blog source sites (OG images)
-      {
-        protocol: "https",
-        hostname: "**.asiatimes.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.eff.org",
-      },
-      {
-        protocol: "https",
-        hostname: "**.restofworld.org",
-      },
-      {
-        protocol: "https",
-        hostname: "**.torrentfreak.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.therecord.media",
-      },
-      {
-        protocol: "https",
-        hostname: "**.freedomhouse.org",
-      },
-      {
-        protocol: "https",
-        hostname: "**.meduza.io",
-      },
-      {
-        protocol: "https",
-        hostname: "**.novayagazeta.eu",
-      },
-      {
-        protocol: "https",
-        hostname: "**.theins.ru",
-      },
-      // Common CDNs used by news sites for OG images
-      {
-        protocol: "https",
-        hostname: "**.wp.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.wordpress.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.cloudfront.net",
-      },
-      {
-        protocol: "https",
-        hostname: "**.amazonaws.com",
-      },
-      {
-        protocol: "https",
-        hostname: "**.techcrunch.com",
-      },
-      {
-        protocol: "https",
-        hostname: "techcrunch.com",
-      },
     ],
+    // Bound the optimizer's URL space. Left at defaults, `w` and `q` accept a
+    // wide range of combinations, so a scripted caller can mint endless unique
+    // cache-missing URLs. No component passes a `quality` prop, so 75 (the
+    // next/image default) is the only value ever legitimately requested.
+    localPatterns: [{ pathname: "/images/**" }],
+    deviceSizes: [640, 828, 1080, 1920],
+    imageSizes: [32, 64, 128, 256],
+    qualities: [75],
+    minimumCacheTTL: 31536000,
   },
 };
 

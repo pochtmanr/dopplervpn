@@ -12,6 +12,11 @@ import { ThemeToggle } from "./theme-toggle";
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  // See the matching comment in desktop-nav.tsx: this grid holds 44 flag
+  // <img> tags, and the drawer around it is always mounted (it animates with
+  // opacity/translate), so the collapsed `grid-rows-[0fr]` wrapper is not a
+  // reliable guarantee the browser skips the fetches. Defer until first open.
+  const [langEverOpened, setLangEverOpened] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [hasAccount, setHasAccount] = useState(false);
   const t = useTranslations("nav");
@@ -52,6 +57,10 @@ export function MobileNav() {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (langOpen) setLangEverOpened(true);
+  }, [langOpen]);
 
   // Close on Escape
   useEffect(() => {
@@ -125,6 +134,7 @@ export function MobileNav() {
           </Link>
           <Link
             href="/support"
+            prefetch={false}
             onClick={close}
             className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
           >
@@ -132,6 +142,7 @@ export function MobileNav() {
           </Link>
           <Link
             href="/account"
+            prefetch={false}
             onClick={() => { if (!hasAccount) trackGetPro("nav-mobile"); close(); }}
             className="flex items-center justify-center mx-2 mt-1 px-4 py-2 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
           >
@@ -179,7 +190,7 @@ export function MobileNav() {
           >
             <div className="overflow-hidden">
               <div className="grid grid-cols-2 gap-1 mt-1 px-1 pb-1 max-h-[50vh] overflow-y-auto">
-                {routing.locales.map((loc) => {
+                {langEverOpened && routing.locales.map((loc) => {
                   const config = localeConfig[loc] || { label: loc, countryCode: "", name: loc };
                   const isActive = locale === loc;
                   return (

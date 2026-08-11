@@ -16,6 +16,14 @@ interface DesktopNavProps {
 
 export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   const [langOpen, setLangOpen] = useState(false);
+  // The language grid holds one <img> per locale — 44 flag SVGs. The panel is
+  // kept mounted so its open/close transition can run, and `opacity-0` does NOT
+  // stop a browser from fetching images inside it (nor does loading="lazy",
+  // since the panel is position:fixed and intersects the viewport). That meant
+  // every page view fetched all 44 flags, on every navigation. Defer the grid
+  // until the panel is opened for the first time; after that it stays mounted
+  // and the transition behaves exactly as before.
+  const [langEverOpened, setLangEverOpened] = useState(false);
   const [hasAccount, setHasAccount] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [panelPos, setPanelPos] = useState<{ top: number; right?: number; left?: number } | null>(null);
@@ -41,6 +49,10 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     } else {
       header.removeAttribute("data-nav-lock");
     }
+  }, [langOpen]);
+
+  useEffect(() => {
+    if (langOpen) setLangEverOpened(true);
   }, [langOpen]);
 
   const close = useCallback(() => setLangOpen(false), []);
@@ -142,6 +154,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
 
             <Link
               href="/support"
+              prefetch={false}
               className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
             >
               {t("support")}
@@ -149,6 +162,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
 
             <Link
               href="/account"
+              prefetch={false}
               onClick={() => { if (!hasAccount) trackGetPro("nav-desktop"); }}
               className="ml-1 px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
             >
@@ -228,7 +242,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
               className="bg-bg-primary/95 backdrop-blur-xl shadow-lg shadow-overlay/10 rounded-2xl border border-overlay/10 p-2.5"
             >
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5">
-                {routing.locales.map((loc) => {
+                {langEverOpened && routing.locales.map((loc) => {
                   const config = localeConfig[loc] || {
                     label: loc,
                     countryCode: "",
