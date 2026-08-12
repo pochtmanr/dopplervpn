@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { unstable_cache } from "next/cache";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createStaticClient } from "@/lib/supabase/server";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
@@ -13,54 +14,47 @@ import type { Metadata } from "next";
 
 // Revalidate blog index every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
+//
+// IMPORTANT: nothing in this file may read `searchParams`. Doing so opts the
+// whole route into dynamic rendering, which silently nullifies the `revalidate`
+// above — the route then answers `no-store` / cache MISS and re-runs both
+// Supabase queries on every hit. That is exactly what happened until Aug 2026,
+// when an AI crawler sweeping 21 blog locales made it the most expensive page
+// on the site. Tag filtering and pagination live in blog-index-content.tsx
+// (a client component reading useSearchParams) precisely to keep this page
+// prerenderable. Keep it that way.
 export const revalidate = 86400;
-
-const PAGE_SIZE = 18;
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ tag?: string; page?: string }>;
 };
 
 export function generateStaticParams() {
   return BLOG_LOCALES.map((locale) => ({ locale }));
 }
 
-function parsePageParam(raw: string | undefined): number {
-  const n = raw ? parseInt(raw, 10) : 1;
-  return Number.isFinite(n) && n >= 1 ? n : 1;
-}
-
-function buildQuerySuffix(tag: string | undefined, page: number): string {
-  const params = new URLSearchParams();
-  if (tag) params.set("tag", tag);
-  if (page > 1) params.set("page", String(page));
-  const qs = params.toString();
-  return qs ? `?${qs}` : "";
-}
-
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const { tag, page: pageRaw } = await searchParams;
-  const page = parsePageParam(pageRaw);
   const t = await getTranslations({ locale, namespace: "blog" });
   const baseUrl = "https://www.dopplervpn.org";
-  const suffix = buildQuerySuffix(tag, page);
 
   return {
     title: t("indexTitle"),
     description: t("indexDescription"),
     alternates: {
-      canonical: `${baseUrl}/${locale}/blog${suffix}`,
+      // Query variants (?tag=, ?page=) all canonicalise to the bare index.
+      // They are also Disallowed in robots.ts — every post is reachable from
+      // the sitemap shards, so discovery never depended on paginated URLs.
+      canonical: `${baseUrl}/${locale}/blog`,
       languages: Object.fromEntries([
-        ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog${suffix}`]),
-        ["x-default", `${baseUrl}/en/blog${suffix}`],
+        ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog`]),
+        ["x-default", `${baseUrl}/en/blog`],
       ]),
     },
     openGraph: {
       title: t("indexTitle"),
       description: t("indexDescription"),
-      url: `${baseUrl}/${locale}/blog${suffix}`,
+      url: `${baseUrl}/${locale}/blog`,
       siteName: "Doppler VPN",
       locale: ogLocaleMap[locale] || "en_US",
       type: "website",
@@ -105,7 +99,7 @@ interface PostData {
   }[];
 }
 
-async function getBlogData(locale: string, tagSlug: string | undefined) {
+async function fetchBlogData(locale: string) {
   // Use the cookie-less client: blog content is 100% public and we want this
   // page to stay statically rendered / ISR-cached. Calling the cookie-aware
   // `createClient()` here would opt the entire route into force-dynamic SSR
@@ -165,7 +159,7 @@ async function getBlogData(locale: string, tagSlug: string | undefined) {
 
   const postsData = postsRaw as PostData[] | null;
 
-  let posts = (postsData || [])
+  const posts = (postsData || [])
     .map((post) => {
       const translation = post.blog_post_translations.find((t) => t.locale === locale);
       if (!translation) return null;
@@ -189,34 +183,23 @@ async function getBlogData(locale: string, tagSlug: string | undefined) {
     })
     .filter((p): p is NonNullable<typeof p> => p !== null);
 
-  // Filter by tag
-  if (tagSlug) {
-    posts = posts.filter((post) =>
-      post.tags.some((tag) => tag.slug === tagSlug)
-    );
-  }
-
   return { posts, tags };
 }
 
-export default async function BlogIndexPage({ params, searchParams }: Props) {
+// One Supabase round-trip per locale per 24h, shared across every request that
+// hits a cold ISR render. Mirrors `fetchPostsByLocale` in src/app/sitemap.ts.
+const getBlogData = unstable_cache(fetchBlogData, ["blog-index"], {
+  revalidate: 86400,
+  tags: ["blog-index"],
+});
+
+export default async function BlogIndexPage({ params }: Props) {
   const { locale } = await params;
   if (!isBlogLocale(locale)) notFound();
-  const { tag: tagSlug, page: pageRaw } = await searchParams;
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "blog" });
-  const { posts } = await getBlogData(locale, tagSlug);
-
-  const requestedPage = parsePageParam(pageRaw);
-  const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
-  // Out-of-range page numbers should 404 (avoids duplicate thin content for SEO).
-  if (requestedPage > totalPages && posts.length > 0) notFound();
-  const currentPage = Math.min(requestedPage, totalPages);
-  const pagePosts = posts.slice(
-    (currentPage - 1) * PAGE_SIZE,
-    currentPage * PAGE_SIZE,
-  );
+  const { posts } = await getBlogData(locale);
 
   const baseUrl = "https://www.dopplervpn.org";
 
@@ -241,11 +224,8 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
 
           <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
             <BlogIndexContent
-              posts={pagePosts}
+              posts={posts}
               locale={locale}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              tagSlug={tagSlug ?? null}
               translations={{
                 readMore: t("readMore"),
                 noPosts: t("noPosts"),
