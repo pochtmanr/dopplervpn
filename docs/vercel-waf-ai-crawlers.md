@@ -1,10 +1,26 @@
 # Vercel WAF: stopping AI-crawler spend
 
-**Why this file exists:** the Vercel CLI on this Mac is authenticated as
-`vancouverrenovations43-7543`, which has no access to the team that owns the real
-`dopplervpn` project. `vercel firewall …` returns *Not authorized*, and a `vercel link`
-attempt previously overwrote `landing/.vercel/project.json`. So the WAF has to be configured
-by hand in the dashboard. These are the exact steps.
+> **STATUS 2026-08-14 — this policy is APPLIED and enforcing.** See
+> [What is live](#what-is-live) at the bottom. The steps below are kept as the
+> rationale and the recovery procedure.
+
+**Why this file exists:** it used to be that the Vercel CLI on this Mac was authenticated
+as `vancouverrenovations43-7543`, with no access to the team owning `dopplervpn`, so
+`vercel firewall …` returned *Not authorized* and everything had to be done in the
+dashboard. **That is fixed** — the CLI is authenticated as `rpochtman-5822` and
+`vercel firewall` works, but only when run from `landing/`. Never run `vercel link` at the
+repo root; it previously overwrote `landing/.vercel/project.json`.
+
+**The failure this policy actually had:** the rules were written down here in 2026-08-12 but
+never applied. On 2026-08-14 the live config still showed `managedRules: null`, and the one
+custom rule that did exist (`Block Washington DC`) had action **`log`**, not `deny` — so it
+recorded matches and passed the traffic through. Four days of traffic: `waf_action=allow`
+171,049 vs `deny` 117. A rule listed as "Enabled" tells you nothing; only the action does.
+Always verify with:
+
+```bash
+vercel metrics vercel.request.count -a sum --group-by waf_action --since 1h
+```
 
 **Why it matters:** Vercel does **not** bill requests denied by the WAF or by a managed
 ruleset. Everything else — 200s, 304s, 307 redirects, 404s, the 410 Gone responses, every
@@ -140,3 +156,55 @@ Then watch **Usage → Edge Requests** over the next 24–48h. Baseline human tr
 - `BLOCKED_AI_USER_AGENTS` — the polite-bot half of what Step 2 enforces
 
 If you change one, change the other.
+
+---
+
+## What is live
+
+Applied 2026-08-14 via the CLI (run from `landing/`). Custom rules, in evaluation order —
+order matters, because `bypass` short-circuits every later custom rule *and* every managed
+ruleset:
+
+| # | Rule | Action | Matches |
+| --- | --- | --- | --- |
+| 1 | `Allow AI citation bots` | Bypass | UA contains `OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `Claude-User`, `Claude-SearchBot` |
+| 2 | `Block Washington DC` | **Deny** (was Log) | `geo_country = US` AND `geo_country_region = DC` |
+| 3 | `Deny AI training crawlers` | Deny | UA contains `meta-externalagent`, `meta-externalfetcher`, `meta-webindexer`, `GPTBot`, `ClaudeBot`, `CCBot`, `Bytespider`, `Amazonbot` |
+| 4 | `Rate limit crawl burst` | Rate Limit 300/60s, key IP, **exceed = Log** | path starts with `/` |
+
+Plus the **AI Bots managed ruleset**, enabled in **Log** (`managedRules.ai_bots`). It catches
+crawlers the UA list above does not name, and Vercel maintains that list.
+
+`Google-Extended` and `Applebot-Extended` are deliberately **not** in rule 3: they are
+robots.txt-only tokens that are never sent as a `User-Agent`, so a UA rule for them is dead
+weight — and matching on `Applebot-Extended` must not be widened to `Applebot`, which would
+block Apple's actual search crawler.
+
+Measured within the hour of publishing: total requests fell from ~1,770/h to 324/h, and
+`meta-externalagent` — 96,939 requests over the preceding 4 days, 57% of all traffic — went
+to zero. `bypass | perplexitybot` appears in the metrics, confirming rule 1 works.
+
+### Still to do
+
+1. **Flip the AI Bots managed ruleset Log → Deny** after reviewing ~24h of matched traffic
+   (Firewall → Traffic; confirm no Googlebot, Bingbot, uptime monitor or real users). There is
+   no CLI for managed rulesets — use the dashboard or:
+   ```bash
+   curl -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+     -d '{"action":"managedRules.update","id":"ai_bots","value":{"active":true,"action":"deny"}}' \
+     "https://api.vercel.com/v1/security/firewall/config?projectId=prj_UdkPjC4Nhvorxi1ls3IESCS3e0Fc&teamId=team_AuIcOXvD0ArmmWkS3WNyZqrB"
+   ```
+2. **Flip rule 4's exceed action Log → Deny** after the same review — `vercel firewall rules edit`.
+3. **Spend limit** (Settings → Billing). Still outstanding. Deliberately not set unattended:
+   hitting it *pauses the project*, i.e. takes the site offline, so the amount is Roman's call.
+
+### visachecker
+
+The sibling project `visachecker` (`prj_PjsFjFHhX0lI4kXSkRROAeYRnXhX`, `visapassage.com`) had
+**no firewall configuration at all** and now has rule 4 only. It deliberately does **not** get
+rules 1–3: its `src/app/robots.ts` uses `Allow: /` for 13 AI crawlers, the opposite of the
+policy here, and that choice was left intact. Its cost was fixed at the source instead — see
+[[vercel-isr-write-billing]] and the `perf/isr-write-cost` branch on `pochtmanr/visachecker`.
+
+To run firewall commands against another project without relinking, point `--cwd` at a scratch
+directory containing only a `.vercel/project.json` for it.
