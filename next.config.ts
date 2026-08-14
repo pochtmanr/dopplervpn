@@ -8,7 +8,9 @@ const isDev = process.env.NODE_ENV === "development";
 // Static CSP (no nonces — nonces would force dynamic rendering and kill the
 // statically generated marketing pages). 'unsafe-inline' is unavoidable:
 // Next.js hydration, next-themes' theme script, and JSON-LD all inline
-// scripts, and experimental.inlineCss inlines styles. The policy's value is
+// scripts. (experimental.inlineCss also used to inline styles; it was removed —
+// see the note in `experimental` below. 'unsafe-inline' in style-src is still
+// required for React's inline style attributes.) The policy's value is
 // origin allowlisting: only self, Vercel Analytics, and Revolut Checkout
 // (embed.js + popup iframes; sandbox origin kept for REVOLUT_ENVIRONMENT).
 // 'unsafe-eval' is dev-only (React Refresh needs it).
@@ -31,10 +33,15 @@ const csp = [
 const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["next-intl"],
-    // Inline CSS into the HTML <head> so the two stylesheet requests no longer
-    // block first paint (PSI: render-blocking CSS, ~720ms). Also surfaces the
-    // @font-face rules immediately, shortening the font critical-path chain.
-    inlineCss: true,
+    // `inlineCss: true` was here to remove ~720ms of render-blocking CSS (PSI) by
+    // inlining the stylesheet into <head>. It was removed 2026-08-14 because the
+    // cost outweighed that: it put ~300 KB into EVERY page — a 157 KB inline
+    // <style> plus a duplicated 142 KB copy inside the RSC flight payload — and
+    // that weight is written to, and read back from, the ISR cache for all ~4,900
+    // prerendered pages, as well as being re-sent on every request (9.3 GB of
+    // egress in 4 days). An external hashed stylesheet is cached by the browser
+    // and the CDN and is not part of the ISR-cached body. Re-check PSI before
+    // reinstating, and if you do, measure ISR write/read units at the same time.
   },
   async rewrites() {
     return [

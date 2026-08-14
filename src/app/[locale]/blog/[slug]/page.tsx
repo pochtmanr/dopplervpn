@@ -242,12 +242,17 @@ async function getPostData(locale: string, slug: string) {
   const translation = post.blog_post_translations.find((t) => t.locale === locale);
   if (!translation) return null;
 
-  const tags = (post.blog_post_tags || []).map((pt) => ({
-    slug: pt.blog_tags.slug,
-    name:
-      pt.blog_tags.blog_tag_translations.find((t) => t.locale === locale)
-        ?.name || pt.blog_tags.slug,
-  }));
+  // Sorted by slug so the rendered <Badge> chip order is stable. A nested embed
+  // comes back in whatever order Postgres produces, and a reshuffle changes the
+  // page bytes without changing the content — which bills a full ISR write.
+  const tags = (post.blog_post_tags || [])
+    .map((pt) => ({
+      slug: pt.blog_tags.slug,
+      name:
+        pt.blog_tags.blog_tag_translations.find((t) => t.locale === locale)
+          ?.name || pt.blog_tags.slug,
+    }))
+    .sort((a, b) => a.slug.localeCompare(b.slug));
 
   const relatedPosts = (post.blog_internal_links || [])
     .sort((a, b) => a.link_order - b.link_order)

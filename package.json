@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run check:facts",
+    "prebuild": "npm run check:facts && npm run check:i18n",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:facts": "tsx scripts/check-agent-facts.ts",
+    "check:i18n": "node scripts/check-client-namespaces.mjs",
     "indexnow": "tsx scripts/indexnow.ts"
   },
   "dependencies": {

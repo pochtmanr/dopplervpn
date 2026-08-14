@@ -56,7 +56,12 @@ const fetchPostsByLocale = unstable_cache(
     const { data, error } = await supabase
       .from("blog_posts")
       .select("slug, updated_at, created_at, blog_post_translations!inner(locale)")
-      .eq("status", "published");
+      .eq("status", "published")
+      // Explicit order, not for correctness but for cost: without it Postgres
+      // returns heap order, which shifts whenever a row is UPDATEd and relocated.
+      // A reshuffle rewrites every sitemap shard's bytes and bills a full set of
+      // ISR writes for content that did not actually change.
+      .order("slug");
 
     if (error) {
       // Throw so unstable_cache does not memoize a degraded result for 24h.

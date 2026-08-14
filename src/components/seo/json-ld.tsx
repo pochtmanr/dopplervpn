@@ -58,6 +58,14 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
   );
 }
 
+// Must be a fixed literal, never computed from `Date.now()`. ProductSchema renders
+// into <head> of the root locale layout, so this string lands in all ~4,900
+// prerendered pages (twice each — once per plan). A computed `now + 365d` rolled
+// over at midnight UTC, which made every page's output differ from the previous
+// day's and so billed a full ISR write on every daily revalidation.
+// Same hardening as STATIC_LASTMOD in src/app/sitemap.ts. Bump by hand when it nears.
+const PRICE_VALID_UNTIL = "2027-12-31";
+
 export async function ProductSchema({ locale }: LocaleProps) {
   const t = await getTranslations({ locale, namespace: "metadata" });
   const pt = await getTranslations({ locale, namespace: "pricing" });
@@ -80,7 +88,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
       name: pt(`durations.${plan.id}`),
       price: plan.total.toFixed(2),
       priceCurrency: CURRENCY,
-      priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+      priceValidUntil: PRICE_VALID_UNTIL,
       availability: "https://schema.org/InStock",
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",

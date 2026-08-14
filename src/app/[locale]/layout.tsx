@@ -5,6 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { Instrument_Serif, Space_Grotesk, Rubik } from "next/font/google";
 
 import { routing, isRtlLocale, type Locale } from "@/i18n/routing";
+import { pickMessages } from "@/i18n/client-namespaces";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import {
   OrganizationSchema,
@@ -154,7 +155,10 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const messages = await getMessages();
+  // Only the namespaces Client Components actually use are serialised into the
+  // RSC payload — passing the full bundle put 276 KB (en) into every page, and
+  // more on larger locales. See src/i18n/client-namespaces.ts.
+  const messages = pickMessages(await getMessages());
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
 
   return (

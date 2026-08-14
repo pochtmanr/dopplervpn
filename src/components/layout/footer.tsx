@@ -65,6 +65,12 @@ function LinkList({ links }: { links: LinkItem[] }) {
   );
 }
 
+// Fixed, not `new Date().getFullYear()`. Footer is a server component rendered on
+// every page, so a computed year rewrites the ISR cache entry for all ~4,900
+// prerendered pages the first time each is revalidated after 1 January — a
+// site-wide write storm for one character. Bump this by hand each new year.
+const COPYRIGHT_YEAR = 2026;
+
 export async function Footer() {
   const t = await getTranslations("footer");
   const locale = await getLocale();
@@ -72,7 +78,7 @@ export async function Footer() {
   // /security ships in the hand-translated core-market locales only
   // (see /[locale]/security/page.tsx generateStaticParams).
   const showSecurityLink = isSecurityLocale(locale);
-  const currentYear = new Date().getFullYear();
+  const currentYear = COPYRIGHT_YEAR;
 
   const productLinks: LinkItem[] = [
     { href: "/#pricing", label: t("pricing") },

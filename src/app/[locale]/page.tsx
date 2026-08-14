@@ -83,6 +83,9 @@ async function getLatestPosts(locale: string) {
     .eq("status", "published")
     .eq("blog_post_translations.locale", locale)
     .order("published_at", { ascending: false })
+    // Tiebreak so posts sharing a published_at cannot swap places between
+    // revalidations — a reshuffle is a byte diff and bills an ISR write.
+    .order("slug")
     .limit(3);
 
   const postsData = postsRaw as HomePostData[] | null;
@@ -92,12 +95,15 @@ async function getLatestPosts(locale: string) {
       const translation = post.blog_post_translations.find((t) => t.locale === locale);
       if (!translation) return null;
 
-      const tags = (post.blog_post_tags || []).map((pt) => ({
-        slug: pt.blog_tags.slug,
-        name:
-          pt.blog_tags.blog_tag_translations.find((t) => t.locale === locale)
-            ?.name || pt.blog_tags.slug,
-      }));
+      // Sorted for stable output — see the tag sort in blog/[slug]/page.tsx.
+      const tags = (post.blog_post_tags || [])
+        .map((pt) => ({
+          slug: pt.blog_tags.slug,
+          name:
+            pt.blog_tags.blog_tag_translations.find((t) => t.locale === locale)
+              ?.name || pt.blog_tags.slug,
+        }))
+        .sort((a, b) => a.slug.localeCompare(b.slug));
 
       return {
         slug: post.slug,
