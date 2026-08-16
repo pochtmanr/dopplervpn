@@ -150,6 +150,83 @@ export async function sendWelcomeEmail({
   });
 }
 
+/* ── Verification code email ────────────────────────────────────── */
+
+interface VerificationCodeEmailParams {
+  to: string;
+  code: string;
+  expiresInMinutes?: number;
+}
+
+/**
+ * Sends a 6-digit account-linking verification code.
+ *
+ * English-only by design: the mobile clients post only
+ * `{account_id, method, contact_value}` to /api/doppler/send-code — there is no
+ * locale on the wire to key a translation off. Matches the Telegram bot's
+ * English-only OTP mail.
+ */
+export async function sendVerificationCodeEmail({
+  to,
+  code,
+  expiresInMinutes = 10,
+}: VerificationCodeEmailParams) {
+  const transporter = getTransporter();
+  const safeCode = escapeHtml(code);
+  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || 'support@simnetiq.store';
+
+  const html = `<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><meta charset="utf-8"><title>Doppler VPN verification code</title></head>
+<body style="margin:0;padding:0;background:#f4f5f7;">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f4f5f7;padding:32px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <tr><td align="center">
+    <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e6e8eb;">
+      <tr><td style="padding:28px 32px 8px 32px;">
+        <img src="https://www.dopplervpn.org/logo.png" alt="Doppler VPN" width="40" height="40" style="display:block;border:0;">
+      </td></tr>
+      <tr><td style="padding:8px 32px 0 32px;">
+        <h1 style="margin:0;font-size:24px;line-height:1.3;color:#0f172a;font-weight:700;">Your verification code</h1>
+        <p style="margin:8px 0 0;color:#475569;font-size:15px;line-height:1.5;">Enter this code in the Doppler VPN app to link this email to your account.</p>
+      </td></tr>
+      <tr><td style="padding:24px 32px 8px 32px;">
+        <div style="background:#f8fafc;border:1px solid #e6e8eb;border-radius:10px;padding:24px;text-align:center;">
+          <p style="margin:0;font-size:34px;font-weight:700;font-family:ui-monospace,Menlo,monospace;letter-spacing:10px;color:#0f172a;">${safeCode}</p>
+        </div>
+        <p style="margin:14px 0 0;color:#64748b;font-size:13px;">This code expires in ${expiresInMinutes} minutes.</p>
+      </td></tr>
+      <tr><td style="padding:24px 32px 28px 32px;border-top:1px solid #f1f5f9;">
+        <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.5;">
+          If you didn't request this, you can safely ignore this email — nothing was changed on your account.<br>
+          Need help? <a href="mailto:support@simnetiq.store" style="color:#2563eb;text-decoration:none;">support@simnetiq.store</a>
+        </p>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>`;
+
+  const text = [
+    'Your Doppler VPN verification code',
+    '',
+    code,
+    '',
+    `This code expires in ${expiresInMinutes} minutes.`,
+    '',
+    "If you didn't request this, you can safely ignore this email.",
+    'Need help? support@simnetiq.store',
+  ].join('\n');
+
+  await transporter.sendMail({
+    from: `"Doppler VPN" <${fromAddress}>`,
+    to,
+    subject: `${code} is your Doppler VPN verification code`,
+    html,
+    text,
+  });
+}
+
 /* ── Receipt email ──────────────────────────────────────────────── */
 
 export type ReceiptPaymentMethod =
