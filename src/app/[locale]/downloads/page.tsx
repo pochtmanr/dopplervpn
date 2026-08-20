@@ -66,8 +66,10 @@ const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
+  // One Windows build, x64 only. ARM64 Windows runs it under emulation; there is
+  // no separate ARM64 installer to offer and no ARM64 tunnel that has been verified
+  // on a device. See dopplerWindows/DopplerVPN.csproj.
   windowsX64: "/api/windows/download/latest-x64",
-  windowsArm64: "/api/windows/download/latest-arm64",
 };
 
 /* ── Release Updates ─────────────────────────────────────────────── */
@@ -249,13 +251,6 @@ const PLATFORMS: {
         variant: "windows-x64",
         download: true,
         primary: true,
-      },
-      {
-        labelKey: "windows.buttonArm64",
-        href: URLS.windowsArm64,
-        variant: "windows-arm64",
-        download: true,
-        primary: false,
       },
     ],
   },

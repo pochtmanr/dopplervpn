@@ -11,9 +11,20 @@ import { firePostback } from "@/lib/postback";
  *
  * Supported files:
  *   latest-x64                        -> newest windows-v* release, x64
- *   latest-arm64                      -> newest windows-v* release, ARM64
+ *   latest-arm64                      -> the SAME x64 installer (see below)
  *   DopplerVPN-<x.y.z>-x64-Setup.exe  -> that exact version (old links keep working)
- *   DopplerVPN-<x.y.z>-arm64-Setup.exe
+ *   DopplerVPN-<x.y.z>-arm64-Setup.exe-> that exact version, if it had an ARM64 build
+ *
+ * ARM64. Doppler for Windows is x64 only from v11 — the data path is xray-core's
+ * native tun inbound over Wintun, and no ARM64 build of that payload has been
+ * verified on a device. `latest-arm64` therefore resolves to the x64 installer
+ * rather than 404ing: ARM64 Windows runs x64 binaries under emulation, so the
+ * download works, whereas an ARM64 asset that does not exist would send the user
+ * to a GitHub 404 with nothing in our logs to explain it. The alias is kept alive
+ * rather than removed because it is baked into links already in the wild.
+ *
+ * Exact versioned ARM64 filenames still resolve to their own release, so links
+ * minted while ARM64 builds were published keep working.
  *
  * Releasing a new version needs no change here: tag windows-v<x.y.z> on the
  * Windows repo, publish the installers to a windows-v<x.y.z> release on
@@ -27,7 +38,9 @@ const REPO = "pochtmanr/dopplervpn";
 const RELEASE_BASE = `https://github.com/${REPO}/releases/download`;
 
 // Used only if the GitHub API is unreachable while resolving a latest-* alias.
-// Keep in step with the newest published windows-v* release.
+// Keep in step with the newest published windows-v* release — and bump it only
+// AFTER that release actually exists on pochtmanr/dopplervpn, or a GitHub outage
+// sends every visitor to a download URL for a build nobody published.
 const FALLBACK_VERSION = "1.0.1";
 
 const INSTALLER_RE = /^DopplerVPN-(\d+\.\d+\.\d+)-(x64|arm64)-Setup\.exe$/;
@@ -153,9 +166,13 @@ export async function GET(req: NextRequest, context: RouteContext) {
 
   const alias = ALIAS_RE.exec(file);
   if (alias) {
-    const arch = alias[1] as Arch;
+    // What the visitor asked for, kept for the conversion report so campaign data
+    // still shows which architecture people are on.
+    const requested = alias[1] as Arch;
+    // What they get: there is one build. See the ARM64 note at the top of the file.
+    const arch: Arch = "x64";
     const version = await resolveLatestVersion();
-    const attributed = reportDownloadConversion(req, arch);
+    const attributed = reportDownloadConversion(req, requested);
     // Never stream the binary through Vercel — it burns Fast Origin Transfer quota.
     return NextResponse.redirect(installerUrl(version, arch), {
       status: 302,

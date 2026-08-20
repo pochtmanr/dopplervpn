@@ -18,9 +18,10 @@ interface PageProps {
 
 const baseUrl = "https://www.dopplervpn.org";
 
+// One Windows build, x64 only. ARM64 Windows runs it under emulation; there is no
+// separate ARM64 installer to offer.
 const URLS = {
   windowsX64: "/api/windows/download/latest-x64",
-  windowsArm64: "/api/windows/download/latest-arm64",
 };
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
@@ -334,14 +335,6 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                     <DownloadIcon />
                     {t("hero.ctaX64")}
                   </a>
-                  <a
-                    href={URLS.windowsArm64}
-                    download
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold border border-overlay/20 text-text-primary hover:border-accent-teal/30 hover:bg-accent-teal/5 transition-colors"
-                  >
-                    <DownloadIcon />
-                    {t("hero.ctaArm64")}
-                  </a>
                 </div>
 
                 {/* SmartScreen heads-up — sits immediately under the download
@@ -608,14 +601,6 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                     >
                       <DownloadIcon />
                       {t("cta.downloadX64")}
-                    </a>
-                    <a
-                      href={URLS.windowsArm64}
-                      download
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold border border-overlay/20 text-text-primary hover:border-accent-teal/30 hover:bg-accent-teal/5 transition-colors"
-                    >
-                      <DownloadIcon />
-                      {t("cta.downloadArm64")}
                     </a>
                   </div>
 

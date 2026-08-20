@@ -35,8 +35,7 @@ export type CtaPlatform = "ios" | "android" | "mac" | "windows" | "desktop";
 export type CtaVariant =
   | "android-play"
   | "android-apk"
-  | "windows-x64"
-  | "windows-arm64";
+  | "windows-x64";
 
 export function trackCta(
   location: CtaLocation,
