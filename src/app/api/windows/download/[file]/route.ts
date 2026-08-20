@@ -18,10 +18,16 @@ import { firePostback } from "@/lib/postback";
  * ARM64. Doppler for Windows is x64 only from v11 — the data path is xray-core's
  * native tun inbound over Wintun, and no ARM64 build of that payload has been
  * verified on a device. `latest-arm64` therefore resolves to the x64 installer
- * rather than 404ing: ARM64 Windows runs x64 binaries under emulation, so the
- * download works, whereas an ARM64 asset that does not exist would send the user
- * to a GitHub 404 with nothing in our logs to explain it. The alias is kept alive
- * rather than removed because it is baked into links already in the wild.
+ * rather than 404ing: Windows 11 on ARM emulates x64, so the download works,
+ * whereas an ARM64 asset that does not exist would send the user to a GitHub 404
+ * with nothing in our logs to explain it. The alias is kept alive rather than
+ * removed because it is baked into links already in the wild.
+ *
+ * The one group this does not serve: **Windows 10 on ARM before 21H2**, which
+ * emulates x86 only, not x64. Those machines cannot run this installer at all.
+ * They are pre-2021 ARM devices, they keep whatever build they have installed,
+ * and the alternative — shipping an ARM64 tunnel nobody has run on a device —
+ * would be worse than leaving them where they are.
  *
  * Exact versioned ARM64 filenames still resolve to their own release, so links
  * minted while ARM64 builds were published keep working.
