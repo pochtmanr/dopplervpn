@@ -24,6 +24,19 @@ import { NextResponse } from "next/server";
 // to the windows-v1.0.1 GitHub asset in 01b3461 did not revive the button.
 // The same-origin download route resolves the real release asset, so this
 // indirection costs nothing and keeps the version out of the URL entirely.
+// HELD AT 1.0.1 ON PURPOSE — do not "fix" this to match the download route.
+//
+// windows-v11.0.0 is published and /api/windows/download/latest-x64 serves it, so
+// anyone who comes to the site gets v11. This constant is a different thing: it is
+// what makes ~every installed 1.0.x machine show an "Update available" banner. v11
+// replaces the system-proxy data path with a full packet tunnel, and as of the
+// 11.0.0 tag that tunnel had never been run on any machine — it was compiled and
+// released so it could be tested, not because it was validated.
+//
+// Bump this to "11.0.0" once the tunnel has passed the acceptance run in
+// dopplerWindows/docs/RELEASE-windows.md §3 (Telegram voice call, WhatsApp call,
+// egress binding ok, udp53 ok) on real hardware. Not before: the banner is how the
+// existing install base finds out, and there is no way to un-tell them.
 const DEFAULT_VERSION = "1.0.1";
 const DEFAULT_DOWNLOAD_URL =
   "https://www.dopplervpn.org/api/windows/download/latest-x64";
