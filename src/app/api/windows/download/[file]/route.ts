@@ -47,7 +47,7 @@ const RELEASE_BASE = `https://github.com/${REPO}/releases/download`;
 // Keep in step with the newest published windows-v* release — and bump it only
 // AFTER that release actually exists on pochtmanr/dopplervpn, or a GitHub outage
 // sends every visitor to a download URL for a build nobody published.
-const FALLBACK_VERSION = "11.0.0";
+const FALLBACK_VERSION = "11.0.1";
 
 const INSTALLER_RE = /^DopplerVPN-(\d+\.\d+\.\d+)-(x64|arm64)-Setup\.exe$/;
 const ALIAS_RE = /^latest-(x64|arm64)$/;
