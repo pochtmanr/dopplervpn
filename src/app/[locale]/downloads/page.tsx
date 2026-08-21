@@ -81,7 +81,7 @@ const URLS = {
 
 type Release = {
   date: string;
-  note: "connectionFix" | null;
+  note: "connectionFix" | "fullTunnel" | null;
   status?: "review";
 };
 
@@ -89,7 +89,7 @@ const RELEASES: Record<"ios" | "android" | "mac" | "windows", Release> = {
   ios:     { date: "2026-04-08", note: null },
   android: { date: "2026-05-03", note: null },
   mac:     { date: "2026-05-11", note: "connectionFix", status: "review" },
-  windows: { date: "2026-07-28", note: "connectionFix" },
+  windows: { date: "2026-08-21", note: "fullTunnel" },
 };
 
 function UpdateInfo({
@@ -116,6 +116,11 @@ function UpdateInfo({
       {release.note === "connectionFix" && (
         <p className="mt-1 text-xs text-text-muted/70">
           {t("releaseNoteConnectionFix")}
+        </p>
+      )}
+      {release.note === "fullTunnel" && (
+        <p className="mt-1 text-xs text-text-muted/70">
+          {t("releaseNoteFullTunnel")}
         </p>
       )}
     </div>
