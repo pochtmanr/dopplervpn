@@ -1,5 +1,12 @@
 # Doppler Landing + Admin
 
+> **Subscriptions, entitlements and anti-fraud live in one place:**
+> [`../SUBSCRIPTION-AND-ANTIFRAUD.md`](../SUBSCRIPTION-AND-ANTIFRAUD.md) — the Pro predicate on
+> every layer, the purchase→Pro pipeline, per-platform behaviour, the anti-fraud posture with
+> honest strength ratings, the known holes, and the schema drift. **Read it before grepping for
+> any of that**, and correct it there rather than re-deriving it.
+
+
 ## Overview
 Next.js 15 web app serving as the public marketing site, admin panel, and blog pipeline for Doppler VPN. Deployed at `dopplervpn.org`. Includes 44-language landing, blog with AI content generation, admin dashboard, and API routes used by the Telegram bots.
 
