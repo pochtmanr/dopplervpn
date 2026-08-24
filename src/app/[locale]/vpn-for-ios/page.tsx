@@ -11,6 +11,7 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/reveal";
 import { Accordion } from "@/components/ui/accordion";
+import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -251,7 +252,9 @@ export default async function VpnForIosPage({ params }: PageProps) {
               {/* Text */}
               <div className="text-center lg:text-start">
                 {/* App Store rating chip */}
-                <a
+                <TrackedDownloadLink
+                  location="vpn-for-ios"
+                  platform="ios"
                   href={URLS.ios}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -260,7 +263,7 @@ export default async function VpnForIosPage({ params }: PageProps) {
                   <Stars />
                   <span className="font-semibold text-text-primary">{tHero("socialProof.rating")}</span>
                   <span className="text-text-muted">{tHero("socialProof.appStore")}</span>
-                </a>
+                </TrackedDownloadLink>
 
                 {/* Headline — serif blur-up cascade, last word in gradient italic */}
                 <h1
@@ -291,7 +294,9 @@ export default async function VpnForIosPage({ params }: PageProps) {
                 </p>
 
                 <div className="hero-animate hero-animate-delay-3 mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                  <a
+                  <TrackedDownloadLink
+                    location="vpn-for-ios"
+                    platform="ios"
                     href={URLS.ios}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -299,7 +304,7 @@ export default async function VpnForIosPage({ params }: PageProps) {
                   >
                     <AppleIcon />
                     {t("hero.cta")}
-                  </a>
+                  </TrackedDownloadLink>
                   <span className="text-xs text-text-muted">{tHero("socialProof.users")}</span>
                 </div>
 
@@ -518,7 +523,9 @@ export default async function VpnForIosPage({ params }: PageProps) {
                   <div id="blog-cta-sentinel" aria-hidden="true" />
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-                    <a
+                    <TrackedDownloadLink
+                      location="vpn-for-ios"
+                      platform="ios"
                       href={URLS.ios}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -526,7 +533,7 @@ export default async function VpnForIosPage({ params }: PageProps) {
                     >
                       <AppleIcon />
                       {t("cta.downloadIos")}
-                    </a>
+                    </TrackedDownloadLink>
                   </div>
 
                   <p className="text-sm text-text-muted mb-2">{t("cta.otherPlatforms")}</p>

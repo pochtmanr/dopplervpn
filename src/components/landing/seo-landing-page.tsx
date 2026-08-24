@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { BreadcrumbSchema, FAQSchema, ArticleSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { isSecurityLocale } from "@/i18n/security-locales";
+import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import type { CtaLocation } from "@/lib/track-cta";
 
 const baseUrl = "https://www.dopplervpn.org";
@@ -123,23 +124,33 @@ function GoogleLogo() {
   );
 }
 
+/**
+ * Rendered twice on every SEO landing page (hero + bottom CTA) across a dozen
+ * pages, which made these the largest block of untracked store links on the
+ * site. `location` is the page slug, already typed `CtaLocation` by
+ * `SeoLandingPageProps` — the analytics plumbing was designed in and never
+ * connected. `TrackedDownloadLink` is a client component; this stays a server
+ * component because every prop crossing the boundary is serialisable.
+ */
 function DownloadButtons({
   t,
   primaryPlatform,
-  utmCampaign,
+  location,
 }: {
   t: (key: string) => string;
   primaryPlatform: PrimaryPlatform;
-  utmCampaign: string;
+  location: CtaLocation;
 }) {
-  const utm = `?utm_source=organic&utm_medium=seo&utm_campaign=${utmCampaign}`;
+  const utm = `?utm_source=organic&utm_medium=seo&utm_campaign=${location}`;
   const showIos = primaryPlatform !== "android";
   const showAndroid = primaryPlatform !== "ios";
 
   return (
     <div className="flex flex-col sm:flex-row gap-3 justify-center">
       {showIos && (
-        <a
+        <TrackedDownloadLink
+          location={location}
+          platform="ios"
           href={`${URLS.ios}${utm}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -147,10 +158,13 @@ function DownloadButtons({
         >
           <AppleLogo />
           {t("cta.downloadIos")}
-        </a>
+        </TrackedDownloadLink>
       )}
       {showAndroid && (
-        <a
+        <TrackedDownloadLink
+          location={location}
+          platform="android"
+          variant="android-play"
           href={`${URLS.androidPlayStore}${utm}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -158,16 +172,18 @@ function DownloadButtons({
         >
           <GoogleLogo />
           {t("cta.downloadAndroid")}
-        </a>
+        </TrackedDownloadLink>
       )}
-      <a
+      <TrackedDownloadLink
+        location={location}
+        platform="telegram"
         href={`${URLS.telegramBot}${utm}`}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-accent-gold/15 text-accent-gold hover:bg-accent-gold/25 transition-colors"
       >
         {t("cta.telegramBot")}
-      </a>
+      </TrackedDownloadLink>
     </div>
   );
 }
@@ -244,7 +260,7 @@ export async function SeoLandingPage({
             <p className="text-text-muted text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8">
               {t("hero.subtitle")}
             </p>
-            <DownloadButtons t={t} primaryPlatform={primaryPlatform} utmCampaign={slug} />
+            <DownloadButtons t={t} primaryPlatform={primaryPlatform} location={slug} />
           </div>
         </section>
 
@@ -385,7 +401,7 @@ export async function SeoLandingPage({
 
             <div id="blog-cta-sentinel" aria-hidden="true" />
 
-            <DownloadButtons t={t} primaryPlatform={primaryPlatform} utmCampaign={slug} />
+            <DownloadButtons t={t} primaryPlatform={primaryPlatform} location={slug} />
 
             <div className="flex flex-wrap gap-3 justify-center mt-6">
               <a

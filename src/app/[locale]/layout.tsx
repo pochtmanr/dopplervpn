@@ -13,6 +13,8 @@ import {
   WebsiteSchema,
   SoftwareApplicationSchema,
 } from "@/components/seo/json-ld";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { GaConsent } from "@/components/analytics/ga-consent";
 import { AnalyticsConsent } from "@/components/analytics-consent";
 import { SpeedInsightsConsent } from "@/components/speed-insights-consent";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -172,6 +174,9 @@ export default async function LocaleLayout({
       }
     >
       <head>
+        {/* First in <head> on purpose — the Consent Mode v2 defaults must be
+            queued before gtag.js can send anything. See the component. */}
+        <GoogleAnalytics />
         <OrganizationSchema locale={locale} />
         <ProductSchema locale={locale} />
         <WebsiteSchema locale={locale} />
@@ -184,6 +189,7 @@ export default async function LocaleLayout({
             <CookieConsent />
           </NextIntlClientProvider>
         </ThemeProvider>
+        <GaConsent />
         <AnalyticsConsent />
         <SpeedInsightsConsent />
       </body>

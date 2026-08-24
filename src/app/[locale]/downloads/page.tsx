@@ -374,6 +374,7 @@ export default async function DownloadsPage({ params }: PageProps) {
                     {buttons.map((btn) => (
                       <TrackedDownloadLink
                         key={btn.labelKey}
+                        location="downloads-page"
                         platform={key}
                         {...(btn.variant ? { variant: btn.variant } : {})}
                         href={btn.href}

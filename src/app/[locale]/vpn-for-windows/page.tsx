@@ -11,6 +11,7 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/reveal";
 import { Accordion } from "@/components/ui/accordion";
+import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -319,14 +320,17 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                 </p>
 
                 <div className="hero-animate hero-animate-delay-3 mt-10 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                  <a
+                  <TrackedDownloadLink
+                    location="vpn-for-windows"
+                    platform="windows"
+                    variant="windows-x64"
                     href={URLS.windowsX64}
                     download
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold bg-accent-teal text-white hover:bg-accent-teal-light transition-all duration-200 shadow-lg shadow-accent-teal/25 hover:shadow-accent-teal/40 hover:-translate-y-0.5"
                   >
                     <DownloadIcon />
                     {t("hero.ctaX64")}
-                  </a>
+                  </TrackedDownloadLink>
                 </div>
 
                 {/* SmartScreen heads-up — sits immediately under the download
@@ -586,14 +590,17 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                   <div id="blog-cta-sentinel" aria-hidden="true" />
 
                   <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-                    <a
+                    <TrackedDownloadLink
+                      location="vpn-for-windows"
+                      platform="windows"
+                      variant="windows-x64"
                       href={URLS.windowsX64}
                       download
                       className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold bg-accent-teal text-white hover:bg-accent-teal-light transition-all duration-200 shadow-lg shadow-accent-teal/25 hover:shadow-accent-teal/40 hover:-translate-y-0.5"
                     >
                       <DownloadIcon />
                       {t("cta.downloadX64")}
-                    </a>
+                    </TrackedDownloadLink>
                   </div>
 
                   {/* Trial terms — mirrors what the payment webhooks actually

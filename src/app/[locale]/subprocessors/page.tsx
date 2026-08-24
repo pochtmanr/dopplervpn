@@ -84,10 +84,12 @@ const SUBPROCESSORS = [
     privacy: "https://www.apple.com/legal/privacy/",
   },
   {
+    // One row per legal entity — the table keys on `name`, and Google is a
+    // subprocessor for two unrelated purposes.
     name: "Google LLC",
-    purpose: "Android payment processing",
+    purpose: "Android payment processing; website analytics (Google Analytics 4)",
     location: "United States",
-    data: "In-app purchase records",
+    data: "In-app purchase records; anonymous website usage analytics, device and browser type, approximate location derived from IP",
     privacy: "https://policies.google.com/privacy",
   },
   {

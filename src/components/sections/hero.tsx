@@ -3,6 +3,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HeroCTAsWrapper } from "@/components/hero/hero-ctas-wrapper";
 import { DotGlobe } from "@/components/hero/dot-globe";
+import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
 const FALLBACK_FONT_LOCALES = new Set(["ru", "uk", "zh", "ja", "ko", "ar", "fa", "he", "hi", "ur", "th"]);
@@ -54,7 +55,9 @@ export function Hero() {
 
   const socialProof = (
     <div className="hero-animate hero-animate-delay-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 pt-1">
-      <a
+      <TrackedDownloadLink
+        location="hero"
+        platform="ios"
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
@@ -65,8 +68,11 @@ export function Hero() {
         <span className="text-xs text-text-muted group-hover:text-text-primary transition-colors">
           {t("socialProof.appStore")}
         </span>
-      </a>
-      <a
+      </TrackedDownloadLink>
+      <TrackedDownloadLink
+        location="hero"
+        platform="android"
+        variant="android-play"
         href={GOOGLE_PLAY_URL}
         target="_blank"
         rel="noopener noreferrer"
@@ -77,7 +83,7 @@ export function Hero() {
         <span className="text-xs text-text-muted group-hover:text-text-primary transition-colors">
           {t("socialProof.googlePlay")}
         </span>
-      </a>
+      </TrackedDownloadLink>
       <span className="hidden sm:inline text-text-tertiary" aria-hidden="true">·</span>
       <span className="text-xs text-text-muted">{t("socialProof.users")}</span>
     </div>

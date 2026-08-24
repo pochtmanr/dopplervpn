@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
-import { trackPurchaseResult } from '@/lib/track-cta';
+import { trackPurchaseResult, type CtaPlatform, type CtaVariant } from '@/lib/track-cta';
+import { TrackedDownloadLink } from '@/components/downloads/tracked-download-link';
 
 const IOS_URL = 'https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773';
 const ANDROID_PLAY_URL = 'https://play.google.com/store/apps/details?id=org.dopplervpn.android';
@@ -76,6 +77,10 @@ export function SuccessClient() {
               plan,
               provider,
               body.status === 'failed' ? body.reason || body.revolut_state : undefined,
+              // The verify response already carries the real charge; without it
+              // GA4 accepts `purchase` but reports zero revenue. `orderId` is
+              // GA4's dedupe key, so it must be the actual order reference.
+              { transactionId: orderId, value: body.amount, currency: body.currency },
             );
           }
           return;
@@ -253,6 +258,7 @@ function SuccessShell({
         <div className="grid sm:grid-cols-2 gap-3 mb-8">
           <DownloadButton
             href={IOS_URL}
+            platform="ios"
             label={t('success.iosLabel')}
             sub={t('success.iosSub')}
             icon={<AppleIcon />}
@@ -260,6 +266,8 @@ function SuccessShell({
           />
           <DownloadButton
             href={ANDROID_PLAY_URL}
+            platform="android"
+            variant="android-play"
             label={t('success.androidLabel')}
             sub={t('success.androidSub')}
             icon={<PlayIcon />}
@@ -267,6 +275,8 @@ function SuccessShell({
           />
           <DownloadButton
             href={WINDOWS_URL}
+            platform="windows"
+            variant="windows-x64"
             label={t('success.windowsLabel')}
             sub={t('success.windowsSub')}
             icon={<WindowsIcon />}
@@ -274,6 +284,7 @@ function SuccessShell({
           />
           <DownloadButton
             href={MAC_URL}
+            platform="mac"
             label={t('success.macLabel')}
             sub={t('success.macSub')}
             icon={<AppleIcon />}
@@ -447,6 +458,8 @@ function DownloadButton({
   label,
   sub,
   icon,
+  platform,
+  variant,
   external = false,
   download = false,
 }: {
@@ -454,11 +467,16 @@ function DownloadButton({
   label: string;
   sub: string;
   icon: React.ReactNode;
+  platform: CtaPlatform;
+  variant?: CtaVariant;
   external?: boolean;
   download?: boolean;
 }) {
   return (
-    <a
+    <TrackedDownloadLink
+      location="checkout-success"
+      platform={platform}
+      variant={variant}
       href={href}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...(download ? { download: true } : {})}
@@ -470,7 +488,7 @@ function DownloadButton({
         <div className="text-text-muted/70 text-xs">{sub}</div>
       </div>
       <ArrowIcon />
-    </a>
+    </TrackedDownloadLink>
   );
 }
 

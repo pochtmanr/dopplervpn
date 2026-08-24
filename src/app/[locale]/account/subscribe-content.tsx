@@ -513,7 +513,18 @@ function SubscribeInner() {
 
   /* ── Step 2: Subscribe ─────────────────────────────────────────── */
   const handleSubscribe = async () => {
-    trackCheckoutStarted(selected, paymentMethod, !!promoApplied, locale);
+    // Report what the visitor is actually about to be charged — the promo
+    // discount applies here, so the list price would overstate the funnel.
+    const startedCents = getDiscountedCents(
+      PLANS.find((p) => p.id === selected)?.cents ?? 0,
+    );
+    trackCheckoutStarted(
+      selected,
+      paymentMethod,
+      !!promoApplied,
+      locale,
+      startedCents / 100,
+    );
     setLoading(true);
     setError('');
 

@@ -11,16 +11,20 @@ const isDev = process.env.NODE_ENV === "development";
 // scripts. (experimental.inlineCss also used to inline styles; it was removed —
 // see the note in `experimental` below. 'unsafe-inline' in style-src is still
 // required for React's inline style attributes.) The policy's value is
-// origin allowlisting: only self, Vercel Analytics, and Revolut Checkout
-// (embed.js + popup iframes; sandbox origin kept for REVOLUT_ENVIRONMENT).
+// origin allowlisting: only self, Vercel Analytics, Google Analytics
+// (googletagmanager.com serves gtag.js; the *.google-analytics.com and
+// *.analytics.google.com wildcards are the regional collect endpoints gtag
+// picks at runtime, so a bare www.google-analytics.com is not enough), and
+// Revolut Checkout (embed.js + popup iframes; sandbox origin kept for
+// REVOLUT_ENVIRONMENT).
 // 'unsafe-eval' is dev-only (React Refresh needs it).
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://merchant.revolut.com https://sandbox-merchant.revolut.com`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com https://merchant.revolut.com https://sandbox-merchant.revolut.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://va.vercel-scripts.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
+  "connect-src 'self' https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
   "frame-src https://merchant.revolut.com https://sandbox-merchant.revolut.com",
   "worker-src 'self' blob:",
   "object-src 'none'",

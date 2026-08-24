@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { CLICK_ID_SOURCE_COOKIE, readClickIdCookie } from "@/lib/click-id";
 import { firePostback } from "@/lib/postback";
+import { sendServerEvent } from "@/lib/ga-server";
 
 /**
  * GET /api/windows/download/:file
@@ -154,17 +155,48 @@ function reportDownloadConversion(req: NextRequest, arch: Arch): boolean {
 }
 
 /**
- * Organic downloads keep the shared 5-minute cache. Attributed ones must not be
- * cached at all: a CDN hit would serve the redirect without running this handler,
- * so every conversion after the first in a window would go unreported — and the
- * response is per-visitor anyway once a click id is involved.
+ * GA4's count of installers actually served, as opposed to buttons clicked.
+ * The client-side `file_download` in lib/track-cta.ts is the other half: it is
+ * richer (it knows which CTA was pressed) but it is also the half ad blockers
+ * remove, so the two are expected to disagree and the gap is the useful signal.
+ *
+ * Fires for every request, attributed or not — unlike the postback, which is
+ * only meaningful for paid clicks.
  */
-function cacheHeaders(attributed: boolean): Record<string, string> {
-  return {
-    "Cache-Control": attributed
-      ? "private, no-store"
-      : "public, max-age=300, s-maxage=300",
-  };
+function reportDownloadToGa(req: NextRequest, arch: Arch, version: string, attributed: boolean) {
+  after(() =>
+    sendServerEvent(
+      {
+        name: "windows_download_served",
+        params: {
+          arch,
+          version,
+          attributed,
+          page_path: req.headers.get("referer") ?? "",
+        },
+      },
+      req.cookies.get("_ga")?.value
+    )
+  );
+}
+
+/**
+ * Nothing here may be cached. A CDN hit serves the redirect WITHOUT running this
+ * handler, so anything reported from inside it — the paid-campaign postback and
+ * the GA4 download count alike — would silently miss every request after the
+ * first in the window.
+ *
+ * This used to keep `s-maxage=300` for organic traffic, on the grounds that only
+ * attributed requests needed reporting. Counting organic downloads in GA4 made
+ * that trade-off wrong: at one cached response per edge region per five minutes
+ * the organic number would have been arbitrary.
+ *
+ * The cost is small. `resolveLatestVersion()` has a module-level 5-minute cache
+ * and its GitHub fetch carries `next: { revalidate: 300 }`, so a miss makes no
+ * upstream call — this is a bare 302 with no payload, never the binary itself.
+ */
+function cacheHeaders(): Record<string, string> {
+  return { "Cache-Control": "private, no-store" };
 }
 
 export async function GET(req: NextRequest, context: RouteContext) {
@@ -179,11 +211,11 @@ export async function GET(req: NextRequest, context: RouteContext) {
     const arch: Arch = "x64";
     const version = await resolveLatestVersion();
     const attributed = reportDownloadConversion(req, requested);
+    reportDownloadToGa(req, requested, version, attributed);
     // Never stream the binary through Vercel — it burns Fast Origin Transfer quota.
     return NextResponse.redirect(installerUrl(version, arch), {
       status: 302,
-      // Short cache: a new release should go live within minutes, not hours.
-      headers: cacheHeaders(attributed),
+      headers: cacheHeaders(),
     });
   }
 
@@ -191,10 +223,11 @@ export async function GET(req: NextRequest, context: RouteContext) {
   if (exact) {
     const [, version, arch] = exact;
     const attributed = reportDownloadConversion(req, arch as Arch);
+    reportDownloadToGa(req, arch as Arch, version, attributed);
     // Version-derived tag, so links minted for older releases keep resolving.
     return NextResponse.redirect(installerUrl(version, arch as Arch), {
       status: 302,
-      headers: cacheHeaders(attributed),
+      headers: cacheHeaders(),
     });
   }
 
