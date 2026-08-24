@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = t("title");
   const description = t("description");
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/pay-with-crypto`,

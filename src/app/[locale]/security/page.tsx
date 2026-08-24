@@ -9,6 +9,7 @@ import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -26,7 +27,7 @@ export async function generateMetadata({
   const description = t("description");
 
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/${SLUG}`,

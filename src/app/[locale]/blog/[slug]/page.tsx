@@ -18,6 +18,7 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
 import { NotFoundContent } from "@/components/not-found-content";
 import type { Metadata } from "next";
+import { seoTitle } from "@/lib/seo-title";
 
 // Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
@@ -110,7 +111,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   ]);
 
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/blog/${slug}`,

@@ -8,6 +8,7 @@ import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/com
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { Link } from "@/i18n/navigation";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = t("title");
   const description = t("description");
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/no-registration-vpn`,

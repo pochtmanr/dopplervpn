@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { SuccessClient } from './success-client';
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'success' });
   return {
-    title: t('metaTitle'),
+    title: seoTitle(t('metaTitle')),
     robots: { index: false, follow: false },
   };
 }

@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema } from "@/components/seo/json-ld";
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = t("title");
   const description = t("subtitle");
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/giveaway`,

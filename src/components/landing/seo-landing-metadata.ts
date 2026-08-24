@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
+import { seoTitle } from "@/lib/seo-title";
 
 const baseUrl = "https://www.dopplervpn.org";
 
@@ -24,7 +25,7 @@ export async function buildSeoLandingMetadata({
   const pageUrl = `${baseUrl}/${locale}/${slug}`;
 
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: pageUrl,

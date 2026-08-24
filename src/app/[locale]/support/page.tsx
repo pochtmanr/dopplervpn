@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { FAQSchema, BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = t("title");
   const description = t("subtitle");
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/support`,

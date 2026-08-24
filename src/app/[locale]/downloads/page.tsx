@@ -14,6 +14,7 @@ import {
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import { Reveal } from "@/components/ui/reveal";
 import type { CtaVariant } from "@/lib/track-cta";
+import { seoTitle } from "@/lib/seo-title";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = t("title");
   const description = t("subtitle");
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/downloads`,
@@ -74,6 +75,10 @@ const URLS = {
   // no separate ARM64 installer to offer and no ARM64 tunnel that has been verified
   // on a device. See dopplerWindows/DopplerVPN.csproj.
   windowsX64: "/api/windows/download/latest-x64",
+  // Standalone (sideload) build: no Play Billing, pays through the web checkout.
+  // Same-origin on purpose — the route decides where the bytes come from, so the
+  // link printed here survives a change of hosting. See the route's own header.
+  androidApk: "/api/android/download/latest",
 };
 
 /* ── Release Updates ─────────────────────────────────────────────── */
@@ -91,7 +96,7 @@ type Release = {
 
 const RELEASES: Record<"ios" | "android" | "mac" | "windows", Release> = {
   ios:     { date: "2026-04-08", note: null },
-  android: { date: "2026-05-03", note: null },
+  android: { date: "2026-08-24", note: null },
   mac:     { date: "2026-05-11", note: "connectionFix", status: "review" },
   windows: { date: "2026-08-21", note: "fullTunnel" },
 };
@@ -198,6 +203,11 @@ function SetupSteps({ steps }: { steps: string[] }) {
 
 /* ── Platform card config ────────────────────────────────────────── */
 
+type PlatformNote = {
+  ns: "apps" | "vpnForWindows";
+  key: string;
+};
+
 type PlatformButton = {
   labelKey: string;
   href: string;
@@ -213,11 +223,12 @@ const PLATFORMS: {
   learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
   buttons: PlatformButton[];
   /**
-   * Short caveats shown under the download buttons. Keys resolve against the
-   * platform's own namespace (e.g. vpnForWindows), not `apps`, so the copy lives
-   * next to the rest of that platform's strings.
+   * Short caveats shown under the download buttons, each naming the namespace
+   * its key lives in. Windows' caveats sit next to the rest of that platform's
+   * strings in `vpnForWindows`; the Android sideload caveat belongs to this page
+   * and lives in `apps`, so the namespace has to travel with the key.
    */
-  notes?: string[];
+  notes?: PlatformNote[];
 }[] = [
   {
     key: "ios",
@@ -229,6 +240,11 @@ const PLATFORMS: {
     key: "android",
     icon: AndroidIcon,
     learnHref: "/vpn-for-android",
+    // The APK is the only Android route for anyone without Play — mainland China
+    // most of all — so it is offered here rather than left to a link handed out
+    // privately. Secondary, because Play is still the right default everywhere
+    // it works: it updates itself, and the sideload build cannot.
+    notes: [{ ns: "apps", key: "android.apkNote" }],
     buttons: [
       {
         labelKey: "android.buttonPlayStore",
@@ -236,6 +252,13 @@ const PLATFORMS: {
         variant: "android-play",
         external: true,
         primary: true,
+      },
+      {
+        labelKey: "android.buttonApk",
+        href: URLS.androidApk,
+        variant: "android-apk",
+        download: true,
+        primary: false,
       },
     ],
   },
@@ -252,7 +275,10 @@ const PLATFORMS: {
     // Windows-only: the installer isn't code-signed yet, so SmartScreen blocks it
     // and people give up at the warning. The trial line is here because this card
     // is the last stop before a paid campaign visitor leaves for the download.
-    notes: ["downloadsSmartScreenNote", "downloadsTrialNote"],
+    notes: [
+      { ns: "vpnForWindows", key: "downloadsSmartScreenNote" },
+      { ns: "vpnForWindows", key: "downloadsTrialNote" },
+    ],
     buttons: [
       {
         labelKey: "windows.buttonX64",
@@ -273,6 +299,8 @@ export default async function DownloadsPage({ params }: PageProps) {
   const t = await getTranslations("apps");
   // Platform-specific caveats live in the platform's own namespace — see `notes`.
   const tWindows = await getTranslations("vpnForWindows");
+  const resolveNote = (note: PlatformNote) =>
+    note.ns === "apps" ? t(note.key) : tWindows(note.key);
 
   const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
   const displayFontStyle = useFallbackFont
@@ -407,12 +435,12 @@ export default async function DownloadsPage({ params }: PageProps) {
 
                     {notes && (
                       <ul className="mt-3 space-y-1.5">
-                        {notes.map((noteKey) => (
+                        {notes.map((note) => (
                           <li
-                            key={noteKey}
+                            key={`${note.ns}.${note.key}`}
                             className="text-xs text-text-muted leading-relaxed rounded-lg border border-accent-gold/20 bg-accent-gold/[0.05] px-3 py-2"
                           >
-                            {tWindows(noteKey)}
+                            {resolveNote(note)}
                           </li>
                         ))}
                       </ul>

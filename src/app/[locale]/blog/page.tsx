@@ -11,6 +11,7 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
+import { seoTitle } from "@/lib/seo-title";
 
 // Revalidate blog index every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = "https://www.dopplervpn.org";
 
   return {
-    title: t("indexTitle"),
+    title: seoTitle(t("indexTitle")),
     description: t("indexDescription"),
     alternates: {
       // Query variants (?tag=, ?page=) all canonicalise to the bare index.

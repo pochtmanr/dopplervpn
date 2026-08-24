@@ -3,19 +3,11 @@ import { randomBytes } from 'crypto';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
+import { resolveSiteUrl } from '@/lib/site-url';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const VALID_PLANS = ['monthly', '6month', 'yearly'] as const;
 const TOKEN_TTL_SECONDS = 600;
-
-function resolveSiteUrl(req: NextRequest): string {
-  const configured = process.env.NEXT_PUBLIC_SITE_URL;
-  if (configured) return configured.replace(/\/$/, '');
-  const host = req.headers.get('x-forwarded-host') || req.headers.get('host');
-  const proto = req.headers.get('x-forwarded-proto') || 'https';
-  if (host) return `${proto}://${host}`;
-  return 'https://www.dopplervpn.org';
-}
 
 export async function POST(req: NextRequest) {
   const rl = rateLimit(req, { limit: 20, windowMs: 60_000, prefix: 'checkout-init' });
