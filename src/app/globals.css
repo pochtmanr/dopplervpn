@@ -311,3 +311,88 @@ body {
   background-color: var(--color-accent-teal);
   color: var(--color-text-primary);
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Shared UI primitive classes  (src/components/ui/*.tsx)
+
+   These collapse the long, *static* Tailwind class lists that the shared
+   primitives repeat on every instance of every prerendered page. The App
+   Router serialises the tree twice (HTML + RSC flight payload), so each byte
+   of class list is paid roughly twice per page across ~4,900 pages.
+
+   Layer discipline: this block lives in the `components` layer, which
+   `@import "tailwindcss"` orders *before* `utilities`. That means a utility
+   passed through a `className` prop at a call site always wins over these.
+   Where the current (utility-vs-utility, source-order) cascade produced the
+   opposite result, the conflicting utility is deliberately LEFT in the TSX so
+   the rendered result is byte-for-byte identical — see the `border` on .card
+   and the `px-*`/`py-*` on .badge.
+   ───────────────────────────────────────────────────────────────────────── */
+@layer components {
+  /* ─── Button (ui/button.tsx) ───────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply bg-accent-gold text-bg-primary hover:bg-accent-gold/90 shadow-lg shadow-accent-gold/20;
+  }
+  .btn-secondary {
+    @apply bg-accent-teal text-text-primary hover:bg-accent-teal-light shadow-lg shadow-accent-teal/20;
+  }
+  .btn-outline {
+    @apply border-2 border-text-primary/20 text-text-primary hover:border-accent-gold hover:text-accent-gold bg-transparent;
+  }
+  .btn-ghost {
+    @apply text-text-primary hover:text-accent-gold bg-transparent;
+  }
+  .btn-sm { @apply px-4 py-2 text-sm; }
+  .btn-md { @apply px-6 py-3 text-base; }
+  .btn-lg { @apply px-8 py-4 text-lg; }
+
+  /* ─── Badge (ui/badge.tsx) ─────────────────────────────────────────── */
+  /* NOTE: px-3 py-1 stay as utilities in badge.tsx. Call sites override them
+     (pricing.tsx passes px-1.5 py-0.5) and in the current utility-order
+     cascade the *base* padding wins. Moving it here would silently flip that. */
+  .badge { @apply inline-flex items-center rounded-full text-sm font-medium; }
+  .badge-default { @apply bg-bg-primary border border-overlay/20 text-text-primary; }
+  .badge-gold    { @apply bg-bg-primary border border-accent-gold text-accent-gold; }
+  .badge-teal    { @apply bg-bg-primary border border-accent-teal text-accent-teal; }
+  .badge-violet  { @apply bg-bg-primary border border-accent-violet text-accent-violet; }
+  .badge-amber   { @apply bg-bg-primary border border-accent-amber text-accent-amber; }
+  .badge-danger  { @apply bg-bg-primary border border-danger text-danger; }
+  .badge-outline { @apply bg-bg-primary border border-accent-gold text-accent-gold; }
+
+  /* ─── Card (ui/card.tsx) ───────────────────────────────────────────── */
+  /* NOTE: `border border-overlay/5` and `hover:border-accent-teal/20` stay as
+     utilities in card.tsx. Two call sites pass `border-accent-teal/20`, which
+     today LOSES to the base border (utility source order). Pulling the base
+     border in here would make those overrides start winning — a visual change. */
+  .card { @apply rounded-2xl bg-bg-secondary/50 backdrop-blur-sm; }
+  .card-hover {
+    @apply transition-all duration-300 hover:bg-bg-secondary/70 hover:shadow-lg hover:shadow-accent-teal/5;
+  }
+  /* CardHeader/CardTitle/CardDescription/CardContent are left as utilities:
+     they currently have zero call sites, so a component class would be
+     dead CSS shipped on every page. */
+
+  /* ─── Section (ui/section.tsx) ─────────────────────────────────────── */
+  .section { @apply py-12 md:py-20 px-4 sm:px-6 lg:px-8; }
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-4;
+  }
+  .section-subtitle { @apply text-text-muted text-lg md:text-xl max-w-2xl mx-auto; }
+
+  /* ─── Accordion (ui/accordion.tsx) ─────────────────────────────────── */
+  .accordion { @apply divide-y divide-overlay/10; }
+  .accordion-trigger {
+    @apply w-full py-5 flex items-center justify-between text-start gap-4;
+  }
+  .accordion-question {
+    @apply text-base md:text-lg font-medium text-text-primary group-hover:text-accent-gold transition-colors;
+  }
+  .accordion-icon {
+    @apply flex-shrink-0 w-6 h-6 flex items-center justify-center text-text-muted group-hover:text-accent-gold transition-all duration-200;
+  }
+  .accordion-panel { @apply grid transition-[grid-template-rows] duration-200 ease-out; }
+  .accordion-answer { @apply pb-5 text-text-muted leading-relaxed text-sm; }
+}

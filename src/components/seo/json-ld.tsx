@@ -34,7 +34,7 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
     image: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
     description: t("description"),
     sameAs: [
-      "https://apps.apple.com/app/doppler-vpn-fast-secure/id6744068438",
+      "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
       "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
       "https://t.me/dopplervpn",
       "https://t.me/dopplervpnen",
@@ -109,6 +109,21 @@ export async function ProductSchema({ locale }: LocaleProps) {
   );
 }
 
+// Rendered by exactly two pages — the locale home page and /downloads — and
+// deliberately NOT by the root locale layout.
+//
+// Google's SoftwareApplication rich result is one of the few that requires
+// `name` + `offers` + `aggregateRating` together; unlike Product, it accepts no
+// substitute for the rating. RATING_DATA is null (see src/lib/ratings.ts) because
+// there is no honest aggregate to publish yet — the App Store shows 5.0 from a
+// single rating and Google Play is still below its own display threshold — so
+// this node ships without `aggregateRating` and validators flag it.
+//
+// While it lived in the layout that was one invalid node on all ~4,900
+// prerendered pages (44 locales), which is what Semrush's 87 failing
+// structured-data checks were counting. Page-scoping it keeps the entity where
+// the app genuinely IS the subject of the page and drops the failure everywhere
+// else. Move it back into the layout only once RATING_DATA holds real numbers.
 export async function SoftwareApplicationSchema({ locale }: LocaleProps) {
   const t = await getTranslations({ locale, namespace: "metadata" });
   const ft = await getTranslations({ locale, namespace: "features.items" });

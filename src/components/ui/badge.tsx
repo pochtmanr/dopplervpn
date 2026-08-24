@@ -18,15 +18,23 @@ interface BadgeProps {
   seed?: string;
 }
 
+// Colour triples live in globals.css (@layer components) as .badge-<variant>.
 const variantStyles: Record<Exclude<BadgeVariant, "auto">, string> = {
-  default: "bg-bg-primary border border-overlay/20 text-text-primary",
-  gold:    "bg-bg-primary border border-accent-gold text-accent-gold",
-  teal:    "bg-bg-primary border border-accent-teal text-accent-teal",
-  violet:  "bg-bg-primary border border-accent-violet text-accent-violet",
-  amber:   "bg-bg-primary border border-accent-amber text-accent-amber",
-  danger:  "bg-bg-primary border border-danger text-danger",
-  outline: "bg-bg-primary border border-accent-gold text-accent-gold",
+  default: "badge-default",
+  gold:    "badge-gold",
+  teal:    "badge-teal",
+  violet:  "badge-violet",
+  amber:   "badge-amber",
+  danger:  "badge-danger",
+  outline: "badge-outline",
 };
+
+// px-3 / py-1 deliberately stay as utilities rather than moving into `.badge`.
+// Call sites override them (pricing.tsx passes px-1.5 py-0.5 lg:px-2 lg:py-1)
+// and in the current utility-vs-utility source order the *base* padding wins.
+// Moving it to the components layer would let the override start winning —
+// a silent visual change. Everything else in `.badge` is safe to collapse.
+const baseStyles = "badge px-3 py-1";
 
 const autoPalette: Array<Exclude<BadgeVariant, "auto" | "default" | "outline">> = [
   "teal",
@@ -60,11 +68,9 @@ export function Badge({
 
   return (
     <span
-      className={`
-        inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-        ${variantStyles[resolved]}
-        ${className}
-      `}
+      className={[baseStyles, variantStyles[resolved], className]
+        .filter(Boolean)
+        .join(" ")}
     >
       {children}
     </span>

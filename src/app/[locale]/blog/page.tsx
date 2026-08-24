@@ -232,7 +232,14 @@ export default async function BlogIndexPage({ params }: Props) {
       <Navbar />
       <main className="min-h-screen pt-20">
         <Section>
-          <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+          {/* h1, not the h2 default: this is the blog index's only page
+              heading, and without it the page ships with no h1 in all 21
+              blog locales. */}
+          <SectionHeader
+            title={t("title")}
+            subtitle={t("subtitle")}
+            headingLevel="h1"
+          />
 
           <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
             <BlogIndexContent

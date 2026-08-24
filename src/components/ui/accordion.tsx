@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+// Layout/typography utility lists live in globals.css (@layer components) as
+// .accordion / .accordion-trigger / .accordion-question / .accordion-icon /
+// .accordion-panel / .accordion-answer. `group` must stay in the markup (it is
+// the hover marker the group-hover: rules key off), and the open/closed
+// grid-rows-[…] classes stay utilities because they are genuinely dynamic.
+
 interface AccordionItem {
   question: string;
   answer: string;
@@ -15,21 +21,21 @@ export function Accordion({ items }: AccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-overlay/10">
+    <div className="accordion">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         return (
           <div key={index}>
             <button
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="w-full py-5 flex items-center justify-between text-start gap-4 group"
+              className="accordion-trigger group"
               aria-expanded={isOpen}
             >
-              <span className="font-display text-base md:text-lg font-medium text-text-primary group-hover:text-accent-gold transition-colors">
+              <span className="font-display accordion-question">
                 {item.question}
               </span>
               <span
-                className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-text-muted group-hover:text-accent-gold transition-all duration-200"
+                className="accordion-icon"
                 style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
               >
                 <svg
@@ -49,12 +55,12 @@ export function Accordion({ items }: AccordionProps) {
             </button>
 
             <div
-              className={`grid transition-[grid-template-rows] duration-200 ease-out ${
+              className={`accordion-panel ${
                 isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
             >
               <div className="overflow-hidden">
-                <p className="pb-5 text-text-muted leading-relaxed text-sm">
+                <p className="accordion-answer">
                   {item.answer}
                 </p>
               </div>

@@ -2,7 +2,7 @@
  * Aggregate user rating sourced from the App Store + Google Play.
  *
  * Refresh these values from:
- *   - iOS:     https://apps.apple.com/app/id6744068438
+ *   - iOS:     https://apps.apple.com/app/id6757091773
  *   - Android: https://play.google.com/store/apps/details?id=org.dopplervpn.android
  *
  * Combine both stores (weighted average if you want, or just the higher-volume

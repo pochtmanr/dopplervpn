@@ -7,6 +7,16 @@ interface CardProps {
   padding?: "none" | "sm" | "md" | "lg";
 }
 
+// `rounded-2xl bg-bg-secondary/50 backdrop-blur-sm` collapse into `.card`
+// (globals.css, @layer components). The two border-colour utilities stay as
+// utilities on purpose: two call sites pass `border-accent-teal/20`, which in
+// the current utility source order LOSES to the base `border-overlay/5`.
+// Moving the base border into the components layer would make those overrides
+// suddenly win — a visual change, not a refactor. Same reason keeps
+// `hover:border-accent-teal/20` out of `.card-hover`.
+const baseStyles = "card border border-overlay/5";
+const hoverStyles = "card-hover hover:border-accent-teal/20";
+
 const paddingStyles = {
   none: "p-0",
   sm: "p-4",
@@ -22,12 +32,14 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={`
-        rounded-2xl bg-bg-secondary/50 backdrop-blur-sm border border-overlay/5
-        ${paddingStyles[padding]}
-        ${hover ? "transition-all duration-300 hover:bg-bg-secondary/70 hover:border-accent-teal/20 hover:shadow-lg hover:shadow-accent-teal/5" : ""}
-        ${className}
-      `}
+      className={[
+        baseStyles,
+        paddingStyles[padding],
+        hover ? hoverStyles : "",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
     >
       {children}
     </div>

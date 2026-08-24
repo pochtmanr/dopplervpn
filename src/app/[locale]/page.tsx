@@ -3,7 +3,11 @@ import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
-import { FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
+import {
+  FAQSchema,
+  SoftwareApplicationSchema,
+  WebPageSchema,
+} from "@/components/seo/json-ld";
 import {
   Hero,
   PlatformsAvailable,
@@ -147,6 +151,12 @@ export default async function HomePage({ params }: PageProps) {
         description={mt("description")}
       />
       <FAQSchema items={faqItems} />
+      {/* Page-scoped, not in the locale layout: the SoftwareApplication rich
+          result requires an aggregateRating we cannot honestly supply yet, so
+          the node only ships on the two pages where the app itself is the
+          subject (here and /downloads) instead of failing on ~4,900 pages.
+          See the comment above the component in json-ld.tsx. */}
+      <SoftwareApplicationSchema locale={locale} />
       <main className="overflow-x-hidden">
         <Hero />
         <PlatformsAvailable />

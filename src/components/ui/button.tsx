@@ -12,20 +12,23 @@ interface ButtonProps extends Omit<ComponentProps<"button">, "className"> {
   className?: string;
 }
 
+// The full utility lists live in globals.css (@layer components) as .btn /
+// .btn-<variant> / .btn-<size>. Emitting the short names instead of ~400 chars
+// of utilities per button matters because the App Router serialises every class
+// attribute twice (HTML + RSC flight payload) on ~4,900 prerendered pages.
+// Anything passed via `className` is a Tailwind utility and therefore still
+// wins over these, since `utilities` is layered after `components`.
 const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    "bg-accent-gold text-bg-primary hover:bg-accent-gold/90 shadow-lg shadow-accent-gold/20",
-  secondary:
-    "bg-accent-teal text-text-primary hover:bg-accent-teal-light shadow-lg shadow-accent-teal/20",
-  outline:
-    "border-2 border-text-primary/20 text-text-primary hover:border-accent-gold hover:text-accent-gold bg-transparent",
-  ghost: "text-text-primary hover:text-accent-gold bg-transparent",
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  outline: "btn-outline",
+  ghost: "btn-ghost",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
+  sm: "btn-sm",
+  md: "btn-md",
+  lg: "btn-lg",
 };
 
 export function Button({
@@ -37,10 +40,9 @@ export function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const baseStyles =
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary disabled:opacity-50 disabled:pointer-events-none";
-
-  const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
+  const combinedStyles = ["btn", variantStyles[variant], sizeStyles[size], className]
+    .filter(Boolean)
+    .join(" ");
 
   if (href) {
     if (external) {

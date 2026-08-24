@@ -1,5 +1,11 @@
 import { type ReactNode } from "react";
 
+// `.section` / `.section-title` / `.section-subtitle` are defined in
+// globals.css (@layer components). `font-display` is kept as a literal token —
+// it resolves to no CSS today (there is no `--font-display` theme key), so
+// @apply-ing it would fail; removing it would be a behaviour change to make
+// deliberately, not a side effect of this refactor.
+
 interface SectionProps {
   children: ReactNode;
   className?: string;
@@ -16,7 +22,7 @@ export function Section({
   return (
     <Component
       id={id}
-      className={`py-12 md:py-20 px-4 sm:px-6 lg:px-8 ${className}`}
+      className={className ? `section ${className}` : "section"}
     >
       <div className="mx-auto max-w-site">{children}</div>
     </Component>
@@ -28,7 +34,9 @@ interface SectionHeaderProps {
   subtitle?: string;
   centered?: boolean;
   className?: string;
-  headingLevel?: "h2" | "h3";
+  /** "h1" is for pages whose SectionHeader IS the page heading — currently
+   *  only the blog index, which otherwise renders no h1 at all. */
+  headingLevel?: "h1" | "h2" | "h3";
 }
 
 export function SectionHeader({
@@ -41,13 +49,15 @@ export function SectionHeader({
   const Heading = headingLevel;
   return (
     <div
-      className={`mb-12 md:mb-16 ${centered ? "text-center" : ""} ${className}`}
+      className={["mb-12 md:mb-16", centered ? "text-center" : "", className]
+        .filter(Boolean)
+        .join(" ")}
     >
-      <Heading className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-4">
+      <Heading className="font-display section-title">
         {title}
       </Heading>
       {subtitle && (
-        <p className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto">
+        <p className="section-subtitle">
           {subtitle}
         </p>
       )}

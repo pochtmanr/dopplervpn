@@ -6,7 +6,11 @@ import { Footer } from "@/components/layout/footer";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
-import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
+import {
+  BreadcrumbSchema,
+  SoftwareApplicationSchema,
+  WebPageSchema,
+} from "@/components/seo/json-ld";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import { Reveal } from "@/components/ui/reveal";
 import type { CtaVariant } from "@/lib/track-cta";
@@ -294,6 +298,12 @@ export default async function DownloadsPage({ params }: PageProps) {
         description={t("subtitle")}
         type="CollectionPage"
       />
+      {/* Page-scoped, not in the locale layout: the SoftwareApplication rich
+          result requires an aggregateRating we cannot honestly supply yet, so
+          the node only ships on the two pages where the app itself is the
+          subject (here and the locale home page) instead of failing on ~4,900
+          pages. See the comment above the component in json-ld.tsx. */}
+      <SoftwareApplicationSchema locale={locale} />
       <Navbar />
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20 overflow-x-hidden">
         {/* Background */}

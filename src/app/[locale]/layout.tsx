@@ -11,7 +11,6 @@ import {
   OrganizationSchema,
   ProductSchema,
   WebsiteSchema,
-  SoftwareApplicationSchema,
 } from "@/components/seo/json-ld";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { GaConsent } from "@/components/analytics/ga-consent";
@@ -180,7 +179,6 @@ export default async function LocaleLayout({
         <OrganizationSchema locale={locale} />
         <ProductSchema locale={locale} />
         <WebsiteSchema locale={locale} />
-        <SoftwareApplicationSchema locale={locale} />
       </head>
       <body className="min-h-screen bg-bg-primary text-text-primary font-body antialiased">
         <ThemeProvider>
