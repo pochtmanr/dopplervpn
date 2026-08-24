@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
+import { PROBE_ORIGINS } from "./src/lib/cn-check-targets";
+
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const isDev = process.env.NODE_ENV === "development";
@@ -33,6 +35,26 @@ const csp = [
   "frame-ancestors 'none'",
   "upgrade-insecure-requests",
 ].join("; ");
+
+/**
+ * CSP for /cn-check only.
+ *
+ * That page's whole job is to open a connection to each host the Android app
+ * depends on and report which ones completed. Under the site-wide `connect-src`
+ * every one of those is refused by the browser before a packet leaves the
+ * machine — and a CSP refusal rejects `fetch` in the same shape as a network
+ * block, so the page reported "blocked" for every host in the world. Opened from
+ * Germany it read as total censorship; it was reading our own header back.
+ *
+ * The origins come from the same list the page probes (src/lib/cn-check-targets.ts),
+ * so adding a target cannot leave the policy behind. This loosens `connect-src`
+ * on exactly one route — unlinked, noindexed, no forms, no user data — and every
+ * other directive, and every other page, is untouched.
+ */
+const cnCheckCsp = csp.replace(
+  "connect-src 'self'",
+  `connect-src 'self' ${PROBE_ORIGINS.join(" ")}`,
+);
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -200,6 +222,12 @@ const nextConfig: NextConfig = {
           },
           { key: "Content-Security-Policy", value: csp },
         ],
+      },
+      {
+        // MUST stay after the /:path* block above: both match /cn-check, and for
+        // a duplicated header key the later entry is the one that survives.
+        source: "/cn-check",
+        headers: [{ key: "Content-Security-Policy", value: cnCheckCsp }],
       },
     ];
   },
