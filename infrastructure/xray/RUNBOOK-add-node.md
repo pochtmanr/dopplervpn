@@ -34,6 +34,29 @@ new rows automatically.
 
 Apply the **flagged-domain routing** from `README.md` (ChatGPT → clean upstream) as part of buildout.
 
+### 2a. Turn the access log OFF — mandatory, before the node ever takes traffic
+
+The App Store listing claims **"Zero activity logs."** xray's access log records *client IP +
+destination, per connection*, which is a browsing history. The `log` block **must** be:
+
+```json
+"log": { "loglevel": "warning", "access": "none" }
+```
+
+`error` stays on (crashes and REALITY handshake failures are still wanted). Only `access` goes.
+
+**This is not the default and it is easy to miss.** An unset `access` key does not mean off — it
+means stdout, which journald persists to disk. On 2026-08-16 all 9 fleet nodes were found logging:
+the 7 Azure nodes had no `access` key at all, and Poland (Marzban) had it pointed at a real file,
+`/var/lib/marzban/access.log` — **266 MB, ~2M lines, 752 distinct client IPs, going back to
+2026-04-03**, with no logrotate.
+
+- Bare-xray: `/usr/local/etc/xray/config.json` → `scratchpad/kill-access-log.sh`
+- Marzban: `/var/lib/marzban/xray_config.json` → `scratchpad/kill-access-log-poland.sh`
+
+Verify after install: `journalctl -u xray | grep -c " accepted "` must be `0`, and for a Marzban
+node `/var/lib/marzban/access.log` must not exist.
+
 ## 3. Insert the `vpn_servers` row
 
 Credentials go in the **dedicated columns, never env/code** (`doppler-bot/CLAUDE.md`). Set real capacity:
@@ -51,8 +74,31 @@ values
 --   stats_agent_url = 'http://<ip>:9101/stats', stats_agent_token = '<token from deploy>'
 ```
 
-- `max_users` — the real ceiling this node can serve well; drives the capacity alert and (future)
-  hard-cap selection. Pick from the box's CPU/RAM/bandwidth (a modest VPS is often ~200–500).
+- `max_users` — the real ceiling this node can serve well. Read only by `doppler-bot`
+  (`src/services/marzban.ts`); **not** exposed by `get_servers`/`get_servers_v2` and not read by any
+  client app. NULL means "no ceiling set", which is the current state of every row.
+
+  > **History:** this column did not exist until 2026-08-17. `20260723_server_capacity.sql` was
+  > written but never applied, while the bot shipped a `SELECT` that included `max_users` — so
+  > PostgREST returned `400 column vpn_servers.max_users does not exist` and the bot's Marzban
+  > provisioning failed on every path. Only section 1 of that migration (the column + check
+  > constraint) has been applied. **Do not apply sections 2–4** — they rewrite `vpn_servers_safe`,
+  > `get_servers` and `get_servers_v2` from a July snapshot and would silently revert the
+  > 2026-08-16 version gate (`min_tun_version`) and the BE-03 `tunnel_mode`/`client_flags` keys.
+
+  **Sizing it.** The old "a modest VPS is often ~200–500" was a guess and is too high for this
+  fleet. Measured 2026-08-17 across all 7 Azure nodes: **2 vCPU, ~900 MB RAM, load ~0.00** — CPU is
+  nowhere near the limit. The binding constraints are RAM and, first, **`nf_conntrack_max`, which
+  is only 7,680** on these boxes (it is derived from the 1 GB of RAM). Sweden was already at
+  624/7680 with ~130 established client connections.
+
+  **That measurement is proxy-era and is now the wrong baseline.** A packet tunnel carries every
+  UDP flow, and each one opens its own outbound connection, so conntrack per user rises sharply.
+  Start conservative — **~150** for a 2 vCPU / 1 GB B-series box — then re-derive from
+  `nf_conntrack_count` under real VPN traffic before raising it. If conntrack is the ceiling,
+  raising `net.netfilter.nf_conntrack_max` is cheaper than a bigger VM, but it costs RAM on a box
+  that only has 1 GB.
+
 - `load_percentage` starts at 0; keep it roughly current so the bot's least-loaded pick spreads users.
 
 ## 4. Deploy the stats agent (monitoring + reachability probe)
