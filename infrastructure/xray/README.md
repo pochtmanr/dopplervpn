@@ -124,3 +124,48 @@ Then run a real ChatGPT session through the VPN exit and confirm no 403. Confirm
 
 The n8n monitor's per-node reachability probe (see `../monitoring/`) will start alerting automatically if a
 node's ChatGPT status turns 403 again.
+
+---
+
+# Fleet nodes
+
+The `RUNBOOK-add-node.md` port→SNI layout is fleet-wide:
+**8443 www.yahoo.com · 8444 www.amazon.com · 8445 www.apple.com · 8446 www.bing.com ·
+8447 www.cloudflare.com · 8448 dl.google.com**, one REALITY inbound per port, fresh x25519
+keypair + shortId per inbound, shared client UUID, `flow: xtls-rprx-vision`,
+`log.access = "none"`. Exceptions are noted per node.
+
+## Netherlands — `103.246.146.20` (added 2026-09-06)
+
+| | |
+|---|---|
+| Host | non-Azure VPS, Ubuntu 26.04, 1 vCPU / 2.5 GB RAM (same hosting account as the Poland bare-metal box) |
+| SSH | `ssh doppler-nl` (root; alias in `~/.ssh/config`) |
+| Type | **bare xray-core** 26.3.27 — `marzban_*` columns stay NULL |
+| Layout | fleet default, **no dest swaps** — all 6 handshake-verified PASS |
+| Access log | `"access": "none"` from the first start; `journalctl -u xray \| grep -c " accepted "` = 0 |
+| Firewall | **ufw**, not an Azure NSG. Open: 22, 80, 443, 8443:8448/tcp, and 9101/tcp **only from 185.203.240.174/32** (the n8n monitor) |
+| Stats agent | `http://103.246.146.20:9101/stats`, deployed per `../monitoring/` conventions |
+| Row payload | generated on the box at `/root/node-summary.json` (keys + stats token). `is_active` starts **false** |
+| Keys | `/root/xray-keys.json` (mode 600, includes private keys — never leaves the box) |
+| Extra role | **also the Supabase relay "sb1"** — see `../relay/README.md`. Caddy owns 80/443, xray owns 8443-8448 |
+
+### Things that differ from the Azure fleet
+
+- **This box can hairpin.** Unlike the Azure VMs, it reaches its own public IP, so
+  `/root/test-reality.sh` verifies all 6 inbounds *from the node itself* — no second
+  server needed. That script is the same pattern as the fleet's `test-reality.sh`
+  (throwaway xray socks client → `curl --socks5-hostname https://ifconfig.me` →
+  assert exit IP == the node's IP).
+- **No Azure NSG.** Every "add an NSG rule" step in the runbook and in
+  `../monitoring/README.md` becomes `ufw allow …` here.
+- **`deploy-stats-agent.sh` does not apply as written** — it hardcodes
+  `azureuser` + `sudo` + `~/.ssh/id_rsa`. The agent was installed by hand following the
+  script's exact conventions (same paths, same `/etc/doppler-stats-agent.env` mode-600
+  token file, same preserve-existing-token rule) over the `doppler-nl` root alias.
+- **`chatgpt_status` is 403** from this IP, same as the rest of the fleet — it is still a
+  datacenter range. The `flagged-upstream` routing above is **not** applied (there are no
+  clean-upstream credentials yet, and no fleet node has it either).
+- **The box is shared** with an admin-panel staging workload. `/root/SHARED-BOX-NOTES.md`
+  on the node records the ufw and Caddy rules of the road; new listeners need their own
+  `ufw allow`.
