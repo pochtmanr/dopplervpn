@@ -31,6 +31,29 @@ function derivePlatform(store: string): string {
   }
 }
 
+// derivePlatform() answers "which app was this bought in" — ios / macos /
+// android / stripe. accounts.subscription_store answers a different question:
+// "which STORE holds this subscription", and its vocabulary is app_store /
+// play_store / stripe. Sending the platform straight through is how "ios" and
+// "android" ended up in a column whose committed CHECK forbids them, and how
+// every server-side guard that asks "is this a store subscription?" started
+// getting the wrong answer for those rows.
+//
+// The database normalises these too (public.subscription_normalize_store), so
+// the two layers agree; this one exists so we stop writing bad values in the
+// first place.
+function storeForRpc(platform: string): string {
+  switch (platform) {
+    case "ios":
+    case "macos":
+      return "app_store";
+    case "android":
+      return "play_store";
+    default:
+      return platform; // "stripe", and anything derivePlatform grows later
+  }
+}
+
 // The app recognizes only the "pro" tier (SubscriptionTier.fromString maps
 // everything else to FREE). Products are named vpn_premium_* but the entitlement
 // tier is always "pro" — do NOT return "premium" here or the app treats it as free.
@@ -65,6 +88,38 @@ function resolveAccountId(event: RCEvent): string {
   ].filter(Boolean) as string[];
   const vpn = candidates.find((c) => /^VPN-/i.test(c));
   return vpn ?? event.app_user_id;
+}
+
+// Which account actually holds this subscription right now.
+//
+// RENEWAL has always done this (the RC app_user_id and the account that owns
+// the transaction routinely differ after a transfer). EXPIRATION and
+// CANCELLATION did NOT, and revoked whatever resolveAccountId() returned — so
+// an expiry could downgrade an account that never held the subscription while
+// the real owner kept it. Same lookup, same reason, now used by all three.
+//
+// Falls back to the event's own account id when there is no ownership row:
+// web-purchased Pro creates no ownership row at all, and a first purchase that
+// expires before it is ever claimed has none either.
+async function resolveOwnerAccountId(
+  originalTxnId: string | undefined,
+  fallbackAccountId: string
+): Promise<{ accountId: string; ownerFound: boolean }> {
+  if (!originalTxnId) return { accountId: fallbackAccountId, ownerFound: false };
+
+  const { data: owner, error } = await supabase.rpc("get_subscription_owner", {
+    p_original_transaction_id: originalTxnId,
+  });
+
+  if (error) {
+    console.error(`[webhook] get_subscription_owner failed for txn=${originalTxnId}:`, error);
+    return { accountId: fallbackAccountId, ownerFound: false };
+  }
+
+  if (owner?.found && owner.current_owner) {
+    return { accountId: owner.current_owner as string, ownerFound: true };
+  }
+  return { accountId: fallbackAccountId, ownerFound: false };
 }
 
 Deno.serve(async (req: Request) => {
@@ -133,15 +188,18 @@ Deno.serve(async (req: Request) => {
     switch (type) {
       case "INITIAL_PURCHASE":
       case "NON_RENEWING_PURCHASE": {
-        const { data } = await supabase.rpc("claim_subscription", {
+        const { data, error } = await supabase.rpc("claim_subscription", {
           p_account_id: accountId,
           p_tier: tier,
           p_expires_at: expiresAt,
           p_original_transaction_id: originalTxnId,
-          p_store: platform === "macos" ? "app_store" : platform,
+          p_store: storeForRpc(platform),
           p_product_id: productId,
         });
-        console.log(`[webhook] claim result:`, JSON.stringify(data));
+        console.log(
+          `[webhook] ${type} claim (account=${accountId}) result:`,
+          JSON.stringify(data ?? error)
+        );
         break;
       }
 
@@ -153,14 +211,21 @@ Deno.serve(async (req: Request) => {
           );
 
           if (owner?.found && owner.current_owner !== accountId) {
-            await supabase.rpc("claim_subscription", {
-              p_account_id: owner.current_owner,
-              p_tier: tier,
-              p_expires_at: expiresAt,
-              p_original_transaction_id: originalTxnId,
-              p_store: platform === "macos" ? "app_store" : platform,
-              p_product_id: productId,
-            });
+            const { data: claimData, error: claimErr } = await supabase.rpc(
+              "claim_subscription",
+              {
+                p_account_id: owner.current_owner,
+                p_tier: tier,
+                p_expires_at: expiresAt,
+                p_original_transaction_id: originalTxnId,
+                p_store: storeForRpc(platform),
+                p_product_id: productId,
+              }
+            );
+            console.log(
+              `[webhook] RENEWAL claim (owner=${owner.current_owner}, rc_user=${accountId}) result:`,
+              JSON.stringify(claimData ?? claimErr)
+            );
 
             await supabase.rpc("webhook_log_event", {
               p_account_id: owner.current_owner,
@@ -176,14 +241,21 @@ Deno.serve(async (req: Request) => {
           }
         }
 
-        await supabase.rpc("claim_subscription", {
-          p_account_id: accountId,
-          p_tier: tier,
-          p_expires_at: expiresAt,
-          p_original_transaction_id: originalTxnId,
-          p_store: platform === "macos" ? "app_store" : platform,
-          p_product_id: productId,
-        });
+        const { data: renewData, error: renewErr } = await supabase.rpc(
+          "claim_subscription",
+          {
+            p_account_id: accountId,
+            p_tier: tier,
+            p_expires_at: expiresAt,
+            p_original_transaction_id: originalTxnId,
+            p_store: storeForRpc(platform),
+            p_product_id: productId,
+          }
+        );
+        console.log(
+          `[webhook] RENEWAL claim (account=${accountId}) result:`,
+          JSON.stringify(renewData ?? renewErr)
+        );
 
         await supabase.rpc("webhook_log_event", {
           p_account_id: accountId,
@@ -199,25 +271,57 @@ Deno.serve(async (req: Request) => {
 
       case "CANCELLATION": {
         if (cancelReason === "CUSTOMER_SUPPORT") {
-          await supabase.rpc("revoke_subscription", {
-            p_account_id: accountId,
-          });
+          // Resolve the CURRENT owner, exactly as RENEWAL does. Refunding a
+          // subscription that has since been transferred must revoke the
+          // account that actually holds it, not the RC app_user_id the event
+          // happens to carry.
+          const { accountId: ownerId, ownerFound } = await resolveOwnerAccountId(
+            originalTxnId,
+            accountId
+          );
 
-          if (originalTxnId) {
-            await supabase
+          const { data: revokeData, error: revokeErr } = await supabase.rpc(
+            "revoke_subscription",
+            {
+              p_account_id: ownerId,
+              p_original_transaction_id: originalTxnId,
+              p_reason: `CANCELLATION:${cancelReason}`,
+            }
+          );
+          console.log(
+            `[webhook] CANCELLATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
+            JSON.stringify(revokeData ?? revokeErr)
+          );
+
+          // Delete the ownership row ONLY when the revoke actually happened.
+          // revoke_subscription now SKIPS non-store rows and transaction
+          // mismatches, and deleting ownership for a subscription we did not
+          // revoke would orphan a live entitlement: verify_restore would stop
+          // recognising the customer while their account still says pro.
+          if (originalTxnId && revokeData?.action === "revoked") {
+            const { error: ownDelErr } = await supabase
               .from("subscription_ownership")
               .delete()
               .eq("original_transaction_id", originalTxnId);
+            console.log(
+              `[webhook] CANCELLATION ownership delete txn=${originalTxnId}:`,
+              ownDelErr ? JSON.stringify(ownDelErr) : "ok"
+            );
           }
 
           await supabase.rpc("webhook_log_event", {
-            p_account_id: accountId,
+            p_account_id: ownerId,
             p_original_transaction_id: originalTxnId,
             p_event_type: "REFUND",
             p_platform: platform,
             p_rc_event_id: rcEventId,
             p_product_id: productId,
-            p_details: { cancel_reason: cancelReason },
+            p_details: {
+              cancel_reason: cancelReason,
+              rc_app_user_id: accountId,
+              owner_found: ownerFound,
+              revoke_result: revokeData ?? null,
+            },
           });
         } else {
           await supabase.rpc("webhook_log_event", {
@@ -235,17 +339,45 @@ Deno.serve(async (req: Request) => {
       }
 
       case "EXPIRATION": {
-        await supabase.rpc("revoke_subscription", {
-          p_account_id: accountId,
-        });
+        // Resolve the CURRENT owner first. This branch used to revoke
+        // resolveAccountId(event) blind, so an expiry could downgrade an
+        // account that had already transferred the subscription away — while
+        // the real owner kept Pro it was no longer paying for.
+        const { accountId: ownerId, ownerFound } = await resolveOwnerAccountId(
+          originalTxnId,
+          accountId
+        );
+
+        const { data: revokeData, error: revokeErr } = await supabase.rpc(
+          "revoke_subscription",
+          {
+            p_account_id: ownerId,
+            p_original_transaction_id: originalTxnId,
+            p_reason: "EXPIRATION",
+          }
+        );
+        // Log it on every path. A `skipped` action here is not a failure: it
+        // means the account's Pro came from somewhere RevenueCat does not
+        // speak for (revolut, oxapay, an admin grant), or the transaction on
+        // the row is not this one. Those are exactly the revokes that used to
+        // be wrong and silent.
+        console.log(
+          `[webhook] EXPIRATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
+          JSON.stringify(revokeData ?? revokeErr)
+        );
 
         await supabase.rpc("webhook_log_event", {
-          p_account_id: accountId,
+          p_account_id: ownerId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "EXPIRATION",
           p_platform: platform,
           p_rc_event_id: rcEventId,
           p_product_id: productId,
+          p_details: {
+            rc_app_user_id: accountId,
+            owner_found: ownerFound,
+            revoke_result: revokeData ?? null,
+          },
         });
         break;
       }
@@ -291,14 +423,21 @@ Deno.serve(async (req: Request) => {
       }
 
       case "PRODUCT_CHANGE": {
-        await supabase.rpc("claim_subscription", {
-          p_account_id: accountId,
-          p_tier: tier,
-          p_expires_at: expiresAt,
-          p_original_transaction_id: originalTxnId,
-          p_store: platform === "macos" ? "app_store" : platform,
-          p_product_id: productId,
-        });
+        const { data: pcData, error: pcErr } = await supabase.rpc(
+          "claim_subscription",
+          {
+            p_account_id: accountId,
+            p_tier: tier,
+            p_expires_at: expiresAt,
+            p_original_transaction_id: originalTxnId,
+            p_store: storeForRpc(platform),
+            p_product_id: productId,
+          }
+        );
+        console.log(
+          `[webhook] PRODUCT_CHANGE claim (account=${accountId}) result:`,
+          JSON.stringify(pcData ?? pcErr)
+        );
 
         await supabase.rpc("webhook_log_event", {
           p_account_id: accountId,
