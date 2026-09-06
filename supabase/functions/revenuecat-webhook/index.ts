@@ -127,6 +127,25 @@ async function resolveOwnerAccountId(
   return { accountId: fallbackAccountId, ownerFound: false };
 }
 
+// A revoke is only safe when the event names the transaction it is about.
+//
+// revoke_subscription's transaction_mismatch guard only fires when
+// p_original_transaction_id is SUPPLIED — pass null and the guard is bypassed
+// and it revokes whatever account it was handed. That account is not
+// necessarily the right one: on a REFUND or CANCELLATION *replay*, the
+// ownership row was deleted by the first delivery, so resolveOwnerAccountId
+// finds nothing and falls back to the RC app_user_id — which after a transfer
+// is a different account from the one that held the subscription.
+//
+// So: no transaction id, no revoke. RevenueCat has told us something ended
+// without telling us what, and the expiry sweeper collects the row three days
+// after it genuinely lapses anyway. This is the same trade the RPC's own
+// guards make — refusing costs at most a 3-day grace, guessing costs a paying
+// customer their access.
+function hasTransactionId(originalTxnId: string | undefined): boolean {
+  return typeof originalTxnId === "string" && originalTxnId.trim() !== "";
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
@@ -322,19 +341,27 @@ Deno.serve(async (req: Request) => {
             accountId
           );
 
-          const { data: revokeData, error: revokeErr } = await supabase.rpc(
-            "revoke_subscription",
-            {
-              p_account_id: ownerId,
-              p_original_transaction_id: originalTxnId,
-              p_reason: `CANCELLATION:${cancelReason}`,
-            }
-          );
-          console.log(
-            `[webhook] CANCELLATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
-            JSON.stringify(revokeData ?? revokeErr)
-          );
-          noteRpcFailure("revoke_subscription", revokeErr);
+          let revokeData: { action?: string } | null = null;
+          if (!hasTransactionId(originalTxnId)) {
+            console.log(
+              `[webhook] CANCELLATION revoke SKIPPED (rc_user=${accountId}): event carried no original_transaction_id, so the revoke cannot be tied to a subscription`
+            );
+          } else {
+            const { data, error: revokeErr } = await supabase.rpc(
+              "revoke_subscription",
+              {
+                p_account_id: ownerId,
+                p_original_transaction_id: originalTxnId,
+                p_reason: `CANCELLATION:${cancelReason}`,
+              }
+            );
+            revokeData = data;
+            console.log(
+              `[webhook] CANCELLATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
+              JSON.stringify(data ?? revokeErr)
+            );
+            noteRpcFailure("revoke_subscription", revokeErr);
+          }
 
           // Delete the ownership row ONLY when the revoke actually happened.
           // revoke_subscription now SKIPS non-store rows and transaction
@@ -369,6 +396,7 @@ Deno.serve(async (req: Request) => {
               cancel_reason: cancelReason,
               rc_app_user_id: accountId,
               owner_found: ownerFound,
+              revoke_skipped: !hasTransactionId(originalTxnId),
               revoke_result: revokeData ?? null,
             },
           });
@@ -397,24 +425,32 @@ Deno.serve(async (req: Request) => {
           accountId
         );
 
-        const { data: revokeData, error: revokeErr } = await supabase.rpc(
-          "revoke_subscription",
-          {
-            p_account_id: ownerId,
-            p_original_transaction_id: originalTxnId,
-            p_reason: "EXPIRATION",
-          }
-        );
-        // Log it on every path. A `skipped` action here is not a failure: it
-        // means the account's Pro came from somewhere RevenueCat does not
-        // speak for (revolut, oxapay, an admin grant), or the transaction on
-        // the row is not this one. Those are exactly the revokes that used to
-        // be wrong and silent.
-        console.log(
-          `[webhook] EXPIRATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
-          JSON.stringify(revokeData ?? revokeErr)
-        );
-        noteRpcFailure("revoke_subscription", revokeErr);
+        let revokeData: { action?: string } | null = null;
+        if (!hasTransactionId(originalTxnId)) {
+          console.log(
+            `[webhook] EXPIRATION revoke SKIPPED (rc_user=${accountId}): event carried no original_transaction_id, so the revoke cannot be tied to a subscription`
+          );
+        } else {
+          const { data, error: revokeErr } = await supabase.rpc(
+            "revoke_subscription",
+            {
+              p_account_id: ownerId,
+              p_original_transaction_id: originalTxnId,
+              p_reason: "EXPIRATION",
+            }
+          );
+          revokeData = data;
+          // Log it on every path. A `skipped` action here is not a failure: it
+          // means the account's Pro came from somewhere RevenueCat does not
+          // speak for (revolut, oxapay, an admin grant), or the transaction on
+          // the row is not this one. Those are exactly the revokes that used to
+          // be wrong and silent.
+          console.log(
+            `[webhook] EXPIRATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
+            JSON.stringify(data ?? revokeErr)
+          );
+          noteRpcFailure("revoke_subscription", revokeErr);
+        }
 
         await logEvent({
           p_account_id: ownerId,
@@ -426,6 +462,7 @@ Deno.serve(async (req: Request) => {
           p_details: {
             rc_app_user_id: accountId,
             owner_found: ownerFound,
+            revoke_skipped: !hasTransactionId(originalTxnId),
             revoke_result: revokeData ?? null,
           },
         });
