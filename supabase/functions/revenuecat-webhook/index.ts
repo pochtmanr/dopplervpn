@@ -209,6 +209,20 @@ Deno.serve(async (req: Request) => {
     rpcFailures.push(`${label}: ${JSON.stringify(err)}`);
   }
 
+  // webhook_log_event is the audit trail for this webhook, and a trail with
+  // holes in it is the thing that made the CKC4 downgrade unreconstructable.
+  // A failure here counts, so it forces the retry too.
+  //
+  // Replaying an event is safe: claim_subscription takes GREATEST of the
+  // current and requested expiry, and a second revoke_subscription for an
+  // already-revoked account answers {action:"skipped"} because the store column
+  // is NULL by then. Both are idempotent under replay, which is what makes
+  // "retry on any failure" the right default rather than a risk.
+  async function logEvent(params: Record<string, unknown>) {
+    const { error } = await supabase.rpc("webhook_log_event", params);
+    noteRpcFailure("webhook_log_event", error);
+  }
+
   try {
     switch (type) {
       case "INITIAL_PURCHASE":
@@ -254,7 +268,7 @@ Deno.serve(async (req: Request) => {
             );
             noteRpcFailure("claim_subscription (owner)", claimErr);
 
-            await supabase.rpc("webhook_log_event", {
+            await logEvent({
               p_account_id: owner.current_owner,
               p_original_transaction_id: originalTxnId,
               p_event_type: "RENEWAL",
@@ -285,7 +299,7 @@ Deno.serve(async (req: Request) => {
         );
         noteRpcFailure("claim_subscription", renewErr);
 
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "RENEWAL",
@@ -336,9 +350,15 @@ Deno.serve(async (req: Request) => {
               `[webhook] CANCELLATION ownership delete txn=${originalTxnId}:`,
               ownDelErr ? JSON.stringify(ownDelErr) : "ok"
             );
+            // A revoked subscription whose ownership row survives is a
+            // half-applied refund: the account is free, but the transaction is
+            // still recorded as owned, so nobody else can ever claim it and
+            // verify_restore keeps answering for a subscription that was
+            // refunded. Force the retry.
+            noteRpcFailure("subscription_ownership delete", ownDelErr);
           }
 
-          await supabase.rpc("webhook_log_event", {
+          await logEvent({
             p_account_id: ownerId,
             p_original_transaction_id: originalTxnId,
             p_event_type: "REFUND",
@@ -353,7 +373,7 @@ Deno.serve(async (req: Request) => {
             },
           });
         } else {
-          await supabase.rpc("webhook_log_event", {
+          await logEvent({
             p_account_id: accountId,
             p_original_transaction_id: originalTxnId,
             p_event_type: "CANCELLATION",
@@ -396,7 +416,7 @@ Deno.serve(async (req: Request) => {
         );
         noteRpcFailure("revoke_subscription", revokeErr);
 
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: ownerId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "EXPIRATION",
@@ -413,7 +433,7 @@ Deno.serve(async (req: Request) => {
       }
 
       case "BILLING_ISSUES": {
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "BILLING_ISSUES",
@@ -426,7 +446,7 @@ Deno.serve(async (req: Request) => {
       }
 
       case "TRANSFER": {
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "TRANSFER",
@@ -442,7 +462,7 @@ Deno.serve(async (req: Request) => {
       }
 
       case "SUBSCRIBER_ALIAS": {
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "SUBSCRIBER_ALIAS",
@@ -470,7 +490,7 @@ Deno.serve(async (req: Request) => {
         );
         noteRpcFailure("claim_subscription", pcErr);
 
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "PRODUCT_CHANGE",
@@ -483,7 +503,7 @@ Deno.serve(async (req: Request) => {
       }
 
       default: {
-        await supabase.rpc("webhook_log_event", {
+        await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
           p_event_type: "INITIAL_PURCHASE",
