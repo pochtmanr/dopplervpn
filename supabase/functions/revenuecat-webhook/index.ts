@@ -112,6 +112,11 @@ async function resolveOwnerAccountId(
   });
 
   if (error) {
+    // Deliberately NOT a request-level failure: falling back to the event's own
+    // account id is the pre-existing behaviour and is safe, because
+    // revoke_subscription independently refuses to act unless the row's store
+    // and transaction match. Logged loudly, because a persistent failure here
+    // means revokes are landing on the fallback account every time.
     console.error(`[webhook] get_subscription_owner failed for txn=${originalTxnId}:`, error);
     return { accountId: fallbackAccountId, ownerFound: false };
   }
@@ -184,6 +189,26 @@ Deno.serve(async (req: Request) => {
     });
   }
 
+  // Any RPC that fails at the TRANSPORT level (PGRST202 from an out-of-order
+  // deploy, a network fault, a permissions change) is recorded here. At the end
+  // of the request it forces a non-2xx.
+  //
+  // This is not pedantry. RevenueCat retries a non-2xx and does NOT retry a
+  // 200, so an out-of-order deploy — the function sending three arguments at a
+  // one-argument revoke_subscription — would have logged PGRST202 on every
+  // event, answered 200, and lost every one of them permanently. The webhook
+  // must never claim to have handled something it did not.
+  //
+  // A REFUSAL is a different thing and must NOT land here: an RPC that answers
+  // {success:false} or {action:"skipped"} was reached, understood the event and
+  // declined to act. Retrying that produces the same answer forever.
+  const rpcFailures: string[] = [];
+  function noteRpcFailure(label: string, err: unknown) {
+    if (!err) return;
+    console.error(`[webhook] ${type} | RPC ${label} FAILED:`, JSON.stringify(err));
+    rpcFailures.push(`${label}: ${JSON.stringify(err)}`);
+  }
+
   try {
     switch (type) {
       case "INITIAL_PURCHASE":
@@ -200,6 +225,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] ${type} claim (account=${accountId}) result:`,
           JSON.stringify(data ?? error)
         );
+        noteRpcFailure("claim_subscription", error);
         break;
       }
 
@@ -226,6 +252,7 @@ Deno.serve(async (req: Request) => {
               `[webhook] RENEWAL claim (owner=${owner.current_owner}, rc_user=${accountId}) result:`,
               JSON.stringify(claimData ?? claimErr)
             );
+            noteRpcFailure("claim_subscription (owner)", claimErr);
 
             await supabase.rpc("webhook_log_event", {
               p_account_id: owner.current_owner,
@@ -256,6 +283,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] RENEWAL claim (account=${accountId}) result:`,
           JSON.stringify(renewData ?? renewErr)
         );
+        noteRpcFailure("claim_subscription", renewErr);
 
         await supabase.rpc("webhook_log_event", {
           p_account_id: accountId,
@@ -292,6 +320,7 @@ Deno.serve(async (req: Request) => {
             `[webhook] CANCELLATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
             JSON.stringify(revokeData ?? revokeErr)
           );
+          noteRpcFailure("revoke_subscription", revokeErr);
 
           // Delete the ownership row ONLY when the revoke actually happened.
           // revoke_subscription now SKIPS non-store rows and transaction
@@ -365,6 +394,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] EXPIRATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
           JSON.stringify(revokeData ?? revokeErr)
         );
+        noteRpcFailure("revoke_subscription", revokeErr);
 
         await supabase.rpc("webhook_log_event", {
           p_account_id: ownerId,
@@ -438,6 +468,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] PRODUCT_CHANGE claim (account=${accountId}) result:`,
           JSON.stringify(pcData ?? pcErr)
         );
+        noteRpcFailure("claim_subscription", pcErr);
 
         await supabase.rpc("webhook_log_event", {
           p_account_id: accountId,
@@ -462,6 +493,19 @@ Deno.serve(async (req: Request) => {
         });
         break;
       }
+    }
+
+    // A 200 here tells RevenueCat "handled, never send this again". Only say
+    // that when every RPC actually reached the database.
+    if (rpcFailures.length > 0) {
+      console.error(
+        `[webhook] ${type} | returning 500 so RevenueCat retries; ${rpcFailures.length} RPC failure(s):`,
+        JSON.stringify(rpcFailures)
+      );
+      return new Response(
+        JSON.stringify({ success: false, error: "rpc_failed", failures: rpcFailures }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
     }
 
     return new Response(JSON.stringify({ success: true }), {

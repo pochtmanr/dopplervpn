@@ -76,6 +76,7 @@ Authorization header configured in the RevenueCat dashboard.
 | Both pass `p_original_transaction_id` and `p_reason` | The RPC refuses to revoke when the transaction on the row is not this one, and the reason lands in `subscription_audit`. |
 | The `subscription_ownership` delete on refund is now conditional on `revokeData.action === "revoked"` | The RPC can now legitimately **skip** (non-store row, transaction mismatch). Deleting ownership for a subscription we did not revoke orphans a live entitlement and breaks `verify_restore` for that customer. |
 | Every branch logs its RPC result | `claim result` used to be logged on exactly one branch. Revokes were logged nowhere at all, which is why "did the webhook do this?" has never been answerable. |
+| **An RPC transport failure now returns HTTP 500 instead of 200** | RevenueCat retries a non-2xx and does **not** retry a 200. Deployed out of order, every revoke would have logged `PGRST202`, answered 200, and been lost permanently. A **refusal** (`{success:false}`, `{action:"skipped"}`) is deliberately NOT treated as a failure — the RPC was reached, understood the event and declined; retrying gives the same answer forever. |
 
 ## 5. Verify after deploying
 
@@ -95,7 +96,18 @@ Expect, per event type:
 **A `"action":"skipped"` on a revoke is not a failure.** It means the account's
 Pro came from a channel RevenueCat does not speak for (`revolut`, `oxapay`,
 `admin`), or the transaction on the row is not the one in the event. Those are
-exactly the revokes that used to happen and used to be wrong.
+exactly the revokes that used to happen and used to be wrong. The webhook still
+answers 200 for these, so RevenueCat does not retry.
+
+**What you must NOT see** is this, which is the out-of-order deploy:
+
+```
+[webhook] EXPIRATION | RPC revoke_subscription FAILED: {"code":"PGRST202",…}
+[webhook] EXPIRATION | returning 500 so RevenueCat retries; 1 RPC failure(s): …
+```
+
+That means migration `20260906T100300` has not been applied. Apply it — the
+events are not lost, because a 500 makes RevenueCat retry.
 
 Then confirm the trail exists, in the Supabase SQL editor:
 
