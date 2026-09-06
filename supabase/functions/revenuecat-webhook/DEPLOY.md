@@ -77,6 +77,7 @@ Authorization header configured in the RevenueCat dashboard.
 | The `subscription_ownership` delete on refund is now conditional on `revokeData.action === "revoked"` | The RPC can now legitimately **skip** (non-store row, transaction mismatch). Deleting ownership for a subscription we did not revoke orphans a live entitlement and breaks `verify_restore` for that customer. |
 | Every branch logs its RPC result | `claim result` used to be logged on exactly one branch. Revokes were logged nowhere at all, which is why "did the webhook do this?" has never been answerable. |
 | **An RPC transport failure now returns HTTP 500 instead of 200** | RevenueCat retries a non-2xx and does **not** retry a 200. Deployed out of order, every revoke would have logged `PGRST202`, answered 200, and been lost permanently. A **refusal** (`{success:false}`, `{action:"skipped"}`) is deliberately NOT treated as a failure — the RPC was reached, understood the event and declined; retrying gives the same answer forever. |
+| **An RPC that returns `{success:false, error:'database_error'}` now forces a 500 too** | The RPCs answer a refusal and a failure with the same HTTP 200 and the same supabase-js shape — `error` is null and the verdict is inside `data`. So checking only `error` treated a deadlock (40P01), a CHECK violation (23514) or a statement timeout exactly like a successful claim: `claim_subscription` catches all of those in its `EXCEPTION WHEN OTHERS` and returns `database_error`, and RevenueCat never retried. Known refusals (`account_not_found`, `transaction_id_required`, `action:'ignored'`, `action:'skipped'`) stay at 200; anything else with `success:false` is unknown territory and is retried. |
 | A revoke is **skipped entirely** when the event carries no `original_transaction_id` | `revoke_subscription`'s transaction-mismatch guard only fires when the argument is *supplied*; pass null and it revokes whatever account it was handed. On a refund **replay** the ownership row was deleted by the first delivery, so the owner lookup falls back to the RC `app_user_id` — a different account from the real owner after a transfer. No transaction id, no revoke; the expiry sweeper collects the row three days after it genuinely lapses. Logged as `revoke SKIPPED`, recorded as `revoke_skipped: true`, still answers 200. |
 | A failed `webhook_log_event` or `subscription_ownership` delete counts as a failure too | A trail with holes in it is what made the CKC4 downgrade unreconstructable; and a revoked subscription whose ownership row survives is a half-applied refund — the account is free, the transaction is still owned, nobody else can claim it, and `verify_restore` keeps answering for it. Replay is safe: `claim_subscription` takes `GREATEST` of current and requested expiry, and a second revoke answers `skipped` because the store is NULL by then. |
 
@@ -110,6 +111,19 @@ answers 200 for these, so RevenueCat does not retry.
 
 That means migration `20260906T100300` has not been applied. Apply it — the
 events are not lost, because a 500 makes RevenueCat retry.
+
+You should also not see this, which is a fault **inside** the RPC — a deadlock,
+a CHECK violation, a statement timeout:
+
+```
+[webhook] RENEWAL | claim_subscription returned an UNSUCCESSFUL result that is
+  not a known refusal: {"success":false,"error":"database_error","sqlstate":"23514", …}
+```
+
+Read the `sqlstate`: `23514` is a CHECK violation (see hole #12 — the
+`subscription_store` CHECK), `23505` a unique violation, `40P01` a deadlock,
+`57014` a statement timeout. These are three completely different bugs and the
+`sqlstate` is the only thing that tells them apart.
 
 Then confirm the trail exists, in the Supabase SQL editor:
 

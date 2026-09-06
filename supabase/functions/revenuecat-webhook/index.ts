@@ -228,6 +228,52 @@ Deno.serve(async (req: Request) => {
     rpcFailures.push(`${label}: ${JSON.stringify(err)}`);
   }
 
+  // The RPCs answer a REFUSAL and a FAILURE with the same HTTP 200 and the same
+  // supabase-js shape: `error` is null, and the verdict is inside `data`. So
+  // checking only `error` — which this webhook did until now — treats a
+  // deadlock (40P01), a CHECK violation (23514) or a statement timeout exactly
+  // like a successful claim. claim_subscription catches all of those in its
+  // EXCEPTION WHEN OTHERS and returns {success:false, error:'database_error'},
+  // which is precisely the case that must be retried and never was.
+  //
+  // Refusals stay at 200. These are the complete set the RPCs can return, and
+  // every one of them is a considered decision that will not change on a
+  // retry:
+  //   claim  — success:true + action 'ignored'  (tier_not_grantable / no_expiry)
+  //   claim  — success:false + 'account_not_found'
+  //   claim  — success:false + 'transaction_id_required'
+  //   revoke — success:true + action 'skipped'  (store_not_revocable /
+  //                                              transaction_mismatch)
+  //   revoke — success:false + 'account_not_found'
+  //
+  // Anything else with success:false is unknown territory — 'database_error'
+  // today, and whatever a future body adds — and unknown means retry. Erring
+  // toward a retry is safe here because both RPCs are idempotent under replay
+  // (see logEvent below); erring toward 200 loses the event forever.
+  const KNOWN_REFUSALS = new Set([
+    "account_not_found",
+    "transaction_id_required",
+  ]);
+
+  function noteRpcOutcome(label: string, data: unknown, err: unknown) {
+    noteRpcFailure(label, err);
+    if (err || data === null || typeof data !== "object") return;
+
+    const result = data as { success?: unknown; error?: unknown; action?: unknown };
+    if (result.success === true) return; // includes action 'ignored' and 'skipped'
+
+    if (typeof result.error === "string" && KNOWN_REFUSALS.has(result.error)) {
+      console.log(`[webhook] ${type} | ${label} refused: ${result.error} (not retried)`);
+      return;
+    }
+
+    console.error(
+      `[webhook] ${type} | ${label} returned an UNSUCCESSFUL result that is not a known refusal:`,
+      JSON.stringify(data)
+    );
+    rpcFailures.push(`${label}: ${JSON.stringify(data)}`);
+  }
+
   // webhook_log_event is the audit trail for this webhook, and a trail with
   // holes in it is the thing that made the CKC4 downgrade unreconstructable.
   // A failure here counts, so it forces the retry too.
@@ -258,7 +304,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] ${type} claim (account=${accountId}) result:`,
           JSON.stringify(data ?? error)
         );
-        noteRpcFailure("claim_subscription", error);
+        noteRpcOutcome("claim_subscription", data, error);
         break;
       }
 
@@ -285,7 +331,7 @@ Deno.serve(async (req: Request) => {
               `[webhook] RENEWAL claim (owner=${owner.current_owner}, rc_user=${accountId}) result:`,
               JSON.stringify(claimData ?? claimErr)
             );
-            noteRpcFailure("claim_subscription (owner)", claimErr);
+            noteRpcOutcome("claim_subscription (owner)", claimData, claimErr);
 
             await logEvent({
               p_account_id: owner.current_owner,
@@ -316,7 +362,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] RENEWAL claim (account=${accountId}) result:`,
           JSON.stringify(renewData ?? renewErr)
         );
-        noteRpcFailure("claim_subscription", renewErr);
+        noteRpcOutcome("claim_subscription", renewData, renewErr);
 
         await logEvent({
           p_account_id: accountId,
@@ -360,7 +406,7 @@ Deno.serve(async (req: Request) => {
               `[webhook] CANCELLATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
               JSON.stringify(data ?? revokeErr)
             );
-            noteRpcFailure("revoke_subscription", revokeErr);
+            noteRpcOutcome("revoke_subscription", data, revokeErr);
           }
 
           // Delete the ownership row ONLY when the revoke actually happened.
@@ -449,7 +495,7 @@ Deno.serve(async (req: Request) => {
             `[webhook] EXPIRATION revoke (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
             JSON.stringify(data ?? revokeErr)
           );
-          noteRpcFailure("revoke_subscription", revokeErr);
+          noteRpcOutcome("revoke_subscription", data, revokeErr);
         }
 
         await logEvent({
@@ -525,7 +571,7 @@ Deno.serve(async (req: Request) => {
           `[webhook] PRODUCT_CHANGE claim (account=${accountId}) result:`,
           JSON.stringify(pcData ?? pcErr)
         );
-        noteRpcFailure("claim_subscription", pcErr);
+        noteRpcOutcome("claim_subscription", pcData, pcErr);
 
         await logEvent({
           p_account_id: accountId,
