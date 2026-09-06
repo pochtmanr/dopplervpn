@@ -62,7 +62,11 @@ export type CtaPlatform =
   | "desktop"
   | "telegram";
 
-export type CtaVariant = "android-play" | "android-apk" | "windows-x64";
+export type CtaVariant =
+  | "android-play"
+  | "android-apk"
+  | "android-apk-32"
+  | "windows-x64";
 
 /**
  * Where the click actually sends the visitor. Distinct from platform because
@@ -81,7 +85,7 @@ export function deriveDestination(
   platform: CtaPlatform,
   variant?: CtaVariant
 ): CtaDestination {
-  if (variant === "android-apk") return "apk";
+  if (variant === "android-apk" || variant === "android-apk-32") return "apk";
   if (variant === "windows-x64") return "direct_exe";
   switch (platform) {
     case "ios":

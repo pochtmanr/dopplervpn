@@ -79,6 +79,12 @@ const URLS = {
   // Same-origin on purpose — the route decides where the bytes come from, so the
   // link printed here survives a change of hosting. See the route's own header.
   androidApk: "/api/android/download/latest",
+  // The 32-bit build, for pre-2019 hardware that cannot install the arm64 APK
+  // (INSTALL_FAILED_NO_MATCHING_ABIS, which Android reports to the user only as
+  // "app not installed"). It has to be a second, explicitly labelled link:
+  // nothing in a browser request states the device's CPU architecture, so the
+  // page cannot pick for the visitor the way the in-app update banner can.
+  androidApk32: "/api/android/download/latest?abi=armeabi-v7a",
 };
 
 /* ── Release Updates ─────────────────────────────────────────────── */
@@ -257,6 +263,13 @@ const PLATFORMS: {
         labelKey: "android.buttonApk",
         href: URLS.androidApk,
         variant: "android-apk",
+        download: true,
+        primary: false,
+      },
+      {
+        labelKey: "android.buttonApk32",
+        href: URLS.androidApk32,
+        variant: "android-apk-32",
         download: true,
         primary: false,
       },

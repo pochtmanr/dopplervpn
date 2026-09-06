@@ -2,6 +2,12 @@ import { NextRequest, NextResponse, after } from "next/server";
 import { CLICK_ID_SOURCE_COOKIE, readClickIdCookie } from "@/lib/click-id";
 import { firePostback } from "@/lib/postback";
 import { sendServerEvent } from "@/lib/ga-server";
+import {
+  ARM32,
+  type AndroidAbi,
+  normalizeAbi,
+  pickApkAsset,
+} from "@/lib/android-abi";
 
 /**
  * GET /api/android/download/latest
@@ -33,6 +39,18 @@ import { sendServerEvent } from "@/lib/ga-server";
  * once put an open image proxy on this site's bill. Turn it on only against
  * evidence that GitHub does not work for the audience, and point
  * ANDROID_APK_ORIGIN_URL at the cheapest host that is actually reachable.
+ *
+ * ## `?abi=` — which architecture
+ *
+ * Since 1.8.1 a release carries two APKs, one per ABI. `?abi=` selects; anything
+ * unrecognised or absent means arm64-v8a, which is what this link always served.
+ * The in-app update banner sends Build.SUPPORTED_ABIS[0]; the website's 32-bit
+ * link sends armeabi-v7a explicitly, because nothing in an HTTP request from a
+ * browser reliably states the device's CPU architecture.
+ *
+ * `ANDROID_APK_ORIGIN_URL` (proxy mode) is a single URL and therefore serves the
+ * arm64 file only; a 32-bit request falls back to the GitHub redirect rather
+ * than being handed the wrong binary.
  */
 
 const REPO = "pochtmanr/dopplervpn";
@@ -52,10 +70,19 @@ const FALLBACK_VERSION: string | null = "1.8.0";
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
-let cachedVersion: { version: string; at: number } | null = null;
+/**
+ * The asset NAMES are cached alongside the version, not just the version.
+ * Constructing the file name from the version by hand is what made the old
+ * single-APK assumption invisible; reading it off the release is what lets a
+ * pre-1.8.1 tag (one unsuffixed APK) and a 1.8.1+ tag (two suffixed ones) both
+ * resolve without a special case at the call site.
+ */
+type LatestRelease = { version: string; assetNames: string[] };
 
-/** Highest x.y.z among the repo's android-v* releases, or null if none resolved. */
-async function fetchLatestVersion(): Promise<string | null> {
+let cachedRelease: { release: LatestRelease; at: number } | null = null;
+
+/** Newest android-v* release by semver, with its asset names, or null. */
+async function fetchLatestRelease(): Promise<LatestRelease | null> {
   const res = await fetch(
     `https://api.github.com/repos/${REPO}/releases?per_page=30`,
     {
@@ -72,53 +99,64 @@ async function fetchLatestVersion(): Promise<string | null> {
     tag_name?: string;
     draft?: boolean;
     prerelease?: boolean;
+    assets?: Array<{ name?: string }>;
   }> = await res.json();
 
   // The Windows installers live on this same repo under windows-v* tags, so the
   // tag prefix — not "the newest release" — is what identifies an Android build.
-  const versions = releases
+  const candidates = releases
     .filter((r) => !r.draft && !r.prerelease)
-    .map((r) => new RegExp(`^${TAG_PREFIX}(\\d+\\.\\d+\\.\\d+)$`).exec(r.tag_name ?? "")?.[1])
-    .filter((v): v is string => Boolean(v));
+    .map((r) => ({
+      release: r,
+      version: new RegExp(`^${TAG_PREFIX}(\\d+\\.\\d+\\.\\d+)$`).exec(r.tag_name ?? "")?.[1],
+    }))
+    .filter((c): c is { release: (typeof releases)[number]; version: string } =>
+      Boolean(c.version)
+    );
 
-  if (versions.length === 0) return null;
+  if (candidates.length === 0) return null;
 
   // GitHub orders by creation date; sort by semver so a late-published patch of an
   // older line can't masquerade as the newest.
-  versions.sort((a, b) => {
-    const pa = a.split(".").map(Number);
-    const pb = b.split(".").map(Number);
+  candidates.sort((a, b) => {
+    const pa = a.version.split(".").map(Number);
+    const pb = b.version.split(".").map(Number);
     return pb[0] - pa[0] || pb[1] - pa[1] || pb[2] - pa[2];
   });
 
-  return versions[0];
+  const top = candidates[0];
+  return {
+    version: top.version,
+    assetNames: (top.release.assets ?? [])
+      .map((a) => a.name)
+      .filter((n): n is string => Boolean(n)),
+  };
 }
 
-async function resolveLatestVersion(): Promise<string | null> {
+async function resolveLatestRelease(): Promise<LatestRelease | null> {
   const now = Date.now();
-  if (cachedVersion && now - cachedVersion.at < CACHE_TTL_MS) {
-    return cachedVersion.version;
+  if (cachedRelease && now - cachedRelease.at < CACHE_TTL_MS) {
+    return cachedRelease.release;
   }
 
   try {
-    const version = await fetchLatestVersion();
-    if (version) {
-      cachedVersion = { version, at: now };
-      return version;
+    const release = await fetchLatestRelease();
+    if (release) {
+      cachedRelease = { release, at: now };
+      return release;
     }
   } catch {
     // fall through
   }
 
-  return cachedVersion?.version ?? FALLBACK_VERSION;
+  if (cachedRelease) return cachedRelease.release;
+  // No listing at all: fall back to the pinned version and derive the file name
+  // by convention (empty asset list) rather than answering 503.
+  return FALLBACK_VERSION ? { version: FALLBACK_VERSION, assetNames: [] } : null;
 }
 
-function apkFileName(version: string): string {
-  return `doppler-vpn-${TAG_PREFIX}${version}.apk`;
-}
-
-function githubUrl(version: string): string {
-  return `${RELEASE_BASE}/${TAG_PREFIX}${version}/${apkFileName(version)}`;
+function githubUrl(version: string, assetName: string): string {
+  return `${RELEASE_BASE}/${TAG_PREFIX}${version}/${assetName}`;
 }
 
 /** See the identical note in the Windows route — same funnel, same reasoning. */
@@ -144,7 +182,8 @@ function reportDownloadToGa(
   req: NextRequest,
   version: string,
   attributed: boolean,
-  mode: string
+  mode: string,
+  abi: AndroidAbi
 ) {
   after(() =>
     sendServerEvent(
@@ -154,6 +193,9 @@ function reportDownloadToGa(
           version,
           attributed,
           mode,
+          // How many people actually need the 32-bit build is unknown — this is
+          // the only place the answer can be counted.
+          abi,
           page_path: req.headers.get("referer") ?? "",
         },
       },
@@ -178,7 +220,7 @@ const NO_STORE = { "Cache-Control": "private, no-store" };
 async function proxyApk(
   req: NextRequest,
   originUrl: string,
-  version: string
+  assetName: string
 ): Promise<NextResponse> {
   const range = req.headers.get("range");
   const upstream = await fetch(originUrl, {
@@ -195,7 +237,7 @@ async function proxyApk(
 
   const headers = new Headers({
     "Content-Type": "application/vnd.android.package-archive",
-    "Content-Disposition": `attachment; filename="${apkFileName(version)}"`,
+    "Content-Disposition": `attachment; filename="${assetName}"`,
     "Accept-Ranges": "bytes",
     ...NO_STORE,
   });
@@ -208,9 +250,9 @@ async function proxyApk(
 }
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
-  const version = await resolveLatestVersion();
+  const latest = await resolveLatestRelease();
 
-  if (!version) {
+  if (!latest) {
     // No android-v* release exists yet, or GitHub is down and we have no cached
     // answer. Say so plainly rather than redirecting to a URL that 404s.
     return NextResponse.json(
@@ -219,25 +261,42 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     );
   }
 
+  const { version, assetNames } = latest;
+  const abi: AndroidAbi = normalizeAbi(req.nextUrl.searchParams.get("abi"));
+  const assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
+
+  if (!assetName) {
+    // Only reachable for a 32-bit request against a release published before
+    // 1.8.1. Answering plainly beats redirecting to a URL that 404s at GitHub,
+    // where the visitor has no way to tell our mistake from a dead link.
+    return NextResponse.json(
+      { error: "no-apk-for-abi", abi, version },
+      { status: 404, headers: NO_STORE }
+    );
+  }
+
   const mode = process.env.ANDROID_APK_SOURCE === "proxy" ? "proxy" : "github";
   const attributed = reportDownloadConversion(req);
-  reportDownloadToGa(req, version, attributed, mode);
+  reportDownloadToGa(req, version, attributed, mode, abi);
+
+  const redirectToGithub = () =>
+    NextResponse.redirect(githubUrl(version, assetName), {
+      status: 302,
+      headers: NO_STORE,
+    });
 
   if (mode === "proxy") {
     const originUrl = process.env.ANDROID_APK_ORIGIN_URL;
-    if (!originUrl) {
-      // Misconfiguration, not a user error: fall back to the redirect rather
-      // than handing the visitor a 500. A slow download beats no download.
-      return NextResponse.redirect(githubUrl(version), {
-        status: 302,
-        headers: NO_STORE,
-      });
+    // ANDROID_APK_ORIGIN_URL names one file, and that file is the arm64 build.
+    // Serving it to a 32-bit device would produce an APK that installs nowhere,
+    // which is worse than the slow-but-correct GitHub path.
+    if (!originUrl || abi === ARM32) {
+      // Misconfiguration (or a 32-bit request), not a user error: fall back to
+      // the redirect rather than handing the visitor a 500 or the wrong binary.
+      return redirectToGithub();
     }
-    return proxyApk(req, originUrl, version);
+    return proxyApk(req, originUrl, assetName);
   }
 
-  return NextResponse.redirect(githubUrl(version), {
-    status: 302,
-    headers: NO_STORE,
-  });
+  return redirectToGithub();
 }

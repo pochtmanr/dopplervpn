@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { resolveSiteUrl } from "@/lib/site-url";
+import { type AndroidAbi, normalizeAbi, pickApkAsset } from "@/lib/android-abi";
 
 /**
  * GET /api/android/latest
@@ -28,6 +29,16 @@ import { resolveSiteUrl } from "@/lib/site-url";
  * are served from reaches already-installed apps too, with no new release.
  * It must be absolute: the app feeds it straight to Uri.parse() + ACTION_VIEW,
  * and a relative path there has no scheme to resolve.
+ *
+ * ## `?abi=` — the banner must not hand out the wrong architecture
+ *
+ * Since 1.8.1 a release carries one APK per ABI. The banner ships the CURRENT
+ * build's URL to an already-installed app, so a 32-bit user following it would
+ * otherwise be handed an arm64 file and hit "app not compatible" at the last
+ * step of an update they already agreed to. UpdateCheckService sends
+ * Build.SUPPORTED_ABIS[0]; that value is echoed into the `url` and picks which
+ * asset `size` describes. An absent or unrecognised value means arm64, which is
+ * what this route always returned.
  */
 
 // Dynamic: the response embeds an absolute URL derived from the request host.
@@ -88,18 +99,29 @@ export async function GET(req: NextRequest) {
   }
 
   const { release, version } = android;
-  const apk = release.assets?.find((a) => a.name?.toLowerCase().endsWith(".apk"));
+  const abi: AndroidAbi = normalizeAbi(req.nextUrl.searchParams.get("abi"));
+  const assetNames = (release.assets ?? [])
+    .map((a) => a.name)
+    .filter((n): n is string => Boolean(n));
+  const assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
 
-  if (!apk) {
-    return NextResponse.json({ error: "no-apk-asset" }, { status: 404 });
+  if (!assetName) {
+    // Either the release has no APK at all, or a 32-bit device asked about a
+    // release published before the split (1.8.1). Both are "there is no update
+    // for you", and 404 is what makes the banner stay quiet instead of offering
+    // a download that cannot install.
+    return NextResponse.json({ error: "no-apk-asset", abi }, { status: 404 });
   }
+
+  const apk = release.assets?.find((a) => a.name === assetName);
 
   return NextResponse.json(
     {
       version,
       tag: release.tag_name,
-      url: `${resolveSiteUrl(req)}/api/android/download/latest`,
-      size: apk.size ?? null,
+      abi,
+      url: `${resolveSiteUrl(req)}/api/android/download/latest?abi=${encodeURIComponent(abi)}`,
+      size: apk?.size ?? null,
       publishedAt: release.published_at ?? null,
       releaseUrl: release.html_url ?? null,
     },
