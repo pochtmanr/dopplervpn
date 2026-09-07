@@ -167,7 +167,7 @@ gh workflow run release.yml -R pochtmanr/dopplerWindows --ref fix/windows-entitl
 git tag windows-v11.0.2 && git push origin windows-v11.0.2
 ```
 
-- [ ] CI build green (Debug + Release x64 including XAML). Watch for: the `or`-combined type patterns in `ServerLoadError.Describe`, `Interlocked` / `CancellationTokenSource` via ImplicitUsings, and the `Activated` handler signature.
+- [x] **CI build green** — run `34145474191`, 2026-09-07, Debug + Release x64 including XAML, conclusion `success`. The three items flagged as compile risks (the `or`-combined type patterns in `ServerLoadError.Describe`, `Interlocked` / `CancellationTokenSource` via ImplicitUsings, the `Activated` handler signature) all resolved. Warnings are pre-existing `async` -without-`await` ones in `ProfilePage`.
 - [ ] Untagged `release.yml` run completes the publish + Inno Setup build.
 - [ ] **The core fix.** Launch once online, confirm servers list and that `device_tokens` has **one** row for this machine. Block Supabase, relaunch: servers still list from the stored token and the row is **still one, unchanged**. Before this release it was replaced every launch.
 - [ ] Make `%LocalAppData%\DopplerVPN\device-tokens.bin` unwritable, sign in fresh: the session still mints, fetches and connects, and does not re-mint on every fetch.
