@@ -1,0 +1,567 @@
+{
+  "id": "GkrDwBol0proeDel",
+  "name": "Doppler Support Bot",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "doppler-support-bot",
+        "options": {}
+      },
+      "id": "node-webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        304
+      ],
+      "webhookId": "doppler-support-bot"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Telegram update from webhook body\nconst body = $input.first().json.body;\n\nlet from = {};\nlet chatId = null;\nlet isCallback = false;\nlet cbData = null;\nlet cbId = null;\nlet text = null;\n\nif (body.callback_query) {\n  const cq = body.callback_query;\n  from = cq.from || {};\n  chatId = cq.message && cq.message.chat ? cq.message.chat.id : (from.id || null);\n  isCallback = true;\n  cbData = cq.data || null;\n  cbId = cq.id || null;\n  text = null;\n} else if (body.message) {\n  const msg = body.message;\n  from = msg.from || {};\n  chatId = msg.chat ? msg.chat.id : (from.id || null);\n  isCallback = false;\n  cbData = null;\n  cbId = null;\n  text = msg.text || null;\n}\n\nreturn [{\n  json: {\n    from,\n    chatId,\n    isCallback,\n    cbData,\n    cbId,\n    text\n  }\n}];"
+      },
+      "id": "node-parseupdate",
+      "name": "ParseUpdate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fzlrhmjdjjzcgstaeblu.supabase.co/rest/v1/rpc/bot_upsert_user",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "{{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ p_telegram_id: $('ParseUpdate').first().json.from.id, p_first_name: $('ParseUpdate').first().json.from.first_name || null, p_last_name: $('ParseUpdate').first().json.from.last_name || null, p_username: $('ParseUpdate').first().json.from.username || null, p_language_code: $('ParseUpdate').first().json.from.language_code || 'en' }) }}",
+        "options": {}
+      },
+      "id": "node-upsertuser",
+      "name": "UpsertUser",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://fzlrhmjdjjzcgstaeblu.supabase.co/rest/v1/message_templates?select=key,lang,text&lang=in.(en,{{ $('UpsertUser').first().json.preferred_language || 'en' }})",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "{{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "node-gettemplates",
+      "name": "GetTemplates",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        864,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================================\n// MAIN ROUTER — Core bot logic\n// ============================================================\n\nconst parsed  = $('ParseUpdate').first().json;\nconst user    = $('UpsertUser').first().json;\nconst tplRows = $('GetTemplates').all().map(i => i.json);\n\nconst { from, chatId, isCallback, cbData, cbId, text } = parsed;\n\n// ---------- Build templates lookup ----------\nconst templates = {};\nfor (const row of tplRows) {\n  if (!row || !row.key || !row.lang) continue;\n  if (!templates[row.key]) templates[row.key] = {};\n  templates[row.key][row.lang] = row.text || '';\n}\n\nconst userLang = user.preferred_language || from.language_code || 'en';\n\nfunction getTemplate(key, lang) {\n  const byKey = templates[key];\n  if (!byKey) return key;\n  return byKey[lang] || byKey['en'] || key;\n}\n\nfunction tpl(text, vars) {\n  if (!text || !vars) return text || '';\n  return text.replace(/\\{(\\w+)\\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : '{' + k + '}'));\n}\n\n// ---------- Keyboards ----------\nconst KB = {\n  menu: {\n    inline_keyboard: [\n      [\n        { text: '🛠 Support',  callback_data: 'action_cmd_support'  },\n        { text: '💰 Pricing',  callback_data: 'action_cmd_pricing'  }\n      ],\n      [\n        { text: '📱 Setup',    callback_data: 'action_cmd_setup'    },\n        { text: '❓ FAQ',      callback_data: 'action_cmd_faq'      }\n      ],\n      [\n        { text: '👤 Account',  callback_data: 'action_cmd_account'  },\n        { text: '🌐 Language', callback_data: 'action_cmd_language' }\n      ],\n      [\n        { text: '📢 Channel',  url: 'https://t.me/dopplervpn'       },\n        { text: '🙋 Human',    callback_data: 'action_cmd_human'    }\n      ]\n    ]\n  },\n  devices: {\n    inline_keyboard: [\n      [\n        { text: '🍎 iPhone',  callback_data: 'action_device_iphone'  },\n        { text: '🤖 Android', callback_data: 'action_device_android' }\n      ],\n      [\n        { text: '💻 Mac',     callback_data: 'action_device_mac'    },\n        { text: '🖥 Other',   callback_data: 'action_device_other'  }\n      ]\n    ]\n  },\n  issues: {\n    inline_keyboard: [\n      [\n        { text: \"🚫 Won't connect\", callback_data: 'action_issue_noconnect'    },\n        { text: '🐢 Slow',          callback_data: 'action_issue_slow'         }\n      ],\n      [\n        { text: '🔌 Disconnects',   callback_data: 'action_issue_disconnects'  },\n        { text: '🚧 Blocked',       callback_data: 'action_issue_blocked'      }\n      ],\n      [\n        { text: '💥 App crash',     callback_data: 'action_issue_crash'        },\n        { text: '❓ Other',         callback_data: 'action_issue_other'        }\n      ]\n    ]\n  },\n  postAi: {\n    inline_keyboard: [\n      [\n        { text: '✅ Yes, solved!',  callback_data: 'action_resolved_yes' },\n        { text: '❌ No',            callback_data: 'action_resolved_no'  },\n        { text: '🙋 Human',        callback_data: 'action_cmd_human'    }\n      ]\n    ]\n  },\n  languages: {\n    inline_keyboard: [\n      [\n        { text: '🇬🇧 English',    callback_data: 'action_lang_en' },\n        { text: '🇷🇺 Русский',   callback_data: 'action_lang_ru' },\n        { text: '🇩🇪 Deutsch',   callback_data: 'action_lang_de' }\n      ],\n      [\n        { text: '🇫🇷 Français',  callback_data: 'action_lang_fr' },\n        { text: '🇪🇸 Español',   callback_data: 'action_lang_es' },\n        { text: '🇮🇹 Italiano',  callback_data: 'action_lang_it' }\n      ],\n      [\n        { text: '🇵🇹 Português', callback_data: 'action_lang_pt' },\n        { text: '🇺🇦 Українська',callback_data: 'action_lang_uk' },\n        { text: '🇹🇷 Türkçe',   callback_data: 'action_lang_tr' }\n      ]\n    ]\n  },\n  feedback: {\n    inline_keyboard: [\n      [\n        { text: '👍 Great', callback_data: 'action_feedback_great' },\n        { text: '👌 OK',    callback_data: 'action_feedback_ok'    },\n        { text: '👎 Poor',  callback_data: 'action_feedback_poor'  }\n      ]\n    ]\n  }\n};\n\n// ---------- Helpers ----------\nfunction kbStr(kb) {\n  return JSON.stringify(kb);\n}\n\nfunction buildFaqKeyboard() {\n  const faqKeys = Object.keys(templates).filter(k => k.startsWith('faq.'));\n  const rows = [];\n  for (let i = 0; i < faqKeys.length; i += 2) {\n    const row = [{ text: faqKeys[i], callback_data: 'action_faq_' + faqKeys[i] }];\n    if (faqKeys[i + 1]) row.push({ text: faqKeys[i + 1], callback_data: 'action_faq_' + faqKeys[i + 1] });\n    rows.push(row);\n  }\n  rows.push([{ text: '🏠 Menu', callback_data: 'action_cmd_menu' }]);\n  return { inline_keyboard: rows };\n}\n\n// ---------- State & input ----------\nconst botState = user.bot_state || 'idle';\nconst accountCode = user.account_code || null;\nconst firstName = from.first_name || 'there';\n\n// Determine effective command/action\nlet cmd = null;       // '/start', '/menu', etc.\nlet action = null;    // 'action_device_iphone', etc.\nlet userText = null;  // plain text from user\n\nif (isCallback && cbData) {\n  if (cbData.startsWith('action_cmd_')) {\n    // treat as command\n    const cmdName = cbData.replace('action_cmd_', '');\n    cmd = '/' + cmdName;\n  } else if (cbData.startsWith('action_')) {\n    action = cbData;\n  }\n} else if (text) {\n  if (text.startsWith('/')) {\n    cmd = text.split(' ')[0].toLowerCase();\n  } else {\n    userText = text;\n  }\n}\n\n// ---------- Result defaults ----------\nlet outText = '';\nlet outKeyboard = null;\nlet callGrok = false;\nlet notifyRoman = false;\nlet notifyPayload = null;\nlet userUpdate = null;\nlet feedbackData = null;\nlet device = user.current_device || null;\nlet issue = user.current_issue || null;\nlet lang = userLang;\n\n// ---------- Command handling ----------\nif (cmd === '/start') {\n  outText = tpl(getTemplate('welcome.main', lang), { user_name: firstName });\n  outKeyboard = kbStr(KB.menu);\n  userUpdate = { bot_state: 'idle' };\n\n} else if (cmd === '/menu' || cmd === '/help') {\n  outText = getTemplate('menu.main', lang);\n  outKeyboard = kbStr(KB.menu);\n  userUpdate = { bot_state: 'idle' };\n\n} else if (cmd === '/pricing') {\n  outText = getTemplate('pricing.info', lang);\n  outKeyboard = kbStr(KB.menu);\n\n} else if (cmd === '/setup') {\n  outText = getTemplate('setup.guide', lang);\n  outKeyboard = kbStr(KB.menu);\n\n} else if (cmd === '/support') {\n  outText = getTemplate('troubleshoot.start', lang);\n  outKeyboard = kbStr(KB.devices);\n  userUpdate = { bot_state: 'troubleshoot_device' };\n\n} else if (cmd === '/human') {\n  outText = getTemplate('human.ask_code', lang);\n  outKeyboard = null;\n  userUpdate = { bot_state: 'awaiting_account_code' };\n  notifyRoman = true;\n  notifyPayload = {\n    type: 'human_requested',\n    telegram_id: from.id,\n    username: from.username || null,\n    first_name: firstName\n  };\n\n} else if (cmd === '/account') {\n  if (accountCode) {\n    outText = tpl(getTemplate('account.linked', lang), { user_name: firstName, account_code: accountCode });\n  } else {\n    outText = getTemplate('account.not_linked', lang);\n    userUpdate = { bot_state: 'awaiting_account_link' };\n  }\n  outKeyboard = kbStr(KB.menu);\n\n} else if (cmd === '/language') {\n  outText = getTemplate('system.language_select', lang);\n  outKeyboard = kbStr(KB.languages);\n  userUpdate = { bot_state: 'language_select' };\n\n} else if (cmd === '/channel') {\n  outText = getTemplate('engagement.channel', lang);\n  outKeyboard = kbStr(KB.menu);\n\n} else if (cmd === '/faq') {\n  const faqKb = buildFaqKeyboard();\n  const faqKeys = Object.keys(templates).filter(k => k.startsWith('faq.'));\n  if (faqKeys.length === 0) {\n    outText = getTemplate('faq.empty', lang) || 'No FAQs available yet.';\n    outKeyboard = kbStr(KB.menu);\n  } else {\n    outText = getTemplate('faq.list', lang) || 'Choose a topic:';\n    outKeyboard = kbStr(faqKb);\n  }\n\n} else if (action) {\n  // ---------- Action handling ----------\n\n  if (action.startsWith('action_device_')) {\n    device = action.replace('action_device_', '');\n    outText = getTemplate('troubleshoot.issue', lang);\n    outKeyboard = kbStr(KB.issues);\n    userUpdate = { bot_state: 'troubleshoot_issue', current_device: device };\n\n  } else if (action.startsWith('action_issue_')) {\n    issue = action.replace('action_issue_', '');\n    callGrok = true;\n    userUpdate = { bot_state: 'post_ai', current_issue: issue };\n\n  } else if (action === 'action_resolved_yes') {\n    outText = getTemplate('troubleshoot.resolved_yes', lang);\n    outKeyboard = kbStr(KB.feedback);\n    userUpdate = { bot_state: 'idle' };\n\n  } else if (action === 'action_resolved_no') {\n    outText = getTemplate('human.ask_code', lang);\n    outKeyboard = null;\n    userUpdate = { bot_state: 'awaiting_account_code' };\n    notifyRoman = true;\n    notifyPayload = {\n      type: 'unresolved_issue',\n      telegram_id: from.id,\n      username: from.username || null,\n      first_name: firstName,\n      device: device,\n      issue: issue\n    };\n\n  } else if (action.startsWith('action_lang_')) {\n    const newLang = action.replace('action_lang_', '');\n    lang = newLang;\n    outText = getTemplate('system.language_changed', newLang);\n    outKeyboard = kbStr(KB.menu);\n    userUpdate = { bot_state: 'idle', preferred_language: newLang };\n\n  } else if (action.startsWith('action_faq_')) {\n    const faqKey = action.replace('action_faq_', '');\n    outText = getTemplate(faqKey, lang) || getTemplate('error.unknown', lang);\n    outKeyboard = kbStr(KB.menu);\n\n  } else if (action.startsWith('action_feedback_')) {\n    const rating = action.replace('action_feedback_', '');\n    feedbackData = { telegram_id: from.id, rating: rating };\n    outText = getTemplate('feedback.thanks', lang) || 'Thank you for your feedback!';\n    outKeyboard = kbStr(KB.menu);\n    userUpdate = { bot_state: 'idle' };\n\n  } else {\n    outText = getTemplate('error.unknown', lang);\n    outKeyboard = kbStr(KB.menu);\n  }\n\n} else if (userText) {\n  // ---------- State-based text handling ----------\n\n  const greetingRegex = /^(hi|hello|hey|привет|хай|добрый|здравствуй|hola|bonjour|ciao|olá|merhaba)/i;\n\n  if (botState === 'troubleshoot_device') {\n    // Treat text as device selection\n    const deviceMap = {\n      iphone: 'iphone', ios: 'iphone', apple: 'iphone',\n      android: 'android', samsung: 'android',\n      mac: 'mac', macos: 'mac', macbook: 'mac',\n      other: 'other'\n    };\n    const normalised = userText.toLowerCase().trim();\n    device = deviceMap[normalised] || 'other';\n    outText = getTemplate('troubleshoot.issue', lang);\n    outKeyboard = kbStr(KB.issues);\n    userUpdate = { bot_state: 'troubleshoot_issue', current_device: device };\n\n  } else if (botState === 'troubleshoot_issue') {\n    issue = userText;\n    callGrok = true;\n    userUpdate = { bot_state: 'post_ai', current_issue: issue };\n\n  } else if (botState === 'awaiting_account_code') {\n    const codeRegex = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i;\n    if (userText.toLowerCase() === 'skip') {\n      outText = getTemplate('human.escalated', lang);\n      outKeyboard = kbStr(KB.menu);\n      userUpdate = { bot_state: 'idle' };\n      notifyRoman = true;\n      notifyPayload = {\n        type: 'human_escalation',\n        telegram_id: from.id,\n        username: from.username || null,\n        first_name: firstName,\n        account_code: null\n      };\n    } else if (codeRegex.test(userText.trim())) {\n      outText = tpl(getTemplate('human.escalated_with_code', lang), { user_name: firstName, account_code: userText.trim() });\n      outKeyboard = kbStr(KB.menu);\n      userUpdate = { bot_state: 'idle', account_code: userText.trim() };\n      notifyRoman = true;\n      notifyPayload = {\n        type: 'human_escalation',\n        telegram_id: from.id,\n        username: from.username || null,\n        first_name: firstName,\n        account_code: userText.trim()\n      };\n    } else {\n      outText = getTemplate('human.invalid_code', lang) || 'Please enter a valid code (VPN-XXXX-XXXX-XXXX) or type \\'skip\\'';\n      outKeyboard = null;\n    }\n\n  } else if (botState === 'awaiting_account_link') {\n    const codeRegex = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i;\n    if (codeRegex.test(userText.trim())) {\n      outText = tpl(getTemplate('account.linked', lang), { user_name: firstName, account_code: userText.trim() });\n      outKeyboard = kbStr(KB.menu);\n      userUpdate = { bot_state: 'idle', account_code: userText.trim() };\n    } else {\n      outText = getTemplate('account.invalid_code', lang) || 'Invalid code format. Please enter VPN-XXXX-XXXX-XXXX.';\n      outKeyboard = null;\n    }\n\n  } else if (botState === 'language_select') {\n    outText = getTemplate('system.language_select', lang);\n    outKeyboard = kbStr(KB.languages);\n\n  } else if (greetingRegex.test(userText)) {\n    outText = tpl(getTemplate('welcome.returning', lang), { user_name: firstName });\n    outKeyboard = kbStr(KB.menu);\n    userUpdate = { bot_state: 'idle' };\n\n  } else {\n    outText = getTemplate('error.unknown', lang);\n    outKeyboard = kbStr(KB.menu);\n  }\n\n} else {\n  // No text, no action, no command\n  outText = getTemplate('error.unknown', lang);\n  outKeyboard = kbStr(KB.menu);\n}\n\n// ---------- Fallback text ----------\nif (!outText) {\n  outText = getTemplate('error.unknown', lang) || 'Sorry, something went wrong. Please try again.';\n}\n\nreturn [{\n  json: {\n    chatId,\n    text: outText,\n    parse_mode: 'HTML',\n    reply_markup: outKeyboard,\n    callGrok,\n    notifyRoman,\n    notifyPayload,\n    callback_query_id: cbId || null,\n    device,\n    issue,\n    lang,\n    userUpdate,\n    feedbackData\n  }\n}];"
+      },
+      "id": "node-mainrouter",
+      "name": "MainRouter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://fzlrhmjdjjzcgstaeblu.supabase.co/rest/v1/telegram_users?telegram_id=eq.{{ $('ParseUpdate').first().json.from.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "{{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('MainRouter').first().json.userUpdate) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "node-updateuser",
+      "name": "UpdateUser",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1312,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fzlrhmjdjjzcgstaeblu.supabase.co/rest/v1/feedback",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "{{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.SUPABASE_SERVICE_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('MainRouter').first().json.feedbackData) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "node-savefeedback",
+      "name": "SaveFeedback",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1312,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.SUPPORT_BOT_TOKEN }}/answerCallbackQuery",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ callback_query_id: $('MainRouter').first().json.callback_query_id }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "node-answercallback",
+      "name": "AnswerCallback",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1312,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-grok",
+              "leftValue": "={{ $('MainRouter').first().json.callGrok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-ifgrok",
+      "name": "IfGrok",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.x.ai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.XAI_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'grok-3-mini-fast', messages: [ { role: 'system', content: 'You are a helpful VPN technical support assistant for Doppler VPN. You provide concise, practical troubleshooting advice. Keep answers under 400 words. Use simple language. Format with numbered steps when appropriate. Do not use markdown headers.' }, { role: 'user', content: 'Device: ' + ($('MainRouter').first().json.device || 'unknown') + '\\nIssue: ' + ($('MainRouter').first().json.issue || 'general') + '\\nLanguage: ' + ($('MainRouter').first().json.lang || 'en') + '\\n\\nPlease help the user resolve their VPN issue. Respond in the user\\'s language (' + ($('MainRouter').first().json.lang || 'en') + ').' } ], max_tokens: 500, temperature: 0.3 }) }}",
+        "options": {}
+      },
+      "id": "node-grokai",
+      "name": "GrokAI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1568,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format AI response into a message\nconst grokResponse = $input.first().json;\nconst mainData = $('MainRouter').first().json;\n\nlet aiText = '';\ntry {\n  aiText = grokResponse.choices[0].message.content || '';\n} catch(e) {\n  aiText = 'I had trouble generating a response. Please try again or contact human support.';\n}\n\nconst postAiKeyboard = {\n  inline_keyboard: [\n    [\n      { text: '✅ Yes, solved!',  callback_data: 'action_resolved_yes' },\n      { text: '❌ No',            callback_data: 'action_resolved_no'  },\n      { text: '🙋 Human',        callback_data: 'action_cmd_human'    }\n    ]\n  ]\n};\n\nconst formattedText = '<b>🤖 AI Support</b>\\n\\n' + aiText + '\\n\\n<i>Did this solve your issue?</i>';\n\nreturn [{\n  json: {\n    chatId: mainData.chatId,\n    text: formattedText,\n    parse_mode: 'HTML',\n    reply_markup: JSON.stringify(postAiKeyboard),\n    callGrok: false,\n    notifyRoman: mainData.notifyRoman || false,\n    notifyPayload: mainData.notifyPayload || null,\n    callback_query_id: mainData.callback_query_id || null\n  }\n}];"
+      },
+      "id": "node-formatai",
+      "name": "FormatAI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.SUPPORT_BOT_TOKEN }}/sendMessage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $json.chatId, text: $json.text, parse_mode: $json.parse_mode, reply_markup: $json.reply_markup ? JSON.parse($json.reply_markup) : undefined }) }}",
+        "options": {}
+      },
+      "id": "node-sendreply",
+      "name": "SendReply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1968,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-notify",
+              "leftValue": "={{ $('MainRouter').first().json.notifyRoman }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-ifnotify",
+      "name": "IfNotify",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ (function() { const p = $('MainRouter').first().json.notifyPayload || {}; const lines = ['🚨 <b>Support Escalation</b>', '']; if (p.type) lines.push('Type: ' + p.type); if (p.first_name) lines.push('User: ' + p.first_name); if (p.username) lines.push('Handle: @' + p.username); if (p.telegram_id) lines.push('TG ID: ' + p.telegram_id); if (p.device) lines.push('Device: ' + p.device); if (p.issue) lines.push('Issue: ' + p.issue); if (p.account_code) lines.push('Code: ' + p.account_code); return JSON.stringify({ chat_id: 218545546, text: lines.join('\\n'), parse_mode: 'HTML' }); })() }}",
+        "options": {}
+      },
+      "id": "node-notifyroman",
+      "name": "NotifyRoman",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const headers = $input.first().json.headers || {};\nconst body = $input.first().json.body || $input.first().json;\n\n// Accept Telegram webhook updates (have update_id in body)\nconst isTelegramUpdate = body && (body.update_id !== undefined);\n\n// Accept internal n8n calls with X-Webhook-Secret header\nconst secret = $env.WEBHOOK_SECRET;\nconst provided = headers['x-webhook-secret'] || headers['x-telegram-bot-api-secret-token'];\nconst hasValidSecret = provided && provided === secret;\n\nif (!isTelegramUpdate && !hasValidSecret) {\n  throw new Error('Unauthorized: not a Telegram update and no valid webhook secret');\n}\nreturn $input.all();"
+      },
+      "id": "auth-check-node",
+      "name": "Auth Check",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        304
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Auth Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ParseUpdate": {
+      "main": [
+        [
+          {
+            "node": "UpsertUser",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UpsertUser": {
+      "main": [
+        [
+          {
+            "node": "GetTemplates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GetTemplates": {
+      "main": [
+        [
+          {
+            "node": "MainRouter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MainRouter": {
+      "main": [
+        [
+          {
+            "node": "UpdateUser",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SaveFeedback",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AnswerCallback",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "IfGrok",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IfGrok": {
+      "main": [
+        [
+          {
+            "node": "GrokAI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SendReply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GrokAI": {
+      "main": [
+        [
+          {
+            "node": "FormatAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FormatAI": {
+      "main": [
+        [
+          {
+            "node": "SendReply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SendReply": {
+      "main": [
+        [
+          {
+            "node": "IfNotify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IfNotify": {
+      "main": [
+        [
+          {
+            "node": "NotifyRoman",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Auth Check": {
+      "main": [
+        [
+          {
+            "node": "ParseUpdate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "binaryMode": "separate"
+  }
+}
