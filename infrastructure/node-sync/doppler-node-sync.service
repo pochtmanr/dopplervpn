@@ -1,0 +1,63 @@
+[Unit]
+Description=Doppler node sync (VLESS user + exit proxy reconciliation)
+Documentation=https://github.com/pochtmanr/dopplervpn landing/infrastructure/node-sync/README.md
+After=network-online.target xray.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/doppler-node-sync.env
+ExecStart=/usr/bin/python3 /usr/local/bin/doppler-node-sync.py --apply
+
+# --- Why this is NOT DynamicUser, unlike doppler-stats-agent.service ---------
+# The stats agent only READS /proc, so a transient UID costs it nothing (it
+# scans /proc precisely because that UID cannot talk to systemd over D-Bus).
+# This unit has to rewrite /usr/local/etc/xray/config.json, which is root-owned
+# and holds the REALITY private keys. DynamicUser=yes would fail on DAC alone:
+# ReadWritePaths only lifts systemd's read-only bind mount, it does not grant
+# file ownership. The alternatives are worse than running as root here:
+#   * chown the xray config to a dynamic group -> the REALITY private keys
+#     become group-readable to an unpredictable GID. Strictly worse.
+#   * a StateDirectory copy + a root helper -> two units and a second trust
+#     boundary to get one file written.
+# So: User=root, and every hardening directive that still applies is kept, with
+# the writable surface cut to exactly the two paths that need it.
+# DO NOT "fix" this back to DynamicUser=yes without solving the ownership
+# problem first -- it will fail at the write and the timer will just log.
+#
+# There is deliberately NO xray reload here. Live changes go through the
+# HandlerService gRPC API (which keeps every connected user online); the config
+# write only exists so a reboot does not deauthorise everyone. Nothing in this
+# unit ever calls systemctl, so the D-Bus question never arises.
+User=root
+Group=root
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ReadWritePaths=/usr/local/etc/xray /var/backups/doppler-node-sync
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+CapabilityBoundingSet=CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER
+
+MemoryMax=128M
+TimeoutStartSec=180
+# oneshot + timer: a failure is logged and the next tick retries. The agent is
+# a reconciler, so a missed run is never corrective work that gets lost.
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

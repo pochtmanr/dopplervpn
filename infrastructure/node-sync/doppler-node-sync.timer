@@ -1,0 +1,18 @@
+[Unit]
+Description=Run Doppler node sync every 5 minutes
+Documentation=https://github.com/pochtmanr/dopplervpn landing/infrastructure/node-sync/README.md
+
+[Timer]
+# First run shortly after boot so a rebooted node re-applies its user set
+# without waiting a full interval -- the on-disk config is authoritative across
+# a restart, but a node that was off during a revocation must catch up fast.
+OnBootSec=2min
+OnUnitActiveSec=5min
+# Up to 60s of spread so nine nodes do not hit the RPCs in the same second.
+RandomizedDelaySec=60
+AccuracySec=10s
+Persistent=true
+Unit=doppler-node-sync.service
+
+[Install]
+WantedBy=timers.target

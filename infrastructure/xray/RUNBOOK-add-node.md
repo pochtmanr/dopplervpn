@@ -32,9 +32,65 @@ new rows automatically.
   admin creds. Ensure inbound **sniffing** is on (needed for the flagged-domain routing).
 - **Bare-xray node:** install xray-core with the same VLESS-Reality inbound layout on 8443–8448.
 
-Apply the **flagged-domain routing** from `README.md` (ChatGPT → clean upstream) as part of buildout.
+### 2a. Apply the node baseline — before the node ever takes traffic
 
-### 2a. Turn the access log OFF — mandatory, before the node ever takes traffic
+A stock xray config has **no `routing` block at all**, which means no egress restrictions: a connected
+client can dial the node's own loopback and the link-local instance metadata address at
+`169.254.169.254`, and nothing stops BitTorrent or outbound SMTP from burning the exit IP. It also has
+no `api`/`stats`, so per-user traffic is unmeasurable and `xray api statsquery` costs 3 s of timeout
+per monitoring poll, and no `dns`, so the node resolves through the hosting provider's resolver.
+
+Fix all of that as part of buildout rather than retrofitting it. It applies in **two independent
+stages**. Stage 1 is additive and goes on every node. Stage 2 is the DNS
+change and is a separate decision — see `README.md` before choosing it.
+
+```bash
+cd landing/infrastructure/xray
+V='vless://…@<ip>:8443?…'
+
+./verify-egress-exposure.sh --vless "$V" --node-ip <ip>    # before
+
+./apply-node-baseline.sh --stage 1 --dry-run <ip>
+./apply-node-baseline.sh --stage 1 <ip>
+./verify-node-baseline.sh --stage 1 <ip> --vless "$V"      # stamps stage1_verified
+
+# only if you have decided to take the DNS change on this node:
+./apply-node-baseline.sh --stage 2 <ip>                    # refuses without the stamp above
+./verify-node-baseline.sh --stage 2 <ip> --vless "$V"
+```
+
+Read the `_comment` fields in `node-baseline.json` before changing anything in it — they carry the
+non-obvious constraints (why the CIDRs are literals rather than `geoip:private`, why the `dns` block
+is inert without the freedom patch, why per-outbound counters are off, why the Marzban node skips
+half the fragment). `README.md` has the same material in prose.
+
+**Expect per-user traffic counters to be empty.** Stage 1 enables them, but the stat key is
+`user>>>{email}>>>traffic>>>uplink`, and the fleet's shared VLESS client entries carry no `email`
+field — so no per-user counter appears no matter what `policy` says. Per-**inbound** counters work
+immediately and are what monitoring should sum. Populating emails is a later workstream's job;
+`apply-node-baseline.sh` reports the count and deliberately refuses to add one, because doing so
+would mean editing a REALITY inbound.
+
+**The applier gates on the node's xray version.** It refuses to merge onto a core the fragment has
+not been validated against (validated: 26.3.27; Poland runs 24.12.31). `--accept-untested-version`
+overrides the refusal, after which the real gate is the `xray -test` run with the node's own binary
+before anything restarts.
+
+**Poland/Marzban is a documented separate branch** — it gets only log/outbound/routing/dns, because
+Marzban supplies `api`/`stats`/`policy` itself. Note also that **Marzban regenerates
+`xray_config.json` from its own panel state**, which the bare-xray nodes never do: a hand-edit there
+can be overwritten by a panel action. Re-check the panel's Core Config after any panel change.
+
+As of 2026-09-08 the baseline is applied to **zero** nodes, at either stage. A new node built from
+this runbook is the first one that gets it from the start.
+
+### 2b. Flagged-domain routing (optional, and currently applied nowhere)
+
+Apply the **flagged-domain routing** from `README.md` (ChatGPT → clean upstream) as part of buildout
+**if** clean-upstream credentials exist — as of 2026-09-08 they do not, and no node has this. If you
+do apply both, apply the node baseline **last** so the rule order stays correct (see README).
+
+### 2c. Turn the access log OFF — mandatory, before the node ever takes traffic
 
 The App Store listing claims **"Zero activity logs."** xray's access log records *client IP +
 destination, per connection*, which is a browsing history. The `log` block **must** be:
@@ -53,6 +109,11 @@ the 7 Azure nodes had no `access` key at all, and Poland (Marzban) had it pointe
 
 - Bare-xray: `/usr/local/etc/xray/config.json` → `scratchpad/kill-access-log.sh`
 - Marzban: `/var/lib/marzban/xray_config.json` → `scratchpad/kill-access-log-poland.sh`
+
+`node-baseline.json` carries the correct `log` block and `apply-node-baseline.sh` refuses to reload if
+`access` is not `none` — but that is a **regression guard, not a fix**. A 2026-09-08 sweep found all
+seven Azure nodes already correct (`access: "none"`, `0` ` accepted ` lines). A brand-new node is not
+covered by that sweep, so do this step on its own merits.
 
 Verify after install: `journalctl -u xray | grep -c " accepted "` must be `0`, and for a Marzban
 node `/var/lib/marzban/access.log` must not exist.
@@ -116,7 +177,14 @@ Also add an Azure/host firewall rule allowing TCP **9101 only from the n8n host*
 
 ## 5. Verify
 
+- `./verify-node-baseline.sh --stage 1 <ip> --vless '…'` is all PASS (and read the SKIPs — a skip is
+  not a pass). Same for `--stage 2` if that stage was taken.
+- `./verify-egress-exposure.sh` reports the CONTROL passing and sections A/B/C all with no answer.
 - Row shows up in the n8n **Doppler Service Monitor** as OK (xray active, connection count sane).
+- The monitor's per-node latency is no longer ~2.2 s — that number was the 2 s timeout the stats agent
+  paid on every `xray api statsquery` against a node with no `api` block.
 - Reachability probe reports `chatgpt_status: 200` (not 403) — the flagged-domain routing is working.
+  Note that on the existing Azure fleet it reports **403 on every node** and the baseline's abuse rules
+  cannot change that; only a cleaner exit IP or the flagged-upstream routing can.
 - Bot's country picker offers the new node; a new provision for that country lands on the least-loaded box.
 - Taiwan streaming smoke test on the new node (play a video, confirm no buffering).

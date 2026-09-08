@@ -1,0 +1,14 @@
+[Unit]
+Description=Daily server_metrics retention sweep
+
+[Timer]
+# 03:20 UTC — the slot the migration's section 7 picked for the pg_cron variant,
+# chosen to stay off the 6-hourly expiry sweeper's boundaries.
+OnCalendar=*-*-* 03:20:00 UTC
+# Catch up after downtime; retention that silently skips a week is not retention.
+Persistent=true
+RandomizedDelaySec=120
+Unit=doppler-metrics-prune.service
+
+[Install]
+WantedBy=timers.target

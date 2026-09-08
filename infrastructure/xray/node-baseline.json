@@ -1,0 +1,141 @@
+{
+  "_comment": "Doppler — node security/observability BASELINE fragment. Merge into every exit node's xray-core config (bare-xray: /usr/local/etc/xray/config.json; Marzban: /var/lib/marzban/xray_config.json). Merge it with ./apply-node-baseline.sh, one host at a time — do NOT hand-edit a live config. This fragment adds egress restrictions (private/link-local, BitTorrent, SMTP), the gRPC api+stats surface, and a DoH resolver. It NEVER touches the six REALITY inbounds on 8443-8448, their x25519 keys or their shortIds. Version-controlled config, no secrets. As of 2026-09-08 this is applied to ZERO nodes. APPLIED IN TWO INDEPENDENT STAGES — see stage1 and stage2 below. Stage 1 is additive and expected on every node. Stage 2 is the DNS change, decided separately per fleet, and cannot be applied until stage 1 is verified on that node.",
+  "_status": "NOT DEPLOYED — 0 of ~10 nodes. Starting shape verified uniform across all seven Azure nodes 2026-09-08 (top-level keys exactly inbounds/log/outbounds; 6 inbounds; 1 freedom outbound; no routing/dns/api/policy). Roll out one node at a time via apply-node-baseline.sh, verify with verify-node-baseline.sh, wait, then move to the next. Stage 1: 0 nodes. Stage 2: 0 nodes.",
+  "stage1": {
+    "_comment": "STAGE 1 — ADDITIVE ONLY. Everything here is a new object: a new api block, a new loopback inbound, a new blackhole outbound, four new routing rules, plus stats/policy. It changes nothing about how traffic that works today is resolved or dialled, which is why it is the stage that goes on every node. It is the stage that fixes the ~2 s of fake per-node latency and unlocks per-user accounting and runtime user management. Apply with: ./apply-node-baseline.sh --stage 1 <host>. Roll back by restoring that run's own backup — stage 2, if present, is untouched by that.",
+    "log": {
+      "_comment": "MANDATORY and non-negotiable — see RUNBOOK-add-node.md section 2c. An UNSET 'access' key does NOT mean off: it means stdout, which journald persists to disk, which is a browsing history for every user of the node. 'error' output stays on (crashes and REALITY handshake failures are still wanted). As of the 2026-09-08 sweep all seven Azure nodes already have access=\"none\" and 0 ' accepted ' lines in the journal, so the August fix has held: carrying this block here and asserting it after the merge is a REGRESSION GUARD, not a fix. What this fragment actually fixes is the absent routing, dns, api and policy. apply-node-baseline.sh asserts access == \"none\" both before and after the merge and refuses to reload if it is not.",
+      "loglevel": "warning",
+      "access": "none"
+    },
+    "api": {
+      "_comment": "gRPC control surface. StatsService makes per-user/per-inbound traffic readable (`xray api statsquery`), which the stats agent in ../monitoring/ currently reports as null. It also removes a latency bug nobody attributed to it: with no api block, `time xray api statsquery --server=127.0.0.1:10085` on Hong Kong takes 3.010s before failing, and the stats agent pays a 2s timeout on EVERY request because of it — that is the whole of the ~2.2s of per-node \"latency\" the admin panel shows. HandlerService lets a later workstream add/remove VLESS users at runtime with no restart and no dropped sessions. LoggerService allows a log restart without a process restart. NOTE: 'listen' is deliberately NOT set here. Setting api.listen makes xray bind the gRPC server itself, which would collide with the dokodemo-door inbound below on the same 127.0.0.1:10085. Exactly one of the two mechanisms may be used; we use the classic dokodemo-door + routing-rule form because it works on every xray version and because it is the form Marzban itself uses.",
+      "tag": "api",
+      "services": [
+        "HandlerService",
+        "StatsService",
+        "LoggerService"
+      ]
+    },
+    "inbounds": [
+      {
+        "_comment": "APPEND this to the existing inbounds array. It is the transport for the api block above. listen is 127.0.0.1 so the socket is not on any public interface at all; the 'api-inbound' routing rule below then hands it to the api handler. A VPN client cannot reach it for two independent reasons: (1) it is bound to loopback, so it is not reachable from off-box; (2) a client dialling 127.0.0.1:10085 THROUGH the tunnel is caught by the 'block-private' rule, which sits above every rule that could send it anywhere. Both are required — (1) alone would not stop a tunnelled client, because from xray's point of view that connection originates on the node.",
+        "tag": "api",
+        "listen": "127.0.0.1",
+        "port": 10085,
+        "protocol": "dokodemo-door",
+        "settings": {
+          "address": "127.0.0.1",
+          "network": "tcp",
+          "followRedirect": false
+        }
+      }
+    ],
+    "outbounds": [
+      {
+        "_comment": "APPEND. The sink every block rule points at. 'none' closes the connection without sending anything back; 'http' would send a 403, which tells a scanner something is there.",
+        "tag": "block",
+        "protocol": "blackhole",
+        "settings": {
+          "response": {
+            "type": "none"
+          }
+        }
+      }
+    ],
+    "routing": {
+      "_comment": "PREPEND these rules ahead of the node's existing rules. Order inside this list is load-bearing and is the order given. domainStrategy is set to \"AsIs\" here, which is xray's default and therefore exactly the behaviour these nodes already have — stage 1 deliberately does not change it. Stage 2 is what flips it to IPIfNonMatch. On a re-run the applier will NOT downgrade an existing IPIfNonMatch back to AsIs (it only fills the key in if it is absent), so re-running stage 1 on a stage-2 node is safe.",
+      "domainStrategy": "AsIs",
+      "rules": [
+        {
+          "_comment": "MUST be rule 0. Sends the loopback dokodemo-door inbound to the api handler. If this sat below block-private, the api inbound's own 127.0.0.1 destination would be blackholed and `xray api statsquery` would hang. There is no 'api' entry in outbounds on purpose: app/commander registers an outbound handler under the api tag automatically.",
+          "type": "field",
+          "ruleTag": "api-inbound",
+          "inboundTag": [
+            "api"
+          ],
+          "outboundTag": "api"
+        },
+        {
+          "_comment": "The actual fix for the exposure this workstream exists to close. Explicit CIDRs, NOT `geoip:private`. To be clear about why: geoip.dat IS present on the nodes (checked 2026-09-08 — /usr/local/share/xray/ on Hong Kong and Japan has both geoip.dat and geosite.dat, and Poland's Marzban container has them too), so `geoip:private` would in fact resolve today. The literals are chosen for ROBUSTNESS, not necessity: they carry no asset dependency, they cannot break if someone prunes the geo files the way the iOS client did, and their meaning cannot shift when the asset is updated underneath a security rule. What happens on a node WITHOUT the file is not hypothetical either — verified against xray 26.3.27 with XRAY_LOCATION_ASSET pointed at a nonexistent directory, `geoip:private` refuses to start with 'failed to load GeoIP: private', while these literals validate fine. Do not 'simplify' them back. WHAT THIS ACTUALLY CLOSES, measured 2026-09-08 and NOT uniform across the fleet: on the Azure nodes the only loopback listener is systemd-resolved on 127.0.0.53:53, so loopback there is close to worthless to an attacker and the item that matters is the link-local instance metadata endpoint at 169.254.169.254. On POLAND it is materially worse: 127.0.0.1:8000 is the Marzban admin API, bound to loopback precisely so that it is not exposed, plus 127.0.0.1:23246 and 127.0.0.1:33765 — a client exiting through Poland can dial all three today. (The admin panel on 3060, n8n on 5678 and nginx on 80/443/9090 are bound to 0.0.0.0 and reachable from the internet regardless, so they are not incremental exposure and this rule is not what protects them.) On the metadata endpoint, state the severity honestly: link-local is reachable and blocking it costs nothing, but whether these VMs have a managed identity assigned has NOT been checked, so do not claim credential theft. Nobody has attempted to retrieve a token and nobody should. The list covers loopback 127/8, RFC1918, RFC6598 CGNAT 100.64/10 (hosting-provider internal networks), link-local 169.254/16, and the IPv6 equivalents so the same hole does not open later on a node that grows a v6 address. This does NOT break REALITY: xray's REALITY server dials its own `dest` (www.yahoo.com:443 etc) from inside the transport layer, not through the routing tree, so no routing rule of any kind is consulted for it — and those dests are public names anyway.",
+          "type": "field",
+          "ruleTag": "block-private",
+          "ip": [
+            "127.0.0.0/8",
+            "10.0.0.0/8",
+            "172.16.0.0/12",
+            "192.168.0.0/16",
+            "169.254.0.0/16",
+            "100.64.0.0/10",
+            "0.0.0.0/8",
+            "::1/128",
+            "fc00::/7",
+            "fe80::/10"
+          ],
+          "outboundTag": "block"
+        },
+        {
+          "_comment": "Exit-IP reputation. Requires sniffing on the inbound, which the fleet already has (destOverride http/tls/quic) — the bittorrent sniffer runs whenever sniffing.enabled is true regardless of what is in destOverride, because destOverride only controls which sniffer results are allowed to REWRITE the destination. Honest limits: this catches the plaintext BitTorrent handshake. It does NOT catch MSE/PE-encrypted BitTorrent, UDP trackers, or DHT. It is reputation hygiene, not enforcement.",
+          "type": "field",
+          "ruleTag": "block-bittorrent",
+          "protocol": [
+            "bittorrent"
+          ],
+          "outboundTag": "block"
+        },
+        {
+          "_comment": "Outbound SMTP. A single spam run out of an exit IP gets it onto Spamhaus, and that is the same reputation that decides whether OpenAI and Cloudflare 403 the node. Port 25 only: 465 (SMTPS) and 587 (submission) are how real people send mail from real clients and are deliberately left open — they are authenticated to a provider, so they cannot be used to spray mail from this IP. Add them here only if a node actually gets listed.",
+          "type": "field",
+          "ruleTag": "block-smtp",
+          "port": 25,
+          "network": "tcp",
+          "outboundTag": "block"
+        }
+      ]
+    },
+    "stats": {
+      "_comment": "Empty object is the whole config — it just switches the counter store on. Without it the policy flags below record nothing and `xray api statsquery` returns an empty list."
+    },
+    "policy": {
+      "_comment": "COUNTER FAMILIES — read this before changing a single boolean. Two consumers already read these names: ../monitoring/stats-agent.py sums xray stat names and the admin panel renders the result as fleet bandwidth in/out. Today that sum is always empty because no node has an api block; the moment this lands it goes live. xray emits three families and THE SAME BYTES APPEAR IN MORE THAN ONE, so anything that sums every name ending in 'uplink' inflates the total. The exact names are: per-inbound `inbound>>>{inboundTag}>>>traffic>>>uplink` and `...>>>downlink`; per-outbound `outbound>>>{outboundTag}>>>traffic>>>uplink|downlink`; per-user `user>>>{email}>>>traffic>>>uplink|downlink`. WHAT IS ENABLED HERE, and why it is two families and not three: (1) per-INBOUND is on — it is the family a consumer should sum for fleet bandwidth, it maps one-to-one onto the six REALITY ports the monitor already thinks in, and it is the only family that produces any data today. Sum `inbound>>>` and nothing else. (2) per-USER is on — this is the one the later user-management workstream genuinely needs, because per-user counters are what finally make a real user count possible instead of the socket count in ../monitoring/README.md. (3) per-OUTBOUND is explicitly FALSE, not merely omitted. It would be a third copy of the same bytes carrying no new information: there is exactly one non-blackhole outbound on these nodes ('direct'), so an outbound total is just the inbound total minus whatever the block rules ate. Turning it off removes the likeliest double-count for free. Level 0 is the right level: the fleet's VLESS clients carry no explicit `level` field and xray defaults an unset level to 0. Only the stats flags are set on purpose — app/policy merges a partially specified level over SessionDefault(), so handshake/connIdle/uplinkOnly/downlinkOnly/bufferSize keep xray's defaults and this fragment cannot silently retune the fleet's timers. GOTCHA that will bite: a per-user key is `user>>>{email}>>>...`, so a client with NO `email` field produces no per-user counter at all, whatever these flags say. The fleet shares one client UUID and its inbounds have no email — so expect the user>>> family to be EMPTY on day one and the inbound>>> family to be populated. apply-node-baseline.sh reports the email count and deliberately does not add any, because that means editing a REALITY inbound.",
+      "levels": {
+        "0": {
+          "statsUserUplink": true,
+          "statsUserDownlink": true
+        }
+      },
+      "system": {
+        "statsInboundUplink": true,
+        "statsInboundDownlink": true,
+        "statsOutboundUplink": false,
+        "statsOutboundDownlink": false
+      }
+    }
+  },
+  "stage2": {
+    "_comment": "STAGE 2 — THE DNS CHANGE, and the only genuinely risky part of this baseline. Separate from stage 1 on purpose: stage 1 is additive, this one changes the behaviour of traffic that works fine today, for every destination and every user. If it regresses, it must be possible to roll it back WITHOUT also losing the api block and the abuse rules — hence two stages, two backups, two rollback paths. WHY DO IT AT ALL: today every node resolves through the hosting provider's resolver, which means the hosting provider sees every domain every user looks up. That sits badly beside the App Store 'Zero activity logs' claim — killing the xray access log (runbook 2c) removed our own copy of that history but not theirs. This is a deliberate, separately decided privacy improvement, not a default. THE THREE PIECES BELONG TOGETHER AND NONE OF THEM MAKES SENSE ALONE: (1) the dns block is inert by itself; (2) the _outbound_patch is what makes it non-inert; (3) IPIfNonMatch is affordable ONLY because (2) already resolves the same name through the same cache — without the freedom patch it would be a brand-new DNS lookup on every unmatched connection. Apply all three or none. Apply with: ./apply-node-baseline.sh --stage 2 <host>, which refuses to run until stage 1 has been verified on that node.",
+    "dns": {
+      "_comment": "Same resolvers, same strategy the clients already use (dopplerswift/PulseVPN/Services/XrayConfigBuilder.swift). IP literals only — a hostname would have to be resolved by the resolver that is trying to reach it. Two DoH entries plus a plain-UDP 1.1.1.1 fallback, because DoH-only means one failure in the DoH path is total DNS failure, which on a node presents as 'connected, no internet' for every user on it. READ THE _outbound_patch NOTE ABOVE: this block does nothing at all unless the freedom outbound's domainStrategy is set, because AsIs never consults xray's DNS module. It also does not affect REALITY: the dest hostnames (www.yahoo.com, dl.google.com, …) are resolved by Go's stdlib resolver inside the transport, never by this module, so a broken DoH path cannot break a REALITY handshake. queryStrategy UseIPv4 matches the fleet's IPv4-only egress.",
+      "tag": "dns-module",
+      "servers": [
+        "https://1.1.1.1/dns-query",
+        "https://8.8.8.8/dns-query",
+        "1.1.1.1"
+      ],
+      "queryStrategy": "UseIPv4",
+      "disableCache": false,
+      "disableFallbackIfMatch": true
+    },
+    "_outbound_patch": {
+      "_comment": "This is NOT an outbound to append — it is a PATCH applied by apply-node-baseline.sh to the EXISTING freedom outbound (the one tagged 'direct'). Read this before changing the dns block. A `dns` block on its own is INERT: freedom's default domainStrategy is AsIs, which hands the hostname straight to Go's stdlib dialer and therefore to /etc/resolv.conf — the hosting provider's resolver, which is the thing we are trying to stop using. Setting freedom's domainStrategy to UseIPv4 is what actually routes node-side resolution through the `dns` block below. UseIPv4 (not UseIP) because the fleet's egress is IPv4-only; an AAAA answer on these boxes is a dead end. Cost, honestly stated: 1.1.1.1/8.8.8.8 do not send EDNS Client Subnet, so CDN answers are chosen from the resolver's anycast location rather than the client's. Cloudflare/Google anycast lands in the same region as the node, so this is close to a no-op in practice, but a CDN that leans hard on ECS may hand out a slightly worse edge than the hosting provider's resolver did. If a streaming complaint appears on a node right after this rollout, this is the first thing to revert (set domainStrategy back to AsIs — the dns block then goes inert again but nothing breaks).",
+      "tag": "direct",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    "routing": {
+      "_comment": "Only domainStrategy. Stage 2 adds no rules and reorders nothing — stage 1's four rules keep working exactly as they did, they simply get a second matching pass against the resolved IP when nothing matched on the first. That second pass is the only in-xray defence against DNS rebinding: a client dialling a name that resolves to 169.254.169.254 or 127.0.0.1 is caught by block-private on pass two, where AsIs would have let it through. Two consequences: (a) domain rules still win, because they match on the FIRST pass — the flagged-domain rule in routing-flagged-domains.json is unaffected wherever it sits; (b) if DoH to 1.1.1.1/8.8.8.8 ever fails from a node, routing stalls on unmatched destinations. Rolling back stage 2 restores AsIs, which keeps every literal-IP block working and gives up only the rebinding pass.",
+      "domainStrategy": "IPIfNonMatch"
+    }
+  }
+}

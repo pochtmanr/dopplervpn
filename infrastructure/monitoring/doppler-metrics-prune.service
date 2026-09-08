@@ -1,0 +1,18 @@
+[Unit]
+# Retention for server_metrics. See doppler-metrics-prune.timer for why this is
+# a systemd timer rather than pg_cron.
+Description=Doppler server_metrics retention (prune_server_metrics)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+DynamicUser=yes
+EnvironmentFile=/etc/doppler-metrics-collector.env
+ExecStart=/usr/bin/python3 /usr/local/bin/doppler-metrics-collector.py --prune
+TimeoutStartSec=300
+MemoryMax=128M
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes

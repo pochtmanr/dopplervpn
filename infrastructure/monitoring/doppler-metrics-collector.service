@@ -1,0 +1,19 @@
+[Unit]
+# Writes one server_metrics row per node per sweep. Poland VPS only: it holds
+# the Supabase service-role key, which must never reach a VPN node.
+Description=Doppler fleet metrics collector (server_metrics history)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+DynamicUser=yes
+EnvironmentFile=/etc/doppler-metrics-collector.env
+ExecStart=/usr/bin/python3 /usr/local/bin/doppler-metrics-collector.py
+# One sweep must never overrun its own 60s timer.
+TimeoutStartSec=45
+MemoryMax=128M
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes

@@ -1,0 +1,15 @@
+[Unit]
+Description=Poll the Doppler fleet every 60s for server_metrics
+
+[Timer]
+# 90s after boot so the network and the nodes' own agents are up first.
+OnBootSec=90s
+OnUnitActiveSec=60s
+# The series is a 1/min grid; drifting seconds make coverage_pct noisy.
+AccuracySec=1s
+# systemd will not start a second sweep while one is still running, so a slow
+# sweep delays the next tick rather than overlapping it.
+Unit=doppler-metrics-collector.service
+
+[Install]
+WantedBy=timers.target
