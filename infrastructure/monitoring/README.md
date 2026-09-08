@@ -33,6 +33,29 @@ Security layers: Azure NSG rule `Allow-DopplerStats` (priority 320) permits
 TCP 9101 **only from 185.203.240.174/32**, plus the per-server bearer token.
 Payload is non-sensitive metrics, so plain HTTP is acceptable.
 
+### What the connection numbers mean (read before alerting on them)
+
+`xray.connections.total` counts **ESTABLISHED TCP sockets**, not users and not
+sessions. In TUN mode a client opens one socket per destination flow, so a
+single device routinely holds hundreds; anything probing the public REALITY
+ports is counted too. Measured on Hong Kong 2026-09-08: **2,197 sockets from 33
+distinct peer IPs**, against a fleet that had 58 subscription-bearing accounts
+in total.
+
+`xray.connections.distinct_peers` (added 2026-09-08) counts unique remote IPs.
+It is the closest thing this box can measure to a device count — still not an
+account count, because every client presents the same shared VLESS UUID and
+several devices can sit behind one NAT address. It is `null` on the `/proc`
+fallback path and on any node still running an older agent, so every consumer
+must treat it as optional.
+
+**Never compare `total` to `vpn_servers.max_users`** — that column counts people.
+The service-monitor did exactly this until 2026-09-08 and would have paged with
+"near cap 2197/150" at roughly two real devices. Capacity alerts now use
+`distinct_peers`; socket volume gets its own separate threshold. `nf_conntrack`
+is not a usable denominator either: Hong Kong read 200/7168 while holding those
+2,197 xray sockets.
+
 `xray.traffic` is `null` on bare installs — the xray stats API is not enabled
 in their configs (enabling it would mean editing live REALITY configs +
 restarting xray; deliberate non-goal).

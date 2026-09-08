@@ -59,19 +59,38 @@ def xray_active():
     return False
 
 
+def _peer_ip(addr):
+    """`[::ffff:1.2.3.4]:5678` / `1.2.3.4:5678` -> `1.2.3.4`."""
+    host = addr.rsplit(":", 1)[0]
+    if host.startswith("[") and host.endswith("]"):
+        host = host[1:-1]
+    if host.startswith("::ffff:"):
+        host = host[7:]
+    return host
+
+
 def connections():
-    """Established connections per xray port, via ss with /proc fallback."""
+    """Established connections per xray port, via ss with /proc fallback.
+
+    `total` counts SOCKETS, not people: a TUN client opens one socket per
+    destination flow, so one device routinely holds hundreds. `distinct_peers`
+    counts unique remote IPs, which is the closest thing this box can measure to
+    a device count -- still not an account count, since every client presents the
+    same shared VLESS UUID and several devices can share one NAT address.
+    """
     counts = {p: 0 for p in XRAY_PORTS}
+    peers = set()
     out = run(["ss", "-Htn", "state", "established"])
     if out:
         for line in out.splitlines():
             parts = line.split()
-            # local address is 3rd column in `ss -Htn state established` output
-            if len(parts) >= 3:
-                local = parts[2] if not parts[0].isdigit() else parts[2]
-                port_s = local.rsplit(":", 1)[-1]
+            # `ss -Htn state established` drops the State column:
+            # Recv-Q Send-Q Local:Port Peer:Port
+            if len(parts) >= 4:
+                port_s = parts[2].rsplit(":", 1)[-1]
                 if port_s.isdigit() and int(port_s) in counts:
                     counts[int(port_s)] += 1
+                    peers.add(_peer_ip(parts[3]))
     else:
         for path in ("/proc/net/tcp", "/proc/net/tcp6"):
             try:
@@ -88,6 +107,8 @@ def connections():
                 pass
     result = {str(p): counts[p] for p in XRAY_PORTS}
     result["total"] = sum(counts.values())
+    # /proc fallback cannot cheaply resolve peers; None means "not measured".
+    result["distinct_peers"] = len(peers) if peers else None
     return result
 
 
