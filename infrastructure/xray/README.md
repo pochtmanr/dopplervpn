@@ -4,9 +4,49 @@ Two separate things live here, and they are applied independently:
 
 | | What it does | Deployed to |
 |---|---|---|
-| **`node-baseline.json` stage 1** | api/stats/policy + the block outbound + four routing rules. Purely additive. **Expected on every node.** | **0 of ~10 nodes** as of 2026-09-08 |
+| **`node-baseline.json` stage 1** | api/stats/policy + the block outbound + four routing rules. Purely additive. **Expected on every node.** | **8 of 10 nodes** as of 2026-09-09 — see the rollout table below |
 | **`node-baseline.json` stage 2** | The DNS change: `dns` block + freedom `domainStrategy` + `IPIfNonMatch`. A separate, deliberate decision. | **0 nodes** |
 | `routing-flagged-domains.json` | Routes ChatGPT/OpenAI through a clean upstream | **0 nodes** — no clean-upstream credentials exist yet |
+
+### Stage 1 rollout, 2026-09-09
+
+Applied and verified on eight nodes in one session. Zero failures, zero rollbacks after the
+script bugs below were fixed. `doppler-nl` went first deliberately: it is the only node with
+`is_active = false`, so no user session was ever at risk while the procedure was still unproven —
+and it is the node that caught both of the first two bugs.
+
+| Node | Verify | statsquery round trip |
+|---|---|---|
+| Netherlands `doppler-nl` | PASS 15 · FAIL 0 · SKIP 2 | 16 ms |
+| Sweden `4.223.104.74` | PASS 14 · FAIL 0 · SKIP 3 | 10 ms |
+| Japan `20.46.122.212` | PASS 14 · FAIL 0 · SKIP 3 | 9 ms |
+| Canada `20.151.116.180` | PASS 14 · FAIL 0 · SKIP 3 | 14 ms |
+| UAE `20.203.125.164` | PASS 14 · FAIL 0 · SKIP 3 | 10 ms |
+| Poland 2 `74.248.17.32` | PASS 14 · FAIL 0 · SKIP 3 | 10 ms |
+| United States `172.202.18.40` | PASS 14 · FAIL 0 · SKIP 3 | 14 ms |
+| Hong Kong `20.24.217.182` | PASS 14 · FAIL 0 · SKIP 3 | 10 ms |
+
+**Not applied:** `doppler-poland` 185.203.240.174 (Marzban, xray 24.12.31 — the version gate
+correctly refuses it, and the panel regenerates `xray_config.json` from its own state, so a
+hand-merge can be silently reverted; it is also the node with the worst exposure, the Marzban
+admin API on `127.0.0.1:8000`) and Russia 72.56.36.147 (down since 2026-09-08).
+
+**The ~2 s of per-node "latency" the admin panel showed was never latency.** It was the stats
+agent paying a 2 s timeout on a `statsquery` that could not succeed without an api block. Every
+node above now answers in 9-16 ms. Fleet bandwidth in the panel was `null` fleet-wide for the
+same reason and starts reporting real numbers now; `../monitoring/stats-agent.py` already sums
+only the `inbound>>>` family, so it is not double-counted.
+
+**What the eight PASS/FAIL lines do NOT cover — read before calling this closed.** Seven of the
+eight ran without `--vless`, which skips two substantive checks: the REALITY handshake test, and
+the exposure re-test that is the entire point of `block-private`. On those seven, the rule is
+verified as *present, correctly ordered, and loaded by a running xray* — configuration evidence,
+not behavioural. Only `doppler-nl` was empirically probed end to end (control passing, tunnel
+exiting at the node, and no sshd banner from the `127.0.0.1:22` oracle). Since `127.0.0.0/8` and
+`169.254.0.0/16` sit in the same rule with the same `outboundTag`, the inference is strong — but
+it is an inference. Closing it needs one client URI per node:
+`./verify-node-baseline.sh --stage 1 <host> --vless 'vless://…'`, which also drives
+`verify-egress-exposure.sh`. The URIs are the `config_data` column of `vpn_servers`.
 
 Scripts:
 
@@ -14,6 +54,50 @@ Scripts:
 |---|---|
 | `node-baseline.json` | The config fragment, split into `stage1` and `stage2`. Every non-obvious decision is a `_comment` inside it — read those, they are the documentation. |
 | `apply-node-baseline.sh` | Merges ONE stage into ONE node. Backs up, gates on the node's xray version, `xray -test`s with the node's own binary before anything restarts, restores on any failure. |
+
+### Two bugs fixed in `apply-node-baseline.sh` on 2026-09-09
+
+Both were found by running the script against `doppler-nl` — the right canary, because it is
+the one node with `is_active = false`, so no user session was ever at risk. Both would have hit
+**every bare-xray node in the fleet**, and neither is visible from reading the script.
+
+1. **The xray version gate never matched.** `printf '%s ' $KNOWN_GOOD_VERSIONS` emits
+   `26.3.27 ` with no *leading* space, while the test greps for `" $VER "` with a space on both
+   sides. So a node running exactly the validated version was reported as
+   `xray 26.3.27 is NOT in the validated list (26.3.27)` and refused. The damage is not the
+   refusal — it is that the only way past it is `--accept-untested-version`, so the flag becomes
+   routine, and the day it is used on Poland's genuinely untested 24.12.31 nobody notices. Fixed
+   by padding both sides. `26.3.2` still correctly fails to match `26.3.27`.
+
+2. **The merged config was installed unreadable.** Step 6 hardcoded
+   `install -m 600 -o root -g root`. The bare-xray fleet comes from the official XTLS installer,
+   which runs the service as `User=nobody`; xray reads its config through the world-read bit
+   (the live file is `644 root:root`). Mode 600 therefore killed the service on start —
+   `failed to read config: ... permission denied` — and step 8 rolled the node back. `xray -test`
+   passes in this state, because it runs as root: **the test gate cannot catch this class of bug.**
+   Fixed by reading the live config's own mode and ownership and reusing them, which cannot be
+   wrong relative to the service already reading that file, and stays correct on a Marzban node
+   whose file differs.
+
+Note for whoever tightens this later: `644` on a file containing REALITY **private keys** is worth
+revisiting — but it must be done as a deliberate change that also sets a group `nobody` can read,
+not by tightening the mode alone, which is exactly the bug above.
+
+3. **Every dry run left the REALITY private keys in world-readable `/tmp`, permanently.** Step 4
+   ships the merged config to the node with `cat >` so the node's own binary can `xray -test` it.
+   The apply path then removes it as part of its `install && rm` chain — but the **dry-run path
+   only printed `(delete it)`** and exited. A dry run is what the runbook tells you to do before
+   *every* apply, so the leak was the common case, and it accumulated one file per run forever.
+   Measured on `doppler-nl` 2026-09-09: two files, `-rw-r--r-- root root`, **6 `privateKey`
+   entries each** — on the box that is *shared* with the admin-panel staging workload. Fixed on
+   both counts: the file is now created under `umask 077`, and the dry-run path deletes it and
+   says so (or warns loudly if it could not). Root still reads it for `xray -test`, so nothing
+   else changes.
+
+   This one is worth internalising beyond the one-line fix: it is the same class of mistake as
+   bug 2 in mirror image. Bug 2 was a permission set too tight for the service to work; this was
+   a permission left too loose for a secret to be safe. Neither is visible from reading the merge
+   logic, which is where all the review attention naturally goes.
 | `verify-node-baseline.sh` | Post-change verification for one node and one stage. Writes the `stage1_verified` stamp that gates stage 2. |
 | `verify-egress-exposure.sh` | Read-only diagnostic: can a VPN client reach the node's loopback / the metadata address? Run it before AND after. |
 | `routing-flagged-domains.json` | The separate ChatGPT-403 fragment (below). |

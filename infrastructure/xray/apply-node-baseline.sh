@@ -188,7 +188,11 @@ fi
 VER="$(printf '%s' "$VER_RAW" | awk '{print $2}')"
 note "running: ${VER_RAW:-<could not read>}"
 [ -n "$VER" ] || die "could not read the xray version — refusing to merge blind"
-if ! printf '%s ' $KNOWN_GOOD_VERSIONS | grep -q " $VER "; then
+# Note the leading space in the format string as well as the trailing one: with
+# `printf '%s '` the first element has no left-hand delimiter, so the " $VER "
+# match below could never hit and EVERY node — including a genuinely untested
+# core like Poland's 24.12.31 — was pushed onto --accept-untested-version.
+if ! printf ' %s ' $KNOWN_GOOD_VERSIONS | grep -q " $VER "; then
   note "xray $VER is NOT in the validated list ($KNOWN_GOOD_VERSIONS)."
   note "Poland runs 24.12.31, roughly nine months behind the Azure fleet's 26.3.27."
   note "The fragment was validated by running xray -test on a full synthetic config"
@@ -288,7 +292,13 @@ note "routing rules: $(jq -r '[.routing.rules[] | .ruleTag // "(untagged)"] | jo
 [ "$STAGE" = 2 ] && note "direct outbound settings: $(jq -c '[.outbounds[]|select(.tag=="direct")][0].settings' "$WORK/new.json")"
 
 step "4/8  xray -test the merged config, using the node's OWN binary, before anything restarts"
-"${SSH[@]}" "cat > /tmp/xray-baseline-$STAMP.json" < "$WORK/new.json"
+# umask 077, not the login user's default. This file is the FULL merged config, which
+# means it carries every REALITY privateKey on the node. Created with a default umask it
+# lands 644 — world-readable — and the README's own rule is that private keys live in
+# /root/xray-keys.json at mode 600 and do not move. Verified 2026-09-09: dry runs had left
+# 644 root:root copies with 6 privateKeys each on doppler-nl, a box shared with the
+# admin-panel staging workload. Root still reads it for `xray -test`, so nothing else changes.
+"${SSH[@]}" "umask 077 && cat > /tmp/xray-baseline-$STAMP.json" < "$WORK/new.json"
 if [ "$PROFILE" = "marzban" ]; then
   "${SSH[@]}" "docker cp /tmp/xray-baseline-$STAMP.json $MZ_CT:/tmp/x.json && docker exec $MZ_CT xray -test -c /tmp/x.json" \
     || die "xray -test FAILED inside $MZ_CT (xray $VER) — nothing was changed. This is the gate doing its job."
@@ -300,7 +310,13 @@ note "xray -test on $VER: OK"
 
 if [ "$DRY" = 1 ]; then
   step "dry run complete"
-  note "merged config left on the node at /tmp/xray-baseline-$STAMP.json (delete it)"
+  # Delete it, do not merely ask the operator to. The apply path already removes this file
+  # as part of its `install && rm` chain; only the dry-run path leaked, and a dry run is the
+  # thing the runbook tells you to do before EVERY apply — so the leak was the common case,
+  # and it accumulated one key-bearing file per run, forever.
+  "${SSH[@]}" "rm -f /tmp/xray-baseline-$STAMP.json" \
+    && note "merged config removed from the node (it carried the REALITY private keys)" \
+    || note "WARNING: could not remove /tmp/xray-baseline-$STAMP.json from the node — it contains the REALITY private keys. Delete it by hand."
   diff -u <(jq -S '{routing,outbounds,dns,api,stats,policy,log}' "$WORK/live.json") \
           <(jq -S '{routing,outbounds,dns,api,stats,policy,log}' "$WORK/new.json") || true
   exit 0
@@ -330,7 +346,21 @@ restore() {
 }
 
 step "6/8  install merged config"
-"${SSH[@]}" "$SUDO install -m 600 -o root -g root /tmp/xray-baseline-$STAMP.json $CFG && $SUDO rm -f /tmp/xray-baseline-$STAMP.json" \
+# Preserve the live config's OWN mode and ownership. This used to hardcode
+# `-m 600 -o root -g root`, which looks safer and is fatal: the bare-xray fleet is
+# installed by the official XTLS script, which runs the service as `User=nobody`, and
+# xray reads its config through the world-read bit (the live file is 644 root:root).
+# Installing 600 root:root makes it unreadable to nobody, so xray exits with
+# "failed to read config: ... permission denied" and step 8 rolls the node back —
+# on EVERY bare node, every run. Verified on doppler-nl 2026-09-09.
+# Copying the mode that the running service already reads cannot be wrong relative to
+# that service, and it also stays correct on a Marzban node whose file differs.
+CFG_MODE="$("${SSH[@]}" "$SUDO stat -c %a $CFG" 2>/dev/null | tr -d '\r' || true)"
+CFG_OWN="$("${SSH[@]}" "$SUDO stat -c %U:%G $CFG" 2>/dev/null | tr -d '\r' || true)"
+case "$CFG_MODE" in ''|*[!0-7]*) die "could not read the live config's mode (got '$CFG_MODE') — refusing to guess" ;; esac
+case "$CFG_OWN" in *:*) ;; *) die "could not read the live config's ownership (got '$CFG_OWN') — refusing to guess" ;; esac
+note "preserving mode $CFG_MODE, owner $CFG_OWN"
+"${SSH[@]}" "$SUDO install -m $CFG_MODE -o ${CFG_OWN%%:*} -g ${CFG_OWN##*:} /tmp/xray-baseline-$STAMP.json $CFG && $SUDO rm -f /tmp/xray-baseline-$STAMP.json" \
   || die "install failed — live config untouched"
 
 step "7/8  reload"
