@@ -24,7 +24,18 @@ is to be reachable.
 
 | id | host | IP | Status |
 |---|---|---|---|
-| `sb1` | *(domain not chosen yet)* | `103.246.146.20` (Netherlands, `doppler-nl`) | Caddy installed and verified; **public site disabled** until a domain's A record points at it |
+| `sb1` | `edge.simnetiq.xyz` | `103.246.146.20` (Netherlands, `doppler-nl`) | **LIVE since 2026-09-08.** Let's Encrypt cert issued, verified off-box: `get_client_flags` returns byte-identical output through the relay and direct. |
+
+`edge.simnetiq.xyz` is a Namecheap BasicDNS A record (plain, never proxied). The apex
+`simnetiq.xyz` is a separate Vercel site and was not touched.
+
+**Known weakness of `sb1`, recorded rather than hidden.** `simnetiq` is also the string in
+the iOS bundle id (`com.simnetiq.vpnreact`) and the support address
+(`support@simnetiq.store`), so this hostname is discoverable from the App Store listing —
+it is not the "boring, unrelated domain" the section below asks for. It was chosen to
+unblock Iranian and Russian users the same day rather than wait on a new registration.
+Treat it as relay #1 of several: `sb2` onward should sit on unrelated domains, registrars
+and ASNs, and the client tries the whole list in order.
 
 `sb1` shares its box with the Netherlands VPN exit node — see
 `../xray/README.md`. That is deliberate: it is one bill, and the relay is a few hundred KB
