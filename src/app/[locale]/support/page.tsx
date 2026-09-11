@@ -116,7 +116,6 @@ export default async function SupportPage({ params }: PageProps) {
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">
         {/* Background blurs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
         </div>
 
@@ -200,9 +199,9 @@ export default async function SupportPage({ params }: PageProps) {
                   href="https://t.me/DopplerSupportBot"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-[#2AABEE]/30 hover:bg-[#2AABEE]/5 p-4 transition-all"
+                  className="group flex items-center gap-4 rounded-xl border border-overlay/10 hover:border-telegram/30 hover:bg-telegram/5 p-4 transition-all"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#2AABEE]/15 border border-[#2AABEE]/25 flex items-center justify-center text-[#2AABEE] shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-telegram/15 border border-telegram/25 flex items-center justify-center text-telegram shrink-0">
                     <TelegramIcon />
                   </div>
                   <div>

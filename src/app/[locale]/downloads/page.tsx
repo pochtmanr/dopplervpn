@@ -22,9 +22,6 @@ interface PageProps {
 
 const baseUrl = "https://www.dopplervpn.org";
 
-// Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
-const FALLBACK_FONT_LOCALES = new Set(["ru", "uk", "zh", "ja", "ko", "ar", "fa", "he", "hi", "ur", "th"]);
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "apps" });
@@ -315,11 +312,6 @@ export default async function DownloadsPage({ params }: PageProps) {
   const resolveNote = (note: PlatformNote) =>
     note.ns === "apps" ? t(note.key) : tWindows(note.key);
 
-  const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
-  const displayFontStyle = useFallbackFont
-    ? { fontFamily: "var(--font-body)", fontWeight: 300 }
-    : { fontFamily: "var(--font-serif)" };
-
   // Word-by-word blur-up cascade (same timing as the homepage hero)
   const WORD_BASE_DELAY = 0.1;
   const WORD_STAGGER = 0.07;
@@ -349,7 +341,6 @@ export default async function DownloadsPage({ params }: PageProps) {
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20 overflow-x-hidden">
         {/* Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
           {/* Faint dot field — echoes the homepage DotGlobe motif */}
           <div
@@ -367,14 +358,11 @@ export default async function DownloadsPage({ params }: PageProps) {
         <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6 lg:px-8">
           {/* ── Header ────────────────────────────────────────────── */}
           <div className="text-center mb-14">
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl text-text-primary mb-5 leading-[1.08]"
-              style={displayFontStyle}
-            >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-text-primary mb-5 leading-[1.08]">
               {headlineWords.map((word, i) => (
                 <Fragment key={i}>
                   <span
-                    className={i === 0 && !useFallbackFont ? "hero-word italic" : "hero-word"}
+                    className="hero-word"
                     style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
                   >
                     {word}

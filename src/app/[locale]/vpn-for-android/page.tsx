@@ -25,9 +25,6 @@ const URLS = {
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
 };
 
-// Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
-const FALLBACK_FONT_LOCALES = new Set(["ru", "uk", "zh", "ja", "ko", "ar", "fa", "he", "hi", "ur", "th"]);
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "vpnForAndroid.metadata" });
@@ -155,7 +152,7 @@ function CheckIcon() {
 
 function Stars() {
   return (
-    <span className="flex items-center gap-px text-accent-amber" aria-hidden="true">
+    <span className="flex items-center gap-px text-accent-gold" aria-hidden="true">
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 0 0 .95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 0 0-.364 1.118l1.287 3.957c.3.922-.755 1.688-1.539 1.118l-3.367-2.445a1 1 0 0 0-1.175 0l-3.367 2.445c-.783.57-1.838-.196-1.539-1.118l1.287-3.957a1 1 0 0 0-.364-1.118L2.063 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 0 0 .95-.69l1.286-3.958Z" />
@@ -199,11 +196,6 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
   const mt = await getTranslations({ locale, namespace: "vpnForAndroid.metadata" });
   const tHero = await getTranslations({ locale, namespace: "hero" });
 
-  const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
-  const displayFontStyle = useFallbackFont
-    ? { fontFamily: "var(--font-body)", fontWeight: 300 }
-    : { fontFamily: "var(--font-serif)" };
-
   // Word-by-word blur-up cascade (same timing as the homepage hero)
   const WORD_BASE_DELAY = 0.1;
   const WORD_STAGGER = 0.07;
@@ -235,7 +227,6 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
             <div className="absolute bottom-0 -end-20 w-[24rem] h-[24rem] bg-accent-gold/10 rounded-full blur-3xl" />
             {/* Faint dot field — echoes the homepage DotGlobe motif */}
             <div
@@ -268,11 +259,8 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
                   <span className="text-text-muted">{tHero("socialProof.googlePlay")}</span>
                 </TrackedDownloadLink>
 
-                {/* Headline — serif blur-up cascade, last word in gradient italic */}
-                <h1
-                  className="mt-6 text-5xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05]"
-                  style={displayFontStyle}
-                >
+                {/* Headline — rounded heading font, blur-up cascade, last word in gradient */}
+                <h1 className="mt-6 text-5xl md:text-6xl xl:text-7xl font-semibold text-text-primary leading-[1.05]">
                   {headlineWords.map((word, i) => {
                     const isLast = i === headlineWords.length - 1;
                     return (
@@ -280,7 +268,7 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
                         <span
                           className={
                             isLast
-                              ? `hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent${useFallbackFont ? "" : " italic"}`
+                              ? "hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
                               : "hero-word"
                           }
                           style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
@@ -331,7 +319,6 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
 
               {/* Screenshot — layered glow presentation */}
               <div className="hero-animate hero-animate-delay-3 relative flex justify-center lg:justify-end">
-                <div className="absolute w-[22rem] h-[22rem] bg-accent-teal/15 rounded-full blur-3xl" aria-hidden="true" />
                 <Image
                   src="/images/android-hero.avif"
                   alt="Doppler VPN running on Android — secure VPN connection screen"

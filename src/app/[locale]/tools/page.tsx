@@ -99,7 +99,6 @@ export default async function Page({ params }: PageProps) {
       <main className="overflow-x-hidden min-h-screen flex flex-col">
         <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
             <div className="absolute bottom-0 -end-20 w-[24rem] h-[24rem] bg-accent-gold/10 rounded-full blur-3xl" />
           </div>
           <div className="relative z-10 mx-auto max-w-4xl text-center">

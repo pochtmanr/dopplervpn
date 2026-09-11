@@ -13,13 +13,14 @@
   --color-text-muted:        #C5C5C5;
   --color-text-tertiary:     #8A8A8A;   /* meta, footnotes */
 
-  --color-accent-gold:       #E1DECF;
+  --color-accent-gold:       #D4D6DB;   /* cool silver (was #E1DECF warm off-white) */
   --color-accent-teal:       #008C8C;
   --color-accent-teal-light: #00ABAB;
 
   --color-accent-violet:     #8B7FD9;   /* Pro tier, premium */
   --color-accent-amber:      #F4C95D;   /* warnings, highlights */
   --color-danger:            #F06763;   /* destructive only */
+  --color-telegram:          #2AABEE;   /* Telegram brand blue */
 
   --color-overlay:           #FFFFFF;
 
@@ -28,6 +29,10 @@
   --font-family-body: var(--font-body, var(--font-rubik)), "Space Grotesk", system-ui, sans-serif;
   /* Instrument Serif - hero headline; Rubik for Cyrillic via --font-cyrillic */
   --font-family-serif: var(--font-serif, var(--font-rubik)), "Instrument Serif", Georgia, serif;
+  /* Headings — matches the iOS app's SF Pro Rounded. `ui-rounded` resolves to
+     SF Pro Rounded in Safari (macOS/iOS); other browsers get Nunito from
+     next/font (--font-rounded). Generates the `font-display` utility. */
+  --font-display: ui-rounded, "SF Pro Rounded", var(--font-rounded), system-ui, sans-serif;
   /* Container — generates the `max-w-site` utility used by all page sections */
   --container-site: 1600px;
 
@@ -86,25 +91,52 @@
 
 /* Light mode overrides */
 .light {
-  --color-bg-primary:        #FAFAF8;   /* warm cream */
-  --color-bg-secondary:      #F2F1ED;
-  --color-bg-elevated:       #E8E7E2;
-  --color-bg-pressed:        #DEDCD6;
-  --color-bg-card:           oklch(0.97 0.005 80 / 0.85);
+  --color-bg-primary:        #F5F5F7;   /* cool light gray (was #FAFAF8 cream) */
+  --color-bg-secondary:      #EDEEF1;
+  --color-bg-elevated:       #E3E4E8;
+  --color-bg-pressed:        #D8D9DE;
+  --color-bg-card:           oklch(0.97 0.004 260 / 0.85);
 
   --color-text-primary:      #1A1A1A;
-  --color-text-muted:        #5C5C5C;
+  --color-text-muted:        #5A5C63;
   --color-text-tertiary:     #8A8A8A;
 
-  --color-accent-gold:       #7A6B42;
+  --color-accent-gold:       #3A3D42;   /* graphite (was #7A6B42 olive gold) */
   --color-accent-teal:       #007070;
   --color-accent-teal-light: #008080;
 
-  --color-accent-violet:     #544AA0;   /* WCAG AA on cream */
-  --color-accent-amber:      #A88434;   /* WCAG AA on cream */
+  --color-accent-violet:     #544AA0;   /* WCAG AA on light gray */
+  --color-accent-amber:      #A88434;   /* WCAG AA on light gray */
   --color-danger:            #B03B37;
+  --color-telegram:          #0369A1;   /* brand blue is ~2.5:1 on light gray */
 
   --color-overlay:           #000000;
+
+  /* Same remap as the admin panel (doppler-admin/src/app/globals.css).
+     Status text, warnings and chips use Tailwind's 400-scale (red-400,
+     green-400, blue-400, …). Those shades are built for dark surfaces — on a
+     light page they sit around 1.5–2.5:1 contrast. Remap them to the
+     700-scale so every existing chip, badge, and status string stays readable
+     without a component-by-component rewrite. 300 is the hover companion of
+     400, so it steps to 800 (darker on hover, matching light-theme convention). */
+  --color-yellow-400: #a16207;
+  --color-yellow-300: #854d0e;
+  --color-green-400: #15803d;
+  --color-green-300: #166534;
+  --color-emerald-400: #047857;
+  --color-emerald-300: #065f46;
+  --color-blue-400: #1d4ed8;
+  --color-blue-300: #1e40af;
+  --color-sky-400: #0369a1;
+  --color-sky-300: #075985;
+  --color-indigo-400: #4338ca;
+  --color-teal-400: #0f766e;
+  --color-purple-400: #7e22ce;
+  --color-amber-400: #b45309;
+  --color-orange-400: #c2410c;
+  --color-red-400: #b91c1c;
+  --color-red-300: #991b1b;
+  --color-gray-400: #4b5563;
 }
 
 /* Base styles */
@@ -122,6 +154,15 @@ body {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Every heading uses the iOS heading font (SF Pro Rounded / Nunito). In the
+   base layer so a utility or inline style can still override — the homepage
+   hero headline keeps Instrument Serif via its inline style. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
 }
 
 /* RTL: browser handles text-align via dir attribute — no override needed */

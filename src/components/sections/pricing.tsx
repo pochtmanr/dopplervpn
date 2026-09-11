@@ -228,7 +228,6 @@ export function Pricing() {
       <Reveal>
         <div className="relative">
           {/* Decorative background glows */}
-          <div className="absolute -top-20 -start-20 w-[24rem] h-[24rem] bg-accent-teal/8 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-20 -end-20 w-[20rem] h-[20rem] bg-accent-gold/5 rounded-full blur-3xl pointer-events-none" />
 
           <Card

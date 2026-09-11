@@ -189,7 +189,7 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
           ) : (
             <div className="space-y-4">
               <div className="flex items-center gap-3 p-4 rounded-xl border border-overlay/10 bg-bg-primary/30">
-                <TelegramIcon className="w-8 h-8 text-[#2AABEE] shrink-0" />
+                <TelegramIcon className="w-8 h-8 text-telegram shrink-0" />
                 <p className="text-sm text-text-muted">
                   {t('restore.telegramMessage')}
                 </p>
@@ -199,7 +199,7 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
                 href="https://t.me/DopplerVerifyBot?start=restore"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full rounded-xl bg-[#2AABEE] hover:bg-[#2AABEE]/90 text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
+                className="w-full rounded-xl bg-telegram hover:bg-telegram/90 text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
               >
                 <TelegramIcon className="w-4 h-4" />
                 {t('restore.openTelegramBot')}

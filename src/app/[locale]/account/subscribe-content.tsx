@@ -15,9 +15,6 @@ const PLANS = [
 
 type PlanId = (typeof PLANS)[number]['id'];
 
-// Locales where the decorative serif breaks (no Cyrillic/CJK/Arabic glyphs) — same set as the hero
-const FALLBACK_FONT_LOCALES = new Set(['ru', 'uk', 'zh', 'ja', 'ko', 'ar', 'fa', 'he', 'hi', 'ur', 'th']);
-
 /* ── Helpers ─────────────────────────────────────────────────────────── */
 
 function formatCents(cents: number): string {
@@ -841,12 +838,8 @@ function SubscribeInner() {
     </>
   );
 
-  /* ── Login header: hero serif voice with per-word reveal ─────── */
-  const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
+  /* ── Login header: rounded heading font with per-word reveal ─── */
   const titleWords = t('title').split(/\s+/).filter(Boolean);
-  const titleFontStyle = useFallbackFont
-    ? { fontFamily: 'var(--font-body)', fontWeight: 300 }
-    : { fontFamily: 'var(--font-serif)' };
 
   /* ── Render ────────────────────────────────────────────────────── */
   return (
@@ -855,15 +848,15 @@ function SubscribeInner() {
       {/* ── Step 1: Identify ─────────────────────────────────────── */}
       {step === 1 && (
         <div className="mx-auto max-w-md px-4 py-12 sm:py-20">
-            {/* Header — hero serif voice, word-by-word blur fade */}
+            {/* Header — rounded heading font, word-by-word blur fade */}
             <div className="text-center mb-12">
-              <h1 className="text-5xl sm:text-6xl text-text-primary leading-[1.05] mb-4" style={titleFontStyle}>
+              <h1 className="text-5xl sm:text-6xl font-semibold text-text-primary leading-[1.05] mb-4">
                 {titleWords.map((word, i) => (
                   <Fragment key={`tw-${i}`}>
                     <span
                       className={
-                        i === titleWords.length - 1 && !useFallbackFont
-                          ? 'account-word italic bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent'
+                        i === titleWords.length - 1
+                          ? 'account-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent'
                           : 'account-word'
                       }
                       style={{ '--reveal-delay': `${0.05 + i * 0.06}s` } as React.CSSProperties}

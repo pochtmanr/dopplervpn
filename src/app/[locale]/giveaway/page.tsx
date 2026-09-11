@@ -110,7 +110,6 @@ export default async function GiveawayPage({ params }: PageProps) {
       <main className="relative min-h-screen bg-bg-primary pt-28 pb-20">
         {/* Background blurs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
           <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
         </div>
 

@@ -26,9 +26,6 @@ const URLS = {
   windowsX64: "/api/windows/download/latest-x64",
 };
 
-// Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
-const FALLBACK_FONT_LOCALES = new Set(["ru", "uk", "zh", "ja", "ko", "ar", "fa", "he", "hi", "ur", "th"]);
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "vpnForWindows.metadata" });
@@ -228,11 +225,6 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
   const mt = await getTranslations({ locale, namespace: "vpnForWindows.metadata" });
   const tHero = await getTranslations({ locale, namespace: "hero" });
 
-  const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
-  const displayFontStyle = useFallbackFont
-    ? { fontFamily: "var(--font-body)", fontWeight: 300 }
-    : { fontFamily: "var(--font-serif)" };
-
   // Word-by-word blur-up cascade (same timing as the homepage hero)
   const WORD_BASE_DELAY = 0.1;
   const WORD_STAGGER = 0.07;
@@ -274,7 +266,6 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
         {/* ── Hero — copy + app screenshot ─────────────────────── */}
         <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
             <div className="absolute bottom-0 -end-20 w-[24rem] h-[24rem] bg-accent-gold/10 rounded-full blur-3xl" />
             {/* Faint dot field — echoes the homepage DotGlobe motif */}
             <div
@@ -292,11 +283,8 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Text */}
               <div className="text-center lg:text-start">
-                {/* Headline — serif blur-up cascade, last word in gradient italic */}
-                <h1
-                  className="text-5xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05]"
-                  style={displayFontStyle}
-                >
+                {/* Headline — rounded heading font, blur-up cascade, last word in gradient */}
+                <h1 className="text-5xl md:text-6xl xl:text-7xl font-semibold text-text-primary leading-[1.05]">
                   {headlineWords.map((word, i) => {
                     const isLast = i === headlineWords.length - 1;
                     return (
@@ -304,7 +292,7 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
                         <span
                           className={
                             isLast
-                              ? `hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent${useFallbackFont ? "" : " italic"}`
+                              ? "hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
                               : "hero-word"
                           }
                           style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
@@ -361,7 +349,6 @@ export default async function VpnForWindowsPage({ params }: PageProps) {
 
               {/* Screenshot — layered glow presentation */}
               <div className="hero-animate hero-animate-delay-3 relative flex justify-center lg:justify-end">
-                <div className="absolute w-[22rem] h-[22rem] bg-accent-teal/15 rounded-full blur-3xl" aria-hidden="true" />
                 <Image
                   src="/images/windows-hero.avif"
                   alt={t("gallery.heroAlt")}

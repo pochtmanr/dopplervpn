@@ -417,18 +417,32 @@ export async function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-overlay/5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-text-muted text-sm">
-              &copy; {currentYear}{" "}
-              <a
-                href="https://simnetiq.store"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent-teal hover:text-accent-gold transition-colors"
-              >
-                SIMNETIQ LTD
-              </a>
-              {t("copyright").replace("SIMNETIQ LTD", "")}
-            </p>
+            <div className="space-y-1.5 text-center sm:text-start">
+              <p className="text-text-muted text-sm">
+                &copy; {currentYear}{" "}
+                <a
+                  href="https://simnetiq.store"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-teal hover:text-accent-gold transition-colors"
+                >
+                  SIMNETIQ LTD
+                </a>
+                {t("copyright").replace("SIMNETIQ LTD", "")}
+              </p>
+              <p className="text-text-muted text-sm">
+                {t("moreFromSimnetiq")}:{" "}
+                <a
+                  href="https://browserargus.com"
+                  target="_blank"
+                  rel="noopener"
+                  className="text-accent-teal hover:text-accent-gold transition-colors"
+                  dir="ltr"
+                >
+                  browserargus.com
+                </a>
+              </p>
+            </div>
 
             <div className="flex items-center gap-4">
               <a

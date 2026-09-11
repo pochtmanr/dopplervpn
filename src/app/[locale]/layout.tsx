@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Instrument_Serif, Space_Grotesk, Rubik } from "next/font/google";
+import { Instrument_Serif, Space_Grotesk, Rubik, Nunito } from "next/font/google";
 
 import { routing, isRtlLocale, type Locale } from "@/i18n/routing";
 import { pickMessages } from "@/i18n/client-namespaces";
@@ -49,11 +49,23 @@ const rubik = Rubik({
   preload: false,
 });
 
+// Nunito - headings (`font-display`) on browsers without `ui-rounded`.
+// Safari renders SF Pro Rounded natively, matching the iOS app; everyone else
+// gets this. Only the 700 face on purpose: Nunito's weight curve is flat from
+// 400 to 600 (its 600 reads as Regular), so its Bold is the visual match for
+// SF Pro Rounded Semibold. With a single face, the headings' 500/600 requests
+// resolve to it, while Safari keeps rendering SF Rounded at the real weight.
+const nunito = Nunito({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-rounded",
+  display: "swap",
+  weight: "700",
+});
 
 export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FAFAF8" },
+    { media: "(prefers-color-scheme: light)", color: "#F5F5F7" },
     { media: "(prefers-color-scheme: dark)", color: "#141414" },
   ],
 };
@@ -168,8 +180,8 @@ export default async function LocaleLayout({
       dir={dir}
       suppressHydrationWarning
       className={(locale === "ru" || locale === "uk" || locale === "bg")
-        ? rubik.variable
-        : `${instrumentSerif.variable} ${spaceGrotesk.variable}`
+        ? `${rubik.variable} ${nunito.variable}`
+        : `${instrumentSerif.variable} ${spaceGrotesk.variable} ${nunito.variable}`
       }
     >
       <head>

@@ -1,10 +1,8 @@
 import { type ReactNode } from "react";
 
 // `.section` / `.section-title` / `.section-subtitle` are defined in
-// globals.css (@layer components). `font-display` is kept as a literal token —
-// it resolves to no CSS today (there is no `--font-display` theme key), so
-// @apply-ing it would fail; removing it would be a behaviour change to make
-// deliberately, not a side effect of this refactor.
+// globals.css (@layer components). `font-display` is the heading font utility
+// from the `--font-display` theme key (SF Pro Rounded / Nunito fallback).
 
 interface SectionProps {
   children: ReactNode;

@@ -15,7 +15,7 @@ const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=org.doppl
 
 function Stars() {
   return (
-    <span className="flex items-center gap-px text-accent-amber" aria-hidden="true">
+    <span className="flex items-center gap-px text-accent-gold" aria-hidden="true">
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 0 0 .95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 0 0-.364 1.118l1.287 3.957c.3.922-.755 1.688-1.539 1.118l-3.367-2.445a1 1 0 0 0-1.175 0l-3.367 2.445c-.783.57-1.838-.196-1.539-1.118l1.287-3.957a1 1 0 0 0-.364-1.118L2.063 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 0 0 .95-.69l1.286-3.958Z" />
@@ -79,7 +79,7 @@ export function Hero() {
         className="group flex items-center gap-1.5"
       >
         <Stars />
-        <span className="text-sm font-semibold text-text-primary">{t("socialProof.rating")}</span>
+        <span className="text-sm font-semibold text-text-primary">{t("socialProof.ratingGooglePlay")}</span>
         <span className="text-xs text-text-muted group-hover:text-text-primary transition-colors">
           {t("socialProof.googlePlay")}
         </span>
@@ -91,12 +91,6 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-10 -start-20 w-[28rem] h-[28rem] bg-accent-teal/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
-      </div>
-
       {/* Main Content - Two Column Layout */}
       <div className="relative z-10 mx-auto max-w-site w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -199,10 +193,6 @@ export function Hero() {
 
           {/* Right Column - Server network dot globe */}
           <div className="relative hidden lg:flex items-center justify-center">
-            <div
-              className="absolute w-[26rem] h-[26rem] bg-accent-teal/15 rounded-full blur-3xl"
-              aria-hidden="true"
-            />
             <DotGlobe
               className="hero-animate hero-animate-delay-3 relative w-full max-w-[620px] aspect-square"
               label={t("globeAlt")}
