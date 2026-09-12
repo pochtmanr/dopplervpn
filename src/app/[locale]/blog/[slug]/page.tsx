@@ -91,23 +91,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     )
     .eq("slug", slug)
     .eq("status", "published")
-    .eq("blog_post_translations.locale", locale)
+    // Deliberately NOT filtered to `locale`: the hreflang block below has to
+    // know every locale this post exists in, and one query that returns them
+    // all is cheaper than a second round trip. The target translation is
+    // picked out of the result below.
     .single();
 
   const post = data as PostMetadata | null;
 
   if (!post || post.blog_post_translations.length === 0) return { title: "Not Found" };
 
-  const translation = post.blog_post_translations[0];
+  const translation = post.blog_post_translations.find((t) => t.locale === locale);
+  if (!translation) return { title: "Not Found" };
+
   const title = translation.meta_title || translation.title;
   const description = translation.meta_description || translation.excerpt;
 
-  // hreflang alternates reference only locales that actually have blog
-  // translations — emitting the full 44-locale set created duplicate-canonical
-  // noise for locales where the URL served English fallback content.
+  // hreflang alternates reference only the locales this post is ACTUALLY
+  // translated into. Narrowing 44→21 fixed half of this; emitting all 21 for
+  // a post that has five still advertised sixteen URLs that render the
+  // "not available in this language" page. This matters most for a freshly
+  // published post, which is English-only until translations are run.
+  const availableLocales = post.blog_post_translations
+    .map((t) => t.locale)
+    .filter((l) => isBlogLocale(l))
+    .sort();
+  const xDefault = availableLocales.includes("en")
+    ? "en"
+    : availableLocales[0] || locale;
   const languages = Object.fromEntries([
-    ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog/${slug}`]),
-    ["x-default", `${baseUrl}/en/blog/${slug}`],
+    ...availableLocales.map((loc) => [loc, `${baseUrl}/${loc}/blog/${slug}`]),
+    ["x-default", `${baseUrl}/${xDefault}/blog/${slug}`],
   ]);
 
   return {
@@ -122,7 +136,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: translation.og_description || description,
       url: `${baseUrl}/${locale}/blog/${slug}`,
       locale: ogLocaleMap[locale] || "en_US",
-      alternateLocale: BLOG_LOCALES
+      alternateLocale: availableLocales
         .filter((l) => l !== locale)
         .map((l) => ogLocaleMap[l] || l),
       type: "article",

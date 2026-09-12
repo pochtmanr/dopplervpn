@@ -37,6 +37,8 @@ interface SitemapPost {
   slug: string;
   updated_at: string | null;
   created_at: string | null;
+  /** Blog locales this post is actually translated into, sorted. */
+  locales: string[];
 }
 
 type PostsByLocale = Record<string, SitemapPost[]>;
@@ -70,17 +72,31 @@ const fetchPostsByLocale = unstable_cache(
 
     // Supabase typegen mistypes one-to-many embeds as a single object on the
     // parent — the runtime always returns an array (see blog_post page.tsx).
-    type Row = SitemapPost & { blog_post_translations: { locale: string }[] };
+    type Row = {
+      slug: string;
+      updated_at: string | null;
+      created_at: string | null;
+      blog_post_translations: { locale: string }[];
+    };
     const byLocale: PostsByLocale = {};
     for (const row of (data ?? []) as unknown as Row[]) {
+      // The locales this post genuinely has. Sorted for the same reason the
+      // query above is ordered: an unordered embed reshuffles between reads,
+      // which rewrites every shard's bytes and bills a full set of ISR writes
+      // for content that did not change.
+      const locales = row.blog_post_translations
+        .map((t) => t.locale)
+        .filter((l) => isBlogLocale(l))
+        .sort();
       const post: SitemapPost = {
         slug: row.slug,
         updated_at: row.updated_at,
         created_at: row.created_at,
+        locales,
       };
-      for (const t of row.blog_post_translations) {
-        if (!byLocale[t.locale]) byLocale[t.locale] = [];
-        byLocale[t.locale].push(post);
+      for (const locale of locales) {
+        if (!byLocale[locale]) byLocale[locale] = [];
+        byLocale[locale].push(post);
       }
     }
     return byLocale;
@@ -175,11 +191,20 @@ function buildSecurityAlternates(path: string) {
 // Blog URLs only exist for the 21 locales with real translations; the other
 // 23 locales 308-redirect to /en/blog via middleware. Alternates and URL
 // emission must reflect that or Google sees duplicate-canonical noise again.
-function buildBlogAlternates(path: string) {
+//
+// `locales` must be the locales that actually exist for THIS path, not the
+// whole BLOG_LOCALES list. A post translated into five languages used to
+// advertise all twenty-one; the sixteen missing ones render the "not
+// available in this language" page, which is the same duplicate-canonical
+// noise the 44→21 narrowing was meant to end. The blog index is the one
+// caller that legitimately passes all of BLOG_LOCALES.
+function buildBlogAlternates(path: string, locales: readonly string[]) {
+  const available = locales.length > 0 ? locales : ["en"];
+  const xDefault = available.includes("en") ? "en" : available[0];
   return {
     languages: Object.fromEntries([
-      ...BLOG_LOCALES.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
-      ["x-default", `${baseUrl}/en${path}`],
+      ...available.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ["x-default", `${baseUrl}/${xDefault}${path}`],
     ]),
   };
 }
@@ -254,7 +279,8 @@ export default async function sitemap({
     .map((page) => {
       let alternates;
       if (page === "/blog") {
-        alternates = buildBlogAlternates(page);
+        // The index exists in every blog locale, so the full list is correct here.
+        alternates = buildBlogAlternates(page, BLOG_LOCALES);
       } else if (page === "/security") {
         alternates = buildSecurityAlternates(page);
       } else {
@@ -277,7 +303,7 @@ export default async function sitemap({
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.8,
-      alternates: buildBlogAlternates(`/blog/${post.slug}`),
+      alternates: buildBlogAlternates(`/blog/${post.slug}`, post.locales),
     };
   });
 

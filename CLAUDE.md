@@ -16,7 +16,7 @@ Next.js 15 web app serving as the public marketing site, admin panel, and blog p
 - **Styling:** Tailwind CSS v4 + `@tailwindcss/postcss`
 - **i18n:** next-intl v3 (44 languages, URL routing via `[locale]`)
 - **Backend:** Supabase (ref: `fzlrhmjdjjzcgstaeblu`)
-- **AI:** OpenAI `gpt-5-mini` for blog content generation
+- **AI:** blog *translation* runs Gemini (`GEMINI_TRANSLATE_MODEL`, default `gemini-3.8-flash`) with an OpenAI fallback (`OPENAI_TRANSLATE_MODEL`, default `gpt-5-mini`) — see `doppler-admin/src/lib/ai/translate.ts`. Content *generation* is OpenAI `gpt-5-mini`, invoked from n8n.
 - **Deployment:** Vercel (dopplervpn.org) — GitHub: pochtmanr/dopplervpn
 
 ## Architecture
@@ -40,13 +40,15 @@ src/
     admin-dvpn/           # Admin panel (4 tabs)
       page.tsx            # Dashboard (Supabase stats)
       # Messages, VPN Users (Marzban), Posts (blog)
-    api/
-      admin/              # Admin API routes (auth-protected)
-      blog/
-        create/           # POST — AI generates article (OpenAI)
-        translate/        # POST — translates to all 44 langs
-        status/           # GET/POST — publish/unpublish
+    api/                  # NOTE: admin/ and blog/ are NOT here — they were
+                          # extracted to the separate `doppler-admin` app
+                          # (commit 6346a5f, 2026-04-10). Landing keeps a
+                          # BLOG_API_KEY and lib/api-auth.ts, but no landing
+                          # route consumes them.
       vpn/                # VPN management routes
+      agents/             # MCP server + agent surface (manifest, pricing, …)
+      checkout/, revolut/, oxapay/, promo/   # payments
+      account/, subscribe/, support/, doppler/  # accounts + support
     auth/                 # Auth callback routes
     globals.css           # Global styles
     robots.ts             # robots.txt
@@ -58,7 +60,8 @@ src/
 ```
 
 ## Key Patterns
-- **Blog pipeline:** `POST /api/blog/create` (OpenAI generates) → `POST /api/blog/translate` (44 langs) → n8n webhook → Telegram channels + live blog
+- **Blog pipeline:** `POST /api/blog/create` (OpenAI generates) → `POST /api/blog/translate` → n8n webhook → Telegram channels + live blog. **These routes live in `doppler-admin`, not here.**
+- **Blog locales:** the site has 44 locales but the blog has **21** (`src/i18n/blog-locales.ts`); translation targets the 20 non-English ones. Non-blog locales 308-redirect `/{locale}/blog/*` → `/en/blog/*`.
 - **Blog API auth:** All blog API routes require `BLOG_API_KEY` header — never expose this key
 - **i18n:** 44 JSON translation files. Use `useTranslations()` hook in Client Components, `getTranslations()` in Server Components
 - **Admin panel** at `/admin-dvpn` has 4 tabs: Dashboard, Messages, VPN Users, Posts — uses Supabase for data
@@ -96,7 +99,8 @@ Vercel auto-deploys on push to main branch. Domain: `dopplervpn.org` (Vercel DNS
 - **Always use `www.dopplervpn.org`** in links and API calls — `dopplervpn.org` redirects strip auth headers
 - `BLOG_API_KEY` must match the value in `admin-bot/.env` — both sides need the same key
 - Images from Unsplash/Pixabay/Pexels are allowed in `next.config` — do not add other external image domains without updating `next.config`
-- OpenAI model: `gpt-5-mini` — do not change without updating the prompt engineering
+- Model IDs are env-driven, not hardcoded (`GEMINI_TRANSLATE_MODEL` / `OPENAI_TRANSLATE_MODEL`). Both vendors retire models on a schedule — the previously hardcoded `gemini-2.5-flash` was set to retire 2026-10-16, which would have hard-failed every translation. Check retirement dates before assuming a default still resolves.
+- Slug generation is `doppler-admin/src/lib/slugify.ts` — one implementation, 60-char cap cut at a word boundary, Unicode-aware. Do not add a second copy; that is how 100-char mid-word slugs and the literal slug `undefined` reached production.
 
 ## Related Projects
 - `admin-bot/` — Admin bot that triggers blog pipeline and calls these API routes
