@@ -67,7 +67,7 @@ src/
 - **Admin panel** at `/admin-dvpn` has 4 tabs: Dashboard, Messages, VPN Users, Posts — uses Supabase for data
 
 ## Backend Integration
-- **Supabase tables:** `accounts` (R), `vpn_users` (R/W), `vpn_servers` (R/W), `blog_posts` (R/W), `blog_translations` (R/W)
+- **Supabase tables:** `accounts` (R), `vpn_users` (R/W), `vpn_servers` (R/W), `blog_posts` (R/W), `blog_post_translations` (R/W)
 - **External APIs:** OpenAI API (blog generation), Marzban API (`MARZBAN_*` env vars), n8n webhook (blog posting)
 - **Auth model:** Supabase Auth for admin panel login; no auth for public pages
 
