@@ -129,7 +129,7 @@
     "headlinePart1a": "Funguje tam, kde ine VPN",
     "headlinePart1b": "blokuju.",
     "headlinePart2": "",
-    "subheadline": "Vaša prevádzka vyzerá ako bežné HTTPS, takže hĺbková inšpekcia paketov ju nevidí. Žiadny účet, žiadne logy, žiadna stopa — jednoducho otvorte aplikáciu a pripojte sa.",
+    "subheadline": "Vaša prevádzka vyzerá ako bežné HTTPS, takže ju hĺbková inšpekcia paketov nevidí. Žiadny účet, žiadne záznamy o aktivite, žiadny záznam o tom, kam chodíte — stačí otvoriť aplikáciu a pripojiť sa.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Bez osobnych udajov",
@@ -178,7 +178,7 @@
       },
       "cryptoPayment": {
         "title": "Plaťte Bitcoinom a kryptom",
-        "description": "Anonymné VPN platby pomocou BTC, ETH, USDT a USDC. Bez karty, bez mena, bez stôp — predplatné funguje na všetkých vašich zariadeniach."
+        "description": "Plaťte v BTC, ETH, USDT alebo USDC — bez karty a bez bankového účtu. Vaše predplatné funguje na všetkých vašich zariadeniach."
       },
       "minimalData": {
         "title": "Prisna politika bez zaznamov",
@@ -521,7 +521,7 @@
       },
       "usage": {
         "title": "5. Acceptable Use",
-        "content": "You agree to use the Services only for lawful purposes and in compliance with all applicable local, national, and international laws and regulations. You shall not: (a) use the Services for any illegal activities or to facilitate illegal conduct; (b) attempt to circumvent, disable, or interfere with security features of the Services; (c) distribute malware, viruses, or any harmful code through the Services; (d) infringe upon the intellectual property rights of any third party; (e) use the AI Video Generation tool to create content that is defamatory, obscene, fraudulent, or that violates the rights of others; (f) use the Services to send spam or unsolicited communications; (g) reverse engineer, decompile, or disassemble any part of the Services; or (h) resell, sublicense, or commercially exploit the Services without our written consent. We reserve the right to suspend or terminate accounts that violate these Terms, with or without notice depending on the severity of the violation."
+        "content": "Súhlasíte, že Služby budete používať výlučne na zákonné účely a v súlade so všetkými platnými miestnymi, národnými a medzinárodnými zákonmi a predpismi. Nesmiete: (a) používať Služby na akúkoľvek nezákonnú činnosť alebo na uľahčenie protiprávneho konania; (b) pokúšať sa obísť, vyradiť či narušiť bezpečnostné prvky Služieb; (c) šíriť prostredníctvom Služieb malvér, vírusy alebo akýkoľvek škodlivý kód; (d) porušovať práva duševného vlastníctva tretích osôb; (e) používať nástroj na generovanie videa s umelou inteligenciou na tvorbu obsahu, ktorý je hanlivý, obscénny, podvodný alebo porušuje práva iných; (f) používať Služby na rozosielanie spamu či nevyžiadaných oznámení; (g) vykonávať spätnú analýzu, dekompiláciu alebo rozklad ktorejkoľvek časti Služieb; ani (h) Služby bez nášho písomného súhlasu ďalej predávať, poskytovať sublicencie alebo komerčne využívať. Sankcie a územia s obmedzeniami: vyhlasujete a zaručujete, že nie ste osobou ani subjektom, na ktoré sa vzťahujú finančné sankcie Spojeného kráľovstva, Európskej únie, Organizácie Spojených národov alebo Spojených štátov, ani za takúto osobu nekonáte, a že sa nenachádzate ani obvykle nezdržiavate na území, na ktoré sa vzťahujú komplexné sankcie. Takýmto osobám Služby nesprístupňujeme a môžeme pozastaviť alebo ukončiť ktorýkoľvek účet, ak sa dozvieme, že toto vyhlásenie nie je alebo prestalo byť pravdivé. Vyhradzujeme si právo pozastaviť alebo ukončiť účty porušujúce tieto Podmienky, s oznámením alebo bez neho podľa závažnosti porušenia."
       },
       "ip": {
         "title": "6. Intellectual Property",
@@ -1276,6 +1276,22 @@
     "lookingUp": "Vyhladavam vas ucet...",
     "accountNotFound": "Ucet nebol najdeny. Skontrolujte vase ID uctu.",
     "verifyingAccount": "Overujem...",
+    "retry": "Skúsiť znova",
+    "existingAccountTitle": "V tomto zariadení je už uložený účet",
+    "existingAccountCta": "Prejsť na váš účet",
+    "existingAccountNote": "Ak budete pokračovať nižšie, do tohto zariadenia sa uloží iné ID účtu.",
+    "loginTitle": "Vitajte späť",
+    "loginSubtitle": "Zadajte svoje ID účtu a pokračujte.",
+    "signupTitle": "Vytvorte si účet",
+    "signupSubtitle": "Žiadny e-mail. Žiadne heslo. Stačí jedno ťuknutie.",
+    "welcomeTitle": "Hotovo",
+    "welcomeBody": "Váš účet je pripravený. Toto ID je váš kľúč — uložte si ho, kým zavriete okno.",
+    "welcomeIdLabel": "Vaše ID účtu",
+    "welcomeCopy": "Kopírovať ID účtu",
+    "welcomeCopied": "Skopírované do schránky",
+    "welcomePromoIntro": "Uvítací darček — použite tento kód pri platbe:",
+    "welcomeCta": "Rozumiem — ID mám uložené",
+    "welcomeDismiss": "Zavrieť",
     "dashboard": {
       "title": "Vas ucet",
       "memberSince": "Clenom od",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Ak ste si zakupili predplatne cez App Store alebo Google Play, spravujte ho tu.",
       "restoreAppStore": "Predplatne App Store",
       "restorePlayStore": "Predplatne Google Play",
-      "deleteProSupportNote": "Váš účet má aktívne predplatné Pro. Pre vymazanie kontaktujte podporu."
+      "deleteProSupportNote": "Váš účet má aktívne predplatné Pro. Pre vymazanie kontaktujte podporu.",
+      "statusPro": "Pro · do {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Bezplatný plán",
+      "active": "Aktívne",
+      "from": "od",
+      "card": "Karta",
+      "crypto": "Krypto",
+      "payWithCrypto": "Zaplatiť kryptomenou — {price}",
+      "cryptoNote": "Plaťte v BTC, ETH, USDT alebo USDC. Budete presmerovaní na OxaPay.",
+      "back": "Späť",
+      "accountIdHint": "Váš kľúč k Doppleru. Prihláste sa ním na akomkoľvek zariadení.",
+      "copyId": "Kopírovať ID",
+      "sendToDevices": "Poslať do mojich zariadení",
+      "sendToDevicesDesc": "Pošlite si ID účtu a odkaz na stiahnutie a otvorte ich v telefóne, tablete alebo počítači.",
+      "shareNative": "Zdieľať…",
+      "shareEmail": "E-mail",
+      "shareTelegramHint": "V Telegrame vyberte Uložené správy.",
+      "copyMessage": "Kopírovať správu",
+      "messageCopied": "Správa skopírovaná",
+      "shareSubject": "Môj účet Doppler VPN",
+      "shareMessage": "Moje ID účtu Doppler VPN: {id}\nStiahnuť aplikáciu: {url}\nOtvorte aplikáciu a prihláste sa týmto ID.",
+      "shareWarning": "Ktokoľvek s týmto ID môže používať vaše predplatné. Posielajte ho iba sebe.",
+      "devices": "Moje zariadenia",
+      "devicesCount": "{count} z {max}",
+      "mainDevice": "Hlavné",
+      "lastActive": "Aktívne {time}",
+      "addedOn": "Pridané {date}",
+      "noDevices": "Zatiaľ žiadne zariadenia. Nainštalujte Doppler a prihláste sa svojím ID účtu.",
+      "manageInApp": "Zariadenie odstránite v aplikácii Doppler v sekcii Zariadenia.",
+      "devicesError": "Vaše zariadenia sa nepodarilo načítať.",
+      "everyDeviceHint": "Nainštalujte Doppler a prihláste sa svojím ID účtu. Až {max} zariadení na jednom účte."
     },
     "securedByCrypto": "Zabezpečené cez OxaPay"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Plaťte anonymne — aj z blokovaných regiónov",
-      "body": "Keď je vaša banka sledovaná alebo medzinárodné karty nefungujú, Bitcoin a stablecoiny stále fungujú. Doppler prijíma BTC, ETH, USDT a USDC — bez banky, bez dokladov, bez stôp.",
+      "title": "Plaťte bez bankovej karty",
+      "body": "Keď u vás nefungujú medzinárodné karty, bitcoin a stablecoiny fungujú. Doppler prijíma BTC, ETH, USDT a USDC — bez bankového účtu aj bez karty.",
       "cta": "Platiť kryptom",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Navod na internetovu cenzuru — Ako sa VPN blokuju a ako zostat pripojeny",
-      "description": "Technicky navod o tom, ako vlady blokuju VPN a proxy pomocou DPI, TSPU a ML — a ako proxy VLESS-Reality obchadzka kazdu metodu detekcie. Pripravte sa na stupnujuce obmedzenia."
+      "description": "Technický sprievodca: ako národné filtračné systémy blokujú VPN pomocou DPI, analýzy prevádzky a aktívneho sondovania — a prečo VLESS-Reality zostáva pripojený. Pripravte sa na sprísňujúce sa obmedzenia."
     },
     "hero": {
       "title": "Vas navod na slobodu internetu",
-      "subtitle": "Ako vlady detekuju a blokuju VPN, ako Doppler porazi kazdu metodu a co by ste mali urobit teraz, aby ste zostali pripojeni, ked sa obmedzenia stupnuju."
+      "subtitle": "Ako cenzori odhaľujú a blokujú VPN, ako Doppler vyradí každú metódu a čo môžete urobiť už teraz, aby ste zostali pripojení."
     },
     "detection": {
       "title": "Ako vlady detekuju a blokuju VPN",
-      "intro": "Internetova cenzura sa vyvinula daleko za jednoduche blokovanie IP adries. Krajiny ako Rusko, Cina a Iran nasadzuju sofistikovane systemy, ktore pouzivaju strojove ucenie na identifikaciu a ukoncenie VPN pripojeni v realnom case. Tu je presne ako to robia.",
+      "intro": "Internetová cenzúra dávno presiahla jednoduché blokovanie IP adries. Národné filtračné systémy dnes používajú strojové učenie na odhaľovanie a prerušovanie VPN spojení v reálnom čase a tie isté techniky sa objavujú aj vo firemných a univerzitných sieťach. Takto presne fungujú.",
       "tspu": {
-        "title": "Infrastruktura: TSPU a DPI",
-        "p1": "Rusko nasadzuje TSPU (Technicke systemy pre protiopatrenia voči hrozbam) — specializovany hardware instalovany priamo na uzloch ISP sieti. Cina pouziva Velky firewall, Iran prevadzkuje NIN. Tieto systemy vykonavaju hlboku inspekciu paketov (DPI) na kazdom pakete prechadzajucom sietou.",
+        "title": "Infraštruktúra: národné systémy DPI",
+        "p1": "Krajiny s intenzívnou filtráciou inštalujú inšpekčný hardvér priamo do sieťových uzlov operátorov — Veľký firewall v Číne, národná informačná sieť v Iráne, TSPU v Rusku a obdobné systémy v Turecku a v Zálive. Všetky vykonávajú hĺbkovú inšpekciu paketov (DPI) pri každom pakete prechádzajúcom sieťou.",
         "p2": "Tradicne VPN protokoly ako OpenVPN, WireGuard a IPSec maju odlisne struktury paketov. DPI ich okamzite identifikuje a ukonci pripojenie. Dokonca aj \"obfuskovane\" rezimy casto zlyhavaju, pretoze zakladny vzor handshake zostava detekovatelny.",
         "p3": "Ked zakladne porovnavanie podpisov nestaci, tieto systemy aktivuju moduly strojoveho ucenia. Prestanu sa pozerat dovnutra paketov (vsetko je sifrovane) a zacnu analyzovat, ako sa prevadzka sprva."
       },
@@ -1548,7 +1595,7 @@
         "title": "Metoda 4: Blokovanie IP a DNS",
         "description": "Zname rozsahy IP adries VPN providerov su blokovane priamo. DNS poziadavky na VPN domeny su zachytavane. Komercni VPN provideri s verejnymi zoznamami serverov su najjednoduchsie ciele — ich cela infrastruktura moze byt zablokovana za minuty."
       },
-      "conclusion": "Vysledok: jednoduche VPN a standardne proxy sluzby ako NordVPN, ExpressVPN a Surfshark prestanu fungovat v priebehu hodin od represie. Iba proxy protokoly specificky navrhnute tak, aby boli neodlisitelne od beznej webovej prevadzky, preziju."
+      "conclusion": "Výsledok: bežné VPN aplikácie postavené na štandardných protokoloch zvyčajne prestanú fungovať v priebehu niekoľkých hodín od začiatku blokovania. Prežijú len protokoly navrhnuté tak, aby boli na nerozoznanie od bežnej webovej prevádzky."
     },
     "defeats": {
       "title": "Ako Doppler porazi kazdu metodu detekcie",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Blokovany v Rusku — a stale tu",
-      "badge": "Potvrdene Roskomnadzorom",
-      "p1": "Ruske urady specificky zacielili a zablokovali Doppler VPN. Nasa domena bola pridana na federalny zoznam blokovani. Toto nie je nieco, co skryvame — je to dokaz, ze nasa technologia funguje.",
-      "p2": "Na rozdiel od komercnych VPN providerov, ktori vyhovuju poziadavkam na stiahnutie alebo ticho opustia obmedzovane trhy, Doppler bol vytvoreny presne pre tento scenar. Ked je nasa webova stranka zablokovana, nas Telegram bot zostava pristupny. Ked su IP adresy serverov zablokovane, nasa infrastruktura sa automaticky rotuje.",
-      "p3": "Kazde blokovanie, ktore uvalite, obideme. To nie je marketingove tvrdenie — je to nasa denne prevadzka.",
-      "stat1label": "Domena blokovana RKN",
-      "stat1value": "Potvrdene",
+      "title": "Odstránená na žiadosť cenzúry — a stále funguje",
+      "badge": "Odstránenie z App Store, Rusko",
+      "p1": "Apple odstránil aplikáciu Doppler VPN z ruského App Store po právnej požiadavke Roskomnadzoru, štátneho regulátora komunikácií. Rovnakým spôsobom Apple odstránil desiatky VPN aplikácií. Zverejňujeme to, namiesto toho aby sme to skrývali: byť označený je to, čo stretáva nástroje, ktoré naďalej fungujú.",
+      "p2": "Na rozdiel od poskytovateľov, ktorí žiadostiam o odstránenie vyhovejú alebo ticho opustia obmedzené trhy, Doppler bol postavený práve na toto. Keď nás obchod s aplikáciami odstráni, náš telegramový bot aplikáciu stále doručí. Keď sú IP adresy serverov zablokované, naša infraštruktúra automaticky mení vstupné body.",
+      "p3": "Distribúcia blokovanie obchádza — priame APK, telegramový bot a rotujúce vstupné body. Je to vlastnosť architektúry, nie sľub.",
+      "stat1label": "Ruský App Store",
+      "stat1value": "Odstránená na žiadosť RKN",
       "stat2label": "Stav sluzby",
       "stat2value": "Funkcna",
       "stat3label": "Alternativny pristup",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Mozny dalsi krok",
         "title": "Model bieleho zoznamu",
-        "description": "Namiesto blokovania konkretnych protokolov by boli pristupne iba schvalene domeny a IP adresy. Vsetko ostatne je blokovane standardne. SSH, RDP, herné porty — vsetko blokovane, pokial nie je registrovane pravnou osobou. Toto bolo ciastocne testovane pocas ruskeho zakazu Telegramu v 2018.",
+        "description": "Namiesto blokovania konkrétnych protokolov by zostali dostupné len schválené domény a IP adresy. Všetko ostatné je predvolene zablokované. SSH, RDP, herné porty — všetko zatvorené, pokiaľ to nezaregistruje právnická osoba. Správanie podľa bieleho zoznamu už bolo vyskúšané v národnom meradle počas rozsiahlych blokovacích akcií a cvičení s odpojením.",
         "status": "Technicky realizovatelne, ciastocne nasadene"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Ekonomicka kontrola reality",
-        "p1": "V roku 2018, ked sa Roskomnadzor pokusil zablokovat iba Telegram, skonil blokovanim milionov IP adries Amazonu a Google. Pokladne v obchodoch prestali fungovat. Zariadenia inteligentnej domacnosti isli offline. Bankov push notifikacie zlyhali.",
-        "p2": "Model bieleho zoznamu by sposobil toto v 100-nasobnom meritku. Moderne ruske webove stranky zavisia od Google Fonts, zahranicnych CDN kniznic, medzinarodnych certifikacnych autorit a cloudovych sluzieb. Banky a logisticke spolocnosti pouzivaju zahranicne SSL certifikaty. Vyvojari by stratili pristup ku GitHub, Docker Hub a npm.",
+        "p1": "V roku 2018 sa pokus zablokovať jedinú aplikáciu na zasielanie správ skončil zablokovaním miliónov IP adries Amazonu a Googlu. Prestali fungovať pokladnice. Zariadenia inteligentnej domácnosti sa odpojili. Neprichádzali bankové upozornenia. Vedľajšie škody sú obvyklým výsledkom hrubého blokovania.",
+        "p2": "Model bieleho zoznamu by to spôsobil v oveľa väčšom meradle. Dnešné weby všade závisia od zahraničných CDN, služieb písem, certifikačných autorít a cloudových platforiem. Banky a logistické firmy používajú zahraničné SSL certifikáty. Vývojári by stratili prístup ku GitHubu, Docker Hubu a npm.",
         "p3": "Uplna izolacia je technicky mozna — ale jej cenou je technologicka degradacia. Aktualizacie Windows a Androidu sa stanu nedostupnymi. Medicinske zariadenia stratia podporu ovladacov. Vyvoj AI sa uplne zastavi bez globalnej open-source infrastruktury.",
         "p4": "Najpravdepodobnejsia cesta je postupne obmedzovanie v priebehu rokov, nie nahlé odpojenie. Ale kazdy krok eskalácie znamena, ze viac pouzivatelov VPN zostane pozadu — pokial nie su pripraveni."
       }
@@ -1642,8 +1689,8 @@
         "description": "Posielame aktualizácie protokolu, aby sme boli pred novymi technikami blokovania. Zapnite automaticke aktualizacie alebo pravidelne kontrolujte aktualizacie cez nase Telegram kanaly."
       },
       "step5": {
-        "title": "Zdielate to s ludmi, ktori to potrebuju",
-        "description": "Cim viac ludi ma Doppler nainstalovany pred stupnovanim obmedzeni, tym lepsie. Zdielate odkaz na naseho Telegram bota — je to distribucny kanal najodolnejsi voci cenzure, ktory mame."
+        "title": "Zdieľajte uvážlivo",
+        "description": "Čím viac ľudí bude mať Doppler nainštalovaný skôr, než sa obmedzenia sprísnia, tým lepšie — odkaz na nášho telegramového bota je najodolnejší kanál voči cenzúre, aký máme. Jedno upozornenie: niektoré krajiny vrátane Ruska dnes pokutujú jednotlivcov za propagáciu nástrojov na obchádzanie blokovaní. Zdieľajte súkromne s ľuďmi, ktorých poznáte, a skôr než niečo zverejníte, overte si pravidlá v mieste, kde žijete."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Často kladené otázky",
       "q1": {
         "question": "Dokáže Doppler VPN obísť vládnu cenzúru?",
         "answer": "Áno. Doppler používa VLESS-Reality, ktorý robí VPN prevádzku nerozoznateľnou od bežného HTTPS. Obchádza DPI, TSPU a Veľký firewall bez akýchkoľvek detekovateľných VPN podpisov."
       },
       "q2": {
         "question": "Funguje Doppler VPN v Rusku, Číne a Iráne?",
-        "answer": "Áno. Doppler je špeciálne vytvorený pre cenzurované regióny. Naša doména bola zablokovaná Roskomnadzor, čo dokazuje, že naša technológia funguje."
+        "answer": "Áno. Doppler je postavený pre silne filtrované siete. V Rusku Apple odstránil našu aplikáciu z miestneho App Store na žiadosť Roskomnadzoru — a služba fungovala ďalej cez nášho telegramového bota a rotujúce vstupné body. Používatelia v Rusku, Číne, Iráne a Turecku sa pripájajú denne."
       },
       "q3": {
         "question": "Prečo je VLESS-Reality lepší ako OpenVPN alebo WireGuard na obchádzanie cenzúry?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Nikoho nenechame pozadu",
-      "subtitle": "Doppler VPN bol vytvoreny specificky pre obmedzovane siete. Neustale vylepsujeme nasu infrastrukturu, rotujeme servery a aktualizujeme protokoly, aby sme boli pred kazdou novou technikou blokovania. Vasa sloboda na internete nie je predmetom vyjednavania.",
+      "title": "Postavené pre siete, ktoré sa bránia",
+      "subtitle": "Doppler VPN je určený pre siete s obmedzeniami. Meníme servery, aktualizujeme protokoly a zlepšujeme infraštruktúru, ako sa menia techniky blokovania.",
       "downloadIos": "Stiahnut pre iOS",
       "downloadAndroid": "Stiahnut pre Android",
       "telegramBot": "Ziskat cez Telegram Bot",
@@ -1778,12 +1826,12 @@
   },
   "payWithCrypto": {
     "metadata": {
-      "title": "Kúpte VPN za Bitcoin — Anonymná platba | Doppler VPN",
-      "description": "Zaplaťte Doppler VPN Bitcoinom, Ethereom, USDT alebo USDC. Anonymná krypto platba, bez karty alebo emailu. Funguje na iPhone, Android, Mac a Windows."
+      "title": "Kúpte VPN za bitcoin — bez karty",
+      "description": "Zaplaťte Doppler VPN bitcoinom, etherom, USDT alebo USDC. Platba kryptomenou, bez karty i e-mailu. Funguje na iPhone, Androide, Macu a Windows."
     },
     "hero": {
       "title": "Kúpte VPN za Bitcoin, Ethereum a stablecoiny",
-      "subtitle": "Plaťte Doppler VPN kryptom. Bez karty, bez emailu, bez stôp — predplatné je spojené s anonymným ID účtu, ktoré funguje na každom zariadení.",
+      "subtitle": "Zaplaťte Doppler VPN kryptomenou. Bez karty a bez e-mailu — vaše predplatné je viazané na anonymný identifikátor účtu, ktorý funguje na každom zariadení.",
       "cta": "Kúpiť kryptom"
     },
     "coins": {
@@ -1897,7 +1945,7 @@
       },
       "done": {
         "title": "Ste chraneni",
-        "description": "To je vsetko. Ziadne potvrdenie e-mailom, ziadne hesla na zapametanie, ziadne ucty na spravu. Vase pripojenie je sifrovane, vasa identita je anonymna a vasa VPN nema tusenia, kto ste. Prehliadate ako skutocne anonymny pouzivatel VPN — bez e-mailu, bez stopy."
+        "description": "A to je všetko. Žiadny potvrdzovací e-mail, na ktorý by ste čakali, žiadne heslá na zapamätanie, žiadne účty na správu. Vaše pripojenie je šifrované a nikdy sa nepýtame, kto ste. Prehliadate pod anonymným identifikátorom účtu — bez e-mailu a bez záznamu o tom, kam chodíte."
       }
     },
     "noCollect": {
@@ -1987,8 +2035,8 @@
         "description": "Nase servery overuju legitimitu klucu bez uchovavania dat o identite. Autentizacia prebieha prostrednictvom TLS 1.3 — ziadne ucty, ziadna databaza prihlasovacich udajov."
       },
       "zeroPii": {
-        "title": "Nulove uchovane osobne udaje",
-        "description": "Ziadny e-mail, ziadne meno, ziadny telefon, ziadne IP logy. Architektonicky nie sme schopni identifikovat nasich pouzivatelov, pretoze nikdy nezhromazdujeme identifikacne udaje."
+        "title": "Minimum údajov už v návrhu",
+        "description": "Žiadny e-mail, žiadne meno, žiadne telefónne číslo. Nikdy nezhromažďujeme identifikačné údaje, podľa ktorých by sa dalo povedať, kto niekto je; jediným záznamom o pripojení zariadenia je krátky overovací záznam uchovávaný 90 dní na predchádzanie zneužitiu."
       }
     },
     "getStarted": {
@@ -2285,7 +2333,7 @@
       },
       "noLogs": {
         "title": "Prisna politika bez zaznamov",
-        "description": "Doppler nikdy nezhromazduje, neuklada ani nezdielna vase udaje o prehliadani. Ziadne zaznamy o pripojeniach, ziadne zaznamy o prevadzke, ziadne zaznamy DNS dotazov. Nedokazeme vas identifikovat, pretoze nikdy nezhromazdujeme identifikacne udaje."
+        "description": "Doppler nikdy nezhromažďuje, neukladá ani nezdieľa údaje o vašom prehliadaní. Žiadne záznamy o prevádzke, žiadne záznamy DNS dopytov, žiadny záznam spájajúci vás s tým, čo navštevujete. Prihlásenie zanechá krátky overovací záznam uchovávaný 90 dní na predchádzanie zneužitiu — ukazuje, že sa zariadenie pripojilo, nikdy kam šlo."
       },
       "globalServers": {
         "title": "6 globalnych serverovych lokalit",
@@ -2400,7 +2448,7 @@
       },
       "noLogs": {
         "title": "Prisna politika bez zaznamov",
-        "description": "Doppler nikdy nezhromazduje, neuklada ani nezdielna vase udaje o prehliadani. Ziadne zaznamy o pripojeniach, ziadne zaznamy o prevadzke, ziadne zaznamy DNS dotazov. Nedokazeme vas identifikovat, pretoze nikdy nezhromazdujeme identifikacne udaje."
+        "description": "Doppler nikdy nezhromažďuje, neukladá ani nezdieľa údaje o vašom prehliadaní. Žiadne záznamy o prevádzke, žiadne záznamy DNS dopytov, žiadny záznam spájajúci vás s tým, čo navštevujete. Prihlásenie zanechá krátky overovací záznam uchovávaný 90 dní na predchádzanie zneužitiu — ukazuje, že sa zariadenie pripojilo, nikdy kam šlo."
       },
       "globalServers": {
         "title": "6 globalnych serverovych lokalit",
@@ -2523,7 +2571,7 @@
       },
       "noLogs": {
         "title": "Prisne zasady bez zaznamov",
-        "description": "Doppler nikdy nezbiera, neuklada ani nezdielala vase udaje o prehliadani. Ziadne zaznamy o pripojeni, ziadne zaznamy o prevadzke, ziadne zaznamy o DNS dotazoch. Nemozeme vas identifikovat, pretoze nikdy nezbierame identifikacne informacie."
+        "description": "Doppler nikdy nezhromažďuje, neukladá ani nezdieľa údaje o vašom prehliadaní. Žiadne záznamy o prevádzke, žiadne záznamy DNS dopytov, žiadny záznam spájajúci vás s tým, čo navštevujete. Prihlásenie zanechá krátky overovací záznam uchovávaný 90 dní na predchádzanie zneužitiu — ukazuje, že sa zariadenie pripojilo, nikdy kam šlo."
       },
       "crossDevice": {
         "title": "Synchronizacia napriec vsetkymi Apple zariadeniami",
@@ -2675,7 +2723,7 @@
       },
       "noLogs": {
         "title": "Prisne zasady bez zaznamov",
-        "description": "Doppler nikdy nezbiera, neuklada ani nezdielala vase udaje o prehliadani. Ziadne zaznamy o pripojeni, ziadne zaznamy o prevadzke, ziadne zaznamy o DNS dotazoch. Nemozeme vas identifikovat, pretoze nikdy nezbierame identifikacne informacie."
+        "description": "Doppler nikdy nezhromažďuje, neukladá ani nezdieľa údaje o vašom prehliadaní. Žiadne záznamy o prevádzke, žiadne záznamy DNS dopytov, žiadny záznam spájajúci vás s tým, čo navštevujete. Prihlásenie zanechá krátky overovací záznam uchovávaný 90 dní na predchádzanie zneužitiu — ukazuje, že sa zariadenie pripojilo, nikdy kam šlo."
       },
       "globalServers": {
         "title": "6 globalnych serverovych lokalit",
@@ -2885,7 +2933,7 @@
       "title": "VPN v UAE — Často kladené otázky",
       "q1": {
         "question": "Je používanie VPN legálne v UAE?",
-        "answer": "Osobné používanie VPN na prístup k blokovaným službám v UAE je právna šedá zóna. Federálny zákon č. 12/2016 sankcionuje používanie VPN pri páchaní trestných činov — nie samotné používanie VPN. V praxi milióny rezidentov UAE používajú VPN denne na prácu, streamovanie a hovory bez incidentov. Doppler nezhromažďuje aktivity, takže ani pod príkazom nemôžeme identifikovať, kto službu používal alebo k čomu pristupoval."
+        "answer": "Osobné používanie VPN v Spojených arabských emirátoch sa pohybuje v právnej sivej zóne. Federálny zákon č. 12 z roku 2016 trestá použitie VPN pri páchaní trestného činu, nie používanie VPN ako také, a mnohí obyvatelia ho používajú denne na prácu, streamovanie a hovory. Odráža to, ako sa zákon uplatňoval, nie záruku pre vašu situáciu — skôr než sa na to spoľahnete, overte si aktuálny stav. Doppler neuchováva záznamy o prevádzke ani aktivite, takže neexistuje záznam o tom, k čomu kto pristupoval."
       },
       "q2": {
         "question": "Prečo sú hovory na WhatsApp a FaceTime blokované v UAE?",
@@ -2997,7 +3045,7 @@
       },
       "q3": {
         "question": "Je bezpečné používať VPN v Iráne?",
-        "answer": "VPN sú technicky zakázané v Iráne, ale presadzovanie voči jednotlivým používateľom je zriedkavé — milióny ich používajú denne. Doppler nenecháva žiadne záznamy o pripojeniach ani aktivitách, takže nevieme identifikovať používateľov ani v prípade donútenia. Používame rovnakú architektúru bez záznamov, ktorej dôverujú novinári a aktivisti v regióne."
+        "answer": "V Iráne sú VPN formálne obmedzené, hoci zásahy proti jednotlivým používateľom boli zriedkavé a milióny ľudí ich používajú denne. Opisuje to doterajšiu prax, nie záruku — zvážte vlastné riziko. Doppler neuchováva záznamy o pripojení ani aktivite, takže neexistuje záznam o tom, k čomu používateľ pristupoval; prihlásenie zanechá len krátky overovací záznam uchovávaný 90 dní."
       },
       "q4": {
         "question": "Môžem platiť bez zahraničnej kreditnej karty?",
@@ -3109,7 +3157,7 @@
       },
       "q5": {
         "question": "Je používanie VPN zákonné pre cudzincov v Číne?",
-        "answer": "Osobné používanie VPN cudzincami sa v podstate nikdy nepresadzuje. Čínsky zákon obmedzuje nepovolené VPN, ale presadzovanie cielené na komerčných operátorov, nie na jednotlivých cestovateľov alebo expatov. Používajte zdravý rozum — nepublikujte o používaní VPN na čínskej sociálnej sieti (WeChat, Weibo) a budete v poriadku."
+        "answer": "Čínske právo obmedzuje neautorizované VPN služby a vymáhanie sa v drvivej väčšine zameriavalo na komerčných prevádzkovateľov, nie na jednotlivých cestovateľov či expatov. Takto sa pravidlá doteraz uplatňovali; nie je to prísľub ohľadom vášho prípadu. Rozumné opatrenie: nepíšte o používaní VPN na čínskych sociálnych sieťach (WeChat, Weibo)."
       },
       "q6": {
         "question": "Čo ak Doppler prestane fungovať v Číne?",
@@ -3170,7 +3218,7 @@
       },
       "feature4": {
         "title": "Bez účtu, bez záznamov",
-        "description": "Žiadny e-mail, žiadne telefónne číslo. Doppler neuchováva žiadne pripojovacie ani aktivita záznamy. Aj keby sme boli donútení, nemôžeme identifikovať používateľa alebo jeho prevádzku."
+        "description": "Žiadny e-mail, žiadne telefónne číslo. Doppler neuchováva záznamy o pripojení ani aktivite, takže nič nespája človeka s jeho prevádzkou. Prihlásenie zanechá overovací záznam na 90 dní, a nič viac."
       }
     },
     "howItWorks": {
@@ -3197,7 +3245,7 @@
       "title": "VPN v Rusku — FAQ",
       "q1": {
         "question": "Je používanie VPN v Rusku legálne?",
-        "answer": "Osobné používanie VPN nie je v Rusku kriminalizované. Zákon o VPN z roku 2017 (Federálny zákon č. 276-FZ) cielený na poskytovateľov VPN, ktorí sa odmietajú podriadiť registračnej listine blokovaných stránok RKN — nevyžaduje postihy pre konečných používateľov. Milióny Rusov používajú VPN každý deň. Doppler nemá ruské aktíva a nedodržiava registre RKN, takže na našej strane služba nie je filtrovaná."
+        "answer": "Používanie VPN samo osebe nie je v Rusku trestným činom a federálny zákon č. 276-FZ mieri na poskytovateľov VPN, nie na koncových používateľov. Od septembra 2025 sa zmenili dve veci, ktoré stojí za to vedieť: úmyselné vyhľadávanie materiálov z federálneho zoznamu «extrémistických» sa stalo správnym deliktom s pokutou 3 000 až 5 000 rubľov a reklama či propagácia nástrojov na obchádzanie blokovaní sa trestá osobitne — 50 000 až 80 000 rubľov pre fyzickú osobu. Milióny ľudí v Rusku používajú VPN denne, ale pravidlá sa sprísňujú; overte si aktuálny stav namiesto spoliehania sa na túto stránku."
       },
       "q2": {
         "question": "Bude Doppler fungovať na Rostelecom, MTS alebo Beeline?",
@@ -3521,7 +3569,7 @@
       },
       "q5": {
         "question": "Je legálne použiť VPN na obídenie blokácie WhatsApp v SAE?",
-        "answer": "Osobné používanie je právna šedá zóna, ale nie je vymáhané proti jednotlivcom. Federálny zákon SAE č. 12 z roku 2016 kriminalizuje používanie VPN na spáchanie trestného činu — uskutočnenie osobného hovoru nie je trestný čin. Milióny obyvateľov a turistov v SAE denne používajú VPN bez incidentu. Doppler neuchováva žiadne záznamy."
+        "answer": "Nepoznáme prípad, keď by obyvateľ Emirátov dostal pokutu za osobné použitie VPN na uskutočnenie hovoru. Federálny zákon SAE č. 12 z roku 2016 trestá použitie VPN «na účel spáchania trestného činu» a osobný telefonát ním nie je. Odráža to prax vymáhania, nie záruku — overte si aktuálny stav. Doppler neuchováva záznam o tom, kto sa pripája ani čo robí."
       },
       "q6": {
         "question": "Ako sa cena porovnáva s BOTIM?",

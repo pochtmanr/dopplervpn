@@ -47,7 +47,8 @@ export type CtaLocation =
   | "landing-cta"
   | "downloads-page"
   | "sticky-mobile"
-  | "checkout-success";
+  | "checkout-success"
+  | "account-dashboard";
 
 /**
  * Which app build the click is for. "telegram" is a real acquisition channel

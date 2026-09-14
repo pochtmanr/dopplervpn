@@ -452,6 +452,27 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
           </div>
         </section>
 
+        {/* ── FAQ ──────────────────────────────────────────────── */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-10 text-center">
+              {t("faq.title")}
+            </h2>
+            <div className="space-y-4">
+              {faqKeys.map((key) => (
+                <div key={key} className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6">
+                  <h3 className="text-lg font-semibold text-text-primary mb-2">
+                    {t(`faq.${key}.question`)}
+                  </h3>
+                  <p className="text-sm text-text-muted leading-relaxed">
+                    {t(`faq.${key}.answer`)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── Related Pages ────────────────────────────────────── */}
         <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">

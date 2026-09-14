@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { BLOG_LOCALES } from "@/i18n/blog-locales";
 import { safeCompare } from "@/lib/api-auth";
 
@@ -53,6 +53,12 @@ export async function POST(request: Request) {
   for (const path of paths) {
     revalidatePath(path);
   }
+
+  // The blog index and the sitemap read through unstable_cache with these
+  // tags. Without flushing them a new post or locale stays out of the index
+  // listing and the sitemap for up to another 24h after the pages refresh.
+  revalidateTag("blog-index");
+  revalidateTag("sitemap");
 
   return NextResponse.json({
     revalidated: paths.length,

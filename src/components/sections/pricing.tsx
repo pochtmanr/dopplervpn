@@ -3,10 +3,10 @@
 import { useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Section, SectionHeader } from "@/components/ui/section";
-import { Card } from "@/components/ui/card";
+import { SectionHeader } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
+import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 import { trackGetPro } from "@/lib/track-cta";
 import { BtcIcon, EthIcon, UsdtIcon, UsdcIcon } from "@/components/icons/crypto";
 import { VisaIcon, MastercardIcon } from "@/components/icons/cards";
@@ -85,7 +85,6 @@ function DurationSelector({ selected, onSelect, t }: DurationSelectorProps) {
       />
       {durations.map((duration, index) => {
         const isSelected = selected === duration;
-        const isAnnual = duration === "annual";
 
         return (
           <button
@@ -222,18 +221,15 @@ export function Pricing() {
   const [selectedDuration, setSelectedDuration] = useState<Duration>("annual");
 
   return (
-    <Section id="pricing" className="bg-bg-secondary/30">
-      <SectionHeader title={t("title")} subtitle={t("subtitle")} />
+    <section id="pricing" className="section relative overflow-hidden bg-bg-secondary/30">
+      <PricingBackdrop />
 
-      <Reveal>
-        <div className="relative">
-          {/* Decorative background glows */}
-          <div className="absolute -bottom-20 -end-20 w-[20rem] h-[20rem] bg-accent-gold/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative mx-auto max-w-site">
+        <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
-          <Card
-            padding="none"
-            className="relative border-accent-teal/20 bg-gradient-to-br from-accent-teal/5 via-transparent to-accent-gold/3 overflow-hidden"
-          >
+        <Reveal>
+          {/* Full site width; translucent glass so the glyph backdrop reads through */}
+          <div className="relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/[0.08] via-bg-primary/60 to-bg-primary/75 backdrop-blur-md">
             {/* Top accent line */}
             <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
 
@@ -263,19 +259,33 @@ export function Pricing() {
                 </div>
 
                 {/* Price Display */}
-                <div className="text-center lg:text-start mb-8 lg:mb-0 flex items-center justify-center lg:justify-start flex-1">
+                <div className="text-center lg:text-start flex items-center justify-center lg:justify-start flex-1">
                   <PriceDisplay duration={selectedDuration} t={t} />
                 </div>
 
-                {/* Notes — desktop only, shown below the price */}
-                <div className="hidden lg:flex flex-col gap-1.5 mt-auto pt-8 border-t border-overlay/5">
-                  <p className="text-accent-teal text-xs font-medium flex items-center gap-2">
-                    <ShieldIcon />
-                    {t("trialNote")}
-                  </p>
-                  <p className="text-text-muted text-xs ps-7">
-                    {t("guarantee")}
-                  </p>
+                {/* Payment methods + tax — under the price */}
+                <div className="mt-6 lg:mt-auto pt-6 lg:pt-8 border-t border-overlay/5 flex flex-col items-center lg:items-start gap-2 text-center lg:text-start text-xs text-text-muted">
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
+                      <VisaIcon width={28} height={18} />
+                      <MastercardIcon width={28} height={18} />
+                    </div>
+                    <div className="w-px h-4 bg-overlay/20" />
+                    <div className="flex items-center gap-1.5">
+                      <BtcIcon size={18} />
+                      <EthIcon size={18} />
+                      <UsdtIcon size={18} />
+                      <UsdcIcon size={18} />
+                    </div>
+                  </div>
+                  <span>
+                    {t("cryptoPaymentNote")}
+                    {" · "}
+                    <Link href="/pay-with-crypto" className="text-accent-teal hover:underline">
+                      {t("cryptoPaymentLearnMore")} →
+                    </Link>
+                  </span>
+                  <span>{t("taxNote")}</span>
                 </div>
               </div>
 
@@ -312,49 +322,21 @@ export function Pricing() {
                   </svg>
                 </Link>
 
-                {/* Notes — mobile only */}
-                <div className="lg:hidden flex flex-col items-center gap-1.5 mt-4">
-                  <p className="text-accent-teal text-xs font-medium">
+                {/* Trial + guarantee — under the CTA */}
+                <div className="flex flex-col items-center lg:items-start gap-1.5 mt-4">
+                  <p className="text-accent-teal text-xs font-medium flex items-start gap-2 text-start">
+                    <ShieldIcon />
                     {t("trialNote")}
                   </p>
-                  <p className="text-text-muted text-xs text-center">
+                  <p className="text-text-muted text-xs text-center lg:text-start lg:ps-7">
                     {t("guarantee")}
                   </p>
                 </div>
-
-                {/* Payment methods */}
-                <div className="text-center text-xs text-text-muted mt-4 flex flex-col items-center gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1">
-                      <VisaIcon width={28} height={18} />
-                      <MastercardIcon width={28} height={18} />
-                    </div>
-                    <div className="w-px h-4 bg-overlay/20" />
-                    <div className="flex items-center gap-1.5">
-                      <BtcIcon size={18} />
-                      <EthIcon size={18} />
-                      <UsdtIcon size={18} />
-                      <UsdcIcon size={18} />
-                    </div>
-                  </div>
-                  <span>
-                    {t("cryptoPaymentNote")}
-                    {" · "}
-                    <Link href="/pay-with-crypto" className="text-accent-teal hover:underline">
-                      {t("cryptoPaymentLearnMore")} →
-                    </Link>
-                  </span>
-                </div>
-
-                {/* Tax note — always visible */}
-                <p className="text-center text-text-muted text-xs mt-4">
-                  {t("taxNote")}
-                </p>
               </div>
             </div>
-          </Card>
-        </div>
-      </Reveal>
-    </Section>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }

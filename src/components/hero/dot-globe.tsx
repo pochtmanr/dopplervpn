@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Hand-rolled "3D" dot globe on a plain 2D canvas — zero dependencies.
- * A fibonacci-distributed dot sphere rotates slowly; the 8 real Doppler
- * server locations glow in teal, with traveling connection arcs that all
- * route through the Warsaw hub (mirrors src/components/sections/servers.tsx).
+ * Hand-rolled "3D" ASCII globe on a plain 2D canvas — zero dependencies.
+ * A lat/lon grid rotates slowly: land cells are drawn as characters from a
+ * density ramp, the ocean stays a sparse field of faint dots so the sphere's
+ * volume still reads. The 8 real Doppler server locations glow in teal, with
+ * traveling connection arcs that all route through the Warsaw hub (mirrors
+ * src/components/sections/servers.tsx).
  *
  * Perf contract: rAF starts via requestIdleCallback (never competes with LCP),
  * pauses when offscreen or the tab is hidden, renders a single static frame
@@ -73,6 +75,25 @@ const CITIES: ReadonlyArray<{ lat: number; lon: number; label: string }> = [
 // Positive tilt = north pole leans toward the viewer (Earth seen from above)
 const TILT = 0.35;
 const FOV = 3.5;
+
+// Density ramp — sparsest at the limb, densest facing the viewer. Punctuation
+// carries the thin end, shade blocks the heavy end: blocks fill their whole cell,
+// so the front of the globe reads as mass rather than as louder punctuation.
+const RAMP = " .:-=+*#▒▓█";
+// Canvas-only font stack: no next/font needed, no CSP surface, always resolves.
+const MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+// Radius (css px) of the teal pointer halo, mirroring the Argus glyph field.
+const HALO_PX = 60;
+// A monospace cell is ~0.6x as wide as it is tall. Stepping longitude by that
+// ratio keeps the glyphs on a square-ish lattice instead of a stretched one.
+const CELL_ASPECT = 0.6;
+// Glyph size and grid pitch shrink together, so smaller characters stay packed
+// into solid continents instead of spreading into a sparse scatter.
+const GLYPH_SCALE = 0.6;
+// 20fps, not 60: a character field at 60fps reads as television static; at 20
+// it reads as a terminal, and it costs a third as much.
+const FRAME_MS = 50;
+
 // Initial Y rotation chosen so the Americas face the viewer on load;
 // front-center longitude = angle + 90°.
 const START_ANGLE = Math.PI;
@@ -203,13 +224,15 @@ export function DotGlobe({
     /* ── Geometry (allocated once) ─────────────────────────────────── */
     // Equal-area lat/lon dot grid: land dots form the continents, a sparser
     // ocean grid keeps the sphere volume readable. pointCount picks density.
-    const latStep = pointCount >= 600 ? 3.0 : 4.2;
+    // latStep is the character row pitch — coarser than a dot grid would be, so
+    // individual glyphs stay legible instead of collapsing into a texture.
+    const latStep = (pointCount >= 600 ? 3.6 : 4.6) * GLYPH_SCALE;
     const landArr: number[] = [];
     const oceanArr: number[] = [];
     for (let lat = -60; lat <= 84; lat += latStep) {
       const cosLat = Math.max(Math.cos((lat * Math.PI) / 180), 0.04);
-      const lonStep = latStep / cosLat;
-      const oceanEvery = Math.round(3.2 / cosLat) || 1; // thin the ocean grid
+      const lonStep = (latStep * CELL_ASPECT) / cosLat;
+      const oceanEvery = Math.round(3.2 / (cosLat * GLYPH_SCALE)) || 1; // thin the ocean grid
       let col = 0;
       for (let lon = -180; lon < 180; lon += lonStep, col++) {
         const [x, y, z] = latLonToVec(lat, lon);
@@ -232,9 +255,9 @@ export function DotGlobe({
     );
     // Projected node positions, refreshed every frame for arc endpoints
     const nodeScreen = nodes.map(() => ({ x: 0, y: 0, z: 0, s: 1 }));
-    const bodyFamily = getComputedStyle(document.body).fontFamily || "sans-serif";
-    const labelFont = `500 11px ${bodyFamily}`;
-    const cityFont = `400 10px ${bodyFamily}`;
+    // Mono labels so the city names sit in the same typographic world as the field
+    const labelFont = `500 11px ${MONO}`;
+    const cityFont = `400 10px ${MONO}`;
 
     /* ── Theme colors (re-read on theme switch) ────────────────────── */
     let dotRgb: [number, number, number] = [138, 138, 138];
@@ -302,19 +325,26 @@ export function DotGlobe({
     };
     for (let i = 0; i < 4; i++) arcs.push(spawnArc());
 
-    /* ── Pointer parallax (gentle, lerped) ─────────────────────────── */
-    let targetTiltX = 0;
-    let targetTiltY = 0;
-    let curTiltX = 0;
-    let curTiltY = 0;
+    /* ── Pointer ───────────────────────────────────────────────────── */
+    // No parallax: the globe keeps its own rotation and never tilts toward the
+    // cursor. The pointer only drives the halo below.
+    // Teal pointer halo: glyphs under the cursor light up in accent. Gated on a
+    // hover-capable pointer so a touch device never leaves a halo stranded where
+    // the last tap landed.
+    const canHover = window.matchMedia("(hover: hover)").matches;
+    let haloOn = false;
+    let haloX = 0;
+    let haloY = 0;
     const onPointerMove = (e: PointerEvent) => {
-      const rect = wrapper.getBoundingClientRect();
-      targetTiltY = ((e.clientX - rect.left) / rect.width - 0.5) * 0.22;
-      targetTiltX = ((e.clientY - rect.top) / rect.height - 0.5) * 0.18;
+      if (canHover) {
+        const rect = wrapper.getBoundingClientRect();
+        haloOn = true;
+        haloX = e.clientX - rect.left;
+        haloY = e.clientY - rect.top;
+      }
     };
     const onPointerLeave = () => {
-      targetTiltX = 0;
-      targetTiltY = 0;
+      haloOn = false;
     };
 
     /* ── Render ────────────────────────────────────────────────────── */
@@ -322,17 +352,14 @@ export function DotGlobe({
 
     const drawFrame = (dt: number) => {
       angle += idleSpeed * dt;
-      curTiltX += (targetTiltX - curTiltX) * 0.04;
-      curTiltY += (targetTiltY - curTiltY) * 0.04;
 
       const cx = cssW / 2;
       const cy = cssH / 2;
       const R = Math.min(cssW, cssH) * 0.42;
-      const sinA = Math.sin(angle + curTiltY);
-      const cosA = Math.cos(angle + curTiltY);
-      const tilt = TILT + curTiltX;
-      const sinT = Math.sin(tilt);
-      const cosT = Math.cos(tilt);
+      const sinA = Math.sin(angle);
+      const cosA = Math.cos(angle);
+      const sinT = Math.sin(TILT);
+      const cosT = Math.cos(TILT);
 
       const project = (x: number, y: number, z: number) => {
         const rx = x * cosA + z * sinA;
@@ -356,15 +383,32 @@ export function DotGlobe({
         ctx.fill();
       }
 
-      // Land dots — the continents
+      // Land glyphs — the continents as an ASCII density ramp. `front` (0 at the
+      // limb, 1 facing the viewer) picks both the character and the alpha, so
+      // depth shades the way it does in ASCII art. One font size per frame:
+      // re-assigning ctx.font per glyph is the only thing here that costs real time.
+      ctx.font = `${Math.max(4, R * 0.055 * GLYPH_SCALE)}px ${MONO}`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      const haloR2 = HALO_PX * HALO_PX;
       for (let i = 0; i < landN; i++) {
         const p = project(land[i * 3], land[i * 3 + 1], land[i * 3 + 2]);
         const front = Math.max(0, p.z);
-        ctx.fillStyle = rgba(dotRgb, 0.06 + 0.6 * front);
-        const r = (0.7 + 1.0 * front) * p.s;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fill();
+        if (front <= 0.02) continue;
+        const ch = RAMP[Math.min(RAMP.length - 1, Math.floor(front * RAMP.length))];
+        if (ch === " ") continue;
+        let lit = false;
+        if (haloOn) {
+          const hx = p.x - haloX;
+          const hy = p.y - haloY;
+          lit = hx * hx + hy * hy <= haloR2;
+        }
+        // Flat 50% under the halo: depth already reads through the character
+        // itself, so varying the alpha too made the teal shout at the centre.
+        ctx.fillStyle = lit
+          ? rgba(arcRgb, 0.5)
+          : rgba(dotRgb, 0.06 + 0.6 * front);
+        ctx.fillText(ch, p.x, p.y);
       }
 
       // Project nodes for this frame
@@ -477,10 +521,11 @@ export function DotGlobe({
     let started = false;
 
     const loop = (now: number) => {
+      if (running) rafId = requestAnimationFrame(loop);
+      if (now - last < FRAME_MS) return; // 20fps gate
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
       drawFrame(dt);
-      if (running) rafId = requestAnimationFrame(loop);
     };
     const syncLoop = () => {
       const shouldRun = started && visible && pageVisible && !reduceMotion.matches;

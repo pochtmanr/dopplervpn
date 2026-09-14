@@ -129,7 +129,7 @@
     "headlinePart1a": "Działa tam, gdzie inne VPN-y",
     "headlinePart1b": "są blokowane.",
     "headlinePart2": "",
-    "subheadline": "Twój ruch wygląda jak zwykły HTTPS, więc DPI go nie widzi. Bez konta, bez logów, bez śladu — po prostu otwórz aplikację i połącz się.",
+    "subheadline": "Twój ruch wygląda jak zwykły HTTPS, więc głęboka inspekcja pakietów go nie widzi. Bez konta, bez dzienników aktywności, bez zapisu, dokąd wchodzisz — po prostu otwórz aplikację i połącz się.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Nie wymagamy danych osobowych",
@@ -178,7 +178,7 @@
       },
       "cryptoPayment": {
         "title": "Płać Bitcoinem i kryptowalutami",
-        "description": "Anonimowe płatności VPN przez BTC, ETH, USDT i USDC. Bez karty, bez nazwiska, bez śladu — subskrypcja działa na wszystkich twoich urządzeniach."
+        "description": "Płać w BTC, ETH, USDT lub USDC — bez karty i bez konta bankowego. Subskrypcja działa na wszystkich twoich urządzeniach."
       },
       "minimalData": {
         "title": "Ścisła polityka braku logów",
@@ -521,7 +521,7 @@
       },
       "usage": {
         "title": "5. Dopuszczalne Użytkowanie",
-        "content": "Zgadzasz się korzystać z Usług wyłącznie w celach zgodnych z prawem i zgodnie ze wszystkimi obowiązującymi przepisami lokalnymi, krajowymi i międzynarodowymi. Nie wolno Ci: (a) korzystać z Usług do działań nielegalnych lub ułatwiania nielegalnego postępowania; (b) próbować obejść, wyłączyć lub zakłócić funkcje bezpieczeństwa Usług; (c) rozpowszechniać złośliwe oprogramowanie, wirusy lub szkodliwy kod za pośrednictwem Usług; (d) naruszać praw własności intelektualnej osób trzecich; (e) używać narzędzia Generowania Wideo AI do tworzenia treści zniesławiających, obscenicznych, oszukańczych lub naruszających prawa innych; (f) korzystać z Usług do wysyłania spamu lub niechcianej komunikacji; (g) dokonywać inżynierii wstecznej, dekompilacji lub dezasemblacji jakiejkolwiek części Usług; lub (h) odsprzedawać, udzielać sublicencji lub komercyjnie wykorzystywać Usługi bez naszej pisemnej zgody. Zastrzegamy sobie prawo do zawieszenia lub zamknięcia kont naruszających niniejszy Regulamin, z powiadomieniem lub bez, w zależności od wagi naruszenia."
+        "content": "Zgadzasz się korzystać z Usług wyłącznie w celach zgodnych z prawem i zgodnie ze wszystkimi obowiązującymi przepisami lokalnymi, krajowymi i międzynarodowymi. Nie wolno ci: (a) wykorzystywać Usług do jakiejkolwiek nielegalnej działalności ani do ułatwiania bezprawnego postępowania; (b) próbować omijać, wyłączać ani zakłócać zabezpieczeń Usług; (c) rozpowszechniać poprzez Usługi złośliwego oprogramowania, wirusów ani żadnego szkodliwego kodu; (d) naruszać praw własności intelektualnej osób trzecich; (e) wykorzystywać narzędzia do generowania wideo z użyciem AI do tworzenia treści zniesławiających, obscenicznych, oszukańczych lub naruszających prawa innych; (f) wykorzystywać Usług do wysyłania spamu lub niezamówionych wiadomości; (g) poddawać jakiejkolwiek części Usług inżynierii wstecznej, dekompilacji ani dezasemblacji; ani (h) odsprzedawać, sublicencjonować ani komercyjnie wykorzystywać Usług bez naszej pisemnej zgody. Sankcje i terytoria objęte ograniczeniami: oświadczasz i zapewniasz, że nie jesteś osobą ani podmiotem objętym sankcjami finansowymi Zjednoczonego Królestwa, Unii Europejskiej, Organizacji Narodów Zjednoczonych lub Stanów Zjednoczonych, ani nie działasz w ich imieniu, a także że nie przebywasz ani nie zamieszkujesz zwyczajowo na terytorium objętym sankcjami całościowymi. Nie udostępniamy Usług takim osobom i możemy zawiesić lub zamknąć każde konto, jeśli dowiemy się, że to oświadczenie jest lub stało się nieprawdziwe. Zastrzegamy sobie prawo do zawieszania lub zamykania kont naruszających niniejsze Warunki, z powiadomieniem lub bez, w zależności od wagi naruszenia."
       },
       "ip": {
         "title": "6. Własność Intelektualna",
@@ -1276,6 +1276,22 @@
     "lookingUp": "Wyszukiwanie konta...",
     "accountNotFound": "Nie znaleziono konta. Sprawdź identyfikator konta.",
     "verifyingAccount": "Weryfikacja...",
+    "retry": "Spróbuj ponownie",
+    "existingAccountTitle": "Na tym urządzeniu zapisano już konto",
+    "existingAccountCta": "Przejdź do konta",
+    "existingAccountNote": "Jeśli przejdziesz dalej, na urządzeniu zostanie zapisane inne ID konta.",
+    "loginTitle": "Witaj ponownie",
+    "loginSubtitle": "Podaj ID konta, aby kontynuować.",
+    "signupTitle": "Załóż konto",
+    "signupSubtitle": "Bez e-maila. Bez hasła. Jedno dotknięcie i gotowe.",
+    "welcomeTitle": "Gotowe",
+    "welcomeBody": "Twoje konto jest gotowe. To ID jest twoim kluczem — zapisz je, zanim zamkniesz.",
+    "welcomeIdLabel": "Twoje ID konta",
+    "welcomeCopy": "Kopiuj moje ID konta",
+    "welcomeCopied": "Skopiowano do schowka",
+    "welcomePromoIntro": "Prezent powitalny — użyj tego kodu przy płatności:",
+    "welcomeCta": "Jasne — zapisałem ID",
+    "welcomeDismiss": "Zamknij",
     "dashboard": {
       "title": "Twoje konto",
       "memberSince": "Członek od",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Jeśli kupiłeś subskrypcję przez App Store lub Google Play, zarządzaj nią tutaj.",
       "restoreAppStore": "Subskrypcje App Store",
       "restorePlayStore": "Subskrypcje Google Play",
-      "deleteProSupportNote": "Twoje konto ma aktywną subskrypcję Pro. Skontaktuj się z pomocą techniczną, aby je usunąć."
+      "deleteProSupportNote": "Twoje konto ma aktywną subskrypcję Pro. Skontaktuj się z pomocą techniczną, aby je usunąć.",
+      "statusPro": "Pro · do {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Plan darmowy",
+      "active": "Aktywna",
+      "from": "od",
+      "card": "Karta",
+      "crypto": "Kryptowaluty",
+      "payWithCrypto": "Zapłać kryptowalutą — {price}",
+      "cryptoNote": "Zapłać w BTC, ETH, USDT lub USDC. Nastąpi przekierowanie do OxaPay.",
+      "back": "Wstecz",
+      "accountIdHint": "Twój klucz do Doppler. Zaloguj się nim na dowolnym urządzeniu.",
+      "copyId": "Kopiuj ID",
+      "sendToDevices": "Wyślij na moje urządzenia",
+      "sendToDevicesDesc": "Wyślij sobie identyfikator konta i link do pobrania, a potem otwórz je na telefonie, tablecie lub komputerze.",
+      "shareNative": "Udostępnij…",
+      "shareEmail": "E-mail",
+      "shareTelegramHint": "W Telegramie wybierz Zapisane wiadomości.",
+      "copyMessage": "Kopiuj wiadomość",
+      "messageCopied": "Skopiowano wiadomość",
+      "shareSubject": "Moje konto Doppler VPN",
+      "shareMessage": "Mój identyfikator konta Doppler VPN: {id}\nPobierz aplikację: {url}\nOtwórz aplikację i zaloguj się tym ID.",
+      "shareWarning": "Każdy, kto ma to ID, może korzystać z Twojej subskrypcji. Wysyłaj je tylko do siebie.",
+      "devices": "Moje urządzenia",
+      "devicesCount": "{count} z {max}",
+      "mainDevice": "Główne",
+      "lastActive": "Aktywność: {time}",
+      "addedOn": "Dodano {date}",
+      "noDevices": "Brak urządzeń. Zainstaluj Doppler i zaloguj się identyfikatorem konta.",
+      "manageInApp": "Aby usunąć urządzenie, otwórz Doppler i przejdź do sekcji Urządzenia.",
+      "devicesError": "Nie udało się wczytać Twoich urządzeń.",
+      "everyDeviceHint": "Zainstaluj Doppler i zaloguj się identyfikatorem konta. Do {max} urządzeń na jednym koncie."
     },
     "securedByCrypto": "Zabezpieczone przez OxaPay"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Płać anonimowo — nawet z zablokowanych regionów",
-      "body": "Gdy twój bank jest obserwowany, a międzynarodowe karty nie działają, Bitcoin i stablecoiny nadal tak. Doppler akceptuje BTC, ETH, USDT i USDC — bez banku, bez dokumentów, bez śladu.",
+      "title": "Płatność bez karty bankowej",
+      "body": "Gdy karty międzynarodowe u ciebie nie działają, bitcoin i stablecoiny działają. Doppler przyjmuje BTC, ETH, USDT i USDC — bez konta bankowego i bez karty.",
       "cta": "Płać kryptowalutą",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Przewodnik po cenzurze internetu — jak blokowane są VPN-y i jak zachować połączenie",
-      "description": "Techniczny przewodnik o tym, jak rządy blokują VPN-y i proxy za pomocą DPI, TSPU i uczenia maszynowego — oraz jak proxy VLESS-Reality omija każdą metodę wykrywania. Przygotuj się na narastające ograniczenia."
+      "description": "Przewodnik techniczny: jak krajowe systemy filtrowania blokują VPN za pomocą DPI, analizy ruchu i aktywnego sondowania — i dlaczego VLESS-Reality nadal działa. Przygotuj się na zaostrzanie ograniczeń."
     },
     "hero": {
       "title": "Twój przewodnik po wolności w internecie",
-      "subtitle": "Jak rządy wykrywają i blokują VPN-y, jak Doppler pokonuje każdą metodę i co powinieneś zrobić już teraz, aby zachować połączenie w obliczu narastających ograniczeń."
+      "subtitle": "Jak cenzorzy wykrywają i blokują VPN, jak Doppler neutralizuje każdą metodę i co możesz zrobić już teraz, by pozostać w sieci."
     },
     "detection": {
       "title": "Jak rządy wykrywają i blokują VPN-y",
-      "intro": "Cenzura internetu dawno wykroczyła poza proste blokowanie adresów IP. Kraje takie jak Rosja, Chiny i Iran stosują zaawansowane systemy wykorzystujące uczenie maszynowe do identyfikacji i przerywania połączeń VPN w czasie rzeczywistym. Oto dokładnie, jak to robią.",
+      "intro": "Cenzura internetu już dawno wykroczyła poza proste blokowanie adresów IP. Krajowe systemy filtrowania wykorzystują dziś uczenie maszynowe, by wykrywać i przerywać połączenia VPN w czasie rzeczywistym, a te same techniki pojawiają się w sieciach firmowych i uczelnianych. Oto jak dokładnie działają.",
       "tspu": {
-        "title": "Infrastruktura: TSPU i DPI",
-        "p1": "Rosja wdraża TSPU (Techniczne Systemy Przeciwdziałania Zagrożeniom) — specjalistyczny sprzęt instalowany bezpośrednio w węzłach sieci dostawców internetu. Chiny używają Wielkiego Firewalla, Iran prowadzi NIN. Systemy te przeprowadzają głęboką inspekcję pakietów (DPI) na każdym pakiecie przechodzącym przez sieć.",
+        "title": "Infrastruktura: krajowe systemy DPI",
+        "p1": "Kraje o ostrym filtrowaniu instalują sprzęt inspekcyjny bezpośrednio w węzłach sieci operatorów — Wielki Firewall w Chinach, krajowa sieć informacyjna w Iranie, TSPU w Rosji oraz podobne systemy w Turcji i w Zatoce. Wszystkie prowadzą głęboką inspekcję pakietów (DPI) dla każdego pakietu przechodzącego przez sieć.",
         "p2": "Tradycyjne protokoły VPN, takie jak OpenVPN, WireGuard i IPSec, mają charakterystyczne struktury pakietów. DPI identyfikuje je natychmiast i przerywa połączenie. Nawet tryby z zaciemnianiem często zawodzą, ponieważ podstawowy wzorzec uzgadniania pozostaje wykrywalny.",
         "p3": "Gdy podstawowe dopasowywanie sygnatur nie wystarcza, systemy te aktywują moduły uczenia maszynowego. Przestają analizować zawartość pakietów (wszystko jest zaszyfrowane) i zaczynają analizować zachowanie ruchu."
       },
@@ -1548,7 +1595,7 @@
         "title": "Metoda 4: Blokowanie IP i DNS",
         "description": "Znane zakresy adresów IP dostawców VPN są blokowane bezpośrednio. Zapytania DNS do domen VPN są przechwytywane. Komercyjni dostawcy VPN z publicznymi listami serwerów są najłatwiejszym celem — cała ich infrastruktura może zostać zablokowana w kilka minut."
       },
-      "conclusion": "Rezultat: gotowe VPN-y i standardowe usługi proxy, takie jak NordVPN, ExpressVPN i Surfshark, przestają działać w ciągu kilku godzin od początku blokady. Przetrwają jedynie protokoły proxy specjalnie zaprojektowane tak, aby być nieodróżnialnymi od zwykłego ruchu internetowego."
+      "conclusion": "Efekt: popularne aplikacje VPN oparte na standardowych protokołach zwykle przestają działać w ciągu kilku godzin od rozpoczęcia blokad. Przetrwają wyłącznie protokoły zaprojektowane tak, by były nie do odróżnienia od zwykłego ruchu WWW."
     },
     "defeats": {
       "title": "Jak Doppler pokonuje każdą metodę wykrywania",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Zablokowany w Rosji — i wciąż działa",
-      "badge": "Potwierdzone przez Roskomnadzor",
-      "p1": "Rosyjskie władze celowo zablokowały Doppler VPN. Nasza domena została dodana do federalnej listy blokad. Nie ukrywamy tego — to dowód na to, że nasza technologia działa.",
-      "p2": "W przeciwieństwie do komercyjnych dostawców VPN, którzy stosują się do żądań o usunięcie lub po cichu wycofują się z rynków podlegających ograniczeniom, Doppler został stworzony dokładnie na taki scenariusz. Gdy nasza strona zostaje zablokowana, nasz bot Telegram pozostaje dostępny. Gdy adresy IP serwerów są banowane, nasza infrastruktura rotuje się automatycznie.",
-      "p3": "Każdą nałożoną blokadę omijamy. To nie jest hasło marketingowe — to nasza codzienna działalność.",
-      "stat1label": "Domena zablokowana przez RKN",
-      "stat1value": "Potwierdzone",
+      "title": "Usunięta na żądanie cenzury — i nadal działa",
+      "badge": "Usunięcie z App Store, Rosja",
+      "p1": "Apple usunęło aplikację Doppler VPN z rosyjskiego App Store po prawnym żądaniu Roskomnadzoru, państwowego regulatora łączności. W ten sam sposób Apple usunęło dziesiątki aplikacji VPN. Publikujemy to, zamiast ukrywać: bycie wskazanym to los narzędzi, które nadal działają.",
+      "p2": "W przeciwieństwie do dostawców, którzy spełniają żądania usunięcia albo po cichu wycofują się z rynków objętych ograniczeniami, Doppler powstał właśnie z myślą o tym. Gdy sklep z aplikacjami nas usuwa, nasz bot na Telegramie nadal dostarcza aplikację. Gdy adresy IP serwerów zostają zablokowane, nasza infrastruktura automatycznie zmienia punkty wejścia.",
+      "p3": "Dystrybucja omija blokadę — bezpośredni APK, bot na Telegramie i rotacyjne punkty wejścia. To właściwość architektury, a nie obietnica.",
+      "stat1label": "Rosyjski App Store",
+      "stat1value": "Usunięta na żądanie RKN",
       "stat2label": "Status usługi",
       "stat2value": "Działa",
       "stat3label": "Alternatywny dostęp",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Możliwy następny krok",
         "title": "Model białej listy",
-        "description": "Zamiast blokowania konkretnych protokołów, dostępne byłyby wyłącznie zatwierdzone domeny i adresy IP. Wszystko inne jest domyślnie blokowane. SSH, RDP, porty do gier — wszystko zablokowane, chyba że zarejestrowane przez podmiot prawny. Było to częściowo testowane podczas rosyjskiej blokady Telegram w 2018 roku.",
+        "description": "Zamiast blokować konkretne protokoły, dostępne pozostałyby tylko zatwierdzone domeny i adresy IP. Wszystko inne jest domyślnie zablokowane. SSH, RDP, porty gier — wszystko zamknięte, o ile nie zarejestruje tego osoba prawna. Model białej listy był już testowany w skali krajowej podczas szeroko zakrojonych blokad i ćwiczeń z odcinania sieci.",
         "status": "Technicznie wykonalne, częściowo wdrożone"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Sprawdzian ekonomicznej rzeczywistości",
-        "p1": "W 2018 roku, gdy Roskomnadzor próbował zablokować sam Telegram, zablokowano miliony adresów IP Amazon i Google. Kasy fiskalne w sklepach przestały działać. Urządzenia inteligentnego domu przeszły w tryb offline. Powiadomienia push z banków przestały dochodzić.",
-        "p2": "Model białej listy spowodowałby to samo w skali 100 razy większej. Współczesne rosyjskie strony internetowe polegają na Google Fonts, zagranicznych bibliotekach CDN, międzynarodowych urzędach certyfikacji i usługach chmurowych. Banki i firmy logistyczne korzystają z zagranicznych certyfikatów SSL. Programiści straciliby dostęp do GitHub, Docker Hub i npm.",
+        "p1": "W 2018 roku próba zablokowania jednego komunikatora zakończyła się zbanowaniem milionów adresów IP Amazona i Google'a. Przestały działać kasy fiskalne. Urządzenia inteligentnego domu straciły łączność. Nie docierały powiadomienia bankowe. Szkody uboczne to typowy skutek prymitywnego blokowania.",
+        "p2": "Model białej listy wywołałby to na znacznie większą skalę. Współczesne strony wszędzie zależą od zagranicznych CDN-ów, usług czcionek, urzędów certyfikacji i platform chmurowych. Banki i firmy logistyczne korzystają z zagranicznych certyfikatów SSL. Programiści straciliby dostęp do GitHuba, Docker Huba i npm.",
         "p3": "Pełna izolacja jest technicznie możliwa — ale jej ceną jest degradacja technologiczna. Aktualizacje Windows i Android stają się niedostępne. Sprzęt medyczny traci wsparcie sterowników. Rozwój AI całkowicie się zatrzymuje bez globalnej infrastruktury open-source.",
         "p4": "Najbardziej prawdopodobna ścieżka to stopniowe ograniczenia na przestrzeni lat, nie nagłe odcięcie. Ale każdy kolejny krok eskalacji oznacza, że więcej użytkowników VPN zostaje odciętych — chyba że są przygotowani."
       }
@@ -1642,8 +1689,8 @@
         "description": "Wprowadzamy aktualizacje protokołów, aby wyprzedzać nowe techniki blokowania. Włącz automatyczne aktualizacje lub regularnie sprawdzaj aktualizacje przez nasze kanały na Telegramie."
       },
       "step5": {
-        "title": "Podziel się z tymi, którzy tego potrzebują",
-        "description": "Im więcej osób zainstaluje Doppler przed zaostrzeniem ograniczeń, tym lepiej. Udostępnij link do naszego bota Telegram — to najbardziej odporny na cenzurę kanał dystrybucji, jaki mamy."
+        "title": "Udostępniaj rozważnie",
+        "description": "Im więcej osób zainstaluje Dopplera, zanim ograniczenia się zaostrzą, tym lepiej — link do naszego bota na Telegramie to najbardziej odporny na cenzurę kanał, jaki mamy. Jedno zastrzeżenie: niektóre kraje, w tym Rosja, nakładają dziś kary finansowe na osoby prywatne promujące narzędzia do omijania blokad. Udostępniaj prywatnie osobom, które znasz, i sprawdź przepisy w swoim miejscu zamieszkania, zanim opublikujesz coś publicznie."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Najczęstsze pytania",
       "q1": {
         "question": "Czy Doppler VPN może ominąć cenzurę rządową?",
         "answer": "Tak. Doppler używa VLESS-Reality, który sprawia, że ruch VPN jest nie do odróżnienia od zwykłego HTTPS. Omija DPI, TSPU i Wielki Firewall bez wykrywalnych sygnatur VPN."
       },
       "q2": {
         "question": "Czy Doppler VPN działa w Rosji, Chinach i Iranie?",
-        "answer": "Tak. Doppler został stworzony specjalnie dla regionów objętych cenzurą. Nasza domena została zablokowana przez Roskomnadzor, co dowodzi, że nasza technologia działa."
+        "answer": "Tak. Doppler powstał z myślą o sieciach silnie filtrowanych. W Rosji Apple usunęło naszą aplikację z lokalnego App Store na żądanie Roskomnadzoru — a usługa działała dalej przez bota na Telegramie i rotacyjne punkty wejścia. Użytkownicy w Rosji, Chinach, Iranie i Turcji łączą się codziennie."
       },
       "q3": {
         "question": "Co sprawia, że VLESS-Reality jest lepszy od OpenVPN lub WireGuard do omijania cenzury?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Nikogo nie zostawiamy w tyle",
-      "subtitle": "Doppler VPN został stworzony specjalnie dla sieci podlegających ograniczeniom. Nieustannie ulepszamy naszą infrastrukturę, rotujemy serwery i aktualizujemy protokoły, aby wyprzedzać każdą nową technikę blokowania. Twoja wolność w internecie nie podlega negocjacjom.",
+      "title": "Zbudowany dla sieci, które stawiają opór",
+      "subtitle": "Doppler VPN jest przeznaczony do sieci z ograniczeniami. Zmieniamy serwery, aktualizujemy protokoły i rozwijamy infrastrukturę wraz ze zmianą technik blokowania.",
       "downloadIos": "Pobierz na iOS",
       "downloadAndroid": "Pobierz na Androida",
       "telegramBot": "Pobierz przez bota Telegram",
@@ -1778,12 +1826,12 @@
   },
   "payWithCrypto": {
     "metadata": {
-      "title": "Kup VPN za Bitcoina — Płać anonimowo | Doppler VPN",
-      "description": "Zapłać za Doppler VPN Bitcoinem, Ethereum, USDT lub USDC. Anonimowy checkout kryptowalutowy, bez karty ani e-maila. Działa na iPhone, Android, Mac i Windows."
+      "title": "Kup VPN za bitcoina — bez karty",
+      "description": "Zapłać za Doppler VPN bitcoinem, ethereum, USDT lub USDC. Płatność kryptowalutą, bez karty i bez e-maila. Działa na iPhonie, Androidzie, Macu i Windowsie."
     },
     "hero": {
       "title": "Kup VPN za Bitcoina, Ethereum i stablecoiny",
-      "subtitle": "Zapłać za Doppler VPN kryptowalutą. Bez karty, bez e-maila, bez śladu — subskrypcja jest powiązana z anonimowym ID konta, który działa na każdym urządzeniu.",
+      "subtitle": "Zapłać za Doppler VPN kryptowalutą. Bez karty i bez e-maila — subskrypcja jest powiązana z anonimowym identyfikatorem konta działającym na każdym urządzeniu.",
       "cta": "Kup kryptowalutą"
     },
     "coins": {
@@ -1897,7 +1945,7 @@
       },
       "done": {
         "title": "Jesteś chroniony",
-        "description": "To wszystko. Bez potwierdzenia e-mailem, bez haseł do zapamiętania, bez kont do zarządzania. Twoje połączenie jest szyfrowane, Twoja tożsamość jest anonimowa, a Twój VPN nie wie, kim jesteś. Przeglądasz jako w pełni anonimowy użytkownik VPN — bez e-maila, bez śladu."
+        "description": "I to wszystko. Żadnego e-maila potwierdzającego, żadnych haseł do zapamiętania, żadnych kont do zarządzania. Twoje połączenie jest zaszyfrowane, a my nigdy nie pytamy, kim jesteś. Przeglądasz sieć pod anonimowym identyfikatorem konta — bez e-maila i bez dziennika tego, dokąd wchodzisz."
       }
     },
     "noCollect": {
@@ -1987,8 +2035,8 @@
         "description": "Nasze serwery weryfikują prawidłowość klucza bez przechowywania danych tożsamości. Uwierzytelnianie odbywa się przez TLS 1.3 — bez kont, bez bazy danych uwierzytelniających."
       },
       "zeroPii": {
-        "title": "Zero przechowywanych danych osobowych",
-        "description": "Bez e-maila, bez imienia, bez telefonu, bez logów IP. Architektonicznie nie jesteśmy w stanie zidentyfikować naszych użytkowników, ponieważ nigdy nie zbieramy danych identyfikacyjnych."
+        "title": "Minimum danych z założenia",
+        "description": "Bez e-maila, bez imienia, bez numeru telefonu. Nigdy nie zbieramy danych tożsamości, które pozwoliłyby stwierdzić, kim ktoś jest; jedynym zapisem połączenia urządzenia jest krótki dziennik uwierzytelniania, przechowywany 90 dni, by zapobiegać nadużyciom."
       }
     },
     "getStarted": {
@@ -2285,7 +2333,7 @@
       },
       "noLogs": {
         "title": "Ścisła polityka braku logów",
-        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia Twoich danych przeglądania. Brak logów połączeń, brak logów ruchu, brak logów zapytań DNS. Nie jesteśmy w stanie Cię zidentyfikować, ponieważ nigdy nie zbieramy danych umożliwiających identyfikację."
+        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia danych o twoim przeglądaniu. Żadnych dzienników ruchu, żadnych dzienników zapytań DNS, żadnego zapisu łączącego cię z tym, co odwiedzasz. Zalogowanie zostawia krótki zapis uwierzytelnienia, przechowywany 90 dni, by zapobiegać nadużyciom — pokazuje, że urządzenie się połączyło, nigdy dokąd poszło."
       },
       "globalServers": {
         "title": "6 lokalizacji serwerów na świecie",
@@ -2400,7 +2448,7 @@
       },
       "noLogs": {
         "title": "Ścisła polityka braku logów",
-        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia Twoich danych przeglądania. Brak logów połączeń, brak logów ruchu, brak logów zapytań DNS. Nie jesteśmy w stanie Cię zidentyfikować, ponieważ nigdy nie zbieramy danych umożliwiających identyfikację."
+        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia danych o twoim przeglądaniu. Żadnych dzienników ruchu, żadnych dzienników zapytań DNS, żadnego zapisu łączącego cię z tym, co odwiedzasz. Zalogowanie zostawia krótki zapis uwierzytelnienia, przechowywany 90 dni, by zapobiegać nadużyciom — pokazuje, że urządzenie się połączyło, nigdy dokąd poszło."
       },
       "globalServers": {
         "title": "6 lokalizacji serwerów na świecie",
@@ -2523,7 +2571,7 @@
       },
       "noLogs": {
         "title": "Ścisła polityka braku logów",
-        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia Twoich danych przeglądania. Bez logów połączeń, bez logów ruchu, bez logów zapytań DNS. Nie możemy Cię zidentyfikować, ponieważ nigdy nie zbieramy danych identyfikujących."
+        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia danych o twoim przeglądaniu. Żadnych dzienników ruchu, żadnych dzienników zapytań DNS, żadnego zapisu łączącego cię z tym, co odwiedzasz. Zalogowanie zostawia krótki zapis uwierzytelnienia, przechowywany 90 dni, by zapobiegać nadużyciom — pokazuje, że urządzenie się połączyło, nigdy dokąd poszło."
       },
       "crossDevice": {
         "title": "Synchronizacja na wszystkich urządzeniach Apple",
@@ -2675,7 +2723,7 @@
       },
       "noLogs": {
         "title": "Ścisła polityka braku logów",
-        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia Twoich danych przeglądania. Bez logów połączeń, bez logów ruchu, bez logów zapytań DNS. Nie możemy Cię zidentyfikować, ponieważ nigdy nie zbieramy danych identyfikujących."
+        "description": "Doppler nigdy nie zbiera, nie przechowuje ani nie udostępnia danych o twoim przeglądaniu. Żadnych dzienników ruchu, żadnych dzienników zapytań DNS, żadnego zapisu łączącego cię z tym, co odwiedzasz. Zalogowanie zostawia krótki zapis uwierzytelnienia, przechowywany 90 dni, by zapobiegać nadużyciom — pokazuje, że urządzenie się połączyło, nigdy dokąd poszło."
       },
       "globalServers": {
         "title": "6 globalnych lokalizacji serwerów",
@@ -2885,7 +2933,7 @@
       "title": "VPN w ZEA — Najczęściej Zadawane Pytania",
       "q1": {
         "question": "Czy korzystanie z VPN jest legalne w ZEA?",
-        "answer": "Osobiste korzystanie z VPN w celu dostępu do zablokowanych usług w ZEA jest strefą szarości prawnej. Federalna ustawa nr 12 z 2016 roku penalizuje korzystanie z VPN w celu popełnienia przestępstwa — nie samo korzystanie z VPN. W praktyce miliony mieszkańców ZEA korzystają codziennie z VPN do pracy, streamingu i rozmów bez incydentów. Doppler nie rejestruje aktywności, więc nawet w przypadku nakazu nie możemy zidentyfikować, kto korzystał z usługi ani co odnaleziono."
+        "answer": "Osobiste korzystanie z VPN w ZEA znajduje się w prawnej szarej strefie. Ustawa federalna nr 12 z 2016 r. karze użycie VPN przy popełnianiu przestępstwa, a nie samo korzystanie z VPN; wielu mieszkańców używa go codziennie do pracy, streamingu i rozmów. To odzwierciedla sposób stosowania prawa, a nie gwarancję dla twojej sytuacji — sprawdź aktualny stan, zanim na tym polegniesz. Doppler nie prowadzi dzienników ruchu ani aktywności, więc nie istnieje zapis tego, do czego ktokolwiek uzyskał dostęp."
       },
       "q2": {
         "question": "Dlaczego rozmowy WhatsApp i FaceTime są zablokowane w ZEA?",
@@ -2997,7 +3045,7 @@
       },
       "q3": {
         "question": "Czy korzystanie z VPN w Iranie jest bezpieczne?",
-        "answer": "VPN-y są technicznie zabronione w Iranie, ale egzekwowanie przeciwko indywidualnym użytkownikom jest rzadkie — miliony używają ich codziennie. Doppler nie rejestruje połączeń ani aktywności, więc nie możemy zidentyfikować użytkowników, nawet jeśli zostaniemy zmuszeni. Używamy tej samej architektury bez logów, której ufają dziennikarze i aktywiści w regionie."
+        "answer": "W Iranie VPN są formalnie ograniczone, choć działania wobec indywidualnych użytkowników były rzadkie, a miliony osób korzystają z nich codziennie. To opis dotychczasowej praktyki, nie gwarancja — oceń własne ryzyko. Doppler nie prowadzi dzienników połączeń ani aktywności, więc nie istnieje zapis tego, do czego użytkownik uzyskał dostęp; zalogowanie zostawia jedynie krótki zapis uwierzytelnienia przechowywany 90 dni."
       },
       "q4": {
         "question": "Czy mogę zapłacić bez zagranicznej karty kredytowej?",
@@ -3109,7 +3157,7 @@
       },
       "q5": {
         "question": "Czy korzystanie z VPN jest legalne dla obcokrajowców w Chinach?",
-        "answer": "Osobiste korzystanie z VPN przez obcokrajowców zasadniczo nigdy nie jest egzekwowane. Chińskie prawo ogranicza nieautoryzowane VPN-y, ale egzekwowanie dotyczy operatorów komercyjnych, a nie indywidualnych podróżników czy ekspatów. Używaj zdrowego rozsądku — nie publikuj o używaniu VPN w chińskich mediach społecznościowych (WeChat, Weibo), a wszystko będzie w porządku."
+        "answer": "Prawo chińskie ogranicza nieautoryzowane usługi VPN, a egzekwowanie w przytłaczającej większości dotyczyło operatorów komercyjnych, nie indywidualnych podróżnych czy ekspatów. Tak dotąd stosowano przepisy — to nie jest obietnica dotycząca twojego przypadku. Rozsądna ostrożność: nie pisz o korzystaniu z VPN w chińskich mediach społecznościowych (WeChat, Weibo)."
       },
       "q6": {
         "question": "Co jeśli Doppler przestanie działać w Chinach?",
@@ -3170,7 +3218,7 @@
       },
       "feature4": {
         "title": "Brak konta, brak logów",
-        "description": "Brak e-maila, brak numeru telefonu. Doppler nie przechowuje żadnych logów połączeń ani aktywności. Nawet w przypadku przymusu nie możemy zidentyfikować użytkownika ani jego ruchu."
+        "description": "Bez e-maila, bez numeru telefonu. Doppler nie prowadzi dzienników połączeń ani aktywności, więc nic nie łączy osoby z jej ruchem. Zalogowanie zostawia zapis uwierzytelnienia na 90 dni i nic więcej."
       }
     },
     "howItWorks": {
@@ -3197,7 +3245,7 @@
       "title": "VPN w Rosji — FAQ",
       "q1": {
         "question": "Czy używanie VPN jest legalne w Rosji?",
-        "answer": "Osobiste korzystanie z VPN nie jest kryminalizowane w Rosji. Ustawa VPN z 2017 roku (Federalna Ustawa nr 276-FZ) dotyczy dostawców VPN, którzy odmawiają dostosowania się do rejestru zablokowanych witryn RKN — nie karze użytkowników końcowych. Miliony Rosjan korzystają codziennie z VPN. Doppler nie posiada żadnych rosyjskich aktywów i nie podlega rejestrom RKN, więc usługa nie jest filtrowana po naszej stronie."
+        "answer": "Korzystanie z VPN samo w sobie nie jest w Rosji przestępstwem, a ustawa federalna nr 276-FZ dotyczy dostawców VPN, nie użytkowników końcowych. Od września 2025 r. zmieniły się dwie rzeczy, o których warto wiedzieć: umyślne wyszukiwanie materiałów z federalnej listy «ekstremistycznych» stało się wykroczeniem administracyjnym z grzywną od 3000 do 5000 rubli, a reklamowanie lub promowanie narzędzi do omijania blokad podlega odrębnej karze — od 50 000 do 80 000 rubli dla osoby fizycznej. Miliony ludzi w Rosji korzystają z VPN codziennie, ale przepisy się zaostrzają; sprawdź aktualny stan, zamiast polegać na tej stronie."
       },
       "q2": {
         "question": "Czy Doppler będzie działać na Rostelecomie, MTS czy Beeline?",
@@ -3521,7 +3569,7 @@
       },
       "q5": {
         "question": "Czy użycie VPN do ominięcia blokady WhatsApp w ZEA jest legalne?",
-        "answer": "Użycie osobiste jest niejasnym obszarem prawnym, ale nie jest egzekwowane przeciwko osobom. ZEA Federalna Ustawa nr 12 z 2016 roku penalizuje użycie VPN do popełnienia przestępstwa — wykonywanie osobistych połączeń nie jest przestępstwem. Miliony rezydentów ZEA i turystów korzystają codziennie z VPN bez incydentów. Doppler nie przechowuje żadnych logów."
+        "answer": "Nie znamy przypadku ukarania mieszkańca ZEA grzywną za osobiste użycie VPN do wykonania połączenia. Ustawa federalna ZEA nr 12 z 2016 r. karze użycie VPN «w celu popełnienia przestępstwa», a osobista rozmowa telefoniczna nim nie jest. To odzwierciedla praktykę egzekwowania, nie gwarancję — sprawdź aktualny stan. Doppler nie przechowuje zapisów o tym, kto się łączy ani co robi."
       },
       "q6": {
         "question": "Jak cena wypada w porównaniu do BOTIM?",

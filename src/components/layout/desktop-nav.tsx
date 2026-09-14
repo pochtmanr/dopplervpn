@@ -24,7 +24,14 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   // until the panel is opened for the first time; after that it stays mounted
   // and the transition behaves exactly as before.
   const [langEverOpened, setLangEverOpened] = useState(false);
-  const [hasAccount, setHasAccount] = useState(false);
+  // Tri-state, not a boolean: null means "not resolved yet". localStorage is
+  // unreadable on the server and during the first client paint, so a boolean
+  // that starts `false` claims the visitor is logged out before we know — a
+  // signed-in visitor saw "Get Pro" -> /signup and watched it swap to
+  // "Account" -> /account. Reading localStorage during render would fix the
+  // label but break hydration; resolving in an effect and rendering an inert
+  // placeholder until then keeps the server and first client render identical.
+  const [hasAccount, setHasAccount] = useState<boolean | null>(null);
   const [mounted, setMounted] = useState(false);
   const [panelPos, setPanelPos] = useState<{ top: number; right?: number; left?: number } | null>(null);
   const t = useTranslations("nav");
@@ -125,6 +132,27 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
 
   const currentLang = localeConfig[locale] || localeConfig.en;
 
+  // Both CTA labels live in the SAME grid cell, so the pill is always as wide
+  // as the wider of the two and resolving the account state cannot reflow the
+  // centred nav row. `invisible` (visibility:hidden) still reserves the box;
+  // `hidden` would not.
+  const ctaClass =
+    "ms-1 inline-grid place-items-center px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors";
+  const ctaLabels = (
+    <>
+      <span
+        className={`col-start-1 row-start-1 ${hasAccount === true ? "" : "invisible"}`}
+      >
+        {t("account")}
+      </span>
+      <span
+        className={`col-start-1 row-start-1 ${hasAccount === false ? "" : "invisible"}`}
+      >
+        {t("getPro")}
+      </span>
+    </>
+  );
+
   return (
     <>
       <nav
@@ -160,14 +188,28 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
               {t("support")}
             </Link>
 
-            <Link
-              href="/account"
-              prefetch={false}
-              onClick={() => { if (!hasAccount) trackGetPro("nav-desktop"); }}
-              className="ml-1 px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
-            >
-              {hasAccount ? t("account") : t("getPro")}
-            </Link>
+            {hasAccount === null ? (
+              // Unresolved: a pill of the right size with no href and no label,
+              // so there is nothing to click through to the wrong destination
+              // and nothing to read as the wrong state. The global
+              // prefers-reduced-motion guard in globals.css already flattens
+              // animate-pulse.
+              <span
+                aria-hidden="true"
+                className={`${ctaClass} animate-pulse`}
+              >
+                {ctaLabels}
+              </span>
+            ) : (
+              <Link
+                href={hasAccount ? "/account" : "/signup"}
+                prefetch={false}
+                onClick={() => { if (!hasAccount) trackGetPro("nav-desktop"); }}
+                className={ctaClass}
+              >
+                {ctaLabels}
+              </Link>
+            )}
             </div>
           </div>
 

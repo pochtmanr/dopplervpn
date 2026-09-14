@@ -2,8 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Card } from "@/components/ui/card";
 import { Reveal } from "@/components/ui/reveal";
+import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 import { trackCta, type CtaPlatform, type CtaVariant } from "@/lib/track-cta";
 
 const APP_STORE_URL = "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
@@ -72,93 +72,87 @@ export function CTA() {
     "w-9 h-9 rounded-lg bg-gradient-to-br from-accent-teal/20 to-accent-teal/5 border border-accent-teal/25 text-accent-teal flex items-center justify-center flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]";
 
   return (
-    <section className="relative py-20 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute bottom-1/4 end-1/4 w-96 h-96 bg-accent-gold/10 rounded-full blur-3xl" />
-      </div>
+    <section className="section relative overflow-hidden bg-bg-secondary/30">
+      <PricingBackdrop />
 
-      <div className="relative z-10 mx-auto max-w-site">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content Column */}
-          <Reveal className="space-y-6 text-center lg:text-start">
-            {/* App Icon + Headline */}
-            <div className="flex flex-row items-center justify-center lg:justify-start gap-4">
+      <div className="relative mx-auto max-w-site">
+        <Reveal>
+          {/* One glass card over the glyph backdrop (pricing's shell), bottom-end corner notched */}
+          <div className="notch-card relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/[0.08] via-bg-primary/60 to-bg-primary/75 backdrop-blur-md">
+            <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
 
+            <div className="grid grid-cols-1 lg:grid-cols-[6fr_5fr]">
+              {/* Content column */}
+              <div className="space-y-6 p-6 sm:p-8 lg:p-12 flex flex-col justify-center text-center lg:text-start">
+                <h2 className="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,3.3vw,3rem)] font-semibold text-text-primary leading-tight">
+                  {t("doppler.titleMiddle")}{" "}
+                  <span className="text-text-muted whitespace-nowrap">{t("doppler.titlePlayful")}</span>
+                </h2>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-text-primary leading-tight">
-                {t("doppler.titleMiddle")}{" "}
-                <span className="bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent">
-                  {t("doppler.titlePlayful")}
-                </span>
-              </h2>
-            </div>
+                <p className="text-text-muted text-lg max-w-md mx-auto lg:mx-0">
+                  {t("doppler.subtitle")}
+                </p>
 
-            {/* Subheadline */}
-            <p className="text-text-muted text-lg max-w-md mx-auto lg:mx-0">
-              {t("doppler.subtitle")}
-            </p>
+                {/* Social proof — same real numbers as the hero */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2">
+                  <span className="flex items-center gap-1.5">
+                    <Stars />
+                    <span className="text-sm font-semibold text-text-primary">{tHero("socialProof.rating")}</span>
+                    <span className="text-xs text-text-muted">{tHero("socialProof.appStore")}</span>
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Stars />
+                    <span className="text-sm font-semibold text-text-primary">{tHero("socialProof.ratingGooglePlay")}</span>
+                    <span className="text-xs text-text-muted">{tHero("socialProof.googlePlay")}</span>
+                  </span>
+                  <span className="hidden sm:inline text-text-tertiary" aria-hidden="true">·</span>
+                  <span className="text-xs text-text-muted">{tHero("socialProof.users")}</span>
+                </div>
 
-            {/* Social proof — same real numbers as the hero */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2">
-              <span className="flex items-center gap-1.5">
-                <Stars />
-                <span className="text-sm font-semibold text-text-primary">{tHero("socialProof.rating")}</span>
-                <span className="text-xs text-text-muted">{tHero("socialProof.appStore")}</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Stars />
-                <span className="text-sm font-semibold text-text-primary">{tHero("socialProof.ratingGooglePlay")}</span>
-                <span className="text-xs text-text-muted">{tHero("socialProof.googlePlay")}</span>
-              </span>
-              <span className="hidden sm:inline text-text-tertiary" aria-hidden="true">·</span>
-              <span className="text-xs text-text-muted">{tHero("socialProof.users")}</span>
-            </div>
+                {/* Platform download buttons */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 max-w-md w-full mx-auto lg:mx-0">
+                  {platforms.map((p) => {
+                    const onClick = () => trackCta("landing-cta", p.platform, p.variant);
+                    return p.external ? (
+                      <a
+                        key={p.id}
+                        href={p.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={onClick}
+                        className={btnClass}
+                      >
+                        <span className={iconWrap}>{p.icon}</span>
+                        <span className="text-sm font-medium leading-tight">{p.label}</span>
+                      </a>
+                    ) : (
+                      <a key={p.id} href={p.href} download onClick={onClick} className={btnClass}>
+                        <span className={iconWrap}>{p.icon}</span>
+                        <span className="text-sm font-medium leading-tight">{p.label}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
 
-            {/* Platform Download Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 max-w-md mx-auto lg:mx-0">
-              {platforms.map((p) => {
-                const onClick = () => trackCta("landing-cta", p.platform, p.variant);
-                return p.external ? (
-                  <a
-                    key={p.id}
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={onClick}
-                    className={btnClass}
-                  >
-                    <span className={iconWrap}>{p.icon}</span>
-                    <span className="text-sm font-medium leading-tight">{p.label}</span>
-                  </a>
-                ) : (
-                  <a key={p.id} href={p.href} download onClick={onClick} className={btnClass}>
-                    <span className={iconWrap}>{p.icon}</span>
-                    <span className="text-sm font-medium leading-tight">{p.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-
-          </Reveal>
-
-          {/* Image Column */}
-          <Reveal delay={100} className="w-full">
-            <Card
-              padding="none"
-              className="relative w-full aspect-[4/3] overflow-hidden border-accent-teal/20 bg-gradient-to-br from-accent-teal/10 via-transparent to-accent-gold/5"
-            >
-              <div className="absolute inset-0">
+              {/* Image column — bleeds to the card edges; the notch cuts its bottom-end corner.
+                  The spacer holds the image's own aspect, so it only crops sideways when the
+                  copy column is taller. */}
+              <div className="relative overflow-hidden border-t lg:border-t-0 lg:border-s border-overlay/5">
+                <div className="aspect-[1009/794]" aria-hidden="true" />
                 <Image
                   src="/images/dopplerdownload.avif"
                   alt="Doppler VPN app interface"
                   fill
+                  sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover"
                 />
               </div>
-            </Card>
-          </Reveal>
-        </div>
+            </div>
+
+            <span className="notch-edge" aria-hidden="true" />
+          </div>
+        </Reveal>
       </div>
     </section>
   );

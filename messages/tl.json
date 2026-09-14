@@ -1276,6 +1276,22 @@
     "lookingUp": "Hinahanap ang iyong account...",
     "accountNotFound": "Hindi nahanap ang account. Pakitingnan ang iyong Account ID.",
     "verifyingAccount": "Bine-verify...",
+    "retry": "Subukan muli",
+    "existingAccountTitle": "May account nang naka-save sa device na ito",
+    "existingAccountCta": "Pumunta sa iyong account",
+    "existingAccountNote": "Kung magpapatuloy ka sa ibaba, ibang Account ID ang mase-save sa device na ito.",
+    "loginTitle": "Maligayang pagbabalik",
+    "loginSubtitle": "Ilagay ang iyong Account ID para magpatuloy.",
+    "signupTitle": "Gumawa ng account",
+    "signupSubtitle": "Walang email. Walang password. Isang tap lang.",
+    "welcomeTitle": "Ayos na",
+    "welcomeBody": "Handa na ang iyong account. Ang ID na ito ang susi mo — i-save bago isara.",
+    "welcomeIdLabel": "Ang iyong Account ID",
+    "welcomeCopy": "Kopyahin ang aking Account ID",
+    "welcomeCopied": "Nakopya sa clipboard",
+    "welcomePromoIntro": "Regalo sa pagsali — gamitin ang code na ito sa checkout:",
+    "welcomeCta": "Sige — na-save ko na ang ID",
+    "welcomeDismiss": "Isara",
     "dashboard": {
       "title": "Ang Iyong Account",
       "memberSince": "Miyembro mula",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Kung bumili ka ng subscription sa pamamagitan ng App Store o Google Play, pamahalaan ito dito.",
       "restoreAppStore": "Mga Subscription sa App Store",
       "restorePlayStore": "Mga Subscription sa Google Play",
-      "deleteProSupportNote": "May aktibong Pro subscription ang iyong account. Mangyaring makipag-ugnayan sa suporta upang burahin ito."
+      "deleteProSupportNote": "May aktibong Pro subscription ang iyong account. Mangyaring makipag-ugnayan sa suporta upang burahin ito.",
+      "statusPro": "Pro · hanggang {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Free plan",
+      "active": "Aktibo",
+      "from": "mula",
+      "card": "Card",
+      "crypto": "Crypto",
+      "payWithCrypto": "Magbayad gamit ang crypto — {price}",
+      "cryptoNote": "Magbayad gamit ang BTC, ETH, USDT o USDC. Dadalhin ka sa OxaPay.",
+      "back": "Bumalik",
+      "accountIdHint": "Ang iyong susi sa Doppler. Mag-sign in gamit ito sa anumang device.",
+      "copyId": "Kopyahin ang ID",
+      "sendToDevices": "Ipadala sa aking mga device",
+      "sendToDevicesDesc": "Ipadala sa iyong sarili ang Account ID at ang download link, at buksan ang mga ito sa iyong phone, tablet o computer.",
+      "shareNative": "Ibahagi…",
+      "shareEmail": "Email",
+      "shareTelegramHint": "Sa Telegram, piliin ang Saved Messages.",
+      "copyMessage": "Kopyahin ang mensahe",
+      "messageCopied": "Nakopya ang mensahe",
+      "shareSubject": "Ang aking Doppler VPN account",
+      "shareMessage": "Ang aking Doppler VPN Account ID: {id}\nI-download ang app: {url}\nBuksan ang app at mag-sign in gamit ang ID na ito.",
+      "shareWarning": "Sinumang may ID na ito ay maaaring gamitin ang iyong subscription. Ipadala ito sa iyong sarili lamang.",
+      "devices": "Aking mga device",
+      "devicesCount": "{count} ng {max}",
+      "mainDevice": "Pangunahin",
+      "lastActive": "Aktibo {time}",
+      "addedOn": "Idinagdag {date}",
+      "noDevices": "Walang device pa. I-install ang Doppler at mag-sign in gamit ang iyong Account ID.",
+      "manageInApp": "Para mag-alis ng device, buksan ang Doppler at pumunta sa Devices.",
+      "devicesError": "Hindi na-load ang iyong mga device.",
+      "everyDeviceHint": "I-install ang Doppler, pagkatapos mag-sign in gamit ang iyong Account ID. Hanggang {max} device sa isang account."
     },
     "securedByCrypto": "Sinigurado ng OxaPay"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Magbayad nang anonymous — kahit sa mga blocked na rehiyon",
-      "body": "Kapag binabantayan ang bangko mo o hindi gumagana ang international cards, patuloy na gumagana ang Bitcoin at stablecoins. Tinatanggap ng Doppler ang BTC, ETH, USDT, at USDC — walang bangko, walang ID, walang bakas.",
+      "title": "Magbayad nang walang bank card",
+      "body": "Kapag hindi gumagana ang mga internasyonal na card sa kinaroroonan mo, gumagana pa rin ang Bitcoin at mga stablecoin. Tumatanggap ang Doppler ng BTC, ETH, USDT, at USDC — walang kailangang bank account o card.",
       "cta": "Magbayad gamit crypto",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Gabay sa Internet Censorship — Paano Bino-block ang mga VPN at Paano Manatiling Konektado",
-      "description": "Teknikal na gabay kung paano bino-block ng mga gobyerno ang mga VPN at proxy gamit ang DPI, TSPU, at ML — at paano binabypass ng VLESS-Reality proxy ang bawat paraan ng detection. Maghanda para sa papaigting na mga restriksyon."
+      "description": "Teknikal na gabay: paano hinaharangan ng mga pambansang sistema ng pagsala ang VPN gamit ang DPI, pagsusuri ng trapiko, at aktibong pagsisiyasat — at bakit nananatiling nakakonekta ang VLESS-Reality. Maghanda sa lumalalang mga paghihigpit."
     },
     "hero": {
       "title": "Ang Gabay Mo sa Kalayaan sa Internet",
-      "subtitle": "Paano nide-detect at bino-block ng mga gobyerno ang mga VPN, paano tinatalunin ng Doppler ang bawat paraan, at ano ang dapat mong gawin ngayon para manatiling konektado habang tumitindi ang mga restriksyon."
+      "subtitle": "Paano tinutukoy at hinaharangan ng mga sensor ang VPN, paano nilalabanan ng Doppler ang bawat paraan, at ano ang magagawa mo ngayon para manatiling nakakonekta."
     },
     "detection": {
       "title": "Paano Nide-detect at Bino-block ng mga Gobyerno ang mga VPN",
-      "intro": "Ang internet censorship ay lumampas na sa simpleng IP blocking. Ang mga bansa tulad ng Russia, China, at Iran ay gumagamit ng mga sopistikadong sistema na gumagamit ng machine learning para matukoy at maputol ang mga VPN connection sa real time. Ganito mismo ang ginagawa nila.",
+      "intro": "Matagal nang lampas sa simpleng pagharang ng IP address ang sensura sa internet. Gumagamit na ngayon ang mga pambansang sistema ng pagsala ng machine learning upang matukoy at putulin ang mga koneksyong VPN nang real time, at lumilitaw din ang parehong pamamaraan sa mga network ng kompanya at unibersidad. Ganito eksaktong gumagana ang mga ito.",
       "tspu": {
-        "title": "Ang Imprastraktura: TSPU at DPI",
-        "p1": "Gumagamit ang Russia ng TSPU (Technical Systems for Threat Countermeasures) — espesyal na hardware na naka-install direkta sa mga ISP network node. Gumagamit ang China ng Great Firewall, at ang Iran ay nag-ooperate ng NIN. Ang mga sistemang ito ay nagsasagawa ng Deep Packet Inspection (DPI) sa bawat packet na dumaraan sa network.",
+        "title": "Ang imprastraktura: pambansang sistema ng DPI",
+        "p1": "Ang mga bansang mahigpit magsala ay direktang naglalagay ng kagamitan sa inspeksyon sa mga network node ng mga operator — ang Great Firewall sa Tsina, ang pambansang network ng impormasyon sa Iran, ang TSPU sa Rusya, at katulad na sistema sa Turkiya at sa Golpo. Lahat ay nagsasagawa ng malalim na inspeksyon ng packet (DPI) sa bawat packet na dumadaan sa network.",
         "p2": "Ang mga tradisyunal na VPN protocol tulad ng OpenVPN, WireGuard, at IPSec ay may kakaibang packet structure. Agad itong natutukoy ng DPI at pinapaputol ang koneksyon. Kahit ang mga \"obfuscated\" mode ay madalas nabibigo dahil nananatiling detectable ang underlying handshake pattern.",
         "p3": "Kapag hindi sapat ang basic signature matching, ina-activate ng mga sistemang ito ang mga machine learning module. Humihinto sila sa pagtingin sa loob ng mga packet (lahat ay encrypted) at nagsisimulang suriin kung paano kumikilos ang traffic."
       },
@@ -1548,7 +1595,7 @@
         "title": "Paraan 4: IP at DNS Blacklisting",
         "description": "Ang mga kilalang VPN provider IP range ay tuwirang bino-block. Ang mga DNS request para sa VPN domain ay inii-intercept. Ang mga komersyal na VPN provider na may pampublikong listahan ng server ang pinaka-madaling target — maaaring ma-block ang buong imprastraktura nila sa loob ng ilang minuto."
       },
-      "conclusion": "Ang resulta: ang mga push-button VPN at karaniwang proxy service tulad ng NordVPN, ExpressVPN, at Surfshark ay humihinto sa pag-andar sa loob ng ilang oras ng crackdown. Tanging ang mga proxy protocol na espesyal na idinisenyo para maging hindi makilala mula sa karaniwang web traffic ang nakakaligtas."
+      "conclusion": "Ang resulta: karaniwang huminto sa paggana ang mga pangkaraniwang VPN app na nakabatay sa mga karaniwang protocol ilang oras matapos magsimula ang pagharang. Ang nananatili lamang ay ang mga protocol na sadyang idinisenyo upang hindi makilala mula sa normal na trapiko sa web."
     },
     "defeats": {
       "title": "Paano Tinatalunin ng Doppler ang Bawat Paraan ng Detection",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Na-block sa Russia — At Naririto Pa Rin",
-      "badge": "Na-verify ng Roskomnadzor",
-      "p1": "Espesipikong tinarget at bino-block ng mga awtoridad ng Russia ang Doppler VPN. Naidagdag na ang aming domain sa federal blocklist. Hindi namin ito itinatago — patunay ito na gumagana ang aming teknolohiya.",
-      "p2": "Hindi tulad ng mga komersyal na VPN provider na sumusunod sa mga takedown request o tahimik na umaalis sa mga restriktibong merkado, binuo ang Doppler para sa eksaktong sitwasyong ito. Kapag na-block ang aming website, nananatiling accessible ang aming Telegram bot. Kapag na-ban ang mga server IP, awtomatikong nag-ro-rotate ang aming imprastraktura.",
-      "p3": "Bawat block na ipinapataw nila, binabypass namin. Hindi iyan marketing claim — iyan ang aming pang-araw-araw na operasyon.",
-      "stat1label": "Domain na-block ng RKN",
-      "stat1value": "Nakumpirma",
+      "title": "Tinanggal sa hiling ng sensor — at gumagana pa rin",
+      "badge": "Pagtanggal sa App Store, Rusya",
+      "p1": "Tinanggal ng Apple ang Doppler VPN app sa App Store ng Rusya matapos ang legal na hiling mula sa Roskomnadzor, ang ahensiya ng estado para sa komunikasyon. Dose-dosenang VPN app na ang tinanggal ng Apple sa ganito ring paraan. Inilalathala namin ito sa halip na itago: ang mapangalanan ay nangyayari sa mga kasangkapang patuloy na gumagana.",
+      "p2": "Di tulad ng mga provider na sumusunod sa hiling na tanggalin o tahimik na umaalis sa mga pinaghihigpitang merkado, ginawa ang Doppler para mismo rito. Kapag tinanggal kami ng isang app store, naihahatid pa rin ng aming Telegram bot ang app. Kapag hinarangan ang mga IP ng server, awtomatikong pinapalitan ng aming imprastraktura ang mga entry point.",
+      "p3": "Lumilihis ang distribusyon sa harang — direktang APK, Telegram bot, at nagpapalitang entry point. Katangian ito ng arkitektura, hindi pangako.",
+      "stat1label": "App Store ng Rusya",
+      "stat1value": "Tinanggal sa hiling ng RKN",
       "stat2label": "Status ng serbisyo",
       "stat2value": "Operasyonal",
       "stat3label": "Alternatibong access",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Posibleng Susunod na Hakbang",
         "title": "Whitelist Model",
-        "description": "Sa halip na i-block ang mga partikular na protocol, tanging mga aprubadong domain at IP address lang ang maa-access. Lahat ng iba pa ay bino-block bilang default. SSH, RDP, gaming port — lahat bino-block maliban kung rehistrado ng legal na entity. Bahagyang sinubukan ito noong 2018 Telegram ban ng Russia.",
+        "description": "Sa halip na harangin ang partikular na protocol, ang mga aprubadong domain at IP address na lamang ang mananatiling maaabot. Naka-harang bilang default ang lahat ng iba pa. SSH, RDP, mga port sa paglalaro — lahat sarado maliban kung nakarehistro ng isang legal na entidad. Nasubukan na sa pambansang saklaw ang paraang whitelist sa mga malawakang operasyon ng pagharang at pagsasanay sa pagpatay ng koneksyon.",
         "status": "Technically feasible, bahagyang nai-deploy"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Ang Katotohanan sa Ekonomiya",
-        "p1": "Noong 2018, nang subukan ng Roskomnadzor na i-block lang ang Telegram, napunta sila sa pag-ban ng milyun-milyong Amazon at Google IP address. Huminto ang mga cash register sa mga tindahan. Nag-offline ang mga smart home device. Nabigo ang mga banking push notification.",
-        "p2": "Ang whitelist model ay magdudulot nito sa 100x na saklaw. Ang mga modernong Russian website ay umaasa sa Google Fonts, dayuhang CDN library, internasyonal na certificate authority, at mga cloud service. Gumagamit ng dayuhang SSL certificate ang mga bangko at logistics company. Mawawalan ng access ang mga developer sa GitHub, Docker Hub, at npm.",
+        "p1": "Noong 2018, nauwi ang pagtatangkang harangin ang iisang messaging app sa pagkaharang ng milyon-milyong IP address ng Amazon at Google kasama nito. Tumigil ang mga cash register. Nawalan ng koneksyon ang mga smart home device. Hindi dumarating ang mga abiso ng bangko. Ang collateral damage ang karaniwang bunga ng magaspang na pagharang.",
+        "p2": "Sa modelong whitelist, mangyayari ito sa mas malaking saklaw. Umaasa ang mga makabagong website saanman sa dayuhang CDN, serbisyo ng font, certificate authority, at cloud platform. Gumagamit ang mga bangko at kompanya ng logistics ng dayuhang SSL certificate. Mawawalan ng akses ang mga developer sa GitHub, Docker Hub, at npm.",
         "p3": "Posible sa teknikal ang buong isolation — pero ang presyo nito ay pagkabulok ng teknolohiya. Hindi na maa-access ang mga update ng Windows at Android. Mawawalan ng driver support ang mga medical equipment. Ganap na titigil ang AI development nang walang global open-source na imprastraktura.",
         "p4": "Ang pinakamalamang na landas ay unti-unting paghihigpit sa loob ng maraming taon, hindi isang biglang pagputol. Pero bawat hakbang ng pagtaas ay nangangahulugang mas maraming VPN user ang maiiwanan — maliban kung sila ay handa."
       }
@@ -1642,8 +1689,8 @@
         "description": "Nagpu-push kami ng mga protocol update para manatiling nangunguna sa mga bagong blocking technique. I-enable ang auto-update o regular na mag-check ng mga update sa pamamagitan ng aming mga Telegram channel."
       },
       "step5": {
-        "title": "I-share sa mga Taong Nangangailangan",
-        "description": "Mas maraming tao ang may naka-install na Doppler bago tumindi ang mga restriksyon, mas mabuti. I-share ang aming Telegram bot link — ito ang pinaka-censorship-resistant na distribution channel na mayroon kami."
+        "title": "Mag-ingat sa pagbabahagi",
+        "description": "Mas marami ang nakapag-install ng Doppler bago humigpit ang mga paghihigpit, mas mabuti — ang link ng aming Telegram bot ang pinakamatibay laban sa sensura na paraan namin. Isang paalala: may mga bansa, kabilang ang Rusya, na nagmumulta na ngayon sa mga indibidwal dahil sa pag-promote ng mga kasangkapang panlusot. Magbahagi nang pribado sa mga taong kilala mo, at tingnan muna ang mga patakaran sa lugar mo bago mag-post nang hayagan."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Mga madalas itanong",
       "q1": {
         "question": "Kaya bang i-bypass ng Doppler VPN ang censorship ng gobyerno?",
         "answer": "Oo. Gumagamit ang Doppler ng VLESS-Reality na ginagawang hindi makilala ang VPN traffic mula sa karaniwang HTTPS. Nilalagpasan nito ang DPI, TSPU, at Great Firewall nang walang matukoy na VPN signature."
       },
       "q2": {
         "question": "Gumagana ba ang Doppler VPN sa Russia, China, at Iran?",
-        "answer": "Oo. Ang Doppler ay partikular na ginawa para sa mga censored na rehiyon. Ang aming domain ay na-block ng Roskomnadzor, na nagpapatunay na gumagana ang aming teknolohiya."
+        "answer": "Oo. Ginawa ang Doppler para sa mga network na mahigpit ang pagsala. Sa Rusya, tinanggal ng Apple ang aming app sa lokal na App Store sa hiling ng Roskomnadzor — at patuloy na gumana ang serbisyo sa pamamagitan ng aming Telegram bot at nagpapalitang entry point. Araw-araw kumokonekta ang mga gumagamit sa Rusya, Tsina, Iran, at Turkiya."
       },
       "q3": {
         "question": "Ano ang nagpapahusay sa VLESS-Reality kaysa OpenVPN o WireGuard para sa pag-bypass ng censorship?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Walang Iiwan Naming Sinuman",
-      "subtitle": "Ang Doppler VPN ay espesyal na binuo para sa mga restriktibong network. Patuloy naming pinapahusay ang aming imprastraktura, niro-rotate ang mga server, at ina-update ang mga protocol para manatiling nangunguna sa bawat bagong blocking technique. Hindi mapag-uusapan ang iyong kalayaan sa internet.",
+      "title": "Ginawa para sa mga network na lumalaban",
+      "subtitle": "Ginawa ang Doppler VPN para sa mga pinaghihigpitang network. Pinapalitan namin ang mga server, ina-update ang mga protocol, at pinapabuti ang imprastraktura habang nagbabago ang mga paraan ng pagharang.",
       "downloadIos": "I-download para sa iOS",
       "downloadAndroid": "I-download para sa Android",
       "telegramBot": "Kunin sa pamamagitan ng Telegram Bot",

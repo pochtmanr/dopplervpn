@@ -129,7 +129,7 @@
     "headlinePart1a": "Töötab seal, kus teised VPN-id",
     "headlinePart1b": "blokeeritakse.",
     "headlinePart2": "",
-    "subheadline": "Teie liiklus näeb välja nagu tavaline HTTPS, nii et süvapakettide kontroll (DPI) seda ei näe. Pole kontot, pole logisid, pole jälgi — lihtsalt avage rakendus ja ühenduge.",
+    "subheadline": "Sinu liiklus näeb välja nagu tavaline HTTPS, seega süvapaketikontroll seda ei näe. Ei kontot, ei tegevuslogisid, ei ühtegi kirjet selle kohta, kuhu lähed — ava rakendus ja ühenda.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Isikuandmeid pole vaja",
@@ -178,7 +178,7 @@
       },
       "cryptoPayment": {
         "title": "Maksa Bitcoini ja krüptoga",
-        "description": "Anonüümsed VPN-i maksed BTC, ETH, USDT ja USDC-ga. Ei kaarti, ei nime, ei jälge — tellimus töötab kõigil sinu seadmetel."
+        "description": "Maksa BTC, ETH, USDT või USDC-ga — ilma kaardi ja pangakontota. Sinu tellimus toimib kõigis sinu seadmetes."
       },
       "minimalData": {
         "title": "Range logideta poliitika",
@@ -521,7 +521,7 @@
       },
       "usage": {
         "title": "5. Acceptable Use",
-        "content": "You agree to use the Services only for lawful purposes and in compliance with all applicable local, national, and international laws and regulations. You shall not: (a) use the Services for any illegal activities or to facilitate illegal conduct; (b) attempt to circumvent, disable, or interfere with security features of the Services; (c) distribute malware, viruses, or any harmful code through the Services; (d) infringe upon the intellectual property rights of any third party; (e) use the AI Video Generation tool to create content that is defamatory, obscene, fraudulent, or that violates the rights of others; (f) use the Services to send spam or unsolicited communications; (g) reverse engineer, decompile, or disassemble any part of the Services; or (h) resell, sublicense, or commercially exploit the Services without our written consent. We reserve the right to suspend or terminate accounts that violate these Terms, with or without notice depending on the severity of the violation."
+        "content": "Nõustud kasutama Teenuseid üksnes seaduslikel eesmärkidel ja kooskõlas kõigi kohaldatavate kohalike, riiklike ja rahvusvaheliste seaduste ning määrustega. Sul ei ole lubatud: (a) kasutada Teenuseid ebaseaduslikuks tegevuseks või õigusvastase käitumise hõlbustamiseks; (b) püüda Teenuste turvafunktsioonidest mööda hiilida, neid välja lülitada või häirida; (c) levitada Teenuste kaudu pahavara, viirusi või mis tahes kahjulikku koodi; (d) rikkuda kolmandate isikute intellektuaalomandi õigusi; (e) kasutada tehisintellektil põhinevat videoloomise tööriista laimava, rõveda, petliku või teiste õigusi rikkuva sisu loomiseks; (f) kasutada Teenuseid rämpsposti või soovimatute sõnumite saatmiseks; (g) pöördprojekteerida, dekompileerida või lahti võtta ühtegi Teenuste osa; või (h) Teenuseid ilma meie kirjaliku nõusolekuta edasi müüa, all-litsentsida või ärilistel eesmärkidel kasutada. Sanktsioonid ja piiranguga territooriumid: kinnitad ja garanteerid, et sa ei ole isik ega üksus, kelle suhtes kohaldatakse Ühendkuningriigi, Euroopa Liidu, Ühinenud Rahvaste Organisatsiooni või Ameerika Ühendriikide finantssanktsioone, ega tegutse sellise isiku nimel, ning et sa ei viibi ega ela alaliselt territooriumil, mille suhtes kohaldatakse ulatuslikke sanktsioone. Me ei tee Teenuseid sellistele isikutele kättesaadavaks ja võime peatada või lõpetada mis tahes konto, kui saame teada, et see kinnitus ei vasta või ei vasta enam tõele. Jätame endale õiguse peatada või lõpetada kontod, mis rikuvad käesolevaid Tingimusi, teatega või ilma, sõltuvalt rikkumise raskusest."
       },
       "ip": {
         "title": "6. Intellectual Property",
@@ -1276,6 +1276,22 @@
     "lookingUp": "Konto otsimine...",
     "accountNotFound": "Kontot ei leitud. Palun kontrollige oma konto ID-d.",
     "verifyingAccount": "Kinnitamine...",
+    "retry": "Proovi uuesti",
+    "existingAccountTitle": "Sellesse seadmesse on juba konto salvestatud",
+    "existingAccountCta": "Mine oma kontole",
+    "existingAccountNote": "Kui jätkate allpool, salvestatakse sellesse seadmesse teine konto ID.",
+    "loginTitle": "Tere tulemast tagasi",
+    "loginSubtitle": "Sisestage jätkamiseks oma konto ID.",
+    "signupTitle": "Looge oma konto",
+    "signupSubtitle": "Ei mingit e-posti. Ei mingit parooli. Piisab ühest puudutusest.",
+    "welcomeTitle": "Valmis",
+    "welcomeBody": "Teie konto on valmis. See ID on teie võti — salvestage see enne sulgemist.",
+    "welcomeIdLabel": "Teie konto ID",
+    "welcomeCopy": "Kopeeri konto ID",
+    "welcomeCopied": "Kopeeritud lõikelauale",
+    "welcomePromoIntro": "Tervituskingitus — kasutage maksmisel seda koodi:",
+    "welcomeCta": "Selge — ID on salvestatud",
+    "welcomeDismiss": "Sulge",
     "dashboard": {
       "title": "Teie konto",
       "memberSince": "Liige alates",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Kui ostsite tellimuse App Store'ist või Google Playst, hallake seda siin.",
       "restoreAppStore": "App Store'i tellimused",
       "restorePlayStore": "Google Play tellimused",
-      "deleteProSupportNote": "Teie kontol on aktiivne Pro tellimus. Kustutamiseks võtke ühendust toega."
+      "deleteProSupportNote": "Teie kontol on aktiivne Pro tellimus. Kustutamiseks võtke ühendust toega.",
+      "statusPro": "Pro · kuni {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Tasuta pakett",
+      "active": "Aktiivne",
+      "from": "alates",
+      "card": "Kaart",
+      "crypto": "Krüpto",
+      "payWithCrypto": "Maksa krüptoga — {price}",
+      "cryptoNote": "Maksa BTC, ETH, USDT või USDC-ga. Sind suunatakse OxaPay lehele.",
+      "back": "Tagasi",
+      "accountIdHint": "Sinu Doppleri võti. Logi sellega sisse igas seadmes.",
+      "copyId": "Kopeeri ID",
+      "sendToDevices": "Saada minu seadmetesse",
+      "sendToDevicesDesc": "Saada endale konto ID ja allalaadimislink ning ava need telefonis, tahvelarvutis või arvutis.",
+      "shareNative": "Jaga…",
+      "shareEmail": "E-post",
+      "shareTelegramHint": "Vali Telegramis Salvestatud sõnumid.",
+      "copyMessage": "Kopeeri sõnum",
+      "messageCopied": "Sõnum kopeeritud",
+      "shareSubject": "Minu Doppler VPN-i konto",
+      "shareMessage": "Minu Doppler VPN-i konto ID: {id}\nLae rakendus alla: {url}\nAva rakendus ja logi selle ID-ga sisse.",
+      "shareWarning": "Igaüks, kellel on see ID, saab sinu tellimust kasutada. Saada see ainult endale.",
+      "devices": "Minu seadmed",
+      "devicesCount": "{count}/{max}",
+      "mainDevice": "Peamine",
+      "lastActive": "Aktiivne {time}",
+      "addedOn": "Lisatud {date}",
+      "noDevices": "Seadmeid veel pole. Paigalda Doppler ja logi sisse oma konto ID-ga.",
+      "manageInApp": "Seadme eemaldamiseks ava Doppler ja mine jaotisse Seadmed.",
+      "devicesError": "Sinu seadmeid ei õnnestunud laadida.",
+      "everyDeviceHint": "Paigalda Doppler ja logi sisse oma konto ID-ga. Kuni {max} seadet ühel kontol."
     },
     "securedByCrypto": "Kaitstud OxaPay poolt"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Maksa anonüümselt — isegi blokeeritud piirkondadest",
-      "body": "Kui sinu pank on jälgimise all või rahvusvahelised kaardid ei tööta, töötavad Bitcoin ja stabiilmündid ikka. Doppler aktsepteerib BTC, ETH, USDT ja USDC — ilma pangata, ilma ID-ta, jälgedeta.",
+      "title": "Maksa ilma pangakaardita",
+      "body": "Kui rahvusvahelised kaardid sinu asukohas ei tööta, siis bitcoin ja stabiilmündid töötavad. Doppler võtab vastu BTC, ETH, USDT ja USDC — ilma pangakonto ja kaardita.",
       "cta": "Maksa krüptoga",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Internetsensuurist möödaviimise juhend — Kuidas VPN-e blokeeritakse ja kuidas ühenduses püsida",
-      "description": "Tehniline juhend selle kohta, kuidas valitsused blokeerivad VPN-e ja puhverservereid DPI, TSPU ja masinõppe abil — ning kuidas VLESS-Reality puhverserver möödub igast tuvastusmeetodist. Valmistuge eskaleeruvateks piiranguteks."
+      "description": "Tehniline juhend: kuidas riiklikud filtreerimissüsteemid blokeerivad VPN-e DPI, liiklusanalüüsi ja aktiivse sondeerimise abil — ja miks VLESS-Reality jääb ühendatuks. Valmistu karmistuvateks piiranguteks."
     },
     "hero": {
       "title": "Teie juhend internetivabaduse juurde",
-      "subtitle": "Kuidas valitsused tuvastavad ja blokeerivad VPN-e, kuidas Doppler alistab iga meetodi ning mida peaksite tegema nüüd, et piirangute kasvades ühenduses püsida."
+      "subtitle": "Kuidas tsensorid VPN-e tuvastavad ja blokeerivad, kuidas Doppler iga meetodi nurjab ja mida saad praegu teha, et ühenduses püsida."
     },
     "detection": {
       "title": "Kuidas valitsused tuvastavad ja blokeerivad VPN-e",
-      "intro": "Internetitsensuur on arenenud kaugele lihtsast IP-blokeerimisest. Riigid nagu Venemaa, Hiina ja Iraan kasutavad keerukaid süsteeme, mis tuvastavad ja katkestavad VPN-ühendusi reaalajas masinõppe abil. Siit saate täpselt teada, kuidas.",
+      "intro": "Internetitsensuur on ammu enamat kui lihtne IP-aadresside blokeerimine. Riiklikud filtreerimissüsteemid kasutavad tänapäeval masinõpet, et VPN-ühendusi reaalajas tuvastada ja katkestada, ning samad võtted esinevad ka ettevõtete ja ülikoolide võrkudes. Täpselt nii need toimivad.",
       "tspu": {
-        "title": "Infrastruktuur: TSPU ja DPI",
-        "p1": "Venemaa kasutab TSPU-d (ohtude vastumeetmete tehnilised süsteemid) — spetsialiseeritud riistvara, mis on paigaldatud otse ISP võrgusõlmedesse. Hiina kasutab Suurt Tulemüüri, Iraan haldab NIN-i. Need süsteemid teostavad DPI-d igale võrku läbivale paketile.",
+        "title": "Taristu: riiklikud DPI-süsteemid",
+        "p1": "Tugeva filtreerimisega riigid paigaldavad kontrollriistvara otse operaatorite võrgusõlmedesse — Hiina suur tulemüür, Iraani riiklik infovõrk, Venemaa TSPU ning sarnased süsteemid Türgis ja Pärsia lahe riikides. Kõik teevad süvapaketikontrolli (DPI) igale võrku läbivale paketile.",
         "p2": "Traditsioonilised VPN-protokollid nagu OpenVPN, WireGuard ja IPSec omavad eristatavaid pakistruktuure. DPI tuvastab need koheselt ja katkestab ühenduse. Isegi \"hägustatud\" režiimid ebaõnnestuvad sageli, kuna aluseks olev kätlusmuster jääb tuvastatavaks.",
         "p3": "Kui lihtne signatuuride sobitamine ei piisa, aktiveerivad need süsteemid masinõppe moodulid. Need lõpetavad pakettide sisu uurimise (kõik on krüpteeritud) ja hakkavad analüüsima liikluse käitumist."
       },
@@ -1548,7 +1595,7 @@
         "title": "Meetod 4: IP ja DNS mustnimekirjad",
         "description": "Tuntud VPN-teenusepakkujate IP-vahemikud blokeeritakse otseselt. VPN-domeenide DNS-päringud püütakse kinni. Avalike serveriloenditega kaubanduslikud VPN-pakkujad on kõige lihtsamad sihtmärgid — nende kogu infrastruktuur saab minutitega blokeeritud."
       },
-      "conclusion": "Tulemus: automaatsed VPN-id ja tavapuhverteenused nagu NordVPN, ExpressVPN ja Surfshark lõpetavad töötamise tundide jooksul pärast sulgemist. Ainult puhverprotokollid, mis on spetsiaalselt loodud tavalisest veebiliiklusest eristamatuteks, jäävad toimima."
+      "conclusion": "Tulemus: standardprotokollidele ehitatud levinud VPN-rakendused lakkavad tavaliselt töötamast mõne tunni jooksul pärast blokeerimise algust. Ellu jäävad üksnes protokollid, mis on loodud spetsiaalselt selliseks, et neid ei saa tavalisest veebiliiklusest eristada."
     },
     "defeats": {
       "title": "Kuidas Doppler alistab iga tuvastusmeetodi",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Venemaa blokeerinud — ja me oleme endiselt siin",
-      "badge": "Kinnitanud Roskomnadzor",
-      "p1": "Vene ametivõimud on Doppler VPN-i sihilikult suunanud ja blokeerinud. Meie domeen on lisatud föderaalsele blokeerimisloendile. See pole midagi, mida me peidame — see on tõend, et meie tehnoloogia töötab.",
-      "p2": "Erinevalt kaubanduslikest VPN-pakkujatest, kes täidavad eemaldamistaotlusi või lahkuvad vaikselt piiratud turgudelt, on Doppler just selle stsenaariumi jaoks ehitatud. Kui meie veebisait blokeeritakse, jääb meie Telegrami bot kättesaadavaks. Kui serveri IP-d keelatakse, roteerub meie infrastruktuur automaatselt.",
-      "p3": "Igast blokeerimisest möödume. See pole turundusväide — see on meie igapäevane tegevus.",
-      "stat1label": "Domeen RKN-i poolt blokeeritud",
-      "stat1value": "Kinnitatud",
+      "title": "Eemaldatud tsensuuri nõudel — ja töötab endiselt",
+      "badge": "Eemaldamine App Store'ist, Venemaa",
+      "p1": "Apple eemaldas Doppler VPN-i rakenduse Venemaa App Store'ist pärast riikliku sideameti Roskomnadzori õiguslikku nõuet. Apple on samal viisil eemaldanud kümneid VPN-rakendusi. Avaldame selle, selle asemel et varjata: nimetamine on see, mis juhtub tööriistadega, mis jätkuvalt töötavad.",
+      "p2": "Erinevalt pakkujatest, kes eemaldamisnõuetele alluvad või piiratud turgudelt vaikselt lahkuvad, on Doppler ehitatud just selleks. Kui rakenduspood meid eemaldab, toimetab meie Telegrami robot rakenduse ikkagi kohale. Kui serverite IP-aadressid blokeeritakse, vahetab meie taristu sisenemispunkte automaatselt.",
+      "p3": "Levitamine läheb blokist mööda — otsene APK, Telegrami robot ja vahelduvad sisenemispunktid. See on arhitektuuri omadus, mitte lubadus.",
+      "stat1label": "Venemaa App Store",
+      "stat1value": "Eemaldatud RKN-i nõudel",
       "stat2label": "Teenuse olek",
       "stat2value": "Toimiv",
       "stat3label": "Alternatiivne juurdepääs",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Võimalik järgmine samm",
         "title": "Lubatud nimekirja mudel",
-        "description": "Konkreetsete protokollide blokeerimise asemel oleksid ainult lubatud domeenid ja IP-aadressid kättesaadavad. Kõik muu on vaikimisi blokeeritud. SSH, RDP, mängupordid — kõik blokeeritud, kui neid pole registreerinud juriidiline isik. Seda testiti osaliselt Venemaa 2018. aasta Telegrami keelu ajal.",
+        "description": "Konkreetsete protokollide blokeerimise asemel jääksid kättesaadavaks üksnes heakskiidetud domeenid ja IP-aadressid. Kõik muu on vaikimisi blokeeritud. SSH, RDP, mänguportid — kõik suletud, kui juriidiline isik pole neid registreerinud. Valge nimekirja loogikat on juba riiklikus mastaabis katsetatud ulatuslike blokeerimisoperatsioonide ja väljalülitamisõppuste ajal.",
         "status": "Tehniliselt teostatav, osaliselt rakendatud"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Majanduslik tegelikkuse kontroll",
-        "p1": "2018. aastal, kui Roskomnadzor üritas blokeerida ainult Telegrami, blokeerisid nad lõpuks miljoneid Amazoni ja Google'i IP-aadresse. Kaupluste kassad lõpetasid töötamise. Nutikodu seadmed läksid võrguühenduseta. Pankade tõuketeavitused ebaõnnestusid.",
-        "p2": "Lubatud nimekirja mudel põhjustaks seda 100 korda suuremas mahus. Kaasaegsed Vene veebisaidid sõltuvad Google Fontsist, välistest CDN-teekidest, rahvusvahelistest sertifitseerimisasutustest ja pilveteenustest. Pangad ja logistikaettevõtted kasutavad välismaiseid SSL-sertifikaate. Arendajad kaotaksid juurdepääsu GitHubile, Docker Hubile ja npm-ile.",
+        "p1": "2018. aastal lõppes katse blokeerida üksainus sõnumirakendus sellega, et blokeeriti miljonid Amazoni ja Google'i IP-aadressid. Kassaaparaadid lakkasid töötamast. Nutikodu seadmed jäid võrgust välja. Pangateated ei jõudnud kohale. Kaasnev kahju on toore blokeerimise tavapärane tulemus.",
+        "p2": "Valge nimekirja mudel tekitaks selle palju suuremas mastaabis. Tänapäeva veebisaidid sõltuvad kõikjal välismaistest CDN-idest, fonditeenustest, sertifitseerimiskeskustest ja pilveplatvormidest. Pangad ja logistikaettevõtted kasutavad välismaiseid SSL-sertifikaate. Arendajad kaotaksid ligipääsu GitHubile, Docker Hubile ja npm-ile.",
         "p3": "Täielik isoleerimine on tehniliselt võimalik — kuid selle hind on tehnoloogiline allakäik. Windowsi ja Androidi uuendused muutuvad kättesaamatuks. Meditsiiniseadmed kaotavad draiveritoe. AI-arendus peatub täielikult ilma globaalse avatud lähtekoodiga infrastruktuurita.",
         "p4": "Kõige tõenäolisem tee on järkjärguline piiramine aastate jooksul, mitte äkiline katkestus. Kuid iga eskaleeruv samm tähendab, et rohkem VPN-kasutajaid jääb maha — kui nad pole valmistunud."
       }
@@ -1642,8 +1689,8 @@
         "description": "Avaldame protokolliuuendusi, et püsida uutest blokeerimistehnikatest ees. Lülitage sisse automaatsed uuendused või kontrollige uuendusi regulaarselt meie Telegrami kanalite kaudu."
       },
       "step5": {
-        "title": "Jagage nendega, kes seda vajavad",
-        "description": "Mida rohkem inimestel on Doppler paigaldatud enne piirangute eskaleerumist, seda parem. Jagage meie Telegrami boti linki — see on kõige tsensuurikindlam levituskanal, mis meil on."
+        "title": "Jaga ettevaatlikult",
+        "description": "Mida rohkem inimesi on Doppleri paigaldanud enne piirangute karmistumist, seda parem — meie Telegrami roboti link on kõige tsensuurikindlam kanal, mis meil on. Üks hoiatus: mõned riigid, nende seas Venemaa, trahvivad nüüd eraisikuid blokeeringutest möödahiilimise vahendite reklaamimise eest. Jaga privaatselt inimestega, keda tunned, ja kontrolli oma elukoha reegleid, enne kui midagi avalikult postitad."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Korduma kippuvad küsimused",
       "q1": {
         "question": "Kas Doppler VPN suudab valitsuse tsensuuri mööda hiilida?",
         "answer": "Jah. Doppler kasutab VLESS-Reality'd, mis muudab VPN-liikluse tavalisest HTTPS-ist eristamatuks. See möödub DPI-st, TSPU-st ja Suurest Tulemüürist ilma tuvastatavate VPN-allkirjadeta."
       },
       "q2": {
         "question": "Kas Doppler VPN töötab Venemaal, Hiinas ja Iraanis?",
-        "answer": "Jah. Doppler on loodud spetsiaalselt tsenseeritud piirkondade jaoks. Meie domeen on Roskomnadzori poolt blokeeritud, mis tõestab, et meie tehnoloogia toimib."
+        "answer": "Jah. Doppler on ehitatud tugevalt filtreeritud võrkude jaoks. Venemaal eemaldas Apple meie rakenduse kohalikust App Store'ist Roskomnadzori nõudel — ja teenus töötas edasi meie Telegrami roboti ja vahelduvate sisenemispunktide kaudu. Kasutajad Venemaal, Hiinas, Iraanis ja Türgis ühenduvad iga päev."
       },
       "q3": {
         "question": "Mis teeb VLESS-Reality tsensuuri möödahiilimiseks paremaks kui OpenVPN või WireGuard?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Me ei jäta kedagi maha",
-      "subtitle": "Doppler VPN on ehitatud spetsiaalselt piiratud võrkude jaoks. Täiustame pidevalt oma infrastruktuuri, roteerime servereid ja uuendame protokolle, et püsida igast uuest blokeerimistehnikast ees. Teie internetivabadus pole läbiräägitav.",
+      "title": "Ehitatud võrkudele, mis osutavad vastupanu",
+      "subtitle": "Doppler VPN on mõeldud piirangutega võrkudele. Vahetame servereid, uuendame protokolle ja täiustame taristut, kui blokeerimisvõtted muutuvad.",
       "downloadIos": "Laadi alla iOS-i jaoks",
       "downloadAndroid": "Laadi alla Androidi jaoks",
       "telegramBot": "Hangi Telegrami boti kaudu",
@@ -1778,12 +1826,12 @@
   },
   "payWithCrypto": {
     "metadata": {
-      "title": "Osta VPN Bitcoiniga — Anonüümne makse | Doppler VPN",
-      "description": "Maksa Doppler VPN-i Bitcoini, Ethereumi, USDT või USDC-ga. Anonüümne krüptomakse, kaarti ega e-posti pole vaja. Töötab iPhone'is, Androidis, Mac-is ja Windowsis."
+      "title": "Osta VPN bitcoiniga — ilma kaardita",
+      "description": "Maksa Doppler VPN-i eest bitcoini, ethereumi, USDT või USDC-ga. Krüptomakse, ilma kaardi või e-postita. Toimib iPhone'is, Androidis, Macis ja Windowsis."
     },
     "hero": {
       "title": "Osta VPN Bitcoini, Ethereumi ja stabiilmüntidega",
-      "subtitle": "Maksa Doppler VPN-i krüptoga. Ei kaarti, ei e-posti, ei jälge — tellimus on seotud anonüümse konto ID-ga, mis töötab igas seadmes.",
+      "subtitle": "Maksa Doppler VPN-i eest krüptoga. Ilma kaardita ja ilma e-postita — sinu tellimus on seotud anonüümse konto tunnusega, mis toimib igas seadmes.",
       "cta": "Osta krüptoga"
     },
     "coins": {
@@ -1897,7 +1945,7 @@
       },
       "done": {
         "title": "Olete kaitstud",
-        "description": "See ongi kõik. E-posti kinnitust pole vaja oodata, paroole pole vaja meelde jätta, kontosid pole vaja hallata. Teie ühendus on krüpteeritud, teie identiteet on anonüümne ja teie VPN ei tea absoluutselt midagi sellest, kes te olete. Sirvite tõeliselt anonüümse VPN-kasutajana — e-posti pole vaja, jälgi ei jää."
+        "description": "See ongi kõik. Ei mingit kinnituskirja, mida oodata, ei paroole, mida meeles pidada, ei kontosid, mida hallata. Sinu ühendus on krüpteeritud ja me ei küsi kunagi, kes sa oled. Sirvid anonüümse konto tunnusega — ilma e-postita ja ilma logita selle kohta, kuhu lähed."
       }
     },
     "noCollect": {
@@ -1987,8 +2035,8 @@
         "description": "Meie serverid kontrollivad võtme legitiimsust ilma identiteediandmeid salvestamata. Autentimine toimub TLS 1.3 kaudu — kontosid pole, mandaatide andmebaasi pole."
       },
       "zeroPii": {
-        "title": "Null isikuandmeid",
-        "description": "E-posti pole, nime pole, telefoni pole, IP-logisid pole. Arhitektuuriliselt ei saa me oma kasutajaid tuvastada, sest me ei kogu kunagi tuvastamiseks vajalikku teavet."
+        "title": "Minimaalsed andmed juba disainilt",
+        "description": "Ei e-posti, ei nime, ei telefoninumbrit. Me ei kogu kunagi neid identiteediandmeid, mille põhjal saaks öelda, kes keegi on; ainus kirje seadme ühendumisest on lühike autentimislogi, mida hoitakse 90 päeva väärkasutuse vältimiseks."
       }
     },
     "getStarted": {
@@ -2285,7 +2333,7 @@
       },
       "noLogs": {
         "title": "Range logide mittesäilitamise poliitika",
-        "description": "Doppler ei kogu, salvesta ega jaga kunagi teie sirvimisandmeid. Ühenduslogisid pole, liikluslogisid pole, DNS-päringute logisid pole. Me ei suuda teid tuvastada, sest me ei kogu kunagi tuvastavat teavet."
+        "description": "Doppler ei kogu, salvesta ega jaga kunagi sinu sirvimisandmeid. Ei liikluslogisid, ei DNS-päringute logisid, ega ühtegi kirjet, mis seoks sind sellega, mida külastad. Sisselogimine jätab lühikese autentimiskirje, mida hoitakse 90 päeva väärkasutuse vältimiseks — see näitab, et seade ühendus, mitte kunagi seda, kuhu ta läks."
       },
       "globalServers": {
         "title": "6 globaalset serverikohta",
@@ -2400,7 +2448,7 @@
       },
       "noLogs": {
         "title": "Range logide mittesäilitamise poliitika",
-        "description": "Doppler ei kogu, salvesta ega jaga kunagi teie sirvimisandmeid. Ühenduslogisid pole, liikluslogisid pole, DNS-päringute logisid pole. Me ei suuda teid tuvastada, sest me ei kogu kunagi tuvastavat teavet."
+        "description": "Doppler ei kogu, salvesta ega jaga kunagi sinu sirvimisandmeid. Ei liikluslogisid, ei DNS-päringute logisid, ega ühtegi kirjet, mis seoks sind sellega, mida külastad. Sisselogimine jätab lühikese autentimiskirje, mida hoitakse 90 päeva väärkasutuse vältimiseks — see näitab, et seade ühendus, mitte kunagi seda, kuhu ta läks."
       },
       "globalServers": {
         "title": "6 globaalset serverikohta",
@@ -2523,7 +2571,7 @@
       },
       "noLogs": {
         "title": "Range logideta poliitika",
-        "description": "Doppler ei kogu, salvesta ega jaga kunagi teie sirvimisandmeid. Ühenduslogisid, liikluslogisid ega DNS-päringute logisid ei peeta. Me ei saa teid tuvastada, sest me ei kogu kunagi tuvastamisandmeid."
+        "description": "Doppler ei kogu, salvesta ega jaga kunagi sinu sirvimisandmeid. Ei liikluslogisid, ei DNS-päringute logisid, ega ühtegi kirjet, mis seoks sind sellega, mida külastad. Sisselogimine jätab lühikese autentimiskirje, mida hoitakse 90 päeva väärkasutuse vältimiseks — see näitab, et seade ühendus, mitte kunagi seda, kuhu ta läks."
       },
       "crossDevice": {
         "title": "Sünkroonib kõikide Apple'i seadmetega",
@@ -2675,7 +2723,7 @@
       },
       "noLogs": {
         "title": "Range logideta poliitika",
-        "description": "Doppler ei kogu, salvesta ega jaga kunagi teie sirvimisandmeid. Ühenduslogisid, liikluslogisid ega DNS-päringute logisid ei peeta. Me ei saa teid tuvastada, sest me ei kogu kunagi tuvastamisandmeid."
+        "description": "Doppler ei kogu, salvesta ega jaga kunagi sinu sirvimisandmeid. Ei liikluslogisid, ei DNS-päringute logisid, ega ühtegi kirjet, mis seoks sind sellega, mida külastad. Sisselogimine jätab lühikese autentimiskirje, mida hoitakse 90 päeva väärkasutuse vältimiseks — see näitab, et seade ühendus, mitte kunagi seda, kuhu ta läks."
       },
       "globalServers": {
         "title": "6 globaalset serverikohta",
@@ -2885,7 +2933,7 @@
       "title": "VPN UAE-s — Korduma Kippuvad Küsimused",
       "q1": {
         "question": "Kas VPN-i kasutamine on UAE-s seaduslik?",
-        "answer": "Isiklik VPN-i kasutamine blokeeritud teenustele juurde pääsemiseks UAE-s on õiguslik hall ala. Föderaalseadus nr 12 2016 penaliseerib VPN-i kasutamist kuriteo toimepanemiseks — mitte VPN-i kasutamine ise. Praktiliselt miljonid UAE elanikud kasutavad igapäevaselt VPN-e töötamiseks, voogedastamiseks ja kõnedeks ilma probleemideta. Doppler ei logi tegevust, seega isegi kui meil palutakse, ei saa me tuvastada, kes teenust kasutas või mida nad juurde pääsesid."
+        "answer": "Isiklik VPN-i kasutamine Araabia Ühendemiraatides asub õiguslikus hallis alas. Föderaalseadus nr 12 aastast 2016 karistab VPN-i kasutamise eest kuriteo toimepanemisel, mitte VPN-i kasutamise eest iseenesest, ja paljud elanikud kasutavad seda iga päev töös, voogedastuses ja kõnedes. See peegeldab seda, kuidas seadust on kohaldatud, mitte garantiid sinu olukorra kohta — kontrolli praegust seisu, enne kui sellele tugined. Doppler ei säilita liiklus- ega tegevuslogisid, seega ei ole olemas kirjet selle kohta, millele keegi on ligi pääsenud."
       },
       "q2": {
         "question": "Miks on WhatsApp ja FaceTime kõned UAE-s blokeeritud?",
@@ -2997,7 +3045,7 @@
       },
       "q3": {
         "question": "Kas VPN-i kasutamine Iraanis on ohutu?",
-        "answer": "VPN-id on Iraanis tehniliselt keelatud, kuid individuaalsete kasutajate suhtes on jõustamine harv — miljonid kasutavad neid iga päev. Doppler ei logi ühendusi ega tegevust, seega ei suuda me kasutajaid tuvastada isegi siis, kui meid sunditakse. Kasutame sama logideta arhitektuuri, mida usaldavad ajakirjanikud ja aktivistid piirkonnas."
+        "answer": "Iraanis on VPN-id ametlikult piiratud, ehkki üksikkasutajate vastu on harva sekkutud ja miljonid kasutavad neid iga päev. See kirjeldab senist praktikat, mitte garantiid — hinda oma riski ise. Doppler ei säilita ühendus- ega tegevuslogisid, seega ei ole kirjet selle kohta, millele kasutaja ligi pääses; sisselogimine jätab vaid lühikese autentimiskirje, mida hoitakse 90 päeva."
       },
       "q4": {
         "question": "Kas ma saan maksta ilma välismaise krediitkaardita?",
@@ -3109,7 +3157,7 @@
       },
       "q5": {
         "question": "Kas VPN-i kasutamine on Hiinas välismaalaste jaoks seaduslik?",
-        "answer": "Isikliku VPN-i kasutamine välismaalaste poolt ei ole enamasti kunagi jõustatud. Hiina seadus piirab volitamata VPN-e, kuid jõustamine suunab kommertstegevusele, mitte üksikutele reisisellidele või välismaalastele. Kasutage kasvatatud mõistust — ärge postitage Hiina sotsiaalmeedias (WeChat, Weibo) VPN-i kasutamise kohta ja kõik on korras."
+        "answer": "Hiina õigus piirab lubamatuid VPN-teenuseid ja jõustamine on valdavalt olnud suunatud äriteenuse pakkujatele, mitte üksikreisijatele ega välismaalastele. Nii on reegleid seni kohaldatud; see ei ole lubadus sinu juhtumi kohta. Mõistlik ettevaatusabinõu: ära postita VPN-i kasutamisest Hiina sotsiaalmeedias (WeChat, Weibo)."
       },
       "q6": {
         "question": "Mis juhtub, kui Doppler Hiinas enam ei toimi?",
@@ -3170,7 +3218,7 @@
       },
       "feature4": {
         "title": "Ilma Kontota, Ilma Logideta",
-        "description": "Ilma e-kirja, ilma telefoninumbrita. Doppler ei salvestata ühtegi ühenduse ega tegevuse logi. Isegi kui sundida, ei saa me tuvastada kasutajat ega tema liiklust."
+        "description": "Ei e-posti, ei telefoninumbrit. Doppler ei säilita ühendus- ega tegevuslogisid, seega ei seo miski inimest tema liiklusega. Sisselogimine jätab 90 päeva autentimiskirje, ja rohkem mitte."
       }
     },
     "howItWorks": {
@@ -3197,7 +3245,7 @@
       "title": "VPN Venemaal — KKK",
       "q1": {
         "question": "Kas VPN-i kasutamine on Venemaal seaduslik?",
-        "answer": "Isiklik VPN-i kasutamine ei ole Venemaal kriminaliseeritud. 2017. aasta VPN seadus (föderaalne seadus nr 276-FZ) suunab VPN-i teenusepakkujaid, kes keelduvad vastamast RKN-i blokeeritud saidi registrile — see ei karista lõppkasutajaid. Miljonid venelased kasutavad igapäevaselt VPN-e. Doppleril ei ole Venemaal vara ja see ei vasta RKN registritele, seega teenust ei filtreerita meie poolt."
+        "answer": "VPN-i kasutamine ei ole Venemaal iseenesest kuritegu ja föderaalseadus nr 276-FZ on suunatud VPN-teenuse pakkujatele, mitte lõppkasutajatele. Alates 2025. aasta septembrist on muutunud kaks asja, mida tasub teada: föderaalsest «ekstremistlike» materjalide nimekirjast teadlik otsimine sai väärteoks trahviga 3000–5000 rubla ning möödahiilimisvahendite reklaamimine või propageerimine on eraldi karistatav — eraisikule 50 000–80 000 rubla. Miljonid inimesed Venemaal kasutavad VPN-i iga päev, kuid reeglid karmistuvad; kontrolli praegust seisu, selle asemel et sellele lehele tugineda."
       },
       "q2": {
         "question": "Kas Doppler töötab Rostelecomis, MTS-is või Beeline'is?",
@@ -3521,7 +3569,7 @@
       },
       "q5": {
         "question": "Kas on seaduslik kasutada VPN-i AÜE WhatsAppi blokeeringu möödumise jaoks?",
-        "answer": "Isiklik kasutamine on seaduslik hall ala, kuid seda ei rakendata isikute vastu. AÜE föderaalseadus nr 12 2016. aastast kriminaliseerib VPN-i kasutamise kuriteo toimepanemiseks — isikliku kõne tegemine ei ole kuritegu. Millions of AÜE elanikud ja turistid kasutavad VPN-e iga päev ilma probleemideta. Doppler ei hoia logisid."
+        "answer": "Meile ei ole teada juhtumit, kus Araabia Ühendemiraatide elanikku oleks trahvitud isikliku VPN-i kasutamise eest kõne tegemiseks. Araabia Ühendemiraatide föderaalseadus nr 12 aastast 2016 karistab VPN-i kasutamise eest «kuriteo toimepanemise eesmärgil» ja isiklik telefonikõne ei ole kuritegu. See peegeldab jõustamispraktikat, mitte garantiid — kontrolli praegust seisu. Doppler ei säilita kirjet selle kohta, kes ühendub või mida ta teeb."
       },
       "q6": {
         "question": "Kuidas hind võrreldes BOTIM-iga?",

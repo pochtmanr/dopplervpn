@@ -102,7 +102,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post || post.blog_post_translations.length === 0) return { title: "Not Found" };
 
   const translation = post.blog_post_translations.find((t) => t.locale === locale);
-  if (!translation) return { title: "Not Found" };
+  if (!translation) {
+    // The page body renders "not available in this language" with HTTP 200.
+    // Without these fields it inherited the layout's canonical (the locale
+    // homepage) and 44-locale hreflang, and was indexable as a soft 404.
+    // Setting `alternates` replaces the layout's object, dropping its hreflang.
+    const fallback =
+      post.blog_post_translations.find((t) => t.locale === "en") ||
+      post.blog_post_translations.find((t) => isBlogLocale(t.locale));
+    if (!fallback) return { title: "Not Found", robots: { index: false, follow: true } };
+    return {
+      title: seoTitle(fallback.meta_title || fallback.title),
+      robots: { index: false, follow: true },
+      alternates: {
+        canonical: `${baseUrl}/${fallback.locale}/blog/${slug}`,
+      },
+    };
+  }
 
   const title = translation.meta_title || translation.title;
   const description = translation.meta_description || translation.excerpt;
@@ -272,9 +288,10 @@ async function getPostData(locale: string, slug: string) {
   const relatedPosts = (post.blog_internal_links || [])
     .sort((a, b) => a.link_order - b.link_order)
     .map((link) => {
+      // Same-locale only. An English fallback card linked to
+      // /{locale}/blog/<slug>, which is the "not available" page.
       const relatedTranslation =
-        link.blog_posts.blog_post_translations.find((t) => t.locale === locale) ||
-        link.blog_posts.blog_post_translations.find((t) => t.locale === "en");
+        link.blog_posts.blog_post_translations.find((t) => t.locale === locale);
       return {
         slug: link.blog_posts.slug,
         title: relatedTranslation?.title || "",

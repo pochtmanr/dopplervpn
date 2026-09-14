@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
+import { ComparisonAccordion } from "./comparison-accordion";
 
 const rowKeys = ["account", "fingerprint", "protocol", "dns", "censorship", "logs"] as const;
 
@@ -12,41 +13,23 @@ export function ComparisonTable() {
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       <Reveal>
-        <div className="overflow-x-auto rounded-2xl border border-overlay/10">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="bg-bg-secondary/50">
-                <th scope="col" className="text-start p-4 font-medium text-text-muted">
-                  {t("headers.feature")}
-                </th>
-                <th scope="col" className="text-start p-4 font-medium text-text-muted">
-                  {t("headers.traditional")}
-                </th>
-                <th scope="col" className="text-start p-4 font-medium text-accent-teal">
-                  {t("headers.doppler")}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rowKeys.map((key, i) => (
-                <tr
-                  key={key}
-                  className={i < rowKeys.length - 1 ? "border-t border-overlay/5" : ""}
-                >
-                  <th scope="row" className="text-start p-4 font-medium text-text-primary">
-                    {t(`rows.${key}.feature`)}
-                  </th>
-                  <td className="p-4 text-text-muted">
-                    {t(`rows.${key}.traditional`)}
-                  </td>
-                  <td className="p-4 text-accent-teal font-medium">
-                    {t(`rows.${key}.doppler`)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ComparisonAccordion
+          headers={{
+            feature: t("headers.feature"),
+            traditional: t("headers.traditional"),
+            doppler: t("headers.doppler"),
+          }}
+          panel={{ means: t("panel.means"), keeps: t("panel.keeps"), why: t("panel.why") }}
+          rows={rowKeys.map((key) => ({
+            key,
+            feature: t(`rows.${key}.feature`),
+            traditional: t(`rows.${key}.traditional`),
+            doppler: t(`rows.${key}.doppler`),
+            means: t(`rows.${key}.means`),
+            keeps: t(`rows.${key}.keeps`),
+            why: t(`rows.${key}.why`),
+          }))}
+        />
       </Reveal>
     </Section>
   );

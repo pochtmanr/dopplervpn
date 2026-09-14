@@ -129,7 +129,7 @@
     "headlinePart1a": "Fungerar där andra VPN:er",
     "headlinePart1b": "blir blockerade.",
     "headlinePart2": "",
-    "subheadline": "Din trafik ser ut som vanlig HTTPS, så deep packet inspection kan inte se den. Inget konto, inga loggar, inga spår — öppna bara appen och anslut.",
+    "subheadline": "Din trafik ser ut som vanlig HTTPS, så djup paketinspektion ser den inte. Inget konto, inga aktivitetsloggar, ingen notering om vart du går — öppna appen och anslut.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "Inga personuppgifter krävs",
@@ -178,7 +178,7 @@
       },
       "cryptoPayment": {
         "title": "Betala med Bitcoin och krypto",
-        "description": "Anonyma VPN-betalningar med BTC, ETH, USDT och USDC. Inget kort, inget namn, inget spår — ditt abonnemang fungerar på alla dina enheter."
+        "description": "Betala med BTC, ETH, USDT eller USDC — utan kort och utan bankkonto. Din prenumeration fungerar på alla dina enheter."
       },
       "minimalData": {
         "title": "Strikt policy utan loggar",
@@ -521,7 +521,7 @@
       },
       "usage": {
         "title": "5. Acceptabel användning",
-        "content": "Du samtycker till att använda Tjänsterna enbart för lagliga ändamål och i enlighet med alla tillämpliga lokala, nationella och internationella lagar och förordningar. Du får inte: (a) använda Tjänsterna för olagliga aktiviteter eller för att underlätta olagligt beteende; (b) försöka kringgå, inaktivera eller störa säkerhetsfunktioner i Tjänsterna; (c) distribuera skadlig programvara, virus eller annan skadlig kod genom Tjänsterna; (d) göra intrång i tredje parts immateriella rättigheter; (e) använda AI-videogenereringsverktyget för att skapa innehåll som är ärekränkande, obscent, bedrägligt eller som kränker andras rättigheter; (f) använda Tjänsterna för att skicka skräppost eller oönskad kommunikation; (g) dekompilera, demontera eller baklängeskonstruera någon del av Tjänsterna; eller (h) vidareförsälja, underlicensiera eller kommersiellt utnyttja Tjänsterna utan vårt skriftliga medgivande. Vi förbehåller oss rätten att stänga av eller avsluta konton som bryter mot dessa Villkor, med eller utan förvarning beroende på överträdelsens allvarlighetsgrad."
+        "content": "Du samtycker till att använda Tjänsterna enbart för lagliga ändamål och i enlighet med alla tillämpliga lokala, nationella och internationella lagar och förordningar. Du får inte: (a) använda Tjänsterna för olaglig verksamhet eller för att underlätta olagligt beteende; (b) försöka kringgå, inaktivera eller störa Tjänsternas säkerhetsfunktioner; (c) sprida skadlig kod, virus eller annan skadlig programvara via Tjänsterna; (d) göra intrång i tredje parts immateriella rättigheter; (e) använda AI-videogenereringsverktyget för att skapa innehåll som är ärekränkande, obscent, bedrägligt eller som kränker andras rättigheter; (f) använda Tjänsterna för att skicka skräppost eller oönskade meddelanden; (g) bakåtkompilera, dekompilera eller demontera någon del av Tjänsterna; eller (h) återförsälja, vidarelicensiera eller kommersiellt utnyttja Tjänsterna utan vårt skriftliga medgivande. Sanktioner och begränsade territorier: du intygar och garanterar att du inte är, och inte agerar på uppdrag av, någon person eller enhet som omfattas av finansiella sanktioner från Storbritannien, Europeiska unionen, Förenta nationerna eller USA, och att du inte befinner dig i eller stadigvarande vistas i ett territorium som omfattas av omfattande sanktioner. Vi tillhandahåller inte Tjänsterna till sådana personer och kan stänga av eller avsluta vilket konto som helst om vi får kännedom om att detta intygande är eller har blivit oriktigt. Vi förbehåller oss rätten att stänga av eller avsluta konton som bryter mot dessa Villkor, med eller utan förvarning beroende på överträdelsens allvar."
       },
       "ip": {
         "title": "6. Immateriella rättigheter",
@@ -1276,6 +1276,22 @@
     "lookingUp": "Letar upp ditt konto...",
     "accountNotFound": "Kontot hittades inte. Kontrollera ditt konto-ID.",
     "verifyingAccount": "Verifierar...",
+    "retry": "Försök igen",
+    "existingAccountTitle": "Det finns redan ett konto sparat på den här enheten",
+    "existingAccountCta": "Gå till ditt konto",
+    "existingAccountNote": "Om du fortsätter nedan sparas ett annat konto-ID på den här enheten.",
+    "loginTitle": "Välkommen tillbaka",
+    "loginSubtitle": "Ange ditt konto-ID för att fortsätta.",
+    "signupTitle": "Skapa ditt konto",
+    "signupSubtitle": "Ingen e-post. Inget lösenord. Ett tryck räcker.",
+    "welcomeTitle": "Klart",
+    "welcomeBody": "Ditt konto är klart. Detta ID är din nyckel — spara det innan du stänger.",
+    "welcomeIdLabel": "Ditt konto-ID",
+    "welcomeCopy": "Kopiera mitt konto-ID",
+    "welcomeCopied": "Kopierat till urklipp",
+    "welcomePromoIntro": "En välkomstgåva — använd den här koden vid betalning:",
+    "welcomeCta": "Uppfattat — jag har sparat mitt ID",
+    "welcomeDismiss": "Stäng",
     "dashboard": {
       "title": "Ditt konto",
       "memberSince": "Medlem sedan",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Om du köpt en prenumeration via App Store eller Google Play, hantera den här.",
       "restoreAppStore": "App Store-prenumerationer",
       "restorePlayStore": "Google Play-prenumerationer",
-      "deleteProSupportNote": "Ditt konto har en aktiv Pro-prenumeration. Kontakta support för att radera det."
+      "deleteProSupportNote": "Ditt konto har en aktiv Pro-prenumeration. Kontakta support för att radera det.",
+      "statusPro": "Pro · till {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Gratisplan",
+      "active": "Aktiv",
+      "from": "från",
+      "card": "Kort",
+      "crypto": "Krypto",
+      "payWithCrypto": "Betala med krypto — {price}",
+      "cryptoNote": "Betala med BTC, ETH, USDT eller USDC. Du skickas vidare till OxaPay.",
+      "back": "Tillbaka",
+      "accountIdHint": "Din nyckel till Doppler. Logga in med den på vilken enhet som helst.",
+      "copyId": "Kopiera ID",
+      "sendToDevices": "Skicka till mina enheter",
+      "sendToDevicesDesc": "Skicka ditt konto-ID och nedladdningslänken till dig själv och öppna dem på din telefon, surfplatta eller dator.",
+      "shareNative": "Dela…",
+      "shareEmail": "E-post",
+      "shareTelegramHint": "Välj Sparade meddelanden i Telegram.",
+      "copyMessage": "Kopiera meddelande",
+      "messageCopied": "Meddelandet har kopierats",
+      "shareSubject": "Mitt Doppler VPN-konto",
+      "shareMessage": "Mitt Doppler VPN konto-ID: {id}\nLadda ner appen: {url}\nÖppna appen och logga in med detta ID.",
+      "shareWarning": "Alla som har detta ID kan använda ditt abonnemang. Skicka det bara till dig själv.",
+      "devices": "Mina enheter",
+      "devicesCount": "{count} av {max}",
+      "mainDevice": "Huvud",
+      "lastActive": "Aktiv {time}",
+      "addedOn": "Tillagd {date}",
+      "noDevices": "Inga enheter än. Installera Doppler och logga in med ditt konto-ID.",
+      "manageInApp": "Öppna Doppler och gå till Enheter för att ta bort en enhet.",
+      "devicesError": "Det gick inte att läsa in dina enheter.",
+      "everyDeviceHint": "Installera Doppler och logga in med ditt konto-ID. Upp till {max} enheter på ett konto."
     },
     "securedByCrypto": "Säkrad av OxaPay"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Betala anonymt — även från blockerade regioner",
-      "body": "När din bank bevakas eller dina internationella kort inte fungerar, fungerar Bitcoin och stablecoins fortfarande. Doppler accepterar BTC, ETH, USDT och USDC — utan bank, utan ID, utan spår.",
+      "title": "Betala utan bankkort",
+      "body": "När internationella kort inte fungerar där du är fungerar bitcoin och stabila kryptovalutor. Doppler tar emot BTC, ETH, USDT och USDC — utan bankkonto eller kort.",
       "cta": "Betala med krypto",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Internetcensurguide — Hur VPN:er blockeras och hur du förblir ansluten",
-      "description": "Teknisk guide om hur regeringar blockerar VPN:er och proxyer med DPI, TSPU och ML — och hur VLESS-Reality-proxy kringgår varje detektionsmetod. Förbered dig för eskalerande restriktioner."
+      "description": "Teknisk guide: hur nationella filtersystem blockerar VPN med DPI, trafikanalys och aktiv sondering — och varför VLESS-Reality fortsätter att ansluta. Förbered dig på hårdare restriktioner."
     },
     "hero": {
       "title": "Din guide till internetfrihet",
-      "subtitle": "Hur regeringar upptäcker och blockerar VPN:er, hur Doppler besegrar varje metod, och vad du bör göra nu för att förbli ansluten när restriktionerna eskalerar."
+      "subtitle": "Hur censorer upptäcker och blockerar VPN, hur Doppler sätter varje metod ur spel och vad du kan göra nu för att förbli uppkopplad."
     },
     "detection": {
       "title": "Hur regeringar upptäcker och blockerar VPN:er",
-      "intro": "Internetcensur har utvecklats långt bortom enkel IP-blockering. Länder som Ryssland, Kina och Iran använder sofistikerade system med maskininlärning för att identifiera och avbryta VPN-anslutningar i realtid. Så här går det till.",
+      "intro": "Internetcensur handlar sedan länge om mycket mer än enkel IP-blockering. Nationella filtersystem använder i dag maskininlärning för att upptäcka och bryta VPN-anslutningar i realtid, och samma tekniker dyker upp i företags- och campusnät. Så här fungerar de exakt.",
       "tspu": {
-        "title": "Infrastrukturen: TSPU och DPI",
-        "p1": "Ryssland använder TSPU (Tekniska system för hotmotåtgärder) — specialiserad hårdvara installerad direkt på internetleverantörernas nätverksnoder. Kina använder Den stora brandväggen, Iran driver NIN. Dessa system utför Deep Packet Inspection (DPI) på varje paket som passerar nätverket.",
+        "title": "Infrastrukturen: nationella DPI-system",
+        "p1": "Länder med omfattande filtrering installerar inspektionsutrustning direkt i operatörernas nätnoder — den stora brandväggen i Kina, det nationella informationsnätet i Iran, TSPU i Ryssland och motsvarande system i Turkiet och Gulfstaterna. Alla utför djup paketinspektion (DPI) på varje paket som passerar nätet.",
         "p2": "Traditionella VPN-protokoll som OpenVPN, WireGuard och IPSec har distinkta paketstrukturer. DPI identifierar dem omedelbart och avbryter anslutningen. Även \"obfuskerade\" lägen misslyckas ofta eftersom det underliggande handskaknings­mönstret förblir detekterbart.",
         "p3": "När grundläggande signaturmatchning inte räcker aktiverar dessa system maskininlärningsmoduler. De slutar leta inuti paket (allt är krypterat) och börjar analysera hur trafiken beter sig."
       },
@@ -1548,7 +1595,7 @@
         "title": "Metod 4: IP- och DNS-svartlistning",
         "description": "Kända VPN-leverantörers IP-intervall blockeras direkt. DNS-förfrågningar för VPN-domäner fångas upp. Kommersiella VPN-leverantörer med publika serverlistor är de enklaste målen — hela deras infrastruktur kan blockeras på minuter."
       },
-      "conclusion": "Resultatet: enkla VPN:er och standardproxytjänster som NordVPN, ExpressVPN och Surfshark slutar fungera inom timmar efter en nedstängning. Bara proxyprotokoll specifikt konstruerade för att vara omöjliga att skilja från vanlig webbtrafik överlever."
+      "conclusion": "Resultatet: vanliga VPN-appar byggda på standardprotokoll slutar oftast fungera inom timmar efter att en blockeringsvåg inletts. Bara protokoll som är särskilt konstruerade för att inte gå att skilja från vanlig webbtrafik klarar sig."
     },
     "defeats": {
       "title": "Hur Doppler besegrar varje detektionsmetod",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Blockerad i Ryssland — och fortfarande här",
-      "badge": "Verifierad av Roskomnadzor",
-      "p1": "Ryska myndigheter har specifikt riktat in sig på och blockerat Doppler VPN. Vår domän har lagts till i den federala blockeringslistan. Det är inget vi döljer — det är bevis på att vår teknik fungerar.",
-      "p2": "Till skillnad från kommersiella VPN-leverantörer som följer nedtagningsbegäranden eller tyst lämnar begränsade marknader, byggdes Doppler för exakt detta scenario. När vår webbplats blockeras förblir vår Telegram-bot tillgänglig. När server-IP:er blockeras roterar vår infrastruktur automatiskt.",
-      "p3": "Varje blockering de inför kringgår vi. Det är inte ett marknadsföringsbudskap — det är vår dagliga verksamhet.",
-      "stat1label": "Domän blockerad av RKN",
-      "stat1value": "Bekräftat",
+      "title": "Borttagen på censurens begäran — och fortfarande i drift",
+      "badge": "Borttagning från App Store, Ryssland",
+      "p1": "Apple tog bort Doppler VPN-appen från den ryska App Store efter ett rättsligt krav från Roskomnadzor, den statliga kommunikationsmyndigheten. Apple har tagit bort dussintals VPN-appar på samma sätt. Vi publicerar det i stället för att dölja det: att pekas ut är vad som händer verktyg som fortsätter att fungera.",
+      "p2": "Till skillnad från leverantörer som följer krav på borttagning eller tyst lämnar begränsade marknader byggdes Doppler just för detta. När en appbutik tar bort oss levererar vår Telegram-bot fortfarande appen. När serverns IP-adresser blockeras byter vår infrastruktur automatiskt ingångspunkter.",
+      "p3": "Distributionen går runt blockeringen — direkt APK, Telegram-bot och roterande ingångspunkter. Det är en egenskap hos arkitekturen, inte ett löfte.",
+      "stat1label": "Ryska App Store",
+      "stat1value": "Borttagen på RKN:s begäran",
       "stat2label": "Tjänstestatus",
       "stat2value": "I drift",
       "stat3label": "Alternativ åtkomst",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Möjligt nästa steg",
         "title": "Vitlistemodell",
-        "description": "Istället för att blockera specifika protokoll skulle bara godkända domäner och IP-adresser vara tillgängliga. Allt annat blockeras som standard. SSH, RDP, spelportar — allt blockerat om det inte registrerats av en juridisk enhet. Detta testades delvis under Rysslands Telegram-blockering 2018.",
+        "description": "I stället för att blockera enskilda protokoll skulle bara godkända domäner och IP-adresser vara nåbara. Allt annat blockeras som standard. SSH, RDP, spelportar — allt stängt om det inte registrerats av en juridisk person. Vitlistbeteende har redan prövats i nationell skala under storskaliga blockeringsinsatser och avstängningsövningar.",
         "status": "Tekniskt möjligt, delvis använt"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Den ekonomiska verklighetskontrollen",
-        "p1": "2018, när Roskomnadzor försökte blockera bara Telegram, blockerade de miljontals Amazon- och Google-IP-adresser. Kassaapparater i butiker slutade fungera. Smarta hemenheter gick offline. Bankens push-notiser slutade fungera.",
-        "p2": "En vitlistemodell skulle orsaka detta i 100 gånger större skala. Moderna ryska webbplatser är beroende av Google Fonts, utländska CDN-bibliotek, internationella certifikatutfärdare och molntjänster. Banker och logistikföretag använder utländska SSL-certifikat. Utvecklare skulle förlora åtkomst till GitHub, Docker Hub och npm.",
+        "p1": "År 2018 slutade ett försök att blockera en enda meddelandeapp med att miljontals IP-adresser hos Amazon och Google blockerades på köpet. Kassaregister slutade fungera. Smarta hem-enheter kopplades ned. Bankaviseringar kom inte fram. Följdskador är det normala resultatet av trubbig blockering.",
+        "p2": "En vitlistmodell skulle orsaka detta i långt större skala. Moderna webbplatser är överallt beroende av utländska CDN:er, teckensnittstjänster, certifikatutfärdare och molnplattformar. Banker och logistikföretag använder utländska SSL-certifikat. Utvecklare skulle förlora åtkomst till GitHub, Docker Hub och npm.",
         "p3": "Fullständig isolering är tekniskt möjlig — men priset är teknologisk nedgång. Windows- och Android-uppdateringar blir otillgängliga. Medicinsk utrustning förlorar drivrutinsstöd. AI-utveckling stannar helt utan global öppen källkodsinfrastruktur.",
         "p4": "Den mest sannolika vägen är gradvis begränsning under flera år, inte en plötslig avstängning. Men varje eskalerande steg innebär att fler VPN-användare lämnas utan tillgång — om de inte är förberedda."
       }
@@ -1642,8 +1689,8 @@
         "description": "Vi skickar protokolluppdateringar för att ligga steget före nya blockeringstekniker. Aktivera automatiska uppdateringar eller sök efter uppdateringar regelbundet via våra Telegram-kanaler."
       },
       "step5": {
-        "title": "Dela med människor som behöver det",
-        "description": "Ju fler som har Doppler installerat innan restriktionerna eskalerar, desto bättre. Dela vår Telegram-botlänk — det är den mest censurresistenta distributionskanalen vi har."
+        "title": "Dela med omdöme",
+        "description": "Ju fler som har installerat Doppler innan restriktionerna skärps, desto bättre — länken till vår Telegram-bot är den mest censurtåliga kanal vi har. En varning: vissa länder, däribland Ryssland, bötfäller numera privatpersoner som marknadsför verktyg för att kringgå blockeringar. Dela privat med personer du känner och kontrollera reglerna där du bor innan du publicerar något offentligt."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Vanliga frågor",
       "q1": {
         "question": "Kan Doppler VPN kringgå statlig censur?",
         "answer": "Ja. Doppler använder VLESS-Reality som gör VPN-trafik omöjlig att skilja från vanlig HTTPS. Det kringgår DPI, TSPU och den stora brandväggen utan några detekterbara VPN-signaturer."
       },
       "q2": {
         "question": "Fungerar Doppler VPN i Ryssland, Kina och Iran?",
-        "answer": "Ja. Doppler är specifikt byggt för censurerade regioner. Vår domän har blockerats av Roskomnadzor, vilket bevisar att vår teknik fungerar."
+        "answer": "Ja. Doppler är byggt för hårt filtrerade nät. I Ryssland tog Apple bort vår app från den lokala App Store på Roskomnadzors begäran — och tjänsten fortsatte att fungera via vår Telegram-bot och roterande ingångspunkter. Användare i Ryssland, Kina, Iran och Turkiet ansluter dagligen."
       },
       "q3": {
         "question": "Vad gör VLESS-Reality bättre än OpenVPN eller WireGuard för att kringgå censur?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Vi lämnar ingen bakom oss",
-      "subtitle": "Doppler VPN byggdes specifikt för begränsade nätverk. Vi förbättrar kontinuerligt vår infrastruktur, roterar servrar och uppdaterar protokoll för att ligga steget före varje ny blockeringsteknik. Din internetfrihet är inte förhandlingsbar.",
+      "title": "Byggt för nät som gör motstånd",
+      "subtitle": "Doppler VPN är byggt för begränsade nät. Vi roterar servrar, uppdaterar protokoll och förbättrar infrastrukturen i takt med att blockeringsteknikerna förändras.",
       "downloadIos": "Ladda ner för iOS",
       "downloadAndroid": "Ladda ner för Android",
       "telegramBot": "Hämta via Telegram Bot",
@@ -1778,12 +1826,12 @@
   },
   "payWithCrypto": {
     "metadata": {
-      "title": "Köp VPN med Bitcoin — Betala anonymt | Doppler VPN",
-      "description": "Betala Doppler VPN med Bitcoin, Ethereum, USDT eller USDC. Anonym kryptobetalning, inget kort eller e-post. Fungerar på iPhone, Android, Mac och Windows."
+      "title": "Köp VPN med bitcoin — utan kort",
+      "description": "Betala Doppler VPN med bitcoin, ethereum, USDT eller USDC. Kryptobetalning, utan kort eller e-post. Fungerar på iPhone, Android, Mac och Windows."
     },
     "hero": {
       "title": "Köp VPN med Bitcoin, Ethereum och stablecoins",
-      "subtitle": "Betala Doppler VPN med krypto. Inget kort, ingen e-post, inget spår — ditt abonnemang är kopplat till ett anonymt konto-ID som fungerar på varje enhet.",
+      "subtitle": "Betala Doppler VPN med krypto. Inget kort och ingen e-post — din prenumeration är kopplad till ett anonymt konto-ID som fungerar på alla enheter.",
       "cta": "Köp med krypto"
     },
     "coins": {
@@ -1897,7 +1945,7 @@
       },
       "done": {
         "title": "Du är skyddad",
-        "description": "Det var allt. Ingen e-postbekräftelse att vänta på, inga lösenord att komma ihåg, inga konton att hantera. Din anslutning är krypterad, din identitet är anonym och din VPN vet ingenting om vem du är. Du surfar som en verkligt anonym VPN-användare — ingen e-post krävs, inga spår lämnade."
+        "description": "Det var allt. Inget bekräftelsemejl att vänta på, inga lösenord att minnas, inga konton att hantera. Din anslutning är krypterad och vi frågar aldrig vem du är. Du surfar under ett anonymt konto-ID — utan e-post och utan logg över vart du går."
       }
     },
     "noCollect": {
@@ -1987,8 +2035,8 @@
         "description": "Våra servrar verifierar nyckelns legitimitet utan att lagra identitetsdata. Autentisering sker via TLS 1.3 — inga konton, ingen inloggningsdatabas."
       },
       "zeroPii": {
-        "title": "Noll personuppgifter lagrade",
-        "description": "Ingen e-post, inget namn, inget telefonnummer, inga IP-loggar. Vi kan arkitektoniskt inte identifiera våra användare eftersom vi aldrig samlar in identifierande information."
+        "title": "Minimalt med data från grunden",
+        "description": "Ingen e-post, inget namn, inget telefonnummer. Vi samlar aldrig in de identitetsuppgifter som skulle kunna avslöja vem någon är; den enda noteringen om att en enhet anslutit är en kort autentiseringslogg som sparas i 90 dagar för att motverka missbruk."
       }
     },
     "getStarted": {
@@ -2285,7 +2333,7 @@
       },
       "noLogs": {
         "title": "Strikt noll-logg-policy",
-        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga anslutningsloggar, inga trafikloggar, inga DNS-frågeloggar. Vi kan inte identifiera dig eftersom vi aldrig samlar in identifierande information."
+        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga trafikloggar, inga DNS-frågeloggar, ingen notering som kopplar dig till det du besöker. Inloggning lämnar en kort autentiseringsnotering som sparas i 90 dagar för att motverka missbruk — den visar att en enhet anslöt, aldrig vart den gick."
       },
       "globalServers": {
         "title": "6 globala serverplatser",
@@ -2400,7 +2448,7 @@
       },
       "noLogs": {
         "title": "Strikt noll-logg-policy",
-        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga anslutningsloggar, inga trafikloggar, inga DNS-frågeloggar. Vi kan inte identifiera dig eftersom vi aldrig samlar in identifierande information."
+        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga trafikloggar, inga DNS-frågeloggar, ingen notering som kopplar dig till det du besöker. Inloggning lämnar en kort autentiseringsnotering som sparas i 90 dagar för att motverka missbruk — den visar att en enhet anslöt, aldrig vart den gick."
       },
       "globalServers": {
         "title": "6 globala serverplatser",
@@ -2523,7 +2571,7 @@
       },
       "noLogs": {
         "title": "Strikt policy utan loggar",
-        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga anslutningsloggar, inga trafikloggar, inga DNS-frågeloggar. Vi kan inte identifiera dig eftersom vi aldrig samlar in identifierande information."
+        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga trafikloggar, inga DNS-frågeloggar, ingen notering som kopplar dig till det du besöker. Inloggning lämnar en kort autentiseringsnotering som sparas i 90 dagar för att motverka missbruk — den visar att en enhet anslöt, aldrig vart den gick."
       },
       "crossDevice": {
         "title": "Synkroniseras på alla Apple-enheter",
@@ -2675,7 +2723,7 @@
       },
       "noLogs": {
         "title": "Strikt policy utan loggar",
-        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga anslutningsloggar, inga trafikloggar, inga DNS-frågeloggar. Vi kan inte identifiera dig eftersom vi aldrig samlar in identifierande information."
+        "description": "Doppler samlar aldrig in, lagrar eller delar dina surfdata. Inga trafikloggar, inga DNS-frågeloggar, ingen notering som kopplar dig till det du besöker. Inloggning lämnar en kort autentiseringsnotering som sparas i 90 dagar för att motverka missbruk — den visar att en enhet anslöt, aldrig vart den gick."
       },
       "globalServers": {
         "title": "6 globala serverplatser",
@@ -2885,7 +2933,7 @@
       "title": "VPN i UAE — Vanliga frågor",
       "q1": {
         "question": "Är det lagligt att använda en VPN i UAE?",
-        "answer": "Personlig VPN-användning för att få åtkomst till blockerade tjänster i UAE är en juridisk gråzon. Federal lag nr 12 av 2016 straffar VPN-användning för att begå brott — inte VPN-användning i sig. I praktiken använder miljontals invånare i UAE VPN:er dagligen för arbete, streaming och samtal utan incidenter. Doppler loggar inte aktiviteter, så även om vi skulle tvingas kan vi inte identifiera vem som använde tjänsten eller vad de fick åtkomst till."
+        "answer": "Privat VPN-användning i Förenade Arabemiraten befinner sig i en juridisk gråzon. Federal lag nr 12 från 2016 straffar användning av VPN vid begående av brott, inte VPN-användning i sig, och många invånare använder VPN dagligen för arbete, streaming och samtal. Detta speglar hur lagen har tillämpats, inte en garanti för din situation — kontrollera det aktuella läget innan du förlitar dig på det. Doppler sparar inga trafik- eller aktivitetsloggar, så det finns ingen notering om vad någon har haft åtkomst till."
       },
       "q2": {
         "question": "Varför är WhatsApp- och FaceTime-samtal blockerade i UAE?",
@@ -2997,7 +3045,7 @@
       },
       "q3": {
         "question": "Är det säkert att använda en VPN i Iran?",
-        "answer": "VPN:er är tekniskt sett förbjudna i Iran men verkställighet mot individuella användare är sällsynt — miljoner använder dem dagligen. Doppler loggar inte anslutningar eller aktivitet, så vi kan inte identifiera användare även om vi tvingas. Vi använder samma no-logs-arkitektur som journalister och aktivister i regionen litar på."
+        "answer": "VPN är formellt begränsade i Iran, även om ingripanden mot enskilda användare har varit sällsynta och miljoner använder dem dagligen. Detta beskriver tidigare praxis, inte en garanti — bedöm din egen risk. Doppler sparar inga anslutnings- eller aktivitetsloggar, så det finns ingen notering om vad en användare haft åtkomst till; inloggning lämnar bara en kort autentiseringsnotering som sparas i 90 dagar."
       },
       "q4": {
         "question": "Kan jag betala utan ett utländskt kreditkort?",
@@ -3109,7 +3157,7 @@
       },
       "q5": {
         "question": "Är det lagligt för utlänningar att använda en VPN i Kina?",
-        "answer": "Personlig användning av VPN av utlänningar är i stort sett aldrig verkställd. Kinesisk lag begränsar icke-auktoriserade VPN:er men verkställighet riktar sig mot kommersiella operatörer, inte individuella resenärer eller expats. Använd sunt förnuft — lägg inte upp om användning av VPN på kinesiska sociala medier (WeChat, Weibo) så kommer du att klara dig bra."
+        "answer": "Kinesisk lag begränsar icke godkända VPN-tjänster, och tillämpningen har till överväldigande del riktats mot kommersiella aktörer, inte mot enskilda resenärer eller utlandsboende. Så har reglerna tillämpats hittills — det är inget löfte om ditt fall. En rimlig försiktighetsåtgärd: skriv inte om VPN-användning på kinesiska sociala medier (WeChat, Weibo)."
       },
       "q6": {
         "question": "Vad händer om Doppler slutar fungera i Kina?",
@@ -3170,7 +3218,7 @@
       },
       "feature4": {
         "title": "Ingen Konto, Inga Loggar",
-        "description": "Ingen e-post, inget telefonnummer. Doppler lagrar zero anslutnings- eller aktivitetsloggar. Även om vi skulle tvingas, kan vi inte identifiera en användare eller deras trafik."
+        "description": "Ingen e-post, inget telefonnummer. Doppler sparar inga anslutnings- eller aktivitetsloggar, så ingenting kopplar en person till dennes trafik. Inloggning lämnar en autentiseringsnotering i 90 dagar, inte mer."
       }
     },
     "howItWorks": {
@@ -3197,7 +3245,7 @@
       "title": "VPN i Ryssland — Vanliga Frågor",
       "q1": {
         "question": "Är det lagligt att använda en VPN i Ryssland?",
-        "answer": "Användning av personlig VPN är inte kriminaliserad i Ryssland. 2017 års VPN-lag (Federal Law No. 276-FZ) riktar sig mot VPN-leverantörer som vägrar att följa RKN:s lista över blockerade webbplatser — den straffar inte slutanvändare. Miljontals ryssar använder VPN dagligen. Doppler har inga ryska tillgångar och följer inte RKN:s register, så tjänsten filtreras inte från vår sida."
+        "answer": "Att använda VPN är i sig inte ett brott i Ryssland, och federal lag nr 276-FZ riktar sig mot VPN-leverantörer, inte slutanvändare. Sedan september 2025 har två saker ändrats som är värda att känna till: att avsiktligt söka efter material på den federala listan över «extremistiskt» innehåll har blivit en administrativ förseelse med böter på 3 000–5 000 rubel, och att marknadsföra eller främja kringgåendeverktyg straffas separat — 50 000–80 000 rubel för en privatperson. Miljoner människor i Ryssland använder VPN dagligen, men reglerna skärps; kontrollera det aktuella läget i stället för att förlita dig på den här sidan."
       },
       "q2": {
         "question": "Kommer Doppler fungera på Rostelecom, MTS eller Beeline?",
@@ -3521,7 +3569,7 @@
       },
       "q5": {
         "question": "Är det lagligt att använda en VPN för att kringgå blockeringen av WhatsApp i Förenade Arabemiraten?",
-        "answer": "Personligt bruk är ett lagligt grått område men inte genomdrivet mot individer. Förenade Arabemiratens federala lag nr 12 av 2016 kriminaliserar användning av VPN för att begå ett brott — att göra ett personligt samtal är inget brott. Miljontals invånare och turister i Förenade Arabemiraten använder VPN dagligen utan incidenter. Doppler sparar inga loggar."
+        "answer": "Vi känner inte till något fall där en invånare i Förenade Arabemiraten bötfällts för privat VPN-användning för att ringa ett samtal. Emiratens federala lag nr 12 från 2016 straffar VPN-användning «i syfte att begå brott», och ett privat telefonsamtal är inte det. Detta speglar tillämpningspraxis, inte en garanti — kontrollera det aktuella läget. Doppler sparar ingen notering om vem som ansluter eller vad denne gör."
       },
       "q6": {
         "question": "Hur står sig priset jämfört med BOTIM?",

@@ -129,7 +129,7 @@
     "headlinePart1a": "Works where other VPNs",
     "headlinePart1b": "get blocked.",
     "headlinePart2": "",
-    "subheadline": "Your traffic looks like ordinary HTTPS, so deep packet inspection can't see it. No account, no logs, no trace — just open the app and connect.",
+    "subheadline": "Your traffic looks like ordinary HTTPS, so deep packet inspection can't see it. No account, no activity logs, no record of where you go — just open the app and connect.",
     "downloadIos": "App Store",
     "downloadAndroid": "Google Play",
     "trustedBy": "No Personal Data Required",
@@ -178,7 +178,7 @@
       },
       "cryptoPayment": {
         "title": "Pay with Bitcoin & Crypto",
-        "description": "Anonymous VPN payments with BTC, ETH, USDT, and USDC. No card, no name, no trace — your subscription works on all your devices."
+        "description": "Pay with BTC, ETH, USDT, or USDC — no card and no bank account needed. Your subscription works on all your devices."
       },
       "minimalData": {
         "title": "Strict No-Logs Policy",
@@ -371,16 +371,16 @@
         "description": "We never see which websites you visit"
       },
       "ip": {
-        "title": "No IP address logs",
-        "description": "Your real IP is never recorded"
+        "title": "No IP tied to activity",
+        "description": "We see your IP when the app signs in and delete it within 90 days. It's never linked to what you do online."
       },
       "dns": {
         "title": "No DNS query storage",
-        "description": "Encrypted and discarded after resolution"
+        "description": "Resolved, filtered, then discarded. No lookup history."
       },
       "account": {
-        "title": "No account database",
-        "description": "Device authentication means no personal data to store"
+        "title": "No personal account data",
+        "description": "Your account is an anonymous ID. No email, name or phone number, unless you add one for recovery."
       }
     }
   },
@@ -522,7 +522,7 @@
       },
       "usage": {
         "title": "5. Acceptable Use",
-        "content": "You agree to use the Services only for lawful purposes and in compliance with all applicable local, national, and international laws and regulations. You shall not: (a) use the Services for any illegal activities or to facilitate illegal conduct; (b) attempt to circumvent, disable, or interfere with security features of the Services; (c) distribute malware, viruses, or any harmful code through the Services; (d) infringe upon the intellectual property rights of any third party; (e) use the AI Video Generation tool to create content that is defamatory, obscene, fraudulent, or that violates the rights of others; (f) use the Services to send spam or unsolicited communications; (g) reverse engineer, decompile, or disassemble any part of the Services; or (h) resell, sublicense, or commercially exploit the Services without our written consent. We reserve the right to suspend or terminate accounts that violate these Terms, with or without notice depending on the severity of the violation."
+        "content": "You agree to use the Services only for lawful purposes and in compliance with all applicable local, national, and international laws and regulations. You shall not: (a) use the Services for any illegal activities or to facilitate illegal conduct; (b) attempt to circumvent, disable, or interfere with security features of the Services; (c) distribute malware, viruses, or any harmful code through the Services; (d) infringe upon the intellectual property rights of any third party; (e) use the AI Video Generation tool to create content that is defamatory, obscene, fraudulent, or that violates the rights of others; (f) use the Services to send spam or unsolicited communications; (g) reverse engineer, decompile, or disassemble any part of the Services; or (h) resell, sublicense, or commercially exploit the Services without our written consent. Sanctions and restricted territories: you represent and warrant that you are not, and are not acting for or on behalf of, any person or entity that is the target of financial sanctions administered by the United Kingdom, the European Union, the United Nations or the United States, and that you are not located in or ordinarily resident in a territory subject to comprehensive sanctions. We do not make the Services available to such persons, and we may suspend or terminate any account where we become aware that this representation is or has become untrue. We reserve the right to suspend or terminate accounts that violate these Terms, with or without notice depending on the severity of the violation."
       },
       "ip": {
         "title": "6. Intellectual Property",
@@ -1270,6 +1270,7 @@
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
     "error": "Something went wrong. Please try again.",
+    "retry": "Retry",
     "securedBy": "Secured by Revolut",
     "securedByCrypto": "Secured by OxaPay",
     "accountFound": "We found your account",
@@ -1278,6 +1279,21 @@
     "lookingUp": "Looking up your account...",
     "accountNotFound": "Account not found. Please check your account ID.",
     "verifyingAccount": "Verifying...",
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Enter your Account ID to pick up where you left off.",
+    "signupTitle": "Create your account",
+    "signupSubtitle": "No email. No password. One tap and you're in.",
+    "existingAccountTitle": "An account is already saved on this device",
+    "existingAccountCta": "Continue to your account",
+    "existingAccountNote": "Continuing below saves a different Account ID on this device instead.",
+    "welcomeTitle": "You're in",
+    "welcomeBody": "Your account is ready. This ID is your key — save it before you close this.",
+    "welcomeIdLabel": "Your Account ID",
+    "welcomeCopy": "Copy my Account ID",
+    "welcomeCopied": "Copied to clipboard",
+    "welcomePromoIntro": "A welcome gift — use this code at checkout:",
+    "welcomeCta": "Got it — I've saved my ID",
+    "welcomeDismiss": "Close",
     "dashboard": {
       "title": "Your Account",
       "memberSince": "Member since",
@@ -1328,7 +1344,38 @@
       "restorePurchasesDesc": "If you purchased a subscription via the App Store or Google Play, manage it here.",
       "restoreAppStore": "App Store Subscriptions",
       "restorePlayStore": "Google Play Subscriptions",
-      "deleteProSupportNote": "Your account has an active Pro subscription. Please contact support to delete it."
+      "deleteProSupportNote": "Your account has an active Pro subscription. Please contact support to delete it.",
+      "statusPro": "Pro · until {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Free plan",
+      "active": "Active",
+      "from": "from",
+      "card": "Card",
+      "crypto": "Crypto",
+      "payWithCrypto": "Pay with crypto — {price}",
+      "cryptoNote": "Pay with BTC, ETH, USDT or USDC. You'll be redirected to OxaPay.",
+      "back": "Back",
+      "accountIdHint": "Your key to Doppler. Sign in with it on any device.",
+      "copyId": "Copy ID",
+      "sendToDevices": "Send to my devices",
+      "sendToDevicesDesc": "Send your Account ID and the download link to yourself, then open it on your phone, tablet or computer.",
+      "shareNative": "Share…",
+      "shareEmail": "Email",
+      "shareTelegramHint": "In Telegram, choose Saved Messages.",
+      "copyMessage": "Copy message",
+      "messageCopied": "Message copied",
+      "shareSubject": "My Doppler VPN account",
+      "shareMessage": "My Doppler VPN Account ID: {id}\nDownload the app: {url}\nOpen the app and sign in with this ID.",
+      "shareWarning": "Anyone with this ID can use your subscription. Send it only to yourself.",
+      "devices": "My devices",
+      "devicesCount": "{count} of {max}",
+      "mainDevice": "Main",
+      "lastActive": "Active {time}",
+      "addedOn": "Added {date}",
+      "noDevices": "No devices yet. Install Doppler and sign in with your Account ID.",
+      "manageInApp": "To remove a device, open Doppler and go to Devices.",
+      "devicesError": "Couldn't load your devices.",
+      "everyDeviceHint": "Install Doppler, then sign in with your Account ID. Up to {max} devices on one account."
     }
   },
   "subscribeSuccess": {
@@ -1456,36 +1503,59 @@
       "traditional": "Traditional VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "What it means",
+      "keeps": "What we keep",
+      "why": "Why we do it"
+    },
     "rows": {
       "account": {
         "feature": "Account required",
         "traditional": "Email + password",
-        "doppler": "No account needed"
+        "doppler": "No sign-up",
+        "means": "You install the app and connect. No email, no password, no phone number.",
+        "keeps": "An anonymous ID (VPN-XXXX-XXXX-XXXX) and a device identifier that enforces your device limit. Nothing that names you.",
+        "why": "An email ties an account to a real person. We never ask for one, so there's nothing to leak, sell or hand over."
       },
       "fingerprint": {
         "feature": "Traffic fingerprint",
         "traditional": "Detectable by DPI",
-        "doppler": "Camouflaged as HTTPS"
+        "doppler": "Camouflaged as HTTPS",
+        "means": "To a firewall, your connection looks like an ordinary visit to a well-known HTTPS site.",
+        "keeps": "Nothing. The disguise happens on the wire, not in a database.",
+        "why": "DPI blocks what it recognises. Traffic that looks ordinary gives it nothing to block."
       },
       "protocol": {
         "feature": "Protocol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality borrows a real website's TLS handshake, so there is no VPN handshake to spot.",
+        "keeps": "Nothing about your traffic. Servers pass packets through and forget them.",
+        "why": "OpenVPN and WireGuard are fast, but their packet patterns are well known and get blocked in seconds in Russia, China and Iran."
       },
       "dns": {
         "feature": "DNS encryption",
         "traditional": "Sometimes",
-        "doppler": "Always"
+        "doppler": "Always",
+        "means": "Every lookup, the step that turns site.com into an address, travels inside the tunnel to our own resolver.",
+        "keeps": "No query history. Each lookup is resolved and filtered for ads and trackers, then discarded.",
+        "why": "Plain DNS shows your internet provider every site you visit, even when the page itself is encrypted."
       },
       "censorship": {
         "feature": "Censorship resistance",
         "traditional": "Limited",
-        "doppler": "Built-in"
+        "doppler": "Built-in",
+        "means": "Built for networks that actively block VPNs. No bridges or extra settings to configure.",
+        "keeps": "The same as everywhere else. The no-logs setup doesn't change by country.",
+        "why": "Blocking gets stronger every year. A protocol that is hard to detect by design outlasts one that has to be patched after each new block."
       },
       "logs": {
         "feature": "Activity logs",
         "traditional": "Varies",
-        "doppler": "Never"
+        "doppler": "Never",
+        "means": "No record of the sites you visit, what you download, how much data you use or how long you stay connected.",
+        "keeps": "A sign-in log: IP, anonymous ID, device ID and time, deleted after 90 days. It shows that a device connected, not what it did.",
+        "why": "Logs that don't exist can't leak or be handed over. The sign-in log is the minimum we need to stop abuse."
       }
     }
   },
@@ -1515,18 +1585,18 @@
   "bypassCensorship": {
     "metadata": {
       "title": "Internet Censorship Guide — How VPNs Get Blocked & How to Stay Connected",
-      "description": "Technical guide on how governments block VPNs and proxies using DPI, TSPU, and ML — and how VLESS-Reality proxy bypasses every detection method. Prepare for escalating restrictions."
+      "description": "Technical guide on how national filtering systems block VPNs using DPI, traffic analysis and active probing — and how VLESS-Reality stays connected. Prepare for escalating restrictions."
     },
     "hero": {
       "title": "Your Guide to Internet Freedom",
-      "subtitle": "How governments detect and block VPNs, how Doppler defeats every method, and what you should do now to stay connected as restrictions escalate."
+      "subtitle": "How censors detect and block VPNs, how Doppler defeats each method, and what you can do now to stay connected as restrictions escalate."
     },
     "detection": {
       "title": "How Governments Detect and Block VPNs",
-      "intro": "Internet censorship has evolved far beyond simple IP blocking. Countries like Russia, China, and Iran deploy sophisticated systems that use machine learning to identify and terminate VPN connections in real time. Here's exactly how they do it.",
+      "intro": "Internet censorship has evolved far beyond simple IP blocking. National filtering systems now use machine learning to identify and terminate VPN connections in real time, and the same techniques turn up in corporate and campus networks. Here's exactly how they work.",
       "tspu": {
-        "title": "The Infrastructure: TSPU and DPI",
-        "p1": "Russia deploys TSPU (Technical Systems for Threat Countermeasures) — specialized hardware installed directly on ISP network nodes. China uses the Great Firewall, Iran operates NIN. These systems perform Deep Packet Inspection (DPI) on every packet crossing the network.",
+        "title": "The Infrastructure: National DPI Systems",
+        "p1": "Heavily filtered countries install inspection hardware directly on ISP network nodes — China's Great Firewall, Iran's national information network, Russia's TSPU (Technical Systems for Threat Countermeasures), and comparable systems in Turkey and the Gulf. All of them perform Deep Packet Inspection (DPI) on every packet crossing the network.",
         "p2": "Traditional VPN protocols like OpenVPN, WireGuard, and IPSec have distinct packet structures. DPI identifies them instantly and drops the connection. Even \"obfuscated\" modes often fail because the underlying handshake pattern remains detectable.",
         "p3": "When basic signature matching isn't enough, these systems activate machine learning modules. They stop looking inside packets (everything is encrypted) and start analyzing how the traffic behaves."
       },
@@ -1546,7 +1616,7 @@
         "title": "Method 4: IP and DNS Blacklisting",
         "description": "Known VPN provider IP ranges are blocked outright. DNS requests for VPN domains are intercepted. Commercial VPN providers with public server lists are the easiest targets — their entire infrastructure can be blocked in minutes."
       },
-      "conclusion": "The result: push-button VPNs and standard proxy services like NordVPN, ExpressVPN, and Surfshark stop working within hours of a crackdown. Only proxy protocols specifically engineered to be indistinguishable from regular web traffic survive."
+      "conclusion": "The result: consumer VPN apps built on standard protocols tend to stop working within hours of a crackdown. Only protocols specifically engineered to be indistinguishable from regular web traffic survive."
     },
     "defeats": {
       "title": "How Doppler Defeats Every Detection Method",
@@ -1578,13 +1648,13 @@
       }
     },
     "blocked": {
-      "title": "Blocked in Russia — And Still Here",
-      "badge": "Verified by Roskomnadzor",
-      "p1": "Russian authorities have specifically targeted and blocked Doppler VPN. Our domain has been added to the federal blocklist. This isn't something we hide — it's proof that our technology works.",
-      "p2": "Unlike commercial VPN providers that comply with takedown requests or quietly exit restricted markets, Doppler was built for this exact scenario. When our website gets blocked, our Telegram bot remains accessible. When server IPs get banned, our infrastructure rotates automatically.",
-      "p3": "Every block they impose, we bypass. That's not a marketing claim — it's our daily operation.",
-      "stat1label": "Domain blocked by RKN",
-      "stat1value": "Confirmed",
+      "title": "Delisted on a Censor's Demand — Still Running",
+      "badge": "App Store removal, Russia",
+      "p1": "Apple removed the Doppler VPN app from the Russian App Store following a legal demand from Roskomnadzor, the state communications regulator. Apple has delisted dozens of VPN apps the same way. We publish this rather than hide it: being named is what happens to tools that keep working.",
+      "p2": "Unlike providers that comply with takedown demands or quietly exit restricted markets, Doppler was built for this. When an app store delists us, our Telegram bot still delivers the app. When server IPs get banned, our infrastructure rotates automatically.",
+      "p3": "Distribution routes around the block — direct APK, Telegram bot, and rotating endpoints. That is an architectural property, not a promise.",
+      "stat1label": "Russian App Store",
+      "stat1value": "Removed on RKN demand",
       "stat2label": "Service status",
       "stat2value": "Operational",
       "stat3label": "Alternative access",
@@ -1602,7 +1672,7 @@
       "stage2": {
         "label": "Possible Next Step",
         "title": "Whitelist Model",
-        "description": "Instead of blocking specific protocols, only approved domains and IP addresses would be accessible. Everything else is blocked by default. SSH, RDP, gaming ports — all blocked unless registered by a legal entity. This was partially tested during Russia's 2018 Telegram ban.",
+        "description": "Instead of blocking specific protocols, only approved domains and IP addresses would be accessible. Everything else is blocked by default. SSH, RDP, gaming ports — all blocked unless registered by a legal entity. Whitelist behaviour has already been tested at national scale during large-scale blocking operations and shutdown exercises.",
         "status": "Technically feasible, partially deployed"
       },
       "stage3": {
@@ -1613,8 +1683,8 @@
       },
       "reality": {
         "title": "The Economic Reality Check",
-        "p1": "In 2018, when Roskomnadzor tried to block just Telegram, they ended up banning millions of Amazon and Google IP addresses. Cash registers in stores stopped working. Smart home devices went offline. Banking push notifications failed.",
-        "p2": "A whitelist model would cause this at 100x scale. Modern Russian websites depend on Google Fonts, foreign CDN libraries, international certificate authorities, and cloud services. Banks and logistics companies use foreign SSL certificates. Developers would lose access to GitHub, Docker Hub, and npm.",
+        "p1": "In 2018, an attempt to block a single messaging app ended with millions of Amazon and Google IP addresses banned alongside it. Cash registers stopped working. Smart home devices went offline. Banking push notifications failed. Collateral damage is the normal outcome of blunt blocking.",
+        "p2": "A whitelist model would cause this at far greater scale. Modern websites everywhere depend on foreign CDNs, font services, certificate authorities and cloud platforms. Banks and logistics firms use foreign SSL certificates. Developers would lose access to GitHub, Docker Hub, and npm.",
         "p3": "Full isolation is technically possible — but its price is technological degradation. Windows and Android updates become unavailable. Medical equipment loses driver support. AI development stops entirely without global open-source infrastructure.",
         "p4": "The most likely path is gradual restriction over years, not a sudden cutoff. But each escalation step means more VPN users get left behind — unless they're prepared."
       }
@@ -1640,8 +1710,8 @@
         "description": "We push protocol updates to stay ahead of new blocking techniques. Enable auto-updates or check for updates regularly through our Telegram channels."
       },
       "step5": {
-        "title": "Share With People Who Need It",
-        "description": "The more people have Doppler installed before restrictions escalate, the better. Share our Telegram bot link — it's the most censorship-resistant distribution channel we have."
+        "title": "Share It Carefully",
+        "description": "The more people have Doppler installed before restrictions escalate, the better — our Telegram bot link is the most censorship-resistant channel we have. One caution: some countries, Russia among them, now fine individuals for promoting circumvention tools. Share privately with people you know, and check the rules where you live before posting publicly."
       }
     },
     "comparison": {
@@ -1676,13 +1746,14 @@
       }
     },
     "faq": {
+      "title": "Frequently Asked Questions",
       "q1": {
         "question": "Can Doppler VPN bypass government censorship?",
         "answer": "Yes. Doppler uses VLESS-Reality, which makes VPN traffic indistinguishable from regular HTTPS. It bypasses DPI, TSPU, and the Great Firewall by producing zero detectable VPN signatures."
       },
       "q2": {
         "question": "Does Doppler VPN work in Russia, China, and Iran?",
-        "answer": "Yes. Doppler is specifically built for censored regions. Our domain has been blocked by Roskomnadzor, which proves our technology works. Users in Russia, China, and Iran connect daily through our rotating infrastructure."
+        "answer": "Yes. Doppler is built for heavily filtered networks. In Russia, Apple removed our app from the local App Store on a Roskomnadzor demand — and the service kept running through our Telegram bot and rotating endpoints. Users across Russia, China, Iran and Turkey connect daily."
       },
       "q3": {
         "question": "What makes VLESS-Reality better than OpenVPN or WireGuard for censorship bypass?",
@@ -1694,8 +1765,8 @@
       }
     },
     "cta": {
-      "title": "We're Not Leaving Anyone Behind",
-      "subtitle": "Doppler VPN was built specifically for restricted networks. We continuously improve our infrastructure, rotate servers, and update protocols to stay ahead of every new blocking technique. Your internet freedom is not negotiable.",
+      "title": "Built for Networks That Fight Back",
+      "subtitle": "Doppler VPN is built for restricted networks. We rotate servers, update protocols and improve infrastructure as blocking techniques change.",
       "downloadIos": "Download for iOS",
       "downloadAndroid": "Download for Android",
       "telegramBot": "Get via Telegram Bot",
@@ -1704,8 +1775,8 @@
       "button": "Download Doppler VPN"
     },
     "cryptoPayment": {
-      "title": "Pay Anonymously — Even from Blocked Regions",
-      "body": "When your bank is watched or your international cards don't work, Bitcoin and stablecoins still do. Doppler accepts BTC, ETH, USDT, and USDC — no bank, no ID, no trace.",
+      "title": "Pay Without a Bank Card",
+      "body": "When international cards don't work where you are, Bitcoin and stablecoins still do. Doppler accepts BTC, ETH, USDT, and USDC — no bank account or card required.",
       "cta": "Pay with crypto",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1830,7 +1901,7 @@
       },
       "done": {
         "title": "You're Protected",
-        "description": "That's it. No email confirmation to wait for, no passwords to remember, no accounts to manage. Your connection is encrypted, your identity is anonymous, and your VPN has zero knowledge of who you are. You are browsing as a truly anonymous VPN user — no email required, no trace left behind."
+        "description": "That's it. No email confirmation to wait for, no passwords to remember, no accounts to manage. Your connection is encrypted and we never ask who you are. You are browsing under an anonymous account ID — no email required, and no log of where you go."
       }
     },
     "noCollect": {
@@ -1920,8 +1991,8 @@
         "description": "Our servers verify key legitimacy without storing identity data. Authentication happens through TLS 1.3 — no accounts, no credentials database."
       },
       "zeroPii": {
-        "title": "Zero PII Stored",
-        "description": "No email, no name, no phone, no IP logs. We architecturally cannot identify our users because we never collect identifying information in the first place."
+        "title": "Minimal Data by Design",
+        "description": "No email, no name, no phone number. We never collect the identity data that would let us say who someone is; the only record of a device connecting is a short authentication log, kept 90 days to stop abuse."
       }
     },
     "getStarted": {
@@ -1978,12 +2049,12 @@
   },
   "payWithCrypto": {
     "metadata": {
-      "title": "Buy VPN with Bitcoin — Pay Anonymously",
-      "description": "Pay for Doppler VPN with Bitcoin, Ethereum, USDT, or USDC. Anonymous crypto checkout, no card or email required. Works on iPhone, Android, Mac, and Windows."
+      "title": "Buy VPN with Bitcoin — No Card Needed",
+      "description": "Pay for Doppler VPN with Bitcoin, Ethereum, USDT, or USDC. Crypto checkout, no card or email required. Works on iPhone, Android, Mac, and Windows."
     },
     "hero": {
       "title": "Buy VPN with Bitcoin, Ethereum & Stablecoins",
-      "subtitle": "Pay for Doppler VPN with crypto. No card, no email, no trace — your subscription is tied to an anonymous account ID that works on every device.",
+      "subtitle": "Pay for Doppler VPN with crypto. No card and no email — your subscription is tied to an anonymous account ID that works on every device.",
       "cta": "Buy with crypto"
     },
     "coins": {
@@ -2292,7 +2363,7 @@
       },
       "noLogs": {
         "title": "Strict No-Logs Policy",
-        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
+        "description": "Doppler never collects, stores, or shares your browsing data. No traffic logs, no DNS query logs, no record linking you to what you visit. Signing in leaves a short authentication record, kept 90 days to stop abuse — it shows that a device connected, never where it went."
       },
       "globalServers": {
         "title": "6 Global Server Locations",
@@ -2407,7 +2478,7 @@
       },
       "noLogs": {
         "title": "Strict No-Logs Policy",
-        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
+        "description": "Doppler never collects, stores, or shares your browsing data. No traffic logs, no DNS query logs, no record linking you to what you visit. Signing in leaves a short authentication record, kept 90 days to stop abuse — it shows that a device connected, never where it went."
       },
       "globalServers": {
         "title": "6 Global Server Locations",
@@ -2530,7 +2601,7 @@
       },
       "noLogs": {
         "title": "Strict No-Logs Policy",
-        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
+        "description": "Doppler never collects, stores, or shares your browsing data. No traffic logs, no DNS query logs, no record linking you to what you visit. Signing in leaves a short authentication record, kept 90 days to stop abuse — it shows that a device connected, never where it went."
       },
       "crossDevice": {
         "title": "Syncs Across All Apple Devices",
@@ -2682,7 +2753,7 @@
       },
       "noLogs": {
         "title": "Strict No-Logs Policy",
-        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
+        "description": "Doppler never collects, stores, or shares your browsing data. No traffic logs, no DNS query logs, no record linking you to what you visit. Signing in leaves a short authentication record, kept 90 days to stop abuse — it shows that a device connected, never where it went."
       },
       "globalServers": {
         "title": "6 Global Server Locations",
@@ -2849,18 +2920,18 @@
         "intro": "Our no-logs policy is enforced by architecture, not just by promise: VPN traffic is never inspected, logged, modified, or stored.",
         "neverTitle": "What we never store",
         "never1": "Browsing activity or history",
-        "never2": "Connection timestamps",
-        "never3": "Originating or assigned IP addresses",
+        "never2": "The destinations or contents of your traffic",
+        "never3": "Any record linking a person to specific network activity",
         "never4": "DNS queries",
         "never5": "Bandwidth usage",
         "never6": "VPN session duration",
         "onlyTitle": "The only things we store",
-        "only1": "A randomly generated device identifier (not linked to your identity)",
-        "only2": "Anonymous, aggregated server performance metrics",
-        "only3": "An email address — only if you voluntarily contact support",
+        "only1": "An anonymous account ID (VPN-XXXX-XXXX-XXXX) and a device identifier, used to enforce your subscription's device limit",
+        "only2": "An authentication record for requests to our API — IP address, account ID, device identifier and timestamp — kept up to 90 days to prevent abuse and enforce rate limits",
+        "only3": "Anonymous, aggregated server performance metrics, and an email address only if you voluntarily contact support",
         "retentionTitle": "Data retention",
-        "retention1": "VPN usage data: not retained (no-logs)",
-        "retention2": "Account data: while active, plus 30 days after deletion",
+        "retention1": "VPN usage data: not retained (no-logs). Authentication records: up to 90 days",
+        "retention2": "Account data: deleted when you delete the account",
         "retention3": "Payment records: 6 years (tax and accounting law)",
         "retention4": "Support correspondence: 12 months after resolution"
       },
@@ -2955,7 +3026,7 @@
       "title": "VPN in the UAE — Frequently Asked Questions",
       "q1": {
         "question": "Is using a VPN legal in the UAE?",
-        "answer": "Personal VPN use to access blocked services in the UAE is a legal grey area. Federal Law No. 12 of 2016 penalizes VPN use for committing a crime — not VPN use itself. In practice, millions of UAE residents use VPNs daily for work, streaming, and calls without incident. Doppler does not log activity, so even if compelled we cannot identify who used the service or what they accessed."
+        "answer": "Personal VPN use in the UAE sits in a legal grey area. Federal Law No. 12 of 2016 penalises using a VPN in the course of committing a crime rather than VPN use in itself, and many residents use VPNs daily for work, streaming and calls. That reflects how the law has been applied, not a guarantee about your situation — check the current position before relying on it. Doppler keeps no traffic or activity logs, so there is no record of what anyone accessed."
       },
       "q2": {
         "question": "Why are WhatsApp and FaceTime calls blocked in the UAE?",
@@ -3079,7 +3150,7 @@
       },
       "q3": {
         "question": "Is it safe to use a VPN in Iran?",
-        "answer": "VPNs are technically prohibited in Iran but enforcement against individual users is rare — millions use them daily. Doppler does not log connections or activity, so we cannot identify users even if compelled. We use the same no-logs architecture trusted by journalists and activists in the region."
+        "answer": "VPNs are formally restricted in Iran, though enforcement against individual users has been rare and millions use them daily. That describes past practice rather than a guarantee — assess your own risk. Doppler keeps no connection or activity logs, so there is no record of what a user accessed; signing in leaves only a short authentication record, kept 90 days."
       },
       "q4": {
         "question": "Can I pay without a foreign credit card?",
@@ -3203,7 +3274,7 @@
       },
       "q5": {
         "question": "Is using a VPN legal for foreigners in China?",
-        "answer": "Personal VPN use by foreigners is essentially never enforced. Chinese law restricts unauthorized VPNs but enforcement targets commercial operators, not individual travelers or expats. Use common sense — don't post about VPN use on Chinese social media (WeChat, Weibo) and you'll be fine."
+        "answer": "Chinese law restricts unauthorised VPN services, and enforcement has overwhelmingly targeted commercial operators rather than individual travellers or expats. That is how the rules have been applied to date, not a promise about your case. A sensible precaution: don't post about VPN use on Chinese social media (WeChat, Weibo)."
       },
       "q6": {
         "question": "What if Doppler stops working in China?",
@@ -3276,7 +3347,7 @@
       },
       "feature4": {
         "title": "No Account, No Logs",
-        "description": "No email, no phone number. Doppler stores zero connection or activity logs. Even if compelled, we cannot identify a user or their traffic."
+        "description": "No email, no phone number. Doppler keeps no connection or activity logs, so nothing ties a person to their traffic. Signing in leaves a 90-day authentication record and nothing more."
       }
     },
     "howItWorks": {
@@ -3303,7 +3374,7 @@
       "title": "VPN in Russia — FAQ",
       "q1": {
         "question": "Is using a VPN legal in Russia?",
-        "answer": "Personal VPN use is not criminalized in Russia. The 2017 VPN law (Federal Law No. 276-FZ) targets VPN providers that refuse to comply with RKN's blocked-site registry — it does not penalize end users. Millions of Russians use VPNs daily. Doppler holds no Russian assets and does not comply with RKN registries, so service is not filtered at our end."
+        "answer": "Using a VPN is not itself a criminal offence in Russia, and Federal Law No. 276-FZ targets VPN providers rather than end users. Two things changed in September 2025 and are worth knowing: deliberately searching for material on the federal 'extremist' list became an administrative offence carrying a 3,000–5,000 rouble fine, and advertising or promoting circumvention tools became separately punishable — 50,000–80,000 roubles for an individual. Millions of people in Russia use VPNs daily, but the rules are tightening, so check the current position rather than relying on this page."
       },
       "q2": {
         "question": "Will Doppler work on Rostelecom, MTS, or Beeline?",
@@ -3335,7 +3406,7 @@
       },
       "q9": {
         "question": "Will using Doppler attract attention from authorities?",
-        "answer": "Personal VPN use is not a criminal offense in Russia; the relevant laws target VPN providers operating inside Russia, not individual users. Doppler's traffic looks like ordinary TLS to outside observers — there is nothing for an ISP or DPI to flag. Avoid posting about VPN use on Russian platforms (VK, Odnoklassniki) as a sensible precaution."
+        "answer": "Using a VPN is not itself a criminal offence in Russia; the relevant laws are aimed at providers rather than individual users. Doppler's traffic looks like ordinary TLS to an outside observer, so there is nothing for an ISP or DPI system to flag. As a sensible precaution, avoid posting about VPN use on Russian platforms (VK, Odnoklassniki) — since September 2025 promoting circumvention tools carries a personal fine."
       }
     },
     "cta": {
@@ -3551,7 +3622,7 @@
       },
       "q5": {
         "question": "Will I be fined for using a VPN to make calls?",
-        "answer": "There is no record of UAE residents being fined for personal VPN use to make calls. UAE Federal Law No. 12 of 2016 penalizes VPN use 'for the purpose of committing a crime' — making a personal phone call is not a crime. Millions of UAE residents use VPNs daily. Doppler does not log who connects or what they do."
+        "answer": "We know of no case of a UAE resident being fined for personal VPN use to make a call. UAE Federal Law No. 12 of 2016 penalises VPN use 'for the purpose of committing a crime', and a personal phone call is not one. That reflects enforcement practice rather than a guarantee, so check the current position. Doppler keeps no record of who connects or what they do."
       },
       "q6": {
         "question": "What's the cheapest plan that works?",

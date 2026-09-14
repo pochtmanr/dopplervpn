@@ -1276,6 +1276,22 @@
     "lookingUp": "Đang tìm kiếm tài khoản của bạn...",
     "accountNotFound": "Không tìm thấy tài khoản. Vui lòng kiểm tra ID tài khoản của bạn.",
     "verifyingAccount": "Đang xác minh...",
+    "retry": "Thử lại",
+    "existingAccountTitle": "Thiết bị này đã lưu một tài khoản",
+    "existingAccountCta": "Đến tài khoản của bạn",
+    "existingAccountNote": "Nếu tiếp tục bên dưới, một ID tài khoản khác sẽ được lưu trên thiết bị này.",
+    "loginTitle": "Chào mừng trở lại",
+    "loginSubtitle": "Nhập ID tài khoản của bạn để tiếp tục.",
+    "signupTitle": "Tạo tài khoản của bạn",
+    "signupSubtitle": "Không email. Không mật khẩu. Chỉ một chạm.",
+    "welcomeTitle": "Xong rồi",
+    "welcomeBody": "Tài khoản của bạn đã sẵn sàng. ID này là chìa khóa của bạn — hãy lưu lại trước khi đóng.",
+    "welcomeIdLabel": "ID tài khoản của bạn",
+    "welcomeCopy": "Sao chép ID tài khoản của tôi",
+    "welcomeCopied": "Đã sao chép",
+    "welcomePromoIntro": "Quà chào mừng — dùng mã này khi thanh toán:",
+    "welcomeCta": "Đã hiểu — tôi đã lưu ID",
+    "welcomeDismiss": "Đóng",
     "dashboard": {
       "title": "Tài Khoản Của Bạn",
       "memberSince": "Thành viên từ",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Nếu bạn đã mua đăng ký qua App Store hoặc Google Play, hãy quản lý tại đây.",
       "restoreAppStore": "Đăng ký App Store",
       "restorePlayStore": "Đăng ký Google Play",
-      "deleteProSupportNote": "Tài khoản của bạn có gói Pro đang hoạt động. Vui lòng liên hệ hỗ trợ để xóa."
+      "deleteProSupportNote": "Tài khoản của bạn có gói Pro đang hoạt động. Vui lòng liên hệ hỗ trợ để xóa.",
+      "statusPro": "Pro · đến {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Gói miễn phí",
+      "active": "Đang hoạt động",
+      "from": "chỉ từ",
+      "card": "Thẻ",
+      "crypto": "Tiền mã hóa",
+      "payWithCrypto": "Thanh toán bằng tiền mã hóa — {price}",
+      "cryptoNote": "Thanh toán bằng BTC, ETH, USDT hoặc USDC. Bạn sẽ được chuyển đến OxaPay.",
+      "back": "Quay lại",
+      "accountIdHint": "Chìa khóa Doppler của bạn. Dùng nó để đăng nhập trên mọi thiết bị.",
+      "copyId": "Sao chép ID",
+      "sendToDevices": "Gửi đến thiết bị của tôi",
+      "sendToDevicesDesc": "Gửi ID tài khoản và liên kết tải xuống cho chính bạn, rồi mở trên điện thoại, máy tính bảng hoặc máy tính.",
+      "shareNative": "Chia sẻ…",
+      "shareEmail": "Email",
+      "shareTelegramHint": "Trong Telegram, chọn Tin nhắn đã lưu.",
+      "copyMessage": "Sao chép tin nhắn",
+      "messageCopied": "Đã sao chép tin nhắn",
+      "shareSubject": "Tài khoản Doppler VPN của tôi",
+      "shareMessage": "ID tài khoản Doppler VPN của tôi: {id}\nTải ứng dụng: {url}\nMở ứng dụng và đăng nhập bằng ID này.",
+      "shareWarning": "Bất kỳ ai có ID này đều có thể dùng gói đăng ký của bạn. Chỉ gửi cho chính bạn.",
+      "devices": "Thiết bị của tôi",
+      "devicesCount": "{count}/{max}",
+      "mainDevice": "Chính",
+      "lastActive": "Hoạt động {time}",
+      "addedOn": "Đã thêm ngày {date}",
+      "noDevices": "Chưa có thiết bị nào. Cài Doppler và đăng nhập bằng ID tài khoản của bạn.",
+      "manageInApp": "Để xóa thiết bị, hãy mở Doppler và vào mục Thiết bị.",
+      "devicesError": "Không thể tải thiết bị của bạn.",
+      "everyDeviceHint": "Cài Doppler, rồi đăng nhập bằng ID tài khoản của bạn. Tối đa {max} thiết bị trên một tài khoản."
     },
     "securedByCrypto": "Được bảo mật bởi OxaPay"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Thanh toán ẩn danh — ngay cả từ khu vực bị chặn",
-      "body": "Khi ngân hàng của bạn bị giám sát hoặc thẻ quốc tế không hoạt động, Bitcoin và stablecoin vẫn chạy. Doppler chấp nhận BTC, ETH, USDT và USDC — không ngân hàng, không giấy tờ, không dấu vết.",
+      "title": "Thanh toán không cần thẻ ngân hàng",
+      "body": "Khi thẻ quốc tế không dùng được ở nơi bạn sống, Bitcoin và stablecoin vẫn dùng được. Doppler chấp nhận BTC, ETH, USDT và USDC — không cần tài khoản ngân hàng hay thẻ.",
       "cta": "Thanh toán bằng crypto",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Hướng dẫn về kiểm duyệt Internet — Cách VPN bị chặn và cách duy trì kết nối",
-      "description": "Hướng dẫn kỹ thuật về cách chính phủ chặn VPN và proxy bằng DPI, TSPU và học máy — và cách proxy VLESS-Reality vượt qua mọi phương pháp phát hiện. Chuẩn bị cho các hạn chế ngày càng leo thang."
+      "description": "Hướng dẫn kỹ thuật: các hệ thống lọc quốc gia chặn VPN bằng DPI, phân tích lưu lượng và dò chủ động ra sao — và vì sao VLESS-Reality vẫn kết nối được. Hãy chuẩn bị cho những hạn chế ngày càng siết chặt."
     },
     "hero": {
       "title": "Hướng dẫn tự do Internet của bạn",
-      "subtitle": "Cách chính phủ phát hiện và chặn VPN, cách Doppler đánh bại mọi phương pháp, và những gì bạn nên làm ngay bây giờ để duy trì kết nối khi các hạn chế ngày càng tăng."
+      "subtitle": "Cách bên kiểm duyệt phát hiện và chặn VPN, cách Doppler vô hiệu hóa từng phương pháp, và bạn có thể làm gì ngay bây giờ để duy trì kết nối."
     },
     "detection": {
       "title": "Cách chính phủ phát hiện và chặn VPN",
-      "intro": "Kiểm duyệt Internet đã phát triển vượt xa việc chặn IP đơn giản. Các quốc gia như Nga, Trung Quốc và Iran triển khai các hệ thống tinh vi sử dụng học máy để nhận dạng và ngắt kết nối VPN trong thời gian thực. Đây là cách chính xác họ thực hiện.",
+      "intro": "Kiểm duyệt internet từ lâu đã vượt xa việc chặn địa chỉ IP đơn thuần. Các hệ thống lọc quốc gia ngày nay dùng học máy để nhận diện và ngắt kết nối VPN theo thời gian thực, và những kỹ thuật tương tự cũng xuất hiện trong mạng doanh nghiệp và trường đại học. Sau đây là cách chúng hoạt động.",
       "tspu": {
-        "title": "Hạ tầng: TSPU và DPI",
-        "p1": "Nga triển khai TSPU (Hệ thống kỹ thuật đối phó mối đe dọa) — phần cứng chuyên dụng được cài đặt trực tiếp trên các nút mạng của nhà cung cấp dịch vụ Internet. Trung Quốc sử dụng Tường lửa Vĩ đại, Iran vận hành NIN. Các hệ thống này thực hiện Kiểm tra gói tin sâu (DPI) trên mọi gói tin đi qua mạng.",
+        "title": "Hạ tầng: các hệ thống DPI cấp quốc gia",
+        "p1": "Những nước lọc gắt lắp thiết bị kiểm tra ngay tại các nút mạng của nhà mạng — Vạn Lý Tường Lửa ở Trung Quốc, mạng thông tin quốc gia ở Iran, hệ thống TSPU ở Nga, cùng các hệ thống tương đương ở Thổ Nhĩ Kỳ và vùng Vịnh. Tất cả đều thực hiện kiểm tra gói sâu (DPI) với mọi gói tin đi qua mạng.",
         "p2": "Các giao thức VPN truyền thống như OpenVPN, WireGuard và IPSec có cấu trúc gói tin đặc trưng. DPI nhận dạng chúng ngay lập tức và ngắt kết nối. Ngay cả các chế độ \"ẩn\" thường cũng thất bại vì mẫu bắt tay kết nối cơ bản vẫn có thể phát hiện được.",
         "p3": "Khi so khớp chữ ký cơ bản không đủ, các hệ thống này kích hoạt các mô-đun học máy. Chúng ngừng phân tích bên trong gói tin (mọi thứ đều được mã hóa) và bắt đầu phân tích cách lưu lượng truy cập hoạt động."
       },
@@ -1548,7 +1595,7 @@
         "title": "Phương pháp 4: Danh sách đen IP và DNS",
         "description": "Các dải IP đã biết của nhà cung cấp VPN bị chặn hoàn toàn. Các yêu cầu DNS đến tên miền VPN bị chặn. Các nhà cung cấp VPN thương mại với danh sách máy chủ công khai là mục tiêu dễ nhất — toàn bộ hạ tầng của họ có thể bị chặn trong vài phút."
       },
-      "conclusion": "Kết quả: các VPN dạng bấm-nút và dịch vụ proxy tiêu chuẩn như NordVPN, ExpressVPN và Surfshark ngừng hoạt động trong vài giờ sau khi có đợt trấn áp. Chỉ các giao thức proxy được thiết kế đặc biệt để không thể phân biệt với lưu lượng web thông thường mới tồn tại."
+      "conclusion": "Kết quả: các ứng dụng VPN phổ thông xây trên giao thức tiêu chuẩn thường ngừng hoạt động trong vòng vài giờ sau khi đợt chặn bắt đầu. Chỉ những giao thức được thiết kế riêng để không thể phân biệt với lưu lượng web thông thường mới trụ được."
     },
     "defeats": {
       "title": "Cách Doppler đánh bại mọi phương pháp phát hiện",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Bị chặn tại Nga — Và vẫn hoạt động",
-      "badge": "Xác nhận bởi Roskomnadzor",
-      "p1": "Chính quyền Nga đã nhắm mục tiêu và chặn Doppler VPN cụ thể. Tên miền của chúng tôi đã được thêm vào danh sách chặn liên bang. Đây không phải điều chúng tôi che giấu — đó là bằng chứng công nghệ của chúng tôi hoạt động.",
-      "p2": "Không giống các nhà cung cấp VPN thương mại tuân thủ yêu cầu gỡ bỏ hoặc âm thầm rút khỏi các thị trường bị hạn chế, Doppler được xây dựng cho chính kịch bản này. Khi trang web của chúng tôi bị chặn, bot Telegram của chúng tôi vẫn có thể truy cập. Khi IP máy chủ bị cấm, hạ tầng của chúng tôi tự động luân chuyển.",
-      "p3": "Mọi lệnh chặn họ áp đặt, chúng tôi đều vượt qua. Đây không phải là tuyên bố quảng cáo — đây là hoạt động hàng ngày của chúng tôi.",
-      "stat1label": "Tên miền bị chặn bởi RKN",
-      "stat1value": "Đã xác nhận",
+      "title": "Bị gỡ theo yêu cầu kiểm duyệt — và vẫn đang chạy",
+      "badge": "Gỡ khỏi App Store, Nga",
+      "p1": "Apple đã gỡ ứng dụng Doppler VPN khỏi App Store Nga sau yêu cầu pháp lý từ Roskomnadzor, cơ quan quản lý truyền thông nhà nước. Apple đã gỡ hàng chục ứng dụng VPN theo cách tương tự. Chúng tôi công bố điều này thay vì giấu đi: bị nêu tên là điều xảy ra với những công cụ vẫn còn hiệu quả.",
+      "p2": "Khác với các nhà cung cấp tuân theo yêu cầu gỡ bỏ hoặc lặng lẽ rút khỏi những thị trường bị hạn chế, Doppler được tạo ra đúng cho tình huống này. Khi một kho ứng dụng gỡ chúng tôi, bot Telegram của chúng tôi vẫn phân phối ứng dụng. Khi IP máy chủ bị chặn, hạ tầng của chúng tôi tự động đổi điểm truy cập.",
+      "p3": "Việc phân phối đi vòng qua rào chặn — APK trực tiếp, bot Telegram và các điểm truy cập luân phiên. Đó là đặc tính của kiến trúc, không phải lời hứa.",
+      "stat1label": "App Store Nga",
+      "stat1value": "Bị gỡ theo yêu cầu của RKN",
       "stat2label": "Trạng thái dịch vụ",
       "stat2value": "Đang hoạt động",
       "stat3label": "Truy cập thay thế",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Bước tiếp theo có thể",
         "title": "Mô hình danh sách trắng",
-        "description": "Thay vì chặn các giao thức cụ thể, chỉ các tên miền và địa chỉ IP được phê duyệt mới có thể truy cập. Mọi thứ khác bị chặn mặc định. SSH, RDP, cổng game — tất cả bị chặn trừ khi được đăng ký bởi một pháp nhân. Điều này đã được thử nghiệm một phần trong lệnh cấm Telegram năm 2018 của Nga.",
+        "description": "Thay vì chặn từng giao thức cụ thể, chỉ những tên miền và địa chỉ IP được phê duyệt mới truy cập được, mọi thứ còn lại bị chặn mặc định. SSH, RDP, cổng chơi game — đều đóng, trừ khi được một pháp nhân đăng ký. Cơ chế danh sách trắng đã được thử ở quy mô quốc gia trong các đợt chặn diện rộng và các cuộc diễn tập ngắt mạng.",
         "status": "Khả thi về kỹ thuật, đã triển khai một phần"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Kiểm tra thực tế kinh tế",
-        "p1": "Năm 2018, khi Roskomnadzor cố chặn chỉ riêng Telegram, họ đã vô tình cấm hàng triệu địa chỉ IP của Amazon và Google. Máy tính tiền trong cửa hàng ngừng hoạt động. Thiết bị nhà thông minh mất kết nối. Thông báo đẩy ngân hàng bị lỗi.",
-        "p2": "Mô hình danh sách trắng sẽ gây ra hậu quả gấp 100 lần. Các trang web Nga hiện đại phụ thuộc vào Google Fonts, thư viện CDN nước ngoài, cơ quan chứng chỉ quốc tế và dịch vụ đám mây. Ngân hàng và công ty logistics sử dụng chứng chỉ SSL nước ngoài. Lập trình viên sẽ mất quyền truy cập GitHub, Docker Hub và npm.",
+        "p1": "Năm 2018, nỗ lực chặn một ứng dụng nhắn tin duy nhất đã kết thúc bằng việc hàng triệu địa chỉ IP của Amazon và Google bị chặn theo. Máy tính tiền ở cửa hàng ngừng hoạt động. Thiết bị nhà thông minh mất kết nối. Thông báo ngân hàng không đến được. Thiệt hại kèm theo là kết cục thường thấy của việc chặn thô bạo.",
+        "p2": "Mô hình danh sách trắng sẽ gây ra điều này ở quy mô lớn hơn nhiều. Ngày nay, website ở khắp nơi phụ thuộc vào CDN nước ngoài, dịch vụ phông chữ, tổ chức cấp chứng chỉ và nền tảng đám mây. Ngân hàng và công ty logistics dùng chứng chỉ SSL nước ngoài. Lập trình viên sẽ mất quyền truy cập GitHub, Docker Hub và npm.",
         "p3": "Cô lập hoàn toàn về mặt kỹ thuật là khả thi — nhưng cái giá phải trả là suy thoái công nghệ. Bản cập nhật Windows và Android không thể tải về. Thiết bị y tế mất hỗ trợ trình điều khiển. Phát triển AI dừng hoàn toàn khi không có hạ tầng mã nguồn mở toàn cầu.",
         "p4": "Con đường có khả năng nhất là hạn chế dần dần qua nhiều năm, không phải cắt đứt đột ngột. Nhưng mỗi bước leo thang đồng nghĩa nhiều người dùng VPN bị bỏ lại phía sau — trừ khi họ đã chuẩn bị."
       }
@@ -1642,8 +1689,8 @@
         "description": "Chúng tôi liên tục cập nhật giao thức để đi trước các kỹ thuật chặn mới. Bật cập nhật tự động hoặc kiểm tra cập nhật thường xuyên qua các kênh Telegram của chúng tôi."
       },
       "step5": {
-        "title": "Chia sẻ với những người cần",
-        "description": "Càng nhiều người cài đặt Doppler trước khi các hạn chế leo thang, càng tốt. Chia sẻ liên kết bot Telegram của chúng tôi — đó là kênh phân phối chống kiểm duyệt tốt nhất mà chúng tôi có."
+        "title": "Hãy chia sẻ thận trọng",
+        "description": "Càng nhiều người cài Doppler trước khi các hạn chế siết chặt thì càng tốt — liên kết bot Telegram của chúng tôi là kênh chống kiểm duyệt tốt nhất mà chúng tôi có. Một lưu ý: một số quốc gia, trong đó có Nga, hiện phạt tiền cá nhân vì quảng bá công cụ vượt rào. Hãy chia sẻ riêng tư với những người bạn quen biết, và kiểm tra quy định nơi bạn sống trước khi đăng công khai."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Câu hỏi thường gặp",
       "q1": {
         "question": "Doppler VPN có thể vượt qua kiểm duyệt của chính phủ không?",
         "answer": "Có. Doppler sử dụng VLESS-Reality giúp lưu lượng VPN không thể phân biệt với HTTPS thông thường. Vượt qua DPI, TSPU và Tường lửa Vĩ đại mà không có bất kỳ chữ ký VPN nào có thể phát hiện."
       },
       "q2": {
         "question": "Doppler VPN có hoạt động ở Nga, Trung Quốc và Iran không?",
-        "answer": "Có. Doppler được xây dựng đặc biệt cho các khu vực bị kiểm duyệt. Tên miền của chúng tôi đã bị Roskomnadzor chặn, chứng minh công nghệ của chúng tôi hoạt động."
+        "answer": "Có. Doppler được xây cho những mạng bị lọc gắt. Tại Nga, Apple đã gỡ ứng dụng của chúng tôi khỏi App Store địa phương theo yêu cầu của Roskomnadzor — và dịch vụ vẫn chạy qua bot Telegram cùng các điểm truy cập luân phiên. Người dùng ở Nga, Trung Quốc, Iran và Thổ Nhĩ Kỳ kết nối hằng ngày."
       },
       "q3": {
         "question": "Điều gì khiến VLESS-Reality tốt hơn OpenVPN hoặc WireGuard trong việc vượt kiểm duyệt?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Chúng tôi không bỏ lại ai phía sau",
-      "subtitle": "Doppler VPN được xây dựng đặc biệt cho các mạng bị hạn chế. Chúng tôi liên tục cải thiện hạ tầng, luân chuyển máy chủ và cập nhật giao thức để đi trước mọi kỹ thuật chặn mới. Quyền tự do Internet của bạn là không thể thương lượng.",
+      "title": "Được xây cho những mạng biết phản kháng",
+      "subtitle": "Doppler VPN được xây cho các mạng bị hạn chế. Chúng tôi luân chuyển máy chủ, cập nhật giao thức và cải thiện hạ tầng khi kỹ thuật chặn thay đổi.",
       "downloadIos": "Tải cho iOS",
       "downloadAndroid": "Tải cho Android",
       "telegramBot": "Nhận qua bot Telegram",

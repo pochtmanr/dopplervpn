@@ -158,7 +158,7 @@ export function CookieConsent() {
 
   // Banner mode
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 p-4 animate-in slide-in-from-bottom duration-300">
+    <div className="fixed bottom-0 inset-x-0 z-50 p-4 slide-in-from-bottom">
       <div className="mx-auto max-w-4xl rounded-2xl border border-overlay/10 bg-bg-secondary/95 backdrop-blur-lg p-5 sm:p-6 shadow-2xl">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-1 min-w-0">

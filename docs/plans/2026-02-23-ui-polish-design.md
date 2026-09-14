@@ -1,5 +1,8 @@
 # UI Polish: Layout, Loading, & Animation Refinement
 
+> **Superseded (marketing motion):** the "opacity-only, 200ms" rule below no longer applies to the
+> landing. See [`landing/DESIGN.md`](../../DESIGN.md) §5.
+
 **Date:** 2026-02-23
 **Scope:** Option A — Surgical Fix (~12 files)
 **Goal:** Enterprise-grade polish for admin panel layout, loading states, hero animations, and accessibility.

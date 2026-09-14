@@ -206,18 +206,37 @@ body {
 }
 
 /* Hero mount animation (plays once on load) */
+/* Long enough to read as a fade, not a cut; the supporting rows follow the
+   headline's word cascade instead of finishing before it. */
 @keyframes hero-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 .hero-animate {
-  animation: hero-fade-in 200ms ease-out both;
+  animation: hero-fade-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.hero-animate-delay-1 { animation-delay: 50ms; }
-.hero-animate-delay-2 { animation-delay: 100ms; }
-.hero-animate-delay-3 { animation-delay: 150ms; }
-.hero-animate-delay-4 { animation-delay: 200ms; }
-.hero-animate-delay-5 { animation-delay: 250ms; }
+.hero-animate-delay-1 { animation-delay: 100ms; }
+.hero-animate-delay-2 { animation-delay: 300ms; }
+.hero-animate-delay-3 { animation-delay: 420ms; }
+.hero-animate-delay-4 { animation-delay: 540ms; }
+.hero-animate-delay-5 { animation-delay: 660ms; }
+
+/* Hero primary CTA: hidden until the platform is detected (its label and icon
+   depend on it), then fades in and glows once. */
+.hero-cta-in {
+  animation:
+    hero-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    pulse-glow 1.5s ease-out 500ms 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate,
+  .hero-cta-in,
+  .hero-backdrop-in,
+  .slide-in-from-bottom {
+    animation: none;
+  }
+}
 
 /* Headline word-by-word "blur-up" cascade (ported from the VisaApplication hero) */
 @keyframes hero-word-up {
@@ -235,7 +254,6 @@ body {
 .hero-word {
   display: inline-block;
   opacity: 0;
-  will-change: transform, filter, opacity;
   animation: hero-word-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -278,6 +296,92 @@ body {
     filter: none;
     animation: none;
   }
+}
+
+/* Glyph spotlight (pricing backdrop) — the lattice is dimmed everywhere except a
+   circle that trails the pointer. The two coordinates are registered so they
+   can transition: the lag is what makes it read as a lamp, not a cursor. Edges
+   fade top and bottom so the field melts into the neighbouring sections. */
+@property --spot-x {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 88%;
+}
+@property --spot-y {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 62%;
+}
+.glyph-spotlight {
+  --spot-x: 88%;
+  --spot-y: 62%;
+  -webkit-mask-image:
+    radial-gradient(circle 24rem at var(--spot-x) var(--spot-y), #000 0%, rgb(0 0 0 / 0.6) 45%, rgb(0 0 0 / 0.3) 100%),
+    linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(circle 24rem at var(--spot-x) var(--spot-y), #000 0%, rgb(0 0 0 / 0.6) 45%, rgb(0 0 0 / 0.3) 100%),
+    linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-composite: intersect;
+  transition: --spot-x 700ms cubic-bezier(0.22, 1, 0.36, 1), --spot-y 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Notched card (home download CTA) — the bottom-end corner is sliced off at 45°.
+   clip-path also clips the CSS border, so .notch-edge redraws the hairline along
+   the cut: a 1px gradient stripe sitting just inside the clip diagonal. */
+.notch-card {
+  --notch: 3.5rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--notch)), calc(100% - var(--notch)) 100%, 0 100%);
+}
+@media (min-width: 1024px) {
+  .notch-card { --notch: 5.5rem; }
+}
+[dir="rtl"] .notch-card {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--notch) 100%, 0 calc(100% - var(--notch)));
+}
+.notch-edge {
+  position: absolute;
+  bottom: 0;
+  inset-inline-end: 0;
+  width: var(--notch);
+  height: var(--notch);
+  pointer-events: none;
+  background: linear-gradient(to top left, transparent 50%, color-mix(in srgb, var(--color-accent-teal) 45%, transparent) 50%, transparent calc(50% + 1.5px));
+}
+[dir="rtl"] .notch-edge {
+  background: linear-gradient(to top right, transparent 50%, color-mix(in srgb, var(--color-accent-teal) 45%, transparent) 50%, transparent calc(50% + 1.5px));
+}
+
+/* Mobile hero backdrop — a static top/bottom fade (animating a mask repaints the
+   whole viewport every frame on a phone), dimmed, and faded in on mount. */
+.glyph-edge-fade {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+}
+.hero-backdrop-in {
+  --backdrop-opacity: 0.55;
+  opacity: var(--backdrop-opacity);
+  animation: hero-backdrop-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Dark glyphs on a light ground read much louder; pull them back. */
+.light .hero-backdrop-in {
+  --backdrop-opacity: 0.32;
+}
+@keyframes hero-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: var(--backdrop-opacity); }
+}
+
+/* Soft edges for a glyph stage, so its grain fades out instead of ending in a box. */
+.glyph-vignette {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 14%, #000 86%, transparent),
+    linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 14%, #000 86%, transparent),
+    linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+  mask-composite: intersect;
 }
 
 /* Server card — full-height flag with a ~30° angled cut on its leading edge */
@@ -330,6 +434,29 @@ body {
   animation: slide-in-from-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Bottom sheet entrance (cookie banner) */
+@keyframes slide-in-from-bottom {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+.slide-in-from-bottom {
+  animation: slide-in-from-bottom 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Comparison accordion: the three notes follow the plate in on open, and leave
+   together on close (the delays apply only while open). */
+.cmp-row[data-open="true"] .cmp-note:nth-child(1) { transition-delay: 150ms; }
+.cmp-row[data-open="true"] .cmp-note:nth-child(2) { transition-delay: 210ms; }
+.cmp-row[data-open="true"] .cmp-note:nth-child(3) { transition-delay: 270ms; }
+
+/* A terminal cursor that blinks in hard steps, never a fade. */
+@keyframes terminal-blink {
+  50% { opacity: 0; }
+}
+.terminal-cursor {
+  animation: terminal-blink 1.06s steps(1, end) infinite;
+}
+
 /* Reduced motion — accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -339,6 +466,8 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .cmp-row .cmp-note { transition-delay: 0ms !important; }
+  .terminal-cursor { animation: none; }
 }
 
 /* Focus visible for accessibility */
@@ -436,4 +565,48 @@ body {
   }
   .accordion-panel { @apply grid transition-[grid-template-rows] duration-200 ease-out; }
   .accordion-answer { @apply pb-5 text-text-muted leading-relaxed text-sm; }
+
+  /* ─── Terminal accordion (sections/comparison-accordion.tsx) ───────── */
+  /* Six rows × ~4,900 prerendered pages: the long lists live here, not inline. */
+  .cmp-row {
+    @apply relative border-t border-overlay/5 transition-colors duration-300 first:border-t-0;
+  }
+  .cmp-row::before {
+    content: "";
+    @apply absolute inset-y-0 start-0 w-0.5 bg-accent-teal opacity-0 transition-opacity duration-300;
+  }
+  .cmp-row[data-open="true"] { @apply bg-bg-secondary/60; }
+  .cmp-row[data-open="true"]::before { @apply opacity-100; }
+  .cmp-btn {
+    @apply grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-1 px-5 py-4 text-start
+      md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] md:px-6 md:py-5
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-teal;
+  }
+  .cmp-feature { @apply col-start-1 row-start-1 font-display text-base md:text-lg font-semibold text-text-primary; }
+  .cmp-trad {
+    @apply col-start-1 row-start-2 text-sm text-text-tertiary md:col-start-2 md:row-start-1 md:text-base;
+  }
+  .cmp-dop {
+    @apply col-start-1 row-start-3 text-sm font-medium text-accent-teal md:col-start-3 md:row-start-1 md:text-base;
+  }
+  .cmp-tag { @apply me-2 inline-block text-[10px] uppercase tracking-wider text-text-tertiary md:hidden; }
+  .cmp-toggle {
+    @apply col-start-2 row-span-3 row-start-1 flex h-8 w-8 items-center justify-center rounded-lg border border-overlay/10
+      text-sm text-text-tertiary transition-colors duration-300
+      group-hover:border-accent-teal/40 group-hover:text-accent-teal md:col-start-4 md:row-span-1;
+  }
+  .cmp-row[data-open="true"] .cmp-toggle { @apply border-accent-teal/40 text-accent-teal; }
+  .cmp-panel {
+    @apply grid grid-rows-[0fr] transition-[grid-template-rows] duration-300;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cmp-row[data-open="true"] .cmp-panel { @apply grid-rows-[1fr]; }
+  .cmp-body {
+    @apply grid gap-5 px-5 pb-6 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] md:items-center md:gap-x-6 md:px-6 md:pb-7;
+  }
+  .cmp-note {
+    @apply border-t border-dashed border-overlay/15 py-3 opacity-0 translate-y-1.5 transition-[opacity,transform] duration-200 ease-out first:border-t-0 first:pt-0;
+  }
+  .cmp-row[data-open="true"] .cmp-note { @apply opacity-100 translate-y-0; }
+  .cmp-note-label { @apply mb-1 text-[11px] uppercase tracking-wider text-text-tertiary; }
 }

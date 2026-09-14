@@ -315,7 +315,9 @@ export default async function DownloadsPage({ params }: PageProps) {
   // Word-by-word blur-up cascade (same timing as the homepage hero)
   const WORD_BASE_DELAY = 0.1;
   const WORD_STAGGER = 0.07;
-  const headlineWords = t("title").split(/\s+/).filter(Boolean);
+  // The on-page headline drops the " — iOS, Android, Mac & Windows" tail; the
+  // full string stays the meta/schema title, where the platform names help search.
+  const headlineWords = t("title").split(" — ")[0].split(/\s+/).filter(Boolean);
 
   return (
     <>

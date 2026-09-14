@@ -37,6 +37,7 @@ export const CLIENT_NAMESPACES = [
   "faq",
   "hero", // hero-ctas, mobile-sticky-cta, cta
   "nav", // desktop-nav, mobile-nav
+  "platformsAvailable", // account/dashboard/every-device-band
   "priceComparison",
   "pricing",
   "speedComparison",

@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/reveal";
+import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
+import { PlatformLogo } from "@/components/glyph/platform-icons";
 
 const platforms = [
   { key: "ios", href: "/vpn-for-ios", store: "appStore", icon: "apple" },
@@ -9,23 +11,6 @@ const platforms = [
   { key: "windows", href: "/vpn-for-windows", store: "directDownload", icon: "windows" },
 ] as const;
 
-const icons: Record<string, React.ReactNode> = {
-  apple: (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-    </svg>
-  ),
-  android: (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M16.61 15.15c-.46 0-.84-.37-.84-.83s.38-.83.84-.83c.46 0 .83.37.83.83s-.37.83-.83.83m-9.22 0c-.46 0-.84-.37-.84-.83s.38-.83.84-.83c.46 0 .83.37.83.83s-.37.83-.83.83m9.5-5.09l1.67-2.88a.35.35 0 00-.12-.47.35.35 0 00-.48.12l-1.69 2.93A10.1 10.1 0 0012 8.57c-1.53 0-2.98.34-4.27.95L6.04 6.59a.35.35 0 00-.48-.12.35.35 0 00-.12.47l1.67 2.88C4.44 11.36 2.62 14.09 2.3 17.3h19.4c-.32-3.21-2.14-5.94-4.81-7.24z" />
-    </svg>
-  ),
-  windows: (
-    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M3 12V6.75l6-1.32v6.48L3 12zm17-9v8.75l-10 .08V5.67L20 3zM3 13l6 .09v6.81l-6-1.15V13zm7 .18l10 .08V21l-10-1.76V13.18z" />
-    </svg>
-  ),
-};
 
 export function PlatformsAvailable() {
   const t = useTranslations("platformsAvailable");
@@ -35,32 +20,58 @@ export function PlatformsAvailable() {
     <section className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5">
       <div className="mx-auto max-w-site">
         <Reveal>
-          <div className="text-center mb-6">
-            <p className="text-xs uppercase tracking-wider text-text-tertiary mb-1">
+          <div className="text-center mb-6 md:mb-8">
+            <p className="text-xs md:text-sm uppercase tracking-wider text-text-tertiary mb-1">
               {t("eyebrow")}
             </p>
-            <h3 className="text-lg md:text-xl text-text-primary font-medium">
+            <h3 className="font-display text-xl md:text-2xl text-text-primary font-semibold">
               {t("title")}
             </h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {platforms.map(({ key, href, store, icon }) => (
+            {platforms.map(({ key, href, store, icon }, i) => (
               <Link
                 key={key}
                 href={href}
-                className="group flex flex-col items-center text-center gap-2 rounded-xl border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 px-4 py-5 transition-colors"
+                className="group relative flex h-[104px] md:h-[112px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 transition-colors"
               >
-                <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal group-hover:bg-accent-teal/15 transition-colors">
-                  {icons[icon]}
+                {/* Glyph strip — the leading third. It bleeds to the card's top,
+                    bottom and outer edge on purpose: the padding belongs to the
+                    text zone alone, so the field reads as artwork rather than as
+                    something pasted into a frame of plain fill. `border-e` is
+                    logical, so the strip sits on the correct side under RTL. */}
+                <div className="relative w-[38%] md:w-1/3 shrink-0 overflow-hidden border-e border-overlay/5">
+                  <PlatformGlyphBand index={i} />
+                  {/* The scene leaves its middle empty, so the logo sits on
+                      quiet ground inside the bracket frame. */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal group-hover:bg-accent-teal/15 group-hover:border-accent-teal/40 transition-colors">
+                      <PlatformLogo icon={icon} />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-text-primary">
+
+                <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-0.5 px-3 md:px-5 py-3 text-start">
+                  <p className="font-display text-base md:text-xl font-semibold leading-tight text-text-primary">
                     {tApps(`${key}.title`)}
                   </p>
-                  <p className="text-xs text-text-muted mt-0.5">
+                  <p className="text-xs md:text-sm leading-tight text-text-muted">
                     {t(`stores.${store}`)}
                   </p>
                 </div>
+
+                {/* The row's "go" mark, where a store listing puts its button.
+                    Dropped in the two-up grid, which has no width to spare. */}
+                <svg
+                  className="hidden md:block me-4 w-4 h-4 shrink-0 self-center text-text-tertiary transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
               </Link>
             ))}
           </div>

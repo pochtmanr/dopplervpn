@@ -6,6 +6,11 @@
 > honest strength ratings, the known holes, and the schema drift. **Read it before grepping for
 > any of that**, and correct it there rather than re-deriving it.
 
+> **Design:** all landing UI work — sections, pages, cards, buttons, OG/social images — follows
+> [`DESIGN.md`](DESIGN.md) (the "Glyph Terminal" standard set by the home hero, "Available on" cards and
+> "How Doppler VPN Protects Your Traffic" cards). **Read it before styling anything**, and update it
+> when the standard changes.
+
 
 ## Overview
 Next.js 15 web app serving as the public marketing site, admin panel, and blog pipeline for Doppler VPN. Deployed at `dopplervpn.org`. Includes 44-language landing, blog with AI content generation, admin dashboard, and API routes used by the Telegram bots.

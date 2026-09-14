@@ -18,7 +18,10 @@ export function MobileNav() {
   // reliable guarantee the browser skips the fetches. Defer until first open.
   const [langEverOpened, setLangEverOpened] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [hasAccount, setHasAccount] = useState(false);
+  // Tri-state, not a boolean — see the matching comment in desktop-nav.tsx:
+  // null is "not resolved yet", so the CTA never asserts a logged-out
+  // destination before localStorage has actually been read.
+  const [hasAccount, setHasAccount] = useState<boolean | null>(null);
   const t = useTranslations("nav");
   const locale = useLocale();
   const router = useRouter();
@@ -73,6 +76,25 @@ export function MobileNav() {
   }, [isOpen, close]);
 
   const currentLang = localeConfig[locale] || localeConfig.en;
+
+  // Same stacked-label trick as desktop-nav.tsx: one grid cell holds both
+  // labels, so the pill never resizes when the account state resolves.
+  const ctaClass =
+    "grid place-items-center mx-2 mt-1 px-4 py-2 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors";
+  const ctaLabels = (
+    <>
+      <span
+        className={`col-start-1 row-start-1 ${hasAccount === true ? "" : "invisible"}`}
+      >
+        {t("account")}
+      </span>
+      <span
+        className={`col-start-1 row-start-1 ${hasAccount === false ? "" : "invisible"}`}
+      >
+        {t("getPro")}
+      </span>
+    </>
+  );
 
   const overlay = (
     <div
@@ -140,14 +162,20 @@ export function MobileNav() {
           >
             {t("support")}
           </Link>
-          <Link
-            href="/account"
-            prefetch={false}
-            onClick={() => { if (!hasAccount) trackGetPro("nav-mobile"); close(); }}
-            className="flex items-center justify-center mx-2 mt-1 px-4 py-2 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
-          >
-            {hasAccount ? t("account") : t("getPro")}
-          </Link>
+          {hasAccount === null ? (
+            <span aria-hidden="true" className={`${ctaClass} animate-pulse`}>
+              {ctaLabels}
+            </span>
+          ) : (
+            <Link
+              href={hasAccount ? "/account" : "/signup"}
+              prefetch={false}
+              onClick={() => { if (!hasAccount) trackGetPro("nav-mobile"); close(); }}
+              className={ctaClass}
+            >
+              {ctaLabels}
+            </Link>
+          )}
         </div>
 
         {/* Language + theme row */}

@@ -2,7 +2,8 @@ import { Fragment } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HeroCTAsWrapper } from "@/components/hero/hero-ctas-wrapper";
-import { DotGlobe } from "@/components/hero/dot-globe";
+import { DesktopGlobe } from "@/components/hero/desktop-globe";
+import { HeroMobileBackdrop } from "@/components/glyph/pricing-glyphs";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)
@@ -90,7 +91,14 @@ export function Hero() {
   );
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-svh lg:min-h-screen flex items-center pt-20 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Below lg: no globe — centred copy over the pricing glyph grain, with a soft
+          bg-primary scrim behind the text so sparks never fight the headline */}
+      <HeroMobileBackdrop />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 lg:hidden bg-[radial-gradient(ellipse_70%_45%_at_50%_50%,var(--color-bg-primary)_0%,transparent_100%)] opacity-60"
+      />
       {/* Main Content - Two Column Layout */}
       <div className="relative z-10 mx-auto max-w-site w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -179,25 +187,11 @@ export function Hero() {
                 {t("trustBadges.vless")}
               </li>
             </ul>
-
-            {/* Mobile globe — desktop gets the full-size one in the right column */}
-            <div className="lg:hidden pt-6">
-              <DotGlobe
-                className="w-full max-w-[340px] aspect-square mx-auto"
-                pointCount={450}
-                label={t("globeAlt")}
-                nodeLabels={nodeLabels}
-              />
-            </div>
           </div>
 
           {/* Right Column - Server network dot globe */}
           <div className="relative hidden lg:flex items-center justify-center">
-            <DotGlobe
-              className="hero-animate hero-animate-delay-3 relative w-full max-w-[620px] aspect-square"
-              label={t("globeAlt")}
-              nodeLabels={nodeLabels}
-            />
+            <DesktopGlobe label={t("globeAlt")} nodeLabels={nodeLabels} />
           </div>
         </div>
       </div>

@@ -149,17 +149,19 @@ export const COMPARISON = [
 export const PRIVACY = {
   noLogs: true,
   summary:
-    "Strict no-logs policy enforced by architecture: VLESS-Reality traffic is never inspected, logged, modified, or stored.",
+    "Strict no-logs policy enforced by architecture: VLESS-Reality traffic is never inspected, logged, modified, or stored. Account API requests leave a short authentication record, kept up to 90 days for abuse prevention.",
   notCollected: [
     "browsing activity or history",
-    "connection timestamps",
-    "originating or assigned IP addresses",
+    "the destinations or contents of your traffic",
     "DNS queries",
     "bandwidth usage",
     "VPN session duration",
+    "any record linking a person to specific network activity",
   ],
   collected: [
-    "a randomly generated device identifier (not linked to identity)",
+    "an anonymous account ID in the form VPN-XXXX-XXXX-XXXX",
+    "a device identifier, used to enforce the subscription device limit",
+    "an authentication log of API requests — IP address, account ID, device identifier and timestamp — kept up to 90 days to prevent abuse and enforce rate limits",
     "anonymous aggregated server performance metrics",
     "an email address only if you voluntarily contact support",
   ],
@@ -167,7 +169,8 @@ export const PRIVACY = {
   compliance: ["UK GDPR", "EU GDPR", "CCPA"],
   retention: {
     vpnUsage: "not retained (no-logs)",
-    account: "while active + 30 days after deletion",
+    authentication: "up to 90 days (abuse prevention and rate limiting)",
+    account: "deleted when you delete the account",
     payments: "6 years (tax/accounting)",
     support: "12 months after resolution",
   },

@@ -1276,6 +1276,22 @@
     "lookingUp": "Inatafuta akaunti yako...",
     "accountNotFound": "Akaunti haikupatikana. Tafadhali angalia kitambulisho chako cha akaunti.",
     "verifyingAccount": "Inathibitisha...",
+    "retry": "Jaribu tena",
+    "existingAccountTitle": "Tayari kuna akaunti iliyohifadhiwa kwenye kifaa hiki",
+    "existingAccountCta": "Nenda kwenye akaunti yako",
+    "existingAccountNote": "Ukiendelea hapa chini, Kitambulisho tofauti cha Akaunti kitahifadhiwa kwenye kifaa hiki.",
+    "loginTitle": "Karibu tena",
+    "loginSubtitle": "Weka Kitambulisho cha Akaunti yako ili kuendelea.",
+    "signupTitle": "Fungua akaunti yako",
+    "signupSubtitle": "Hakuna barua pepe. Hakuna nenosiri. Gusa mara moja tu.",
+    "welcomeTitle": "Imekamilika",
+    "welcomeBody": "Akaunti yako iko tayari. Kitambulisho hiki ni ufunguo wako — kihifadhi kabla ya kufunga.",
+    "welcomeIdLabel": "Kitambulisho cha Akaunti yako",
+    "welcomeCopy": "Nakili Kitambulisho cha Akaunti yangu",
+    "welcomeCopied": "Imenakiliwa",
+    "welcomePromoIntro": "Zawadi ya karibu — tumia msimbo huu wakati wa malipo:",
+    "welcomeCta": "Nimeelewa — nimehifadhi Kitambulisho",
+    "welcomeDismiss": "Funga",
     "dashboard": {
       "title": "Akaunti Yako",
       "memberSince": "Mwanachama tangu",
@@ -1326,7 +1342,38 @@
       "restorePurchasesDesc": "Ikiwa ulinunua usajili kupitia App Store au Google Play, isimamie hapa.",
       "restoreAppStore": "Usajili wa App Store",
       "restorePlayStore": "Usajili wa Google Play",
-      "deleteProSupportNote": "Akaunti yako ina usajili wa Pro unaotumika. Tafadhali wasiliana na usaidizi ili kuifuta."
+      "deleteProSupportNote": "Akaunti yako ina usajili wa Pro unaotumika. Tafadhali wasiliana na usaidizi ili kuifuta.",
+      "statusPro": "Pro · hadi {date}",
+      "statusProShort": "Pro",
+      "statusFree": "Mpango wa bure",
+      "active": "Inatumika",
+      "from": "kuanzia",
+      "card": "Kadi",
+      "crypto": "Crypto",
+      "payWithCrypto": "Lipa kwa crypto — {price}",
+      "cryptoNote": "Lipa kwa BTC, ETH, USDT au USDC. Utaelekezwa kwenye OxaPay.",
+      "back": "Rudi",
+      "accountIdHint": "Ufunguo wako wa Doppler. Ingia nao kwenye kifaa chochote.",
+      "copyId": "Nakili ID",
+      "sendToDevices": "Tuma kwenye vifaa vyangu",
+      "sendToDevicesDesc": "Jitumie kitambulisho cha akaunti yako na kiungo cha kupakua, kisha ukifungue kwenye simu, kompyuta kibao au kompyuta yako.",
+      "shareNative": "Shiriki…",
+      "shareEmail": "Barua pepe",
+      "shareTelegramHint": "Kwenye Telegram, chagua Saved Messages.",
+      "copyMessage": "Nakili ujumbe",
+      "messageCopied": "Ujumbe umenakiliwa",
+      "shareSubject": "Akaunti yangu ya Doppler VPN",
+      "shareMessage": "Kitambulisho cha akaunti yangu ya Doppler VPN: {id}\nPakua programu: {url}\nFungua programu na uingie kwa kitambulisho hiki.",
+      "shareWarning": "Mtu yeyote mwenye kitambulisho hiki anaweza kutumia usajili wako. Jitumie wewe mwenyewe tu.",
+      "devices": "Vifaa vyangu",
+      "devicesCount": "{count} kati ya {max}",
+      "mainDevice": "Kikuu",
+      "lastActive": "Kilitumika {time}",
+      "addedOn": "Kiliongezwa {date}",
+      "noDevices": "Bado hakuna vifaa. Sakinisha Doppler na uingie kwa kitambulisho cha akaunti yako.",
+      "manageInApp": "Ili kuondoa kifaa, fungua Doppler na uende kwenye Vifaa.",
+      "devicesError": "Imeshindwa kupakia vifaa vyako.",
+      "everyDeviceHint": "Sakinisha Doppler, kisha uingie kwa kitambulisho cha akaunti yako. Hadi vifaa {max} kwa akaunti moja."
     },
     "securedByCrypto": "Imelindwa na OxaPay"
   },
@@ -1507,8 +1554,8 @@
   },
   "bypassCensorship": {
     "cryptoPayment": {
-      "title": "Lipa bila jina — hata kutoka maeneo yaliyofungwa",
-      "body": "Benki yako ikiwa inachunguzwa au kadi zako za kimataifa zisiposhughulika, Bitcoin na stablecoins bado zinafanya kazi. Doppler inakubali BTC, ETH, USDT na USDC — bila benki, bila utambulisho, bila alama.",
+      "title": "Lipa bila kadi ya benki",
+      "body": "Kadi za kimataifa zisipofanya kazi mahali ulipo, Bitcoin na sarafu imara hufanya kazi. Doppler hukubali BTC, ETH, USDT na USDC — bila akaunti ya benki wala kadi.",
       "cta": "Lipa kwa kripto",
       "btc": "Bitcoin",
       "eth": "Ethereum",
@@ -1517,18 +1564,18 @@
     },
     "metadata": {
       "title": "Mwongozo wa Udhibiti wa Mtandao — Jinsi VPN Zinavyozuiwa na Jinsi ya Kubaki Mtandaoni",
-      "description": "Mwongozo wa kitaalamu kuhusu jinsi serikali zinavyozuia VPN na proksi kwa kutumia DPI, TSPU, na ujifunzaji wa mashine — na jinsi proksi ya VLESS-Reality inavyopita kila njia ya ugunduzi. Jiandae kwa vikwazo vinavyoongezeka."
+      "description": "Mwongozo wa kiufundi: jinsi mifumo ya kitaifa ya kuchuja inavyozuia VPN kwa DPI, uchanganuzi wa trafiki na upekuzi hai — na kwa nini VLESS-Reality inaendelea kuunganisha. Jiandae kwa vikwazo vinavyoongezeka."
     },
     "hero": {
       "title": "Mwongozo Wako wa Uhuru wa Mtandao",
-      "subtitle": "Jinsi serikali zinavyogundua na kuzuia VPN, jinsi Doppler inavyoshinda kila njia, na unachopaswa kufanya sasa ili kubaki mtandaoni vikwazo vinapozidi."
+      "subtitle": "Jinsi wadhibiti wanavyogundua na kuzuia VPN, jinsi Doppler inavyobatilisha kila mbinu, na unachoweza kufanya sasa ili ubaki umeunganishwa."
     },
     "detection": {
       "title": "Jinsi Serikali Zinavyogundua na Kuzuia VPN",
-      "intro": "Udhibiti wa mtandao umepita mbali zaidi ya kuzuia IP tu. Nchi kama Urusi, China, na Iran zinatumia mifumo ya kisasa inayotumia ujifunzaji wa mashine kutambua na kusitisha muunganisho wa VPN kwa wakati halisi. Hivi ndivyo wanavyofanya.",
+      "intro": "Udhibiti wa mtandao umepita zamani hatua ya kuzuia anwani za IP pekee. Mifumo ya kitaifa ya kuchuja sasa hutumia kujifunza kwa mashine kutambua na kukata miunganisho ya VPN papo hapo, na mbinu hizo hizo huonekana katika mitandao ya makampuni na vyuo. Hivi ndivyo inavyofanya kazi hasa.",
       "tspu": {
-        "title": "Miundombinu: TSPU na DPI",
-        "p1": "Urusi inatumia TSPU (Technical Systems for Threat Countermeasures) — vifaa maalum vilivyowekwa moja kwa moja kwenye nodi za mtandao wa ISP. China inatumia Great Firewall, Iran inaendesha NIN. Mifumo hii inafanya Deep Packet Inspection (DPI) kwa kila paketi inayopita mtandaoni.",
+        "title": "Miundombinu: mifumo ya kitaifa ya DPI",
+        "p1": "Nchi zinazochuja kwa nguvu husakinisha vifaa vya ukaguzi moja kwa moja kwenye nodi za mtandao za watoa huduma — Ukuta Mkubwa wa Moto nchini China, mtandao wa kitaifa wa taarifa nchini Iran, TSPU nchini Urusi, na mifumo kama hiyo Uturuki na nchi za Ghuba. Vyote hufanya ukaguzi wa kina wa pakiti (DPI) kwa kila pakiti inayopita mtandaoni.",
         "p2": "Itifaki za VPN za jadi kama OpenVPN, WireGuard, na IPSec zina muundo wa paketi unaotofautiana. DPI inazitambua papo hapo na kusitisha muunganisho. Hata hali za \"kufichwa\" mara nyingi zinashindwa kwa sababu mfumo wa awali wa handshake unabaki kugunduliwa.",
         "p3": "Wakati ulinganishaji wa saini za kawaida hautoshi, mifumo hii inaanzisha moduli za ujifunzaji wa mashine. Inaacha kuchunguza ndani ya paketi (kila kitu kimesimbwa) na kuanza kuchambua jinsi trafiki inavyojiendesha."
       },
@@ -1548,7 +1595,7 @@
         "title": "Njia ya 4: Kuzuia IP na DNS",
         "description": "Masafa ya IP ya watoa VPN yanayojulikana yanazuiwa kabisa. Maombi ya DNS kwa vikoa vya VPN yanazuiliwa. Watoa VPN wa kibiashara wenye orodha za seva za umma ndio shabaha rahisi zaidi — miundombinu yao yote inaweza kuzuiwa ndani ya dakika."
       },
-      "conclusion": "Matokeo: VPN za kitufe-kimoja na huduma za proksi za kawaida kama NordVPN, ExpressVPN, na Surfshark zinaacha kufanya kazi ndani ya masaa ya hatua kali. Ni itifaki za proksi zilizoundwa mahususi kuwa sawa na trafiki ya kawaida ya wavuti pekee ndizo zinazobaki."
+      "conclusion": "Matokeo: programu za kawaida za VPN zilizojengwa juu ya itifaki za kawaida huacha kufanya kazi ndani ya saa chache baada ya kuanza kwa kuzuiwa. Zinazosalia ni itifaki zilizobuniwa mahususi zisiweze kutofautishwa na trafiki ya kawaida ya wavuti."
     },
     "defeats": {
       "title": "Jinsi Doppler Inavyoshinda Kila Njia ya Ugunduzi",
@@ -1580,13 +1627,13 @@
       }
     },
     "blocked": {
-      "title": "Imezuiwa Urusi — Na Bado Tunafanya Kazi",
-      "badge": "Imethibitishwa na Roskomnadzor",
-      "p1": "Mamlaka ya Urusi imelenga na kuzuia Doppler VPN mahususi. Kikoa chetu kimeongezwa kwenye orodha ya kuzuia ya shirikisho. Hii si kitu tunachoficha — ni uthibitisho kwamba teknolojia yetu inafanya kazi.",
-      "p2": "Tofauti na watoa VPN wa kibiashara wanaotii maombi ya kuondolewa au kutoka kimya kimya kwenye masoko yenye vikwazo, Doppler ilijengwa kwa hali hii haswa. Tovuti yetu inapozuiwa, boti yetu ya Telegram inabaki kupatikana. Wakati IP za seva zinapozuiwa, miundombinu yetu inabadilika kiotomatiki.",
-      "p3": "Kila kizuizi wanachoweka, tunakipita. Hii si dai la uuzaji — ni utendaji wetu wa kila siku.",
-      "stat1label": "Kikoa kimezuiwa na RKN",
-      "stat1value": "Imethibitishwa",
+      "title": "Iliondolewa kwa madai ya mdhibiti — na bado inafanya kazi",
+      "badge": "Kuondolewa App Store, Urusi",
+      "p1": "Apple iliondoa programu ya Doppler VPN kutoka App Store ya Urusi kufuatia madai ya kisheria kutoka Roskomnadzor, mdhibiti wa serikali wa mawasiliano. Apple imeondoa programu kadhaa za VPN kwa njia hiyo hiyo. Tunachapisha hili badala ya kulificha: kutajwa ni jambo linalozipata zana zinazoendelea kufanya kazi.",
+      "p2": "Tofauti na watoa huduma wanaotii madai ya kuondolewa au wanaoondoka kimyakimya katika masoko yenye vikwazo, Doppler ilijengwa kwa ajili ya hali hii hasa. Duka la programu linapotuondoa, boti yetu ya Telegram bado huwasilisha programu. Anwani za IP za seva zinapozuiwa, miundombinu yetu hubadilisha vituo vya kuingia kiotomatiki.",
+      "p3": "Usambazaji hupita kando ya kizuizi — APK ya moja kwa moja, boti ya Telegram, na vituo vya kuingia vinavyobadilishana. Hii ni sifa ya usanifu, si ahadi.",
+      "stat1label": "App Store ya Urusi",
+      "stat1value": "Iliondolewa kwa madai ya RKN",
       "stat2label": "Hali ya huduma",
       "stat2value": "Inafanya kazi",
       "stat3label": "Njia mbadala ya ufikiaji",
@@ -1604,7 +1651,7 @@
       "stage2": {
         "label": "Hatua Inayoweza Kufuata",
         "title": "Mfumo wa Orodha ya Ruhusa",
-        "description": "Badala ya kuzuia itifaki maalum, ni vikoa na anwani za IP zilizoidhinishwa pekee ndizo zingefikiwa. Mengine yote yanazuiwa kwa chaguo-msingi. SSH, RDP, bandari za michezo — yote yanazuiwa isipokuwa yamesajiliwa na taasisi halali. Hii ilijaribiwa kwa sehemu wakati Urusi ilipozuia Telegram mwaka 2018.",
+        "description": "Badala ya kuzuia itifaki mahususi, ni vikoa na anwani za IP zilizoidhinishwa pekee zingebaki zikipatikana. Kingine chote huzuiwa kwa chaguo-msingi. SSH, RDP, milango ya michezo — vyote vimefungwa isipokuwa vimesajiliwa na taasisi ya kisheria. Mwenendo wa orodha nyeupe tayari umejaribiwa kwa kiwango cha kitaifa wakati wa operesheni kubwa za kuzuia na mazoezi ya kuzima mtandao.",
         "status": "Inawezekana kitaalamu, imetumika kwa sehemu"
       },
       "stage3": {
@@ -1615,8 +1662,8 @@
       },
       "reality": {
         "title": "Ukaguzi wa Hali Halisi ya Kiuchumi",
-        "p1": "Mwaka 2018, wakati Roskomnadzor ilipojaribu kuzuia Telegram peke yake, waliishia kuzuia mamilioni ya anwani za IP za Amazon na Google. Mashine za malipo katika maduka zilikoma kufanya kazi. Vifaa vya nyumba mahiri vilikatika. Arifa za benki zilishindwa kufika.",
-        "p2": "Mfumo wa orodha ya ruhusa ungesababisha hali hii mara 100 zaidi. Tovuti za kisasa za Urusi zinategemea Google Fonts, maktaba za CDN za kigeni, mamlaka ya vyeti vya kimataifa, na huduma za wingu. Benki na makampuni ya usafirishaji yanatumia vyeti vya SSL vya kigeni. Waendelezaji wangepoteza ufikiaji wa GitHub, Docker Hub, na npm.",
+        "p1": "Mwaka 2018, jaribio la kuzuia programu moja tu ya ujumbe liliishia kwa kuzuiwa kwa mamilioni ya anwani za IP za Amazon na Google pamoja nayo. Mashine za malipo madukani ziliacha kufanya kazi. Vifaa vya nyumba janja vilikatika. Arifa za benki hazikufika. Madhara ya pembeni ni matokeo ya kawaida ya kuzuia kwa mkumbo.",
+        "p2": "Mtindo wa orodha nyeupe ungesababisha hili kwa kiwango kikubwa zaidi. Tovuti za leo kila mahali hutegemea CDN za kigeni, huduma za fonti, mamlaka za vyeti na majukwaa ya wingu. Benki na kampuni za usafirishaji hutumia vyeti vya SSL vya kigeni. Wasanidi wangepoteza ufikiaji wa GitHub, Docker Hub na npm.",
         "p3": "Kutengwa kabisa kunawezekana kitaalamu — lakini bei yake ni kurudi nyuma kiteknolojia. Masasisho ya Windows na Android yanakuwa hayapatikani. Vifaa vya matibabu vinapoteza msaada wa viendeshaji. Uendelezaji wa AI unasimama kabisa bila miundombinu ya chanzo-huru ya kimataifa.",
         "p4": "Njia inayowezekana zaidi ni vikwazo vya taratibu kwa miaka, si kukatika kwa ghafla. Lakini kila hatua ya kupandisha vikwazo inamaanisha watumiaji zaidi wa VPN wanabaki nyuma — isipokuwa wamejiandaa."
       }
@@ -1642,8 +1689,8 @@
         "description": "Tunatuma masasisho ya itifaki ili kubaki mbele ya mbinu mpya za kuzuia. Washa masasisho ya kiotomatiki au angalia masasisho mara kwa mara kupitia chaneli zetu za Telegram."
       },
       "step5": {
-        "title": "Shiriki na Watu Wanaohitaji",
-        "description": "Watu wengi zaidi wakiwa na Doppler iliyosakinishwa kabla vikwazo havijazidi, ni bora zaidi. Shiriki kiungo cha boti yetu ya Telegram — ni njia yetu ya usambazaji inayostahimili udhibiti zaidi."
+        "title": "Shiriki kwa tahadhari",
+        "description": "Kadiri watu wengi wanavyosakinisha Doppler kabla vikwazo havijakaza, ndivyo bora — kiungo cha boti yetu ya Telegram ndicho njia sugu zaidi dhidi ya udhibiti tuliyo nayo. Tahadhari moja: baadhi ya nchi, ikiwemo Urusi, sasa zinatoza faini watu binafsi kwa kutangaza zana za kukwepa vizuizi. Shiriki kwa faragha na watu unaowajua, na angalia sheria za mahali unapoishi kabla ya kuchapisha hadharani."
       }
     },
     "comparison": {
@@ -1678,13 +1725,14 @@
       }
     },
     "faq": {
+      "title": "Maswali yanayoulizwa mara kwa mara",
       "q1": {
         "question": "Je, Doppler VPN inaweza kupita udhibiti wa serikali?",
         "answer": "Ndiyo. Doppler inatumia VLESS-Reality inayofanya trafiki ya VPN isitofautishwe na HTTPS ya kawaida. Inapita DPI, TSPU na Ukuta Mkuu wa Moto bila saini yoyote ya VPN inayoweza kugunduliwa."
       },
       "q2": {
         "question": "Je, Doppler VPN inafanya kazi nchini Urusi, China na Iran?",
-        "answer": "Ndiyo. Doppler imejengwa mahsusi kwa maeneo yenye udhibiti. Kikoa chetu kimezuiwa na Roskomnadzor, ikionyesha teknolojia yetu inafanya kazi."
+        "answer": "Ndiyo. Doppler imejengwa kwa mitandao inayochujwa kwa nguvu. Nchini Urusi, Apple iliondoa programu yetu kutoka App Store ya huko kwa madai ya Roskomnadzor — na huduma iliendelea kufanya kazi kupitia boti yetu ya Telegram na vituo vya kuingia vinavyobadilishana. Watumiaji nchini Urusi, China, Iran na Uturuki huunganisha kila siku."
       },
       "q3": {
         "question": "Ni nini kinachofanya VLESS-Reality kuwa bora kuliko OpenVPN au WireGuard katika kupita udhibiti?",
@@ -1696,8 +1744,8 @@
       }
     },
     "cta": {
-      "title": "Hatuachi Mtu Yeyote Nyuma",
-      "subtitle": "Doppler VPN ilijengwa mahususi kwa mitandao yenye vikwazo. Tunaboresha miundombinu yetu kila wakati, tunabadilisha seva, na kusasisha itifaki ili kubaki mbele ya kila mbinu mpya ya kuzuia. Uhuru wako wa mtandao haujadiliwe.",
+      "title": "Imejengwa kwa mitandao inayopambana",
+      "subtitle": "Doppler VPN imejengwa kwa mitandao yenye vikwazo. Tunabadilisha seva, kusasisha itifaki na kuboresha miundombinu kadiri mbinu za kuzuia zinavyobadilika.",
       "downloadIos": "Pakua kwa iOS",
       "downloadAndroid": "Pakua kwa Android",
       "telegramBot": "Pata kupitia Boti ya Telegram",

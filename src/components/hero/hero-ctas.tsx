@@ -14,9 +14,11 @@ const WINDOWS_X64_URL = "/api/windows/download/latest-x64";
 
 interface HeroCTAsProps {
   platform: Platform;
+  /** false until the platform is detected; the primary button is hidden until then. */
+  ready?: boolean;
 }
 
-export function HeroCTAs({ platform }: HeroCTAsProps) {
+export function HeroCTAs({ platform, ready = true }: HeroCTAsProps) {
   const t = useTranslations("hero");
 
   const downloadConfig = {
@@ -32,7 +34,7 @@ export function HeroCTAs({ platform }: HeroCTAsProps) {
   const handlePrimaryClick = () => trackCta("hero", platform, primaryVariant);
 
   const primaryClass =
-    "inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal text-white hover:bg-accent-teal/90 rounded-lg transition-colors text-sm font-medium pulse-glow-once";
+    `inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal text-white hover:bg-accent-teal/90 rounded-lg transition-colors text-sm font-medium ${ready ? "hero-cta-in" : "opacity-0"}`;
 
   const secondaryClass =
     "inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center border border-overlay/20 text-text-muted hover:text-text-primary hover:border-overlay/40 rounded-lg transition-colors text-sm font-medium";

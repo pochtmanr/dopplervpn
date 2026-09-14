@@ -58,7 +58,7 @@ WITH upsert_post AS (
   INSERT INTO blog_post_translations
     (post_id, locale, title, excerpt, content, image_alt, meta_title, meta_description, og_title, og_description)
   SELECT id, 'en',
-    $t$What Is VLESS? The Protocol Explained in Plain English$t$,
+    $t$VLESS Explained: The Protocol in Plain English$t$,
     $e$VLESS is a lightweight proxy protocol from the Xray ecosystem. Its name says it carries less encryption than its predecessor — and that turns out to be the whole point.$e$,
     $c$# What Is VLESS? The Protocol Explained in Plain English
 
@@ -127,7 +127,7 @@ WITH upsert_post AS (
   INSERT INTO blog_post_translations
     (post_id, locale, title, excerpt, content, image_alt, meta_title, meta_description, og_title, og_description)
   SELECT id, 'en',
-    $t$VLESS vs VMess vs Trojan vs Shadowsocks: Which Survives DPI?$t$,
+    $t$VLESS vs VMess vs Trojan vs Shadowsocks: Which Survives DPI$t$,
     $e$Four censorship-resistant protocols, four different bets on how to stay unnoticed. Here is what separates them, and which ones still work in 2026.$e$,
     $c$# VLESS vs VMess vs Trojan vs Shadowsocks: Which Survives DPI?
 
