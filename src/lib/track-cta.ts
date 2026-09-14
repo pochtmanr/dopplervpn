@@ -26,6 +26,7 @@ export type CtaLocation =
   | "bypass-censorship"
   | "no-registration-vpn"
   | "vless-vpn"
+  | "pay-with-crypto"
   | "vpn-for-ios"
   | "vpn-for-android"
   | "vpn-for-macos"

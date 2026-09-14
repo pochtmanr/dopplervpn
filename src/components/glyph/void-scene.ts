@@ -73,7 +73,7 @@ function scan(width: number, tick: number, salt: number): string {
   return s;
 }
 
-interface VoidArt {
+export interface VoidArt {
   label: string;
   command: string;
   keys: [string, string];
@@ -89,10 +89,10 @@ const CARDS: readonly VoidArt[] = [
   { label: "account", command: "select email from accounts", keys: ["email", "name"], result: "no such column" },
 ];
 
-export function voidScene(index: number): Scene {
-  const art = CARDS[index % CARDS.length];
-  // Stagger the cards so four commands never type in unison.
-  const offset = index * (CYCLE_MS / CARDS.length);
+export function voidScene(index: number, cards: readonly VoidArt[] = CARDS): Scene {
+  const art = cards[index % cards.length];
+  // Stagger the cards so sibling commands never type in unison.
+  const offset = index * (CYCLE_MS / cards.length);
   const typedAt = art.command.length * TYPE_MS;
 
   return {

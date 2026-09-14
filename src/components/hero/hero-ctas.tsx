@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { trackCta } from "@/lib/track-cta";
+import { trackCta, type CtaLocation } from "@/lib/track-cta";
 import type { Platform } from "@/lib/detect-platform";
 export type { Platform };
 
@@ -16,9 +16,23 @@ interface HeroCTAsProps {
   platform: Platform;
   /** false until the platform is detected; the primary button is hidden until then. */
   ready?: boolean;
+  /** Analytics location. Homepage hero stays `"hero"`. */
+  location?: CtaLocation;
+  /** Secondary button href. Hash links stay `<a>`; anything else is an i18n `Link`. */
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  /** Homepage is start-aligned on lg; centered pages pass true. */
+  centered?: boolean;
 }
 
-export function HeroCTAs({ platform, ready = true }: HeroCTAsProps) {
+export function HeroCTAs({
+  platform,
+  ready = true,
+  location = "hero",
+  secondaryHref = "#pricing",
+  secondaryLabel,
+  centered = false,
+}: HeroCTAsProps) {
   const t = useTranslations("hero");
 
   const downloadConfig = {
@@ -31,7 +45,7 @@ export function HeroCTAs({ platform, ready = true }: HeroCTAsProps) {
 
   const primaryVariant =
     platform === "android" ? "android-play" : platform === "windows" ? "windows-x64" : undefined;
-  const handlePrimaryClick = () => trackCta("hero", platform, primaryVariant);
+  const handlePrimaryClick = () => trackCta(location, platform, primaryVariant);
 
   const primaryClass =
     `inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal text-white hover:bg-accent-teal/90 rounded-lg transition-colors text-sm font-medium ${ready ? "hero-cta-in" : "opacity-0"}`;
@@ -72,14 +86,17 @@ export function HeroCTAs({ platform, ready = true }: HeroCTAsProps) {
   );
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 w-full">
+    <div className={`flex flex-col sm:flex-row items-center gap-3 w-full ${centered ? "justify-center" : "justify-center lg:justify-start"}`}>
       {downloadBtn}
-      <a
-        href="#pricing"
-        className={secondaryClass}
-      >
-        {t("seePrices")}
-      </a>
+      {secondaryHref.startsWith("#") ? (
+        <a href={secondaryHref} className={secondaryClass}>
+          {secondaryLabel ?? t("seePrices")}
+        </a>
+      ) : (
+        <Link href={secondaryHref} className={secondaryClass}>
+          {secondaryLabel ?? t("seePrices")}
+        </Link>
+      )}
     </div>
   );
 }

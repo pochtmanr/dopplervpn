@@ -2,27 +2,30 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
-import { Link } from "@/i18n/navigation";
-import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import { seoTitle } from "@/lib/seo-title";
+import { SectionHeader } from "@/components/ui/section";
+import { Reveal } from "@/components/ui/reveal";
+import { ComparisonAccordion } from "@/components/sections/comparison-accordion";
+import { CTA } from "@/components/sections/cta";
+import { RelatedRail, type RelatedRailItem } from "@/components/no-registration/related-rail";
+import { NoRegStepCard } from "@/components/no-registration/step-card";
+import { CollectItem } from "@/components/no-registration/collect-item";
+import { NoRegIdentityPlate } from "@/components/no-registration/identity-plate";
+import { PageFaq } from "@/components/no-registration/page-faq";
+import { SeoHero } from "@/components/seo/seo-hero";
+import { CheckIcon } from "@/components/seo/glass-card";
+import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
 const baseUrl = "https://www.dopplervpn.org";
-
-const URLS = {
-  ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
-  telegramBot: "https://t.me/dopplercreatebot",
-  telegramChannelRu: "https://t.me/dopplervpn",
-  telegramChannelEn: "https://t.me/dopplervpnen",
-};
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -68,75 +71,44 @@ const faqKeys = ["q1", "q2", "q3", "q4"] as const;
 const registrationReasons = ["dataHarvesting", "targetedAds", "govRequests", "breachLiability"] as const;
 const howSteps = ["download", "generateKey", "connect", "done"] as const;
 const collectionItems = ["email", "phone", "name", "browsingHistory", "ipLogs", "connectionTimestamps"] as const;
-const comparisonProviders = ["doppler", "protonvpn", "nordvpn", "expressvpn"] as const;
-const comparisonCols = ["registration", "emailNeeded", "logsPolicy", "paymentTracking", "openProtocol"] as const;
-const getStartedSteps = ["step1", "step2", "step3"] as const;
-
-/* -- Icons ------------------------------------------------------------ */
-
-function ShieldIcon() {
-  return (
-    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-    </svg>
-  );
-}
-
-function KeyIcon() {
-  return (
-    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
-    </svg>
-  );
-}
-
-function DeviceIcon() {
-  return (
-    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg className="w-5 h-5 text-accent-teal shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-    </svg>
-  );
-}
-
-function XMarkIcon() {
-  return (
-    <svg className="w-5 h-5 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-    </svg>
-  );
-}
-
-function CollectedIcon() {
-  return (
-    <svg className="w-5 h-5 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg className="w-4 h-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
-
-/* -- Page ------------------------------------------------------------- */
+const compareRows = ["account", "logs", "protocol"] as const;
+const devicePillars = ["deviceGen", "serverVal", "zeroPii"] as const;
 
 export default async function NoRegistrationVpnPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("noRegistrationVpn");
-  const mt = await getTranslations({ locale, namespace: "noRegistrationVpn.metadata" });
+  const [t, mt, tHero, tFooter, tCrypto, tBypass, tCmp, tFaq] = await Promise.all([
+    getTranslations("noRegistrationVpn"),
+    getTranslations({ locale, namespace: "noRegistrationVpn.metadata" }),
+    getTranslations("hero"),
+    getTranslations("footer"),
+    getTranslations("payWithCrypto"),
+    getTranslations("bypassCensorship"),
+    getTranslations("comparisonTable"),
+    getTranslations("faq"),
+  ]);
+
+  const faqItems = faqKeys.map((key) => ({
+    id: key,
+    question: t(`faq.${key}.question`),
+    answer: t(`faq.${key}.answer`),
+  }));
+
+  const relatedItems: RelatedRailItem[] = [
+    { href: "/vless-vpn", title: t("related.vless"), desc: t("related.vlessDesc"), icon: "vless" },
+    {
+      href: "/pay-with-crypto",
+      title: tFooter("payWithCrypto"),
+      desc: tCrypto("why.anonymousTitle"),
+      icon: "crypto",
+    },
+    {
+      href: "/bypass-censorship",
+      title: tFooter("bypassCensorship"),
+      desc: tBypass("hero.title"),
+      icon: "bypass",
+    },
+  ];
 
   return (
     <>
@@ -156,359 +128,172 @@ export default async function NoRegistrationVpnPage({ params }: PageProps) {
         description={mt("description")}
         url={`${baseUrl}/${locale}/no-registration-vpn`}
         datePublished="2026-03-11"
-        dateModified="2026-04-02"
+        dateModified="2026-09-14"
       />
-      <FAQSchema
-        items={faqKeys.map((key) => ({
-          question: t(`faq.${key}.question`),
-          answer: t(`faq.${key}.answer`),
-        }))}
-      />
+      <FAQSchema items={faqItems.map(({ question, answer }) => ({ question, answer }))} />
       <Navbar />
-      <main className="overflow-x-hidden">
-        {/* -- Hero ---------------------------------------------------- */}
-        <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute bottom-0 -end-20 w-[24rem] h-[24rem] bg-accent-gold/10 rounded-full blur-3xl" />
-          </div>
-          <div className="relative z-10 mx-auto max-w-4xl text-center">
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-text-primary mb-4">
-              {t("hero.title")}
-            </h1>
-            <p className="text-text-muted text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-              {t("hero.subtitle")}
-            </p>
-          </div>
-        </section>
-
-        {/* -- Why Most VPNs Require Registration ---------------------- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 text-center">
-              {t("whyRegister.title")}
-            </h2>
-            <p className="text-text-muted text-lg max-w-3xl mx-auto text-center mb-12 leading-relaxed">
-              {t("whyRegister.intro")}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {registrationReasons.map((reason, i) => (
-                <div key={reason} className="rounded-2xl border border-red-500/10 bg-red-500/[0.02] p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center text-red-400 text-sm font-semibold">
-                      {i + 1}
-                    </span>
-                    <h3 className="text-lg font-semibold text-text-primary">
-                      {t(`whyRegister.${reason}.title`)}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-text-muted leading-relaxed">
-                    {t(`whyRegister.${reason}.description`)}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-center text-text-muted font-medium italic mt-8">
-              {t("whyRegister.conclusion")}
-            </p>
-          </div>
-        </section>
-
-        {/* -- How Doppler Works Without an Account -------------------- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-3 text-center">
-              {t("howItWorks.title")}
-            </h2>
-            <p className="text-text-muted text-lg max-w-2xl mx-auto text-center mb-12 leading-relaxed">
-              {t("howItWorks.subtitle")}
-            </p>
-
-            <div className="space-y-4">
-              {howSteps.map((step, i) => (
-                <div key={step} className="rounded-2xl border border-accent-teal/15 bg-accent-teal/[0.03] p-6 flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-xl bg-accent-teal/15 border border-accent-teal/20 flex items-center justify-center text-accent-teal font-semibold">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-text-primary mb-1">
-                      {t(`howItWorks.${step}.title`)}
-                    </h3>
-                    <p className="text-sm text-text-muted leading-relaxed">
-                      {t(`howItWorks.${step}.description`)}
-                    </p>
-                  </div>
-                </div>
-              ))}
+      <main className="overflow-x-clip">
+        <section className="relative overflow-hidden bg-bg-secondary/30 pt-28 sm:pt-32 pb-12 md:pb-20 px-4 sm:px-6 lg:px-8">
+          <PricingBackdrop />
+          <div className="relative mx-auto max-w-site py-6 md:py-10">
+            <SeoHero
+              title={t("hero.title")}
+              subtitle={t("hero.subtitle")}
+              location="no-registration-vpn"
+              secondaryLabel={tHero("getPro")}
+              trustLabel={(key) => tHero(`trustBadges.${key}`)}
+            />
+            <div className="lg:hidden mt-8">
+              <RelatedRail items={relatedItems} variant="chips" />
             </div>
           </div>
         </section>
 
-        {/* -- What We Don't Collect ----------------------------------- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-3 text-center">
-              {t("noCollect.title")}
-            </h2>
-            <p className="text-text-muted text-lg max-w-3xl mx-auto text-center mb-12 leading-relaxed">
-              {t("noCollect.subtitle")}
-            </p>
-
-            <div className="overflow-x-auto rounded-2xl border border-overlay/10">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-bg-secondary/50">
-                    <th scope="col" className="text-start p-4 font-medium text-text-muted">
-                      {t("noCollect.headers.dataType")}
-                    </th>
-                    <th scope="col" className="text-center p-4 font-medium text-text-muted">
-                      {t("noCollect.headers.otherVpns")}
-                    </th>
-                    <th scope="col" className="text-center p-4 font-medium text-text-muted">
-                      {t("noCollect.headers.doppler")}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {collectionItems.map((item, i) => (
-                    <tr key={item} className={i < collectionItems.length - 1 ? "border-t border-overlay/5" : ""}>
-                      <td className="p-4 text-text-primary font-medium">
-                        {t(`noCollect.${item}.label`)}
-                      </td>
-                      <td className="p-4">
-                        <div className="flex justify-center">
-                          <CollectedIcon />
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-site lg:grid lg:grid-cols-[minmax(0,1fr)_16.5rem] xl:grid-cols-[minmax(0,1fr)_17.5rem] lg:gap-10 xl:gap-12">
+            <div className="min-w-0">
+              <section className="py-12 md:py-20">
+                <SectionHeader title={t("whyRegister.title")} subtitle={t("whyRegister.intro")} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  {registrationReasons.map((reason, i) => (
+                    <Reveal key={reason} delay={i * 50}>
+                      <div className="group relative h-full rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300">
+                        <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+                        <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative">
+                          <h3 className="text-lg font-semibold text-text-primary mb-2">
+                            {t(`whyRegister.${reason}.title`)}
+                          </h3>
+                          <p className="text-sm text-text-muted leading-relaxed">
+                            {t(`whyRegister.${reason}.description`)}
+                          </p>
                         </div>
-                      </td>
-                      <td className="p-4 bg-accent-teal/5">
-                        <div className="flex justify-center">
-                          <XMarkIcon />
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <p className="text-center text-text-muted text-sm mt-4 italic">
-              {t("noCollect.footnote")}
-            </p>
-          </div>
-        </section>
-
-        {/* -- Privacy Comparison -------------------------------------- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary mb-8 text-center">
-              {t("comparison.title")}
-            </h2>
-            <div className="overflow-x-auto rounded-2xl border border-overlay/10">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-bg-secondary/50">
-                    <th scope="col" className="text-start p-4 font-medium text-text-muted">
-                      {t("comparison.headers.provider")}
-                    </th>
-                    {comparisonCols.map((col) => (
-                      <th key={col} scope="col" className="text-start p-4 font-medium text-text-muted">
-                        {t(`comparison.headers.${col}`)}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparisonProviders.map((provider, i) => (
-                    <tr key={provider} className={`${i < comparisonProviders.length - 1 ? "border-t border-overlay/5" : ""} ${provider === "doppler" ? "bg-accent-teal/5" : ""}`}>
-                      <th scope="row" className={`text-start p-4 font-medium ${provider === "doppler" ? "text-accent-teal" : "text-text-primary"}`}>
-                        {t(`comparison.${provider}.name`)}
-                      </th>
-                      {comparisonCols.map((col) => (
-                        <td key={col} className={`p-4 ${provider === "doppler" ? "text-accent-teal font-medium" : "text-text-muted"}`}>
-                          {t(`comparison.${provider}.${col}`)}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        {/* -- Your Data, Your Device ---------------------------------- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="rounded-2xl border border-accent-teal/20 bg-accent-teal/[0.03] p-8 md:p-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-accent-teal/15 border border-accent-teal/20 flex items-center justify-center text-accent-teal">
-                  <DeviceIcon />
-                </div>
-                <div>
-                  <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">
-                    {t("deviceKey.title")}
-                  </h2>
-                  <span className="text-xs font-medium text-accent-teal bg-accent-teal/10 px-2 py-0.5 rounded-full">
-                    {t("deviceKey.badge")}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-4 mb-8">
-                <p className="text-text-muted leading-relaxed">{t("deviceKey.p1")}</p>
-                <p className="text-text-muted leading-relaxed">{t("deviceKey.p2")}</p>
-                <p className="text-text-muted leading-relaxed">{t("deviceKey.p3")}</p>
-                <p className="text-text-primary font-medium">{t("deviceKey.p4")}</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {(["deviceGen", "serverVal", "zeroPii"] as const).map((item) => (
-                  <div key={item} className="rounded-xl border border-accent-teal/15 bg-accent-teal/[0.05] p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="w-8 h-8 rounded-lg bg-accent-teal/15 flex items-center justify-center text-accent-teal">
-                        {item === "deviceGen" && <KeyIcon />}
-                        {item === "serverVal" && <ShieldIcon />}
-                        {item === "zeroPii" && <CheckIcon />}
                       </div>
-                      <h3 className="text-sm font-semibold text-text-primary">
-                        {t(`deviceKey.${item}.title`)}
-                      </h3>
-                    </div>
-                    <p className="text-xs text-text-muted leading-relaxed">
-                      {t(`deviceKey.${item}.description`)}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* -- Get Started in 30 Seconds ------------------------------- */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-3 text-center">
-              {t("getStarted.title")}
-            </h2>
-            <p className="text-text-muted text-lg max-w-2xl mx-auto text-center mb-12 leading-relaxed">
-              {t("getStarted.subtitle")}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {getStartedSteps.map((step, i) => (
-                <div key={step} className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 text-center">
-                  <span className="inline-flex w-12 h-12 rounded-2xl bg-accent-teal/15 border border-accent-teal/20 items-center justify-center text-accent-teal text-xl font-bold mb-4">
-                    {i + 1}
-                  </span>
-                  <h3 className="text-lg font-semibold text-text-primary mb-2">
-                    {t(`getStarted.${step}.title`)}
-                  </h3>
-                  <p className="text-sm text-text-muted leading-relaxed">
-                    {t(`getStarted.${step}.description`)}
-                  </p>
+                    </Reveal>
+                  ))}
                 </div>
-              ))}
+                <Reveal delay={200}>
+                  <p className="text-center mt-8 text-lg font-medium text-text-primary">
+                    {t("whyRegister.conclusion")}
+                    <span aria-hidden="true" className="terminal-cursor ms-1 text-accent-teal-light">
+                      ▌
+                    </span>
+                  </p>
+                </Reveal>
+              </section>
+
+              <section className="py-12 md:py-20">
+                <SectionHeader title={t("howItWorks.title")} subtitle={t("howItWorks.subtitle")} />
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4"
+                  aria-label={`${t("howItWorks.download.title")} → ${t("howItWorks.generateKey.title")} → ${t("howItWorks.connect.title")} → ${t("howItWorks.done.title")}`}
+                >
+                  {howSteps.map((step, i) => (
+                    <Reveal key={step} delay={i * 50}>
+                      <NoRegStepCard
+                        index={i}
+                        title={t(`howItWorks.${step}.title`)}
+                        description={t(`howItWorks.${step}.description`)}
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              </section>
+
+              <section className="py-12 md:py-20">
+                <SectionHeader title={t("noCollect.title")} subtitle={t("noCollect.subtitle")} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                  {collectionItems.map((item, i) => (
+                    <Reveal key={item} delay={i * 40}>
+                      <CollectItem
+                        item={item}
+                        label={t(`noCollect.${item}.label`)}
+                        never={tCmp("rows.logs.doppler")}
+                      />
+                    </Reveal>
+                  ))}
+                </div>
+              </section>
+
+              <section className="py-12 md:py-20">
+                <SectionHeader title={t("comparison.title")} subtitle={tCmp("subtitle")} />
+                <Reveal>
+                  <ComparisonAccordion
+                    headers={{
+                      feature: tCmp("headers.feature"),
+                      traditional: tCmp("headers.traditional"),
+                      doppler: tCmp("headers.doppler"),
+                    }}
+                    panel={{ means: tCmp("panel.means"), keeps: tCmp("panel.keeps"), why: tCmp("panel.why") }}
+                    rows={compareRows.map((key) => ({
+                      key,
+                      feature: tCmp(`rows.${key}.feature`),
+                      traditional: tCmp(`rows.${key}.traditional`),
+                      doppler: tCmp(`rows.${key}.doppler`),
+                      means: tCmp(`rows.${key}.means`),
+                      keeps: tCmp(`rows.${key}.keeps`),
+                      why: tCmp(`rows.${key}.why`),
+                    }))}
+                  />
+                </Reveal>
+              </section>
+
+              <section className="py-12 md:py-20">
+                <div className="group relative overflow-hidden rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] backdrop-blur-sm">
+                  <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+                  <div className="relative p-6 sm:p-8 lg:p-10 space-y-6">
+                    <div>
+                      <p className="text-xs md:text-sm uppercase tracking-wider text-text-tertiary mb-1">
+                        {t("deviceKey.badge")}
+                      </p>
+                      <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold text-text-primary">
+                        {t("deviceKey.title")}
+                      </h2>
+                    </div>
+                    <div className="space-y-4 max-w-3xl">
+                      <p className="text-text-muted leading-relaxed">{t("deviceKey.p1")}</p>
+                      <p className="text-text-muted leading-relaxed">{t("deviceKey.p2")}</p>
+                      <p className="text-text-muted leading-relaxed">{t("deviceKey.p3")}</p>
+                      <p className="text-text-primary font-medium">{t("deviceKey.p4")}</p>
+                    </div>
+                    <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {devicePillars.map((item) => (
+                        <li key={item} className="flex items-start gap-3">
+                          <CheckIcon />
+                          <div>
+                            <h3 className="text-sm font-semibold text-text-primary mb-1">
+                              {t(`deviceKey.${item}.title`)}
+                            </h3>
+                            <p className="text-xs text-text-muted leading-relaxed">
+                              {t(`deviceKey.${item}.description`)}
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="relative pt-2">
+                    <NoRegIdentityPlate />
+                  </div>
+                </div>
+              </section>
+
+              <section className="py-12 md:py-20">
+                <PageFaq title={tFaq("title")} items={faqItems} />
+              </section>
             </div>
+
+            <aside className="hidden lg:block pt-12 md:pt-20">
+              <div className="sticky top-28">
+                <RelatedRail items={relatedItems} />
+              </div>
+            </aside>
           </div>
-        </section>
+        </div>
 
-        {/* -- Related Pages ------------------------------------------- */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <Link href="/vless-vpn" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
-                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.vless")}</h3>
-                <p className="text-xs text-text-muted">{t("related.vlessDesc")}</p>
-              </Link>
-              <Link href="/vpn-for-ios" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
-                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.ios")}</h3>
-                <p className="text-xs text-text-muted">{t("related.iosDesc")}</p>
-              </Link>
-              <Link href="/vpn-for-android" className="rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-5 hover:border-accent-teal/20 transition-colors block">
-                <h3 className="text-sm font-semibold text-text-primary mb-1">{t("related.android")}</h3>
-                <p className="text-xs text-text-muted">{t("related.androidDesc")}</p>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* -- Final CTA ----------------------------------------------- */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4">
-              {t("cta.title")}
-            </h2>
-            <p className="text-text-muted text-lg mb-10 leading-relaxed max-w-2xl mx-auto">
-              {t("cta.subtitle")}
-            </p>
-
-            <div id="blog-cta-sentinel" aria-hidden="true" />
-
-            {/* Primary download buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-              <TrackedDownloadLink
-                location="no-registration-vpn"
-                platform="ios"
-                href={URLS.ios}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 transition-colors"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                {t("cta.downloadIos")}
-              </TrackedDownloadLink>
-              <TrackedDownloadLink
-                location="no-registration-vpn"
-                platform="android"
-                variant="android-play"
-                href={URLS.androidPlayStore}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium bg-accent-teal/20 text-accent-teal hover:bg-accent-teal/30 transition-colors"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-                </svg>
-                {t("cta.downloadAndroid")}
-              </TrackedDownloadLink>
-              <TrackedDownloadLink
-                location="no-registration-vpn"
-                platform="telegram"
-                href={URLS.telegramBot}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium bg-accent-gold/15 text-accent-gold hover:bg-accent-gold/25 transition-colors"
-              >
-                {t("cta.telegramBot")}
-              </TrackedDownloadLink>
-            </div>
-
-            {/* Telegram channel links */}
-            <div className="flex flex-wrap gap-3 justify-center">
-              <a
-                href={URLS.telegramChannelRu}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-accent-teal transition-colors"
-              >
-                <ArrowIcon />
-                {t("cta.telegramChannelRu")}
-              </a>
-              <a
-                href={URLS.telegramChannelEn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-accent-teal transition-colors"
-              >
-                <ArrowIcon />
-                {t("cta.telegramChannelEn")}
-              </a>
-            </div>
-          </div>
-        </section>
+        <div id="blog-cta-sentinel" aria-hidden="true" />
+        <CTA />
+        <MobileStickyCta />
       </main>
       <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation="no-registration-vpn" />
       <Footer />
