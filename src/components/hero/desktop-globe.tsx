@@ -20,7 +20,7 @@ export function DesktopGlobe({ label, nodeLabels }: DesktopGlobeProps) {
     <div className="relative w-full max-w-[620px] aspect-square">
       {isDesktop && (
         <DotGlobe
-          className="hero-animate relative w-full h-full"
+          className="relative w-full h-full"
           label={label}
           nodeLabels={nodeLabels}
         />

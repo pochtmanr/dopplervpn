@@ -205,39 +205,33 @@ body {
   transform: translateY(0);
 }
 
-/* Hero mount animation (plays once on load) */
-/* Long enough to read as a fade, not a cut; the supporting rows follow the
-   headline's word cascade instead of finishing before it.
+/* Hero entrance: THERE ISN'T ONE, AND THAT IS DELIBERATE
+ * ------------------------------------------------------
+ * The hero used to animate in twice over — `hero-animate` rose the supporting
+ * rows 8px on a 100/300/420/540/660ms stagger, and `hero-word` ran a per-word
+ * blur-up that rose each word 22px. Both were removed: the staggered rises made
+ * the whole column visibly shift around while it settled, which reads as the
+ * page still loading rather than as an entrance.
  *
- * TRANSFORM ONLY — DO NOT PUT `opacity: 0` BACK
- * ---------------------------------------------
- * Chrome excludes any element at `opacity: 0` from being an LCP candidate, so a
- * fade-from-zero on the hero disqualifies the one thing on the page that is
- * server-rendered and free to paint, and hands LCP to something slower. The rise
- * reads as an entrance on its own. `.hero-cta-in` below is the one exception,
- * and it is exempt for a reason.
+ * The hero is fully server-rendered, so with no animation it is simply THERE in
+ * the first paint. That is also the fastest thing it can be — an element at
+ * `opacity: 0` is not an LCP candidate at all, so any fade-from-zero here
+ * disqualifies the one part of the page that costs nothing to paint.
+ *
+ * If you are about to add an entrance to the hero: don't. If something really
+ * must animate, animate colour or opacity from a non-zero value, never
+ * position — and never on the <h1> or the mobile glyph backdrop, which are the
+ * LCP candidates.
  */
-@keyframes hero-rise {
-  from { transform: translateY(8px); }
-  to { transform: none; }
-}
-.hero-animate {
-  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.hero-animate-delay-1 { animation-delay: 100ms; }
-.hero-animate-delay-2 { animation-delay: 300ms; }
-.hero-animate-delay-3 { animation-delay: 420ms; }
-.hero-animate-delay-4 { animation-delay: 540ms; }
-.hero-animate-delay-5 { animation-delay: 660ms; }
 
-/* Hero primary CTA: hidden until the platform is detected (its label and icon
-   depend on it), then fades in and glows once.
-   The only hero element that legitimately starts at opacity 0 — it is swapping
-   out of a Tailwind `opacity-0` state, so without it the label would pop. It is
-   a button, never big enough to be the LCP element. */
+/* The one exception, and it is not an entrance: the primary CTA's label and icon
+   depend on UA platform detection, so it is held at a Tailwind `opacity-0` until
+   that resolves and then faded in — otherwise the label visibly swaps. Opacity
+   only, no transform: it must not move either. It is button-sized and mid-page,
+   never the LCP element. */
 @keyframes hero-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .hero-cta-in {
   animation:
@@ -246,36 +240,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-animate,
   .hero-cta-in,
   .slide-in-from-bottom {
-    animation: none;
-  }
-}
-
-/* Headline word-by-word "blur-up" cascade (ported from the VisaApplication hero) */
-/* Same rule as `hero-rise`: no `opacity: 0`, or the <h1> stops being an LCP
-   candidate until the last word of the cascade has landed — on this page that
-   was ~0.5s of pure LCP for no visual gain. translateY + blur alone still read
-   as a blur-up. */
-@keyframes hero-word-up {
-  from {
-    transform: translateY(22px);
-    filter: blur(10px);
-  }
-  to {
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-.hero-word {
-  display: inline-block;
-  animation: hero-word-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-word {
-    transform: none;
-    filter: none;
     animation: none;
   }
 }

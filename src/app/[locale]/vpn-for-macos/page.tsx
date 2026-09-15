@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/navbar";
@@ -195,9 +194,12 @@ export default async function VpnForMacosPage({ params }: PageProps) {
   const tHero = await getTranslations({ locale, namespace: "hero" });
 
   // Word-by-word blur-up cascade (same timing as the homepage hero)
-  const WORD_BASE_DELAY = 0.1;
-  const WORD_STAGGER = 0.07;
+  // Only the last word takes the gradient; the rest is plain text. Split rather
+  // than one span because `bg-clip-text` would otherwise ramp across the whole
+  // headline instead of the final word.
   const headlineWords = t("hero.title").split(/\s+/).filter(Boolean);
+  const headlineLast = headlineWords[headlineWords.length - 1] ?? "";
+  const headlineLead = headlineWords.slice(0, -1).join(" ");
 
   return (
     <>
@@ -249,39 +251,27 @@ export default async function VpnForMacosPage({ params }: PageProps) {
                   href={URLS.mac}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hero-animate inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm bg-accent-teal/10 border border-accent-teal/20 hover:bg-accent-teal/20 hover:border-accent-teal/40 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm bg-accent-teal/10 border border-accent-teal/20 hover:bg-accent-teal/20 hover:border-accent-teal/40 transition-colors"
                 >
                   <Stars />
                   <span className="font-semibold text-text-primary">{tHero("socialProof.rating")}</span>
                   <span className="text-text-muted">{tHero("socialProof.appStore")}</span>
                 </TrackedDownloadLink>
 
-                {/* Headline — rounded heading font, blur-up cascade, last word in gradient */}
+                {/* Headline — rounded heading font, last word in gradient. Static: it
+                    is this page's LCP element, so it carries no entrance. */}
                 <h1 className="mt-6 text-5xl md:text-6xl xl:text-7xl font-semibold text-text-primary leading-[1.05]">
-                  {headlineWords.map((word, i) => {
-                    const isLast = i === headlineWords.length - 1;
-                    return (
-                      <Fragment key={i}>
-                        <span
-                          className={
-                            isLast
-                              ? "hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                              : "hero-word"
-                          }
-                          style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
-                        >
-                          {word}
-                        </span>{" "}
-                      </Fragment>
-                    );
-                  })}
+                  {headlineLead}{headlineLead && " "}
+                  <span className="bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent">
+                    {headlineLast}
+                  </span>
                 </h1>
 
-                <p className="hero-animate hero-animate-delay-2 mt-6 text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                <p className="mt-6 text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
                   {t("hero.subtitle")}
                 </p>
 
-                <div className="hero-animate hero-animate-delay-3 mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                   <TrackedDownloadLink
                     location="vpn-for-macos"
                     platform="mac"
@@ -297,7 +287,7 @@ export default async function VpnForMacosPage({ params }: PageProps) {
                 </div>
 
                 {/* Trust badges — same trio as the homepage hero */}
-                <ul className="hero-animate hero-animate-delay-5 mt-7 hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-text-muted">
+                <ul className="mt-7 hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-text-muted">
                   <li className="flex items-center gap-1.5">
                     <CheckIcon />
                     {tHero("trustBadges.noData")}
@@ -314,7 +304,7 @@ export default async function VpnForMacosPage({ params }: PageProps) {
               </div>
 
               {/* Brand panel — layered glow with Apple mark (no Mac screenshot yet) */}
-              <div className="hero-animate hero-animate-delay-3 relative flex justify-center lg:justify-end">
+              <div className="relative flex justify-center lg:justify-end">
                 <div className="relative w-full max-w-lg lg:max-w-xl aspect-[4/3] rounded-[2rem] ring-1 ring-overlay/10 shadow-2xl shadow-black/40 bg-gradient-to-br from-accent-teal/20 via-bg-secondary to-accent-gold/10 overflow-hidden flex items-center justify-center">
                   <div
                     className="absolute inset-0"

@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
@@ -99,11 +98,6 @@ export default async function SupportPage({ params }: PageProps) {
 
   const allFaqItems = [...faqItems, ...troubleshootItems];
 
-  // Word-by-word blur-up cascade (same timing and size as the downloads page)
-  const WORD_BASE_DELAY = 0.1;
-  const WORD_STAGGER = 0.07;
-  const headlineWords = t("title").split(/\s+/).filter(Boolean);
-
   return (
     <>
       <FAQSchema items={allFaqItems} />
@@ -129,18 +123,9 @@ export default async function SupportPage({ params }: PageProps) {
           {/* ── Header ────────────────────────────────────────────── */}
           <div className="text-center mb-16">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-text-primary mb-5 leading-[1.08]">
-              {headlineWords.map((word, i) => (
-                <Fragment key={i}>
-                  <span
-                    className="hero-word"
-                    style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
-                  >
-                    {word}
-                  </span>{" "}
-                </Fragment>
-              ))}
+              {t("title")}
             </h1>
-            <p className="hero-animate hero-animate-delay-3 text-lg text-text-muted max-w-2xl mx-auto">
+            <p className="text-lg text-text-muted max-w-2xl mx-auto">
               {t("subtitle")}
             </p>
           </div>

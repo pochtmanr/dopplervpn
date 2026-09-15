@@ -38,24 +38,21 @@ export function Hero() {
   const useFallbackFont = FALLBACK_FONT_LOCALES.has(locale);
   const nodeLabels = NODE_LOCATION_KEYS.map((key) => tServers(`locations.${key}.city`));
 
-  // Word-by-word blur-up cascade timing (seconds), matched to the reference hero.
-  const WORD_BASE_DELAY = 0.1;
-  const WORD_STAGGER = 0.07;
-
-  const splitWords = (text: string) => text.split(/\s+/).filter(Boolean);
 
   // Line 1: part1a (italic in serif mode) + part1b. Line 2: gradient part2 (optional).
-  const line1Words = [
-    ...splitWords(t("headlinePart1a")).map((word) => ({ word, italic: !useFallbackFont })),
-    ...splitWords(t("headlinePart1b")).map((word) => ({ word, italic: false })),
-  ];
-  const line2Words = splitWords(t("headlinePart2"));
+  //
+  // Line 2 stays split into one span per word, even though nothing animates any
+  // more. `bg-clip-text` paints its gradient across the element's whole
+  // background box, so a single span that wraps onto two lines would stretch one
+  // gradient over both of them, while per-word spans each get the full ramp.
+  // On a single line the two are identical; on a locale that wraps they are not.
+  const line2Words = t("headlinePart2").split(/\s+/).filter(Boolean);
   const headlineFontStyle = useFallbackFont
     ? { fontFamily: "var(--font-body)", fontWeight: 300 }
     : { fontFamily: "var(--font-serif)" };
 
   const socialProof = (
-    <div className="hero-animate hero-animate-delay-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 pt-1">
+    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 pt-1">
       <TrackedDownloadLink
         location="hero"
         platform="ios"
@@ -105,7 +102,7 @@ export function Hero() {
           {/* Left Column - Content */}
           <div className="space-y-6 text-center lg:text-start">
             {/* Giveaway CTA chip — replaces the old tagline. Remove when the giveaway ends. */}
-            <div className="hero-animate">
+            <div>
               <Link
                 href="/giveaway"
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-accent-teal/10 text-accent-teal border border-accent-teal/20 hover:bg-accent-teal/20 hover:border-accent-teal/40 hover:text-accent-gold transition-colors"
@@ -118,29 +115,19 @@ export function Hero() {
               </Link>
             </div>
 
-            {/* Headline — server-rendered (no hydration delay); words cascade via pure-CSS blur-up */}
+            {/* Headline — server-rendered and static. It is the LCP element on a
+                phone, so it carries no entrance animation at all; see globals.css. */}
             <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl text-text-primary leading-[1.05]">
               <span className="sr-only">Doppler VPN — </span>
               <span className="block" style={headlineFontStyle}>
-                {line1Words.map(({ word, italic }, i) => (
-                  <Fragment key={`l1-${i}`}>
-                    <span
-                      className={italic ? "hero-word italic" : "hero-word"}
-                      style={{ animationDelay: `${WORD_BASE_DELAY + i * WORD_STAGGER}s` }}
-                    >
-                      {word}
-                    </span>{" "}
-                  </Fragment>
-                ))}
+                {useFallbackFont ? t("headlinePart1a") : <span className="italic">{t("headlinePart1a")}</span>}{" "}
+                {t("headlinePart1b")}
               </span>
               {line2Words.length > 0 && (
                 <span className="block mt-0" style={headlineFontStyle}>
                   {line2Words.map((word, j) => (
                     <Fragment key={`l2-${j}`}>
-                      <span
-                        className="hero-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent"
-                        style={{ animationDelay: `${WORD_BASE_DELAY + (line1Words.length + j) * WORD_STAGGER}s` }}
-                      >
+                      <span className="bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent">
                         {word}
                       </span>{" "}
                     </Fragment>
@@ -151,13 +138,13 @@ export function Hero() {
 
             {/* Subheadline */}
             <p
-              className="hero-animate hero-animate-delay-2 text-text-muted text-sm sm:text-base md:text-lg xl:text-xl max-w-md sm:max-w-xl lg:max-w-lg mx-auto lg:mx-0"
+              className="text-text-muted text-sm sm:text-base md:text-lg xl:text-xl max-w-md sm:max-w-xl lg:max-w-lg mx-auto lg:mx-0"
             >
               {t("subheadline")}
             </p>
 
             {/* Platform-Aware CTAs — client component for UA detection */}
-            <div className="hero-animate hero-animate-delay-3 pt-4">
+            <div className="pt-4">
               <HeroCTAsWrapper />
             </div>
 
@@ -166,7 +153,7 @@ export function Hero() {
 
             {/* Trust Badges */}
             <ul
-              className="hero-animate hero-animate-delay-5 hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 pt-2 text-xs text-text-muted"
+              className="hidden sm:flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 pt-2 text-xs text-text-muted"
             >
               <li className="flex items-center gap-1.5">
                 <svg className="w-4 h-4 text-accent-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
