@@ -9,10 +9,15 @@ import { GA_MEASUREMENT_ID } from "@/lib/ga";
  * ------------------------
  * The inline block below is server-rendered into <head>, so it runs before
  * anything else on the page and defines `window.gtag` as a `dataLayer` shim.
- * gtag.js itself loads `afterInteractive` and replays whatever the shim queued,
- * so the `consent default` call is guaranteed to be processed before the first
+ * gtag.js itself loads `lazyOnload` and replays whatever the shim queued, so the
+ * `consent default` call is guaranteed to be processed before the first
  * measurement hit — which is the one thing Consent Mode v2 cannot tolerate
  * getting wrong. Anything that fires in between is simply held in the queue.
+ *
+ * That queue is also why the strategy can be `lazyOnload` rather than
+ * `afterInteractive`: nothing is lost by loading the tag late, and on the
+ * critical path gtag.js cost a 35ms forced reflow (it measures geometry on
+ * startup) plus its own parse, against a hero that was already LCP-bound.
  *
  * CONSENT MODE V2
  * ---------------
@@ -54,7 +59,7 @@ gtag('config','${GA_MEASUREMENT_ID}',{ send_page_view:false });
       <script dangerouslySetInnerHTML={{ __html: bootstrap }} />
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     </>
   );

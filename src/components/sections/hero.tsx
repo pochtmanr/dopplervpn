@@ -3,7 +3,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HeroCTAsWrapper } from "@/components/hero/hero-ctas-wrapper";
 import { DesktopGlobe } from "@/components/hero/desktop-globe";
-import { HeroMobileBackdrop } from "@/components/glyph/pricing-glyphs";
+import { HeroMobileBackdrop } from "@/components/glyph/hero-mobile-backdrop";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 
 // Locales where decorative Latin-only fonts break (no Cyrillic/CJK/Arabic glyphs)

@@ -207,13 +207,22 @@ body {
 
 /* Hero mount animation (plays once on load) */
 /* Long enough to read as a fade, not a cut; the supporting rows follow the
-   headline's word cascade instead of finishing before it. */
-@keyframes hero-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+   headline's word cascade instead of finishing before it.
+ *
+ * TRANSFORM ONLY — DO NOT PUT `opacity: 0` BACK
+ * ---------------------------------------------
+ * Chrome excludes any element at `opacity: 0` from being an LCP candidate, so a
+ * fade-from-zero on the hero disqualifies the one thing on the page that is
+ * server-rendered and free to paint, and hands LCP to something slower. The rise
+ * reads as an entrance on its own. `.hero-cta-in` below is the one exception,
+ * and it is exempt for a reason.
+ */
+@keyframes hero-rise {
+  from { transform: translateY(8px); }
+  to { transform: none; }
 }
 .hero-animate {
-  animation: hero-fade-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .hero-animate-delay-1 { animation-delay: 100ms; }
 .hero-animate-delay-2 { animation-delay: 300ms; }
@@ -222,7 +231,14 @@ body {
 .hero-animate-delay-5 { animation-delay: 660ms; }
 
 /* Hero primary CTA: hidden until the platform is detected (its label and icon
-   depend on it), then fades in and glows once. */
+   depend on it), then fades in and glows once.
+   The only hero element that legitimately starts at opacity 0 — it is swapping
+   out of a Tailwind `opacity-0` state, so without it the label would pop. It is
+   a button, never big enough to be the LCP element. */
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
 .hero-cta-in {
   animation:
     hero-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both,
@@ -232,33 +248,32 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-animate,
   .hero-cta-in,
-  .hero-backdrop-in,
   .slide-in-from-bottom {
     animation: none;
   }
 }
 
 /* Headline word-by-word "blur-up" cascade (ported from the VisaApplication hero) */
+/* Same rule as `hero-rise`: no `opacity: 0`, or the <h1> stops being an LCP
+   candidate until the last word of the cascade has landed — on this page that
+   was ~0.5s of pure LCP for no visual gain. translateY + blur alone still read
+   as a blur-up. */
 @keyframes hero-word-up {
   from {
-    opacity: 0;
     transform: translateY(22px);
     filter: blur(10px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
     filter: blur(0);
   }
 }
 .hero-word {
   display: inline-block;
-  opacity: 0;
   animation: hero-word-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-word {
-    opacity: 1;
     transform: none;
     filter: none;
     animation: none;
@@ -358,18 +373,18 @@ body {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
 }
-.hero-backdrop-in {
+/* Static, and no longer faded in. The 1.2s fade existed only to cover the pop
+   when the client-painted first frame appeared after hydration; the frame now
+   ships in the HTML (glyph-render.ts `frameZero`), so there is no pop to cover —
+   and since this is the LCP element on a phone, starting it at opacity 0 would
+   disqualify it from LCP for the length of the fade. */
+.hero-backdrop {
   --backdrop-opacity: 0.55;
   opacity: var(--backdrop-opacity);
-  animation: hero-backdrop-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 /* Dark glyphs on a light ground read much louder; pull them back. */
-.light .hero-backdrop-in {
+.light .hero-backdrop {
   --backdrop-opacity: 0.32;
-}
-@keyframes hero-backdrop-in {
-  from { opacity: 0; }
-  to { opacity: var(--backdrop-opacity); }
 }
 
 /* Soft edges for a glyph stage, so its grain fades out instead of ending in a box. */

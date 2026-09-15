@@ -8,7 +8,7 @@ redesigned element — a section, a page, a card, a button, the OG image — is 
 | Hero | `src/components/sections/hero.tsx`, `src/components/hero/dot-globe.tsx`, `hero-ctas.tsx` |
 | "Available on" platform cards | `src/components/sections/platforms-available.tsx`, `src/components/glyph/platform-glyph-band.tsx` |
 | "How Doppler VPN Protects Your Traffic" cards | `src/components/sections/technical-how-it-works.tsx`, `traffic-step-card.tsx`, `src/components/glyph/traffic-scene.ts` |
-| Shared engine | `src/components/glyph/glyph-field.tsx`, `glyph-scene.ts`, `use-mount-on-view.ts`, `src/components/ui/reveal.tsx`, `src/app/globals.css` |
+| Shared engine | `src/components/glyph/glyph-field.tsx`, `glyph-render.ts` (the pure frame maths — **not** a client module, so a server frame can be rendered from it), `glyph-scene.ts`, `use-mount-on-view.ts`, `src/components/ui/reveal.tsx`, `src/app/globals.css` |
 
 When this file and the code disagree, the reference sections win — then fix this file.
 It supersedes the motion rule in `docs/plans/2026-02-23-ui-polish-design.md` ("opacity-only, 200ms").
@@ -64,7 +64,13 @@ Body font is Space Grotesk (`--font-body`).
 - **Full section:** `<Section id>` + `<SectionHeader>` (`.section` = `py-12 md:py-20 px-4 sm:px-6 lg:px-8`).
 - **Band** (thin interstitial strip, e.g. platforms):
   `py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5`.
-- **Hero:** on `lg+` no background of its own, no glow. Two-column `grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center`, text `text-center lg:text-start`, globe right. **Below `lg` there is no globe**: the copy sits centred in a `min-h-svh` section over `<HeroMobileBackdrop />` (recipe C's `backdropScene` on a portrait 90×100 grid at **5fps** (`frameMs={200}`), static top/bottom `.glyph-edge-fade` mask — **no animated mask**, it re-rasterised the whole viewport every frame — fading in via `.hero-backdrop-in` to 0.55, 0.32 in light) plus a `bg-primary` radial scrim behind the text. The backdrop mounts only below lg and `DesktopGlobe` only at lg+ (`useMediaQuery`, `src/lib/use-media-query.ts`): a CSS-hidden component still runs its setup during hydration. Same for `PricingBackdrop` below md.
+- **Hero:** on `lg+` no background of its own, no glow. Two-column `grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center`, text `text-center lg:text-start`, globe right. **Below `lg` there is no globe**: the copy sits centred in a `min-h-svh` section over `<HeroMobileBackdrop />` (recipe C's `backdropScene` on a portrait 90×100 grid at **5fps** (`frameMs={200}`), static top/bottom `.glyph-edge-fade` mask — **no animated mask**, it re-rasterised the whole viewport every frame — at a flat `.hero-backdrop` 0.55, 0.32 in light) plus a `bg-primary` radial scrim behind the text.
+
+  **The hero backdrop is the exception to the `useMediaQuery` mount gate, and is server-rendered.** It is full-bleed over a `min-h-svh` section, which makes it the LCP element on a phone; gated on JS it could not paint until the bundle had downloaded, hydrated and run an effect, which put LCP at 2.8s (2.79s of it "element render delay"). So `hero-mobile-backdrop.tsx` (a Server Component) computes the t=0 frame with `frameZero` (`glyph-render.ts`) and passes it to `<GlyphField initialFrame>`, which renders it as the `<pre>` children — the lattice is in the HTML and paints at FCP. The wrapper is hidden at lg+ with plain `lg:hidden`; that is safe here because with `initialFrame` set the mount does no fbm work, and a `display:none` host never intersects, so the rAF loop never starts. It also no longer fades in: `.hero-backdrop-in` existed only to mask the post-hydration pop, and there is no longer a pop to mask.
+
+  Grid constants for a server-rendered field must live in a plain module (`price-scene.ts`), never in the `"use client"` file beside the component — a Server Component importing a constant from a client module gets a proxy that coerces to `NaN`, and the frame comes out silently empty instead of throwing.
+
+  `DesktopGlobe` still mounts only at lg+ and `PricingBackdrop` only at md+ (`useMediaQuery`, `src/lib/use-media-query.ts`): a CSS-hidden component still runs its setup during hydration, and neither of those ships a server frame.
 
 ### Card recipe A — Glyph-strip row card (platforms-available.tsx:52)
 ```
@@ -165,8 +171,9 @@ throttled `requestAnimationFrame` only.
 
 | Pattern | Spec | Where |
 |---|---|---|
-| Hero headline word cascade | `hero-word`: translateY 22px + blur 10px → 0, **0.85s `cubic-bezier(0.22,1,0.36,1)`**, delay `0.1s + i·0.07s` per word | globals.css:223-248 |
-| Hero supporting content | `hero-animate` opacity + 8px rise, 700ms `cubic-bezier(0.22,1,0.36,1)`, `hero-animate-delay-1..5` = 100/300/420/540/660ms (chip 0, sub 2, CTAs 3, proof 4, badges 5). Primary CTA stays `opacity-0` until the platform is detected, then `.hero-cta-in` (fade + one `pulse-glow`) so its label never visibly swaps | globals.css:209-220 |
+| Hero headline word cascade | `hero-word`: translateY 22px + blur 10px → 0 (**no opacity — see below**), **0.85s `cubic-bezier(0.22,1,0.36,1)`**, delay `0.1s + i·0.07s` per word | globals.css:223-248 |
+| Hero supporting content | `hero-animate` = `hero-rise`, an 8px rise, 700ms `cubic-bezier(0.22,1,0.36,1)`, `hero-animate-delay-1..5` = 100/300/420/540/660ms (chip 0, sub 2, CTAs 3, proof 4, badges 5). Primary CTA stays `opacity-0` until the platform is detected, then `.hero-cta-in` (fade + one `pulse-glow`) so its label never visibly swaps | globals.css:209-220 |
+| **No `opacity: 0` in the hero** | Chrome will not treat an element at `opacity: 0` as an LCP candidate, so fading the hero in from zero disqualifies the one part of the page that is server-rendered and free to paint. `hero-word` and `hero-rise` animate transform and blur only. `.hero-cta-in` is the sole exception — it is swapping out of a Tailwind `opacity-0` state and is only ever button-sized | globals.css:208-265 |
 | Scroll reveal | `<Reveal delay>`: opacity + translateY 6px, 200ms ease-out, fires once at `rootMargin -100px`; siblings stagger `delay={i * 50}`, trailing CTA ~200ms | reveal.tsx, use-in-view.ts |
 | CTA attention | `pulse-glow-once`: teal box-shadow 0→20px/4px→0, 1.5s, once | globals.css:292-299 |
 | Hover | `transition-colors` (cards/tiles, default or 300ms), arrow nudge `translate-x-0.5`, orb fade 500ms; glyph layers warm to teal over 300ms `ease-out` | cards, glyph-field.tsx:287 |

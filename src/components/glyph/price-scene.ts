@@ -10,6 +10,20 @@ import { stamp, type Frame, type Scene } from "./glyph-scene";
  */
 export const BACKDROP_COLS = 240;
 export const BACKDROP_ROWS = 76;
+
+/**
+ * Portrait grid for a phone-shaped hero: 90·0.6 / 100·1.15 ≈ 0.47, close to 390×844.
+ *
+ * These live HERE, in a plain module, and not next to the component that uses
+ * them — that component's file is `"use client"`, and a Server Component
+ * importing a plain constant out of a client module gets a client-reference
+ * proxy instead of the number. It does not throw: the proxy coerces to NaN, so
+ * `Array.from({ length: NaN })` yields zero rows and the server frame comes out
+ * silently empty. hero-mobile-backdrop.tsx renders the hero's first frame on the
+ * server and needs the real numbers.
+ */
+export const HERO_MOBILE_COLS = 90;
+export const HERO_MOBILE_ROWS = 100;
 const MARK_EVERY_COL = 40;
 const MARK_EVERY_ROW = 18;
 

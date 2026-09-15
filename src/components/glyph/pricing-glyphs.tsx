@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { GlyphField } from "./glyph-field";
-import { backdropScene } from "./price-scene";
+import { backdropScene, HERO_MOBILE_COLS, HERO_MOBILE_ROWS } from "./price-scene";
+import type { Rendered } from "./glyph-render";
 import { useMediaQuery } from "@/lib/use-media-query";
 
 /**
@@ -70,31 +71,44 @@ function PricingBackdropField() {
   );
 }
 
-// Portrait grid for a phone-shaped hero: 90·0.6 / 100·1.15 ≈ 0.47, close to 390×844.
-const HERO_MOBILE_COLS = 90;
-const HERO_MOBILE_ROWS = 100;
 // 5fps: sparks swap one at a time and the grain drifts slowly, so a low rate
 // still reads as alive. At 20fps this field cost ~40% of a throttled phone core.
 const HERO_MOBILE_FRAME_MS = 200;
 
 /**
  * The pricing ground reused as the hero's backdrop below lg, where the globe is
- * dropped. Mounted only below lg. The mask is static (edge fade only) — an
- * animated mask re-rasterises the whole viewport every frame on a phone — and
- * the field fades in once its first frame is painted instead of popping.
- * Same placement contract as PricingBackdrop.
+ * dropped. The mask is static (edge fade only) — an animated mask re-rasterises
+ * the whole viewport every frame on a phone.
+ *
+ * WHY THIS ONE IS NOT `useMediaQuery`-GATED, UNLIKE ITS SIBLINGS
+ * -------------------------------------------------------------
+ * It is full-bleed over a `min-h-svh` section, which makes it the page's LCP
+ * element on a phone — and a JS-gated field cannot paint until the bundle has
+ * downloaded, hydrated and run an effect. That put LCP at 2.8s, essentially all
+ * of it "element render delay". So it is server-rendered instead: the wrapper
+ * ships in the HTML, hidden at lg+ by CSS, and `frameZero` puts the first frame
+ * in the markup so it paints at FCP.
+ *
+ * The usual objection to CSS-hiding a glyph field — that it still runs its setup
+ * during hydration — does not bite here. With `initialFrame` set, mount does no
+ * fbm work at all, and a `display:none` host never intersects, so the rAF loop
+ * is never started at lg+. See glyph-field.tsx.
+ *
+ * Mounted from a Server Component so `frameZero` runs at build time; only the
+ * five strings cross the RSC boundary (a Scene has methods and cannot).
+ * See hero-mobile-backdrop.tsx.
  */
-export function HeroMobileBackdrop() {
-  const isMobile = useMediaQuery("(max-width: 1023.98px)");
-  return isMobile ? <HeroMobileBackdropField /> : null;
-}
-
-function HeroMobileBackdropField() {
+export function HeroMobileBackdropField({ initialFrame }: { initialFrame: Rendered }) {
   const scene = useMemo(() => backdropScene(HERO_MOBILE_COLS, HERO_MOBILE_ROWS), []);
 
   return (
-    <div aria-hidden="true" className="glyph-edge-fade hero-backdrop-in pointer-events-none absolute inset-0">
-      <GlyphField scene={scene} loop={false} frameMs={HERO_MOBILE_FRAME_MS} />
+    <div aria-hidden="true" className="glyph-edge-fade hero-backdrop pointer-events-none absolute inset-0 lg:hidden">
+      <GlyphField
+        scene={scene}
+        loop={false}
+        frameMs={HERO_MOBILE_FRAME_MS}
+        initialFrame={initialFrame}
+      />
     </div>
   );
 }
