@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { GlyphField } from '@/components/glyph/glyph-field';
 import type { Scene } from '@/components/glyph/glyph-scene';
+import { SUPPORT_WELL_COLS, SUPPORT_WELL_ROWS } from '@/components/glyph/traffic-scene';
 import { useMountOnView } from '@/components/glyph/use-mount-on-view';
 
 /**
@@ -23,14 +24,17 @@ const CYCLE_MS = 9000;
 
 /**
  * The ground under the bubbles: bare grain with nothing stamped, in Telegram
- * blue. Sized for ~11px glyphs across a one-column card; the field cover-crops.
+ * blue. Same 64×16 well as TicketPlate so the two featured cards share glyph size.
  */
 const GROUND: Scene = {
-  cols: 44,
-  rows: 16,
+  cols: SUPPORT_WELL_COLS,
+  rows: SUPPORT_WELL_ROWS,
   paint() {},
   order(r, c) {
-    return Math.min(1, Math.hypot(r / 15 - 0.5, c / 43 - 0.5) * 1.4);
+    return Math.min(
+      1,
+      Math.hypot(r / (SUPPORT_WELL_ROWS - 1) - 0.5, c / (SUPPORT_WELL_COLS - 1) - 0.5) * 1.4,
+    );
   },
 };
 
@@ -78,7 +82,7 @@ export function TelegramChat() {
   // plays every cycle; the well is fixed-height and bottom-anchored, so a new
   // message pushes the earlier ones up, as in a chat.
   return (
-    <div ref={groundRef} className="relative h-44">
+    <div ref={groundRef} className="relative h-full">
       <div
         className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${
           groundMounted ? 'opacity-70' : 'opacity-0'

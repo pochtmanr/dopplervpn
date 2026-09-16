@@ -381,7 +381,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-cta-in,
-  .slide-in-from-bottom {
+  .slide-in-from-bottom,
+  .copy-pop {
     animation: none;
   }
   /* The press itself stays — it is user-triggered and instant. Only the
@@ -569,6 +570,21 @@ body {
   animation: slide-in-from-bottom 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Page loader (account): held back 200ms so a fast load never shows it. */
+.loader-in {
+  animation: fadeIn 300ms ease-out 200ms both;
+}
+
+/* Copy confirmation: the check lands with a small overshoot. */
+@keyframes copy-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.copy-pop {
+  animation: copy-pop 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Comparison accordion: the three notes follow the plate in on open, and leave
    together on close (the delays apply only while open). */
 .cmp-row[data-open="true"] .cmp-note:nth-child(1) { transition-delay: 150ms; }
@@ -636,12 +652,17 @@ body {
    as a second, differently-shaped box. It sits at the pill's exact position,
    and its closed clip is the pill itself: bar height, radius = height / 2.
    The radius never changes, so the top corners stay put while the bottom
-   edge slides down. Only clip-path, opacity and transform animate, and the
-   panel has no backdrop-filter, so nothing re-blurs the page every frame. */
+   edge slides down.
+   Everything runs on one short clock with no delays: staggering the body
+   behind the panel (and delaying the close fade) read as two separate steps.
+   The backdrop only blurs — it never dims the page. Its blur radius is fixed;
+   only its opacity animates, so the blur is not recomputed at every radius. */
 .mnav {
   --mnav-bar: 3rem;
+  --mnav-in: 140ms;
+  --mnav-out: 110ms;
   visibility: hidden;
-  transition: visibility 0s linear 420ms;
+  transition: visibility 0s linear var(--mnav-out);
 }
 @media (min-width: 40rem) {
   .mnav { --mnav-bar: 3.5rem; }
@@ -651,39 +672,28 @@ body {
   transition-delay: 0s;
 }
 .mnav-backdrop {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   opacity: 0;
-  transition: opacity 320ms ease-in;
+  transition: opacity var(--mnav-out) ease-in;
 }
 .mnav[data-open] .mnav-backdrop {
   opacity: 1;
-  transition: opacity 420ms ease-out;
+  transition: opacity var(--mnav-in) ease-out;
 }
 .mnav-panel {
   clip-path: inset(0 0 calc(100% - var(--mnav-bar)) 0 round calc(var(--mnav-bar) / 2));
   opacity: 0;
-  /* Close: shrink back into the pill, then fade to reveal the real bar. */
   transition:
-    clip-path 360ms cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 120ms ease 300ms;
+    clip-path var(--mnav-out) ease-in,
+    opacity var(--mnav-out) ease-in;
 }
 .mnav[data-open] .mnav-panel {
   clip-path: inset(0 0 0 0 round calc(var(--mnav-bar) / 2));
   opacity: 1;
   transition:
-    clip-path 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 120ms ease;
-}
-.mnav-body {
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity 160ms ease, transform 160ms ease;
-}
-.mnav[data-open] .mnav-body {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity 360ms ease-out 120ms,
-    transform 460ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
+    clip-path var(--mnav-in) cubic-bezier(0.22, 1, 0.36, 1),
+    opacity var(--mnav-in) ease-out;
 }
 
 /* Reduced motion — accessibility */

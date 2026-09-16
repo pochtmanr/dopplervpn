@@ -57,6 +57,25 @@ export const ROW_TILE_BLUE =
   "w-11 h-11 shrink-0 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-blue/25 " +
   "flex items-center justify-center text-accent-blue-light group-hover:bg-accent-blue/15 " +
   "group-hover:border-accent-blue/45 transition-colors";
+/** The same tile in Telegram blue — the Telegram card on /support only. */
+export const ROW_TILE_TELEGRAM =
+  "w-11 h-11 shrink-0 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-telegram/30 " +
+  "flex items-center justify-center text-telegram group-hover:bg-telegram/15 " +
+  "group-hover:border-telegram/50 transition-colors";
+/** The same tile in danger — delete account, on /support and the account dashboard. */
+export const DELETE_TILE =
+  "w-11 h-11 shrink-0 rounded-2xl bg-bg-secondary/80 border border-danger/20 flex items-center justify-center " +
+  "text-danger group-hover:bg-danger/10 group-hover:border-danger/40 transition-colors";
+
+/**
+ * A card's foot pill. `KEY_PILL` is the one raised key a surface gets; its
+ * neighbours take `cta-flat` with `CTA_PILL`, which is what makes the key read
+ * as raised (DESIGN.md §4, keycap pair).
+ */
+export const CTA_PILL =
+  "inline-flex shrink-0 items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-full";
+export const KEY_PILL = `cta-key cta-key-sm text-white ${CTA_PILL}`;
+
 export const ROW_TITLE =
   "font-display text-base md:text-lg font-semibold leading-tight text-text-primary";
 export const ROW_TEXT = "mt-0.5 text-xs md:text-sm leading-snug text-text-muted";

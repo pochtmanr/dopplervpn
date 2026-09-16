@@ -7,10 +7,11 @@ import type { RevolutCheckoutInstance } from '@revolut/checkout';
 import { trackCheckoutStarted } from '@/lib/track-cta';
 import { AuthPanel, type AuthResult } from '@/components/account/auth-panel';
 import { WelcomeModal } from '@/components/account/welcome-modal';
-import { AccountGateSkeleton, DashboardSkeleton } from '@/components/account/skeletons';
+import { PageLoader } from '@/components/ui/page-loader';
 import type { AccountDevices, AccountInfo } from '@/components/account/types';
 import { AccountIdCard } from '@/components/account/dashboard/account-id-card';
 import { ContactsCard } from '@/components/account/dashboard/contacts-card';
+import { DashboardDialog } from '@/components/account/dashboard/dashboard-dialog';
 import { DevicesCard } from '@/components/account/dashboard/devices-card';
 import { EveryDeviceBand } from '@/components/account/dashboard/every-device-band';
 import { RestoreCard } from '@/components/account/dashboard/restore-card';
@@ -18,21 +19,13 @@ import { SubscriptionCard } from '@/components/account/dashboard/subscription-ca
 import {
   CheckIcon,
   CloseIcon,
-  LogOutIcon,
   ShieldIcon,
   SparkleIcon,
   SpinnerIcon,
   WarningIcon,
 } from '@/components/account/dashboard/icons';
-import {
-  BTN_DANGER,
-  BTN_PRIMARY,
-  BTN_SECONDARY,
-  HAIRLINE,
-  INPUT,
-  MODAL_PANEL,
-  SCRIM,
-} from '@/components/account/dashboard/ui';
+import { BTN_DANGER, BTN_PRIMARY, BTN_SECONDARY, INPUT } from '@/components/account/dashboard/ui';
+import { CARD_TITLE, DELETE_TILE } from '@/components/ui/card-recipes';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
@@ -102,6 +95,8 @@ function SubscribeInner() {
   const [accountError, setAccountError] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
   const [contactSaved, setContactSaved] = useState(false);
+  // Bumped by the Account card's "Connect email"; ContactsCard opens its field on change.
+  const [emailRequest, setEmailRequest] = useState(0);
 
   /* ── Devices state ────────────────────────────────────────────── */
   const [devices, setDevices] = useState<AccountDevices | null>(null);
@@ -698,8 +693,10 @@ function SubscribeInner() {
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary pt-24">
 
-      {/* ── Pre-hydration: neither branch is decided yet ──────────── */}
-      {!hydrated && <AccountGateSkeleton />}
+      {/* ── Loading: before hydration, then while the dashboard fetches.
+           One element in one place, so the orb keeps turning across the
+           hand-off instead of restarting. ─────────────────────────────── */}
+      {(!hydrated || (step === 2 && dashboardLoading)) && <PageLoader />}
 
       {/* ── Step 1: Identify ─────────────────────────────────────── */}
       {hydrated && step === 1 && (
@@ -712,11 +709,9 @@ function SubscribeInner() {
       )}
 
       {/* ── Step 2: Account Dashboard ────────────────────────────── */}
-      {hydrated && step === 2 && (
+      {hydrated && step === 2 && !dashboardLoading && (
         <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-          {dashboardLoading ? (
-            <DashboardSkeleton />
-          ) : (
+          {(
             <>
               {/* ── Dashboard header ─────────────────────────────── */}
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
@@ -793,41 +788,28 @@ function SubscribeInner() {
 
                 {/* ── Left column: account ─────────────────────── */}
                 <div className="lg:col-span-3 space-y-5">
-                  <AccountIdCard accountId={accountId} locale={locale} />
+                  <AccountIdCard
+                    accountId={accountId}
+                    locale={locale}
+                    accountInfo={accountInfo}
+                    isActivePro={isActivePro}
+                    unsavedId={!existingAccount && mode === 'new'}
+                    onLogout={handleLogout}
+                    onDeleteRequest={() => { setDeleteModalOpen(true); setDeleteError(''); }}
+                    onConnectEmail={() => setEmailRequest((n) => n + 1)}
+                    onShowContacts={() => {
+                      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                      document.getElementById('contacts')?.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+                    }}
+                  />
 
                   {!isActivePro && devicesCard}
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-                    <ContactsCard accountId={accountId} accountInfo={accountInfo} onSaved={handleContactSaved} />
+                    <ContactsCard accountId={accountId} accountInfo={accountInfo} onSaved={handleContactSaved} emailRequest={emailRequest} />
                     <RestoreCard />
                   </div>
 
-                  {/* Account actions */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <button type="button" onClick={handleLogout} className={BTN_SECONDARY}>
-                      <LogOutIcon className="w-4 h-4" />
-                      {t('dashboard.logout')}
-                    </button>
-
-                    {isActivePro ? (
-                      <a href={`/${locale}/support#delete-account`} className={BTN_DANGER}>
-                        {t('dashboard.deleteAccount')}
-                      </a>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => { setDeleteModalOpen(true); setDeleteError(''); }}
-                        className={BTN_DANGER}
-                      >
-                        {t('dashboard.deleteAccount')}
-                      </button>
-                    )}
-                  </div>
-                  {isActivePro && (
-                    <p className="text-xs text-text-tertiary px-1 leading-relaxed">
-                      {t('dashboard.deleteProSupportNote')}
-                    </p>
-                  )}
                 </div>
 
                 {/* ── Right column: subscription ───────────────── */}
@@ -884,163 +866,164 @@ function SubscribeInner() {
 
       {/* ── Delete Account Confirmation Modal ──────────────────── */}
       {deleteModalOpen && (
-        <div
-          className={SCRIM}
-          onClick={(e) => { if (e.target === e.currentTarget && !deleteLoading) setDeleteModalOpen(false); }}
+        <DashboardDialog
+          labelledBy="delete-title"
+          onClose={() => setDeleteModalOpen(false)}
+          locked={deleteLoading}
+          width="sm:max-w-md"
+          className="p-6 space-y-4"
         >
-          <div className={`${MODAL_PANEL} sm:max-w-md p-6 space-y-4`} role="dialog" aria-modal="true" aria-labelledby="delete-title">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-danger/10 border border-danger/30 shrink-0">
-                <WarningIcon className="w-5 h-5 text-danger" />
-              </div>
-              <h2 id="delete-title" className="text-lg font-semibold text-text-primary">
-                {t('dashboard.deleteConfirmTitle')}
-              </h2>
+          <div className="flex items-center gap-3">
+            <div className={DELETE_TILE}>
+              <WarningIcon className="w-5 h-5" />
             </div>
-            <p className="text-sm text-text-muted leading-relaxed">
-              {t('dashboard.deleteConfirmBody')}
-            </p>
-            <p className="font-mono text-sm font-bold text-text-primary tracking-wide" dir="ltr">{accountId}</p>
-            {deleteError && (
-              <p className="text-xs text-danger">{deleteError}</p>
-            )}
-            <div className="space-y-2.5 pt-1">
-              <button
-                type="button"
-                onClick={handleDeleteAccount}
-                disabled={deleteLoading}
-                className="w-full rounded-xl bg-danger hover:bg-danger/85 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
-              >
-                {deleteLoading ? <SpinnerIcon className="w-4 h-4" /> : t('dashboard.deleteConfirm')}
-              </button>
-              <button
-                type="button"
-                onClick={() => setDeleteModalOpen(false)}
-                disabled={deleteLoading}
-                className={`${BTN_SECONDARY} w-full`}
-              >
-                {t('dashboard.deleteCancel')}
-              </button>
-            </div>
+            <h2 id="delete-title" className={CARD_TITLE}>
+              {t('dashboard.deleteConfirmTitle')}
+            </h2>
           </div>
-        </div>
+          <p className="text-sm text-text-muted leading-relaxed">
+            {t('dashboard.deleteConfirmBody')}
+          </p>
+          <p className="font-mono text-sm font-bold text-text-primary tracking-wide" dir="ltr">{accountId}</p>
+          {deleteError && (
+            <p className="text-xs text-danger">{deleteError}</p>
+          )}
+          <div className="space-y-2.5 pt-1">
+            <button
+              type="button"
+              onClick={handleDeleteAccount}
+              disabled={deleteLoading}
+              className="w-full rounded-xl bg-danger hover:bg-danger/85 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
+            >
+              {deleteLoading ? <SpinnerIcon className="w-4 h-4" /> : t('dashboard.deleteConfirm')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setDeleteModalOpen(false)}
+              disabled={deleteLoading}
+              className={`${BTN_SECONDARY} w-full`}
+              // The safe choice takes focus, so Enter on open never deletes.
+              autoFocus
+            >
+              {t('dashboard.deleteCancel')}
+            </button>
+          </div>
+        </DashboardDialog>
       )}
 
       {/* ── Premium Support Modal ──────────────────────────────── */}
       {premiumTicketOpen && (
-        <div
-          className={SCRIM}
-          onClick={(e) => { if (e.target === e.currentTarget) { setPremiumTicketOpen(false); } }}
+        <DashboardDialog
+          labelledBy="ticket-title"
+          onClose={() => setPremiumTicketOpen(false)}
+          width="sm:max-w-lg"
         >
-          <div className={`${MODAL_PANEL} sm:max-w-lg max-h-[90vh] overflow-y-auto`} role="dialog" aria-modal="true" aria-labelledby="ticket-title">
-            <div className={HAIRLINE} />
-            <div className="flex items-center justify-between p-6 pb-0">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 id="ticket-title" className="text-lg font-semibold text-text-primary">
-                    {t('dashboard.expressSupport')}
-                  </h2>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-accent-teal/15 text-accent-teal text-[10px] font-bold uppercase tracking-wider">
-                    Pro
-                  </span>
-                </div>
-                <p className="text-xs text-text-muted mt-1">{t('dashboard.premiumSupportDesc')}</p>
+          <div className="flex items-center justify-between p-6 pb-0">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 id="ticket-title" className="text-lg font-semibold text-text-primary">
+                  {t('dashboard.expressSupport')}
+                </h2>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-accent-teal/15 text-accent-teal text-[10px] font-bold uppercase tracking-wider">
+                  Pro
+                </span>
               </div>
-              <button
-                type="button"
-                onClick={() => setPremiumTicketOpen(false)}
-                aria-label={t('dashboard.close')}
-                className="p-2 rounded-lg hover:bg-overlay/10 text-text-muted hover:text-text-primary transition-colors"
-              >
-                <CloseIcon className="w-5 h-5" />
-              </button>
+              <p className="text-xs text-text-muted mt-1">{t('dashboard.premiumSupportDesc')}</p>
             </div>
+            <button
+              type="button"
+              onClick={() => setPremiumTicketOpen(false)}
+              aria-label={t('dashboard.close')}
+              className="p-2 rounded-lg hover:bg-overlay/10 text-text-muted hover:text-text-primary transition-colors"
+            >
+              <CloseIcon className="w-5 h-5" />
+            </button>
+          </div>
 
-            <div className="p-6">
-              {premiumTicketSuccess ? (
-                <div className="text-center py-8 space-y-4">
-                  <CheckIcon className="w-12 h-12 text-accent-teal mx-auto" />
-                  <h3 className="text-lg font-semibold text-text-primary">
-                    {t('dashboard.ticketCreated')}
-                  </h3>
-                  <p className="text-sm text-text-muted">
-                    {t('dashboard.ticketCreatedDesc', { ticketNumber: premiumTicketSuccess })}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => setPremiumTicketOpen(false)}
-                    className={`${BTN_PRIMARY} mt-4 w-full`}
-                  >
-                    {t('dashboard.close')}
-                  </button>
+          <div className="p-6">
+            {premiumTicketSuccess ? (
+              <div className="text-center py-8 space-y-4">
+                <CheckIcon className="w-12 h-12 text-accent-teal mx-auto" />
+                <h3 className="text-lg font-semibold text-text-primary">
+                  {t('dashboard.ticketCreated')}
+                </h3>
+                <p className="text-sm text-text-muted">
+                  {t('dashboard.ticketCreatedDesc', { ticketNumber: premiumTicketSuccess })}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setPremiumTicketOpen(false)}
+                  className={`${BTN_PRIMARY} mt-4 w-full`}
+                >
+                  {t('dashboard.close')}
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-5">
+                <div>
+                  <label htmlFor="ticket-subject" className="block text-xs font-medium text-text-muted mb-1.5">
+                    {t('dashboard.ticketSubject')}
+                  </label>
+                  <input
+                    id="ticket-subject"
+                    type="text"
+                    value={premiumTicketForm.subject}
+                    onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, subject: e.target.value }))}
+                    placeholder={t('dashboard.ticketSubjectPlaceholder')}
+                    className={INPUT}
+                  />
                 </div>
-              ) : (
-                <div className="space-y-5">
+                <div>
+                  <label htmlFor="ticket-description" className="block text-xs font-medium text-text-muted mb-1.5">
+                    {t('dashboard.ticketDescription')}
+                  </label>
+                  <textarea
+                    id="ticket-description"
+                    rows={4}
+                    value={premiumTicketForm.description}
+                    onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder={t('dashboard.ticketDescPlaceholder')}
+                    className={`${INPUT} resize-none`}
+                  />
+                </div>
+                {/* Contact email — only show if we don't already know it */}
+                {!resolvedTicketEmail && (
                   <div>
-                    <label htmlFor="ticket-subject" className="block text-xs font-medium text-text-muted mb-1.5">
-                      {t('dashboard.ticketSubject')}
+                    <label htmlFor="ticket-email" className="block text-xs font-medium text-text-muted mb-1.5">
+                      {t('dashboard.ticketEmailLabel')}
                     </label>
                     <input
-                      id="ticket-subject"
-                      type="text"
-                      value={premiumTicketForm.subject}
-                      onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, subject: e.target.value }))}
-                      placeholder={t('dashboard.ticketSubjectPlaceholder')}
+                      id="ticket-email"
+                      type="email"
+                      value={premiumTicketForm.contactEmail}
+                      onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, contactEmail: e.target.value }))}
+                      placeholder={t('dashboard.connectEmailPlaceholder')}
                       className={INPUT}
                     />
                   </div>
-                  <div>
-                    <label htmlFor="ticket-description" className="block text-xs font-medium text-text-muted mb-1.5">
-                      {t('dashboard.ticketDescription')}
-                    </label>
-                    <textarea
-                      id="ticket-description"
-                      rows={4}
-                      value={premiumTicketForm.description}
-                      onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, description: e.target.value }))}
-                      placeholder={t('dashboard.ticketDescPlaceholder')}
-                      className={`${INPUT} resize-none`}
-                    />
-                  </div>
-                  {/* Contact email — only show if we don't already know it */}
-                  {!resolvedTicketEmail && (
-                    <div>
-                      <label htmlFor="ticket-email" className="block text-xs font-medium text-text-muted mb-1.5">
-                        {t('dashboard.ticketEmailLabel')}
-                      </label>
-                      <input
-                        id="ticket-email"
-                        type="email"
-                        value={premiumTicketForm.contactEmail}
-                        onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, contactEmail: e.target.value }))}
-                        placeholder={t('dashboard.connectEmailPlaceholder')}
-                        className={INPUT}
-                      />
-                    </div>
+                )}
+                {premiumTicketError && (
+                  <p className="text-xs text-danger ps-1">{premiumTicketError}</p>
+                )}
+                <button
+                  type="button"
+                  onClick={handlePremiumTicket}
+                  disabled={premiumTicketLoading || !premiumTicketForm.subject.trim() || !premiumTicketForm.description.trim() || (!resolvedTicketEmail && !premiumTicketForm.contactEmail.trim())}
+                  className={`${BTN_PRIMARY} w-full`}
+                >
+                  {premiumTicketLoading ? (
+                    <>
+                      <SpinnerIcon className="w-4 h-4" />
+                      {t('dashboard.submitting')}
+                    </>
+                  ) : (
+                    t('dashboard.submitTicket')
                   )}
-                  {premiumTicketError && (
-                    <p className="text-xs text-danger ps-1">{premiumTicketError}</p>
-                  )}
-                  <button
-                    type="button"
-                    onClick={handlePremiumTicket}
-                    disabled={premiumTicketLoading || !premiumTicketForm.subject.trim() || !premiumTicketForm.description.trim() || (!resolvedTicketEmail && !premiumTicketForm.contactEmail.trim())}
-                    className={`${BTN_PRIMARY} w-full`}
-                  >
-                    {premiumTicketLoading ? (
-                      <>
-                        <SpinnerIcon className="w-4 h-4" />
-                        {t('dashboard.submitting')}
-                      </>
-                    ) : (
-                      t('dashboard.submitTicket')
-                    )}
-                  </button>
-                </div>
-              )}
-            </div>
+                </button>
+              </div>
+            )}
           </div>
-        </div>
+        </DashboardDialog>
       )}
       {showWelcome && accountId && (
         <WelcomeModal
@@ -1059,7 +1042,7 @@ export function SubscribeContent() {
     <Suspense
       fallback={
         <main className="min-h-screen bg-bg-primary text-text-primary pt-24">
-          <AccountGateSkeleton />
+          <PageLoader />
         </main>
       }
     >

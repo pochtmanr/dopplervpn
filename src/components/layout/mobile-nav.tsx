@@ -107,7 +107,7 @@ export function MobileNav({ logo }: { logo: ReactNode }) {
       className="mnav fixed inset-0 z-[60] md:hidden"
     >
       <div
-        className="mnav-backdrop absolute inset-0 bg-black/60"
+        className="mnav-backdrop absolute inset-0"
         onClick={close}
         aria-hidden="true"
       />
@@ -133,7 +133,7 @@ export function MobileNav({ logo }: { logo: ReactNode }) {
           </button>
         </div>
 
-        <div className="mnav-body border-t border-overlay/10">
+        <div className="border-t border-overlay/10">
           {/* Nav links — same text size as desktop */}
           <div className="px-2 py-2 space-y-0.5">
             <Link

@@ -1,10 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 import { trackCta, type CtaPlatform, type CtaVariant } from "@/lib/track-cta";
+import { detectPlatform, type Platform } from "@/lib/detect-platform";
 
 const APP_STORE_URL = "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
 const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
@@ -49,6 +51,12 @@ function Stars() {
 export function CTA() {
   const t = useTranslations("cta");
   const tHero = useTranslations("hero");
+  // null until detected after mount; until then (and on desktop) all four show.
+  const [detected, setDetected] = useState<Platform | null>(null);
+
+  useEffect(() => {
+    setDetected(detectPlatform());
+  }, []);
 
   const platforms: ReadonlyArray<{
     id: string;
@@ -65,6 +73,12 @@ export function CTA() {
     { id: "mac", platform: "mac", href: APP_STORE_URL, label: tHero("downloadMac"), icon: <AppleIcon />, external: true, download: false },
     { id: "windows", platform: "windows", variant: "windows-x64", href: WINDOWS_X64_URL, label: tHero("downloadWindows"), icon: <WindowsIcon />, external: false, download: true },
   ];
+
+  // A phone can only install its own store's app, so iOS and Android get one button.
+  const visible =
+    detected === "ios" || detected === "android"
+      ? platforms.filter((p) => p.id === detected)
+      : platforms;
 
   const btnClass =
     "group relative inline-flex items-center gap-3 px-4 py-3 rounded-xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] backdrop-blur-sm text-text-primary hover:border-accent-teal/30 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
@@ -110,8 +124,8 @@ export function CTA() {
                 </div>
 
                 {/* Platform download buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 max-w-md w-full mx-auto lg:mx-0">
-                  {platforms.map((p) => {
+                <div className={`grid grid-cols-1 ${visible.length > 1 ? "sm:grid-cols-2" : ""} gap-3 pt-2 max-w-md w-full mx-auto lg:mx-0`}>
+                  {visible.map((p) => {
                     const onClick = () => trackCta("landing-cta", p.platform, p.variant);
                     return p.external ? (
                       <a

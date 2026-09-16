@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ThinkingOrb } from "thinking-orbs";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 
@@ -44,8 +45,8 @@ export function DeleteConfirmContent() {
       <div className="max-w-md w-full text-center">
         {status === "loading" && (
           <>
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-overlay/10 mb-4">
-              <div className="w-8 h-8 border-2 border-accent-teal border-t-transparent rounded-full animate-spin" />
+            <div className="flex justify-center mb-4">
+              <ThinkingOrb state="solving" size={64} aria-hidden="true" />
             </div>
             <p className="text-text-muted">{t("confirmingDeletion")}</p>
           </>

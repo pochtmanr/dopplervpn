@@ -4,7 +4,8 @@ import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { trackGetPro } from '@/lib/track-cta';
 import { ArrowRightIcon, CheckIcon, ChevronBackIcon, ShieldIcon, SparkleIcon, featureIcons } from './icons';
-import { BTN_PRIMARY, BTN_SECONDARY, EYEBROW, GLASS_CARD, HAIRLINE, ORB } from './ui';
+import { CARD, CARD_HAIRLINE } from '@/components/ui/card-recipes';
+import { BTN_PRIMARY, BTN_SECONDARY, EYEBROW, ORB } from './ui';
 
 /** The paywall's one big action: DESIGN.md standalone CTA, sized up, pulsing once. */
 const PAYWALL_CTA =
@@ -42,8 +43,8 @@ export function SubscriptionCard({
   if (isActivePro) {
     return (
       <div className="space-y-5">
-        <div className={`${GLASS_CARD} p-6`}>
-          <div className={HAIRLINE} />
+        <div className={`${CARD} p-6`}>
+          <div className={CARD_HAIRLINE} aria-hidden="true" />
           <div className={ORB} />
           <div className="relative space-y-5">
             <h2 className={EYEBROW}>{t('dashboard.subscription')}</h2>
@@ -94,89 +95,92 @@ export function SubscriptionCard({
   const features = [t('feat1'), t('feat2'), t('feat3'), t('feat4'), t('feat5'), t('feat6')];
 
   return (
-    <div className={GLASS_CARD}>
-      <div className={HAIRLINE} />
+    // Auto-height wrapper so CARD's h-full doesn't take the whole grid column (see AccountIdCard).
+    <div>
+      <div className={CARD}>
+        <div className={CARD_HAIRLINE} aria-hidden="true" />
 
-      {!showPlans ? (
-        <div key="paywall-features" className="relative slide-in-from-left">
-          <div className="px-6 pt-6 pb-4">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="flex items-center justify-center w-10 h-10 rounded-2xl bg-bg-secondary/80 border border-accent-teal/20 text-accent-teal">
-                <ShieldIcon className="w-5 h-5" />
-              </span>
-              <h2 className="text-2xl font-semibold text-text-primary">{t('dashboard.proActive')}</h2>
-            </div>
-            {isExpiredPro && expiresAt ? (
-              <p className="text-sm font-medium text-accent-amber">
-                {t('dashboard.expiredPro', { date: formatDate(expiresAt, locale) })}
-              </p>
-            ) : (
-              <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
-            )}
-          </div>
-
-          {/* Serif price — DESIGN.md allows Instrument Serif for price figures. */}
-          <div className="px-6 pb-6">
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-text-tertiary">
-              {t('dashboard.from')}
-            </span>
-            <div className="mt-1 flex items-baseline gap-1">
-              <span
-                className="text-6xl sm:text-7xl font-semibold text-text-primary tracking-tight leading-none"
-                style={{ fontFamily: 'var(--font-serif)', fontStyle: 'normal' }}
-              >
-                $3.33
-              </span>
-              <span className="text-lg sm:text-xl text-text-muted">{t('perMonth')}</span>
-            </div>
-          </div>
-
-          <ul className="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
-            {features.map((feat, i) => (
-              <li key={feat} className="flex items-center gap-3 text-sm text-text-primary">
-                <span className="flex items-center justify-center w-9 h-9 shrink-0 rounded-xl bg-bg-secondary/80 border border-accent-teal/20 text-accent-teal">
-                  {featureIcons[i] ?? <CheckIcon className="w-4 h-4" />}
+        {!showPlans ? (
+          <div key="paywall-features" className="relative slide-in-from-left">
+            <div className="px-6 pt-6 pb-4">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="flex items-center justify-center w-10 h-10 rounded-2xl bg-bg-secondary/80 border border-accent-teal/20 text-accent-teal">
+                  <ShieldIcon className="w-5 h-5" />
                 </span>
-                <span>{feat}</span>
-              </li>
-            ))}
-          </ul>
+                <h2 className="text-2xl font-semibold text-text-primary">{t('dashboard.proActive')}</h2>
+              </div>
+              {isExpiredPro && expiresAt ? (
+                <p className="text-sm font-medium text-accent-amber">
+                  {t('dashboard.expiredPro', { date: formatDate(expiresAt, locale) })}
+                </p>
+              ) : (
+                <p className="text-sm text-text-muted">{t('dashboard.freeTier')}</p>
+              )}
+            </div>
 
-          <div className="px-6 pb-6 space-y-3">
-            <button
-              type="button"
-              onClick={() => {
-                trackGetPro('account-paywall');
-                onShowPlans(true);
-              }}
-              className={PAYWALL_CTA}
-            >
-              <SparkleIcon className="w-5 h-5" />
-              {isExpiredPro ? t('dashboard.renewPro') : t('dashboard.getPro')}
-              <ArrowRightIcon className="w-5 h-5 transition-transform group-hover/cta:translate-x-0.5 rtl:group-hover/cta:-translate-x-0.5" />
-            </button>
-            <p className="text-xs text-text-tertiary text-center">{t('footerNote')}</p>
-          </div>
-        </div>
-      ) : (
-        <div key="paywall-plans" className="relative slide-in-from-right">
-          <div className="flex items-center gap-3 px-6 pt-6 pb-5">
-            <button
-              type="button"
-              onClick={() => onShowPlans(false)}
-              aria-label={t('dashboard.back')}
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-overlay/20 bg-bg-primary/40 text-text-primary hover:border-accent-teal/40 hover:bg-accent-teal/10 transition-colors"
-            >
-              <ChevronBackIcon className="w-4 h-4" />
-            </button>
-            <div className="flex items-center gap-2">
-              <ShieldIcon className="w-5 h-5 text-accent-teal" />
-              <h2 className="text-lg font-semibold text-text-primary">{t('dashboard.proActive')}</h2>
+            {/* Serif price — DESIGN.md allows Instrument Serif for price figures. */}
+            <div className="px-6 pb-6">
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-text-tertiary">
+                {t('dashboard.from')}
+              </span>
+              <div className="mt-1 flex items-baseline gap-1">
+                <span
+                  className="text-6xl sm:text-7xl font-semibold text-text-primary tracking-tight leading-none"
+                  style={{ fontFamily: 'var(--font-serif)', fontStyle: 'normal' }}
+                >
+                  $3.33
+                </span>
+                <span className="text-lg sm:text-xl text-text-muted">{t('perMonth')}</span>
+              </div>
+            </div>
+
+            <ul className="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+              {features.map((feat, i) => (
+                <li key={feat} className="flex items-center gap-3 text-sm text-text-primary">
+                  <span className="flex items-center justify-center w-9 h-9 shrink-0 rounded-xl bg-bg-secondary/80 border border-accent-teal/20 text-accent-teal">
+                    {featureIcons[i] ?? <CheckIcon className="w-4 h-4" />}
+                  </span>
+                  <span>{feat}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="px-6 pb-6 space-y-3">
+              <button
+                type="button"
+                onClick={() => {
+                  trackGetPro('account-paywall');
+                  onShowPlans(true);
+                }}
+                className={PAYWALL_CTA}
+              >
+                <SparkleIcon className="w-5 h-5" />
+                {isExpiredPro ? t('dashboard.renewPro') : t('dashboard.getPro')}
+                <ArrowRightIcon className="w-5 h-5 transition-transform group-hover/cta:translate-x-0.5 rtl:group-hover/cta:-translate-x-0.5" />
+              </button>
+              <p className="text-xs text-text-tertiary text-center">{t('footerNote')}</p>
             </div>
           </div>
-          <div className="px-6 pb-6 space-y-5">{plansView}</div>
-        </div>
-      )}
+        ) : (
+          <div key="paywall-plans" className="relative slide-in-from-right">
+            <div className="flex items-center gap-3 px-6 pt-6 pb-5">
+              <button
+                type="button"
+                onClick={() => onShowPlans(false)}
+                aria-label={t('dashboard.back')}
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-overlay/20 bg-bg-primary/40 text-text-primary hover:border-accent-teal/40 hover:bg-accent-teal/10 transition-colors"
+              >
+                <ChevronBackIcon className="w-4 h-4" />
+              </button>
+              <div className="flex items-center gap-2">
+                <ShieldIcon className="w-5 h-5 text-accent-teal" />
+                <h2 className="text-lg font-semibold text-text-primary">{t('dashboard.proActive')}</h2>
+              </div>
+            </div>
+            <div className="px-6 pb-6 space-y-5">{plansView}</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

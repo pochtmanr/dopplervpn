@@ -2,8 +2,7 @@
 
 import { useMemo } from "react";
 import { GlyphField } from "./glyph-field";
-import { useMediaQuery } from "@/lib/use-media-query";
-import { kv, plateAspect, plateScene, TRAFFIC_COLS, type PlateArt } from "./traffic-scene";
+import { kv, plateScene, SUPPORT_WELL_COLS, SUPPORT_WELL_ROWS, type PlateArt } from "./traffic-scene";
 import { useMountOnView } from "./use-mount-on-view";
 
 /**
@@ -11,6 +10,9 @@ import { useMountOnView } from "./use-mount-on-view";
  * filed. Artwork only (aria-hidden, English terminal words); the translated
  * claim is the card's own text. The Telegram card beside it plays a chat
  * instead (support/telegram-chat.tsx).
+ *
+ * Lives in a side well, not a foot band: same 64×16 lattice as the Telegram
+ * grain so both featured cards keep ~11px glyphs.
  */
 
 const TICKET: PlateArt = {
@@ -19,28 +21,22 @@ const TICKET: PlateArt = {
   lines: () => [kv("topic", "▸ connection"), kv("status", "● open"), kv("reply", "< 24h")],
 };
 
-// Glyph size follows the host width, so a wide host needs a wider grid to keep
-// the lattice near the traffic plates' ~11px instead of blowing it up. The card
-// spans the whole two-up row at md and 8 of 12 columns at lg.
-const COLS = { base: TRAFFIC_COLS, md: 96, lg: 128 } as const;
-
 export function TicketPlate() {
   const [hostRef, mounted] = useMountOnView<HTMLDivElement>();
-  const md = useMediaQuery("(min-width: 768px)");
-  const lg = useMediaQuery("(min-width: 1024px)");
-  const cols = lg ? COLS.lg : md ? COLS.md : COLS.base;
-  const scene = useMemo(() => plateScene(TICKET, cols), [cols]);
+  const scene = useMemo(
+    () => plateScene(TICKET, SUPPORT_WELL_COLS, SUPPORT_WELL_ROWS),
+    [],
+  );
 
   return (
     <div
       ref={hostRef}
       aria-hidden="true"
-      style={{ aspectRatio: plateAspect(cols) }}
-      className={`pointer-events-none relative w-full transition-opacity duration-700 motion-reduce:transition-none ${
+      className={`pointer-events-none absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${
         mounted ? "opacity-100" : "opacity-0"
       }`}
     >
-      {mounted && <GlyphField key={cols} scene={scene} loop={false} hover />}
+      {mounted && <GlyphField scene={scene} loop={false} hover />}
     </div>
   );
 }

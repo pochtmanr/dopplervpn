@@ -77,14 +77,20 @@ Body font is Space Grotesk (`--font-body`).
 
 ### Card recipe A — Glyph-strip row card (platforms-available.tsx:52)
 ```
-group relative flex h-[104px] md:h-[112px] flex-row overflow-hidden rounded-xl
-border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 transition-colors
+group relative flex h-[88px] flex-row overflow-hidden rounded-xl
+border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:border-accent-teal/30 transition-colors
 ```
-- Leading strip `relative w-[38%] md:w-1/3 shrink-0 overflow-hidden border-e border-overlay/5` holding a
-  looping `GlyphField` (`hover`, phase-offset per sibling). The field bleeds to the card edges — padding
+- Leading strip `relative w-[34%] md:w-[26%] shrink-0 overflow-hidden border-e border-overlay/5` holding a
+  looping `GlyphField` (`hover`, phase-offset per sibling). Since 2026-09-16 its scene (`platformScene`) is
+  **data rain**: 0/1 columns with the odd hex digit falling at whole-number speeds per cycle, teal heads, a clear
+  rectangle under the logo tile, trail digits at half opacity (`GlyphField dimContent`), teal heads at full strength, the grey logo over them. It resolves out of the grain
+  once and never dissolves (`loop={false}`); per-card variety comes from `platformScene(rainOffsetMs)`. The Android
+  card's tile uses the Google Play mark (`googlePlay` in `platform-icons.tsx`). On the home page the band is `hidden md:block` — phones get the hero CTA and the
+  closing CTA card instead, and that card (`cta.tsx`) shows only the App Store / Google Play button once the UA
+  resolves to iOS / Android (all four otherwise). The field bleeds to the card edges — padding
   belongs to the text zone only.
-- **Glass logo tile** centred on the strip:
-  `w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-teal/20 text-accent-teal group-hover:bg-accent-teal/15 group-hover:border-accent-teal/40 transition-colors`
+- **No tile** since 2026-09-16: the logo sits straight on the strip's clear centre,
+  `w-8 h-8 md:w-10 md:h-10 text-text-muted group-hover:text-accent-teal transition-colors`.
 - Text zone `px-3 md:px-5 py-3 text-start`; trailing chevron
   `hidden md:block me-4 w-4 h-4 text-text-tertiary transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5`.
 
@@ -101,20 +107,28 @@ border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:borde
   `src/components/ui/card-recipes.ts` (`CARD`, `CARD_HAIRLINE`, `CARD_TITLE`, `ROW_CARD`, `ROW_TILE`,
   `ROW_TITLE`, `ROW_TEXT`, `HERO_*`, `splitHeadline`). Change a recipe there, not in either page.
 - Support (reworked 2026-09-16) = the downloads hero → **one action grid** (`support/action-buttons.tsx`,
-  `lg:grid-cols-12`) holding every control on the page, in priority order: Submit a Request (8), with a settle-once terminal plate at
-  the foot (`glyph/ticket-plate.tsx`, `plateScene` on a grid widened per breakpoint), + Telegram (4), with the
-  bare Telegram mark (no tile) and a looping chat at the foot (`support/telegram-chat.tsx`: question bubble →
-  typing dots → answer, using the translated "VPN won't connect" troubleshooting entry; paused off screen, still
-  under reduced motion). The Telegram card is Telegram blue at rest (border, gradient, hairline, question bubble, `.cta-key-telegram`), with a bare-grain `GlyphField tone="telegram"` behind the bubbles; Business shares the same blue via the `accent-blue` tokens → Restore | Email | Business (4 each, plain recipe B, no plate) → Delete account as a
-  quiet full-width recipe A row with a danger tile, linking to `/delete-account`. md is 2-up (ticket and delete
-  span both), phones 1-up. Artwork only on the featured row: it is the hierarchy.
+  `lg:grid-cols-12`) holding every control on the page, in priority order.
+- **Five action cards, one structure** (`ActionCard`): icon tile top-start → title → one-line subtitle →
+  CTA pill bottom-end, diagonally opposite the icon, pinned with `mt-auto`; same `p-6`, tile, title, pill
+  and `min-h-56` on all five. Color names the channel (teal, `accent-blue` Business, Telegram blue with
+  `ROW_TILE_TELEGRAM` + `.cta-key-telegram`); it never changes the structure. Learn it on the first card,
+  rely on it for the rest.
+  - Row 1: Submit a Request (6) | Telegram (6). **xl+ only**, each gets an `aria-hidden` art well on its end
+    half: the settle-once ticket plate (`glyph/ticket-plate.tsx`) and the looping chat
+    (`support/telegram-chat.tsx`: question → typing dots → answer from the translated "VPN won't connect"
+    entry; paused off screen, still under reduced motion). Equal halves keep both lattices one glyph size.
+  - Row 2: Business | Restore | Email (4 each). Row 3: Delete account, a quiet full-width recipe A row with a
+    danger tile, linking to `/delete-account` — not one of the five.
+  - **Below xl there is no artwork**: phones 1-up, md 2-up with Email spanning both, five identical still
+    cards. The wells are `display:none`, so their IntersectionObservers never fire and nothing animates. At lg
+    the half-card well was too narrow (copy wrapped, bubbles squeezed) — don't move it back down.
 - **Act vs read:** FAQ | Troubleshooting sit below in a full-bleed band (`bg-bg-secondary/30 border-y`) with
   **no card chrome** — a heading over a hairline rule, then the accordion. Glass card = you can act on it;
   flat text on the band = you read it. Don't put either back in cards.
 - **Action card control:** the title is the card's one `<button>`/`<a>`, stretched over the card with
   `after:absolute after:inset-0 after:z-10` (a `<button>` cannot contain the plate's block content); the card
   shows focus with `has-[:focus-visible]:ring-2`. The foot pill is the navbar's CTA key as a `<span>`, one per
-  card; the Email card's pill is the revealed `ObfuscatedEmail` mailto itself, flat (`cta-flat`).
+  card, always at the bottom-end; the Email card's pill is the revealed `ObfuscatedEmail` mailto itself, flat (`cta-flat`).
 - **Submit-a-request dialog** (support/ticket-modal.tsx): `CARD_SURFACE` (recipe B without the hover — a dialog
   is not a hover target) over `bg-bg-secondary`, bottom sheet below `sm`. Two steps with a 2-segment teal bar:
   topic cards → details with live minimum-length hints matching the API. Success is a mono receipt plate
@@ -244,6 +258,10 @@ tile and no glyphs. Existing sections using it are migration targets (§9).
 
 No animation library (no framer-motion). CSS keyframes/transitions, IntersectionObserver, and
 throttled `requestAnimationFrame` only.
+One exception, chosen by the owner 2026-09-16: `thinking-orbs` (zero-dependency canvas) for the page
+loader — `ui/page-loader.tsx`, state `solving`, size 64, monochrome ink. It is the only loader for
+account, login/signup, support, downloads, tools, blog and delete-account (`loading.tsx`), the account
+hydration gate, checkout-pending and delete-confirm; use it, don't add another spinner for page loads.
 
 | Pattern | Spec | Where |
 |---|---|---|

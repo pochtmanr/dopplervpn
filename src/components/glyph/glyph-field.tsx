@@ -50,6 +50,8 @@ interface GlyphFieldProps {
    * literally the frame the clock starts on, and with an offset it would not be.
    */
   initialFrame?: Rendered;
+  /** Draws the scene's plain characters at half opacity; accent marks stay full strength. */
+  dimContent?: boolean;
   /** Accent colour: teal everywhere but the support page's Telegram card. */
   tone?: "teal" | "telegram";
 }
@@ -79,6 +81,7 @@ export function GlyphField({
   hover = false,
   frameMs = FRAME_MS,
   initialFrame,
+  dimContent = false,
   tone = "teal",
 }: GlyphFieldProps) {
   const hue = TONES[tone];
@@ -250,7 +253,7 @@ export function GlyphField({
       <pre
         ref={contentRef}
         style={size}
-        className={`${layer} ${warm} text-text-muted ${
+        className={`${layer} ${warm} text-text-muted ${dimContent ? "opacity-50" : ""} ${
           hover ? hue.content : ""
         }`}
       >

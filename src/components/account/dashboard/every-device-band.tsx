@@ -21,7 +21,7 @@ const PLATFORMS: ReadonlyArray<{
   download: boolean;
 }> = [
   { key: 'ios', store: 'appStore', icon: 'apple', href: APP_STORE_URL, platform: 'ios', download: false },
-  { key: 'android', store: 'googlePlay', icon: 'android', href: GOOGLE_PLAY_URL, platform: 'android', variant: 'android-play', download: false },
+  { key: 'android', store: 'googlePlay', icon: 'googlePlay', href: GOOGLE_PLAY_URL, platform: 'android', variant: 'android-play', download: false },
   { key: 'mac', store: 'macAppStore', icon: 'apple', href: APP_STORE_URL, platform: 'mac', download: false },
   { key: 'windows', store: 'directDownload', icon: 'windows', href: WINDOWS_X64_URL, platform: 'windows', variant: 'windows-x64', download: true },
 ];
@@ -49,14 +49,12 @@ export function EveryDeviceBand({ maxDevices }: { maxDevices: number }) {
             href={p.href}
             {...(p.download ? { download: true } : { target: '_blank', rel: 'noopener noreferrer' })}
             onClick={() => trackCta('account-dashboard', p.platform, p.variant)}
-            className="group relative flex h-[104px] md:h-[112px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 transition-colors"
+            className="group relative flex h-[88px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:border-accent-teal/30 transition-colors"
           >
-            <div className="relative w-[38%] md:w-1/3 shrink-0 overflow-hidden border-e border-overlay/5">
+            <div className="relative w-[34%] md:w-[26%] shrink-0 overflow-hidden border-e border-overlay/5">
               <PlatformGlyphBand index={i} />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal group-hover:bg-accent-teal/15 group-hover:border-accent-teal/40 transition-colors">
-                  <PlatformLogo icon={p.icon} />
-                </div>
+                <PlatformLogo icon={p.icon} className="w-8 h-8 md:w-10 md:h-10 text-text-muted group-hover:text-accent-teal transition-colors" />
               </div>
             </div>
 

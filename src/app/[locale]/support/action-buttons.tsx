@@ -12,9 +12,13 @@ import {
   CARD_HAIRLINE,
   CARD_HAIRLINE_BLUE,
   CARD_TITLE,
+  CTA_PILL,
+  DELETE_TILE,
+  KEY_PILL,
   ROW_TEXT,
   ROW_TILE,
   ROW_TILE_BLUE,
+  ROW_TILE_TELEGRAM,
   ROW_TITLE,
 } from '@/components/ui/card-recipes';
 
@@ -44,12 +48,11 @@ function BriefcaseIcon({ className = 'w-5 h-5' }: { className?: string }) {
   );
 }
 
-/** The full Telegram mark — blue disc, white plane — shown bare, not in a tile. */
-function TelegramLogo({ className = 'w-11 h-11' }: { className?: string }) {
+/** Telegram's paper plane on its own, for a tile like every other card's icon. */
+function TelegramIcon({ className = 'w-5 h-5' }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="12" className="fill-telegram" />
-      <path className="fill-white" d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+    <svg className={className} viewBox="3.5 4.5 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
     </svg>
   );
 }
@@ -79,15 +82,13 @@ function ArrowIcon() {
 }
 
 /* ── Recipes ──────────────────────────────────────────────────────── */
-// Six recipe B cards in priority order (DESIGN.md, "Downloads ↔ support"). The
-// title is the card's one control, stretched over the whole card with ::after,
-// so a card can hold a glyph plate (block content a <button> may not contain)
-// and nothing interactive is nested. The foot pill is a <span>, except on the
-// email card, where the revealed mailto itself is the stretched control.
-
-const CTA_PILL =
-  'inline-flex shrink-0 items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-full';
-const KEY_PILL = `cta-key cta-key-sm text-white ${CTA_PILL}`;
+// Five action cards, one structure (DESIGN.md, "Downloads ↔ support"): icon tile
+// top-start → title → subtitle → CTA pill bottom-end, diagonally opposite the
+// icon. The title is the card's one control, stretched over the whole card with
+// ::after, so nothing interactive is nested. The foot pill is a <span>, except on
+// the email card, where the revealed mailto itself is the stretched control.
+// Artwork is extra, xl+ only, in a well beside the copy; below xl the five cards
+// are identical and still (a display:none well never mounts its animation).
 
 const STRETCH =
   "cursor-pointer text-start focus-visible:outline-none after:absolute after:inset-0 after:z-10 after:content-['']";
@@ -111,18 +112,50 @@ const DELETE_ROW =
   'group relative flex min-h-[88px] flex-row items-center overflow-hidden rounded-xl ' +
   'border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-danger/30 transition-colors ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary';
-const DELETE_TILE =
-  'w-11 h-11 shrink-0 rounded-2xl bg-bg-secondary/80 border border-danger/20 flex items-center justify-center ' +
-  'text-danger group-hover:bg-danger/10 group-hover:border-danger/40 transition-colors';
 
-/* ── Parts ────────────────────────────────────────────────────────── */
+/* ── Card ─────────────────────────────────────────────────────────── */
 
-function CardHead({ tile, icon }: { tile: string; icon: React.ReactNode }) {
-  return <div className={tile}>{icon}</div>;
-}
-
-function Desc({ children }: { children: React.ReactNode }) {
-  return <p className="mt-2 text-sm leading-relaxed text-text-muted">{children}</p>;
+/**
+ * Every action card. `title` is the control node (button / link / plain text on
+ * the email card); `art` adds a well on the end half, xl+ only (at lg the half is too narrow).
+ */
+function ActionCard({
+  surface,
+  hairline,
+  tile,
+  icon,
+  title,
+  subtitle,
+  cta,
+  art,
+}: {
+  surface: string;
+  hairline: string;
+  tile: string;
+  icon: React.ReactNode;
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
+  cta: React.ReactNode;
+  art?: React.ReactNode;
+}) {
+  return (
+    <div className={`${surface} min-h-56`}>
+      <span className={hairline} aria-hidden="true" />
+      <div className={`grid min-h-0 flex-1 grid-cols-1 ${art ? 'xl:grid-cols-2' : ''}`}>
+        <div className="flex h-full min-w-0 flex-col p-6">
+          <div className={tile}>{icon}</div>
+          <h3 className={`mt-5 ${CARD_TITLE}`}>{title}</h3>
+          <div className="mt-1.5 text-sm leading-relaxed text-text-muted">{subtitle}</div>
+          <div className="mt-auto flex pt-5">{cta}</div>
+        </div>
+        {art && (
+          <div className="relative hidden overflow-hidden border-s border-overlay/5 xl:block" aria-hidden="true">
+            {art}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 /* ── Component ────────────────────────────────────────────────────── */
@@ -141,125 +174,119 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
       <h2 className="sr-only">{t('contact.title')}</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-5">
-        {/* ── 1 · Submit a request — the featured card ───────────────── */}
-        <Reveal className="h-full md:col-span-2 lg:col-span-8">
-          <div className={TEAL_CARD}>
-            <span className={CARD_HAIRLINE} aria-hidden="true" />
-            <span
-              className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              aria-hidden="true"
-            />
-            <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-start">
-              <CardHead tile={ROW_TILE} icon={<TicketIcon />} />
-              <div className="min-w-0 flex-1">
-                <h3 className={`${CARD_TITLE} md:text-2xl`}>
-                  <button type="button" onClick={onOpenTicket} className={STRETCH}>
-                    {t('actions.submitRequest')}
-                  </button>
-                </h3>
-                <Desc>{t('actions.submitRequestDesc')}</Desc>
-              </div>
-              <span className={`self-start sm:self-center ${KEY_PILL}`}>
+        {/* ── 1 · Submit a request ──────────────────────────────────── */}
+        <Reveal className="h-full lg:col-span-6">
+          <ActionCard
+            surface={TEAL_CARD}
+            hairline={CARD_HAIRLINE}
+            tile={ROW_TILE}
+            icon={<TicketIcon />}
+            title={
+              <button type="button" onClick={onOpenTicket} className={STRETCH}>
+                {t('actions.submitRequest')}
+              </button>
+            }
+            subtitle={t('actions.submitRequestDesc')}
+            cta={
+              <span className={`ms-auto ${KEY_PILL}`}>
                 {t('actions.submitRequestCta')}
                 <ArrowIcon />
               </span>
-            </div>
-            <div className="mt-auto border-t border-overlay/5">
-              <TicketPlate />
-            </div>
-          </div>
+            }
+            art={<TicketPlate />}
+          />
         </Reveal>
 
-        {/* ── 2 · Telegram — the fastest channel ─────────────────────── */}
-        <Reveal delay={50} className="h-full lg:col-span-4">
-          <div className={TELEGRAM_CARD}>
-            <span className={TELEGRAM_HAIRLINE} aria-hidden="true" />
-            {/* Pill beside the name only at xl: narrower, it squeezes the handle. */}
-            <div className="flex flex-col gap-5 p-6 xl:flex-row xl:items-start">
-              <div className="flex min-w-0 flex-1 items-start gap-4">
-                <TelegramLogo className="w-11 h-11 shrink-0" />
-                <div className="min-w-0">
-                  <h3 className={`${CARD_TITLE} transition-colors group-hover:text-telegram`}>
-                    <a
-                      href="https://t.me/DopplerSupportBot"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={STRETCH}
-                    >
-                      {t('contact.telegram')}
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-text-muted" dir="ltr">
-                    {t('contact.telegramBot')}
-                  </p>
-                </div>
-              </div>
-              <span className={`self-start cta-key-telegram ${KEY_PILL}`}>
+        {/* ── 2 · Telegram — same card, chat in the well ───────────── */}
+        <Reveal delay={50} className="h-full lg:col-span-6">
+          <ActionCard
+            surface={TELEGRAM_CARD}
+            hairline={TELEGRAM_HAIRLINE}
+            tile={ROW_TILE_TELEGRAM}
+            icon={<TelegramIcon />}
+            title={
+              <a
+                href="https://t.me/DopplerSupportBot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={STRETCH}
+              >
+                {t('contact.telegram')}
+              </a>
+            }
+            subtitle={<span dir="ltr">{t('contact.telegramBot')}</span>}
+            cta={
+              <span className={`ms-auto cta-key-telegram ${KEY_PILL}`}>
                 {t('actions.submitRequestCta')}
                 <ArrowIcon />
               </span>
-            </div>
-            <div className="mt-auto border-t border-overlay/5">
-              <TelegramChat />
-            </div>
-          </div>
+            }
+            art={<TelegramChat />}
+          />
         </Reveal>
 
-        {/* ── 3 · Restore account ────────────────────────────────────── */}
+        {/* ── 3 · Business ───────────────────────────────────────────── */}
         <Reveal delay={100} className="h-full lg:col-span-4">
-          <div className={`${TEAL_CARD} p-6`}>
-            <span className={CARD_HAIRLINE} aria-hidden="true" />
-            <CardHead tile={ROW_TILE} icon={<KeyIcon />} />
-            <h3 className={`mt-5 ${CARD_TITLE}`}>
+          <ActionCard
+            surface={BLUE_CARD}
+            hairline={CARD_HAIRLINE_BLUE}
+            tile={ROW_TILE_BLUE}
+            icon={<BriefcaseIcon />}
+            title={
+              <button type="button" onClick={onOpenBusiness} className={STRETCH}>
+                {t('actions.businessContact')}
+              </button>
+            }
+            subtitle={t('actions.businessContactDesc')}
+            cta={
+              <span className={`ms-auto cta-key-blue ${KEY_PILL}`}>
+                {t('actions.businessContactCta')}
+                <ArrowIcon />
+              </span>
+            }
+          />
+        </Reveal>
+
+        {/* ── 4 · Restore account ────────────────────────────────────── */}
+        <Reveal delay={150} className="h-full lg:col-span-4">
+          <ActionCard
+            surface={TEAL_CARD}
+            hairline={CARD_HAIRLINE}
+            tile={ROW_TILE}
+            icon={<KeyIcon />}
+            title={
               <button type="button" onClick={onOpenRestore} className={STRETCH}>
                 {t('actions.restoreAccount')}
               </button>
-            </h3>
-            <Desc>{t('actions.restoreAccountDesc')}</Desc>
-            <div className="mt-auto flex pt-5">
+            }
+            subtitle={t('actions.restoreAccountDesc')}
+            cta={
               <span className={`ms-auto ${KEY_PILL}`}>
                 {t('actions.restoreAccountCta')}
                 <ArrowIcon />
               </span>
-            </div>
-          </div>
+            }
+          />
         </Reveal>
 
-        {/* ── 4 · Email — the address stays obfuscated in the HTML ───── */}
-        <Reveal delay={150} className="h-full lg:col-span-4">
-          <div className={`${TEAL_CARD} p-6`}>
-            <span className={CARD_HAIRLINE} aria-hidden="true" />
-            <CardHead tile={ROW_TILE} icon={<EmailIcon />} />
-            <h3 className={`mt-5 ${CARD_TITLE}`}>{t('contact.email')}</h3>
-            <Desc>{t('contact.responseTime')}</Desc>
-            <div className="mt-auto flex pt-5">
+        {/* ── 5 · Email — the address stays obfuscated in the HTML; spans
+             both columns on md so the 2-up grid has no hole ───────────── */}
+        <Reveal delay={200} className="h-full md:col-span-2 lg:col-span-4">
+          <ActionCard
+            surface={TEAL_CARD}
+            hairline={CARD_HAIRLINE}
+            tile={ROW_TILE}
+            icon={<EmailIcon />}
+            title={t('contact.email')}
+            subtitle={t('contact.responseTime')}
+            cta={
               <ObfuscatedEmail
                 user="support"
                 domain="simnetiq.store"
                 className={`ms-auto cta-flat ${CTA_PILL} ${STRETCH}`}
               />
-            </div>
-          </div>
-        </Reveal>
-
-        {/* ── 5 · Business — the one blue card ───────────────────────── */}
-        <Reveal delay={200} className="h-full lg:col-span-4">
-          <div className={`${BLUE_CARD} p-6`}>
-            <span className={CARD_HAIRLINE_BLUE} aria-hidden="true" />
-            <CardHead tile={ROW_TILE_BLUE} icon={<BriefcaseIcon />} />
-            <h3 className={`mt-5 ${CARD_TITLE}`}>
-              <button type="button" onClick={onOpenBusiness} className={STRETCH}>
-                {t('actions.businessContact')}
-              </button>
-            </h3>
-            <Desc>{t('actions.businessContactDesc')}</Desc>
-            <div className="mt-auto flex pt-5">
-              <span className={`ms-auto cta-key-blue ${KEY_PILL}`}>
-                {t('actions.businessContactCta')}
-                <ArrowIcon />
-              </span>
-            </div>
-          </div>
+            }
+          />
         </Reveal>
 
         {/* ── 6 · Delete account — a quiet full-width row ────────────── */}

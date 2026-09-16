@@ -6,7 +6,7 @@ import { PlatformLogo } from "@/components/glyph/platform-icons";
 
 const platforms = [
   { key: "ios", href: "/vpn-for-ios", store: "appStore", icon: "apple" },
-  { key: "android", href: "/vpn-for-android", store: "googlePlay", icon: "android" },
+  { key: "android", href: "/vpn-for-android", store: "googlePlay", icon: "googlePlay" },
   { key: "mac", href: "/vpn-for-macos", store: "macAppStore", icon: "apple" },
   { key: "windows", href: "/vpn-for-windows", store: "directDownload", icon: "windows" },
 ] as const;
@@ -17,7 +17,9 @@ export function PlatformsAvailable() {
   const tApps = useTranslations("apps");
 
   return (
-    <section className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5">
+    // Desktop and tablet only: on a phone the hero and the closing CTA already
+    // offer the one store that visitor can use.
+    <section className="hidden md:block py-8 md:py-12 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30 border-y border-overlay/5">
       <div className="mx-auto max-w-site">
         <Reveal>
           <div className="text-center mb-6 md:mb-8">
@@ -33,21 +35,19 @@ export function PlatformsAvailable() {
               <Link
                 key={key}
                 href={href}
-                className="group relative flex h-[104px] md:h-[112px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 transition-colors"
+                className="group relative flex h-[88px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:border-accent-teal/30 transition-colors"
               >
-                {/* Glyph strip — the leading third. It bleeds to the card's top,
+                {/* Glyph strip — the leading quarter. It bleeds to the card's top,
                     bottom and outer edge on purpose: the padding belongs to the
                     text zone alone, so the field reads as artwork rather than as
                     something pasted into a frame of plain fill. `border-e` is
                     logical, so the strip sits on the correct side under RTL. */}
-                <div className="relative w-[38%] md:w-1/3 shrink-0 overflow-hidden border-e border-overlay/5">
+                <div className="relative w-[34%] md:w-[26%] shrink-0 overflow-hidden border-e border-overlay/5">
                   <PlatformGlyphBand index={i} />
-                  {/* The scene leaves its middle empty, so the logo sits on
-                      quiet ground inside the bracket frame. */}
+                  {/* The scene leaves its middle empty, so the logo sits straight
+                      on quiet ground — no tile. Grey at rest, teal on hover. */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-11 h-11 md:w-14 md:h-14 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal group-hover:bg-accent-teal/15 group-hover:border-accent-teal/40 transition-colors">
-                      <PlatformLogo icon={icon} />
-                    </div>
+                    <PlatformLogo icon={icon} className="w-8 h-8 md:w-10 md:h-10 text-text-muted group-hover:text-accent-teal transition-colors" />
                   </div>
                 </div>
 

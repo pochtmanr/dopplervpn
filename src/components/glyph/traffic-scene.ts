@@ -25,6 +25,12 @@ import { stamp, type Frame, type Scene } from "./glyph-scene";
 export const TRAFFIC_COLS = 52;
 export const TRAFFIC_ROWS = 9;
 
+/** Side well on the support featured cards (ticket plate + Telegram grain). */
+export const SUPPORT_WELL_COLS = 64;
+export const SUPPORT_WELL_ROWS = 16;
+export const SUPPORT_WELL_ASPECT =
+  (SUPPORT_WELL_COLS * 0.6) / (SUPPORT_WELL_ROWS * 1.15);
+
 /** The grid's shape. A host that does not adopt it will clip the lattice. */
 export const TRAFFIC_ASPECT = (TRAFFIC_COLS * 0.6) / (TRAFFIC_ROWS * 1.15);
 
@@ -136,33 +142,38 @@ export function trafficScene(index: number): Scene {
   return plateScene(STEPS[index % STEPS.length]);
 }
 
-/** Grid aspect for a plate scene `cols` wide. A host must adopt it or the lattice clips. */
-export function plateAspect(cols: number): number {
-  return (cols * 0.6) / (TRAFFIC_ROWS * 1.15);
+/** Grid aspect for a plate scene. A host must adopt it or the lattice clips. */
+export function plateAspect(cols: number, rows: number = TRAFFIC_ROWS): number {
+  return (cols * 0.6) / (rows * 1.15);
 }
 
 /**
  * A terminal plate: prints left to right, then keeps working. `cols` widens the
  * grid around a centred plate, so a wide host keeps the glyphs small instead of
- * scaling them up to fill its width.
+ * scaling them up to fill its width. `rows` does the same on the vertical axis
+ * for a side slot (the traffic band stays 9).
  */
-export function plateScene(art: PlateArt, cols: number = TRAFFIC_COLS): Scene {
-  // The traffic grid keeps its hand-placed offset; wider grids centre the plate.
-  const plateX = cols === TRAFFIC_COLS ? PLATE_X : Math.floor((cols - PLATE_W) / 2);
+export function plateScene(
+  art: PlateArt,
+  cols: number = TRAFFIC_COLS,
+  rows: number = TRAFFIC_ROWS,
+): Scene {
+  const originX = cols === TRAFFIC_COLS ? PLATE_X : Math.floor((cols - PLATE_W) / 2);
+  const originY = rows === TRAFFIC_ROWS ? PLATE_TOP : Math.floor((rows - 5) / 2);
   /** Column of the last usable cell inside the plate — where the cursor rides. */
-  const cursorX = plateX + PLATE_W - 3;
+  const cursorX = originX + PLATE_W - 3;
 
   return {
     cols,
-    rows: TRAFFIC_ROWS,
+    rows,
 
     paint(f: Frame, tMs: number) {
-      stamp(f, PLATE_TOP, plateX, plateTop(art.label));
-      art.lines(tMs).forEach((line, i) => stamp(f, PLATE_TOP + 1 + i, plateX, plateLine(line)));
-      stamp(f, PLATE_TOP + 4, plateX, plateBottom());
+      stamp(f, originY, originX, plateTop(art.label));
+      art.lines(tMs).forEach((line, i) => stamp(f, originY + 1 + i, originX, plateLine(line)));
+      stamp(f, originY + 4, originX, plateBottom());
 
       if (art.cursor) {
-        stamp(f, PLATE_TOP + 1 + (Math.floor(tMs / 450) % 3), cursorX, "▸", "accent");
+        stamp(f, originY + 1 + (Math.floor(tMs / 450) % 3), cursorX, "▸", "accent");
       }
     },
 
@@ -170,7 +181,7 @@ export function plateScene(art: PlateArt, cols: number = TRAFFIC_COLS): Scene {
       // Left to right, so the plate reads as a line printing. The band's radial
       // order is that picture's signature and is not borrowed here; the row term
       // is small, just enough to stop the sweep looking like a rigid wipe.
-      const sweep = (col / (cols - 1)) * 0.85 + (row / (TRAFFIC_ROWS - 1)) * 0.15;
+      const sweep = (col / (cols - 1)) * 0.85 + (row / (rows - 1)) * 0.15;
       return Math.min(1, Math.max(0, sweep));
     },
   };

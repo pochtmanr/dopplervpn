@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { CONTACT } from '@/lib/facts';
 import type { AccountInfo } from '../types';
 import { ArrowRightIcon, MailIcon, SpinnerIcon, TelegramIcon } from './icons';
 import { BTN_PRIMARY, EYEBROW, ICON_TILE, INPUT, PLAIN_CARD, ROW_LINK } from './ui';
@@ -12,7 +13,7 @@ function StatusPill({ verified, label }: { verified: boolean; label: string }) {
   return (
     <span
       className={`shrink-0 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${
-        verified ? 'bg-green-500/15 text-green-400' : 'bg-yellow-500/15 text-yellow-400'
+        verified ? 'bg-accent-teal/15 text-accent-teal' : 'bg-accent-amber/15 text-accent-amber'
       }`}
     >
       {label}
@@ -25,13 +26,31 @@ interface ContactsCardProps {
   accountInfo: AccountInfo | null;
   /** Called after a contact is saved, so the parent can refetch and toast. */
   onSaved: () => void;
+  /** Bumped by the Account card's "Connect email": open the field and bring it into view. */
+  emailRequest?: number;
 }
 
-export function ContactsCard({ accountId, accountInfo, onSaved }: ContactsCardProps) {
+export function ContactsCard({ accountId, accountInfo, onSaved, emailRequest = 0 }: ContactsCardProps) {
   const t = useTranslations('subscribe.dashboard');
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [saving, setSaving] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Focus without scrolling: autoFocus would jump the page and cut across the
+  // smooth scroll below.
+  useEffect(() => {
+    if (open) inputRef.current?.focus({ preventScroll: true });
+  }, [open]);
+
+  useEffect(() => {
+    if (!emailRequest) return;
+    setOpen(true);
+    inputRef.current?.focus({ preventScroll: true });
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    cardRef.current?.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+  }, [emailRequest]);
 
   const hasEmail = !!(accountInfo?.contactMethod === 'email' && accountInfo.contactValue);
   const hasTelegram = !!(accountInfo?.contactMethod === 'telegram' && accountInfo.contactValue);
@@ -59,7 +78,7 @@ export function ContactsCard({ accountId, accountInfo, onSaved }: ContactsCardPr
   };
 
   return (
-    <div className={`${PLAIN_CARD} p-5`}>
+    <div ref={cardRef} id="contacts" className={`${PLAIN_CARD} scroll-mt-28 p-5`}>
       <div className="flex items-center justify-between gap-3 mb-4">
         <h2 className={EYEBROW}>{t('contacts')}</h2>
         <span className="text-xs text-text-tertiary">{t('contactsOptional')}</span>
@@ -113,7 +132,7 @@ export function ContactsCard({ accountId, accountInfo, onSaved }: ContactsCardPr
                 onKeyDown={(e) => e.key === 'Enter' && save()}
                 placeholder={t('connectEmailPlaceholder')}
                 className={`${INPUT} flex-1`}
-                autoFocus
+                ref={inputRef}
               />
               <button type="button" onClick={save} disabled={saving} className={BTN_PRIMARY}>
                 {saving ? <SpinnerIcon className="w-4 h-4" /> : t('save')}
@@ -128,7 +147,7 @@ export function ContactsCard({ accountId, accountInfo, onSaved }: ContactsCardPr
           ))}
 
         {!hasTelegram && (
-          <a href="https://t.me/DopplerVerifyBot" target="_blank" rel="noopener noreferrer" className={ROW_LINK}>
+          <a href={CONTACT.telegram.verifyBot} target="_blank" rel="noopener noreferrer" className={ROW_LINK}>
             <TelegramIcon className="w-4 h-4 text-telegram" />
             {t('connectTelegram')}
             <ArrowRightIcon className="w-3.5 h-3.5 ms-auto text-text-tertiary transition-transform group-hover/row:translate-x-0.5 rtl:group-hover/row:-translate-x-0.5" />

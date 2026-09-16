@@ -126,31 +126,82 @@ export interface Scene {
 }
 
 /* ── The platform scene ──────────────────────────────────────────────
- * No words and no frame. The strip is bare drifting grain with a single accent
- * mark scanning its outer edge; the platform's own SVG logo sits over the
- * middle, on ground left deliberately empty.
+ * Data rain. Columns of 0/1 and the odd hex digit fall down the strip at their
+ * own speeds, each led by a teal head; the platform's own SVG logo sits over
+ * the middle, on a rectangle kept deliberately empty.
  *
- * A cell holding "" draws noise, so leaving the scene almost entirely unstamped
- * is what lets the lattice itself be the artwork.
+ * Every cell is stamped — a trail glyph or a space — because a "" cell would
+ * draw fbm grain, and the rain is meant to replace the grain, not sit on it.
  */
 
-const SCAN_COL = COLS - 4; // 20
-const SCAN_TOP = 3;
-const SCAN_BOTTOM = ROWS - 4; // 8
-const SCAN_STEP_MS = 420;
+const RAIN_TRAIL = 4;
+// A drop falls off the bottom and spends its trail's length out of sight before
+// re-entering, so the columns don't all look like they recycle on the spot.
+const RAIN_PERIOD = ROWS + RAIN_TRAIL + 3;
+// How often a trail glyph re-rolls. Slower than the 50ms paint, so the digits
+// flicker like a terminal rather than boil.
+const RAIN_FLICKER_MS = 150;
+// Mostly 0/1 with the odd hex digit, so it reads as bits first.
+const RAIN_GLYPHS = "01".repeat(24) + "0123456789abcdef";
+
+// The ground under the logo (it covers ~45% × 45% of the strip).
+const CLEAR_COL_START = 6;
+const CLEAR_COL_END = COLS - 6; // exclusive → cols 6..17
+const CLEAR_ROW_START = 3;
+const CLEAR_ROW_END = ROWS - 3; // exclusive → rows 3..8
+
+function rainHash(x: number, y: number): number {
+  const s = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+  return s - Math.floor(s);
+}
+
+interface RainColumn {
+  /** Whole falls per CYCLE_MS — an integer, so the loop wrap is seamless. */
+  falls: number;
+  offset: number;
+}
+
+// Spatial only, so it is fixed per column. Roughly a third of columns stay dry,
+// which is what makes it read as rain rather than a wall of digits.
+const RAIN_COLUMNS: ReadonlyArray<RainColumn | null> = Array.from({ length: COLS }, (_, c) => {
+  if (rainHash(c, 1.7) < 0.34) return null;
+  return {
+    falls: 2 + Math.floor(rainHash(c, 5.3) * 4), // 2..5
+    offset: Math.floor(rainHash(c, 9.1) * RAIN_PERIOD),
+  };
+});
 
 /**
- * One shared scene: the platforms are told apart by their logo and by their
- * phase offset, not by the artwork, so there is nothing here to parameterise.
+ * One shared scene: the platforms are told apart by their logo, not by the
+ * artwork. `rainOffsetMs` only shifts where each card's drops are, so sibling
+ * cards open together without raining in lockstep.
  */
-export function platformScene(): Scene {
+export function platformScene(rainOffsetMs = 0): Scene {
   return {
-    paint(f, tMs) {
-      // A mark scanning the outer edge, quantised to its own step so it reads as
-      // deliberate motion rather than riding the render rate.
-      const span = SCAN_BOTTOM - SCAN_TOP;
-      const scanRow = SCAN_TOP + (Math.floor(tMs / SCAN_STEP_MS) % span);
-      stamp(f, scanRow, SCAN_COL, "▸", "accent");
+    paint(f, sceneMs) {
+      const tMs = sceneMs + rainOffsetMs;
+      const tick = Math.floor(tMs / RAIN_FLICKER_MS);
+      for (let c = 0; c < COLS; c++) {
+        const column = RAIN_COLUMNS[c];
+        const head = column
+          ? (Math.floor((tMs / CYCLE_MS) * column.falls * RAIN_PERIOD) + column.offset) % RAIN_PERIOD
+          : -RAIN_PERIOD;
+        const clearCol = c >= CLEAR_COL_START && c < CLEAR_COL_END;
+
+        for (let r = 0; r < ROWS; r++) {
+          const behind = head - r; // 0 = the head, 1..TRAIL = its trail
+          if (
+            (clearCol && r >= CLEAR_ROW_START && r < CLEAR_ROW_END) ||
+            behind < 0 ||
+            behind > RAIN_TRAIL
+          ) {
+            stamp(f, r, c, " ");
+            continue;
+          }
+          const glyph = RAIN_GLYPHS[Math.floor(rainHash(c * 3.1 + tick, r * 7.3) * RAIN_GLYPHS.length)];
+          stamp(f, r, c, glyph, behind === 0 ? "accent" : "auto");
+        }
+      }
     },
     order(row, col) {
       // Radial: the middle settles first, so the ground under the logo is quiet

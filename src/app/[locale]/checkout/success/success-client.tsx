@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { ThinkingOrb } from 'thinking-orbs';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
@@ -179,8 +180,8 @@ function PendingShell({
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary flex items-center justify-center p-4">
       <div className="w-full max-w-md text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent-teal/15 ring-1 ring-accent-teal/30 mb-6">
-          <Spinner />
+        <div className="flex justify-center mb-6">
+          <ThinkingOrb state="solving" size={64} aria-hidden="true" />
         </div>
         <h1 className="text-2xl font-bold mb-2">{t('pending.title')}</h1>
         <p className="text-text-muted text-sm mb-6">{t('pending.body', { processor })}</p>
@@ -493,15 +494,6 @@ function DownloadButton({
 }
 
 /* ─────────── icons ─────────── */
-
-function Spinner() {
-  return (
-    <svg className="w-8 h-8 animate-spin text-accent-teal" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.2" strokeWidth="3" />
-      <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 function CheckBadge() {
   return (
