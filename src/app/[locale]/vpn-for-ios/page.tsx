@@ -224,7 +224,7 @@ export default async function VpnForIosPage({ params }: PageProps) {
         }))}
       />
       <Navbar />
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-clip">
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">

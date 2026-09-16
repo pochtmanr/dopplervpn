@@ -459,7 +459,7 @@ export default async function DownloadsPage({ params }: PageProps) {
           pages. See the comment above the component in json-ld.tsx. */}
       <SoftwareApplicationSchema locale={locale} />
       <Navbar />
-      <main className="relative overflow-x-hidden">
+      <main className="relative overflow-x-clip">
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className={HERO_SECTION}>
           <div className="relative mx-auto max-w-site text-center">

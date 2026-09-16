@@ -10,6 +10,8 @@ import {
   StepPanel,
   MinHint,
   useModalDialog,
+  useVisualViewportFit,
+  isCoarsePointer,
   DIALOG_PANEL,
   CLOSE_PATH,
   CHECK_PATH,
@@ -200,14 +202,16 @@ function TicketReceipt({ ticketNumber, topic, email }: { ticketNumber: string; t
 
 export function TicketModal({ account, onClose }: TicketModalProps) {
   const t = useTranslations('support');
+  const tSubscribe = useTranslations('subscribe');
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const subjectRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
   const titleId = useId();
 
   /* Step state */
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [direction, setDirection] = useState<'none' | 'forward' | 'back'>('none');
 
   /* Form state */
@@ -230,18 +234,24 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
   const subjectLen = subject.trim().length;
   const descriptionLen = description.trim().length;
   const emailValid = EMAIL_REGEX.test(email.trim());
-  const canSubmit = !!topic && subjectLen >= SUBJECT_MIN && descriptionLen >= DESCRIPTION_MIN && emailValid;
+  const detailsValid = subjectLen >= SUBJECT_MIN && descriptionLen >= DESCRIPTION_MIN;
+  const canSubmit = !!topic && detailsValid && emailValid;
   const showEmailError = emailTouched && !emailValid;
 
   /* Declared first so it captures the opener before focus moves into the dialog */
   useModalDialog(panelRef, onClose);
+  useVisualViewportFit(overlayRef);
 
-  /* Move focus into the current step */
+  /* Move focus into the current step (the panel itself on touch — see isCoarsePointer) */
   useEffect(() => {
     const panel = panelRef.current;
     if (!panel) return;
-    if (step === 2) {
+    if (isCoarsePointer()) {
+      panel.focus({ preventScroll: true });
+    } else if (step === 2) {
       subjectRef.current?.focus();
+    } else if (step === 3) {
+      emailRef.current?.focus();
     } else {
       const target =
         panel.querySelector<HTMLElement>('[data-topic][aria-pressed="true"]') ??
@@ -253,7 +263,7 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
   /* The form unmounts on success, taking focus with it: land on the heading so
      it is read out and the Tab trap has a starting point inside the dialog. */
   useEffect(() => {
-    if (success) successHeadingRef.current?.focus();
+    if (success) successHeadingRef.current?.focus({ preventScroll: true });
   }, [success]);
 
   /* Click outside (desktop) */
@@ -270,7 +280,14 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
   const goBack = () => {
     setError('');
     setDirection('back');
-    setStep(1);
+    setStep(step === 3 ? 2 : 1);
+  };
+
+  const goToContact = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!detailsValid) return;
+    setDirection('forward');
+    setStep(3);
   };
 
   /* Submit */
@@ -317,17 +334,19 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]"
+      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center max-sm:pt-[max(0.5rem,env(safe-area-inset-top))] sm:p-4 overscroll-contain bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]"
     >
       {/* Sizing wrapper: its height is indefinite, so the panel's h-full resolves to
-          auto instead of stretching the panel to the viewport. */}
-      <div className="flex w-full sm:max-w-lg max-h-[90vh] flex-col animate-[slideUp_200ms_ease-out]">
+          auto instead of stretching the panel to the viewport. Capped by the scrim,
+          which useVisualViewportFit keeps equal to the visible area on phones. */}
+      <div className="flex w-full sm:max-w-lg max-h-full sm:max-h-[90vh] flex-col animate-[slideUp_200ms_ease-out]">
         <div
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          className={`${DIALOG_PANEL} min-h-0 max-sm:rounded-b-none max-sm:border-b-0`}
+          tabIndex={-1}
+          className={`${DIALOG_PANEL} min-h-0 outline-none max-sm:rounded-b-none max-sm:border-b-0`}
         >
           {/* ── Header ── */}
           <div className="relative flex items-start gap-4 p-6 pb-4">
@@ -354,7 +373,7 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
           {!success && (
             <div className="relative px-6 pb-4 border-b border-overlay/5">
               <div className="flex gap-1.5" aria-hidden="true">
-                {[1, 2].map((n) => (
+                {[1, 2, 3].map((n) => (
                   <span
                     key={n}
                     className={`h-0.5 flex-1 rounded-full transition-colors duration-200 ${
@@ -364,7 +383,7 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
                 ))}
               </div>
               <p className="mt-2 text-xs text-text-tertiary" aria-live="polite">
-                {t('ticket.stepOf', { current: step, total: 2 })}
+                {t('ticket.stepOf', { current: step, total: 3 })}
               </p>
             </div>
           )}
@@ -452,10 +471,10 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
                   })}
                 </div>
               </StepPanel>
-            ) : (
-              /* ── Step 2: details ── */
+            ) : step === 2 ? (
+              /* ── Step 2: what happened ── */
               <StepPanel key="step-2" direction={direction}>
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                <form onSubmit={goToContact} noValidate className="space-y-5">
                   <div className="flex items-center justify-between gap-3">
                     <button
                       type="button"
@@ -521,12 +540,44 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
                     />
                   </div>
 
+                  <button
+                    type="submit"
+                    disabled={!detailsValid}
+                    className="cta-key w-full rounded-xl disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2"
+                  >
+                    {tSubscribe('continue')}
+                  </button>
+                </form>
+              </StepPanel>
+            ) : (
+              /* ── Step 3: where to reply ── */
+              <StepPanel key="step-3" direction={direction}>
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      className={`-ms-2 inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors ${FOCUS_RING}`}
+                    >
+                      <Icon d={BACK_PATH} className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                      {t('ticket.back')}
+                    </button>
+                    {topic && (
+                      <span className="inline-flex min-w-0 items-center gap-2 rounded-full border border-accent-teal/20 bg-accent-teal/10 px-3 py-1.5 text-xs font-medium text-accent-teal">
+                        <Icon d={TOPIC_ICONS[topic]} className="w-4 h-4 shrink-0" />
+                        <span className="sr-only">{t('ticket.topicLabel')}: </span>
+                        <span className="truncate">{t(`ticket.topics.${topic}`)}</span>
+                      </span>
+                    )}
+                  </div>
+
                   {/* Contact Email */}
                   <div>
                     <label htmlFor="ticket-email" className={`${LABEL} text-text-muted`}>
                       {t('ticket.emailLabel')}
                     </label>
                     <input
+                      ref={emailRef}
                       id="ticket-email"
                       type="email"
                       autoComplete="email"

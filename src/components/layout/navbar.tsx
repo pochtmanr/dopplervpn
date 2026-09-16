@@ -15,8 +15,16 @@ export async function Navbar() {
     </Link>
   );
 
+  // Sticky with zero height, not fixed. iOS 26 Safari floats its toolbars over
+  // the page and repositions fixed elements on their own layer whenever the
+  // toolbar collapses (first pixels of a scroll) or returns (pull-to-refresh),
+  // so a fixed bar visibly lagged, snapped back, or landed half under the
+  // status bar. A sticky bar scrolls with the document instead. `h-0` keeps it
+  // out of the flow, so pages keep their own top padding; the pill overflows
+  // the empty box. Must stay a direct child of the page (body is its
+  // containing block). mobile-nav.tsx's .mnav-panel mirrors this top offset.
   return (
-    <header className="fixed top-[max(1rem,env(safe-area-inset-top))] inset-x-0 z-50 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-[max(1rem,env(safe-area-inset-top))] z-50 h-0 px-4 sm:px-6 lg:px-8">
       <DesktopNav
         logo={logo}
         controls={<ThemeToggle />}

@@ -40,7 +40,7 @@ export const INPUT =
 
 /** Modal scrim, as the support dialogs have it. Pair with DIALOG_PANEL from ui/modal-parts. */
 export const SCRIM =
-  'overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]';
+  'overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center max-sm:pt-[max(0.5rem,env(safe-area-inset-top))] sm:p-4 overscroll-contain bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]';
 
 /* ── Icon buttons, tooltips, popovers ──────────────────────────────────── */
 

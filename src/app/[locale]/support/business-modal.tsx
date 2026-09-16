@@ -9,6 +9,8 @@ import {
   StepPanel,
   MinHint,
   useModalDialog,
+  useVisualViewportFit,
+  isCoarsePointer,
   DIALOG_PANEL,
   CLOSE_PATH,
   CHECK_PATH,
@@ -200,14 +202,16 @@ function InquiryReceipt({ ticketNumber, company, email }: { ticketNumber: string
 
 export function BusinessModal({ onClose }: { onClose: () => void }) {
   const t = useTranslations('support');
+  const tSubscribe = useTranslations('subscribe');
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const companyRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const successHeadingRef = useRef<HTMLHeadingElement>(null);
   const titleId = useId();
 
   /* Step state */
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [direction, setDirection] = useState<'none' | 'forward' | 'back'>('none');
 
   /* Form state */
@@ -228,18 +232,24 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
   const companyLen = company.trim().length;
   const messageLen = message.trim().length;
   const emailValid = EMAIL_REGEX.test(email.trim());
-  const canSubmit = !!inquiryType && companyLen >= COMPANY_MIN && messageLen >= MESSAGE_MIN && emailValid;
+  const companyValid = companyLen >= COMPANY_MIN;
+  const canSubmit = !!inquiryType && companyValid && messageLen >= MESSAGE_MIN && emailValid;
   const showEmailError = emailTouched && !emailValid;
 
   /* Declared first so it captures the opener before focus moves into the dialog */
   useModalDialog(panelRef, onClose);
+  useVisualViewportFit(overlayRef);
 
-  /* Move focus into the current step */
+  /* Move focus into the current step (the panel itself on touch — see isCoarsePointer) */
   useEffect(() => {
     const panel = panelRef.current;
     if (!panel) return;
-    if (step === 2) {
+    if (isCoarsePointer()) {
+      panel.focus({ preventScroll: true });
+    } else if (step === 2) {
       companyRef.current?.focus();
+    } else if (step === 3) {
+      emailRef.current?.focus();
     } else {
       const target =
         panel.querySelector<HTMLElement>('[data-type][aria-pressed="true"]') ??
@@ -250,7 +260,7 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
 
   /* The form unmounts on success: land on the heading so it is read out */
   useEffect(() => {
-    if (success) successHeadingRef.current?.focus();
+    if (success) successHeadingRef.current?.focus({ preventScroll: true });
   }, [success]);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -266,7 +276,14 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
   const goBack = () => {
     setError('');
     setDirection('back');
-    setStep(1);
+    setStep(step === 3 ? 2 : 1);
+  };
+
+  const goToContact = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!companyValid) return;
+    setDirection('forward');
+    setStep(3);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -315,16 +332,18 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]"
+      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center max-sm:pt-[max(0.5rem,env(safe-area-inset-top))] sm:p-4 overscroll-contain bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]"
     >
-      {/* Sizing wrapper: its height is indefinite, so the surface's h-full resolves to auto */}
-      <div className="flex w-full sm:max-w-lg max-h-[90vh] flex-col animate-[slideUp_200ms_ease-out]">
+      {/* Sizing wrapper: its height is indefinite, so the surface's h-full resolves to auto.
+          Capped by the scrim, which useVisualViewportFit keeps equal to the visible area. */}
+      <div className="flex w-full sm:max-w-lg max-h-full sm:max-h-[90vh] flex-col animate-[slideUp_200ms_ease-out]">
         <div
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          className={`${DIALOG_PANEL} min-h-0 max-sm:rounded-b-none max-sm:border-b-0`}
+          tabIndex={-1}
+          className={`${DIALOG_PANEL} min-h-0 outline-none max-sm:rounded-b-none max-sm:border-b-0`}
         >
           {/* ── Header ── */}
           <div className="relative flex items-start gap-4 p-6 pb-4">
@@ -351,7 +370,7 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
           {!success && (
             <div className="relative px-6 pb-4 border-b border-overlay/5">
               <div className="flex gap-1.5" aria-hidden="true">
-                {[1, 2].map((n) => (
+                {[1, 2, 3].map((n) => (
                   <span
                     key={n}
                     className={`h-0.5 flex-1 rounded-full transition-colors duration-200 ${
@@ -361,7 +380,7 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
                 ))}
               </div>
               <p className="mt-2 text-xs text-text-tertiary" aria-live="polite">
-                {t('ticket.stepOf', { current: step, total: 2 })}
+                {t('ticket.stepOf', { current: step, total: 3 })}
               </p>
             </div>
           )}
@@ -449,10 +468,10 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
                   })}
                 </div>
               </StepPanel>
-            ) : (
-              /* ── Step 2: details ── */
+            ) : step === 2 ? (
+              /* ── Step 2: company ── */
               <StepPanel key="step-2" direction={direction}>
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                <form onSubmit={goToContact} noValidate className="space-y-5">
                   <div className="flex items-center justify-between gap-3">
                     <button
                       type="button"
@@ -469,19 +488,6 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
                         <span className="truncate">{t(`businessForm.types.${inquiryType}`)}</span>
                       </span>
                     )}
-                  </div>
-
-                  {/* Honeypot: off-screen and out of the tab order; humans never fill it */}
-                  <div aria-hidden="true" className="absolute -start-[9999px] h-px w-px overflow-hidden">
-                    <label htmlFor="biz-fax">Fax</label>
-                    <input
-                      id="biz-fax"
-                      type="text"
-                      tabIndex={-1}
-                      autoComplete="off"
-                      value={fax}
-                      onChange={(e) => setFax(e.target.value)}
-                    />
                   </div>
 
                   {/* Company */}
@@ -576,12 +582,57 @@ export function BusinessModal({ onClose }: { onClose: () => void }) {
                     </div>
                   </div>
 
+                  <button
+                    type="submit"
+                    disabled={!companyValid}
+                    className="cta-key cta-key-blue w-full rounded-xl disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2"
+                  >
+                    {tSubscribe('continue')}
+                  </button>
+                </form>
+              </StepPanel>
+            ) : (
+              /* ── Step 3: contact + message ── */
+              <StepPanel key="step-3" direction={direction}>
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={goBack}
+                      className={`-ms-2 inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors ${FOCUS_RING}`}
+                    >
+                      <Icon d={BACK_PATH} className="w-4 h-4 rtl:-scale-x-100" strokeWidth={2} />
+                      {t('ticket.back')}
+                    </button>
+                    {inquiryType && (
+                      <span className="inline-flex min-w-0 items-center gap-2 rounded-full border border-accent-blue/25 bg-accent-blue/10 px-3 py-1.5 text-xs font-medium text-accent-blue-light">
+                        <Icon d={TYPE_ICONS[inquiryType]} className="w-4 h-4 shrink-0" />
+                        <span className="sr-only">{t('businessForm.typeLabel')}: </span>
+                        <span className="truncate">{t(`businessForm.types.${inquiryType}`)}</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Honeypot: off-screen and out of the tab order; humans never fill it */}
+                  <div aria-hidden="true" className="absolute -start-[9999px] h-px w-px overflow-hidden">
+                    <label htmlFor="biz-fax">Fax</label>
+                    <input
+                      id="biz-fax"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={fax}
+                      onChange={(e) => setFax(e.target.value)}
+                    />
+                  </div>
+
                   {/* Work email */}
                   <div>
                     <label htmlFor="biz-email" className={`${LABEL} text-text-muted`}>
                       {t('businessForm.emailLabel')}
                     </label>
                     <input
+                      ref={emailRef}
                       id="biz-email"
                       type="email"
                       autoComplete="email"

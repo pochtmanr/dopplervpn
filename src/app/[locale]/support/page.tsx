@@ -108,7 +108,7 @@ export default async function SupportPage({ params }: PageProps) {
         description={t("subtitle")}
       />
       <Navbar />
-      <main className="relative overflow-x-hidden">
+      <main className="relative overflow-x-clip">
         {/* ── Hero ──────────────────────────────────────────────── */}
         {/* The downloads hero: static, last word on the clip-text ramp. */}
         <section className={HERO_SECTION}>

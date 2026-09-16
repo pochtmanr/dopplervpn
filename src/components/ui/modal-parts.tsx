@@ -54,7 +54,7 @@ export function useModalDialog(panelRef: RefObject<HTMLDivElement | null>, onClo
   /* Restore focus to the opener on close */
   useEffect(() => {
     const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    return () => opener?.focus();
+    return () => opener?.focus({ preventScroll: true });
   }, []);
 
   /* Escape to close, Tab trapped inside the dialog */
@@ -86,11 +86,74 @@ export function useModalDialog(panelRef: RefObject<HTMLDivElement | null>, onClo
     return () => document.removeEventListener('keydown', handler);
   }, [onClose, panelRef]);
 
-  /* Lock scroll */
+  useScrollLock();
+}
+
+/* ── Scroll lock ──────────────────────────────────────────────────── */
+// `body { overflow: hidden }` alone does not stop iOS Safari: the page kept
+// scrolling under the sheet and dragged the fixed dialog with it. Pinning the
+// body at its current offset does, and the offset is put back on release.
+
+export function useScrollLock() {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
+    const { body, documentElement: html } = document;
+    const y = window.scrollY;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      overflow: body.style.overflow,
+    };
+    body.style.position = 'fixed';
+    body.style.top = `-${y}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.overflow = 'hidden';
+    return () => {
+      Object.assign(body.style, prev);
+      // Jump straight back: a smooth scroll-behavior would animate from the top.
+      const behavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      html.style.scrollBehavior = behavior;
+    };
   }, []);
+}
+
+/* ── Visual-viewport fit ──────────────────────────────────────────── */
+// `fixed inset-0` and `vh` both describe the layout viewport, which on iOS
+// ignores the on-screen keyboard and the floating toolbars. A bottom sheet
+// capped at 90vh therefore ran off the visible area, and its inner scroller
+// had nothing left to scroll. Pin the scrim to the *visual* viewport instead,
+// so the sheet always fits what is actually on screen.
+
+export function useVisualViewportFit(scrimRef: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const vv = window.visualViewport;
+    const el = scrimRef.current;
+    if (!vv || !el) return;
+    const fit = () => {
+      el.style.top = `${vv.offsetTop}px`;
+      el.style.height = `${vv.height}px`;
+      el.style.bottom = 'auto';
+    };
+    fit();
+    vv.addEventListener('resize', fit);
+    vv.addEventListener('scroll', fit);
+    return () => {
+      vv.removeEventListener('resize', fit);
+      vv.removeEventListener('scroll', fit);
+    };
+  }, [scrimRef]);
+}
+
+/* On touch devices a dialog must not focus a field (or a card halfway down)
+   when it opens or changes step: iOS scrolls to the element and raises the
+   keyboard, so the sheet opened mid-form. Focus the panel itself there and let
+   the visitor tap the field they want. */
+export function isCoarsePointer() {
+  return typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 }
 
 /* ── Step panel ───────────────────────────────────────────────────── */

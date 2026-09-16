@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import { useScrollLock, useVisualViewportFit } from '@/components/ui/modal-parts';
 
 /* ── Icons ────────────────────────────────────────────────────────── */
 
@@ -58,11 +59,8 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
     return () => document.removeEventListener('keydown', handler);
   }, [onClose]);
 
-  /* Lock scroll */
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
+  useScrollLock();
+  useVisualViewportFit(overlayRef);
 
   /* Click outside (desktop) */
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -95,12 +93,12 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 animate-[fadeIn_200ms_ease-out]"
+      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center max-sm:pt-[max(0.5rem,env(safe-area-inset-top))] overscroll-contain bg-black/60 animate-[fadeIn_200ms_ease-out]"
       role="dialog"
       aria-modal="true"
       aria-label={t('restore.title')}
     >
-      <div className="w-full sm:max-w-lg bg-bg-secondary border border-overlay/10 rounded-t-2xl sm:rounded-2xl max-h-[90vh] overflow-y-auto animate-[slideUp_200ms_ease-out]">
+      <div className="w-full sm:max-w-lg bg-bg-secondary border border-overlay/10 rounded-t-2xl sm:rounded-2xl max-h-full sm:max-h-[90vh] overflow-y-auto overscroll-contain animate-[slideUp_200ms_ease-out]">
         {/* Header */}
         <div className="flex items-center justify-between p-6 pb-0">
           <div>

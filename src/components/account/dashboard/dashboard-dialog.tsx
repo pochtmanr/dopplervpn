@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { DIALOG_PANEL, useModalDialog } from '@/components/ui/modal-parts';
+import { DIALOG_PANEL, useModalDialog, useVisualViewportFit } from '@/components/ui/modal-parts';
 import { SCRIM } from './ui';
 
 interface DashboardDialogProps {
@@ -23,13 +23,16 @@ interface DashboardDialogProps {
  */
 export function DashboardDialog({ labelledBy, onClose, locked = false, width, className = '', children }: DashboardDialogProps) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const scrimRef = useRef<HTMLDivElement>(null);
   const close = () => {
     if (!locked) onClose();
   };
   useModalDialog(panelRef, close);
+  useVisualViewportFit(scrimRef);
 
   return (
     <div
+      ref={scrimRef}
       className={SCRIM}
       onClick={(e) => {
         if (e.target === e.currentTarget) close();
@@ -37,7 +40,7 @@ export function DashboardDialog({ labelledBy, onClose, locked = false, width, cl
     >
       {/* Sizing wrapper: its height is indefinite, so the panel's h-full resolves to
           auto instead of stretching the panel to the viewport. */}
-      <div className={`flex w-full ${width} max-h-[90vh] flex-col animate-[slideUp_200ms_ease-out]`}>
+      <div className={`flex w-full ${width} max-h-full sm:max-h-[90vh] flex-col animate-[slideUp_200ms_ease-out]`}>
         <div
           ref={panelRef}
           role="dialog"

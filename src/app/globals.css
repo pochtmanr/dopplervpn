@@ -146,8 +146,14 @@
 }
 
 /* Base styles */
-html {
-  scroll-behavior: smooth;
+/* Smooth anchor scrolling on mouse/trackpad devices only. On iOS Safari a
+   global `smooth` also animates the browser's own scroll adjustments (restore
+   after reload, clamping as the toolbar collapses), which fights the finger
+   and reads as the page snapping back at the start of a swipe. */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

@@ -157,7 +157,7 @@ export default async function HomePage({ params }: PageProps) {
           subject (here and /downloads) instead of failing on ~4,900 pages.
           See the comment above the component in json-ld.tsx. */}
       <SoftwareApplicationSchema locale={locale} />
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-clip">
         <Hero />
         <PlatformsAvailable />
         <Features />
