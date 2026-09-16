@@ -1000,7 +1000,18 @@
       "successTitle": "Poziadavka odoslana",
       "successMessage": "Tiket {ticketNumber} bol vytvoreny. Odpovieme na {email} do 24 hodin.",
       "errorGeneric": "Nepodarilo sa odoslat poziadavku. Skuste to znova.",
-      "close": "Zavriet"
+      "close": "Zavriet",
+      "stepOf": "Krok {current} z {total}",
+      "topicPrompt": "S čím potrebujete pomôcť?",
+      "back": "Späť",
+      "subjectHint": "Minimálny počet znakov: {min}",
+      "descriptionHint": "Minimálny počet znakov: {min}",
+      "emailInvalid": "Zadajte platnú e-mailovú adresu",
+      "receiptTicket": "Tiket",
+      "receiptReplyTo": "Odpoveď na",
+      "receiptStatus": "Prijaté — v rade podpory",
+      "copy": "Kopírovať",
+      "copied": "Skopírované"
     },
     "restore": {
       "title": "Obnovenie uctu",
@@ -1024,13 +1035,60 @@
       "title": "Obchodne dotazy",
       "subtitle": "Partneri, tlac, firmy"
     },
+    "businessForm": {
+      "title": "Obchodný dopyt",
+      "subtitle": "Partnerstvá, médiá a tarify pre tímy — odpovedáme do 1–2 pracovných dní",
+      "typePrompt": "Čoho sa váš dopyt týka?",
+      "typeLabel": "Typ dopytu",
+      "types": {
+        "partnership": "Partnerstvo",
+        "enterprise": "Firma / Tím",
+        "press": "Tlač / Médiá",
+        "reseller": "Predajca / Affiliate",
+        "other": "Niečo iné"
+      },
+      "companyLabel": "Názov firmy",
+      "companyPlaceholder": "Príklad s.r.o.",
+      "industryLabel": "Odvetvie (nepovinné)",
+      "industryPlaceholder": "Vyberte odvetvie",
+      "industries": {
+        "tech_saas": "Technológie / SaaS",
+        "media_press": "Médiá a tlač",
+        "finance": "Financie",
+        "education": "Vzdelávanie",
+        "healthcare": "Zdravotníctvo",
+        "travel": "Cestovanie a pohostinstvo",
+        "retail_ecommerce": "Maloobchod a e-commerce",
+        "government_ngo": "Štátna správa / MVO",
+        "telecom_isp": "Telekomunikácie / ISP",
+        "other": "Iné"
+      },
+      "nameLabel": "Vaše meno (nepovinné)",
+      "namePlaceholder": "Jana Kováčová",
+      "websiteLabel": "Web (nepovinné)",
+      "emailLabel": "Pracovný e-mail",
+      "emailPlaceholder": "vy@firma.sk",
+      "messageLabel": "Správa",
+      "messagePlaceholder": "Povedzte nám o svojej firme a o tom, čo máte na mysli…",
+      "submit": "Odoslať dopyt",
+      "submitting": "Odosiela sa…",
+      "successTitle": "Dopyt odoslaný",
+      "successMessage": "Číslo {ticketNumber}. Náš tím odpovie na {email} do 1–2 pracovných dní.",
+      "errorGeneric": "Dopyt sa nepodarilo odoslať. Skúste to znova.",
+      "receiptReference": "Číslo",
+      "receiptCompany": "Firma",
+      "receiptStatus": "Prijaté — u nášho obchodného tímu"
+    },
     "actions": {
       "submitRequest": "Odoslat poziadavku",
       "submitRequestDesc": "Ziskajte pomoc od naseho timu",
       "restoreAccount": "Obnovit ucet",
       "restoreAccountDesc": "Obnovte svoje ID uctu",
       "businessContact": "Obchodne dotazy",
-      "businessContactDesc": "Partneri, tlac, firmy"
+      "businessContactDesc": "Partneri, tlac, firmy",
+      "submitRequestCta": "Otvoriť",
+      "restoreAccountCta": "Obnoviť",
+      "businessContactCta": "Kontaktujte nás"
     }
   },
   "guideProtocols": {
@@ -4135,13 +4193,11 @@
     },
     "hero": {
       "title": "Aká je moja IP?",
-      "subtitle": "Vaša verejná IP adresa tak, ako ju vidí každá navštívená webová stránka — plus geografia a poskytovateľ, ktorí sú s ňou spojení. Po pripojení k VPN stránku obnovte a overte, že sa zmena prejavila."
+      "subtitle": "Vaša verejná IP adresa tak, ako ju vidí každá navštívená webová stránka — plus geografia a poskytovateľ, ktorí sú s ňou spojení. Po pripojení k VPN stránku obnovte a overte, že sa zmena prejavila.",
+      "breadcrumbTools": "Nástroje"
     },
     "widget": {
       "yourIp": "Vaša IP adresa",
-      "country": "Krajina",
-      "region": "Región",
-      "city": "Mesto",
       "isp": "Poskytovateľ internetu",
       "asn": "ASN",
       "unknown": "Neznáme",
@@ -4150,7 +4206,19 @@
       "copied": "Skopírované",
       "copy": "Kopírovať",
       "loading": "Zisťujeme vašu IP…",
-      "error": "Nepodarilo sa zistiť vašu IP. Obnovte stránku alebo to o chvíľu skúste znova."
+      "error": "Nepodarilo sa zistiť vašu IP. Obnovte stránku alebo to o chvíľu skúste znova.",
+      "details": "Podrobnosti pripojenia",
+      "location": "Poloha",
+      "timezone": "Časové pásmo",
+      "coordinates": "Približné súradnice",
+      "ipv4": "IPv4 adresa",
+      "ipv6": "IPv6 adresa",
+      "notAvailable": "Nedostupné",
+      "ipv6Hint": "Chýbajúca IPv6 je normálna — mnohé siete a VPN používajú iba IPv4.",
+      "changed": "Vaša IP sa od poslednej kontroly na tomto zariadení zmenila (predtým {previous}).",
+      "unchanged": "Rovnaká IP ako pri poslednej kontrole. Ak ste sa práve pripojili k VPN, prevádzka tohto prehliadača cez ňu ešte neprechádza.",
+      "firstCheck": "Tip: poznačte si túto IP, pripojte sa k VPN a obnovte stránku — adresa by sa mala zmeniť.",
+      "retry": "Skúsiť znova"
     },
     "explainer": {
       "whatTitle": "Čo je IP adresa?",
@@ -4169,6 +4237,7 @@
         "item4": "Žiadnu zmienku o vašom skutočnom meste alebo regióne."
       }
     },
+    "faqTitle": "Často kladené otázky",
     "faq": {
       "q1": {
         "question": "Na čo sa používa moja IP adresa?",
@@ -4213,6 +4282,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Ak Doppler VPN chráni tento prehliadač, test by mal ukazovať:",
+      "items": {
+        "item1": "Žiadnu adresu označenú ako únik v zozname WebRTC.",
+        "item2": "Každá verejná adresa v zozname sa zhoduje s IP, ktorú vidia webové stránky.",
+        "item3": "IP vášho domáceho poskytovateľa nikde na stránke — spustite test raz bez VPN, aby ste ju spoznali.",
+        "item4": "Rovnaký výsledok aj po prepnutí servera a opätovnom spustení testu."
+      }
+    },
     "metadata": {
       "title": "Test úniku WebRTC — Zistite, či vaša VPN skrýva skutočnú IP",
       "description": "Bezplatný test úniku WebRTC. Zistí, či váš prehliadač cez STUN prezrádza vašu skutočnú IP aj pri pripojenej VPN. Prebehne za 2 sekundy. Žiadne dáta neopustia vaše zariadenie."
@@ -4228,6 +4306,11 @@
       "leakedBody": "WebRTC zistilo jednu alebo viac IP adries, ktoré sa líšia od verejnej IP. Ak ste na VPN, znamená to, že stránka používajúca WebRTC stále vidí vašu skutočnú adresu.",
       "safeTitle": "Nezistil sa žiadny únik WebRTC",
       "safeBody": "WebRTC nahlásilo rovnakú IP ako verejnú, alebo žiadnu. Cez WebRTC momentálne svoju skutočnú adresu neprezrádzate.",
+      "noWebrtcTitle": "WebRTC je vypnuté",
+      "localNote": "Miestne a mDNS (.local) adresy fungujú len vo vašej vlastnej sieti, takže neprezrádzajú, kto ste.",
+      "tagLeak": "únik",
+      "tagPublic": "verejná",
+      "tagLocal": "miestna",
       "noWebrtc": "Váš prehliadač má WebRTC vypnuté alebo sa nepodarilo zistiť žiadne adresy. To je bezpečný stav.",
       "unknown": "Neznáme",
       "refresh": "Spustiť test znova",
@@ -4294,7 +4377,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Otvoriť browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Na dnsleaktest.com kliknite na „Extended test“. Výsledok by mal uvádzať len DNS server(y) vášho poskytovateľa VPN — nie vášho ISP. Ak vo výsledkoch vidíte Comcast, Verizon, Vodafone alebo iného spotrebiteľského poskytovateľa, vaše DNS uniká."
+      "steps": {
+        "step1": {
+          "title": "Pripojte VPN",
+          "body": "Zapnite VPN a počkajte, kým ukáže, že je pripojená. Panel pripojenia na tejto stránke by mal teraz ukazovať sieť VPN, nie vášho domáceho poskytovateľa internetu — ak nie, kliknite na „Obnoviť“."
+        },
+        "step2": {
+          "title": "Spustite rozšírený test",
+          "body": "Otvorte dnsleaktest.com a kliknite na „Extended test“. Test sa opýta na sériu jednorazových doménových mien a zaznamená, ktoré DNS servery na ne odpovedali."
+        },
+        "step3": {
+          "title": "Skontrolujte, kto odpovedal",
+          "body": "Každý server vo výsledku by mal patriť vášmu poskytovateľovi VPN. Ak vidíte Comcast, Verizon, Vodafone alebo iného spotrebiteľského poskytovateľa, vaše DNS uniká. Zopakujte test s vypnutou VPN, aby ste videli, ako vyzerá únik."
+        }
+      },
+      "panel": {
+        "title": "Vaše pripojenie práve teraz",
+        "hint": "Toto je vaša verejná IP adresa, nie váš DNS resolver — ten vidí len externý test. So zapnutou VPN by ani jedno nemalo patriť vášmu domácemu poskytovateľovi internetu.",
+        "error": "Vaše pripojenie sa nepodarilo zistiť. Externý test napriek tomu funguje."
+      }
     },
     "explainer": {
       "whatTitle": "Čo je únik DNS?",

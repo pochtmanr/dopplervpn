@@ -137,7 +137,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
   // centred nav row. `invisible` (visibility:hidden) still reserves the box;
   // `hidden` would not.
   const ctaClass =
-    "ms-1 inline-grid place-items-center px-4 py-1.5 text-sm font-semibold rounded-full bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors";
+    "cta-key cta-key-sm ms-1 inline-grid place-items-center px-4 py-1.5 text-sm font-semibold rounded-full text-white";
   const ctaLabels = (
     <>
       <span

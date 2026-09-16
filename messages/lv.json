@@ -1000,7 +1000,18 @@
       "successTitle": "Pieprasījums iesniegts",
       "successMessage": "Pieteikums {ticketNumber} izveidots. Mēs atbildēsim uz {email} 24 stundu laikā.",
       "errorGeneric": "Neizdevās iesniegt pieprasījumu. Lūdzu, mēģiniet vēlreiz.",
-      "close": "Aizvērt"
+      "close": "Aizvērt",
+      "stepOf": "{current}. solis no {total}",
+      "topicPrompt": "Kādā jautājumā jums vajadzīga palīdzība?",
+      "back": "Atpakaļ",
+      "subjectHint": "Minimālais rakstzīmju skaits: {min}",
+      "descriptionHint": "Minimālais rakstzīmju skaits: {min}",
+      "emailInvalid": "Ievadiet derīgu e-pasta adresi",
+      "receiptTicket": "Pieteikums",
+      "receiptReplyTo": "Atbilde uz",
+      "receiptStatus": "Saņemts — atbalsta rindā",
+      "copy": "Kopēt",
+      "copied": "Nokopēts"
     },
     "restore": {
       "title": "Atjaunot savu kontu",
@@ -1024,13 +1035,60 @@
       "title": "Biznesa pieprasījumi",
       "subtitle": "Partnerības, prese, uzņēmumi"
     },
+    "businessForm": {
+      "title": "Biznesa pieprasījums",
+      "subtitle": "Partnerības, prese un komandu plāni — atbildam 1–2 darba dienu laikā",
+      "typePrompt": "Par ko ir jūsu pieprasījums?",
+      "typeLabel": "Pieprasījuma veids",
+      "types": {
+        "partnership": "Partnerība",
+        "enterprise": "Uzņēmums / Komanda",
+        "press": "Prese / Mediji",
+        "reseller": "Tālākpārdevējs / Partneru programma",
+        "other": "Kas cits"
+      },
+      "companyLabel": "Uzņēmuma nosaukums",
+      "companyPlaceholder": "SIA „Piemērs”",
+      "industryLabel": "Nozare (neobligāti)",
+      "industryPlaceholder": "Izvēlieties nozari",
+      "industries": {
+        "tech_saas": "Tehnoloģijas / SaaS",
+        "media_press": "Mediji un prese",
+        "finance": "Finanses",
+        "education": "Izglītība",
+        "healthcare": "Veselības aprūpe",
+        "travel": "Ceļojumi un viesmīlība",
+        "retail_ecommerce": "Mazumtirdzniecība un e-komercija",
+        "government_ngo": "Valsts sektors / NVO",
+        "telecom_isp": "Telekomunikācijas / Interneta pakalpojumu sniedzējs",
+        "other": "Cits"
+      },
+      "nameLabel": "Jūsu vārds (neobligāti)",
+      "namePlaceholder": "Laura Bērziņa",
+      "websiteLabel": "Tīmekļa vietne (neobligāti)",
+      "emailLabel": "Darba e-pasts",
+      "emailPlaceholder": "jus@uznemums.lv",
+      "messageLabel": "Ziņojums",
+      "messagePlaceholder": "Pastāstiet par savu uzņēmumu un to, kas jums padomā…",
+      "submit": "Nosūtīt pieprasījumu",
+      "submitting": "Sūta…",
+      "successTitle": "Pieprasījums nosūtīts",
+      "successMessage": "Numurs {ticketNumber}. Mūsu komanda atbildēs uz {email} 1–2 darba dienu laikā.",
+      "errorGeneric": "Neizdevās nosūtīt pieprasījumu. Mēģiniet vēlreiz.",
+      "receiptReference": "Numurs",
+      "receiptCompany": "Uzņēmums",
+      "receiptStatus": "Saņemts — pie mūsu biznesa komandas"
+    },
     "actions": {
       "submitRequest": "Iesniegt pieprasījumu",
       "submitRequestDesc": "Saņemiet palīdzību no mūsu komandas",
       "restoreAccount": "Atjaunot kontu",
       "restoreAccountDesc": "Atgūt savu Konta ID",
       "businessContact": "Biznesa pieprasījumi",
-      "businessContactDesc": "Partnerības, prese, uzņēmumi"
+      "businessContactDesc": "Partnerības, prese, uzņēmumi",
+      "submitRequestCta": "Atvērt",
+      "restoreAccountCta": "Atjaunot",
+      "businessContactCta": "Sazināties"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Kāds ir mans IP?",
-      "subtitle": "Jūsu publiskā IP adrese tāda, kādu to redz katra apmeklētā vietne — kopā ar tai piesaistīto ģeogrāfiju un pakalpojumu sniedzēju. Pēc pieslēgšanās VPN atsvaidziniet lapu, lai pārliecinātos, ka maiņa notikusi."
+      "subtitle": "Jūsu publiskā IP adrese tāda, kādu to redz katra apmeklētā vietne — kopā ar tai piesaistīto ģeogrāfiju un pakalpojumu sniedzēju. Pēc pieslēgšanās VPN atsvaidziniet lapu, lai pārliecinātos, ka maiņa notikusi.",
+      "breadcrumbTools": "Rīki"
     },
     "widget": {
       "yourIp": "Jūsu IP adrese",
-      "country": "Valsts",
-      "region": "Reģions",
-      "city": "Pilsēta",
       "isp": "Interneta pakalpojumu sniedzējs",
       "asn": "ASN",
       "unknown": "Nezināms",
@@ -4050,7 +4106,19 @@
       "copied": "Nokopēts",
       "copy": "Kopēt",
       "loading": "Nosaka jūsu IP…",
-      "error": "Neizdevās noteikt jūsu IP. Pārlādējiet lapu vai pēc brīža mēģiniet vēlreiz."
+      "error": "Neizdevās noteikt jūsu IP. Pārlādējiet lapu vai pēc brīža mēģiniet vēlreiz.",
+      "details": "Savienojuma informācija",
+      "location": "Atrašanās vieta",
+      "timezone": "Laika josla",
+      "coordinates": "Aptuvenās koordinātas",
+      "ipv4": "IPv4 adrese",
+      "ipv6": "IPv6 adrese",
+      "notAvailable": "Nav pieejams",
+      "ipv6Hint": "Ja IPv6 nav, tas ir normāli — daudzi tīkli un VPN izmanto tikai IPv4.",
+      "changed": "Jūsu IP ir mainījies kopš pēdējās pārbaudes šajā ierīcē (bija {previous}).",
+      "unchanged": "Tas pats IP, kas pēdējā pārbaudē. Ja tikko pieslēdzāties VPN, šī pārlūka datplūsma caur to vēl neiet.",
+      "firstCheck": "Padoms: pierakstiet šo IP, pieslēdzieties VPN un atsvaidziniet lapu — adresei vajadzētu mainīties.",
+      "retry": "Mēģināt vēlreiz"
     },
     "explainer": {
       "whatTitle": "Kas ir IP adrese?",
@@ -4069,6 +4137,7 @@
         "item4": "Nekādas norādes uz jūsu īsto pilsētu vai reģionu."
       }
     },
+    "faqTitle": "Bieži uzdotie jautājumi",
     "faq": {
       "q1": {
         "question": "Kam tiek izmantota mana IP adrese?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Ja Doppler VPN aizsargā šo pārlūku, šim testam jārāda:",
+      "items": {
+        "item1": "WebRTC sarakstā nav nevienas adreses, kas atzīmēta kā noplūde.",
+        "item2": "Katra publiskā adrese sarakstā sakrīt ar IP, ko redz vietnes.",
+        "item3": "Jūsu mājas interneta pakalpojumu sniedzēja IP nekur lapā — vienreiz palaidiet testu bez VPN, lai to atpazītu.",
+        "item4": "Tas pats rezultāts pēc servera nomaiņas un testa atkārtošanas."
+      }
+    },
     "metadata": {
       "title": "WebRTC noplūdes tests — Pārbaudiet, vai VPN slēpj jūsu īsto IP",
       "description": "Bezmaksas WebRTC noplūdes tests. Nosaka, vai pārlūks caur STUN noplūdina jūsu īsto IP pat ar pieslēgtu VPN. Izpildās 2 sekundēs. Nekādi dati nepamet ierīci."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC atklāja vienu vai vairākus IP, kas atšķiras no publiskā. Ja izmantojat VPN, tas nozīmē, ka vietne, kas izmanto WebRTC, joprojām var redzēt jūsu īsto adresi.",
       "safeTitle": "WebRTC noplūde nav konstatēta",
       "safeBody": "WebRTC ziņoja to pašu IP, kas publiskais, vai nevienu. Jūsu īstā adrese šobrīd nenoplūst caur WebRTC.",
+      "noWebrtcTitle": "WebRTC ir izslēgts",
+      "localNote": "Lokālās un mDNS (.local) adreses darbojas tikai jūsu pašu tīklā, tāpēc tās neatklāj, kas jūs esat.",
+      "tagLeak": "noplūde",
+      "tagPublic": "publiska",
+      "tagLocal": "lokāla",
       "noWebrtc": "Jūsu pārlūks ir atspējojis WebRTC, vai adreses netika atrastas. Tas ir drošs stāvoklis.",
       "unknown": "Nezināms",
       "refresh": "Atkārtot testu",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Atvērt browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Vietnē dnsleaktest.com noklikšķiniet \"Extended test\". Rezultātā jābūt tikai jūsu VPN pakalpojumu sniedzēja DNS serveriem — nevis jūsu interneta operatoram. Ja rezultātos redzat Comcast, Verizon, Vodafone vai citu patērētāju operatoru, jūsu DNS noplūst."
+      "steps": {
+        "step1": {
+          "title": "Pieslēdziet VPN",
+          "body": "Ieslēdziet VPN un pagaidiet, līdz tas rāda, ka savienojums ir izveidots. Savienojuma panelim šajā lapā tagad jārāda VPN tīkls, nevis jūsu mājas interneta operators — ja tā nav, noklikšķiniet \"Atsvaidzināt\"."
+        },
+        "step2": {
+          "title": "Palaidiet paplašināto testu",
+          "body": "Atveriet dnsleaktest.com un noklikšķiniet \"Extended test\". Tests vaicā virkni vienreizēju domēna vārdu un pieraksta, kuri DNS serveri uz tiem atbildēja."
+        },
+        "step3": {
+          "title": "Pārbaudiet, kas atbildēja",
+          "body": "Katram rezultātā norādītajam serverim jāpieder jūsu VPN pakalpojumu sniedzējam. Ja redzat Comcast, Verizon, Vodafone vai citu patērētāju operatoru, jūsu DNS noplūst. Atkārtojiet testu ar izslēgtu VPN, lai redzētu, kā izskatās noplūde."
+        }
+      },
+      "panel": {
+        "title": "Jūsu savienojums šobrīd",
+        "hint": "Šī ir jūsu publiskā IP adrese, nevis DNS resolveris — to redz tikai ārējais tests. Ar ieslēgtu VPN ne vienam, ne otram nevajadzētu piederēt jūsu mājas interneta operatoram.",
+        "error": "Neizdevās noteikt jūsu savienojumu. Ārējais tests joprojām darbojas."
+      }
     },
     "explainer": {
       "whatTitle": "Kas ir DNS noplūde?",

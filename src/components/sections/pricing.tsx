@@ -310,9 +310,8 @@ export function Pricing() {
                 <Link
                   href="/account"
                   onClick={() => trackGetPro("pricing")}
-                  className="group relative w-full inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-lg font-semibold bg-accent-teal text-white shadow-[0_10px_30px_-10px_rgba(0,140,140,0.45)] hover:shadow-[0_12px_36px_-10px_rgba(0,140,140,0.6)] transition-shadow duration-200 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
+                  className="cta-key group w-full inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-lg font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary"
                 >
-                  <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1100ms] ease-out bg-gradient-to-r from-transparent via-white/15 to-transparent rtl:scale-x-[-1]" />
                   <svg className="w-5 h-5 relative" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
                   </svg>

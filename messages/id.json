@@ -1000,7 +1000,18 @@
       "successTitle": "Permintaan Terkirim",
       "successMessage": "Tiket {ticketNumber} dibuat. Kami akan merespons ke {email} dalam 24 jam.",
       "errorGeneric": "Gagal mengirim permintaan. Silakan coba lagi.",
-      "close": "Tutup"
+      "close": "Tutup",
+      "stepOf": "Langkah {current} dari {total}",
+      "topicPrompt": "Apa yang perlu kami bantu?",
+      "back": "Kembali",
+      "subjectHint": "Minimal {min} karakter",
+      "descriptionHint": "Minimal {min} karakter",
+      "emailInvalid": "Masukkan alamat email yang valid",
+      "receiptTicket": "Tiket",
+      "receiptReplyTo": "Balas ke",
+      "receiptStatus": "Diterima — dalam antrean dukungan",
+      "copy": "Salin",
+      "copied": "Tersalin"
     },
     "restore": {
       "title": "Pulihkan Akun Anda",
@@ -1024,13 +1035,60 @@
       "title": "Pertanyaan Bisnis",
       "subtitle": "Kemitraan, pers, perusahaan"
     },
+    "businessForm": {
+      "title": "Pertanyaan Bisnis",
+      "subtitle": "Kemitraan, pers, dan paket tim — kami membalas dalam 1–2 hari kerja",
+      "typePrompt": "Pertanyaan Anda tentang apa?",
+      "typeLabel": "Jenis pertanyaan",
+      "types": {
+        "partnership": "Kemitraan",
+        "enterprise": "Perusahaan / Tim",
+        "press": "Pers / Media",
+        "reseller": "Reseller / Afiliasi",
+        "other": "Hal lain"
+      },
+      "companyLabel": "Nama perusahaan",
+      "companyPlaceholder": "PT Contoh",
+      "industryLabel": "Industri (opsional)",
+      "industryPlaceholder": "Pilih industri",
+      "industries": {
+        "tech_saas": "Teknologi / SaaS",
+        "media_press": "Media & Pers",
+        "finance": "Keuangan",
+        "education": "Pendidikan",
+        "healthcare": "Kesehatan",
+        "travel": "Perjalanan & Perhotelan",
+        "retail_ecommerce": "Ritel & E-commerce",
+        "government_ngo": "Pemerintah / LSM",
+        "telecom_isp": "Telekomunikasi / ISP",
+        "other": "Lainnya"
+      },
+      "nameLabel": "Nama Anda (opsional)",
+      "namePlaceholder": "Siti Rahayu",
+      "websiteLabel": "Situs web (opsional)",
+      "emailLabel": "Email kantor",
+      "emailPlaceholder": "anda@perusahaan.co.id",
+      "messageLabel": "Pesan",
+      "messagePlaceholder": "Ceritakan tentang perusahaan Anda dan apa yang Anda rencanakan…",
+      "submit": "Kirim Pertanyaan",
+      "submitting": "Mengirim…",
+      "successTitle": "Pertanyaan Terkirim",
+      "successMessage": "Referensi {ticketNumber}. Tim kami akan membalas ke {email} dalam 1–2 hari kerja.",
+      "errorGeneric": "Gagal mengirim pertanyaan Anda. Silakan coba lagi.",
+      "receiptReference": "Referensi",
+      "receiptCompany": "Perusahaan",
+      "receiptStatus": "Diterima — di tim bisnis kami"
+    },
     "actions": {
       "submitRequest": "Kirim Permintaan",
       "submitRequestDesc": "Dapatkan bantuan dari tim kami",
       "restoreAccount": "Pulihkan Akun",
       "restoreAccountDesc": "Pulihkan ID Akun Anda",
       "businessContact": "Pertanyaan Bisnis",
-      "businessContactDesc": "Kemitraan, pers, perusahaan"
+      "businessContactDesc": "Kemitraan, pers, perusahaan",
+      "submitRequestCta": "Buka",
+      "restoreAccountCta": "Pulihkan",
+      "businessContactCta": "Hubungi kami"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Berapa IP saya?",
-      "subtitle": "Alamat IP publik Anda sebagaimana dilihat setiap situs yang Anda kunjungi — beserta geografi dan ISP yang menyertainya. Segarkan setelah terhubung ke VPN untuk memastikan perubahannya berlaku."
+      "subtitle": "Alamat IP publik Anda sebagaimana dilihat setiap situs yang Anda kunjungi — beserta geografi dan ISP yang menyertainya. Segarkan setelah terhubung ke VPN untuk memastikan perubahannya berlaku.",
+      "breadcrumbTools": "Alat"
     },
     "widget": {
       "yourIp": "Alamat IP Anda",
-      "country": "Negara",
-      "region": "Wilayah",
-      "city": "Kota",
       "isp": "Penyedia internet",
       "asn": "ASN",
       "unknown": "Tidak diketahui",
@@ -4050,7 +4106,19 @@
       "copied": "Tersalin",
       "copy": "Salin",
       "loading": "Mendeteksi IP Anda…",
-      "error": "IP Anda tidak terdeteksi. Muat ulang halaman atau coba lagi sebentar lagi."
+      "error": "IP Anda tidak terdeteksi. Muat ulang halaman atau coba lagi sebentar lagi.",
+      "details": "Detail koneksi",
+      "location": "Lokasi",
+      "timezone": "Zona waktu",
+      "coordinates": "Perkiraan koordinat",
+      "ipv4": "Alamat IPv4",
+      "ipv6": "Alamat IPv6",
+      "notAvailable": "Tidak tersedia",
+      "ipv6Hint": "Tidak adanya IPv6 itu normal — banyak jaringan dan VPN hanya memakai IPv4.",
+      "changed": "IP Anda berubah sejak pemeriksaan terakhir di perangkat ini (sebelumnya {previous}).",
+      "unchanged": "IP sama dengan pemeriksaan terakhir. Jika Anda baru saja menghubungkan VPN, VPN tersebut belum merutekan lalu lintas peramban ini.",
+      "firstCheck": "Tips: catat IP ini, hubungkan VPN Anda, lalu segarkan — alamatnya seharusnya berubah.",
+      "retry": "Coba lagi"
     },
     "explainer": {
       "whatTitle": "Apa itu alamat IP?",
@@ -4069,6 +4137,7 @@
         "item4": "Tidak ada penyebutan kota atau wilayah asli Anda."
       }
     },
+    "faqTitle": "Pertanyaan yang sering diajukan",
     "faq": {
       "q1": {
         "question": "Untuk apa alamat IP saya digunakan?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Jika Doppler VPN melindungi peramban ini, tes ini seharusnya menampilkan:",
+      "items": {
+        "item1": "Tidak ada alamat yang ditandai sebagai kebocoran di daftar WebRTC.",
+        "item2": "Setiap alamat publik di daftar cocok dengan IP yang dilihat situs web.",
+        "item3": "IP ISP rumah Anda tidak muncul di mana pun di halaman — jalankan tes sekali tanpa VPN agar Anda mengenalinya.",
+        "item4": "Hasil yang sama setelah Anda berganti server dan menjalankan tes lagi."
+      }
+    },
     "metadata": {
       "title": "Tes Kebocoran WebRTC — Periksa Apakah VPN Menyembunyikan IP Asli Anda",
       "description": "Tes kebocoran WebRTC gratis. Mendeteksi apakah peramban membocorkan IP asli Anda lewat STUN bahkan saat VPN terhubung. Selesai dalam 2 detik. Tidak ada data yang keluar dari perangkat."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC mendeteksi satu atau lebih IP yang berbeda dari IP publik. Jika Anda memakai VPN, artinya situs yang menggunakan WebRTC masih bisa melihat alamat asli Anda.",
       "safeTitle": "Tidak ada kebocoran WebRTC terdeteksi",
       "safeBody": "WebRTC melaporkan IP yang sama dengan IP publik, atau tidak melaporkan IP sama sekali. Saat ini alamat asli Anda tidak bocor lewat WebRTC.",
+      "noWebrtcTitle": "WebRTC dimatikan",
+      "localNote": "Alamat lokal dan mDNS (.local) hanya berfungsi di dalam jaringan Anda sendiri, jadi tidak mengungkap siapa Anda.",
+      "tagLeak": "bocor",
+      "tagPublic": "publik",
+      "tagLocal": "lokal",
       "noWebrtc": "Peramban Anda menonaktifkan WebRTC atau tidak ada alamat yang ter-resolve. Itu kondisi aman.",
       "unknown": "Tidak diketahui",
       "refresh": "Jalankan ulang tes",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Buka browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Klik \"Extended test\" di dnsleaktest.com. Hasilnya seharusnya hanya menampilkan server DNS penyedia VPN Anda — bukan ISP Anda. Jika Anda melihat Comcast, Verizon, Vodafone, atau ISP konsumen lain di hasil, DNS Anda bocor."
+      "steps": {
+        "step1": {
+          "title": "Hubungkan VPN Anda",
+          "body": "Nyalakan VPN dan tunggu sampai statusnya terhubung. Panel koneksi di halaman ini sekarang seharusnya menampilkan jaringan VPN, bukan penyedia internet rumah Anda — jika tidak, klik \"Segarkan\"."
+        },
+        "step2": {
+          "title": "Jalankan tes lengkap",
+          "body": "Buka dnsleaktest.com dan klik \"Extended test\". Tes ini mencari serangkaian nama domain sekali pakai dan mencatat server DNS mana yang menjawabnya."
+        },
+        "step3": {
+          "title": "Periksa siapa yang menjawab",
+          "body": "Setiap server di hasil seharusnya milik penyedia VPN Anda. Jika Anda melihat Comcast, Verizon, Vodafone, atau ISP konsumen lain, DNS Anda bocor. Ulangi tes dengan VPN mati untuk melihat seperti apa kebocoran itu."
+        }
+      },
+      "panel": {
+        "title": "Koneksi Anda saat ini",
+        "hint": "Ini IP publik Anda, bukan resolver DNS Anda — itu hanya bisa dilihat oleh tes eksternal. Saat VPN menyala, keduanya tidak boleh milik penyedia internet rumah Anda.",
+        "error": "Koneksi Anda tidak dapat diperiksa. Tes eksternal tetap berfungsi."
+      }
     },
     "explainer": {
       "whatTitle": "Apa itu kebocoran DNS?",

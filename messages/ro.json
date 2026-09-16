@@ -1000,7 +1000,18 @@
       "successTitle": "Solicitare trimisă",
       "successMessage": "Tichetul {ticketNumber} a fost creat. Vom răspunde la {email} în 24 de ore.",
       "errorGeneric": "Nu s-a putut trimite solicitarea. Te rugăm să încerci din nou.",
-      "close": "Închide"
+      "close": "Închide",
+      "stepOf": "Pasul {current} din {total}",
+      "topicPrompt": "Cu ce te putem ajuta?",
+      "back": "Înapoi",
+      "subjectHint": "Minimum {min} caractere",
+      "descriptionHint": "Minimum {min} caractere",
+      "emailInvalid": "Introdu o adresă de e-mail validă",
+      "receiptTicket": "Tichet",
+      "receiptReplyTo": "Răspuns la",
+      "receiptStatus": "Primit — în coada de suport",
+      "copy": "Copiază",
+      "copied": "Copiat"
     },
     "restore": {
       "title": "Restaurează-ți contul",
@@ -1024,13 +1035,60 @@
       "title": "Solicitări de afaceri",
       "subtitle": "Parteneriate, presă, enterprise"
     },
+    "businessForm": {
+      "title": "Solicitare de afaceri",
+      "subtitle": "Parteneriate, presă și planuri pentru echipe — răspundem în 1–2 zile lucrătoare",
+      "typePrompt": "Despre ce este solicitarea ta?",
+      "typeLabel": "Tipul solicitării",
+      "types": {
+        "partnership": "Parteneriat",
+        "enterprise": "Companie / Echipă",
+        "press": "Presă / Media",
+        "reseller": "Revânzător / Afiliat",
+        "other": "Altceva"
+      },
+      "companyLabel": "Numele companiei",
+      "companyPlaceholder": "Exemplu SRL",
+      "industryLabel": "Domeniu (opțional)",
+      "industryPlaceholder": "Alege un domeniu",
+      "industries": {
+        "tech_saas": "Tehnologie / SaaS",
+        "media_press": "Media și presă",
+        "finance": "Finanțe",
+        "education": "Educație",
+        "healthcare": "Sănătate",
+        "travel": "Turism și hoteluri",
+        "retail_ecommerce": "Retail și e-commerce",
+        "government_ngo": "Administrație / ONG",
+        "telecom_isp": "Telecom / ISP",
+        "other": "Altul"
+      },
+      "nameLabel": "Numele tău (opțional)",
+      "namePlaceholder": "Ioana Popescu",
+      "websiteLabel": "Site web (opțional)",
+      "emailLabel": "E-mail de serviciu",
+      "emailPlaceholder": "tu@companie.ro",
+      "messageLabel": "Mesaj",
+      "messagePlaceholder": "Spune-ne despre compania ta și ce ai în minte…",
+      "submit": "Trimite solicitarea",
+      "submitting": "Se trimite…",
+      "successTitle": "Solicitare trimisă",
+      "successMessage": "Referință {ticketNumber}. Echipa noastră va răspunde la {email} în 1–2 zile lucrătoare.",
+      "errorGeneric": "Solicitarea nu a putut fi trimisă. Încearcă din nou.",
+      "receiptReference": "Referință",
+      "receiptCompany": "Companie",
+      "receiptStatus": "Primită — la echipa noastră de afaceri"
+    },
     "actions": {
       "submitRequest": "Trimite o solicitare",
       "submitRequestDesc": "Obține ajutor de la echipa noastră",
       "restoreAccount": "Restaurează contul",
       "restoreAccountDesc": "Recuperează ID-ul tău de cont",
       "businessContact": "Solicitări de afaceri",
-      "businessContactDesc": "Parteneriate, presă, enterprise"
+      "businessContactDesc": "Parteneriate, presă, enterprise",
+      "submitRequestCta": "Deschide",
+      "restoreAccountCta": "Restaurează",
+      "businessContactCta": "Contactează-ne"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Care este IP-ul meu?",
-      "subtitle": "Adresa dvs. IP publică așa cum o vede fiecare site pe care îl vizitați — împreună cu geografia și furnizorul asociate. Reîmprospătați după conectarea la un VPN pentru a confirma că schimbarea a avut efect."
+      "subtitle": "Adresa dvs. IP publică așa cum o vede fiecare site pe care îl vizitați — împreună cu geografia și furnizorul asociate. Reîmprospătați după conectarea la un VPN pentru a confirma că schimbarea a avut efect.",
+      "breadcrumbTools": "Instrumente"
     },
     "widget": {
       "yourIp": "Adresa dvs. IP",
-      "country": "Țară",
-      "region": "Regiune",
-      "city": "Oraș",
       "isp": "Furnizor de internet",
       "asn": "ASN",
       "unknown": "Necunoscut",
@@ -4050,7 +4106,19 @@
       "copied": "Copiat",
       "copy": "Copiază",
       "loading": "Se detectează IP-ul…",
-      "error": "Nu am putut detecta IP-ul. Reîncărcați pagina sau încercați din nou peste puțin timp."
+      "error": "Nu am putut detecta IP-ul. Reîncărcați pagina sau încercați din nou peste puțin timp.",
+      "details": "Detalii conexiune",
+      "location": "Locație",
+      "timezone": "Fus orar",
+      "coordinates": "Coordonate aproximative",
+      "ipv4": "Adresă IPv4",
+      "ipv6": "Adresă IPv6",
+      "notAvailable": "Indisponibil",
+      "ipv6Hint": "Lipsa IPv6 este normală — multe rețele și VPN-uri folosesc doar IPv4.",
+      "changed": "IP-ul dvs. s-a schimbat de la ultima verificare pe acest dispozitiv (era {previous}).",
+      "unchanged": "Același IP ca la ultima verificare. Dacă tocmai v-ați conectat la un VPN, traficul acestui browser nu trece încă prin el.",
+      "firstCheck": "Sfat: notați acest IP, conectați-vă la VPN, apoi reîmprospătați — adresa ar trebui să se schimbe.",
+      "retry": "Încearcă din nou"
     },
     "explainer": {
       "whatTitle": "Ce este o adresă IP?",
@@ -4069,6 +4137,7 @@
         "item4": "Nicio mențiune a orașului sau regiunii dvs. reale."
       }
     },
+    "faqTitle": "Întrebări frecvente",
     "faq": {
       "q1": {
         "question": "La ce este folosită adresa mea IP?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Dacă Doppler VPN protejează acest browser, testul ar trebui să arate:",
+      "items": {
+        "item1": "Nicio adresă marcată ca scurgere în lista WebRTC.",
+        "item2": "Orice adresă publică din listă coincide cu IP-ul pe care îl văd site-urile.",
+        "item3": "IP-ul furnizorului dvs. de acasă nicăieri pe pagină — rulați testul o dată fără VPN ca să-l recunoașteți.",
+        "item4": "Același rezultat după ce schimbați serverul și rulați din nou testul."
+      }
+    },
     "metadata": {
       "title": "Test de scurgeri WebRTC — Verificați dacă VPN-ul vă ascunde IP-ul real",
       "description": "Test gratuit de scurgeri WebRTC. Detectează dacă browserul vă scurge IP-ul real prin STUN chiar și cu VPN conectat. Rulează în 2 secunde. Nicio dată nu părăsește dispozitivul."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC a detectat unul sau mai multe IP-uri diferite de cel public. Dacă folosiți un VPN, înseamnă că un site care folosește WebRTC vă poate vedea în continuare adresa reală.",
       "safeTitle": "Nicio scurgere WebRTC detectată",
       "safeBody": "WebRTC a raportat același IP ca cel public, sau niciunul. Adresa dvs. reală nu se scurge prin WebRTC acum.",
+      "noWebrtcTitle": "WebRTC este dezactivat",
+      "localNote": "Adresele locale și mDNS (.local) funcționează doar în propria dvs. rețea, deci nu dezvăluie cine sunteți.",
+      "tagLeak": "scurgere",
+      "tagPublic": "publică",
+      "tagLocal": "locală",
       "noWebrtc": "Browserul dvs. a dezactivat WebRTC sau nu s-au rezolvat adrese. Aceasta este o stare sigură.",
       "unknown": "Necunoscut",
       "refresh": "Reia testul",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Deschide browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Apăsați \"Extended test\" pe dnsleaktest.com. Rezultatul ar trebui să afișeze doar serverele DNS ale furnizorului VPN — nu furnizorul dvs. de internet. Dacă vedeți Comcast, Verizon, Vodafone sau alt furnizor de consum în rezultate, DNS-ul dvs. se scurge."
+      "steps": {
+        "step1": {
+          "title": "Conectați VPN-ul",
+          "body": "Porniți VPN-ul și așteptați să indice că este conectat. Panoul de conexiune de pe această pagină ar trebui să arate acum rețeaua VPN-ului, nu furnizorul dvs. de internet de acasă — dacă nu, apăsați „Reîmprospătează”."
+        },
+        "step2": {
+          "title": "Rulați testul extins",
+          "body": "Deschideți dnsleaktest.com și apăsați \"Extended test\". Testul interoghează o serie de nume de domeniu de unică folosință și notează ce servere DNS au răspuns."
+        },
+        "step3": {
+          "title": "Verificați cine a răspuns",
+          "body": "Fiecare server din rezultat ar trebui să aparțină furnizorului dvs. de VPN. Dacă vedeți Comcast, Verizon, Vodafone sau alt furnizor de consum, DNS-ul dvs. se scurge. Repetați testul cu VPN-ul oprit ca să vedeți cum arată o scurgere."
+        }
+      },
+      "panel": {
+        "title": "Conexiunea dvs. acum",
+        "hint": "Acesta este IP-ul dvs. public, nu resolverul DNS — pe acela îl vede doar testul extern. Cu VPN-ul pornit, niciunul dintre ele nu ar trebui să aparțină furnizorului dvs. de internet de acasă.",
+        "error": "Nu am putut verifica conexiunea dvs. Testul extern funcționează în continuare."
+      }
     },
     "explainer": {
       "whatTitle": "Ce este o scurgere DNS?",

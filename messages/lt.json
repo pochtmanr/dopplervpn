@@ -1000,7 +1000,18 @@
       "successTitle": "Užklausa pateikta",
       "successMessage": "Bilietas {ticketNumber} sukurtas. Atsakysime i {email} per 24 valandas.",
       "errorGeneric": "Nepavyko pateikti užklausos. Bandykite dar karta.",
-      "close": "Uždaryti"
+      "close": "Uždaryti",
+      "stepOf": "{current} žingsnis iš {total}",
+      "topicPrompt": "Dėl ko jums reikia pagalbos?",
+      "back": "Atgal",
+      "subjectHint": "Mažiausias simbolių skaičius: {min}",
+      "descriptionHint": "Mažiausias simbolių skaičius: {min}",
+      "emailInvalid": "Įveskite galiojantį el. pašto adresą",
+      "receiptTicket": "Užklausa",
+      "receiptReplyTo": "Atsakymas adresu",
+      "receiptStatus": "Gauta — palaikymo eilėje",
+      "copy": "Kopijuoti",
+      "copied": "Nukopijuota"
     },
     "restore": {
       "title": "Atkurti paskyra",
@@ -1024,13 +1035,60 @@
       "title": "Verslo užklausos",
       "subtitle": "Partnerystes, spauda, imones"
     },
+    "businessForm": {
+      "title": "Verslo užklausa",
+      "subtitle": "Partnerystės, žiniasklaida ir komandų planai — atsakome per 1–2 darbo dienas",
+      "typePrompt": "Dėl ko jūsų užklausa?",
+      "typeLabel": "Užklausos tipas",
+      "types": {
+        "partnership": "Partnerystė",
+        "enterprise": "Įmonė / Komanda",
+        "press": "Spauda / Žiniasklaida",
+        "reseller": "Perpardavėjas / Partnerių programa",
+        "other": "Kita tema"
+      },
+      "companyLabel": "Įmonės pavadinimas",
+      "companyPlaceholder": "UAB „Pavyzdys“",
+      "industryLabel": "Sritis (neprivaloma)",
+      "industryPlaceholder": "Pasirinkite sritį",
+      "industries": {
+        "tech_saas": "Technologijos / SaaS",
+        "media_press": "Žiniasklaida ir spauda",
+        "finance": "Finansai",
+        "education": "Švietimas",
+        "healthcare": "Sveikatos priežiūra",
+        "travel": "Kelionės ir apgyvendinimas",
+        "retail_ecommerce": "Mažmeninė ir e. prekyba",
+        "government_ngo": "Viešasis sektorius / NVO",
+        "telecom_isp": "Telekomunikacijos / IPT",
+        "other": "Kita"
+      },
+      "nameLabel": "Jūsų vardas (neprivaloma)",
+      "namePlaceholder": "Rūta Kazlauskienė",
+      "websiteLabel": "Svetainė (neprivaloma)",
+      "emailLabel": "Darbo el. paštas",
+      "emailPlaceholder": "jus@imone.lt",
+      "messageLabel": "Žinutė",
+      "messagePlaceholder": "Papasakokite apie savo įmonę ir ką sumanėte…",
+      "submit": "Siųsti užklausą",
+      "submitting": "Siunčiama…",
+      "successTitle": "Užklausa išsiųsta",
+      "successMessage": "Numeris {ticketNumber}. Mūsų komanda atsakys adresu {email} per 1–2 darbo dienas.",
+      "errorGeneric": "Nepavyko išsiųsti užklausos. Bandykite dar kartą.",
+      "receiptReference": "Numeris",
+      "receiptCompany": "Įmonė",
+      "receiptStatus": "Gauta — perduota verslo komandai"
+    },
     "actions": {
       "submitRequest": "Pateikti užklausa",
       "submitRequestDesc": "Gaukite pagalba iš musu komandos",
       "restoreAccount": "Atkurti paskyra",
       "restoreAccountDesc": "Atkurkite savo Account ID",
       "businessContact": "Verslo užklausos",
-      "businessContactDesc": "Partnerystes, spauda, imones"
+      "businessContactDesc": "Partnerystes, spauda, imones",
+      "submitRequestCta": "Atidaryti",
+      "restoreAccountCta": "Atkurti",
+      "businessContactCta": "Susisiekite"
     }
   },
   "guideProtocols": {
@@ -4056,13 +4114,11 @@
     },
     "hero": {
       "title": "Koks mano IP?",
-      "subtitle": "Jūsų viešas IP adresas toks, kokį mato kiekviena lankoma svetainė — kartu su prie jo pririšta geografija ir tiekėju. Prisijungę prie VPN atnaujinkite puslapį ir įsitikinkite, kad pakeitimas įsigaliojo."
+      "subtitle": "Jūsų viešas IP adresas toks, kokį mato kiekviena lankoma svetainė — kartu su prie jo pririšta geografija ir tiekėju. Prisijungę prie VPN atnaujinkite puslapį ir įsitikinkite, kad pakeitimas įsigaliojo.",
+      "breadcrumbTools": "Įrankiai"
     },
     "widget": {
       "yourIp": "Jūsų IP adresas",
-      "country": "Šalis",
-      "region": "Regionas",
-      "city": "Miestas",
       "isp": "Interneto tiekėjas",
       "asn": "ASN",
       "unknown": "Nežinoma",
@@ -4071,7 +4127,19 @@
       "copied": "Nukopijuota",
       "copy": "Kopijuoti",
       "loading": "Nustatomas jūsų IP…",
-      "error": "Nepavyko nustatyti jūsų IP. Perkraukite puslapį arba pabandykite dar kartą po akimirkos."
+      "error": "Nepavyko nustatyti jūsų IP. Perkraukite puslapį arba pabandykite dar kartą po akimirkos.",
+      "details": "Ryšio informacija",
+      "location": "Vieta",
+      "timezone": "Laiko juosta",
+      "coordinates": "Apytikslės koordinatės",
+      "ipv4": "IPv4 adresas",
+      "ipv6": "IPv6 adresas",
+      "notAvailable": "Nėra",
+      "ipv6Hint": "Jei IPv6 nėra, tai normalu — daugelis tinklų ir VPN naudoja tik IPv4.",
+      "changed": "Jūsų IP pasikeitė nuo paskutinio patikrinimo šiame įrenginyje (buvo {previous}).",
+      "unchanged": "Tas pats IP kaip per paskutinį patikrinimą. Jei ką tik prisijungėte prie VPN, šios naršyklės srautas per jį dar neina.",
+      "firstCheck": "Patarimas: užsirašykite šį IP, prisijunkite prie VPN ir atnaujinkite puslapį — adresas turėtų pasikeisti.",
+      "retry": "Bandyti dar kartą"
     },
     "explainer": {
       "whatTitle": "Kas yra IP adresas?",
@@ -4090,6 +4158,7 @@
         "item4": "Jokio jūsų tikrojo miesto ar regiono paminėjimo."
       }
     },
+    "faqTitle": "Dažnai užduodami klausimai",
     "faq": {
       "q1": {
         "question": "Kam naudojamas mano IP adresas?",
@@ -4134,6 +4203,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Jei Doppler VPN saugo šią naršyklę, šis testas turėtų rodyti:",
+      "items": {
+        "item1": "WebRTC sąraše nėra nė vieno adreso, pažymėto kaip nutekėjimas.",
+        "item2": "Kiekvienas viešas sąrašo adresas sutampa su IP, kurį mato svetainės.",
+        "item3": "Jūsų namų interneto tiekėjo IP niekur puslapyje — vieną kartą paleiskite testą be VPN, kad jį atpažintumėte.",
+        "item4": "Tas pats rezultatas pakeitus serverį ir paleidus testą iš naujo."
+      }
+    },
     "metadata": {
       "title": "WebRTC nutekėjimo testas — Patikrinkite, ar VPN slepia tikrąjį jūsų IP",
       "description": "Nemokamas WebRTC nutekėjimo testas. Nustato, ar naršyklė per STUN nutekina tikrąjį jūsų IP net prijungus VPN. Įvykdomas per 2 sekundes. Jokie duomenys nepalieka įrenginio."
@@ -4149,6 +4227,11 @@
       "leakedBody": "WebRTC aptiko vieną ar kelis IP, kurie skiriasi nuo viešojo. Jei naudojate VPN, tai reiškia, kad WebRTC naudojanti svetainė vis dar gali matyti tikrąjį jūsų adresą.",
       "safeTitle": "WebRTC nutekėjimo neaptikta",
       "safeBody": "WebRTC pranešė tą patį IP kaip viešasis arba jokio. Šiuo metu tikrasis jūsų adresas per WebRTC nenuteka.",
+      "noWebrtcTitle": "WebRTC išjungtas",
+      "localNote": "Vietiniai ir mDNS (.local) adresai veikia tik jūsų pačių tinkle, todėl neatskleidžia, kas esate.",
+      "tagLeak": "nutekėjimas",
+      "tagPublic": "viešas",
+      "tagLocal": "vietinis",
       "noWebrtc": "Jūsų naršyklė išjungė WebRTC arba adresų nerasta. Tai saugi būsena.",
       "unknown": "Nežinoma",
       "refresh": "Kartoti testą",
@@ -4215,7 +4298,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Atidaryti browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Svetainėje dnsleaktest.com spustelėkite \"Extended test\". Rezultate turėtų būti tik jūsų VPN tiekėjo DNS serveriai — ne jūsų interneto tiekėjas. Jei rezultatuose matote Comcast, Verizon, Vodafone ar bet kurį kitą buitinį tiekėją, jūsų DNS nuteka."
+      "steps": {
+        "step1": {
+          "title": "Prisijunkite prie VPN",
+          "body": "Įjunkite VPN ir palaukite, kol jis parodys, kad prisijungta. Ryšio skydelis šiame puslapyje dabar turėtų rodyti VPN tinklą, o ne jūsų namų interneto tiekėją — jei ne, spustelėkite „Atnaujinti“."
+        },
+        "step2": {
+          "title": "Paleiskite išplėstinį testą",
+          "body": "Atidarykite dnsleaktest.com ir spustelėkite \"Extended test\". Testas užklausia vienkartinių domenų vardų rinkinį ir užfiksuoja, kurie DNS serveriai į juos atsakė."
+        },
+        "step3": {
+          "title": "Patikrinkite, kas atsakė",
+          "body": "Kiekvienas rezultate esantis serveris turėtų priklausyti jūsų VPN tiekėjui. Jei matote Comcast, Verizon, Vodafone ar bet kurį kitą buitinį tiekėją, jūsų DNS nuteka. Pakartokite testą su išjungtu VPN, kad pamatytumėte, kaip atrodo nuotėkis."
+        }
+      },
+      "panel": {
+        "title": "Jūsų ryšys dabar",
+        "hint": "Tai jūsų viešasis IP, o ne DNS resolveris — jį mato tik išorinis testas. Įjungus VPN, nei vienas, nei kitas neturėtų priklausyti jūsų namų interneto tiekėjui.",
+        "error": "Nepavyko nustatyti jūsų ryšio. Išorinis testas vis tiek veikia."
+      }
     },
     "explainer": {
       "whatTitle": "Kas yra DNS nutekėjimas?",

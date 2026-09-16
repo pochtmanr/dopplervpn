@@ -52,7 +52,7 @@ export function TechnicalHowItWorks() {
         <div className="mt-10 text-center">
           <Link
             href="/tools"
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
+            className="cta-key group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
           >
             {t("toolsCta")}
             <svg

@@ -168,7 +168,7 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
                 type="button"
                 onClick={handleSend}
                 disabled={loading || !email.trim()}
-                className="w-full rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
+                className="cta-key w-full rounded-xl disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>

@@ -50,7 +50,27 @@ interface GlyphFieldProps {
    * literally the frame the clock starts on, and with an offset it would not be.
    */
   initialFrame?: Rendered;
+  /** Accent colour: teal everywhere but the support page's Telegram card. */
+  tone?: "teal" | "telegram";
 }
+
+/** Static lists so Tailwind sees every class. */
+const TONES = {
+  teal: {
+    hot: "group-hover:text-accent-teal",
+    grain: "text-accent-teal",
+    grainHover: "group-hover:text-accent-teal-light",
+    content: "group-hover:text-accent-teal",
+    accent: "text-accent-teal-light",
+  },
+  telegram: {
+    hot: "group-hover:text-telegram",
+    grain: "text-telegram",
+    grainHover: "group-hover:text-telegram",
+    content: "group-hover:text-telegram",
+    accent: "text-telegram",
+  },
+} as const;
 
 export function GlyphField({
   scene,
@@ -59,7 +79,9 @@ export function GlyphField({
   hover = false,
   frameMs = FRAME_MS,
   initialFrame,
+  tone = "teal",
 }: GlyphFieldProps) {
+  const hue = TONES[tone];
   const hostRef = useRef<HTMLDivElement>(null);
   const grainRef = useRef<HTMLPreElement>(null);
   const grainHotRef = useRef<HTMLPreElement>(null);
@@ -211,7 +233,7 @@ export function GlyphField({
         ref={grainHotRef}
         style={size}
         className={`${layer} ${warm} text-text-tertiary opacity-40 ${
-          hover ? "group-hover:text-accent-teal group-hover:opacity-70" : ""
+          hover ? `${hue.hot} group-hover:opacity-70` : ""
         }`}
       >
         {initialFrame?.grainHot}
@@ -219,8 +241,8 @@ export function GlyphField({
       <pre
         ref={grainAccentRef}
         style={size}
-        className={`${layer} ${warm} text-accent-teal opacity-60 ${
-          hover ? "group-hover:text-accent-teal-light group-hover:opacity-100" : ""
+        className={`${layer} ${warm} ${hue.grain} opacity-60 ${
+          hover ? `${hue.grainHover} group-hover:opacity-100` : ""
         }`}
       >
         {initialFrame?.grainAccent}
@@ -229,13 +251,13 @@ export function GlyphField({
         ref={contentRef}
         style={size}
         className={`${layer} ${warm} text-text-muted ${
-          hover ? "group-hover:text-accent-teal" : ""
+          hover ? hue.content : ""
         }`}
       >
         {initialFrame?.content}
       </pre>
       {/* Never warms: the verdict marks must stay the loudest thing in both states. */}
-      <pre ref={accentRef} style={size} className={`${layer} text-accent-teal-light`}>
+      <pre ref={accentRef} style={size} className={`${layer} ${hue.accent}`}>
         {initialFrame?.accent}
       </pre>
     </div>

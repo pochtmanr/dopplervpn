@@ -377,7 +377,7 @@ function ErrorShell({
         <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <a
             href={`mailto:${SUPPORT_EMAIL}?subject=${supportSubject}&body=${supportBody}`}
-            className="flex-1 text-center px-5 py-3 rounded-xl bg-accent-teal hover:bg-accent-teal/90 active:bg-accent-teal/80 font-semibold text-white transition-colors"
+            className="cta-key flex-1 text-center px-5 py-3 rounded-xl font-semibold text-white"
           >
             {t('errors.contactSupport')}
           </a>

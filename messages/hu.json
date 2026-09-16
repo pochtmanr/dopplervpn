@@ -1000,7 +1000,18 @@
       "successTitle": "Kérés beküldve",
       "successMessage": "A(z) {ticketNumber} számú jegy létrejött. 24 órán belül válaszolunk a(z) {email} címre.",
       "errorGeneric": "Nem sikerült beküldeni a kérést. Kérjük, próbáld újra.",
-      "close": "Bezárás"
+      "close": "Bezárás",
+      "stepOf": "{current}. lépés / {total}",
+      "topicPrompt": "Miben segíthetünk?",
+      "back": "Vissza",
+      "subjectHint": "Legalább {min} karakter",
+      "descriptionHint": "Legalább {min} karakter",
+      "emailInvalid": "Adjon meg érvényes e-mail-címet",
+      "receiptTicket": "Jegy",
+      "receiptReplyTo": "Válasz ide",
+      "receiptStatus": "Beérkezett — a támogatási sorban",
+      "copy": "Másolás",
+      "copied": "Másolva"
     },
     "restore": {
       "title": "Fiók visszaállítása",
@@ -1024,13 +1035,60 @@
       "title": "Üzleti megkeresések",
       "subtitle": "Partnerségek, sajtó, vállalati együttműködés"
     },
+    "businessForm": {
+      "title": "Üzleti megkeresés",
+      "subtitle": "Partnerségek, sajtó és csapatcsomagok — 1–2 munkanapon belül válaszolunk",
+      "typePrompt": "Miről szól a megkeresése?",
+      "typeLabel": "Megkeresés típusa",
+      "types": {
+        "partnership": "Partnerség",
+        "enterprise": "Vállalat / Csapat",
+        "press": "Sajtó / Média",
+        "reseller": "Viszonteladó / Affiliate",
+        "other": "Valami más"
+      },
+      "companyLabel": "Cégnév",
+      "companyPlaceholder": "Példa Kft.",
+      "industryLabel": "Iparág (nem kötelező)",
+      "industryPlaceholder": "Válasszon iparágat",
+      "industries": {
+        "tech_saas": "Technológia / SaaS",
+        "media_press": "Média és sajtó",
+        "finance": "Pénzügy",
+        "education": "Oktatás",
+        "healthcare": "Egészségügy",
+        "travel": "Utazás és vendéglátás",
+        "retail_ecommerce": "Kereskedelem és e-kereskedelem",
+        "government_ngo": "Közszféra / Civil szervezet",
+        "telecom_isp": "Távközlés / Internetszolgáltató",
+        "other": "Egyéb"
+      },
+      "nameLabel": "Az Ön neve (nem kötelező)",
+      "namePlaceholder": "Kovács Anna",
+      "websiteLabel": "Weboldal (nem kötelező)",
+      "emailLabel": "Munkahelyi e-mail",
+      "emailPlaceholder": "on@ceg.hu",
+      "messageLabel": "Üzenet",
+      "messagePlaceholder": "Meséljen a cégéről és arról, mit tervez…",
+      "submit": "Megkeresés küldése",
+      "submitting": "Küldés…",
+      "successTitle": "Megkeresés elküldve",
+      "successMessage": "Azonosító: {ticketNumber}. Csapatunk 1–2 munkanapon belül válaszol a(z) {email} címre.",
+      "errorGeneric": "Nem sikerült elküldeni a megkeresést. Próbálja újra.",
+      "receiptReference": "Azonosító",
+      "receiptCompany": "Cég",
+      "receiptStatus": "Beérkezett — üzleti csapatunknál"
+    },
     "actions": {
       "submitRequest": "Kérés beküldése",
       "submitRequestDesc": "Kérj segítséget a csapatunktól",
       "restoreAccount": "Fiók visszaállítása",
       "restoreAccountDesc": "Fiók ID visszaszerzése",
       "businessContact": "Üzleti megkeresések",
-      "businessContactDesc": "Partnerségek, sajtó, vállalati együttműködés"
+      "businessContactDesc": "Partnerségek, sajtó, vállalati együttműködés",
+      "submitRequestCta": "Megnyitás",
+      "restoreAccountCta": "Visszaállítás",
+      "businessContactCta": "Kapcsolatfelvétel"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Mi az IP-címem?",
-      "subtitle": "Az Ön nyilvános IP-címe úgy, ahogy minden meglátogatott weboldal látja — a hozzá tartozó földrajzi adatokkal és szolgáltatóval együtt. VPN-csatlakozás után frissítsen, hogy megbizonyosodjon a váltás sikeréről."
+      "subtitle": "Az Ön nyilvános IP-címe úgy, ahogy minden meglátogatott weboldal látja — a hozzá tartozó földrajzi adatokkal és szolgáltatóval együtt. VPN-csatlakozás után frissítsen, hogy megbizonyosodjon a váltás sikeréről.",
+      "breadcrumbTools": "Eszközök"
     },
     "widget": {
       "yourIp": "Az Ön IP-címe",
-      "country": "Ország",
-      "region": "Régió",
-      "city": "Város",
       "isp": "Internetszolgáltató",
       "asn": "ASN",
       "unknown": "Ismeretlen",
@@ -4050,7 +4106,19 @@
       "copied": "Másolva",
       "copy": "Másolás",
       "loading": "IP-cím észlelése…",
-      "error": "Nem sikerült észlelni az IP-címét. Töltse újra az oldalt, vagy próbálja meg kicsit később."
+      "error": "Nem sikerült észlelni az IP-címét. Töltse újra az oldalt, vagy próbálja meg kicsit később.",
+      "details": "Kapcsolat részletei",
+      "location": "Hely",
+      "timezone": "Időzóna",
+      "coordinates": "Hozzávetőleges koordináták",
+      "ipv4": "IPv4-cím",
+      "ipv6": "IPv6-cím",
+      "notAvailable": "Nem elérhető",
+      "ipv6Hint": "Teljesen normális, ha nincs IPv6 — sok hálózat és VPN csak IPv4-et használ.",
+      "changed": "IP-címe megváltozott az ezen az eszközön végzett legutóbbi ellenőrzés óta (korábban: {previous}).",
+      "unchanged": "Ugyanaz az IP-cím, mint a legutóbbi ellenőrzéskor. Ha épp most csatlakozott VPN-hez, az még nem ennek a böngészőnek a forgalmát irányítja.",
+      "firstCheck": "Tipp: jegyezze fel ezt az IP-címet, csatlakozzon a VPN-hez, majd frissítse az oldalt — a címnek meg kell változnia.",
+      "retry": "Újrapróbálás"
     },
     "explainer": {
       "whatTitle": "Mi az az IP-cím?",
@@ -4069,6 +4137,7 @@
         "item4": "Semmilyen utalást a valódi városára vagy régiójára."
       }
     },
+    "faqTitle": "Gyakori kérdések",
     "faq": {
       "q1": {
         "question": "Mire használják az IP-címemet?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Ha a Doppler VPN védi ezt a böngészőt, a tesztnek ezt kell mutatnia:",
+      "items": {
+        "item1": "A WebRTC-listában egyetlen cím sincs szivárgásként megjelölve.",
+        "item2": "A lista minden nyilvános címe egyezik azzal az IP-vel, amelyet a weboldalak látnak.",
+        "item3": "Az otthoni internetszolgáltatója IP-je sehol sincs az oldalon — futtassa le egyszer a tesztet VPN nélkül, hogy felismerje.",
+        "item4": "Ugyanaz az eredmény szerverváltás és a teszt újrafuttatása után is."
+      }
+    },
     "metadata": {
       "title": "WebRTC-szivárgásteszt — Ellenőrizze, hogy a VPN elrejti-e a valódi IP-jét",
       "description": "Ingyenes WebRTC-szivárgásteszt. Kimutatja, hogy a böngészője STUN-on keresztül kiszivárogtatja-e a valódi IP-jét csatlakoztatott VPN mellett is. 2 másodperc alatt lefut. Semmilyen adat nem hagyja el az eszközét."
@@ -4128,6 +4206,11 @@
       "leakedBody": "A WebRTC egy vagy több, a nyilvánostól eltérő IP-t észlelt. Ha VPN-t használ, ez azt jelenti, hogy egy WebRTC-t használó weboldal továbbra is láthatja a valódi címét.",
       "safeTitle": "Nem észlelhető WebRTC-szivárgás",
       "safeBody": "A WebRTC ugyanazt az IP-t jelentette, mint a nyilvános, vagy egyet sem. A valódi címe jelenleg nem szivárog a WebRTC-n keresztül.",
+      "noWebrtcTitle": "A WebRTC ki van kapcsolva",
+      "localNote": "A helyi és az mDNS (.local) címek csak a saját hálózatán belül működnek, így nem árulják el, ki Ön.",
+      "tagLeak": "szivárgás",
+      "tagPublic": "nyilvános",
+      "tagLocal": "helyi",
       "noWebrtc": "A böngészője letiltotta a WebRTC-t, vagy nem sikerült címeket feloldani. Ez biztonságos állapot.",
       "unknown": "Ismeretlen",
       "refresh": "Teszt újrafuttatása",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "browserleaks.com/dns megnyitása",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Kattintson az \"Extended test\"-re a dnsleaktest.com-on. Az eredményben csak a VPN-szolgáltatója DNS-szervereinek szabad szerepelniük — nem az internetszolgáltatójának. Ha Comcastot, Verizont, Vodafone-t vagy más lakossági szolgáltatót lát az eredmények között, a DNS-e szivárog."
+      "steps": {
+        "step1": {
+          "title": "Csatlakoztassa a VPN-t",
+          "body": "Kapcsolja be a VPN-t, és várja meg, amíg csatlakozottnak mutatja magát. Az oldal kapcsolatpaneljének most a VPN hálózatát kell mutatnia, nem az otthoni internetszolgáltatóját — ha nem így van, kattintson a „Frissítés” gombra."
+        },
+        "step2": {
+          "title": "Futtassa a bővített tesztet",
+          "body": "Nyissa meg a dnsleaktest.com oldalt, és kattintson az \"Extended test\"-re. A teszt egy sor egyszer használatos domainnevet kérdez le, és rögzíti, mely DNS-szerverek válaszoltak."
+        },
+        "step3": {
+          "title": "Nézze meg, ki válaszolt",
+          "body": "Az eredményben minden szervernek a VPN-szolgáltatójához kell tartoznia. Ha Comcastot, Verizont, Vodafone-t vagy más lakossági szolgáltatót lát, a DNS-e szivárog. Ismételje meg a tesztet kikapcsolt VPN-nel, hogy lássa, hogyan néz ki egy szivárgás."
+        }
+      },
+      "panel": {
+        "title": "Az Ön kapcsolata most",
+        "hint": "Ez az Ön nyilvános IP-címe, nem a DNS-feloldója — azt csak a külső teszt látja. Bekapcsolt VPN mellett egyik sem tartozhat az otthoni internetszolgáltatójához.",
+        "error": "Nem sikerült lekérdezni a kapcsolatát. A külső teszt ettől még működik."
+      }
     },
     "explainer": {
       "whatTitle": "Mi az a DNS-szivárgás?",

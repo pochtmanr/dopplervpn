@@ -852,7 +852,7 @@
     "windows": {
       "title": "Windows",
       "buttonX64": "Download for Windows",
-      "step1": "Download the installer for your PC (64-bit Windows 10 or 11)",
+      "step1": "Download the installer for your PC ",
       "step2": "Run the installer and follow the setup wizard",
       "step3": "Open Doppler VPN — your account is created automatically",
       "step4": "Choose a plan, subscribe, and connect!",
@@ -1001,7 +1001,18 @@
       "successTitle": "Request Submitted",
       "successMessage": "Ticket {ticketNumber} created. We'll respond to {email} within 24 hours.",
       "errorGeneric": "Failed to submit request. Please try again.",
-      "close": "Close"
+      "close": "Close",
+      "stepOf": "Step {current} of {total}",
+      "topicPrompt": "What do you need help with?",
+      "back": "Back",
+      "subjectHint": "At least {min} characters",
+      "descriptionHint": "At least {min} characters",
+      "emailInvalid": "Enter a valid email address",
+      "receiptTicket": "Ticket",
+      "receiptReplyTo": "Reply to",
+      "receiptStatus": "Received — in the support queue",
+      "copy": "Copy",
+      "copied": "Copied"
     },
     "restore": {
       "title": "Restore Your Account",
@@ -1025,13 +1036,60 @@
       "title": "Business Inquiries",
       "subtitle": "Partnerships, press, enterprise"
     },
+    "businessForm": {
+      "title": "Business Inquiry",
+      "subtitle": "Partnerships, press and team plans — we reply within 1–2 business days",
+      "typePrompt": "What is your inquiry about?",
+      "typeLabel": "Inquiry type",
+      "types": {
+        "partnership": "Partnership",
+        "enterprise": "Enterprise / Team",
+        "press": "Press / Media",
+        "reseller": "Reseller / Affiliate",
+        "other": "Something else"
+      },
+      "companyLabel": "Company name",
+      "companyPlaceholder": "Acme Inc.",
+      "industryLabel": "Industry (optional)",
+      "industryPlaceholder": "Select an industry",
+      "industries": {
+        "tech_saas": "Technology / SaaS",
+        "media_press": "Media & Press",
+        "finance": "Finance",
+        "education": "Education",
+        "healthcare": "Healthcare",
+        "travel": "Travel & Hospitality",
+        "retail_ecommerce": "Retail & E-commerce",
+        "government_ngo": "Government / NGO",
+        "telecom_isp": "Telecom / ISP",
+        "other": "Other"
+      },
+      "nameLabel": "Your name (optional)",
+      "namePlaceholder": "Jane Smith",
+      "websiteLabel": "Website (optional)",
+      "emailLabel": "Work email",
+      "emailPlaceholder": "you@company.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell us about your company and what you have in mind…",
+      "submit": "Send Inquiry",
+      "submitting": "Sending…",
+      "successTitle": "Inquiry Sent",
+      "successMessage": "Reference {ticketNumber}. Our team will reply to {email} within 1–2 business days.",
+      "errorGeneric": "Failed to send your inquiry. Please try again.",
+      "receiptReference": "Reference",
+      "receiptCompany": "Company",
+      "receiptStatus": "Received — with our business team"
+    },
     "actions": {
       "submitRequest": "Submit a Request",
       "submitRequestDesc": "Get help from our team",
       "restoreAccount": "Restore Account",
       "restoreAccountDesc": "Recover your Account ID",
       "businessContact": "Business Inquiries",
-      "businessContactDesc": "Partnerships, press, enterprise"
+      "businessContactDesc": "Partnerships, press, enterprise",
+      "submitRequestCta": "Open",
+      "restoreAccountCta": "Restore",
+      "businessContactCta": "Get in touch"
     }
   },
   "guideProtocols": {
@@ -2379,7 +2437,7 @@
       }
     },
     "howItWorks": {
-      "title": "How to Set Up VPN on iPhone",
+      "title": "How to Set Up on iPhone",
       "subtitle": "Get connected in under 30 seconds — no technical knowledge required.",
       "step1": {
         "title": "Download from the App Store",
@@ -2494,7 +2552,7 @@
       }
     },
     "howItWorks": {
-      "title": "How to Set Up VPN on Android",
+      "title": "How to Set Up on Android",
       "subtitle": "Get connected in under 30 seconds — no technical knowledge required.",
       "step1": {
         "title": "Download from Google Play",
@@ -2609,7 +2667,7 @@
       }
     },
     "howItWorks": {
-      "title": "How to Set Up VPN on Mac",
+      "title": "How to Set Up on Mac",
       "subtitle": "Get connected in under a minute — no technical knowledge required.",
       "step1": {
         "title": "Download from the Mac App Store",
@@ -2761,7 +2819,7 @@
       }
     },
     "howItWorks": {
-      "title": "How to Set Up VPN on Windows",
+      "title": "How to Set Up on Windows",
       "subtitle": "Get connected in under a minute — no technical knowledge required.",
       "step1": {
         "title": "Download the Installer",
@@ -4372,13 +4430,11 @@
     },
     "hero": {
       "title": "What is my IP?",
-      "subtitle": "Your public IP address as seen by every website you visit — plus the geography and ISP attached to it. Refresh after connecting to a VPN to verify the change took effect."
+      "subtitle": "Your public IP address as seen by every website you visit — plus the geography and ISP attached to it. Refresh after connecting to a VPN to verify the change took effect.",
+      "breadcrumbTools": "Tools"
     },
     "widget": {
       "yourIp": "Your IP address",
-      "country": "Country",
-      "region": "Region",
-      "city": "City",
       "isp": "Internet provider",
       "asn": "ASN",
       "unknown": "Unknown",
@@ -4387,7 +4443,19 @@
       "copied": "Copied",
       "copy": "Copy",
       "loading": "Detecting your IP…",
-      "error": "Couldn't detect your IP. Refresh the page or try again in a moment."
+      "error": "Couldn't detect your IP. Refresh the page or try again in a moment.",
+      "details": "Connection details",
+      "location": "Location",
+      "timezone": "Time zone",
+      "coordinates": "Approx. coordinates",
+      "ipv4": "IPv4 address",
+      "ipv6": "IPv6 address",
+      "notAvailable": "Not available",
+      "ipv6Hint": "No IPv6 is normal — many networks and VPNs use IPv4 only.",
+      "changed": "Your IP changed since your last check on this device (was {previous}).",
+      "unchanged": "Same IP as your last check. If you just connected a VPN, it isn't routing this browser yet.",
+      "firstCheck": "Tip: note this IP, connect your VPN, then refresh — the address should change.",
+      "retry": "Try again"
     },
     "explainer": {
       "whatTitle": "What is an IP address?",
@@ -4406,6 +4474,7 @@
         "item4": "No mention of your real city or region."
       }
     },
+    "faqTitle": "Frequently asked questions",
     "faq": {
       "q1": {
         "question": "What is my IP address used for?",
@@ -4450,6 +4519,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "If Doppler VPN is protecting this browser, this test should show:",
+      "items": {
+        "item1": "No address marked as a leak in the WebRTC list.",
+        "item2": "Any public address in the list matches the IP websites see.",
+        "item3": "Your home ISP's IP nowhere on the page — run the test once with the VPN off so you recognize it.",
+        "item4": "The same result after you switch servers and re-run the test."
+      }
+    },
     "metadata": {
       "title": "WebRTC Leak Test — Check if Your VPN Hides Your Real IP",
       "description": "Free WebRTC leak test. Detects whether your browser is leaking your real IP through STUN even when a VPN is connected. Runs in 2 seconds. No data leaves your device."
@@ -4465,6 +4543,11 @@
       "leakedBody": "WebRTC detected one or more IPs that differ from the public IP. If you are on a VPN, this means a website using WebRTC can still see your real address.",
       "safeTitle": "No WebRTC leak detected",
       "safeBody": "WebRTC reported the same IP as the public one, or no IP at all. You are not leaking your real address through WebRTC right now.",
+      "noWebrtcTitle": "WebRTC is turned off",
+      "localNote": "Local and mDNS (.local) addresses only work inside your own network, so they don't reveal who you are.",
+      "tagLeak": "leak",
+      "tagPublic": "public",
+      "tagLocal": "local",
       "noWebrtc": "Your browser disabled WebRTC or no addresses were resolved. That is a safe state.",
       "unknown": "Unknown",
       "refresh": "Re-run test",
@@ -4531,7 +4614,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Open browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Click \"Extended test\" on dnsleaktest.com. The result should list only the VPN provider's DNS server(s) — not your ISP. If you see Comcast, Verizon, Vodafone, or any other consumer ISP in the results, your DNS is leaking."
+      "steps": {
+        "step1": {
+          "title": "Connect your VPN",
+          "body": "Turn the VPN on and wait until it says connected. The connection panel on this page should now show the VPN's network, not your home internet provider — press Refresh if it does not."
+        },
+        "step2": {
+          "title": "Run the extended test",
+          "body": "Open dnsleaktest.com and click \"Extended test\". It looks up a batch of one-off domain names and records which DNS servers answered them."
+        },
+        "step3": {
+          "title": "Check who answered",
+          "body": "Every server in the result should belong to your VPN provider. If you see Comcast, Verizon, Vodafone or any other consumer ISP, your DNS is leaking. Repeat with the VPN off to see what a leak looks like."
+        }
+      },
+      "panel": {
+        "title": "Your connection right now",
+        "hint": "This is your public IP, not your DNS resolver — only the external test can see that. With the VPN on, neither should belong to your home internet provider.",
+        "error": "Couldn't look up your connection. The external test still works."
+      }
     },
     "explainer": {
       "whatTitle": "What is a DNS leak?",

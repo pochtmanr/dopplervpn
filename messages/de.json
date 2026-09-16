@@ -1000,7 +1000,18 @@
       "successTitle": "Anfrage eingereicht",
       "successMessage": "Ticket {ticketNumber} erstellt. Wir antworten an {email} innerhalb von 24 Stunden.",
       "errorGeneric": "Anfrage konnte nicht gesendet werden. Bitte erneut versuchen.",
-      "close": "Schließen"
+      "close": "Schließen",
+      "stepOf": "Schritt {current} von {total}",
+      "topicPrompt": "Wobei können wir helfen?",
+      "back": "Zurück",
+      "subjectHint": "Mindestens {min} Zeichen",
+      "descriptionHint": "Mindestens {min} Zeichen",
+      "emailInvalid": "Gültige E-Mail-Adresse eingeben",
+      "receiptTicket": "Ticket",
+      "receiptReplyTo": "Antwort an",
+      "receiptStatus": "Eingegangen — in der Support-Warteschlange",
+      "copy": "Kopieren",
+      "copied": "Kopiert"
     },
     "restore": {
       "title": "Konto wiederherstellen",
@@ -1024,13 +1035,60 @@
       "title": "Geschäftsanfragen",
       "subtitle": "Partnerschaften, Presse, Unternehmen"
     },
+    "businessForm": {
+      "title": "Geschäftsanfrage",
+      "subtitle": "Partnerschaften, Presse und Team-Tarife — wir antworten innerhalb von 1–2 Werktagen",
+      "typePrompt": "Worum geht es bei Ihrer Anfrage?",
+      "typeLabel": "Art der Anfrage",
+      "types": {
+        "partnership": "Partnerschaft",
+        "enterprise": "Unternehmen / Team",
+        "press": "Presse / Medien",
+        "reseller": "Wiederverkäufer / Affiliate",
+        "other": "Etwas anderes"
+      },
+      "companyLabel": "Firmenname",
+      "companyPlaceholder": "Muster GmbH",
+      "industryLabel": "Branche (optional)",
+      "industryPlaceholder": "Branche auswählen",
+      "industries": {
+        "tech_saas": "Technologie / SaaS",
+        "media_press": "Medien & Presse",
+        "finance": "Finanzen",
+        "education": "Bildung",
+        "healthcare": "Gesundheitswesen",
+        "travel": "Reisen & Gastgewerbe",
+        "retail_ecommerce": "Handel & E-Commerce",
+        "government_ngo": "Behörden / NGO",
+        "telecom_isp": "Telekommunikation / ISP",
+        "other": "Sonstiges"
+      },
+      "nameLabel": "Ihr Name (optional)",
+      "namePlaceholder": "Anna Schmidt",
+      "websiteLabel": "Website (optional)",
+      "emailLabel": "Geschäftliche E-Mail",
+      "emailPlaceholder": "sie@firma.de",
+      "messageLabel": "Nachricht",
+      "messagePlaceholder": "Erzählen Sie uns von Ihrem Unternehmen und Ihrem Anliegen…",
+      "submit": "Anfrage senden",
+      "submitting": "Wird gesendet…",
+      "successTitle": "Anfrage gesendet",
+      "successMessage": "Referenz {ticketNumber}. Unser Team antwortet an {email} innerhalb von 1–2 Werktagen.",
+      "errorGeneric": "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+      "receiptReference": "Referenz",
+      "receiptCompany": "Firma",
+      "receiptStatus": "Eingegangen — bei unserem Business-Team"
+    },
     "actions": {
       "submitRequest": "Anfrage stellen",
       "submitRequestDesc": "Hilfe von unserem Team erhalten",
       "restoreAccount": "Konto wiederherstellen",
       "restoreAccountDesc": "Konto-ID wiederherstellen",
       "businessContact": "Geschäftsanfragen",
-      "businessContactDesc": "Partnerschaften, Presse, Unternehmen"
+      "businessContactDesc": "Partnerschaften, Presse, Unternehmen",
+      "submitRequestCta": "Öffnen",
+      "restoreAccountCta": "Wiederherstellen",
+      "businessContactCta": "Kontakt aufnehmen"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Wie ist meine IP?",
-      "subtitle": "Ihre öffentliche IP-Adresse, wie jede besuchte Website sie sieht — samt der damit verknüpften Geografie und dem Provider. Aktualisieren Sie nach dem Verbinden mit einem VPN, um zu prüfen, ob der Wechsel funktioniert hat."
+      "subtitle": "Ihre öffentliche IP-Adresse, wie jede besuchte Website sie sieht — samt der damit verknüpften Geografie und dem Provider. Aktualisieren Sie nach dem Verbinden mit einem VPN, um zu prüfen, ob der Wechsel funktioniert hat.",
+      "breadcrumbTools": "Tools"
     },
     "widget": {
       "yourIp": "Ihre IP-Adresse",
-      "country": "Land",
-      "region": "Region",
-      "city": "Stadt",
       "isp": "Internetanbieter",
       "asn": "ASN",
       "unknown": "Unbekannt",
@@ -4050,7 +4106,19 @@
       "copied": "Kopiert",
       "copy": "Kopieren",
       "loading": "IP wird ermittelt…",
-      "error": "Ihre IP konnte nicht ermittelt werden. Laden Sie die Seite neu oder versuchen Sie es gleich noch einmal."
+      "error": "Ihre IP konnte nicht ermittelt werden. Laden Sie die Seite neu oder versuchen Sie es gleich noch einmal.",
+      "details": "Verbindungsdetails",
+      "location": "Standort",
+      "timezone": "Zeitzone",
+      "coordinates": "Ungefähre Koordinaten",
+      "ipv4": "IPv4-Adresse",
+      "ipv6": "IPv6-Adresse",
+      "notAvailable": "Nicht verfügbar",
+      "ipv6Hint": "Keine IPv6 zu haben ist normal — viele Netzwerke und VPNs nutzen nur IPv4.",
+      "changed": "Ihre IP hat sich seit Ihrer letzten Prüfung auf diesem Gerät geändert (vorher {previous}).",
+      "unchanged": "Dieselbe IP wie bei Ihrer letzten Prüfung. Falls Sie gerade ein VPN verbunden haben, leitet es den Traffic dieses Browsers noch nicht um.",
+      "firstCheck": "Tipp: Notieren Sie sich diese IP, verbinden Sie Ihr VPN und laden Sie die Seite neu — die Adresse sollte sich ändern.",
+      "retry": "Erneut versuchen"
     },
     "explainer": {
       "whatTitle": "Was ist eine IP-Adresse?",
@@ -4069,6 +4137,7 @@
         "item4": "Keine Erwähnung Ihrer echten Stadt oder Region."
       }
     },
+    "faqTitle": "Häufig gestellte Fragen",
     "faq": {
       "q1": {
         "question": "Wofür wird meine IP-Adresse verwendet?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Wenn Doppler VPN diesen Browser schützt, sollte dieser Test zeigen:",
+      "items": {
+        "item1": "Keine Adresse, die in der WebRTC-Liste als Leck markiert ist.",
+        "item2": "Jede öffentliche Adresse in der Liste stimmt mit der IP überein, die Websites sehen.",
+        "item3": "Die IP Ihres Heimanbieters nirgends auf der Seite — führen Sie den Test einmal ohne VPN aus, damit Sie sie wiedererkennen.",
+        "item4": "Dasselbe Ergebnis, nachdem Sie den Server gewechselt und den Test erneut ausgeführt haben."
+      }
+    },
     "metadata": {
       "title": "WebRTC-Leak-Test — Prüfen Sie, ob Ihr VPN Ihre echte IP verbirgt",
       "description": "Kostenloser WebRTC-Leak-Test. Erkennt, ob Ihr Browser Ihre echte IP über STUN preisgibt — selbst bei verbundenem VPN. Läuft in 2 Sekunden. Keine Daten verlassen Ihr Gerät."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC hat eine oder mehrere IPs entdeckt, die von der öffentlichen IP abweichen. Wenn Sie ein VPN nutzen, kann eine Website mit WebRTC also weiterhin Ihre echte Adresse sehen.",
       "safeTitle": "Kein WebRTC-Leck erkannt",
       "safeBody": "WebRTC hat dieselbe IP wie die öffentliche gemeldet — oder gar keine. Ihre echte Adresse sickert derzeit nicht über WebRTC durch.",
+      "noWebrtcTitle": "WebRTC ist deaktiviert",
+      "localNote": "Lokale und mDNS-Adressen (.local) funktionieren nur in Ihrem eigenen Netzwerk und verraten daher nicht, wer Sie sind.",
+      "tagLeak": "Leck",
+      "tagPublic": "öffentlich",
+      "tagLocal": "lokal",
       "noWebrtc": "Ihr Browser hat WebRTC deaktiviert oder es wurden keine Adressen aufgelöst. Das ist ein sicherer Zustand.",
       "unknown": "Unbekannt",
       "refresh": "Test wiederholen",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "browserleaks.com/dns öffnen",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Klicken Sie auf dnsleaktest.com auf \"Extended test\". Das Ergebnis sollte nur die DNS-Server Ihres VPN-Anbieters auflisten — nicht Ihren Internetanbieter. Sehen Sie Comcast, Verizon, Vodafone oder einen anderen Endkunden-Provider in den Ergebnissen, leckt Ihr DNS."
+      "steps": {
+        "step1": {
+          "title": "VPN verbinden",
+          "body": "Schalten Sie das VPN ein und warten Sie, bis es als verbunden angezeigt wird. Das Verbindungsfeld auf dieser Seite sollte jetzt das Netz des VPN zeigen, nicht Ihren Internetanbieter zu Hause — sonst klicken Sie auf „Aktualisieren“."
+        },
+        "step2": {
+          "title": "Erweiterten Test starten",
+          "body": "Öffnen Sie dnsleaktest.com und klicken Sie auf \"Extended test\". Der Test fragt eine Reihe einmaliger Domainnamen ab und protokolliert, welche DNS-Server darauf geantwortet haben."
+        },
+        "step3": {
+          "title": "Prüfen, wer geantwortet hat",
+          "body": "Jeder Server im Ergebnis sollte zu Ihrem VPN-Anbieter gehören. Sehen Sie Comcast, Verizon, Vodafone oder einen anderen Endkunden-Provider, leckt Ihr DNS. Wiederholen Sie den Test ohne VPN, um zu sehen, wie ein Leck aussieht."
+        }
+      },
+      "panel": {
+        "title": "Ihre Verbindung gerade",
+        "hint": "Das ist Ihre öffentliche IP, nicht Ihr DNS-Resolver — den sieht nur der externe Test. Mit aktivem VPN sollte keines von beiden zu Ihrem Internetanbieter zu Hause gehören.",
+        "error": "Ihre Verbindung konnte nicht abgefragt werden. Der externe Test funktioniert trotzdem."
+      }
     },
     "explainer": {
       "whatTitle": "Was ist ein DNS-Leck?",

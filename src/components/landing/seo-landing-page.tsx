@@ -154,7 +154,7 @@ function DownloadButtons({
           href={`${URLS.ios}${utm}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors shadow-lg shadow-accent-teal/20"
+          className="cta-key inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
         >
           <AppleLogo />
           {t("cta.downloadIos")}
@@ -168,7 +168,7 @@ function DownloadButtons({
           href={`${URLS.androidPlayStore}${utm}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors shadow-lg shadow-accent-teal/20"
+          className="cta-key inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
         >
           <GoogleLogo />
           {t("cta.downloadAndroid")}

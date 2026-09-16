@@ -35,6 +35,7 @@ eased, once, and always has a still fallback.
 | `accent-gold` | `#D4D6DB` silver | `#3A3D42` graphite | stars, rare neutral emphasis — not an accent colour despite the name |
 | `overlay` | `#FFFFFF` | `#000000` | every border & hairline: `overlay/5`, `/10`, `/20` |
 | violet / amber / danger / telegram | | | Pro tier / real warnings / destructive / Telegram only |
+| `accent-blue` / `blue-light` | `#2AABEE` / `#5BC0F2` | `#0369A1` / `#0369A1` | Telegram's blue (same as the `telegram` token). **Business inquiries and the support Telegram card only** — the `/support` Business card and its modal (`CARD_BLUE`, `ROW_TILE_BLUE`, `.cta-key-blue` in `card-recipes.ts` / `globals.css`). Not a second site accent |
 
 Rules:
 - **Never** raw `white`/`black`/hex in components, and **no `dark:` variants** — tokens + `overlay/*` flip
@@ -87,13 +88,81 @@ border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:borde
 - Text zone `px-3 md:px-5 py-3 text-start`; trailing chevron
   `hidden md:block me-4 w-4 h-4 text-text-tertiary transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5`.
 
+### Recipe B variant — Plain download card (downloads/page.tsx)
+- **Since 2026-09-16 the downloads cards carry no artwork** — no screenshot, no device stage. The app is
+  shown once, in the setup card below them. A card is: the platform name (`h2`), the keycap download with the
+  **platform mark** as its icon (Apple / Android / Windows), Android's APK and 32-bit APK as `.cta-flat`
+  buttons with the download glyph (they are files), quiet caveat lines (Windows' SmartScreen with an amber
+  icon), then the release date and "Learn more" pinned to the foot. No hover orb. The visitor's own platform
+  (`downloads/detected-platform.tsx`, resolved after mount) gets a teal border + ring — colour only.
+
+### Downloads ↔ support: one set of class lists (ui/card-recipes.ts)
+- Since 2026-09-16 the support page is built from the same recipes as downloads, imported from
+  `src/components/ui/card-recipes.ts` (`CARD`, `CARD_HAIRLINE`, `CARD_TITLE`, `ROW_CARD`, `ROW_TILE`,
+  `ROW_TITLE`, `ROW_TEXT`, `HERO_*`, `splitHeadline`). Change a recipe there, not in either page.
+- Support (reworked 2026-09-16) = the downloads hero → **one action grid** (`support/action-buttons.tsx`,
+  `lg:grid-cols-12`) holding every control on the page, in priority order: Submit a Request (8), with a settle-once terminal plate at
+  the foot (`glyph/ticket-plate.tsx`, `plateScene` on a grid widened per breakpoint), + Telegram (4), with the
+  bare Telegram mark (no tile) and a looping chat at the foot (`support/telegram-chat.tsx`: question bubble →
+  typing dots → answer, using the translated "VPN won't connect" troubleshooting entry; paused off screen, still
+  under reduced motion). The Telegram card is Telegram blue at rest (border, gradient, hairline, question bubble, `.cta-key-telegram`), with a bare-grain `GlyphField tone="telegram"` behind the bubbles; Business shares the same blue via the `accent-blue` tokens → Restore | Email | Business (4 each, plain recipe B, no plate) → Delete account as a
+  quiet full-width recipe A row with a danger tile, linking to `/delete-account`. md is 2-up (ticket and delete
+  span both), phones 1-up. Artwork only on the featured row: it is the hierarchy.
+- **Act vs read:** FAQ | Troubleshooting sit below in a full-bleed band (`bg-bg-secondary/30 border-y`) with
+  **no card chrome** — a heading over a hairline rule, then the accordion. Glass card = you can act on it;
+  flat text on the band = you read it. Don't put either back in cards.
+- **Action card control:** the title is the card's one `<button>`/`<a>`, stretched over the card with
+  `after:absolute after:inset-0 after:z-10` (a `<button>` cannot contain the plate's block content); the card
+  shows focus with `has-[:focus-visible]:ring-2`. The foot pill is the navbar's CTA key as a `<span>`, one per
+  card; the Email card's pill is the revealed `ObfuscatedEmail` mailto itself, flat (`cta-flat`).
+- **Submit-a-request dialog** (support/ticket-modal.tsx): `CARD_SURFACE` (recipe B without the hover — a dialog
+  is not a hover target) over `bg-bg-secondary`, bottom sheet below `sm`. Two steps with a 2-segment teal bar:
+  topic cards → details with live minimum-length hints matching the API. Success is a mono receipt plate
+  (ticket / topic / reply-to, dashed CSS rules rather than counted box art, copy pill, `terminal-cursor`).
+  Step and row entrances transition `opacity,translate` — in Tailwind v4 `translate-*` sets the `translate`
+  property, so `transition-[opacity,transform]` would snap the movement.
+
+### Device stage (glyph/device-scene.ts, device-stage.tsx) — not used on downloads any more
+- Recipe B's card with the plate moved from the foot to the **head**: a
+  `relative -mx-6 -mt-6 mb-5 border-b border-overlay/5` block (the negative margins must track the
+  card's `p-6`) holding `<DeviceStage>`, then the platform's name as the card's `<h2>` under it.
+- The stage **adopts the grid's aspect** (`DEVICE_ASPECT`, 40×13 ≈ 1.6:1) rather than taking a fixed
+  height, so nothing is ever cover-cropped: a card runs from ~300px wide two-up on a phone to ~370px
+  four-up at 1600px, and a device cut off at one of those widths is not a device.
+- **Each device is drawn as itself, and the mark on its screen names the platform.** An iPhone from
+  the front (rounded body, Dynamic Island, side buttons stamped in the column outside the frame with
+  `▐`/`▌` so they read as nubs on the rail, home indicator) and an Android phone of the same build
+  (punch-hole, `◁ ○ □`, buttons on the trailing side only); a compact Macintosh and a Windows desktop
+  of a monitor on a neck and foot **with its tower beside it**. The screens carry the Apple mark, the
+  droid, the Finder face and the four Windows panes — which is what finally keeps iOS and macOS
+  apart, since they share one Apple glyph everywhere else.
+- **Two silhouettes in the same family read as the same object.** The Mac was a rounded box with a
+  screen in it, which is what the PC's monitor also is. What separates them is the compact Mac's
+  stepped shoulder — the screen housing drawn a column narrower each side than the base, with
+  `╭╯ … ╰╮` stepping the wall out between them — and the PC's tower. Keep both.
+- One live element, shared: a four-cell signal meter filling and starting over every 420ms. It is
+  always four characters wide however full it is, so the padded rows around it keep their width and
+  the noise never bleeds back through the device's interior. On the Mac it rides in the chin beside
+  the floppy slot, where a drive light belongs.
+- **Box art is easy to get wrong by one cell, and `stamp` clips in silence on both axes** — a row
+  padded to the wrong width overruns its frame, and a body one line too tall simply loses its closing
+  edge, which is what had happened to both phones: 14-line bodies dropping their `╰─────────╯` off
+  the bottom of a 13-row grid, so neither phone had a bottom. A scene is a pure function of
+  `(frame, tMs)`, so run `npx tsx scripts/preview-devices.ts [tMs]` and read the frame — and for how
+  the blocks actually join in a mono face, render the frame to a page and look at it. Counting
+  characters proves the widths; it does not tell you a one-cell lobe either side of a one-cell cleft
+  comes out a mushroom rather than an apple.
+
 ### Card recipe B — Glass gradient card with terminal plate (traffic-step-card.tsx:49)
 ```
 group relative flex h-full flex-col rounded-2xl border border-overlay/10
 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04]
 p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300
 ```
-- Top hairline: `absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent`
+- Top hairline: `absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent`.
+  **Not** `inset-inline-start-0 inset-inline-end-0`: Tailwind v4 has no such utilities, so the line collapses to
+  0px. That broken pair is still in ~12 older files (pricing, cta, traffic-step-card, comparison-accordion,
+  auth-panel, setup-section, …).
 - Hover orb (the **only** allowed blur glow — inside a card, hover-only):
   `absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`
 - Content `relative`; then the plate pinned to the foot, edge to edge:
@@ -164,6 +233,11 @@ tile and no glyphs. Existing sections using it are migration targets (§9).
 - **Check list items:** `text-xs text-text-muted` with `w-4 h-4 text-accent-teal` stroke-2 check icons.
 - **Stars / ratings:** `text-accent-gold w-3.5 h-3.5` + `text-sm font-semibold text-text-primary`.
 - Icons are inline heroicons-style SVG (`stroke="currentColor"`, strokeWidth 1.75–2.5), `aria-hidden`.
+- **The keycap pair** (globals.css:260-355): `.cta-key` is the solid-teal primary as a physical key
+  (cap gradient, inset bevel, hard `0 4px 0` skirt, contact shadow; `:active` bottoms it out).
+  `.cta-flat` is its counterpart — filled but flat and unpressable. **At most one key per surface**,
+  with its neighbours flat: that contrast is what makes the key read as raised. Chips and quick-jump
+  pills take `.cta-flat` for the same reason.
 - The `ui/button.tsx` `.btn-primary` (silver fill, shadow) predates this standard — prefer the teal recipes above.
 
 ## 5. Motion
@@ -258,6 +332,20 @@ static JPG at the same path so existing references keep working.
   `blog/home-blog-section.tsx`.
 - Layout: `layout/footer.tsx`, `navbar.tsx`, `mobile-sticky-cta.tsx`.
 - `components/landing/seo-landing-page.tsx` (~20 SEO pages): orbs, shadowed buttons, no Reveal/glyphs.
-- `vpn-for-{ios,android,macos,windows}`, `downloads`: CSS dot-field backdrop instead of glyph artwork.
-- Support, about, security, tools, legal, giveaway, blog, account, checkout, cn-check.
+- ~~`downloads`~~ — done 2026-09-16, reworked the same day for conversion: plain hero (no glyph backdrop),
+  four plain download cards (see recipe B variant above), then the setup steps
+  in **recipe C's notched card** (`downloads/setup-section.tsx`): platform tabs opening on the visitor's
+  own, the steps playing through (a teal bar under the active step is the clock — its `animationend`
+  advances; paused off screen / hidden tab; any step click stops it for good; never under reduced motion),
+  the platform's keycap download + ratings, and on the right the home CTA card's own picture
+  (`dopplerdownload.avif`, the same for every tab). The two recipe-A link rows (censorship, support) sit above it, so the card closes the page.
+  No new translation keys — headings are the platform pages' `howItWorks.title`/`subtitle`.
+- `vpn-for-{ios,android,macos,windows}`: CSS dot-field backdrop instead of glyph artwork.
+- ~~`tools`~~ — done 2026-09-16. Hub: plain hero (no `PricingBackdrop`), `GlyphPlateCard` with its optional
+  `icon` (a `ROW_TILE` above the title; icons in `components/tools/tool-icons.tsx`). What-is-my-IP: plain hero with
+  a text breadcrumb, recipe B widget (address + keycap Refresh left, mono `whois` receipt right — ISP/ASN from
+  ipinfo Lite via `IPINFO_TOKEN`, IPv4/IPv6 from ipify under a route-scoped CSP in next.config.ts), recipe B
+  explainer cards, recipe B checklist, native `<details>` FAQ in one glass card, recipe A related rows, CTA.
+  WebRTC and DNS leak pages still old.
+- ~~Support~~ (done 2026-09-16, see "Downloads ↔ support"); about, security, legal, giveaway, blog, account, checkout, cn-check.
 - OG image (§8).

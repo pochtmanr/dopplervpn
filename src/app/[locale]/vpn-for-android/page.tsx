@@ -282,7 +282,7 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
                     href={URLS.androidPlayStore}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold bg-accent-teal text-white hover:bg-accent-teal-light transition-all duration-200 shadow-lg shadow-accent-teal/25 hover:shadow-accent-teal/40 hover:-translate-y-0.5"
+                    className="cta-key inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold text-white"
                   >
                     <PlayStoreIcon />
                     {t("hero.cta")}
@@ -511,7 +511,7 @@ export default async function VpnForAndroidPage({ params }: PageProps) {
                       href={URLS.androidPlayStore}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold bg-accent-teal text-white hover:bg-accent-teal-light transition-all duration-200 shadow-lg shadow-accent-teal/25 hover:shadow-accent-teal/40 hover:-translate-y-0.5"
+                      className="cta-key inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold text-white"
                     >
                       <PlayStoreIcon />
                       {t("cta.downloadAndroid")}

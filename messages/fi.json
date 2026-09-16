@@ -1000,7 +1000,18 @@
       "successTitle": "Pyyntö lähetetty",
       "successMessage": "Tiketti {ticketNumber} luotu. Vastaamme osoitteeseen {email} 24 tunnin kuluessa.",
       "errorGeneric": "Pyynnön lähetys epäonnistui. Yritä uudelleen.",
-      "close": "Sulje"
+      "close": "Sulje",
+      "stepOf": "Vaihe {current}/{total}",
+      "topicPrompt": "Missä tarvitset apua?",
+      "back": "Takaisin",
+      "subjectHint": "Vähintään {min} merkkiä",
+      "descriptionHint": "Vähintään {min} merkkiä",
+      "emailInvalid": "Anna kelvollinen sähköpostiosoite",
+      "receiptTicket": "Tukipyyntö",
+      "receiptReplyTo": "Vastaus osoitteeseen",
+      "receiptStatus": "Vastaanotettu — tukijonossa",
+      "copy": "Kopioi",
+      "copied": "Kopioitu"
     },
     "restore": {
       "title": "Palauta tilisi",
@@ -1024,13 +1035,60 @@
       "title": "Yrityskyselyt",
       "subtitle": "Kumppanuudet, lehdistö, yritysratkaisut"
     },
+    "businessForm": {
+      "title": "Yrityskysely",
+      "subtitle": "Kumppanuudet, media ja tiimipaketit — vastaamme 1–2 arkipäivän kuluessa",
+      "typePrompt": "Mitä kyselysi koskee?",
+      "typeLabel": "Kyselyn tyyppi",
+      "types": {
+        "partnership": "Kumppanuus",
+        "enterprise": "Yritys / Tiimi",
+        "press": "Lehdistö / Media",
+        "reseller": "Jälleenmyyjä / Kumppaniohjelma",
+        "other": "Jokin muu"
+      },
+      "companyLabel": "Yrityksen nimi",
+      "companyPlaceholder": "Esimerkki Oy",
+      "industryLabel": "Toimiala (valinnainen)",
+      "industryPlaceholder": "Valitse toimiala",
+      "industries": {
+        "tech_saas": "Teknologia / SaaS",
+        "media_press": "Media ja lehdistö",
+        "finance": "Rahoitus",
+        "education": "Koulutus",
+        "healthcare": "Terveydenhuolto",
+        "travel": "Matkailu ja majoitus",
+        "retail_ecommerce": "Vähittäiskauppa ja verkkokauppa",
+        "government_ngo": "Julkinen sektori / Järjestö",
+        "telecom_isp": "Tietoliikenne / Internetoperaattori",
+        "other": "Muu"
+      },
+      "nameLabel": "Nimesi (valinnainen)",
+      "namePlaceholder": "Laura Virtanen",
+      "websiteLabel": "Verkkosivusto (valinnainen)",
+      "emailLabel": "Työsähköposti",
+      "emailPlaceholder": "sina@yritys.fi",
+      "messageLabel": "Viesti",
+      "messagePlaceholder": "Kerro meille yrityksestäsi ja siitä, mitä sinulla on mielessä…",
+      "submit": "Lähetä kysely",
+      "submitting": "Lähetetään…",
+      "successTitle": "Kysely lähetetty",
+      "successMessage": "Viite {ticketNumber}. Tiimimme vastaa osoitteeseen {email} 1–2 arkipäivän kuluessa.",
+      "errorGeneric": "Kyselyn lähettäminen epäonnistui. Yritä uudelleen.",
+      "receiptReference": "Viite",
+      "receiptCompany": "Yritys",
+      "receiptStatus": "Vastaanotettu — yritystiimillämme"
+    },
     "actions": {
       "submitRequest": "Lähetä tukipyyntö",
       "submitRequestDesc": "Saat apua tiimiltämme",
       "restoreAccount": "Palauta tili",
       "restoreAccountDesc": "Palauta tilitunnuksesi",
       "businessContact": "Yrityskyselyt",
-      "businessContactDesc": "Kumppanuudet, lehdistö, yritysratkaisut"
+      "businessContactDesc": "Kumppanuudet, lehdistö, yritysratkaisut",
+      "submitRequestCta": "Avaa",
+      "restoreAccountCta": "Palauta",
+      "businessContactCta": "Ota yhteyttä"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Mikä on IP-osoitteeni?",
-      "subtitle": "Julkinen IP-osoitteesi sellaisena kuin jokainen vierailemasi sivusto sen näkee — sekä siihen liittyvä maantiede ja operaattori. Päivitä VPN-yhteyden jälkeen varmistaaksesi, että vaihto onnistui."
+      "subtitle": "Julkinen IP-osoitteesi sellaisena kuin jokainen vierailemasi sivusto sen näkee — sekä siihen liittyvä maantiede ja operaattori. Päivitä VPN-yhteyden jälkeen varmistaaksesi, että vaihto onnistui.",
+      "breadcrumbTools": "Työkalut"
     },
     "widget": {
       "yourIp": "IP-osoitteesi",
-      "country": "Maa",
-      "region": "Alue",
-      "city": "Kaupunki",
       "isp": "Internetoperaattori",
       "asn": "ASN",
       "unknown": "Tuntematon",
@@ -4050,7 +4106,19 @@
       "copied": "Kopioitu",
       "copy": "Kopioi",
       "loading": "Tunnistetaan IP-osoitettasi…",
-      "error": "IP-osoitettasi ei voitu tunnistaa. Lataa sivu uudelleen tai yritä hetken kuluttua."
+      "error": "IP-osoitettasi ei voitu tunnistaa. Lataa sivu uudelleen tai yritä hetken kuluttua.",
+      "details": "Yhteyden tiedot",
+      "location": "Sijainti",
+      "timezone": "Aikavyöhyke",
+      "coordinates": "Likimääräiset koordinaatit",
+      "ipv4": "IPv4-osoite",
+      "ipv6": "IPv6-osoite",
+      "notAvailable": "Ei saatavilla",
+      "ipv6Hint": "IPv6:n puuttuminen on normaalia — monet verkot ja VPN:t käyttävät vain IPv4:ää.",
+      "changed": "IP-osoitteesi on vaihtunut edellisen tällä laitteella tehdyn tarkistuksen jälkeen (aiemmin {previous}).",
+      "unchanged": "Sama IP kuin edellisellä tarkistuksella. Jos yhdistit juuri VPN:ään, se ei vielä ohjaa tämän selaimen liikennettä.",
+      "firstCheck": "Vinkki: merkitse tämä IP muistiin, yhdistä VPN ja päivitä sivu — osoitteen pitäisi vaihtua.",
+      "retry": "Yritä uudelleen"
     },
     "explainer": {
       "whatTitle": "Mikä on IP-osoite?",
@@ -4069,6 +4137,7 @@
         "item4": "Ei mitään mainintaa oikeasta kaupungistasi tai alueestasi."
       }
     },
+    "faqTitle": "Usein kysytyt kysymykset",
     "faq": {
       "q1": {
         "question": "Mihin IP-osoitettani käytetään?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Jos Doppler VPN suojaa tätä selainta, testin pitäisi näyttää:",
+      "items": {
+        "item1": "WebRTC-listassa ei ole yhtään vuodoksi merkittyä osoitetta.",
+        "item2": "Jokainen listan julkinen osoite vastaa IP:tä, jonka sivustot näkevät.",
+        "item3": "Kotiliittymäsi IP ei näy missään sivulla — aja testi kerran ilman VPN:ää, jotta tunnistat sen.",
+        "item4": "Sama tulos, kun vaihdat palvelinta ja ajat testin uudelleen."
+      }
+    },
     "metadata": {
       "title": "WebRTC-vuototesti — Tarkista, piilottaako VPN oikean IP-osoitteesi",
       "description": "Ilmainen WebRTC-vuototesti. Tunnistaa, vuotaako selaimesi oikean IP:si STUN:in kautta, vaikka VPN olisi yhdistettynä. Valmis 2 sekunnissa. Mitään dataa ei lähde laitteeltasi."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC havaitsi yhden tai useamman IP:n, joka eroaa julkisesta. Jos käytät VPN:ää, WebRTC:tä käyttävä sivusto voi yhä nähdä oikean osoitteesi.",
       "safeTitle": "WebRTC-vuotoa ei havaittu",
       "safeBody": "WebRTC ilmoitti saman IP:n kuin julkinen, tai ei mitään. Oikea osoitteesi ei vuoda WebRTC:n kautta juuri nyt.",
+      "noWebrtcTitle": "WebRTC on pois päältä",
+      "localNote": "Paikalliset ja mDNS-osoitteet (.local) toimivat vain omassa verkossasi, joten ne eivät paljasta, kuka olet.",
+      "tagLeak": "vuoto",
+      "tagPublic": "julkinen",
+      "tagLocal": "paikallinen",
       "noWebrtc": "Selaimesi on poistanut WebRTC:n käytöstä tai osoitteita ei löytynyt. Se on turvallinen tila.",
       "unknown": "Tuntematon",
       "refresh": "Suorita testi uudelleen",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Avaa browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Napsauta \"Extended test\" dnsleaktest.comissa. Tuloksessa pitäisi näkyä vain VPN-palveluntarjoajasi DNS-palvelimet — ei internetoperaattorisi. Jos näet tuloksissa Comcastin, Verizonin, Vodafonen tai muun kuluttajaoperaattorin, DNS:si vuotaa."
+      "steps": {
+        "step1": {
+          "title": "Yhdistä VPN",
+          "body": "Kytke VPN päälle ja odota, kunnes se näyttää olevan yhdistetty. Tämän sivun yhteyspaneelin pitäisi nyt näyttää VPN:n verkko eikä kotisi internetoperaattoria — jos ei, napsauta \"Päivitä\"."
+        },
+        "step2": {
+          "title": "Aja laajennettu testi",
+          "body": "Avaa dnsleaktest.com ja napsauta \"Extended test\". Testi hakee joukon kertakäyttöisiä verkkotunnuksia ja kirjaa, mitkä DNS-palvelimet vastasivat niihin."
+        },
+        "step3": {
+          "title": "Tarkista, kuka vastasi",
+          "body": "Jokaisen tuloksen palvelimen pitäisi kuulua VPN-palveluntarjoajallesi. Jos näet Comcastin, Verizonin, Vodafonen tai muun kuluttajaoperaattorin, DNS:si vuotaa. Toista testi VPN pois päältä nähdäksesi, miltä vuoto näyttää."
+        }
+      },
+      "panel": {
+        "title": "Yhteytesi juuri nyt",
+        "hint": "Tämä on julkinen IP-osoitteesi, ei DNS-resolverisi — sen näkee vain ulkoinen testi. VPN päällä kumpikaan ei saisi kuulua kotisi internetoperaattorille.",
+        "error": "Yhteytesi tietoja ei saatu haettua. Ulkoinen testi toimii silti."
+      }
     },
     "explainer": {
       "whatTitle": "Mikä on DNS-vuoto?",

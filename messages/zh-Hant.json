@@ -1000,7 +1000,18 @@
       "successTitle": "請求已提交",
       "successMessage": "工單 {ticketNumber} 已建立。我們會在 24 小時內回覆至 {email}。",
       "errorGeneric": "提交失敗，請重試。",
-      "close": "關閉"
+      "close": "關閉",
+      "stepOf": "第 {current} 步，共 {total} 步",
+      "topicPrompt": "您需要哪方面的協助？",
+      "back": "返回",
+      "subjectHint": "至少 {min} 個字元",
+      "descriptionHint": "至少 {min} 個字元",
+      "emailInvalid": "請輸入有效的電子郵件地址",
+      "receiptTicket": "工單",
+      "receiptReplyTo": "回覆至",
+      "receiptStatus": "已收到 — 已進入支援佇列",
+      "copy": "複製",
+      "copied": "已複製"
     },
     "restore": {
       "title": "恢復帳戶",
@@ -1024,13 +1035,60 @@
       "title": "商務洽詢",
       "subtitle": "合作、媒體及企業服務"
     },
+    "businessForm": {
+      "title": "商務洽詢",
+      "subtitle": "合作、媒體與團隊方案 — 我們將在 1–2 個工作天內回覆",
+      "typePrompt": "您想洽詢哪方面的問題？",
+      "typeLabel": "洽詢類型",
+      "types": {
+        "partnership": "商務合作",
+        "enterprise": "企業 / 團隊",
+        "press": "媒體 / 新聞",
+        "reseller": "經銷商 / 推廣聯盟",
+        "other": "其他事項"
+      },
+      "companyLabel": "公司名稱",
+      "companyPlaceholder": "範例科技股份有限公司",
+      "industryLabel": "產業（選填）",
+      "industryPlaceholder": "選擇產業",
+      "industries": {
+        "tech_saas": "科技 / SaaS",
+        "media_press": "媒體與新聞",
+        "finance": "金融",
+        "education": "教育",
+        "healthcare": "醫療保健",
+        "travel": "旅遊與餐旅",
+        "retail_ecommerce": "零售與電商",
+        "government_ngo": "政府 / 非營利組織",
+        "telecom_isp": "電信 / 網路服務供應商",
+        "other": "其他"
+      },
+      "nameLabel": "您的姓名（選填）",
+      "namePlaceholder": "陳怡君",
+      "websiteLabel": "網站（選填）",
+      "emailLabel": "工作信箱",
+      "emailPlaceholder": "you@company.com",
+      "messageLabel": "留言",
+      "messagePlaceholder": "請介紹您的公司以及您的想法…",
+      "submit": "送出洽詢",
+      "submitting": "送出中…",
+      "successTitle": "洽詢已送出",
+      "successMessage": "編號 {ticketNumber}。我們的團隊將在 1–2 個工作天內回覆至 {email}。",
+      "errorGeneric": "洽詢送出失敗，請再試一次。",
+      "receiptReference": "編號",
+      "receiptCompany": "公司",
+      "receiptStatus": "已收到 — 商務團隊處理中"
+    },
     "actions": {
       "submitRequest": "提交請求",
       "submitRequestDesc": "取得我們團隊的協助",
       "restoreAccount": "恢復帳戶",
       "restoreAccountDesc": "找回您的帳戶 ID",
       "businessContact": "商務洽詢",
-      "businessContactDesc": "合作、媒體及企業服務"
+      "businessContactDesc": "合作、媒體及企業服務",
+      "submitRequestCta": "開啟",
+      "restoreAccountCta": "復原",
+      "businessContactCta": "聯絡我們"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "我的 IP 是什麼？",
-      "subtitle": "這是您造訪的每個網站所看到的公網 IP 位址，以及與之關聯的地理位置和電信業者。連接 VPN 後重新整理頁面，確認位址已經更換。"
+      "subtitle": "這是您造訪的每個網站所看到的公網 IP 位址，以及與之關聯的地理位置和電信業者。連接 VPN 後重新整理頁面，確認位址已經更換。",
+      "breadcrumbTools": "工具"
     },
     "widget": {
       "yourIp": "您的 IP 位址",
-      "country": "國家",
-      "region": "地區",
-      "city": "城市",
       "isp": "網路業者",
       "asn": "ASN",
       "unknown": "未知",
@@ -4050,7 +4106,19 @@
       "copied": "已複製",
       "copy": "複製",
       "loading": "正在偵測您的 IP…",
-      "error": "無法偵測您的 IP。請重新整理頁面或稍後再試。"
+      "error": "無法偵測您的 IP。請重新整理頁面或稍後再試。",
+      "details": "連線詳細資訊",
+      "location": "位置",
+      "timezone": "時區",
+      "coordinates": "大致座標",
+      "ipv4": "IPv4 位址",
+      "ipv6": "IPv6 位址",
+      "notAvailable": "無法取得",
+      "ipv6Hint": "沒有 IPv6 很正常——許多網路和 VPN 僅使用 IPv4。",
+      "changed": "自您上次在此裝置上檢測以來，您的 IP 已經改變（先前為 {previous}）。",
+      "unchanged": "與上次檢測的 IP 相同。如果您剛連接 VPN，表示它尚未接管此瀏覽器的流量。",
+      "firstCheck": "提示：記下此 IP，連接 VPN 後重新整理頁面——位址應該會改變。",
+      "retry": "重試"
     },
     "explainer": {
       "whatTitle": "什麼是 IP 位址？",
@@ -4069,6 +4137,7 @@
         "item4": "完全不出現您真實的城市或地區。"
       }
     },
+    "faqTitle": "常見問題",
     "faq": {
       "q1": {
         "question": "我的 IP 位址被用來做什麼？",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "如果 Doppler VPN 正在保護此瀏覽器，本測試應顯示：",
+      "items": {
+        "item1": "WebRTC 清單中沒有任何標記為洩漏的位址。",
+        "item2": "清單中的任何公網位址都與網站看到的 IP 一致。",
+        "item3": "頁面上任何地方都沒有您家用網路的 IP — 先在不開 VPN 的情況下測一次，以便認出它。",
+        "item4": "切換伺服器並重新測試後，結果依然相同。"
+      }
+    },
     "metadata": {
       "title": "WebRTC 洩漏測試 — 檢測 VPN 是否隱藏了您的真實 IP",
       "description": "免費 WebRTC 洩漏測試。檢測即使連接了 VPN，瀏覽器是否仍透過 STUN 洩露您的真實 IP。2 秒完成。資料不離開您的裝置。"
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC 偵測到一個或多個與公網 IP 不同的位址。如果您正在使用 VPN，這意味著使用 WebRTC 的網站仍能看到您的真實位址。",
       "safeTitle": "未偵測到 WebRTC 洩漏",
       "safeBody": "WebRTC 回報的 IP 與公網 IP 相同，或未回報任何 IP。您目前沒有透過 WebRTC 洩露真實位址。",
+      "noWebrtcTitle": "WebRTC 已關閉",
+      "localNote": "本機位址和 mDNS（.local）位址只在您自己的網路內有效，因此不會暴露您的身分。",
+      "tagLeak": "洩漏",
+      "tagPublic": "公網",
+      "tagLocal": "本機",
       "noWebrtc": "您的瀏覽器已停用 WebRTC，或未解析出任何位址。這是安全狀態。",
       "unknown": "未知",
       "refresh": "重新測試",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "開啟 browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "在 dnsleaktest.com 上點擊 \"Extended test\"。結果應只列出您 VPN 供應商的 DNS 伺服器——而不是您的電信業者。如果結果中出現 Comcast、Verizon、Vodafone 或任何其他家用業者，說明您的 DNS 正在洩漏。"
+      "steps": {
+        "step1": {
+          "title": "連線 VPN",
+          "body": "開啟 VPN，等待其顯示已連線。此時本頁的連線面板應顯示 VPN 的網路，而不是您家中的網路業者——如果沒有，請點擊「重新整理」。"
+        },
+        "step2": {
+          "title": "執行延伸測試",
+          "body": "開啟 dnsleaktest.com 並點擊 \"Extended test\"。測試會查詢一批一次性網域名稱，並記錄是哪些 DNS 伺服器做出回應。"
+        },
+        "step3": {
+          "title": "查看是誰回應的",
+          "body": "結果中的每台伺服器都應屬於您的 VPN 供應商。如果出現 Comcast、Verizon、Vodafone 或任何其他家用業者，說明您的 DNS 正在洩漏。關閉 VPN 再測一次，就能看到洩漏是什麼樣子。"
+        }
+      },
+      "panel": {
+        "title": "您目前的連線",
+        "hint": "這是您的公用 IP，而不是您的 DNS 解析器——解析器只有外部測試才看得到。開啟 VPN 時，兩者都不應屬於您家中的網路業者。",
+        "error": "無法查詢您的連線。外部測試仍然可以使用。"
+      }
     },
     "explainer": {
       "whatTitle": "什麼是 DNS 洩漏？",

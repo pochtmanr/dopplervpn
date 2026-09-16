@@ -1000,7 +1000,18 @@
       "successTitle": "Solicitação enviada",
       "successMessage": "Ticket {ticketNumber} criado. Responderemos para {email} em até 24 horas.",
       "errorGeneric": "Falha ao enviar a solicitação. Por favor, tente novamente.",
-      "close": "Fechar"
+      "close": "Fechar",
+      "stepOf": "Passo {current} de {total}",
+      "topicPrompt": "Com o que você precisa de ajuda?",
+      "back": "Voltar",
+      "subjectHint": "Pelo menos {min} caracteres",
+      "descriptionHint": "Pelo menos {min} caracteres",
+      "emailInvalid": "Digite um e-mail válido",
+      "receiptTicket": "Chamado",
+      "receiptReplyTo": "Resposta para",
+      "receiptStatus": "Recebido — na fila do suporte",
+      "copy": "Copiar",
+      "copied": "Copiado"
     },
     "restore": {
       "title": "Recuperar sua conta",
@@ -1024,13 +1035,60 @@
       "title": "Consultas comerciais",
       "subtitle": "Parcerias, imprensa, empresas"
     },
+    "businessForm": {
+      "title": "Consulta comercial",
+      "subtitle": "Parcerias, imprensa e planos para equipes — respondemos em 1–2 dias úteis",
+      "typePrompt": "Sobre o que é a sua consulta?",
+      "typeLabel": "Tipo de consulta",
+      "types": {
+        "partnership": "Parceria",
+        "enterprise": "Empresa / Equipe",
+        "press": "Imprensa / Mídia",
+        "reseller": "Revendedor / Afiliado",
+        "other": "Outro assunto"
+      },
+      "companyLabel": "Nome da empresa",
+      "companyPlaceholder": "Empresa Exemplo Ltda.",
+      "industryLabel": "Setor (opcional)",
+      "industryPlaceholder": "Selecione um setor",
+      "industries": {
+        "tech_saas": "Tecnologia / SaaS",
+        "media_press": "Mídia e imprensa",
+        "finance": "Finanças",
+        "education": "Educação",
+        "healthcare": "Saúde",
+        "travel": "Viagens e hotelaria",
+        "retail_ecommerce": "Varejo e e-commerce",
+        "government_ngo": "Governo / ONG",
+        "telecom_isp": "Telecom / Provedor",
+        "other": "Outro"
+      },
+      "nameLabel": "Seu nome (opcional)",
+      "namePlaceholder": "Ana Souza",
+      "websiteLabel": "Site (opcional)",
+      "emailLabel": "E-mail corporativo",
+      "emailPlaceholder": "voce@empresa.com",
+      "messageLabel": "Mensagem",
+      "messagePlaceholder": "Conte-nos sobre a sua empresa e o que você tem em mente…",
+      "submit": "Enviar consulta",
+      "submitting": "Enviando…",
+      "successTitle": "Consulta enviada",
+      "successMessage": "Referência {ticketNumber}. Nossa equipe responderá para {email} em 1–2 dias úteis.",
+      "errorGeneric": "Não foi possível enviar sua consulta. Tente novamente.",
+      "receiptReference": "Referência",
+      "receiptCompany": "Empresa",
+      "receiptStatus": "Recebida — com nossa equipe comercial"
+    },
     "actions": {
       "submitRequest": "Enviar solicitação",
       "submitRequestDesc": "Obtenha ajuda da nossa equipe",
       "restoreAccount": "Recuperar conta",
       "restoreAccountDesc": "Recupere seu ID de conta",
       "businessContact": "Consultas comerciais",
-      "businessContactDesc": "Parcerias, imprensa, empresas"
+      "businessContactDesc": "Parcerias, imprensa, empresas",
+      "submitRequestCta": "Abrir",
+      "restoreAccountCta": "Restaurar",
+      "businessContactCta": "Fale conosco"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Qual é o meu IP?",
-      "subtitle": "Seu endereço IP público como cada site que você visita o enxerga — junto com a geografia e o provedor vinculados a ele. Atualize depois de conectar a uma VPN para verificar se a mudança funcionou."
+      "subtitle": "Seu endereço IP público como cada site que você visita o enxerga — junto com a geografia e o provedor vinculados a ele. Atualize depois de conectar a uma VPN para verificar se a mudança funcionou.",
+      "breadcrumbTools": "Ferramentas"
     },
     "widget": {
       "yourIp": "Seu endereço IP",
-      "country": "País",
-      "region": "Região",
-      "city": "Cidade",
       "isp": "Provedor de internet",
       "asn": "ASN",
       "unknown": "Desconhecido",
@@ -4050,7 +4106,19 @@
       "copied": "Copiado",
       "copy": "Copiar",
       "loading": "Detectando seu IP…",
-      "error": "Não foi possível detectar seu IP. Recarregue a página ou tente novamente em instantes."
+      "error": "Não foi possível detectar seu IP. Recarregue a página ou tente novamente em instantes.",
+      "details": "Detalhes da conexão",
+      "location": "Localização",
+      "timezone": "Fuso horário",
+      "coordinates": "Coordenadas aproximadas",
+      "ipv4": "Endereço IPv4",
+      "ipv6": "Endereço IPv6",
+      "notAvailable": "Indisponível",
+      "ipv6Hint": "Não ter IPv6 é normal — muitas redes e VPNs usam apenas IPv4.",
+      "changed": "Seu IP mudou desde a última verificação neste dispositivo (era {previous}).",
+      "unchanged": "Mesmo IP da última verificação. Se você acabou de conectar uma VPN, ela ainda não está roteando o tráfego deste navegador.",
+      "firstCheck": "Dica: anote este IP, conecte sua VPN e atualize a página — o endereço deve mudar.",
+      "retry": "Tentar novamente"
     },
     "explainer": {
       "whatTitle": "O que é um endereço IP?",
@@ -4069,6 +4137,7 @@
         "item4": "Nenhuma menção à sua cidade ou região reais."
       }
     },
+    "faqTitle": "Perguntas frequentes",
     "faq": {
       "q1": {
         "question": "Para que meu endereço IP é usado?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Se o Doppler VPN está protegendo este navegador, este teste deve mostrar:",
+      "items": {
+        "item1": "Nenhum endereço marcado como vazamento na lista do WebRTC.",
+        "item2": "Qualquer endereço público da lista corresponde ao IP que os sites veem.",
+        "item3": "O IP do seu provedor de casa em nenhum lugar da página — rode o teste uma vez sem a VPN para reconhecê-lo.",
+        "item4": "O mesmo resultado depois de trocar de servidor e rodar o teste de novo."
+      }
+    },
     "metadata": {
       "title": "Teste de Vazamento WebRTC — Veja se sua VPN esconde seu IP real",
       "description": "Teste gratuito de vazamento WebRTC. Detecta se o navegador está vazando seu IP real via STUN mesmo com a VPN conectada. Leva 2 segundos. Nenhum dado sai do seu dispositivo."
@@ -4128,6 +4206,11 @@
       "leakedBody": "O WebRTC detectou um ou mais IPs diferentes do IP público. Se você está em uma VPN, isso significa que um site que use WebRTC ainda pode ver seu endereço real.",
       "safeTitle": "Nenhum vazamento de WebRTC detectado",
       "safeBody": "O WebRTC reportou o mesmo IP que o público, ou nenhum IP. Você não está vazando seu endereço real pelo WebRTC neste momento.",
+      "noWebrtcTitle": "O WebRTC está desativado",
+      "localNote": "Endereços locais e mDNS (.local) só funcionam dentro da sua própria rede, então não revelam quem você é.",
+      "tagLeak": "vazamento",
+      "tagPublic": "público",
+      "tagLocal": "local",
       "noWebrtc": "Seu navegador desativou o WebRTC ou nenhum endereço foi resolvido. Esse é um estado seguro.",
       "unknown": "Desconhecido",
       "refresh": "Repetir o teste",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Abrir browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Clique em \"Extended test\" no dnsleaktest.com. O resultado deve listar apenas o(s) servidor(es) DNS do seu provedor de VPN — não o seu provedor de internet. Se você vir Comcast, Verizon, Vodafone ou qualquer outro provedor de consumo nos resultados, seu DNS está vazando."
+      "steps": {
+        "step1": {
+          "title": "Conecte sua VPN",
+          "body": "Ative a VPN e espere até ela indicar que está conectada. O painel de conexão desta página deve mostrar agora a rede da VPN, não o seu provedor de internet de casa — se não mostrar, clique em \"Atualizar\"."
+        },
+        "step2": {
+          "title": "Rode o teste estendido",
+          "body": "Abra o dnsleaktest.com e clique em \"Extended test\". O teste consulta uma série de nomes de domínio descartáveis e registra quais servidores DNS responderam."
+        },
+        "step3": {
+          "title": "Veja quem respondeu",
+          "body": "Cada servidor no resultado deve pertencer ao seu provedor de VPN. Se você vir Comcast, Verizon, Vodafone ou qualquer outro provedor de consumo, seu DNS está vazando. Repita o teste com a VPN desligada para ver como é um vazamento."
+        }
+      },
+      "panel": {
+        "title": "Sua conexão agora",
+        "hint": "Este é o seu IP público, não o seu resolvedor DNS — só o teste externo consegue ver isso. Com a VPN ligada, nenhum dos dois deve pertencer ao seu provedor de internet de casa.",
+        "error": "Não foi possível consultar sua conexão. O teste externo continua funcionando."
+      }
     },
     "explainer": {
       "whatTitle": "O que é um vazamento de DNS?",

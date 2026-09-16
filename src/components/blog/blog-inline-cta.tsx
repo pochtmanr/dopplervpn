@@ -46,7 +46,7 @@ export function BlogInlineCta() {
           target={platform === "desktop" ? undefined : "_blank"}
           rel={platform === "desktop" ? undefined : "noopener noreferrer"}
           onClick={handleClick}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-accent-teal text-bg-primary hover:bg-accent-teal/90 transition-colors text-sm font-medium whitespace-nowrap flex-shrink-0"
+          className="cta-key inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-white text-sm font-medium whitespace-nowrap flex-shrink-0"
         >
           {config.icon}
           {config.label}

@@ -1000,7 +1000,18 @@
       "successTitle": "Päring esitatud",
       "successMessage": "Pilet {ticketNumber} loodud. Vastame aadressile {email} 24 tunni jooksul.",
       "errorGeneric": "Päringu esitamine ebaõnnestus. Palun proovige uuesti.",
-      "close": "Sulge"
+      "close": "Sulge",
+      "stepOf": "Samm {current}/{total}",
+      "topicPrompt": "Millega vajate abi?",
+      "back": "Tagasi",
+      "subjectHint": "Vähemalt {min} tähemärki",
+      "descriptionHint": "Vähemalt {min} tähemärki",
+      "emailInvalid": "Sisestage kehtiv e-posti aadress",
+      "receiptTicket": "Pöördumine",
+      "receiptReplyTo": "Vastus aadressile",
+      "receiptStatus": "Vastu võetud — toe järjekorras",
+      "copy": "Kopeeri",
+      "copied": "Kopeeritud"
     },
     "restore": {
       "title": "Taasta oma konto",
@@ -1024,13 +1035,60 @@
       "title": "Äripäringud",
       "subtitle": "Partnerlused, ajakirjandus, ettevõtted"
     },
+    "businessForm": {
+      "title": "Äripäring",
+      "subtitle": "Partnerlused, meedia ja meeskonnapaketid — vastame 1–2 tööpäeva jooksul",
+      "typePrompt": "Mida sinu päring puudutab?",
+      "typeLabel": "Päringu tüüp",
+      "types": {
+        "partnership": "Partnerlus",
+        "enterprise": "Ettevõte / Meeskond",
+        "press": "Ajakirjandus / Meedia",
+        "reseller": "Edasimüüja / Partnerprogramm",
+        "other": "Midagi muud"
+      },
+      "companyLabel": "Ettevõtte nimi",
+      "companyPlaceholder": "Näidis OÜ",
+      "industryLabel": "Valdkond (valikuline)",
+      "industryPlaceholder": "Vali valdkond",
+      "industries": {
+        "tech_saas": "Tehnoloogia / SaaS",
+        "media_press": "Meedia ja ajakirjandus",
+        "finance": "Rahandus",
+        "education": "Haridus",
+        "healthcare": "Tervishoid",
+        "travel": "Reisimine ja majutus",
+        "retail_ecommerce": "Jaekaubandus ja e-kaubandus",
+        "government_ngo": "Avalik sektor / MTÜ",
+        "telecom_isp": "Telekom / Internetiteenuse pakkuja",
+        "other": "Muu"
+      },
+      "nameLabel": "Sinu nimi (valikuline)",
+      "namePlaceholder": "Kadri Tamm",
+      "websiteLabel": "Veebileht (valikuline)",
+      "emailLabel": "Töö e-post",
+      "emailPlaceholder": "sina@ettevote.ee",
+      "messageLabel": "Sõnum",
+      "messagePlaceholder": "Räägi meile oma ettevõttest ja sellest, mida sa silmas pead…",
+      "submit": "Saada päring",
+      "submitting": "Saatmine…",
+      "successTitle": "Päring saadetud",
+      "successMessage": "Viide {ticketNumber}. Meie meeskond vastab aadressile {email} 1–2 tööpäeva jooksul.",
+      "errorGeneric": "Päringu saatmine ebaõnnestus. Proovi uuesti.",
+      "receiptReference": "Viide",
+      "receiptCompany": "Ettevõte",
+      "receiptStatus": "Vastu võetud — meie ärimeeskonna juures"
+    },
     "actions": {
       "submitRequest": "Esita päring",
       "submitRequestDesc": "Saage abi meie meeskonnalt",
       "restoreAccount": "Taasta konto",
       "restoreAccountDesc": "Taasta oma konto ID",
       "businessContact": "Äripäringud",
-      "businessContactDesc": "Partnerlused, ajakirjandus, ettevõtted"
+      "businessContactDesc": "Partnerlused, ajakirjandus, ettevõtted",
+      "submitRequestCta": "Ava",
+      "restoreAccountCta": "Taasta",
+      "businessContactCta": "Võta ühendust"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Mis on minu IP?",
-      "subtitle": "Teie avalik IP-aadress sellisena, nagu iga külastatav veebileht seda näeb — koos sellega seotud geograafia ja teenusepakkujaga. Värskendage pärast VPN-iga ühendamist, et veenduda muudatuse jõustumises."
+      "subtitle": "Teie avalik IP-aadress sellisena, nagu iga külastatav veebileht seda näeb — koos sellega seotud geograafia ja teenusepakkujaga. Värskendage pärast VPN-iga ühendamist, et veenduda muudatuse jõustumises.",
+      "breadcrumbTools": "Tööriistad"
     },
     "widget": {
       "yourIp": "Teie IP-aadress",
-      "country": "Riik",
-      "region": "Piirkond",
-      "city": "Linn",
       "isp": "Internetiteenuse pakkuja",
       "asn": "ASN",
       "unknown": "Teadmata",
@@ -4050,7 +4106,19 @@
       "copied": "Kopeeritud",
       "copy": "Kopeeri",
       "loading": "Teie IP tuvastamine…",
-      "error": "Teie IP-d ei õnnestunud tuvastada. Laadige leht uuesti või proovige hetke pärast uuesti."
+      "error": "Teie IP-d ei õnnestunud tuvastada. Laadige leht uuesti või proovige hetke pärast uuesti.",
+      "details": "Ühenduse üksikasjad",
+      "location": "Asukoht",
+      "timezone": "Ajavöönd",
+      "coordinates": "Ligikaudsed koordinaadid",
+      "ipv4": "IPv4-aadress",
+      "ipv6": "IPv6-aadress",
+      "notAvailable": "Pole saadaval",
+      "ipv6Hint": "IPv6 puudumine on normaalne — paljud võrgud ja VPN-id kasutavad ainult IPv4-d.",
+      "changed": "Teie IP on pärast viimast kontrolli selles seadmes muutunud (varem {previous}).",
+      "unchanged": "Sama IP mis viimasel kontrollil. Kui ühendasite just VPN-i, ei suuna see veel selle brauseri liiklust.",
+      "firstCheck": "Nõuanne: märkige see IP üles, ühendage VPN ja värskendage lehte — aadress peaks muutuma.",
+      "retry": "Proovige uuesti"
     },
     "explainer": {
       "whatTitle": "Mis on IP-aadress?",
@@ -4069,6 +4137,7 @@
         "item4": "Mitte ühtegi viidet teie tegelikule linnale või piirkonnale."
       }
     },
+    "faqTitle": "Korduma kippuvad küsimused",
     "faq": {
       "q1": {
         "question": "Milleks minu IP-aadressi kasutatakse?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Kui Doppler VPN kaitseb seda brauserit, peaks see test näitama:",
+      "items": {
+        "item1": "WebRTC loendis pole ühtegi lekkena märgitud aadressi.",
+        "item2": "Iga loendis olev avalik aadress ühtib IP-ga, mida veebilehed näevad.",
+        "item3": "Teie koduse teenusepakkuja IP-d pole lehel kusagil — käivitage test korra ilma VPN-ita, et seda ära tunda.",
+        "item4": "Sama tulemus pärast serveri vahetamist ja testi uuesti käivitamist."
+      }
+    },
     "metadata": {
       "title": "WebRTC lekketest — Kontrollige, kas VPN peidab teie tegelikku IP-d",
       "description": "Tasuta WebRTC lekketest. Tuvastab, kas brauser lekitab teie tegelikku IP-d STUN-i kaudu isegi ühendatud VPN-iga. Valmis 2 sekundiga. Ükski andmebait ei lahku teie seadmest."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC tuvastas ühe või mitu IP-d, mis erinevad avalikust IP-st. Kui kasutate VPN-i, tähendab see, et WebRTC-d kasutav veebileht näeb endiselt teie tegelikku aadressi.",
       "safeTitle": "WebRTC leket ei tuvastatud",
       "safeBody": "WebRTC teatas sama IP nagu avalik, või ei teatanud ühtegi. Teie tegelik aadress ei leki praegu WebRTC kaudu.",
+      "noWebrtcTitle": "WebRTC on välja lülitatud",
+      "localNote": "Kohalikud ja mDNS (.local) aadressid töötavad ainult teie enda võrgus, seega ei paljasta need, kes te olete.",
+      "tagLeak": "leke",
+      "tagPublic": "avalik",
+      "tagLocal": "kohalik",
       "noWebrtc": "Teie brauser on WebRTC keelanud või aadresse ei leitud. See on turvaline seisund.",
       "unknown": "Teadmata",
       "refresh": "Käivita test uuesti",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Ava browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Klõpsake dnsleaktest.com-is \"Extended test\". Tulemus peaks näitama ainult teie VPN-pakkuja DNS-servereid — mitte teie internetiteenuse pakkujat. Kui näete tulemustes Comcasti, Verizoni, Vodafone'i või mõnda muud tavateenusepakkujat, teie DNS lekib."
+      "steps": {
+        "step1": {
+          "title": "Ühendage VPN",
+          "body": "Lülitage VPN sisse ja oodake, kuni see näitab ühendust. Selle lehe ühenduse paneel peaks nüüd näitama VPN-i võrku, mitte teie kodust internetiteenuse pakkujat — kui ei näita, klõpsake \"Värskenda\"."
+        },
+        "step2": {
+          "title": "Käivitage laiendatud test",
+          "body": "Avage dnsleaktest.com ja klõpsake \"Extended test\". Test päringub rea ühekordseid domeeninimesid ja märgib üles, millised DNS-serverid neile vastasid."
+        },
+        "step3": {
+          "title": "Vaadake, kes vastas",
+          "body": "Iga tulemuses olev server peaks kuuluma teie VPN-pakkujale. Kui näete Comcasti, Verizoni, Vodafone'i või mõnda muud tavateenusepakkujat, teie DNS lekib. Korrake testi VPN-i väljalülitatult, et näha, milline leke välja näeb."
+        }
+      },
+      "panel": {
+        "title": "Teie ühendus praegu",
+        "hint": "See on teie avalik IP, mitte teie DNS-resolver — seda näeb ainult väline test. Sisselülitatud VPN-i korral ei tohiks kumbki kuuluda teie kodusele internetiteenuse pakkujale.",
+        "error": "Teie ühendust ei õnnestunud tuvastada. Väline test töötab endiselt."
+      }
     },
     "explainer": {
       "whatTitle": "Mis on DNS-i leke?",

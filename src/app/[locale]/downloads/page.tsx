@@ -12,8 +12,25 @@ import {
 } from "@/components/seo/json-ld";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import { Reveal } from "@/components/ui/reveal";
+import { PlatformLogo, type PlatformIcon } from "@/components/glyph/platform-icons";
+import { SetupSection, type SetupPlatform } from "@/components/downloads/setup-section";
+import { DetectedCard, DetectedPlatformProvider } from "@/components/downloads/detected-platform";
 import type { CtaVariant } from "@/lib/track-cta";
 import { seoTitle } from "@/lib/seo-title";
+import {
+  CARD,
+  CARD_HAIRLINE,
+  CARD_TITLE,
+  HERO_SECTION,
+  HERO_SUBTITLE,
+  HERO_TITLE,
+  HERO_TITLE_RAMP,
+  ROW_CARD,
+  ROW_TEXT,
+  ROW_TILE,
+  ROW_TITLE,
+  splitHeadline,
+} from "@/components/ui/card-recipes";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -83,6 +100,10 @@ const URLS = {
   androidApk32: "/api/android/download/latest?abi=armeabi-v7a",
 };
 
+// Store links for the ratings row — the same two the home hero and CTA card use.
+const APP_STORE_URL = URLS.ios;
+const GOOGLE_PLAY_URL = URLS.androidPlayStore;
+
 /* ── Release Updates ─────────────────────────────────────────────── */
 // Shown as a small "Last updated: <date>" subtitle under each download button.
 // To register a new release: bump the date below. To attach a release note,
@@ -97,10 +118,10 @@ type Release = {
 };
 
 const RELEASES: Record<"ios" | "android" | "mac" | "windows", Release> = {
-  ios:     { date: "2026-04-08", note: null },
-  android: { date: "2026-08-24", note: null },
-  mac:     { date: "2026-05-11", note: "connectionFix", status: "review" },
-  windows: { date: "2026-08-21", note: "fullTunnel" },
+  ios:     { date: "2026-09-14", note: null },
+  android: { date: "2026-08-16", note: null },
+  mac:     { date: "2026-09-13", note: null },
+  windows: { date: "2026-08-16", note: "fullTunnel" },
 };
 
 function UpdateInfo({
@@ -121,7 +142,7 @@ function UpdateInfo({
         <span className="text-text-muted/60">{t("lastUpdated")}: </span>
         <span className="text-text-muted">{formatted}</span>
         {release.status === "review" && (
-          <span className="text-accent-gold/90"> · {t("statusPendingReview")}</span>
+          <span className="text-text-tertiary"> · {t("statusPendingReview")}</span>
         )}
       </p>
       {release.note === "connectionFix" && (
@@ -139,34 +160,13 @@ function UpdateInfo({
 }
 
 /* ── Icons ────────────────────────────────────────────────────────── */
-
-function AppleIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-    </svg>
-  );
-}
-
-function AndroidIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M16.61 15.15c-.46 0-.84-.37-.84-.83s.38-.83.84-.83c.46 0 .83.37.83.83s-.37.83-.83.83m-9.22 0c-.46 0-.84-.37-.84-.83s.38-.83.84-.83c.46 0 .83.37.83.83s-.37.83-.83.83m9.5-5.09l1.67-2.88a.35.35 0 00-.12-.47.35.35 0 00-.48.12l-1.69 2.93A10.1 10.1 0 0012 8.57c-1.53 0-2.98.34-4.27.95L6.04 6.59a.35.35 0 00-.48-.12.35.35 0 00-.12.47l1.67 2.88C4.44 11.36 2.62 14.09 2.3 17.3h19.4c-.32-3.21-2.14-5.94-4.81-7.24z" />
-    </svg>
-  );
-}
-
-function WindowsIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M3 12V6.75l6-1.32v6.48L3 12zm17-9v8.75l-10 .08V5.67L20 3zM3 13l6 .09v6.81l-6-1.15V13zm7 .18l10 .08V21l-10-1.76V13.18z" />
-    </svg>
-  );
-}
+// Platform marks come from `glyph/platform-icons`, shared with the home page's
+// "Available on" band and the account dashboard, so the three surfaces stay one
+// picture. Only the page's own UI glyphs live here.
 
 function DownloadIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
     </svg>
   );
@@ -174,32 +174,44 @@ function DownloadIcon({ className = "w-4 h-4" }: { className?: string }) {
 
 function ArrowIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
   return (
-    <svg className={`${className} rtl:-scale-x-100`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+    <svg className={`${className} rtl:-scale-x-100`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
     </svg>
   );
 }
 
-/* ── Setup Steps — numbered list with connecting line ────────────── */
-
-function SetupSteps({ steps }: { steps: string[] }) {
+function WarnIcon() {
   return (
-    <ol className="mt-5">
-      {steps.map((step, i) => (
-        <li key={i} className="relative flex items-start gap-3 pb-3.5 last:pb-0">
-          {i < steps.length - 1 && (
-            <span
-              className="absolute start-3 top-7 bottom-0 w-px bg-overlay/10"
-              aria-hidden="true"
-            />
-          )}
-          <span className="relative z-10 flex-shrink-0 w-6 h-6 rounded-full bg-accent-teal/15 border border-accent-teal/20 text-accent-teal text-xs font-semibold flex items-center justify-center mt-0.5">
-            {i + 1}
-          </span>
-          <span className="text-sm text-text-muted leading-relaxed">{step}</span>
-        </li>
+    <svg className="mt-px w-3.5 h-3.5 shrink-0 text-accent-amber" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+    </svg>
+  );
+}
+
+function ChevronIcon() {
+  return (
+    <svg
+      className="hidden sm:block ms-auto me-4 w-4 h-4 shrink-0 text-text-tertiary transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2.5}
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+  );
+}
+
+function Stars() {
+  return (
+    <span className="flex items-center gap-px text-accent-gold" aria-hidden="true">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 0 0 .95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 0 0-.364 1.118l1.287 3.957c.3.922-.755 1.688-1.539 1.118l-3.367-2.445a1 1 0 0 0-1.175 0l-3.367 2.445c-.783.57-1.838-.196-1.539-1.118l1.287-3.957a1 1 0 0 0-.364-1.118L2.063 9.385c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 0 0 .95-.69l1.286-3.958Z" />
+        </svg>
       ))}
-    </ol>
+    </span>
   );
 }
 
@@ -208,6 +220,13 @@ function SetupSteps({ steps }: { steps: string[] }) {
 type PlatformNote = {
   ns: "apps" | "vpnForWindows";
   key: string;
+  /**
+   * "warn" is amber and reserved for a real warning — currently only the
+   * unsigned-installer SmartScreen block, which stops the install dead. Anything
+   * that is merely worth knowing is "info" and stays neutral, so the amber plate
+   * keeps its meaning.
+   */
+  tone: "warn" | "info";
 };
 
 type PlatformButton = {
@@ -219,9 +238,20 @@ type PlatformButton = {
   primary: boolean;
 };
 
+/**
+ * The platform page each card links to, and whose `howItWorks` strings title
+ * that platform's panel in the setup section below.
+ */
+const HOW_TO_NS = {
+  ios: "vpnForIos",
+  android: "vpnForAndroid",
+  mac: "vpnForMacos",
+  windows: "vpnForWindows",
+} as const;
+
 const PLATFORMS: {
   key: "ios" | "android" | "mac" | "windows";
-  icon: ({ className }: { className?: string }) => React.JSX.Element;
+  icon: PlatformIcon;
   learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
   buttons: PlatformButton[];
   /**
@@ -234,19 +264,19 @@ const PLATFORMS: {
 }[] = [
   {
     key: "ios",
-    icon: AppleIcon,
+    icon: "apple",
     learnHref: "/vpn-for-ios",
     buttons: [{ labelKey: "ios.button", href: URLS.ios, external: true, primary: true }],
   },
   {
     key: "android",
-    icon: AndroidIcon,
+    icon: "android",
     learnHref: "/vpn-for-android",
     // The APK is the only Android route for anyone without Play — mainland China
     // most of all — so it is offered here rather than left to a link handed out
     // privately. Secondary, because Play is still the right default everywhere
     // it works: it updates itself, and the sideload build cannot.
-    notes: [{ ns: "apps", key: "android.apkNote" }],
+    notes: [{ ns: "apps", key: "android.apkNote", tone: "info" }],
     buttons: [
       {
         labelKey: "android.buttonPlayStore",
@@ -273,20 +303,20 @@ const PLATFORMS: {
   },
   {
     key: "mac",
-    icon: AppleIcon,
+    icon: "apple",
     learnHref: "/vpn-for-macos",
     buttons: [{ labelKey: "mac.button", href: URLS.mac, external: true, primary: true }],
   },
   {
     key: "windows",
-    icon: WindowsIcon,
+    icon: "windows",
     learnHref: "/vpn-for-windows",
     // Windows-only: the installer isn't code-signed yet, so SmartScreen blocks it
     // and people give up at the warning. The trial line is here because this card
     // is the last stop before a paid campaign visitor leaves for the download.
     notes: [
-      { ns: "vpnForWindows", key: "downloadsSmartScreenNote" },
-      { ns: "vpnForWindows", key: "downloadsTrialNote" },
+      { ns: "vpnForWindows", key: "downloadsSmartScreenNote", tone: "warn" },
+      { ns: "vpnForWindows", key: "downloadsTrialNote", tone: "info" },
     ],
     buttons: [
       {
@@ -300,6 +330,32 @@ const PLATFORMS: {
   },
 ];
 
+/* ── Shared class lists ──────────────────────────────────────────── */
+// The card, row and hero recipes live in `ui/card-recipes`, shared with the
+// support page. Only this page's own buttons and detected-card state are here.
+
+/**
+ * Download buttons — the hero's CTA pair (hero/hero-ctas.tsx), verbatim apart
+ * from the width. `.cta-key` is the keycap and `.cta-flat` the deck it sits on,
+ * so a card shows at most one key. No `bg-*` utility on the key: the cap
+ * gradient IS its background, and a utility would paint over it.
+ *
+ * The hero is `w-full sm:w-auto` because it lays its two buttons out in a row;
+ * here they stack down a card column, so they stay full width. Everything that
+ * makes the button itself — padding, radius, type, icon size, focus ring — is
+ * the hero's.
+ */
+const BTN_BASE =
+  "inline-flex w-full items-center justify-center gap-2 px-5 py-3 text-center rounded-lg text-sm font-medium " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light " +
+  "focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
+const BTN_PRIMARY = `cta-key ${BTN_BASE} text-white`;
+const BTN_SECONDARY = `cta-flat ${BTN_BASE} mt-2 hover:text-accent-teal`;
+
+/** The visitor's own platform (DetectedCard) — colour only, so nothing moves. */
+const CARD_DETECTED =
+  "data-[detected=true]:border-accent-teal/50 data-[detected=true]:ring-1 data-[detected=true]:ring-accent-teal/25";
+
 /* ── Page ─────────────────────────────────────────────────────────── */
 
 export default async function DownloadsPage({ params }: PageProps) {
@@ -308,12 +364,79 @@ export default async function DownloadsPage({ params }: PageProps) {
   const t = await getTranslations("apps");
   // Platform-specific caveats live in the platform's own namespace — see `notes`.
   const tWindows = await getTranslations("vpnForWindows");
+  // The ratings row is the same block, and the same real numbers, as the home
+  // hero and the home CTA card — so it reuses their strings rather than adding
+  // four more keys to 44 locale files.
+  const tHero = await getTranslations("hero");
   const resolveNote = (note: PlatformNote) =>
     note.ns === "apps" ? t(note.key) : tWindows(note.key);
+
+  // Resolved here so the four `vpnFor*` namespaces never reach the client
+  // bundle: the setup card receives plain strings.
+  const setupPlatforms: SetupPlatform[] = await Promise.all(
+    PLATFORMS.map(async ({ key, icon, buttons }) => {
+      const tHowTo = await getTranslations(HOW_TO_NS[key]);
+      const primary = buttons.find((b) => b.primary) ?? buttons[0];
+      return {
+        key,
+        icon,
+        name: t(`${key}.title`),
+        title: tHowTo("howItWorks.title"),
+        subtitle: tHowTo("howItWorks.subtitle"),
+        steps: [1, 2, 3, 4].map((n) => t(`${key}.step${n}`)),
+        cta: {
+          href: primary.href,
+          label: t(primary.labelKey),
+          ...(primary.variant ? { variant: primary.variant } : {}),
+          external: !!primary.external,
+          download: !!primary.download,
+        },
+      };
+    }),
+  );
 
   // The on-page headline drops the " — iOS, Android, Mac & Windows" tail; the
   // full string stays the meta/schema title, where the platform names help search.
   const headline = t("title").split(" — ")[0];
+  const { lead: headlineLead, last: headlineLast } = splitHeadline(headline);
+
+  // Social proof — the same real store ratings as the home hero. Rendered twice:
+  // under the headline, and under the setup card's download button.
+  const ratings = (
+    <>
+      <TrackedDownloadLink
+        location="downloads-page"
+        platform="ios"
+        href={APP_STORE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group/star flex items-center gap-1.5"
+      >
+        <Stars />
+        <span className="text-sm font-semibold text-text-primary">{tHero("socialProof.rating")}</span>
+        <span className="text-xs text-text-muted group-hover/star:text-text-primary transition-colors">
+          {tHero("socialProof.appStore")}
+        </span>
+      </TrackedDownloadLink>
+      <TrackedDownloadLink
+        location="downloads-page"
+        platform="android"
+        variant="android-play"
+        href={GOOGLE_PLAY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group/star flex items-center gap-1.5"
+      >
+        <Stars />
+        <span className="text-sm font-semibold text-text-primary">{tHero("socialProof.ratingGooglePlay")}</span>
+        <span className="text-xs text-text-muted group-hover/star:text-text-primary transition-colors">
+          {tHero("socialProof.googlePlay")}
+        </span>
+      </TrackedDownloadLink>
+      <span className="hidden sm:inline text-text-tertiary" aria-hidden="true">·</span>
+      <span className="text-xs text-text-muted">{tHero("socialProof.users")}</span>
+    </>
+  );
 
   return (
     <>
@@ -336,186 +459,176 @@ export default async function DownloadsPage({ params }: PageProps) {
           pages. See the comment above the component in json-ld.tsx. */}
       <SoftwareApplicationSchema locale={locale} />
       <Navbar />
-      <main className="relative min-h-screen bg-bg-primary pt-28 pb-20 overflow-x-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute bottom-1/3 -end-20 w-[32rem] h-[32rem] bg-accent-gold/10 rounded-full blur-3xl" />
-          {/* Faint dot field — echoes the homepage DotGlobe motif */}
-          <div
-            className="absolute inset-x-0 top-0 h-[40rem]"
-            style={{
-              backgroundImage: "radial-gradient(circle, var(--color-overlay) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
-              opacity: 0.05,
-              maskImage: "radial-gradient(ellipse 70% 80% at 50% 0%, black, transparent)",
-              WebkitMaskImage: "radial-gradient(ellipse 70% 80% at 50% 0%, black, transparent)",
-            }}
-          />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6 lg:px-8">
-          {/* ── Header ────────────────────────────────────────────── */}
-          <div className="text-center mb-14">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-text-primary mb-5 leading-[1.08]">
-              {headline}
+      <main className="relative overflow-x-hidden">
+        {/* ── Hero ──────────────────────────────────────────────── */}
+        <section className={HERO_SECTION}>
+          <div className="relative mx-auto max-w-site text-center">
+            {/* Static, with no entrance: this is the page's LCP element, and an
+                element at opacity 0 is not an LCP candidate at all. */}
+            <h1 className={HERO_TITLE}>
+              {headlineLead}{headlineLead && " "}
+              <span className={HERO_TITLE_RAMP}>
+                {headlineLast}
+              </span>
             </h1>
-            <p className="text-lg text-text-muted max-w-2xl mx-auto">
+
+            <p className={HERO_SUBTITLE}>
               {t("subtitle")}
             </p>
 
-            {/* Platform quick-jump chips */}
-            <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-              {PLATFORMS.map(({ key, icon: Icon }) => (
-                <a
-                  key={key}
-                  href={`#${key}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-text-muted border border-overlay/10 bg-bg-secondary/50 hover:text-accent-teal hover:border-accent-teal/30 hover:bg-bg-secondary/80 transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                  {t(`${key}.title`)}
-                </a>
-              ))}
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+              {ratings}
+            </div>
+          </div>
+        </section>
+
+        <DetectedPlatformProvider>
+          <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
+            {/* ── Platform Cards ───────────────────────────────────── */}
+            {/* Name, download, the platform's caveats, date. The app itself is
+                shown in the setup card below. */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+              {PLATFORMS.map(({ key, icon, learnHref, buttons, notes }, i) => {
+                return (
+                  <Reveal key={key} delay={i * 50} className="h-full">
+                    <DetectedCard
+                      platform={key}
+                      id={key}
+                      className={`${CARD} ${CARD_DETECTED} p-6 scroll-mt-28`}
+                    >
+                      <div className={CARD_HAIRLINE} aria-hidden="true" />
+
+                      <div className="relative flex flex-1 flex-col">
+                        <h2 className={`mb-4 ${CARD_TITLE}`}>
+                          {t(`${key}.title`)}
+                        </h2>
+
+                        {/* The store/installer button carries the platform mark;
+                            the sideload APKs are files, so they keep the download glyph. */}
+                        {buttons.map((btn) => (
+                          <TrackedDownloadLink
+                            key={btn.labelKey}
+                            location="downloads-page"
+                            platform={key}
+                            {...(btn.variant ? { variant: btn.variant } : {})}
+                            href={btn.href}
+                            {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            {...(btn.download ? { download: true } : {})}
+                            className={btn.primary ? BTN_PRIMARY : BTN_SECONDARY}
+                          >
+                            {btn.primary ? (
+                              <PlatformLogo icon={icon} className="w-4 h-4" />
+                            ) : (
+                              <DownloadIcon className="w-4 h-4" />
+                            )}
+                            {t(btn.labelKey)}
+                          </TrackedDownloadLink>
+                        ))}
+
+                        {notes && (
+                          <ul className="mt-3 space-y-1.5">
+                            {notes.map((note) => (
+                              <li
+                                key={`${note.ns}.${note.key}`}
+                                className="flex items-start gap-1.5 text-xs leading-relaxed text-text-muted"
+                              >
+                                {note.tone === "warn" && <WarnIcon />}
+                                <span className={note.tone === "info" ? "text-text-tertiary" : undefined}>
+                                  {resolveNote(note)}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        <div className="mt-auto pt-5">
+                          <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
+                          <Link
+                            href={learnHref}
+                            className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-teal-light transition-colors"
+                          >
+                            {t(`${key}.learnMore`)}
+                            <span className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                              <ArrowIcon />
+                            </span>
+                          </Link>
+                        </div>
+                      </div>
+                    </DetectedCard>
+                  </Reveal>
+                );
+              })}
+            </div>
+
+            {/* Pro sync note — shown once for all platforms, set as the last line
+                of a terminal session (the privacy section's tagline treatment). */}
+            <Reveal>
+              <p className="mt-10 text-center text-sm text-text-muted">
+                {t("syncNote")}
+                <span aria-hidden="true" className="terminal-cursor ms-1 text-accent-teal-light">
+                  ▌
+                </span>
+              </p>
+            </Reveal>
+
+            {/* ── Elsewhere ─────────────────────────────────────── */}
+            <div className="mt-8 mb-4 md:mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Reveal className="h-full">
+                <Link href="/bypass-censorship" className={`${ROW_CARD} h-full`}>
+                  <div className="flex min-w-0 items-center gap-4 px-5 py-4">
+                    <div className={ROW_TILE}>
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 text-start">
+                      <h2 className={ROW_TITLE}>
+                        {t("censorshipCard.title")}
+                      </h2>
+                      <p className={ROW_TEXT}>
+                        {t("censorshipCard.description")}
+                      </p>
+                    </div>
+                  </div>
+                  <ChevronIcon />
+                </Link>
+              </Reveal>
+
+              <Reveal delay={50} className="h-full">
+                <Link href="/support" className={`${ROW_CARD} h-full`}>
+                  <div className="flex min-w-0 items-center gap-4 px-5 py-4">
+                    <div className={ROW_TILE}>
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                      </svg>
+                    </div>
+                    <div className="min-w-0 text-start">
+                      <h2 className={ROW_TITLE}>
+                        {t("needHelp")}
+                      </h2>
+                      <p className={ROW_TEXT}>
+                        {t("visitSupport")}
+                      </p>
+                    </div>
+                  </div>
+                  <ChevronIcon />
+                </Link>
+              </Reveal>
             </div>
           </div>
 
-          {/* ── Platform Cards ───────────────────────────────────── */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {PLATFORMS.map(({ key, icon: Icon, learnHref, buttons, notes }, i) => (
-              <Reveal key={key} delay={(i % 2) * 70} className="h-full">
-                <div
-                  id={key}
-                  className="group relative h-full scroll-mt-28 overflow-hidden rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-6 sm:p-7 transition-all duration-300 hover:border-accent-teal/25 flex flex-col"
-                >
-                  <div
-                    className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-accent-teal/[0.06] to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    aria-hidden="true"
-                  />
-
-                  <div className="relative flex items-center gap-3.5 mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal transition-all duration-300 group-hover:bg-accent-teal/20 group-hover:shadow-[0_0_20px_rgba(0,140,140,0.25)]">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h2 className="text-2xl font-semibold text-text-primary">{t(`${key}.title`)}</h2>
-                  </div>
-
-                  <div className="relative">
-                    {buttons.map((btn) => (
-                      <TrackedDownloadLink
-                        key={btn.labelKey}
-                        location="downloads-page"
-                        platform={key}
-                        {...(btn.variant ? { variant: btn.variant } : {})}
-                        href={btn.href}
-                        {...(btn.external
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                        {...(btn.download ? { download: true } : {})}
-                        className={
-                          btn.primary
-                            ? "flex items-center justify-center gap-2 rounded-xl bg-accent-teal text-white px-4 py-3.5 hover:bg-accent-teal-light transition-all duration-200 font-semibold text-sm shadow-lg shadow-accent-teal/20 hover:shadow-accent-teal/35"
-                            : "flex items-center justify-center gap-2 rounded-xl border border-overlay/10 hover:border-accent-teal/30 hover:bg-accent-teal/5 px-4 py-2.5 mt-2 transition-all text-text-muted hover:text-accent-teal text-sm"
-                        }
-                      >
-                        <DownloadIcon className="w-4 h-4" />
-                        {t(btn.labelKey)}
-                      </TrackedDownloadLink>
-                    ))}
-
-                    <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
-
-                    {notes && (
-                      <ul className="mt-3 space-y-1.5">
-                        {notes.map((note) => (
-                          <li
-                            key={`${note.ns}.${note.key}`}
-                            className="text-xs text-text-muted leading-relaxed rounded-lg border border-accent-gold/20 bg-accent-gold/[0.05] px-3 py-2"
-                          >
-                            {resolveNote(note)}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    <SetupSteps
-                      steps={[1, 2, 3, 4].map((n) => t(`${key}.step${n}`))}
-                    />
-                  </div>
-
-                  <div className="relative mt-auto pt-5">
-                    <Link
-                      href={learnHref}
-                      className="inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-gold transition-colors"
-                    >
-                      {t(`${key}.learnMore`)}
-                      <span className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
-                        <ArrowIcon />
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Pro sync note — shown once for all platforms */}
-          <Reveal>
-            <p className="mt-8 flex items-center justify-center gap-2 text-center text-sm text-text-muted">
-              <svg className="w-4 h-4 text-accent-teal flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-              {t("syncNote")}
-            </p>
-          </Reveal>
-
-          {/* ── Bottom Cards ──────────────────────────────────── */}
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Bypass Censorship */}
-            <Reveal className="h-full">
-              <Link
-                href="/bypass-censorship"
-                className="group block h-full relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-b from-accent-teal/10 to-accent-teal/[0.03] p-8 sm:p-10 text-center hover:border-accent-teal/35 transition-all duration-300"
-              >
-                <div
-                  className="absolute -top-16 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 w-64 h-32 bg-accent-teal/15 rounded-full blur-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  aria-hidden="true"
-                />
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl bg-accent-teal/15 border border-accent-teal/20 flex items-center justify-center text-accent-teal mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                    </svg>
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-semibold text-text-primary mb-2">
-                    {t("censorshipCard.title")}
-                  </h2>
-                  <p className="text-sm text-text-muted">
-                    {t("censorshipCard.description")}
-                  </p>
-                </div>
-              </Link>
-            </Reveal>
-
-            {/* Need Help */}
-            <Reveal delay={70} className="h-full">
-              <Link
-                href="/support"
-                className="group block h-full rounded-2xl border border-overlay/10 bg-bg-secondary/50 p-8 sm:p-10 text-center hover:bg-bg-secondary/70 hover:border-overlay/20 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-overlay/5 border border-overlay/10 flex items-center justify-center text-text-muted mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-                  </svg>
-                </div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-text-primary mb-2">
-                  {t("needHelp")}
-                </h2>
-                <p className="text-sm text-text-muted">
-                  {t("visitSupport")}
-                </p>
-              </Link>
-            </Reveal>
-          </div>
-        </div>
+          {/* ── Setup ─────────────────────────────────────────── */}
+          {/* The home page's notched download card, one platform at a time,
+              opening on the visitor's own. */}
+          <SetupSection
+            platforms={setupPlatforms}
+            ratings={
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2">
+                {ratings}
+              </div>
+            }
+          />
+        </DetectedPlatformProvider>
       </main>
       <Footer />
     </>

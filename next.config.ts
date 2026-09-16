@@ -20,13 +20,17 @@ const isDev = process.env.NODE_ENV === "development";
 // Revolut Checkout (embed.js + popup iframes; sandbox origin kept for
 // REVOLUT_ENVIRONMENT).
 // 'unsafe-eval' is dev-only (React Refresh needs it).
+// api4/api6.ipify.org: the what-is-my-ip widget asks each single-stack host for
+// the visitor's IPv4 and IPv6. Site-wide rather than route-scoped because a CSP
+// belongs to the first document loaded — reaching that page by client-side
+// <Link> from /tools would keep the stricter policy and silently fail both.
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com https://merchant.revolut.com https://sandbox-merchant.revolut.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
+  "connect-src 'self' https://api4.ipify.org https://api6.ipify.org https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
   "frame-src https://merchant.revolut.com https://sandbox-merchant.revolut.com",
   "worker-src 'self' blob:",
   "object-src 'none'",

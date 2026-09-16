@@ -262,7 +262,7 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
                 <p className="text-sm text-text-muted leading-relaxed mb-6">{t("cryptoPayment.body")}</p>
                 <Link
                   href="/pay-with-crypto"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors"
+                  className="cta-key inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white"
                 >
                   {t("cryptoPayment.cta")}
                   <ArrowIcon />

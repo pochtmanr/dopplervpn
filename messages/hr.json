@@ -1000,7 +1000,18 @@
       "successTitle": "Zahtjev poslan",
       "successMessage": "Tiket {ticketNumber} je kreiran. Odgovorit ćemo na {email} unutar 24 sata.",
       "errorGeneric": "Slanje zahtjeva nije uspjelo. Molimo pokušajte ponovo.",
-      "close": "Zatvori"
+      "close": "Zatvori",
+      "stepOf": "Korak {current} od {total}",
+      "topicPrompt": "S čime vam treba pomoć?",
+      "back": "Natrag",
+      "subjectHint": "Najmanji broj znakova: {min}",
+      "descriptionHint": "Najmanji broj znakova: {min}",
+      "emailInvalid": "Unesite valjanu adresu e-pošte",
+      "receiptTicket": "Zahtjev",
+      "receiptReplyTo": "Odgovor na",
+      "receiptStatus": "Zaprimljeno — u redu podrške",
+      "copy": "Kopiraj",
+      "copied": "Kopirano"
     },
     "restore": {
       "title": "Oporavak računa",
@@ -1024,13 +1035,60 @@
       "title": "Poslovni upiti",
       "subtitle": "Partnerstva, mediji, poduzeća"
     },
+    "businessForm": {
+      "title": "Poslovni upit",
+      "subtitle": "Partnerstva, mediji i paketi za timove — odgovaramo u roku od 1–2 radna dana",
+      "typePrompt": "Na što se odnosi vaš upit?",
+      "typeLabel": "Vrsta upita",
+      "types": {
+        "partnership": "Partnerstvo",
+        "enterprise": "Tvrtka / Tim",
+        "press": "Tisak / Mediji",
+        "reseller": "Preprodavač / Affiliate",
+        "other": "Nešto drugo"
+      },
+      "companyLabel": "Naziv tvrtke",
+      "companyPlaceholder": "Primjer d.o.o.",
+      "industryLabel": "Djelatnost (neobavezno)",
+      "industryPlaceholder": "Odaberite djelatnost",
+      "industries": {
+        "tech_saas": "Tehnologija / SaaS",
+        "media_press": "Mediji i tisak",
+        "finance": "Financije",
+        "education": "Obrazovanje",
+        "healthcare": "Zdravstvo",
+        "travel": "Putovanja i ugostiteljstvo",
+        "retail_ecommerce": "Maloprodaja i e-trgovina",
+        "government_ngo": "Javna uprava / Udruge",
+        "telecom_isp": "Telekomunikacije / ISP",
+        "other": "Ostalo"
+      },
+      "nameLabel": "Vaše ime (neobavezno)",
+      "namePlaceholder": "Ana Horvat",
+      "websiteLabel": "Web stranica (neobavezno)",
+      "emailLabel": "Poslovni e-mail",
+      "emailPlaceholder": "vi@tvrtka.hr",
+      "messageLabel": "Poruka",
+      "messagePlaceholder": "Recite nam nešto o svojoj tvrtki i što imate na umu…",
+      "submit": "Pošalji upit",
+      "submitting": "Slanje…",
+      "successTitle": "Upit poslan",
+      "successMessage": "Broj {ticketNumber}. Naš tim odgovorit će na {email} u roku od 1–2 radna dana.",
+      "errorGeneric": "Slanje upita nije uspjelo. Pokušajte ponovno.",
+      "receiptReference": "Broj",
+      "receiptCompany": "Tvrtka",
+      "receiptStatus": "Zaprimljeno — kod našeg poslovnog tima"
+    },
     "actions": {
       "submitRequest": "Pošalji zahtjev",
       "submitRequestDesc": "Dobijte pomoć od našeg tima",
       "restoreAccount": "Oporavi račun",
       "restoreAccountDesc": "Povratite svoj Account ID",
       "businessContact": "Poslovni upiti",
-      "businessContactDesc": "Partnerstva, mediji, poduzeća"
+      "businessContactDesc": "Partnerstva, mediji, poduzeća",
+      "submitRequestCta": "Otvori",
+      "restoreAccountCta": "Vrati",
+      "businessContactCta": "Javite nam se"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Koji je moj IP?",
-      "subtitle": "Vaša javna IP adresa onakva kakvu je vidi svaka stranica koju posjetite — zajedno s geografijom i pružateljem vezanima uz nju. Osvježite nakon spajanja na VPN kako biste potvrdili da je promjena stupila na snagu."
+      "subtitle": "Vaša javna IP adresa onakva kakvu je vidi svaka stranica koju posjetite — zajedno s geografijom i pružateljem vezanima uz nju. Osvježite nakon spajanja na VPN kako biste potvrdili da je promjena stupila na snagu.",
+      "breadcrumbTools": "Alati"
     },
     "widget": {
       "yourIp": "Vaša IP adresa",
-      "country": "Država",
-      "region": "Regija",
-      "city": "Grad",
       "isp": "Pružatelj interneta",
       "asn": "ASN",
       "unknown": "Nepoznato",
@@ -4050,7 +4106,19 @@
       "copied": "Kopirano",
       "copy": "Kopiraj",
       "loading": "Otkrivanje vaše IP adrese…",
-      "error": "Nismo uspjeli otkriti vašu IP adresu. Osvježite stranicu ili pokušajte ponovno za trenutak."
+      "error": "Nismo uspjeli otkriti vašu IP adresu. Osvježite stranicu ili pokušajte ponovno za trenutak.",
+      "details": "Detalji veze",
+      "location": "Lokacija",
+      "timezone": "Vremenska zona",
+      "coordinates": "Približne koordinate",
+      "ipv4": "IPv4 adresa",
+      "ipv6": "IPv6 adresa",
+      "notAvailable": "Nije dostupno",
+      "ipv6Hint": "Nedostatak IPv6 adrese sasvim je normalan — mnoge mreže i VPN-ovi koriste samo IPv4.",
+      "changed": "Vaša IP adresa promijenila se od posljednje provjere na ovom uređaju (bila je {previous}).",
+      "unchanged": "Ista IP adresa kao pri posljednjoj provjeri. Ako ste se upravo spojili na VPN, on još ne usmjerava promet ovog preglednika.",
+      "firstCheck": "Savjet: zabilježite ovu IP adresu, spojite se na VPN pa osvježite stranicu — adresa bi se trebala promijeniti.",
+      "retry": "Pokušaj ponovno"
     },
     "explainer": {
       "whatTitle": "Što je IP adresa?",
@@ -4069,6 +4137,7 @@
         "item4": "Nikakav spomen vašeg stvarnog grada ili regije."
       }
     },
+    "faqTitle": "Česta pitanja",
     "faq": {
       "q1": {
         "question": "Za što se koristi moja IP adresa?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Ako Doppler VPN štiti ovaj preglednik, test bi trebao prikazivati:",
+      "items": {
+        "item1": "Nijednu adresu označenu kao curenje na popisu WebRTC-a.",
+        "item2": "Svaka javna adresa na popisu podudara se s IP-om koji vide stranice.",
+        "item3": "IP vašeg kućnog pružatelja nigdje na stranici — pokrenite test jednom bez VPN-a da ga prepoznate.",
+        "item4": "Isti rezultat nakon što promijenite poslužitelj i ponovno pokrenete test."
+      }
+    },
     "metadata": {
       "title": "Test curenja WebRTC-a — Provjerite skriva li VPN vašu pravu IP adresu",
       "description": "Besplatan test curenja WebRTC-a. Otkriva curi li vaš preglednik pravu IP adresu putem STUN-a čak i sa spojenim VPN-om. Gotov za 2 sekunde. Nikakvi podaci ne napuštaju uređaj."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC je otkrio jednu ili više IP adresa koje se razlikuju od javne. Ako koristite VPN, to znači da stranica koja koristi WebRTC i dalje može vidjeti vašu pravu adresu.",
       "safeTitle": "Curenje WebRTC-a nije otkriveno",
       "safeBody": "WebRTC je prijavio istu IP adresu kao javnu, ili nijednu. Vaša prava adresa trenutno ne curi putem WebRTC-a.",
+      "noWebrtcTitle": "WebRTC je isključen",
+      "localNote": "Lokalne i mDNS (.local) adrese rade samo unutar vaše vlastite mreže, pa ne otkrivaju tko ste.",
+      "tagLeak": "curenje",
+      "tagPublic": "javna",
+      "tagLocal": "lokalna",
       "noWebrtc": "Vaš preglednik je onemogućio WebRTC ili adrese nisu pronađene. To je sigurno stanje.",
       "unknown": "Nepoznato",
       "refresh": "Ponovi test",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Otvori browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Kliknite \"Extended test\" na dnsleaktest.com. Rezultat bi trebao prikazati samo DNS poslužitelje vašeg VPN pružatelja — ne vašeg operatera. Ako u rezultatima vidite Comcast, Verizon, Vodafone ili bilo kojeg drugog potrošačkog pružatelja, vaš DNS curi."
+      "steps": {
+        "step1": {
+          "title": "Povežite VPN",
+          "body": "Uključite VPN i pričekajte da pokaže da je povezan. Ploča veze na ovoj stranici sada bi trebala prikazivati mrežu VPN-a, a ne vašeg kućnog pružatelja interneta — ako ne, kliknite \"Osvježi\"."
+        },
+        "step2": {
+          "title": "Pokrenite prošireni test",
+          "body": "Otvorite dnsleaktest.com i kliknite \"Extended test\". Test traži niz jednokratnih naziva domena i bilježi koji su DNS poslužitelji na njih odgovorili."
+        },
+        "step3": {
+          "title": "Provjerite tko je odgovorio",
+          "body": "Svaki poslužitelj u rezultatu trebao bi pripadati vašem VPN pružatelju. Ako vidite Comcast, Verizon, Vodafone ili bilo kojeg drugog potrošačkog pružatelja, vaš DNS curi. Ponovite test s isključenim VPN-om da vidite kako izgleda curenje."
+        }
+      },
+      "panel": {
+        "title": "Vaša veza trenutačno",
+        "hint": "Ovo je vaša javna IP adresa, a ne vaš DNS resolver — njega vidi samo vanjski test. S uključenim VPN-om ni jedno ni drugo ne bi smjelo pripadati vašem kućnom pružatelju interneta.",
+        "error": "Nismo uspjeli provjeriti vašu vezu. Vanjski test i dalje radi."
+      }
     },
     "explainer": {
       "whatTitle": "Što je curenje DNS-a?",

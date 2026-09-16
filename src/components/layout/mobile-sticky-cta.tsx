@@ -49,7 +49,7 @@ export function MobileStickyCta() {
   const onClick = () => trackCta("sticky-mobile", platform, variant);
 
   const primaryClass =
-    "flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-accent-teal text-white hover:bg-accent-teal/90 rounded-xl transition-colors text-sm font-semibold";
+    "cta-key flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 text-white rounded-xl text-sm font-semibold";
 
   return (
     <div

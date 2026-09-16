@@ -8,10 +8,10 @@ import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { seoTitle } from "@/lib/seo-title";
-import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 import { Reveal } from "@/components/ui/reveal";
 import { CTA } from "@/components/sections/cta";
 import { GlyphPlateCard } from "@/components/seo/glyph-plate-card";
+import { DnsIcon, IpIcon, WebrtcIcon } from "@/components/tools/tool-icons";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -21,9 +21,9 @@ const baseUrl = "https://www.dopplervpn.org";
 const SLUG = "tools";
 
 const TOOLS = [
-  { href: "/tools/what-is-my-ip", key: "ipChecker" },
-  { href: "/tools/webrtc-leak-test", key: "webrtcLeak" },
-  { href: "/tools/dns-leak-test", key: "dnsLeak" },
+  { href: "/tools/what-is-my-ip", key: "ipChecker", Icon: IpIcon },
+  { href: "/tools/webrtc-leak-test", key: "webrtcLeak", Icon: WebrtcIcon },
+  { href: "/tools/dns-leak-test", key: "dnsLeak", Icon: DnsIcon },
 ] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -85,11 +85,26 @@ export default async function Page({ params }: PageProps) {
         description={mt("description")}
         type="CollectionPage"
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: t("title"),
+            itemListElement: TOOLS.map(({ href, key }, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: t(`tools.${key}.title`),
+              url: `${baseUrl}/${locale}${href}`,
+            })),
+          }).replace(/<\//g, "<\\/"),
+        }}
+      />
       <Navbar />
       <main className="overflow-x-clip">
-        <section className="relative overflow-hidden bg-bg-secondary/30 pt-28 sm:pt-32 pb-12 md:pb-20 px-4 sm:px-6 lg:px-8">
-          <PricingBackdrop />
-          <div className="relative mx-auto max-w-site py-6 md:py-10">
+        <section className="pt-28 sm:pt-32 pb-4 md:pb-8 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-site py-6 md:py-10">
             <div className="mx-auto text-center space-y-6">
               <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(2.5rem,3.6vw,3.75rem)] font-semibold text-text-primary leading-[1.12]">
                 {t("title")}
@@ -101,14 +116,15 @@ export default async function Page({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <section className="px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
           <div className="mx-auto max-w-site grid sm:grid-cols-3 gap-3 md:gap-4">
-            {TOOLS.map(({ href, key }, i) => (
+            {TOOLS.map(({ href, key, Icon }, i) => (
               <Reveal key={key} delay={i * 50} className="h-full">
                 <Link href={href} className="block h-full">
                   <GlyphPlateCard
                     kind="tools"
                     index={i}
+                    icon={<Icon />}
                     title={t(`tools.${key}.title`)}
                     description={t(`tools.${key}.description`)}
                     cta={t(`tools.${key}.cta`)}

@@ -1001,7 +1001,18 @@
       "successTitle": "请求已提交",
       "successMessage": "工单 {ticketNumber} 已创建，我们将在 24 小时内回复至 {email}。",
       "errorGeneric": "提交失败，请重试。",
-      "close": "关闭"
+      "close": "关闭",
+      "stepOf": "第 {current} 步，共 {total} 步",
+      "topicPrompt": "您需要哪方面的帮助？",
+      "back": "返回",
+      "subjectHint": "至少 {min} 个字符",
+      "descriptionHint": "至少 {min} 个字符",
+      "emailInvalid": "请输入有效的邮箱地址",
+      "receiptTicket": "工单",
+      "receiptReplyTo": "回复至",
+      "receiptStatus": "已收到 — 已进入支持队列",
+      "copy": "复制",
+      "copied": "已复制"
     },
     "restore": {
       "title": "找回您的账户",
@@ -1025,13 +1036,60 @@
       "title": "商务合作",
       "subtitle": "合作伙伴、媒体、企业"
     },
+    "businessForm": {
+      "title": "商务咨询",
+      "subtitle": "合作、媒体与团队方案 — 我们将在 1–2 个工作日内回复",
+      "typePrompt": "您想咨询哪方面的问题？",
+      "typeLabel": "咨询类型",
+      "types": {
+        "partnership": "商务合作",
+        "enterprise": "企业 / 团队",
+        "press": "媒体 / 新闻",
+        "reseller": "经销商 / 推广联盟",
+        "other": "其他事项"
+      },
+      "companyLabel": "公司名称",
+      "companyPlaceholder": "示例科技有限公司",
+      "industryLabel": "行业（选填）",
+      "industryPlaceholder": "选择行业",
+      "industries": {
+        "tech_saas": "科技 / SaaS",
+        "media_press": "媒体与新闻",
+        "finance": "金融",
+        "education": "教育",
+        "healthcare": "医疗健康",
+        "travel": "旅游与酒店",
+        "retail_ecommerce": "零售与电商",
+        "government_ngo": "政府 / 非营利组织",
+        "telecom_isp": "电信 / 网络服务商",
+        "other": "其他"
+      },
+      "nameLabel": "您的姓名（选填）",
+      "namePlaceholder": "李娜",
+      "websiteLabel": "网站（选填）",
+      "emailLabel": "工作邮箱",
+      "emailPlaceholder": "you@company.com",
+      "messageLabel": "留言",
+      "messagePlaceholder": "请介绍一下您的公司以及您的想法…",
+      "submit": "提交咨询",
+      "submitting": "提交中…",
+      "successTitle": "咨询已提交",
+      "successMessage": "编号 {ticketNumber}。我们的团队将在 1–2 个工作日内回复至 {email}。",
+      "errorGeneric": "咨询提交失败，请重试。",
+      "receiptReference": "编号",
+      "receiptCompany": "公司",
+      "receiptStatus": "已收到 — 商务团队处理中"
+    },
     "actions": {
       "submitRequest": "提交请求",
       "submitRequestDesc": "获取团队帮助",
       "restoreAccount": "找回账户",
       "restoreAccountDesc": "找回您的账户 ID",
       "businessContact": "商务合作",
-      "businessContactDesc": "合作伙伴、媒体、企业"
+      "businessContactDesc": "合作伙伴、媒体、企业",
+      "submitRequestCta": "打开",
+      "restoreAccountCta": "恢复",
+      "businessContactCta": "联系我们"
     }
   },
   "guideProtocols": {
@@ -4099,13 +4157,11 @@
     },
     "hero": {
       "title": "我的 IP 是什么？",
-      "subtitle": "这是您访问的每个网站所看到的公网 IP 地址，以及与之关联的地理位置和运营商。连接 VPN 后刷新页面，确认地址已经更换。"
+      "subtitle": "这是您访问的每个网站所看到的公网 IP 地址，以及与之关联的地理位置和运营商。连接 VPN 后刷新页面，确认地址已经更换。",
+      "breadcrumbTools": "工具"
     },
     "widget": {
       "yourIp": "您的 IP 地址",
-      "country": "国家",
-      "region": "地区",
-      "city": "城市",
       "isp": "网络运营商",
       "asn": "ASN",
       "unknown": "未知",
@@ -4114,7 +4170,19 @@
       "copied": "已复制",
       "copy": "复制",
       "loading": "正在检测您的 IP…",
-      "error": "无法检测您的 IP。请刷新页面或稍后再试。"
+      "error": "无法检测您的 IP。请刷新页面或稍后再试。",
+      "details": "连接详情",
+      "location": "位置",
+      "timezone": "时区",
+      "coordinates": "大致坐标",
+      "ipv4": "IPv4 地址",
+      "ipv6": "IPv6 地址",
+      "notAvailable": "不可用",
+      "ipv6Hint": "没有 IPv6 很正常——许多网络和 VPN 仅使用 IPv4。",
+      "changed": "自您上次在此设备上检测以来，您的 IP 已发生变化（之前为 {previous}）。",
+      "unchanged": "与上次检测的 IP 相同。如果您刚连接 VPN，说明它尚未接管此浏览器的流量。",
+      "firstCheck": "提示：记下此 IP，连接 VPN 后刷新页面——地址应当发生变化。",
+      "retry": "重试"
     },
     "explainer": {
       "whatTitle": "什么是 IP 地址？",
@@ -4133,6 +4201,7 @@
         "item4": "完全不出现您真实的城市或地区。"
       }
     },
+    "faqTitle": "常见问题",
     "faq": {
       "q1": {
         "question": "我的 IP 地址被用来做什么？",
@@ -4177,6 +4246,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "如果 Doppler VPN 正在保护此浏览器，本测试应显示：",
+      "items": {
+        "item1": "WebRTC 列表中没有任何标记为泄漏的地址。",
+        "item2": "列表中的任何公网地址都与网站看到的 IP 一致。",
+        "item3": "页面上任何地方都没有您家庭宽带的 IP — 先在不开 VPN 的情况下测一次，以便认出它。",
+        "item4": "切换服务器并重新测试后，结果依然相同。"
+      }
+    },
     "metadata": {
       "title": "WebRTC 泄漏测试 — 检测 VPN 是否隐藏了您的真实 IP",
       "description": "免费 WebRTC 泄漏测试。检测即使连接了 VPN，浏览器是否仍通过 STUN 泄露您的真实 IP。2 秒完成。数据不离开您的设备。"
@@ -4192,6 +4270,11 @@
       "leakedBody": "WebRTC 检测到一个或多个与公网 IP 不同的地址。如果您正在使用 VPN，这意味着使用 WebRTC 的网站仍能看到您的真实地址。",
       "safeTitle": "未检测到 WebRTC 泄漏",
       "safeBody": "WebRTC 报告的 IP 与公网 IP 相同，或未报告任何 IP。您目前没有通过 WebRTC 泄露真实地址。",
+      "noWebrtcTitle": "WebRTC 已关闭",
+      "localNote": "本地地址和 mDNS（.local）地址只在您自己的网络内有效，因此不会暴露您的身份。",
+      "tagLeak": "泄漏",
+      "tagPublic": "公网",
+      "tagLocal": "本地",
       "noWebrtc": "您的浏览器已禁用 WebRTC，或未解析出任何地址。这是安全状态。",
       "unknown": "未知",
       "refresh": "重新测试",
@@ -4258,7 +4341,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "打开 browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "在 dnsleaktest.com 上点击 \"Extended test\"。结果应只列出您 VPN 提供商的 DNS 服务器——而不是您的运营商。如果结果中出现 Comcast、Verizon、Vodafone 或任何其他家用运营商，说明您的 DNS 正在泄漏。"
+      "steps": {
+        "step1": {
+          "title": "连接 VPN",
+          "body": "打开 VPN，等待其显示已连接。此时本页的连接面板应显示 VPN 的网络，而不是您家里的网络运营商——如果没有，请点击“刷新”。"
+        },
+        "step2": {
+          "title": "运行扩展测试",
+          "body": "打开 dnsleaktest.com 并点击 \"Extended test\"。测试会查询一批一次性域名，并记录是哪些 DNS 服务器做出了应答。"
+        },
+        "step3": {
+          "title": "查看是谁应答的",
+          "body": "结果中的每台服务器都应属于您的 VPN 提供商。如果出现 Comcast、Verizon、Vodafone 或任何其他家用运营商，说明您的 DNS 正在泄漏。关闭 VPN 再测一次，就能看到泄漏是什么样子。"
+        }
+      },
+      "panel": {
+        "title": "您当前的连接",
+        "hint": "这是您的公网 IP，而不是您的 DNS 解析器——解析器只有外部测试才能看到。开启 VPN 时，两者都不应属于您家里的网络运营商。",
+        "error": "无法查询您的连接。外部测试仍然可以使用。"
+      }
     },
     "explainer": {
       "whatTitle": "什么是 DNS 泄漏？",

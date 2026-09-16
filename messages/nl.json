@@ -1000,7 +1000,18 @@
       "successTitle": "Verzoek Ingediend",
       "successMessage": "Ticket {ticketNumber} is aangemaakt. We reageren op {email} binnen 24 uur.",
       "errorGeneric": "Verzoek kon niet worden ingediend. Probeer het opnieuw.",
-      "close": "Sluiten"
+      "close": "Sluiten",
+      "stepOf": "Stap {current} van {total}",
+      "topicPrompt": "Waarmee kunnen we helpen?",
+      "back": "Terug",
+      "subjectHint": "Minimaal {min} tekens",
+      "descriptionHint": "Minimaal {min} tekens",
+      "emailInvalid": "Vul een geldig e-mailadres in",
+      "receiptTicket": "Ticket",
+      "receiptReplyTo": "Antwoord naar",
+      "receiptStatus": "Ontvangen — in de supportwachtrij",
+      "copy": "Kopiëren",
+      "copied": "Gekopieerd"
     },
     "restore": {
       "title": "Herstel Je Account",
@@ -1024,13 +1035,60 @@
       "title": "Zakelijke Aanvragen",
       "subtitle": "Partnerschappen, pers, zakelijk"
     },
+    "businessForm": {
+      "title": "Zakelijke aanvraag",
+      "subtitle": "Partnerschappen, pers en teamabonnementen — we reageren binnen 1–2 werkdagen",
+      "typePrompt": "Waar gaat je aanvraag over?",
+      "typeLabel": "Soort aanvraag",
+      "types": {
+        "partnership": "Partnerschap",
+        "enterprise": "Bedrijf / Team",
+        "press": "Pers / Media",
+        "reseller": "Reseller / Affiliate",
+        "other": "Iets anders"
+      },
+      "companyLabel": "Bedrijfsnaam",
+      "companyPlaceholder": "Voorbeeld B.V.",
+      "industryLabel": "Branche (optioneel)",
+      "industryPlaceholder": "Kies een branche",
+      "industries": {
+        "tech_saas": "Technologie / SaaS",
+        "media_press": "Media & pers",
+        "finance": "Financiën",
+        "education": "Onderwijs",
+        "healthcare": "Zorg",
+        "travel": "Reizen & horeca",
+        "retail_ecommerce": "Retail & e-commerce",
+        "government_ngo": "Overheid / ngo",
+        "telecom_isp": "Telecom / provider",
+        "other": "Overig"
+      },
+      "nameLabel": "Je naam (optioneel)",
+      "namePlaceholder": "Sanne de Vries",
+      "websiteLabel": "Website (optioneel)",
+      "emailLabel": "Zakelijk e-mailadres",
+      "emailPlaceholder": "jij@bedrijf.nl",
+      "messageLabel": "Bericht",
+      "messagePlaceholder": "Vertel ons over je bedrijf en wat je in gedachten hebt…",
+      "submit": "Aanvraag versturen",
+      "submitting": "Versturen…",
+      "successTitle": "Aanvraag verstuurd",
+      "successMessage": "Referentie {ticketNumber}. Ons team reageert binnen 1–2 werkdagen op {email}.",
+      "errorGeneric": "Je aanvraag kon niet worden verstuurd. Probeer het opnieuw.",
+      "receiptReference": "Referentie",
+      "receiptCompany": "Bedrijf",
+      "receiptStatus": "Ontvangen — bij ons zakelijke team"
+    },
     "actions": {
       "submitRequest": "Dien een Verzoek in",
       "submitRequestDesc": "Krijg hulp van ons team",
       "restoreAccount": "Account Herstellen",
       "restoreAccountDesc": "Herstel je Account-ID",
       "businessContact": "Zakelijke Aanvragen",
-      "businessContactDesc": "Partnerschappen, pers, zakelijk"
+      "businessContactDesc": "Partnerschappen, pers, zakelijk",
+      "submitRequestCta": "Openen",
+      "restoreAccountCta": "Herstellen",
+      "businessContactCta": "Neem contact op"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Wat is mijn IP?",
-      "subtitle": "Je publieke IP-adres zoals elke website die je bezoekt het ziet — plus de geografie en provider die eraan vastzitten. Ververs na het verbinden met een VPN om te controleren of de wissel is gelukt."
+      "subtitle": "Je publieke IP-adres zoals elke website die je bezoekt het ziet — plus de geografie en provider die eraan vastzitten. Ververs na het verbinden met een VPN om te controleren of de wissel is gelukt.",
+      "breadcrumbTools": "Tools"
     },
     "widget": {
       "yourIp": "Je IP-adres",
-      "country": "Land",
-      "region": "Regio",
-      "city": "Stad",
       "isp": "Internetprovider",
       "asn": "ASN",
       "unknown": "Onbekend",
@@ -4050,7 +4106,19 @@
       "copied": "Gekopieerd",
       "copy": "Kopiëren",
       "loading": "Je IP detecteren…",
-      "error": "Je IP kon niet worden gedetecteerd. Ververs de pagina of probeer het zo opnieuw."
+      "error": "Je IP kon niet worden gedetecteerd. Ververs de pagina of probeer het zo opnieuw.",
+      "details": "Verbindingsdetails",
+      "location": "Locatie",
+      "timezone": "Tijdzone",
+      "coordinates": "Geschatte coördinaten",
+      "ipv4": "IPv4-adres",
+      "ipv6": "IPv6-adres",
+      "notAvailable": "Niet beschikbaar",
+      "ipv6Hint": "Geen IPv6 is normaal — veel netwerken en VPN's gebruiken alleen IPv4.",
+      "changed": "Je IP is veranderd sinds je laatste controle op dit apparaat (was {previous}).",
+      "unchanged": "Zelfde IP als bij je laatste controle. Heb je net een VPN verbonden? Dan loopt het verkeer van deze browser er nog niet doorheen.",
+      "firstCheck": "Tip: noteer dit IP, verbind je VPN en ververs dan — het adres zou moeten veranderen.",
+      "retry": "Opnieuw proberen"
     },
     "explainer": {
       "whatTitle": "Wat is een IP-adres?",
@@ -4069,6 +4137,7 @@
         "item4": "Geen vermelding van je echte stad of regio."
       }
     },
+    "faqTitle": "Veelgestelde vragen",
     "faq": {
       "q1": {
         "question": "Waar wordt mijn IP-adres voor gebruikt?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Als Doppler VPN deze browser beschermt, zou deze test moeten tonen:",
+      "items": {
+        "item1": "Geen enkel adres dat in de WebRTC-lijst als lek is gemarkeerd.",
+        "item2": "Elk publiek adres in de lijst komt overeen met het IP dat websites zien.",
+        "item3": "Het IP van je thuisprovider nergens op de pagina — doe de test één keer zonder VPN zodat je het herkent.",
+        "item4": "Hetzelfde resultaat nadat je van server wisselt en de test opnieuw uitvoert."
+      }
+    },
     "metadata": {
       "title": "WebRTC-lektest — Controleer of je VPN je echte IP verbergt",
       "description": "Gratis WebRTC-lektest. Detecteert of je browser je echte IP via STUN lekt, zelfs met een verbonden VPN. Klaar in 2 seconden. Geen data verlaat je apparaat."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC heeft een of meer IP's gevonden die afwijken van het publieke IP. Als je een VPN gebruikt, betekent dit dat een website met WebRTC je echte adres nog steeds kan zien.",
       "safeTitle": "Geen WebRTC-lek gedetecteerd",
       "safeBody": "WebRTC meldde hetzelfde IP als het publieke, of helemaal geen IP. Je lekt op dit moment je echte adres niet via WebRTC.",
+      "noWebrtcTitle": "WebRTC staat uit",
+      "localNote": "Lokale en mDNS-adressen (.local) werken alleen binnen je eigen netwerk, dus ze verraden niet wie je bent.",
+      "tagLeak": "lek",
+      "tagPublic": "publiek",
+      "tagLocal": "lokaal",
       "noWebrtc": "Je browser heeft WebRTC uitgeschakeld of er zijn geen adressen opgelost. Dat is een veilige toestand.",
       "unknown": "Onbekend",
       "refresh": "Test opnieuw uitvoeren",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Open browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Klik op \"Extended test\" op dnsleaktest.com. Het resultaat zou alleen de DNS-server(s) van je VPN-aanbieder moeten tonen — niet je internetprovider. Zie je Comcast, Verizon, Vodafone of een andere consumentenprovider in de resultaten, dan lekt je DNS."
+      "steps": {
+        "step1": {
+          "title": "Verbind je VPN",
+          "body": "Zet de VPN aan en wacht tot hij verbonden is. Het verbindingspaneel op deze pagina hoort nu het netwerk van de VPN te tonen, niet je internetprovider thuis — zo niet, klik dan op \"Vernieuwen\"."
+        },
+        "step2": {
+          "title": "Start de uitgebreide test",
+          "body": "Open dnsleaktest.com en klik op \"Extended test\". De test zoekt een reeks eenmalige domeinnamen op en noteert welke DNS-servers daarop antwoordden."
+        },
+        "step3": {
+          "title": "Kijk wie er antwoordde",
+          "body": "Elke server in het resultaat hoort bij je VPN-aanbieder. Zie je Comcast, Verizon, Vodafone of een andere consumentenprovider, dan lekt je DNS. Herhaal de test met de VPN uit om te zien hoe een lek eruitziet."
+        }
+      },
+      "panel": {
+        "title": "Je verbinding op dit moment",
+        "hint": "Dit is je publieke IP, niet je DNS-resolver — die ziet alleen de externe test. Met de VPN aan hoort geen van beide bij je internetprovider thuis.",
+        "error": "Je verbinding kon niet worden opgevraagd. De externe test werkt nog steeds."
+      }
     },
     "explainer": {
       "whatTitle": "Wat is een DNS-lek?",

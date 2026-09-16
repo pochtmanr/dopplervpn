@@ -8,7 +8,7 @@ import { BTN_PRIMARY, BTN_SECONDARY, EYEBROW, GLASS_CARD, HAIRLINE, ORB } from '
 
 /** The paywall's one big action: DESIGN.md standalone CTA, sized up, pulsing once. */
 const PAYWALL_CTA =
-  'group/cta w-full inline-flex items-center justify-center gap-2 rounded-xl bg-accent-teal hover:bg-accent-teal-light px-6 py-4 text-base font-semibold text-white transition-colors pulse-glow-once focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary';
+  'cta-key group/cta w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 text-base font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary';
 
 function formatDate(iso: string, locale: string): string {
   return new Date(iso).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });

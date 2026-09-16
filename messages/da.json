@@ -1000,7 +1000,18 @@
       "successTitle": "Forespørgsel indsendt",
       "successMessage": "Sag {ticketNumber} oprettet. Vi svarer til {email} inden for 24 timer.",
       "errorGeneric": "Kunne ikke indsende forespørgsel. Prøv venligst igen.",
-      "close": "Luk"
+      "close": "Luk",
+      "stepOf": "Trin {current} af {total}",
+      "topicPrompt": "Hvad har du brug for hjælp til?",
+      "back": "Tilbage",
+      "subjectHint": "Mindst {min} tegn",
+      "descriptionHint": "Mindst {min} tegn",
+      "emailInvalid": "Indtast en gyldig e-mailadresse",
+      "receiptTicket": "Sag",
+      "receiptReplyTo": "Svar til",
+      "receiptStatus": "Modtaget — i supportkøen",
+      "copy": "Kopiér",
+      "copied": "Kopieret"
     },
     "restore": {
       "title": "Gendan din konto",
@@ -1024,13 +1035,60 @@
       "title": "Forretningshenvendelser",
       "subtitle": "Partnerskaber, presse, virksomheder"
     },
+    "businessForm": {
+      "title": "Forretningshenvendelse",
+      "subtitle": "Partnerskaber, presse og teamabonnementer — vi svarer inden for 1–2 hverdage",
+      "typePrompt": "Hvad drejer din henvendelse sig om?",
+      "typeLabel": "Type henvendelse",
+      "types": {
+        "partnership": "Partnerskab",
+        "enterprise": "Virksomhed / Team",
+        "press": "Presse / Medier",
+        "reseller": "Forhandler / Affiliate",
+        "other": "Noget andet"
+      },
+      "companyLabel": "Virksomhedens navn",
+      "companyPlaceholder": "Eksempel ApS",
+      "industryLabel": "Branche (valgfrit)",
+      "industryPlaceholder": "Vælg en branche",
+      "industries": {
+        "tech_saas": "Teknologi / SaaS",
+        "media_press": "Medier og presse",
+        "finance": "Finans",
+        "education": "Uddannelse",
+        "healthcare": "Sundhed",
+        "travel": "Rejser og hotel",
+        "retail_ecommerce": "Detailhandel og e-handel",
+        "government_ngo": "Offentlig sektor / NGO",
+        "telecom_isp": "Telekom / Internetudbyder",
+        "other": "Andet"
+      },
+      "nameLabel": "Dit navn (valgfrit)",
+      "namePlaceholder": "Mette Jensen",
+      "websiteLabel": "Hjemmeside (valgfrit)",
+      "emailLabel": "Arbejdsmail",
+      "emailPlaceholder": "dig@firma.dk",
+      "messageLabel": "Besked",
+      "messagePlaceholder": "Fortæl os om din virksomhed og hvad du har i tankerne…",
+      "submit": "Send henvendelse",
+      "submitting": "Sender…",
+      "successTitle": "Henvendelse sendt",
+      "successMessage": "Reference {ticketNumber}. Vores team svarer til {email} inden for 1–2 hverdage.",
+      "errorGeneric": "Din henvendelse kunne ikke sendes. Prøv igen.",
+      "receiptReference": "Reference",
+      "receiptCompany": "Virksomhed",
+      "receiptStatus": "Modtaget — hos vores forretningsteam"
+    },
     "actions": {
       "submitRequest": "Indsend en forespørgsel",
       "submitRequestDesc": "Få hjælp fra vores team",
       "restoreAccount": "Gendan konto",
       "restoreAccountDesc": "Genfind dit konto-ID",
       "businessContact": "Forretningshenvendelser",
-      "businessContactDesc": "Partnerskaber, presse, virksomheder"
+      "businessContactDesc": "Partnerskaber, presse, virksomheder",
+      "submitRequestCta": "Åbn",
+      "restoreAccountCta": "Gendan",
+      "businessContactCta": "Kontakt os"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Hvad er min IP?",
-      "subtitle": "Din offentlige IP-adresse, som hvert websted du besøger ser den — plus den geografi og udbyder, der er knyttet til den. Opdater efter du har forbundet til en VPN for at bekræfte, at skiftet er slået igennem."
+      "subtitle": "Din offentlige IP-adresse, som hvert websted du besøger ser den — plus den geografi og udbyder, der er knyttet til den. Opdater efter du har forbundet til en VPN for at bekræfte, at skiftet er slået igennem.",
+      "breadcrumbTools": "Værktøjer"
     },
     "widget": {
       "yourIp": "Din IP-adresse",
-      "country": "Land",
-      "region": "Region",
-      "city": "By",
       "isp": "Internetudbyder",
       "asn": "ASN",
       "unknown": "Ukendt",
@@ -4050,7 +4106,19 @@
       "copied": "Kopieret",
       "copy": "Kopiér",
       "loading": "Finder din IP…",
-      "error": "Kunne ikke finde din IP. Genindlæs siden, eller prøv igen om lidt."
+      "error": "Kunne ikke finde din IP. Genindlæs siden, eller prøv igen om lidt.",
+      "details": "Forbindelsesdetaljer",
+      "location": "Placering",
+      "timezone": "Tidszone",
+      "coordinates": "Omtrentlige koordinater",
+      "ipv4": "IPv4-adresse",
+      "ipv6": "IPv6-adresse",
+      "notAvailable": "Ikke tilgængelig",
+      "ipv6Hint": "Ingen IPv6 er helt normalt — mange netværk og VPN'er bruger kun IPv4.",
+      "changed": "Din IP har ændret sig siden dit sidste tjek på denne enhed (var {previous}).",
+      "unchanged": "Samme IP som ved dit sidste tjek. Hvis du lige har forbundet til en VPN, sender den endnu ikke denne browsers trafik igennem.",
+      "firstCheck": "Tip: notér denne IP, forbind til din VPN, og opdater — adressen bør skifte.",
+      "retry": "Prøv igen"
     },
     "explainer": {
       "whatTitle": "Hvad er en IP-adresse?",
@@ -4069,6 +4137,7 @@
         "item4": "Ingen omtale af din rigtige by eller region."
       }
     },
+    "faqTitle": "Ofte stillede spørgsmål",
     "faq": {
       "q1": {
         "question": "Hvad bruges min IP-adresse til?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Hvis Doppler VPN beskytter denne browser, bør testen vise:",
+      "items": {
+        "item1": "Ingen adresse markeret som læk på WebRTC-listen.",
+        "item2": "Enhver offentlig adresse på listen matcher den IP, websteder ser.",
+        "item3": "Din hjemmeudbyders IP intetsteds på siden — kør testen én gang uden VPN, så du kan genkende den.",
+        "item4": "Samme resultat, når du skifter server og kører testen igen."
+      }
+    },
     "metadata": {
       "title": "WebRTC-lækagetest — Tjek om din VPN skjuler din rigtige IP",
       "description": "Gratis WebRTC-lækagetest. Opdager, om din browser lækker din rigtige IP gennem STUN, selv når en VPN er forbundet. Kører på 2 sekunder. Ingen data forlader din enhed."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC fandt en eller flere IP'er, der afviger fra den offentlige IP. Hvis du er på en VPN, betyder det, at et websted, der bruger WebRTC, stadig kan se din rigtige adresse.",
       "safeTitle": "Ingen WebRTC-lækage fundet",
       "safeBody": "WebRTC rapporterede samme IP som den offentlige, eller slet ingen. Du lækker ikke din rigtige adresse gennem WebRTC lige nu.",
+      "noWebrtcTitle": "WebRTC er slået fra",
+      "localNote": "Lokale adresser og mDNS-adresser (.local) virker kun på dit eget netværk, så de afslører ikke, hvem du er.",
+      "tagLeak": "læk",
+      "tagPublic": "offentlig",
+      "tagLocal": "lokal",
       "noWebrtc": "Din browser har deaktiveret WebRTC, eller ingen adresser blev fundet. Det er en sikker tilstand.",
       "unknown": "Ukendt",
       "refresh": "Kør testen igen",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Åbn browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Klik på \"Extended test\" på dnsleaktest.com. Resultatet bør kun vise din VPN-udbyders DNS-servere — ikke din internetudbyder. Hvis du ser Comcast, Verizon, Vodafone eller en anden forbrugerudbyder i resultaterne, lækker din DNS."
+      "steps": {
+        "step1": {
+          "title": "Forbind din VPN",
+          "body": "Slå VPN til, og vent til den viser, at den er forbundet. Forbindelsespanelet på denne side bør nu vise VPN'ens netværk, ikke din internetudbyder derhjemme — tryk på \"Opdater\", hvis det ikke gør."
+        },
+        "step2": {
+          "title": "Kør den udvidede test",
+          "body": "Åbn dnsleaktest.com, og klik på \"Extended test\". Testen slår en række engangsdomænenavne op og noterer, hvilke DNS-servere der svarede."
+        },
+        "step3": {
+          "title": "Tjek, hvem der svarede",
+          "body": "Hver server i resultatet bør tilhøre din VPN-udbyder. Hvis du ser Comcast, Verizon, Vodafone eller en anden forbrugerudbyder, lækker din DNS. Gentag testen med VPN slået fra for at se, hvordan et læk ser ud."
+        }
+      },
+      "panel": {
+        "title": "Din forbindelse lige nu",
+        "hint": "Dette er din offentlige IP, ikke din DNS-resolver — den kan kun den eksterne test se. Med VPN slået til bør ingen af dem tilhøre din internetudbyder derhjemme.",
+        "error": "Kunne ikke slå din forbindelse op. Den eksterne test virker stadig."
+      }
     },
     "explainer": {
       "whatTitle": "Hvad er en DNS-lækage?",

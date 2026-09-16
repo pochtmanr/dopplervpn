@@ -1000,7 +1000,18 @@
       "successTitle": "Sol·licitud enviada",
       "successMessage": "Tiquet {ticketNumber} creat. Respondrem a {email} en 24 hores.",
       "errorGeneric": "Error en enviar la sol·licitud. Si us plau, torna-ho a provar.",
-      "close": "Tancar"
+      "close": "Tancar",
+      "stepOf": "Pas {current} de {total}",
+      "topicPrompt": "Amb què necessites ajuda?",
+      "back": "Enrere",
+      "subjectHint": "Almenys {min} caràcters",
+      "descriptionHint": "Almenys {min} caràcters",
+      "emailInvalid": "Introdueix una adreça electrònica vàlida",
+      "receiptTicket": "Tiquet",
+      "receiptReplyTo": "Resposta a",
+      "receiptStatus": "Rebut — a la cua de suport",
+      "copy": "Copia",
+      "copied": "Copiat"
     },
     "restore": {
       "title": "Restaurar el teu compte",
@@ -1024,13 +1035,60 @@
       "title": "Consultes empresarials",
       "subtitle": "Col·laboracions, premsa, empresa"
     },
+    "businessForm": {
+      "title": "Consulta empresarial",
+      "subtitle": "Aliances, premsa i plans per a equips — responem en 1–2 dies laborables",
+      "typePrompt": "Sobre què és la teva consulta?",
+      "typeLabel": "Tipus de consulta",
+      "types": {
+        "partnership": "Aliança",
+        "enterprise": "Empresa / Equip",
+        "press": "Premsa / Mitjans",
+        "reseller": "Revenedor / Afiliat",
+        "other": "Una altra cosa"
+      },
+      "companyLabel": "Nom de l'empresa",
+      "companyPlaceholder": "Empresa Exemple S.L.",
+      "industryLabel": "Sector (opcional)",
+      "industryPlaceholder": "Tria un sector",
+      "industries": {
+        "tech_saas": "Tecnologia / SaaS",
+        "media_press": "Mitjans i premsa",
+        "finance": "Finances",
+        "education": "Educació",
+        "healthcare": "Salut",
+        "travel": "Viatges i hostaleria",
+        "retail_ecommerce": "Comerç i e-commerce",
+        "government_ngo": "Administració / ONG",
+        "telecom_isp": "Telecomunicacions / ISP",
+        "other": "Altres"
+      },
+      "nameLabel": "El teu nom (opcional)",
+      "namePlaceholder": "Marta Puig",
+      "websiteLabel": "Lloc web (opcional)",
+      "emailLabel": "Correu de feina",
+      "emailPlaceholder": "tu@empresa.cat",
+      "messageLabel": "Missatge",
+      "messagePlaceholder": "Explica'ns sobre la teva empresa i què tens al cap…",
+      "submit": "Envia la consulta",
+      "submitting": "S'està enviant…",
+      "successTitle": "Consulta enviada",
+      "successMessage": "Referència {ticketNumber}. El nostre equip respondrà a {email} en 1–2 dies laborables.",
+      "errorGeneric": "No s'ha pogut enviar la consulta. Torna-ho a provar.",
+      "receiptReference": "Referència",
+      "receiptCompany": "Empresa",
+      "receiptStatus": "Rebuda — amb el nostre equip comercial"
+    },
     "actions": {
       "submitRequest": "Enviar una sol·licitud",
       "submitRequestDesc": "Obtén ajuda del nostre equip",
       "restoreAccount": "Restaurar compte",
       "restoreAccountDesc": "Recupera el teu Account ID",
       "businessContact": "Consultes empresarials",
-      "businessContactDesc": "Col·laboracions, premsa, empresa"
+      "businessContactDesc": "Col·laboracions, premsa, empresa",
+      "submitRequestCta": "Obre",
+      "restoreAccountCta": "Recupera",
+      "businessContactCta": "Contacta'ns"
     }
   },
   "guideProtocols": {
@@ -4035,13 +4093,11 @@
     },
     "hero": {
       "title": "Quina és la meva IP?",
-      "subtitle": "La teva adreça IP pública tal com la veu cada web que visites — amb la geografia i el proveïdor que hi van lligats. Actualitza després de connectar-te a una VPN per verificar que el canvi ha tingut efecte."
+      "subtitle": "La teva adreça IP pública tal com la veu cada web que visites — amb la geografia i el proveïdor que hi van lligats. Actualitza després de connectar-te a una VPN per verificar que el canvi ha tingut efecte.",
+      "breadcrumbTools": "Eines"
     },
     "widget": {
       "yourIp": "La teva adreça IP",
-      "country": "País",
-      "region": "Regió",
-      "city": "Ciutat",
       "isp": "Proveïdor d'internet",
       "asn": "ASN",
       "unknown": "Desconegut",
@@ -4050,7 +4106,19 @@
       "copied": "Copiat",
       "copy": "Copia",
       "loading": "Detectant la teva IP…",
-      "error": "No hem pogut detectar la teva IP. Recarrega la pàgina o torna-ho a provar d'aquí a un moment."
+      "error": "No hem pogut detectar la teva IP. Recarrega la pàgina o torna-ho a provar d'aquí a un moment.",
+      "details": "Detalls de la connexió",
+      "location": "Ubicació",
+      "timezone": "Zona horària",
+      "coordinates": "Coordenades aproximades",
+      "ipv4": "Adreça IPv4",
+      "ipv6": "Adreça IPv6",
+      "notAvailable": "No disponible",
+      "ipv6Hint": "No tenir IPv6 és normal — moltes xarxes i VPN només fan servir IPv4.",
+      "changed": "La teva IP ha canviat des de l'última comprovació en aquest dispositiu (abans era {previous}).",
+      "unchanged": "La mateixa IP que a l'última comprovació. Si t'acabes de connectar a una VPN, encara no encamina el trànsit d'aquest navegador.",
+      "firstCheck": "Consell: apunta't aquesta IP, connecta't a la VPN i actualitza — l'adreça hauria de canviar.",
+      "retry": "Torna-ho a provar"
     },
     "explainer": {
       "whatTitle": "Què és una adreça IP?",
@@ -4069,6 +4137,7 @@
         "item4": "Cap menció de la teva ciutat o regió reals."
       }
     },
+    "faqTitle": "Preguntes freqüents",
     "faq": {
       "q1": {
         "question": "Per a què es fa servir la meva adreça IP?",
@@ -4113,6 +4182,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Si Doppler VPN protegeix aquest navegador, aquesta prova hauria de mostrar:",
+      "items": {
+        "item1": "Cap adreça marcada com a fuita a la llista de WebRTC.",
+        "item2": "Qualsevol adreça pública de la llista coincideix amb la IP que veuen els webs.",
+        "item3": "La IP del teu proveïdor de casa enlloc de la pàgina — fes la prova una vegada sense la VPN per reconèixer-la.",
+        "item4": "El mateix resultat després de canviar de servidor i tornar a fer la prova."
+      }
+    },
     "metadata": {
       "title": "Test de Fuites WebRTC — Comprova si la teva VPN amaga la teva IP real",
       "description": "Test gratuït de fuites WebRTC. Detecta si el navegador filtra la teva IP real per STUN encara que la VPN estigui connectada. Triga 2 segons. Cap dada no surt del dispositiu."
@@ -4128,6 +4206,11 @@
       "leakedBody": "WebRTC ha detectat una o més IP diferents de la pública. Si fas servir una VPN, vol dir que un web que utilitzi WebRTC encara pot veure la teva adreça real.",
       "safeTitle": "No s'ha detectat cap fuita WebRTC",
       "safeBody": "WebRTC ha informat de la mateixa IP que la pública, o de cap. Ara mateix no estàs filtrant la teva adreça real per WebRTC.",
+      "noWebrtcTitle": "WebRTC està desactivat",
+      "localNote": "Les adreces locals i mDNS (.local) només funcionen dins la teva pròpia xarxa, així que no revelen qui ets.",
+      "tagLeak": "fuita",
+      "tagPublic": "pública",
+      "tagLocal": "local",
       "noWebrtc": "El teu navegador té WebRTC desactivat o no s'ha resolt cap adreça. És un estat segur.",
       "unknown": "Desconegut",
       "refresh": "Repeteix el test",
@@ -4194,7 +4277,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Obre browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Fes clic a \"Extended test\" a dnsleaktest.com. El resultat només hauria de llistar els servidors DNS del teu proveïdor de VPN — no el teu proveïdor d'internet. Si veus Comcast, Verizon, Vodafone o qualsevol altre proveïdor de consum als resultats, el teu DNS s'escapa."
+      "steps": {
+        "step1": {
+          "title": "Connecta la VPN",
+          "body": "Activa la VPN i espera que indiqui que està connectada. El panell de connexió d'aquesta pàgina hauria de mostrar ara la xarxa de la VPN, no el teu proveïdor d'internet de casa; si no, prem «Actualitza»."
+        },
+        "step2": {
+          "title": "Executa la prova ampliada",
+          "body": "Obre dnsleaktest.com i fes clic a \"Extended test\". La prova consulta una sèrie de noms de domini d'un sol ús i registra quins servidors DNS han respost."
+        },
+        "step3": {
+          "title": "Comprova qui ha respost",
+          "body": "Cada servidor del resultat hauria de pertànyer al teu proveïdor de VPN. Si veus Comcast, Verizon, Vodafone o qualsevol altre proveïdor de consum, el teu DNS s'escapa. Repeteix la prova amb la VPN apagada per veure com és una fuita."
+        }
+      },
+      "panel": {
+        "title": "La teva connexió ara mateix",
+        "hint": "Aquesta és la teva IP pública, no el teu resolutor DNS; això només ho veu la prova externa. Amb la VPN activada, cap dels dos hauria de pertànyer al teu proveïdor d'internet de casa.",
+        "error": "No hem pogut consultar la teva connexió. La prova externa continua funcionant."
+      }
     },
     "explainer": {
       "whatTitle": "Què és una fuita DNS?",

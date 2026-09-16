@@ -1000,7 +1000,18 @@
       "successTitle": "Förfrågan skickad",
       "successMessage": "Ärende {ticketNumber} skapat. Vi svarar till {email} inom 24 timmar.",
       "errorGeneric": "Kunde inte skicka förfrågan. Försök igen.",
-      "close": "Stäng"
+      "close": "Stäng",
+      "stepOf": "Steg {current} av {total}",
+      "topicPrompt": "Vad behöver du hjälp med?",
+      "back": "Tillbaka",
+      "subjectHint": "Minst {min} tecken",
+      "descriptionHint": "Minst {min} tecken",
+      "emailInvalid": "Ange en giltig e-postadress",
+      "receiptTicket": "Ärende",
+      "receiptReplyTo": "Svar till",
+      "receiptStatus": "Mottaget — i supportkön",
+      "copy": "Kopiera",
+      "copied": "Kopierat"
     },
     "restore": {
       "title": "Återställ ditt konto",
@@ -1024,13 +1035,60 @@
       "title": "Affärsförfrågningar",
       "subtitle": "Partnerskap, press, företag"
     },
+    "businessForm": {
+      "title": "Affärsförfrågan",
+      "subtitle": "Partnerskap, press och teamabonnemang — vi svarar inom 1–2 arbetsdagar",
+      "typePrompt": "Vad gäller din förfrågan?",
+      "typeLabel": "Typ av förfrågan",
+      "types": {
+        "partnership": "Partnerskap",
+        "enterprise": "Företag / Team",
+        "press": "Press / Media",
+        "reseller": "Återförsäljare / Affiliate",
+        "other": "Något annat"
+      },
+      "companyLabel": "Företagsnamn",
+      "companyPlaceholder": "Exempel AB",
+      "industryLabel": "Bransch (valfritt)",
+      "industryPlaceholder": "Välj en bransch",
+      "industries": {
+        "tech_saas": "Teknik / SaaS",
+        "media_press": "Media och press",
+        "finance": "Finans",
+        "education": "Utbildning",
+        "healthcare": "Hälso- och sjukvård",
+        "travel": "Resor och hotell",
+        "retail_ecommerce": "Handel och e-handel",
+        "government_ngo": "Offentlig sektor / NGO",
+        "telecom_isp": "Telekom / Internetleverantör",
+        "other": "Annat"
+      },
+      "nameLabel": "Ditt namn (valfritt)",
+      "namePlaceholder": "Anna Andersson",
+      "websiteLabel": "Webbplats (valfritt)",
+      "emailLabel": "Jobbmejl",
+      "emailPlaceholder": "du@foretag.se",
+      "messageLabel": "Meddelande",
+      "messagePlaceholder": "Berätta om ditt företag och vad du har i åtanke…",
+      "submit": "Skicka förfrågan",
+      "submitting": "Skickar…",
+      "successTitle": "Förfrågan skickad",
+      "successMessage": "Referens {ticketNumber}. Vårt team svarar till {email} inom 1–2 arbetsdagar.",
+      "errorGeneric": "Det gick inte att skicka din förfrågan. Försök igen.",
+      "receiptReference": "Referens",
+      "receiptCompany": "Företag",
+      "receiptStatus": "Mottagen — hos vårt affärsteam"
+    },
     "actions": {
       "submitRequest": "Skicka en förfrågan",
       "submitRequestDesc": "Få hjälp från vårt team",
       "restoreAccount": "Återställ konto",
       "restoreAccountDesc": "Återskapa ditt konto-ID",
       "businessContact": "Affärsförfrågningar",
-      "businessContactDesc": "Partnerskap, press, företag"
+      "businessContactDesc": "Partnerskap, press, företag",
+      "submitRequestCta": "Öppna",
+      "restoreAccountCta": "Återställ",
+      "businessContactCta": "Kontakta oss"
     }
   },
   "guideProtocols": {
@@ -4135,13 +4193,11 @@
     },
     "hero": {
       "title": "Vad är min IP?",
-      "subtitle": "Din publika IP-adress som varje webbplats du besöker ser den — plus geografin och operatören som hör till. Uppdatera sidan efter att du anslutit till en VPN för att bekräfta att bytet slagit igenom."
+      "subtitle": "Din publika IP-adress som varje webbplats du besöker ser den — plus geografin och operatören som hör till. Uppdatera sidan efter att du anslutit till en VPN för att bekräfta att bytet slagit igenom.",
+      "breadcrumbTools": "Verktyg"
     },
     "widget": {
       "yourIp": "Din IP-adress",
-      "country": "Land",
-      "region": "Region",
-      "city": "Stad",
       "isp": "Internetleverantör",
       "asn": "ASN",
       "unknown": "Okänt",
@@ -4150,7 +4206,19 @@
       "copied": "Kopierad",
       "copy": "Kopiera",
       "loading": "Identifierar din IP…",
-      "error": "Kunde inte identifiera din IP. Uppdatera sidan eller försök igen om en stund."
+      "error": "Kunde inte identifiera din IP. Uppdatera sidan eller försök igen om en stund.",
+      "details": "Anslutningsdetaljer",
+      "location": "Plats",
+      "timezone": "Tidszon",
+      "coordinates": "Ungefärliga koordinater",
+      "ipv4": "IPv4-adress",
+      "ipv6": "IPv6-adress",
+      "notAvailable": "Inte tillgängligt",
+      "ipv6Hint": "Ingen IPv6 är helt normalt — många nätverk och VPN:er använder bara IPv4.",
+      "changed": "Din IP har ändrats sedan din senaste kontroll på den här enheten (var {previous}).",
+      "unchanged": "Samma IP som vid din senaste kontroll. Om du precis anslöt en VPN leder den ännu inte trafiken från den här webbläsaren.",
+      "firstCheck": "Tips: anteckna den här IP:n, anslut din VPN och uppdatera sedan — adressen bör ändras.",
+      "retry": "Försök igen"
     },
     "explainer": {
       "whatTitle": "Vad är en IP-adress?",
@@ -4169,6 +4237,7 @@
         "item4": "Inget omnämnande av din riktiga stad eller region."
       }
     },
+    "faqTitle": "Vanliga frågor",
     "faq": {
       "q1": {
         "question": "Vad används min IP-adress till?",
@@ -4213,6 +4282,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Om Doppler VPN skyddar den här webbläsaren bör testet visa:",
+      "items": {
+        "item1": "Ingen adress markerad som läcka i WebRTC-listan.",
+        "item2": "Varje offentlig adress i listan stämmer med den IP som webbplatser ser.",
+        "item3": "Din hemleverantörs IP ingenstans på sidan — kör testet en gång utan VPN så att du känner igen den.",
+        "item4": "Samma resultat när du byter server och kör testet igen."
+      }
+    },
     "metadata": {
       "title": "WebRTC-läckagetest — Kontrollera om din VPN döljer din riktiga IP",
       "description": "Kostnadsfritt WebRTC-läckagetest. Upptäcker om din webbläsare läcker din riktiga IP via STUN även när en VPN är ansluten. Tar 2 sekunder. Ingen data lämnar din enhet."
@@ -4228,6 +4306,11 @@
       "leakedBody": "WebRTC upptäckte en eller flera IP-adresser som skiljer sig från den publika IP-adressen. Om du använder VPN betyder det att en webbplats som använder WebRTC fortfarande kan se din riktiga adress.",
       "safeTitle": "Ingen WebRTC-läcka upptäcktes",
       "safeBody": "WebRTC rapporterade samma IP som den publika, eller ingen alls. Du läcker inte din riktiga adress via WebRTC just nu.",
+      "noWebrtcTitle": "WebRTC är avstängt",
+      "localNote": "Lokala adresser och mDNS-adresser (.local) fungerar bara i ditt eget nätverk, så de avslöjar inte vem du är.",
+      "tagLeak": "läcka",
+      "tagPublic": "offentlig",
+      "tagLocal": "lokal",
       "noWebrtc": "Din webbläsare har inaktiverat WebRTC eller så kunde inga adresser hittas. Det är ett säkert läge.",
       "unknown": "Okänt",
       "refresh": "Kör testet igen",
@@ -4294,7 +4377,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Öppna browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Klicka på ”Extended test” på dnsleaktest.com. Resultatet ska bara lista din VPN-leverantörs DNS-servrar — inte din ISP:s. Om du ser Comcast, Verizon, Vodafone eller någon annan konsument-ISP i resultaten läcker din DNS."
+      "steps": {
+        "step1": {
+          "title": "Anslut din VPN",
+          "body": "Slå på VPN:en och vänta tills den visar att den är ansluten. Anslutningspanelen på den här sidan ska nu visa VPN:ens nätverk, inte din internetleverantör hemma — klicka på ”Uppdatera” om den inte gör det."
+        },
+        "step2": {
+          "title": "Kör det utökade testet",
+          "body": "Öppna dnsleaktest.com och klicka på ”Extended test”. Testet slår upp en rad engångsdomännamn och noterar vilka DNS-servrar som svarade."
+        },
+        "step3": {
+          "title": "Kontrollera vem som svarade",
+          "body": "Varje server i resultatet ska tillhöra din VPN-leverantör. Om du ser Comcast, Verizon, Vodafone eller någon annan konsument-ISP läcker din DNS. Upprepa testet med VPN:en avstängd för att se hur en läcka ser ut."
+        }
+      },
+      "panel": {
+        "title": "Din anslutning just nu",
+        "hint": "Det här är din publika IP, inte din DNS-resolver — den ser bara det externa testet. Med VPN:en på ska ingen av dem tillhöra din internetleverantör hemma.",
+        "error": "Det gick inte att slå upp din anslutning. Det externa testet fungerar ändå."
+      }
     },
     "explainer": {
       "whatTitle": "Vad är en DNS-läcka?",

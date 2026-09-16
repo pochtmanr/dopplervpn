@@ -17,6 +17,9 @@
   --color-accent-teal:       #008C8C;
   --color-accent-teal-light: #00ABAB;
 
+  --color-accent-blue:       #2AABEE;   /* business inquiries only — Telegram's blue, see DESIGN.md */
+  --color-accent-blue-light: #5BC0F2;
+
   --color-accent-violet:     #8B7FD9;   /* Pro tier, premium */
   --color-accent-amber:      #F4C95D;   /* warnings, highlights */
   --color-danger:            #F06763;   /* destructive only */
@@ -104,6 +107,9 @@
   --color-accent-gold:       #3A3D42;   /* graphite (was #7A6B42 olive gold) */
   --color-accent-teal:       #007070;
   --color-accent-teal-light: #008080;
+
+  --color-accent-blue:       #0369A1;   /* the telegram token in light — AA on light gray */
+  --color-accent-blue-light: #0369A1;
 
   --color-accent-violet:     #544AA0;   /* WCAG AA on light gray */
   --color-accent-amber:      #A88434;   /* WCAG AA on light gray */
@@ -234,15 +240,154 @@ body {
   to { opacity: 1; }
 }
 .hero-cta-in {
-  animation:
-    hero-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both,
-    pulse-glow 1.5s ease-out 500ms 1;
+  /* Fade only. `pulse-glow` used to ride along here, but it animates
+     `box-shadow` outright, which would wipe `.cta-key`'s bevel and skirt for
+     1.5s and then pop them back — the key would flatten on load. The keycap is
+     now what draws the eye, so it no longer needs a pulse to do it. */
+  animation: hero-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── Hero primary CTA: the keycap (hero/hero-ctas.tsx) ──────────────────
+   The page reads as a terminal, so its one call to action is a key you press —
+   the single physical object on an otherwise flat surface. Four layers make it
+   plastic rather than a gradient button:
+     1. cap gradient      light falls on the top edge, shade at the bottom
+     2. inset bevel       bright top rim, shaded bottom rim (the inner shadow)
+     3. skirt             a HARD, unblurred `0 4px 0` — the key's side wall. A
+                          blurred shadow here reads as a floating card instead.
+     4. contact shadow    soft, tight, so the key sits ON the page
+   `::before` draws the gradient border as a masked 1px ring, lit from the same
+   direction as the cap. `:active` drops the cap 3px and collapses the skirt to
+   1px, so the key bottoms out instead of merely shifting.
+   Every shadow colour is a custom property, so `.light` restyles the whole key
+   by swapping four variables — no per-state overrides, no specificity fights.
+   The secondary CTA stays deliberately flat: it is the deck the key sits on,
+   and that contrast is what sells the key. */
+.cta-key {
+  position: relative;
+  --key-face:   #0BA6A6;   /* top of the cap, where the light lands */
+  --key-edge:   #009898;
+  --key-base:   #008C8C;   /* accent-teal — the cap's own colour */
+  --key-skirt:  #00595C;   /* the side wall in shadow */
+  --key-ambient: rgb(0 140 140 / 0.5);
+  --key-lift:   4px;       /* how tall the side wall is = how far it travels */
+  background-image: linear-gradient(
+    to bottom,
+    var(--key-face) 0%,
+    var(--key-edge) 45%,
+    var(--key-base) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.32),
+    inset 0 -1px 0 rgb(0 0 0 / 0.28),
+    0 var(--key-lift) 0 var(--key-skirt),
+    0 calc(var(--key-lift) + 2px) 14px -4px var(--key-ambient);
+  transition:
+    transform 120ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 120ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 160ms ease-out;
+}
+/* Compact keys (nav pills, inline bar buttons) get a shorter wall — a 4px
+   skirt under a 30px-tall pill reads as a mistake, not as a key. */
+.cta-key-sm {
+  --key-lift: 2px;
+}
+.cta-key::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.55),
+    rgb(255 255 255 / 0.06) 42%,
+    rgb(0 0 0 / 0.28)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.cta-key:hover {
+  filter: brightness(1.07);
+}
+.cta-key:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(calc(var(--key-lift) - 1px));
+  box-shadow:
+    inset 0 2px 5px rgb(0 0 0 / 0.32),
+    inset 0 -1px 0 rgb(255 255 255 / 0.12),
+    0 1px 0 var(--key-skirt),
+    0 2px 6px -4px var(--key-ambient);
+}
+/* A disabled key is not a key. Drop the wall and the bevel so it sits flush —
+   nothing about it should suggest it can be pressed. The call sites keep their
+   own `disabled:opacity-*`. */
+.cta-key:disabled,
+.cta-key[aria-disabled="true"] {
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
+  filter: saturate(0.6);
+}
+.cta-key:disabled::before,
+.cta-key[aria-disabled="true"]::before {
+  opacity: 0.35;
+}
+.light .cta-key {
+  --key-face:   #098A8A;
+  --key-edge:   #007B7B;
+  --key-base:   #007070;   /* accent-teal in light */
+  --key-skirt:  #004E4E;
+  --key-ambient: rgb(0 0 0 / 0.3);
+}
+/* The support page's blue keys — Business and Telegram share one plastic,
+   Telegram's blue. Declared after the light teal key so the `.light` pair
+   (higher specificity) wins over it. */
+.cta-key-blue,
+.cta-key-telegram {
+  --key-face:   #45B7F0;
+  --key-edge:   #36B0EF;
+  --key-base:   #2AABEE;   /* telegram / accent-blue */
+  --key-skirt:  #16739F;
+  --key-ambient: rgb(42 171 238 / 0.5);
+}
+.light .cta-key-blue,
+.light .cta-key-telegram {
+  --key-face:   #127AB3;
+  --key-edge:   #0B72AA;
+  --key-base:   #0369A1;   /* telegram / accent-blue in light */
+  --key-skirt:  #024B73;
+  --key-ambient: rgb(0 0 0 / 0.3);
+}
+
+/* The keycap's counterpart: filled, but flat and unpressable. Every surface
+   that has a key should have at most one, and its neighbours use this — the
+   contrast between the two is what makes the key read as raised. */
+.cta-flat {
+  background-color: color-mix(in oklab, var(--color-bg-secondary) 70%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-overlay) 10%, transparent);
+  color: var(--color-text-muted);
+  transition: background-color 160ms ease-out, border-color 160ms ease-out, color 160ms ease-out;
+}
+.cta-flat:hover {
+  background-color: var(--color-bg-elevated);
+  border-color: color-mix(in oklab, var(--color-overlay) 25%, transparent);
+  color: var(--color-text-primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-cta-in,
   .slide-in-from-bottom {
     animation: none;
+  }
+  /* The press itself stays — it is user-triggered and instant. Only the
+     easing between states goes. */
+  .cta-key {
+    transition: none;
   }
 }
 
@@ -438,6 +583,88 @@ body {
   animation: terminal-blink 1.06s steps(1, end) infinite;
 }
 
+/* Support page, Telegram card: chat bubbles pop in from below, and the bot's
+   typing dots bob in turn (telegram-chat.tsx staggers them). */
+.chat-bubble {
+  max-width: 85%;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  animation: chat-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 300ms ease-out, border-color 300ms ease-out;
+}
+.chat-bubble.chat-typing {
+  padding-block: 0.75rem;
+}
+@keyframes chat-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+}
+.chat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--color-text-tertiary);
+  animation: chat-dot 900ms ease-in-out infinite;
+}
+@keyframes chat-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* Mobile menu — the panel grows out of the navbar pill instead of appearing
+   as a second, differently-shaped box. It sits at the pill's exact position,
+   and its closed clip is the pill itself: bar height, radius = height / 2.
+   The radius never changes, so the top corners stay put while the bottom
+   edge slides down. Only clip-path, opacity and transform animate, and the
+   panel has no backdrop-filter, so nothing re-blurs the page every frame. */
+.mnav {
+  --mnav-bar: 3rem;
+  visibility: hidden;
+  transition: visibility 0s linear 420ms;
+}
+@media (min-width: 40rem) {
+  .mnav { --mnav-bar: 3.5rem; }
+}
+.mnav[data-open] {
+  visibility: visible;
+  transition-delay: 0s;
+}
+.mnav-backdrop {
+  opacity: 0;
+  transition: opacity 320ms ease-in;
+}
+.mnav[data-open] .mnav-backdrop {
+  opacity: 1;
+  transition: opacity 420ms ease-out;
+}
+.mnav-panel {
+  clip-path: inset(0 0 calc(100% - var(--mnav-bar)) 0 round calc(var(--mnav-bar) / 2));
+  opacity: 0;
+  /* Close: shrink back into the pill, then fade to reveal the real bar. */
+  transition:
+    clip-path 360ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 120ms ease 300ms;
+}
+.mnav[data-open] .mnav-panel {
+  clip-path: inset(0 0 0 0 round calc(var(--mnav-bar) / 2));
+  opacity: 1;
+  transition:
+    clip-path 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 120ms ease;
+}
+.mnav-body {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.mnav[data-open] .mnav-body {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 360ms ease-out 120ms,
+    transform 460ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
+}
+
 /* Reduced motion — accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -448,6 +675,7 @@ body {
     transition-duration: 0.01ms !important;
   }
   .cmp-row .cmp-note { transition-delay: 0ms !important; }
+  .mnav, .mnav *, .mnav-panel { transition-delay: 0ms !important; }
   .terminal-cursor { animation: none; }
 }
 
@@ -487,8 +715,11 @@ body {
   .btn-primary {
     @apply bg-accent-gold text-bg-primary hover:bg-accent-gold/90 shadow-lg shadow-accent-gold/20;
   }
+  /* The solid-teal variant is the keycap (`.cta-key`, composed in button.tsx
+     since @apply cannot reach a plain CSS class). No `bg-*`/`shadow-*` here:
+     both would paint over the cap gradient and the skirt. */
   .btn-secondary {
-    @apply bg-accent-teal text-text-primary hover:bg-accent-teal-light shadow-lg shadow-accent-teal/20;
+    @apply text-white;
   }
   .btn-outline {
     @apply border-2 border-text-primary/20 text-text-primary hover:border-accent-gold hover:text-accent-gold bg-transparent;
@@ -590,4 +821,21 @@ body {
   }
   .cmp-row[data-open="true"] .cmp-note { @apply opacity-100 translate-y-0; }
   .cmp-note-label { @apply mb-1 text-[11px] uppercase tracking-wider text-text-tertiary; }
+}
+
+/* Downloads setup card — the bar that times each step of the walk-through.
+   Its animationend advances the step, so it is the clock, not decoration; the
+   component never starts autoplay under reduced motion. */
+@keyframes setup-step-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.setup-step-bar {
+  transform-origin: left;
+  animation-name: setup-step-fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+[dir="rtl"] .setup-step-bar {
+  transform-origin: right;
 }

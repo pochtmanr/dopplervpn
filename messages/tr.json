@@ -1001,7 +1001,18 @@
       "successTitle": "Talep Gönderildi",
       "successMessage": "{ticketNumber} numaralı destek talebi oluşturuldu. {email} adresine 24 saat içinde yanıt vereceğiz.",
       "errorGeneric": "Talep gönderilemedi. Lütfen tekrar deneyin.",
-      "close": "Kapat"
+      "close": "Kapat",
+      "stepOf": "Adım {current}/{total}",
+      "topicPrompt": "Hangi konuda yardıma ihtiyacınız var?",
+      "back": "Geri",
+      "subjectHint": "En az {min} karakter",
+      "descriptionHint": "En az {min} karakter",
+      "emailInvalid": "Geçerli bir e-posta adresi girin",
+      "receiptTicket": "Talep",
+      "receiptReplyTo": "Yanıt adresi",
+      "receiptStatus": "Alındı — destek kuyruğunda",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı"
     },
     "restore": {
       "title": "Hesabınızı Geri Yükleyin",
@@ -1025,13 +1036,60 @@
       "title": "İş Başvuruları",
       "subtitle": "Ortaklıklar, basın, kurumsal"
     },
+    "businessForm": {
+      "title": "Kurumsal Talep",
+      "subtitle": "İş ortaklıkları, basın ve ekip planları — 1–2 iş günü içinde yanıt veriyoruz",
+      "typePrompt": "Talebiniz ne hakkında?",
+      "typeLabel": "Talep türü",
+      "types": {
+        "partnership": "İş ortaklığı",
+        "enterprise": "Kurumsal / Ekip",
+        "press": "Basın / Medya",
+        "reseller": "Bayi / Satış ortaklığı",
+        "other": "Başka bir konu"
+      },
+      "companyLabel": "Şirket adı",
+      "companyPlaceholder": "Örnek A.Ş.",
+      "industryLabel": "Sektör (isteğe bağlı)",
+      "industryPlaceholder": "Sektör seçin",
+      "industries": {
+        "tech_saas": "Teknoloji / SaaS",
+        "media_press": "Medya ve basın",
+        "finance": "Finans",
+        "education": "Eğitim",
+        "healthcare": "Sağlık",
+        "travel": "Seyahat ve konaklama",
+        "retail_ecommerce": "Perakende ve e-ticaret",
+        "government_ngo": "Kamu / STK",
+        "telecom_isp": "Telekom / İSS",
+        "other": "Diğer"
+      },
+      "nameLabel": "Adınız (isteğe bağlı)",
+      "namePlaceholder": "Ayşe Yılmaz",
+      "websiteLabel": "Web sitesi (isteğe bağlı)",
+      "emailLabel": "İş e-postası",
+      "emailPlaceholder": "siz@sirket.com",
+      "messageLabel": "Mesaj",
+      "messagePlaceholder": "Bize şirketinizden ve aklınızdaki fikirden bahsedin…",
+      "submit": "Talebi gönder",
+      "submitting": "Gönderiliyor…",
+      "successTitle": "Talep gönderildi",
+      "successMessage": "Referans {ticketNumber}. Ekibimiz 1–2 iş günü içinde {email} adresine yanıt verecek.",
+      "errorGeneric": "Talebiniz gönderilemedi. Lütfen tekrar deneyin.",
+      "receiptReference": "Referans",
+      "receiptCompany": "Şirket",
+      "receiptStatus": "Alındı — kurumsal ekibimizde"
+    },
     "actions": {
       "submitRequest": "Talep Gönder",
       "submitRequestDesc": "Ekibimizden yardım alın",
       "restoreAccount": "Hesabı Geri Yükle",
       "restoreAccountDesc": "Hesap Kimliğinizi kurtarın",
       "businessContact": "İş Başvuruları",
-      "businessContactDesc": "Ortaklıklar, basın, kurumsal"
+      "businessContactDesc": "Ortaklıklar, basın, kurumsal",
+      "submitRequestCta": "Aç",
+      "restoreAccountCta": "Geri yükle",
+      "businessContactCta": "İletişime geçin"
     }
   },
   "guideProtocols": {
@@ -4099,13 +4157,11 @@
     },
     "hero": {
       "title": "IP adresim nedir?",
-      "subtitle": "Ziyaret ettiğiniz her web sitesinin gördüğü hâliyle genel IP adresiniz — ona bağlı coğrafya ve servis sağlayıcıyla birlikte. Değişikliğin gerçekleştiğini doğrulamak için bir VPN'e bağlandıktan sonra sayfayı yenileyin."
+      "subtitle": "Ziyaret ettiğiniz her web sitesinin gördüğü hâliyle genel IP adresiniz — ona bağlı coğrafya ve servis sağlayıcıyla birlikte. Değişikliğin gerçekleştiğini doğrulamak için bir VPN'e bağlandıktan sonra sayfayı yenileyin.",
+      "breadcrumbTools": "Araçlar"
     },
     "widget": {
       "yourIp": "IP adresiniz",
-      "country": "Ülke",
-      "region": "Bölge",
-      "city": "Şehir",
       "isp": "İnternet sağlayıcısı",
       "asn": "ASN",
       "unknown": "Bilinmiyor",
@@ -4114,7 +4170,19 @@
       "copied": "Kopyalandı",
       "copy": "Kopyala",
       "loading": "IP'niz tespit ediliyor…",
-      "error": "IP'niz tespit edilemedi. Sayfayı yenileyin veya birazdan tekrar deneyin."
+      "error": "IP'niz tespit edilemedi. Sayfayı yenileyin veya birazdan tekrar deneyin.",
+      "details": "Bağlantı ayrıntıları",
+      "location": "Konum",
+      "timezone": "Saat dilimi",
+      "coordinates": "Yaklaşık koordinatlar",
+      "ipv4": "IPv4 adresi",
+      "ipv6": "IPv6 adresi",
+      "notAvailable": "Mevcut değil",
+      "ipv6Hint": "IPv6 olmaması normaldir — birçok ağ ve VPN yalnızca IPv4 kullanır.",
+      "changed": "IP'niz bu cihazdaki son kontrolünüzden bu yana değişti (önceki: {previous}).",
+      "unchanged": "Son kontrolünüzdekiyle aynı IP. Bir VPN'e yeni bağlandıysanız, VPN bu tarayıcının trafiğini henüz yönlendirmiyor.",
+      "firstCheck": "İpucu: Bu IP'yi not edin, VPN'inize bağlanın ve sayfayı yenileyin — adres değişmelidir.",
+      "retry": "Tekrar dene"
     },
     "explainer": {
       "whatTitle": "IP adresi nedir?",
@@ -4133,6 +4201,7 @@
         "item4": "Gerçek şehrinizden veya bölgenizden hiç söz edilmemesi."
       }
     },
+    "faqTitle": "Sıkça sorulan sorular",
     "faq": {
       "q1": {
         "question": "IP adresim ne için kullanılır?",
@@ -4177,6 +4246,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Doppler VPN bu tarayıcıyı koruyorsa bu test şunları göstermelidir:",
+      "items": {
+        "item1": "WebRTC listesinde sızıntı olarak işaretlenmiş hiçbir adres yok.",
+        "item2": "Listedeki her genel adres, web sitelerinin gördüğü IP ile eşleşiyor.",
+        "item3": "Ev internet sağlayıcınızın IP'si sayfanın hiçbir yerinde yok — tanıyabilmek için testi bir kez VPN olmadan çalıştırın.",
+        "item4": "Sunucu değiştirip testi yeniden çalıştırdıktan sonra da aynı sonuç."
+      }
+    },
     "metadata": {
       "title": "WebRTC Sızıntı Testi — VPN'inizin gerçek IP'nizi gizleyip gizlemediğini kontrol edin",
       "description": "Ücretsiz WebRTC sızıntı testi. VPN bağlıyken bile tarayıcınızın STUN üzerinden gerçek IP'nizi sızdırıp sızdırmadığını tespit eder. 2 saniyede çalışır. Hiçbir veri cihazınızdan çıkmaz."
@@ -4192,6 +4270,11 @@
       "leakedBody": "WebRTC, genel IP'den farklı bir veya daha fazla IP tespit etti. VPN kullanıyorsanız bu, WebRTC kullanan bir web sitesinin gerçek adresinizi hâlâ görebileceği anlamına gelir.",
       "safeTitle": "WebRTC sızıntısı tespit edilmedi",
       "safeBody": "WebRTC, genel IP ile aynı IP'yi bildirdi ya da hiç IP bildirmedi. Şu anda gerçek adresinizi WebRTC üzerinden sızdırmıyorsunuz.",
+      "noWebrtcTitle": "WebRTC kapalı",
+      "localNote": "Yerel ve mDNS (.local) adresleri yalnızca kendi ağınızın içinde çalışır, bu yüzden kim olduğunuzu açığa çıkarmaz.",
+      "tagLeak": "sızıntı",
+      "tagPublic": "genel",
+      "tagLocal": "yerel",
       "noWebrtc": "Tarayıcınız WebRTC'yi devre dışı bırakmış veya hiçbir adres çözümlenmedi. Bu güvenli bir durumdur.",
       "unknown": "Bilinmiyor",
       "refresh": "Testi yeniden çalıştır",
@@ -4258,7 +4341,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "browserleaks.com/dns'i aç",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "dnsleaktest.com'da \"Extended test\"e tıklayın. Sonuç yalnızca VPN sağlayıcınızın DNS sunucularını listelemelidir — internet sağlayıcınızı değil. Sonuçlarda Comcast, Verizon, Vodafone veya başka bir tüketici ISS'si görüyorsanız DNS'iniz sızdırıyor demektir."
+      "steps": {
+        "step1": {
+          "title": "VPN'inizi bağlayın",
+          "body": "VPN'i açın ve bağlandı yazana kadar bekleyin. Bu sayfadaki bağlantı paneli artık evdeki internet sağlayıcınızı değil, VPN'in ağını göstermelidir — göstermiyorsa \"Yenile\"ye tıklayın."
+        },
+        "step2": {
+          "title": "Genişletilmiş testi çalıştırın",
+          "body": "dnsleaktest.com'u açın ve \"Extended test\"e tıklayın. Test, tek kullanımlık bir dizi alan adını sorgular ve bunlara hangi DNS sunucularının yanıt verdiğini kaydeder."
+        },
+        "step3": {
+          "title": "Kimin yanıt verdiğine bakın",
+          "body": "Sonuçtaki her sunucu VPN sağlayıcınıza ait olmalıdır. Comcast, Verizon, Vodafone veya başka bir tüketici ISS'si görüyorsanız DNS'iniz sızdırıyor demektir. Sızıntının neye benzediğini görmek için testi VPN kapalıyken tekrarlayın."
+        }
+      },
+      "panel": {
+        "title": "Şu anki bağlantınız",
+        "hint": "Bu, DNS çözümleyiciniz değil, genel IP adresinizdir — çözümleyiciyi yalnızca harici test görebilir. VPN açıkken ikisi de evdeki internet sağlayıcınıza ait olmamalıdır.",
+        "error": "Bağlantınız sorgulanamadı. Harici test yine de çalışır."
+      }
     },
     "explainer": {
       "whatTitle": "DNS sızıntısı nedir?",

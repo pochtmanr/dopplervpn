@@ -5,19 +5,22 @@ import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "./theme-toggle";
 
 export async function Navbar() {
+  // Shared with MobileNav so the open menu's top row matches the bar exactly.
+  const logo = (
+    <Link href="/" dir="ltr" className="flex items-center gap-2.5 shrink-0">
+      <DopplerLogo />
+      <span className="text-base sm:text-lg font-semibold text-text-primary tracking-tight">
+        Doppler VPN
+      </span>
+    </Link>
+  );
+
   return (
     <header className="fixed top-[max(1rem,env(safe-area-inset-top))] inset-x-0 z-50 px-4 sm:px-6 lg:px-8">
       <DesktopNav
-        logo={
-          <Link href="/" dir="ltr" className="flex items-center gap-2.5 shrink-0">
-            <DopplerLogo />
-            <span className="text-base sm:text-lg font-semibold text-text-primary tracking-tight">
-              Doppler VPN
-            </span>
-          </Link>
-        }
+        logo={logo}
         controls={<ThemeToggle />}
-        mobile={<MobileNav />}
+        mobile={<MobileNav logo={logo} />}
       />
     </header>
   );

@@ -80,7 +80,7 @@ function BuyButton({ href, label }: { href: "/account"; label: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center bg-accent-teal text-white hover:bg-accent-teal/90 rounded-lg transition-colors text-sm font-medium pulse-glow-once"
+      className="cta-key inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center text-white rounded-lg text-sm font-medium"
     >
       {label}
       <ArrowIcon />

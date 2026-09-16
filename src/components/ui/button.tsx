@@ -20,7 +20,7 @@ interface ButtonProps extends Omit<ComponentProps<"button">, "className"> {
 // wins over these, since `utilities` is layered after `components`.
 const variantStyles: Record<ButtonVariant, string> = {
   primary: "btn-primary",
-  secondary: "btn-secondary",
+  secondary: "cta-key btn-secondary",
   outline: "btn-outline",
   ghost: "btn-ghost",
 };

@@ -260,7 +260,7 @@ export function AuthPanel({
                   disabled={identifyLoading}
                   aria-busy={identifyLoading}
                   aria-describedby={identifyError ? errorId : undefined}
-                  className="w-full rounded-full bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                  className="cta-key w-full rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2"
                 >
                   {identifyLoading ? (
                     <>
@@ -296,7 +296,7 @@ export function AuthPanel({
                   disabled={identifyLoading}
                   aria-busy={identifyLoading}
                   aria-describedby={identifyError ? errorId : undefined}
-                  className="w-full rounded-full bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm transition-colors flex items-center justify-center gap-2"
+                  className="cta-key w-full rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2"
                 >
                   {identifyLoading ? (
                     <>
@@ -400,7 +400,7 @@ export function ExistingAccountBanner() {
 
         <Link
           href={`/${locale}/account`}
-          className="mt-4 w-full rounded-full bg-accent-teal hover:bg-accent-teal-light text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center"
+          className="cta-key mt-4 w-full rounded-full text-white font-semibold py-3 text-sm flex items-center justify-center"
         >
           {t('existingAccountCta')}
         </Link>

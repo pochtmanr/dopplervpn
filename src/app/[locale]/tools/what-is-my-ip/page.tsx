@@ -13,6 +13,27 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { IpCheckerWidget } from "@/components/tools/ip-checker-widget";
 import { seoTitle } from "@/lib/seo-title";
+import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
+import { CTA } from "@/components/sections/cta";
+import { Reveal } from "@/components/ui/reveal";
+import {
+  CARD,
+  CARD_HAIRLINE,
+  CARD_SURFACE,
+  CARD_TITLE,
+  HERO_SUBTITLE,
+  ROW_CARD,
+  ROW_TEXT,
+  ROW_TILE,
+  ROW_TITLE,
+} from "@/components/ui/card-recipes";
+import {
+  AddressIcon,
+  DnsIcon,
+  EyeIcon,
+  ShieldIcon,
+  WebrtcIcon,
+} from "@/components/tools/tool-icons";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -22,6 +43,16 @@ const baseUrl = "https://www.dopplervpn.org";
 const SLUG = "tools/what-is-my-ip";
 const FAQ_KEYS = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"] as const;
 const CHECKLIST_KEYS = ["item1", "item2", "item3", "item4"] as const;
+const EXPLAINERS = [
+  { key: "what", Icon: AddressIcon },
+  { key: "expose", Icon: EyeIcon },
+  { key: "vpn", Icon: ShieldIcon },
+] as const;
+const RELATED = [
+  { href: "/tools/webrtc-leak-test", key: "webrtc", Icon: WebrtcIcon },
+  { href: "/tools/dns-leak-test", key: "dns", Icon: DnsIcon },
+  { href: "/vless-vpn", key: "vless", Icon: ShieldIcon },
+] as const;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -66,6 +97,7 @@ export default async function Page({ params }: PageProps) {
 
   const t = await getTranslations("toolsIpChecker");
   const mt = await getTranslations({ locale, namespace: "toolsIpChecker.metadata" });
+  const hubT = await getTranslations("toolsHub");
   const pageUrl = `${baseUrl}/${locale}/${SLUG}`;
 
   const faqItems = FAQ_KEYS.map((key) => ({
@@ -79,9 +111,21 @@ export default async function Page({ params }: PageProps) {
     name: t("hero.title"),
     description: mt("description"),
     url: pageUrl,
+    inLanguage: locale,
     applicationCategory: "UtilitiesApplication",
     browserRequirements: "Requires JavaScript",
     operatingSystem: "Any",
+    isAccessibleForFree: true,
+    featureList: [
+      t("widget.yourIp"),
+      t("widget.ipv4"),
+      t("widget.ipv6"),
+      t("widget.location"),
+      t("widget.isp"),
+      t("widget.asn"),
+      t("widget.timezone"),
+    ],
+    provider: { "@type": "Organization", name: "Doppler VPN", url: baseUrl },
     offers: {
       "@type": "Offer",
       price: "0",
@@ -94,7 +138,7 @@ export default async function Page({ params }: PageProps) {
       <BreadcrumbSchema
         items={[
           { name: "Home", url: `${baseUrl}/${locale}` },
-          { name: "Tools", url: `${baseUrl}/${locale}/tools` },
+          { name: hubT("title"), url: `${baseUrl}/${locale}/tools` },
           { name: t("hero.title"), url: pageUrl },
         ]}
       />
@@ -104,6 +148,7 @@ export default async function Page({ params }: PageProps) {
         description={mt("description")}
         url={pageUrl}
         datePublished="2026-05-27"
+        dateModified="2026-09-16"
       />
       <FAQSchema items={faqItems} />
       <script
@@ -113,96 +158,110 @@ export default async function Page({ params }: PageProps) {
         }}
       />
       <Navbar />
-      <main className="overflow-x-hidden">
-        {/* Hero */}
-        <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute bottom-0 -end-20 w-[24rem] h-[24rem] bg-accent-gold/10 rounded-full blur-3xl" />
-          </div>
-          <div className="relative z-10 mx-auto max-w-4xl text-center">
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-text-primary mb-4">
+      <main className="overflow-x-clip">
+        {/* Hero — static, no backdrop, no entrance (DESIGN.md §4, §5) */}
+        <section className="pt-28 sm:pt-32 pb-8 md:pb-12 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-site text-center">
+            <nav aria-label="Breadcrumb" className="mb-5">
+              <ol className="inline-flex items-center gap-2 text-xs text-text-tertiary">
+                <li>
+                  <Link href="/tools" className="hover:text-accent-teal transition-colors">
+                    {t("hero.breadcrumbTools")}
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-text-muted">
+                  {t("hero.title")}
+                </li>
+              </ol>
+            </nav>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-[clamp(2.5rem,3.6vw,3.75rem)] font-semibold text-text-primary leading-[1.12]">
               {t("hero.title")}
             </h1>
-            <p className="text-text-muted text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-              {t("hero.subtitle")}
-            </p>
+            <p className={HERO_SUBTITLE}>{t("hero.subtitle")}</p>
           </div>
         </section>
 
         {/* Widget */}
-        <section className="px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="mx-auto max-w-3xl">
+        <section className="px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+          <div className="mx-auto max-w-site">
             <IpCheckerWidget />
           </div>
         </section>
 
         {/* Explainer */}
-        <section className="px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="mx-auto max-w-3xl space-y-10 text-text-secondary leading-relaxed">
-            <div>
-              <h2 className="font-display text-2xl md:text-3xl text-text-primary mb-3">
-                {t("explainer.whatTitle")}
-              </h2>
-              <p>{t("explainer.whatBody")}</p>
-            </div>
-            <div>
-              <h2 className="font-display text-2xl md:text-3xl text-text-primary mb-3">
-                {t("explainer.exposeTitle")}
-              </h2>
-              <p>{t("explainer.exposeBody")}</p>
-            </div>
-            <div>
-              <h2 className="font-display text-2xl md:text-3xl text-text-primary mb-3">
-                {t("explainer.vpnTitle")}
-              </h2>
-              <p>{t("explainer.vpnBody")}</p>
-            </div>
+        <section className="px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+          <div className="mx-auto max-w-site grid md:grid-cols-3 gap-3 md:gap-4">
+            {EXPLAINERS.map(({ key, Icon }, i) => (
+              <Reveal key={key} delay={i * 50} className="h-full">
+                <article className={`${CARD} p-6`}>
+                  <div className={CARD_HAIRLINE} />
+                  <div className={`${ROW_TILE} mb-4`}>
+                    <Icon />
+                  </div>
+                  <h2 className={CARD_TITLE}>{t(`explainer.${key}Title`)}</h2>
+                  <p className="mt-3 text-sm md:text-base text-text-muted leading-relaxed">
+                    {t(`explainer.${key}Body`)}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </section>
 
         {/* Checklist */}
-        <section className="px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="mx-auto max-w-3xl rounded-2xl bg-accent-teal/5 border border-accent-teal/20 p-6 sm:p-8">
-            <h2 className="font-display text-xl md:text-2xl text-text-primary mb-4">
-              {t("checklist.title")}
-            </h2>
-            <ul className="space-y-3 text-text-secondary">
-              {CHECKLIST_KEYS.map((key) => (
-                <li key={key} className="flex gap-3">
-                  <svg
-                    className="w-5 h-5 text-accent-teal shrink-0 mt-0.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
-                  <span>{t(`checklist.items.${key}`)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <section className="px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+          <Reveal className="mx-auto max-w-site">
+            <div className={`${CARD_SURFACE} p-6 sm:p-8 lg:p-10`}>
+              <div className={CARD_HAIRLINE} />
+              <h2 className={CARD_TITLE}>{t("checklist.title")}</h2>
+              <ul className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4">
+                {CHECKLIST_KEYS.map((key, i) => (
+                  <li key={key} className="flex gap-3 text-text-muted leading-relaxed">
+                    <span
+                      aria-hidden="true"
+                      className="mt-0.5 font-mono text-xs text-text-tertiary tabular-nums"
+                    >
+                      0{i + 1}
+                    </span>
+                    <svg
+                      className="w-5 h-5 text-accent-teal shrink-0 mt-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                    <span>{t(`checklist.items.${key}`)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </section>
 
-        {/* FAQ */}
-        <section className="px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-8 text-center">
-              FAQ
+        {/* FAQ — native <details>, so every answer is in the server HTML */}
+        <section className="px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+          <div className="mx-auto max-w-site lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12">
+            <h2 className="section-title text-center lg:text-start mb-8 md:mb-12 lg:mb-0 lg:sticky lg:top-28 lg:self-start">
+              {t("faqTitle")}
             </h2>
-            <div className="space-y-4">
+            <div className={`${CARD_SURFACE} divide-y divide-overlay/5`}>
+              <div className={CARD_HAIRLINE} />
               {FAQ_KEYS.map((key) => (
-                <details
-                  key={key}
-                  className="rounded-xl bg-bg-secondary/40 border border-overlay/5 p-5 group"
-                >
-                  <summary className="font-medium text-text-primary cursor-pointer list-none flex justify-between items-start gap-4">
-                    <span>{t(`faq.${key}.question`)}</span>
-                    <span className="text-accent-teal shrink-0 transition-transform group-open:rotate-45">+</span>
+                <details key={key} className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 sm:px-6 py-4 sm:py-5 text-start font-medium text-text-primary hover:bg-bg-secondary/40 transition-colors [&::-webkit-details-marker]:hidden">
+                    <h3 className="text-base sm:text-lg leading-snug">{t(`faq.${key}.question`)}</h3>
+                    <span
+                      aria-hidden="true"
+                      className="flex w-7 h-7 shrink-0 items-center justify-center rounded-lg border border-accent-teal/20 font-mono text-accent-teal transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
                   </summary>
-                  <p className="text-text-secondary mt-3 leading-relaxed">
+                  <p className="px-5 sm:px-6 pb-5 -mt-1 text-text-muted leading-relaxed">
                     {t(`faq.${key}.answer`)}
                   </p>
                 </details>
@@ -212,31 +271,34 @@ export default async function Page({ params }: PageProps) {
         </section>
 
         {/* Related */}
-        <section className="px-4 sm:px-6 lg:px-8 pb-24">
-          <div className="mx-auto max-w-5xl grid sm:grid-cols-3 gap-4">
-            <Link
-              href="/tools/webrtc-leak-test"
-              className="rounded-2xl bg-bg-secondary/40 border border-overlay/5 p-6 hover:border-accent-teal/30 transition-colors"
-            >
-              <div className="font-medium text-text-primary mb-2">{t("related.webrtcTitle")}</div>
-              <div className="text-sm text-text-muted">{t("related.webrtcDesc")}</div>
-            </Link>
-            <Link
-              href="/tools/dns-leak-test"
-              className="rounded-2xl bg-bg-secondary/40 border border-overlay/5 p-6 hover:border-accent-teal/30 transition-colors"
-            >
-              <div className="font-medium text-text-primary mb-2">{t("related.dnsTitle")}</div>
-              <div className="text-sm text-text-muted">{t("related.dnsDesc")}</div>
-            </Link>
-            <Link
-              href="/vless-vpn"
-              className="rounded-2xl bg-bg-secondary/40 border border-overlay/5 p-6 hover:border-accent-teal/30 transition-colors"
-            >
-              <div className="font-medium text-text-primary mb-2">{t("related.vlessTitle")}</div>
-              <div className="text-sm text-text-muted">{t("related.vlessDesc")}</div>
-            </Link>
+        <section className="px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
+          <div className="mx-auto max-w-site grid md:grid-cols-3 gap-3 md:gap-4">
+            {RELATED.map(({ href, key, Icon }) => (
+              <Link key={key} href={href} className={`${ROW_CARD} gap-4 px-4 md:px-5`}>
+                <span className={ROW_TILE}>
+                  <Icon />
+                </span>
+                <span className="min-w-0 flex-1 py-3 text-start">
+                  <span className={`block ${ROW_TITLE}`}>{t(`related.${key}Title`)}</span>
+                  <span className={`block ${ROW_TEXT}`}>{t(`related.${key}Desc`)}</span>
+                </span>
+                <svg
+                  className="w-4 h-4 shrink-0 text-text-tertiary transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </Link>
+            ))}
           </div>
         </section>
+
+        <CTA />
+        <MobileStickyCta />
       </main>
       <Footer />
     </>

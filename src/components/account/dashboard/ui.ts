@@ -25,7 +25,7 @@ const FOCUS =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary';
 
 /** Solid teal — the one action per card. */
-export const BTN_PRIMARY = `inline-flex items-center justify-center gap-2 rounded-xl bg-accent-teal hover:bg-accent-teal-light disabled:opacity-50 disabled:cursor-not-allowed px-5 py-3 text-sm font-semibold text-white transition-colors ${FOCUS}`;
+export const BTN_PRIMARY = `cta-key inline-flex items-center justify-center gap-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed px-5 py-3 text-sm font-semibold text-white ${FOCUS}`;
 
 /** Bordered neutral — full-strength text, so it reads as a button, not a hint. */
 export const BTN_SECONDARY = `inline-flex items-center justify-center gap-2 rounded-xl border border-overlay/20 bg-bg-primary/40 hover:border-accent-teal/40 hover:bg-accent-teal/10 disabled:opacity-50 disabled:cursor-not-allowed px-5 py-3 text-sm font-semibold text-text-primary transition-colors ${FOCUS}`;

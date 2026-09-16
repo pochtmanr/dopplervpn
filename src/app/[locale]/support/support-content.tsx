@@ -5,6 +5,7 @@ import { useLocale } from 'next-intl';
 import { ActionButtons } from './action-buttons';
 import { TicketModal } from './ticket-modal';
 import { RestoreModal } from './restore-modal';
+import { BusinessModal } from './business-modal';
 
 /* ── Account type (for pre-filling ticket form) ───────────────────── */
 
@@ -27,11 +28,14 @@ export function SupportContent() {
   const [account, setAccount] = useState<AccountData | null>(null);
   const [ticketModalOpen, setTicketModalOpen] = useState(false);
   const [restoreModalOpen, setRestoreModalOpen] = useState(false);
+  const [businessModalOpen, setBusinessModalOpen] = useState(false);
 
-  /* Auto-open restore modal if hash is #restore */
+  /* Auto-open a modal from a shareable hash: #restore, #business */
   useEffect(() => {
     if (window.location.hash === '#restore') {
       setRestoreModalOpen(true);
+    } else if (window.location.hash === '#business') {
+      setBusinessModalOpen(true);
     }
   }, []);
 
@@ -47,10 +51,11 @@ export function SupportContent() {
   }, []);
 
   return (
-    <section className="mb-14">
+    <section>
       <ActionButtons
         onOpenTicket={() => setTicketModalOpen(true)}
         onOpenRestore={() => setRestoreModalOpen(true)}
+        onOpenBusiness={() => setBusinessModalOpen(true)}
       />
 
       {ticketModalOpen && (
@@ -58,6 +63,10 @@ export function SupportContent() {
           account={account}
           onClose={() => setTicketModalOpen(false)}
         />
+      )}
+
+      {businessModalOpen && (
+        <BusinessModal onClose={() => setBusinessModalOpen(false)} />
       )}
 
       {restoreModalOpen && (

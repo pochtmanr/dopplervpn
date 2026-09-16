@@ -1000,7 +1000,18 @@
       "successTitle": "Zahtevek poslan",
       "successMessage": "Zahtevek {ticketNumber} je ustvarjen. Odgovorili bomo na {email} v 24 urah.",
       "errorGeneric": "Pošiljanje zahtevka ni uspelo. Poskusite znova.",
-      "close": "Zapri"
+      "close": "Zapri",
+      "stepOf": "Korak {current} od {total}",
+      "topicPrompt": "Pri čem potrebujete pomoč?",
+      "back": "Nazaj",
+      "subjectHint": "Najmanjše število znakov: {min}",
+      "descriptionHint": "Najmanjše število znakov: {min}",
+      "emailInvalid": "Vnesite veljaven e-poštni naslov",
+      "receiptTicket": "Zahtevek",
+      "receiptReplyTo": "Odgovor na",
+      "receiptStatus": "Prejeto — v čakalni vrsti podpore",
+      "copy": "Kopiraj",
+      "copied": "Kopirano"
     },
     "restore": {
       "title": "Obnovite svoj račun",
@@ -1024,13 +1035,60 @@
       "title": "Poslovna povpraševanja",
       "subtitle": "Partnerstva, mediji, podjetja"
     },
+    "businessForm": {
+      "title": "Poslovno povpraševanje",
+      "subtitle": "Partnerstva, mediji in paketi za ekipe — odgovorimo v 1–2 delovnih dneh",
+      "typePrompt": "Na kaj se nanaša vaše povpraševanje?",
+      "typeLabel": "Vrsta povpraševanja",
+      "types": {
+        "partnership": "Partnerstvo",
+        "enterprise": "Podjetje / Ekipa",
+        "press": "Tisk / Mediji",
+        "reseller": "Preprodajalec / Partnerski program",
+        "other": "Nekaj drugega"
+      },
+      "companyLabel": "Ime podjetja",
+      "companyPlaceholder": "Primer d.o.o.",
+      "industryLabel": "Panoga (neobvezno)",
+      "industryPlaceholder": "Izberite panogo",
+      "industries": {
+        "tech_saas": "Tehnologija / SaaS",
+        "media_press": "Mediji in tisk",
+        "finance": "Finance",
+        "education": "Izobraževanje",
+        "healthcare": "Zdravstvo",
+        "travel": "Turizem in gostinstvo",
+        "retail_ecommerce": "Trgovina in e-trgovina",
+        "government_ngo": "Javna uprava / NVO",
+        "telecom_isp": "Telekomunikacije / ISP",
+        "other": "Drugo"
+      },
+      "nameLabel": "Vaše ime (neobvezno)",
+      "namePlaceholder": "Maja Novak",
+      "websiteLabel": "Spletna stran (neobvezno)",
+      "emailLabel": "Službeni e-naslov",
+      "emailPlaceholder": "vi@podjetje.si",
+      "messageLabel": "Sporočilo",
+      "messagePlaceholder": "Povejte nam o svojem podjetju in o tem, kar imate v mislih…",
+      "submit": "Pošlji povpraševanje",
+      "submitting": "Pošiljanje…",
+      "successTitle": "Povpraševanje poslano",
+      "successMessage": "Številka {ticketNumber}. Naša ekipa bo odgovorila na {email} v 1–2 delovnih dneh.",
+      "errorGeneric": "Povpraševanja ni bilo mogoče poslati. Poskusite znova.",
+      "receiptReference": "Številka",
+      "receiptCompany": "Podjetje",
+      "receiptStatus": "Prejeto — pri naši poslovni ekipi"
+    },
     "actions": {
       "submitRequest": "Pošljite zahtevek",
       "submitRequestDesc": "Pridobite pomoč naše ekipe",
       "restoreAccount": "Obnovite račun",
       "restoreAccountDesc": "Obnovite svoj ID računa",
       "businessContact": "Poslovna povpraševanja",
-      "businessContactDesc": "Partnerstva, mediji, podjetja"
+      "businessContactDesc": "Partnerstva, mediji, podjetja",
+      "submitRequestCta": "Odpri",
+      "restoreAccountCta": "Obnovi",
+      "businessContactCta": "Pišite nam"
     }
   },
   "guideProtocols": {
@@ -4135,13 +4193,11 @@
     },
     "hero": {
       "title": "Kakšen je moj IP?",
-      "subtitle": "Vaš javni naslov IP, kot ga vidi vsaka spletna stran, ki jo obiščete — skupaj z geografijo in ponudnikom, ki sta z njim povezana. Po povezavi z VPN osvežite stran in preverite, da je sprememba uveljavljena."
+      "subtitle": "Vaš javni naslov IP, kot ga vidi vsaka spletna stran, ki jo obiščete — skupaj z geografijo in ponudnikom, ki sta z njim povezana. Po povezavi z VPN osvežite stran in preverite, da je sprememba uveljavljena.",
+      "breadcrumbTools": "Orodja"
     },
     "widget": {
       "yourIp": "Vaš naslov IP",
-      "country": "Država",
-      "region": "Regija",
-      "city": "Mesto",
       "isp": "Ponudnik interneta",
       "asn": "ASN",
       "unknown": "Neznano",
@@ -4150,7 +4206,19 @@
       "copied": "Kopirano",
       "copy": "Kopiraj",
       "loading": "Zaznavamo vaš IP…",
-      "error": "Vašega IP ni bilo mogoče zaznati. Osvežite stran ali poskusite znova čez trenutek."
+      "error": "Vašega IP ni bilo mogoče zaznati. Osvežite stran ali poskusite znova čez trenutek.",
+      "details": "Podrobnosti povezave",
+      "location": "Lokacija",
+      "timezone": "Časovni pas",
+      "coordinates": "Približne koordinate",
+      "ipv4": "Naslov IPv4",
+      "ipv6": "Naslov IPv6",
+      "notAvailable": "Ni na voljo",
+      "ipv6Hint": "Če IPv6 ni, je to povsem običajno — številna omrežja in storitve VPN uporabljajo samo IPv4.",
+      "changed": "Vaš IP se je od zadnjega preverjanja v tej napravi spremenil (prej {previous}).",
+      "unchanged": "Enak IP kot pri zadnjem preverjanju. Če ste pravkar vzpostavili povezavo z VPN, promet tega brskalnika še ne poteka prek njega.",
+      "firstCheck": "Nasvet: zapišite si ta IP, se povežite z VPN in osvežite stran — naslov bi se moral spremeniti.",
+      "retry": "Poskusi znova"
     },
     "explainer": {
       "whatTitle": "Kaj je naslov IP?",
@@ -4169,6 +4237,7 @@
         "item4": "Nobene omembe vašega pravega mesta ali regije."
       }
     },
+    "faqTitle": "Pogosto zastavljena vprašanja",
     "faq": {
       "q1": {
         "question": "Za kaj se uporablja moj naslov IP?",
@@ -4213,6 +4282,15 @@
     }
   },
   "toolsWebrtcLeak": {
+    "checklist": {
+      "title": "Če Doppler VPN ščiti ta brskalnik, bi moral test prikazovati:",
+      "items": {
+        "item1": "Nobenega naslova, označenega kot uhajanje, na seznamu WebRTC.",
+        "item2": "Vsak javni naslov na seznamu se ujema z IP-jem, ki ga vidijo spletne strani.",
+        "item3": "IP vašega domačega ponudnika nikjer na strani — enkrat zaženite test brez VPN, da ga boste prepoznali.",
+        "item4": "Enak rezultat po zamenjavi strežnika in ponovnem zagonu testa."
+      }
+    },
     "metadata": {
       "title": "Test uhajanja WebRTC — Preverite, ali vaš VPN skriva pravi IP",
       "description": "Brezplačen test uhajanja WebRTC. Zazna, ali vaš brskalnik prek STUN razkriva vaš pravi IP, tudi ko je VPN povezan. Traja 2 sekundi. Nobeni podatki ne zapustijo vaše naprave."
@@ -4228,6 +4306,11 @@
       "leakedBody": "WebRTC je zaznal enega ali več IP-jev, ki se razlikujejo od javnega IP. Če uporabljate VPN, to pomeni, da spletna stran z WebRTC še vedno vidi vaš pravi naslov.",
       "safeTitle": "Uhajanje WebRTC ni bilo zaznano",
       "safeBody": "WebRTC je sporočil enak IP kot javni ali pa nobenega. Trenutno prek WebRTC ne razkrivate svojega pravega naslova.",
+      "noWebrtcTitle": "WebRTC je izklopljen",
+      "localNote": "Lokalni naslovi in naslovi mDNS (.local) delujejo le v vašem lastnem omrežju, zato ne razkrivajo, kdo ste.",
+      "tagLeak": "uhajanje",
+      "tagPublic": "javni",
+      "tagLocal": "lokalni",
       "noWebrtc": "Vaš brskalnik ima WebRTC onemogočen ali pa ni bil razrešen noben naslov. To je varno stanje.",
       "unknown": "Neznano",
       "refresh": "Ponovi test",
@@ -4294,7 +4377,25 @@
       "primaryHref": "https://dnsleaktest.com/",
       "secondaryButton": "Odpri browserleaks.com/dns",
       "secondaryHref": "https://browserleaks.com/dns",
-      "instructions": "Na dnsleaktest.com kliknite »Extended test«. Rezultat bi moral navajati le strežnike DNS vašega ponudnika VPN — ne vašega ISP. Če v rezultatih vidite Comcast, Verizon, Vodafone ali katerega koli drugega potrošniškega ponudnika, vaš DNS uhaja."
+      "steps": {
+        "step1": {
+          "title": "Povežite VPN",
+          "body": "Vklopite VPN in počakajte, da pokaže, da je povezan. Plošča povezave na tej strani bi zdaj morala kazati omrežje VPN, ne vašega domačega ponudnika interneta — če ga ne, kliknite »Osveži«."
+        },
+        "step2": {
+          "title": "Zaženite razširjeni test",
+          "body": "Odprite dnsleaktest.com in kliknite »Extended test«. Test poizveduje po nizu enkratnih domenskih imen in zabeleži, kateri strežniki DNS so nanje odgovorili."
+        },
+        "step3": {
+          "title": "Preverite, kdo je odgovoril",
+          "body": "Vsak strežnik v rezultatu bi moral pripadati vašemu ponudniku VPN. Če vidite Comcast, Verizon, Vodafone ali katerega koli drugega potrošniškega ponudnika, vaš DNS uhaja. Ponovite test z izklopljenim VPN, da vidite, kako je videti uhajanje."
+        }
+      },
+      "panel": {
+        "title": "Vaša povezava ta trenutek",
+        "hint": "To je vaš javni IP, ne vaš razreševalnik DNS — tega vidi le zunanji test. Pri vklopljenem VPN ne bi smelo nobeno od njiju pripadati vašemu domačemu ponudniku interneta.",
+        "error": "Vaše povezave ni bilo mogoče preveriti. Zunanji test še vedno deluje."
+      }
     },
     "explainer": {
       "whatTitle": "Kaj je uhajanje DNS?",
