@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Footer } from "@/components/layout/footer";
 import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
-import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { CTA } from "@/components/sections/cta";
 import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 import { RelatedRail, type RelatedRailItem } from "@/components/no-registration/related-rail";
@@ -14,7 +13,6 @@ import type { CtaLocation } from "@/lib/track-cta";
 export function SeoPageFrame({
   hero,
   relatedItems,
-  trackingLocation,
   children,
 }: {
   hero: ReactNode;
@@ -48,9 +46,8 @@ export function SeoPageFrame({
 
         <div id="blog-cta-sentinel" aria-hidden="true" />
         <CTA />
-        <MobileStickyCta />
+        <MobileStickyCta sentinelId="blog-cta-sentinel" />
       </main>
-      <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={trackingLocation} />
       <Footer />
     </>
   );

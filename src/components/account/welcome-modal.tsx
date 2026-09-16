@@ -199,12 +199,12 @@ export function WelcomeModal({ accountId, onClose }: WelcomeModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-[fadeIn_200ms_ease-out]"
+      className="overlay-dim fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-[fadeIn_200ms_ease-out]"
       role="dialog"
       aria-modal="true"
       aria-label={t('welcomeTitle')}
     >
-      <div ref={panelRef} className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-overlay/10 bg-bg-secondary/95 backdrop-blur-lg p-6 shadow-2xl animate-[scaleIn_200ms_ease-out]">
+      <div ref={panelRef} className="overlay-surface-muted relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-overlay/10 bg-bg-secondary p-6 shadow-2xl animate-[scaleIn_200ms_ease-out]">
         <button
           type="button"
           onClick={onClose}

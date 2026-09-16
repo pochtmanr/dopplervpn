@@ -48,6 +48,7 @@ export type CtaLocation =
   | "landing-cta"
   | "downloads-page"
   | "sticky-mobile"
+  | "sticky-desktop"
   | "checkout-success"
   | "account-dashboard";
 

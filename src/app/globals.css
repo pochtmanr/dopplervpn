@@ -611,6 +611,27 @@ body {
   30% { transform: translateY(-3px); opacity: 1; }
 }
 
+/* Overlay blur on iOS: Safari composites backdrop-filter in 2–3 horizontal
+   tiles that update out of sync with box-shadow. Unlayered + !important so
+   these beat Tailwind utilities on touch / narrow viewports. In-flow glass
+   cards are left alone. */
+@media (hover: none) and (pointer: coarse), (max-width: 1023px) {
+  .overlay-surface {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background-color: var(--color-bg-primary) !important;
+  }
+  .overlay-surface-muted {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background-color: var(--color-bg-secondary) !important;
+  }
+  .overlay-dim {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
 /* Mobile menu — the panel grows out of the navbar pill instead of appearing
    as a second, differently-shaped box. It sits at the pill's exact position,
    and its closed clip is the pill itself: bar height, radius = height / 2.

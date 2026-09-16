@@ -44,6 +44,6 @@ export const INPUT =
 
 /** Modal scrim + panel (recipe B, no orb). */
 export const SCRIM =
-  'fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-bg-primary/70 backdrop-blur-sm';
+  'overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-bg-primary/70';
 export const MODAL_PANEL =
   'relative w-full overflow-hidden rounded-t-2xl sm:rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary to-bg-secondary';

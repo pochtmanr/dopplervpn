@@ -85,11 +85,12 @@ export function BlogStickyBar({
 
   return (
     <div
-      className={`fixed bottom-0 inset-x-0 z-40 transition-transform duration-300 ease-out ${
+      className={`hidden lg:block fixed bottom-0 inset-x-0 z-40 transition-transform duration-300 ease-out ${
         show ? "translate-y-0" : "translate-y-full"
       }`}
+      aria-hidden={!show}
     >
-      <div className="bg-bg-secondary/98 backdrop-blur-md border-t border-overlay/10 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+      <div className="overlay-surface-muted bg-bg-secondary border-t border-overlay/10 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
             {/* Shield icon + message */}

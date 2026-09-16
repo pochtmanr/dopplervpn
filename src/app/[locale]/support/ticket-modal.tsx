@@ -317,7 +317,7 @@ export function TicketModal({ account, onClose }: TicketModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-bg-primary/70 backdrop-blur-sm animate-[fadeIn_200ms_ease-out]"
+      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-bg-primary/70 animate-[fadeIn_200ms_ease-out]"
     >
       {/* Sizing wrapper: its height is indefinite, so the panel's h-full resolves to
           auto instead of stretching the panel to the viewport. */}

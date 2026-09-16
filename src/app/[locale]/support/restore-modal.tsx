@@ -95,7 +95,7 @@ export function RestoreModal({ onClose, onOpenTicket }: RestoreModalProps) {
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm animate-[fadeIn_200ms_ease-out]"
+      className="overlay-dim fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 animate-[fadeIn_200ms_ease-out]"
       role="dialog"
       aria-modal="true"
       aria-label={t('restore.title')}

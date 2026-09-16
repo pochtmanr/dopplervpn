@@ -157,7 +157,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
     <>
       <nav
         ref={navRef}
-        className="relative mx-auto bg-bg-primary/95 backdrop-blur-md shadow-sm shadow-overlay/5 overflow-hidden max-w-site rounded-full"
+        className="overlay-surface relative mx-auto bg-bg-primary/95 backdrop-blur-md shadow-sm shadow-overlay/5 overflow-hidden max-w-site rounded-full"
       >
         {/* Main bar row */}
         <div className="relative flex items-center justify-between h-12 sm:h-14 px-3 sm:px-4 md:min-w-max">
@@ -281,7 +281,7 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
               role="menu"
               aria-label="Select language"
               aria-hidden={!langOpen}
-              className="bg-bg-primary/95 backdrop-blur-xl shadow-lg shadow-overlay/10 rounded-2xl border border-overlay/10 p-2.5"
+              className="overlay-surface bg-bg-primary/95 backdrop-blur-xl shadow-lg shadow-overlay/10 rounded-2xl border border-overlay/10 p-2.5"
             >
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-1.5">
                 {langEverOpened && routing.locales.map((loc) => {

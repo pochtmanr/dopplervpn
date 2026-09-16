@@ -91,8 +91,8 @@ export function CookieConsent() {
 
   if (mode === "preferences") {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-        <div className="w-full max-w-lg rounded-2xl border border-overlay/10 bg-bg-secondary/95 backdrop-blur-lg p-6 shadow-2xl">
+      <div className="overlay-dim fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
+        <div className="overlay-surface-muted w-full max-w-lg rounded-2xl border border-overlay/10 bg-bg-secondary p-6 shadow-2xl">
           <h2 className="text-lg font-semibold text-text-primary mb-4">
             {t("preferencesTitle")}
           </h2>
@@ -159,7 +159,7 @@ export function CookieConsent() {
   // Banner mode
   return (
     <div className="fixed bottom-0 inset-x-0 z-50 p-4 slide-in-from-bottom">
-      <div className="mx-auto max-w-4xl rounded-2xl border border-overlay/10 bg-bg-secondary/95 backdrop-blur-lg p-5 sm:p-6 shadow-2xl">
+      <div className="overlay-surface-muted mx-auto max-w-4xl rounded-2xl border border-overlay/10 bg-bg-secondary p-5 sm:p-6 shadow-2xl">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-1 min-w-0">
             <p className="text-sm text-text-muted leading-relaxed">

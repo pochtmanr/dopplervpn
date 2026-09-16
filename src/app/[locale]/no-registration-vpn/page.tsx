@@ -6,7 +6,6 @@ import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
 import { routing } from "@/i18n/routing";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { BreadcrumbSchema, ArticleSchema, FAQSchema, WebPageSchema } from "@/components/seo/json-ld";
-import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { seoTitle } from "@/lib/seo-title";
 import { SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
@@ -293,9 +292,8 @@ export default async function NoRegistrationVpnPage({ params }: PageProps) {
 
         <div id="blog-cta-sentinel" aria-hidden="true" />
         <CTA />
-        <MobileStickyCta />
+        <MobileStickyCta sentinelId="blog-cta-sentinel" />
       </main>
-      <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation="no-registration-vpn" />
       <Footer />
     </>
   );
