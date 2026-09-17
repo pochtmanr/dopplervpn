@@ -391,7 +391,7 @@ write and is the right way to inspect the fleet without touching the table.
 `sql/2026-07-monitoring.sql` — adds `support_tickets.telegram_notified_at`
 (+ partial index) for the ticket notifier, and
 `vpn_servers.stats_agent_url/stats_agent_token`. The `stats_agent_*` columns
-are separate from `marzban_*` on purpose: doppler-bot treats non-null
+are separate from `marzban_*` on purpose: doppler-telegram-bot treats non-null
 `marzban_api_url` as "provision users here".
 
 ## Related n8n workflows (exports in ../n8n-workflows/)

@@ -1,6 +1,6 @@
 # Fan-out FAQ Audit (Phase 2.2)
 
-> Source: GEO blueprint section 2.1–2.2 (`landing/seo.md`). Pages that answer the
+> Source: GEO blueprint section 2.1–2.2 (`doppler-web/seo.md`). Pages that answer the
 > fan-out sub-queries Google generates from a primary H1 are 161% more likely to
 > be cited in AI Overviews. Target density: 8–10 FAQ items per landing page,
 > dense and intent-matched (~2–3 sentences each), no historical-bloat dilution.
@@ -9,7 +9,7 @@
 
 All 12 short-template SEO landing pages went from 6 FAQ items → 9. The
 `SeoLandingPage` component default `faqCount` was bumped from 6 to 9
-(`src/components/landing/seo-landing-page.tsx`). Pages with shorter FAQ
+(`src/components/doppler-web/seo-landing-page.tsx`). Pages with shorter FAQ
 inventories should override explicitly.
 
 The three new keys per namespace are `q7` / `q8` / `q9`. They cover gaps the

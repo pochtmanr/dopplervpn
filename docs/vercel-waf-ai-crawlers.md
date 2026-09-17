@@ -8,8 +8,8 @@
 as `vancouverrenovations43-7543`, with no access to the team owning `dopplervpn`, so
 `vercel firewall …` returned *Not authorized* and everything had to be done in the
 dashboard. **That is fixed** — the CLI is authenticated as `rpochtman-5822` and
-`vercel firewall` works, but only when run from `landing/`. Never run `vercel link` at the
-repo root; it previously overwrote `landing/.vercel/project.json`.
+`vercel firewall` works, but only when run from `doppler-web/`. Never run `vercel link` at the
+repo root; it previously overwrote `doppler-web/.vercel/project.json`.
 
 **The failure this policy actually had:** the rules were written down here in 2026-08-12 but
 never applied. On 2026-08-14 the live config still showed `managedRules: null`, and the one
@@ -161,7 +161,7 @@ If you change one, change the other.
 
 ## What is live
 
-Applied 2026-08-14 via the CLI (run from `landing/`). Custom rules, in evaluation order —
+Applied 2026-08-14 via the CLI (run from `doppler-web/`). Custom rules, in evaluation order —
 order matters, because `bypass` short-circuits every later custom rule *and* every managed
 ruleset:
 

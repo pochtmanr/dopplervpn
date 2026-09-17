@@ -9,7 +9,7 @@ been applied.
 ## 1. Order — this one is not optional
 
 `supabase/migrations/20260906T100300_revoke_subscription_guards.sql` (in the
-**VPnReact** repo, which is where the schema lives) must be applied **before**
+**doppler-legacy-rn** repo, which is where the schema lives) must be applied **before**
 this function is deployed.
 
 The new code calls:
@@ -31,7 +31,7 @@ defaults, so the currently deployed function's one-argument call keeps
 resolving. That is the whole reason they are defaulted.
 
 ```
-  1. apply VPnReact/supabase/migrations/20260906T100000_subscription_audit.sql
+  1. apply doppler-legacy-rn/supabase/migrations/20260906T100000_subscription_audit.sql
   2. apply … 20260906T100200_claim_subscription_guards.sql
   3. apply … 20260906T100300_revoke_subscription_guards.sql   <- the hard dependency
   4. verify (each migration has a VERIFY block in its trailing comments)
@@ -40,7 +40,7 @@ resolving. That is the whole reason they are defaulted.
 
 ## 2. Clear `supabase/.temp/` first
 
-`landing/supabase/.temp/project-ref` contains **`seakhlgyzkerxabitgoo`**, which
+`doppler-web/supabase/.temp/project-ref` contains **`seakhlgyzkerxabitgoo`**, which
 is **the wrong project**. So does `pooler-url`. The correct project is
 **`fzlrhmjdjjzcgstaeblu`**. This trap has cost a session before.
 

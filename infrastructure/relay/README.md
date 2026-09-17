@@ -219,9 +219,9 @@ same request against the next base URL and remember which one worked.
 
 The list is a build-time constant, `SUPABASE_RELAY_URLS`:
 
-- iOS / macOS — `dopplerswift/PulseVPN/Services/SupabaseServerService.swift`
-- Android — `DopplerAndroid/app/src/main/kotlin/org/dopplervpn/android/services/ServerRepository.kt`
-- Windows — `dopplerWindows/DopplerVPN/Services/SupabaseService.cs`
+- iOS / macOS — `doppler-apple/PulseVPN/Services/SupabaseServerService.swift`
+- Android — `doppler-android/app/src/main/kotlin/org/dopplervpn/android/services/ServerRepository.kt`
+- Windows — `doppler-windows/DopplerVPN/Services/SupabaseService.cs`
 
 Implementation notes:
 
@@ -236,5 +236,5 @@ Implementation notes:
 - A relay URL going stale is harmless — it just fails and the next candidate is tried. So
   shipping a relay list slightly ahead of DNS is safe.
 
-Related: `landing/infrastructure/xray/README.md` (the fleet), and the host-failover work
+Related: `doppler-web/infrastructure/xray/README.md` (the fleet), and the host-failover work
 recorded in the `doppler-supabase-host-failover` memory note.

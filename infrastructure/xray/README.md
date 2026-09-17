@@ -271,7 +271,7 @@ These are the things that will break a node if you change the fragment without k
 There is no fleet loop and there will not be one. `apply-node-baseline.sh` refuses more than one host.
 
 ```bash
-cd landing/infrastructure/xray
+cd doppler-web/infrastructure/xray
 V='vless://…@<ip>:8443?…'      # one of the node's inbounds. Not in git — take it from the app or the box.
 
 # 0. Establish the exposure BEFORE the change, from a client, so the "after" means something.

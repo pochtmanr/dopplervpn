@@ -23,7 +23,7 @@ python3 node_sync.py --apply            # actually reconcile
 
 ## Supabase RPC contract (ASSUMED — reconcile this before first run)
 
-The two RPCs were written concurrently in `VPnReact/supabase/migrations/` and
+The two RPCs were written concurrently in `doppler-legacy-rn/supabase/migrations/` and
 **this agent has never seen them.** Everything below is what it assumes. All of
 it is isolated in the block marked `SUPABASE CONTRACT` in `node_sync.py`
 (~40 lines); a mismatch is a one-place edit, not a rewrite.

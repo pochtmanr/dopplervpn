@@ -45,7 +45,7 @@ stages**. Stage 1 is additive and goes on every node. Stage 2 is the DNS
 change and is a separate decision — see `README.md` before choosing it.
 
 ```bash
-cd landing/infrastructure/xray
+cd doppler-web/infrastructure/xray
 V='vless://…@<ip>:8443?…'
 
 ./verify-egress-exposure.sh --vless "$V" --node-ip <ip>    # before
@@ -120,7 +120,7 @@ node `/var/lib/marzban/access.log` must not exist.
 
 ## 3. Insert the `vpn_servers` row
 
-Credentials go in the **dedicated columns, never env/code** (`doppler-bot/CLAUDE.md`). Set real capacity:
+Credentials go in the **dedicated columns, never env/code** (`doppler-telegram-bot/CLAUDE.md`). Set real capacity:
 
 ```sql
 insert into public.vpn_servers
@@ -135,7 +135,7 @@ values
 --   stats_agent_url = 'http://<ip>:9101/stats', stats_agent_token = '<token from deploy>'
 ```
 
-- `max_users` — the real ceiling this node can serve well. Read only by `doppler-bot`
+- `max_users` — the real ceiling this node can serve well. Read only by `doppler-telegram-bot`
   (`src/services/marzban.ts`); **not** exposed by `get_servers`/`get_servers_v2` and not read by any
   client app. NULL means "no ceiling set", which is the current state of every row.
 
@@ -165,7 +165,7 @@ values
 ## 4. Deploy the stats agent (monitoring + reachability probe)
 
 ```bash
-cd landing/infrastructure/monitoring
+cd doppler-web/infrastructure/monitoring
 ./deploy-stats-agent.sh <ip>          # prints:  <ip> <token>
 ```
 

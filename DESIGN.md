@@ -349,7 +349,7 @@ static JPG at the same path so existing references keep working.
   (legacy cards); `censorship-resistance.tsx` (recipe B without a plate); `faq.tsx`,
   `blog/home-blog-section.tsx`.
 - Layout: `layout/footer.tsx`, `navbar.tsx`, `mobile-sticky-cta.tsx`.
-- `components/landing/seo-landing-page.tsx` (~20 SEO pages): orbs, shadowed buttons, no Reveal/glyphs.
+- `components/doppler-web/seo-landing-page.tsx` (~20 SEO pages): orbs, shadowed buttons, no Reveal/glyphs.
 - ~~`downloads`~~ — done 2026-09-16, reworked the same day for conversion: plain hero (no glyph backdrop),
   four plain download cards (see recipe B variant above), then the setup steps
   in **recipe C's notched card** (`downloads/setup-section.tsx`): platform tabs opening on the visitor's
