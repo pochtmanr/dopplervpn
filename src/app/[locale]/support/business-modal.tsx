@@ -20,7 +20,7 @@ import {
   EMAIL_REGEX,
   MONO,
   ROW_DELAYS,
-} from './modal-parts';
+} from '@/components/ui/modal-parts';
 
 /* The ticket form's twin for companies, in blue. Rows land in support_tickets
    with topic 'business' — see api/support/business-inquiry/route.ts. */

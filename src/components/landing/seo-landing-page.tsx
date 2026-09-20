@@ -19,7 +19,7 @@ const EXPANDED_FAQ_LOCALES = new Set(["en"]);
 const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
-  telegramBot: "https://t.me/dopplercreatebot",
+  telegramBot: "https://t.me/DopplerSupportBot",
   telegramChannelRu: "https://t.me/dopplervpn",
   telegramChannelEn: "https://t.me/dopplervpnen",
 };

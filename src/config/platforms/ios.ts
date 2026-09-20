@@ -1,0 +1,53 @@
+import {
+  AppleIcon,
+  BoltIcon,
+  GiftIcon,
+  LockIcon,
+  NoSymbolIcon,
+  PhoneIcon,
+  ServerIcon,
+  ShieldIcon,
+} from "@/components/icons/platform";
+import type { PlatformLandingConfig } from "@/components/landing/platform-landing-config";
+
+export const iosPlatform: PlatformLandingConfig = {
+  slug: "vpn-for-ios",
+  namespace: "vpnForIos",
+  operatingSystem: "iOS",
+  trackPlatform: "ios",
+  downloadUrl: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
+  ogImageAlt: "Doppler VPN for iPhone & iPad",
+  ratingChip: { storeKey: "appStore" },
+  heroCtaIcon: AppleIcon,
+  heroCtaKey: "hero.cta",
+  heroGapClass: "gap-12 lg:gap-20",
+  heroVisual: {
+    kind: "image",
+    src: "/images/ios-hero.avif",
+    alt: "Doppler VPN running on iPhone — secure VPN connection screen",
+    width: 1354,
+    height: 909,
+    roundedClass: "rounded-[2rem]",
+  },
+  features: [
+    { key: "vlessEncryption", featured: true, icon: LockIcon },
+    { key: "noRegistration", icon: NoSymbolIcon },
+    { key: "oneTapConnect", icon: BoltIcon },
+    { key: "bypassCensorship", featured: true, icon: ShieldIcon },
+    { key: "noLogs", icon: ShieldIcon },
+    { key: "globalServers", icon: ServerIcon },
+    { key: "freeTrial", featured: true, icon: GiftIcon },
+    { key: "iphoneIpad", featured: true, icon: PhoneIcon },
+  ],
+  stepKeys: ["step1", "step2", "step3", "step4"],
+  faqKeys: ["q1", "q2", "q3", "q4", "q5", "q6"],
+  related: [
+    { href: "/no-registration-vpn", title: "noRegistration", desc: "noRegistrationDesc" },
+    { href: "/vless-vpn", title: "vless", desc: "vlessDesc" },
+    { href: "/vpn-for-android", title: "android", desc: "androidDesc" },
+    { href: "/vpn-for-macos", title: "macos", desc: "macosDesc" },
+    { href: "/vpn-for-windows", title: "windows", desc: "windowsDesc" },
+    { href: "/vpn-for-public-wifi-iphone", title: "publicWifi", desc: "publicWifiDesc" },
+  ],
+  ctaDownloadKey: "cta.downloadIos",
+};

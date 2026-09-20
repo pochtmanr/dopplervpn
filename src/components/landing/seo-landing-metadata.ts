@@ -11,6 +11,8 @@ interface BuildMetadataArgs {
   slug: string;
   namespace: string;
   ogType?: "website" | "article";
+  /** `alt` on the OG/Twitter image. Defaults to the page title. */
+  ogImageAlt?: string;
 }
 
 export async function buildSeoLandingMetadata({
@@ -18,6 +20,7 @@ export async function buildSeoLandingMetadata({
   slug,
   namespace,
   ogType = "article",
+  ogImageAlt,
 }: BuildMetadataArgs): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: `${namespace}.metadata` });
   const title = t("title");
@@ -46,7 +49,7 @@ export async function buildSeoLandingMetadata({
           url: `${baseUrl}/images/og-banner.jpg`,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: ogImageAlt ?? title,
         },
       ],
     },
