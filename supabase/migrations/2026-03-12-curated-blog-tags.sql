@@ -1,4 +1,8 @@
 -- Blog Tag Cleanup Migration
+--
+-- NOTE: a manual, multi-step runbook, not an automatically-applied migration.
+-- Moved here from docs/migrations/ on 2026-09-17 so that supabase/migrations/
+-- is the single migrations home (see README). Applied 2026-03-12.
 -- Date: 2026-03-12
 -- Purpose: Ensure all curated tags exist and identify orphan tags for manual review
 --
