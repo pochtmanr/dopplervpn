@@ -20,7 +20,19 @@
 
 # misc
 .DS_Store
+
+# credentials / key material — these patterns are the last line of defence,
+# so keep them broad. A service_role JWT once reached this public repo inside
+# an unrelated scratch file (venus_init.js); extension globs would not have
+# caught that, but they do catch the ordinary mistakes.
 *.pem
+*.p8
+*.key
+*.crt
+*.pfx
+*.p12
+id_rsa*
+*service-account*.json
 
 # debug
 npm-debug.log*
@@ -29,6 +41,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files
+.env
+.env.*
+!.env*.example
 .env*.local
 .env*.tmp
 

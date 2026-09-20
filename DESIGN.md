@@ -11,7 +11,7 @@ redesigned element — a section, a page, a card, a button, the OG image — is 
 | Shared engine | `src/components/glyph/glyph-field.tsx`, `glyph-render.ts` (the pure frame maths — **not** a client module, so a server frame can be rendered from it), `glyph-scene.ts`, `use-mount-on-view.ts`, `src/components/ui/reveal.tsx`, `src/app/globals.css` |
 
 When this file and the code disagree, the reference sections win — then fix this file.
-It supersedes the motion rule in `docs/plans/2026-02-23-ui-polish-design.md` ("opacity-only, 200ms").
+It supersedes an earlier "opacity-only, 200ms" motion rule; that plan document is gone, this file is the standard.
 
 ---
 
@@ -40,6 +40,10 @@ eased, once, and always has a still fallback.
 Rules:
 - **Never** raw `white`/`black`/hex in components, and **no `dark:` variants** — tokens + `overlay/*` flip
   light mode automatically (next-themes puts `.light` on `<html>`).
+  - *One exception:* a third party's own brand colour, where using our palette would misrepresent
+    their mark. Today that is `blog/share-buttons.tsx` (Telegram, WhatsApp, Facebook, LinkedIn,
+    Reddit). Those hexes are fixed by the platforms and must not flip with the theme. Adding a hex
+    anywhere else is a bug — add a token instead.
 - Radius: `rounded-xl` (24px) small cards, `rounded-2xl` big cards & logo tiles, `rounded-lg` buttons in
   the hero, `rounded-xl` standalone CTAs, `rounded-full` chips.
 - Width: every section container is `mx-auto max-w-site` (1600px). Gutters `px-4 sm:px-6 lg:px-8`.
@@ -48,7 +52,7 @@ Rules:
 
 | Role | Recipe |
 |---|---|
-| Home hero headline **only** | Instrument Serif via inline `style={{ fontFamily: "var(--font-serif)" }}`; lead phrase *italic*, punch upright; `text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05]`. Locales in `FALLBACK_FONT_LOCALES` (hero.tsx:9) swap to `var(--font-body)` weight 300, no italic. **The only other use is price figures** (pricing section and the account paywall), which are digits and so safe in every locale. |
+| Home hero headline **only** | Instrument Serif via inline `style={{ fontFamily: "var(--font-serif)" }}`; lead phrase *italic*, punch upright; `text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05]`. Locales in `FALLBACK_FONT_LOCALES` (hero.tsx:10) swap to `var(--font-body)` weight 300, no italic. **The only other use is price figures** (pricing section and the account paywall), which are digits and so safe in every locale. |
 | Every other heading | nothing to add — h1–h6 get `--font-display` (SF Pro Rounded → Nunito 700) from the base layer. Non-heading tags that act as titles add `font-display`. |
 | Section title / subtitle | `SectionHeader` (`.section-title` `text-3xl md:text-4xl lg:text-5xl font-semibold`, `.section-subtitle` `text-text-muted text-lg md:text-xl max-w-2xl mx-auto`), wrapper `mb-12 md:mb-16 text-center` |
 | Band title (compact section) | eyebrow `text-xs md:text-sm uppercase tracking-wider text-text-tertiary mb-1` + `font-display text-xl md:text-2xl font-semibold text-text-primary` |
@@ -75,7 +79,7 @@ Body font is Space Grotesk (`--font-body`).
 
   `DesktopGlobe` still mounts only at lg+ and `PricingBackdrop` only at md+ (`useMediaQuery`, `src/lib/use-media-query.ts`): a CSS-hidden component still runs its setup during hydration, and neither of those ships a server frame.
 
-### Card recipe A — Glyph-strip row card (platforms-available.tsx:52)
+### Card recipe A — Glyph-strip row card (platforms-available.tsx:38)
 ```
 group relative flex h-[88px] flex-row overflow-hidden rounded-xl
 border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:border-accent-teal/30 transition-colors
@@ -136,7 +140,11 @@ border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:borde
   Step and row entrances transition `opacity,translate` — in Tailwind v4 `translate-*` sets the `translate`
   property, so `transition-[opacity,transform]` would snap the movement.
 
-### Device stage (glyph/device-scene.ts, device-stage.tsx) — not used on downloads any more
+### Device stage (glyph/device-scene.ts, device-stage.tsx) — **no call sites today**
+
+> Kept deliberately, not dead code left behind: `device-scene.ts` is still exercised by
+> `npx tsx scripts/preview-devices.ts`, and this is the recipe to follow if device art returns.
+> `device-stage.tsx` (the React wrapper) is currently imported by nothing.
 - Recipe B's card with the plate moved from the foot to the **head**: a
   `relative -mx-6 -mt-6 mb-5 border-b border-overlay/5` block (the negative margins must track the
   card's `p-6`) holding `<DeviceStage>`, then the platform's name as the card's `<h2>` under it.
@@ -175,7 +183,7 @@ p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colo
 ```
 - Top hairline: `absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent`.
   **Not** `inset-inline-start-0 inset-inline-end-0`: Tailwind v4 has no such utilities, so the line collapses to
-  0px. That broken pair is still in ~12 older files (pricing, cta, traffic-step-card, comparison-accordion,
+  0px. That broken pair is still in 11 files (ui/card-recipes.ts, pricing, cta, traffic-step-card, comparison-accordion,
   auth-panel, setup-section, …).
 - Hover orb (the **only** allowed blur glow — inside a card, hover-only):
   `absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`
@@ -214,7 +222,7 @@ p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colo
 ### Recipe D — Terminal accordion (comparison-table.tsx, comparison-accordion.tsx, glyph/comparison-scene.ts)
 - **Shell:** recipe B's glass, with no orb, around a receipt header (mono uppercase, dashed bottom rule, md+ only).
 - **Rows:** `<h3><button aria-expanded aria-controls>`, styled by `.cmp-*` classes in `@layer components`
-  (six rows on ~4,900 pages, so no long inline lists). The desktop grid is `1.15fr 1fr 1fr 2rem`. Below md, each row stacks
+  (six rows on 5,280 pages, so no long inline lists). The desktop grid is `1.15fr 1fr 1fr 2rem`. Below md, each row stacks
   with mono column tags. Every value carries an sr-only column name. Arrow keys, Home and End move focus between rows.
 - **Open state:** one row at a time, the first open on load. The open row gets a teal `::before` bar on the start edge, a
   `bg-bg-secondary/60` fill, and a teal `−` tile. The panel animates `grid-template-rows 0fr→1fr` over 300ms with the hero easing.
@@ -247,7 +255,7 @@ tile and no glyphs. Existing sections using it are migration targets (§9).
 - **Check list items:** `text-xs text-text-muted` with `w-4 h-4 text-accent-teal` stroke-2 check icons.
 - **Stars / ratings:** `text-accent-gold w-3.5 h-3.5` + `text-sm font-semibold text-text-primary`.
 - Icons are inline heroicons-style SVG (`stroke="currentColor"`, strokeWidth 1.75–2.5), `aria-hidden`.
-- **The keycap pair** (globals.css:260-355): `.cta-key` is the solid-teal primary as a physical key
+- **The keycap pair** (globals.css:272-386): `.cta-key` is the solid-teal primary as a physical key
   (cap gradient, inset bevel, hard `0 4px 0` skirt, contact shadow; `:active` bottoms it out).
   `.cta-flat` is its counterpart — filled but flat and unpressable. **At most one key per surface**,
   with its neighbours flat: that contrast is what makes the key read as raised. Chips and quick-jump
@@ -265,18 +273,18 @@ hydration gate, checkout-pending and delete-confirm; use it, don't add another s
 
 | Pattern | Spec | Where |
 |---|---|---|
-| **Heroes do not animate in. At all.** | Removed 2026-09-16, and not to be reinstated. The home hero, the four platform heroes, support and downloads all used to run `hero-word` (per-word blur-up, 22px rise) over `hero-animate` (8px rise on a 100/300/420/540/660ms stagger). Two overlapping staggers meant the whole column visibly shifted while it settled — it read as the page still loading, not as an entrance. Heroes are fully server-rendered, so with nothing to animate they are simply there in the first paint, which is also the fastest they can be | globals.css:208-247 |
+| **Heroes do not animate in. At all.** | Removed 2026-09-16, and not to be reinstated. The home hero, the four platform heroes, support and downloads all used to run `hero-word` (per-word blur-up, 22px rise) over `hero-animate` (8px rise on a 100/300/420/540/660ms stagger). Two overlapping staggers meant the whole column visibly shifted while it settled — it read as the page still loading, not as an entrance. Heroes are fully server-rendered, so with nothing to animate they are simply there in the first paint, which is also the fastest they can be | globals.css:222-250 |
 | Hero primary CTA — the one exception | Its label and icon depend on UA platform detection, so it is held at Tailwind `opacity-0` until that resolves, then `.hero-cta-in` (opacity fade + one `pulse-glow`) so the label never visibly swaps. **Opacity only, no transform** — it must not move either. Button-sized and mid-page, so never the LCP element | globals.css:230-247 |
-| **Never `opacity: 0`, never a rise, on anything in a hero** | Chrome will not treat an element at `opacity: 0` as an LCP candidate, so fading a hero in from zero disqualifies the one part of the page that is server-rendered and free to paint, and hands LCP to something slower. A rise moves the layout around after paint. If something in a hero really must animate, animate colour, or opacity from a non-zero value — never position, and never on the `<h1>` or the mobile glyph backdrop | globals.css:208-227 |
+| **Never `opacity: 0`, never a rise, on anything in a hero** | Chrome will not treat an element at `opacity: 0` as an LCP candidate, so fading a hero in from zero disqualifies the one part of the page that is server-rendered and free to paint, and hands LCP to something slower. A rise moves the layout around after paint. If something in a hero really must animate, animate colour, or opacity from a non-zero value — never position, and never on the `<h1>` or the mobile glyph backdrop | globals.css:222-250 |
 | Scroll reveal | `<Reveal delay>`: opacity + translateY 6px, 200ms ease-out, fires once at `rootMargin -100px`; siblings stagger `delay={i * 50}`, trailing CTA ~200ms | reveal.tsx, use-in-view.ts |
-| CTA attention | `pulse-glow-once`: teal box-shadow 0→20px/4px→0, 1.5s, once | globals.css:292-299 |
+| CTA attention | `pulse-glow-once`: teal box-shadow 0→20px/4px→0, 1.5s, once | globals.css:529-540 |
 | Hover | `transition-colors` (cards/tiles, default or 300ms), arrow nudge `translate-x-0.5`, orb fade 500ms; glyph layers warm to teal over 300ms `ease-out` | cards, glyph-field.tsx:287 |
 | Glyph field | 20fps (`FRAME_MS 50`); looping scenes: resolve 1200 / hold 5600 / dissolve 600ms (7400 cycle), cells resolve radially (`SPREAD 0.45`); siblings get `phaseOffsets(n)` (keep `CYCLE_MS/n > 1800`); settle-once scenes (`loop={false}`) sweep in over 1200ms then keep small live motion (scramble ~110ms, cursor/node ~450–520ms ticks) | glyph-scene.ts, traffic-scene.ts |
 | Lazy mount | expensive fields mount at IntersectionObserver `rootMargin 120px`, one-way, then host fades `transition-opacity duration-700` | traffic-step-card.tsx:30-72 |
 | Canvas artwork (globe) | 20fps, glyphs `R·0.055·GLYPH_SCALE` (0.6) with the lat/lon pitch scaled by the same factor, ASCII ramp `" .:-=+*#▒▓█"`, slow idle rotation (0.06 rad/s), no pointer tilt (removed 2026-09-14), teal hover halo 60px, start via `requestIdleCallback`, colours read from CSS vars + MutationObserver for theme | dot-globe.tsx |
 
 Contract for anything animated:
-1. **Reduced motion:** CSS is covered by the global rule (globals.css:334); **every rAF/canvas loop must
+1. **Reduced motion:** CSS is covered by the global rules (globals.css:388, :425, :706); **every rAF/canvas loop must
    check `matchMedia("(prefers-reduced-motion: reduce)")` itself** and paint one resolved still frame.
 2. **Never burn CPU unseen:** loops run only while on screen (IntersectionObserver) **and** `!document.hidden`.
 3. Transition `color`/`opacity`/`transform` specifically — never `transition-all` on glyph hosts.
@@ -309,8 +317,9 @@ Contract for anything animated:
 - Give a section its visual interest with a glyph scene, a glass logo tile, or a terminal plate.
 - Use teal as the single signal for action and hover.
 - Use logical properties (`ps/pe`, `ms/me`, `start/end`, `border-e`) and `rtl:` flips on directional icons.
-- Keep class lists static and short-ish — pages are serialised twice across ~4,900 prerendered pages
-  (globals.css:356-371). Repeated long lists belong in a component or `@layer components` class.
+- Keep class lists static and short-ish — pages are serialised twice across 5,280 prerendered pages,
+  so a long repeated list is paid for 10,560 times. Repeated long lists belong in a component, in
+  `ui/card-recipes.ts`, or in the `@layer components` block at the end of `globals.css`.
 - Check: dark, light, one RTL locale (ar/he), one fallback-font locale (ru/zh), reduced motion, 360px width.
 
 **Don't**
@@ -349,7 +358,7 @@ static JPG at the same path so existing references keep working.
   (legacy cards); `censorship-resistance.tsx` (recipe B without a plate); `faq.tsx`,
   `blog/home-blog-section.tsx`.
 - Layout: `layout/footer.tsx`, `navbar.tsx`, `mobile-sticky-cta.tsx`.
-- `components/doppler-web/seo-landing-page.tsx` (~20 SEO pages): orbs, shadowed buttons, no Reveal/glyphs.
+- `components/landing/seo-landing-page.tsx` (~20 SEO pages): orbs, shadowed buttons, no Reveal/glyphs.
 - ~~`downloads`~~ — done 2026-09-16, reworked the same day for conversion: plain hero (no glyph backdrop),
   four plain download cards (see recipe B variant above), then the setup steps
   in **recipe C's notched card** (`downloads/setup-section.tsx`): platform tabs opening on the visitor's

@@ -1,4 +1,9 @@
-# Doppler Landing + Admin
+# Doppler Web — engineering context
+
+> **This repository is public** (`github.com/pochtmanr/dopplervpn`). Nothing here may contain a
+> credential, a node IP, a VPS hostname, a personal address, internal traffic/revenue figures, or
+> an internal QA list. Server-side ops live in the private `doppler-infra` repo. When in doubt,
+> put it there.
 
 > **Subscriptions, entitlements and anti-fraud live in one place:**
 > [`../SUBSCRIPTION-AND-ANTIFRAUD.md`](../SUBSCRIPTION-AND-ANTIFRAUD.md) — the Pro predicate on
@@ -7,107 +12,156 @@
 > any of that**, and correct it there rather than re-deriving it.
 
 > **Design:** all landing UI work — sections, pages, cards, buttons, OG/social images — follows
-> [`DESIGN.md`](DESIGN.md) (the "Glyph Terminal" standard set by the home hero, "Available on" cards and
-> "How Doppler VPN Protects Your Traffic" cards). **Read it before styling anything**, and update it
-> when the standard changes.
-
+> [`DESIGN.md`](DESIGN.md) (the "Glyph Terminal" standard set by the home hero, "Available on" cards
+> and "How Doppler VPN Protects Your Traffic" cards). **Read it before styling anything**, and
+> update it when the standard changes.
 
 ## Overview
-Next.js 15 web app serving as the public marketing site, admin panel, and blog pipeline for Doppler VPN. Deployed at `dopplervpn.org`. Includes 44-language landing, blog with AI content generation, admin dashboard, and API routes used by the Telegram bots.
 
-## Tech Stack
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4 + `@tailwindcss/postcss`
-- **i18n:** next-intl v3 (44 languages, URL routing via `[locale]`)
-- **Backend:** Supabase (ref: `fzlrhmjdjjzcgstaeblu`)
-- **AI:** blog *translation* runs Gemini (`GEMINI_TRANSLATE_MODEL`, default `gemini-3.8-flash`) with an OpenAI fallback (`OPENAI_TRANSLATE_MODEL`, default `gpt-5-mini`) — see `doppler-admin/src/lib/ai/translate.ts`. Content *generation* is OpenAI `gpt-5-mini`, invoked from n8n.
-- **Deployment:** Vercel (dopplervpn.org) — GitHub: pochtmanr/dopplervpn
+Next.js 15 App Router app serving `www.dopplervpn.org`: the 44-language marketing site, the blog
+read-path, downloads, web checkout, the account dashboard, privacy tools, and the API routes the
+native clients and the Telegram bot call. Deployed on Vercel.
+
+**Not here:** the admin dashboard and the blog *write*-path (including AI translation) are a
+separate app, `doppler-admin`. The VPN server side is the private `doppler-infra` repo.
+
+## Tech stack
+
+- **Framework:** Next.js 15 (App Router), React 19
+- **Language:** TypeScript (`strict: true`)
+- **Styling:** Tailwind CSS v4 + `@tailwindcss/postcss` — tokens in `src/app/globals.css`
+- **i18n:** next-intl v3 — 44 locales, URL-routed via `[locale]`
+- **Backend:** Supabase (project ref `fzlrhmjdjjzcgstaeblu`)
+- **Payments:** Revolut (cards) and OxaPay (crypto)
+- **Deployment:** Vercel, auto-deploy on push to `main`
 
 ## Architecture
 
 ```
 src/
+  middleware.ts           # www redirect, next-intl routing, click-id cookie, blog 410s
+  i18n/
+    routing.ts            # the 44 locales
+    blog-locales.ts       # the 21 blog locales (subset)
+    security-locales.ts   # locales with the /security page translated
+    request.ts, navigation.ts, client-namespaces.ts
   app/
-    [locale]/             # All public pages (44 locale routes)
-      page.tsx            # Landing page
-      layout.tsx          # Root layout with i18n provider
-      blog/               # Blog listing + post pages
-      downloads/          # App download links
-      support/            # Support / FAQ page
-      account/, checkout/ # Account management + checkout success
-      tools/              # Utility tools (IP check, leak test, …)
-      # Legal: privacy/, terms/, refund/, dpa/, subprocessors/, security/,
-      #        delete-account/
-      # SEO landing pages (~20 dirs): bypass-censorship/, no-registration-vpn/,
-      #   vless-vpn/, vless-vpn-android/, pay-with-crypto/, vpn-for-{ios,android,
-      #   macos,windows}/, vpn-for-{china,iran,russia,turkey,uae,...}/, and more
-    admin-dvpn/           # Admin panel (4 tabs)
-      page.tsx            # Dashboard (Supabase stats)
-      # Messages, VPN Users (Marzban), Posts (blog)
-    api/                  # NOTE: admin/ and blog/ are NOT here — they were
-                          # extracted to the separate `doppler-admin` app
-                          # (commit 6346a5f, 2026-04-10). Landing keeps a
-                          # BLOG_API_KEY and lib/api-auth.ts, but no landing
-                          # route consumes them.
-      vpn/                # VPN management routes
-      agents/             # MCP server + agent surface (manifest, pricing, …)
-      checkout/, revolut/, oxapay/, promo/   # payments
-      account/, subscribe/, support/, doppler/  # accounts + support
-    auth/                 # Auth callback routes
-    globals.css           # Global styles
-    robots.ts             # robots.txt
-    sitemap.ts            # Sitemap generation
-  components/             # Shared UI components
-  fonts/                  # Local font files
-  i18n/                   # next-intl config + routing
-  lib/                    # Supabase client, shared utilities
+    [locale]/             # the whole public site
+      (auth)/             # login/, signup/ — the only route group
+      page.tsx            # landing
+      blog/, blog/[slug]/ # blog read-path (writes live in doppler-admin)
+      account/            # account dashboard + checkout
+      checkout/success/   # post-payment polling
+      downloads/, support/, tools/{what-is-my-ip,dns-leak-test,webrtc-leak-test}/
+      delete-account/, delete-account/confirm/
+      # Legal: privacy/, terms/, refund/, dpa/, subprocessors/, security/
+      # ~20 SEO landings: vpn-for-{ios,android,macos,windows}/,
+      #   vpn-for-{china,iran,russia,turkey,uae,...}/, vless-vpn/,
+      #   no-registration-vpn/, bypass-censorship/, pay-with-crypto/, giveaway/
+    agents/               # human-readable agent surface (not localized)
+    checkout/             # non-localized checkout entry (not localized)
+    cn-check/             # China reachability probe (not localized)
+    q/[slug]/route.ts     # QR short links -> track_qr_scan
+    api/                  # see below
+    sitemap.ts, sitemap-index/, robots.ts, globals.css
+  components/
+    landing/              # SeoLandingPage + PlatformLandingPage (see "Shared page shells")
+    sections/, layout/, blog/, seo/, glyph/, account/, hero/, tools/,
+    downloads/, no-registration/, icons/, ui/, analytics/
+  config/platforms/       # per-platform config for the 4 platform landings
+  lib/                    # services + shared utilities
+    supabase/{client,server,admin,types}.ts   # the ONLY 4 Supabase constructions
+  hooks/
 ```
 
-## Key Patterns
-- **Blog pipeline:** `POST /api/blog/create` (OpenAI generates) → `POST /api/blog/translate` → n8n webhook → Telegram channels + live blog. **These routes live in `doppler-admin`, not here.**
-- **Blog locales:** the site has 44 locales but the blog has **21** (`src/i18n/blog-locales.ts`); translation targets the 20 non-English ones. Non-blog locales 308-redirect `/{locale}/blog/*` → `/en/blog/*`.
-- **Blog API auth:** All blog API routes require `BLOG_API_KEY` header — never expose this key
-- **i18n:** 44 JSON translation files. Use `useTranslations()` hook in Client Components, `getTranslations()` in Server Components
-- **Admin panel** at `/admin-dvpn` has 4 tabs: Dashboard, Messages, VPN Users, Posts — uses Supabase for data
+### API routes (`src/app/api/`)
 
-## Backend Integration
-- **Supabase tables:** `accounts` (R), `vpn_users` (R/W), `vpn_servers` (R/W), `blog_posts` (R/W), `blog_post_translations` (R/W)
-- **External APIs:** OpenAI API (blog generation), Marzban API (`MARZBAN_*` env vars), n8n webhook (blog posting)
-- **Auth model:** Supabase Auth for admin panel login; no auth for public pages
+| Group | Purpose |
+|---|---|
+| `subscribe/`, `account/` | account creation, lookup, devices, deletion |
+| `doppler/{send-code,verify-code}` | email verification codes for account linking |
+| `checkout/`, `revolut/`, `oxapay/`, `promo/` | web payments, webhooks, promo validation |
+| `support/` | tickets, business inquiries, account recovery |
+| `vpn/{connect,disconnect,servers}` | native-client calls — the only routes with real auth (`requireAppApiKey`) |
+| `agents/` | MCP server + agent manifest/pricing/privacy surface |
+| `android/`, `windows/` | release metadata and download proxying |
+| `ip`, `waitlist`, `revalidate`, `dev/grant-pro` | misc |
 
-## Environment Variables
-```
-NEXT_PUBLIC_SUPABASE_URL          # https://fzlrhmjdjjzcgstaeblu.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY     # Supabase anon key
-SUPABASE_SERVICE_ROLE_KEY         # Service role key (server-only)
-OPENAI_API_KEY                    # For blog generation
-BLOG_API_KEY                      # Required header for /api/blog/* routes
-ADMIN_EMAILS                      # Comma-separated list of allowed admin emails (e.g. pochtmanrca@gmail.com)
-MARZBAN_HOST                      # Marzban panel URL
-MARZBAN_USERNAME                  # Marzban admin username
-MARZBAN_PASSWORD                  # Marzban admin password
-```
+## Key patterns
+
+- **Shared page shells.** Two, and new pages should use one rather than hand-rolling markup:
+  - `components/landing/seo-landing-page.tsx` — the article-style SEO landings (China, Iran, …).
+  - `components/landing/platform-landing-page.tsx` — the four platform pages, driven by
+    `config/platforms/{ios,android,macos,windows}.ts`. These were four ~550-line near-copies
+    before; do not fork them again.
+  - Both use `components/landing/seo-landing-metadata.ts` — never hand-write `generateMetadata`
+    with the 44-locale `alternates.languages` fan-out again.
+- **Icons** live in `components/icons/`. `ShieldIcon` was once declared in seven files; add to the
+  shared module instead.
+- **Supabase clients** are constructed in exactly four places, all under `lib/supabase/`. Do not
+  create an ad-hoc client anywhere else.
+- **Blog locales:** 44 site locales but **21** blog locales (`i18n/blog-locales.ts`). Non-blog
+  locales 308-redirect `/{locale}/blog/*` → `/en/blog/*` in `middleware.ts`.
+- **i18n:** `useTranslations()` in Client Components, `getTranslations()` in Server Components. A
+  namespace used client-side must be listed in `i18n/client-namespaces.ts` or `check:i18n` fails.
+- **`"use client"` sits on leaf components**, never on a `page.tsx`. Keep it that way.
+
+## Backend integration
+
+**Tables written/read from here** (by query volume): `accounts`, `vpn_invoices`,
+`verification_codes`, `blog_posts`, `vpn_user_configs`, `checkout_tokens`, `vpn_servers`,
+`promo_codes`, `promo_redemptions`, `support_tickets`, `ad_conversions`, `waitlist`,
+`device_sessions`, `blog_tags`. `blog_post_translations` is read only as an embedded join.
+
+**RPCs:** `delete_account`, `increment_promo_redemptions`, `track_qr_scan`.
+
+**Auth model.** There is no Supabase Auth on the public path. The account code
+(`VPN-XXXX-XXXX-XXXX`) is the only credential, and most routes authorise on knowledge of it alone
+via the service-role client — see *Known issues*.
 
 ## Commands
+
 ```bash
-npm run dev        # Dev server (localhost:3000)
-npm run build      # Production build
-npm run lint       # ESLint
-npm run typecheck  # TypeScript check
+npm run dev         # dev server (localhost:3000)
+npm run build       # production build — runs `prebuild` first (see below)
+npm run start       # serve the production build
+npm run lint        # ESLint
+npm run typecheck   # tsc --noEmit
+npm run check:facts # facts.ts vs the static /public mirrors  ── prebuild gate
+npm run check:i18n  # client namespaces declared             ── prebuild gate
+npm run indexnow    # ping IndexNow for changed URLs
 ```
 
-## Deployment
-Vercel auto-deploys on push to main branch. Domain: `dopplervpn.org` (Vercel DNS).
+`npm run build` runs a **blocking** `prebuild` (`check:facts && check:i18n`). A build that fails
+there has not reached Next.js yet — read the script output, not the Next error.
 
-## Important Notes
-- **Always use `www.dopplervpn.org`** in links and API calls — `dopplervpn.org` redirects strip auth headers
-- `BLOG_API_KEY` must match the value in `admin-bot/.env` — both sides need the same key
-- Images from Unsplash/Pixabay/Pexels are allowed in `next.config` — do not add other external image domains without updating `next.config`
-- Model IDs are env-driven, not hardcoded (`GEMINI_TRANSLATE_MODEL` / `OPENAI_TRANSLATE_MODEL`). Both vendors retire models on a schedule — the previously hardcoded `gemini-2.5-flash` was set to retire 2026-10-16, which would have hard-failed every translation. Check retirement dates before assuming a default still resolves.
-- Slug generation is `doppler-admin/src/lib/slugify.ts` — one implementation, 60-char cap cut at a word boundary, Unicode-aware. Do not add a second copy; that is how 100-char mid-word slugs and the literal slug `undefined` reached production.
+## Known issues
 
-## Related Projects
-- `admin-bot/` — Admin bot that triggers blog pipeline and calls these API routes
-- `bot/` — Customer bot that links to this site for downloads + (planned) checkout
-- `miniapp/` — Mini App that shares the same Supabase backend
+- **The account ID is a bearer password.** 30 of 42 API routes use the service-role client and
+  authorise purely on a submitted `account_id`; only `/api/vpn/*` checks a real secret. The fix is
+  a signed, expiring session token minted by the verify-code flow — it touches all three native
+  clients, so it is a cross-platform change, not a web-only one.
+- **Rate limiting is in-memory** (`lib/rate-limit.ts`) and therefore per-serverless-instance. It is
+  best-effort, not a security boundary.
+- **CSP allows `script-src 'unsafe-inline'`** (`next.config.ts`) — deliberate, because nonces would
+  break static generation, but it removes CSP's XSS value.
+- **No test suite yet.** See `.github/workflows/ci.yml` for what is gated today.
+
+## Important notes
+
+- **Always use `www.dopplervpn.org`** in links and API calls — the apex redirects and that strips
+  auth headers. `vercel.json` holds the redirect; `middleware.ts` explains the split.
+- **Never hardcode a price, a contact address or a product fact** — `lib/facts.ts` owns them, and
+  `check:facts` enforces agreement with the static mirrors in `/public`.
+- **Never hardcode the site URL** — `lib/site-url.ts` / `SITE_URL` in `lib/facts.ts`.
+- Images from Unsplash/Pixabay/Pexels are allowed in `next.config.ts`; adding another external
+  image host requires updating `images.remotePatterns`.
+- Migrations for the whole product live in `supabase/migrations/`. Do not start a second
+  migrations directory.
+
+## Related repositories
+
+- `doppler-admin/` — admin dashboard, blog write-path, AI translation pipeline
+- `doppler-infra/` — **private**: node config, n8n workflows, ops runbooks
+- `doppler-apple/`, `doppler-android/`, `doppler-windows/` — the native clients
+- `doppler-support-bot/` — `@DopplerSupportBot`, which links here for downloads and checkout

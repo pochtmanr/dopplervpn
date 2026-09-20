@@ -21,34 +21,43 @@ Next.js 15 (App Router) on Vercel.
 
 ```
 src/
+  middleware.ts          www redirect, locale routing, click-id cookie, blog 410s
   app/
     [locale]/            44 locale routes — landing, blog, downloads, support,
                          account, checkout, tools, legal pages, ~20 SEO pages
-    admin-dvpn/          Legacy admin surface (the live admin is doppler-admin)
+    agents/              Human-readable agent surface (not localized)
+    checkout/            Non-localized checkout entry
+    cn-check/            China reachability probe
+    q/[slug]/            QR short links
     api/
-      vpn/               VPN management routes
-      checkout/  revolut/  oxapay/  promo/     payments
+      vpn/               Native-client routes (the only ones with real auth)
+      checkout/  revolut/  oxapay/  promo/      payments
       account/  subscribe/  support/  doppler/  accounts + support
       agents/            MCP server + agent manifest surface
-    auth/                Supabase auth callbacks
-    robots.ts  sitemap.ts
-  components/            Shared UI
+      android/  windows/  release metadata and download proxying
+    robots.ts  sitemap.ts  sitemap-index/  globals.css
+  components/            Shared UI — see components/landing for the page shells
+  config/platforms/      Per-platform config for the four platform landings
   i18n/                  next-intl config, routing, blog-locale list
-  lib/                   Supabase client, shared helpers
-  fonts/
+  lib/                   Supabase clients, payment/email services, helpers
+  hooks/
 messages/                44 locale JSON files
-infrastructure/          VPN node ops tooling — xray, relay, node-sync, monitoring
 supabase/migrations/     Database migrations for the whole product
 scripts/                 Build-time gates and utilities
 ```
 
 ## Getting started
 
+Node 20 or newer.
+
 ```bash
 npm install
-cp .env.local.example .env.local     # fill in the values
+cp .env.local.example .env.local     # then fill it in — see Environment below
 npm run dev                          # http://localhost:3000
 ```
+
+The app will not boot without the Supabase values. Everything else degrades gracefully:
+payments, email and analytics simply no-op when their keys are absent.
 
 ## Commands
 
@@ -56,6 +65,7 @@ npm run dev                          # http://localhost:3000
 |---|---|
 | `npm run dev` | Dev server |
 | `npm run build` | Production build — **runs `prebuild` first** |
+| `npm run start` | Serve the production build |
 | `npm run typecheck` | TypeScript, no emit |
 | `npm run lint` | ESLint |
 | `npm run check:facts` | Verifies the agent-facing fact surface is consistent |
@@ -67,17 +77,20 @@ either fails** — that is deliberate, and `scripts/` is load-bearing.
 
 ## Environment
 
-Copy `.env.local.example`. Required names only — values are never committed:
+`.env.local.example` documents **every** variable the code reads, grouped by subsystem and
+annotated with what breaks when it is missing. Copy it and fill it from the password manager or
+the Vercel project; values are never committed.
 
-```
-NEXT_PUBLIC_SUPABASE_URL          NEXT_PUBLIC_SUPABASE_ANON_KEY
-SUPABASE_SERVICE_ROLE_KEY         BLOG_API_KEY
-OPENAI_API_KEY                    ADMIN_EMAILS
-MARZBAN_HOST                      MARZBAN_USERNAME / MARZBAN_PASSWORD
-```
+The required set is Supabase (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+`SUPABASE_SERVICE_ROLE_KEY`) plus `NEXT_PUBLIC_SITE_URL` in production. If you add a
+`process.env.X`, add `X` to `.env.local.example` in the same commit.
 
 ## Things worth knowing
 
+- **This repository is public.** No credentials, node IPs, VPS hostnames, personal addresses,
+  traffic or revenue figures, or internal QA lists. Server-side ops live in the private
+  `doppler-infra` repo. A Supabase `service_role` key once reached this history inside a stray
+  scratch file — `.gitignore` is deliberately broad, and it is not a substitute for looking.
 - **Always link to `www.dopplervpn.org`.** The apex domain redirects, and the redirect strips
   auth headers — API calls to the apex will fail in ways that look like auth bugs.
 - **The blog has 21 locales, the site has 44.** Translation targets the 20 non-English blog
@@ -92,5 +105,6 @@ MARZBAN_HOST                      MARZBAN_USERNAME / MARZBAN_PASSWORD
 
 ## Related
 
-`doppler-admin` (admin + blog writes) · `doppler-support-bot` (calls `/api/checkout/init`) ·
+`doppler-admin` (admin + blog writes) · `doppler-infra` (**private** — node config, n8n, ops) ·
+`doppler-support-bot` (calls `/api/checkout/init`) ·
 [`../SUBSCRIPTION-AND-ANTIFRAUD.md`](../SUBSCRIPTION-AND-ANTIFRAUD.md) · [`DESIGN.md`](DESIGN.md)
