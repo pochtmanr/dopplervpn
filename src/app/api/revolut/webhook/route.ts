@@ -2,7 +2,7 @@ import { NextRequest, NextResponse, after } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { getOrder, type RevolutOrder } from '@/lib/revolut';
 import { firePostback } from '@/lib/postback';
-import crypto from 'crypto';
+import { verifyRevolutSignature } from '@/lib/revolut-webhook';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -34,29 +34,6 @@ function log(stage: string, data: Record<string, unknown>) {
   console.log(`[revolut-webhook] ${stage}`, JSON.stringify(data));
 }
 
-function verifySignature(rawBody: string, signatureHeader: string, timestamp: string): boolean {
-  const secret = process.env.REVOLUT_WEBHOOK_SECRET;
-  if (!secret) throw new Error('REVOLUT_WEBHOOK_SECRET is not configured');
-
-  // Revolut sends: Revolut-Signature: v1=<hmac_hex>[,v1=<hmac_hex>...]
-  // Payload to sign: "v1.<timestamp>.<rawBody>"
-  const signatures = signatureHeader.split(',').map((s) => s.trim());
-  const payload = `v1.${timestamp}.${rawBody}`;
-  const expected = crypto
-    .createHmac('sha256', secret)
-    .update(payload)
-    .digest('hex');
-
-  return signatures.some((sig) => {
-    const hash = sig.startsWith('v1=') ? sig.slice(3) : null;
-    if (!hash) return false;
-    try {
-      return crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(expected));
-    } catch {
-      return false;
-    }
-  });
-}
 
 export async function POST(req: NextRequest) {
   const rawBody = await req.text();
@@ -68,7 +45,6 @@ export async function POST(req: NextRequest) {
     hasSig: !!signatureHeader,
     hasTs: !!timestamp,
     tsRaw: timestamp, // log raw value so format is visible in Vercel logs
-    sigPrefix: signatureHeader.slice(0, 10),
   });
 
   if (!signatureHeader || !timestamp) {
@@ -99,7 +75,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    if (!verifySignature(rawBody, signatureHeader, timestamp)) {
+    if (!verifyRevolutSignature(rawBody, signatureHeader, timestamp)) {
       log('reject_bad_signature', {});
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }

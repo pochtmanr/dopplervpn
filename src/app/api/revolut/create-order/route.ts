@@ -4,6 +4,7 @@ import { createOrder } from '@/lib/revolut';
 import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
 import { readClickIdCookie } from '@/lib/click-id';
+import { generateAccountId } from '@/lib/account-id';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,13 +14,6 @@ const PLAN_AMOUNTS: Record<string, { amount: number; name: string; days: number 
   '6month': { amount: 2999, name: 'Doppler VPN Pro — 6 Months', days: 180 },
   yearly: { amount: 3999, name: 'Doppler VPN Pro — Yearly', days: 365 },
 };
-
-function generateAccountId(): string {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  const seg = () =>
-    Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
-  return `VPN-${seg()}-${seg()}-${seg()}`;
-}
 
 export async function POST(req: NextRequest) {
   const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'revolut-checkout' });

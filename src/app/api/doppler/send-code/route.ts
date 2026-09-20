@@ -15,8 +15,7 @@ const MAX_CODES_PER_WINDOW = 3;
  * POST /api/doppler/send-code
  *
  * Issues a 6-digit account-linking code and mails it. Replaces the dead
- * `http://72.61.87.54/api/doppler` service the mobile clients were still
- * pointed at. Mirrors the Telegram bot's flow
+ * self-hosted `/api/doppler` service the mobile clients were still pointed at. Mirrors the Telegram bot's flow
  * (doppler-bot/src/handlers/email-verify.ts) against the same
  * `verification_codes` table.
  *

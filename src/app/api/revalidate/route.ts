@@ -19,9 +19,8 @@ export async function POST(request: Request) {
   const secret = process.env.REVALIDATE_SECRET;
 
   // Return rather than throw. An unset env var means "nobody can call this",
-  // which is a 401 — not a 500. `requireBlogApiKey` in lib/api-auth.ts throws
-  // here, which turns a config mistake into an opaque server error; this route
-  // deliberately does not copy that.
+  // which is a 401 — not a 500. Throwing would turn a config mistake into an
+  // opaque server error.
   if (!secret) {
     return NextResponse.json({ error: "Not configured" }, { status: 401 });
   }

@@ -1,5 +1,10 @@
+import 'server-only';
 import nodemailer from 'nodemailer';
 import { isRtlLocale } from '@/i18n/routing';
+import { CONTACT } from '@/lib/facts';
+
+/** Canonical support address. `lib/facts.ts` owns it; never re-type it here. */
+const CONTACT_SUPPORT_EMAIL = CONTACT.supportEmail;
 
 /** Escape HTML entities to prevent XSS in email templates. */
 function escapeHtml(str: string): string {
@@ -102,7 +107,7 @@ export async function sendWelcomeEmail({
   const safePlanName = escapeHtml(planName);
   const safeExpiresAt = escapeHtml(expiresAt);
 
-  const supportEmail = 'support@simnetiq.store';
+  const supportEmail = CONTACT_SUPPORT_EMAIL;
   const supportTelegram = '@DopplerSupportBot';
   const footerHtml = escapeHtml(
     interpolate(w.footer, { supportEmail, supportTelegram }),
@@ -143,7 +148,7 @@ export async function sendWelcomeEmail({
 </html>`;
 
   await transporter.sendMail({
-    from: '"Doppler VPN" <support@simnetiq.store>',
+    from: `"Doppler VPN" <${CONTACT_SUPPORT_EMAIL}>`,
     to,
     subject: w.subject,
     html,
@@ -173,7 +178,7 @@ export async function sendVerificationCodeEmail({
 }: VerificationCodeEmailParams) {
   const transporter = getTransporter();
   const safeCode = escapeHtml(code);
-  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || 'support@simnetiq.store';
+  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT_SUPPORT_EMAIL;
 
   const html = `<!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -198,7 +203,7 @@ export async function sendVerificationCodeEmail({
       <tr><td style="padding:24px 32px 28px 32px;border-top:1px solid #f1f5f9;">
         <p style="margin:0;font-size:12px;color:#94a3b8;line-height:1.5;">
           If you didn't request this, you can safely ignore this email — nothing was changed on your account.<br>
-          Need help? <a href="mailto:support@simnetiq.store" style="color:#2563eb;text-decoration:none;">support@simnetiq.store</a>
+          Need help? <a href="mailto:${CONTACT_SUPPORT_EMAIL}" style="color:#2563eb;text-decoration:none;">${CONTACT_SUPPORT_EMAIL}</a>
         </p>
       </td></tr>
     </table>
@@ -215,7 +220,7 @@ export async function sendVerificationCodeEmail({
     `This code expires in ${expiresInMinutes} minutes.`,
     '',
     "If you didn't request this, you can safely ignore this email.",
-    'Need help? support@simnetiq.store',
+    `Need help? ${CONTACT_SUPPORT_EMAIL}`,
   ].join('\n');
 
   await transporter.sendMail({
@@ -291,7 +296,7 @@ export async function sendReceiptEmail({
   const safeExpires = escapeHtml(localeDateString(expiresAt, resolvedLocale));
 
   const subject = interpolate(r.subject, { plan: planLabel });
-  const supportEmail = 'support@simnetiq.store';
+  const supportEmail = CONTACT_SUPPORT_EMAIL;
   const refundText = interpolate(r.refund, { email: supportEmail });
   // Inject the support email link into the refund line.
   const refundHtml = escapeHtml(refundText).replace(
@@ -415,12 +420,75 @@ export async function sendReceiptEmail({
     r.footer,
   ].join('\n');
 
-  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || 'support@simnetiq.store';
+  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT_SUPPORT_EMAIL;
 
   await transporter.sendMail({
     from: `"Doppler VPN" <${fromAddress}>`,
     to,
     subject,
+    html,
+    text,
+  });
+}
+
+/* ── Account ID recovery email ──────────────────────────────────── */
+
+/**
+ * Mail an account ID to the address on file.
+ *
+ * Two callers, one rule: **never return an account ID in an HTTP response to a
+ * caller who only proved knowledge of an email address.** The ID is a bearer
+ * credential, so email is the ownership proof — the address on file receives
+ * it, and the requester learns nothing. `/api/support/restore-account` is the
+ * front-door recovery flow; `/api/subscribe/create-account` falls back to this
+ * when the address already has an account.
+ *
+ * Send failures are the caller's to swallow: both callers must return an
+ * identical response whether or not an account was found, or the endpoint
+ * becomes an account-enumeration oracle.
+ */
+export async function sendAccountIdEmail({
+  to,
+  accountId,
+}: {
+  to: string;
+  accountId: string;
+}) {
+  const transporter = getTransporter();
+  const fromAddress =
+    process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT_SUPPORT_EMAIL;
+  const safeAccountId = escapeHtml(accountId);
+
+  const html = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0a0a0a; color: #ffffff; border-radius: 12px;">
+      <h2 style="margin: 0 0 16px; color: #ffffff;">Doppler VPN</h2>
+      <p style="color: #a1a1aa; margin: 0 0 24px;">You requested your Account ID. Here it is:</p>
+      <div style="background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 20px; text-align: center; margin: 0 0 24px;">
+        <p style="color: #a1a1aa; font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1px;">Account ID</p>
+        <p style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0; font-family: monospace; letter-spacing: 2px;">${safeAccountId}</p>
+      </div>
+      <p style="color: #a1a1aa; margin: 0 0 16px;">Use this ID to manage your subscription and access your VPN services.</p>
+      <a href="https://www.dopplervpn.org/account" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">Go to Doppler VPN</a>
+      <hr style="border: none; border-top: 1px solid #27272a; margin: 24px 0;" />
+      <p style="color: #71717a; font-size: 12px; margin: 0;">If you did not request this, you can safely ignore this email.</p>
+    </div>
+  `;
+
+  const text = [
+    'Doppler VPN',
+    '',
+    'You requested your Account ID. Here it is:',
+    accountId,
+    '',
+    'Use this ID to manage your subscription at https://www.dopplervpn.org/account',
+    '',
+    'If you did not request this, you can safely ignore this email.',
+  ].join('\n');
+
+  await transporter.sendMail({
+    from: `"Doppler VPN" <${fromAddress}>`,
+    to,
+    subject: 'Your Doppler VPN Account ID',
     html,
     text,
   });

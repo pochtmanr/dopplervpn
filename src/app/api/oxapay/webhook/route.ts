@@ -67,6 +67,30 @@ export async function POST(req: NextRequest) {
   const status = String(event.status || '').toLowerCase();
   const orderId = event.order_id;
 
+  // Staleness guard for *terminal-failure* callbacks only.
+  //
+  // `date` is inside the HMAC-signed body, so a replayer can't forge a fresh
+  // one — they can only resend a captured callback. The case worth blocking is
+  // an old `expired`/`failed` being replayed to knock a row out of `pending`.
+  // Crediting is already idempotent (`invoice.status === 'paid'` below), so a
+  // replayed success is harmless.
+  //
+  // Deliberately NOT applied to success callbacks, and deliberately 24h rather
+  // than Revolut's 15 min: OxaPay retries until it gets a 200, so a tight
+  // window would turn a 15-minute outage into a permanently rejected payment.
+  // `date` is optional in OxaPay's schema, so absence is never an error.
+  const isTerminalFailure = status === 'expired' || status === 'failed' || status === 'cancelled';
+  if (isTerminalFailure && typeof event.date === 'number' && event.date > 0) {
+    const eventTime = event.date < 1e12 ? event.date * 1000 : event.date;
+    const ageMs = Date.now() - eventTime;
+    if (ageMs > 24 * 60 * 60 * 1000) {
+      log('ignore_stale_failure', { date: event.date, eventTime, ageMs });
+      // 200, not 400: this is a replay we choose to ignore, and a non-200 only
+      // makes OxaPay retry it.
+      return okResponse();
+    }
+  }
+
   if (!orderId) {
     log('reject_missing_order_id', {});
     return NextResponse.json({ error: 'Missing order_id' }, { status: 400 });

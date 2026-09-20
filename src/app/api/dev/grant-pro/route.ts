@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
+import { safeCompare } from '@/lib/api-auth';
 
 /**
  * Dev-only: flip an account to Pro without going through a real payment.
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
   }
 
   const provided = req.headers.get('x-dev-secret') || '';
-  if (provided !== secret) {
+  if (!safeCompare(provided, secret)) {
     return notFound();
   }
 

@@ -1,10 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { rateLimit } from '@/lib/rate-limit';
-import nodemailer from 'nodemailer';
+import { sendAccountIdEmail } from '@/lib/email';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Identical for found, not-found and send-failure — see below. */
+const GENERIC_RESPONSE = {
+  success: true,
+  message: "If an account exists with this email, we've sent the Account ID.",
+};
+
+/**
+ * POST /api/support/restore-account
+ *
+ * Front-door account recovery: mails the account ID to the address on file.
+ *
+ * Every path returns {@link GENERIC_RESPONSE}. Varying the reply on
+ * "no such account" or on an SMTP failure would turn this into an
+ * account-enumeration oracle, which matters more here than usual because the
+ * account ID is the only credential there is.
+ */
 export async function POST(req: NextRequest) {
   // Strict rate limit: 2 restores per minute per IP (prevents email spam)
   const rl = rateLimit(req, { limit: 2, windowMs: 60_000, prefix: 'restore-account' });
@@ -34,57 +50,17 @@ export async function POST(req: NextRequest) {
     }
 
     if (account) {
-      const smtpHost = process.env.SMTP_HOST;
-      const smtpPort = parseInt(process.env.SMTP_PORT || '465', 10);
-      const smtpUser = process.env.SMTP_USER;
-      const smtpPass = process.env.SMTP_PASS;
-
-      if (!smtpHost || !smtpUser || !smtpPass) {
-        console.error('[restore-account] Missing SMTP configuration');
-        // Return same response to not leak whether account exists
-        return NextResponse.json({
-          success: true,
-          message: "If an account exists with this email, we've sent the Account ID.",
-        });
-      }
-
-      const transporter = nodemailer.createTransport({
-        host: smtpHost,
-        port: smtpPort,
-        secure: smtpPort === 465,
-        auth: { user: smtpUser, pass: smtpPass },
-      });
-
       try {
-        await transporter.sendMail({
-          from: `"Doppler VPN" <${smtpUser}>`,
-          to: normalizedEmail,
-          subject: 'Your Doppler VPN Account ID',
-          html: `
-            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0a0a0a; color: #ffffff; border-radius: 12px;">
-              <h2 style="margin: 0 0 16px; color: #ffffff;">Doppler VPN</h2>
-              <p style="color: #a1a1aa; margin: 0 0 24px;">You requested your Account ID. Here it is:</p>
-              <div style="background: #18181b; border: 1px solid #27272a; border-radius: 8px; padding: 20px; text-align: center; margin: 0 0 24px;">
-                <p style="color: #a1a1aa; font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1px;">Account ID</p>
-                <p style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0; font-family: monospace; letter-spacing: 2px;">${account.account_id}</p>
-              </div>
-              <p style="color: #a1a1aa; margin: 0 0 16px;">Use this ID to manage your subscription and access your VPN services.</p>
-              <a href="https://www.dopplervpn.org/account" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">Go to Doppler VPN</a>
-              <hr style="border: none; border-top: 1px solid #27272a; margin: 24px 0;" />
-              <p style="color: #71717a; font-size: 12px; margin: 0;">If you did not request this, you can safely ignore this email.</p>
-            </div>
-          `,
-        });
+        await sendAccountIdEmail({ to: normalizedEmail, accountId: account.account_id });
       } catch (emailError) {
-        console.error('[restore-account] SMTP send failed:', emailError instanceof Error ? emailError.message : emailError);
+        console.error(
+          '[restore-account] SMTP send failed:',
+          emailError instanceof Error ? emailError.message : emailError,
+        );
       }
     }
 
-    // Always return the same response regardless of whether account was found
-    return NextResponse.json({
-      success: true,
-      message: "If an account exists with this email, we've sent the Account ID.",
-    });
+    return NextResponse.json(GENERIC_RESPONSE);
   } catch (error) {
     console.error('[restore-account] Error:', error);
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
