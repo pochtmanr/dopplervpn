@@ -85,6 +85,64 @@ export async function createInvoice(params: OxaPayCreateParams): Promise<OxaPayI
   };
 }
 
+export interface OxaPayWhiteLabel {
+  track_id: string;
+  address: string;
+  pay_amount: string;
+  pay_currency: string;
+  network: string;
+  memo: string | null;
+  qr_code: string;
+  expired_at: number;
+}
+
+export interface OxaPayWhiteLabelParams {
+  amount: number;
+  currency: string;
+  payCurrency: string;
+  network?: string;
+  orderId: string;
+  callbackUrl: string;
+  description: string;
+  lifetimeMinutes?: number;
+}
+
+export async function createWhiteLabel(params: OxaPayWhiteLabelParams): Promise<OxaPayWhiteLabel> {
+  const payload: Record<string, unknown> = {
+    amount: params.amount,
+    currency: params.currency,
+    pay_currency: params.payCurrency,
+    order_id: params.orderId,
+    callback_url: params.callbackUrl,
+    description: params.description,
+    lifetime: params.lifetimeMinutes ?? 60,
+    fee_paid_by_payer: 1,
+    sandbox: isSandbox(),
+  };
+  if (params.network) payload.network = params.network;
+
+  const body = await oxapayFetch('/payment/white-label', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+
+  const data = body?.data;
+  if (!data?.address || data.track_id == null || data.pay_amount == null || data.pay_amount === '') {
+    throw new Error('OxaPay response missing address, track_id, or pay_amount');
+  }
+  const memo = typeof data.memo === 'string' ? data.memo.trim() : '';
+  return {
+    track_id: String(data.track_id),
+    address: String(data.address),
+    pay_amount: String(data.pay_amount),
+    pay_currency: String(data.pay_currency ?? params.payCurrency),
+    network: String(data.network ?? params.network ?? ''),
+    memo: memo || null,
+    qr_code: data.qr_code ? String(data.qr_code) : '',
+    expired_at: Number(data.expired_at ?? 0),
+  };
+}
+
 export interface OxaPayPaymentInfo {
   track_id: string;
   order_id?: string;

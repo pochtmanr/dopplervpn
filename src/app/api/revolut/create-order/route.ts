@@ -5,6 +5,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
 import { readClickIdCookie } from '@/lib/click-id';
 import { generateAccountId } from '@/lib/account-id';
+import { resolvePromoCharge } from '@/lib/promo-checkout';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -87,50 +88,17 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Server-side promo validation (silently ignore invalid promos)
-    let finalAmount = plan.amount;
-    let validatedPromoId: string | null = null;
-    let validatedPromoCode: string | null = null;
-
-    if (promo_code && promo_id) {
-      try {
-        const { data: promo } = await supabase
-          .from('promo_codes')
-          .select('*')
-          .eq('id', promo_id)
-          .eq('code', promo_code.toUpperCase().trim())
-          .eq('is_active', true)
-          .single();
-
-        if (promo) {
-          const notExpired = !promo.expires_at || new Date(promo.expires_at) >= new Date();
-          const notFullyRedeemed = !promo.max_redemptions || promo.current_redemptions < promo.max_redemptions;
-
-          const planMap: Record<string, string> = {
-            monthly: 'monthly',
-            '6month': 'semiannual',
-            yearly: 'annual',
-          };
-          const applicablePlan = !promo.applicable_plans || promo.applicable_plans.includes(planMap[planId] || planId);
-
-          // Check if account already redeemed this promo
-          const { data: existingRedemption } = await supabase
-            .from('promo_redemptions')
-            .select('id')
-            .eq('promo_code_id', promo_id)
-            .eq('account_id', accountId)
-            .maybeSingle();
-
-          if (notExpired && notFullyRedeemed && applicablePlan && !existingRedemption) {
-            finalAmount = Math.round(plan.amount * (1 - promo.discount_percent / 100));
-            validatedPromoId = promo.id;
-            validatedPromoCode = promo.code;
-          }
-        }
-      } catch (promoErr) {
-        console.warn('Promo validation failed, charging full price:', promoErr);
-      }
-    }
+    // Invalid promos stay at the list price. The same helper prices OxaPay.
+    const promoCharge = await resolvePromoCharge(supabase, {
+      promoCode: promo_code,
+      promoId: promo_id,
+      planId,
+      accountId,
+      listCents: plan.amount,
+    });
+    const finalAmount = promoCharge.amount;
+    const validatedPromoId = promoCharge.promoId;
+    const validatedPromoCode = promoCharge.promoCode;
 
     // Paid-campaign attribution. Revolut has no pending invoice row to hang this
     // on — the row is only inserted by the webhook — so the click id travels in

@@ -6,6 +6,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
 import { readClickIdCookie } from '@/lib/click-id';
 import { resolveSiteUrl } from '@/lib/site-url';
+import { resolvePromoCharge } from '@/lib/promo-checkout';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,7 +24,14 @@ export async function POST(req: NextRequest) {
   if (rl) return rl;
 
   try {
-    const { account_id: rawAccountId, plan_id: planId, email, locale: rawLocale } = await req.json();
+    const {
+      account_id: rawAccountId,
+      plan_id: planId,
+      email,
+      locale: rawLocale,
+      promo_code,
+      promo_id,
+    } = await req.json();
 
     const locale = typeof rawLocale === 'string' && (routing.locales as readonly string[]).includes(rawLocale)
       ? rawLocale
@@ -64,6 +72,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
     }
 
+    const promoCharge = await resolvePromoCharge(supabase, {
+      promoCode: promo_code,
+      promoId: promo_id,
+      planId,
+      accountId: rawAccountId,
+      listCents: plan.amount,
+    });
+
     const orderId = crypto.randomUUID();
     const site = resolveSiteUrl(req);
 
@@ -74,7 +90,7 @@ export async function POST(req: NextRequest) {
     returnUrl.searchParams.set('account_id', rawAccountId);
 
     const invoice = await createInvoice({
-      amount: plan.amount / 100,
+      amount: promoCharge.amount / 100,
       currency: 'USD',
       orderId,
       callbackUrl: `${site}/api/oxapay/webhook`,
@@ -94,11 +110,13 @@ export async function POST(req: NextRequest) {
     const { error: insertErr } = await supabase.from('vpn_invoices').insert({
       telegram_user_id: 0,
       plan: `${planId}:${rawAccountId}`,
-      amount: plan.amount,
+      amount: promoCharge.amount,
       currency: 'USD',
       status: 'pending',
       provider: 'oxapay',
       provider_payment_id: orderId,
+      promo_id: promoCharge.promoId,
+      promo_code: promoCharge.promoCode,
       // Paid-campaign attribution. The webhook is a server-to-server call with no
       // cookies, so the click id has to be stashed here to survive to confirmation.
       click_id: readClickIdCookie(req),

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse, after } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { verifyWebhookSignature, type OxaPayWebhookPayload } from '@/lib/oxapay';
 import { firePostback } from '@/lib/postback';
+import { recordPromoRedemption } from '@/lib/promo-checkout';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -59,8 +60,9 @@ export async function POST(req: NextRequest) {
     order_id: event.order_id,
   });
 
-  // Ignore non-invoice (e.g. payout) callbacks
-  if (event.type && event.type !== 'invoice') {
+  // Invoice is the hosted landing checkout. white_label is the Mini App.
+  // Every other type (payout, static_address, donation) stays ignored.
+  if (event.type && event.type !== 'invoice' && event.type !== 'white_label') {
     return okResponse();
   }
 
@@ -126,7 +128,7 @@ export async function POST(req: NextRequest) {
     // row for planId since OxaPay does not echo it back.
     const { data: invoice, error: invoiceErr } = await supabase
       .from('vpn_invoices')
-      .select('id, status, plan, amount, currency, click_id')
+      .select('id, status, plan, amount, currency, click_id, promo_id, promo_code')
       .eq('provider_payment_id', orderId)
       .eq('provider', 'oxapay')
       .maybeSingle();
@@ -190,6 +192,26 @@ export async function POST(req: NextRequest) {
     }
 
     log('account_upgraded', { accountId, newExpiry: newExpiry.toISOString() });
+
+    // Redeem before the row flips to paid. A retry that already inserted the
+    // redemption returns 'already' and does not increment again. A failure
+    // here is logged and does not stop the 200: the paid-status guard above
+    // would otherwise skip the promo on the next delivery, and returning 500
+    // would make OxaPay retry the whole credit.
+    if (invoice.promo_id) {
+      try {
+        const outcome = await recordPromoRedemption(supabase, {
+          promoId: invoice.promo_id,
+          accountId,
+        });
+        log(outcome === 'already' ? 'promo_already_redeemed' : 'promo_redeemed', {
+          code: invoice.promo_code,
+          accountId,
+        });
+      } catch (promoErr) {
+        console.error('[oxapay-webhook] promo_redemption_failed', promoErr);
+      }
+    }
 
     // Flip the pre-inserted invoice row to paid. Note: OxaPay sends amount
     // as decimal — convert back to minor units to match the Revolut convention.

@@ -383,8 +383,6 @@ function SubscribeInner() {
 
     try {
       if (paymentMethod === 'crypto') {
-        // Crypto flow — create OxaPay invoice and redirect to hosted payment page.
-        // Promo codes are not yet wired through the OxaPay route; ignore silently.
         const res = await fetch('/api/oxapay/create-invoice', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -393,6 +391,7 @@ function SubscribeInner() {
             plan_id: selected,
             email: knownEmail || undefined,
             locale,
+            ...(promoApplied ? { promo_code: promoApplied.code, promo_id: promoApplied.promo_id } : {}),
           }),
         });
         const data = await res.json();
