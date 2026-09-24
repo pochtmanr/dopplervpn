@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { Section } from "@/components/ui/section";
 import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import type { Metadata } from "next";
+import { seoTitle } from "@/lib/seo-title";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "about" });
 
   return {
-    title: t("meta.title"),
+    title: seoTitle(t("meta.title")),
     description: t("meta.description"),
     alternates: {
       canonical: `${baseUrl}/${locale}/about`,
@@ -40,11 +41,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         .filter((l) => l !== locale)
         .map((l) => ogLocaleMap[l] || l),
       type: "website",
+      images: [
+        {
+          url: `${baseUrl}/images/og-banner.jpg`,
+          width: 1200,
+          height: 630,
+          alt: t("meta.ogTitle"),
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: t("meta.ogTitle"),
       description: t("meta.ogDescription"),
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }

@@ -188,7 +188,7 @@ export async function sendVerificationCodeEmail({
   <tr><td align="center">
     <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e6e8eb;">
       <tr><td style="padding:28px 32px 8px 32px;">
-        <img src="https://www.dopplervpn.org/logo.png" alt="Doppler VPN" width="40" height="40" style="display:block;border:0;">
+        <img src="https://www.dopplervpn.org/images/iosdopplerlogo.png" alt="Doppler VPN" width="40" height="40" style="display:block;border:0;">
       </td></tr>
       <tr><td style="padding:8px 32px 0 32px;">
         <h1 style="margin:0;font-size:24px;line-height:1.3;color:#0f172a;font-weight:700;">Your verification code</h1>
@@ -324,7 +324,7 @@ export async function sendReceiptEmail({
   <tr><td align="center">
     <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e6e8eb;direction:${dir};">
       <tr><td style="padding:28px 32px 8px 32px;text-align:${align};">
-        <img src="https://www.dopplervpn.org/logo.png" alt="Doppler VPN" width="40" height="40" style="display:block;border:0;">
+        <img src="https://www.dopplervpn.org/images/iosdopplerlogo.png" alt="Doppler VPN" width="40" height="40" style="display:block;border:0;">
       </td></tr>
       <tr><td style="padding:8px 32px 0 32px;text-align:${align};">
         <h1 style="margin:0;font-size:24px;line-height:1.3;color:#0f172a;font-weight:700;">${escapeHtml(r.heading)}</h1>

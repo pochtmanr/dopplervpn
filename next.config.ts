@@ -26,11 +26,11 @@ const isDev = process.env.NODE_ENV === "development";
 // <Link> from /tools would keep the stricter policy and silently fail both.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com https://merchant.revolut.com https://sandbox-merchant.revolut.com`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com https://www.googletagmanager.com https://connect.facebook.net https://merchant.revolut.com https://sandbox-merchant.revolut.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self' https://api4.ipify.org https://api6.ipify.org https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
+  "connect-src 'self' https://api4.ipify.org https://api6.ipify.org https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://connect.facebook.net https://www.facebook.com https://merchant.revolut.com https://sandbox-merchant.revolut.com",
   "frame-src https://merchant.revolut.com https://sandbox-merchant.revolut.com",
   "worker-src 'self' blob:",
   "object-src 'none'",

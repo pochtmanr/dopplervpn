@@ -78,10 +78,15 @@ export function SuccessClient() {
               plan,
               provider,
               body.status === 'failed' ? body.reason || body.revolut_state : undefined,
-              // The verify response already carries the real charge; without it
-              // GA4 accepts `purchase` but reports zero revenue. `orderId` is
-              // GA4's dedupe key, so it must be the actual order reference.
-              { transactionId: orderId, value: body.amount, currency: body.currency },
+              // The verify response carries the real charge in MINOR units
+              // (vpn_invoices.amount, cents) — analytics wants major units, so
+              // divide here. Sending the raw 3999 inflated revenue 100x.
+              // `orderId` is the dedupe key, so it must be the real order ref.
+              {
+                transactionId: orderId,
+                value: typeof body.amount === 'number' ? body.amount / 100 : undefined,
+                currency: body.currency,
+              },
             );
           }
           return;

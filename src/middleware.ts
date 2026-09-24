@@ -9,6 +9,13 @@ import {
   CLICK_ID_SOURCE_COOKIE,
   readClickIdParam,
 } from "./lib/click-id";
+import {
+  ATTR_COOKIE,
+  ATTR_MAX_AGE_SECONDS,
+  landingTouchFromRequest,
+  parseLandingTouch,
+  serializeLandingTouch,
+} from "./lib/attribution";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
@@ -35,6 +42,31 @@ function captureClickId(request: NextRequest, response: NextResponse): NextRespo
 
   response.cookies.set(CLICK_ID_COOKIE, hit.clickId, options);
   response.cookies.set(CLICK_ID_SOURCE_COOKIE, hit.source, options);
+  return response;
+}
+
+/**
+ * Record the channel that brought the visitor (UTM tags, gclid, fbclid, the
+ * external referrer) so a purchase reported later from the payment webhook can
+ * be credited to it. See src/lib/attribution.ts for the overwrite rules.
+ */
+function captureAttribution(request: NextRequest, response: NextResponse): NextResponse {
+  const existing = parseLandingTouch(request.cookies.get(ATTR_COOKIE)?.value);
+  const touch = landingTouchFromRequest(
+    request.nextUrl,
+    request.headers.get("referer"),
+    existing,
+    request.nextUrl.hostname
+  );
+  if (!touch) return response;
+
+  response.cookies.set(ATTR_COOKIE, serializeLandingTouch(touch), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    maxAge: ATTR_MAX_AGE_SECONDS,
+    path: "/",
+  });
   return response;
 }
 
@@ -104,7 +136,7 @@ export async function middleware(request: NextRequest) {
   // Click-id capture rides on this response only: the redirects above all preserve
   // the query string, so the follow-up request captures it on the final URL. That
   // also avoids setting a host-only cookie on the apex that www would never see.
-  return captureClickId(request, intlMiddleware(request));
+  return captureAttribution(request, captureClickId(request, intlMiddleware(request)));
 }
 
 export const config = {

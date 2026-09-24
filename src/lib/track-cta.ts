@@ -1,12 +1,14 @@
 import { track } from "@vercel/analytics";
 
 import { gtagEvent } from "@/lib/ga";
+import { fbqTrack, fbqTrackCustom } from "@/lib/meta-pixel";
 
 /**
- * The site's single CTA event layer. Every call here is DUAL-EMITTED: once to
- * Vercel Analytics (`track`) and once to GA4 (`gtagEvent`). Keeping both means
- * the two sources can be compared before either is trusted, and an ad blocker
- * killing gtag.js does not leave us blind.
+ * The site's single CTA event layer. Every call here is emitted to Vercel
+ * Analytics (`track`), GA4 (`gtagEvent`) and the Meta Pixel (`fbqTrack`).
+ * Keeping several sources means they can be compared before any is trusted,
+ * and an ad blocker killing gtag.js does not leave us blind. Meta events are
+ * held by fbevents.js until the visitor grants the Marketing category.
  *
  * GA4 naming follows Google's reserved/recommended names wherever one exists
  * (`file_download`, `begin_checkout`, `purchase`) so the built-in reports and
@@ -167,6 +169,11 @@ export function trackCta(
       locale: locale ?? "",
     });
   }
+
+  // Meta: `Lead` is a standard event, so ad sets can optimise for it; the
+  // custom twin keeps the platform breakdown for custom conversions.
+  fbqTrack("Lead", { content_name: "app_download", content_category: platform });
+  fbqTrackCustom("AppDownloadClick", { platform, destination, cta_location: location });
 }
 
 export type GetProLocation =
@@ -193,6 +200,8 @@ export function trackGetPro(
     page_path,
     locale: locale ?? "",
   });
+
+  fbqTrackCustom("GetProClick", { cta_location: location });
 }
 
 export function trackAccountIdentified(
@@ -208,6 +217,13 @@ export function trackAccountIdentified(
   });
 
   gtagEvent("account_identified", { mode, page_path, locale: locale ?? "" });
+
+  // A brand-new account is the site's sign-up — reported under GA4's and
+  // Meta's recommended names so both platforms' built-in reports pick it up.
+  if (mode === "new") {
+    gtagEvent("sign_up", { method: "account_code", page_path, locale: locale ?? "" });
+    fbqTrack("CompleteRegistration", { content_name: "account" });
+  }
 }
 
 export function trackCheckoutStarted(
@@ -239,11 +255,20 @@ export function trackCheckoutStarted(
     locale: locale ?? "",
     items: [{ item_id: plan, item_name: plan, price: value, quantity: 1 }],
   });
+
+  fbqTrack("InitiateCheckout", {
+    value,
+    currency,
+    content_ids: [plan],
+    content_type: "product",
+    num_items: 1,
+  });
 }
 
 export interface PurchaseDetails {
-  /** Order id — GA4 dedupes `purchase` on this, so it must be the real one. */
+  /** Order id — the dedupe key on both GA4 and Meta, so it must be the real one. */
   transactionId?: string | null;
+  /** In MAJOR units (dollars, not cents). `vpn_invoices.amount` is cents. */
   value?: number | null;
   currency?: string | null;
 }
@@ -270,17 +295,24 @@ export function trackPurchaseResult(
     return;
   }
 
-  // GA4 standard `purchase`. Without transaction_id/value/currency the event is
-  // accepted but contributes nothing to revenue reporting, which is the only
-  // reason to send it.
+  // GA4 `purchase` is NOT sent from here. The payment webhooks report it via
+  // the Measurement Protocol (lib/purchase-events.ts), which counts every paid
+  // order — including buyers who close the tab, block gtag.js, or pay in the
+  // Telegram Mini App. Sending it here as well would double-count, because GA4
+  // does not reliably dedupe a browser hit against a server one.
+  //
+  // Meta DOES dedupe: this browser `Purchase` and the Conversions API one share
+  // the order id as event id, so Meta keeps one and merges their signals.
   const value = details?.value ?? undefined;
-  gtagEvent("purchase", {
-    transaction_id: details?.transactionId ?? "",
-    value,
-    currency: details?.currency ?? "USD",
-    provider: provider ?? "",
-    items: [
-      { item_id: plan ?? "", item_name: plan ?? "", price: value, quantity: 1 },
-    ],
-  });
+  fbqTrack(
+    "Purchase",
+    {
+      value,
+      currency: details?.currency ?? "USD",
+      content_ids: plan ? [plan] : undefined,
+      content_type: "product",
+      num_items: 1,
+    },
+    details?.transactionId ?? undefined
+  );
 }

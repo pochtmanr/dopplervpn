@@ -13,6 +13,14 @@ const aggregateRating = RATING_DATA
     }
   : undefined;
 
+/**
+ * Stable node ids so every page's JSON-LD points at ONE Organization and ONE
+ * WebSite entity instead of re-declaring anonymous copies. Locale-independent
+ * on purpose: the company and the site are the same entity in every language.
+ */
+export const ORG_ID = "https://www.dopplervpn.org/#organization";
+export const WEBSITE_ID = "https://www.dopplervpn.org/#website";
+
 /** Escape closing script tags to prevent XSS when injecting JSON into <script> */
 function safeJsonLd(obj: unknown): string {
   return JSON.stringify(obj).replace(/<\//g, "<\\/");
@@ -28,6 +36,7 @@ export async function OrganizationSchema({ locale }: LocaleProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORG_ID,
     name: "Doppler VPN",
     url: `https://www.dopplervpn.org/${locale}`,
     logo: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
@@ -80,6 +89,7 @@ export async function ProductSchema({ locale }: LocaleProps) {
       "@type": "Brand",
       name: "Doppler VPN",
     },
+    manufacturer: { "@type": "Organization", "@id": ORG_ID, name: "Doppler VPN" },
     ...(aggregateRating ? { aggregateRating } : {}),
     // Prices derive from the canonical PLANS in lib/facts.ts so the schema can
     // never drift from the live pricing page again.
@@ -95,7 +105,9 @@ export async function ProductSchema({ locale }: LocaleProps) {
         applicableCountry: "US",
         returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: 30,
-        returnMethod: "https://schema.org/ReturnByMail",
+        // No returnMethod: this is a digital subscription refunded on request
+        // (see /refund). The previous ReturnByMail was simply false, and the
+        // property is optional for Google.
         returnFees: "https://schema.org/FreeReturn",
       },
     })),
@@ -286,11 +298,9 @@ export function WebPageSchema({
     name,
     description,
     ...(inLanguage ? { inLanguage } : {}),
-    isPartOf: {
-      "@type": "WebSite",
-      url: isPartOf ?? "https://www.dopplervpn.org",
-      name: "Doppler VPN",
-    },
+    isPartOf: isPartOf
+      ? { "@type": "WebSite", url: isPartOf, name: "Doppler VPN" }
+      : { "@type": "WebSite", "@id": WEBSITE_ID, name: "Doppler VPN" },
   };
 
   return (
@@ -305,14 +315,11 @@ export async function WebsiteSchema({ locale }: LocaleProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
     name: "Doppler VPN",
     url: `https://www.dopplervpn.org/${locale}`,
     inLanguage: ogLocaleMap[locale]?.replace("_", "-") || "en-US",
-    publisher: {
-      "@type": "Organization",
-      name: "Doppler VPN",
-      url: "https://www.dopplervpn.org",
-    },
+    publisher: { "@type": "Organization", "@id": ORG_ID, name: "Doppler VPN" },
   };
 
   return (
@@ -334,6 +341,8 @@ interface ArticleSchemaProps {
    *  user-visible content materially changes. */
   dateModified?: string;
   image?: string;
+  /** BCP 47 tag. Set it on any page that ships in more than one language. */
+  inLanguage?: string;
 }
 
 export function ArticleSchema({
@@ -343,6 +352,7 @@ export function ArticleSchema({
   datePublished,
   dateModified,
   image = "https://www.dopplervpn.org/images/og-banner.jpg",
+  inLanguage,
 }: ArticleSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -352,18 +362,9 @@ export function ArticleSchema({
     image,
     datePublished,
     dateModified: dateModified ?? datePublished,
-    author: {
-      "@type": "Organization",
-      name: "Doppler VPN",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Doppler VPN",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.dopplervpn.org/images/iosdopplerlogo.png",
-      },
-    },
+    ...(inLanguage ? { inLanguage } : {}),
+    author: { "@type": "Organization", "@id": ORG_ID, name: "Doppler VPN" },
+    publisher: { "@type": "Organization", "@id": ORG_ID, name: "Doppler VPN" },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,
@@ -387,11 +388,32 @@ interface BreadcrumbSchemaProps {
   items: BreadcrumbItem[];
 }
 
-export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
+/**
+ * Most call sites pass a literal English "Home" crumb pointing at
+ * `<site>/<locale>`, which put English into every localized BreadcrumbList.
+ * Rather than thread translations through ~15 pages, the root crumb is
+ * localized here from its own URL, using the existing `blog.breadcrumb.home`
+ * string (present in all 44 locales).
+ */
+async function localizeHomeCrumb(items: BreadcrumbItem[]): Promise<BreadcrumbItem[]> {
+  const first = items[0];
+  if (!first || first.name !== "Home") return items;
+  const locale = first.url.match(/^https?:\/\/[^/]+\/([A-Za-z-]+)\/?$/)?.[1];
+  if (!locale || locale === "en") return items;
+  try {
+    const t = await getTranslations({ locale, namespace: "blog.breadcrumb" });
+    return [{ ...first, name: t("home") }, ...items.slice(1)];
+  } catch {
+    return items;
+  }
+}
+
+export async function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
+  const localized = await localizeHomeCrumb(items);
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
+    itemListElement: localized.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,

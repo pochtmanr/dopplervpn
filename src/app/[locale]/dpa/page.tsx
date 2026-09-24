@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Section } from "@/components/ui/section";
 import { routing } from "@/i18n/routing";
 import { seoTitle } from "@/lib/seo-title";
+import { ogLocaleMap } from "@/lib/og-locale-map";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -35,12 +36,15 @@ export async function generateMetadata({
       description,
       url: `${baseUrl}/${locale}/dpa`,
       siteName: "Doppler VPN",
+      locale: ogLocaleMap[locale] || "en_US",
       type: "website",
+      images: [{ url: `${baseUrl}/images/og-banner.jpg`, width: 1200, height: 630, alt: title }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }

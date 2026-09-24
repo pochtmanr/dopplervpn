@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import type { RevolutCheckoutInstance } from '@revolut/checkout';
 import { trackCheckoutStarted } from '@/lib/track-cta';
+import { readConsentFlags } from '@/components/cookie-consent';
 import { AuthPanel, type AuthResult } from '@/components/account/auth-panel';
 import { WelcomeModal } from '@/components/account/welcome-modal';
 import { PageLoader } from '@/components/ui/page-loader';
@@ -383,6 +384,7 @@ function SubscribeInner() {
             plan_id: selected,
             email: knownEmail || undefined,
             locale,
+            consent: readConsentFlags(),
             ...(promoApplied ? { promo_code: promoApplied.code, promo_id: promoApplied.promo_id } : {}),
           }),
         });
@@ -403,6 +405,7 @@ function SubscribeInner() {
         plan_id: selected,
         email: knownEmail || '',
         locale,
+        consent: readConsentFlags(),
         ...(promoApplied ? { promo_code: promoApplied.code, promo_id: promoApplied.promo_id } : {}),
       };
 

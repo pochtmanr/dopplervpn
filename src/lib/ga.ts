@@ -56,13 +56,18 @@ export function gtagEvent(name: string, params: GtagParams = {}): void {
 }
 
 /**
- * Consent Mode v2 update. Only `analytics_storage` ever moves: the cookie
- * banner has exactly two categories (essential / analytics) and no advertising
- * category, so the three ad_* signals stay denied for the life of the session.
+ * Consent Mode v2 update. `analytics_storage` follows the Analytics category;
+ * the three ad_* signals follow the Marketing category (added alongside the
+ * Meta Pixel), so Google Ads conversion modelling works only for visitors who
+ * allowed advertising measurement.
  */
-export function gtagConsentUpdate(analyticsGranted: boolean): void {
+export function gtagConsentUpdate(analyticsGranted: boolean, marketingGranted = false): void {
+  const ads = marketingGranted ? "granted" : "denied";
   callGtag("consent", "update", {
     analytics_storage: analyticsGranted ? "granted" : "denied",
+    ad_storage: ads,
+    ad_user_data: ads,
+    ad_personalization: ads,
   });
 }
 

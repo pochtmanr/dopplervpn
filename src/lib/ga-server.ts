@@ -1,5 +1,7 @@
 import "server-only";
 
+import { clientIdFromGaCookie } from "@/lib/attribution";
+
 /**
  * GA4 Measurement Protocol — server-side events.
  *
@@ -24,26 +26,32 @@ import "server-only";
 const MP_ENDPOINT = "https://www.google-analytics.com/mp/collect";
 const TIMEOUT_MS = 5_000;
 
-/**
- * The `_ga` cookie is `GA1.1.<client_id>` where client_id is `<random>.<ts>`.
- * Google's own MP examples do exactly this split.
- */
-export function clientIdFromGaCookie(raw: string | undefined): string | null {
-  if (!raw) return null;
-  const parts = raw.split(".");
-  if (parts.length < 4) return null;
-  const clientId = `${parts[2]}.${parts[3]}`;
-  return /^\d+\.\d+$/.test(clientId) ? clientId : null;
-}
+export { clientIdFromGaCookie };
 
 export interface ServerEvent {
   name: string;
-  params?: Record<string, string | number | boolean | undefined>;
+  /** `unknown` because ecommerce events carry an `items` array. */
+  params?: Record<string, unknown>;
+}
+
+export interface ServerEventOptions {
+  /**
+   * A client id captured earlier (e.g. at checkout creation) for callers that
+   * have no request cookie to read — the payment webhooks. Wins over the cookie.
+   */
+  clientId?: string | null;
+  /**
+   * The visitor's GA session id at checkout. Sent as `session_id` so GA4 joins
+   * the hit to that session and credits it to the session's source/medium;
+   * without it a server purchase lands as "(not set)".
+   */
+  sessionId?: string | null;
 }
 
 export async function sendServerEvent(
   event: ServerEvent,
-  gaCookie: string | undefined
+  gaCookie: string | undefined,
+  options: ServerEventOptions = {}
 ): Promise<void> {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const apiSecret = process.env.GA_API_SECRET;
@@ -51,7 +59,7 @@ export async function sendServerEvent(
   // no-op rather than a misconfiguration.
   if (!measurementId || !apiSecret) return;
 
-  const known = clientIdFromGaCookie(gaCookie);
+  const known = options.clientId || clientIdFromGaCookie(gaCookie);
   const clientId = known ?? `${Math.floor(Math.random() * 1e10)}.${Math.floor(Date.now() / 1000)}`;
 
   const body = {
@@ -62,6 +70,7 @@ export async function sendServerEvent(
         params: {
           ...event.params,
           ...(known ? {} : { synthetic_client: true }),
+          ...(options.sessionId ? { session_id: options.sessionId } : {}),
           // Without this GA4 treats a Measurement Protocol hit as a
           // non-session event and it never appears in realtime or standard
           // reports — a very common way for MP to look silently broken.
@@ -82,6 +91,6 @@ export async function sendServerEvent(
       cache: "no-store",
     });
   } catch {
-    // Analytics must never surface as a failed download.
+    // Analytics must never surface as a failed download or a failed webhook.
   }
 }

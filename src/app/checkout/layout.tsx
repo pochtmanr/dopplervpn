@@ -4,6 +4,8 @@ import { getMessages } from "next-intl/server";
 
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { GaConsent } from "@/components/analytics/ga-consent";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
+import { MetaConsent } from "@/components/analytics/meta-consent";
 import { CookieConsent } from "@/components/cookie-consent";
 import "@/app/globals.css";
 
@@ -38,6 +40,7 @@ export default async function CheckoutLayout({
     <html lang="en">
       <head>
         <GoogleAnalytics />
+        <MetaPixel />
       </head>
       <body className="min-h-screen bg-zinc-950 text-white antialiased">
         {children}
@@ -45,6 +48,7 @@ export default async function CheckoutLayout({
           <CookieConsent />
         </NextIntlClientProvider>
         <GaConsent />
+        <MetaConsent />
       </body>
     </html>
   );

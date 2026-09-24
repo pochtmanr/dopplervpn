@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { readConsentFlags } from '@/components/cookie-consent';
 
 const PLANS = [
   { id: 'monthly', label: '1 Month', price: '$6.99', perMonth: '$6.99/mo', save: null, best: false },
@@ -114,6 +115,8 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly' }: CheckoutForm
           account_id: validAccountId,
           plan_id: selectedPlan,
           locale: 'en',
+          // Tells the payment webhook which tracking the buyer allowed.
+          consent: readConsentFlags(),
         }),
       });
 
@@ -205,6 +208,8 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly' }: CheckoutForm
           account_id: validAccountId,
           plan_id: selectedPlan,
           locale: 'en',
+          // Tells the payment webhook which tracking the buyer allowed.
+          consent: readConsentFlags(),
         }),
       });
 

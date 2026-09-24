@@ -5,6 +5,7 @@ import { createInvoice } from '@/lib/oxapay';
 import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
 import { readClickIdCookie } from '@/lib/click-id';
+import { parseConsentFlags, readCheckoutAttribution } from '@/lib/attribution';
 import { resolveSiteUrl } from '@/lib/site-url';
 import { resolvePromoCharge } from '@/lib/promo-checkout';
 
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
       locale: rawLocale,
       promo_code,
       promo_id,
+      consent,
     } = await req.json();
 
     const locale = typeof rawLocale === 'string' && (routing.locales as readonly string[]).includes(rawLocale)
@@ -107,7 +109,7 @@ export async function POST(req: NextRequest) {
     //
     // plan format mirrors the Revolut flow: `${planId}:${accountId}` so we
     // can recover both values from the invoice alone.
-    const { error: insertErr } = await supabase.from('vpn_invoices').insert({
+    const invoiceRow = {
       telegram_user_id: 0,
       plan: `${planId}:${rawAccountId}`,
       amount: promoCharge.amount,
@@ -120,7 +122,22 @@ export async function POST(req: NextRequest) {
       // Paid-campaign attribution. The webhook is a server-to-server call with no
       // cookies, so the click id has to be stashed here to survive to confirmation.
       click_id: readClickIdCookie(req),
-    });
+    };
+    // Channel + analytics ids for the webhook's server-side purchase report
+    // (lib/purchase-events.ts). Same reason as click_id: no cookies at webhook time.
+    const attribution = readCheckoutAttribution(
+      req,
+      parseConsentFlags(consent),
+      process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+    );
+    let { error: insertErr } = await supabase
+      .from('vpn_invoices')
+      .insert({ ...invoiceRow, attribution });
+    if (insertErr && /attribution/i.test(insertErr.message ?? '')) {
+      // Migration 010 not applied yet — keep the pending row, lose attribution.
+      console.error('[oxapay-create] attribution_column_missing');
+      ({ error: insertErr } = await supabase.from('vpn_invoices').insert(invoiceRow));
+    }
     if (insertErr) {
       console.error('[oxapay-create] pending_invoice_insert_failed', insertErr);
       // Do not fail the checkout — the webhook will insert on Paid if needed.

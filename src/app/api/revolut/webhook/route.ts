@@ -2,6 +2,8 @@ import { NextRequest, NextResponse, after } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { getOrder, type RevolutOrder } from '@/lib/revolut';
 import { firePostback } from '@/lib/postback';
+import { attributionFromMetadata } from '@/lib/attribution';
+import { reportPurchase } from '@/lib/purchase-events';
 import { verifyRevolutSignature } from '@/lib/revolut-webhook';
 
 // Days credited on a successful web payment.
@@ -193,8 +195,10 @@ export async function POST(req: NextRequest) {
 
         // Log invoice (also seals idempotency for future deliveries).
         // NOTE: vpn_invoices schema = {id, telegram_user_id, plan, amount,
-        // currency, status, provider, provider_payment_id, created_at}.
-        // No `notes` column — do NOT add fields without checking the schema.
+        // currency, status, provider, provider_payment_id, created_at,
+        // click_id, promo_*, attribution}. No `notes` column — do NOT add
+        // fields without checking the schema. `attribution` is deliberately
+        // written by a separate update below, never in this insert.
         const { error: invoiceErr } = await supabase.from('vpn_invoices').insert({
           telegram_user_id: 0,
           plan: `${planId}:${accountId}`,
@@ -219,6 +223,36 @@ export async function POST(req: NextRequest) {
             meta: { locale: metadata.locale, pagePath: `revolut:${planId}` },
           })
         );
+
+        // Analytics + ad platforms (GA4 Measurement Protocol, Meta CAPI). The
+        // attribution snapshot rode in the order metadata from create-order.
+        // It is written to the invoice separately, best-effort, so a missing
+        // `attribution` column can never break the idempotency-sealing insert.
+        const attribution = {
+          ...attributionFromMetadata(metadata),
+          ...(metadata.source === 'miniapp' ? { source: 'telegram_miniapp' } : {}),
+        };
+        after(async () => {
+          const { error: attrErr } = await supabase
+            .from('vpn_invoices')
+            .update({ attribution })
+            .eq('provider_payment_id', orderId)
+            .eq('provider', 'revolut');
+          if (attrErr) log('attribution_write_skipped', { orderId, err: attrErr.message });
+
+          await reportPurchase({
+            orderId,
+            amountMinor: order?.amount ?? 0,
+            currency: order?.currency || 'USD',
+            plan: planId,
+            provider: 'revolut',
+            paymentMethod: detectPaymentMethod(order),
+            accountId,
+            email: customerEmail,
+            attribution,
+            promoCode: metadata.promo_code,
+          });
+        });
 
         // Receipt email (transactional). Must NEVER block the 200 response —
         // Revolut retries non-2xx responses and would double-extend the sub.

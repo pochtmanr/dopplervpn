@@ -1,4 +1,5 @@
 import { ogLocaleMap } from "@/lib/og-locale-map";
+import { ORG_ID } from "@/components/seo/json-ld";
 
 /** Escape closing script tags to prevent XSS when injecting JSON into <script> */
 function safeJsonLd(obj: unknown): string {
@@ -34,7 +35,7 @@ export function BlogPostJsonLd({
 
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: title,
     description,
     image: imageUrl || `${baseUrl}/images/iosdopplerlogo.png`,
@@ -45,14 +46,7 @@ export function BlogPostJsonLd({
       name: authorName || "Doppler Team",
       url: baseUrl,
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Doppler VPN",
-      logo: {
-        "@type": "ImageObject",
-        url: `${baseUrl}/images/iosdopplerlogo.png`,
-      },
-    },
+    publisher: { "@type": "Organization", "@id": ORG_ID, name: "Doppler VPN" },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `${baseUrl}/${locale}/blog/${slug}`,

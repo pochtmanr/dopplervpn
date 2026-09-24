@@ -14,6 +14,8 @@ import {
 } from "@/components/seo/json-ld";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { GaConsent } from "@/components/analytics/ga-consent";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
+import { MetaConsent } from "@/components/analytics/meta-consent";
 import { AnalyticsConsent } from "@/components/analytics-consent";
 import { SpeedInsightsConsent } from "@/components/speed-insights-consent";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -145,6 +147,11 @@ export async function generateMetadata({
     verification: {
       google: "vfzTLNRXO6Wqg4yP5UTzG8jlnVilqSxwsW4cEAOvqx8",
       yandex: "b63f47e62d39cfe2",
+      // Meta Business Manager domain verification. If Meta's crawler balks at
+      // the / -> /<locale> redirect, the fallback is a DNS TXT record.
+      other: {
+        "facebook-domain-verification": "hcua778t4lzy3tlavtsnzs1yudt6eg",
+      },
     },
   };
 }
@@ -188,6 +195,7 @@ export default async function LocaleLayout({
         {/* First in <head> on purpose — the Consent Mode v2 defaults must be
             queued before gtag.js can send anything. See the component. */}
         <GoogleAnalytics />
+        <MetaPixel />
         <OrganizationSchema locale={locale} />
         <ProductSchema locale={locale} />
         <WebsiteSchema locale={locale} />
@@ -200,6 +208,7 @@ export default async function LocaleLayout({
           </NextIntlClientProvider>
         </ThemeProvider>
         <GaConsent />
+        <MetaConsent />
         <AnalyticsConsent />
         <SpeedInsightsConsent />
       </body>

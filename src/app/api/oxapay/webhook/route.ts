@@ -2,6 +2,8 @@ import { NextRequest, NextResponse, after } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { verifyWebhookSignature, type OxaPayWebhookPayload } from '@/lib/oxapay';
 import { firePostback } from '@/lib/postback';
+import type { CheckoutAttribution } from '@/lib/attribution';
+import { reportPurchase } from '@/lib/purchase-events';
 import { recordPromoRedemption } from '@/lib/promo-checkout';
 
 // Days credited on a successful web payment.
@@ -241,6 +243,32 @@ export async function POST(req: NextRequest) {
         meta: { pagePath: `oxapay:${planId}` },
       })
     );
+
+    // Analytics + ad platforms (GA4 Measurement Protocol, Meta CAPI). The
+    // attribution snapshot was stored on the pending row by create-invoice; it
+    // is read separately so a missing column (migration 010 not yet applied)
+    // only costs attribution, never the credit above.
+    const paidCurrency = event.currency || invoice.currency || 'USD';
+    after(async () => {
+      const { data: attrRow } = await supabase
+        .from('vpn_invoices')
+        .select('attribution')
+        .eq('id', invoice.id)
+        .maybeSingle();
+      const stored = (attrRow?.attribution ?? {}) as CheckoutAttribution;
+      await reportPurchase({
+        orderId,
+        amountMinor: paidAmountMinor,
+        currency: paidCurrency,
+        plan: planId,
+        provider: 'oxapay',
+        paymentMethod: 'crypto',
+        accountId,
+        email: event.email,
+        attribution: event.type === 'white_label' ? { ...stored, source: 'telegram_miniapp' } : stored,
+        promoCode: invoice.promo_code,
+      });
+    });
 
     // Best-effort receipt email (never blocks the 200 response).
     if (event.email && process.env.RECEIPT_EMAILS_ENABLED === 'true') {

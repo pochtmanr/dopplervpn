@@ -44,7 +44,7 @@ export function GaConsent() {
   // Its own effect so a route change never re-sends the consent signal.
   useEffect(() => {
     if (!GA_MEASUREMENT_ID || !consentResolved) return;
-    gtagConsentUpdate(consent?.analytics ?? false);
+    gtagConsentUpdate(consent?.analytics ?? false, consent?.marketing ?? false);
   }, [consent, consentResolved]);
 
   useEffect(() => {

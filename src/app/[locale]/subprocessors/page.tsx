@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Section } from "@/components/ui/section";
 import { routing } from "@/i18n/routing";
 import { seoTitle } from "@/lib/seo-title";
+import { ogLocaleMap } from "@/lib/og-locale-map";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -35,12 +36,15 @@ export async function generateMetadata({
       description,
       url: `${baseUrl}/${locale}/subprocessors`,
       siteName: "Doppler VPN",
+      locale: ogLocaleMap[locale] || "en_US",
       type: "website",
+      images: [{ url: `${baseUrl}/images/og-banner.jpg`, width: 1200, height: 630, alt: title }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images: [`${baseUrl}/images/og-banner.jpg`],
     },
   };
 }
@@ -88,10 +92,19 @@ const SUBPROCESSORS = [
     // One row per legal entity — the table keys on `name`, and Google is a
     // subprocessor for two unrelated purposes.
     name: "Google LLC",
-    purpose: "Android payment processing; website analytics (Google Analytics 4)",
+    purpose:
+      "Android payment processing; website analytics (Google Analytics 4); ad measurement signals (only with Marketing cookie consent)",
     location: "United States",
-    data: "In-app purchase records; anonymous website usage analytics, device and browser type, approximate location derived from IP",
+    data: "In-app purchase records; anonymous website usage analytics, device and browser type, approximate location derived from IP; web purchase value and order reference",
     privacy: "https://policies.google.com/privacy",
+  },
+  {
+    name: "Meta Platforms Ireland Ltd",
+    purpose:
+      "Advertising measurement: Meta Pixel and Conversions API (only with Marketing cookie consent)",
+    location: "Ireland (EU); transfers to Meta Platforms Inc., United States",
+    data: "Pages viewed, download/checkout/purchase events and value, browser cookie IDs (_fbp/_fbc), IP address, user agent; hashed email and hashed account ID for purchases",
+    privacy: "https://www.facebook.com/privacy/policy/",
   },
   {
     name: "RevenueCat Inc.",

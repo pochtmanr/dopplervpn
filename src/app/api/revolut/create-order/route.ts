@@ -4,6 +4,7 @@ import { createOrder } from '@/lib/revolut';
 import { rateLimit } from '@/lib/rate-limit';
 import { routing } from '@/i18n/routing';
 import { readClickIdCookie } from '@/lib/click-id';
+import { attributionToMetadata, parseConsentFlags, readCheckoutAttribution } from '@/lib/attribution';
 import { generateAccountId } from '@/lib/account-id';
 import { resolvePromoCharge } from '@/lib/promo-checkout';
 
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
   if (rl) return rl;
 
   try {
-    const { account_id: rawAccountId, plan_id: planId, email, promo_code, promo_id, locale: rawLocale } = await req.json();
+    const { account_id: rawAccountId, plan_id: planId, email, promo_code, promo_id, locale: rawLocale, consent } = await req.json();
     const locale = typeof rawLocale === 'string' && (routing.locales as readonly string[]).includes(rawLocale)
       ? rawLocale
       : 'en';
@@ -104,6 +105,13 @@ export async function POST(req: NextRequest) {
     // on — the row is only inserted by the webhook — so the click id travels in
     // the order metadata, which the webhook reads back via getOrder().
     const clickId = readClickIdCookie(req);
+    // Channel + analytics ids for the webhook's server-side purchase report
+    // (lib/purchase-events.ts), split into flat `a_*` keys for Revolut.
+    const attribution = readCheckoutAttribution(
+      req,
+      parseConsentFlags(consent),
+      process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+    );
 
     const order = await createOrder(
       finalAmount,
@@ -114,6 +122,7 @@ export async function POST(req: NextRequest) {
         plan_id: planId,
         locale,
         ...(clickId ? { click_id: clickId } : {}),
+        ...attributionToMetadata(attribution),
         ...(email ? { email } : {}),
         ...(validatedPromoId ? { promo_id: validatedPromoId, promo_code: validatedPromoCode! } : {}),
       },

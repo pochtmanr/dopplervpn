@@ -27,9 +27,8 @@ import { GA_MEASUREMENT_ID } from "@/lib/ga";
  * instead of being withheld until opt-in the way `analytics-consent.tsx` gates
  * Vercel Analytics. `GaConsent` flips it to 'granted' when the visitor accepts.
  *
- * The three ad_* signals are declared and never updated: the cookie banner has
- * no advertising category, so there is nothing that could legitimately grant
- * them. `wait_for_update` gives the client-side consent bridge a 500 ms window
+ * The three ad_* signals start denied too and are granted only by the banner's
+ * Marketing category (see `gtagConsentUpdate`). `wait_for_update` gives the client-side consent bridge a 500 ms window
  * to restore a stored choice before the first hit is sent, so a returning
  * visitor who already accepted is not counted as denied for one pageview.
  *
