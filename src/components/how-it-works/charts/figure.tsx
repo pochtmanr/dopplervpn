@@ -14,11 +14,14 @@ export function ChartFigure({
   title,
   note,
   source,
+  sourceLabel,
   children,
 }: {
   title: string;
   note?: string;
   source: ChartSource | ChartSource[];
+  /** Translated caption prefix. The source labels themselves stay English. */
+  sourceLabel: string;
   children: ReactNode;
 }) {
   const sources = Array.isArray(source) ? source : [source];
@@ -28,9 +31,10 @@ export function ChartFigure({
       {children}
       <figcaption className="mt-5 border-t border-overlay/10 pt-3 text-xs leading-relaxed text-text-tertiary">
         {note && <span className="block mb-1 text-text-muted">{note}</span>}
-        Source:{" "}
+        {sourceLabel}
+        {": "}
         {sources.map((s, i) => (
-          <span key={s.url}>
+          <span key={i}>
             {i > 0 && "; "}
             <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-accent-teal">
               {s.label}

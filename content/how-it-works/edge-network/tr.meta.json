@@ -1,0 +1,55 @@
+{
+  "step": 3,
+  "title": "Uç Düğüm: Trafiğiniz Nereden Çıkıyor ve Kayıtsızlık Ne Demek",
+  "metaTitle": "VPN Uç Sunucuları, Gecikme ve Kayıtsızlık Ne Demek?",
+  "metaDescription": "Bir VPN çıkış sunucusu ne yapıyor, her 100 km neden yaklaşık 1 ms ekliyor, hangi kayıtsızlık iddiaları mahkemede tuttu ve bir Doppler düğümü neyi saklıyor?",
+  "excerpt": "Uç düğüm, trafiğinizin tünelden çıktığı yer. Ne yaptığı, mesafenin neden milisaniyeye mal olduğu, hangi kayıtsızlık sözlerinin mahkemede tuttuğu ve bizimkinin tam olarak neyi sakladığı burada.",
+  "navLabel": "Doppler Uç Düğümü",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 9,
+  "faq": [
+    {
+      "question": "VPN uç düğümü nedir?",
+      "answer": "Şifreli tünelinizin sonlandığı ve trafiğinizin açık internete devam ettiği sunucudur. İsteklerinizi kendi IP adresiyle iletir; böylece web siteleri gerçek bağlantınızı değil düğümü görür. Doppler'de ayrıca DNS sorgularınızı da bu sunucu çözümler."
+    },
+    {
+      "question": "VPN sunucusuna olan mesafe hızı etkiler mi?",
+      "answer": "Evet. Işık fiberde milisaniyede yaklaşık 200 km yol alır, yani her 100 km mesafe gidiş dönüş süresine en az 1 ms ekler ve gerçek güzergâhlar bunun üstüne çıkar. Doppler uygulaması konumunuz için en hızlı düğümü otomatik olarak seçer."
+    },
+    {
+      "question": "Bir VPN'in gerçekten kayıt tutmadığını nasıl anlarım?",
+      "answer": "Sınandığında ne olduğuna bakın. Polis kapıya dayandığında teslim edecek hiçbir şeyi olmayan birkaç sağlayıcı oldu; kayıt tutmadığını söyleyen bazıları ise IP adreslerini ve bağlantı zamanlarını verdi. Manşetteki sözü değil, sağlayıcının neleri sakladığına dair tam listeyi okuyun."
+    },
+    {
+      "question": "Doppler neleri saklıyor?",
+      "answer": "Gezinme geçmişi, trafik içeriği, DNS sorguları, bant genişliği veya oturum süreleri saklanmaz. Doppler anonim ve toplu sunucu ölçümlerini tutar; yalnızca API oturum açmaları için de IP adresi, anonim hesap kimliği, cihaz kimliği ve zaman kaydını kötüye kullanımı durdurmak amacıyla 90 güne kadar saklar."
+    },
+    {
+      "question": "Doppler bir Birleşik Krallık şirketi, bu gizlilik için sorun mu?",
+      "answer": "Birleşik Krallık bir Five Eyes üyesi ve Soruşturma Yetkileri Yasası telekom operatörleri için veri saklama bildirimlerine izin veriyor. Doppler'in yanıtı mimari: böyle bir talebin arayacağı trafik kayıtları en baştan hiç oluşturulmuyor."
+    },
+    {
+      "question": "Doppler'in kaç ülkede sunucusu var?",
+      "answer": "Doppler birden çok ülkede sunucu işletiyor ve ağlar ile engelleme değiştikçe bu kümeyi değiştiriyor; dolayısıyla uygulamadaki liste her zaman güncel olanıdır. Otomatik seçim sizin için en hızlı kullanılabilir düğümü seçer."
+    }
+  ],
+  "sources": [
+    { "label": "IETF, RFC 3022: Traditional IP Network Address Translator", "url": "https://www.rfc-editor.org/rfc/rfc3022" },
+    { "label": "Cloudflare, Cloudflare's network is the fastest (12 Sep 2021)", "url": "https://blog.cloudflare.com/fastest-internet/" },
+    { "label": "WonderNetwork, global ping statistics (accessed 24 Sep 2026)", "url": "https://wondernetwork.com/pings" },
+    { "label": "Submarine Networks, Hibernia Express connects New York to London in under 58.95 ms (Oct 2015)", "url": "https://www.submarinenetworks.com/en/systems/trans-atlantic/project-express/hibernia-express-connects-new-york-to-london-in-under-58-95ms" },
+    { "label": "ITU-T Recommendation G.114: One-way transmission time", "url": "https://www.itu.int/rec/T-REC-G.114-200305-I/en" },
+    { "label": "Marketing Dive, 53% of mobile users abandon sites that take over 3 seconds to load (Sep 2016)", "url": "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/" },
+    { "label": "The Register, HideMyAss and the LulzSec controversy (26 Sep 2011)", "url": "https://www.theregister.com/2011/09/26/hidemyass_lulzsec_controversy/" },
+    { "label": "TorrentFreak, VPN providers' no-logging claims tested in FBI case (12 Mar 2016)", "url": "https://torrentfreak.com/vpn-providers-no-logging-claims-tested-in-fbi-case-160312/" },
+    { "label": "TorrentFreak, IPVanish no-logging VPN led Homeland Security to Comcast user (2018)", "url": "https://torrentfreak.com/ipvanish-no-logging-vpn-led-homeland-security-to-comcast-user-180505/" },
+    { "label": "TorrentFreak, PureVPN logs helped FBI net alleged cyberstalker (9 Oct 2017)", "url": "https://torrentfreak.com/purevpn-logs-helped-fbi-net-alleged-cyberstalker-171009/" },
+    { "label": "TorrentFreak, VPN server seized to investigate Russian ambassador's assassination (Dec 2017)", "url": "https://torrentfreak.com/vpn-server-seized-to-investigate-russian-ambassadors-assassination-1171219/" },
+    { "label": "Mullvad, Mullvad VPN was subject to a search warrant; customer data not compromised (Apr 2023)", "url": "https://mullvad.net/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised" },
+    { "label": "Windscribe, the Greek court case", "url": "https://windscribe.com/blog/windscribe-greek-court-case/" },
+    { "label": "ExpressVPN, Introducing TrustedServer (17 Apr 2019)", "url": "https://www.expressvpn.com/blog/introducing-trustedserver/" },
+    { "label": "ODNI, Five Eyes Intelligence Oversight and Review Council charter (2025)", "url": "https://www.dni.gov/files/ICIG/Documents/Partnerships/FIORC/FIORC-Charter-2025.pdf" },
+    { "label": "UK Investigatory Powers Act 2016, section 87", "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87" }
+  ]
+}

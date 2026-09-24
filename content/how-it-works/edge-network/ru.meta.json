@@ -1,0 +1,103 @@
+{
+  "step": 3,
+  "title": "Выходной узел: где трафик покидает туннель и что значит «без логов»",
+  "metaTitle": "Выходной узел VPN, задержка и что значит «без логов»",
+  "metaDescription": "Что делает выходной сервер VPN, почему каждые 100 км добавляют около 1 мс, чьи обещания «без логов» выдержали суд, а чьи нет, и что хранит узел Doppler.",
+  "excerpt": "Выходной узел это место, где ваш трафик покидает туннель. Вот чем он занят, почему расстояние стоит миллисекунд, чьи обещания «без логов» выдержали суд и что именно хранит наш.",
+  "navLabel": "Выходной узел Doppler",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 10,
+  "faq": [
+    {
+      "question": "Что такое выходной узел VPN?",
+      "answer": "Это сервер, на котором заканчивается ваш зашифрованный туннель и трафик идёт дальше в открытый интернет. Он пересылает ваши запросы под своим собственным IP-адресом, поэтому сайты видят узел, а не ваше настоящее подключение, а в случае Doppler он ещё и разрешает ваши DNS-запросы."
+    },
+    {
+      "question": "Влияет ли расстояние до VPN-сервера на скорость?",
+      "answer": "Да. Свет в оптоволокне проходит около 200 км за миллисекунду, поэтому каждые 100 км расстояния добавляют минимум 1 мс к времени отклика в обе стороны, а реальные маршруты добавляют ещё больше. Приложение Doppler само выбирает самый быстрый узел для вашего местоположения."
+    },
+    {
+      "question": "Как понять, что VPN действительно не ведёт логи?",
+      "answer": "Посмотрите, что происходило, когда сервис проверяли на деле. Нескольким сервисам было нечего отдать, когда пришла полиция, а другие, рекламировавшие отсутствие логов, выдали IP-адреса и время подключений. Читайте полный перечень того, что сервис всё-таки хранит, а не только громкое обещание."
+    },
+    {
+      "question": "Какие данные хранит Doppler?",
+      "answer": "Ни истории браузера, ни содержимого трафика, ни DNS-запросов, ни объёма трафика, ни длительности сессий. Doppler хранит анонимные агрегированные метрики серверов и, только для авторизации в API, запись с IP-адресом, анонимным идентификатором аккаунта, идентификатором устройства и временем, до 90 дней для защиты от злоупотреблений."
+    },
+    {
+      "question": "Doppler зарегистрирован в Великобритании. Это проблема для приватности?",
+      "answer": "Великобритания входит в Five Eyes, а её Закон о следственных полномочиях допускает предписания о хранении данных для операторов связи. Ответ Doppler лежит в архитектуре: записи о трафике, которые такой запрос стал бы искать, изначально не создаются."
+    },
+    {
+      "question": "В скольких странах у Doppler есть серверы?",
+      "answer": "Doppler держит серверы в нескольких странах и меняет их набор по мере того, как меняются сети и блокировки, поэтому список в приложении всегда актуальный. Автоматический выбор берёт самый быстрый доступный вам узел."
+    }
+  ],
+  "sources": [
+    {
+      "label": "IETF, RFC 3022: Traditional IP Network Address Translator",
+      "url": "https://www.rfc-editor.org/rfc/rfc3022"
+    },
+    {
+      "label": "Cloudflare, Cloudflare's network is the fastest (12 Sep 2021)",
+      "url": "https://blog.cloudflare.com/fastest-internet/"
+    },
+    {
+      "label": "WonderNetwork, global ping statistics (accessed 24 Sep 2026)",
+      "url": "https://wondernetwork.com/pings"
+    },
+    {
+      "label": "Submarine Networks, Hibernia Express connects New York to London in under 58.95 ms (Oct 2015)",
+      "url": "https://www.submarinenetworks.com/en/systems/trans-atlantic/project-express/hibernia-express-connects-new-york-to-london-in-under-58-95ms"
+    },
+    {
+      "label": "ITU-T Recommendation G.114: One-way transmission time",
+      "url": "https://www.itu.int/rec/T-REC-G.114-200305-I/en"
+    },
+    {
+      "label": "Marketing Dive, 53% of mobile users abandon sites that take over 3 seconds to load (Sep 2016)",
+      "url": "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/"
+    },
+    {
+      "label": "The Register, HideMyAss and the LulzSec controversy (26 Sep 2011)",
+      "url": "https://www.theregister.com/2011/09/26/hidemyass_lulzsec_controversy/"
+    },
+    {
+      "label": "TorrentFreak, VPN providers' no-logging claims tested in FBI case (12 Mar 2016)",
+      "url": "https://torrentfreak.com/vpn-providers-no-logging-claims-tested-in-fbi-case-160312/"
+    },
+    {
+      "label": "TorrentFreak, IPVanish no-logging VPN led Homeland Security to Comcast user (2018)",
+      "url": "https://torrentfreak.com/ipvanish-no-logging-vpn-led-homeland-security-to-comcast-user-180505/"
+    },
+    {
+      "label": "TorrentFreak, PureVPN logs helped FBI net alleged cyberstalker (9 Oct 2017)",
+      "url": "https://torrentfreak.com/purevpn-logs-helped-fbi-net-alleged-cyberstalker-171009/"
+    },
+    {
+      "label": "TorrentFreak, VPN server seized to investigate Russian ambassador's assassination (Dec 2017)",
+      "url": "https://torrentfreak.com/vpn-server-seized-to-investigate-russian-ambassadors-assassination-1171219/"
+    },
+    {
+      "label": "Mullvad, Mullvad VPN was subject to a search warrant; customer data not compromised (Apr 2023)",
+      "url": "https://mullvad.net/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised"
+    },
+    {
+      "label": "Windscribe, the Greek court case",
+      "url": "https://windscribe.com/blog/windscribe-greek-court-case/"
+    },
+    {
+      "label": "ExpressVPN, Introducing TrustedServer (17 Apr 2019)",
+      "url": "https://www.expressvpn.com/blog/introducing-trustedserver/"
+    },
+    {
+      "label": "ODNI, Five Eyes Intelligence Oversight and Review Council charter (2025)",
+      "url": "https://www.dni.gov/files/ICIG/Documents/Partnerships/FIORC/FIORC-Charter-2025.pdf"
+    },
+    {
+      "label": "UK Investigatory Powers Act 2016, section 87",
+      "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87"
+    }
+  ]
+}

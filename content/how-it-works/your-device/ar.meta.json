@@ -1,0 +1,57 @@
+{
+  "step": 1,
+  "title": "جهازك: ما الذي يسرّبه، ولماذا لا يحتاج Doppler إلى حساب",
+  "metaTitle": "ماذا يكشف جهازك على الإنترنت؟ وVPN بلا حساب",
+  "metaDescription": "عنوان IP واستعلامات DNS وأسماء المواقع تغادر جهازك قبل تشغيل أي VPN. من يقرأها، ولماذا يسرّب التسجيل في خدمات VPN، وكيف يتصل Doppler بلا بريد إلكتروني ولا حساب.",
+  "excerpt": "عنوان IP الخاص بك، واستعلامات DNS، وأسماء المواقع التي تفتحها، كلها تغادر جهازك قبل أن يبدأ أي VPN. إليك من يستطيع رؤيتها، ولماذا لا يسألك Doppler أبداً عن هويتك.",
+  "navLabel": "جهازك",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 9,
+  "faq": [
+    {
+      "question": "هل يستطيع مزود الإنترنت معرفة المواقع التي أزورها عبر HTTPS؟",
+      "answer": "نعم في العادة. يخفي HTTPS محتوى الصفحة، لكن اسم الموقع يُرسل بنص واضح في مصافحة TLS (حقل SNI) ما لم يدعم متصفحك والموقع معاً خاصية Encrypted Client Hello. كما تكشف استعلامات DNS غير المشفّرة النطاق أيضاً. ومع VPN يسافر الاثنان داخل النفق."
+    },
+    {
+      "question": "هل يمنع الـ VPN تبصيم المتصفح؟",
+      "answer": "لا. تُبنى البصمة من إعدادات متصفحك نفسه، مثل مقاس الشاشة والخطوط والمنطقة الزمنية، والـ VPN لا يغيّر أياً منها. وقد وجدت الدراسات أن ما بين 83.6% و89.4% من المتصفحات فريدة. استخدم متصفحاً يركّز على الخصوصية إن كان التبصيم يقلقك."
+    },
+    {
+      "question": "لماذا لا يطلب Doppler عنوان بريد إلكتروني؟",
+      "answer": "لأن البيانات التي لا تُجمع أصلاً لا يمكن أن تتسرب. ينشئ التطبيق معرّف حساب عشوائياً على جهازك بصيغة VPN-XXXX-XXXX-XXXX، وهذا المعرّف هو اشتراكك. ولا يرتبط به أي بريد إلكتروني أو رقم هاتف أو كلمة مرور."
+    },
+    {
+      "question": "ما البيانات التي يخزّنها Doppler عن جهازي؟",
+      "answer": "معرّف حساب مجهول، ومعرّف جهاز لتطبيق حد الأجهزة في اشتراكك، وسجل مصادقة لطلبات واجهة برمجة التطبيقات (عنوان IP ومعرّف الحساب ومعرّف الجهاز والوقت) يُحفظ حتى 90 يوماً لمنع إساءة الاستخدام. أما نشاط التصفح واستعلامات DNS وحركة البيانات فلا تُسجَّل أبداً."
+    },
+    {
+      "question": "ماذا يحدث إذا فقدت هاتفي أو حذفت التطبيق؟",
+      "answer": "اشتراكك مرتبط بمعرّف حسابك، لا ببريد إلكتروني. احتفظ بنسخة من المعرّف من إعدادات التطبيق حتى تتمكن من استعادته على جهاز جديد. فبدونه لا توجد لدينا أي بيانات شخصية نستطيع استخدامها للعثور على حسابك."
+    },
+    {
+      "question": "كيف أعرف ما الذي يسرّبه جهازي الآن؟",
+      "answer": "تُظهر لك أدوات Doppler المجانية على dopplervpn.org/tools عنوان IP العام وموقعك، وتشغّل اختبار تسريب DNS واختبار تسريب WebRTC. لا تحتاج أي منها إلى حساب، ولا تخزّن أي منها نتائجك."
+    }
+  ],
+  "sources": [
+    { "label": "MaxMind, Geolocation Accuracy", "url": "https://support.maxmind.com/hc/en-us/articles/4407630607131-Geolocation-Accuracy" },
+    { "label": "Mozilla, Firefox brings DNS over HTTPS by default for US users (25 Feb 2020)", "url": "https://blog.mozilla.org/blog/2020/02/25/firefox-continues-push-to-bring-dns-over-https-by-default-for-us-users/" },
+    { "label": "Cloudflare, Encrypted Client Hello: the last puzzle piece to privacy (29 Sep 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "IETF, RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "The Hacker News, WebRTC leaks VPN users' real IP address (Feb 2015)", "url": "https://thehackernews.com/2015/02/webrtc-leaks-vpn-ip-address.html" },
+    { "label": "EFF, Panopticlick: How unique is your web browser? (13 May 2010)", "url": "https://www.eff.org/press/archives/2010/05/13" },
+    { "label": "Laperdrix, Rudametkin, Baudry, Beauty and the Beast: diverting modern web browsers to build unique browser fingerprints (IEEE S&P 2016)", "url": "https://www.semanticscholar.org/paper/fe2f4faec5cf209ae7d8a73100db9cce46ce53d4" },
+    { "label": "US FTC, staff report on ISP data practices (21 Oct 2021)", "url": "https://www.ftc.gov/news-events/news/press-releases/2021/10/ftc-staff-report-finds-many-internet-service-providers-collect-troves-personal-data-users-have-few" },
+    { "label": "UK Investigatory Powers Act 2016, section 87", "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87" },
+    { "label": "Human Rights Watch, Russia: growing internet isolation, control, censorship (18 Jun 2020)", "url": "https://www.hrw.org/news/2020/06/18/russia-growing-internet-isolation-control-censorship" },
+    { "label": "Court of Justice of the EU, Digital Rights Ireland judgment press release (8 Apr 2014)", "url": "https://curia.europa.eu/site/upload/docs/application/pdf/2014-04/cp140054en.pdf" },
+    { "label": "The Register, UFO VPN database exposed (17 Jul 2020)", "url": "https://www.theregister.com/2020/07/17/ufo_vpn_database/" },
+    { "label": "Kaspersky, SuperVPN, GeckoVPN and ChatVPN user data leak (16 Mar 2021)", "url": "https://www.kaspersky.com/blog/supervpn-geckovpn-chatvopn-leak/39029/" },
+    { "label": "vpnMentor, SuperVPN data breach report (2023)", "url": "https://www.vpnmentor.com/news/report-super-vpn-breach/" },
+    { "label": "Have I Been Pwned (count as of September 2026)", "url": "https://haveibeenpwned.com/" },
+    { "label": "Verizon, 2026 Data Breach Investigations Report, executive summary", "url": "https://www.verizon.com/business/resources/executivebriefs/2026-dbir-executive-summary.pdf" },
+    { "label": "Regulation (EU) 2016/679 (GDPR), Article 5", "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj" },
+    { "label": "FIDO Alliance, World Passkey Day 2026 report (7 May 2026)", "url": "https://fidoalliance.org/fido-alliance-reports-accelerating-global-passkey-adoption-on-world-passkey-day-2026/" }
+  ]
+}

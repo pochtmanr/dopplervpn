@@ -1,0 +1,57 @@
+{
+  "step": 1,
+  "title": "دستگاه شما چه چیزی لو می‌دهد، و چرا Doppler به حساب کاربری نیاز ندارد",
+  "metaTitle": "دستگاه شما چه اطلاعاتی لو می‌دهد؟ VPN بدون ثبت‌نام",
+  "metaDescription": "نشانی IP، درخواست‌های DNS و نام سایت‌ها پیش از روشن شدن هر VPN از دستگاه شما بیرون می‌روند. ببینید چه کسی آن‌ها را می‌خواند و چرا Doppler ایمیل نمی‌خواهد.",
+  "excerpt": "نشانی IP شما، درخواست‌های DNS شما و نام سایت‌هایی که باز می‌کنید، همه پیش از روشن شدن VPN از دستگاه بیرون می‌روند. اینجا می‌بینید چه کسی آن‌ها را می‌بیند و چرا Doppler هرگز نمی‌پرسد شما کی هستید.",
+  "navLabel": "دستگاه شما",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 9,
+  "faq": [
+    {
+      "question": "آیا ارائه‌دهنده اینترنت می‌فهمد چه سایت‌هایی را با HTTPS باز می‌کنم؟",
+      "answer": "معمولاً بله. HTTPS محتوای صفحه را پنهان می‌کند، اما نام سایت به صورت متن ساده در دست‌دهی TLS (فیلد SNI) فرستاده می‌شود، مگر آنکه هم مرورگر شما و هم سایت از Encrypted Client Hello پشتیبانی کنند. درخواست‌های DNS رمزنگاری‌نشده هم دامنه را لو می‌دهند. با یک VPN، هر دو داخل تونل سفر می‌کنند."
+    },
+    {
+      "question": "آیا VPN جلوی اثر انگشت مرورگر را می‌گیرد؟",
+      "answer": "خیر. اثر انگشت از روی تنظیمات خود مرورگر ساخته می‌شود، مثل اندازه‌ی صفحه، فونت‌ها و منطقه‌ی زمانی، و VPN این‌ها را عوض نمی‌کند. پژوهش‌ها نشان داده‌اند 83.6% تا 89.4% مرورگرها یکتا هستند. اگر اثر انگشت‌گیری نگرانتان می‌کند، از مرورگری استفاده کنید که روی حریم خصوصی تمرکز دارد."
+    },
+    {
+      "question": "چرا Doppler ایمیل نمی‌خواهد؟",
+      "answer": "چون داده‌ای که هرگز جمع نشود نمی‌تواند نشت کند. اپلیکیشن روی دستگاه شما یک شناسه‌ی حساب تصادفی به شکل VPN-XXXX-XXXX-XXXX می‌سازد و همان شناسه، اشتراک شماست. هیچ ایمیل، شماره تلفن یا گذرواژه‌ای به آن گره نخورده است."
+    },
+    {
+      "question": "Doppler چه اطلاعاتی از دستگاه من ذخیره می‌کند؟",
+      "answer": "یک شناسه‌ی حساب ناشناس، یک شناسه‌ی دستگاه برای اعمال محدودیت تعداد دستگاه‌های اشتراک، و یک رکورد احراز هویت برای درخواست‌های API (نشانی IP، شناسه‌ی حساب، شناسه‌ی دستگاه و زمان) که تا 90 روز برای جلوگیری از سوءاستفاده نگه داشته می‌شود. فعالیت مرور، کوئری‌های DNS و ترافیک هرگز ثبت نمی‌شوند."
+    },
+    {
+      "question": "اگر گوشی‌ام را گم کنم یا اپلیکیشن را پاک کنم چه می‌شود؟",
+      "answer": "اشتراک شما به شناسه‌ی حسابتان گره خورده است، نه به یک ایمیل. یک نسخه از شناسه را از تنظیمات اپلیکیشن نگه دارید تا بتوانید روی دستگاه تازه بازیابی‌اش کنید. بدون آن، ما هیچ اطلاعات شخصی‌ای نداریم که بتوانیم با آن حساب شما را پیدا کنیم."
+    },
+    {
+      "question": "چطور بفهمم همین حالا دستگاهم چه چیزی لو می‌دهد؟",
+      "answer": "ابزارهای رایگان Doppler در نشانی dopplervpn.org/tools نشانی IP عمومی و موقعیت شما را نشان می‌دهند، تست نشت DNS و تست نشت WebRTC اجرا می‌کنند. هیچ‌کدام به حساب کاربری نیاز ندارند و هیچ‌کدام نتیجه‌ی شما را ذخیره نمی‌کنند."
+    }
+  ],
+  "sources": [
+    { "label": "MaxMind, Geolocation Accuracy", "url": "https://support.maxmind.com/hc/en-us/articles/4407630607131-Geolocation-Accuracy" },
+    { "label": "Mozilla, Firefox brings DNS over HTTPS by default for US users (25 Feb 2020)", "url": "https://blog.mozilla.org/blog/2020/02/25/firefox-continues-push-to-bring-dns-over-https-by-default-for-us-users/" },
+    { "label": "Cloudflare, Encrypted Client Hello: the last puzzle piece to privacy (29 Sep 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "IETF, RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "The Hacker News, WebRTC leaks VPN users' real IP address (Feb 2015)", "url": "https://thehackernews.com/2015/02/webrtc-leaks-vpn-ip-address.html" },
+    { "label": "EFF, Panopticlick: How unique is your web browser? (13 May 2010)", "url": "https://www.eff.org/press/archives/2010/05/13" },
+    { "label": "Laperdrix, Rudametkin, Baudry, Beauty and the Beast: diverting modern web browsers to build unique browser fingerprints (IEEE S&P 2016)", "url": "https://www.semanticscholar.org/paper/fe2f4faec5cf209ae7d8a73100db9cce46ce53d4" },
+    { "label": "US FTC, staff report on ISP data practices (21 Oct 2021)", "url": "https://www.ftc.gov/news-events/news/press-releases/2021/10/ftc-staff-report-finds-many-internet-service-providers-collect-troves-personal-data-users-have-few" },
+    { "label": "UK Investigatory Powers Act 2016, section 87", "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87" },
+    { "label": "Human Rights Watch, Russia: growing internet isolation, control, censorship (18 Jun 2020)", "url": "https://www.hrw.org/news/2020/06/18/russia-growing-internet-isolation-control-censorship" },
+    { "label": "Court of Justice of the EU, Digital Rights Ireland judgment press release (8 Apr 2014)", "url": "https://curia.europa.eu/site/upload/docs/application/pdf/2014-04/cp140054en.pdf" },
+    { "label": "The Register, UFO VPN database exposed (17 Jul 2020)", "url": "https://www.theregister.com/2020/07/17/ufo_vpn_database/" },
+    { "label": "Kaspersky, SuperVPN, GeckoVPN and ChatVPN user data leak (16 Mar 2021)", "url": "https://www.kaspersky.com/blog/supervpn-geckovpn-chatvopn-leak/39029/" },
+    { "label": "vpnMentor, SuperVPN data breach report (2023)", "url": "https://www.vpnmentor.com/news/report-super-vpn-breach/" },
+    { "label": "Have I Been Pwned (count as of September 2026)", "url": "https://haveibeenpwned.com/" },
+    { "label": "Verizon, 2026 Data Breach Investigations Report, executive summary", "url": "https://www.verizon.com/business/resources/executivebriefs/2026-dbir-executive-summary.pdf" },
+    { "label": "Regulation (EU) 2016/679 (GDPR), Article 5", "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj" },
+    { "label": "FIDO Alliance, World Passkey Day 2026 report (7 May 2026)", "url": "https://fidoalliance.org/fido-alliance-reports-accelerating-global-passkey-adoption-on-world-passkey-day-2026/" }
+  ]
+}

@@ -25,26 +25,28 @@ export function FlowSchema({
   title,
   note,
   source,
+  sourceLabel,
   lanes,
   links,
 }: {
   title: string;
   note?: string;
   source: ChartSource | ChartSource[];
+  sourceLabel: string;
   lanes: SchemaLane[];
   links: string[];
 }) {
   return (
-    <ChartFigure title={title} note={note} source={source}>
+    <ChartFigure title={title} note={note} source={source} sourceLabel={sourceLabel}>
       <div className="flex flex-col md:flex-row md:items-stretch">
-        {lanes.map((lane, i) => (
-          <Fragment key={lane.title}>
+        {lanes.map((lane, li) => (
+          <Fragment key={li}>
             <div className="flex min-w-0 flex-1 flex-col gap-2">
               <div className="flex flex-1 flex-col gap-2 rounded-xl border border-dashed border-overlay/20 p-2.5">
                 <p className="px-1 font-mono text-[11px] uppercase tracking-wider text-text-tertiary">{lane.title}</p>
-                {lane.nodes.map((n) => (
+                {lane.nodes.map((n, ni) => (
                   <div
-                    key={n.label}
+                    key={ni}
                     className={`rounded-lg border px-3 py-2 ${
                       n.tone === "accent"
                         ? "border-accent-teal/50 bg-accent-teal/[0.07]"
@@ -74,12 +76,12 @@ export function FlowSchema({
                 </div>
               )}
             </div>
-            {i < lanes.length - 1 && (
+            {li < lanes.length - 1 && (
               <div className="flex shrink-0 items-center justify-center gap-2 py-2 md:w-24 md:flex-col md:gap-1 md:py-0 md:self-start md:pt-10">
                 <svg className="h-4 w-4 text-accent-teal md:hidden" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m0 0 6.75-6.75M12 19.5l-6.75-6.75" />
                 </svg>
-                <span className="text-center font-mono text-[11px] leading-tight text-text-tertiary">{links[i]}</span>
+                <span className="text-center font-mono text-[11px] leading-tight text-text-tertiary">{links[li]}</span>
                 <svg className="hidden h-4 w-full text-accent-teal md:block rtl:rotate-180" viewBox="0 0 96 16" fill="none" preserveAspectRatio="none" aria-hidden="true">
                   <path d="M4 8h84m0 0-6-5m6 5-6 5" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
                 </svg>

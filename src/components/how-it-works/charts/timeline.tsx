@@ -12,18 +12,20 @@ export function Timeline({
   title,
   note,
   source,
+  sourceLabel,
   events,
 }: {
   title: string;
   note?: string;
   source: ChartSource | ChartSource[];
+  sourceLabel: string;
   events: TimelineEvent[];
 }) {
   return (
-    <ChartFigure title={title} note={note} source={source}>
+    <ChartFigure title={title} note={note} source={source} sourceLabel={sourceLabel}>
       <ol className="relative border-s border-overlay/15 ms-2">
-        {events.map((e) => (
-          <li key={`${e.year}-${e.title}`} className="relative ps-6 pb-6 last:pb-0">
+        {events.map((e, i) => (
+          <li key={i} className="relative ps-6 pb-6 last:pb-0">
             <span
               aria-hidden="true"
               className={`absolute -start-[5px] top-1.5 h-2.5 w-2.5 rounded-full ring-4 ring-bg-secondary ${

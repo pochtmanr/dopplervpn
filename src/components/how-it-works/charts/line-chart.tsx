@@ -15,6 +15,7 @@ export function LineChart({
   title,
   note,
   source,
+  sourceLabel,
   points,
   xLabel,
   yLabel,
@@ -28,6 +29,7 @@ export function LineChart({
   title: string;
   note?: string;
   source: ChartSource | ChartSource[];
+  sourceLabel: string;
   points: LinePoint[];
   xLabel: string;
   yLabel: string;
@@ -48,7 +50,7 @@ export function LineChart({
   const d = points.map((p, i) => `${i ? "L" : "M"}${sx(p.x).toFixed(1)},${sy(p.y).toFixed(1)}`).join(" ");
 
   return (
-    <ChartFigure title={title} note={note} source={source}>
+    <ChartFigure title={title} note={note} source={source} sourceLabel={sourceLabel}>
       <svg viewBox={`0 0 ${W} ${H}`} direction="ltr" role="img" aria-label={title} className="w-full h-auto overflow-visible">
         <title>{title}</title>
         {yTicks.map((t) => (
@@ -92,8 +94,8 @@ export function LineChart({
           </g>
         )}
         {line && <path d={d} fill="none" className="stroke-accent-teal" strokeWidth={2} strokeLinejoin="round" />}
-        {points.map((p) => (
-          <g key={`${p.x}-${p.y}`}>
+        {points.map((p, i) => (
+          <g key={i}>
             <circle cx={sx(p.x)} cy={sy(p.y)} r={p.label ? 4.5 : 3} className="fill-accent-teal-light" />
             {p.label && (
               // Labels past the middle hang to the left of their dot so they stay inside the plot.

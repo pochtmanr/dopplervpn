@@ -34,6 +34,13 @@ const baseUrl = "https://www.dopplervpn.org";
 // (Blog entries below use the post's real updated_at/created_at instead.)
 const STATIC_LASTMOD = new Date("2026-06-09");
 
+// The /how-it-works articles are newer than the rest of the static set and carry
+// their own dateModified in content/how-it-works/<slug>/<locale>.meta.json.
+// Keep the two in step by hand rather than putting fs reads in a 44-shard
+// sitemap; a lastmod older than the article's own date is a contradictory
+// freshness signal on a brand-new URL.
+const HOW_IT_WORKS_LASTMOD = new Date("2026-09-24");
+
 interface SitemapPost {
   slug: string;
   updated_at: string | null;
@@ -303,7 +310,7 @@ export default async function sitemap({
       }
       return {
         url: `${baseUrl}/${locale}${page}`,
-        lastModified: STATIC_LASTMOD,
+        lastModified: isHowItWorksPage(page) ? HOW_IT_WORKS_LASTMOD : STATIC_LASTMOD,
         changeFrequency: changeFreqFor(page),
         priority: priorityFor(page),
         alternates,

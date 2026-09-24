@@ -74,18 +74,50 @@ export function nextStepHref(slug: ArticleSlug): string {
   return i < ARTICLE_SLUGS.length - 1 ? `/how-it-works/${ARTICLE_SLUGS[i + 1]}` : "/tools";
 }
 
-/** Heading text → anchor id. Shared by the renderer and the table of contents. */
+/**
+ * Heading text → anchor id. Unicode-aware: an ASCII-only class stripped every
+ * letter out of a Cyrillic, Arabic or CJK heading and left `id=""` on all of
+ * them. The English articles are unaffected — their headings are pure ASCII,
+ * and punctuation falls outside `\p{L}\p{N}` exactly as it fell outside
+ * `a-z0-9`, so ids indexed before this change still resolve.
+ *
+ * `\p{M}` earns its place: Arabic and Persian carry combining marks (harakat,
+ * hamza above and below) that are Mn, not L, and dropping them would leave an
+ * id that no longer matches the heading a reader sees.
+ *
+ * toLowerCase(), never toLocaleLowerCase(): the locale-aware form maps Turkish
+ * I to ı, which would make an anchor depend on the server's default locale.
+ */
 export function headingId(text: string): string {
-  return text
+  const id = text
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
+    .normalize("NFKC")
+    .replace(/[^\p{L}\p{N}\p{M}\s-]/gu, "")
     .trim()
     .replace(/\s+/g, "-");
+  return id || "section";
+}
+
+/**
+ * Ids in document order, deduped. The markdown renderer and the table of
+ * contents each create one factory and walk the same headings, so the two
+ * always produce the same sequence. Matters most for CJK, where headings carry
+ * no word spaces and collide more readily than English ones.
+ */
+export function createHeadingIdFactory() {
+  const seen = new Map<string, number>();
+  return (text: string): string => {
+    const base = headingId(text);
+    const n = (seen.get(base) ?? 0) + 1;
+    seen.set(base, n);
+    return n === 1 ? base : `${base}-${n}`;
+  };
 }
 
 /** H2s in document order, ignoring fenced blocks, for the table of contents. */
 export function extractH2s(markdown: string): Array<{ id: string; text: string }> {
   const out: Array<{ id: string; text: string }> = [];
+  const nextId = createHeadingIdFactory();
   let inFence = false;
   for (const line of markdown.split("\n")) {
     if (/^\s{0,3}(```|~~~)/.test(line)) {
@@ -96,7 +128,7 @@ export function extractH2s(markdown: string): Array<{ id: string; text: string }
     const m = /^##\s+(.+?)\s*#*$/.exec(line);
     if (m) {
       const text = m[1].replace(/[*_`]/g, "");
-      out.push({ id: headingId(text), text });
+      out.push({ id: nextId(text), text });
     }
   }
   return out;

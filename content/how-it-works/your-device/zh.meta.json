@@ -1,0 +1,57 @@
+{
+  "step": 1,
+  "title": "你的设备：它泄露了什么，以及 Doppler 为什么不需要账号",
+  "metaTitle": "设备上网会泄露什么？免注册 VPN 如何保护你的连接",
+  "metaDescription": "在 VPN 启动之前，IP 地址、DNS 查询和网站名就已离开你的设备。看清谁能读到这些、VPN 注册为何泄露隐私，以及 Doppler 为什么连邮箱都不要。",
+  "excerpt": "你的 IP、你的 DNS 查询、你打开的每一个网站的名字，都在 VPN 启动之前就离开了设备。这里说清楚谁看得到它们，以及 Doppler 为什么从不问你是谁。",
+  "navLabel": "你的设备",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 8,
+  "faq": [
+    {
+      "question": "运营商能看到我访问了哪些 HTTPS 网站吗？",
+      "answer": "通常能。HTTPS 隐藏的是页面内容，但网站名会以明文出现在 TLS 握手的 SNI 字段里，除非你的浏览器和该网站都支持加密客户端问候（ECH）。未加密的 DNS 查询同样会暴露域名。连上 VPN 之后，这两者都走在隧道内部。"
+    },
+    {
+      "question": "VPN 能防止浏览器指纹识别吗？",
+      "answer": "不能。指纹是由浏览器自身的设置拼出来的，比如屏幕尺寸、字体和时区，VPN 不会改变这些。有研究发现 83.6% 到 89.4% 的浏览器是独一无二的。如果你担心指纹识别，请改用注重隐私的浏览器。"
+    },
+    {
+      "question": "Doppler 为什么不要邮箱注册？",
+      "answer": "因为从未被收集的数据不会泄露。应用会在你的设备上生成一个形如 VPN-XXXX-XXXX-XXXX 的随机账户 ID，这个 ID 就是你的订阅。它背后没有绑定任何邮箱、手机号或密码。"
+    },
+    {
+      "question": "Doppler 会保存我设备的哪些信息？",
+      "answer": "一个匿名账户 ID，一个用于执行套餐设备数量限制的设备标识，以及针对 API 请求的认证记录（IP 地址、账户 ID、设备 ID 和时间），为防止滥用最长保留 90 天。浏览活动、DNS 查询和流量从不被记录。"
+    },
+    {
+      "question": "手机丢了或者卸载了应用，订阅还在吗？",
+      "answer": "你的订阅绑定的是账户 ID，不是邮箱。请到应用的设置里把这个 ID 抄下来保存好，换设备时就能恢复。没有它，我们手上也没有任何个人信息可以用来找回你的账户。"
+    },
+    {
+      "question": "怎么查自己的设备现在正在泄露什么？",
+      "answer": "Doppler 在 dopplervpn.org/tools 提供免费工具，可以查看你的公网 IP 和位置，做 DNS 泄漏测试和 WebRTC 泄漏测试。这些工具都不需要账号，也不会保存你的检测结果。"
+    }
+  ],
+  "sources": [
+    { "label": "MaxMind, Geolocation Accuracy", "url": "https://support.maxmind.com/hc/en-us/articles/4407630607131-Geolocation-Accuracy" },
+    { "label": "Mozilla, Firefox brings DNS over HTTPS by default for US users (25 Feb 2020)", "url": "https://blog.mozilla.org/blog/2020/02/25/firefox-continues-push-to-bring-dns-over-https-by-default-for-us-users/" },
+    { "label": "Cloudflare, Encrypted Client Hello: the last puzzle piece to privacy (29 Sep 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "IETF, RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "The Hacker News, WebRTC leaks VPN users' real IP address (Feb 2015)", "url": "https://thehackernews.com/2015/02/webrtc-leaks-vpn-ip-address.html" },
+    { "label": "EFF, Panopticlick: How unique is your web browser? (13 May 2010)", "url": "https://www.eff.org/press/archives/2010/05/13" },
+    { "label": "Laperdrix, Rudametkin, Baudry, Beauty and the Beast: diverting modern web browsers to build unique browser fingerprints (IEEE S&P 2016)", "url": "https://www.semanticscholar.org/paper/fe2f4faec5cf209ae7d8a73100db9cce46ce53d4" },
+    { "label": "US FTC, staff report on ISP data practices (21 Oct 2021)", "url": "https://www.ftc.gov/news-events/news/press-releases/2021/10/ftc-staff-report-finds-many-internet-service-providers-collect-troves-personal-data-users-have-few" },
+    { "label": "UK Investigatory Powers Act 2016, section 87", "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87" },
+    { "label": "Human Rights Watch, Russia: growing internet isolation, control, censorship (18 Jun 2020)", "url": "https://www.hrw.org/news/2020/06/18/russia-growing-internet-isolation-control-censorship" },
+    { "label": "Court of Justice of the EU, Digital Rights Ireland judgment press release (8 Apr 2014)", "url": "https://curia.europa.eu/site/upload/docs/application/pdf/2014-04/cp140054en.pdf" },
+    { "label": "The Register, UFO VPN database exposed (17 Jul 2020)", "url": "https://www.theregister.com/2020/07/17/ufo_vpn_database/" },
+    { "label": "Kaspersky, SuperVPN, GeckoVPN and ChatVPN user data leak (16 Mar 2021)", "url": "https://www.kaspersky.com/blog/supervpn-geckovpn-chatvopn-leak/39029/" },
+    { "label": "vpnMentor, SuperVPN data breach report (2023)", "url": "https://www.vpnmentor.com/news/report-super-vpn-breach/" },
+    { "label": "Have I Been Pwned (count as of September 2026)", "url": "https://haveibeenpwned.com/" },
+    { "label": "Verizon, 2026 Data Breach Investigations Report, executive summary", "url": "https://www.verizon.com/business/resources/executivebriefs/2026-dbir-executive-summary.pdf" },
+    { "label": "Regulation (EU) 2016/679 (GDPR), Article 5", "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj" },
+    { "label": "FIDO Alliance, World Passkey Day 2026 report (7 May 2026)", "url": "https://fidoalliance.org/fido-alliance-reports-accelerating-global-passkey-adoption-on-world-passkey-day-2026/" }
+  ]
+}

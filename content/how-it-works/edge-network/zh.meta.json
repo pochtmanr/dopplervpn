@@ -1,0 +1,103 @@
+{
+  "step": 3,
+  "title": "边缘节点：你的流量在哪里离开隧道，“零日志”又意味着什么",
+  "metaTitle": "VPN 边缘节点：延迟从哪来，“零日志”算不算数",
+  "metaDescription": "VPN 出口服务器做什么，为什么每 100 km 要多花约 1 ms，哪些无日志承诺在法庭上站住了，以及 Doppler 的节点到底保存什么。",
+  "excerpt": "边缘节点是你的流量离开隧道的地方。这里讲它做什么、距离为什么要花掉毫秒、哪些无日志承诺在法庭上站住了，以及我们的节点究竟保存什么。",
+  "navLabel": "Doppler 边缘节点",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 8,
+  "faq": [
+    {
+      "question": "VPN 的边缘节点是什么？",
+      "answer": "它是你的加密隧道终止、流量继续走向开放互联网的那台服务器。它用自己的 IP 地址转发你的请求，所以网站看到的是这个节点而不是你真实的连接；在 Doppler 上，它还负责解析你的 DNS 查询。"
+    },
+    {
+      "question": "VPN 服务器离得远会影响网速吗？",
+      "answer": "会。光在光纤里大约每毫秒走 200 km，所以每 100 km 的距离至少要多花 1 ms 的往返时间，真实路线还要更多。Doppler 应用会自动为你所在的位置挑选最快的节点。"
+    },
+    {
+      "question": "怎么判断一家 VPN 是不是真的不记日志？",
+      "answer": "看它被检验时发生了什么。有几家服务商在警方上门时确实拿不出任何东西，而另一些宣称无日志的，却交出了 IP 地址和连接时间。要读服务商列出的完整存储清单，而不只是那句口号。"
+    },
+    {
+      "question": "Doppler 会保存哪些数据？",
+      "answer": "不保存浏览历史、流量内容、DNS 查询、流量用量和会话时长。Doppler 保存匿名的聚合服务器指标；仅针对 API 认证，还会保存 IP 地址、匿名账户 ID、设备 ID 和时间，为防止滥用最长保留 90 天。"
+    },
+    {
+      "question": "Doppler 是英国公司，这对隐私有影响吗？",
+      "answer": "英国是五眼联盟成员，其《调查权力法》允许向电信运营商发出数据留存通知。Doppler 的答案在架构上：这类要求想找的流量记录，我们从一开始就没有生成。"
+    },
+    {
+      "question": "Doppler 在多少个国家有服务器？",
+      "answer": "Doppler 在多个国家运行服务器，并会随着网络状况和封锁情况的变化调整这份名单，所以应用里显示的始终是当前的名单。自动选择会替你挑出最快的可用节点。"
+    }
+  ],
+  "sources": [
+    {
+      "label": "IETF, RFC 3022: Traditional IP Network Address Translator",
+      "url": "https://www.rfc-editor.org/rfc/rfc3022"
+    },
+    {
+      "label": "Cloudflare, Cloudflare's network is the fastest (12 Sep 2021)",
+      "url": "https://blog.cloudflare.com/fastest-internet/"
+    },
+    {
+      "label": "WonderNetwork, global ping statistics (accessed 24 Sep 2026)",
+      "url": "https://wondernetwork.com/pings"
+    },
+    {
+      "label": "Submarine Networks, Hibernia Express connects New York to London in under 58.95 ms (Oct 2015)",
+      "url": "https://www.submarinenetworks.com/en/systems/trans-atlantic/project-express/hibernia-express-connects-new-york-to-london-in-under-58-95ms"
+    },
+    {
+      "label": "ITU-T Recommendation G.114: One-way transmission time",
+      "url": "https://www.itu.int/rec/T-REC-G.114-200305-I/en"
+    },
+    {
+      "label": "Marketing Dive, 53% of mobile users abandon sites that take over 3 seconds to load (Sep 2016)",
+      "url": "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/"
+    },
+    {
+      "label": "The Register, HideMyAss and the LulzSec controversy (26 Sep 2011)",
+      "url": "https://www.theregister.com/2011/09/26/hidemyass_lulzsec_controversy/"
+    },
+    {
+      "label": "TorrentFreak, VPN providers' no-logging claims tested in FBI case (12 Mar 2016)",
+      "url": "https://torrentfreak.com/vpn-providers-no-logging-claims-tested-in-fbi-case-160312/"
+    },
+    {
+      "label": "TorrentFreak, IPVanish no-logging VPN led Homeland Security to Comcast user (2018)",
+      "url": "https://torrentfreak.com/ipvanish-no-logging-vpn-led-homeland-security-to-comcast-user-180505/"
+    },
+    {
+      "label": "TorrentFreak, PureVPN logs helped FBI net alleged cyberstalker (9 Oct 2017)",
+      "url": "https://torrentfreak.com/purevpn-logs-helped-fbi-net-alleged-cyberstalker-171009/"
+    },
+    {
+      "label": "TorrentFreak, VPN server seized to investigate Russian ambassador's assassination (Dec 2017)",
+      "url": "https://torrentfreak.com/vpn-server-seized-to-investigate-russian-ambassadors-assassination-1171219/"
+    },
+    {
+      "label": "Mullvad, Mullvad VPN was subject to a search warrant; customer data not compromised (Apr 2023)",
+      "url": "https://mullvad.net/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised"
+    },
+    {
+      "label": "Windscribe, the Greek court case",
+      "url": "https://windscribe.com/blog/windscribe-greek-court-case/"
+    },
+    {
+      "label": "ExpressVPN, Introducing TrustedServer (17 Apr 2019)",
+      "url": "https://www.expressvpn.com/blog/introducing-trustedserver/"
+    },
+    {
+      "label": "ODNI, Five Eyes Intelligence Oversight and Review Council charter (2025)",
+      "url": "https://www.dni.gov/files/ICIG/Documents/Partnerships/FIORC/FIORC-Charter-2025.pdf"
+    },
+    {
+      "label": "UK Investigatory Powers Act 2016, section 87",
+      "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87"
+    }
+  ]
+}

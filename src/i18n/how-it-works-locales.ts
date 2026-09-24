@@ -5,7 +5,7 @@
  * Add a locale here only after its `content/how-it-works/<slug>/<locale>.md`
  * files and the `howItWorksHub` namespace land.
  */
-export const HOW_IT_WORKS_LOCALES = ["en"] as const;
+export const HOW_IT_WORKS_LOCALES = ["en", "ru", "fa", "zh", "ar", "tr"] as const;
 
 export function isHowItWorksLocale(locale: string): boolean {
   return (HOW_IT_WORKS_LOCALES as readonly string[]).includes(locale);

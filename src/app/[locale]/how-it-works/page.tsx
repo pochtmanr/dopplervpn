@@ -87,11 +87,11 @@ export default async function HowItWorksHubPage({ params }: PageProps) {
     <>
       <BreadcrumbSchema
         items={[
-          { name: "Home", url: `${baseUrl}/${locale}` },
+          { name: "Doppler VPN", url: `${baseUrl}/${locale}` },
           { name: t("breadcrumb"), url: pageUrl },
         ]}
       />
-      <WebPageSchema url={pageUrl} name={mt("title")} description={mt("description")} type="CollectionPage" />
+      <WebPageSchema url={pageUrl} name={mt("title")} description={mt("description")} type="CollectionPage" inLanguage={ogLocaleMap[locale]?.replace("_", "-") ?? "en-US"} />
       <Navbar />
       <main className="overflow-x-clip">
         <section className="relative overflow-hidden bg-bg-secondary/30 pt-28 sm:pt-32 pb-12 md:pb-16 px-4 sm:px-6 lg:px-8">
@@ -122,7 +122,7 @@ export default async function HowItWorksHubPage({ params }: PageProps) {
               <p>{t("intro.p2")}</p>
             </div>
             <div className="mx-auto max-w-5xl">
-              <JourneySchema />
+              <JourneySchema locale={locale} />
             </div>
           </div>
         </section>

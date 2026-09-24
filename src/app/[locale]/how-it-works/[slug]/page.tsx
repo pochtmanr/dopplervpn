@@ -91,17 +91,19 @@ export default async function HowItWorksArticlePage({ params }: PageProps) {
         return { href: nextHref, kicker: t("nextStep", { n: nm.step }), title: nm.navLabel, desc: nm.excerpt };
       })();
 
-  const updated = new Date(meta.dateModified).toLocaleDateString(locale, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  // fa defaults to the Solar Hijri calendar, which would print "2 Mehr 1405"
+  // under an ArticleSchema that says 2026-09-24. Pin Gregorian; the Persian
+  // script and numerals are kept.
+  const updated = new Date(meta.dateModified).toLocaleDateString(
+    locale === "fa" ? "fa-u-ca-gregory" : locale,
+    { year: "numeric", month: "long", day: "numeric" },
+  );
 
   return (
     <>
       <BreadcrumbSchema
         items={[
-          { name: "Home", url: `${baseUrl}/${locale}` },
+          { name: "Doppler VPN", url: `${baseUrl}/${locale}` },
           { name: t("breadcrumb"), url: `${baseUrl}/${locale}/how-it-works` },
           { name: meta.navLabel, url: pageUrl },
         ]}
@@ -112,6 +114,7 @@ export default async function HowItWorksArticlePage({ params }: PageProps) {
         url={pageUrl}
         datePublished={meta.datePublished}
         dateModified={meta.dateModified}
+        inLanguage={ogLocaleMap[locale]?.replace("_", "-") ?? "en-US"}
       />
       <FAQSchema items={meta.faq} />
       <Navbar />

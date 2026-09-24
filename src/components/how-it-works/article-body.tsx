@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Element, Text } from "hast";
-import { headingId } from "@/lib/how-it-works";
-import { CHARTS } from "./charts/registry";
+import { createHeadingIdFactory } from "@/lib/how-it-works";
+import { chartsFor } from "./charts/registry";
 
 /**
  * Server-rendered markdown for the /how-it-works articles. The prose recipe is
@@ -56,16 +56,20 @@ function chartIdOf(node: Element | undefined): string | null {
  * page's locale prefix here, so a translated article needs no link rewriting.
  */
 export function ArticleBody({ markdown, locale }: { markdown: string; locale: string }) {
+  const charts = chartsFor(locale);
+  // One factory per render, consumed in document order, so these ids are the
+  // same sequence the table of contents got from extractH2s().
+  const nextHeadingId = createHeadingIdFactory();
   return (
     <div className={PROSE}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
-          h2: ({ children }) => <h2 id={headingId(textOf(children))}>{children}</h2>,
+          h2: ({ children }) => <h2 id={nextHeadingId(textOf(children))}>{children}</h2>,
           pre: ({ node, children }) => {
             const id = chartIdOf(node);
             if (id === null) return <pre>{children}</pre>;
-            const Chart = CHARTS[id];
+            const Chart = charts[id];
             if (!Chart) throw new Error(`how-it-works: unknown chart id "${id}"`);
             return <Chart />;
           },

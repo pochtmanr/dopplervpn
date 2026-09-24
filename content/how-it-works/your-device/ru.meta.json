@@ -1,0 +1,111 @@
+{
+  "step": 1,
+  "title": "Ваше устройство: что оно выдаёт и почему Doppler не нужен аккаунт",
+  "metaTitle": "Что ваше устройство выдаёт в сети и VPN без аккаунта",
+  "metaDescription": "IP, DNS-запросы и имена сайтов уходят с устройства ещё до включения VPN. Кто их видит, чем опасна регистрация в VPN и как Doppler работает без почты и аккаунта.",
+  "excerpt": "Ваш IP, ваши DNS-запросы и имена открываемых сайтов уходят с устройства ещё до того, как заработает VPN. Вот кто их видит и почему Doppler никогда не спрашивает, кто вы.",
+  "navLabel": "Ваше устройство",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 10,
+  "faq": [
+    {
+      "question": "Видит ли провайдер, какие сайты я открываю по HTTPS?",
+      "answer": "Как правило, да. HTTPS скрывает содержимое страницы, но имя сайта передаётся открытым текстом в TLS-рукопожатии (поле SNI), если только Encrypted Client Hello не поддерживают и ваш браузер, и сайт. Незашифрованные DNS-запросы тоже раскрывают домен. С VPN и то и другое идёт внутри туннеля."
+    },
+    {
+      "question": "Защищает ли VPN от отпечатка браузера?",
+      "answer": "Нет. Отпечаток складывается из настроек самого браузера: размера экрана, шрифтов, часового пояса, и VPN их не меняет. Исследования показали, что уникальны от 83.6% до 89.4% браузеров. Если вас беспокоят отпечатки, используйте браузер с упором на приватность."
+    },
+    {
+      "question": "Почему Doppler не просит электронную почту?",
+      "answer": "Потому что данные, которых никогда не собирали, не могут утечь. Приложение создаёт на вашем устройстве случайный идентификатор аккаунта вида VPN-XXXX-XXXX-XXXX, и этот идентификатор и есть ваша подписка. К нему не привязаны ни почта, ни телефон, ни пароль."
+    },
+    {
+      "question": "Какие данные об устройстве хранит Doppler?",
+      "answer": "Анонимный идентификатор аккаунта, идентификатор устройства для соблюдения лимита устройств в тарифе и запись аутентификации для запросов к API (IP-адрес, идентификатор аккаунта, идентификатор устройства и время), которая хранится до 90 дней для защиты от злоупотреблений. Активность в браузере, DNS-запросы и трафик не журналируются никогда."
+    },
+    {
+      "question": "Что будет, если я потеряю телефон или удалю приложение?",
+      "answer": "Ваша подписка привязана к идентификатору аккаунта, а не к почте. Сохраните копию идентификатора из настроек приложения, чтобы восстановить подписку на новом устройстве. Без него у нас нет никаких личных данных, по которым мы могли бы найти ваш аккаунт."
+    },
+    {
+      "question": "Как проверить, что утекает с моего устройства прямо сейчас?",
+      "answer": "Бесплатные инструменты Doppler на dopplervpn.org/tools показывают ваш публичный IP и местоположение, проверяют утечки DNS и утечки WebRTC. Ни один из них не требует аккаунта и не сохраняет ваши результаты."
+    }
+  ],
+  "sources": [
+    {
+      "label": "MaxMind, Geolocation Accuracy",
+      "url": "https://support.maxmind.com/hc/en-us/articles/4407630607131-Geolocation-Accuracy"
+    },
+    {
+      "label": "Mozilla, Firefox brings DNS over HTTPS by default for US users (25 Feb 2020)",
+      "url": "https://blog.mozilla.org/blog/2020/02/25/firefox-continues-push-to-bring-dns-over-https-by-default-for-us-users/"
+    },
+    {
+      "label": "Cloudflare, Encrypted Client Hello: the last puzzle piece to privacy (29 Sep 2023)",
+      "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/"
+    },
+    {
+      "label": "IETF, RFC 9849: TLS Encrypted Client Hello",
+      "url": "https://www.rfc-editor.org/info/rfc9849/"
+    },
+    {
+      "label": "The Hacker News, WebRTC leaks VPN users' real IP address (Feb 2015)",
+      "url": "https://thehackernews.com/2015/02/webrtc-leaks-vpn-ip-address.html"
+    },
+    {
+      "label": "EFF, Panopticlick: How unique is your web browser? (13 May 2010)",
+      "url": "https://www.eff.org/press/archives/2010/05/13"
+    },
+    {
+      "label": "Laperdrix, Rudametkin, Baudry, Beauty and the Beast: diverting modern web browsers to build unique browser fingerprints (IEEE S&P 2016)",
+      "url": "https://www.semanticscholar.org/paper/fe2f4faec5cf209ae7d8a73100db9cce46ce53d4"
+    },
+    {
+      "label": "US FTC, staff report on ISP data practices (21 Oct 2021)",
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2021/10/ftc-staff-report-finds-many-internet-service-providers-collect-troves-personal-data-users-have-few"
+    },
+    {
+      "label": "UK Investigatory Powers Act 2016, section 87",
+      "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87"
+    },
+    {
+      "label": "Human Rights Watch, Russia: growing internet isolation, control, censorship (18 Jun 2020)",
+      "url": "https://www.hrw.org/news/2020/06/18/russia-growing-internet-isolation-control-censorship"
+    },
+    {
+      "label": "Court of Justice of the EU, Digital Rights Ireland judgment press release (8 Apr 2014)",
+      "url": "https://curia.europa.eu/site/upload/docs/application/pdf/2014-04/cp140054en.pdf"
+    },
+    {
+      "label": "The Register, UFO VPN database exposed (17 Jul 2020)",
+      "url": "https://www.theregister.com/2020/07/17/ufo_vpn_database/"
+    },
+    {
+      "label": "Kaspersky, SuperVPN, GeckoVPN and ChatVPN user data leak (16 Mar 2021)",
+      "url": "https://www.kaspersky.com/blog/supervpn-geckovpn-chatvopn-leak/39029/"
+    },
+    {
+      "label": "vpnMentor, SuperVPN data breach report (2023)",
+      "url": "https://www.vpnmentor.com/news/report-super-vpn-breach/"
+    },
+    {
+      "label": "Have I Been Pwned (count as of September 2026)",
+      "url": "https://haveibeenpwned.com/"
+    },
+    {
+      "label": "Verizon, 2026 Data Breach Investigations Report, executive summary",
+      "url": "https://www.verizon.com/business/resources/executivebriefs/2026-dbir-executive-summary.pdf"
+    },
+    {
+      "label": "Regulation (EU) 2016/679 (GDPR), Article 5",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+    },
+    {
+      "label": "FIDO Alliance, World Passkey Day 2026 report (7 May 2026)",
+      "url": "https://fidoalliance.org/fido-alliance-reports-accelerating-global-passkey-adoption-on-world-passkey-day-2026/"
+    }
+  ]
+}

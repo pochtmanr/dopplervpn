@@ -15,6 +15,7 @@ export function BarChart({
   title,
   note,
   source,
+  sourceLabel,
   bars,
   unit = "",
   max,
@@ -23,6 +24,7 @@ export function BarChart({
   title: string;
   note?: string;
   source: ChartSource | ChartSource[];
+  sourceLabel: string;
   bars: Bar[];
   unit?: string;
   max?: number;
@@ -30,10 +32,10 @@ export function BarChart({
 }) {
   const top = max ?? Math.max(...bars.map((b) => b.value));
   return (
-    <ChartFigure title={title} note={note} source={source}>
+    <ChartFigure title={title} note={note} source={source} sourceLabel={sourceLabel}>
       <ul className="space-y-3.5">
-        {bars.map((b) => (
-          <li key={b.label} className="grid grid-cols-1 sm:grid-cols-[11rem_minmax(0,1fr)] gap-x-4 gap-y-1 items-center">
+        {bars.map((b, i) => (
+          <li key={i} className="grid grid-cols-1 sm:grid-cols-[11rem_minmax(0,1fr)] gap-x-4 gap-y-1 items-center">
             <span className={`text-sm leading-snug ${b.highlight ? "text-text-primary font-semibold" : "text-text-muted"}`}>
               {b.label}
             </span>
