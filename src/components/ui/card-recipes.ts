@@ -74,7 +74,7 @@ export const DELETE_TILE =
  */
 export const CTA_PILL =
   "inline-flex shrink-0 items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-full";
-export const KEY_PILL = `cta-key cta-key-sm text-white ${CTA_PILL}`;
+export const KEY_PILL = `cta-key text-white ${CTA_PILL}`;
 
 export const ROW_TITLE =
   "font-display text-base md:text-lg font-semibold leading-tight text-text-primary";

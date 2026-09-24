@@ -147,7 +147,7 @@ export function ContactsCard({ accountId, accountInfo, onSaved, emailRequest = 0
           ))}
 
         {!hasTelegram && (
-          <a href={CONTACT.telegram.verifyBot} target="_blank" rel="noopener noreferrer" className={ROW_LINK}>
+          <a href={CONTACT.telegram.createBot} target="_blank" rel="noopener noreferrer" className={ROW_LINK}>
             <TelegramIcon className="w-4 h-4 text-telegram" />
             {t('connectTelegram')}
             <ArrowRightIcon className="w-3.5 h-3.5 ms-auto text-text-tertiary transition-transform group-hover/row:translate-x-0.5 rtl:group-hover/row:-translate-x-0.5" />

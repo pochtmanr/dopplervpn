@@ -247,7 +247,7 @@ body {
 }
 .hero-cta-in {
   /* Fade only. `pulse-glow` used to ride along here, but it animates
-     `box-shadow` outright, which would wipe `.cta-key`'s bevel and skirt for
+     `box-shadow` outright, which would wipe `.cta-key`'s rim and shadow for
      1.5s and then pop them back — the key would flatten on load. The keycap is
      now what draws the eye, so it no longer needs a pulse to do it. */
   animation: hero-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -255,18 +255,16 @@ body {
 
 /* ─── Hero primary CTA: the keycap (hero/hero-ctas.tsx) ──────────────────
    The page reads as a terminal, so its one call to action is a key you press —
-   the single physical object on an otherwise flat surface. Four layers make it
-   plastic rather than a gradient button:
+   the single lit object on an otherwise flat surface. Three layers:
      1. cap gradient      light falls on the top edge, shade at the bottom
-     2. inset bevel       bright top rim, shaded bottom rim (the inner shadow)
-     3. skirt             a HARD, unblurred `0 4px 0` — the key's side wall. A
-                          blurred shadow here reads as a floating card instead.
-     4. contact shadow    soft, tight, so the key sits ON the page
-   `::before` draws the gradient border as a masked 1px ring, lit from the same
-   direction as the cap. `:active` drops the cap 3px and collapses the skirt to
-   1px, so the key bottoms out instead of merely shifting.
-   Every shadow colour is a custom property, so `.light` restyles the whole key
-   by swapping four variables — no per-state overrides, no specificity fights.
+     2. top rim           a bright inset highlight along the top edge
+     3. contact shadow    soft, tight, so the key sits ON the page
+   There is deliberately no bottom edge — no hard skirt, no shaded or lit
+   bottom rim. `::before` draws the gradient border as a masked 1px ring, lit
+   from the top and fading out before the bottom. `:active` nudges the cap 1px
+   and shades it from above, so the press still reads.
+   Every colour is a custom property, so `.light` restyles the whole key by
+   swapping variables — no per-state overrides, no specificity fights.
    The secondary CTA stays deliberately flat: it is the deck the key sits on,
    and that contrast is what sells the key. */
 .cta-key {
@@ -274,9 +272,7 @@ body {
   --key-face:   #0BA6A6;   /* top of the cap, where the light lands */
   --key-edge:   #009898;
   --key-base:   #008C8C;   /* accent-teal — the cap's own colour */
-  --key-skirt:  #00595C;   /* the side wall in shadow */
   --key-ambient: rgb(0 140 140 / 0.5);
-  --key-lift:   4px;       /* how tall the side wall is = how far it travels */
   background-image: linear-gradient(
     to bottom,
     var(--key-face) 0%,
@@ -285,18 +281,11 @@ body {
   );
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.32),
-    inset 0 -1px 0 rgb(0 0 0 / 0.28),
-    0 var(--key-lift) 0 var(--key-skirt),
-    0 calc(var(--key-lift) + 2px) 14px -4px var(--key-ambient);
+    0 2px 14px -4px var(--key-ambient);
   transition:
     transform 120ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 120ms cubic-bezier(0.22, 1, 0.36, 1),
     filter 160ms ease-out;
-}
-/* Compact keys (nav pills, inline bar buttons) get a shorter wall — a 4px
-   skirt under a 30px-tall pill reads as a mistake, not as a key. */
-.cta-key-sm {
-  --key-lift: 2px;
 }
 .cta-key::before {
   content: "";
@@ -308,7 +297,7 @@ body {
     to bottom,
     rgb(255 255 255 / 0.55),
     rgb(255 255 255 / 0.06) 42%,
-    rgb(0 0 0 / 0.28)
+    transparent
   );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -324,16 +313,14 @@ body {
   filter: brightness(1.07);
 }
 .cta-key:active:not(:disabled):not([aria-disabled="true"]) {
-  transform: translateY(calc(var(--key-lift) - 1px));
+  transform: translateY(1px);
   box-shadow:
     inset 0 2px 5px rgb(0 0 0 / 0.32),
-    inset 0 -1px 0 rgb(255 255 255 / 0.12),
-    0 1px 0 var(--key-skirt),
-    0 2px 6px -4px var(--key-ambient);
+    0 1px 6px -4px var(--key-ambient);
 }
-/* A disabled key is not a key. Drop the wall and the bevel so it sits flush —
-   nothing about it should suggest it can be pressed. The call sites keep their
-   own `disabled:opacity-*`. */
+/* A disabled key is not a key. Drop the bevel so it sits flush — nothing
+   about it should suggest it can be pressed. The call sites keep their own
+   `disabled:opacity-*`. */
 .cta-key:disabled,
 .cta-key[aria-disabled="true"] {
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
@@ -347,7 +334,6 @@ body {
   --key-face:   #098A8A;
   --key-edge:   #007B7B;
   --key-base:   #007070;   /* accent-teal in light */
-  --key-skirt:  #004E4E;
   --key-ambient: rgb(0 0 0 / 0.3);
 }
 /* The support page's blue keys — Business and Telegram share one plastic,
@@ -358,7 +344,6 @@ body {
   --key-face:   #45B7F0;
   --key-edge:   #36B0EF;
   --key-base:   #2AABEE;   /* telegram / accent-blue */
-  --key-skirt:  #16739F;
   --key-ambient: rgb(42 171 238 / 0.5);
 }
 .light .cta-key-blue,
@@ -366,7 +351,6 @@ body {
   --key-face:   #127AB3;
   --key-edge:   #0B72AA;
   --key-base:   #0369A1;   /* telegram / accent-blue in light */
-  --key-skirt:  #024B73;
   --key-ambient: rgb(0 0 0 / 0.3);
 }
 
@@ -754,7 +738,7 @@ body {
   }
   /* The solid-teal variant is the keycap (`.cta-key`, composed in button.tsx
      since @apply cannot reach a plain CSS class). No `bg-*`/`shadow-*` here:
-     both would paint over the cap gradient and the skirt. */
+     both would paint over the cap gradient and the top rim. */
   .btn-secondary {
     @apply text-white;
   }

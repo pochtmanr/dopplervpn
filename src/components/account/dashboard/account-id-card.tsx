@@ -27,6 +27,8 @@ const LOGOUT_AFTER_COPY_MS = 600;
 
 const PANEL_SHOWN = 'opacity-100 translate-y-0';
 const PANEL_HIDDEN = 'opacity-0 -translate-y-1';
+/** CARD minus its clip: appending `overflow-visible` would lose to it by stylesheet order. */
+const CARD_UNCLIPPED = CARD.replace('overflow-hidden ', '');
 
 interface AccountIdCardProps {
   accountId: string;
@@ -108,17 +110,22 @@ export function AccountIdCard({
     // sits in a stretched column with siblings under it, so this wrapper (auto
     // height) makes that 100% resolve to auto instead of the whole column.
     <div>
-      <div className={`${CARD} p-6`}>
-        <span className={CARD_HAIRLINE} aria-hidden="true" />
-        <div className={ORB} />
+      {/* Unclipped, so the toolbar's menus can hang past the card's edge; the
+          hairline and orb get their own clipped layer instead. Raised while a
+          menu is open, or the backdrop-blurred cards below would paint over it. */}
+      <div className={`${CARD_UNCLIPPED} p-6 ${menu.open || logout.open ? 'z-30' : ''}`}>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]" aria-hidden="true">
+          <span className={CARD_HAIRLINE} />
+          <div className={ORB} />
+        </div>
 
         <div className="relative space-y-4">
           {/* ── Label + toolbar ─────────────────────────────────────────── */}
           <div className="flex items-center justify-between gap-3">
             <h2 className={EYEBROW}>{t('accountLabel')}</h2>
 
-            {/* Popovers anchor to this row's end, not to their own button: the card
-                clips, and a panel hung off the middle button would run out of it. */}
+            {/* Popovers anchor to this row's end, not to their own button: a panel
+                hung off the middle button would run off a narrow screen. */}
             <div className="relative flex items-center gap-2">
               {hasTelegram ? (
                 <IconButton
@@ -135,7 +142,7 @@ export function AccountIdCard({
                   <TelegramIcon className="w-[18px] h-[18px]" />
                 </IconButton>
               ) : (
-                <IconButton label={t('dashboard.connectTelegram')} href={CONTACT.telegram.verifyBot} badge="plus">
+                <IconButton label={t('dashboard.connectTelegram')} href={CONTACT.telegram.createBot} badge="plus">
                   <TelegramIcon className="w-[18px] h-[18px]" />
                 </IconButton>
               )}

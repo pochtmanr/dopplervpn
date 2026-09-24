@@ -27,11 +27,10 @@ export const CONTACT = {
   /** Canonical support address. Used everywhere agents/users are pointed at us. */
   supportEmail: "support@simnetiq.store",
   telegram: {
-    /**
-     * The single customer bot: help, downloads, subscription status and support requests.
-     * @dopplercreatebot was retired in 2026-09 and is now only a redirect here.
-     */
+    /** Customer support bot: help, downloads, subscription status and support requests. */
     supportBot: "https://t.me/DopplerSupportBot",
+    /** Lead bot (@dopplercreatebot): the dashboard's "Connect Telegram" target. */
+    createBot: "https://t.me/dopplercreatebot",
     /** Account recovery bot. */
     verifyBot: "https://t.me/DopplerVerifyBot",
     /** Announcement channel. */

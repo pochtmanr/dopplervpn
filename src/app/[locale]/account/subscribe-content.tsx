@@ -49,14 +49,6 @@ function perMonth(cents: number, months: number): string {
   return `$${pm.toFixed(2)}`;
 }
 
-function formatDate(dateStr: string, locale: string): string {
-  return new Date(dateStr).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
-
 /* ── Subscribe content ───────────────────────────────────────────────── */
 
 function SubscribeInner() {
@@ -713,33 +705,9 @@ function SubscribeInner() {
           {(
             <>
               {/* ── Dashboard header ─────────────────────────────── */}
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-                <div>
-                  <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-                    {t('dashboard.title')}
-                  </h1>
-                  {accountInfo?.createdAt && (
-                    <p className="text-sm text-text-muted mt-1">
-                      {t('dashboard.memberSince')} {formatDate(accountInfo.createdAt, locale)}
-                    </p>
-                  )}
-                </div>
-                {accountInfo && (
-                  isActivePro ? (
-                    <span className="self-start sm:self-auto inline-flex items-center gap-2 rounded-full border border-accent-teal/30 bg-accent-teal/10 px-4 py-1.5 text-sm font-semibold text-accent-teal">
-                      <span className="w-2 h-2 rounded-full bg-accent-teal-light" aria-hidden="true" />
-                      {accountInfo.expiresAt
-                        ? t('dashboard.statusPro', { date: formatDate(accountInfo.expiresAt, locale) })
-                        : t('dashboard.statusProShort')}
-                    </span>
-                  ) : (
-                    <span className="self-start sm:self-auto inline-flex items-center gap-2 rounded-full border border-overlay/20 px-4 py-1.5 text-sm font-semibold text-text-muted">
-                      <span className="w-2 h-2 rounded-full bg-overlay/30" aria-hidden="true" />
-                      {t('dashboard.statusFree')}
-                    </span>
-                  )
-                )}
-              </div>
+              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-8">
+                {t('dashboard.title')}
+              </h1>
 
               {/* ── Save your ID warning for new accounts ──────── */}
               {!existingAccount && mode === 'new' && (

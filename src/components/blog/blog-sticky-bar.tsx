@@ -110,7 +110,7 @@ export function BlogStickyBar({
                 target={platform === "desktop" ? undefined : "_blank"}
                 rel={platform === "desktop" ? undefined : "noopener noreferrer"}
                 onClick={handleClick}
-                className="cta-key cta-key-sm inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium whitespace-nowrap"
+                className="cta-key inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium whitespace-nowrap"
               >
                 {config.icon}
                 {t("cta")}

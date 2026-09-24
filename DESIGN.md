@@ -255,8 +255,9 @@ tile and no glyphs. Existing sections using it are migration targets (§9).
 - **Check list items:** `text-xs text-text-muted` with `w-4 h-4 text-accent-teal` stroke-2 check icons.
 - **Stars / ratings:** `text-accent-gold w-3.5 h-3.5` + `text-sm font-semibold text-text-primary`.
 - Icons are inline heroicons-style SVG (`stroke="currentColor"`, strokeWidth 1.75–2.5), `aria-hidden`.
-- **The keycap pair** (globals.css:272-386): `.cta-key` is the solid-teal primary as a physical key
-  (cap gradient, inset bevel, hard `0 4px 0` skirt, contact shadow; `:active` bottoms it out).
+- **The keycap pair** (globals.css `.cta-key`): `.cta-key` is the solid-teal primary as a key
+  (cap gradient, top rim, soft contact shadow; **no bottom edge** — no skirt, no shaded/lit bottom
+  rim, removed 2026-09-24; `:active` nudges it 1px).
   `.cta-flat` is its counterpart — filled but flat and unpressable. **At most one key per surface**,
   with its neighbours flat: that contrast is what makes the key read as raised. Chips and quick-jump
   pills take `.cta-flat` for the same reason.

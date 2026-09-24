@@ -47,8 +47,8 @@ export function HeroCTAs({
     platform === "android" ? "android-play" : platform === "windows" ? "windows-x64" : undefined;
   const handlePrimaryClick = () => trackCta(location, platform, primaryVariant);
 
-  /* `cta-key` (globals.css) is the keycap: cap gradient, inset bevel, hard
-     skirt and a real press on :active. No `bg-*` utility here — the gradient
+  /* `cta-key` (globals.css) is the keycap: cap gradient, top rim, no
+     bottom edge, and a 1px press on :active. No `bg-*` utility here — the gradient
      is the background, and a utility would paint over it. */
   const primaryClass =
     `cta-key inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center text-white rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary ${ready ? "hero-cta-in" : "opacity-0"}`;

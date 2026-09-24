@@ -80,7 +80,7 @@ export function MobileNav({ logo }: { logo: ReactNode }) {
   // Same stacked-label trick as desktop-nav.tsx: one grid cell holds both
   // labels, so the pill never resizes when the account state resolves.
   const ctaClass =
-    "cta-key cta-key-sm grid place-items-center mx-2 mt-1 px-4 py-2 text-sm font-semibold rounded-full text-white";
+    "cta-key grid place-items-center mx-2 mt-1 px-4 py-2 text-sm font-semibold rounded-full text-white";
   const ctaLabels = (
     <>
       <span
