@@ -1,0 +1,56 @@
+{
+  "step": 2,
+  "title": "The VLESS-Reality Tunnel: How Doppler Hides a VPN in Plain Sight",
+  "metaTitle": "What Is VLESS-Reality? How It Hides VPN Traffic From DPI",
+  "metaDescription": "Why OpenVPN and WireGuard get blocked, how Shadowsocks, Trojan and VLESS led to Reality, how Reality borrows a real site's TLS handshake, and where its limits are.",
+  "excerpt": "Encryption hides what you send, not that you use a VPN. Here is how VLESS-Reality makes your tunnel look like a visit to a real website, where it came from, and where its limits are.",
+  "navLabel": "VLESS-Reality Tunnel",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 10,
+  "faq": [
+    {
+      "question": "What is VLESS-Reality in simple terms?",
+      "answer": "VLESS is a lightweight proxy protocol that tells the server where to send your traffic. Reality is a TLS layer that makes the connection look like an ordinary TLS 1.3 visit to a real, popular website. Anyone who probes the server is forwarded to that real website and sees its genuine certificate."
+    },
+    {
+      "question": "Why do OpenVPN and WireGuard get blocked?",
+      "answer": "They encrypt well but have recognisable shapes on the wire. A 2022 study identified over 85% of OpenVPN flows in a real ISP network, and WireGuard's handshake messages are always 148 and 92 bytes. Censors in several countries filter both."
+    },
+    {
+      "question": "Does VLESS-Reality need its own domain or certificate?",
+      "answer": "No. That is its main advance over Trojan and similar protocols. Reality borrows the TLS handshake of an existing website, so there is no Doppler domain or certificate for a censor to list and block."
+    },
+    {
+      "question": "Is VLESS-Reality undetectable?",
+      "answer": "No protocol is. Research published in 2024 showed that TLS carried inside TLS can be fingerprinted, and in November 2025 some Russian ISPs were reported to cut Reality connections. It is the hardest mainstream option to block, and Doppler adjusts server settings as filtering changes."
+    },
+    {
+      "question": "Is VLESS slower than WireGuard?",
+      "answer": "In everyday use the difference is small. VLESS adds a header of about 22 bytes plus the destination address once per connection, and TLS 1.3 adds 22 bytes per record of up to 16 KB. XTLS Vision also avoids encrypting already encrypted web traffic a second time."
+    },
+    {
+      "question": "When was Reality released?",
+      "answer": "Reality was announced in February 2023 and shipped in Xray-core version 1.8.0 in March 2023. VLESS itself was proposed in July 2020, and Xray-core forked from V2Ray in November 2020."
+    }
+  ],
+  "sources": [
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "net4people, OpenVPN and WireGuard blocking in Russia (issue 274, Aug 2023)", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Freedom House, Freedom on the Net 2025", "url": "https://freedomhouse.org/report/freedom-net/2025/uncertain-future-global-internet" },
+    { "label": "Freedom House, Tunnel Vision: anti-censorship tools and the fight for free expression (2025)", "url": "https://freedomhouse.org/report/special-report/2025/tunnel-vision-anti-censorship-tools-end-end-encryption-and-fight-free" },
+    { "label": "Tor Project, history", "url": "https://www.torproject.org/about/history/" },
+    { "label": "China Digital Times, circumvention tool deleted after police visit developer (Aug 2015)", "url": "https://chinadigitaltimes.net/2015/08/circumvention-tool-deleted-after-police-visit-developer/" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16 Jul 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "Project X, news and chronicle", "url": "https://xtls.github.io/en/about/news.html" },
+    { "label": "XTLS, Xray-core v1.8.0 release (Mar 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Project X, VLESS protocol specification", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "IETF, RFC 8446: TLS 1.3, section 5.2", "url": "https://www.rfc-editor.org/rfc/rfc8446#section-5.2" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, VLESS + Reality + Vision blocking reports in Russia (issue 546, Nov 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

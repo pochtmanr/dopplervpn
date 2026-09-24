@@ -154,13 +154,13 @@ const nextConfig: NextConfig = {
       // staticPages list in sitemap.ts).
       {
         source:
-          "/:slug(downloads|privacy|terms|refund|dpa|subprocessors|blog|support|about|security|bypass-censorship|giveaway|no-registration-vpn|pay-with-crypto|vless-vpn|vless-vpn-android|vpn-for-ios|vpn-for-android|vpn-for-macos|vpn-for-windows|vpn-for-uae|vpn-for-iran|vpn-for-china|vpn-for-russia|vpn-for-turkey|vpn-for-telegram-calls-uae|vpn-for-whatsapp-calls-uae|vpn-for-instagram-russia|vpn-for-travelers-china|vpn-for-tiktok-ban|vpn-for-public-wifi-iphone|tools)",
+          "/:slug(downloads|privacy|terms|refund|dpa|subprocessors|blog|support|about|security|bypass-censorship|giveaway|no-registration-vpn|pay-with-crypto|vless-vpn|vless-vpn-android|vpn-for-ios|vpn-for-android|vpn-for-macos|vpn-for-windows|vpn-for-uae|vpn-for-iran|vpn-for-china|vpn-for-russia|vpn-for-turkey|vpn-for-telegram-calls-uae|vpn-for-whatsapp-calls-uae|vpn-for-instagram-russia|vpn-for-travelers-china|vpn-for-tiktok-ban|vpn-for-public-wifi-iphone|tools|how-it-works)",
         destination: "/en/:slug",
         permanent: true,
       },
       {
         source:
-          "/:slug(downloads|privacy|terms|refund|dpa|subprocessors|blog|support|about|security|bypass-censorship|giveaway|no-registration-vpn|pay-with-crypto|vless-vpn|vless-vpn-android|vpn-for-ios|vpn-for-android|vpn-for-macos|vpn-for-windows|vpn-for-uae|vpn-for-iran|vpn-for-china|vpn-for-russia|vpn-for-turkey|vpn-for-telegram-calls-uae|vpn-for-whatsapp-calls-uae|vpn-for-instagram-russia|vpn-for-travelers-china|vpn-for-tiktok-ban|vpn-for-public-wifi-iphone|tools)/:rest+",
+          "/:slug(downloads|privacy|terms|refund|dpa|subprocessors|blog|support|about|security|bypass-censorship|giveaway|no-registration-vpn|pay-with-crypto|vless-vpn|vless-vpn-android|vpn-for-ios|vpn-for-android|vpn-for-macos|vpn-for-windows|vpn-for-uae|vpn-for-iran|vpn-for-china|vpn-for-russia|vpn-for-turkey|vpn-for-telegram-calls-uae|vpn-for-whatsapp-calls-uae|vpn-for-instagram-russia|vpn-for-travelers-china|vpn-for-tiktok-ban|vpn-for-public-wifi-iphone|tools|how-it-works)/:rest+",
         destination: "/en/:slug/:rest+",
         permanent: true,
       },

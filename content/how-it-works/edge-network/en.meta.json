@@ -1,0 +1,55 @@
+{
+  "step": 3,
+  "title": "The Edge Node: Where Your Traffic Exits, and What Zero-Log Means",
+  "metaTitle": "VPN Edge Nodes, Latency and What Zero-Log Really Means",
+  "metaDescription": "What a VPN exit server does, why every 100 km adds about 1 ms, which no-logs claims held up in court and which failed, and exactly what a Doppler node keeps.",
+  "excerpt": "The edge node is where your traffic leaves the tunnel. Here is what it does, why distance costs milliseconds, which no-logs promises held up in court, and exactly what ours keeps.",
+  "navLabel": "Doppler Edge Node",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24",
+  "readingMinutes": 9,
+  "faq": [
+    {
+      "question": "What is a VPN edge node?",
+      "answer": "It is the server where your encrypted tunnel ends and your traffic continues to the open internet. It forwards your requests under its own IP address, so websites see the node rather than your real connection, and with Doppler it also resolves your DNS lookups."
+    },
+    {
+      "question": "Does the distance to the VPN server affect speed?",
+      "answer": "Yes. Light in fibre covers about 200 km per millisecond, so each 100 km of distance adds at least 1 ms of round-trip time, and real routes add more. The Doppler app picks the fastest node for your location automatically."
+    },
+    {
+      "question": "How can I know a VPN really keeps no logs?",
+      "answer": "Look at what happened when it was tested. Several providers had nothing to hand over when police arrived, while others that advertised no logs gave up IP addresses and connection times. Read the provider's full list of what it does store, not just the headline promise."
+    },
+    {
+      "question": "What does Doppler store?",
+      "answer": "No browsing history, traffic content, DNS queries, bandwidth or session times. Doppler keeps anonymous aggregated server metrics and, for API sign-ins only, a record of IP address, anonymous account ID, device ID and time for up to 90 days to stop abuse."
+    },
+    {
+      "question": "Doppler is a UK company. Is that a problem for privacy?",
+      "answer": "The UK is a Five Eyes member and its Investigatory Powers Act allows data retention notices for telecom operators. Doppler's answer is architectural: the traffic records such a request would look for are not created in the first place."
+    },
+    {
+      "question": "How many countries does Doppler have servers in?",
+      "answer": "Doppler runs servers in multiple countries and changes the set as networks and blocking change, so the list in the app is always the current one. Automatic selection picks the fastest available node for you."
+    }
+  ],
+  "sources": [
+    { "label": "IETF, RFC 3022: Traditional IP Network Address Translator", "url": "https://www.rfc-editor.org/rfc/rfc3022" },
+    { "label": "Cloudflare, Cloudflare's network is the fastest (12 Sep 2021)", "url": "https://blog.cloudflare.com/fastest-internet/" },
+    { "label": "WonderNetwork, global ping statistics (accessed 24 Sep 2026)", "url": "https://wondernetwork.com/pings" },
+    { "label": "Submarine Networks, Hibernia Express connects New York to London in under 58.95 ms (Oct 2015)", "url": "https://www.submarinenetworks.com/en/systems/trans-atlantic/project-express/hibernia-express-connects-new-york-to-london-in-under-58-95ms" },
+    { "label": "ITU-T Recommendation G.114: One-way transmission time", "url": "https://www.itu.int/rec/T-REC-G.114-200305-I/en" },
+    { "label": "Marketing Dive, 53% of mobile users abandon sites that take over 3 seconds to load (Sep 2016)", "url": "https://www.marketingdive.com/news/google-53-of-mobile-users-abandon-sites-that-take-over-3-seconds-to-load/426070/" },
+    { "label": "The Register, HideMyAss and the LulzSec controversy (26 Sep 2011)", "url": "https://www.theregister.com/2011/09/26/hidemyass_lulzsec_controversy/" },
+    { "label": "TorrentFreak, VPN providers' no-logging claims tested in FBI case (12 Mar 2016)", "url": "https://torrentfreak.com/vpn-providers-no-logging-claims-tested-in-fbi-case-160312/" },
+    { "label": "TorrentFreak, IPVanish no-logging VPN led Homeland Security to Comcast user (2018)", "url": "https://torrentfreak.com/ipvanish-no-logging-vpn-led-homeland-security-to-comcast-user-180505/" },
+    { "label": "TorrentFreak, PureVPN logs helped FBI net alleged cyberstalker (9 Oct 2017)", "url": "https://torrentfreak.com/purevpn-logs-helped-fbi-net-alleged-cyberstalker-171009/" },
+    { "label": "TorrentFreak, VPN server seized to investigate Russian ambassador's assassination (Dec 2017)", "url": "https://torrentfreak.com/vpn-server-seized-to-investigate-russian-ambassadors-assassination-1171219/" },
+    { "label": "Mullvad, Mullvad VPN was subject to a search warrant; customer data not compromised (Apr 2023)", "url": "https://mullvad.net/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised" },
+    { "label": "Windscribe, the Greek court case", "url": "https://windscribe.com/blog/windscribe-greek-court-case/" },
+    { "label": "ExpressVPN, Introducing TrustedServer (17 Apr 2019)", "url": "https://www.expressvpn.com/blog/introducing-trustedserver/" },
+    { "label": "ODNI, Five Eyes Intelligence Oversight and Review Council charter (2025)", "url": "https://www.dni.gov/files/ICIG/Documents/Partnerships/FIORC/FIORC-Charter-2025.pdf" },
+    { "label": "UK Investigatory Powers Act 2016, section 87", "url": "https://www.legislation.gov.uk/ukpga/2016/25/section/87" }
+  ]
+}

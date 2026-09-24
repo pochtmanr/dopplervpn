@@ -1,13 +1,23 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { isHowItWorksLocale } from "@/i18n/how-it-works-locales";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
-import { Link } from "@/i18n/navigation";
 import { TrafficStepCard } from "./traffic-step-card";
 
 const flowSteps = ["step1", "step2", "step3", "step4"] as const;
+/** Each card opens its step's article; the last one, "Open Internet", opens the leak tests. */
+const stepHrefs = [
+  "/how-it-works/your-device",
+  "/how-it-works/vless-reality-tunnel",
+  "/how-it-works/edge-network",
+  "/tools",
+] as const;
 
 export function TechnicalHowItWorks() {
   const t = useTranslations("technicalHowItWorks");
+  // The step articles are English-first: link other locales straight to /en
+  // rather than through a 308 on every card.
+  const articleLocale = isHowItWorksLocale(useLocale()) ? undefined : "en";
 
   return (
     <Section id="how-doppler-works">
@@ -16,8 +26,8 @@ export function TechnicalHowItWorks() {
       {/* Flow Steps as Cards with Arrows */}
       <div
         className="flex flex-col md:flex-row items-center md:items-stretch gap-0"
-        aria-label={`${t("flow.step1.title")} → ${t("flow.step2.title")} → ${t("flow.step3.title")} → ${t("flow.step4.title")}`}
-        role="img"
+        // No role="img" here any more: the cards are links now, and an img role
+        // would hide them from assistive tech.
       >
         {flowSteps.map((step, i) => (
           <div key={step} className="flex flex-col md:flex-row items-center md:items-stretch w-full md:w-1/4">
@@ -26,6 +36,9 @@ export function TechnicalHowItWorks() {
                 index={i}
                 title={t(`flow.${step}.title`)}
                 description={t(`flow.${step}.description`)}
+                href={stepHrefs[i]}
+                hrefLocale={stepHrefs[i].startsWith("/how-it-works") ? articleLocale : undefined}
+                linkLabel={t("readMore")}
               />
             </Reveal>
             {i < flowSteps.length - 1 && (
@@ -47,26 +60,6 @@ export function TechnicalHowItWorks() {
           </div>
         ))}
       </div>
-
-      <Reveal delay={200}>
-        <div className="mt-10 text-center">
-          <Link
-            href="/tools"
-            className="cta-key group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
-          >
-            {t("toolsCta")}
-            <svg
-              className="w-4 h-4 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-        </div>
-      </Reveal>
     </Section>
   );
 }

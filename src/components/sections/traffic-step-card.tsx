@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { GlyphField } from "@/components/glyph/glyph-field";
 import { TRAFFIC_ASPECT, trafficScene } from "@/components/glyph/traffic-scene";
+import { CARD, CARD_HAIRLINE } from "@/components/ui/card-recipes";
+import { Link } from "@/i18n/navigation";
 
 /**
  * One step of the traffic flow: the prose, and under it the ASCII terminal
@@ -20,9 +22,15 @@ interface TrafficStepCardProps {
   index: number;
   title: string;
   description: string;
+  /** Where the whole card leads: the step's /how-it-works article, or /tools. */
+  href: string;
+  /** The "Learn more" affordance under the description. */
+  linkLabel: string;
+  /** Pin the link to another locale, for pages that don't exist in this one. */
+  hrefLocale?: string;
 }
 
-export function TrafficStepCard({ index, title, description }: TrafficStepCardProps) {
+export function TrafficStepCard({ index, title, description, href, linkLabel, hrefLocale }: TrafficStepCardProps) {
   const [mounted, setMounted] = useState(false);
   const hostRef = useRef<HTMLDivElement>(null);
   const scene = useMemo(() => trafficScene(index), [index]);
@@ -46,13 +54,23 @@ export function TrafficStepCard({ index, title, description }: TrafficStepCardPr
   }, []);
 
   return (
-    <div className="group relative flex h-full flex-col rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300">
-      <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+    <Link
+      href={href}
+      locale={hrefLocale}
+      className={`${CARD} p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light`}
+    >
+      <span className={CARD_HAIRLINE} />
       <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <div className="relative">
         <h3 className="text-lg font-semibold text-text-primary mb-1.5">{title}</h3>
         <p className="text-sm text-text-muted mt-1">{description}</p>
+        <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent-teal-light">
+          {linkLabel}
+          <svg className="w-3.5 h-3.5 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </span>
       </div>
 
       {/* mt-auto pins the plate to the card's foot, so the four line up on one
@@ -75,6 +93,6 @@ export function TrafficStepCard({ index, title, description }: TrafficStepCardPr
           {mounted && <GlyphField scene={scene} loop={false} hover />}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

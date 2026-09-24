@@ -4,6 +4,7 @@ import { createStaticClient } from "@/lib/supabase/server";
 import { routing } from "@/i18n/routing";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
+import { HOW_IT_WORKS_LOCALES, isHowItWorksLocale } from "@/i18n/how-it-works-locales";
 
 // Prerender all 44 shards at BUILD time and serve them as static files from
 // the CDN. Googlebot fetches every shard in /sitemap.xml in parallel; when
@@ -144,6 +145,11 @@ const staticPages = [
   "/tools/what-is-my-ip",
   "/tools/webrtc-leak-test",
   "/tools/dns-leak-test",
+  // The home flow's step articles (English-first; see i18n/how-it-works-locales.ts)
+  "/how-it-works",
+  "/how-it-works/your-device",
+  "/how-it-works/vless-reality-tunnel",
+  "/how-it-works/edge-network",
 ];
 
 const toolPages = new Set([
@@ -177,12 +183,12 @@ function buildAlternates(path: string) {
   };
 }
 
-// /security ships in the hand-translated core-market locales only; other
-// locales 308-redirect to /en/security (see /[locale]/security/page.tsx).
-function buildSecurityAlternates(path: string) {
+// /security and /how-it-works ship in their hand-translated locales only; the
+// other locales 308-redirect to /en (see those pages' permanentRedirect).
+function buildSubsetAlternates(path: string, locales: readonly string[]) {
   return {
     languages: Object.fromEntries([
-      ...SECURITY_LOCALES.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
+      ...locales.map((locale) => [locale, `${baseUrl}/${locale}${path}`]),
       ["x-default", `${baseUrl}/en${path}`],
     ]),
   };
@@ -209,6 +215,10 @@ function buildBlogAlternates(path: string, locales: readonly string[]) {
   };
 }
 
+function isHowItWorksPage(page: string): boolean {
+  return page === "/how-it-works" || page.startsWith("/how-it-works/");
+}
+
 function priorityFor(page: string): number {
   if (page === "") return 1;
   if (page === "/blog") return 0.9;
@@ -229,6 +239,7 @@ function priorityFor(page: string): number {
   if (seoLandingPages.has(page)) return 0.7;
   if (toolPages.has(page)) return 0.8;
   if (page === "/security") return 0.7;
+  if (isHowItWorksPage(page)) return 0.7;
   if (page === "/support" || page === "/about") return 0.6;
   return 0.5;
 }
@@ -276,13 +287,17 @@ export default async function sitemap({
     .filter((page) => page !== "/blog" || localeHasBlog)
     // /security exists only in its hand-translated locales.
     .filter((page) => page !== "/security" || isSecurityLocale(locale))
+    // So do the /how-it-works articles.
+    .filter((page) => !isHowItWorksPage(page) || isHowItWorksLocale(locale))
     .map((page) => {
       let alternates;
       if (page === "/blog") {
         // The index exists in every blog locale, so the full list is correct here.
         alternates = buildBlogAlternates(page, BLOG_LOCALES);
       } else if (page === "/security") {
-        alternates = buildSecurityAlternates(page);
+        alternates = buildSubsetAlternates(page, SECURITY_LOCALES);
+      } else if (isHowItWorksPage(page)) {
+        alternates = buildSubsetAlternates(page, HOW_IT_WORKS_LOCALES);
       } else {
         alternates = buildAlternates(page);
       }
