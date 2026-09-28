@@ -5,6 +5,7 @@ import { firePostback } from '@/lib/postback';
 import { attributionFromMetadata } from '@/lib/attribution';
 import { reportPurchase } from '@/lib/purchase-events';
 import { verifyRevolutSignature } from '@/lib/revolut-webhook';
+import { observeRevolutCompleted } from '@/lib/reporting/schedule';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -232,6 +233,16 @@ export async function POST(req: NextRequest) {
           ...attributionFromMetadata(metadata),
           ...(metadata.source === 'miniapp' ? { source: 'telegram_miniapp' } : {}),
         };
+        // Reporting is not part of fulfilment. A store failure must not change
+        // the 200 Revolut is waiting on, and must not extend the subscription twice.
+        after(() => observeRevolutCompleted({
+          orderId,
+          amountMinor: typeof order?.amount === 'number' ? order.amount : null,
+          currency: order?.currency || null,
+          occurredAt: new Date().toISOString(),
+          planId,
+          attribution,
+        }));
         after(async () => {
           const { error: attrErr } = await supabase
             .from('vpn_invoices')

@@ -1,0 +1,22 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Doppler Business OS export",
+    "version": "1.0.0",
+    "description": "Implementation routes for business-os.contract.v1. Response schemas are the pinned C0 files under simnetiq.store/contracts/business-os/v1/schemas. This document does not replace that contract. Analytics reports are advertised unsupported until D5. Supported bases are purchase and settled_cash."
+  },
+  "servers": [],
+  "paths": {
+    "/api/business-os/v1/capabilities": { "get": { "operationId": "capabilities" } },
+    "/api/business-os/v1/overview": { "get": { "operationId": "overview" } },
+    "/api/business-os/v1/finance/summary": { "get": { "operationId": "financeSummary" } },
+    "/api/business-os/v1/finance/daily": { "get": { "operationId": "financeDaily" } },
+    "/api/business-os/v1/finance/records": { "get": { "operationId": "financeRecords" } },
+    "/api/business-os/v1/finance/balances": { "get": { "operationId": "financeBalances" } },
+    "/api/business-os/v1/finance/reconciliation": { "get": { "operationId": "financeReconciliation" } },
+    "/api/business-os/v1/subscriptions/summary": { "get": { "operationId": "subscriptionsSummary" } },
+    "/api/business-os/v1/operations/daily": { "get": { "operationId": "operationsDaily" } },
+    "/api/business-os/v1/analytics/report": { "get": { "operationId": "analyticsReport" } },
+    "/api/business-os/v1/health": { "get": { "operationId": "health" } }
+  }
+}

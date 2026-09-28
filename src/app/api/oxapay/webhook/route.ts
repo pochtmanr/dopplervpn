@@ -5,6 +5,7 @@ import { firePostback } from '@/lib/postback';
 import type { CheckoutAttribution } from '@/lib/attribution';
 import { reportPurchase } from '@/lib/purchase-events';
 import { recordPromoRedemption } from '@/lib/promo-checkout';
+import { observeOxapayPaid } from '@/lib/reporting/schedule';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -232,6 +233,17 @@ export async function POST(req: NextRequest) {
     if (flipErr) {
       console.error('[oxapay-webhook] invoice_flip_failed', orderId, flipErr);
     }
+
+    // Reporting stays outside the credit. OxaPay retries non-200 responses.
+    after(() => observeOxapayPaid({
+      orderId,
+      trackId: String(event.track_id || orderId),
+      amountMajor: typeof event.amount === 'number' ? event.amount : null,
+      currency: event.currency || invoice.currency || null,
+      occurredAt: new Date().toISOString(),
+      planId,
+      channel: event.type === 'white_label' ? 'telegram_miniapp' : 'web',
+    }));
 
     // Report the purchase to the ad network. Placed after the idempotency guard
     // above so an OxaPay retry can't double-count, and inside after() so a slow

@@ -196,6 +196,11 @@ Deno.serve(async (req: Request) => {
     `[webhook] ${type} | account=${accountId} | app_user_id=${event.app_user_id} | aliases=${JSON.stringify(event.aliases)} | txn=${originalTxnId} | product=${productId}`
   );
 
+  // This function grants access. It is not a monetary ledger: the payload used
+  // here has no price, currency, tax, or fee. Reporting must not treat an
+  // access grant as a sale, and a reporting write must never be added on this
+  // path in a way that can turn a successful grant into a non-2xx.
+  //
   // RevenueCat delivers sandbox and StoreKit-test purchases through this same webhook,
   // so without this check a dev build mints real pro: VPN-FMN9-5ZE7-7HWT held production
   // pro off a StoreKitTest transaction. Match only an explicit SANDBOX — an absent or
