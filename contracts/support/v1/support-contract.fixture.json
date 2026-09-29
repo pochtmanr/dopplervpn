@@ -1,0 +1,80 @@
+{
+  "contractVersion": 1,
+  "migration": "20260928223000_support_contract_v1.sql",
+  "appliedToProduction": false,
+  "source": ["web", "telegram"],
+  "issueCategory": [
+    "account",
+    "payment",
+    "subscription",
+    "connection",
+    "performance",
+    "app",
+    "refund",
+    "privacy",
+    "feature_request",
+    "other",
+    "business"
+  ],
+  "devicePlatform": ["ios", "android", "macos", "windows", "web", "unknown"],
+  "preferredReplyChannel": ["telegram", "email", "whatsapp"],
+  "legacyTopics": [
+    "connection_issues",
+    "subscription_billing",
+    "account",
+    "feature_request",
+    "other",
+    "business"
+  ],
+  "legacyTopicMap": {
+    "connection_issues": "connection",
+    "subscription_billing": null,
+    "account": "account",
+    "feature_request": "feature_request",
+    "other": "other",
+    "business": "business"
+  },
+  "categoryToTopic": {
+    "account": "account",
+    "payment": "payment",
+    "subscription": "subscription",
+    "connection": "connection_issues",
+    "performance": "performance",
+    "app": "app",
+    "refund": "refund",
+    "privacy": "privacy",
+    "feature_request": "feature_request",
+    "other": "other",
+    "business": "business"
+  },
+  "capabilities": {
+    "whatsappDelivery": false,
+    "whatsappManualPreference": true,
+    "contactRemovalPublicUrl": null,
+    "contactRemovalRequestsEnv": "SUPPORT_CONTACT_REMOVAL_ENABLED"
+  },
+  "limits": {
+    "emailMax": 254,
+    "whatsappMinDigits": 8,
+    "whatsappMaxDigits": 15,
+    "telegramUsernameMin": 5,
+    "telegramUsernameMax": 32,
+    "accountCodeMax": 64,
+    "privacyNoticeVersionMax": 40,
+    "paymentProviderMax": 40,
+    "paymentOrderRefMax": 80
+  },
+  "columns": [
+    "issue_category",
+    "device_platform",
+    "preferred_reply_channel",
+    "whatsapp_e164",
+    "reply_contact_verified",
+    "association_verified",
+    "privacy_notice_version",
+    "privacy_notice_acknowledged_at",
+    "payment_provider",
+    "payment_order_ref",
+    "client_request_id"
+  ]
+}

@@ -1,103 +1,62 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { Section } from "@/components/ui/section";
-import { routing } from "@/i18n/routing";
-import { seoTitle } from "@/lib/seo-title";
-import { ogLocaleMap } from "@/lib/og-locale-map";
+import { ReadingArticle, type ReadingSection } from "@/components/help/reading-article";
+import { legalMetadata } from "@/lib/support/legal-metadata";
+import { publishedRefundPolicyLabel } from "@/lib/support/published-policy";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
-const baseUrl = "https://www.dopplervpn.org";
+const SECTIONS: { key: string; id: string }[] = [
+  { key: "euRights", id: "eu-rights" },
+  { key: "ukRights", id: "uk-rights" },
+  { key: "goodwill", id: "goodwill" },
+  { key: "revolutCard", id: "revolut-card" },
+  { key: "oxapay", id: "oxapay" },
+  { key: "appStore", id: "app-store" },
+  { key: "googlePlay", id: "google-play" },
+  { key: "renewals", id: "renewals" },
+  { key: "exclusions", id: "exclusions" },
+  { key: "howTo", id: "how-to" },
+  { key: "contact", id: "contact" },
+];
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "refund" });
-  const title = t("title");
-  const description = t("intro");
-
-  return {
-    title: seoTitle(title),
-    description,
-    alternates: {
-      canonical: `${baseUrl}/${locale}/refund`,
-      languages: Object.fromEntries([
-        ...routing.locales.map((loc) => [loc, `${baseUrl}/${loc}/refund`]),
-        ["x-default", `${baseUrl}/en/refund`],
-      ]),
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${baseUrl}/${locale}/refund`,
-      siteName: "Doppler VPN",
-      locale: ogLocaleMap[locale] || "en_US",
-      type: "website",
-      images: [{ url: `${baseUrl}/images/og-banner.jpg`, width: 1200, height: 630, alt: title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [`${baseUrl}/images/og-banner.jpg`],
-    },
-  };
+  return legalMetadata(locale, "/refund", t("title"), t("intro"));
 }
-
-const sectionKeys = [
-  "euRights",
-  "ukRights",
-  "goodwill",
-  "webSubscriptions",
-  "mobileSubscriptions",
-  "renewals",
-  "exclusions",
-  "howTo",
-  "contact",
-] as const;
 
 export default async function RefundPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-
   const t = await getTranslations("refund");
 
+  const sections: ReadingSection[] = SECTIONS.map((section) => {
+    const links =
+      section.key === "appStore"
+        ? [
+            { href: "https://support.apple.com/en-gb/118223", label: t("appleInstructions") },
+            { href: "https://reportaproblem.apple.com", label: t("appleReport") },
+          ]
+        : section.key === "googlePlay"
+          ? [{ href: "https://support.google.com/googleplay/answer/2479637?hl=en", label: t("googleInstructions") }]
+          : undefined;
+    return {
+      id: section.id,
+      title: t(`sections.${section.key}.title`),
+      content: t(`sections.${section.key}.content`),
+      links,
+    };
+  });
+
   return (
-    <>
-      <Navbar />
-      <main className="pt-20">
-        <Section className="min-h-screen">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-4">
-              {t("title")}
-            </h1>
-            <p className="text-text-muted mb-8">{t("lastUpdated")}</p>
-
-            <div className="prose prose-invert max-w-none">
-              <p className="text-text-muted text-lg leading-relaxed mb-8">
-                {t("intro")}
-              </p>
-
-              {sectionKeys.map((key) => (
-                <div key={key} className="mb-8">
-                  <h2 className="font-display text-2xl font-semibold text-text-primary mb-4">
-                    {t(`sections.${key}.title`)}
-                  </h2>
-                  <p className="text-text-muted leading-relaxed">
-                    {t(`sections.${key}.content`)}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Section>
-      </main>
-      <Footer />
-    </>
+    <ReadingArticle
+      title={t("title")}
+      updated={`${t("lastUpdated")} · ${publishedRefundPolicyLabel()}`}
+      intro={t("intro")}
+      sections={sections}
+    />
   );
 }

@@ -80,7 +80,7 @@ export const TERMS = {
   trialNote: "3-day free trial via App Store & Google Play. Bonus days on web checkout.",
   moneyBackGuaranteeDays: 30,
   guarantee:
-    "Web checkout is a one-time payment with no auto-renewal. App Store and Google Play subscriptions auto-renew until cancelled. 30-day money-back guarantee.",
+    "EU/EEA and UK customers have a 14-day right to cancel. For other customers, the published goodwill refund is 30 days on the first purchase only, and promotional or discounted purchases are excluded. Web checkout is a one-time payment and does not auto-renew. App Store and Google Play plans renew until cancelled.",
   euWithdrawalDays: 14,
   paymentMethods: ["Visa", "Mastercard", "Apple Pay", "BTC", "ETH", "USDT", "USDC"],
 } as const;

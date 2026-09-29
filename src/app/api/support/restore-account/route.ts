@@ -46,23 +46,20 @@ export async function POST(req: NextRequest) {
       .maybeSingle();
 
     if (lookupError) {
-      console.error('[restore-account] DB lookup error:', lookupError.message);
+      console.error('[restore-account] DB lookup error', lookupError.code);
     }
 
     if (account) {
       try {
         await sendAccountIdEmail({ to: normalizedEmail, accountId: account.account_id });
       } catch (emailError) {
-        console.error(
-          '[restore-account] SMTP send failed:',
-          emailError instanceof Error ? emailError.message : emailError,
-        );
+        console.error('[restore-account] SMTP send failed');
       }
     }
 
     return NextResponse.json(GENERIC_RESPONSE);
   } catch (error) {
-    console.error('[restore-account] Error:', error);
+    console.error('[restore-account] Error');
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
 }

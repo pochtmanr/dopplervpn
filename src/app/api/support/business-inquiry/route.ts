@@ -129,6 +129,11 @@ export async function POST(req: NextRequest) {
     const { error: insertError } = await supabase.from('support_tickets').insert({
       ticket_number: ticketNumber,
       topic: 'business',
+      issue_category: 'business',
+      preferred_reply_channel: 'email',
+      reply_contact_verified: false,
+      association_verified: false,
+      source: 'web',
       inquiry_type,
       subject: `${typeLabel} — ${company}`,
       description: text,
@@ -143,13 +148,13 @@ export async function POST(req: NextRequest) {
     });
 
     if (insertError) {
-      console.error('Insert business inquiry error:', insertError);
+      console.error('Insert business inquiry error', insertError.code);
       return NextResponse.json({ error: 'Failed to send inquiry' }, { status: 500 });
     }
 
     return NextResponse.json({ ticket_number: ticketNumber });
   } catch (error) {
-    console.error('Business inquiry error:', error);
+    console.error('Business inquiry error');
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
 }

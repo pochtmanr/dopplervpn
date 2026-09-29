@@ -32,7 +32,7 @@ const baseUrl = "https://www.dopplervpn.org";
 // look freshly modified on every deploy, which trains Google to distrust the
 // signal. Bump this only when the static pages' content actually changes.
 // (Blog entries below use the post's real updated_at/created_at instead.)
-const STATIC_LASTMOD = new Date("2026-06-09");
+const STATIC_LASTMOD = new Date("2026-09-28");
 
 // The /how-it-works articles are newer than the rest of the static set and carry
 // their own dateModified in content/how-it-works/<slug>/<locale>.meta.json.
@@ -119,6 +119,9 @@ const staticPages = [
   "/privacy",
   "/terms",
   "/refund",
+  "/help/account-id",
+  "/help/web-and-store",
+  "/help/restore-cancel-refund",
   "/dpa",
   "/subprocessors",
   "/blog",

@@ -3,6 +3,7 @@ import {
   COMPANY,
   CONTACT,
   PLANS,
+  TERMS,
   HIGHLIGHTS,
   PLATFORMS,
 } from "@/lib/facts";
@@ -93,7 +94,7 @@ export default function AgentsPage() {
           ))}
         </ul>
         <p className="mt-2 text-xs text-zinc-500">
-          One-time payment, no auto-renewal. 30-day money-back guarantee.
+          {TERMS.guarantee}
         </p>
       </Block>
 

@@ -9,6 +9,7 @@ import { readConsentFlags } from '@/components/cookie-consent';
 import { AuthPanel, type AuthResult } from '@/components/account/auth-panel';
 import { WelcomeModal } from '@/components/account/welcome-modal';
 import { PageLoader } from '@/components/ui/page-loader';
+import { publishedRefundPolicyLabel } from '@/lib/support/published-policy';
 import type { AccountDevices, AccountInfo } from '@/components/account/types';
 import { AccountIdCard } from '@/components/account/dashboard/account-id-card';
 import { ContactsCard } from '@/components/account/dashboard/contacts-card';
@@ -809,6 +810,7 @@ function SubscribeInner() {
               {/* Footer links */}
               <div className="text-center space-y-2 pt-6">
                 <p className="text-xs text-text-tertiary">{t('footerNote')}</p>
+                <p className="text-xs text-text-tertiary">{publishedRefundPolicyLabel()}</p>
                 <div className="flex items-center justify-center gap-3 text-xs text-text-tertiary">
                   <a
                     href={`/${locale}/terms`}

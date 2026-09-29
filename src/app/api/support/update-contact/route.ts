@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
       .eq('account_id', account_id);
 
     if (error) {
-      console.error('Update contact error:', error);
+      console.error('Update contact error', error.code ?? '');
       return NextResponse.json(
         { error: 'Failed to update contact' },
         { status: 500 }
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Update contact error:', error);
+    console.error('Update contact error');
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
 }

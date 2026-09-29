@@ -1,81 +1,113 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useLocale } from 'next-intl';
-import { ActionButtons } from './action-buttons';
-import { TicketModal } from './ticket-modal';
-import { RestoreModal } from './restore-modal';
-import { BusinessModal } from './business-modal';
+import { useEffect, useState } from "react";
+import { useLocale } from "next-intl";
+import { ActionButtons } from "./action-buttons";
+import { BusinessModal } from "./business-modal";
+import { ContactRemovalPanel } from "./contact-removal-panel";
+import { RestoreModal } from "./restore-modal";
+import { TicketFlow, useTicketSession, type TicketAccountPrefill } from "./ticket-flow";
 
-/* ── Account type (for pre-filling ticket form) ───────────────────── */
-
-export interface AccountData {
-  account_id: string;
+export interface AccountData extends TicketAccountPrefill {
   subscription_tier: string;
   subscription_expires_at: string | null;
-  contact_method: string | null;
-  contact_value: string | null;
   contact_verified: boolean;
   subscription_source: string | null;
   created_at: string;
 }
 
-/* ── SupportContent ───────────────────────────────────────────────── */
+function desktopShell(): boolean {
+  return window.matchMedia("(min-width: 1024px)").matches;
+}
 
 export function SupportContent() {
   const locale = useLocale();
-
   const [account, setAccount] = useState<AccountData | null>(null);
-  const [ticketModalOpen, setTicketModalOpen] = useState(false);
-  const [restoreModalOpen, setRestoreModalOpen] = useState(false);
-  const [businessModalOpen, setBusinessModalOpen] = useState(false);
+  const [ticketOpen, setTicketOpen] = useState(false);
+  const [shell, setShell] = useState<"page" | "dialog">("page");
+  const [restoreOpen, setRestoreOpen] = useState(false);
+  const [businessOpen, setBusinessOpen] = useState(false);
+  const [scrollRemoval, setScrollRemoval] = useState(false);
+  const session = useTicketSession(account);
 
-  /* Auto-open a modal from a shareable hash: #restore, #business */
   useEffect(() => {
-    if (window.location.hash === '#restore') {
-      setRestoreModalOpen(true);
-    } else if (window.location.hash === '#business') {
-      setBusinessModalOpen(true);
-    }
+    if (window.location.hash === "#restore") setRestoreOpen(true);
+    else if (window.location.hash === "#business") setBusinessOpen(true);
   }, []);
 
-  /* Try to restore session from localStorage (for pre-filling ticket form only) */
   useEffect(() => {
-    const savedId = localStorage.getItem('doppler_account_id');
-    if (savedId) {
-      fetch(`/api/support/account?account_id=${encodeURIComponent(savedId)}`)
-        .then((res) => res.ok ? res.json() : null)
-        .then((data) => { if (data?.account) setAccount(data.account); })
-        .catch(() => {});
-    }
+    const savedId = localStorage.getItem("doppler_account_id");
+    if (!savedId) return;
+    fetch(`/api/support/account?account_id=${encodeURIComponent(savedId)}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.account) setAccount(data.account);
+      })
+      .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if (!ticketOpen) return;
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const apply = () => setShell(mql.matches ? "dialog" : "page");
+    mql.addEventListener("change", apply);
+    return () => mql.removeEventListener("change", apply);
+  }, [ticketOpen]);
+
+  const openTicket = () => {
+    setShell(desktopShell() ? "dialog" : "page");
+    setTicketOpen(true);
+  };
+
+  useEffect(() => {
+    if (!scrollRemoval || ticketOpen) return;
+    const panel = document.getElementById("contact-removal");
+    panel?.scrollIntoView({ block: "start" });
+    panel?.focus({ preventScroll: true });
+    setScrollRemoval(false);
+  }, [scrollRemoval, ticketOpen]);
+
+  const openRemoval = () => {
+    setTicketOpen(false);
+    setScrollRemoval(true);
+  };
+
+  const showCards = !(ticketOpen && shell === "page");
 
   return (
     <section>
-      <ActionButtons
-        onOpenTicket={() => setTicketModalOpen(true)}
-        onOpenRestore={() => setRestoreModalOpen(true)}
-        onOpenBusiness={() => setBusinessModalOpen(true)}
-      />
-
-      {ticketModalOpen && (
-        <TicketModal
-          account={account}
-          onClose={() => setTicketModalOpen(false)}
+      {showCards && (
+        <ActionButtons
+          onOpenTicket={openTicket}
+          onOpenRestore={() => setRestoreOpen(true)}
+          onOpenBusiness={() => setBusinessOpen(true)}
         />
       )}
 
-      {businessModalOpen && (
-        <BusinessModal onClose={() => setBusinessModalOpen(false)} />
+      {ticketOpen && (
+        <TicketFlow
+          shell={shell}
+          session={session}
+          onCancel={() => setTicketOpen(false)}
+          onDone={() => {
+            session.reset();
+            setTicketOpen(false);
+          }}
+          onOpenRemoval={openRemoval}
+        />
       )}
 
-      {restoreModalOpen && (
+      <ContactRemovalPanel />
+
+      {businessOpen && <BusinessModal onClose={() => setBusinessOpen(false)} />}
+
+      {restoreOpen && (
         <RestoreModal
           locale={locale}
-          onClose={() => setRestoreModalOpen(false)}
+          onClose={() => setRestoreOpen(false)}
           onOpenTicket={() => {
-            setRestoreModalOpen(false);
-            setTicketModalOpen(true);
+            setRestoreOpen(false);
+            openTicket();
           }}
         />
       )}

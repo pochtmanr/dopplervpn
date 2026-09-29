@@ -1,0 +1,479 @@
+{
+  "version": "2026-09-28",
+  "status": "research",
+  "approvedCustomerPromise": false,
+  "seller": {
+    "name": "SIMNETIQ LTD",
+    "companyNumber": "16861177",
+    "jurisdiction": "United Kingdom",
+    "governingLawPublished": "England and Wales"
+  },
+  "example": {
+    "grossPaid": { "amount": "6.99", "currency": "USD" },
+    "gatewayCost": { "amount": "0.15", "currency": "USD" },
+    "forbiddenDefaultCustomerAmount": "6.84",
+    "note": "Gross paid, gateway cost, and any lawful use deduction are separate. A processor keeping its fee does not by itself reduce the customer's refund."
+  },
+  "law": {
+    "ukDistanceSelling": {
+      "instrument": "Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013",
+      "url": "https://www.legislation.gov.uk/uksi/2013/3134",
+      "guidanceUrl": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/429300/bis-13-1368-consumer-contracts-information-cancellation-and-additional-payments-regulations-guidance.pdf",
+      "inForceOn": "2026-09-28",
+      "notes": "Regulation 34 requires reimbursement and prohibits a reimbursement fee. Regulation 36 is a separate use deduction and needs the consumer's express request for early performance. A single connection is not that evidence."
+    },
+    "ukSubscriptionRegime": {
+      "instrument": "Digital Markets, Competition and Consumers Act 2024, Part 4 Chapter 2",
+      "announcedCommencement": "2027-01",
+      "inForceOn": null,
+      "checkedOn": "2026-09-28",
+      "sources": [
+        "https://www.tlt.com/insights-and-events/insight/dmcc-act-subscription-contracts-regime-brought-forward-by-the-pm-what-do-businesses-need-to-know",
+        "https://connectontech.bakermckenzie.com/uk-government-accelerates-dmcca-subscription-reforms-to-january-2027/"
+      ],
+      "notes": "Secondary legislation and a commencement order were not in force on the check date. Do not apply this regime. Web plans are one-time access, not auto-renewals. Store auto-renewals are a later question."
+    },
+    "euDirective": {
+      "instrument": "Directive 2011/83/EU",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011L0083",
+      "defaultForCurrentWebCheckout": false,
+      "notes": "Not the default for current website sales because EU member states are redirected away from web checkout. A historic or store purchase may still be in scope. Article 13 reimburses without fees. Article 14 is the qualifying use deduction."
+    }
+  },
+  "countryRestrictions": {
+    "verifiedOn": "2026-09-28",
+    "webCheckout": {
+      "file": "doppler-web/src/app/checkout/page.tsx",
+      "signal": "x-vercel-ip-country",
+      "blockedEuMembers": [
+        "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR",
+        "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL",
+        "PL", "PT", "RO", "SK", "SI", "ES", "SE"
+      ],
+      "notBlockedExamples": ["GB", "IS", "LI", "NO", "CH", "RU"],
+      "paymentRoutesHaveCountryBlock": false
+    },
+    "termsSanctionsWarrantyIsNotAPaymentBlock": true,
+    "russianLocaleIsNotResidence": true,
+    "storePurchasesOutsideWebRedirect": true,
+    "unresolved": [
+      "Checkout does not block Russia or other sanctioned territories. The owner says payments are unavailable there; the code does not enforce that.",
+      "EEA countries outside the EU, and Switzerland, are not in the EU member redirect.",
+      "Historic App Store and Google Play purchases are not governed by the website redirect."
+    ]
+  },
+  "rails": [
+    {
+      "id": "revolut_card",
+      "confirmed": true,
+      "kind": "web_card",
+      "notes": "Website card checkout through Revolut."
+    },
+    {
+      "id": "apple_pay_web",
+      "confirmed": true,
+      "kind": "web_wallet",
+      "notes": "Apple Pay on the Revolut card checkout. This is not App Store billing."
+    },
+    {
+      "id": "google_pay_web",
+      "confirmed": true,
+      "kind": "web_wallet",
+      "notes": "Google Pay on the Revolut card checkout. This is not Google Play billing."
+    },
+    {
+      "id": "oxapay",
+      "confirmed": true,
+      "kind": "web_crypto",
+      "notes": "Website crypto invoices through OxaPay."
+    },
+    {
+      "id": "app_store",
+      "confirmed": true,
+      "kind": "store_subscription",
+      "notes": "Auto-renewing App Store subscriptions for iPhone, iPad, and Mac."
+    },
+    {
+      "id": "google_play",
+      "confirmed": true,
+      "kind": "store_subscription",
+      "notes": "Auto-renewing Google Play subscriptions. The APK build has no Play billing."
+    },
+    {
+      "id": "telegram_stars",
+      "confirmed": false,
+      "kind": "unconfirmed",
+      "notes": "No sales path in the website or support bot."
+    },
+    {
+      "id": "microsoft_store",
+      "confirmed": false,
+      "kind": "unconfirmed",
+      "notes": "Windows ships a direct installer. Store listing notes are not live commerce."
+    },
+    {
+      "id": "balance_topup",
+      "confirmed": false,
+      "kind": "unconfirmed",
+      "notes": "No balance top-up product."
+    }
+  ],
+  "branches": [
+    {
+      "id": "uk_statutory_cancellation",
+      "jurisdiction": "UK",
+      "purchaserType": "consumer",
+      "rail": "web",
+      "railConfirmed": true,
+      "reasonClass": "statutory_cancellation",
+      "whoActs": "merchant_on_original_rail",
+      "requestWindow": "Usually 14 days from the contract under the 2013 regulations. Disclosure effects are unresolved for a given purchase.",
+      "grossTreatment": "reimburse_gross",
+      "gatewayCostTreatment": "merchant_expense",
+      "useDeduction": "not_this_branch",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [
+        { "title": "Consumer Contracts Regulations 2013", "url": "https://www.legislation.gov.uk/uksi/2013/3134", "effective": "2014-06-13" },
+        { "title": "BIS implementation guidance", "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/429300/bis-13-1368-consumer-contracts-information-cancellation-and-additional-payments-regulations-guidance.pdf", "effective": "2013-12" },
+        { "title": "GOV.UK online and distance selling", "url": "https://www.gov.uk/online-and-distance-selling-for-businesses", "effective": "2026-09-28" }
+      ],
+      "unresolved": [
+        "Whether the required pre-contract information was given for the purchase.",
+        "The purchaser's residence is not inferred from Telegram language."
+      ]
+    },
+    {
+      "id": "uk_reg36_use_deduction",
+      "jurisdiction": "UK",
+      "purchaserType": "consumer",
+      "rail": "web",
+      "railConfirmed": true,
+      "reasonClass": "statutory_use_deduction",
+      "whoActs": "merchant_on_original_rail",
+      "requestWindow": "Same cancellation window as statutory cancellation. The deduction itself needs regulation 36 conditions.",
+      "grossTreatment": "unresolved_without_evidence",
+      "gatewayCostTreatment": "merchant_expense",
+      "useDeduction": "only_with_express_early_performance_evidence",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": null,
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false,
+        "withoutRequiredEvidenceCustomerAmount": "6.99"
+      },
+      "sources": [
+        { "title": "Consumer Contracts Regulations 2013, regulation 36", "url": "https://www.legislation.gov.uk/uksi/2013/3134", "effective": "2014-06-13" }
+      ],
+      "unresolved": [
+        "No express early-performance request is assumed from the fact that the VPN connected.",
+        "The lawful deduction amount is not calculated here."
+      ]
+    },
+    {
+      "id": "service_failure",
+      "jurisdiction": "purchase_specific",
+      "purchaserType": "unknown",
+      "rail": "web",
+      "railConfirmed": true,
+      "reasonClass": "service_failure",
+      "whoActs": "merchant_or_provider_after_facts",
+      "requestWindow": "Not capped at 14 or 30 days.",
+      "grossTreatment": "reimburse_gross_when_full_reversal_approved",
+      "gatewayCostTreatment": "merchant_expense",
+      "useDeduction": "not_goodwill",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [
+        { "title": "House of Commons briefing SN05761", "url": "https://commonslibrary.parliament.uk/research-briefings/sn05761/", "effective": "2026-09-28" }
+      ],
+      "unresolved": [
+        "Whether this purchase is a service failure rather than change of mind.",
+        "Statutory remedy and any partial value already received."
+      ]
+    },
+    {
+      "id": "duplicate_charge",
+      "jurisdiction": "purchase_specific",
+      "purchaserType": "unknown",
+      "rail": "web",
+      "railConfirmed": true,
+      "reasonClass": "duplicate_charge",
+      "whoActs": "merchant_on_original_rail",
+      "requestWindow": "Not capped at 14 or 30 days.",
+      "grossTreatment": "reimburse_duplicate_gross",
+      "gatewayCostTreatment": "merchant_expense",
+      "useDeduction": "not_applicable",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": [
+        "Payment records must show two charges before this branch is used."
+      ]
+    },
+    {
+      "id": "missing_activation",
+      "jurisdiction": "purchase_specific",
+      "purchaserType": "unknown",
+      "rail": "web",
+      "railConfirmed": true,
+      "reasonClass": "missing_activation",
+      "whoActs": "merchant_after_entitlement_check",
+      "requestWindow": "Not capped at 14 or 30 days.",
+      "grossTreatment": "reimburse_gross_when_paid_and_never_activated",
+      "gatewayCostTreatment": "merchant_expense",
+      "useDeduction": "not_applicable",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": [
+        "Entitlement and payment facts are required. Do not classify this as goodwill."
+      ]
+    },
+    {
+      "id": "voluntary_goodwill",
+      "jurisdiction": "published_august_2026_statement",
+      "purchaserType": "customer_outside_statutory_branch",
+      "rail": "web",
+      "railConfirmed": true,
+      "reasonClass": "voluntary_goodwill",
+      "whoActs": "merchant",
+      "requestWindow": "Published August 2026 statement: 30 days, first purchase, one per customer. Discounted purchases excluded. Not narrowed by this matrix.",
+      "grossTreatment": "proposed_full_gross_if_owner_approves_a_grant",
+      "gatewayCostTreatment": "merchant_expense_in_the_proposal",
+      "useDeduction": "not_part_of_the_proposal",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": [
+        "Owner has not approved replacing the August 2026 goodwill wording with a simpler full-gross rule.",
+        "The $6.99 figure is the proposed result of a grant, not a new public promise."
+      ]
+    },
+    {
+      "id": "revolut_card_and_web_wallets",
+      "jurisdiction": "purchase_specific",
+      "purchaserType": "unknown",
+      "rail": "revolut_card",
+      "railConfirmed": true,
+      "reasonClass": "rail_mechanics",
+      "whoActs": "merchant_card_refund",
+      "requestWindow": "The applicable statutory or goodwill branch, plus what Revolut can actually refund.",
+      "grossTreatment": "reimburse_gross_when_that_branch_applies",
+      "gatewayCostTreatment": "merchant_expense_until_fee_return_is_known",
+      "useDeduction": "separate_branch",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": [
+        "Whether Revolut returns the acquiring fee to the merchant.",
+        "Apple Pay and Google Pay here are wallets on the card checkout, not store billing."
+      ]
+    },
+    {
+      "id": "oxapay_crypto",
+      "jurisdiction": "purchase_specific",
+      "purchaserType": "unknown",
+      "rail": "oxapay",
+      "railConfirmed": true,
+      "reasonClass": "rail_mechanics",
+      "whoActs": "merchant_after_confirmed_destination",
+      "requestWindow": "The applicable statutory or goodwill branch. Crypto is not a universal exception.",
+      "grossTreatment": "gross_invoice_fiat_is_the_starting_point",
+      "gatewayCostTreatment": "no_entitlement_to_keep_network_or_fx_fees",
+      "useDeduction": "separate_branch",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [
+        { "title": "OxaPay generate invoice", "url": "https://docs.oxapay.com/api-reference/payment/generate-invoice", "effective": "2026-09-28" },
+        { "title": "OxaPay payment information", "url": "https://docs.oxapay.com/api-reference/payment/payment-information", "effective": "2026-09-28" }
+      ],
+      "unresolved": [
+        "Merchant terms, asset, network, precision, FX basis, payout minimum, and any return fee.",
+        "Do not send a refund to a guessed sender address.",
+        "Invoice fiat and asset units stay distinct. $6.84 is not the formula."
+      ]
+    },
+    {
+      "id": "app_store",
+      "jurisdiction": "apple_country_rules",
+      "purchaserType": "unknown",
+      "rail": "app_store",
+      "railConfirmed": true,
+      "reasonClass": "store_refund",
+      "whoActs": "apple",
+      "requestWindow": "Apple's country-specific eligibility. No merchant day count.",
+      "grossTreatment": "store_decides",
+      "gatewayCostTreatment": "not_a_merchant_net_calculation",
+      "useDeduction": "not_a_merchant_calculation",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": null,
+        "currency": "USD",
+        "gatewayCostBearer": "not_calculated",
+        "useDeductionApplied": false
+      },
+      "sources": [
+        { "title": "Apple refund instructions", "url": "https://support.apple.com/en-gb/118223", "effective": "2026-09-28" }
+      ],
+      "unresolved": [
+        "Approval, timing, and Apple's net settlement are Apple's decision."
+      ]
+    },
+    {
+      "id": "google_play",
+      "jurisdiction": "google_country_and_product_rules",
+      "purchaserType": "unknown",
+      "rail": "google_play",
+      "railConfirmed": true,
+      "reasonClass": "store_refund",
+      "whoActs": "google",
+      "requestWindow": "Depends on product, elapsed time, region, and reason. One published window is not a universal denial.",
+      "grossTreatment": "store_decides",
+      "gatewayCostTreatment": "not_a_merchant_net_calculation",
+      "useDeduction": "not_a_merchant_calculation",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": null,
+        "currency": "USD",
+        "gatewayCostBearer": "not_calculated",
+        "useDeductionApplied": false
+      },
+      "sources": [
+        { "title": "Google Play refund policies", "url": "https://support.google.com/googleplay/answer/2479637?hl=en", "effective": "2026-09-28" }
+      ],
+      "unresolved": [
+        "Which Google path applies to the purchase."
+      ]
+    },
+    {
+      "id": "eu_historic_or_store",
+      "jurisdiction": "EU_if_in_scope",
+      "purchaserType": "consumer",
+      "rail": "historic_or_store",
+      "railConfirmed": true,
+      "reasonClass": "statutory_cancellation",
+      "whoActs": "depends_on_rail",
+      "requestWindow": "Directive timetable if the purchase is actually in scope. Not the default for current web checkout.",
+      "grossTreatment": "reimburse_gross_if_in_scope",
+      "gatewayCostTreatment": "merchant_expense_if_article_13_applies",
+      "useDeduction": "article_14_only_when_conditions_met",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": "6.99",
+        "currency": "USD",
+        "gatewayCostBearer": "merchant",
+        "useDeductionApplied": false
+      },
+      "sources": [
+        { "title": "Consumer Rights Directive", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011L0083", "effective": "2014-06-13" }
+      ],
+      "unresolved": [
+        "Whether the historic purchase is an EU distance contract.",
+        "Store refunds are still requested from Apple or Google."
+      ]
+    },
+    {
+      "id": "telegram_stars",
+      "jurisdiction": null,
+      "purchaserType": null,
+      "rail": "telegram_stars",
+      "railConfirmed": false,
+      "reasonClass": "unconfirmed_rail",
+      "whoActs": null,
+      "requestWindow": null,
+      "grossTreatment": "no_flow",
+      "gatewayCostTreatment": "no_flow",
+      "useDeduction": "no_flow",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": null,
+        "currency": "USD",
+        "gatewayCostBearer": null,
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": ["Rail is not a confirmed sales path."]
+    },
+    {
+      "id": "microsoft_store",
+      "jurisdiction": null,
+      "purchaserType": null,
+      "rail": "microsoft_store",
+      "railConfirmed": false,
+      "reasonClass": "unconfirmed_rail",
+      "whoActs": null,
+      "requestWindow": null,
+      "grossTreatment": "no_flow",
+      "gatewayCostTreatment": "no_flow",
+      "useDeduction": "no_flow",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": null,
+        "currency": "USD",
+        "gatewayCostBearer": null,
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": ["Windows purchases on the website use the web rails. Microsoft Store commerce is not live."]
+    },
+    {
+      "id": "balance_topup",
+      "jurisdiction": null,
+      "purchaserType": null,
+      "rail": "balance_topup",
+      "railConfirmed": false,
+      "reasonClass": "unconfirmed_rail",
+      "whoActs": null,
+      "requestWindow": null,
+      "grossTreatment": "no_flow",
+      "gatewayCostTreatment": "no_flow",
+      "useDeduction": "no_flow",
+      "publishedAsCustomerPromise": false,
+      "example": {
+        "customerAmount": null,
+        "currency": "USD",
+        "gatewayCostBearer": null,
+        "useDeductionApplied": false
+      },
+      "sources": [],
+      "unresolved": ["No balance top-up product exists."]
+    }
+  ]
+}

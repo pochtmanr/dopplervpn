@@ -2,15 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { rateLimit } from '@/lib/rate-limit';
 import { randomUUID } from 'crypto';
+import { assembleWebTicket, saveTicketOnce } from '@/lib/support/contract';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const VALID_TOPICS = [
-  'connection_issues',
-  'subscription_billing',
-  'account',
-  'feature_request',
-  'other',
-] as const;
+const ACCOUNT_CODE_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
 export async function POST(req: NextRequest) {
   // Rate limit: 3 tickets per minute per IP
@@ -18,85 +12,88 @@ export async function POST(req: NextRequest) {
   if (rl) return rl;
 
   try {
-    const { topic, subject, description, contact_email, account_id } =
-      await req.json();
-
-    if (!topic || !VALID_TOPICS.includes(topic)) {
-      return NextResponse.json(
-        { error: `Invalid topic. Must be one of: ${VALID_TOPICS.join(', ')}` },
-        { status: 400 }
-      );
+    const body = await req.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 
-    if (!subject || typeof subject !== 'string' || subject.trim().length < 3) {
-      return NextResponse.json(
-        { error: 'Subject must be at least 3 characters' },
-        { status: 400 }
-      );
+    const subject = typeof body.subject === 'string' ? body.subject.trim() : '';
+    const description = typeof body.description === 'string' ? body.description.trim() : '';
+    if (subject.length < 3) {
+      return NextResponse.json({ error: 'Subject must be at least 3 characters' }, { status: 400 });
     }
-
-    if (
-      !description ||
-      typeof description !== 'string' ||
-      description.trim().length < 10
-    ) {
+    if (description.length < 10) {
       return NextResponse.json(
         { error: 'Description must be at least 10 characters' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    if (!contact_email || !EMAIL_REGEX.test(contact_email)) {
-      return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+    const contract = assembleWebTicket(body as Record<string, unknown>);
+    if (!contract.ok) {
+      return NextResponse.json({ error: contract.error }, { status: 400 });
     }
 
     const supabase = createUntypedAdminClient();
-
-    // Use UUID-based ticket number to avoid race condition
     const ticketNumber = `TKT-${randomUUID().slice(0, 8).toUpperCase()}`;
+    const priority = await priorityForAccount(supabase, contract.value.account_id);
 
-    // Determine priority from account subscription, not from request body
-    let priority = 'normal';
-    if (account_id) {
-      const { data: account } = await supabase
-        .from('accounts')
-        .select('subscription_tier, subscription_expires_at')
-        .eq('account_id', account_id)
-        .single();
-
-      if (
-        account?.subscription_tier === 'pro' &&
-        account.subscription_expires_at &&
-        new Date(account.subscription_expires_at) > new Date()
-      ) {
-        priority = 'premium';
-      }
-    }
-
-    const { error: insertError } = await supabase
-      .from('support_tickets')
-      .insert({
+    const saved = await saveTicketOnce(
+      {
+        insert: async (row) => {
+          const { error } = await supabase.from('support_tickets').insert(row);
+          return { error: error ? { code: error.code, message: error.message } : null };
+        },
+        findByClientRequest: async (source, clientRequestId) => {
+          const { data, error } = await supabase
+            .from('support_tickets')
+            .select('ticket_number')
+            .eq('source', source)
+            .eq('client_request_id', clientRequestId)
+            .maybeSingle();
+          if (error || !data?.ticket_number) return null;
+          return data.ticket_number;
+        },
+      },
+      {
+        ...contract.value,
         ticket_number: ticketNumber,
-        topic: topic,
-        subject: subject.trim(),
-        description: description.trim(),
-        contact_email: contact_email.toLowerCase().trim(),
-        account_id: account_id || null,
+        subject,
+        description,
         status: 'open',
         priority,
-      });
+      },
+    );
 
-    if (insertError) {
-      console.error('Insert ticket error:', insertError);
-      return NextResponse.json(
-        { error: 'Failed to create ticket' },
-        { status: 500 }
-      );
+    if (!saved.ok) {
+      console.error('Insert ticket error', saved.code ?? '');
+      return NextResponse.json({ error: 'Failed to create ticket' }, { status: 500 });
     }
 
-    return NextResponse.json({ ticket_number: ticketNumber });
-  } catch (error) {
-    console.error('Create ticket error:', error);
+    return NextResponse.json({ ticket_number: saved.ticketNumber });
+  } catch {
+    console.error('Create ticket error');
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
+}
+
+async function priorityForAccount(
+  supabase: ReturnType<typeof createUntypedAdminClient>,
+  accountCode: string | null,
+): Promise<'normal' | 'premium'> {
+  if (!accountCode || !ACCOUNT_CODE_REGEX.test(accountCode)) return 'normal';
+  const { data: account } = await supabase
+    .from('accounts')
+    .select('subscription_tier, subscription_expires_at')
+    .eq('account_id', accountCode)
+    .maybeSingle();
+
+  if (
+    account?.subscription_tier === 'pro' &&
+    account.subscription_expires_at &&
+    new Date(account.subscription_expires_at) > new Date()
+  ) {
+    return 'premium';
+  }
+  return 'normal';
 }

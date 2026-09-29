@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback } from 'react';
 import { readConsentFlags } from '@/components/cookie-consent';
+import { publishedRefundPolicyLabel } from '@/lib/support/published-policy';
 
 const PLANS = [
   { id: 'monthly', label: '1 Month', price: '$6.99', perMonth: '$6.99/mo', save: null, best: false },
@@ -55,9 +56,10 @@ function CryptoIcon() {
 interface CheckoutFormProps {
   accountId: string | null;
   initialPlan?: PlanId;
+  locale?: string;
 }
 
-export function CheckoutForm({ accountId, initialPlan = 'yearly' }: CheckoutFormProps) {
+export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' }: CheckoutFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanId>(initialPlan);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [loading, setLoading] = useState(false);
@@ -405,6 +407,17 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly' }: CheckoutForm
           {paymentMethod === 'card'
             ? 'Secure payment via Revolut · One-time payment · No auto-renewal'
             : 'Secure crypto payment via OxaPay · One-time payment · No auto-renewal'}
+        </p>
+        <p className="text-center text-zinc-500 text-xs mt-3">
+          EU/EEA and UK customers have a 14-day right to cancel. Elsewhere, the published
+          goodwill refund is 30 days on the first purchase only. {publishedRefundPolicyLabel()}.
+        </p>
+        <p className="text-center text-zinc-500 text-xs mt-3">
+          <a className="underline underline-offset-4" href={`/${locale}/terms`}>Terms</a>
+          <span aria-hidden="true"> · </span>
+          <a className="underline underline-offset-4" href={`/${locale}/privacy`}>Privacy</a>
+          <span aria-hidden="true"> · </span>
+          <a className="underline underline-offset-4" href={`/${locale}/refund`}>Refunds</a>
         </p>
       </div>
     </div>

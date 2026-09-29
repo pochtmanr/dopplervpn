@@ -59,6 +59,7 @@ const sectionKeys = [
   "thirdParty",
   "international",
   "retention",
+  "supportContact",
   "cookies",
   "children",
   "changes",

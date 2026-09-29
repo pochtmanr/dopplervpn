@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
     // Mask contact value — only show partial info
     return NextResponse.json({ account });
   } catch (error) {
-    console.error('Account lookup error:', error);
+    console.error('Account lookup error');
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }
 }

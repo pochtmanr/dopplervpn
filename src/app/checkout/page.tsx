@@ -80,10 +80,10 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
 
   const headersList = await headers();
   const country = headersList.get('x-vercel-ip-country') || '';
+  const rawLocale = params.l ?? 'en';
+  const safeLocale = (routing.locales as readonly string[]).includes(rawLocale) ? rawLocale : 'en';
 
   if (EU_COUNTRIES.has(country.toUpperCase())) {
-    const rawLocale = params.l ?? 'en';
-    const safeLocale = (routing.locales as readonly string[]).includes(rawLocale) ? rawLocale : 'en';
     redirect(`/${safeLocale}/account`);
   }
 
@@ -105,5 +105,5 @@ export default async function CheckoutPage({ searchParams }: PageProps) {
     );
   }
 
-  return <CheckoutForm accountId={accountId} initialPlan={initialPlan} />;
+  return <CheckoutForm accountId={accountId} initialPlan={initialPlan} locale={safeLocale} />;
 }

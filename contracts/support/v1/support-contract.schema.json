@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.dopplervpn.org/contracts/support/v1/support-contract.schema.json",
+  "title": "Doppler support contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "migration",
+    "appliedToProduction",
+    "source",
+    "issueCategory",
+    "devicePlatform",
+    "preferredReplyChannel",
+    "legacyTopics",
+    "legacyTopicMap",
+    "categoryToTopic",
+    "capabilities",
+    "limits",
+    "columns"
+  ],
+  "properties": {
+    "contractVersion": { "const": 1 },
+    "migration": { "const": "20260928223000_support_contract_v1.sql" },
+    "appliedToProduction": { "const": false },
+    "source": {
+      "type": "array",
+      "items": { "enum": ["web", "telegram"] },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "issueCategory": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "account",
+          "payment",
+          "subscription",
+          "connection",
+          "performance",
+          "app",
+          "refund",
+          "privacy",
+          "feature_request",
+          "other",
+          "business"
+        ]
+      },
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true
+    },
+    "devicePlatform": {
+      "type": "array",
+      "items": { "enum": ["ios", "android", "macos", "windows", "web", "unknown"] },
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true
+    },
+    "preferredReplyChannel": {
+      "type": "array",
+      "items": { "enum": ["telegram", "email", "whatsapp"] },
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "legacyTopics": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "connection_issues",
+          "subscription_billing",
+          "account",
+          "feature_request",
+          "other",
+          "business"
+        ]
+      },
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true
+    },
+    "legacyTopicMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "connection_issues",
+        "subscription_billing",
+        "account",
+        "feature_request",
+        "other",
+        "business"
+      ],
+      "properties": {
+        "connection_issues": { "const": "connection" },
+        "subscription_billing": { "type": "null" },
+        "account": { "const": "account" },
+        "feature_request": { "const": "feature_request" },
+        "other": { "const": "other" },
+        "business": { "const": "business" }
+      }
+    },
+    "categoryToTopic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "account",
+        "payment",
+        "subscription",
+        "connection",
+        "performance",
+        "app",
+        "refund",
+        "privacy",
+        "feature_request",
+        "other",
+        "business"
+      ],
+      "properties": {
+        "account": { "const": "account" },
+        "payment": { "const": "payment" },
+        "subscription": { "const": "subscription" },
+        "connection": { "const": "connection_issues" },
+        "performance": { "const": "performance" },
+        "app": { "const": "app" },
+        "refund": { "const": "refund" },
+        "privacy": { "const": "privacy" },
+        "feature_request": { "const": "feature_request" },
+        "other": { "const": "other" },
+        "business": { "const": "business" }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "whatsappDelivery",
+        "whatsappManualPreference",
+        "contactRemovalPublicUrl",
+        "contactRemovalRequestsEnv"
+      ],
+      "properties": {
+        "whatsappDelivery": { "const": false },
+        "whatsappManualPreference": { "const": true },
+        "contactRemovalPublicUrl": { "type": "null" },
+        "contactRemovalRequestsEnv": { "const": "SUPPORT_CONTACT_REMOVAL_ENABLED" }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "emailMax",
+        "whatsappMinDigits",
+        "whatsappMaxDigits",
+        "telegramUsernameMin",
+        "telegramUsernameMax",
+        "accountCodeMax",
+        "privacyNoticeVersionMax",
+        "paymentProviderMax",
+        "paymentOrderRefMax"
+      ],
+      "properties": {
+        "emailMax": { "const": 254 },
+        "whatsappMinDigits": { "const": 8 },
+        "whatsappMaxDigits": { "const": 15 },
+        "telegramUsernameMin": { "const": 5 },
+        "telegramUsernameMax": { "const": 32 },
+        "accountCodeMax": { "const": 64 },
+        "privacyNoticeVersionMax": { "const": 40 },
+        "paymentProviderMax": { "const": 40 },
+        "paymentOrderRefMax": { "const": 80 }
+      }
+    },
+    "columns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 11,
+      "uniqueItems": true
+    }
+  }
+}

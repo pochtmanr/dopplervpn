@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.dopplervpn.org/contracts/refund/v1/refund-decision-matrix.schema.json",
+  "title": "Doppler refund decision matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "approvedCustomerPromise", "seller", "example", "law", "countryRestrictions", "rails", "branches"],
+  "properties": {
+    "version": { "const": "2026-09-28" },
+    "status": { "const": "research" },
+    "approvedCustomerPromise": { "const": false },
+    "seller": { "type": "object" },
+    "example": {
+      "type": "object",
+      "required": ["grossPaid", "gatewayCost", "forbiddenDefaultCustomerAmount"],
+      "properties": {
+        "forbiddenDefaultCustomerAmount": { "const": "6.84" },
+        "grossPaid": { "type": "object" },
+        "gatewayCost": { "type": "object" },
+        "note": { "type": "string" }
+      }
+    },
+    "law": { "type": "object" },
+    "countryRestrictions": { "type": "object" },
+    "rails": { "type": "array" },
+    "branches": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "railConfirmed", "reasonClass", "publishedAsCustomerPromise", "example", "unresolved"],
+        "properties": {
+          "id": { "type": "string" },
+          "publishedAsCustomerPromise": { "const": false },
+          "railConfirmed": { "type": "boolean" },
+          "example": {
+            "type": "object",
+            "required": ["customerAmount", "useDeductionApplied"],
+            "properties": {
+              "customerAmount": { "type": ["string", "null"] },
+              "useDeductionApplied": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

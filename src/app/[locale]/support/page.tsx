@@ -9,6 +9,7 @@ import { ogLocaleMap } from "@/lib/og-locale-map";
 import { FAQSchema, BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { seoTitle } from "@/lib/seo-title";
 import { Reveal } from "@/components/ui/reveal";
+import { Link } from "@/i18n/navigation";
 import {
   HERO_SECTION,
   HERO_SUBTITLE,
@@ -126,6 +127,15 @@ export default async function SupportPage({ params }: PageProps) {
         <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 pb-12 md:pb-20">
           {/* ── Actions ───────────────────────────────────────────── */}
           <SupportContent />
+          <section id="guides" className="scroll-mt-28 max-w-3xl mx-auto mt-10">
+            <h2 className="font-display text-2xl font-semibold text-text-primary mb-4">{t("guides.title")}</h2>
+            <ul className="space-y-3 text-text-muted">
+              <li><Link href="/help/account-id" className="text-accent-teal underline underline-offset-4">{t("guides.accountId")}</Link></li>
+              <li><Link href="/help/web-and-store" className="text-accent-teal underline underline-offset-4">{t("guides.webAndStore")}</Link></li>
+              <li><Link href="/help/restore-cancel-refund" className="text-accent-teal underline underline-offset-4">{t("guides.restoreCancelRefund")}</Link></li>
+              <li><Link href="/refund" className="text-accent-teal underline underline-offset-4">{t("guides.refund")}</Link></li>
+            </ul>
+          </section>
         </div>
 
         {/* ── FAQ + Troubleshooting ─────────────────────────────── */}

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { trackGetPro } from '@/lib/track-cta';
 import { ArrowRightIcon, CheckIcon, ChevronBackIcon, ShieldIcon, SparkleIcon, featureIcons } from './icons';
 import { CARD, CARD_HAIRLINE } from '@/components/ui/card-recipes';
+import { publishedRefundPolicyLabel } from '@/lib/support/published-policy';
 import { BTN_PRIMARY, BTN_SECONDARY, EYEBROW, ORB } from './ui';
 
 /** The paywall's one big action: DESIGN.md standalone CTA, sized up, pulsing once. */
@@ -159,6 +160,7 @@ export function SubscriptionCard({
                 <ArrowRightIcon className="w-5 h-5 transition-transform group-hover/cta:translate-x-0.5 rtl:group-hover/cta:-translate-x-0.5" />
               </button>
               <p className="text-xs text-text-tertiary text-center">{t('footerNote')}</p>
+              <p className="text-xs text-text-tertiary text-center">{publishedRefundPolicyLabel()}</p>
             </div>
           </div>
         ) : (
