@@ -197,7 +197,7 @@ export default async function SecurityPage({ params }: PageProps) {
                   <li>
                     <ObfuscatedEmail
                       user="support"
-                      domain="simnetiq.store"
+                      domain="simnetiq.com"
                       className="text-accent-teal hover:text-accent-gold transition-colors"
                     />
                   </li>

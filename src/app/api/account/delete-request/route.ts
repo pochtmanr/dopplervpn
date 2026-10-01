@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { rateLimit } from '@/lib/rate-limit';
 import crypto from 'crypto';
+import { CONTACT } from '@/lib/facts';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -67,7 +68,8 @@ export async function POST(req: NextRequest) {
       const confirmUrl = `https://www.dopplervpn.org/en/delete-account/confirm?token=${token}`;
 
       await transporter.sendMail({
-        from: '"Doppler VPN" <support@simnetiq.store>',
+        from: `"Doppler VPN" <${process.env.SMTP_USER || CONTACT.senderEmail}>`,
+        replyTo: CONTACT.supportEmail,
         to: normalizedEmail,
         subject: 'Confirm Account Deletion — Doppler VPN',
         html: `
@@ -79,7 +81,7 @@ export async function POST(req: NextRequest) {
             </div>
             <p style="color: #a1a1aa; font-size: 14px;">This link expires in 24 hours. If you did not request this, you can safely ignore this email.</p>
             <hr style="border: none; border-top: 1px solid #27272a; margin: 24px 0;" />
-            <p style="color: #71717a; font-size: 12px; margin: 0;">SIMNETIQ LTD — support@simnetiq.store</p>
+            <p style="color: #71717a; font-size: 12px; margin: 0;">SIMNETIQ LTD — ${CONTACT.supportEmail}</p>
           </div>
         `,
       });

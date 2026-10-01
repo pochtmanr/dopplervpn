@@ -245,7 +245,7 @@ export async function Footer() {
               <li>
                 <ObfuscatedEmail
                   user="support"
-                  domain="simnetiq.store"
+                  domain="simnetiq.com"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm"
                 />
               </li>
@@ -406,7 +406,7 @@ export async function Footer() {
               <li>
                 <ObfuscatedEmail
                   user="support"
-                  domain="simnetiq.store"
+                  domain="simnetiq.com"
                   className="text-text-muted hover:text-text-primary transition-colors text-sm"
                 />
               </li>
@@ -421,7 +421,7 @@ export async function Footer() {
               <p className="text-text-muted text-sm">
                 &copy; {currentYear}{" "}
                 <a
-                  href="https://simnetiq.store"
+                  href="https://simnetiq.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-accent-teal hover:text-accent-gold transition-colors"

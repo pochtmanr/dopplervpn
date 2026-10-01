@@ -6,6 +6,11 @@ import { CONTACT } from '@/lib/facts';
 /** Canonical support address. `lib/facts.ts` owns it; never re-type it here. */
 const CONTACT_SUPPORT_EMAIL = CONTACT.supportEmail;
 
+/** Outbound mail is sent from the hello@ mailbox; customers reply to support@. */
+function senderAddress(): string {
+  return process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT.senderEmail;
+}
+
 /** Escape HTML entities to prevent XSS in email templates. */
 function escapeHtml(str: string): string {
   return str
@@ -148,7 +153,8 @@ export async function sendWelcomeEmail({
 </html>`;
 
   await transporter.sendMail({
-    from: `"Doppler VPN" <${CONTACT_SUPPORT_EMAIL}>`,
+    from: `"Doppler VPN" <${senderAddress()}>`,
+    replyTo: CONTACT_SUPPORT_EMAIL,
     to,
     subject: w.subject,
     html,
@@ -178,7 +184,7 @@ export async function sendVerificationCodeEmail({
 }: VerificationCodeEmailParams) {
   const transporter = getTransporter();
   const safeCode = escapeHtml(code);
-  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT_SUPPORT_EMAIL;
+  const fromAddress = senderAddress();
 
   const html = `<!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -225,6 +231,7 @@ export async function sendVerificationCodeEmail({
 
   await transporter.sendMail({
     from: `"Doppler VPN" <${fromAddress}>`,
+    replyTo: CONTACT_SUPPORT_EMAIL,
     to,
     subject: `${code} is your Doppler VPN verification code`,
     html,
@@ -420,10 +427,11 @@ export async function sendReceiptEmail({
     r.footer,
   ].join('\n');
 
-  const fromAddress = process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT_SUPPORT_EMAIL;
+  const fromAddress = senderAddress();
 
   await transporter.sendMail({
     from: `"Doppler VPN" <${fromAddress}>`,
+    replyTo: CONTACT_SUPPORT_EMAIL,
     to,
     subject,
     html,
@@ -455,8 +463,7 @@ export async function sendAccountIdEmail({
   accountId: string;
 }) {
   const transporter = getTransporter();
-  const fromAddress =
-    process.env.RECEIPT_FROM_ADDRESS || process.env.SMTP_USER || CONTACT_SUPPORT_EMAIL;
+  const fromAddress = senderAddress();
   const safeAccountId = escapeHtml(accountId);
 
   const html = `
@@ -487,6 +494,7 @@ export async function sendAccountIdEmail({
 
   await transporter.sendMail({
     from: `"Doppler VPN" <${fromAddress}>`,
+    replyTo: CONTACT_SUPPORT_EMAIL,
     to,
     subject: 'Your Doppler VPN Account ID',
     html,

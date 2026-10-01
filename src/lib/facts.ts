@@ -25,7 +25,9 @@ export const COMPANY = {
 
 export const CONTACT = {
   /** Canonical support address. Used everywhere agents/users are pointed at us. */
-  supportEmail: "support@simnetiq.store",
+  supportEmail: "support@simnetiq.com",
+  /** The mailbox our SMTP logs in as and sends from; replies go to supportEmail. */
+  senderEmail: "hello@simnetiq.com",
   telegram: {
     /** Customer support bot: help, downloads, subscription status and support requests. */
     supportBot: "https://t.me/DopplerSupportBot",

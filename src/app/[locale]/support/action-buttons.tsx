@@ -282,7 +282,7 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
             cta={
               <ObfuscatedEmail
                 user="support"
-                domain="simnetiq.store"
+                domain="simnetiq.com"
                 className={`ms-auto cta-flat ${CTA_PILL} ${STRETCH}`}
               />
             }

@@ -73,8 +73,8 @@ export const PROBE_TARGETS: ProbeTarget[] = [
   },
   {
     id: "simnetiq",
-    label: "www.simnetiq.store",
-    url: "https://www.simnetiq.store/",
+    label: "www.simnetiq.com",
+    url: "https://www.simnetiq.com/",
     role: "core",
     en: "A second domain of ours on different DNS. Tells us whether a backup domain would survive if the main one is blocked.",
     zh: "我们的另一个域名，使用不同的 DNS。用于判断主域名被封时备用域名是否还能用。",

@@ -294,7 +294,7 @@ export function BlogCta({ title, subtitle, doppler, simnetiq }: BlogCtaProps) {
       appStoreLabel: simnetiq.appStore,
       playStoreLabel: simnetiq.playStore,
       appStoreHref: "https://apps.apple.com/gb/app/simnetiq-travel-esim-data/id6755963262",
-      playStoreHref: "https://play.google.com/store/apps/details?id=com.simnetiq.storeAndroid&hl=en",
+      playStoreHref: "https://play.google.com/store/apps/details?id=com.simnetiq.comAndroid&hl=en",
       accentColor: "gold",
       promo,
     },

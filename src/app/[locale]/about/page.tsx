@@ -163,7 +163,7 @@ export default async function AboutPage({ params }: Props) {
                   {t("company.contactLabel")}
                 </dt>
                 <dd className="text-text-primary">
-                  <ObfuscatedEmail user="support" domain="simnetiq.store" />
+                  <ObfuscatedEmail user="support" domain="simnetiq.com" />
                 </dd>
               </div>
             </dl>
