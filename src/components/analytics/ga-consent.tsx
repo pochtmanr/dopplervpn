@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import { currentCtaAttribution } from "@/lib/cta-attribution";
 import { useCookieConsent } from "@/components/cookie-consent";
 import { GA_MEASUREMENT_ID, gtagConsentUpdate, gtagPageView } from "@/lib/ga";
 
@@ -40,6 +41,10 @@ export function GaConsent() {
    */
   const [consentResolved, setConsentResolved] = useState(false);
   useEffect(() => setConsentResolved(true), []);
+
+  useEffect(() => {
+    if (consentResolved) currentCtaAttribution();
+  }, [pathname, consentResolved, consent?.analytics]);
 
   // Its own effect so a route change never re-sends the consent signal.
   useEffect(() => {

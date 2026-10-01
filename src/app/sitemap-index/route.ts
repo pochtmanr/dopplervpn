@@ -13,13 +13,12 @@ const baseUrl = "https://www.dopplervpn.org";
 // on every fetch. Bump this only when the shard set actually changes.
 export const dynamic = "force-static";
 
-const lastmod = new Date("2026-06-09").toISOString();
 
 export function GET() {
   const entries = routing.locales
     .map(
       (_locale, id) =>
-        `  <sitemap>\n    <loc>${baseUrl}/sitemap/${id}.xml</loc>\n    <lastmod>${lastmod}</lastmod>\n  </sitemap>`
+        `  <sitemap>\n    <loc>${baseUrl}/sitemap/${id}.xml</loc>\n  </sitemap>`
     )
     .join("\n");
 

@@ -22,11 +22,7 @@ const DEFAULT_DISALLOW = [
   // honoured consistently by crawlers, so the old pattern matched nothing
   // and every utm-tagged URL stayed crawlable.
   "/*?utm_",
-  // Blog index filter/pagination variants. They all canonicalise to the bare
-  // /<locale>/blog (see [locale]/blog/page.tsx) and every post is already
-  // listed in the sitemap shards, so crawling them adds nothing but requests.
-  "/*?tag=",
-  "/*?page=",
+  // Filter pages are noindex; archives remain crawlable.
 ];
 
 // AI agents that send traffic back: they answer a user's question and cite the

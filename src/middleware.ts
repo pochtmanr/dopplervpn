@@ -2,6 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { GONE_BLOG_SLUGS, parseBlogSlug } from "./lib/blog-gone-slugs";
+import { parseBlogPage } from "./lib/blog-pagination";
+import { publishedBlogArchivePageExists, publishedBlogTranslationExists } from "./lib/supabase/public-blog";
 import { isBlogLocale } from "./i18n/blog-locales";
 import {
   CLICK_ID_COOKIE,
@@ -130,6 +132,42 @@ export async function middleware(request: NextRequest) {
         },
       },
     );
+  }
+
+  // App Router notFound() after streaming begins cannot change HTTP 200.
+  // Check article existence before rendering; a database outage is 503, never 404.
+  if (goneSlug && goneSlug !== "editorial" && blogPathMatch) {
+    const locale = blogPathMatch[1];
+    try {
+      const validSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(goneSlug) && goneSlug.length <= 200;
+      if (!validSlug || !(await publishedBlogTranslationExists(locale, goneSlug))) {
+        return new NextResponse(
+          '<!doctype html><html><head><meta charset="utf-8"><title>Article not found</title><meta name="robots" content="noindex"></head><body><h1>Article not found</h1><p><a href="/' + locale + '/blog">Return to the blog</a></p></body></html>',
+          { status: 404, headers: { "Content-Type": "text/html; charset=utf-8", "X-Robots-Tag": "noindex", "Cache-Control": "no-store" } },
+        );
+      }
+    } catch {
+      return new NextResponse("Blog temporarily unavailable", {
+        status: 503, headers: { "Retry-After": "60", "Cache-Control": "no-store" },
+      });
+    }
+  }
+
+  if (blogPathMatch && /^\/blog\/?$/.test(blogPathMatch[2]) && !request.nextUrl.searchParams.has("tag")) {
+    const page = parseBlogPage(request.nextUrl.searchParams.get("page") || undefined);
+    if (page > 1) {
+      try {
+        if (!(await publishedBlogArchivePageExists(blogPathMatch[1], page))) {
+          return new NextResponse("Archive page not found", {
+            status: 404, headers: { "X-Robots-Tag": "noindex", "Cache-Control": "no-store" },
+          });
+        }
+      } catch {
+        return new NextResponse("Blog temporarily unavailable", {
+          status: 503, headers: { "Retry-After": "60", "Cache-Control": "no-store" },
+        });
+      }
+    }
   }
 
   // Public routes — i18n middleware.

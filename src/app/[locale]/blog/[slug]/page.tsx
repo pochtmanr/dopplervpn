@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createStaticClient } from "@/lib/supabase/server";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
@@ -16,9 +17,9 @@ import {
 import { ShareButtons } from "@/components/blog/share-buttons";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
-import { NotFoundContent } from "@/components/not-found-content";
 import type { Metadata } from "next";
 import { seoTitle } from "@/lib/seo-title";
+import { currentBlogTranslations } from "@/lib/supabase/public-blog";
 
 // Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
@@ -53,10 +54,12 @@ export async function generateStaticParams() {
 }
 
 interface PostMetadata {
+  english_revision: { content: string }[];
   slug: string;
   image_url: string | null;
   blog_post_translations: {
     locale: string;
+    updated_at: string | null;
     title: string;
     excerpt: string;
     meta_title: string | null;
@@ -78,6 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `
       slug,
       image_url,
+      english_revision:blog_post_translations (content, locale),
       blog_post_translations!inner (
         title,
         excerpt,
@@ -85,12 +89,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         meta_description,
         og_title,
         og_description,
-        locale
+        locale,
+        updated_at
       )
     `
     )
     .eq("slug", slug)
     .eq("status", "published")
+    .eq("english_revision.locale", "en")
     // Deliberately NOT filtered to `locale`: the hreflang block below has to
     // know every locale this post exists in, and one query that returns them
     // all is cheaper than a second round trip. The target translation is
@@ -99,26 +105,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const post = data as PostMetadata | null;
 
-  if (!post || post.blog_post_translations.length === 0) return { title: "Not Found" };
+  if (!post || post.blog_post_translations.length === 0) notFound();
 
   const translation = post.blog_post_translations.find((t) => t.locale === locale);
-  if (!translation) {
-    // The page body renders "not available in this language" with HTTP 200.
-    // Without these fields it inherited the layout's canonical (the locale
-    // homepage) and 44-locale hreflang, and was indexable as a soft 404.
-    // Setting `alternates` replaces the layout's object, dropping its hreflang.
-    const fallback =
-      post.blog_post_translations.find((t) => t.locale === "en") ||
-      post.blog_post_translations.find((t) => isBlogLocale(t.locale));
-    if (!fallback) return { title: "Not Found", robots: { index: false, follow: true } };
-    return {
-      title: seoTitle(fallback.meta_title || fallback.title),
-      robots: { index: false, follow: true },
-      alternates: {
-        canonical: `${baseUrl}/${fallback.locale}/blog/${slug}`,
-      },
-    };
-  }
+  if (!translation) notFound();
 
   const title = translation.meta_title || translation.title;
   const description = translation.meta_description || translation.excerpt;
@@ -128,7 +118,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // a post that has five still advertised sixteen URLs that render the
   // "not available in this language" page. This matters most for a freshly
   // published post, which is English-only until translations are run.
-  const availableLocales = post.blog_post_translations
+  const currentTranslations = currentBlogTranslations(post.blog_post_translations, post.english_revision?.[0]?.content);
+  const currentPage = currentTranslations.some((item) => item.locale === locale);
+  const availableLocales = currentTranslations
     .map((t) => t.locale)
     .filter((l) => isBlogLocale(l))
     .sort();
@@ -145,14 +137,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical: `${baseUrl}/${locale}/blog/${slug}`,
-      languages,
+      // Preserve legacy direct URLs, but do not claim stale versions are
+      // language alternatives of the current article.
+      languages: currentPage ? languages : {},
     },
     openGraph: {
       title: translation.og_title || title,
       description: translation.og_description || description,
       url: `${baseUrl}/${locale}/blog/${slug}`,
       locale: ogLocaleMap[locale] || "en_US",
-      alternateLocale: availableLocales
+      alternateLocale: (currentPage ? availableLocales : [])
         .filter((l) => l !== locale)
         .map((l) => ogLocaleMap[l] || l),
       type: "article",
@@ -336,27 +330,6 @@ function estimateReadingTime(content: string): number {
   return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
-async function findAvailableTranslationLocale(slug: string): Promise<string | null> {
-  // Called only after the requested-locale fetch missed — figure out whether
-  // the post exists at all and, if so, which locale to offer as a fallback
-  // link. Prefer English, then any blog-supported locale.
-  const supabase = createStaticClient();
-  const { data } = await supabase
-    .from("blog_posts")
-    .select("blog_post_translations(locale)")
-    .eq("slug", slug)
-    .eq("status", "published")
-    .single<{ blog_post_translations: { locale: string }[] }>();
-
-  const locales = (data?.blog_post_translations ?? [])
-    .map((t) => t.locale)
-    .filter((l) => isBlogLocale(l));
-
-  if (locales.length === 0) return null;
-  if (locales.includes("en")) return "en";
-  return locales[0];
-}
-
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!isBlogLocale(locale)) notFound();
@@ -365,22 +338,7 @@ export default async function BlogPostPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: "blog" });
   const post = await getPostData(locale, slug);
 
-  if (!post) {
-    // Post is missing in the requested locale. Check if it exists in another
-    // locale — if so, render the "not available in this language" UI with a
-    // link to the fallback translation. Otherwise show the generic 404.
-    const fallbackLocale = await findAvailableTranslationLocale(slug);
-    if (fallbackLocale && fallbackLocale !== locale) {
-      return (
-        <NotFoundContent
-          locale={locale}
-          variant="missing-translation"
-          englishHref={`/${fallbackLocale}/blog/${slug}`}
-        />
-      );
-    }
-    notFound();
-  }
+  if (!post) notFound();
 
   const readingTime = estimateReadingTime(post.content);
 
@@ -429,7 +387,9 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted">
               <span>
-                {t("by")} {post.authorName}
+                {t("by")} { /jerry/i.test(post.authorName)
+                  ? <Link href="/en/blog/editorial" className="underline">Jerry · Doppler VPN</Link>
+                  : post.authorName}
               </span>
               <span className="hidden sm:inline">•</span>
               <time dateTime={post.publishedAt || undefined}>

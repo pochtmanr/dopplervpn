@@ -1,4 +1,5 @@
 import { track } from "@vercel/analytics";
+import { currentCtaAttribution } from "@/lib/cta-attribution";
 
 import { gtagEvent } from "@/lib/ga";
 import { fbqTrack, fbqTrackCustom } from "@/lib/meta-pixel";
@@ -137,8 +138,10 @@ export function trackCta(
 ) {
   const page_path = pagePath ?? currentPath();
   const destination = options?.destination ?? deriveDestination(platform, variant);
+  const attribution = currentCtaAttribution();
 
   track("cta_click", {
+    ...attribution,
     location,
     platform,
     variant: variant ?? "",
@@ -147,6 +150,7 @@ export function trackCta(
   });
 
   gtagEvent("app_download_click", {
+    ...attribution,
     platform,
     destination,
     cta_location: location,
@@ -161,6 +165,7 @@ export function trackCta(
   const file = FILE_DOWNLOADS[destination];
   if (file) {
     gtagEvent("file_download", {
+      ...attribution,
       ...file,
       link_url: options?.href ?? "",
       platform,

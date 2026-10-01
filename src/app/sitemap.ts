@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { unstable_cache } from "next/cache";
 import { createStaticClient } from "@/lib/supabase/server";
+import { currentBlogTranslations } from "@/lib/supabase/public-blog";
 import { routing } from "@/i18n/routing";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
@@ -32,7 +33,6 @@ const baseUrl = "https://www.dopplervpn.org";
 // look freshly modified on every deploy, which trains Google to distrust the
 // signal. Bump this only when the static pages' content actually changes.
 // (Blog entries below use the post's real updated_at/created_at instead.)
-const STATIC_LASTMOD = new Date("2026-09-28");
 
 // The /how-it-works articles are newer than the rest of the static set and carry
 // their own dateModified in content/how-it-works/<slug>/<locale>.meta.json.
@@ -65,8 +65,9 @@ const fetchPostsByLocale = unstable_cache(
     const supabase = createStaticClient();
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("slug, updated_at, created_at, blog_post_translations!inner(locale)")
+      .select("slug, updated_at, created_at, blog_post_translations!inner(locale, updated_at), english_revision:blog_post_translations(locale, content)")
       .eq("status", "published")
+      .eq("english_revision.locale", "en")
       // Explicit order, not for correctness but for cost: without it Postgres
       // returns heap order, which shifts whenever a row is UPDATEd and relocated.
       // A reshuffle rewrites every sitemap shard's bytes and bills a full set of
@@ -84,7 +85,8 @@ const fetchPostsByLocale = unstable_cache(
       slug: string;
       updated_at: string | null;
       created_at: string | null;
-      blog_post_translations: { locale: string }[];
+      blog_post_translations: { locale: string; updated_at: string | null }[];
+      english_revision: { locale: string; content: string }[];
     };
     const byLocale: PostsByLocale = {};
     for (const row of (data ?? []) as unknown as Row[]) {
@@ -92,7 +94,7 @@ const fetchPostsByLocale = unstable_cache(
       // query above is ordered: an unordered embed reshuffles between reads,
       // which rewrites every shard's bytes and bills a full set of ISR writes
       // for content that did not change.
-      const locales = row.blog_post_translations
+      const locales = currentBlogTranslations(row.blog_post_translations, row.english_revision?.[0]?.content)
         .map((t) => t.locale)
         .filter((l) => isBlogLocale(l))
         .sort();
@@ -104,12 +106,14 @@ const fetchPostsByLocale = unstable_cache(
       };
       for (const locale of locales) {
         if (!byLocale[locale]) byLocale[locale] = [];
-        byLocale[locale].push(post);
+        const translationDate = row.blog_post_translations.find((translation) => translation.locale === locale)?.updated_at;
+        const latestDate = [post.updated_at, translationDate].filter((date): date is string => Boolean(date)).sort().at(-1);
+        byLocale[locale].push({ ...post, updated_at: latestDate || null });
       }
     }
     return byLocale;
   },
-  ["sitemap-blog-posts-by-locale"],
+  ["sitemap-blog-posts-by-locale-reviewed-v3"],
   { revalidate: 86400, tags: ["sitemap"] }
 );
 
@@ -279,15 +283,8 @@ export default async function sitemap({
 
   let posts: SitemapPost[] = [];
   if (localeHasBlog) {
-    try {
-      const byLocale = await fetchPostsByLocale();
-      posts = byLocale[locale] ?? [];
-    } catch (err) {
-      // Degrade to static-only entries rather than 500ing the shard.
-      // A 500 makes Google retry the whole sitemap; an emptier-than-usual
-      // 200 just suppresses blog URLs for one ISR cycle.
-      console.error("[sitemap] falling back to static-only entries:", err);
-    }
+    const byLocale = await fetchPostsByLocale();
+    posts = byLocale[locale] ?? [];
   }
 
   const staticEntries: MetadataRoute.Sitemap = staticPages
@@ -313,7 +310,7 @@ export default async function sitemap({
       }
       return {
         url: `${baseUrl}/${locale}${page}`,
-        lastModified: isHowItWorksPage(page) ? HOW_IT_WORKS_LASTMOD : STATIC_LASTMOD,
+        lastModified: isHowItWorksPage(page) ? HOW_IT_WORKS_LASTMOD : undefined,
         changeFrequency: changeFreqFor(page),
         priority: priorityFor(page),
         alternates,
@@ -322,7 +319,7 @@ export default async function sitemap({
 
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => {
     const lastmodSource = post.updated_at ?? post.created_at;
-    const lastModified = lastmodSource ? new Date(lastmodSource) : STATIC_LASTMOD;
+    const lastModified = lastmodSource ? new Date(lastmodSource) : undefined;
     return {
       url: `${baseUrl}/${locale}/blog/${post.slug}`,
       lastModified,
@@ -337,11 +334,13 @@ export default async function sitemap({
   const agentSurfaceEntries: MetadataRoute.Sitemap =
     locale === "en"
       ? [
-          { url: `${baseUrl}/agents`, lastModified: STATIC_LASTMOD, changeFrequency: "monthly" as const, priority: 0.6 },
-          { url: `${baseUrl}/llms.txt`, lastModified: STATIC_LASTMOD, changeFrequency: "monthly" as const, priority: 0.5 },
-          { url: `${baseUrl}/llms-full.txt`, lastModified: STATIC_LASTMOD, changeFrequency: "monthly" as const, priority: 0.5 },
+          { url: `${baseUrl}/agents`, changeFrequency: "monthly" as const, priority: 0.6 },
+          { url: `${baseUrl}/llms.txt`, changeFrequency: "monthly" as const, priority: 0.5 },
+          { url: `${baseUrl}/llms-full.txt`, changeFrequency: "monthly" as const, priority: 0.5 },
         ]
       : [];
 
-  return [...staticEntries, ...blogEntries, ...agentSurfaceEntries];
+  const editorialEntries: MetadataRoute.Sitemap = locale === "en"
+    ? [{ url: `${baseUrl}/en/blog/editorial` }] : [];
+  return [...staticEntries, ...blogEntries, ...agentSurfaceEntries, ...editorialEntries];
 }

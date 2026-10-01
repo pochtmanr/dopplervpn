@@ -11,43 +11,38 @@ import { Section, SectionHeader } from "@/components/ui/section";
 import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
+import { parseBlogPage } from "@/lib/blog-pagination";
 import { seoTitle } from "@/lib/seo-title";
 
 // Revalidate blog index every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
 //
-// IMPORTANT: nothing in this file may read `searchParams`. Doing so opts the
-// whole route into dynamic rendering, which silently nullifies the `revalidate`
-// above — the route then answers `no-store` / cache MISS and re-runs both
-// Supabase queries on every hit. That is exactly what happened until Aug 2026,
-// when an AI crawler sweeping 21 blog locales made it the most expensive page
-// on the site. Tag filtering and pagination live in blog-index-content.tsx
-// (a client component reading useSearchParams) precisely to keep this page
-// prerenderable. Keep it that way.
+// Query variants render on the server; the catalogue remains cached by locale.
 export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ page?: string; tag?: string }>;
 };
 
 export function generateStaticParams() {
   return BLOG_LOCALES.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const query = await searchParams;
+  const page = parseBlogPage(query.page);
+  const pageSuffix = page > 1 ? `?page=${page}` : "";
   const t = await getTranslations({ locale, namespace: "blog" });
   const baseUrl = "https://www.dopplervpn.org";
 
   return {
-    title: seoTitle(t("indexTitle")),
+    title: seoTitle(`${t("indexTitle")}${page > 1 ? ` — ${page}` : ""}`),
     description: t("indexDescription"),
     alternates: {
-      // Query variants (?tag=, ?page=) all canonicalise to the bare index.
-      // They are also Disallowed in robots.ts — every post is reachable from
-      // the sitemap shards, so discovery never depended on paginated URLs.
-      canonical: `${baseUrl}/${locale}/blog`,
-      languages: Object.fromEntries([
+      canonical: `${baseUrl}/${locale}/blog${pageSuffix}`,
+      languages: page > 1 ? {} : Object.fromEntries([
         ...BLOG_LOCALES.map((loc) => [loc, `${baseUrl}/${loc}/blog`]),
         ["x-default", `${baseUrl}/en/blog`],
       ]),
@@ -55,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("indexTitle"),
       description: t("indexDescription"),
-      url: `${baseUrl}/${locale}/blog`,
+      url: `${baseUrl}/${locale}/blog${pageSuffix}`,
       siteName: "Doppler VPN",
       locale: ogLocaleMap[locale] || "en_US",
       type: "website",
@@ -68,6 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
     },
+    robots: query.tag ? { index: false, follow: true } : undefined,
     twitter: {
       card: "summary_large_image",
       title: t("indexTitle"),
@@ -136,7 +132,7 @@ async function fetchBlogData(locale: string) {
   // requested locale. `!inner` turns the join into a filter instead of a
   // fallback. Eliminates duplicate English content served under translated
   // URLs — the primary cause of the Feb–Apr 2026 indexing penalty.
-  const { data: postsRaw } = await supabase
+  const { data: postsRaw, error: postsError } = await supabase
     .from("blog_posts")
     .select(`
       slug,
@@ -165,7 +161,9 @@ async function fetchBlogData(locale: string) {
     // reshuffling the card grid and billing an ISR write on every revalidation.
     .order("slug");
 
-  const postsData = postsRaw as PostData[] | null;
+  if (postsError) throw new Error("Blog catalogue unavailable");
+
+  const postsData = postsRaw as unknown as PostData[] | null;
 
   const posts = (postsData || [])
     .map((post) => {
@@ -206,13 +204,20 @@ const getBlogData = unstable_cache(fetchBlogData, ["blog-index"], {
   tags: ["blog-index"],
 });
 
-export default async function BlogIndexPage({ params }: Props) {
+export default async function BlogIndexPage({ params, searchParams }: Props) {
   const { locale } = await params;
   if (!isBlogLocale(locale)) notFound();
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "blog" });
-  const { posts } = await getBlogData(locale);
+  const query = await searchParams;
+  const requestedPage = parseBlogPage(query.page);
+  const { posts: allPosts } = await getBlogData(locale);
+  const posts = query.tag
+    ? allPosts.filter((post) => post.tags.some((tag) => tag.slug === query.tag))
+    : allPosts;
+  const totalPages = Math.max(1, Math.ceil(posts.length / 18));
+  if (requestedPage > totalPages) notFound();
 
   const baseUrl = "https://www.dopplervpn.org";
 
@@ -225,7 +230,7 @@ export default async function BlogIndexPage({ params }: Props) {
         ]}
       />
       <WebPageSchema
-        url={`${baseUrl}/${locale}/blog`}
+        url={`${baseUrl}/${locale}/blog${requestedPage > 1 ? `?page=${requestedPage}` : ""}`}
         name={t("title")}
         description={t("subtitle")}
         type="CollectionPage"
@@ -244,7 +249,10 @@ export default async function BlogIndexPage({ params }: Props) {
 
           <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
             <BlogIndexContent
-              posts={posts}
+              posts={posts.slice((requestedPage - 1) * 18, requestedPage * 18)}
+              currentPage={requestedPage}
+              totalPages={totalPages}
+              tagSlug={query.tag || null}
               locale={locale}
               translations={{
                 readMore: t("readMore"),

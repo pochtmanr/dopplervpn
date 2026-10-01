@@ -43,8 +43,8 @@ export function BlogPostJsonLd({
     dateModified: updatedAt,
     author: {
       "@type": "Organization",
-      name: authorName || "Doppler Team",
-      url: baseUrl,
+      name: /jerry/i.test(authorName) ? "Doppler VPN" : authorName || "Doppler Team",
+      url: /jerry/i.test(authorName) ? `${baseUrl}/en/blog/editorial` : baseUrl,
     },
     publisher: { "@type": "Organization", "@id": ORG_ID, name: "Doppler VPN" },
     mainEntityOfPage: {
