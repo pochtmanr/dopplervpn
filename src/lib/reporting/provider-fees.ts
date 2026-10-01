@@ -32,3 +32,22 @@ export function providerFeeLookup(): FeeLookup {
 export async function importDurableFees(): Promise<FeeImportResult> {
   return importProviderFees(reportingStore(), providerFeeLookup());
 }
+
+/**
+ * The shape of Revolut's payments for one order, with only state and fee
+ * fields kept: no card, customer or address data leaves this function.
+ */
+export async function probeRevolutFees(orderId: string): Promise<unknown> {
+  const payments = await getOrderPayments(orderId);
+  return payments.map((payment) => {
+    const item = payment as Record<string, unknown>;
+    return {
+      keys: Object.keys(item).sort(),
+      state: item.state ?? null,
+      fees: item.fees ?? null,
+      settled_amount: item.settled_amount ?? null,
+      amount: item.amount ?? null,
+      currency: item.currency ?? null,
+    };
+  });
+}

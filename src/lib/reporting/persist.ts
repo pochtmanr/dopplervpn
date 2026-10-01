@@ -31,6 +31,7 @@ interface QueryBuilder extends PromiseLike<QueryResult<unknown>> {
   select(columns: string, options?: { count?: "exact"; head?: boolean }): QueryBuilder;
   eq(column: string, value: string): QueryBuilder;
   lte(column: string, value: string): QueryBuilder;
+  gte(column: string, value: string): QueryBuilder;
   or(filters: string): QueryBuilder;
   order(column: string, options: { ascending: boolean }): QueryBuilder;
   limit(count: number): QueryBuilder;
@@ -355,10 +356,15 @@ export function invoiceReader(): InvoiceReader {
         .order("created_at", { ascending: true })
         .order("id", { ascending: true })
         .limit(limit);
-      if (after) {
+      if (after?.id) {
         query = query.or(
           `created_at.gt.${after.createdAt},and(created_at.eq.${after.createdAt},id.gt.${after.id})`,
         );
+      } else if (after) {
+        // A resume rewinds by the overlap window with no id. `id.gt.` with an
+        // empty value is invalid against the numeric id and failed every
+        // run after the first; re-reading the overlap is safe (duplicates).
+        query = query.gte("created_at", after.createdAt);
       }
       const result = await query;
       if (result.error) throw new Error("invoice_read_failed");

@@ -2,7 +2,7 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { unauthorizedReporting } from "@/lib/reporting/auth";
 import { importDurableAppleSales, importDurableHistory } from "@/lib/reporting/persist";
-import { importDurableFees } from "@/lib/reporting/provider-fees";
+import { importDurableFees, probeRevolutFees } from "@/lib/reporting/provider-fees";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,6 +17,18 @@ async function runImport(request: NextRequest) {
   if (!cronAuthorized(request)) {
     const denied = unauthorizedReporting(request);
     if (denied) return denied;
+  }
+  // Read-only: what Revolut reports as fees on one order, for checking the
+  // fee parser against live data. Same service-token auth as the import.
+  const probe = request.nextUrl.searchParams.get("probe_revolut_order");
+  if (probe) {
+    try {
+      return NextResponse.json({ payments: await probeRevolutFees(probe) }, {
+        headers: { "Cache-Control": "private, no-store" },
+      });
+    } catch (error) {
+      return NextResponse.json({ error: error instanceof Error ? error.message.slice(0, 200) : "probe_failed" }, { status: 502 });
+    }
   }
   try {
     const result = await importDurableHistory();
