@@ -80,3 +80,8 @@ export async function getOrderPayments(orderId: string): Promise<unknown[]> {
   const nested = (body as { payments?: unknown })?.payments;
   return Array.isArray(nested) ? nested : [];
 }
+
+/** One payment's details, including the `fees` Revolut charged on it. */
+export async function getPaymentDetails(paymentId: string): Promise<unknown> {
+  return revolutFetch(`/payments/${encodeURIComponent(paymentId)}`);
+}

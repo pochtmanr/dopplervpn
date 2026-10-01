@@ -1,6 +1,6 @@
 import "server-only";
 import { listPaidPayments, type OxaPayHistoryEntry } from "@/lib/oxapay";
-import { getOrderPayments } from "@/lib/revolut";
+import { getOrderPayments, getPaymentDetails } from "@/lib/revolut";
 import { importProviderFees, revolutFeeFromPayments, type FeeImportResult, type FeeLookup } from "./fees";
 import { reportingStore } from "./persist";
 
@@ -12,7 +12,13 @@ export function providerFeeLookup(): FeeLookup {
   let oxapayByOrder: Promise<Map<string, OxaPayHistoryEntry>> | null = null;
   return {
     async revolut(orderId) {
-      return revolutFeeFromPayments(await getOrderPayments(orderId));
+      // The order's payment list omits fees; each payment's details carry them.
+      const payments = await getOrderPayments(orderId);
+      const detailed = await Promise.all(payments.map(async (payment) => {
+        const id = (payment as { id?: unknown }).id;
+        return typeof id === "string" ? getPaymentDetails(id) : payment;
+      }));
+      return revolutFeeFromPayments(detailed);
     },
     async oxapay(orderId) {
       // A sale is keyed by our order id; OxaPay's history carries it as order_id.
@@ -39,7 +45,11 @@ export async function importDurableFees(): Promise<FeeImportResult> {
  */
 export async function probeRevolutFees(orderId: string): Promise<unknown> {
   const payments = await getOrderPayments(orderId);
-  return payments.map((payment) => {
+  const detailed = await Promise.all(payments.map(async (payment) => {
+    const id = (payment as { id?: unknown }).id;
+    return typeof id === "string" ? getPaymentDetails(id) : payment;
+  }));
+  return detailed.map((payment) => {
     const item = payment as Record<string, unknown>;
     return {
       keys: Object.keys(item).sort(),
