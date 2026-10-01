@@ -72,3 +72,11 @@ export async function createOrder(
 export async function getOrder(orderId: string): Promise<RevolutOrder> {
   return revolutFetch(`/orders/${encodeURIComponent(orderId)}`);
 }
+
+/** The payments on an order, each with the `fees` Revolut charged on it. */
+export async function getOrderPayments(orderId: string): Promise<unknown[]> {
+  const body = await revolutFetch(`/orders/${encodeURIComponent(orderId)}/payments`);
+  if (Array.isArray(body)) return body;
+  const nested = (body as { payments?: unknown })?.payments;
+  return Array.isArray(nested) ? nested : [];
+}

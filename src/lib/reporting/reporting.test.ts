@@ -225,16 +225,16 @@ describe("doppler reporting foundation", () => {
     expect(sale?.original_amount.asset).toBe("BTC");
   });
 
-  it("leaves missing tax, fees and FX null", async () => {
+  it("charges no VAT while unregistered and leaves missing fees and FX null", async () => {
     const store = new MemoryReportingStore();
     await store.apply(revolutSale("ord_missing", 1000));
     const summary = await windowOf(store);
     const metrics = summary.native[0]?.metrics;
     expect(metrics?.gross_customer_sales).toMatchObject({ amount: "10.00", quality: "actual" });
     expect(metrics?.refunded_principal).toMatchObject({ amount: "0.00", quality: "actual" });
-    expect(metrics?.sales_tax).toMatchObject({ amount: null, quality: "unavailable", reason: "missing_sales_tax" });
+    expect(metrics?.sales_tax).toMatchObject({ amount: "0.00", quality: "actual" });
     expect(metrics?.store_and_processor_fees).toMatchObject({ amount: null, quality: "unavailable", reason: "missing_processor_fees" });
-    expect(metrics?.net_sales.amount).toBeNull();
+    expect(metrics?.net_sales.amount).toBe("10.00");
     expect(metrics?.net_proceeds.amount).toBeNull();
     expect(summary.gbp).toMatchObject({ amount: null, quality: "unavailable", reason: "missing_fx_evidence", policy_version: "gbp-unconfigured" });
     expect(store.fxEvidence().some((row) => row.reason === "missing_fx_evidence")).toBe(true);

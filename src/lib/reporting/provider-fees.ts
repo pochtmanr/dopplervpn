@@ -1,0 +1,34 @@
+import "server-only";
+import { listPaidPayments, type OxaPayHistoryEntry } from "@/lib/oxapay";
+import { getOrderPayments } from "@/lib/revolut";
+import { importProviderFees, revolutFeeFromPayments, type FeeImportResult, type FeeLookup } from "./fees";
+import { reportingStore } from "./persist";
+
+// Kept out of persist.ts: doppler-admin compiles persist.ts through its
+// @reporting alias and has no Revolut or OxaPay client.
+
+/** Live provider lookups. Only the deployed server holds the production keys. */
+export function providerFeeLookup(): FeeLookup {
+  let oxapayByOrder: Promise<Map<string, OxaPayHistoryEntry>> | null = null;
+  return {
+    async revolut(orderId) {
+      return revolutFeeFromPayments(await getOrderPayments(orderId));
+    },
+    async oxapay(orderId) {
+      // A sale is keyed by our order id; OxaPay's history carries it as order_id.
+      oxapayByOrder ??= listPaidPayments().then((entries) =>
+        new Map(entries
+          .filter((entry) => entry.order_id)
+          .map((entry) => [entry.order_id as string, entry])));
+      const payment = (await oxapayByOrder).get(orderId);
+      if (!payment || payment.status.toLowerCase() !== "paid" || payment.fee_paid_by_payer !== 1) return null;
+      // Invoices are created with fee_paid_by_payer=1: the payer covered
+      // OxaPay's fee and the merchant kept the full invoice amount.
+      return { amount: "0.00", currency: payment.currency.toUpperCase() };
+    },
+  };
+}
+
+export async function importDurableFees(): Promise<FeeImportResult> {
+  return importProviderFees(reportingStore(), providerFeeLookup());
+}

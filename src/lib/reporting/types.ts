@@ -2,7 +2,7 @@ import type { FORMULA_VERSION } from "./constants";
 
 export type ReportingEnvironment = "production" | "sandbox" | "unknown";
 export type RecordEnvironment = "production" | "sandbox" | "test";
-export type SourceSystem = "revolut" | "oxapay" | "revenuecat" | "invoice";
+export type SourceSystem = "revolut" | "oxapay" | "revenuecat" | "invoice" | "app_store";
 export type EventKind =
   | "sale"
   | "refund"

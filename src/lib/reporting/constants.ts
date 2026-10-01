@@ -9,6 +9,16 @@ export const FX_POLICY_VERSION = "gbp-unconfigured";
 export const PROJECT_ID = "doppler";
 export const SERVICE_SCHEMA = "doppler-reporting-service/v1";
 
+/**
+ * Owner-confirmed 2026-10-01: web checkout charges no UK VAT, so a web
+ * sale's sales tax is 0. App store sales follow too: the store collects and
+ * remits tax, and what it withholds is a store deduction, not ours.
+ */
+export const UK_VAT_REGISTERED = false;
+export const TAX_POLICY_REASON = "uk_not_vat_registered";
+/** UK small profits rate, profits up to GBP 50,000. An estimate, not a filing. */
+export const UK_CORPORATION_TAX_RATE = "0.19";
+
 /** Proposed in C0. REPORTING_TIMEZONE is not confirmed. */
 export const TIMEZONE_PROPOSAL = "Europe/London";
 

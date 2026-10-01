@@ -4,6 +4,7 @@ import {
   PROJECT_ID,
   SERVICE_SCHEMA,
   TIMEZONE_PROPOSAL,
+  UK_VAT_REGISTERED,
   fiatExponent,
 } from "./constants";
 import { addDecimals, subtractDecimals } from "./decimal";
@@ -16,6 +17,8 @@ export interface SummaryQuery {
   now?: Date;
   source?: string;
   channel?: string;
+  /** Payment methods to include; see money.ts inMethods. Omitted means all. */
+  methods?: string[];
 }
 
 export interface MetricValue {
@@ -112,7 +115,8 @@ export async function summarizeProduction(
       record.occurred_at >= query.from &&
       record.occurred_at < query.to &&
       (!query.source || record.source_system === query.source) &&
-      (!query.channel || record.channel === query.channel),
+      (!query.channel || record.channel === query.channel) &&
+      (!query.methods || query.methods.includes(record.store ?? record.source_system)),
   );
   const excluded = await store.exclusionCounts();
   const native = summarizeFiat(records, snapshot.snapshotId, query.from, query.to);
@@ -178,9 +182,12 @@ function summarizeFiat(
     const sales = posted.filter((record) => record.record_type === "sale" && record.counts_as_new_revenue);
     const gross = sumAmounts(sales.map((record) => record.original_amount), scale);
     const refunded = refundedPrincipal(posted, scale);
-    const tax = componentSum(posted, ["sales_tax", "tax_reversal"], scale, sales.length + refundCount(posted) > 0);
+    const stated = componentSum(posted, ["sales_tax", "tax_reversal"], scale, sales.length + refundCount(posted) > 0);
+    // Not VAT-registered: a sale that states no tax carries none, and its
+    // price is tax-exclusive. Tax a provider did state is still used.
+    const tax = stated.amount || UK_VAT_REGISTERED ? stated : { amount: formatZero(scale), reason: null };
     const fees = componentSum(posted, ["processor_fee", "store_commission", "network_fee", "fee_reversal"], scale, sales.length > 0);
-    const taxBasis = taxBasisOf(sales);
+    const taxBasis = stated.amount || UK_VAT_REGISTERED ? taxBasisOf(sales) : "exclusive";
     const netSales = netSalesAmount(gross, refunded, tax, taxBasis, scale);
     const netProceeds = netSales.amount && fees.amount
       ? subtractDecimals(netSales.amount, fees.amount, scale)
@@ -313,10 +320,19 @@ function componentSum(
       type === "tax_reversal" || type === "fee_reversal",
   );
   const sales = records.filter((record) => record.record_type === "sale");
+  // A fee can also arrive as its own fee record on the sale's transaction,
+  // looked up from the provider after the sale was observed.
+  const feeRecords = types.includes("processor_fee")
+    ? new Set(
+      records
+        .filter((record) => record.record_type === "fee" && record.posting_role === "primary")
+        .map((record) => record.economic_transaction_id),
+    )
+    : new Set<string>();
   for (const sale of sales) {
     const hasComponent = (sale.components ?? []).some(
       (component) => component.posting_role === "primary" && (positive as readonly string[]).includes(component.component_type),
-    );
+    ) || feeRecords.has(sale.economic_transaction_id);
     if (!hasComponent) return { amount: null, reason: missingReason };
   }
   const seen = new Set<string>();

@@ -155,7 +155,12 @@ export function toFinanceSummary(model: MoneyPageModel, query: IntervalQuery, en
     coverage: coverageOf(model),
     posting: false as const,
     metrics: gbpHeadline(model, query),
-    native_currency_subtotals: model.native.map((row) => ({ currency: row.currency, metrics: row.metrics })),
+    native_currency_subtotals: model.native.map((row) => {
+      // The contract has no corporation tax metric; it is an admin-page estimate.
+      const { corporation_tax_estimate: _estimate, ...metrics } = row.metrics;
+      void _estimate;
+      return { currency: row.currency, metrics };
+    }),
     warnings: ["missing_fx_evidence"],
   };
 }

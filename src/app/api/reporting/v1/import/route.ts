@@ -1,13 +1,18 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { unauthorizedReporting } from "@/lib/reporting/auth";
-import { importDurableHistory } from "@/lib/reporting/persist";
+import { importDurableAppleSales, importDurableHistory } from "@/lib/reporting/persist";
+import { importDurableFees } from "@/lib/reporting/provider-fees";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+// Apple's backfill fetches up to 40 daily reports per run.
+export const maxDuration = 300;
 
-// Daily catch-up for paid invoices whose webhook observation never landed.
-// The live webhooks write each payment as it happens; this backfills the rest.
+// Daily catch-up for paid invoices whose webhook observation never landed,
+// each provider's fee for sales that have none yet, and Apple's daily App
+// Store sales reports once ASC credentials are configured. The live webhooks
+// write each payment as it happens; this backfills the rest.
 async function runImport(request: NextRequest) {
   if (!cronAuthorized(request)) {
     const denied = unauthorizedReporting(request);
@@ -15,7 +20,12 @@ async function runImport(request: NextRequest) {
   }
   try {
     const result = await importDurableHistory();
-    return NextResponse.json(result, {
+    const fees = await importDurableFees();
+    const appStore = await importDurableAppleSales().catch((error: unknown) => ({
+      status: "failed" as const,
+      error: error instanceof Error ? error.message : "apple_import_failed",
+    }));
+    return NextResponse.json({ ...result, fees, appStore }, {
       headers: { "Cache-Control": "private, no-store" },
     });
   } catch (error) {

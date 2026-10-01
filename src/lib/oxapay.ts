@@ -150,6 +150,8 @@ export interface OxaPayPaymentInfo {
   amount: number;
   currency: string;
   date?: number;
+  /** 1 when the payer covered OxaPay's fee, so the merchant received the full amount. */
+  fee_paid_by_payer?: number;
 }
 
 export async function getPayment(trackId: string): Promise<OxaPayPaymentInfo> {
@@ -162,7 +164,41 @@ export async function getPayment(trackId: string): Promise<OxaPayPaymentInfo> {
     amount: Number(d.amount ?? 0),
     currency: String(d.currency ?? 'USD'),
     date: d.date ? Number(d.date) : undefined,
+    fee_paid_by_payer: d.fee_paid_by_payer == null ? undefined : Number(d.fee_paid_by_payer),
   };
+}
+
+export interface OxaPayHistoryEntry {
+  track_id: string;
+  order_id: string | null;
+  status: string;
+  currency: string;
+  fee_paid_by_payer: number | null;
+}
+
+/**
+ * Every paid payment, newest first. The history list is the only place an
+ * old invoice's OxaPay record can be found: vpn_invoices kept our order id,
+ * not OxaPay's track id.
+ */
+export async function listPaidPayments(maxPages = 25): Promise<OxaPayHistoryEntry[]> {
+  const entries: OxaPayHistoryEntry[] = [];
+  for (let page = 1; page <= maxPages; page += 1) {
+    const body = await oxapayFetch(`/payment?status=Paid&size=200&page=${page}`, { method: 'GET' });
+    const list: Array<Record<string, unknown>> = Array.isArray(body?.data?.list) ? body.data.list : [];
+    for (const item of list) {
+      entries.push({
+        track_id: String(item.track_id ?? ''),
+        order_id: item.order_id ? String(item.order_id) : null,
+        status: String(item.status ?? ''),
+        currency: String(item.currency ?? 'USD'),
+        fee_paid_by_payer: item.fee_paid_by_payer == null ? null : Number(item.fee_paid_by_payer),
+      });
+    }
+    const last = Number(body?.data?.meta?.last_page ?? page);
+    if (list.length === 0 || page >= last) break;
+  }
+  return entries;
 }
 
 /**

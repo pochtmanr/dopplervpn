@@ -2,6 +2,12 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { createUntypedAdminClient } from "@/lib/supabase/admin";
 import { FORMULA_VERSION } from "./constants";
+import {
+  ascCredentialsFromEnv,
+  fetchAppleSalesReport,
+  importAppleSales,
+  type AppleImportResult,
+} from "./apple-sales";
 import { importInvoiceHistory, type InvoiceReader } from "./import-history";
 import { invoiceEnvironment, type InvoiceRow } from "./map-evidence";
 import type { BalanceRow, MoneyDraft, MoneyStore, MoneyVault, StoredDocument } from "./money";
@@ -369,6 +375,14 @@ export function invoiceReader(): InvoiceReader {
 
 export async function applyDurableObservation(obs: Observation): Promise<ApplyResult> {
   return reportingStore().apply(obs);
+}
+
+export async function importDurableAppleSales(): Promise<AppleImportResult> {
+  const credentials = ascCredentialsFromEnv();
+  return importAppleSales(
+    reportingStore(),
+    credentials ? (date) => fetchAppleSalesReport(credentials, date) : null,
+  );
 }
 
 export async function importDurableHistory(): Promise<Awaited<ReturnType<typeof importInvoiceHistory>>> {

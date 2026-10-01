@@ -1,13 +1,19 @@
 import { createHash, randomUUID } from "node:crypto";
 import { contentHash } from "./canonical";
-import { FORMULA_VERSION, PROJECT_ID, TIMEZONE_PROPOSAL, fiatExponent } from "./constants";
-import { addDecimals, formatDecimal, isZeroDecimal, parseDecimal, rescale, subtractDecimals } from "./decimal";
+import {
+  FORMULA_VERSION,
+  PROJECT_ID,
+  TIMEZONE_PROPOSAL,
+  UK_CORPORATION_TAX_RATE,
+  fiatExponent,
+} from "./constants";
+import { addDecimals, formatDecimal, isZeroDecimal, multiplyDecimal, parseDecimal, rescale } from "./decimal";
 import { summarizeProduction, type MetricValue } from "./summarize";
 import type { FinanceRecord, MoneyValue, ReportingStore, TaxInclusion } from "./types";
 
 export const MONEY_FORMULA_VERSION = "doppler-money-native-v1";
 
-const IMMUTABLE_SOURCES = new Set(["revolut", "oxapay", "revenuecat", "invoice", "statement_import"]);
+const IMMUTABLE_SOURCES = new Set(["revolut", "oxapay", "revenuecat", "invoice", "statement_import", "app_store"]);
 const REJECTED_CATEGORIES = new Set([
   "shared_overhead",
   "company_overhead",
@@ -213,6 +219,7 @@ export interface MoneyPageModel {
       contribution_profit: MoneyMetric;
       operating_expenses: MoneyMetric;
       operating_profit: MoneyMetric;
+      corporation_tax_estimate: MoneyMetric;
       net_profit: MoneyMetric;
     };
     margin: MoneyMetric;
@@ -244,6 +251,25 @@ export interface SnapshotQuery {
   snapshotId?: string;
   source?: string;
   channel?: string;
+  /**
+   * Payment methods to include (record.store, else source_system), e.g.
+   * ["revolut", "oxapay", "app_store"]. Applies to sales, refunds and fees;
+   * costs are not a payment method and always count. Omitted means all.
+   */
+  methods?: string[];
+}
+
+/** The payment method a ledger row belongs to, for the method filter. */
+export function paymentMethodOf(record: FinanceRecord): string {
+  return record.store ?? record.source_system;
+}
+
+const COST_TYPES = new Set<string>(["expense", "direct_cost", "transfer", "settlement"]);
+
+export function inMethods(record: FinanceRecord, methods: string[] | undefined): boolean {
+  if (!methods) return true;
+  if (COST_TYPES.has(record.record_type)) return true;
+  return methods.includes(paymentMethodOf(record));
 }
 
 /**
@@ -495,13 +521,15 @@ export class MoneyBook {
       now: this.store.clock(),
       source: query.source,
       channel: query.channel,
+      methods: query.methods,
     });
-    const cacheKey = `${summary.snapshot_id}|${query.basis}|${query.from}|${query.to}|${query.source ?? ""}|${query.channel ?? ""}`;
+    const cacheKey = `${summary.snapshot_id}|${query.basis}|${query.from}|${query.to}|${query.source ?? ""}|${query.channel ?? ""}|${query.methods?.join(",") ?? "*"}`;
     const cached = this.frozen.get(cacheKey);
     if (cached) return cached;
     const records = (await this.store.recordsAt(summary.high_watermark)).filter((record) =>
       (!query.source || record.source_system === query.source) &&
-      (!query.channel || record.channel === query.channel)
+      (!query.channel || record.channel === query.channel) &&
+      inMethods(record, query.methods)
     );
     const model = buildModel(summary, records, query, await this.vault.listBalances(), this.residuals);
     // Only a requested snapshot can be asked for again. Each unpinned read
@@ -700,6 +728,9 @@ function buildModel(
     const proceeds = sales ? fromSummary(sales.metrics.net_proceeds) : unavailableMetric(currency, "settled_cash_sales_unsupported", ["sale"], query, summary.snapshot_id);
     const contribution = profitMetric(proceeds, direct, currency, query, summary.snapshot_id, ["sale", "direct_cost"], "missing_direct_costs");
     const operatingProfit = profitMetric(contribution, operating, currency, query, summary.snapshot_id, ["sale", "expense"], "incomplete_costs");
+    const corporationTax = corporationTaxMetric(operatingProfit, currency, query, summary.snapshot_id);
+    const netProfit = profitMetric(operatingProfit, corporationTax, currency, query, summary.snapshot_id, ["sale", "expense"], "incomplete_costs_and_taxes");
+    const netSales = sales ? fromSummary(sales.metrics.net_sales) : null;
     return {
       currency,
       metrics: {
@@ -723,15 +754,10 @@ function buildModel(
         contribution_profit: contribution,
         operating_expenses: operating,
         operating_profit: operatingProfit,
-        net_profit: unavailableMetric(currency, "incomplete_costs_and_taxes", ["sale", "expense"], query, summary.snapshot_id),
+        corporation_tax_estimate: corporationTax,
+        net_profit: netProfit,
       },
-      margin: unavailableMetric(
-        currency,
-        "incomplete_costs_and_taxes",
-        ["sale", "expense"],
-        query,
-        summary.snapshot_id,
-      ),
+      margin: marginMetric(netProfit, netSales, query, summary.snapshot_id),
     };
   });
   const missing = new Set<string>(summary.coverage.missing);
@@ -920,11 +946,65 @@ function profitMetric(
     return unavailableMetric(currency, left.reason ?? right.reason ?? missingReason, types, query, snapshotId);
   }
   const scale = fiatExponent(currency);
-  const difference = subtractDecimals(left.amount, right.amount, scale);
-  if (difference === null) {
-    return unavailableMetric(currency, "costs_exceed_proceeds", types, query, snapshotId);
+  // A loss is a negative profit, not a missing one.
+  const difference = signedUnits(left.amount, scale) - signedUnits(right.amount, scale);
+  return actualMetric(formatSigned(difference, scale), currency, types, query, snapshotId);
+}
+
+/**
+ * UK corporation tax on a positive operating profit at the small profits
+ * rate. An estimate for planning: it ignores allowances and the GBP
+ * conversion of a non-GBP profit. A loss owes nothing.
+ */
+function corporationTaxMetric(
+  operatingProfit: MoneyMetric,
+  currency: string,
+  query: SnapshotQuery,
+  snapshotId: string,
+): MoneyMetric {
+  const types = ["sale", "expense"];
+  if (!operatingProfit.amount) {
+    return unavailableMetric(currency, operatingProfit.reason ?? "incomplete_costs", types, query, snapshotId);
   }
-  return actualMetric(difference, currency, types, query, snapshotId);
+  const scale = fiatExponent(currency);
+  const profit = signedUnits(operatingProfit.amount, scale);
+  if (profit <= BigInt(0)) return actualMetric(formatDecimal(BigInt(0), scale), currency, types, query, snapshotId);
+  const tax = multiplyDecimal(formatDecimal(profit, scale), UK_CORPORATION_TAX_RATE, scale);
+  return { ...actualMetric(tax, currency, types, query, snapshotId), reason: "uk_small_profits_rate_estimate" };
+}
+
+/** Net profit as a percentage of net sales, one decimal place. */
+function marginMetric(
+  netProfit: MoneyMetric,
+  netSales: MoneyMetric | null,
+  query: SnapshotQuery,
+  snapshotId: string,
+): MoneyMetric {
+  const types = ["sale", "expense"];
+  if (!netProfit.amount || !netSales?.amount) {
+    return unavailableMetric("%", netProfit.reason ?? netSales?.reason ?? "incomplete_costs_and_taxes", types, query, snapshotId);
+  }
+  const scale = fiatExponent(netProfit.currency);
+  const sales = signedUnits(netSales.amount, scale);
+  if (sales === BigInt(0)) return unavailableMetric("%", "no_net_sales", types, query, snapshotId);
+  const tenths = (signedUnits(netProfit.amount, scale) * BigInt(1000)) / sales;
+  return {
+    amount: formatSigned(tenths, 1),
+    currency: "%",
+    quality: "actual",
+    coverage: "partial",
+    drill_through: drillFilter(snapshotId, query, types),
+  };
+}
+
+function signedUnits(value: string, scale: number): bigint {
+  const negative = value.startsWith("-");
+  const units = rescale(parseDecimal(negative ? value.slice(1) : value), scale);
+  return negative ? -units : units;
+}
+
+function formatSigned(units: bigint, scale: number): string {
+  return units < BigInt(0) ? `-${formatDecimal(-units, scale)}` : formatDecimal(units, scale);
 }
 
 function drillRows(records: FinanceRecord[], query: SnapshotQuery): DrillRow[] {
