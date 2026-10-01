@@ -384,7 +384,13 @@ function statusAt(contract: Contract, asOfMs: number): Status {
     if (ms(contract.startedAt) <= asOfMs && expires != null && asOfMs < expires) return "fixed_term_active";
     return "expired";
   }
-  if (contract.billing === "unknown" || contract.phase === "unknown") return "unknown";
+  if (contract.billing === "unknown" || contract.phase === "unknown") {
+    // Trial or paying, a term that ended more than a grace period ago is over.
+    // Without this one stale contract seen only through its cancellation
+    // would keep MRR unavailable forever.
+    if (expires != null && asOfMs >= expires + GRACE_MS) return "expired";
+    return "unknown";
+  }
   if (contract.phase === "trial") {
     return expires != null && asOfMs < expires ? "trial" : "expired";
   }
@@ -839,6 +845,7 @@ function storedDetail(details: unknown, key: string): string | null {
  */
 export function eventsFromStoredRows(rows: StoredSubscriptionEvent[]): LifecycleEvent[] {
   const events: LifecycleEvent[] = [];
+  const typed = new Set<LifecycleEvent>();
   for (const row of rows) {
     const kind = STORED_KINDS[row.event_type];
     const occurredAt = storedInstant(row.created_at);
@@ -849,13 +856,14 @@ export function eventsFromStoredRows(rows: StoredSubscriptionEvent[]): Lifecycle
       : "production";
     const purchase = kind === "INITIAL_PURCHASE" || kind === "RENEWAL" || kind === "NON_RENEWING_PURCHASE" || kind === "PRODUCT_CHANGE";
     const charged = storedDetail(row.details, "price") ?? storedDetail(row.details, "charged_amount");
-    events.push({
+    const event: LifecycleEvent = {
       eventId: storedDetail(row.details, "rc_event_id") ?? row.id,
       occurredAt,
       contractId: row.original_transaction_id || row.id,
       accountId: row.account_id,
       kind,
-      productId: row.product_id,
+      // Play product ids arrive as "<subscription>:<base plan>".
+      productId: row.product_id ? row.product_id.split(":")[0] : null,
       store: row.platform,
       environment,
       expiresAt: row.expires_at && storedInstant(row.expires_at) ? storedInstant(row.expires_at) : row.expires_at,
@@ -863,9 +871,74 @@ export function eventsFromStoredRows(rows: StoredSubscriptionEvent[]): Lifecycle
       currency: storedDetail(row.details, "currency"),
       phase: period === "TRIAL" ? "trial" : purchase ? "paying" : null,
       billingModel: kind === "NON_RENEWING_PURCHASE" ? "fixed_term" : null,
-    });
+    };
+    if (period) typed.add(event);
+    events.push(event);
   }
-  return events;
+  return inferStoredPeriods(dropShadowContracts(events), typed);
+}
+
+// Before the app could read Apple's original transaction id it claimed under
+// "<product>_<purchase date>" (SubscriptionSyncService.syntheticTransactionId).
+const SYNTHETIC_CONTRACT = /^vpn_premium_[a-z0-9_]+_\d{4}-\d{2}-\d{2}T/;
+
+/**
+ * A synthetic contract shadows the store's real one for the same account, so
+ * keeping both counts one subscriber twice and reads the quiet copy as churn.
+ * It is kept only when the account has no real contract to stand in for it.
+ */
+function dropShadowContracts(events: LifecycleEvent[]): LifecycleEvent[] {
+  const withReal = new Set(
+    events.filter((event) => !SYNTHETIC_CONTRACT.test(event.contractId)).map((event) => event.accountId),
+  );
+  return events.filter((event) => !SYNTHETIC_CONTRACT.test(event.contractId) || !withReal.has(event.accountId));
+}
+
+// No store period runs shorter than a month; the App Store and Play trials are 3 days.
+const TRIAL_TERM_MAX_MS = 7 * DAY_MS;
+// A client re-claim recomputes the expiry and can land seconds past the known one.
+const RECLAIM_TOLERANCE_MS = DAY_MS;
+
+/**
+ * Live rows mostly carry no period_type. claim_subscription writes
+ * INITIAL_PURCHASE and RENEWAL with empty details, and the app re-claims the
+ * same term as a RENEWAL with an unchanged expiry. Read literally, every
+ * trial is paying and every re-claim is a renewal.
+ *
+ * For untyped purchases the term decides: a purchase whose access runs seven
+ * days or less is a trial. A RENEWAL that moves the expiry less than a day
+ * past the term already known is a re-claim and is dropped. Rows that state their
+ * period_type are kept as stated and still advance the known expiry.
+ */
+function inferStoredPeriods(events: LifecycleEvent[], typed: Set<LifecycleEvent>): LifecycleEvent[] {
+  const dropped = new Set<LifecycleEvent>();
+  const byContract = new Map<string, LifecycleEvent[]>();
+  for (const event of events) {
+    const list = byContract.get(event.contractId) ?? [];
+    list.push(event);
+    byContract.set(event.contractId, list);
+  }
+  for (const list of byContract.values()) {
+    list.sort((a, b) => ms(a.occurredAt) - ms(b.occurredAt) || a.eventId.localeCompare(b.eventId));
+    let knownExpiry: number | null = null;
+    for (const event of list) {
+      const expires = event.expiresAt ? Date.parse(event.expiresAt) : NaN;
+      if (Number.isNaN(expires)) continue;
+      const purchase = event.kind === "INITIAL_PURCHASE" || event.kind === "RENEWAL";
+      if (purchase && !typed.has(event)) {
+        if (event.kind === "RENEWAL" && knownExpiry != null && expires <= knownExpiry + RECLAIM_TOLERANCE_MS) {
+          dropped.add(event);
+          continue;
+        }
+        const start = event.kind === "RENEWAL" && knownExpiry != null ? knownExpiry : ms(event.occurredAt);
+        event.phase = expires - start <= TRIAL_TERM_MAX_MS ? "trial" : "paying";
+      }
+      if (purchase || event.kind === "PRODUCT_CHANGE") {
+        knownExpiry = knownExpiry == null ? expires : Math.max(knownExpiry, expires);
+      }
+    }
+  }
+  return events.filter((event) => !dropped.has(event));
 }
 
 export function reportingFromStoredEvents(

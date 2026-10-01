@@ -176,7 +176,7 @@ describe("export records", () => {
     expect(leftBody.records).toHaveLength(1);
 
     const book = new MoneyBook(store);
-    const draft = book.createDraft({
+    const draft = await book.createDraft({
       kind: "manual_income",
       amount: "5.00",
       currency: "USD",

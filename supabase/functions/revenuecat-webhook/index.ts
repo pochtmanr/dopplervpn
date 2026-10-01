@@ -72,6 +72,9 @@ interface RCEvent {
   expiration_at_ms?: number;
   store?: string;
   environment?: string;
+  period_type?: string;
+  currency?: string;
+  price_in_purchased_currency?: number;
   cancel_reason?: string;
   transferred_from?: string[];
   transferred_to?: string[];
@@ -196,8 +199,8 @@ Deno.serve(async (req: Request) => {
     `[webhook] ${type} | account=${accountId} | app_user_id=${event.app_user_id} | aliases=${JSON.stringify(event.aliases)} | txn=${originalTxnId} | product=${productId}`
   );
 
-  // This function grants access. It is not a monetary ledger: the payload used
-  // here has no price, currency, tax, or fee. Reporting must not treat an
+  // This function grants access. It is not a monetary ledger: the price it
+  // copies onto the audit row is evidence, not a sale. Reporting must not treat an
   // access grant as a sale, and a reporting write must never be added on this
   // path in a way that can turn a successful grant into a non-2xx.
   //
@@ -288,8 +291,28 @@ Deno.serve(async (req: Request) => {
   // already-revoked account answers {action:"skipped"} because the store column
   // is NULL by then. Both are idempotent under replay, which is what makes
   // "retry on any failure" the right default rather than a risk.
+  // Reporting reads trial vs paying and the charge off these rows; without
+  // them every trial counted as paying and MRR fell back to list prices.
+  // Strings, because the reader ignores non-string detail values.
+  const billing: Record<string, string> = {};
+  if (event.period_type) billing.period_type = event.period_type;
+  if (event.environment) billing.environment = event.environment;
+  if (rcEventId) billing.rc_event_id = rcEventId;
+  if (
+    event.currency &&
+    typeof event.price_in_purchased_currency === "number" &&
+    event.price_in_purchased_currency > 0
+  ) {
+    billing.charged_amount = String(event.price_in_purchased_currency);
+    billing.currency = event.currency;
+  }
+
   async function logEvent(params: Record<string, unknown>) {
-    const { error } = await supabase.rpc("webhook_log_event", params);
+    const details = (params.p_details as Record<string, unknown> | undefined) ?? {};
+    const { error } = await supabase.rpc("webhook_log_event", {
+      ...params,
+      p_details: { ...billing, ...details },
+    });
     noteRpcFailure("webhook_log_event", error);
   }
 

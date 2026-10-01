@@ -1,4 +1,4 @@
-import { fiatExponent } from "./constants";
+import { FIAT_EXPONENTS, fiatExponent } from "./constants";
 import { formatDecimal, parseDecimal } from "./decimal";
 import { formatUtcInstant, safeId, saleRecordId } from "./plan";
 import type { AttributionEvidence, Observation, SourceSystem } from "./types";
@@ -41,6 +41,18 @@ export function oxapayReportingEnvironment(
   configured = process.env.OXAPAY_SANDBOX,
 ): "production" | "sandbox" {
   return configured === "true" ? "sandbox" : "production";
+}
+
+/**
+ * vpn_invoices has no environment column. A paid invoice was settled by the
+ * provider account this deployment is configured for, which is the same
+ * signal the live webhooks use. Without it every pre-webhook invoice would be
+ * quarantined as ambiguous and history could never be imported.
+ */
+export function invoiceEnvironment(provider: string | null): "production" | "sandbox" | null {
+  if (provider === "revolut") return revolutReportingEnvironment();
+  if (provider === "oxapay") return oxapayReportingEnvironment();
+  return null;
 }
 
 export function sourceAccountId(provider: string, configured?: string | null): string {
@@ -100,8 +112,16 @@ export function observationFromInvoice(row: InvoiceRow): Observation | null {
   const provider = row.provider === "revolut" || row.provider === "oxapay" ? row.provider : null;
   if (!provider || !row.provider_payment_id || !row.id) return null;
   if (row.status !== "paid") return null;
-  const currency = (row.currency || "USD").toUpperCase();
-  const amount = row.amount == null ? null : minorUnitsToMajor(row.amount, currency);
+  const stated = (row.currency || "USD").toUpperCase();
+  // OxaPay once priced an invoice in USDT. A non-fiat code has no fiat
+  // exponent (throwing would stall the whole import on that row), so it is
+  // carried as a crypto amount. The invoice never recorded the chain.
+  const fiat = FIAT_EXPONENTS[stated] !== undefined;
+  const currency = fiat ? stated : null;
+  const amount = row.amount == null || !fiat ? null : minorUnitsToMajor(row.amount, stated);
+  const crypto = !fiat && row.amount != null && Number.isInteger(row.amount) && row.amount > 0
+    ? { asset: stated, network: "unspecified", amount: formatDecimal(BigInt(row.amount), 2) }
+    : null;
   const environment = row.environment ?? "unknown";
   return base({
     sourceSystem: provider,
@@ -111,8 +131,9 @@ export function observationFromInvoice(row: InvoiceRow): Observation | null {
     eventKind: "sale",
     occurredAt: formatUtcInstant(row.created_at),
     amount,
-    currency: amount ? currency : currency,
-    amountReason: amount ? null : "stored_zero_not_trusted",
+    currency,
+    crypto,
+    amountReason: amount || crypto ? null : "stored_zero_not_trusted",
     aliasIds: [`invoice.${row.id}`],
     attribution: attributionFrom(row.attribution),
     processor: provider,

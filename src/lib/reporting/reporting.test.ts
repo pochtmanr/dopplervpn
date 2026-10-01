@@ -8,6 +8,7 @@ import {
   observationFromOxapay,
   observationFromRevenueCat,
   observationFromRevolut,
+  invoiceEnvironment,
   type InvoiceRow,
 } from "./map-evidence";
 import { MemoryReportingStore } from "./memory-store";
@@ -328,6 +329,47 @@ describe("doppler reporting foundation", () => {
     const stopped = await importInvoiceHistory(retries, broken, { nowMs: 10, owner: "after" });
     expect(stopped.status).toBe("bounded_stop");
     expect(calls).toBe(5);
+  });
+
+  it("imports pre-webhook invoice history under the configured provider environment", async () => {
+    const previous = { revolut: process.env.REVOLUT_ENVIRONMENT, oxapay: process.env.OXAPAY_SANDBOX };
+    process.env.REVOLUT_ENVIRONMENT = "production";
+    delete process.env.OXAPAY_SANDBOX;
+    try {
+      expect(invoiceEnvironment("revolut")).toBe("production");
+      expect(invoiceEnvironment("oxapay")).toBe("production");
+      expect(invoiceEnvironment("paypal")).toBeNull();
+      const store = new MemoryReportingStore();
+      const row = { ...invoice("ord_hist", "inv_hist"), attribution: null, environment: invoiceEnvironment("revolut") };
+      const imported = await importInvoiceHistory(store, reader([row]), { nowMs: 1_700_000_000_000 });
+      expect(imported.applied).toBe(1);
+      expect(imported.quarantined).toBe(0);
+      const summary = await windowOf(store);
+      expect(summary.native[0]?.metrics.gross_customer_sales.amount).toBe("10.00");
+    } finally {
+      process.env.REVOLUT_ENVIRONMENT = previous.revolut;
+      if (previous.oxapay === undefined) delete process.env.OXAPAY_SANDBOX;
+      else process.env.OXAPAY_SANDBOX = previous.oxapay;
+    }
+  });
+
+  it("carries a USDT invoice as crypto instead of stalling the import", async () => {
+    const store = new MemoryReportingStore();
+    const usdt: InvoiceRow = {
+      ...invoice("ord_usdt", "inv_usdt"),
+      provider: "oxapay",
+      currency: "USDT",
+      amount: 3999,
+      environment: "production",
+    };
+    const usd: InvoiceRow = { ...invoice("ord_usd", "inv_usd"), environment: "production" };
+    const imported = await importInvoiceHistory(store, reader([usdt, usd]), { nowMs: 1_700_000_000_000 });
+    expect(imported.status).toBe("imported");
+    expect(imported.applied).toBe(2);
+    const summary = await windowOf(store);
+    expect(summary.native.map((row) => row.currency)).toEqual(["USD"]);
+    expect(summary.native[0]?.metrics.gross_customer_sales.amount).toBe("10.00");
+    expect(summary.crypto).toEqual([expect.objectContaining({ asset: "USDT", gross: "39.99" })]);
   });
 });
 

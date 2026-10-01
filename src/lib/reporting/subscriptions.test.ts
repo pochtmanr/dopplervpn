@@ -455,4 +455,89 @@ describe("summarizeSubscriptions", () => {
     expect(missing.mrr).toMatchObject({ amount: null, quality: "unavailable" });
     expect(missing.active_contracts.value).toBeNull();
   });
+
+  it("infers trials from the term and drops re-claims and shadow contracts", () => {
+    const row = (id: string, type: string, txn: string, created: string, expires: string | null, account = "acct-1") => ({
+      id,
+      event_type: type,
+      account_id: account,
+      original_transaction_id: txn,
+      platform: "ios",
+      product_id: "vpn_premium_monthly",
+      expires_at: expires,
+      details: null,
+      created_at: created,
+    });
+    const mapped = eventsFromStoredRows([
+      row("a", "INITIAL_PURCHASE", "txn-1", "2026-08-01T00:00:00Z", "2026-08-04T00:00:00Z"),
+      // app re-claim of the same trial, expiry a few seconds later
+      row("b", "RENEWAL", "txn-1", "2026-08-01T00:05:00Z", "2026-08-04T00:00:07Z"),
+      // the real conversion: a month past the trial
+      row("c", "RENEWAL", "txn-1", "2026-08-04T00:00:00Z", "2026-09-04T00:00:00Z"),
+      // synthetic id for the same subscription, from the pre-StoreKit-2 client
+      row("d", "INITIAL_PURCHASE", "vpn_premium_monthly_2026-08-01T00:00:00Z", "2026-08-01T00:01:00Z", "2026-08-04T00:00:00Z"),
+      // synthetic id with no real contract on the account stays
+      row("e", "INITIAL_PURCHASE", "vpn_premium_monthly_2026-08-02T00:00:00Z", "2026-08-02T00:00:00Z", "2026-09-02T00:00:00Z", "acct-2"),
+      // Play product ids carry a base plan suffix
+      { ...row("f", "INITIAL_PURCHASE", "GPA.1", "2026-08-03T00:00:00Z", "2026-09-03T00:00:00Z", "acct-3"), product_id: "vpn_premium_monthly:vpn-premium-monthly" },
+    ]);
+    expect(mapped.map((event) => [event.eventId, event.kind, event.phase])).toEqual([
+      ["a", "INITIAL_PURCHASE", "trial"],
+      ["c", "RENEWAL", "paying"],
+      ["e", "INITIAL_PURCHASE", "paying"],
+      ["f", "INITIAL_PURCHASE", "paying"],
+    ]);
+    expect(mapped.at(-1)?.productId).toBe("vpn_premium_monthly");
+  });
+
+  it("keeps a stated period_type over the inferred one", () => {
+    const [event] = eventsFromStoredRows([{
+      id: "a",
+      event_type: "INITIAL_PURCHASE",
+      account_id: "acct-1",
+      original_transaction_id: "txn-1",
+      platform: "ios",
+      product_id: "vpn_premium_monthly",
+      expires_at: "2026-08-04T00:00:00Z",
+      details: { period_type: "NORMAL" },
+      created_at: "2026-08-01T00:00:00Z",
+    }]);
+    expect(event.phase).toBe("paying");
+  });
+
+  it("does not let a long-ended contract of unknown phase block MRR", () => {
+    const window = {
+      from: "2026-09-01T00:00:00Z",
+      to: "2026-10-01T00:00:00Z",
+      asOf: "2026-10-01T00:00:00Z",
+      snapshotId: "sub-stale",
+      generatedAt: "2026-10-01T00:00:00Z",
+      dataAsOf: "2026-10-01T00:00:00Z",
+    };
+    const view = reportingFromStoredEvents([
+      {
+        id: "stale",
+        event_type: "CANCELLATION",
+        account_id: "acct-9",
+        original_transaction_id: "GPA.9",
+        platform: "android",
+        product_id: "vpn_premium_monthly",
+        expires_at: "2026-08-13T00:00:00Z",
+        details: { cancel_reason: "UNSUBSCRIBE" },
+        created_at: "2026-08-01T00:00:00Z",
+      },
+      {
+        id: "live",
+        event_type: "INITIAL_PURCHASE",
+        account_id: "acct-1",
+        original_transaction_id: "txn-1",
+        platform: "ios",
+        product_id: "vpn_premium_monthly",
+        expires_at: "2026-10-20T00:00:00Z",
+        details: null,
+        created_at: "2026-09-20T00:00:00Z",
+      },
+    ], window, false);
+    expect(view.mrr.amount).toBe("6.9900");
+  });
 });

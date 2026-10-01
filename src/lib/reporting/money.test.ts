@@ -82,7 +82,7 @@ function sale(id: string, amount: string): Observation {
 describe("money page", () => {
   it("counts an expense once across replacement and void", async () => {
     const { book } = openBook();
-    const draft = book.createDraft(expense());
+    const draft = await book.createDraft(expense());
     const posted = await book.postDraft(draft.draftId);
     await book.replaceRecord(posted.record_id, expense({ amount: "30.00" }));
     const replaced = await book.snapshot({ from: FROM, to: TO, basis: "purchase" });
@@ -95,7 +95,7 @@ describe("money page", () => {
 
   it("separates service-period expense from paid cash and keeps a recurrence from posting cash", async () => {
     const { book } = openBook();
-    const draft = book.createDraft(expense({
+    const draft = await book.createDraft(expense({
       amount: "20.00",
       paidAt: "2026-10-03T00:00:00Z",
       recurrence: { interval: "month", intervalCount: 1 },
@@ -186,14 +186,14 @@ describe("money page", () => {
     expect(imported.checksum).toBe(again.checksum);
   });
 
-  it("authorizes a receipt only for an admin and never returns a public url", () => {
+  it("authorizes a receipt only for an admin and never returns a public url", async () => {
     const { book } = openBook();
     const bytes = new TextEncoder().encode("receipt-bytes");
-    const document = book.storeDocument("receipt.pdf", bytes);
+    const document = await book.storeDocument("receipt.pdf", bytes);
     const denied = authorizeReceipt({ isAdmin: false, document, nowMs: Date.parse("2026-09-28T12:00:00Z") });
     expect(denied.ok).toBe(false);
     expect(denied.url).toBeNull();
-    const granted = book.authorizeDownload(document.documentId, true, Date.parse("2026-09-28T12:00:00Z"));
+    const granted = await book.authorizeDownload(document.documentId, true, Date.parse("2026-09-28T12:00:00Z"));
     expect(granted.ok).toBe(true);
     expect(granted.url).toBeNull();
     expect(granted.checksum).toBe(document.checksum);
@@ -221,7 +221,7 @@ describe("money page", () => {
 
   it("returns the same page view as the frozen service snapshot", async () => {
     const { book } = openBook();
-    const draft = book.createDraft(expense({ kind: "direct_cost", category: "servers", amount: "4.00" }));
+    const draft = await book.createDraft(expense({ kind: "direct_cost", category: "servers", amount: "4.00" }));
     await book.postDraft(draft.draftId);
     const first = await book.snapshot({ from: FROM, to: TO, basis: "purchase" });
     const second = await book.snapshot({
@@ -238,8 +238,8 @@ describe("money page", () => {
 
   it("rejects company overhead and leaves channel, processor, store, and acquisition distinct", async () => {
     const { book } = openBook();
-    expect(() => book.createDraft(expense({ category: "shared_overhead" }))).toThrow(MoneyError);
-    const draft = book.createDraft(expense({
+    await expect(book.createDraft(expense({ category: "shared_overhead" }))).rejects.toThrow(MoneyError);
+    const draft = await book.createDraft(expense({
       kind: "manual_income",
       category: "consulting",
       channel: "telegram",

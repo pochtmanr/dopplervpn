@@ -1,10 +1,9 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { contentHash } from "./canonical";
 import { FORMULA_VERSION, PROJECT_ID, TIMEZONE_PROPOSAL, fiatExponent } from "./constants";
 import { addDecimals, formatDecimal, isZeroDecimal, parseDecimal, rescale, subtractDecimals } from "./decimal";
-import type { MemoryReportingStore } from "./memory-store";
 import { summarizeProduction, type MetricValue } from "./summarize";
-import type { FinanceRecord, MoneyValue, TaxInclusion } from "./types";
+import type { FinanceRecord, MoneyValue, ReportingStore, TaxInclusion } from "./types";
 
 export const MONEY_FORMULA_VERSION = "doppler-money-native-v1";
 
@@ -79,6 +78,67 @@ export interface ReceiptGrant {
   checksum?: string;
   delivery?: "authorized_short_lived";
   url: null;
+}
+
+/**
+ * The ledger MoneyBook writes to. Manual entries, settlements and transfers
+ * are appended on the same change sequence as provider observations, so one
+ * snapshot watermark covers both.
+ */
+export interface MoneyStore extends ReportingStore {
+  clock(): Date;
+  currentWatermark(): string | Promise<string>;
+  appendBuilt(
+    build: (allocate: () => Promise<string>, now: string) => Promise<FinanceRecord[]>,
+  ): Promise<FinanceRecord[]>;
+}
+
+/** Side state that is not a ledger row: drafts, receipts, statement files, balances. */
+export interface MoneyVault {
+  saveDraft(draft: MoneyDraft): Promise<void>;
+  getDraft(draftId: string): Promise<MoneyDraft | null>;
+  saveDocument(document: StoredDocument): Promise<void>;
+  getDocument(documentId: string): Promise<StoredDocument | null>;
+  getStatement(checksum: string): Promise<Uint8Array | null>;
+  saveStatement(checksum: string, bytes: Uint8Array, balances: BalanceRow[]): Promise<void>;
+  listBalances(): Promise<BalanceRow[]>;
+}
+
+export class MemoryMoneyVault implements MoneyVault {
+  private drafts = new Map<string, MoneyDraft>();
+  private documents = new Map<string, StoredDocument>();
+  private statements = new Map<string, Uint8Array>();
+  private balances: BalanceRow[] = [];
+
+  async saveDraft(draft: MoneyDraft): Promise<void> {
+    this.drafts.set(draft.draftId, { ...draft });
+  }
+
+  async getDraft(draftId: string): Promise<MoneyDraft | null> {
+    const draft = this.drafts.get(draftId);
+    return draft ? { ...draft } : null;
+  }
+
+  async saveDocument(document: StoredDocument): Promise<void> {
+    this.documents.set(document.documentId, document);
+  }
+
+  async getDocument(documentId: string): Promise<StoredDocument | null> {
+    return this.documents.get(documentId) ?? null;
+  }
+
+  async getStatement(checksum: string): Promise<Uint8Array | null> {
+    return this.statements.get(checksum) ?? null;
+  }
+
+  async saveStatement(checksum: string, bytes: Uint8Array, balances: BalanceRow[]): Promise<void> {
+    this.statements.set(checksum, bytes);
+    this.balances.push(...balances);
+  }
+
+  async listBalances(): Promise<BalanceRow[]> {
+    return [...this.balances];
+  }
 }
 
 export interface MoneyMetric {
@@ -230,17 +290,17 @@ export function authorizeReceipt(input: {
 }
 
 export class MoneyBook {
-  private drafts = new Map<string, MoneyDraft>();
-  private documents = new Map<string, StoredDocument>();
-  private statements = new Map<string, Uint8Array>();
-  private balances: BalanceRow[] = [];
+  // Payout residuals are reconciliation output, recomputed on the next
+  // statement import. They are not durable and the page does not show them.
   private residuals: PayoutResidual[] = [];
   private frozen = new Map<string, MoneyPageModel>();
-  private localSeq = 0;
 
-  constructor(readonly store: MemoryReportingStore) {}
+  constructor(
+    readonly store: MoneyStore,
+    private readonly vault: MoneyVault = new MemoryMoneyVault(),
+  ) {}
 
-  createDraft(input: MoneyDraftInput): MoneyDraft {
+  async createDraft(input: MoneyDraftInput): Promise<MoneyDraft> {
     validateDraft(input);
     const draft: MoneyDraft = {
       ...input,
@@ -263,27 +323,28 @@ export class MoneyBook {
       status: "draft",
       recordId: null,
     };
-    this.drafts.set(draft.draftId, draft);
+    await this.vault.saveDraft(draft);
     return draft;
   }
 
   async postDraft(draftId: string): Promise<FinanceRecord> {
-    const draft = this.requireDraft(draftId);
+    const draft = await this.requireDraft(draftId);
     if (draft.status === "posted") throw new MoneyError("draft_already_posted");
-    const document = draft.documentId ? this.documents.get(draft.documentId) ?? null : null;
+    const document = draft.documentId ? await this.vault.getDocument(draft.documentId) : null;
     if (draft.documentId && !document) throw new MoneyError("document_not_found");
     const recordId = this.nextId(draft.kind === "manual_income" ? "sale.manual" : draft.kind);
-    const [record] = await this.store.appendBuilt((allocate, now) => [
+    const [record] = await this.store.appendBuilt(async (allocate, now) => [
       sealRecord(draftToRecord(draft, {
         recordId,
         revision: 1,
-        sequence: allocate(),
+        sequence: await allocate(),
         now,
         document,
       })),
     ]);
     draft.status = "posted";
     draft.recordId = record.record_id;
+    await this.vault.saveDraft(draft);
     this.frozen.clear();
     return record;
   }
@@ -292,12 +353,12 @@ export class MoneyBook {
     const previous = await this.latest(recordId);
     this.assertMutable(previous);
     if (previous.status !== "posted") throw new MoneyError("record_not_posted");
-    const [record] = await this.store.appendBuilt((allocate, now) => [
+    const [record] = await this.store.appendBuilt(async (allocate, now) => [
       sealRecord({
         ...previous,
         revision: previous.revision + 1,
         supersedes_revision: previous.revision,
-        change_sequence: allocate(),
+        change_sequence: await allocate(),
         updated_at: now,
         status: "void",
         source_as_of: now,
@@ -317,7 +378,7 @@ export class MoneyBook {
     if (previous.status !== "posted") throw new MoneyError("record_not_posted");
     const expectedKind = previous.record_type === "sale" ? "manual_income" : previous.record_type;
     if (input.kind !== expectedKind) throw new MoneyError("kind_mismatch");
-    const document = input.documentId ? this.documents.get(input.documentId) ?? null : null;
+    const document = input.documentId ? await this.vault.getDocument(input.documentId) : null;
     if (input.documentId && !document) throw new MoneyError("document_not_found");
     const draft: MoneyDraft = {
       ...input,
@@ -340,11 +401,11 @@ export class MoneyBook {
       status: "posted",
       recordId,
     };
-    const [record] = await this.store.appendBuilt((allocate, now) => [
+    const [record] = await this.store.appendBuilt(async (allocate, now) => [
       sealRecord(draftToRecord(draft, {
         recordId,
         revision: previous.revision + 1,
-        sequence: allocate(),
+        sequence: await allocate(),
         now,
         document,
         supersedes: previous.revision,
@@ -354,21 +415,21 @@ export class MoneyBook {
     return record;
   }
 
-  storeDocument(filename: string, bytes: Uint8Array): StoredDocument {
+  async storeDocument(filename: string, bytes: Uint8Array): Promise<StoredDocument> {
     const document: StoredDocument = {
       documentId: this.nextId("doc"),
       filename,
       checksum: sha256(bytes),
       bytes,
     };
-    this.documents.set(document.documentId, document);
+    await this.vault.saveDocument(document);
     return document;
   }
 
-  authorizeDownload(documentId: string, isAdmin: boolean, nowMs: number): ReceiptGrant {
+  async authorizeDownload(documentId: string, isAdmin: boolean, nowMs: number): Promise<ReceiptGrant> {
     return authorizeReceipt({
       isAdmin,
-      document: this.documents.get(documentId) ?? null,
+      document: await this.vault.getDocument(documentId),
       nowMs,
     });
   }
@@ -380,20 +441,21 @@ export class MoneyBook {
   }> {
     const checksum = sha256(bytes);
     if (claimedChecksum && claimedChecksum !== checksum) throw new MoneyError("checksum_mismatch");
-    const existing = this.statements.get(checksum);
+    const existing = await this.vault.getStatement(checksum);
     if (existing) {
       if (!bytesEqual(existing, bytes)) throw new MoneyError("immutable_statement_conflict");
       return { status: "duplicate", checksum, residuals: [] };
     }
     const text = new TextDecoder().decode(bytes);
     const rows = parseStatement(text);
-    const records = await this.store.recordsAt(this.store.currentWatermark());
+    const records = await this.store.recordsAt(await this.store.currentWatermark());
     const residuals: PayoutResidual[] = [];
-    const built = await this.store.appendBuilt((allocate, now) => {
+    const balances: BalanceRow[] = [];
+    const built = await this.store.appendBuilt(async (allocate, now) => {
       const posted: FinanceRecord[] = [];
       for (const row of rows) {
         if (row.rowType === "balance") {
-          this.balances.push({
+          balances.push({
             financial_account_id: row.accountId,
             account_kind: row.accountKind,
             as_of: row.occurredAt,
@@ -406,7 +468,7 @@ export class MoneyBook {
           });
           continue;
         }
-        const sequence = allocate();
+        const sequence = await allocate();
         const recordId = this.nextId(row.rowType === "transfer" ? "transfer" : "settlement");
         if (row.rowType === "settlement") {
           residuals.push(residualFor(recordId, row, records));
@@ -417,7 +479,7 @@ export class MoneyBook {
     });
     void built;
     this.residuals.push(...residuals);
-    this.statements.set(checksum, bytes);
+    await this.vault.saveStatement(checksum, bytes, balances);
     this.frozen.clear();
     return { status: "imported", checksum, residuals };
   }
@@ -441,13 +503,15 @@ export class MoneyBook {
       (!query.source || record.source_system === query.source) &&
       (!query.channel || record.channel === query.channel)
     );
-    const model = buildModel(summary, records, query, this.balances, this.residuals);
-    this.frozen.set(cacheKey, model);
+    const model = buildModel(summary, records, query, await this.vault.listBalances(), this.residuals);
+    // Only a requested snapshot can be asked for again. Each unpinned read
+    // mints a fresh snapshot id, so caching it would only grow the map.
+    if (query.snapshotId) this.frozen.set(cacheKey, model);
     return model;
   }
 
   private async latest(recordId: string): Promise<FinanceRecord> {
-    const records = await this.store.recordsAt(this.store.currentWatermark());
+    const records = await this.store.recordsAt(await this.store.currentWatermark());
     const record = records.find((item) => item.record_id === recordId);
     if (!record) throw new MoneyError("record_not_found");
     return record;
@@ -459,15 +523,16 @@ export class MoneyBook {
     }
   }
 
-  private requireDraft(draftId: string): MoneyDraft {
-    const draft = this.drafts.get(draftId);
+  private async requireDraft(draftId: string): Promise<MoneyDraft> {
+    const draft = await this.vault.getDraft(draftId);
     if (!draft) throw new MoneyError("draft_not_found");
     return draft;
   }
 
+  // Ids outlive the process once the ledger is durable, so a per-process
+  // counter would collide with rows written before the last restart.
   private nextId(prefix: string): string {
-    this.localSeq += 1;
-    return `${prefix}.${this.localSeq}`;
+    return `${prefix}.${randomUUID()}`;
   }
 }
 

@@ -111,12 +111,12 @@ export class MemoryReportingStore {
    * share D1's snapshot watermark instead of a second ledger.
    */
   async appendBuilt(
-    build: (allocate: () => string, now: string) => FinanceRecord[],
+    build: (allocate: () => Promise<string>, now: string) => Promise<FinanceRecord[]>,
   ): Promise<FinanceRecord[]> {
     return this.withLock("money.append", async () => {
       const now = formatUtcInstant(this.clock());
-      const records = build(() => {
-          this.seq += BigInt(1);
+      const records = await build(async () => {
+        this.seq += BigInt(1);
         return this.seq.toString();
       }, now);
       this.records.push(...records);
