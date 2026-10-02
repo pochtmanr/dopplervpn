@@ -393,8 +393,10 @@ export function CookieConsent() {
         aria-describedby={bannerTextId}
         className="overlay-surface-muted mx-auto max-w-4xl max-h-[70dvh] overflow-y-auto rounded-2xl border border-overlay/10 bg-bg-secondary p-5 sm:p-6 shadow-2xl"
       >
-        <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
-          <div className="flex-1 min-w-0">
+        {/* Stacked at every width: the text keeps the full line length and the
+            choices sit in one row beneath it, Manage at the start. */}
+        <div className="flex flex-col gap-4">
+          <div className="min-w-0">
             <h2 id={bannerTitleId} className="text-sm font-semibold text-text-primary mb-1">
               {t("bannerTitle")}
             </h2>
@@ -402,20 +404,18 @@ export function CookieConsent() {
               {t("message")} {privacyLink}
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 shrink-0">
-            <button type="button" onClick={rejectAll} className={CHOICE_BTN}>
-              {t("rejectAll")}
-            </button>
-            <button type="button" onClick={acceptAll} className={CHOICE_BTN}>
-              {t("acceptAll")}
-            </button>
-            <button
-              type="button"
-              onClick={openPreferencesFromBanner}
-              className={`${SECONDARY_BTN} col-span-2 sm:col-span-1 sm:order-first`}
-            >
+          <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-3">
+            <button type="button" onClick={openPreferencesFromBanner} className={SECONDARY_BTN}>
               {t("managePreferences")}
             </button>
+            <div className="grid grid-cols-2 gap-3 sm:ms-auto">
+              <button type="button" onClick={rejectAll} className={CHOICE_BTN}>
+                {t("rejectAll")}
+              </button>
+              <button type="button" onClick={acceptAll} className={CHOICE_BTN}>
+                {t("acceptAll")}
+              </button>
+            </div>
           </div>
         </div>
       </div>
