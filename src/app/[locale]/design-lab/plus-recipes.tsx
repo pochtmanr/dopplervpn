@@ -1,8 +1,36 @@
+import type { ReactNode } from 'react';
+
 /**
  * Class lists for the Design Lab's "Calm+" direction: Calm's recipes plus the
  * lift hover, duotone glyphs (no tile) and an inset well for the live element.
  * Colours from calm.css; motion from plus.css.
  */
+/**
+ * Site-width wrapper in the shipped `.section` order: gutter padding outside,
+ * the 1600px `max-w-site` box inside, so Calm+ edges match the rest of the landing.
+ */
+export function PlusContainer({ className = '', children }: { className?: string; children: ReactNode }) {
+  return (
+    <div className={`px-4 sm:px-6 lg:px-8 ${className}`}>
+      <div className="mx-auto max-w-site">{children}</div>
+    </div>
+  );
+}
+
+/**
+ * A landing section's title + subtitle. `live` (the homepage preview): the title is the
+ * section's h2, sized like the shipped headers; in the lab it stays a pane-sized h3.
+ */
+export function PlusHeading({ title, subtitle, live = false }: { title: string; subtitle: string; live?: boolean }) {
+  const Title = live ? 'h2' : 'h3';
+  return (
+    <div className="mb-8 text-center">
+      <Title className={`${PLUS_TITLE} ${live ? 'md:text-3xl' : ''}`}>{title}</Title>
+      <p className={`mx-auto mt-2 max-w-2xl ${PLUS_BODY}`}>{subtitle}</p>
+    </div>
+  );
+}
+
 export const PLUS_CARD = 'relative flex h-full flex-col rounded-[22px] bg-(--c-card) p-6';
 /** A card you act on: light shadow on hover, nothing else. `group` drives the plate's teal warm-up and the arrow. */
 export const PLUS_CARD_HOVER = `group plus-lift ${PLUS_CARD}`;

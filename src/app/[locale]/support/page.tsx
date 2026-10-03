@@ -17,6 +17,10 @@ import {
   HERO_TITLE_RAMP,
   splitHeadline,
 } from "@/components/ui/card-recipes";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell } from "../design-lab/home-preview";
+import { PlusFaqAccordion } from "../design-lab/plus/faq";
+import { ArrowGlyph, PLUS_TITLE } from "../design-lab/plus-recipes";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -110,6 +114,60 @@ export default async function SupportPage({ params }: PageProps) {
       />
       <Navbar />
       <main className="relative overflow-x-clip">
+        {calmPlusPreview ? (
+          <PlusPageShell>
+            <section className={HERO_SECTION}>
+              <div className="relative mx-auto max-w-site text-center">
+                <h1 className={HERO_TITLE}>
+                  {headlineLead}{headlineLead && " "}
+                  <span className={HERO_TITLE_RAMP}>{headlineLast}</span>
+                </h1>
+                <p className={HERO_SUBTITLE}>{t("subtitle")}</p>
+              </div>
+            </section>
+
+            <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
+              <SupportContent plus />
+              {/* Guides: one card of row links, as the FAQ card is one card of rows. */}
+              <section id="guides" className="scroll-mt-28 mt-10">
+                <h2 className={`mb-4 ${PLUS_TITLE}`}>{t("guides.title")}</h2>
+                <ul className="overflow-hidden rounded-[22px] bg-(--c-card)">
+                  {(
+                    [
+                      ["/help/account-id", "guides.accountId"],
+                      ["/help/web-and-store", "guides.webAndStore"],
+                      ["/help/restore-cancel-refund", "guides.restoreCancelRefund"],
+                      ["/refund", "guides.refund"],
+                    ] as const
+                  ).map(([href, key], i) => (
+                    <li key={href} className={i > 0 ? "border-t border-(--c-separator)" : undefined}>
+                      <Link
+                        href={href}
+                        className="group flex items-center gap-3 px-5 py-4 text-[16px] font-bold text-(--c-text) transition-colors hover:bg-(--c-accent-tint) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--c-accent)"
+                      >
+                        <span className="flex-1">{t(key)}</span>
+                        <ArrowGlyph className="h-4 w-4 text-(--c-tert) group-hover:text-(--c-accent)" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* FAQ + troubleshooting: two Calm+ accordion cards. */}
+              <div className="mt-12 grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-6">
+                <section id="faq" className="scroll-mt-28">
+                  <h2 className={`mb-4 ${PLUS_TITLE}`}>{t("faq.title")}</h2>
+                  <PlusFaqAccordion items={faqItems} />
+                </section>
+                <section id="troubleshooting" className="scroll-mt-28">
+                  <h2 className={`mb-4 ${PLUS_TITLE}`}>{t("troubleshooting.title")}</h2>
+                  <PlusFaqAccordion items={troubleshootItems} />
+                </section>
+              </div>
+            </div>
+          </PlusPageShell>
+        ) : (
+        <>
         {/* ── Hero ──────────────────────────────────────────────── */}
         {/* The downloads hero: static, last word on the clip-text ramp. */}
         <section className={HERO_SECTION}>
@@ -158,6 +216,8 @@ export default async function SupportPage({ params }: PageProps) {
             </Reveal>
           </div>
         </div>
+        </>
+        )}
       </main>
       <Footer />
     </>

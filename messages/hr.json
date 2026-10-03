@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Ukloni kontakt za podršku",
+      "intro": "Ako je na vašem Doppler računu spremljena adresa e-pošte ili Telegram račun kao kontakt za podršku i više ga ne želite tamo, zatražite ovdje da ga uklonimo.",
+      "keepsTitle": "Vaš račun se ne briše",
+      "keeps": "Uklanja se samo kontakt. Račun, pretplata i podaci o plaćanjima ostaju nepromijenjeni.",
+      "accountLabel": "ID računa",
+      "accountHint": "Izgleda kao VPN-XXXX-XXXX-XXXX i prikazan je u aplikaciji i na stranici vašeg računa.",
+      "methodLabel": "Vrsta kontakta",
+      "methodHint": "Odaberite koja je vrsta kontakta spremljena na računu.",
+      "methodEmail": "E-pošta",
+      "valueLabel": "Kontakt za uklanjanje",
+      "valueHint": "Unesite ga točno onako kako je spremljen: cijelu adresu e-pošte ili korisničko ime na Telegramu.",
+      "submit": "Zatraži uklanjanje",
+      "submitting": "Slanje…",
+      "recordedTitle": "Zahtjev zaprimljen",
+      "recorded": "Ako se ID računa podudara s potvrđenim kontaktom tog računa, zahtjev je zabilježen. Radi zaštite računa ne otkrivamo je li bilo podudaranja.",
+      "unavailableTitle": "Još nije dostupno",
+      "unavailable": "Uklanjanje kontakta za podršku još nije dostupno. Ništa nije poslano.",
+      "errorTitle": "Zahtjev nije poslan",
+      "error": "Zahtjev nije moguće poslati. Provjerite vezu i pokušajte ponovno kasnije."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Tradicionalni VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Što to znači",
+      "keeps": "Što čuvamo",
+      "why": "Zašto to radimo"
+    },
     "rows": {
       "account": {
         "feature": "Potreban račun",
         "traditional": "E-pošta + lozinka",
-        "doppler": "Račun nije potreban"
+        "doppler": "Račun nije potreban",
+        "means": "Instalirate aplikaciju i povežete se. Bez e-pošte, lozinke i broja telefona.",
+        "keeps": "Anonimni ID (VPN-XXXX-XXXX-XXXX) i identifikator uređaja koji provodi ograničenje uređaja. Ništa što vas imenuje.",
+        "why": "E-pošta povezuje račun sa stvarnom osobom. Nikad je ne tražimo, pa nema ničega što bi moglo procuriti, biti prodano ili predano."
       },
       "fingerprint": {
         "feature": "Otisak prometa",
         "traditional": "DPI ga otkriva",
-        "doppler": "Kamuflirano kao HTTPS"
+        "doppler": "Kamuflirano kao HTTPS",
+        "means": "Vatrozidu vaša veza izgleda kao običan posjet poznatoj HTTPS stranici.",
+        "keeps": "Ništa. Prikrivanje se događa na mreži, a ne u bazi podataka.",
+        "why": "DPI blokira ono što prepozna. Promet koji izgleda obično ne daje mu ništa za blokiranje."
       },
       "protocol": {
         "feature": "Protokol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality posuđuje TLS rukovanje prave web stranice, pa nema VPN rukovanja koje bi se moglo uočiti.",
+        "keeps": "Ništa o vašem prometu. Poslužitelji propuštaju pakete i zaboravljaju ih.",
+        "why": "OpenVPN i WireGuard su brzi, ali njihovi obrasci paketa dobro su poznati i u Rusiji, Kini i Iranu blokiraju se u nekoliko sekundi."
       },
       "dns": {
         "feature": "DNS enkripcija",
         "traditional": "Ponekad",
-        "doppler": "Uvijek"
+        "doppler": "Uvijek",
+        "means": "Svaki upit, korak koji site.com pretvara u adresu, putuje kroz tunel do našeg vlastitog resolvera.",
+        "keeps": "Bez povijesti upita. Svaki upit se razriješi, filtrira od oglasa i alata za praćenje te odbaci.",
+        "why": "Običan DNS vašem pružatelju interneta pokazuje svaku stranicu koju posjetite, čak i kad je sama stranica šifrirana."
       },
       "censorship": {
         "feature": "Otpornost na cenzuru",
         "traditional": "Ograničena",
-        "doppler": "Ugrađena"
+        "doppler": "Ugrađena",
+        "means": "Napravljeno za mreže koje aktivno blokiraju VPN. Bez mostova i dodatnih postavki.",
+        "keeps": "Isto kao i svugdje. Pravilo bez zapisa ne mijenja se ovisno o državi.",
+        "why": "Blokade su svake godine jače. Protokol koji je po prirodi teško otkriti traje dulje od onoga koji se mora krpati nakon svake nove blokade."
       },
       "logs": {
         "feature": "Zapisnici aktivnosti",
         "traditional": "Varira",
-        "doppler": "Nikada"
+        "doppler": "Nikada",
+        "means": "Nema zapisa o stranicama koje posjećujete, što preuzimate, koliko podataka trošite ni koliko dugo ste povezani.",
+        "keeps": "Zapisnik prijava: IP, anonimni ID, ID uređaja i vrijeme, briše se nakon 90 dana. Pokazuje da se uređaj povezao, a ne što je radio.",
+        "why": "Zapisi koji ne postoje ne mogu procuriti niti biti predani. Zapisnik prijava minimum je potreban za zaustavljanje zlouporabe."
       }
     }
   },

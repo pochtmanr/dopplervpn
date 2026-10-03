@@ -27,13 +27,20 @@ const PLATFORMS: ReadonlyArray<{
 ];
 
 /** The home page's "Available on" band (card recipe A), pointed straight at the stores. */
-export function EveryDeviceBand({ maxDevices }: { maxDevices: number }) {
+/** `plus`: the Calm+ preview, decided on the server. */
+export function EveryDeviceBand({ maxDevices, plus = false }: { maxDevices: number; plus?: boolean }) {
   const t = useTranslations('platformsAvailable');
   const tApps = useTranslations('apps');
   const tDash = useTranslations('subscribe.dashboard');
 
   return (
-    <section className="mt-5 rounded-2xl border border-overlay/10 bg-bg-secondary/30 px-4 py-6 sm:px-6 md:py-8">
+    <section
+      className={
+        plus
+          ? "mt-5 rounded-[22px] bg-(--c-card) px-4 py-6 sm:px-6 md:py-8"
+          : "mt-5 rounded-2xl border border-overlay/10 bg-bg-secondary/30 px-4 py-6 sm:px-6 md:py-8"
+      }
+    >
       <div className="text-center mb-5 md:mb-6">
         <p className="text-xs md:text-sm uppercase tracking-wider text-text-tertiary mb-1">{t('eyebrow')}</p>
         <h2 className="font-display text-xl md:text-2xl font-semibold text-text-primary">{t('title')}</h2>
@@ -49,9 +56,19 @@ export function EveryDeviceBand({ maxDevices }: { maxDevices: number }) {
             href={p.href}
             {...(p.download ? { download: true } : { target: '_blank', rel: 'noopener noreferrer' })}
             onClick={() => trackCta('account-dashboard', p.platform, p.variant)}
-            className="group relative flex h-[88px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:border-accent-teal/30 transition-colors"
+            className={
+              plus
+                ? "group plus-lift relative flex h-[88px] flex-row gap-2 overflow-hidden rounded-2xl bg-(--c-inset) p-2"
+                : "group relative flex h-[88px] flex-row overflow-hidden rounded-xl border border-overlay/10 bg-bg-secondary/20 hover:bg-bg-secondary/35 hover:border-accent-teal/30 transition-colors"
+            }
           >
-            <div className="relative w-[34%] md:w-[26%] shrink-0 overflow-hidden border-e border-overlay/5">
+            <div
+              className={
+                plus
+                  ? "relative w-[34%] md:w-[26%] shrink-0 overflow-hidden rounded-xl bg-(--c-bg)"
+                  : "relative w-[34%] md:w-[26%] shrink-0 overflow-hidden border-e border-overlay/5"
+              }
+            >
               <PlatformGlyphBand index={i} />
               <div className="absolute inset-0 flex items-center justify-center">
                 <PlatformLogo icon={p.icon} className="w-8 h-8 md:w-10 md:h-10 text-text-muted group-hover:text-accent-teal transition-colors" />

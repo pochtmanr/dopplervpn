@@ -4,13 +4,17 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { detectPlatform, type Platform } from "@/lib/detect-platform";
 import { trackCta } from "@/lib/track-cta";
+// Calm+ pill for the `plus` branch.
+import { PLUS_BODY, PLUS_BTN, PLUS_ICON, PLUS_ICON_TONE, PLUS_TITLE_SM } from "@/app/[locale]/design-lab/plus-recipes";
+import { DopplerLogo } from "@/components/layout/doppler-logo";
 
 const APP_STORE_URL =
   "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
 
-export function BlogInlineCta() {
+/** `plus`: the Calm+ preview, passed down from the server page through BlogContent. */
+export function BlogInlineCta({ plus = false }: { plus?: boolean }) {
   const t = useTranslations("blog.inlineCta");
   const [platform, setPlatform] = useState<Platform>("desktop");
 
@@ -30,6 +34,36 @@ export function BlogInlineCta() {
     trackCta("blog-inline", platform);
   };
 
+  const link = {
+    href: config.href,
+    target: platform === "desktop" ? undefined : "_blank",
+    rel: platform === "desktop" ? undefined : "noopener noreferrer",
+    onClick: handleClick,
+  };
+
+  if (plus) {
+    // Calm+: a card on the tonal ramp, the wave mark as a duotone glyph, one flat pill.
+    return (
+      <div className="not-prose my-10 rounded-[22px] bg-(--c-card) p-5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
+          <div className="flex min-w-0 flex-1 items-start gap-4">
+            <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal} mt-1`}>
+              <DopplerLogo className="h-6 w-16" />
+            </span>
+            <div className="min-w-0">
+              <p className={`${PLUS_TITLE_SM} mb-1`}>{t("headline")}</p>
+              <p className={PLUS_BODY}>{t("subtext")}</p>
+            </div>
+          </div>
+          <a {...link} className={`${PLUS_BTN} w-full shrink-0 whitespace-nowrap sm:w-auto`}>
+            {config.icon}
+            {config.label}
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="not-prose my-10 rounded-xl border-s-4 border-accent-teal bg-accent-teal/5 p-5 sm:p-6">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -42,10 +76,7 @@ export function BlogInlineCta() {
           </p>
         </div>
         <a
-          href={config.href}
-          target={platform === "desktop" ? undefined : "_blank"}
-          rel={platform === "desktop" ? undefined : "noopener noreferrer"}
-          onClick={handleClick}
+          {...link}
           className="cta-key inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-white text-sm font-medium whitespace-nowrap flex-shrink-0"
         >
           {config.icon}

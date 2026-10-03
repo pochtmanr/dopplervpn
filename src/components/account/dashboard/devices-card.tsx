@@ -4,6 +4,10 @@ import { useTranslations } from 'next-intl';
 import type { AccountDevices } from '../types';
 import { DeviceTypeIcon, WarningIcon } from './icons';
 import { EYEBROW, ICON_TILE, PLAIN_CARD } from './ui';
+// Calm+ recipes for the `plus` preview branch.
+import { PLUS_BTN_SECONDARY, PLUS_CARD, PLUS_CHIP, PLUS_ICON, PLUS_ICON_TONE, PLUS_META, PLUS_TITLE } from '@/app/[locale]/design-lab/plus-recipes';
+
+const DAY_MS = 86_400_000;
 
 const TYPE_LABELS: Record<string, string> = {
   ios: 'iOS',
@@ -43,14 +47,100 @@ interface DevicesCardProps {
   loading: boolean;
   error: boolean;
   onRetry: () => void;
+  /** Calm+ preview, decided on the server (CALM_PLUS_PREVIEW is not a client env). */
+  plus?: boolean;
 }
 
 /**
  * Read-only on purpose. A remove button here would act on the Account ID alone
  * and would not revoke the device's token, so removal stays in the apps.
  */
-export function DevicesCard({ locale, data, loading, error, onRetry }: DevicesCardProps) {
+export function DevicesCard({ locale, data, loading, error, onRetry, plus = false }: DevicesCardProps) {
   const t = useTranslations('subscribe');
+
+  if (plus) {
+    return (
+      <div className={PLUS_CARD}>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className={PLUS_TITLE}>{t('dashboard.devices')}</h2>
+          {data && (
+            <span className={`${PLUS_CHIP} bg-(--c-inset) text-(--c-muted) tabular-nums`}>
+              {t('dashboard.devicesCount', { count: data.devices.length, max: data.maxDevices })}
+            </span>
+          )}
+        </div>
+
+        {loading && !data && (
+          <div className="space-y-2 animate-pulse" role="status" aria-busy="true">
+            {[0, 1].map((i) => (
+              <div key={i} className="flex items-center gap-3 rounded-2xl bg-(--c-inset) px-3 py-3">
+                <div className="ms-1 h-6 w-6 rounded-lg bg-(--c-card)" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-3.5 w-32 rounded-md bg-(--c-card)" />
+                  <div className="h-3 w-20 rounded-md bg-(--c-card)" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {error && !data && (
+          <div role="alert" className="flex items-center gap-3 rounded-2xl bg-(--c-danger-tint) px-4 py-3">
+            <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.danger}`}>
+              <WarningIcon className="h-5 w-5" />
+            </span>
+            <p className="flex-1 text-sm text-(--c-text)">{t('dashboard.devicesError')}</p>
+            <button type="button" onClick={onRetry} className={`${PLUS_BTN_SECONDARY} !h-9 shrink-0 !px-4 text-sm`}>
+              {t('retry')}
+            </button>
+          </div>
+        )}
+
+        {data && data.devices.length === 0 && (
+          <p className="rounded-2xl bg-(--c-inset) px-4 py-4 text-[15px] text-(--c-muted)">{t('dashboard.noDevices')}</p>
+        )}
+
+        {data && data.devices.length > 0 && (
+          <ul className="space-y-2">
+            {data.devices.map((d, i) => {
+              const typeLabel = TYPE_LABELS[(d.type ?? '').toLowerCase()] ?? d.type ?? '';
+              const name = d.name?.trim() || typeLabel || '—';
+              const recent = !!d.lastActiveAt && Date.now() - new Date(d.lastActiveAt).getTime() < DAY_MS;
+              return (
+                <li key={`${d.createdAt}-${i}`} className="flex items-center gap-3 rounded-2xl bg-(--c-inset) px-3 py-3">
+                  <span className={`${PLUS_ICON} ${recent ? PLUS_ICON_TONE.teal : PLUS_ICON_TONE.neutral} relative ms-1`}>
+                    <DeviceTypeIcon type={d.type} className="h-6 w-6" />
+                    {recent && (
+                      <span className="absolute -end-1.5 -top-1 flex h-3 w-3 items-center justify-center rounded-full bg-(--c-inset)">
+                        <span className="plus-pulse h-2 w-2 rounded-full bg-(--c-accent) text-(--c-accent)" />
+                      </span>
+                    )}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-[15px] font-bold text-(--c-text)">{name}</p>
+                      {d.isMain && (
+                        <span className={`${PLUS_CHIP} shrink-0 !py-0.5 bg-(--c-card) text-(--c-muted)`}>{t('dashboard.mainDevice')}</span>
+                      )}
+                    </div>
+                    <p className={`truncate ${PLUS_META}`}>
+                      {typeLabel && name !== typeLabel ? `${typeLabel} · ` : ''}
+                      {d.lastActiveAt
+                        ? t('dashboard.lastActive', { time: relativeTime(d.lastActiveAt, locale) })
+                        : t('dashboard.addedOn', { date: formatDate(d.createdAt, locale) })}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {/* mt-auto: when the grid stretches the card, the note stays on its bottom edge. */}
+        {data && <p className={`mt-auto pt-3 ${PLUS_META}`}>{t('dashboard.manageInApp')}</p>}
+      </div>
+    );
+  }
 
   return (
     <div className={`${PLAIN_CARD} p-5`}>

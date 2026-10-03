@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Poista tukiyhteystieto",
+      "intro": "Jos Doppler-tilillesi on tallennettu sähköpostiosoite tai Telegram-tili tukiyhteystiedoksi etkä enää halua sitä sinne, pyydä meitä poistamaan se täällä.",
+      "keepsTitle": "Tiliäsi ei poisteta",
+      "keeps": "Vain yhteystieto poistetaan. Tili, tilaus ja maksutiedot pysyvät ennallaan.",
+      "accountLabel": "Tilin tunnus",
+      "accountHint": "Se on muotoa VPN-XXXX-XXXX-XXXX, ja se näkyy sovelluksessa ja tilisivulla.",
+      "methodLabel": "Yhteystiedon tyyppi",
+      "methodHint": "Valitse, millainen yhteystieto tilille on tallennettu.",
+      "methodEmail": "Sähköposti",
+      "valueLabel": "Poistettava yhteystieto",
+      "valueHint": "Kirjoita se täsmälleen niin kuin se on tallennettu: koko sähköpostiosoite tai Telegram-käyttäjänimi.",
+      "submit": "Pyydä poistoa",
+      "submitting": "Lähetetään…",
+      "recordedTitle": "Pyyntö vastaanotettu",
+      "recorded": "Jos tilin tunnus vastaa tilin vahvistettua yhteystietoa, pyyntösi on kirjattu. Tilin suojaamiseksi emme kerro, oliko vastaavuus.",
+      "unavailableTitle": "Ei vielä käytössä",
+      "unavailable": "Tukiyhteystiedon poistaminen ei ole vielä mahdollista. Mitään ei lähetetty.",
+      "errorTitle": "Pyyntöä ei lähetetty",
+      "error": "Pyyntöä ei voitu lähettää. Tarkista yhteys ja yritä myöhemmin uudelleen."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Perinteinen VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Mitä se tarkoittaa",
+      "keeps": "Mitä säilytämme",
+      "why": "Miksi teemme näin"
+    },
     "rows": {
       "account": {
         "feature": "Tili vaaditaan",
         "traditional": "Sähköposti + salasana",
-        "doppler": "Ei tiliä tarvita"
+        "doppler": "Ei tiliä tarvita",
+        "means": "Asennat sovelluksen ja yhdistät. Ei sähköpostia, ei salasanaa, ei puhelinnumeroa.",
+        "keeps": "Anonyymi tunnus (VPN-XXXX-XXXX-XXXX) ja laitetunniste, joka valvoo laiterajaasi. Ei mitään, mikä nimeäisi sinut.",
+        "why": "Sähköposti yhdistää tilin oikeaan ihmiseen. Emme koskaan pyydä sitä, joten ei ole mitään vuodettavaa, myytävää tai luovutettavaa."
       },
       "fingerprint": {
         "feature": "Liikenteen sormenjälki",
         "traditional": "DPI havaitsee",
-        "doppler": "Naamioitu HTTPS:ksi"
+        "doppler": "Naamioitu HTTPS:ksi",
+        "means": "Palomuurille yhteytesi näyttää tavalliselta käynniltä tunnetulla HTTPS-sivustolla.",
+        "keeps": "Ei mitään. Naamiointi tapahtuu verkossa, ei tietokannassa.",
+        "why": "DPI estää sen, minkä se tunnistaa. Tavalliselta näyttävä liikenne ei anna sille mitään estettävää."
       },
       "protocol": {
         "feature": "Protokolla",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality lainaa oikean verkkosivuston TLS-kättelyn, joten havaittavaa VPN-kättelyä ei ole.",
+        "keeps": "Ei mitään liikenteestäsi. Palvelimet välittävät paketit eteenpäin ja unohtavat ne.",
+        "why": "OpenVPN ja WireGuard ovat nopeita, mutta niiden pakettikuviot tunnetaan hyvin, ja ne estetään sekunneissa Venäjällä, Kiinassa ja Iranissa."
       },
       "dns": {
         "feature": "DNS-salaus",
         "traditional": "Joskus",
-        "doppler": "Aina"
+        "doppler": "Aina",
+        "means": "Jokainen haku, vaihe joka muuttaa site.comin osoitteeksi, kulkee tunnelin sisällä omalle resolverillemme.",
+        "keeps": "Ei hakuhistoriaa. Jokainen haku ratkaistaan, siitä suodatetaan mainokset ja seurantatyökalut, ja se hävitetään.",
+        "why": "Tavallinen DNS näyttää internetpalveluntarjoajallesi jokaisen vierailemasi sivuston, vaikka itse sivu olisi salattu."
       },
       "censorship": {
         "feature": "Sensuurinkestävyys",
         "traditional": "Rajallinen",
-        "doppler": "Sisäänrakennettu"
+        "doppler": "Sisäänrakennettu",
+        "means": "Tehty verkkoihin, jotka estävät VPN:iä aktiivisesti. Ei siltoja eikä lisäasetuksia.",
+        "keeps": "Sama kuin kaikkialla muualla. Lokiton käytäntö ei muutu maittain.",
+        "why": "Estot kovenevat joka vuosi. Rakenteeltaan vaikeasti havaittava protokolla kestää pidempään kuin sellainen, jota pitää paikata jokaisen uuden eston jälkeen."
       },
       "logs": {
         "feature": "Toimintalokit",
         "traditional": "Vaihtelee",
-        "doppler": "Ei koskaan"
+        "doppler": "Ei koskaan",
+        "means": "Ei merkintöjä vierailemistasi sivustoista, lataamistasi tiedostoista, käyttämästäsi datamäärästä tai yhteytesi kestosta.",
+        "keeps": "Kirjautumisloki: IP, anonyymi tunnus, laitetunnus ja aika, poistetaan 90 päivän jälkeen. Se näyttää, että laite yhdisti, ei sitä, mitä se teki.",
+        "why": "Lokit, joita ei ole, eivät voi vuotaa eikä niitä voi luovuttaa. Kirjautumisloki on vähimmäismäärä, jolla väärinkäytökset saadaan pysäytettyä."
       }
     }
   },

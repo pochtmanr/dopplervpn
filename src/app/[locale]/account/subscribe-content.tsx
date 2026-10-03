@@ -28,6 +28,16 @@ import {
 } from '@/components/account/dashboard/icons';
 import { BTN_DANGER, BTN_PRIMARY, BTN_SECONDARY, INPUT } from '@/components/account/dashboard/ui';
 import { CARD_TITLE, DELETE_TILE } from '@/components/ui/card-recipes';
+// Calm+ recipes for the `plus` preview branch.
+import { PlusPlanPicker } from '../design-lab/plus/plan-picker';
+import { PLUS_BTN_SECONDARY } from '../design-lab/plus-recipes';
+import { PlusPolicyLinks } from '../design-lab/plus/policy-links';
+
+/** Calm+ preview: a filled inset field, no border; the ring only on focus. */
+const PLUS_INPUT =
+  'w-full rounded-2xl bg-(--c-inset) px-4 py-3 text-[15px] text-(--c-text) placeholder:text-(--c-tert) focus:ring-2 focus:ring-(--c-accent) outline-none transition-shadow';
+/** Calm+ preview banners: a flat tinted card, no border. */
+const PLUS_BANNER = 'mb-5 rounded-[22px] px-5 py-4 flex items-start gap-3';
 
 /* ── Plan data ──────────────────────────────────────────────────────── */
 
@@ -53,7 +63,8 @@ function perMonth(cents: number, months: number): string {
 
 /* ── Subscribe content ───────────────────────────────────────────────── */
 
-function SubscribeInner() {
+/** `plus`: the Calm+ preview, decided on the server (CALM_PLUS_PREVIEW is not a client env). */
+function SubscribeInner({ plus = false }: { plus?: boolean }) {
   const t = useTranslations('subscribe');
   const locale = useLocale();
   const router = useRouter();
@@ -672,6 +683,31 @@ function SubscribeInner() {
     </>
   );
 
+  /* Calm+ preview of the same picker (design-lab/plus/plan-picker.tsx), on the same state. */
+  const plusPlansView = (
+    <PlusPlanPicker
+      plans={PLANS}
+      selected={selected}
+      onSelect={(id) => setSelected(id as PlanId)}
+      discounted={getDiscountedCents}
+      formatCents={formatCents}
+      perMonth={perMonth}
+      promoApplied={promoApplied}
+      onRemovePromo={removePromo}
+      promoCode={promoCode}
+      onPromoChange={(code) => { setPromoCode(code); setPromoError(''); }}
+      promoError={promoError}
+      promoLoading={promoLoading}
+      onApplyPromo={applyPromo}
+      paymentMethod={paymentMethod}
+      onPaymentMethod={(method) => { setPaymentMethod(method); setError(''); }}
+      loading={loading}
+      onSubscribe={handleSubscribe}
+      finalCents={finalCents}
+      error={error}
+    />
+  );
+
   // The free paywall is the tallest card, so devices balance the account column
   // there; with Pro the status card is short, so devices sit under it instead.
   const devicesCard = (
@@ -681,6 +717,25 @@ function SubscribeInner() {
       loading={devicesLoading}
       error={devicesError}
       onRetry={() => fetchDevices(accountId)}
+      plus={plus}
+    />
+  );
+
+  const subscriptionCard = (
+    <SubscriptionCard
+      locale={locale}
+      isActivePro={isActivePro}
+      isExpiredPro={isExpiredPro}
+      expiresAt={accountInfo?.expiresAt ?? null}
+      showPlans={showPlans}
+      onShowPlans={setShowPlans}
+      onExpressSupport={() => {
+        setPremiumTicketOpen(true);
+        setPremiumTicketSuccess(null);
+        setPremiumTicketError('');
+      }}
+      plansView={plus ? plusPlansView : plansView}
+      plus={plus}
     />
   );
 
@@ -700,6 +755,7 @@ function SubscribeInner() {
           subtitle={t('subtitle')}
           deletedNotice={deletedNotice}
           onSuccess={handleAuthSuccess}
+          plus={plus}
         />
       )}
 
@@ -709,14 +765,26 @@ function SubscribeInner() {
           {(
             <>
               {/* ── Dashboard header ─────────────────────────────── */}
-              <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-8">
+              <h1
+                className={
+                  plus
+                    ? 'font-display text-3xl sm:text-4xl font-bold tracking-tight text-(--c-text) mb-8'
+                    : 'text-3xl sm:text-4xl font-semibold tracking-tight mb-8'
+                }
+              >
                 {t('dashboard.title')}
               </h1>
 
               {/* ── Save your ID warning for new accounts ──────── */}
               {!existingAccount && mode === 'new' && (
-                <div className="mb-5 rounded-2xl border border-accent-amber/30 bg-accent-amber/10 px-5 py-4 flex items-start gap-3">
-                  <WarningIcon className="w-5 h-5 text-accent-amber mt-0.5 shrink-0" />
+                <div
+                  className={
+                    plus
+                      ? `${PLUS_BANNER} bg-[color-mix(in_oklab,var(--c-warn)_14%,transparent)]`
+                      : 'mb-5 rounded-2xl border border-accent-amber/30 bg-accent-amber/10 px-5 py-4 flex items-start gap-3'
+                  }
+                >
+                  <WarningIcon className={plus ? 'w-5 h-5 text-(--c-warn) mt-0.5 shrink-0' : 'w-5 h-5 text-accent-amber mt-0.5 shrink-0'} />
                   <div>
                     <p className="text-sm font-semibold text-text-primary">{t('saveWarning')}</p>
                     <p className="text-sm text-text-muted mt-0.5">{t('saveWarningDetail')}</p>
@@ -726,7 +794,13 @@ function SubscribeInner() {
 
               {/* ── Existing account notice ───────────────────────── */}
               {existingAccount && (
-                <div className="mb-5 rounded-2xl border border-accent-teal/25 bg-accent-teal/10 px-5 py-4 flex items-start gap-3">
+                <div
+                  className={
+                    plus
+                      ? `${PLUS_BANNER} bg-(--c-accent-tint)`
+                      : 'mb-5 rounded-2xl border border-accent-teal/25 bg-accent-teal/10 px-5 py-4 flex items-start gap-3'
+                  }
+                >
                   <CheckIcon className="w-5 h-5 text-accent-teal mt-0.5 shrink-0" />
                   <div>
                     <p className="text-sm font-semibold text-text-primary">{t('accountFound')}</p>
@@ -737,7 +811,14 @@ function SubscribeInner() {
 
               {/* ── Contact saved toast ───────────────────────────── */}
               {contactSaved && (
-                <div className="mb-5 rounded-2xl border border-accent-teal/25 bg-accent-teal/10 px-5 py-3 flex items-center gap-2" role="status">
+                <div
+                  className={
+                    plus
+                      ? 'mb-5 rounded-[22px] bg-(--c-accent-tint) px-5 py-3 flex items-center gap-2'
+                      : 'mb-5 rounded-2xl border border-accent-teal/25 bg-accent-teal/10 px-5 py-3 flex items-center gap-2'
+                  }
+                  role="status"
+                >
                   <CheckIcon className="w-4 h-4 text-accent-teal" />
                   <p className="text-sm font-semibold text-text-primary">{t('dashboard.contactSaved')}</p>
                 </div>
@@ -745,7 +826,13 @@ function SubscribeInner() {
 
               {/* ── Account info failed to load ───────────────────── */}
               {accountError && (
-                <div className="mb-5 rounded-2xl border border-danger/30 bg-danger/[0.08] px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+                <div
+                  className={
+                    plus
+                      ? 'mb-5 rounded-[22px] bg-(--c-danger-tint) px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3'
+                      : 'mb-5 rounded-2xl border border-danger/30 bg-danger/[0.08] px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3'
+                  }
+                >
                   <WarningIcon className="w-5 h-5 text-danger shrink-0" />
                   <p className="flex-1 text-sm text-text-primary text-start">{t('error')}</p>
                   <button type="button" onClick={() => fetchAccountInfo(accountId)} className={BTN_DANGER}>
@@ -758,7 +845,7 @@ function SubscribeInner() {
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
 
                 {/* ── Left column: account ─────────────────────── */}
-                <div className="lg:col-span-3 space-y-5">
+                <div className={plus ? 'lg:col-span-3 flex flex-col gap-5' : 'lg:col-span-3 space-y-5'}>
                   <AccountIdCard
                     accountId={accountId}
                     locale={locale}
@@ -768,6 +855,7 @@ function SubscribeInner() {
                     onLogout={handleLogout}
                     onDeleteRequest={() => { setDeleteModalOpen(true); setDeleteError(''); }}
                     onConnectEmail={() => setEmailRequest((n) => n + 1)}
+                    plus={plus}
                     onShowContacts={() => {
                       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                       document.getElementById('contacts')?.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
@@ -776,60 +864,62 @@ function SubscribeInner() {
 
                   {!isActivePro && devicesCard}
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-                    <ContactsCard accountId={accountId} accountInfo={accountInfo} onSaved={handleContactSaved} emailRequest={emailRequest} />
-                    <RestoreCard />
+                  {/* Calm+: the pair is the left column's last row, so it takes the
+                      column's spare height and both cards stretch to match. */}
+                  <div className={plus ? 'grid grid-cols-1 md:grid-cols-2 gap-5 lg:flex-1' : 'grid grid-cols-1 md:grid-cols-2 gap-5 items-start'}>
+                    <ContactsCard accountId={accountId} accountInfo={accountInfo} onSaved={handleContactSaved} emailRequest={emailRequest} plus={plus} />
+                    <RestoreCard plus={plus} />
                   </div>
 
                 </div>
 
                 {/* ── Right column: subscription ───────────────── */}
-                <div className="lg:col-span-2 space-y-5">
-                  <SubscriptionCard
-                    locale={locale}
-                    isActivePro={isActivePro}
-                    isExpiredPro={isExpiredPro}
-                    expiresAt={accountInfo?.expiresAt ?? null}
-                    showPlans={showPlans}
-                    onShowPlans={setShowPlans}
-                    onExpressSupport={() => {
-                      setPremiumTicketOpen(true);
-                      setPremiumTicketSuccess(null);
-                      setPremiumTicketError('');
-                    }}
-                    plansView={plansView}
-                  />
+                <div className={plus ? 'lg:col-span-2 flex flex-col gap-5' : 'lg:col-span-2 space-y-5'}>
+                  {/* Calm+: on the free tier the paywall is the right column's last card, so it
+                      stretches to the left column's height. */}
+                  {plus && !isActivePro ? (
+                    <div className="flex flex-col lg:flex-1 [&>*]:flex-1">{subscriptionCard}</div>
+                  ) : (
+                    subscriptionCard
+                  )}
 
-                  {isActivePro && devicesCard}
+                  {isActivePro && (plus ? <div className="flex flex-col lg:flex-1 [&>*]:flex-1">{devicesCard}</div> : devicesCard)}
                 </div>
               </div>
 
               {/* ── Doppler VPN on every device ───────────────────── */}
-              <EveryDeviceBand maxDevices={devices?.maxDevices ?? 10} />
+              <EveryDeviceBand maxDevices={devices?.maxDevices ?? 10} plus={plus} />
 
               {/* Footer links */}
               <div className="text-center space-y-2 pt-6">
                 <p className="text-xs text-text-tertiary">{t('footerNote')}</p>
                 <p className="text-xs text-text-tertiary">{publishedRefundPolicyLabel()}</p>
-                <div className="flex items-center justify-center gap-3 text-xs text-text-tertiary">
-                  <a
-                    href={`/${locale}/terms`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-text-primary transition-colors underline underline-offset-2"
-                  >
-                    {t('terms')}
-                  </a>
-                  <span aria-hidden="true">&middot;</span>
-                  <a
-                    href={`/${locale}/privacy`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-text-primary transition-colors underline underline-offset-2"
-                  >
-                    {t('privacy')}
-                  </a>
-                </div>
+                {plus ? (
+                  <PlusPolicyLinks
+                    include={['terms', 'privacy', 'refund', 'restoreCancelRefund', 'webAndStore']}
+                    className="justify-center"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center gap-3 text-xs text-text-tertiary">
+                    <a
+                      href={`/${locale}/terms`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-text-primary transition-colors underline underline-offset-2"
+                    >
+                      {t('terms')}
+                    </a>
+                    <span aria-hidden="true">&middot;</span>
+                    <a
+                      href={`/${locale}/privacy`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-text-primary transition-colors underline underline-offset-2"
+                    >
+                      {t('privacy')}
+                    </a>
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -865,7 +955,11 @@ function SubscribeInner() {
               type="button"
               onClick={handleDeleteAccount}
               disabled={deleteLoading}
-              className="w-full rounded-xl bg-danger hover:bg-danger/85 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2"
+              className={
+                plus
+                  ? 'plus-btn w-full h-11 rounded-full bg-danger hover:bg-danger/85 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-[15px] flex items-center justify-center gap-2'
+                  : 'w-full rounded-xl bg-danger hover:bg-danger/85 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 text-sm transition-colors flex items-center justify-center gap-2'
+              }
             >
               {deleteLoading ? <SpinnerIcon className="w-4 h-4" /> : t('dashboard.deleteConfirm')}
             </button>
@@ -873,7 +967,7 @@ function SubscribeInner() {
               type="button"
               onClick={() => setDeleteModalOpen(false)}
               disabled={deleteLoading}
-              className={`${BTN_SECONDARY} w-full`}
+              className={plus ? `${PLUS_BTN_SECONDARY} w-full` : `${BTN_SECONDARY} w-full`}
               // The safe choice takes focus, so Enter on open never deletes.
               autoFocus
             >
@@ -942,7 +1036,7 @@ function SubscribeInner() {
                     value={premiumTicketForm.subject}
                     onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, subject: e.target.value }))}
                     placeholder={t('dashboard.ticketSubjectPlaceholder')}
-                    className={INPUT}
+                    className={plus ? PLUS_INPUT : INPUT}
                   />
                 </div>
                 <div>
@@ -955,7 +1049,7 @@ function SubscribeInner() {
                     value={premiumTicketForm.description}
                     onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, description: e.target.value }))}
                     placeholder={t('dashboard.ticketDescPlaceholder')}
-                    className={`${INPUT} resize-none`}
+                    className={`${plus ? PLUS_INPUT : INPUT} resize-none`}
                   />
                 </div>
                 {/* Contact email — only show if we don't already know it */}
@@ -970,7 +1064,7 @@ function SubscribeInner() {
                       value={premiumTicketForm.contactEmail}
                       onChange={(e) => setPremiumTicketForm(prev => ({ ...prev, contactEmail: e.target.value }))}
                       placeholder={t('dashboard.connectEmailPlaceholder')}
-                      className={INPUT}
+                      className={plus ? PLUS_INPUT : INPUT}
                     />
                   </div>
                 )}
@@ -1009,7 +1103,7 @@ function SubscribeInner() {
 
 /* ── Export with Suspense boundary ────────────────────────────────────── */
 
-export function SubscribeContent() {
+export function SubscribeContent({ plus = false }: { plus?: boolean }) {
   return (
     <Suspense
       fallback={
@@ -1018,7 +1112,7 @@ export function SubscribeContent() {
         </main>
       }
     >
-      <SubscribeInner />
+      <SubscribeInner plus={plus} />
     </Suspense>
   );
 }

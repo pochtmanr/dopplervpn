@@ -29,3 +29,46 @@ export function mockDevices(now: number): AccountDevices {
     ],
   };
 }
+
+/** A post for the blog card rows (image from the blog's own remote host list). */
+export const MOCK_POST = {
+  slug: 'vless-reality-vs-wireguard',
+  title: 'VLESS-Reality vs WireGuard: Why Fast Is Not the Same as Unblockable',
+  excerpt: 'WireGuard is the faster protocol and it is blocked in minutes. The reason has nothing to do with encryption strength.',
+  imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800',
+  imageAlt: null,
+  publishedAt: '2026-09-13T09:00:00.000Z',
+  tags: [
+    { slug: 'comparison', name: 'Comparison' },
+    { slug: 'protocol', name: 'Protocol' },
+  ],
+};
+
+/** Markdown that exercises every BlogContent renderer; the inline CTA lands after the third h2. */
+export const MOCK_ARTICLE = `## What a censor looks at
+
+A censorship system does not decrypt your traffic. It **classifies** it, and asks a cheaper question: *what kind of connection is this?* See [the VLESS guide](/en/vless-vpn).
+
+- Packet sizes and timing
+- Port numbers
+- The opening handshake
+
+## Why WireGuard stands out
+
+> Its first packet is a fixed-size UDP message with a known structure.
+
+Inline \`code\` and a block:
+
+\`\`\`
+vless://uuid@host:443?security=reality&sni=example.com
+\`\`\`
+
+## The trade
+
+| Protocol | Speed | Survives DPI |
+| --- | --- | --- |
+| WireGuard | Fastest | No |
+| VLESS-Reality | Fast | Yes |
+
+That is the honest trade.
+`;

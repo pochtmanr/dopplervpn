@@ -19,6 +19,10 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { BlogPostJsonLd } from "@/components/seo/blog-json-ld";
 import type { Metadata } from "next";
 import { seoTitle } from "@/lib/seo-title";
+import { Fragment } from "react";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell } from "../../design-lab/home-preview";
+import { PLUS_CHIP } from "../../design-lab/plus-recipes";
 import { currentBlogTranslations } from "@/lib/supabase/public-blog";
 
 // Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
@@ -341,6 +345,18 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   const readingTime = estimateReadingTime(post.content);
+  const plus = calmPlusPreview;
+  const Scope = plus ? PlusPageShell : Fragment;
+  const tagChip = (tag: { slug: string; name: string }) =>
+    plus ? (
+      <span key={tag.slug} className={`${PLUS_CHIP} bg-(--c-inset) text-(--c-muted)`}>
+        {tag.name}
+      </span>
+    ) : (
+      <Badge key={tag.slug} variant="auto" seed={tag.slug}>
+        {tag.name}
+      </Badge>
+    );
 
   return (
     <>
@@ -357,6 +373,7 @@ export default async function BlogPostPage({ params }: Props) {
         breadcrumbBlog={t("breadcrumb.blog")}
       />
       <Navbar />
+      <Scope>
       <main className="min-h-screen pt-20">
         <Section as="article">
           {/* Breadcrumb */}
@@ -373,19 +390,27 @@ export default async function BlogPostPage({ params }: Props) {
           <header className="mb-8">
             {post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-4">
-                {post.tags.map((tag) => (
-                  <Badge key={tag.slug} variant="auto" seed={tag.slug}>
-                    {tag.name}
-                  </Badge>
-                ))}
+                {post.tags.map(tagChip)}
               </div>
             )}
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-text-primary mb-4 leading-tight">
+            <h1
+              className={
+                plus
+                  ? "font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-(--c-text) mb-4 leading-tight"
+                  : "text-3xl sm:text-4xl lg:text-5xl font-semibold text-text-primary mb-4 leading-tight"
+              }
+            >
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted">
+            <div
+              className={
+                plus
+                  ? "flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] text-(--c-tert)"
+                  : "flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-text-muted"
+              }
+            >
               <span>
                 {t("by")} { /jerry/i.test(post.authorName)
                   ? <Link href="/en/blog/editorial" className="underline">Jerry · Doppler VPN</Link>
@@ -404,7 +429,13 @@ export default async function BlogPostPage({ params }: Props) {
               pipeline so crawler fetches of remote blog images don't burn
               Fast Origin Transfer quota on a Hobby plan. */}
           {post.imageUrl && (
-            <div className="relative aspect-[21/9] mb-10 rounded-2xl overflow-hidden">
+            <div
+              className={
+                plus
+                  ? "relative aspect-[21/9] mb-10 rounded-[22px] overflow-hidden bg-(--c-card)"
+                  : "relative aspect-[21/9] mb-10 rounded-2xl overflow-hidden"
+              }
+            >
               <Image
                 src={post.imageUrl}
                 alt={post.imageAlt || post.title}
@@ -419,17 +450,13 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Article Content */}
           <div className="max-w-3xl mx-auto">
-            <BlogContent content={post.content} locale={locale} />
+            <BlogContent content={post.content} locale={locale} plus={plus} />
 
             {/* Tags at bottom */}
             {post.tags.length > 0 && (
-              <div className="mt-10 pt-6 border-t border-overlay/10">
+              <div className={plus ? "mt-10 pt-6 border-t border-(--c-separator)" : "mt-10 pt-6 border-t border-overlay/10"}>
                 <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <Badge key={tag.slug} variant="auto" seed={tag.slug}>
-                      {tag.name}
-                    </Badge>
-                  ))}
+                  {post.tags.map(tagChip)}
                 </div>
               </div>
             )}
@@ -439,6 +466,7 @@ export default async function BlogPostPage({ params }: Props) {
               url={`https://www.dopplervpn.org/${locale}/blog/${post.slug}`}
               title={post.title}
               imageUrl={post.imageUrl}
+              plus={plus}
             />
 
             {/* Related Posts */}
@@ -447,12 +475,20 @@ export default async function BlogPostPage({ params }: Props) {
               locale={locale}
               title={t("relatedPosts")}
               readMoreText={t("readMore")}
+              plus={plus}
             />
 
           </div>
         </Section>
       </main>
-      <BlogStickyBar />
+      </Scope>
+      {plus ? (
+        <PlusPageShell>
+          <BlogStickyBar plus />
+        </PlusPageShell>
+      ) : (
+        <BlogStickyBar />
+      )}
       <Footer />
     </>
   );

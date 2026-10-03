@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Eliminar un contacte d'assistència",
+      "intro": "Si al teu compte de Doppler hi ha desat un correu electrònic o un compte de Telegram com a contacte d'assistència i ja no vols que hi sigui, demana'ns aquí que l'eliminem.",
+      "keepsTitle": "El teu compte no s'elimina",
+      "keeps": "Només s'elimina el contacte. El compte, la subscripció i els registres de pagament es mantenen igual.",
+      "accountLabel": "ID del compte",
+      "accountHint": "Té la forma VPN-XXXX-XXXX-XXXX i apareix a l'app i a la pàgina del teu compte.",
+      "methodLabel": "Tipus de contacte",
+      "methodHint": "Tria quin tipus de contacte hi ha desat al compte.",
+      "methodEmail": "Correu electrònic",
+      "valueLabel": "Contacte que vols eliminar",
+      "valueHint": "Escriu-lo exactament com està desat: l'adreça de correu completa o el nom d'usuari de Telegram.",
+      "submit": "Sol·licitar l'eliminació",
+      "submitting": "S'està enviant…",
+      "recordedTitle": "Sol·licitud rebuda",
+      "recorded": "Si l'ID del compte coincideix amb un contacte verificat d'aquest compte, la sol·licitud queda registrada. Per protegir el compte, no diem si hi ha hagut coincidència.",
+      "unavailableTitle": "Encara no disponible",
+      "unavailable": "Encara no es poden eliminar contactes d'assistència. No s'ha enviat res.",
+      "errorTitle": "Sol·licitud no enviada",
+      "error": "No s'ha pogut enviar la sol·licitud. Comprova la connexió i torna-ho a provar més tard."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN tradicional",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Què vol dir",
+      "keeps": "Què guardem",
+      "why": "Per què ho fem"
+    },
     "rows": {
       "account": {
         "feature": "Compte necessari",
         "traditional": "Correu electrònic + contrasenya",
-        "doppler": "Sense compte necessari"
+        "doppler": "Sense compte necessari",
+        "means": "Instal·les l’app i et connectes. Sense correu, sense contrasenya, sense número de telèfon.",
+        "keeps": "Un ID anònim (VPN-XXXX-XXXX-XXXX) i un identificador de dispositiu que aplica el límit de dispositius. Res que t’identifiqui.",
+        "why": "Un correu lliga un compte a una persona real. No en demanem mai cap, així que no hi ha res per filtrar, vendre ni lliurar."
       },
       "fingerprint": {
         "feature": "Empremta del tràfic",
         "traditional": "Detectable pel DPI",
-        "doppler": "Camuflat com a HTTPS"
+        "doppler": "Camuflat com a HTTPS",
+        "means": "Per a un tallafoc, la teva connexió sembla una visita normal a un lloc HTTPS conegut.",
+        "keeps": "Res. El camuflatge passa a la xarxa, no en una base de dades.",
+        "why": "El DPI bloqueja el que reconeix. El trànsit que sembla normal no li dona res per bloquejar."
       },
       "protocol": {
         "feature": "Protocol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality agafa prestat el handshake TLS d’un web real, així que no hi ha cap handshake VPN per detectar.",
+        "keeps": "Res sobre el teu trànsit. Els servidors deixen passar els paquets i els obliden.",
+        "why": "OpenVPN i WireGuard són ràpids, però els seus patrons de paquets són ben coneguts i es bloquegen en segons a Rússia, la Xina i l’Iran."
       },
       "dns": {
         "feature": "Xifratge DNS",
         "traditional": "De vegades",
-        "doppler": "Sempre"
+        "doppler": "Sempre",
+        "means": "Cada consulta, el pas que converteix site.com en una adreça, viatja dins del túnel fins al nostre propi resolutor.",
+        "keeps": "Cap historial de consultes. Cada consulta es resol, es filtra d’anuncis i rastrejadors i es descarta.",
+        "why": "El DNS sense xifrar mostra al teu proveïdor d’internet cada lloc que visites, encara que la pàgina mateixa estigui xifrada."
       },
       "censorship": {
         "feature": "Resistència a la censura",
         "traditional": "Limitada",
-        "doppler": "Integrada"
+        "doppler": "Integrada",
+        "means": "Fet per a xarxes que bloquegen activament les VPN. Sense ponts ni configuració addicional.",
+        "keeps": "El mateix que a tot arreu. La política sense registres no canvia segons el país.",
+        "why": "Els bloquejos són més forts cada any. Un protocol difícil de detectar per disseny dura més que un que s’ha de pedaçar després de cada bloqueig nou."
       },
       "logs": {
         "feature": "Registres d'activitat",
         "traditional": "Variable",
-        "doppler": "Mai"
+        "doppler": "Mai",
+        "means": "Cap registre dels llocs que visites, del que descarregues, de quantes dades fas servir ni de quant de temps estàs connectat.",
+        "keeps": "Un registre d’inicis de sessió: IP, ID anònim, ID del dispositiu i hora, que s’esborra al cap de 90 dies. Mostra que un dispositiu s’ha connectat, no què ha fet.",
+        "why": "Els registres que no existeixen no es poden filtrar ni lliurar. El registre d’inicis de sessió és el mínim necessari per aturar els abusos."
       }
     }
   },

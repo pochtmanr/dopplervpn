@@ -3,7 +3,9 @@
  * `.lab-calm` so nothing outside the lab changes. Surfaces are the iOS app's
  * shipped tonal ramp (surfaceBackground / surfaceCard / surfaceInset).
  */
-.lab-calm {
+/* `.plus-pills` (the Calm+ preview's <body>) takes only the tokens, for the site-wide flat pills in plus.css. */
+.lab-calm,
+.plus-pills {
   --c-bg: #141416;
   --c-card: #1f1f22;
   --c-card-hover: #252528;
@@ -20,12 +22,16 @@
   --c-blue-tint: rgb(91 192 242 / 0.14);
   --c-danger: #ff7a75;
   --c-danger-tint: rgb(240 103 99 / 0.14);
+  --c-warn: #f4c95d;
   --c-separator: rgb(255 255 255 / 0.07);
+}
+.lab-calm {
   background: var(--c-bg);
   color: var(--c-text);
 }
 
-.light .lab-calm {
+.light .lab-calm,
+.light .plus-pills {
   --c-bg: #f3f3f5;
   --c-card: #ffffff;
   --c-card-hover: #fafafb;
@@ -42,6 +48,7 @@
   --c-blue-tint: rgb(3 105 161 / 0.1);
   --c-danger: #b03b37;
   --c-danger-tint: rgb(176 59 55 / 0.1);
+  --c-warn: #8a6a1f;
   --c-separator: rgb(0 0 0 / 0.08);
 }
 

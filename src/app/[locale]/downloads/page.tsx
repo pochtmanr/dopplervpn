@@ -31,6 +31,22 @@ import {
   ROW_TITLE,
   splitHeadline,
 } from "@/components/ui/card-recipes";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { Fragment } from "react";
+import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
+import { calmPlusPreview, PlusPageShell } from "../design-lab/home-preview";
+import {
+  ArrowGlyph,
+  PLUS_BTN,
+  PLUS_BTN_SECONDARY,
+  PLUS_CARD,
+  PLUS_CARD_HOVER,
+  PLUS_ICON,
+  PLUS_ICON_TONE,
+  PLUS_META,
+  PLUS_TITLE_SM,
+  PLUS_WELL,
+} from "../design-lab/plus-recipes";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -356,6 +372,18 @@ const BTN_SECONDARY = `cta-flat ${BTN_BASE} mt-2 hover:text-accent-teal`;
 const CARD_DETECTED =
   "data-[detected=true]:border-accent-teal/50 data-[detected=true]:ring-1 data-[detected=true]:ring-accent-teal/25";
 
+/* ── Calm+ preview (CALM_PLUS_PREVIEW) ───────────────────────────── */
+// Platform cards hold several controls, so no hover: the glyph tray + logo is
+// their live element. The detected card gets a teal ring, colour only.
+
+const PLUS_DETECTED = "data-[detected=true]:ring-2 data-[detected=true]:ring-(--c-accent)";
+const PLUS_DL_PRIMARY = `${PLUS_BTN} w-full`;
+const PLUS_DL_SECONDARY = `${PLUS_BTN_SECONDARY} mt-2 w-full`;
+const PLUS_ROW =
+  `${PLUS_CARD_HOVER} h-full min-h-[96px] !flex-row items-center !p-0 ` +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg)";
+const PLUS_ROW_ICON = `${PLUS_ICON} ${PLUS_ICON_TONE.teal} [&_svg]:h-7 [&_svg]:w-7`;
+
 /* ── Page ─────────────────────────────────────────────────────────── */
 
 export default async function DownloadsPage({ params }: PageProps) {
@@ -399,6 +427,8 @@ export default async function DownloadsPage({ params }: PageProps) {
   // full string stays the meta/schema title, where the platform names help search.
   const headline = t("title").split(" — ")[0];
   const { lead: headlineLead, last: headlineLast } = splitHeadline(headline);
+  const plus = calmPlusPreview;
+  const Scope = plus ? PlusPageShell : Fragment;
 
   // Social proof — the same real store ratings as the home hero. Rendered twice:
   // under the headline, and under the setup card's download button.
@@ -460,6 +490,7 @@ export default async function DownloadsPage({ params }: PageProps) {
       <SoftwareApplicationSchema locale={locale} />
       <Navbar />
       <main className="relative overflow-x-clip">
+        <Scope>
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className={HERO_SECTION}>
           <div className="relative mx-auto max-w-site text-center">
@@ -494,12 +525,20 @@ export default async function DownloadsPage({ params }: PageProps) {
                     <DetectedCard
                       platform={key}
                       id={key}
-                      className={`${CARD} ${CARD_DETECTED} p-6 scroll-mt-28`}
+                      className={plus ? `${PLUS_CARD} ${PLUS_DETECTED} scroll-mt-28` : `${CARD} ${CARD_DETECTED} p-6 scroll-mt-28`}
                     >
-                      <div className={CARD_HAIRLINE} aria-hidden="true" />
+                      {!plus && <div className={CARD_HAIRLINE} aria-hidden="true" />}
 
                       <div className="relative flex flex-1 flex-col">
-                        <h2 className={`mb-4 ${CARD_TITLE}`}>
+                        {plus && (
+                          <span className={`${PLUS_WELL} mb-5 block h-24`} aria-hidden="true">
+                            <PlatformGlyphBand index={i} />
+                            <span className="absolute inset-0 flex items-center justify-center">
+                              <PlatformLogo icon={icon} className="h-8 w-8 text-(--c-text)" />
+                            </span>
+                          </span>
+                        )}
+                        <h2 className={plus ? `mb-4 ${PLUS_TITLE_SM}` : `mb-4 ${CARD_TITLE}`}>
                           {t(`${key}.title`)}
                         </h2>
 
@@ -514,7 +553,11 @@ export default async function DownloadsPage({ params }: PageProps) {
                             href={btn.href}
                             {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                             {...(btn.download ? { download: true } : {})}
-                            className={btn.primary ? BTN_PRIMARY : BTN_SECONDARY}
+                            className={
+                              plus
+                                ? btn.primary ? PLUS_DL_PRIMARY : PLUS_DL_SECONDARY
+                                : btn.primary ? BTN_PRIMARY : BTN_SECONDARY
+                            }
                           >
                             {btn.primary ? (
                               <PlatformLogo icon={icon} className="w-4 h-4" />
@@ -543,6 +586,15 @@ export default async function DownloadsPage({ params }: PageProps) {
 
                         <div className="mt-auto pt-5">
                           <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
+                          {plus ? (
+                            <Link
+                              href={learnHref}
+                              className="plus-btn mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-(--c-accent)"
+                            >
+                              {t(`${key}.learnMore`)}
+                              <ArrowGlyph className="h-3.5 w-3.5" />
+                            </Link>
+                          ) : (
                           <Link
                             href={learnHref}
                             className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-teal-light transition-colors"
@@ -552,6 +604,7 @@ export default async function DownloadsPage({ params }: PageProps) {
                               <ArrowIcon />
                             </span>
                           </Link>
+                          )}
                         </div>
                       </div>
                     </DetectedCard>
@@ -574,44 +627,44 @@ export default async function DownloadsPage({ params }: PageProps) {
             {/* ── Elsewhere ─────────────────────────────────────── */}
             <div className="mt-8 mb-4 md:mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               <Reveal className="h-full">
-                <Link href="/bypass-censorship" className={`${ROW_CARD} h-full`}>
+                <Link href="/bypass-censorship" className={plus ? PLUS_ROW : `${ROW_CARD} h-full`}>
                   <div className="flex min-w-0 items-center gap-4 px-5 py-4">
-                    <div className={ROW_TILE}>
+                    <div className={plus ? PLUS_ROW_ICON : ROW_TILE}>
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
                       </svg>
                     </div>
                     <div className="min-w-0 text-start">
-                      <h2 className={ROW_TITLE}>
+                      <h2 className={plus ? PLUS_TITLE_SM : ROW_TITLE}>
                         {t("censorshipCard.title")}
                       </h2>
-                      <p className={ROW_TEXT}>
+                      <p className={plus ? PLUS_META : ROW_TEXT}>
                         {t("censorshipCard.description")}
                       </p>
                     </div>
                   </div>
-                  <ChevronIcon />
+                  {plus ? <ArrowGlyph className="ms-auto me-5 hidden h-4 w-4 shrink-0 text-(--c-tert) sm:block" /> : <ChevronIcon />}
                 </Link>
               </Reveal>
 
               <Reveal delay={50} className="h-full">
-                <Link href="/support" className={`${ROW_CARD} h-full`}>
+                <Link href="/support" className={plus ? PLUS_ROW : `${ROW_CARD} h-full`}>
                   <div className="flex min-w-0 items-center gap-4 px-5 py-4">
-                    <div className={ROW_TILE}>
+                    <div className={plus ? PLUS_ROW_ICON : ROW_TILE}>
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
                       </svg>
                     </div>
                     <div className="min-w-0 text-start">
-                      <h2 className={ROW_TITLE}>
+                      <h2 className={plus ? PLUS_TITLE_SM : ROW_TITLE}>
                         {t("needHelp")}
                       </h2>
-                      <p className={ROW_TEXT}>
+                      <p className={plus ? PLUS_META : ROW_TEXT}>
                         {t("visitSupport")}
                       </p>
                     </div>
                   </div>
-                  <ChevronIcon />
+                  {plus ? <ArrowGlyph className="ms-auto me-5 hidden h-4 w-4 shrink-0 text-(--c-tert) sm:block" /> : <ChevronIcon />}
                 </Link>
               </Reveal>
             </div>
@@ -621,6 +674,7 @@ export default async function DownloadsPage({ params }: PageProps) {
           {/* The home page's notched download card, one platform at a time,
               opening on the visitor's own. */}
           <SetupSection
+            plus={plus}
             platforms={setupPlatforms}
             ratings={
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2">
@@ -629,6 +683,7 @@ export default async function DownloadsPage({ params }: PageProps) {
             }
           />
         </DetectedPlatformProvider>
+        </Scope>
       </main>
       <Footer />
     </>

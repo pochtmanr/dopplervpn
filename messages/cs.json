@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Odebrat kontakt pro podporu",
+      "intro": "Pokud je u vašeho účtu Doppler uložen e-mail nebo účet Telegram jako kontakt pro podporu a už ho tam nechcete, požádejte nás zde o jeho odebrání.",
+      "keepsTitle": "Váš účet se nemaže",
+      "keeps": "Odebere se jen kontakt. Účet, předplatné a záznamy o platbách zůstanou beze změny.",
+      "accountLabel": "ID účtu",
+      "accountHint": "Má tvar VPN-XXXX-XXXX-XXXX a najdete ho v aplikaci a na stránce účtu.",
+      "methodLabel": "Typ kontaktu",
+      "methodHint": "Vyberte, jaký typ kontaktu je u účtu uložen.",
+      "methodEmail": "E-mail",
+      "valueLabel": "Kontakt k odebrání",
+      "valueHint": "Zadejte ho přesně tak, jak je uložen: celou e-mailovou adresu nebo uživatelské jméno v Telegramu.",
+      "submit": "Požádat o odebrání",
+      "submitting": "Odesílání…",
+      "recordedTitle": "Žádost přijata",
+      "recorded": "Pokud ID účtu odpovídá ověřenému kontaktu tohoto účtu, žádost je zaznamenána. Kvůli ochraně účtu neříkáme, zda se údaje shodovaly.",
+      "unavailableTitle": "Zatím nedostupné",
+      "unavailable": "Odebrání kontaktu pro podporu zatím není k dispozici. Nic nebylo odesláno.",
+      "errorTitle": "Žádost nebyla odeslána",
+      "error": "Žádost se nepodařilo odeslat. Zkontrolujte připojení a zkuste to později."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Tradiční VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Co to znamená",
+      "keeps": "Co uchováváme",
+      "why": "Proč to děláme"
+    },
     "rows": {
       "account": {
         "feature": "Vyžadován účet",
         "traditional": "E-mail + heslo",
-        "doppler": "Bez nutnosti účtu"
+        "doppler": "Bez nutnosti účtu",
+        "means": "Nainstalujete aplikaci a připojíte se. Žádný e-mail, heslo ani telefonní číslo.",
+        "keeps": "Anonymní ID (VPN-XXXX-XXXX-XXXX) a identifikátor zařízení, který hlídá limit zařízení. Nic, co by vás jmenovalo.",
+        "why": "E-mail spojuje účet se skutečnou osobou. Nikdy o něj nežádáme, takže není co uniknout, prodat ani předat."
       },
       "fingerprint": {
         "feature": "Otisk provozu",
         "traditional": "Zjistitelný pomocí DPI",
-        "doppler": "Maskován jako HTTPS"
+        "doppler": "Maskován jako HTTPS",
+        "means": "Pro firewall vypadá vaše připojení jako běžná návštěva známého HTTPS webu.",
+        "keeps": "Nic. Maskování probíhá na síti, ne v databázi.",
+        "why": "DPI blokuje to, co rozpozná. Provoz, který vypadá obyčejně, mu nedává nic k zablokování."
       },
       "protocol": {
         "feature": "Protokol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality si půjčuje TLS handshake skutečného webu, takže neexistuje žádný VPN handshake, který by šlo odhalit.",
+        "keeps": "Nic o vašem provozu. Servery pakety předají a zapomenou na ně.",
+        "why": "OpenVPN a WireGuard jsou rychlé, ale jejich vzorce paketů jsou dobře známé a v Rusku, Číně a Íránu se blokují během sekund."
       },
       "dns": {
         "feature": "Šifrování DNS",
         "traditional": "Někdy",
-        "doppler": "Vždy"
+        "doppler": "Vždy",
+        "means": "Každý dotaz, krok, který z site.com udělá adresu, jde tunelem k našemu vlastnímu resolveru.",
+        "keeps": "Žádná historie dotazů. Každý dotaz se vyřeší, odfiltrují se reklamy a sledovače a pak se zahodí.",
+        "why": "Běžné DNS ukazuje vašemu poskytovateli každý web, který navštívíte, i když je samotná stránka šifrovaná."
       },
       "censorship": {
         "feature": "Odolnost vůči cenzuře",
         "traditional": "Omezená",
-        "doppler": "Integrovaná"
+        "doppler": "Integrovaná",
+        "means": "Navrženo pro sítě, které aktivně blokují VPN. Žádné mosty ani další nastavení.",
+        "keeps": "Totéž co všude jinde. Politika bez logů se podle země nemění.",
+        "why": "Blokování každým rokem sílí. Protokol, který je ze své podstaty těžko odhalitelný, vydrží déle než ten, který se musí záplatovat po každém novém blokování."
       },
       "logs": {
         "feature": "Záznamy o aktivitě",
         "traditional": "Záleží na poskytovateli",
-        "doppler": "Nikdy"
+        "doppler": "Nikdy",
+        "means": "Žádný záznam o webech, které navštěvujete, co stahujete, kolik dat spotřebujete ani jak dlouho jste připojeni.",
+        "keeps": "Záznam přihlášení: IP, anonymní ID, ID zařízení a čas, smazaný po 90 dnech. Ukazuje, že se zařízení připojilo, ne co dělalo.",
+        "why": "Logy, které neexistují, nemohou uniknout ani být předány. Záznam přihlášení je minimum potřebné k zastavení zneužití."
       }
     }
   },

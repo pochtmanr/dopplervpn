@@ -1,3 +1,6 @@
+import { Fragment } from "react";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell } from "@/app/[locale]/design-lab/home-preview";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { Navbar } from "@/components/layout/navbar";
@@ -100,6 +103,7 @@ export async function PlatformLandingPage({
     answer: t(`faq.${key}.answer`),
   }));
 
+  const Scope = calmPlusPreview ? PlusPageShell : Fragment;
   return (
     <>
       <BreadcrumbSchema
@@ -117,6 +121,7 @@ export async function PlatformLandingPage({
       />
       <FAQSchema items={faqItems} />
       <Navbar />
+      <Scope>
       <main className="overflow-x-clip">
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section className="relative pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -496,6 +501,7 @@ export async function PlatformLandingPage({
           </div>
         </section>
       </main>
+      </Scope>
       <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} />
       <Footer />
     </>

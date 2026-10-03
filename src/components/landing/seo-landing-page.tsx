@@ -1,3 +1,6 @@
+import { Fragment } from "react";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell } from "@/app/[locale]/design-lab/home-preview";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -219,6 +222,7 @@ export async function SeoLandingPage({
   const faqKeys = Array.from({ length: effectiveFaqCount }, (_, i) => `q${i + 1}`);
   const pageUrl = `${baseUrl}/${locale}/${slug}`;
 
+  const Scope = calmPlusPreview ? PlusPageShell : Fragment;
   return (
     <>
       <BreadcrumbSchema
@@ -246,6 +250,7 @@ export async function SeoLandingPage({
         }))}
       />
       <Navbar />
+      <Scope>
       <main className="overflow-x-hidden">
         {/* Hero */}
         <section className="relative pt-32 pb-12 px-4 sm:px-6 lg:px-8">
@@ -436,7 +441,14 @@ export async function SeoLandingPage({
           </div>
         </section>
       </main>
-      <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} />
+      </Scope>
+      {calmPlusPreview ? (
+        <PlusPageShell>
+          <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} plus />
+        </PlusPageShell>
+      ) : (
+        <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} />
+      )}
       <Footer />
     </>
   );

@@ -21,6 +21,8 @@ import { SpeedInsightsConsent } from "@/components/speed-insights-consent";
 import { CookieConsent } from "@/components/cookie-consent";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/app/globals.css";
+// Site-wide Calm+ pills (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns them off).
+import { calmPlusPreview } from "./design-lab/home-preview";
 
 // Instrument Serif - for hero headline only
 const instrumentSerif = Instrument_Serif({
@@ -200,7 +202,9 @@ export default async function LocaleLayout({
         <ProductSchema locale={locale} />
         <WebsiteSchema locale={locale} />
       </head>
-      <body className="min-h-screen bg-bg-primary text-text-primary font-body antialiased">
+      <body
+        className={`min-h-screen bg-bg-primary text-text-primary font-body antialiased${calmPlusPreview ? " plus-pills" : ""}`}
+      >
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             {children}

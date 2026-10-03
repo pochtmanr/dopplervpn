@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Noņemt atbalsta kontaktu",
+      "intro": "Ja jūsu Doppler kontā kā atbalsta kontakts ir saglabāta e-pasta adrese vai Telegram konts un jūs to tur vairs nevēlaties, palūdziet mums to noņemt šeit.",
+      "keepsTitle": "Jūsu konts netiek dzēsts",
+      "keeps": "Tiek noņemts tikai kontakts. Konts, abonements un maksājumu ieraksti paliek nemainīgi.",
+      "accountLabel": "Konta ID",
+      "accountHint": "Tas izskatās kā VPN-XXXX-XXXX-XXXX un ir redzams lietotnē un jūsu konta lapā.",
+      "methodLabel": "Kontakta veids",
+      "methodHint": "Izvēlieties, kāda veida kontakts ir saglabāts kontā.",
+      "methodEmail": "E-pasts",
+      "valueLabel": "Noņemamais kontakts",
+      "valueHint": "Ievadiet to tieši tā, kā tas ir saglabāts: pilnu e-pasta adresi vai Telegram lietotājvārdu.",
+      "submit": "Pieprasīt noņemšanu",
+      "submitting": "Sūta…",
+      "recordedTitle": "Pieprasījums saņemts",
+      "recorded": "Ja konta ID atbilst šī konta apstiprinātam kontaktam, pieprasījums ir reģistrēts. Konta aizsardzībai mēs neatklājam, vai bija sakritība.",
+      "unavailableTitle": "Vēl nav pieejams",
+      "unavailable": "Atbalsta kontakta noņemšana vēl nav pieejama. Nekas netika nosūtīts.",
+      "errorTitle": "Pieprasījums nav nosūtīts",
+      "error": "Pieprasījumu neizdevās nosūtīt. Pārbaudiet savienojumu un mēģiniet vēlāk vēlreiz."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Tradicionāls VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Ko tas nozīmē",
+      "keeps": "Ko mēs glabājam",
+      "why": "Kāpēc mēs tā darām"
+    },
     "rows": {
       "account": {
         "feature": "Nepieciešams konts",
         "traditional": "E-pasts + parole",
-        "doppler": "Konts nav nepieciešams"
+        "doppler": "Konts nav nepieciešams",
+        "means": "Jūs instalējat lietotni un pieslēdzaties. Bez e-pasta, paroles un tālruņa numura.",
+        "keeps": "Anonīms ID (VPN-XXXX-XXXX-XXXX) un ierīces identifikators, kas uztur ierīču limitu. Nekas, kas jūs nosauktu vārdā.",
+        "why": "E-pasts sasaista kontu ar reālu cilvēku. Mēs to nekad neprasām, tāpēc nav nekā, ko nopludināt, pārdot vai nodot."
       },
       "fingerprint": {
         "feature": "Datu plūsmas pirkstu nospiedums",
         "traditional": "Nosakāms ar DPI",
-        "doppler": "Maskēts kā HTTPS"
+        "doppler": "Maskēts kā HTTPS",
+        "means": "Ugunsmūrim jūsu savienojums izskatās kā parasts apmeklējums zināmā HTTPS vietnē.",
+        "keeps": "Neko. Maskēšanās notiek tīklā, nevis datubāzē.",
+        "why": "DPI bloķē to, ko atpazīst. Satiksme, kas izskatās parasta, nedod tam neko, ko bloķēt."
       },
       "protocol": {
         "feature": "Protokols",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality aizņemas īstas vietnes TLS rokasspiedienu, tāpēc nav VPN rokasspiediena, ko pamanīt.",
+        "keeps": "Neko par jūsu satiksmi. Serveri pārsūta paketes un tās aizmirst.",
+        "why": "OpenVPN un WireGuard ir ātri, taču to pakešu modeļi ir labi zināmi, un Krievijā, Ķīnā un Irānā tos bloķē dažās sekundēs."
       },
       "dns": {
         "feature": "DNS šifrēšana",
         "traditional": "Dažreiz",
-        "doppler": "Vienmēr"
+        "doppler": "Vienmēr",
+        "means": "Katrs vaicājums, solis, kas site.com pārvērš adresē, iet caur tuneli uz mūsu pašu resolveri.",
+        "keeps": "Nav vaicājumu vēstures. Katrs vaicājums tiek atrisināts, attīrīts no reklāmām un izsekotājiem un izmests.",
+        "why": "Parasts DNS rāda jūsu interneta pakalpojumu sniedzējam katru apmeklēto vietni, pat ja pati lapa ir šifrēta."
       },
       "censorship": {
         "feature": "Cenzūras pretestība",
         "traditional": "Ierobežota",
-        "doppler": "Iebūvēta"
+        "doppler": "Iebūvēta",
+        "means": "Veidots tīkliem, kas aktīvi bloķē VPN. Bez tiltiem un papildu iestatījumiem.",
+        "keeps": "Tas pats, kas visur citur. Bezžurnālu pieeja nemainās atkarībā no valsts.",
+        "why": "Bloķēšana katru gadu kļūst stiprāka. Protokols, ko pēc būtības ir grūti atklāt, izdzīvo ilgāk nekā tas, ko jālāpa pēc katras jaunas bloķēšanas."
       },
       "logs": {
         "feature": "Darbību žurnāli",
         "traditional": "Atšķiras",
-        "doppler": "Nekad"
+        "doppler": "Nekad",
+        "means": "Nav ierakstu par apmeklētajām vietnēm, lejupielādēm, izmantoto datu apjomu vai savienojuma ilgumu.",
+        "keeps": "Pieteikšanās žurnāls: IP, anonīms ID, ierīces ID un laiks, dzēsts pēc 90 dienām. Tas parāda, ka ierīce pieslēdzās, nevis ko tā darīja.",
+        "why": "Žurnāli, kas neeksistē, nevar noplūst vai tikt nodoti. Pieteikšanās žurnāls ir minimums, kas vajadzīgs ļaunprātīgas izmantošanas apturēšanai."
       }
     }
   },

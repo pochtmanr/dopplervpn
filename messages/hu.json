@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Ügyfélszolgálati kapcsolat eltávolítása",
+      "intro": "Ha a Doppler-fiókodhoz ügyfélszolgálati kapcsolatként e-mail-cím vagy Telegram-fiók van mentve, és már nem szeretnéd, hogy ott legyen, itt kérheted az eltávolítását.",
+      "keepsTitle": "A fiókod nem törlődik",
+      "keeps": "Csak a kapcsolat kerül eltávolításra. A fiók, az előfizetés és a fizetési adatok változatlanok maradnak.",
+      "accountLabel": "Fiókazonosító",
+      "accountHint": "VPN-XXXX-XXXX-XXXX formátumú, és megtalálod az alkalmazásban és a fiókoldaladon.",
+      "methodLabel": "Kapcsolat típusa",
+      "methodHint": "Válaszd ki, milyen típusú kapcsolat van a fiókban mentve.",
+      "methodEmail": "E-mail",
+      "valueLabel": "Eltávolítandó kapcsolat",
+      "valueHint": "Pontosan úgy add meg, ahogy mentve van: a teljes e-mail-címet vagy a Telegram-felhasználónevet.",
+      "submit": "Eltávolítás kérése",
+      "submitting": "Küldés…",
+      "recordedTitle": "Kérés beérkezett",
+      "recorded": "Ha a fiókazonosító egyezik a fiók egy ellenőrzött kapcsolatával, a kérést rögzítettük. A fiók védelme érdekében nem áruljuk el, volt-e egyezés.",
+      "unavailableTitle": "Még nem elérhető",
+      "unavailable": "Az ügyfélszolgálati kapcsolat eltávolítása még nem érhető el. Semmi sem lett elküldve.",
+      "errorTitle": "A kérés nem lett elküldve",
+      "error": "A kérést nem sikerült elküldeni. Ellenőrizd a kapcsolatot, és próbáld újra később."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Hagyományos VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Mit jelent",
+      "keeps": "Mit őrzünk meg",
+      "why": "Miért csináljuk így"
+    },
     "rows": {
       "account": {
         "feature": "Fiók szükséges",
         "traditional": "E-mail + jelszó",
-        "doppler": "Nincs szükség fiókra"
+        "doppler": "Nincs szükség fiókra",
+        "means": "Telepíted az appot és csatlakozol. Nincs e-mail, jelszó vagy telefonszám.",
+        "keeps": "Egy anonim azonosító (VPN-XXXX-XXXX-XXXX) és egy eszközazonosító, amely betartatja az eszközkorlátot. Semmi, ami megnevezne téged.",
+        "why": "Az e-mail egy valódi személyhez köti a fiókot. Soha nem kérünk ilyet, így nincs mit kiszivárogtatni, eladni vagy kiadni."
       },
       "fingerprint": {
         "feature": "Forgalom-ujjlenyomat",
         "traditional": "DPI felismeri",
-        "doppler": "HTTPS-nek álcázott"
+        "doppler": "HTTPS-nek álcázott",
+        "means": "Egy tűzfal számára a kapcsolatod egy ismert HTTPS-oldal szokásos meglátogatásának tűnik.",
+        "keeps": "Semmit. Az álcázás a hálózaton történik, nem adatbázisban.",
+        "why": "A DPI azt blokkolja, amit felismer. A hétköznapinak tűnő forgalom nem ad neki mit blokkolni."
       },
       "protocol": {
         "feature": "Protokoll",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "A VLESS-Reality egy valódi weboldal TLS-kézfogását kölcsönzi, így nincs észrevehető VPN-kézfogás.",
+        "keeps": "Semmit a forgalmadról. A szerverek továbbítják a csomagokat, és elfelejtik őket.",
+        "why": "Az OpenVPN és a WireGuard gyors, de csomagmintáik jól ismertek, és Oroszországban, Kínában és Iránban másodpercek alatt blokkolják őket."
       },
       "dns": {
         "feature": "DNS-titkosítás",
         "traditional": "Néha",
-        "doppler": "Mindig"
+        "doppler": "Mindig",
+        "means": "Minden lekérdezés, vagyis az a lépés, amely a site.com-ot címmé alakítja, az alagúton belül jut el a saját resolverünkhöz.",
+        "keeps": "Nincs lekérdezési előzmény. Minden lekérdezést feloldunk, kiszűrjük belőle a hirdetéseket és nyomkövetőket, majd eldobjuk.",
+        "why": "A sima DNS minden meglátogatott oldalt megmutat az internetszolgáltatódnak, még akkor is, ha maga az oldal titkosított."
       },
       "censorship": {
         "feature": "Cenzúraellenállás",
         "traditional": "Korlátozott",
-        "doppler": "Beépített"
+        "doppler": "Beépített",
+        "means": "Olyan hálózatokra készült, amelyek aktívan blokkolják a VPN-eket. Nincs szükség hidakra vagy extra beállításokra.",
+        "keeps": "Ugyanazt, mint bárhol máshol. A naplómentes működés országonként nem változik.",
+        "why": "A blokkolás évről évre erősödik. Egy eleve nehezen észlelhető protokoll tovább bírja, mint egy olyan, amelyet minden új blokkolás után foltozni kell."
       },
       "logs": {
         "feature": "Tevékenységnaplók",
         "traditional": "Változó",
-        "doppler": "Soha"
+        "doppler": "Soha",
+        "means": "Nincs feljegyzés a meglátogatott oldalakról, a letöltéseidről, a felhasznált adatmennyiségről vagy arról, mennyi ideig vagy csatlakozva.",
+        "keeps": "Egy bejelentkezési napló: IP, anonim azonosító, eszközazonosító és időpont, 90 nap után törlődik. Azt mutatja, hogy egy eszköz csatlakozott, nem azt, hogy mit csinált.",
+        "why": "A nem létező naplók nem szivároghatnak ki és nem adhatók ki. A bejelentkezési napló a minimum, ami a visszaélések megállításához kell."
       }
     }
   },

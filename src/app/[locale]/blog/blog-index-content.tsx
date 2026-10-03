@@ -1,5 +1,23 @@
 import { BlogCard } from "@/components/blog";
 import { Reveal } from "@/components/ui/reveal";
+// Calm+ card for the `plus` branch.
+import { PlusBlogCard } from "../design-lab/plus/blog";
+
+/** Pagination classes: shipped, and the Calm+ preview's round inset pills. */
+const PAGER = {
+  shipped: {
+    nav: "inline-flex items-center justify-center w-10 h-10 rounded-lg border border-overlay/15 text-text-primary hover:bg-overlay/5 transition-colors",
+    navOff: "inline-flex items-center justify-center w-10 h-10 rounded-lg border border-overlay/10 text-text-muted/40 cursor-not-allowed",
+    on: "inline-flex items-center justify-center min-w-10 h-10 px-3 rounded-lg bg-accent-teal text-bg-primary font-medium",
+    off: "inline-flex items-center justify-center min-w-10 h-10 px-3 rounded-lg border border-overlay/15 text-text-primary hover:bg-overlay/5 transition-colors",
+  },
+  plus: {
+    nav: "inline-flex items-center justify-center w-10 h-10 rounded-full bg-(--c-inset) text-(--c-text) hover:bg-(--c-accent-tint) hover:text-(--c-accent) transition-colors",
+    navOff: "inline-flex items-center justify-center w-10 h-10 rounded-full bg-(--c-inset) text-(--c-tert) opacity-50 cursor-not-allowed",
+    on: "inline-flex items-center justify-center min-w-10 h-10 px-3 rounded-full bg-(--c-accent-fill) text-white font-bold",
+    off: "inline-flex items-center justify-center min-w-10 h-10 px-3 rounded-full bg-(--c-inset) text-(--c-text) font-bold hover:bg-(--c-accent-tint) hover:text-(--c-accent) transition-colors",
+  },
+};
 
 
 interface BlogPost {
@@ -23,6 +41,8 @@ interface BlogIndexContentProps {
     noPosts: string;
     noPostsDescription: string;
   };
+  /** Calm+ preview, decided on the server page. */
+  plus?: boolean;
 }
 
 function buildPageHref(locale: string, page: number, tagSlug: string | null): string {
@@ -58,7 +78,9 @@ export function BlogIndexContent({
   currentPage,
   totalPages,
   tagSlug,
+  plus = false,
 }: BlogIndexContentProps) {
+  const pager = plus ? PAGER.plus : PAGER.shipped;
   const pagePosts = posts;
 
   const pageItems = getPageItems(currentPage, totalPages);
@@ -67,7 +89,13 @@ export function BlogIndexContent({
 
   return (
     <>
-      {pagePosts.length > 0 ? (
+      {pagePosts.length > 0 && plus ? (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {pagePosts.map((post) => (
+            <PlusBlogCard key={post.slug} post={post} locale={locale} readMoreText={translations.readMore} headingLevel="h2" />
+          ))}
+        </div>
+      ) : pagePosts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pagePosts.map((post, i) => (
             <Reveal key={post.slug} delay={i * 30}>
@@ -102,14 +130,14 @@ export function BlogIndexContent({
               href={buildPageHref(locale, currentPage - 1, tagSlug)}
               aria-label="Previous page"
               rel="prev"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-overlay/15 text-text-primary hover:bg-overlay/5 transition-colors"
+              className={pager.nav}
             >
               <ChevronStart />
             </a>
           ) : (
             <span
               aria-hidden="true"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-overlay/10 text-text-muted/40 cursor-not-allowed"
+              className={pager.navOff}
             >
               <ChevronStart />
             </span>
@@ -134,11 +162,7 @@ export function BlogIndexContent({
                 href={buildPageHref(locale, item, tagSlug)}
                 aria-label={`Page ${item}`}
                 aria-current={isActive ? "page" : undefined}
-                className={
-                  isActive
-                    ? "inline-flex items-center justify-center min-w-10 h-10 px-3 rounded-lg bg-accent-teal text-bg-primary font-medium"
-                    : "inline-flex items-center justify-center min-w-10 h-10 px-3 rounded-lg border border-overlay/15 text-text-primary hover:bg-overlay/5 transition-colors"
-                }
+                className={isActive ? pager.on : pager.off}
               >
                 {item}
               </a>
@@ -150,14 +174,14 @@ export function BlogIndexContent({
               href={buildPageHref(locale, currentPage + 1, tagSlug)}
               aria-label="Next page"
               rel="next"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-overlay/15 text-text-primary hover:bg-overlay/5 transition-colors"
+              className={pager.nav}
             >
               <ChevronEnd />
             </a>
           ) : (
             <span
               aria-hidden="true"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-overlay/10 text-text-muted/40 cursor-not-allowed"
+              className={pager.navOff}
             >
               <ChevronEnd />
             </span>

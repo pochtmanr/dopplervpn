@@ -5,13 +5,14 @@ import { ThemeToggle } from '@/components/layout/theme-toggle';
 
 export interface LabRow {
   id: string;
-  group: 'Landing' | 'Support' | 'Dashboard';
+  group: (typeof GROUPS)[number];
   title: string;
   source: string;
   /** Full-width card: the panes stack instead of sitting side by side. */
   wide?: boolean;
   current: ReactNode;
-  calm: ReactNode;
+  /** Omitted on rows built after Calm was rejected: that pane is skipped. */
+  calm?: ReactNode;
   plus: ReactNode;
 }
 
@@ -20,10 +21,10 @@ type Kind = 'current' | 'calm' | 'plus';
 const KINDS: { kind: Kind; label: string; caption: string; root: string }[] = [
   { kind: 'current', label: 'Current', caption: 'Current · Glyph Terminal', root: 'bg-bg-primary' },
   { kind: 'calm', label: 'Calm', caption: 'Calm · app-like', root: 'lab-calm' },
-  { kind: 'plus', label: 'Calm+', caption: 'Calm+ · one live element · Plus Jakarta Sans', root: 'lab-calm lab-plus' },
+  { kind: 'plus', label: 'Calm+', caption: 'Calm+ · one live element · Plus Jakarta Sans', root: 'lab-calm lab-plus plus-remap' },
 ];
 
-const GROUPS = ['Landing', 'Support', 'Dashboard'] as const;
+const GROUPS = ['Landing', 'Support', 'Dashboard', 'Blog', 'Auth'] as const;
 
 function Pane({ caption, root, wide, children }: { caption: string; root: string; wide?: boolean; children: ReactNode }) {
   return (
@@ -90,7 +91,7 @@ export function LabContent({ rows }: { rows: LabRow[] }) {
                       <code className="text-xs text-text-tertiary">{r.source}</code>
                     </div>
                     <div className={`grid gap-6 ${r.wide ? 'grid-cols-1' : cols}`}>
-                      {panes.map((p) => (
+                      {panes.filter((p) => r[p.kind] !== undefined).map((p) => (
                         <Pane key={p.kind} caption={p.caption} root={p.root} wide={r.wide}>
                           {r[p.kind]}
                         </Pane>

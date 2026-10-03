@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Remover um contato de suporte",
+      "intro": "Se um e-mail ou uma conta do Telegram estiver salvo na sua conta Doppler como contato de suporte e você não quiser mais, peça a remoção aqui.",
+      "keepsTitle": "Sua conta não é excluída",
+      "keeps": "Somente o contato é removido. Sua conta, assinatura e registros de pagamento continuam iguais.",
+      "accountLabel": "ID da conta",
+      "accountHint": "Tem o formato VPN-XXXX-XXXX-XXXX e aparece no app e na página da sua conta.",
+      "methodLabel": "Tipo de contato",
+      "methodHint": "Escolha o tipo de contato salvo na conta.",
+      "methodEmail": "E-mail",
+      "valueLabel": "Contato a remover",
+      "valueHint": "Digite exatamente como está salvo: o endereço de e-mail completo ou o nome de usuário do Telegram.",
+      "submit": "Solicitar remoção",
+      "submitting": "Enviando…",
+      "recordedTitle": "Solicitação recebida",
+      "recorded": "Se o ID da conta corresponder a um contato verificado dessa conta, sua solicitação foi registrada. Para proteger a conta, não informamos se houve correspondência.",
+      "unavailableTitle": "Ainda não disponível",
+      "unavailable": "A remoção de contatos de suporte ainda não está disponível. Nada foi enviado.",
+      "errorTitle": "Solicitação não enviada",
+      "error": "Não foi possível enviar a solicitação. Verifique sua conexão e tente novamente mais tarde."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN tradicional",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "O que significa",
+      "keeps": "O que guardamos",
+      "why": "Por que fazemos isso"
+    },
     "rows": {
       "account": {
         "feature": "Conta necessária",
         "traditional": "Email + senha",
-        "doppler": "Não precisa"
+        "doppler": "Não precisa",
+        "means": "Você instala o app e conecta. Sem e-mail, sem senha, sem número de telefone.",
+        "keeps": "Um ID anônimo (VPN-XXXX-XXXX-XXXX) e um identificador de dispositivo que aplica o seu limite de dispositivos. Nada que identifique você.",
+        "why": "Um e-mail liga uma conta a uma pessoa real. Nunca pedimos um, então não há nada para vazar, vender ou entregar."
       },
       "fingerprint": {
         "feature": "Impressão do tráfego",
         "traditional": "Detectável por DPI",
-        "doppler": "Camuflado como HTTPS"
+        "doppler": "Camuflado como HTTPS",
+        "means": "Para um firewall, sua conexão parece uma visita comum a um site HTTPS conhecido.",
+        "keeps": "Nada. O disfarce acontece na rede, não em um banco de dados.",
+        "why": "O DPI bloqueia o que reconhece. Tráfego com aparência comum não dá nada a ele para bloquear."
       },
       "protocol": {
         "feature": "Protocolo",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "O VLESS-Reality usa o handshake TLS de um site real, então não existe handshake de VPN para ser notado.",
+        "keeps": "Nada sobre o seu tráfego. Os servidores repassam os pacotes e os esquecem.",
+        "why": "OpenVPN e WireGuard são rápidos, mas seus padrões de pacotes são bem conhecidos e bloqueados em segundos na Rússia, na China e no Irã."
       },
       "dns": {
         "feature": "Criptografia DNS",
         "traditional": "Às vezes",
-        "doppler": "Sempre"
+        "doppler": "Sempre",
+        "means": "Cada consulta, o passo que transforma site.com em um endereço, viaja dentro do túnel até o nosso próprio resolvedor.",
+        "keeps": "Nenhum histórico de consultas. Cada consulta é resolvida, filtrada contra anúncios e rastreadores e descartada.",
+        "why": "O DNS comum mostra ao seu provedor de internet cada site que você visita, mesmo quando a página em si é criptografada."
       },
       "censorship": {
         "feature": "Resistência a censura",
         "traditional": "Limitada",
-        "doppler": "Integrada"
+        "doppler": "Integrada",
+        "means": "Feito para redes que bloqueiam VPNs ativamente. Sem pontes nem configurações extras.",
+        "keeps": "O mesmo que em qualquer lugar. A política sem registros não muda de país para país.",
+        "why": "Os bloqueios ficam mais fortes a cada ano. Um protocolo difícil de detectar por natureza dura mais do que um que precisa de correção a cada novo bloqueio."
       },
       "logs": {
         "feature": "Logs de atividade",
         "traditional": "Depende",
-        "doppler": "Nunca"
+        "doppler": "Nunca",
+        "means": "Nenhum registro dos sites que você visita, do que baixa, de quantos dados usa ou de quanto tempo fica conectado.",
+        "keeps": "Um registro de login: IP, ID anônimo, ID do dispositivo e horário, apagado após 90 dias. Ele mostra que um dispositivo se conectou, não o que fez.",
+        "why": "Registros que não existem não podem vazar nem ser entregues. O registro de login é o mínimo necessário para impedir abusos."
       }
     }
   },

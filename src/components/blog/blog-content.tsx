@@ -9,7 +9,32 @@ import { BlogInlineCta } from "./blog-inline-cta";
 interface BlogContentProps {
   content: string;
   locale: string;
+  /** Calm+ preview, decided on the server page. */
+  plus?: boolean;
 }
+
+/** Calm+ preview: the same prose on the tonal ramp (muted body, teal links and markers, card-tone code and quotes). */
+const PLUS_PROSE = [
+  "prose prose-lg dark:prose-invert max-w-none text-start",
+  "prose-headings:font-display prose-headings:font-bold prose-headings:text-(--c-text) prose-headings:tracking-tight",
+  "prose-h2:text-3xl sm:prose-h2:text-[34px] prose-h2:mt-16 prose-h2:mb-5",
+  "prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-4",
+  "prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3",
+  "prose-p:text-(--c-muted) prose-p:text-[18px] prose-p:leading-[1.75] prose-p:mb-6",
+  "prose-a:text-(--c-accent) prose-a:font-semibold prose-a:underline prose-a:underline-offset-4",
+  "prose-a:decoration-(--c-accent)/40 hover:prose-a:decoration-(--c-accent) prose-a:transition-colors",
+  "prose-strong:text-(--c-text) prose-strong:font-bold prose-em:text-(--c-muted)",
+  "prose-ul:my-6 prose-ol:my-6 prose-li:text-(--c-muted) prose-li:text-[18px] prose-li:leading-[1.7] prose-li:mb-2 prose-li:marker:text-(--c-accent)",
+  "prose-blockquote:border-s-[3px] prose-blockquote:border-(--c-accent) prose-blockquote:bg-(--c-card)",
+  "prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-e-2xl prose-blockquote:not-italic prose-blockquote:font-normal",
+  "prose-blockquote:text-(--c-muted) prose-blockquote:my-8",
+  "prose-code:text-(--c-accent) prose-code:bg-(--c-inset) prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md",
+  "prose-code:text-[0.9em] prose-code:font-medium prose-code:before:content-none prose-code:after:content-none",
+  "prose-pre:bg-(--c-card) prose-pre:text-(--c-text) prose-pre:rounded-2xl prose-pre:my-8",
+  "[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-(--c-text)",
+  "prose-img:rounded-[22px] prose-img:my-10",
+  "prose-hr:border-(--c-separator) prose-hr:my-12",
+].join(" ");
 
 // Find the source line (1-indexed) of the Nth ATX-style H2 in markdown,
 // ignoring headings inside fenced code blocks. Returns null if fewer exist.
@@ -32,14 +57,17 @@ function findNthH2Line(markdown: string, n: number): number | null {
   return null;
 }
 
-export function BlogContent({ content, locale }: BlogContentProps) {
+export function BlogContent({ content, locale, plus = false }: BlogContentProps) {
   const isRtl = isRtlLocale(locale);
   const thirdH2Line = useMemo(() => findNthH2Line(content, 3), [content]);
 
   return (
     <article
       dir={isRtl ? "rtl" : "ltr"}
-      className={`
+      className={
+        plus
+          ? PLUS_PROSE
+          : `
         prose prose-lg dark:prose-invert max-w-none
         text-start
 
@@ -84,42 +112,53 @@ export function BlogContent({ content, locale }: BlogContentProps) {
 
         /* Horizontal rules */
         prose-hr:border-overlay/20 prose-hr:my-12
-      `}
+      `
+      }
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           table: ({ children }) => (
-            <div className="my-10 overflow-x-auto rounded-xl border border-overlay/15">
+            <div className={plus ? "my-10 overflow-x-auto rounded-2xl bg-(--c-card)" : "my-10 overflow-x-auto rounded-xl border border-overlay/15"}>
               <table className="w-full text-start text-base border-collapse">
                 {children}
               </table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-overlay/8 text-sm uppercase tracking-wider">
+            <thead className={plus ? "bg-(--c-inset) text-[13px]" : "bg-overlay/8 text-sm uppercase tracking-wider"}>
               {children}
             </thead>
           ),
           th: ({ children }) => (
-            <th className="px-5 py-3.5 font-semibold border-b border-overlay/15 text-text-primary whitespace-nowrap">
+            <th
+              className={
+                plus
+                  ? "px-5 py-3.5 font-bold text-(--c-text) whitespace-nowrap"
+                  : "px-5 py-3.5 font-semibold border-b border-overlay/15 text-text-primary whitespace-nowrap"
+              }
+            >
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className="px-5 py-3.5 text-text-muted border-b border-overlay/8">
+            <td className={plus ? "px-5 py-3.5 text-(--c-muted) border-t border-(--c-separator)" : "px-5 py-3.5 text-text-muted border-b border-overlay/8"}>
               {children}
             </td>
           ),
           tr: ({ children }) => (
-            <tr className="transition-colors hover:bg-overlay/5">{children}</tr>
+            <tr className={plus ? undefined : "transition-colors hover:bg-overlay/5"}>{children}</tr>
           ),
           a: ({ href, children }) => (
             <a
               href={href}
               target={href?.startsWith("http") ? "_blank" : undefined}
               rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="text-accent-teal font-medium underline underline-offset-4 decoration-accent-teal/40 hover:decoration-accent-teal transition-colors"
+              className={
+                plus
+                  ? "text-(--c-accent) font-semibold underline underline-offset-4 decoration-(--c-accent)/40 hover:decoration-(--c-accent) transition-colors"
+                  : "text-accent-teal font-medium underline underline-offset-4 decoration-accent-teal/40 hover:decoration-accent-teal transition-colors"
+              }
             >
               {children}
             </a>
@@ -131,7 +170,7 @@ export function BlogContent({ content, locale }: BlogContentProps) {
             return (
               <>
                 <h2 {...props}>{children}</h2>
-                {isThirdH2 && <BlogInlineCta />}
+                {isThirdH2 && <BlogInlineCta plus={plus} />}
               </>
             );
           },

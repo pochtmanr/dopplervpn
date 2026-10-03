@@ -7,6 +7,17 @@ import { ObfuscatedEmail } from '@/components/ui/obfuscated-email';
 import { TicketPlate } from '@/components/glyph/ticket-plate';
 import { TelegramChat } from './telegram-chat';
 import {
+  ArrowGlyph,
+  PLUS_BTN,
+  PLUS_BTN_SECONDARY,
+  PLUS_CARD_HOVER,
+  PLUS_ICON,
+  PLUS_ICON_TONE,
+  PLUS_META,
+  PLUS_TITLE_SM,
+  PLUS_WELL,
+} from '../design-lab/plus-recipes';
+import {
   CARD,
   CARD_BLUE,
   CARD_HAIRLINE,
@@ -113,6 +124,19 @@ const DELETE_ROW =
   'border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-danger/30 transition-colors ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary';
 
+/* ── Calm+ preview (CALM_PLUS_PREVIEW, design-lab/plus-recipes) ───── */
+// Same controls and stretch; the surface, icon and pills swap. Hover is the
+// shadow fade only, and the icon is a duotone glyph with no tile.
+
+const PLUS_FOCUS =
+  'has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-(--c-bg)';
+const plusCard = (ring: string) => `${PLUS_CARD_HOVER} !p-0 ${PLUS_FOCUS} ${ring}`;
+const plusIcon = (tone: keyof typeof PLUS_ICON_TONE) =>
+  `${PLUS_ICON} ${PLUS_ICON_TONE[tone]} [&_svg]:h-[30px] [&_svg]:w-[30px]`;
+const PLUS_DELETE_ROW =
+  `${PLUS_CARD_HOVER} min-h-[88px] !flex-row items-center !p-0 ` +
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-danger) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg)';
+
 /* ── Card ─────────────────────────────────────────────────────────── */
 
 /**
@@ -128,6 +152,7 @@ function ActionCard({
   subtitle,
   cta,
   art,
+  plus = false,
 }: {
   surface: string;
   hairline: string;
@@ -137,7 +162,28 @@ function ActionCard({
   subtitle: React.ReactNode;
   cta: React.ReactNode;
   art?: React.ReactNode;
+  plus?: boolean;
 }) {
+  if (plus) {
+    // Calm+: padding on the card, the art in an inset tray beside the copy (xl+).
+    return (
+      <div className={`${surface} min-h-56`}>
+        <div className={`grid min-h-0 flex-1 grid-cols-1 gap-5 p-6 ${art ? 'xl:grid-cols-2' : ''}`}>
+          <div className="flex h-full min-w-0 flex-col">
+            <span className={tile}>{icon}</span>
+            <h3 className={`mt-5 ${PLUS_TITLE_SM}`}>{title}</h3>
+            <div className="mt-1 text-[15px] leading-relaxed text-(--c-muted)">{subtitle}</div>
+            <div className="mt-auto flex pt-5">{cta}</div>
+          </div>
+          {art && (
+            <div className={`${PLUS_WELL} hidden min-h-44 xl:block`} aria-hidden="true">
+              {art}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={`${surface} min-h-56`}>
       <span className={hairline} aria-hidden="true" />
@@ -164,10 +210,25 @@ interface ActionButtonsProps {
   onOpenTicket: () => void;
   onOpenRestore: () => void;
   onOpenBusiness: () => void;
+  /** Calm+ preview; the server page decides (CALM_PLUS_PREVIEW is not a client env). */
+  plus?: boolean;
 }
 
-export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: ActionButtonsProps) {
+export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness, plus = false }: ActionButtonsProps) {
   const t = useTranslations('support');
+  // The pill a card ends on: one filled key (the ticket card), the rest secondary.
+  const pill = (label: string, key: boolean, shipped: string) =>
+    plus ? (
+      <span className={key ? PLUS_BTN : PLUS_BTN_SECONDARY}>
+        {label}
+        <ArrowGlyph />
+      </span>
+    ) : (
+      <span className={['ms-auto', shipped, KEY_PILL].filter(Boolean).join(' ')}>
+        {label}
+        <ArrowIcon />
+      </span>
+    );
 
   return (
     <div id="contact" className="scroll-mt-28">
@@ -177,9 +238,10 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
         {/* ── 1 · Submit a request ──────────────────────────────────── */}
         <Reveal className="h-full lg:col-span-6">
           <ActionCard
-            surface={TEAL_CARD}
+            plus={plus}
+            surface={plus ? plusCard('has-[:focus-visible]:ring-(--c-accent)') : TEAL_CARD}
             hairline={CARD_HAIRLINE}
-            tile={ROW_TILE}
+            tile={plus ? plusIcon('teal') : ROW_TILE}
             icon={<TicketIcon />}
             title={
               <button type="button" onClick={onOpenTicket} className={STRETCH}>
@@ -187,12 +249,7 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
               </button>
             }
             subtitle={t('actions.submitRequestDesc')}
-            cta={
-              <span className={`ms-auto ${KEY_PILL}`}>
-                {t('actions.submitRequestCta')}
-                <ArrowIcon />
-              </span>
-            }
+            cta={pill(t('actions.submitRequestCta'), true, '')}
             art={<TicketPlate />}
           />
         </Reveal>
@@ -200,9 +257,10 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
         {/* ── 2 · Telegram — same card, chat in the well ───────────── */}
         <Reveal delay={50} className="h-full lg:col-span-6">
           <ActionCard
-            surface={TELEGRAM_CARD}
+            plus={plus}
+            surface={plus ? plusCard('has-[:focus-visible]:ring-(--c-telegram)') : TELEGRAM_CARD}
             hairline={TELEGRAM_HAIRLINE}
-            tile={ROW_TILE_TELEGRAM}
+            tile={plus ? plusIcon('telegram') : ROW_TILE_TELEGRAM}
             icon={<TelegramIcon />}
             title={
               <a
@@ -215,12 +273,7 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
               </a>
             }
             subtitle={<span dir="ltr">{t('contact.telegramBot')}</span>}
-            cta={
-              <span className={`ms-auto cta-key-telegram ${KEY_PILL}`}>
-                {t('actions.submitRequestCta')}
-                <ArrowIcon />
-              </span>
-            }
+            cta={pill(t('actions.submitRequestCta'), false, 'cta-key-telegram')}
             art={<TelegramChat />}
           />
         </Reveal>
@@ -228,9 +281,10 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
         {/* ── 3 · Business ───────────────────────────────────────────── */}
         <Reveal delay={100} className="h-full lg:col-span-4">
           <ActionCard
-            surface={BLUE_CARD}
+            plus={plus}
+            surface={plus ? plusCard('has-[:focus-visible]:ring-(--c-blue)') : BLUE_CARD}
             hairline={CARD_HAIRLINE_BLUE}
-            tile={ROW_TILE_BLUE}
+            tile={plus ? plusIcon('blue') : ROW_TILE_BLUE}
             icon={<BriefcaseIcon />}
             title={
               <button type="button" onClick={onOpenBusiness} className={STRETCH}>
@@ -238,21 +292,17 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
               </button>
             }
             subtitle={t('actions.businessContactDesc')}
-            cta={
-              <span className={`ms-auto cta-key-blue ${KEY_PILL}`}>
-                {t('actions.businessContactCta')}
-                <ArrowIcon />
-              </span>
-            }
+            cta={pill(t('actions.businessContactCta'), false, 'cta-key-blue')}
           />
         </Reveal>
 
         {/* ── 4 · Restore account ────────────────────────────────────── */}
         <Reveal delay={150} className="h-full lg:col-span-4">
           <ActionCard
-            surface={TEAL_CARD}
+            plus={plus}
+            surface={plus ? plusCard('has-[:focus-visible]:ring-(--c-accent)') : TEAL_CARD}
             hairline={CARD_HAIRLINE}
-            tile={ROW_TILE}
+            tile={plus ? plusIcon('teal') : ROW_TILE}
             icon={<KeyIcon />}
             title={
               <button type="button" onClick={onOpenRestore} className={STRETCH}>
@@ -260,12 +310,7 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
               </button>
             }
             subtitle={t('actions.restoreAccountDesc')}
-            cta={
-              <span className={`ms-auto ${KEY_PILL}`}>
-                {t('actions.restoreAccountCta')}
-                <ArrowIcon />
-              </span>
-            }
+            cta={pill(t('actions.restoreAccountCta'), false, '')}
           />
         </Reveal>
 
@@ -273,9 +318,10 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
              both columns on md so the 2-up grid has no hole ───────────── */}
         <Reveal delay={200} className="h-full md:col-span-2 lg:col-span-4">
           <ActionCard
-            surface={TEAL_CARD}
+            plus={plus}
+            surface={plus ? plusCard('has-[:focus-visible]:ring-(--c-accent)') : TEAL_CARD}
             hairline={CARD_HAIRLINE}
-            tile={ROW_TILE}
+            tile={plus ? plusIcon('teal') : ROW_TILE}
             icon={<EmailIcon />}
             title={t('contact.email')}
             subtitle={t('contact.responseTime')}
@@ -283,7 +329,7 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
               <ObfuscatedEmail
                 user="support"
                 domain="simnetiq.com"
-                className={`ms-auto cta-flat ${CTA_PILL} ${STRETCH}`}
+                className={plus ? `${PLUS_BTN_SECONDARY} ${STRETCH}` : `ms-auto cta-flat ${CTA_PILL} ${STRETCH}`}
               />
             }
           />
@@ -291,6 +337,20 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
 
         {/* ── 6 · Delete account — a quiet full-width row ────────────── */}
         <Reveal delay={250} className="md:col-span-2 lg:col-span-12">
+          {plus ? (
+            <Link id="delete-account" href="/delete-account" className={`scroll-mt-28 ${PLUS_DELETE_ROW}`}>
+              <div className="flex min-w-0 flex-1 items-center gap-4 px-5 py-4">
+                <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.danger} [&_svg]:h-6 [&_svg]:w-6`}>
+                  <TrashIcon />
+                </span>
+                <div className="min-w-0 text-start">
+                  <h3 className={PLUS_TITLE_SM}>{t('deleteAccount.title')}</h3>
+                  <p className={PLUS_META}>{t('deleteAccount.step2')}</p>
+                </div>
+              </div>
+              <ArrowGlyph className="me-5 h-4 w-4 shrink-0 text-(--c-tert)" />
+            </Link>
+          ) : (
           <Link id="delete-account" href="/delete-account" className={`scroll-mt-28 ${DELETE_ROW}`}>
             <div className="flex min-w-0 flex-1 items-center gap-4 px-5 py-4">
               <div className={DELETE_TILE}>
@@ -312,6 +372,7 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness }: A
               <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
             </svg>
           </Link>
+          )}
         </Reveal>
       </div>
     </div>

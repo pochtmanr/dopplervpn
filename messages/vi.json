@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Xóa liên hệ hỗ trợ",
+      "intro": "Nếu tài khoản Doppler của bạn đang lưu một địa chỉ email hoặc tài khoản Telegram làm liên hệ hỗ trợ và bạn không muốn giữ nữa, hãy yêu cầu chúng tôi xóa tại đây.",
+      "keepsTitle": "Tài khoản của bạn không bị xóa",
+      "keeps": "Chỉ liên hệ bị xóa. Tài khoản, gói đăng ký và lịch sử thanh toán của bạn vẫn giữ nguyên.",
+      "accountLabel": "ID tài khoản",
+      "accountHint": "Có dạng VPN-XXXX-XXXX-XXXX, hiển thị trong ứng dụng và trên trang tài khoản của bạn.",
+      "methodLabel": "Loại liên hệ",
+      "methodHint": "Chọn loại liên hệ đang được lưu trong tài khoản.",
+      "methodEmail": "Email",
+      "valueLabel": "Liên hệ cần xóa",
+      "valueHint": "Nhập chính xác như đã lưu: địa chỉ email đầy đủ hoặc tên người dùng Telegram.",
+      "submit": "Yêu cầu xóa",
+      "submitting": "Đang gửi…",
+      "recordedTitle": "Đã nhận yêu cầu",
+      "recorded": "Nếu ID tài khoản khớp với một liên hệ đã xác minh của tài khoản đó, yêu cầu của bạn đã được ghi nhận. Để bảo vệ tài khoản, chúng tôi không cho biết thông tin có khớp hay không.",
+      "unavailableTitle": "Chưa mở",
+      "unavailable": "Tính năng xóa liên hệ hỗ trợ chưa khả dụng. Chưa có gì được gửi.",
+      "errorTitle": "Chưa gửi được yêu cầu",
+      "error": "Không thể gửi yêu cầu. Hãy kiểm tra kết nối và thử lại sau."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN Truyền Thống",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Điều đó có nghĩa là",
+      "keeps": "Chúng tôi lưu gì",
+      "why": "Vì sao chúng tôi làm vậy"
+    },
     "rows": {
       "account": {
         "feature": "Yêu cầu tài khoản",
         "traditional": "Email + mật khẩu",
-        "doppler": "Không cần tài khoản"
+        "doppler": "Không cần tài khoản",
+        "means": "Bạn cài ứng dụng và kết nối. Không email, không mật khẩu, không số điện thoại.",
+        "keeps": "Một ID ẩn danh (VPN-XXXX-XXXX-XXXX) và một mã định danh thiết bị để áp dụng giới hạn thiết bị của bạn. Không có gì nêu tên bạn.",
+        "why": "Email gắn tài khoản với một người thật. Chúng tôi không bao giờ hỏi email, nên không có gì để rò rỉ, bán hay giao nộp."
       },
       "fingerprint": {
         "feature": "Vân tay lưu lượng",
         "traditional": "DPI phát hiện được",
-        "doppler": "Ngụy trang thành HTTPS"
+        "doppler": "Ngụy trang thành HTTPS",
+        "means": "Với tường lửa, kết nối của bạn trông như một lần truy cập bình thường vào một trang HTTPS quen thuộc.",
+        "keeps": "Không có gì. Việc ngụy trang diễn ra trên đường truyền, không phải trong cơ sở dữ liệu.",
+        "why": "DPI chặn những gì nó nhận ra. Lưu lượng trông bình thường không cho nó thứ gì để chặn."
       },
       "protocol": {
         "feature": "Giao thức",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality mượn quá trình bắt tay TLS của một trang web thật, nên không có bắt tay VPN nào để phát hiện.",
+        "keeps": "Không có gì về lưu lượng của bạn. Máy chủ chuyển gói tin đi rồi quên chúng.",
+        "why": "OpenVPN và WireGuard nhanh, nhưng mẫu gói tin của chúng đã quá quen thuộc và bị chặn trong vài giây ở Nga, Trung Quốc và Iran."
       },
       "dns": {
         "feature": "Mã hóa DNS",
         "traditional": "Đôi khi",
-        "doppler": "Luôn luôn"
+        "doppler": "Luôn luôn",
+        "means": "Mọi lượt tra cứu, bước biến site.com thành địa chỉ, đều đi trong đường hầm tới máy phân giải riêng của chúng tôi.",
+        "keeps": "Không có lịch sử truy vấn. Mỗi lượt tra cứu được phân giải, lọc quảng cáo và trình theo dõi, rồi bị xóa.",
+        "why": "DNS thông thường cho nhà mạng thấy mọi trang bạn truy cập, ngay cả khi chính trang đó đã được mã hóa."
       },
       "censorship": {
         "feature": "Chống kiểm duyệt",
         "traditional": "Hạn chế",
-        "doppler": "Tích hợp sẵn"
+        "doppler": "Tích hợp sẵn",
+        "means": "Được xây dựng cho các mạng chủ động chặn VPN. Không cần cầu nối hay cài đặt thêm.",
+        "keeps": "Giống như ở mọi nơi khác. Chính sách không lưu nhật ký không thay đổi theo quốc gia.",
+        "why": "Việc chặn ngày càng mạnh qua từng năm. Một giao thức khó phát hiện ngay từ thiết kế sẽ trụ lâu hơn giao thức phải vá sau mỗi đợt chặn mới."
       },
       "logs": {
         "feature": "Nhật ký hoạt động",
         "traditional": "Tùy nhà cung cấp",
-        "doppler": "Không bao giờ"
+        "doppler": "Không bao giờ",
+        "means": "Không ghi lại trang bạn truy cập, thứ bạn tải xuống, lượng dữ liệu bạn dùng hay thời gian bạn kết nối.",
+        "keeps": "Một nhật ký đăng nhập: IP, ID ẩn danh, ID thiết bị và thời gian, bị xóa sau 90 ngày. Nó cho thấy một thiết bị đã kết nối, không cho thấy thiết bị đó đã làm gì.",
+        "why": "Nhật ký không tồn tại thì không thể rò rỉ hay bị giao nộp. Nhật ký đăng nhập là mức tối thiểu chúng tôi cần để ngăn lạm dụng."
       }
     }
   },

@@ -7,9 +7,11 @@ interface ShareButtonsProps {
   url: string;
   title: string;
   imageUrl?: string | null;
+  /** Calm+ preview, decided on the server page. */
+  plus?: boolean;
 }
 
-export function ShareButtons({ url, title }: ShareButtonsProps) {
+export function ShareButtons({ url, title, plus = false }: ShareButtonsProps) {
   const t = useTranslations("blog");
   const [copied, setCopied] = useState(false);
 
@@ -88,8 +90,8 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
   };
 
   return (
-    <div className="mt-8 pt-6 border-t border-overlay/10">
-      <p className="text-sm font-medium text-text-muted mb-3">{t("share")}</p>
+    <div className={plus ? "mt-8 pt-6 border-t border-(--c-separator)" : "mt-8 pt-6 border-t border-overlay/10"}>
+      <p className={plus ? "text-[13px] font-semibold text-(--c-tert) mb-3" : "text-sm font-medium text-text-muted mb-3"}>{t("share")}</p>
       <div className="flex flex-wrap gap-2">
         {shareLinks.map((link) => (
           <a
@@ -97,7 +99,11 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-overlay/10 text-text-muted text-sm transition-colors ${link.color}`}
+            className={
+              plus
+                ? "inline-flex h-10 items-center gap-2 rounded-full bg-(--c-inset) px-4 text-sm font-bold text-(--c-muted) transition-colors hover:bg-(--c-accent-tint) hover:text-(--c-accent)"
+                : `inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-overlay/10 text-text-muted text-sm transition-colors ${link.color}`
+            }
             title={`${t("share")} ${link.name}`}
           >
             {link.icon}
@@ -106,11 +112,19 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
         ))}
         <button
           onClick={copyLink}
-          className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border text-sm transition-all duration-200 cursor-pointer ${
-            copied
-              ? "border-accent-teal/30 bg-accent-teal/10 text-accent-teal"
-              : "border-overlay/10 text-text-muted hover:bg-overlay/10 hover:text-text-primary"
-          }`}
+          className={
+            plus
+              ? `inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-bold transition-colors cursor-pointer ${
+                  copied
+                    ? "bg-(--c-accent-tint) text-(--c-accent)"
+                    : "bg-(--c-inset) text-(--c-muted) hover:bg-(--c-accent-tint) hover:text-(--c-accent)"
+                }`
+              : `inline-flex items-center gap-2 px-3 py-2 rounded-xl border text-sm transition-all duration-200 cursor-pointer ${
+                  copied
+                    ? "border-accent-teal/30 bg-accent-teal/10 text-accent-teal"
+                    : "border-overlay/10 text-text-muted hover:bg-overlay/10 hover:text-text-primary"
+                }`
+          }
           title={t("copyLink")}
         >
           {copied ? (

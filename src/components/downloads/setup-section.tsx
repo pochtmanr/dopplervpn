@@ -49,13 +49,24 @@ const BTN =
   "text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-2 " +
   "focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
 
+/**
+ * Calm+ preview (CALM_PLUS_PREVIEW; design-lab/plus/landing.tsx PRICING_GLASS):
+ * the same glass, no notch, the picture in an inset tray, the tabs as a
+ * segmented pill. The download keycap turns flat via plus.css.
+ */
+const PLUS_GLASS =
+  "relative overflow-hidden rounded-[22px] border border-(--c-accent)/20 " +
+  "bg-gradient-to-br from-(--c-accent)/[0.08] via-(--c-bg)/60 to-(--c-bg)/75 backdrop-blur-md";
+
 export function SetupSection({
   platforms,
   ratings,
+  plus = false,
 }: {
   platforms: SetupPlatform[];
   /** Pre-rendered ratings row, shared with the hero. */
   ratings: React.ReactNode;
+  plus?: boolean;
 }) {
   const [active, setActive] = useState(0);
   const [step, setStep] = useState(0);
@@ -131,23 +142,27 @@ export function SetupSection({
   };
 
   return (
-    <section className="section relative overflow-hidden bg-bg-secondary/30">
+    <section className={plus ? "section relative overflow-hidden" : "section relative overflow-hidden bg-bg-secondary/30"}>
       <PricingBackdrop />
 
       <div ref={cardRef} className="relative mx-auto max-w-site">
-        <div className="notch-card relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/[0.08] via-bg-primary/60 to-bg-primary/75 backdrop-blur-md">
+        <div className={plus ? PLUS_GLASS : "notch-card relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/[0.08] via-bg-primary/60 to-bg-primary/75 backdrop-blur-md"}>
           <div
             className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent"
             aria-hidden="true"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[6fr_5fr]">
+          <div className={plus ? "grid grid-cols-1 gap-2 p-3 lg:grid-cols-[6fr_5fr]" : "grid grid-cols-1 lg:grid-cols-[6fr_5fr]"}>
             {/* ── Copy column ─────────────────────────────────── */}
-            <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-12 text-center lg:text-start">
+            <div className={plus ? "flex flex-col justify-center p-4 sm:p-6 lg:p-10 text-center lg:text-start" : "flex flex-col justify-center p-6 sm:p-8 lg:p-12 text-center lg:text-start"}>
               <div
                 role="tablist"
                 onKeyDown={moveTab}
-                className="flex flex-wrap justify-center lg:justify-start gap-2"
+                className={
+                  plus
+                    ? "inline-flex flex-wrap justify-center self-center lg:self-start gap-1 rounded-[22px] bg-(--c-inset) p-1"
+                    : "flex flex-wrap justify-center lg:justify-start gap-2"
+                }
               >
                 {platforms.map((platform, i) => {
                   const selected = i === active;
@@ -165,11 +180,17 @@ export function SetupSection({
                       // Roving tabindex: one stop for the whole set, arrows move within it.
                       tabIndex={selected ? 0 : -1}
                       onClick={() => selectTab(i)}
-                      className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                        selected
-                          ? "bg-accent-teal/10 text-accent-teal border border-accent-teal/30"
-                          : "cta-flat hover:text-accent-teal"
-                      }`}
+                      className={
+                        plus
+                          ? `inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) ${
+                              selected ? "bg-(--c-accent-fill) text-white" : "text-(--c-muted) hover:text-(--c-text)"
+                            }`
+                          : `inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                              selected
+                                ? "bg-accent-teal/10 text-accent-teal border border-accent-teal/30"
+                                : "cta-flat hover:text-accent-teal"
+                            }`
+                      }
                     >
                       <PlatformLogo icon={platform.icon} className="w-4 h-4" />
                       {platform.name}
@@ -179,7 +200,7 @@ export function SetupSection({
               </div>
 
               <div id="setup-panel" role="tabpanel" aria-labelledby={`setup-tab-${current.key}`}>
-                <h2 className="mt-7 text-3xl sm:text-4xl lg:text-[clamp(2rem,2.8vw,2.75rem)] font-semibold text-text-primary leading-tight">
+                <h2 className={`mt-7 text-3xl sm:text-4xl lg:text-[clamp(2rem,2.8vw,2.75rem)] ${plus ? "font-bold" : "font-semibold"} text-text-primary leading-tight`}>
                   {current.title}
                 </h2>
                 <p className="mt-3 text-text-muted text-base md:text-lg max-w-md mx-auto lg:mx-0">
@@ -198,16 +219,24 @@ export function SetupSection({
                           onClick={() => chooseStep(i)}
                           aria-current={isActive ? "step" : undefined}
                           className={`group/step relative flex w-full items-start gap-3 overflow-hidden rounded-xl border px-3.5 py-3 text-start transition-colors duration-300 ${
-                            isActive
-                              ? "border-accent-teal/25 bg-accent-teal/[0.06]"
-                              : "border-transparent hover:bg-overlay/5"
+                            plus
+                              ? isActive
+                                ? "border-transparent bg-(--c-inset)"
+                                : "border-transparent hover:bg-(--c-inset)/60"
+                              : isActive
+                                ? "border-accent-teal/25 bg-accent-teal/[0.06]"
+                                : "border-transparent hover:bg-overlay/5"
                           }`}
                         >
                           <span
                             className={`flex-shrink-0 w-6 h-6 rounded-full text-xs font-semibold flex items-center justify-center transition-colors duration-300 ${
-                              isActive
-                                ? "bg-accent-teal text-white"
-                                : "bg-accent-teal/10 border border-accent-teal/20 text-accent-teal"
+                              plus
+                                ? isActive
+                                  ? "bg-(--c-accent-fill) text-white font-bold"
+                                  : "bg-(--c-accent-tint) text-(--c-accent) font-bold"
+                                : isActive
+                                  ? "bg-accent-teal text-white"
+                                  : "bg-accent-teal/10 border border-accent-teal/20 text-accent-teal"
                             }`}
                           >
                             {done ? (
@@ -272,7 +301,7 @@ export function SetupSection({
                 bleeds to the card edges and the notch cuts its bottom-end corner;
                 the spacer holds the image's own aspect, so a taller copy column
                 only crops it sideways. */}
-            <div className="relative overflow-hidden border-t lg:border-t-0 lg:border-s border-overlay/5">
+            <div className={plus ? "relative overflow-hidden rounded-2xl bg-(--c-bg)" : "relative overflow-hidden border-t lg:border-t-0 lg:border-s border-overlay/5"}>
               <div className="aspect-[1009/794]" aria-hidden="true" />
               <Image
                 src="/images/dopplerdownload.avif"
@@ -284,7 +313,7 @@ export function SetupSection({
             </div>
           </div>
 
-          <span className="notch-edge" aria-hidden="true" />
+          {!plus && <span className="notch-edge" aria-hidden="true" />}
         </div>
       </div>
     </section>

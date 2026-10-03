@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Odstrani kontakt za podporo",
+      "intro": "Če je v vašem računu Doppler shranjen e-poštni naslov ali račun Telegram kot kontakt za podporo in ga tam ne želite več, nas tukaj prosite, da ga odstranimo.",
+      "keepsTitle": "Vaš račun ni izbrisan",
+      "keeps": "Odstrani se samo kontakt. Račun, naročnina in zapisi o plačilih ostanejo nespremenjeni.",
+      "accountLabel": "ID računa",
+      "accountHint": "Ima obliko VPN-XXXX-XXXX-XXXX in je prikazan v aplikaciji in na strani vašega računa.",
+      "methodLabel": "Vrsta kontakta",
+      "methodHint": "Izberite, katera vrsta kontakta je shranjena v računu.",
+      "methodEmail": "E-pošta",
+      "valueLabel": "Kontakt za odstranitev",
+      "valueHint": "Vnesite ga natanko tako, kot je shranjen: celoten e-poštni naslov ali uporabniško ime v Telegramu.",
+      "submit": "Zahtevaj odstranitev",
+      "submitting": "Pošiljanje …",
+      "recordedTitle": "Zahteva prejeta",
+      "recorded": "Če se ID računa ujema s potrjenim kontaktom tega računa, je zahteva zabeležena. Zaradi zaščite računa ne povemo, ali je bilo ujemanje.",
+      "unavailableTitle": "Še ni na voljo",
+      "unavailable": "Odstranitev kontakta za podporo še ni na voljo. Nič ni bilo poslano.",
+      "errorTitle": "Zahteva ni bila poslana",
+      "error": "Zahteve ni bilo mogoče poslati. Preverite povezavo in poskusite znova pozneje."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Tradicionalen VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Kaj to pomeni",
+      "keeps": "Kaj hranimo",
+      "why": "Zakaj to počnemo"
+    },
     "rows": {
       "account": {
         "feature": "Potreben račun",
         "traditional": "E-pošta + geslo",
-        "doppler": "Račun ni potreben"
+        "doppler": "Račun ni potreben",
+        "means": "Namestite aplikacijo in se povežete. Brez e-pošte, gesla in telefonske številke.",
+        "keeps": "Anonimni ID (VPN-XXXX-XXXX-XXXX) in identifikator naprave, ki uveljavlja omejitev naprav. Nič, kar bi vas poimenovalo.",
+        "why": "E-pošta poveže račun z resnično osebo. Nikoli je ne zahtevamo, zato ni ničesar, kar bi lahko ušlo, bilo prodano ali predano."
       },
       "fingerprint": {
         "feature": "Podpis prometa",
         "traditional": "Odkrit s strani DPI",
-        "doppler": "Prikrit kot HTTPS"
+        "doppler": "Prikrit kot HTTPS",
+        "means": "Za požarni zid je vaša povezava videti kot običajen obisk znane spletne strani HTTPS.",
+        "keeps": "Nič. Prikrivanje poteka v omrežju, ne v podatkovni bazi.",
+        "why": "DPI blokira tisto, kar prepozna. Promet, ki je videti običajen, mu ne da ničesar za blokiranje."
       },
       "protocol": {
         "feature": "Protokol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality si izposodi TLS rokovanje prave spletne strani, zato ni rokovanja VPN, ki bi ga lahko opazili.",
+        "keeps": "Nič o vašem prometu. Strežniki pakete prepustijo in jih pozabijo.",
+        "why": "OpenVPN in WireGuard sta hitra, vendar so njuni vzorci paketov dobro znani in jih v Rusiji, na Kitajskem in v Iranu blokirajo v nekaj sekundah."
       },
       "dns": {
         "feature": "DNS šifriranje",
         "traditional": "Včasih",
-        "doppler": "Vedno"
+        "doppler": "Vedno",
+        "means": "Vsaka poizvedba, korak, ki site.com spremeni v naslov, potuje skozi tunel do našega lastnega razreševalnika.",
+        "keeps": "Brez zgodovine poizvedb. Vsaka poizvedba se razreši, očisti oglasov in sledilnikov ter zavrže.",
+        "why": "Navaden DNS vašemu ponudniku pokaže vsako stran, ki jo obiščete, tudi ko je sama stran šifrirana."
       },
       "censorship": {
         "feature": "Odpornost na cenzuro",
         "traditional": "Omejena",
-        "doppler": "Vgrajena"
+        "doppler": "Vgrajena",
+        "means": "Narejeno za omrežja, ki dejavno blokirajo VPN. Brez mostov in dodatnih nastavitev.",
+        "keeps": "Enako kot povsod drugod. Pravilo brez dnevnikov se ne spreminja glede na državo.",
+        "why": "Blokade so vsako leto močnejše. Protokol, ki ga je po zasnovi težko zaznati, zdrži dlje kot tisti, ki ga je treba popravljati po vsaki novi blokadi."
       },
       "logs": {
         "feature": "Beleženje aktivnosti",
         "traditional": "Različno",
-        "doppler": "Nikoli"
+        "doppler": "Nikoli",
+        "means": "Brez zapisov o straneh, ki jih obiščete, kaj prenesete, koliko podatkov porabite ali kako dolgo ste povezani.",
+        "keeps": "Dnevnik prijav: IP, anonimni ID, ID naprave in čas, izbrisan po 90 dneh. Pokaže, da se je naprava povezala, ne pa, kaj je počela.",
+        "why": "Dnevniki, ki ne obstajajo, ne morejo uiti ali biti predani. Dnevnik prijav je minimum, potreben za ustavitev zlorab."
       }
     }
   },

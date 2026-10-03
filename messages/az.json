@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Dəstək əlaqəsini sil",
+      "intro": "Doppler hesabınızda dəstək əlaqəsi kimi e-poçt ünvanı və ya Telegram hesabı saxlanılıbsa və artıq orada olmasını istəmirsinizsə, burada onun silinməsini istəyin.",
+      "keepsTitle": "Hesabınız silinmir",
+      "keeps": "Yalnız əlaqə silinir. Hesab, abunəlik və ödəniş qeydləri olduğu kimi qalır.",
+      "accountLabel": "Hesab ID-si",
+      "accountHint": "VPN-XXXX-XXXX-XXXX formatındadır və tətbiqdə, eləcə də hesab səhifənizdə göstərilir.",
+      "methodLabel": "Əlaqə növü",
+      "methodHint": "Hesabda hansı növ əlaqənin saxlandığını seçin.",
+      "methodEmail": "E-poçt",
+      "valueLabel": "Silinəcək əlaqə",
+      "valueHint": "Onu saxlandığı kimi dəqiq yazın: tam e-poçt ünvanı və ya Telegram istifadəçi adı.",
+      "submit": "Silinməni istə",
+      "submitting": "Göndərilir…",
+      "recordedTitle": "Sorğu qəbul edildi",
+      "recorded": "Hesab ID-si həmin hesabdakı təsdiqlənmiş əlaqə ilə uyğun gəlirsə, sorğunuz qeydə alınıb. Hesabı qorumaq üçün uyğunluq olub-olmadığını demirik.",
+      "unavailableTitle": "Hələ açıq deyil",
+      "unavailable": "Dəstək əlaqəsinin silinməsi hələ mümkün deyil. Heç nə göndərilmədi.",
+      "errorTitle": "Sorğu göndərilmədi",
+      "error": "Sorğunu göndərmək mümkün olmadı. Bağlantını yoxlayın və bir az sonra yenidən cəhd edin."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Ənənəvi VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Bu nə deməkdir",
+      "keeps": "Nə saxlayırıq",
+      "why": "Niyə belə edirik"
+    },
     "rows": {
       "account": {
         "feature": "Hesab tələb olunur",
         "traditional": "E-poçt + şifrə",
-        "doppler": "Hesab lazım deyil"
+        "doppler": "Hesab lazım deyil",
+        "means": "Tətbiqi quraşdırıb qoşulursunuz. E-poçt, parol və telefon nömrəsi yoxdur.",
+        "keeps": "Anonim ID (VPN-XXXX-XXXX-XXXX) və cihaz limitinizi tətbiq edən cihaz identifikatoru. Sizi adlandıran heç nə yoxdur.",
+        "why": "E-poçt hesabı real şəxsə bağlayır. Biz onu heç vaxt istəmirik, ona görə də sızacaq, satılacaq və ya təhvil veriləcək heç nə yoxdur."
       },
       "fingerprint": {
         "feature": "Trafik izi",
         "traditional": "DPI tərəfindən aşkarlanır",
-        "doppler": "HTTPS kimi kamuflyaj edilir"
+        "doppler": "HTTPS kimi kamuflyaj edilir",
+        "means": "Firewall üçün bağlantınız tanınmış HTTPS saytına adi ziyarət kimi görünür.",
+        "keeps": "Heç nə. Maskalanma verilənlər bazasında yox, şəbəkədə baş verir.",
+        "why": "DPI tanıdığını bloklayır. Adi görünən trafik ona bloklamaq üçün heç nə vermir."
       },
       "protocol": {
         "feature": "Protokol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality real saytın TLS əl sıxmasını götürür, ona görə də aşkar ediləcək VPN əl sıxması yoxdur.",
+        "keeps": "Trafikiniz haqqında heç nə. Serverlər paketləri ötürür və unudur.",
+        "why": "OpenVPN və WireGuard sürətlidir, lakin onların paket nümunələri yaxşı məlumdur və Rusiya, Çin və İranda saniyələr ərzində bloklanır."
       },
       "dns": {
         "feature": "DNS şifrələmə",
         "traditional": "Bəzən",
-        "doppler": "Həmişə"
+        "doppler": "Həmişə",
+        "means": "site.com-u ünvana çevirən hər sorğu tunelin içi ilə öz resolverimizə gedir.",
+        "keeps": "Sorğu tarixçəsi yoxdur. Hər sorğu həll edilir, reklam və izləyicilərdən təmizlənir, sonra silinir.",
+        "why": "Adi DNS, səhifənin özü şifrələnmiş olsa belə, ziyarət etdiyiniz hər saytı internet provayderinizə göstərir."
       },
       "censorship": {
         "feature": "Senzura müqaviməti",
         "traditional": "Məhdud",
-        "doppler": "Daxili"
+        "doppler": "Daxili",
+        "means": "VPN-ləri aktiv bloklayan şəbəkələr üçün hazırlanıb. Körpü və əlavə ayar lazım deyil.",
+        "keeps": "Hər yerdə olduğu kimi. Loqsuz yanaşma ölkəyə görə dəyişmir.",
+        "why": "Bloklamalar hər il güclənir. Təbiətcə aşkar edilməsi çətin olan protokol hər yeni bloklamadan sonra yamaqlanmalı olan protokoldan daha uzun yaşayır."
       },
       "logs": {
         "feature": "Fəaliyyət qeydləri",
         "traditional": "Fərqli olur",
-        "doppler": "Heç vaxt"
+        "doppler": "Heç vaxt",
+        "means": "Ziyarət etdiyiniz saytlar, endirdikləriniz, nə qədər data istifadə etdiyiniz və nə qədər qoşulu qaldığınız qeyd olunmur.",
+        "keeps": "Giriş jurnalı: IP, anonim ID, cihaz ID-si və vaxt, 90 gündən sonra silinir. Cihazın qoşulduğunu göstərir, nə etdiyini yox.",
+        "why": "Mövcud olmayan loqlar sıza və ya təhvil verilə bilməz. Giriş jurnalı sui-istifadəni dayandırmaq üçün lazım olan minimumdur."
       }
     }
   },

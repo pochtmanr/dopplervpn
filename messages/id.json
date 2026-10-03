@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Hapus kontak dukungan",
+      "intro": "Jika alamat email atau akun Telegram tersimpan di akun Doppler Anda sebagai kontak dukungan dan Anda tidak ingin lagi, minta kami menghapusnya di sini.",
+      "keepsTitle": "Akun Anda tidak dihapus",
+      "keeps": "Hanya kontaknya yang dihapus. Akun, langganan, dan catatan pembayaran Anda tetap seperti semula.",
+      "accountLabel": "ID Akun",
+      "accountHint": "Bentuknya VPN-XXXX-XXXX-XXXX dan tampil di aplikasi serta di halaman akun Anda.",
+      "methodLabel": "Jenis kontak",
+      "methodHint": "Pilih jenis kontak yang tersimpan di akun.",
+      "methodEmail": "Email",
+      "valueLabel": "Kontak yang dihapus",
+      "valueHint": "Masukkan persis seperti yang tersimpan: alamat email lengkap atau nama pengguna Telegram.",
+      "submit": "Minta penghapusan",
+      "submitting": "Mengirim…",
+      "recordedTitle": "Permintaan diterima",
+      "recorded": "Jika ID Akun cocok dengan kontak terverifikasi di akun itu, permintaan Anda tercatat. Demi melindungi akun, kami tidak memberi tahu apakah datanya cocok.",
+      "unavailableTitle": "Belum tersedia",
+      "unavailable": "Penghapusan kontak dukungan belum tersedia. Tidak ada yang dikirim.",
+      "errorTitle": "Permintaan tidak terkirim",
+      "error": "Permintaan tidak dapat dikirim. Periksa koneksi Anda dan coba lagi nanti."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN Biasa",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Artinya",
+      "keeps": "Yang kami simpan",
+      "why": "Mengapa kami melakukannya"
+    },
     "rows": {
       "account": {
         "feature": "Akun diperlukan",
         "traditional": "Email + password",
-        "doppler": "Tidak perlu akun"
+        "doppler": "Tidak perlu akun",
+        "means": "Anda memasang aplikasi lalu terhubung. Tanpa email, kata sandi, atau nomor telepon.",
+        "keeps": "ID anonim (VPN-XXXX-XXXX-XXXX) dan pengenal perangkat yang menegakkan batas perangkat Anda. Tidak ada yang menyebut nama Anda.",
+        "why": "Email mengaitkan akun dengan orang sungguhan. Kami tidak pernah memintanya, jadi tidak ada yang bisa bocor, dijual, atau diserahkan."
       },
       "fingerprint": {
         "feature": "Sidik jari lalu lintas",
         "traditional": "Terdeteksi DPI",
-        "doppler": "Tersamarkan sebagai HTTPS"
+        "doppler": "Tersamarkan sebagai HTTPS",
+        "means": "Bagi firewall, koneksi Anda terlihat seperti kunjungan biasa ke situs HTTPS terkenal.",
+        "keeps": "Tidak ada. Penyamaran terjadi di jaringan, bukan di database.",
+        "why": "DPI memblokir apa yang dikenalinya. Lalu lintas yang terlihat biasa tidak memberinya apa pun untuk diblokir."
       },
       "protocol": {
         "feature": "Protokol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality meminjam handshake TLS dari situs web sungguhan, jadi tidak ada handshake VPN yang bisa dikenali.",
+        "keeps": "Tidak ada tentang lalu lintas Anda. Server meneruskan paket lalu melupakannya.",
+        "why": "OpenVPN dan WireGuard cepat, tetapi pola paketnya sudah dikenal luas dan diblokir dalam hitungan detik di Rusia, Tiongkok, dan Iran."
       },
       "dns": {
         "feature": "Enkripsi DNS",
         "traditional": "Kadang-kadang",
-        "doppler": "Selalu"
+        "doppler": "Selalu",
+        "means": "Setiap pencarian, langkah yang mengubah site.com menjadi alamat, berjalan di dalam terowongan ke resolver kami sendiri.",
+        "keeps": "Tanpa riwayat kueri. Setiap pencarian diselesaikan, disaring dari iklan dan pelacak, lalu dibuang.",
+        "why": "DNS biasa memperlihatkan setiap situs yang Anda kunjungi kepada penyedia internet, meskipun halamannya sendiri terenkripsi."
       },
       "censorship": {
         "feature": "Ketahanan sensor",
         "traditional": "Terbatas",
-        "doppler": "Bawaan"
+        "doppler": "Bawaan",
+        "means": "Dibuat untuk jaringan yang aktif memblokir VPN. Tanpa bridge atau pengaturan tambahan.",
+        "keeps": "Sama seperti di mana pun. Kebijakan tanpa log tidak berubah menurut negara.",
+        "why": "Pemblokiran makin kuat setiap tahun. Protokol yang sulit dideteksi sejak dirancang bertahan lebih lama daripada protokol yang harus ditambal setelah setiap pemblokiran baru."
       },
       "logs": {
         "feature": "Log aktivitas",
         "traditional": "Bervariasi",
-        "doppler": "Tidak pernah"
+        "doppler": "Tidak pernah",
+        "means": "Tidak ada catatan situs yang Anda kunjungi, apa yang Anda unduh, berapa banyak data yang Anda pakai, atau berapa lama Anda terhubung.",
+        "keeps": "Log masuk: IP, ID anonim, ID perangkat, dan waktu, dihapus setelah 90 hari. Log ini menunjukkan bahwa perangkat terhubung, bukan apa yang dilakukannya.",
+        "why": "Log yang tidak ada tidak bisa bocor atau diserahkan. Log masuk adalah batas minimum yang kami perlukan untuk menghentikan penyalahgunaan."
       }
     }
   },

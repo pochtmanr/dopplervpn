@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Elimină un contact de asistență",
+      "intro": "Dacă în contul tău Doppler este salvată o adresă de e-mail sau un cont Telegram drept contact de asistență și nu mai vrei să fie acolo, cere-ne aici să îl eliminăm.",
+      "keepsTitle": "Contul tău nu este șters",
+      "keeps": "Se elimină doar contactul. Contul, abonamentul și înregistrările de plată rămân neschimbate.",
+      "accountLabel": "ID-ul contului",
+      "accountHint": "Arată ca VPN-XXXX-XXXX-XXXX și apare în aplicație și pe pagina contului tău.",
+      "methodLabel": "Tipul contactului",
+      "methodHint": "Alege ce tip de contact este salvat în cont.",
+      "methodEmail": "E-mail",
+      "valueLabel": "Contactul de eliminat",
+      "valueHint": "Introdu-l exact cum este salvat: adresa de e-mail completă sau numele de utilizator Telegram.",
+      "submit": "Solicită eliminarea",
+      "submitting": "Se trimite…",
+      "recordedTitle": "Solicitare primită",
+      "recorded": "Dacă ID-ul contului corespunde unui contact verificat al acelui cont, solicitarea este înregistrată. Pentru protecția contului, nu spunem dacă au corespuns.",
+      "unavailableTitle": "Încă indisponibil",
+      "unavailable": "Eliminarea unui contact de asistență nu este încă disponibilă. Nu s-a trimis nimic.",
+      "errorTitle": "Solicitare netrimisă",
+      "error": "Solicitarea nu a putut fi trimisă. Verifică conexiunea și încearcă din nou mai târziu."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN tradițional",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Ce înseamnă",
+      "keeps": "Ce păstrăm",
+      "why": "De ce o facem"
+    },
     "rows": {
       "account": {
         "feature": "Cont necesar",
         "traditional": "Email + parolă",
-        "doppler": "Fără cont necesar"
+        "doppler": "Fără cont necesar",
+        "means": "Instalezi aplicația și te conectezi. Fără e-mail, fără parolă, fără număr de telefon.",
+        "keeps": "Un ID anonim (VPN-XXXX-XXXX-XXXX) și un identificator de dispozitiv care aplică limita de dispozitive. Nimic care să te numească.",
+        "why": "Un e-mail leagă un cont de o persoană reală. Nu cerem niciodată unul, așa că nu există nimic de scurs, vândut sau predat."
       },
       "fingerprint": {
         "feature": "Amprentă trafic",
         "traditional": "Detectabil de DPI",
-        "doppler": "Camuflat ca HTTPS"
+        "doppler": "Camuflat ca HTTPS",
+        "means": "Pentru un firewall, conexiunea ta arată ca o vizită obișnuită pe un site HTTPS cunoscut.",
+        "keeps": "Nimic. Deghizarea are loc în rețea, nu într-o bază de date.",
+        "why": "DPI blochează ce recunoaște. Traficul care arată obișnuit nu îi oferă nimic de blocat."
       },
       "protocol": {
         "feature": "Protocol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality împrumută handshake-ul TLS al unui site real, așa că nu există niciun handshake VPN de observat.",
+        "keeps": "Nimic despre traficul tău. Serverele lasă pachetele să treacă și le uită.",
+        "why": "OpenVPN și WireGuard sunt rapide, dar tiparele lor de pachete sunt bine cunoscute și sunt blocate în câteva secunde în Rusia, China și Iran."
       },
       "dns": {
         "feature": "Criptare DNS",
         "traditional": "Uneori",
-        "doppler": "Întotdeauna"
+        "doppler": "Întotdeauna",
+        "means": "Fiecare interogare, pasul care transformă site.com într-o adresă, călătorește prin tunel până la propriul nostru resolver.",
+        "keeps": "Niciun istoric al interogărilor. Fiecare interogare este rezolvată, filtrată de reclame și trackere, apoi ștearsă.",
+        "why": "DNS-ul obișnuit îi arată furnizorului tău de internet fiecare site pe care îl vizitezi, chiar și când pagina în sine este criptată."
       },
       "censorship": {
         "feature": "Rezistență la cenzură",
         "traditional": "Limitată",
-        "doppler": "Integrată"
+        "doppler": "Integrată",
+        "means": "Creat pentru rețelele care blochează activ VPN-urile. Fără poduri sau setări suplimentare.",
+        "keeps": "La fel ca peste tot. Politica fără jurnale nu se schimbă în funcție de țară.",
+        "why": "Blocările devin mai puternice în fiecare an. Un protocol greu de detectat prin design rezistă mai mult decât unul care trebuie reparat după fiecare nouă blocare."
       },
       "logs": {
         "feature": "Jurnale de activitate",
         "traditional": "Variabil",
-        "doppler": "Niciodată"
+        "doppler": "Niciodată",
+        "means": "Nicio evidență a site-urilor pe care le vizitezi, a ce descarci, a câte date folosești sau a cât timp stai conectat.",
+        "keeps": "Un jurnal de autentificare: IP, ID anonim, ID dispozitiv și ora, șters după 90 de zile. Arată că un dispozitiv s-a conectat, nu ce a făcut.",
+        "why": "Jurnalele care nu există nu pot fi scurse sau predate. Jurnalul de autentificare este minimul necesar pentru a opri abuzurile."
       }
     }
   },

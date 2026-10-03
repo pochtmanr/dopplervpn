@@ -49,3 +49,8 @@ export const localeConfig: Record<string, { label: string; countryCode: string; 
 export function getFlagUrl(countryCode: string): string {
   return `/flags/${countryCode}.svg`;
 }
+
+/** Rectangular 4:3 flag (lipis/flag-icons, MIT, public/flags/4x3) for a given country code */
+export function getRectFlagUrl(countryCode: string): string {
+  return `/flags/4x3/${countryCode}.svg`;
+}

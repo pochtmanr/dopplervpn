@@ -29,6 +29,25 @@ const PriceComparison = dynamic(() => import("@/components/sections/price-compar
 const Pricing = dynamic(() => import("@/components/sections/pricing").then(m => ({ default: m.Pricing })));
 const FAQ = dynamic(() => import("@/components/sections/faq").then(m => ({ default: m.FAQ })));
 import { createStaticClient } from "@/lib/supabase/server";
+// Calm+ sections (CALM_PLUS_PREVIEW=0 restores the Glyph Terminal ones).
+import {
+  calmPlusPreview,
+  PreviewBlog,
+  PreviewCensorship,
+  PreviewComparison,
+  PreviewCta,
+  PreviewFaq,
+  PreviewFeatures,
+  PreviewGetStarted,
+  PreviewPlatforms,
+  PreviewPriceComparison,
+  PreviewPricing,
+  PreviewPrivacy,
+  PreviewServers,
+  PreviewSpeed,
+  PreviewSteps,
+  PreviewUseCases,
+} from "./design-lab/home-preview";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -159,21 +178,21 @@ export default async function HomePage({ params }: PageProps) {
       <SoftwareApplicationSchema locale={locale} />
       <main className="overflow-x-clip">
         <Hero />
-        <PlatformsAvailable />
-        <Features />
-        <TechnicalHowItWorks />
-        <SpeedComparison />
-        <Pricing />
-        <PriceComparison />
-        <CensorshipResistance />
-        <ComparisonTable />
-        <UseCases />
-        <Servers />
-        <PrivacyModel />
-        <HowItWorks />
-        <FAQ />
-        <CTA />
-        <HomeBlogSection posts={posts} locale={locale} />
+        {calmPlusPreview ? <PreviewPlatforms /> : <PlatformsAvailable />}
+        {calmPlusPreview ? <PreviewFeatures /> : <Features />}
+        {calmPlusPreview ? <PreviewSteps /> : <TechnicalHowItWorks />}
+        {calmPlusPreview ? <PreviewSpeed /> : <SpeedComparison />}
+        {calmPlusPreview ? <PreviewPricing /> : <Pricing />}
+        {calmPlusPreview ? <PreviewPriceComparison /> : <PriceComparison />}
+        {calmPlusPreview ? <PreviewCensorship /> : <CensorshipResistance />}
+        {calmPlusPreview ? <PreviewComparison /> : <ComparisonTable />}
+        {calmPlusPreview ? <PreviewUseCases /> : <UseCases />}
+        {calmPlusPreview ? <PreviewServers /> : <Servers />}
+        {calmPlusPreview ? <PreviewPrivacy /> : <PrivacyModel />}
+        {calmPlusPreview ? <PreviewGetStarted /> : <HowItWorks />}
+        {calmPlusPreview ? <PreviewFaq /> : <FAQ />}
+        {calmPlusPreview ? <PreviewCta /> : <CTA />}
+        {calmPlusPreview ? <PreviewBlog posts={posts} locale={locale} /> : <HomeBlogSection posts={posts} locale={locale} />}
         <MobileStickyCta />
       </main>
       <Footer />

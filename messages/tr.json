@@ -1072,6 +1072,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Destek iletişim bilgisini kaldır",
+      "intro": "Doppler hesabında destek iletişim bilgisi olarak bir e-posta adresi veya Telegram hesabı kayıtlıysa ve artık orada olmasını istemiyorsan, buradan kaldırılmasını isteyebilirsin.",
+      "keepsTitle": "Hesabın silinmez",
+      "keeps": "Yalnızca iletişim bilgisi kaldırılır. Hesabın, aboneliğin ve ödeme kayıtların olduğu gibi kalır.",
+      "accountLabel": "Hesap kimliği",
+      "accountHint": "VPN-XXXX-XXXX-XXXX biçimindedir; uygulamada ve hesap sayfanda görünür.",
+      "methodLabel": "İletişim türü",
+      "methodHint": "Hesapta kayıtlı iletişim bilgisinin türünü seç.",
+      "methodEmail": "E-posta",
+      "valueLabel": "Kaldırılacak iletişim bilgisi",
+      "valueHint": "Kayıtlı olduğu gibi aynen yaz: e-posta adresinin tamamı veya Telegram kullanıcı adı.",
+      "submit": "Kaldırma iste",
+      "submitting": "Gönderiliyor…",
+      "recordedTitle": "Talep alındı",
+      "recorded": "Hesap kimliği o hesaptaki doğrulanmış bir iletişim bilgisiyle eşleşiyorsa talebin kaydedildi. Hesabı korumak için eşleşme olup olmadığını söylemiyoruz.",
+      "unavailableTitle": "Henüz açık değil",
+      "unavailable": "Destek iletişim bilgisini kaldırma henüz kullanılamıyor. Hiçbir şey gönderilmedi.",
+      "errorTitle": "Talep gönderilmedi",
+      "error": "Talep gönderilemedi. Bağlantını kontrol et ve daha sonra tekrar dene."
     }
   },
   "servers": {
@@ -1418,36 +1439,59 @@
       "traditional": "Geleneksel VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Ne anlama geliyor",
+      "keeps": "Ne saklıyoruz",
+      "why": "Neden böyle yapıyoruz"
+    },
     "rows": {
       "account": {
         "feature": "Hesap gerekli mi",
         "traditional": "Email + şifre",
-        "doppler": "Hesap gerekmez"
+        "doppler": "Hesap gerekmez",
+        "means": "Uygulamayı yükleyip bağlanırsınız. E-posta, şifre ya da telefon numarası yok.",
+        "keeps": "Anonim bir kimlik (VPN-XXXX-XXXX-XXXX) ve cihaz sınırınızı uygulayan bir cihaz tanımlayıcısı. Sizi adlandıran hiçbir şey yok.",
+        "why": "E-posta, bir hesabı gerçek bir kişiye bağlar. Asla istemiyoruz; bu yüzden sızacak, satılacak ya da teslim edilecek bir şey yok."
       },
       "fingerprint": {
         "feature": "Trafik izi",
         "traditional": "DPI tarafından tespit edilir",
-        "doppler": "HTTPS olarak kamufle edilir"
+        "doppler": "HTTPS olarak kamufle edilir",
+        "means": "Bir güvenlik duvarına göre bağlantınız, bilinen bir HTTPS sitesine yapılan sıradan bir ziyaret gibi görünür.",
+        "keeps": "Hiçbir şey. Gizleme bir veritabanında değil, hat üzerinde gerçekleşir.",
+        "why": "DPI tanıdığını engeller. Sıradan görünen trafik ona engelleyecek bir şey bırakmaz."
       },
       "protocol": {
         "feature": "Protokol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality gerçek bir web sitesinin TLS el sıkışmasını ödünç alır; bu yüzden fark edilecek bir VPN el sıkışması yoktur.",
+        "keeps": "Trafiğiniz hakkında hiçbir şey. Sunucular paketleri iletir ve unutur.",
+        "why": "OpenVPN ve WireGuard hızlıdır, ancak paket desenleri iyi bilinir ve Rusya, Çin ve İran’da saniyeler içinde engellenir."
       },
       "dns": {
         "feature": "DNS şifreleme",
         "traditional": "Bazen",
-        "doppler": "Her zaman"
+        "doppler": "Her zaman",
+        "means": "site.com’u bir adrese dönüştüren her sorgu, tünelin içinden kendi çözümleyicimize gider.",
+        "keeps": "Sorgu geçmişi yok. Her sorgu çözümlenir, reklam ve izleyicilerden arındırılır ve ardından silinir.",
+        "why": "Düz DNS, sayfanın kendisi şifreli olsa bile ziyaret ettiğiniz her siteyi internet sağlayıcınıza gösterir."
       },
       "censorship": {
         "feature": "Sansür direnci",
         "traditional": "Sınırlı",
-        "doppler": "Yerleşik"
+        "doppler": "Yerleşik",
+        "means": "VPN’leri aktif olarak engelleyen ağlar için tasarlandı. Köprü ya da ek ayar gerekmez.",
+        "keeps": "Her yerde olduğu gibi. Kayıt tutmama düzeni ülkeye göre değişmez.",
+        "why": "Engellemeler her yıl güçleniyor. Tasarımı gereği tespit edilmesi zor bir protokol, her yeni engellemeden sonra yamalanması gereken bir protokolden daha uzun dayanır."
       },
       "logs": {
         "feature": "Aktivite logları",
         "traditional": "Değişir",
-        "doppler": "Asla"
+        "doppler": "Asla",
+        "means": "Ziyaret ettiğiniz siteler, indirdikleriniz, ne kadar veri kullandığınız ya da ne kadar süre bağlı kaldığınız kaydedilmez.",
+        "keeps": "Bir oturum açma kaydı: IP, anonim kimlik, cihaz kimliği ve saat; 90 gün sonra silinir. Bir cihazın bağlandığını gösterir, ne yaptığını değil.",
+        "why": "Var olmayan kayıtlar sızamaz ve teslim edilemez. Oturum açma kaydı, kötüye kullanımı durdurmak için gereken en az şeydir."
       }
     }
   },

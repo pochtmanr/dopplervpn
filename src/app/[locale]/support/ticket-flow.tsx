@@ -901,7 +901,7 @@ function ChoiceButton({
           : "border-overlay/10 bg-bg-secondary/40 hover:border-accent-teal/30 hover:bg-bg-secondary/70"
       }`}
     >
-      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent-teal text-text-primary">
+      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent-teal text-white">
         {icon}
       </span>
       <span className="min-w-0 flex-1">

@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Ondoa mawasiliano ya usaidizi",
+      "intro": "Ikiwa anwani ya barua pepe au akaunti ya Telegram imehifadhiwa kwenye akaunti yako ya Doppler kama mawasiliano ya usaidizi na hutaki tena iwe hapo, tuombe tuiondoe hapa.",
+      "keepsTitle": "Akaunti yako haifutwi",
+      "keeps": "Mawasiliano pekee ndiyo yanaondolewa. Akaunti, usajili na rekodi zako za malipo zinabaki kama zilivyo.",
+      "accountLabel": "Kitambulisho cha Akaunti",
+      "accountHint": "Kinaonekana kama VPN-XXXX-XXXX-XXXX na kinaonyeshwa kwenye programu na kwenye ukurasa wa akaunti yako.",
+      "methodLabel": "Aina ya mawasiliano",
+      "methodHint": "Chagua aina ya mawasiliano yaliyohifadhiwa kwenye akaunti.",
+      "methodEmail": "Barua pepe",
+      "valueLabel": "Mawasiliano ya kuondoa",
+      "valueHint": "Yaandike sawasawa kama yalivyohifadhiwa: anwani kamili ya barua pepe au jina la mtumiaji la Telegram.",
+      "submit": "Omba kuondolewa",
+      "submitting": "Inatuma…",
+      "recordedTitle": "Ombi limepokelewa",
+      "recorded": "Ikiwa Kitambulisho cha Akaunti kinalingana na mawasiliano yaliyothibitishwa ya akaunti hiyo, ombi lako limerekodiwa. Ili kulinda akaunti, hatusemi kama vililingana.",
+      "unavailableTitle": "Bado haijafunguliwa",
+      "unavailable": "Kuondoa mawasiliano ya usaidizi bado hakupatikani. Hakuna kilichotumwa.",
+      "errorTitle": "Ombi halikutumwa",
+      "error": "Ombi halikuweza kutumwa. Angalia muunganisho wako na ujaribu tena baadaye."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN ya Kawaida",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Inamaanisha nini",
+      "keeps": "Tunachohifadhi",
+      "why": "Kwa nini tunafanya hivi"
+    },
     "rows": {
       "account": {
         "feature": "Akaunti inahitajika",
         "traditional": "Email + nenosiri",
-        "doppler": "Hakuna akaunti"
+        "doppler": "Hakuna akaunti",
+        "means": "Unasakinisha programu na kuunganisha. Hakuna barua pepe, nenosiri wala namba ya simu.",
+        "keeps": "Kitambulisho kisichojulikana (VPN-XXXX-XXXX-XXXX) na kitambulisho cha kifaa kinachosimamia kikomo chako cha vifaa. Hakuna kitu kinachokutaja kwa jina.",
+        "why": "Barua pepe inaunganisha akaunti na mtu halisi. Hatuiombi kamwe, kwa hivyo hakuna cha kuvuja, kuuzwa wala kukabidhiwa."
       },
       "fingerprint": {
         "feature": "Alama ya trafiki",
         "traditional": "Inagunduliwa na DPI",
-        "doppler": "Imefichwa kama HTTPS"
+        "doppler": "Imefichwa kama HTTPS",
+        "means": "Kwa firewall, muunganisho wako unaonekana kama ziara ya kawaida kwenye tovuti maarufu ya HTTPS.",
+        "keeps": "Hakuna. Kujificha kunafanyika kwenye mtandao, si kwenye hifadhidata.",
+        "why": "DPI huzuia kile inachokitambua. Trafiki inayoonekana ya kawaida haiipi chochote cha kuzuia."
       },
       "protocol": {
         "feature": "Itifaki",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality huazima mpeano wa mkono wa TLS wa tovuti halisi, kwa hivyo hakuna mpeano wa mkono wa VPN wa kugunduliwa.",
+        "keeps": "Hakuna chochote kuhusu trafiki yako. Seva hupitisha pakiti na kuzisahau.",
+        "why": "OpenVPN na WireGuard ni za haraka, lakini mifumo ya pakiti zao inajulikana sana na huzuiwa ndani ya sekunde chache nchini Urusi, China na Iran."
       },
       "dns": {
         "feature": "Usimbaji wa DNS",
         "traditional": "Wakati mwingine",
-        "doppler": "Daima"
+        "doppler": "Daima",
+        "means": "Kila utafutaji, hatua inayobadilisha site.com kuwa anwani, hupita ndani ya handaki hadi kwenye resolver yetu wenyewe.",
+        "keeps": "Hakuna historia ya maombi. Kila utafutaji hutatuliwa, huchujwa matangazo na vifuatiliaji, kisha hufutwa.",
+        "why": "DNS ya kawaida humwonyesha mtoa huduma wako wa intaneti kila tovuti unayotembelea, hata ukurasa wenyewe ukiwa umesimbwa."
       },
       "censorship": {
         "feature": "Upinzani wa udhibiti",
         "traditional": "Mdogo",
-        "doppler": "Imejengwa ndani"
+        "doppler": "Imejengwa ndani",
+        "means": "Imeundwa kwa mitandao inayozuia VPN kikamilifu. Hakuna madaraja wala mipangilio ya ziada.",
+        "keeps": "Sawa na kila mahali. Mpangilio wa kutoweka kumbukumbu haubadiliki kulingana na nchi.",
+        "why": "Uzuiaji unazidi kuwa mkali kila mwaka. Itifaki ambayo ni ngumu kugunduliwa tangu muundo wake hudumu kuliko ile inayohitaji kurekebishwa baada ya kila uzuiaji mpya."
       },
       "logs": {
         "feature": "Kumbukumbu za shughuli",
         "traditional": "Inategemea",
-        "doppler": "Kamwe"
+        "doppler": "Kamwe",
+        "means": "Hakuna rekodi ya tovuti unazotembelea, unachopakua, kiasi cha data unachotumia wala muda unaokaa umeunganishwa.",
+        "keeps": "Kumbukumbu ya kuingia: IP, kitambulisho kisichojulikana, kitambulisho cha kifaa na muda, hufutwa baada ya siku 90. Inaonyesha kuwa kifaa kiliunganishwa, si kilichofanya.",
+        "why": "Kumbukumbu zisizokuwepo haziwezi kuvuja wala kukabidhiwa. Kumbukumbu ya kuingia ndiyo kiwango cha chini tunachohitaji kuzuia matumizi mabaya."
       }
     }
   },

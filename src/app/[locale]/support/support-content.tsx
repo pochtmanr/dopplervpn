@@ -20,7 +20,8 @@ function desktopShell(): boolean {
   return window.matchMedia("(min-width: 1024px)").matches;
 }
 
-export function SupportContent() {
+/** `plus`: the Calm+ preview, decided on the server (see design-lab/home-preview.tsx). */
+export function SupportContent({ plus = false }: { plus?: boolean }) {
   const locale = useLocale();
   const [account, setAccount] = useState<AccountData | null>(null);
   const [ticketOpen, setTicketOpen] = useState(false);
@@ -81,6 +82,7 @@ export function SupportContent() {
           onOpenTicket={openTicket}
           onOpenRestore={() => setRestoreOpen(true)}
           onOpenBusiness={() => setBusinessOpen(true)}
+          plus={plus}
         />
       )}
 
@@ -97,7 +99,7 @@ export function SupportContent() {
         />
       )}
 
-      <ContactRemovalPanel />
+      <ContactRemovalPanel plus={plus} />
 
       {businessOpen && <BusinessModal onClose={() => setBusinessOpen(false)} />}
 

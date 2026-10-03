@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Alisin ang isang support contact",
+      "intro": "Kung may email address o Telegram account na naka-save sa iyong Doppler account bilang support contact at ayaw mo na itong naroon, hilingin sa amin dito na alisin ito.",
+      "keepsTitle": "Hindi binubura ang account mo",
+      "keeps": "Ang contact lang ang inaalis. Mananatili ang account, subscription at mga record ng bayad mo.",
+      "accountLabel": "Account ID",
+      "accountHint": "Mukha itong VPN-XXXX-XXXX-XXXX at makikita sa app at sa page ng account mo.",
+      "methodLabel": "Uri ng contact",
+      "methodHint": "Piliin kung anong uri ng contact ang naka-save sa account.",
+      "methodEmail": "Email",
+      "valueLabel": "Contact na aalisin",
+      "valueHint": "Ilagay ito nang eksakto kung paano ito naka-save: ang buong email address o ang Telegram username.",
+      "submit": "Humiling na alisin",
+      "submitting": "Ipinapadala…",
+      "recordedTitle": "Natanggap ang hiling",
+      "recorded": "Kung tugma ang Account ID sa isang verified na contact ng account na iyon, naitala ang hiling mo. Para maprotektahan ang account, hindi namin sinasabi kung nagtugma ang mga ito.",
+      "unavailableTitle": "Hindi pa bukas",
+      "unavailable": "Hindi pa available ang pag-alis ng support contact. Walang naipadala.",
+      "errorTitle": "Hindi naipadala ang hiling",
+      "error": "Hindi maipadala ang hiling. Suriin ang koneksyon mo at subukang muli mamaya."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Karaniwang VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Ano ang ibig sabihin",
+      "keeps": "Ano ang itinatago namin",
+      "why": "Bakit namin ito ginagawa"
+    },
     "rows": {
       "account": {
         "feature": "Kailangan ng account",
         "traditional": "Email + password",
-        "doppler": "Hindi kailangan"
+        "doppler": "Hindi kailangan",
+        "means": "I-install mo ang app at kumonekta. Walang email, password o numero ng telepono.",
+        "keeps": "Isang anonymous na ID (VPN-XXXX-XXXX-XXXX) at device identifier na nagpapatupad ng limitasyon mo sa device. Walang anumang nagpapakilala sa iyo.",
+        "why": "Iniuugnay ng email ang account sa isang totoong tao. Hindi kami kailanman humihingi nito, kaya walang maaaring ma-leak, maibenta o maibigay."
       },
       "fingerprint": {
         "feature": "Traffic fingerprint",
         "traditional": "Nakikita ng DPI",
-        "doppler": "Nakabalatkayo bilang HTTPS"
+        "doppler": "Nakabalatkayo bilang HTTPS",
+        "means": "Para sa isang firewall, mukhang ordinaryong pagbisita sa kilalang HTTPS site ang koneksyon mo.",
+        "keeps": "Wala. Nangyayari ang pagbabalatkayo sa network, hindi sa database.",
+        "why": "Bina-block ng DPI ang nakikilala nito. Ang trapikong mukhang ordinaryo ay walang ibinibigay para i-block."
       },
       "protocol": {
         "feature": "Protocol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "Hinihiram ng VLESS-Reality ang TLS handshake ng isang totoong website, kaya walang VPN handshake na mapapansin.",
+        "keeps": "Walang anuman tungkol sa trapiko mo. Ipinapasa ng mga server ang mga packet at kinakalimutan ang mga ito.",
+        "why": "Mabilis ang OpenVPN at WireGuard, pero kilalang-kilala ang pattern ng kanilang mga packet at nabo-block sa loob ng ilang segundo sa Russia, China at Iran."
       },
       "dns": {
         "feature": "DNS encryption",
         "traditional": "Minsan",
-        "doppler": "Palagi"
+        "doppler": "Palagi",
+        "means": "Bawat lookup, ang hakbang na ginagawang address ang site.com, ay dumadaan sa loob ng tunnel papunta sa sarili naming resolver.",
+        "keeps": "Walang query history. Nire-resolve ang bawat lookup, sinasala laban sa ads at tracker, saka itinatapon.",
+        "why": "Ipinapakita ng karaniwang DNS sa internet provider mo ang bawat site na binibisita mo, kahit naka-encrypt ang mismong page."
       },
       "censorship": {
         "feature": "Censorship resistance",
         "traditional": "Limitado",
-        "doppler": "Built-in"
+        "doppler": "Built-in",
+        "means": "Ginawa para sa mga network na aktibong nagba-block ng VPN. Walang bridge o dagdag na setting.",
+        "keeps": "Pareho sa lahat ng lugar. Hindi nagbabago ang no-logs setup ayon sa bansa.",
+        "why": "Lumalakas ang pag-block bawat taon. Ang protocol na mahirap ma-detect sa disenyo pa lang ay mas tumatagal kaysa sa kailangang i-patch pagkatapos ng bawat bagong block."
       },
       "logs": {
         "feature": "Activity logs",
         "traditional": "Depende",
-        "doppler": "Hindi kailanman"
+        "doppler": "Hindi kailanman",
+        "means": "Walang talaan ng mga site na binibisita mo, ng dina-download mo, kung gaano karaming data ang ginagamit mo o kung gaano ka katagal nakakonekta.",
+        "keeps": "Isang sign-in log: IP, anonymous na ID, device ID at oras, binubura pagkalipas ng 90 araw. Ipinapakita nito na kumonekta ang isang device, hindi kung ano ang ginawa nito.",
+        "why": "Ang mga log na hindi umiiral ay hindi maaaring ma-leak o maibigay. Ang sign-in log ang pinakamababang kailangan namin para pigilan ang pang-aabuso."
       }
     }
   },

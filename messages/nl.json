@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Een supportcontact verwijderen",
+      "intro": "Staat er een e-mailadres of Telegram-account als supportcontact op je Doppler-account en wil je dat niet meer, vraag ons dan hier om het te verwijderen.",
+      "keepsTitle": "Je account wordt niet verwijderd",
+      "keeps": "Alleen het contact wordt verwijderd. Je account, abonnement en betaalgegevens blijven zoals ze zijn.",
+      "accountLabel": "Account-ID",
+      "accountHint": "Ziet eruit als VPN-XXXX-XXXX-XXXX en staat in de app en op je accountpagina.",
+      "methodLabel": "Soort contact",
+      "methodHint": "Kies welk soort contact er op het account staat.",
+      "methodEmail": "E-mail",
+      "valueLabel": "Te verwijderen contact",
+      "valueHint": "Vul het precies in zoals het is opgeslagen: het volledige e-mailadres of de Telegram-gebruikersnaam.",
+      "submit": "Verwijdering aanvragen",
+      "submitting": "Versturen…",
+      "recordedTitle": "Aanvraag ontvangen",
+      "recorded": "Als de account-ID overeenkomt met een geverifieerd contact van dat account, is je aanvraag vastgelegd. Ter bescherming van het account zeggen we niet of er een match was.",
+      "unavailableTitle": "Nog niet beschikbaar",
+      "unavailable": "Een supportcontact verwijderen is nog niet mogelijk. Er is niets verstuurd.",
+      "errorTitle": "Aanvraag niet verstuurd",
+      "error": "De aanvraag kon niet worden verstuurd. Controleer je verbinding en probeer het later opnieuw."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Traditionele VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Wat het betekent",
+      "keeps": "Wat we bewaren",
+      "why": "Waarom we het doen"
+    },
     "rows": {
       "account": {
         "feature": "Account vereist",
         "traditional": "E-mail + wachtwoord",
-        "doppler": "Geen account nodig"
+        "doppler": "Geen account nodig",
+        "means": "Je installeert de app en maakt verbinding. Geen e-mail, geen wachtwoord, geen telefoonnummer.",
+        "keeps": "Een anonieme ID (VPN-XXXX-XXXX-XXXX) en een apparaat-ID die je apparaatlimiet bewaakt. Niets wat jou noemt.",
+        "why": "Een e-mailadres koppelt een account aan een echt persoon. Wij vragen er nooit om, dus er is niets om te lekken, te verkopen of af te geven."
       },
       "fingerprint": {
         "feature": "Verkeersvingerafdruk",
         "traditional": "Detecteerbaar door DPI",
-        "doppler": "Gecamoufleerd als HTTPS"
+        "doppler": "Gecamoufleerd als HTTPS",
+        "means": "Voor een firewall lijkt je verbinding op een gewoon bezoek aan een bekende HTTPS-site.",
+        "keeps": "Niets. De vermomming gebeurt op de lijn, niet in een database.",
+        "why": "DPI blokkeert wat het herkent. Verkeer dat er gewoon uitziet, geeft het niets om te blokkeren."
       },
       "protocol": {
         "feature": "Protocol",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality leent de TLS-handshake van een echte website, dus er is geen VPN-handshake om op te merken.",
+        "keeps": "Niets over je verkeer. Servers sturen pakketten door en vergeten ze.",
+        "why": "OpenVPN en WireGuard zijn snel, maar hun pakketpatronen zijn bekend en worden in Rusland, China en Iran binnen seconden geblokkeerd."
       },
       "dns": {
         "feature": "DNS-encryptie",
         "traditional": "Soms",
-        "doppler": "Altijd"
+        "doppler": "Altijd",
+        "means": "Elke lookup, de stap die site.com in een adres omzet, gaat door de tunnel naar onze eigen resolver.",
+        "keeps": "Geen querygeschiedenis. Elke lookup wordt opgelost, gefilterd op advertenties en trackers en daarna weggegooid.",
+        "why": "Gewone DNS laat je internetprovider elke site zien die je bezoekt, ook als de pagina zelf versleuteld is."
       },
       "censorship": {
         "feature": "Censuurbestendigheid",
         "traditional": "Beperkt",
-        "doppler": "Ingebouwd"
+        "doppler": "Ingebouwd",
+        "means": "Gemaakt voor netwerken die VPN’s actief blokkeren. Geen bridges of extra instellingen nodig.",
+        "keeps": "Hetzelfde als overal. Het no-logsbeleid verschilt niet per land.",
+        "why": "Blokkades worden elk jaar strenger. Een protocol dat van nature moeilijk te herkennen is, houdt het langer vol dan een protocol dat na elke nieuwe blokkade gerepareerd moet worden."
       },
       "logs": {
         "feature": "Activiteitslogs",
         "traditional": "Verschilt",
-        "doppler": "Nooit"
+        "doppler": "Nooit",
+        "means": "Geen registratie van de sites die je bezoekt, wat je downloadt, hoeveel data je gebruikt of hoe lang je verbonden bent.",
+        "keeps": "Een inloglog: IP, anonieme ID, apparaat-ID en tijdstip, na 90 dagen verwijderd. Het laat zien dat een apparaat verbinding maakte, niet wat het deed.",
+        "why": "Logs die niet bestaan, kunnen niet lekken of worden afgegeven. Het inloglog is het minimum om misbruik te stoppen."
       }
     }
   },

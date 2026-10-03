@@ -6,6 +6,58 @@ import { useTranslations, useLocale } from 'next-intl';
 
 import { trackAccountIdentified } from '@/lib/track-cta';
 import type { AccountInfo } from './types';
+// Calm+ recipes for the `plus` preview branch.
+import { PLUS_BTN, PLUS_ICON, PLUS_ICON_TONE } from '@/app/[locale]/design-lab/plus-recipes';
+
+/* ── Class sets ──────────────────────────────────────────────────────── */
+
+/** The shipped classes. */
+const SHIPPED = {
+  wrap: 'mx-auto max-w-md px-4 py-12 sm:py-20',
+  h1: 'text-5xl sm:text-6xl font-semibold text-text-primary leading-[1.05] mb-4',
+  lastWord: 'account-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent',
+  subtitle: 'account-reveal text-sm sm:text-base text-text-muted',
+  deleted: 'rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-5 py-3 flex items-center gap-2',
+  toggle: 'grid grid-cols-2 gap-1 p-1 rounded-full bg-bg-secondary/40 border border-overlay/10',
+  toggleBtn: 'rounded-full py-2.5 text-sm font-medium transition-colors',
+  toggleOn: 'bg-accent-teal text-white',
+  toggleOff: 'text-text-muted hover:text-text-primary',
+  card: 'group relative rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300',
+  note: 'text-sm text-text-primary font-medium text-center',
+  submit: 'cta-key w-full rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2',
+  input: 'w-full rounded-2xl border border-overlay/10 bg-bg-secondary/40 px-4 py-4 text-base font-mono tracking-widest text-center text-text-primary placeholder:text-text-muted/40 focus:border-accent-teal focus:ring-2 focus:ring-accent-teal/20 outline-none transition-all',
+  forgot: 'text-xs text-text-muted hover:text-text-primary transition-colors',
+  error: 'flex items-start gap-2.5 rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-start animate-[fadeIn_200ms_ease-out]',
+  errorText: 'text-xs text-danger',
+  reassure: 'flex items-center gap-3 rounded-xl border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 transition-colors p-4',
+  reassureTile: 'w-11 h-11 shrink-0 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal',
+  reassureIcon: 'w-5 h-5',
+  reassureText: 'text-xs text-text-muted',
+};
+
+/** Calm+ preview: the tonal ramp, one flat card, a filled field, duotone glyphs, no gradient or glow. */
+const PLUS: typeof SHIPPED = {
+  wrap: 'mx-auto w-full max-w-md px-4 py-10 sm:py-14',
+  h1: 'font-display text-4xl sm:text-5xl font-bold text-(--c-text) leading-[1.05] mb-3',
+  lastWord: 'account-word',
+  subtitle: 'account-reveal text-[15px] leading-relaxed text-(--c-muted)',
+  deleted: 'rounded-2xl bg-(--c-accent-tint) px-5 py-3 flex items-center gap-2',
+  toggle: 'grid grid-cols-2 gap-1 p-1 rounded-full bg-(--c-inset)',
+  toggleBtn: 'rounded-full py-2.5 text-sm font-bold transition-colors',
+  toggleOn: 'bg-(--c-card) text-(--c-text) shadow-sm',
+  toggleOff: 'text-(--c-muted) hover:text-(--c-text)',
+  card: 'relative rounded-[22px] bg-(--c-card) p-6',
+  note: 'text-[15px] leading-relaxed text-(--c-muted) text-center',
+  submit: `${PLUS_BTN} w-full !h-12 disabled:opacity-50 disabled:cursor-not-allowed`,
+  input: 'w-full rounded-2xl bg-(--c-inset) px-4 py-4 text-base font-mono tracking-widest text-center text-(--c-text) placeholder:text-(--c-tert) focus:ring-2 focus:ring-(--c-accent) outline-none transition-shadow',
+  forgot: 'text-[13px] font-semibold text-(--c-muted) hover:text-(--c-accent) transition-colors',
+  error: 'flex items-start gap-2.5 rounded-2xl bg-(--c-danger-tint) px-4 py-3 text-start animate-[fadeIn_200ms_ease-out]',
+  errorText: 'text-[13px] text-(--c-danger)',
+  reassure: 'flex items-center gap-3 rounded-[22px] bg-(--c-card) p-4',
+  reassureTile: `${PLUS_ICON} ${PLUS_ICON_TONE.teal} w-11 justify-center`,
+  reassureIcon: 'w-6 h-6',
+  reassureText: 'text-[13px] leading-snug text-(--c-muted)',
+};
 
 /* ── Icons ───────────────────────────────────────────────────────────── */
 
@@ -76,6 +128,8 @@ interface AuthPanelProps {
   lockMode?: boolean;
   deletedNotice?: boolean;
   onSuccess: (result: AuthResult) => void;
+  /** Calm+ preview, decided on the server (CALM_PLUS_PREVIEW is not a client env). */
+  plus?: boolean;
 }
 
 /* ── Component ───────────────────────────────────────────────────────── */
@@ -95,7 +149,9 @@ export function AuthPanel({
   lockMode = false,
   deletedNotice = false,
   onSuccess,
+  plus = false,
 }: AuthPanelProps) {
+  const c = plus ? PLUS : SHIPPED;
   const t = useTranslations('subscribe');
   const locale = useLocale();
 
@@ -178,16 +234,16 @@ export function AuthPanel({
   };
 
   return (
-    <div className="mx-auto max-w-md px-4 py-12 sm:py-20">
+    <div className={c.wrap}>
       {/* Header — word-by-word blur fade, same idiom as the rest of /account */}
       <div className="text-center mb-10">
-        <h1 className="text-5xl sm:text-6xl font-semibold text-text-primary leading-[1.05] mb-4">
+        <h1 className={c.h1}>
           {titleWords.map((word, i) => (
             <Fragment key={`tw-${i}`}>
               <span
                 className={
                   i === titleWords.length - 1
-                    ? 'account-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent'
+                    ? c.lastWord
                     : 'account-word'
                 }
                 style={{ '--reveal-delay': `${0.05 + i * 0.06}s` } as React.CSSProperties}
@@ -198,7 +254,7 @@ export function AuthPanel({
           ))}
         </h1>
         <p
-          className="account-reveal text-sm sm:text-base text-text-muted"
+          className={c.subtitle}
           style={{ '--reveal-delay': '0.25s' } as React.CSSProperties}
         >
           {subtitle}
@@ -208,7 +264,7 @@ export function AuthPanel({
       <div className="space-y-5">
         {/* Account deleted confirmation */}
         {deletedNotice && (
-          <div className="rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-5 py-3 flex items-center gap-2">
+          <div className={c.deleted}>
             <CheckIcon className="w-4 h-4 text-accent-teal shrink-0" />
             <p className="text-sm font-medium text-accent-teal">{t('dashboard.deleteSuccess')}</p>
           </div>
@@ -216,26 +272,18 @@ export function AuthPanel({
 
         {/* Mode toggle — segmented pill */}
         {!lockMode && (
-          <div className="grid grid-cols-2 gap-1 p-1 rounded-full bg-bg-secondary/40 border border-overlay/10">
+          <div className={c.toggle}>
             <button
               type="button"
               onClick={() => { setMode('new'); setIdentifyError(''); }}
-              className={`rounded-full py-2.5 text-sm font-medium transition-colors ${
-                mode === 'new'
-                  ? 'bg-accent-teal text-white'
-                  : 'text-text-muted hover:text-text-primary'
-              }`}
+              className={`${c.toggleBtn} ${mode === 'new' ? c.toggleOn : c.toggleOff}`}
             >
               {t('newUser')}
             </button>
             <button
               type="button"
               onClick={() => { setMode('existing'); setIdentifyError(''); }}
-              className={`rounded-full py-2.5 text-sm font-medium transition-colors ${
-                mode === 'existing'
-                  ? 'bg-accent-teal text-white'
-                  : 'text-text-muted hover:text-text-primary'
-              }`}
+              className={`${c.toggleBtn} ${mode === 'existing' ? c.toggleOn : c.toggleOff}`}
             >
               {t('existingUser')}
             </button>
@@ -243,14 +291,18 @@ export function AuthPanel({
         )}
 
         {/* Signature gradient card — same treatment as the landing traffic cards */}
-        <div className="group relative rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300">
-          <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
-          <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className={c.card}>
+          {!plus && (
+            <>
+              <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+              <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </>
+          )}
 
           <div className="relative space-y-5">
             {mode === 'new' ? (
               <>
-                <p className="text-sm text-text-primary font-medium text-center">
+                <p className={c.note}>
                   {t('noRegistrationNote')}
                 </p>
                 <button
@@ -260,7 +312,7 @@ export function AuthPanel({
                   disabled={identifyLoading}
                   aria-busy={identifyLoading}
                   aria-describedby={identifyError ? errorId : undefined}
-                  className="cta-key w-full rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2"
+                  className={c.submit}
                 >
                   {identifyLoading ? (
                     <>
@@ -285,7 +337,7 @@ export function AuthPanel({
                   aria-label={t('accountPlaceholder')}
                   aria-invalid={identifyError ? true : undefined}
                   aria-describedby={identifyError ? errorId : undefined}
-                  className="w-full rounded-2xl border border-overlay/10 bg-bg-secondary/40 px-4 py-4 text-base font-mono tracking-widest text-center text-text-primary placeholder:text-text-muted/40 focus:border-accent-teal focus:ring-2 focus:ring-accent-teal/20 outline-none transition-all"
+                  className={c.input}
                   onKeyDown={(e) => e.key === 'Enter' && handleContinue()}
                 />
 
@@ -296,7 +348,7 @@ export function AuthPanel({
                   disabled={identifyLoading}
                   aria-busy={identifyLoading}
                   aria-describedby={identifyError ? errorId : undefined}
-                  className="cta-key w-full rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3.5 text-sm flex items-center justify-center gap-2"
+                  className={c.submit}
                 >
                   {identifyLoading ? (
                     <>
@@ -314,7 +366,7 @@ export function AuthPanel({
                     onClick={() => {
                       window.location.href = `/${locale}/support#restore`;
                     }}
-                    className="text-xs text-text-muted hover:text-text-primary transition-colors"
+                    className={c.forgot}
                   >
                     {t('dashboard.forgotAccountId')}
                   </button>
@@ -327,10 +379,10 @@ export function AuthPanel({
                 id={errorId}
                 role="alert"
                 aria-live="polite"
-                className="flex items-start gap-2.5 rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-start animate-[fadeIn_200ms_ease-out]"
+                className={c.error}
               >
                 <AlertIcon className="w-4 h-4 text-danger mt-0.5 shrink-0" />
-                <p className="text-xs text-danger">{identifyError}</p>
+                <p className={c.errorText}>{identifyError}</p>
               </div>
             )}
           </div>
@@ -340,11 +392,11 @@ export function AuthPanel({
             Only autoDeleteNote lives here; noRegistrationNote is already the
             explainer inside the card above and must not be repeated. */}
         {mode === 'new' && (
-          <div className="flex items-center gap-3 rounded-xl border border-overlay/10 bg-bg-secondary/40 hover:bg-bg-secondary/70 hover:border-accent-teal/30 transition-colors p-4">
-            <div className="w-11 h-11 shrink-0 rounded-2xl bg-bg-secondary/80 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal">
-              <ClockIcon className="w-5 h-5" />
+          <div className={c.reassure}>
+            <div className={c.reassureTile}>
+              <ClockIcon className={c.reassureIcon} />
             </div>
-            <p className="text-xs text-text-muted">{t('autoDeleteNote')}</p>
+            <p className={c.reassureText}>{t('autoDeleteNote')}</p>
           </div>
         )}
       </div>
@@ -363,7 +415,7 @@ export function AuthPanel({
  * until that read has resolved, so the server and first client paint agree and
  * the banner never flashes.
  */
-export function ExistingAccountBanner() {
+export function ExistingAccountBanner({ plus = false }: { plus?: boolean }) {
   const t = useTranslations('subscribe');
   const locale = useLocale();
 
@@ -382,11 +434,23 @@ export function ExistingAccountBanner() {
   if (!resolved || !savedId) return null;
 
   return (
-    <div className="mx-auto max-w-md px-4 pt-10 sm:pt-16">
-      <div className="rounded-2xl border border-accent-teal/20 bg-accent-teal/5 p-4 animate-[fadeIn_200ms_ease-out]">
+    <div className={plus ? 'mx-auto w-full max-w-md px-4 pt-8 sm:pt-12' : 'mx-auto max-w-md px-4 pt-10 sm:pt-16'}>
+      <div
+        className={
+          plus
+            ? 'rounded-[22px] bg-(--c-card) p-5 animate-[fadeIn_200ms_ease-out]'
+            : 'rounded-2xl border border-accent-teal/20 bg-accent-teal/5 p-4 animate-[fadeIn_200ms_ease-out]'
+        }
+      >
         <div className="flex items-start gap-3 text-start">
-          <div className="w-9 h-9 shrink-0 rounded-xl bg-bg-secondary/80 border border-accent-teal/20 flex items-center justify-center text-accent-teal">
-            <UserIcon className="w-4 h-4" />
+          <div
+            className={
+              plus
+                ? `${PLUS_ICON} ${PLUS_ICON_TONE.teal} mt-0.5`
+                : 'w-9 h-9 shrink-0 rounded-xl bg-bg-secondary/80 border border-accent-teal/20 flex items-center justify-center text-accent-teal'
+            }
+          >
+            <UserIcon className={plus ? 'w-6 h-6' : 'w-4 h-4'} />
           </div>
           <div className="min-w-0">
             <p className="text-sm font-medium text-text-primary">
@@ -400,7 +464,11 @@ export function ExistingAccountBanner() {
 
         <Link
           href={`/${locale}/account`}
-          className="cta-key mt-4 w-full rounded-full text-white font-semibold py-3 text-sm flex items-center justify-center"
+          className={
+            plus
+              ? `${PLUS_BTN} mt-4 w-full`
+              : 'cta-key mt-4 w-full rounded-full text-white font-semibold py-3 text-sm flex items-center justify-center'
+          }
         >
           {t('existingAccountCta')}
         </Link>

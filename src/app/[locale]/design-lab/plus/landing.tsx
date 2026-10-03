@@ -1,4 +1,6 @@
 import { useTranslations } from 'next-intl';
+import { PlusPolicyLinks } from './policy-links';
+import { Link } from '@/i18n/navigation';
 import { PlatformLogo } from '@/components/glyph/platform-icons';
 import { PlatformGlyphBand } from '@/components/glyph/platform-glyph-band';
 import { CheckIcon, ShieldIcon, SparkleIcon, UserIcon, featureIcons } from '@/components/account/dashboard/icons';
@@ -6,6 +8,7 @@ import { PricingBackdrop } from '@/components/glyph/pricing-glyphs';
 import { CARD_HAIRLINE } from '@/components/ui/card-recipes';
 import { PLANS } from '@/lib/facts';
 import { PaymentMarks } from './payment-marks';
+import { PlusFaqAccordion } from './faq';
 import { PlusPlate } from './plate';
 import {
   ArrowGlyph,
@@ -22,28 +25,47 @@ import {
   PLUS_TITLE,
   PLUS_TITLE_SM,
   PLUS_WELL,
+  PlusContainer,
+  PlusHeading,
 } from '../plus-recipes';
 
 const platforms = [
-  { key: 'ios', store: 'appStore', icon: 'apple' },
-  { key: 'android', store: 'googlePlay', icon: 'googlePlay' },
-  { key: 'mac', store: 'macAppStore', icon: 'apple' },
-  { key: 'windows', store: 'directDownload', icon: 'windows' },
+  { key: 'ios', href: '/vpn-for-ios', store: 'appStore', icon: 'apple' },
+  { key: 'android', href: '/vpn-for-android', store: 'googlePlay', icon: 'googlePlay' },
+  { key: 'mac', href: '/vpn-for-macos', store: 'macAppStore', icon: 'apple' },
+  { key: 'windows', href: '/vpn-for-windows', store: 'directDownload', icon: 'windows' },
 ] as const;
 
+/** The step articles, as technical-how-it-works.tsx links them. */
+const stepHrefs = [
+  '/how-it-works/your-device',
+  '/how-it-works/vless-reality-tunnel',
+  '/how-it-works/edge-network',
+  '/tools',
+] as const;
+const allSteps = ['step1', 'step2', 'step3', 'step4'] as const;
+
+/**
+ * `live`: the homepage preview (home-preview.tsx) passes it so the cards link
+ * where the shipped ones do. In the lab they stay on `#`.
+ */
+interface LiveProps {
+  live?: boolean;
+}
+
 /** Live element: the data-rain well behind the logo, on an inset tray. */
-export function PlusPlatforms() {
+export function PlusPlatforms({ live = false }: LiveProps) {
   const t = useTranslations('platformsAvailable');
   const tApps = useTranslations('apps');
   return (
-    <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-10">
+    <PlusContainer className="py-10">
       <div className="mb-6 text-center">
         <p className={PLUS_LABEL}>{t('eyebrow')}</p>
         <h3 className={`mt-1 ${PLUS_TITLE}`}>{t('title')}</h3>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {platforms.map(({ key, store, icon }, i) => (
-          <a key={key} href="#" className={`${PLUS_CARD_HOVER} !flex-row items-center gap-4 !p-3`}>
+        {platforms.map(({ key, href, store, icon }, i) => (
+          <Link key={key} href={live ? href : '#'} className={`${PLUS_CARD_HOVER} !flex-row items-center gap-4 !p-3`}>
             <span className={`${PLUS_WELL} h-16 w-20 shrink-0`}>
               <PlatformGlyphBand index={i} />
               <span className="absolute inset-0 flex items-center justify-center">
@@ -55,20 +77,21 @@ export function PlusPlatforms() {
               <span className={`block ${PLUS_META}`}>{t(`stores.${store}`)}</span>
             </span>
             <ArrowGlyph className="me-2 h-4 w-4 text-(--c-tert) group-hover:text-(--c-accent)" />
-          </a>
+          </Link>
         ))}
       </div>
-    </div>
+    </PlusContainer>
   );
 }
 
 /** Live element: the step's own terminal plate, on a tray; the CTA pill sits under it at the end. */
-export function PlusTrafficSteps() {
+export function PlusTrafficSteps({ live = false }: LiveProps) {
   const t = useTranslations('technicalHowItWorks');
+  const steps = live ? allSteps : allSteps.slice(0, 2);
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {(['step1', 'step2'] as const).map((step, i) => (
-        <a key={step} href="#" className={PLUS_CARD_HOVER}>
+    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${live ? 'lg:grid-cols-4' : ''}`}>
+      {steps.map((step, i) => (
+        <Link key={step} href={live ? stepHrefs[i] : '#'} className={PLUS_CARD_HOVER}>
           <div className="flex items-center gap-3">
             <span className="font-display text-lg font-bold tabular-nums text-(--c-accent)">{String(i + 1).padStart(2, '0')}</span>
             <h3 className={PLUS_TITLE_SM}>{t(`flow.${step}.title`)}</h3>
@@ -83,14 +106,14 @@ export function PlusTrafficSteps() {
               <ArrowGlyph className="h-3.5 w-3.5" />
             </span>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
 }
 
 /** Current's pricing glass: translucent so the glyph backdrop reads through it. */
-const PRICING_GLASS =
+export const PRICING_GLASS =
   'relative overflow-hidden rounded-[22px] border border-(--c-accent)/20 ' +
   'bg-gradient-to-br from-(--c-accent)/[0.08] via-(--c-bg)/60 to-(--c-bg)/75 backdrop-blur-md';
 
@@ -101,13 +124,13 @@ const plusFeatureKeys = ['premiumServers', 'smartRouting', 'alwaysOn', 'devices'
  * follows the pointer), seen through Current's glass. Nothing moves inside the
  * card; the CTA is the feature column's attached footer.
  */
-export function PlusPricing() {
+export function PlusPricing({ live = false }: LiveProps) {
   const t = useTranslations('pricing');
   const plan = PLANS.annual;
   return (
     <div className="relative overflow-hidden">
       <PricingBackdrop />
-      <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-10">
+      <PlusContainer className="relative py-10">
         <div className={`${PRICING_GLASS} lg:!grid lg:grid-cols-5`}>
           <div className={CARD_HAIRLINE} aria-hidden="true" />
           <div className="flex flex-col p-6 md:p-8 lg:col-span-3">
@@ -146,6 +169,7 @@ export function PlusPricing() {
             <div className="mt-8 flex flex-col items-start gap-2 border-t border-(--c-inset) pt-5 lg:mt-auto">
               <PaymentMarks />
               <p className={PLUS_META}>{t('cryptoPaymentNote')} · {t('taxNote')}</p>
+              <PlusPolicyLinks include={['refund', 'webAndStore', 'terms']} />
             </div>
           </div>
 
@@ -162,14 +186,14 @@ export function PlusPricing() {
             </ul>
             <p className={`mt-8 text-center ${PLUS_META} lg:mt-auto lg:pt-8`}>{t('trialNote')}</p>
             <div className="-mx-6 -mb-6 mt-4 md:-mx-8 md:-mb-8">
-              <button type="button" className={`${PLUS_BTN} ${PLUS_FOOTER_BTN}`}>
+              <Link href={live ? '/account' : '#'} className={`${PLUS_BTN} ${PLUS_FOOTER_BTN}`}>
                 {t('plusCta')}
                 <ArrowGlyph />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
-      </div>
+      </PlusContainer>
     </div>
   );
 }
@@ -187,7 +211,7 @@ const features = [
 export function PlusFeatures() {
   const t = useTranslations('features');
   return (
-    <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-10">
+    <PlusContainer className="py-10">
       <div className="mb-8 text-center">
         <h3 className={PLUS_TITLE}>{t('title')}</h3>
         <p className={`mx-auto mt-2 max-w-2xl ${PLUS_BODY}`}>{t('subtitle')}</p>
@@ -201,6 +225,31 @@ export function PlusFeatures() {
           </div>
         ))}
       </div>
-    </div>
+    </PlusContainer>
+  );
+}
+
+/** The homepage FAQ's questions, in the shipped order (sections/faq.tsx, page.tsx's FAQSchema). */
+const homeFaqKeys = [
+  'what', 'noLogs', 'adBlocker', 'categories', 'devices', 'platforms',
+  'whatIsIncluded', 'plans', 'trial', 'cancel', 'restore', 'refund',
+] as const;
+
+/**
+ * Live element: the open row's teal start bar. Two cards of six at lg+, one open across both.
+ * `live`: on the homepage the title is the section's h2, sized like the other preview headers.
+ */
+export function PlusHomeFaq({ live = false }: LiveProps) {
+  const t = useTranslations('faq');
+  return (
+    <PlusContainer className="py-10">
+      <PlusHeading title={t('title')} subtitle={t('subtitle')} live={live} />
+      <div className="mx-auto max-w-6xl">
+        <PlusFaqAccordion
+          columns={2}
+          items={homeFaqKeys.map((k) => ({ question: t(`items.${k}.question`), answer: t(`items.${k}.answer`) }))}
+        />
+      </div>
+    </PlusContainer>
   );
 }

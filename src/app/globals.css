@@ -269,6 +269,9 @@ body {
    and that contrast is what sells the key. */
 .cta-key {
   position: relative;
+  /* Text on the teal (or blue) cap is always white. Without this, a key
+     inherits text-text-primary, which turns near-black in light mode. */
+  color: #fff;
   --key-face:   #0BA6A6;   /* top of the cap, where the light lands */
   --key-edge:   #009898;
   --key-base:   #008C8C;   /* accent-teal — the cap's own colour */

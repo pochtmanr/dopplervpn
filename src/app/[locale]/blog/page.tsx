@@ -13,6 +13,9 @@ import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
 import { parseBlogPage } from "@/lib/blog-pagination";
 import { seoTitle } from "@/lib/seo-title";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell } from "../design-lab/home-preview";
+import { PLUS_BODY } from "../design-lab/plus-recipes";
 
 // Revalidate blog index every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
@@ -236,33 +239,59 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
         type="CollectionPage"
       />
       <Navbar />
-      <main className="min-h-screen pt-20">
-        <Section>
-          {/* h1, not the h2 default: this is the blog index's only page
-              heading, and without it the page ships with no h1 in all 21
-              blog locales. */}
-          <SectionHeader
-            title={t("title")}
-            subtitle={t("subtitle")}
-            headingLevel="h1"
-          />
-
-          <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
-            <BlogIndexContent
-              posts={posts.slice((requestedPage - 1) * 18, requestedPage * 18)}
-              currentPage={requestedPage}
-              totalPages={totalPages}
-              tagSlug={query.tag || null}
-              locale={locale}
-              translations={{
-                readMore: t("readMore"),
-                noPosts: t("noPosts"),
-                noPostsDescription: t("noPostsDescription"),
-              }}
+      {calmPlusPreview ? (
+        <PlusPageShell>
+          <main className="min-h-screen pt-20">
+            <Section>
+              <div className="mb-10 text-center">
+                <h1 className="font-display text-3xl font-bold leading-tight text-(--c-text) md:text-5xl">{t("title")}</h1>
+                <p className={`mx-auto mt-3 max-w-2xl ${PLUS_BODY}`}>{t("subtitle")}</p>
+              </div>
+              <BlogIndexContent
+                posts={posts.slice((requestedPage - 1) * 18, requestedPage * 18)}
+                currentPage={requestedPage}
+                totalPages={totalPages}
+                tagSlug={query.tag || null}
+                locale={locale}
+                translations={{
+                  readMore: t("readMore"),
+                  noPosts: t("noPosts"),
+                  noPostsDescription: t("noPostsDescription"),
+                }}
+                plus
+              />
+            </Section>
+          </main>
+        </PlusPageShell>
+      ) : (
+        <main className="min-h-screen pt-20">
+          <Section>
+            {/* h1, not the h2 default: this is the blog index's only page
+                heading, and without it the page ships with no h1 in all 21
+                blog locales. */}
+            <SectionHeader
+              title={t("title")}
+              subtitle={t("subtitle")}
+              headingLevel="h1"
             />
-          </Suspense>
-        </Section>
-      </main>
+
+            <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
+              <BlogIndexContent
+                posts={posts.slice((requestedPage - 1) * 18, requestedPage * 18)}
+                currentPage={requestedPage}
+                totalPages={totalPages}
+                tagSlug={query.tag || null}
+                locale={locale}
+                translations={{
+                  readMore: t("readMore"),
+                  noPosts: t("noPosts"),
+                  noPostsDescription: t("noPostsDescription"),
+                }}
+              />
+            </Suspense>
+          </Section>
+        </main>
+      )}
       <Footer />
     </>
   );

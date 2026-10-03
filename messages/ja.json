@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "サポート連絡先を削除",
+      "intro": "Doppler アカウントにサポート連絡先としてメールアドレスや Telegram アカウントが登録されていて、もう不要な場合は、ここから削除を依頼できます。",
+      "keepsTitle": "アカウントは削除されません",
+      "keeps": "削除されるのは連絡先だけです。アカウント、サブスクリプション、支払い記録はそのまま残ります。",
+      "accountLabel": "アカウントID",
+      "accountHint": "VPN-XXXX-XXXX-XXXX の形式で、アプリとアカウントページに表示されています。",
+      "methodLabel": "連絡先の種類",
+      "methodHint": "アカウントに登録されている連絡先の種類を選んでください。",
+      "methodEmail": "メール",
+      "valueLabel": "削除する連絡先",
+      "valueHint": "登録されているとおりに正確に入力してください：メールアドレス全体、または Telegram のユーザー名。",
+      "submit": "削除を依頼",
+      "submitting": "送信中…",
+      "recordedTitle": "依頼を受け付けました",
+      "recorded": "アカウントIDがそのアカウントの確認済み連絡先と一致する場合、依頼は記録されています。アカウント保護のため、一致したかどうかはお知らせしません。",
+      "unavailableTitle": "まだ利用できません",
+      "unavailable": "サポート連絡先の削除はまだ利用できません。何も送信されていません。",
+      "errorTitle": "依頼を送信できませんでした",
+      "error": "依頼を送信できませんでした。接続を確認して、しばらくしてからもう一度お試しください。"
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "従来のVPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "どういうことか",
+      "keeps": "保存するもの",
+      "why": "その理由"
+    },
     "rows": {
       "account": {
         "feature": "アカウント",
         "traditional": "メール+パスワード",
-        "doppler": "不要"
+        "doppler": "不要",
+        "means": "アプリを入れて接続するだけ。メールアドレスもパスワードも電話番号も不要です。",
+        "keeps": "匿名ID（VPN-XXXX-XXXX-XXXX）と、デバイス数の上限を管理するためのデバイス識別子だけ。あなたを特定するものはありません。",
+        "why": "メールアドレスはアカウントを実在の人物に結びつけます。私たちは一切求めないので、漏れるものも、売るものも、引き渡すものもありません。"
       },
       "fingerprint": {
         "feature": "トラフィック指紋",
         "traditional": "DPIで検知可能",
-        "doppler": "HTTPSに偽装"
+        "doppler": "HTTPSに偽装",
+        "means": "ファイアウォールからは、よく知られたHTTPSサイトへの普通のアクセスに見えます。",
+        "keeps": "何も保存しません。偽装は通信経路上で行われ、データベースには残りません。",
+        "why": "DPIは見分けられるものをブロックします。普通に見える通信には、ブロックする手がかりがありません。"
       },
       "protocol": {
         "feature": "プロトコル",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Realityは実在のWebサイトのTLSハンドシェイクを借りるため、見つかるようなVPNのハンドシェイクが存在しません。",
+        "keeps": "通信内容については何も保存しません。サーバーはパケットを中継し、そのまま忘れます。",
+        "why": "OpenVPNやWireGuardは高速ですが、パケットのパターンがよく知られており、ロシア・中国・イランでは数秒でブロックされます。"
       },
       "dns": {
         "feature": "DNS暗号化",
         "traditional": "場合による",
-        "doppler": "常時"
+        "doppler": "常時",
+        "means": "site.comをアドレスに変換する問い合わせは、すべてトンネルの中を通って自社のリゾルバーに届きます。",
+        "keeps": "問い合わせ履歴は残しません。各問い合わせは解決され、広告やトラッカーを除外したうえで破棄されます。",
+        "why": "暗号化されていないDNSでは、ページ自体が暗号化されていても、訪れたサイトがすべてプロバイダーに見えてしまいます。"
       },
       "censorship": {
         "feature": "検閲耐性",
         "traditional": "限定的",
-        "doppler": "標準搭載"
+        "doppler": "標準搭載",
+        "means": "VPNを積極的にブロックするネットワーク向けに作られています。ブリッジや追加設定は不要です。",
+        "keeps": "どこでも同じです。ノーログの仕組みは国によって変わりません。",
+        "why": "ブロックは年々強まっています。設計段階から検出されにくいプロトコルは、新しいブロックのたびに修正が必要なプロトコルより長く使えます。"
       },
       "logs": {
         "feature": "アクティビティログ",
         "traditional": "まちまち",
-        "doppler": "一切なし"
+        "doppler": "一切なし",
+        "means": "訪れたサイト、ダウンロードしたもの、使ったデータ量、接続時間は一切記録しません。",
+        "keeps": "サインイン記録（IP、匿名ID、デバイスID、時刻）のみで、90日後に削除されます。デバイスが接続した事実は分かっても、何をしたかは分かりません。",
+        "why": "存在しないログは漏れることも、引き渡されることもありません。サインイン記録は不正利用を防ぐための最小限のものです。"
       }
     }
   },

@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Eemalda toe kontakt",
+      "intro": "Kui sinu Doppleri kontole on toe kontaktiks salvestatud e-posti aadress või Telegrami konto ja sa ei soovi seda enam seal, palu meil see siin eemaldada.",
+      "keepsTitle": "Sinu kontot ei kustutata",
+      "keeps": "Eemaldatakse ainult kontakt. Konto, tellimus ja maksekirjed jäävad samaks.",
+      "accountLabel": "Konto ID",
+      "accountHint": "See on kujul VPN-XXXX-XXXX-XXXX ja on näha rakenduses ning sinu konto lehel.",
+      "methodLabel": "Kontakti tüüp",
+      "methodHint": "Vali, mis tüüpi kontakt on kontole salvestatud.",
+      "methodEmail": "E-post",
+      "valueLabel": "Eemaldatav kontakt",
+      "valueHint": "Sisesta see täpselt nii, nagu see on salvestatud: kogu e-posti aadress või Telegrami kasutajanimi.",
+      "submit": "Taotle eemaldamist",
+      "submitting": "Saatmine…",
+      "recordedTitle": "Taotlus vastu võetud",
+      "recorded": "Kui konto ID vastab selle konto kinnitatud kontaktile, on taotlus registreeritud. Konto kaitseks me ei ütle, kas andmed klappisid.",
+      "unavailableTitle": "Veel pole saadaval",
+      "unavailable": "Toe kontakti eemaldamine pole veel saadaval. Midagi ei saadetud.",
+      "errorTitle": "Taotlust ei saadetud",
+      "error": "Taotlust ei õnnestunud saata. Kontrolli ühendust ja proovi hiljem uuesti."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Traditsiooniline VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Mida see tähendab",
+      "keeps": "Mida me hoiame",
+      "why": "Miks me nii teeme"
+    },
     "rows": {
       "account": {
         "feature": "Konto vajalik",
         "traditional": "E-post + parool",
-        "doppler": "Kontot pole vaja"
+        "doppler": "Kontot pole vaja",
+        "means": "Paigaldate rakenduse ja ühendate. Pole e-posti, parooli ega telefoninumbrit.",
+        "keeps": "Anonüümne ID (VPN-XXXX-XXXX-XXXX) ja seadme identifikaator, mis jõustab teie seadmete limiidi. Mitte midagi, mis teid nimetaks.",
+        "why": "E-post seob konto päris inimesega. Me ei küsi seda kunagi, nii et pole midagi lekkida, müüa ega välja anda."
       },
       "fingerprint": {
         "feature": "Liikluse jälg",
         "traditional": "DPI poolt tuvastatav",
-        "doppler": "Maskeeritud HTTPS-iks"
+        "doppler": "Maskeeritud HTTPS-iks",
+        "means": "Tulemüüri jaoks näeb teie ühendus välja nagu tavaline külastus tuntud HTTPS-saidile.",
+        "keeps": "Mitte midagi. Maskeering toimub võrgus, mitte andmebaasis.",
+        "why": "DPI blokeerib seda, mida ta ära tunneb. Tavaline välja nägev liiklus ei anna talle midagi blokeerida."
       },
       "protocol": {
         "feature": "Protokoll",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality laenab päris veebisaidi TLS-kätlust, nii et pole VPN-kätlust, mida märgata.",
+        "keeps": "Mitte midagi teie liikluse kohta. Serverid lasevad paketid läbi ja unustavad need.",
+        "why": "OpenVPN ja WireGuard on kiired, kuid nende paketimustrid on hästi teada ning Venemaal, Hiinas ja Iraanis blokeeritakse need sekunditega."
       },
       "dns": {
         "feature": "DNS-krüpteerimine",
         "traditional": "Mõnikord",
-        "doppler": "Alati"
+        "doppler": "Alati",
+        "means": "Iga päring, samm, mis teeb site.com-ist aadressi, liigub tunneli sees meie enda resolverisse.",
+        "keeps": "Päringute ajalugu pole. Iga päring lahendatakse, filtreeritakse reklaamidest ja jälgijatest ning visatakse ära.",
+        "why": "Tavaline DNS näitab teie internetiteenuse pakkujale iga külastatud saiti, isegi kui leht ise on krüpteeritud."
       },
       "censorship": {
         "feature": "Tsensuurikindlus",
         "traditional": "Piiratud",
-        "doppler": "Sisseehitatud"
+        "doppler": "Sisseehitatud",
+        "means": "Loodud võrkude jaoks, mis VPN-e aktiivselt blokeerivad. Pole sildu ega lisaseadeid.",
+        "keeps": "Sama mis mujal. Logideta lähenemine riigiti ei muutu.",
+        "why": "Blokeeringud muutuvad igal aastal tugevamaks. Protokoll, mida on oma olemuselt raske tuvastada, peab kauem vastu kui see, mida tuleb pärast iga uut blokeeringut paigata."
       },
       "logs": {
         "feature": "Tegevuslogid",
         "traditional": "Varieerub",
-        "doppler": "Mitte kunagi"
+        "doppler": "Mitte kunagi",
+        "means": "Pole kirjeid külastatud saitide, allalaadimiste, kasutatud andmemahu ega ühenduse kestuse kohta.",
+        "keeps": "Sisselogimislogi: IP, anonüümne ID, seadme ID ja aeg, kustutatakse 90 päeva pärast. See näitab, et seade ühendus, mitte seda, mida see tegi.",
+        "why": "Logid, mida pole olemas, ei saa lekkida ega välja antud saada. Sisselogimislogi on miinimum, mis on vajalik kuritarvitamise peatamiseks."
       }
     }
   },

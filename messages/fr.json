@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Supprimer un contact d'assistance",
+      "intro": "Si une adresse e-mail ou un compte Telegram est enregistré comme contact d'assistance sur votre compte Doppler et que vous ne le souhaitez plus, demandez-nous de le supprimer ici.",
+      "keepsTitle": "Votre compte n'est pas supprimé",
+      "keeps": "Seul le contact est retiré. Votre compte, votre abonnement et vos paiements restent inchangés.",
+      "accountLabel": "Identifiant du compte",
+      "accountHint": "Il a la forme VPN-XXXX-XXXX-XXXX et figure dans l'application et sur la page de votre compte.",
+      "methodLabel": "Type de contact",
+      "methodHint": "Choisissez le type de contact enregistré sur le compte.",
+      "methodEmail": "E-mail",
+      "valueLabel": "Contact à supprimer",
+      "valueHint": "Saisissez-le exactement tel qu'il est enregistré : l'adresse e-mail complète ou le nom d'utilisateur Telegram.",
+      "submit": "Demander la suppression",
+      "submitting": "Envoi…",
+      "recordedTitle": "Demande reçue",
+      "recorded": "Si l'identifiant correspond à un contact vérifié de ce compte, votre demande est enregistrée. Pour protéger le compte, nous n'indiquons pas s'il y a correspondance.",
+      "unavailableTitle": "Pas encore ouvert",
+      "unavailable": "La suppression d'un contact d'assistance n'est pas encore disponible. Rien n'a été envoyé.",
+      "errorTitle": "Demande non envoyée",
+      "error": "La demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez plus tard."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "VPN classique",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Ce que ça veut dire",
+      "keeps": "Ce que nous conservons",
+      "why": "Pourquoi"
+    },
     "rows": {
       "account": {
         "feature": "Compte requis",
         "traditional": "Email + mot de passe",
-        "doppler": "Aucun compte"
+        "doppler": "Aucun compte",
+        "means": "Vous installez l’app et vous vous connectez. Pas d’e-mail, pas de mot de passe, pas de numéro de téléphone.",
+        "keeps": "Un identifiant anonyme (VPN-XXXX-XXXX-XXXX) et un identifiant d’appareil qui applique votre limite d’appareils. Rien qui vous nomme.",
+        "why": "Un e-mail relie un compte à une vraie personne. Nous n’en demandons jamais, donc il n’y a rien à fuiter, à vendre ou à remettre."
       },
       "fingerprint": {
         "feature": "Empreinte du trafic",
         "traditional": "Détectable par DPI",
-        "doppler": "Camouflé en HTTPS"
+        "doppler": "Camouflé en HTTPS",
+        "means": "Pour un pare-feu, votre connexion ressemble à une visite ordinaire d’un site HTTPS connu.",
+        "keeps": "Rien. Le camouflage se fait sur le réseau, pas dans une base de données.",
+        "why": "Le DPI bloque ce qu’il reconnaît. Un trafic qui paraît ordinaire ne lui donne rien à bloquer."
       },
       "protocol": {
         "feature": "Protocole",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality emprunte la négociation TLS d’un vrai site web : il n’y a donc aucune négociation VPN à repérer.",
+        "keeps": "Rien sur votre trafic. Les serveurs font passer les paquets et les oublient.",
+        "why": "OpenVPN et WireGuard sont rapides, mais leurs schémas de paquets sont bien connus et bloqués en quelques secondes en Russie, en Chine et en Iran."
       },
       "dns": {
         "feature": "Chiffrement DNS",
         "traditional": "Parfois",
-        "doppler": "Toujours"
+        "doppler": "Toujours",
+        "means": "Chaque requête, l’étape qui transforme site.com en adresse, passe dans le tunnel jusqu’à notre propre résolveur.",
+        "keeps": "Aucun historique de requêtes. Chaque requête est résolue, filtrée des pubs et traqueurs, puis supprimée.",
+        "why": "Un DNS en clair montre à votre fournisseur d’accès chaque site que vous visitez, même quand la page elle-même est chiffrée."
       },
       "censorship": {
         "feature": "Résistance à la censure",
         "traditional": "Limitée",
-        "doppler": "Intégrée"
+        "doppler": "Intégrée",
+        "means": "Conçu pour les réseaux qui bloquent activement les VPN. Aucun pont ni réglage supplémentaire à configurer.",
+        "keeps": "La même chose que partout ailleurs. L’absence de journaux ne change pas selon le pays.",
+        "why": "Les blocages se renforcent chaque année. Un protocole difficile à détecter par conception tient plus longtemps qu’un protocole qu’il faut corriger après chaque nouveau blocage."
       },
       "logs": {
         "feature": "Logs d'activité",
         "traditional": "Variable",
-        "doppler": "Jamais"
+        "doppler": "Jamais",
+        "means": "Aucune trace des sites que vous visitez, de ce que vous téléchargez, des données que vous utilisez ni de votre durée de connexion.",
+        "keeps": "Un journal de connexion : IP, identifiant anonyme, identifiant d’appareil et heure, supprimé après 90 jours. Il montre qu’un appareil s’est connecté, pas ce qu’il a fait.",
+        "why": "Des journaux qui n’existent pas ne peuvent ni fuiter ni être remis. Le journal de connexion est le minimum nécessaire pour stopper les abus."
       }
     }
   },

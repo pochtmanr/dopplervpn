@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Fjern en supportkontakt",
+      "intro": "Hvis en e-postadresse eller en Telegram-konto er lagret som supportkontakt på Doppler-kontoen din, og du ikke lenger vil ha den der, kan du be oss fjerne den her.",
+      "keepsTitle": "Kontoen din blir ikke slettet",
+      "keeps": "Bare kontakten fjernes. Kontoen, abonnementet og betalingsopplysningene forblir som de er.",
+      "accountLabel": "Konto-ID",
+      "accountHint": "Den ser ut som VPN-XXXX-XXXX-XXXX og vises i appen og på kontosiden din.",
+      "methodLabel": "Kontakttype",
+      "methodHint": "Velg hvilken type kontakt som er lagret på kontoen.",
+      "methodEmail": "E-post",
+      "valueLabel": "Kontakt som skal fjernes",
+      "valueHint": "Skriv den nøyaktig slik den er lagret: hele e-postadressen eller Telegram-brukernavnet.",
+      "submit": "Be om fjerning",
+      "submitting": "Sender …",
+      "recordedTitle": "Forespørsel mottatt",
+      "recorded": "Hvis konto-ID-en stemmer med en bekreftet kontakt på kontoen, er forespørselen registrert. For å beskytte kontoen sier vi ikke om det var samsvar.",
+      "unavailableTitle": "Ikke åpent ennå",
+      "unavailable": "Det er ennå ikke mulig å fjerne en supportkontakt. Ingenting ble sendt.",
+      "errorTitle": "Forespørselen ble ikke sendt",
+      "error": "Forespørselen kunne ikke sendes. Sjekk tilkoblingen og prøv igjen senere."
     }
   },
   "servers": {
@@ -1417,36 +1438,59 @@
       "traditional": "Tradisjonell VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Hva det betyr",
+      "keeps": "Hva vi lagrer",
+      "why": "Hvorfor vi gjør det"
+    },
     "rows": {
       "account": {
         "feature": "Konto krevd",
         "traditional": "E-post + passord",
-        "doppler": "Ingen konto nodvendig"
+        "doppler": "Ingen konto nodvendig",
+        "means": "Du installerer appen og kobler til. Ingen e-post, intet passord, intet telefonnummer.",
+        "keeps": "En anonym ID (VPN-XXXX-XXXX-XXXX) og en enhets-ID som håndhever enhetsgrensen din. Ingenting som navngir deg.",
+        "why": "En e-postadresse knytter en konto til en ekte person. Vi ber aldri om en, så det finnes ingenting å lekke, selge eller utlevere."
       },
       "fingerprint": {
         "feature": "Trafikkavtrykk",
         "traditional": "Oppdagbar av DPI",
-        "doppler": "Kamuflert som HTTPS"
+        "doppler": "Kamuflert som HTTPS",
+        "means": "For en brannmur ser tilkoblingen din ut som et vanlig besøk på et kjent HTTPS-nettsted.",
+        "keeps": "Ingenting. Forkledningen skjer på linjen, ikke i en database.",
+        "why": "DPI blokkerer det den kjenner igjen. Trafikk som ser vanlig ut, gir den ingenting å blokkere."
       },
       "protocol": {
         "feature": "Protokoll",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality låner TLS-håndtrykket til et ekte nettsted, så det finnes ikke noe VPN-håndtrykk å oppdage.",
+        "keeps": "Ingenting om trafikken din. Serverne sender pakkene videre og glemmer dem.",
+        "why": "OpenVPN og WireGuard er raske, men pakkemønstrene deres er godt kjent og blokkeres på sekunder i Russland, Kina og Iran."
       },
       "dns": {
         "feature": "DNS-kryptering",
         "traditional": "Noen ganger",
-        "doppler": "Alltid"
+        "doppler": "Alltid",
+        "means": "Hvert oppslag, steget som gjør site.com om til en adresse, går gjennom tunnelen til vår egen resolver.",
+        "keeps": "Ingen oppslagshistorikk. Hvert oppslag blir løst, filtrert for reklame og sporere og deretter forkastet.",
+        "why": "Vanlig DNS viser internettleverandøren din hvert nettsted du besøker, selv når selve siden er kryptert."
       },
       "censorship": {
         "feature": "Sensurresistens",
         "traditional": "Begrenset",
-        "doppler": "Innebygd"
+        "doppler": "Innebygd",
+        "means": "Laget for nettverk som aktivt blokkerer VPN. Ingen broer eller ekstra innstillinger.",
+        "keeps": "Det samme som overalt ellers. Ingen-logger-oppsettet endres ikke fra land til land.",
+        "why": "Blokkeringene blir sterkere hvert år. En protokoll som er vanskelig å oppdage fra grunnen av, varer lenger enn en som må lappes etter hver nye blokkering."
       },
       "logs": {
         "feature": "Aktivitetslogger",
         "traditional": "Varierer",
-        "doppler": "Aldri"
+        "doppler": "Aldri",
+        "means": "Ingen registrering av nettstedene du besøker, hva du laster ned, hvor mye data du bruker eller hvor lenge du er tilkoblet.",
+        "keeps": "En innloggingslogg: IP, anonym ID, enhets-ID og tidspunkt, slettes etter 90 dager. Den viser at en enhet koblet til, ikke hva den gjorde.",
+        "why": "Logger som ikke finnes, kan ikke lekke eller utleveres. Innloggingsloggen er minimumet vi trenger for å stoppe misbruk."
       }
     }
   },

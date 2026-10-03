@@ -20,6 +20,8 @@ import {
 import { onMenuKeyDown, usePopover } from './popover';
 import { SendToDevices } from './send-to-devices';
 import { EYEBROW, FOCUS, MENU_ITEM, MENU_ITEM_DANGER, MENU_PANEL, ORB } from './ui';
+// Calm+ recipes for the `plus` preview branch.
+import { PLUS_BTN, PLUS_META, PLUS_TITLE } from '@/app/[locale]/design-lab/plus-recipes';
 
 const COPIED_MS = 2000;
 /** Long enough to see the check land before the dashboard goes away. */
@@ -41,6 +43,8 @@ interface AccountIdCardProps {
   onDeleteRequest: () => void;
   onConnectEmail: () => void;
   onShowContacts: () => void;
+  /** Calm+ preview, decided on the server (CALM_PLUS_PREVIEW is not a client env). */
+  plus?: boolean;
 }
 
 /**
@@ -61,6 +65,7 @@ export function AccountIdCard({
   onDeleteRequest,
   onConnectEmail,
   onShowContacts,
+  plus = false,
 }: AccountIdCardProps) {
   const t = useTranslations('subscribe');
   const [copied, setCopied] = useState(false);
@@ -113,16 +118,20 @@ export function AccountIdCard({
       {/* Unclipped, so the toolbar's menus can hang past the card's edge; the
           hairline and orb get their own clipped layer instead. Raised while a
           menu is open, or the backdrop-blurred cards below would paint over it. */}
-      <div className={`${CARD_UNCLIPPED} p-6 ${menu.open || logout.open ? 'z-30' : ''}`}>
-        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]" aria-hidden="true">
-          <span className={CARD_HAIRLINE} />
-          <div className={ORB} />
-        </div>
+      <div
+        className={`${plus ? 'relative rounded-[22px] bg-(--c-card)' : CARD_UNCLIPPED} p-6 ${menu.open || logout.open ? 'z-30' : ''}`}
+      >
+        {!plus && (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]" aria-hidden="true">
+            <span className={CARD_HAIRLINE} />
+            <div className={ORB} />
+          </div>
+        )}
 
         <div className="relative space-y-4">
           {/* ── Label + toolbar ─────────────────────────────────────────── */}
           <div className="flex items-center justify-between gap-3">
-            <h2 className={EYEBROW}>{t('accountLabel')}</h2>
+            <h2 className={plus ? PLUS_TITLE : EYEBROW}>{t('accountLabel')}</h2>
 
             {/* Popovers anchor to this row's end, not to their own button: a panel
                 hung off the middle button would run off a narrow screen. */}
@@ -285,33 +294,66 @@ export function AccountIdCard({
           </div>
 
           {/* ── The ID and its copy control ─────────────────────────────── */}
-          <div>
-            <div className="flex items-center gap-3">
-              <p
-                className="min-w-0 font-mono text-2xl sm:text-[1.7rem] font-bold tracking-wide text-text-primary break-all select-all"
-                dir="ltr"
-              >
-                {accountId}
-              </p>
-              <IconButton
-                label={t('dashboard.copyId')}
-                tooltip={copied ? t('dashboard.copied') : undefined}
-                tooltipShown={copied}
-                tone={copied ? 'teal' : 'default'}
-                onClick={() => copyId()}
-              >
-                {copied ? (
-                  <CheckIcon key="check" className="w-4 h-4 copy-pop" />
-                ) : (
-                  <CopyIcon key="copy" className="w-[18px] h-[18px]" />
-                )}
-              </IconButton>
-              <span className="sr-only" aria-live="polite">
-                {copied ? t('dashboard.copied') : ''}
-              </span>
+          {plus ? (
+            /* Calm+: the ID printed on a dashed plate. */
+            <div>
+              <div className="rounded-2xl border border-dashed border-(--c-accent-ring) bg-(--c-bg) px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <p
+                    className="min-w-0 flex-1 font-mono text-[17px] sm:text-2xl font-bold tracking-wide text-(--c-text) break-all select-all"
+                    dir="ltr"
+                  >
+                    {accountId}
+                  </p>
+                  <IconButton
+                    label={t('dashboard.copyId')}
+                    tooltip={copied ? t('dashboard.copied') : undefined}
+                    tooltipShown={copied}
+                    tone={copied ? 'teal' : 'default'}
+                    onClick={() => copyId()}
+                  >
+                    {copied ? (
+                      <CheckIcon key="check" className="w-4 h-4 copy-pop" />
+                    ) : (
+                      <CopyIcon key="copy" className="w-[18px] h-[18px]" />
+                    )}
+                  </IconButton>
+                  <span className="sr-only" aria-live="polite">
+                    {copied ? t('dashboard.copied') : ''}
+                  </span>
+                </div>
+              </div>
+              <p className={`mt-2 ${PLUS_META}`}>{t('dashboard.accountIdHint')}</p>
             </div>
-            <p className="mt-1.5 text-sm text-text-muted">{t('dashboard.accountIdHint')}</p>
-          </div>
+          ) : (
+            <div>
+              <div className="flex items-center gap-3">
+                <p
+                  className="min-w-0 font-mono text-2xl sm:text-[1.7rem] font-bold tracking-wide text-text-primary break-all select-all"
+                  dir="ltr"
+                >
+                  {accountId}
+                </p>
+                <IconButton
+                  label={t('dashboard.copyId')}
+                  tooltip={copied ? t('dashboard.copied') : undefined}
+                  tooltipShown={copied}
+                  tone={copied ? 'teal' : 'default'}
+                  onClick={() => copyId()}
+                >
+                  {copied ? (
+                    <CheckIcon key="check" className="w-4 h-4 copy-pop" />
+                  ) : (
+                    <CopyIcon key="copy" className="w-[18px] h-[18px]" />
+                  )}
+                </IconButton>
+                <span className="sr-only" aria-live="polite">
+                  {copied ? t('dashboard.copied') : ''}
+                </span>
+              </div>
+              <p className="mt-1.5 text-sm text-text-muted">{t('dashboard.accountIdHint')}</p>
+            </div>
+          )}
 
           {/* ── The one key ─────────────────────────────────────────────── */}
           <button
@@ -319,7 +361,7 @@ export function AccountIdCard({
             onClick={() => setShareOpen((o) => !o)}
             aria-expanded={shareOpen}
             aria-controls="send-to-devices"
-            className={`${KEY_PILL} min-h-11 ${FOCUS}`}
+            className={plus ? `${PLUS_BTN} w-full` : `${KEY_PILL} min-h-11 ${FOCUS}`}
           >
             <ShareIcon className="w-4 h-4" />
             {t('dashboard.sendToDevices')}
@@ -346,7 +388,11 @@ export function AccountIdCard({
             <button
               type="button"
               onClick={onShowContacts}
-              className={`flex w-full items-center gap-2.5 rounded-xl border border-overlay/10 bg-bg-primary/30 px-3 py-2 text-start text-sm hover:border-overlay/20 transition-colors ${FOCUS}`}
+              className={
+                plus
+                  ? `flex w-full items-center gap-2.5 rounded-2xl bg-(--c-inset) px-3.5 py-2.5 text-start text-sm transition-colors hover:bg-(--c-accent-tint) ${FOCUS}`
+                  : `flex w-full items-center gap-2.5 rounded-xl border border-overlay/10 bg-bg-primary/30 px-3 py-2 text-start text-sm hover:border-overlay/20 transition-colors ${FOCUS}`
+              }
             >
               {hasTelegram ? (
                 <TelegramIcon className="w-4 h-4 shrink-0 text-telegram" />

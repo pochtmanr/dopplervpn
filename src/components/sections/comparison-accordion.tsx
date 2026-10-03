@@ -31,6 +31,8 @@ interface ComparisonAccordionProps {
   headers: { feature: string; traditional: string; doppler: string };
   panel: { means: string; keeps: string; why: string };
   rows: ComparisonRow[];
+  /** Calm+ preview: a flat tonal card, the plate in an inset tray. Rows restyle via plus.css. */
+  plus?: boolean;
 }
 
 function Plate({ rowKey, active }: { rowKey: string; active: boolean }) {
@@ -52,7 +54,7 @@ function Plate({ rowKey, active }: { rowKey: string; active: boolean }) {
   );
 }
 
-export function ComparisonAccordion({ headers, panel, rows }: ComparisonAccordionProps) {
+export function ComparisonAccordion({ headers, panel, rows, plus = false }: ComparisonAccordionProps) {
   const [open, setOpen] = useState<string | null>(rows[0]?.key ?? null);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -78,14 +80,26 @@ export function ComparisonAccordion({ headers, panel, rows }: ComparisonAccordio
   ] as const;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.06] via-bg-secondary/40 to-bg-secondary/30">
-      <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+    <div
+      className={
+        plus
+          ? "plus-cmp relative overflow-hidden rounded-[22px] bg-(--c-card)"
+          : "relative overflow-hidden rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.06] via-bg-secondary/40 to-bg-secondary/30"
+      }
+    >
+      {!plus && (
+        <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+      )}
 
       {/* Receipt header. Screen readers get the column names inline on each row. */}
       <div
         aria-hidden="true"
-        style={{ fontFamily: MONO }}
-        className="hidden md:grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] gap-x-6 border-b border-dashed border-overlay/15 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-text-tertiary"
+        style={plus ? undefined : { fontFamily: MONO }}
+        className={
+          plus
+            ? "hidden md:grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] gap-x-6 border-b border-(--c-separator) px-6 py-4 text-[13px] font-semibold text-(--c-tert)"
+            : "hidden md:grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)_2rem] gap-x-6 border-b border-dashed border-overlay/15 px-6 py-4 text-[11px] uppercase tracking-[0.2em] text-text-tertiary"
+        }
       >
         <span>{headers.feature}</span>
         <span>{headers.traditional}</span>
@@ -136,7 +150,13 @@ export function ComparisonAccordion({ headers, panel, rows }: ComparisonAccordio
             <div id={panelId} role="region" aria-labelledby={btnId} inert={!isOpen} className="cmp-panel">
               <div className="min-h-0 overflow-hidden">
                 <div className="cmp-body">
-                  <Plate rowKey={row.key} active={isOpen} />
+                  {plus ? (
+                    <div className="overflow-hidden rounded-2xl bg-(--c-bg)">
+                      <Plate rowKey={row.key} active={isOpen} />
+                    </div>
+                  ) : (
+                    <Plate rowKey={row.key} active={isOpen} />
+                  )}
                   <dl className="md:col-span-2">
                     {notes.map((note) => (
                       // Staggered in after the plate starts printing (globals.css).

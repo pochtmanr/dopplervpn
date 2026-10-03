@@ -1072,6 +1072,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "移除支持联系方式",
+      "intro": "如果你的 Doppler 账户中保存了作为支持联系方式的邮箱地址或 Telegram 账号，而你不再希望保留它，可以在这里请求我们移除。",
+      "keepsTitle": "你的账户不会被删除",
+      "keeps": "只会移除联系方式。你的账户、订阅和付款记录都保持不变。",
+      "accountLabel": "账户 ID",
+      "accountHint": "格式为 VPN-XXXX-XXXX-XXXX，可在应用内和账户页面中找到。",
+      "methodLabel": "联系方式类型",
+      "methodHint": "选择账户中保存的联系方式类型。",
+      "methodEmail": "邮箱",
+      "valueLabel": "要移除的联系方式",
+      "valueHint": "请与保存的内容完全一致地输入：完整的邮箱地址，或 Telegram 用户名。",
+      "submit": "请求移除",
+      "submitting": "正在发送…",
+      "recordedTitle": "已收到请求",
+      "recorded": "如果账户 ID 与该账户中已验证的联系方式相符，你的请求已被记录。为保护账户安全，我们不会告知是否相符。",
+      "unavailableTitle": "暂未开放",
+      "unavailable": "暂时无法移除支持联系方式。未发送任何内容。",
+      "errorTitle": "请求未发送",
+      "error": "无法发送请求。请检查网络连接，稍后再试。"
     }
   },
   "servers": {
@@ -1418,36 +1439,59 @@
       "traditional": "传统VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "这意味着什么",
+      "keeps": "我们保留什么",
+      "why": "为什么这样做"
+    },
     "rows": {
       "account": {
         "feature": "需要账号",
         "traditional": "邮箱+密码",
-        "doppler": "不需要"
+        "doppler": "不需要",
+        "means": "安装应用即可连接。无需邮箱、密码或手机号。",
+        "keeps": "一个匿名 ID（VPN-XXXX-XXXX-XXXX），以及用于执行设备数量上限的设备标识符。没有任何能识别您身份的信息。",
+        "why": "邮箱会把账户和真实的人联系起来。我们从不索要，所以没有任何东西可以泄露、出售或交出。"
       },
       "fingerprint": {
         "feature": "流量指纹",
         "traditional": "DPI可检测",
-        "doppler": "伪装为HTTPS"
+        "doppler": "伪装为HTTPS",
+        "means": "在防火墙看来，您的连接就像是访问一个知名 HTTPS 网站的普通请求。",
+        "keeps": "不保留任何内容。伪装发生在传输线路上，而不是数据库里。",
+        "why": "DPI 只能拦截它认得出的流量。看起来普通的流量，让它无从拦截。"
       },
       "protocol": {
         "feature": "协议",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality 借用真实网站的 TLS 握手，因此不存在可被识别的 VPN 握手。",
+        "keeps": "不保留任何与您流量有关的内容。服务器转发数据包后即忘。",
+        "why": "OpenVPN 和 WireGuard 速度快，但其数据包特征广为人知，在俄罗斯、中国和伊朗几秒内就会被封锁。"
       },
       "dns": {
         "feature": "DNS加密",
         "traditional": "偶尔",
-        "doppler": "始终"
+        "doppler": "始终",
+        "means": "每一次查询，也就是把 site.com 转换成地址的那一步，都会在隧道内发送到我们自己的解析器。",
+        "keeps": "不保留查询记录。每次查询都会被解析、过滤广告和跟踪器，然后丢弃。",
+        "why": "未加密的 DNS 会把您访问的每个网站暴露给网络运营商，即使网页本身是加密的。"
       },
       "censorship": {
         "feature": "抗审查",
         "traditional": "有限",
-        "doppler": "内置"
+        "doppler": "内置",
+        "means": "专为主动封锁 VPN 的网络打造。无需网桥或额外设置。",
+        "keeps": "与其他地区相同。无日志机制不会因国家而改变。",
+        "why": "封锁一年比一年严格。从设计上就难以检测的协议，比每次新封锁后都要打补丁的协议更持久。"
       },
       "logs": {
         "feature": "活动日志",
         "traditional": "不确定",
-        "doppler": "绝不"
+        "doppler": "绝不",
+        "means": "不记录您访问的网站、下载的内容、使用的流量或连接时长。",
+        "keeps": "一份登录记录：IP、匿名 ID、设备 ID 和时间，90 天后删除。它只表明某台设备连接过，不显示它做了什么。",
+        "why": "不存在的日志不会泄露，也无法被交出。登录记录是阻止滥用所需的最低限度。"
       }
     }
   },

@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { detectPlatform, type Platform } from "@/lib/detect-platform";
 import { trackCta, type CtaLocation } from "@/lib/track-cta";
+// Calm+ recipes for the `plus` branch.
+import { PLUS_BTN, PLUS_ICON, PLUS_ICON_TONE } from "@/app/[locale]/design-lab/plus-recipes";
+import { DopplerLogo } from "@/components/layout/doppler-logo";
 
 const APP_STORE_URL =
   "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
@@ -13,11 +16,14 @@ const GOOGLE_PLAY_URL =
 interface BlogStickyBarProps {
   sentinelId?: string;
   trackingLocation?: CtaLocation;
+  /** Calm+ preview, decided on the server; the page wraps the bar in PlusPageShell for the tokens. */
+  plus?: boolean;
 }
 
 export function BlogStickyBar({
   sentinelId = "blog-cta-sentinel",
   trackingLocation = "blog-sticky",
+  plus = false,
 }: BlogStickyBarProps) {
   const t = useTranslations("blog.stickyBar");
   const locale = useLocale();
@@ -82,6 +88,50 @@ export function BlogStickyBar({
   };
 
   const show = visible && !dismissed;
+
+  if (plus) {
+    // Calm+: a floating pill like the landing's sticky CTA (mobile-sticky-cta.tsx),
+    // not a full-width sheet. Same lg-only rule and the same slide + fade.
+    return (
+      <div
+        className={`hidden lg:block fixed inset-x-0 bottom-0 z-40 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] transition-all duration-300 ease-out ${
+          show ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!show}
+      >
+        <div className="mx-auto flex max-w-3xl items-center gap-3 rounded-full bg-(--c-card) p-2 ps-5 shadow-(--c-lift-shadow) ring-1 ring-(--c-separator)">
+          <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal}`}>
+            <DopplerLogo className="h-5 w-[3.25rem]" />
+          </span>
+          <p className="min-w-0 flex-1 text-[14px] font-medium leading-snug text-(--c-text) line-clamp-2">
+            {t("message")}
+          </p>
+          <a
+            href={config.href}
+            target={platform === "desktop" ? undefined : "_blank"}
+            rel={platform === "desktop" ? undefined : "noopener noreferrer"}
+            onClick={handleClick}
+            className={`${PLUS_BTN} shrink-0 whitespace-nowrap`}
+            tabIndex={show ? 0 : -1}
+          >
+            {config.icon}
+            {t("cta")}
+          </a>
+          <button
+            type="button"
+            onClick={handleDismiss}
+            className="plus-btn flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-(--c-inset) text-(--c-muted) hover:bg-(--c-accent-tint) hover:text-(--c-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent)"
+            aria-label={t("dismissLabel")}
+            tabIndex={show ? 0 : -1}
+          >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

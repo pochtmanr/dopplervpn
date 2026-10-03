@@ -3,6 +3,8 @@ import { setRequestLocale } from 'next-intl/server';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { SubscribeContent } from './subscribe-content';
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell } from '../design-lab/home-preview';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -19,7 +21,13 @@ export default async function SubscribePage({ params }: PageProps) {
   return (
     <>
       <Navbar />
-      <SubscribeContent />
+      {calmPlusPreview ? (
+        <PlusPageShell>
+          <SubscribeContent plus />
+        </PlusPageShell>
+      ) : (
+        <SubscribeContent />
+      )}
       <Footer />
     </>
   );

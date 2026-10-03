@@ -6,8 +6,11 @@
 .lab-plus {
   --c-accent-ring: rgb(46 196 196 / 0.45);
   --c-lift-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.5);
-  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  /* Jakarta has no basic Cyrillic: ru/uk/bg fall through to Rubik (set only on
+     those locales, hence the var() fallback, without which the stack is invalid). */
+  --font-plus: var(--font-jakarta), var(--font-rubik, ui-sans-serif), system-ui, sans-serif;
+  --font-display: var(--font-plus);
+  font-family: var(--font-plus);
 }
 .light .lab-plus {
   --c-accent-ring: rgb(0 112 112 / 0.4);
@@ -50,6 +53,8 @@
 .plus-btn .plus-arrow { transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1); }
 .plus-btn:hover .plus-arrow,
 .group:hover .plus-arrow { transform: translateX(3px); }
+/* RTL: the arrow points the reading way at rest, too (it only flipped on hover before). */
+[dir="rtl"] .plus-arrow { transform: scaleX(-1); }
 [dir="rtl"] .plus-btn:hover .plus-arrow,
 [dir="rtl"] .group:hover .plus-arrow { transform: scaleX(-1) translateX(3px); }
 
@@ -85,11 +90,105 @@
 }
 @keyframes plus-sheen { to { transform: translateX(120%); } }
 
-/* FAQ: the open row gets a teal bar on its start edge. */
-.lab-plus details[open] > summary { box-shadow: inset 3px 0 0 var(--c-accent); }
-[dir="rtl"] .lab-plus details[open] > summary { box-shadow: inset -3px 0 0 var(--c-accent); }
+/* FAQ (plus/faq.tsx): the open row gets a teal bar on its start edge; the chevron turns down. */
+.plus-faq-row[data-open="true"] > button { box-shadow: inset 3px 0 0 var(--c-accent); }
+[dir="rtl"] .plus-faq-row[data-open="true"] > button { box-shadow: inset -3px 0 0 var(--c-accent); }
+.plus-faq-chevron { transition: rotate 200ms ease-out; }
+.plus-faq-row[data-open="true"] .plus-faq-chevron { rotate: 90deg; }
+/* The RTL chevron is mirrored by scale, which applies after rotate, so it turns the other way. */
+[dir="rtl"] .plus-faq-row[data-open="true"] .plus-faq-chevron { rotate: -90deg; }
 
 @media (prefers-reduced-motion: reduce) {
   .plus-pulse::after, .plus-fill, .plus-sheen::after { animation: none; }
   .plus-sheen::after { display: none; }
+}
+
+/*
+ * Shipped controls inside a Calm+ scope. Components that carry tracking or
+ * state (HeroCTAs, the ticket flow, the removal form) keep their markup; the
+ * keycap and its flat deck become Calm+'s flat pills here instead.
+ * `.plus-pills` is the preview <body> ([locale]/layout.tsx): every keycap on
+ * every page, without the page itself moving to Calm+.
+ */
+:is(.lab-plus, .plus-pills) :is(.cta-key, .cta-flat) {
+  border-radius: 9999px;
+  font-weight: 700;
+}
+:is(.lab-plus, .plus-pills) .cta-key {
+  background-image: none;
+  background-color: var(--c-accent-fill);
+  box-shadow: none;
+  filter: none;
+  transition: background-color 160ms ease-out, transform 120ms ease-out;
+}
+:is(.lab-plus, .plus-pills) .cta-key::before { display: none; }
+:is(.lab-plus, .plus-pills) .cta-key:is(:disabled, [aria-disabled="true"]) { box-shadow: none; filter: none; }
+:is(.lab-plus, .plus-pills) .cta-key:hover { background-color: var(--c-accent); filter: none; }
+:is(.lab-plus, .plus-pills) .cta-key:active:not(:disabled):not([aria-disabled="true"]) { transform: scale(0.97); box-shadow: none; }
+:is(.lab-plus, .plus-pills) .cta-key:is(.cta-key-blue, .cta-key-telegram) { background-color: var(--c-telegram); }
+.light :is(.lab-plus, .plus-pills) .cta-key:is(.cta-key-blue, .cta-key-telegram) { background-color: var(--c-telegram); }
+:is(.lab-plus, .plus-pills) .cta-flat {
+  background-color: var(--c-inset);
+  border-color: transparent;
+  color: var(--c-text);
+}
+:is(.lab-plus, .plus-pills) .cta-flat:hover {
+  background-color: var(--c-accent-tint);
+  border-color: transparent;
+  color: var(--c-accent);
+}
+
+/*
+ * Whole pages in Calm+ (/support, /downloads preview): the site's own tokens
+ * remapped onto the tonal ramp, so anything still on bg-bg-secondary,
+ * text-text-muted and friends (dialogs, the hero, forms) lands on Calm+
+ * surfaces without its markup changing.
+ */
+.plus-remap {
+  --color-bg-primary: var(--c-bg);
+  --color-bg-secondary: var(--c-card);
+  --color-bg-elevated: var(--c-inset);
+  --color-bg-pressed: var(--c-card-hover);
+  --color-text-primary: var(--c-text);
+  --color-text-muted: var(--c-muted);
+  --color-text-tertiary: var(--c-tert);
+}
+
+/* The comparison accordion (ComparisonAccordion plus): rows on the card, the
+   open row on the inset tone with the FAQ's teal start bar; the +/− toggle
+   loses its box and becomes the FAQ chevron's colour. */
+.plus-cmp .cmp-row { border-color: var(--c-separator); }
+.plus-cmp .cmp-row[data-open="true"] { background-color: transparent; }
+.plus-cmp .cmp-row::before { background-color: var(--c-accent); width: 3px; }
+.plus-cmp .cmp-btn:hover { background-color: var(--c-accent-tint); }
+.plus-cmp .cmp-feature { color: var(--c-text); font-weight: 700; }
+.plus-cmp .cmp-trad { color: var(--c-tert); }
+.plus-cmp .cmp-dop { color: var(--c-accent); font-weight: 600; }
+.plus-cmp .cmp-tag, .plus-cmp .cmp-note-label { color: var(--c-tert); font-family: inherit !important; letter-spacing: 0; text-transform: none; font-size: 12px; font-weight: 600; }
+.plus-cmp .cmp-toggle { border-color: transparent; color: var(--c-tert); font-family: inherit !important; font-size: 18px; }
+.plus-cmp .cmp-row[data-open="true"] .cmp-toggle { border-color: transparent; color: var(--c-accent); }
+.plus-cmp .cmp-note { border-color: var(--c-separator); border-style: solid; }
+.plus-cmp dd { color: var(--c-muted); }
+
+/* Support dialogs and the ticket page frame inside a Calm+ page: the card's
+   radius and no hairline; the solid accent tiles become duotone glyphs. */
+.plus-remap :is([role="dialog"], #ticket-request > div) {
+  border-color: transparent;
+  border-radius: 22px;
+}
+.plus-remap [role="dialog"] :is(.bg-accent-teal, .bg-accent-blue):has(> svg) {
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--c-accent);
+}
+.plus-remap [role="dialog"] .bg-accent-blue:has(> svg) { color: var(--c-blue); }
+.plus-remap [role="dialog"] :is(.bg-accent-teal, .bg-accent-blue):has(> svg) svg {
+  width: 26px;
+  height: 26px;
+}
+.plus-remap [role="dialog"] :is(.bg-accent-teal, .bg-accent-blue):has(> svg) svg[fill="none"] path {
+  fill: color-mix(in oklab, currentColor 24%, transparent);
+}
+.light .plus-remap [role="dialog"] :is(.bg-accent-teal, .bg-accent-blue):has(> svg) svg[fill="none"] path {
+  fill: color-mix(in oklab, currentColor 16%, transparent);
 }

@@ -1071,6 +1071,27 @@
       "unavailable": "Support contact removal is not open yet.",
       "recorded": "If the account and verified contact match, the request has been recorded.",
       "error": "Could not send the request. Try again."
+    },
+    "removalPlus": {
+      "title": "Pašalinti pagalbos kontaktą",
+      "intro": "Jei jūsų Doppler paskyroje kaip pagalbos kontaktas išsaugotas el. pašto adresas ar Telegram paskyra ir nebenorite, kad jis ten būtų, paprašykite mūsų jį pašalinti čia.",
+      "keepsTitle": "Jūsų paskyra neištrinama",
+      "keeps": "Pašalinamas tik kontaktas. Paskyra, prenumerata ir mokėjimų įrašai lieka nepakitę.",
+      "accountLabel": "Paskyros ID",
+      "accountHint": "Jis atrodo taip: VPN-XXXX-XXXX-XXXX. Jį rasite programėlėje ir paskyros puslapyje.",
+      "methodLabel": "Kontakto tipas",
+      "methodHint": "Pasirinkite, kokio tipo kontaktas išsaugotas paskyroje.",
+      "methodEmail": "El. paštas",
+      "valueLabel": "Šalinamas kontaktas",
+      "valueHint": "Įveskite jį tiksliai taip, kaip išsaugota: visą el. pašto adresą arba Telegram naudotojo vardą.",
+      "submit": "Prašyti pašalinti",
+      "submitting": "Siunčiama…",
+      "recordedTitle": "Prašymas gautas",
+      "recorded": "Jei paskyros ID atitinka patvirtintą tos paskyros kontaktą, prašymas užregistruotas. Siekdami apsaugoti paskyrą, nesakome, ar duomenys sutapo.",
+      "unavailableTitle": "Dar neprieinama",
+      "unavailable": "Pagalbos kontakto pašalinimas dar neprieinamas. Niekas neišsiųsta.",
+      "errorTitle": "Prašymas neišsiųstas",
+      "error": "Prašymo išsiųsti nepavyko. Patikrinkite ryšį ir bandykite vėliau."
     }
   },
   "servers": {
@@ -1438,36 +1459,59 @@
       "traditional": "Tradicinis VPN",
       "doppler": "Doppler"
     },
+    "panel": {
+      "means": "Ką tai reiškia",
+      "keeps": "Ką saugome",
+      "why": "Kodėl taip darome"
+    },
     "rows": {
       "account": {
         "feature": "Reikalinga paskyra",
         "traditional": "El. paštas + slaptažodis",
-        "doppler": "Paskyra nereikalinga"
+        "doppler": "Paskyra nereikalinga",
+        "means": "Įdiegiate programėlę ir prisijungiate. Jokio el. pašto, slaptažodžio ar telefono numerio.",
+        "keeps": "Anoniminis ID (VPN-XXXX-XXXX-XXXX) ir įrenginio identifikatorius, prižiūrintis įrenginių limitą. Nieko, kas jus įvardytų.",
+        "why": "El. paštas susieja paskyrą su tikru žmogumi. Mes jo niekada neprašome, todėl nėra ką nutekinti, parduoti ar perduoti."
       },
       "fingerprint": {
         "feature": "Srauto pirštü atspaudas",
         "traditional": "Aptinkamas DPI",
-        "doppler": "Maskuojamas kaip HTTPS"
+        "doppler": "Maskuojamas kaip HTTPS",
+        "means": "Ugniasienei jūsų ryšys atrodo kaip įprastas apsilankymas žinomoje HTTPS svetainėje.",
+        "keeps": "Nieko. Maskuotė vyksta tinkle, o ne duomenų bazėje.",
+        "why": "DPI blokuoja tai, ką atpažįsta. Įprastai atrodantis srautas neduoda jam ko blokuoti."
       },
       "protocol": {
         "feature": "Protokolas",
         "traditional": "OpenVPN / WireGuard",
-        "doppler": "VLESS-Reality"
+        "doppler": "VLESS-Reality",
+        "means": "VLESS-Reality pasiskolina tikros svetainės TLS rankos paspaudimą, todėl nėra VPN rankos paspaudimo, kurį būtų galima pastebėti.",
+        "keeps": "Nieko apie jūsų srautą. Serveriai praleidžia paketus ir juos pamiršta.",
+        "why": "OpenVPN ir WireGuard yra greiti, bet jų paketų modeliai gerai žinomi ir Rusijoje, Kinijoje bei Irane blokuojami per kelias sekundes."
       },
       "dns": {
         "feature": "DNS šifravimas",
         "traditional": "Kartais",
-        "doppler": "Visada"
+        "doppler": "Visada",
+        "means": "Kiekviena užklausa, žingsnis, paverčiantis site.com adresu, keliauja tuneliu į mūsų pačių resolverį.",
+        "keeps": "Jokios užklausų istorijos. Kiekviena užklausa išsprendžiama, išfiltruojamos reklamos ir sekikliai, tada ji ištrinama.",
+        "why": "Įprastas DNS rodo jūsų interneto tiekėjui kiekvieną aplankytą svetainę, net kai pats puslapis šifruotas."
       },
       "censorship": {
         "feature": "Cenzuros atsparumas",
         "traditional": "Ribotas",
-        "doppler": "Integruotas"
+        "doppler": "Integruotas",
+        "means": "Sukurta tinklams, kurie aktyviai blokuoja VPN. Jokių tiltų ar papildomų nustatymų.",
+        "keeps": "Tas pats, kaip ir visur. Politika be žurnalų nesikeičia priklausomai nuo šalies.",
+        "why": "Blokavimas kasmet stiprėja. Protokolas, kurį iš esmės sunku aptikti, išlieka ilgiau nei tas, kurį reikia lopyti po kiekvieno naujo blokavimo."
       },
       "logs": {
         "feature": "Veiklos žurnalai",
         "traditional": "Skirtingai",
-        "doppler": "Niekada"
+        "doppler": "Niekada",
+        "means": "Jokių įrašų apie lankomas svetaines, atsisiuntimus, sunaudotus duomenis ar prisijungimo trukmę.",
+        "keeps": "Prisijungimų žurnalas: IP, anoniminis ID, įrenginio ID ir laikas, ištrinamas po 90 dienų. Jis rodo, kad įrenginys prisijungė, bet ne ką jis darė.",
+        "why": "Neegzistuojantys žurnalai negali nutekėti ar būti perduoti. Prisijungimų žurnalas yra minimumas, reikalingas piktnaudžiavimui sustabdyti."
       }
     }
   },
