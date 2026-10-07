@@ -68,6 +68,31 @@ export const PLUS_ICON_TONE = {
 
 export const PLUS_CHIP = 'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold';
 
+/**
+ * Article prose on the tonal ramp (muted body, teal links and markers, card-tone code and quotes),
+ * after `prose prose-lg …`. Shared by the blog (BlogContent) and the long-form guides (ArticleBody).
+ */
+export const PLUS_PROSE_TOKENS = [
+  'prose-headings:font-display prose-headings:font-bold prose-headings:text-(--c-text) prose-headings:tracking-tight',
+  'prose-h2:text-3xl sm:prose-h2:text-[34px] prose-h2:mt-16 prose-h2:mb-5',
+  'prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-4',
+  'prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3',
+  'prose-p:text-(--c-muted) prose-p:text-[18px] prose-p:leading-[1.75] prose-p:mb-6',
+  'prose-a:text-(--c-accent) prose-a:font-semibold prose-a:underline prose-a:underline-offset-4',
+  'prose-a:decoration-(--c-accent)/40 hover:prose-a:decoration-(--c-accent) prose-a:transition-colors',
+  'prose-strong:text-(--c-text) prose-strong:font-bold prose-em:text-(--c-muted)',
+  'prose-ul:my-6 prose-ol:my-6 prose-li:text-(--c-muted) prose-li:text-[18px] prose-li:leading-[1.7] prose-li:mb-2 prose-li:marker:text-(--c-accent)',
+  'prose-blockquote:border-s-[3px] prose-blockquote:border-(--c-accent) prose-blockquote:bg-(--c-card)',
+  'prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-e-2xl prose-blockquote:not-italic prose-blockquote:font-normal',
+  'prose-blockquote:text-(--c-muted) prose-blockquote:my-8',
+  'prose-code:text-(--c-accent) prose-code:bg-(--c-inset) prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md',
+  'prose-code:text-[0.9em] prose-code:font-medium prose-code:before:content-none prose-code:after:content-none',
+  'prose-pre:bg-(--c-card) prose-pre:text-(--c-text) prose-pre:rounded-2xl prose-pre:my-8',
+  '[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-(--c-text)',
+  'prose-img:rounded-[22px] prose-img:my-10',
+  'prose-hr:border-(--c-separator) prose-hr:my-12',
+].join(' ');
+
 export function ArrowGlyph({ className = 'h-4 w-4' }: { className?: string }) {
   return (
     <svg className={`plus-arrow ${className}`} fill="none" viewBox="0 0 24 24" strokeWidth={2.25} stroke="currentColor" aria-hidden="true">

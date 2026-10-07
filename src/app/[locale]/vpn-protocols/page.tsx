@@ -15,6 +15,21 @@ import { getAllProtocolMeta, getProtocolArticle } from "@/lib/vpn-protocols";
 import { SITE_URL } from "@/lib/facts";
 import { ogLocaleMap } from "@/lib/og-locale-map";
 import { seoTitle } from "@/lib/seo-title";
+import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
+// Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
+import { calmPlusPreview, PlusPageShell, PreviewCta } from "../design-lab/home-preview";
+import {
+  ArrowGlyph,
+  PLUS_BODY,
+  PLUS_CARD_HOVER,
+  PLUS_CHIP,
+  PLUS_LABEL,
+  PLUS_META,
+  PLUS_TITLE,
+  PLUS_TITLE_SM,
+  PlusContainer,
+  PlusHeading,
+} from "../design-lab/plus-recipes";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -85,6 +100,95 @@ export default async function VpnProtocolsHubPage({ params }: PageProps) {
       />
       <WebPageSchema url={pageUrl} name={mt("title")} description={mt("description")} type="CollectionPage" inLanguage={ogLocaleMap[locale]?.replace("_", "-") ?? "en-US"} />
       <Navbar />
+      {calmPlusPreview ? (
+        <PlusPageShell>
+          <main className="overflow-x-clip">
+            <section className="px-4 pt-28 pb-6 sm:px-6 sm:pt-32 md:pb-10 lg:px-8">
+              <div className="mx-auto max-w-3xl text-center">
+                <h1 className="font-display text-4xl font-bold leading-[1.12] text-(--c-text) sm:text-5xl">{t("hero.title")}</h1>
+                <p className="mt-5 text-lg leading-relaxed text-(--c-muted) md:text-xl">{t("hero.subtitle")}</p>
+              </div>
+            </section>
+
+            <PlusContainer className="py-10">
+              <PlusHeading title={t("tableTitle")} subtitle={t("ratingNote")} live />
+              <div className="overflow-x-auto rounded-[22px] bg-(--c-card)">
+                <table className="w-full min-w-[760px] text-[15px] text-start">
+                  <thead className="bg-(--c-inset) text-[13px] text-(--c-text)">
+                    <tr>
+                      {(["protocol", "transport", "looksLike", "resistance", "speed", "builtIn"] as const).map((c) => (
+                        <th key={c} scope="col" className="px-5 py-3.5 font-bold text-start whitespace-nowrap">
+                          {t(`columns.${c}`)}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {protocols.map(({ slug, meta }) => {
+                      const card = meta.card!;
+                      return (
+                        <tr key={slug} className="border-t border-(--c-separator)">
+                          <th scope="row" className="px-5 py-3.5 text-start font-bold whitespace-nowrap">
+                            <Link href={`/${SLUG}/${slug}`} className="text-(--c-accent) underline-offset-4 hover:underline">
+                              {meta.navLabel}
+                            </Link>
+                            <span className={`ms-2 font-normal tabular-nums ${PLUS_META}`}>{card.year}</span>
+                          </th>
+                          <td className="px-5 py-3.5 text-(--c-muted) whitespace-nowrap">{card.transport}</td>
+                          <td className="px-5 py-3.5 text-(--c-muted)">{card.looksLike}</td>
+                          <td className="px-5 py-3.5"><RatingDots value={card.censorshipResistance} label={rating(card.censorshipResistance)} plus /></td>
+                          <td className="px-5 py-3.5"><RatingDots value={card.speed} label={rating(card.speed)} plus /></td>
+                          <td className="px-5 py-3.5 text-(--c-muted)">{card.builtIn}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </PlusContainer>
+
+            <PlusContainer className="py-10">
+              <div className="mb-8 text-center">
+                <h2 className={`${PLUS_TITLE} md:text-3xl`}>{t("guidesTitle")}</h2>
+              </div>
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {protocols.map(({ slug, meta }) => (
+                  <li key={slug}>
+                    <Link href={`/${SLUG}/${slug}`} className={PLUS_CARD_HOVER}>
+                      <span className={PLUS_LABEL}>{meta.card?.transport}</span>
+                      <span className={`mt-1.5 block ${PLUS_TITLE_SM}`}>{meta.navLabel}</span>
+                      <span className={`mt-1.5 block ${PLUS_BODY}`}>{meta.excerpt}</span>
+                      <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-bold text-(--c-accent)">
+                        {t("readGuide")}
+                        <ArrowGlyph className="h-3.5 w-3.5" />
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <Link href={`/${SLUG}/why-vless`} className={`${PLUS_CARD_HOVER} mt-4 sm:!p-8`}>
+                <span className={`${PLUS_CHIP} self-start bg-(--c-accent-tint) text-(--c-accent)`}>{t("whyKicker")}</span>
+                <span className="mt-3 flex items-center justify-between gap-4">
+                  <span>
+                    <span className={`block ${PLUS_TITLE}`}>{why.meta.title}</span>
+                    <span className={`mt-1.5 block max-w-3xl ${PLUS_BODY}`}>{why.meta.excerpt}</span>
+                  </span>
+                  <ArrowGlyph className="h-6 w-6 shrink-0 text-(--c-tert) group-hover:text-(--c-accent)" />
+                </span>
+              </Link>
+
+              <div className="mx-auto mt-14 max-w-3xl space-y-5 text-lg leading-relaxed text-(--c-muted)">
+                <p>{t("intro.p1")}</p>
+                <p>{t("intro.p2")}</p>
+              </div>
+            </PlusContainer>
+
+            <div id="blog-cta-sentinel" aria-hidden="true" />
+            <PreviewCta />
+          </main>
+        </PlusPageShell>
+      ) : (
       <main className="overflow-x-clip">
         <section className="relative overflow-hidden bg-bg-secondary/30 pt-28 sm:pt-32 pb-12 md:pb-16 px-4 sm:px-6 lg:px-8">
           <PricingBackdrop />
@@ -171,6 +275,12 @@ export default async function VpnProtocolsHubPage({ params }: PageProps) {
         <CTA />
         <MobileStickyCta sentinelId="blog-cta-sentinel" />
       </main>
+      )}
+      {calmPlusPreview && (
+        <PlusPageShell>
+          <BlogStickyBar sentinelId="blog-cta-sentinel" plus />
+        </PlusPageShell>
+      )}
       <Footer />
     </>
   );

@@ -8,6 +8,7 @@ import { isHowItWorksLocale } from "@/i18n/how-it-works-locales";
 import { isSecurityLocale } from "@/i18n/security-locales";
 import { isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 import { BlogInlineCta } from "./blog-inline-cta";
+import { PLUS_PROSE_TOKENS } from "@/app/[locale]/design-lab/plus-recipes";
 
 const SITE = "https://www.dopplervpn.org";
 
@@ -45,28 +46,8 @@ interface BlogContentProps {
   plus?: boolean;
 }
 
-/** Calm+ preview: the same prose on the tonal ramp (muted body, teal links and markers, card-tone code and quotes). */
-const PLUS_PROSE = [
-  "prose prose-lg dark:prose-invert max-w-none text-start",
-  "prose-headings:font-display prose-headings:font-bold prose-headings:text-(--c-text) prose-headings:tracking-tight",
-  "prose-h2:text-3xl sm:prose-h2:text-[34px] prose-h2:mt-16 prose-h2:mb-5",
-  "prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-4",
-  "prose-h4:text-xl prose-h4:mt-8 prose-h4:mb-3",
-  "prose-p:text-(--c-muted) prose-p:text-[18px] prose-p:leading-[1.75] prose-p:mb-6",
-  "prose-a:text-(--c-accent) prose-a:font-semibold prose-a:underline prose-a:underline-offset-4",
-  "prose-a:decoration-(--c-accent)/40 hover:prose-a:decoration-(--c-accent) prose-a:transition-colors",
-  "prose-strong:text-(--c-text) prose-strong:font-bold prose-em:text-(--c-muted)",
-  "prose-ul:my-6 prose-ol:my-6 prose-li:text-(--c-muted) prose-li:text-[18px] prose-li:leading-[1.7] prose-li:mb-2 prose-li:marker:text-(--c-accent)",
-  "prose-blockquote:border-s-[3px] prose-blockquote:border-(--c-accent) prose-blockquote:bg-(--c-card)",
-  "prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-e-2xl prose-blockquote:not-italic prose-blockquote:font-normal",
-  "prose-blockquote:text-(--c-muted) prose-blockquote:my-8",
-  "prose-code:text-(--c-accent) prose-code:bg-(--c-inset) prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md",
-  "prose-code:text-[0.9em] prose-code:font-medium prose-code:before:content-none prose-code:after:content-none",
-  "prose-pre:bg-(--c-card) prose-pre:text-(--c-text) prose-pre:rounded-2xl prose-pre:my-8",
-  "[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-(--c-text)",
-  "prose-img:rounded-[22px] prose-img:my-10",
-  "prose-hr:border-(--c-separator) prose-hr:my-12",
-].join(" ");
+/** Calm+ preview: the same prose on the tonal ramp (plus-recipes.tsx). */
+const PLUS_PROSE = `prose prose-lg dark:prose-invert max-w-none text-start ${PLUS_PROSE_TOKENS}`;
 
 // Find the source line (1-indexed) of the Nth ATX-style H2 in markdown,
 // ignoring headings inside fenced code blocks. Returns null if fewer exist.

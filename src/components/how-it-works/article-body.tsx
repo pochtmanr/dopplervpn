@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import type { Element, Text } from "hast";
 import { createHeadingIdFactory } from "@/lib/how-it-works";
 import { chartsFor } from "./charts/registry";
+import { PLUS_PROSE_TOKENS } from "@/app/[locale]/design-lab/plus-recipes";
 
 /**
  * Server-rendered markdown for the /how-it-works articles. The prose recipe is
@@ -31,6 +32,11 @@ const PROSE =
   "prose-pre:bg-bg-secondary prose-pre:text-text-primary prose-pre:border prose-pre:border-overlay/10 prose-pre:rounded-xl " +
   "prose-hr:border-overlay/15";
 
+/** Calm+: the blog's Calm+ prose, still without `dark:prose-invert`. */
+const PLUS_PROSE =
+  "prose prose-lg max-w-none text-start prose-headings:scroll-mt-28 [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none " +
+  PLUS_PROSE_TOKENS;
+
 function textOf(children: ReactNode): string {
   if (typeof children === "string" || typeof children === "number") return String(children);
   if (Array.isArray(children)) return children.map(textOf).join("");
@@ -55,13 +61,13 @@ function chartIdOf(node: Element | undefined): string | null {
  * Internal links are written locale-free in the markdown ("/tools") and get the
  * page's locale prefix here, so a translated article needs no link rewriting.
  */
-export function ArticleBody({ markdown, locale }: { markdown: string; locale: string }) {
+export function ArticleBody({ markdown, locale, plus = false }: { markdown: string; locale: string; plus?: boolean }) {
   const charts = chartsFor(locale);
   // One factory per render, consumed in document order, so these ids are the
   // same sequence the table of contents got from extractH2s().
   const nextHeadingId = createHeadingIdFactory();
   return (
-    <div className={PROSE}>
+    <div className={plus ? PLUS_PROSE : PROSE}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -74,16 +80,24 @@ export function ArticleBody({ markdown, locale }: { markdown: string; locale: st
             return <Chart />;
           },
           table: ({ children }) => (
-            <div className="not-prose my-10 overflow-x-auto rounded-xl border border-overlay/15">
+            <div className={plus ? "not-prose my-10 overflow-x-auto rounded-2xl bg-(--c-card)" : "not-prose my-10 overflow-x-auto rounded-xl border border-overlay/15"}>
               <table className="w-full text-start text-sm sm:text-base border-collapse">{children}</table>
             </div>
           ),
-          thead: ({ children }) => <thead className="bg-overlay/5 text-xs uppercase tracking-wider">{children}</thead>,
+          thead: ({ children }) => <thead className={plus ? "bg-(--c-inset) text-[13px]" : "bg-overlay/5 text-xs uppercase tracking-wider"}>{children}</thead>,
           th: ({ children }) => (
-            <th className="px-4 py-3 text-start font-semibold border-b border-overlay/15 text-text-primary">{children}</th>
+            <th className={plus ? "px-4 py-3 text-start font-bold text-(--c-text)" : "px-4 py-3 text-start font-semibold border-b border-overlay/15 text-text-primary"}>
+              {children}
+            </th>
           ),
           td: ({ children }) => (
-            <td className="px-4 py-3 align-top text-text-muted border-b border-overlay/10 [&_strong]:text-text-primary">
+            <td
+              className={
+                plus
+                  ? "px-4 py-3 align-top text-(--c-muted) border-t border-(--c-separator) [&_strong]:text-(--c-text)"
+                  : "px-4 py-3 align-top text-text-muted border-b border-overlay/10 [&_strong]:text-text-primary"
+              }
+            >
               {children}
             </td>
           ),
