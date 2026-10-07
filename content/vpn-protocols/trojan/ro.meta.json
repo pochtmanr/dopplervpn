@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: un proxy ascuns în spatele unui site real",
+  "metaTitle": "Ce este protocolul Trojan? Cum ascunde traficul de proxy în HTTPS",
+  "metaDescription": "Trojan explicat: cum ascunde traficul de proxy într-o conexiune TLS autentică, revine la un site real pentru sonde și de ce nevoia de domeniu propriu este punctul lui slab.",
+  "excerpt": "O conexiune TLS reală către un site real pe care îl deții, cu un hash de parolă înăuntru. Fără parolă, vizitatorii și sondele văd doar site-ul.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS către propriul tău domeniu",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Niciunul (e nevoie de aplicație)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (implementare de referință)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Cum autentifică Trojan utilizatorii?",
+      "answer": "În interiorul conexiunii TLS, clientul trimite hash-ul SHA-224 codificat hexazecimal al unei parole partajate, lung de 56 de caractere. Dacă este greșit, serverul trimite conexiunea mai departe către un server web de rezervă."
+    },
+    {
+      "question": "Are Trojan nevoie de un domeniu?",
+      "answer": "Da. Serverul prezintă un certificat real pentru un domeniu real, și asta îl face să arate ca un site HTTPS obișnuit. Acel domeniu este și ceea ce poate bloca un cenzor."
+    },
+    {
+      "question": "Trojan sau VLESS?",
+      "answer": "Ambele se bazează pe TLS, nu pe o criptare proprie. VLESS cu Reality merge mai departe: împrumută handshake-ul unui site popular existent, așa că nu există un domeniu de proxy de blocat."
+    },
+    {
+      "question": "Poate fi detectat Trojan?",
+      "answer": "Nu prin sondare simplă, pentru că sondele primesc site-ul de rezervă. Cercetarea a arătat că traficul TLS în interiorul TLS poate fi amprentat după timpi și după dimensiunile pachetelor, iar domeniile de proxy pot fi blocate odată identificate."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repository-ul trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

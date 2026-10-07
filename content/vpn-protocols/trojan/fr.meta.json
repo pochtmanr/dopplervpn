@@ -1,0 +1,47 @@
+{
+  "title": "Trojan : cacher un proxy derrière un vrai site web",
+  "metaTitle": "Qu'est-ce que le protocole Trojan ? Un proxy caché dans du HTTPS",
+  "metaDescription": "Trojan expliqué : il cache le trafic du proxy dans une vraie connexion TLS, bascule vers un vrai site web pour les sondes, et son point faible est le besoin d'un domaine propre.",
+  "excerpt": "Une vraie connexion TLS vers un vrai site web que vous possédez, avec un hachage de mot de passe à l'intérieur. Sans le mot de passe, visiteurs et sondes ne voient que le site web.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS vers votre propre domaine",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Aucun (application requise)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (implémentation de référence)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Comment Trojan authentifie-t-il les utilisateurs ?",
+      "answer": "À l'intérieur de la connexion TLS, le client envoie le hachage SHA-224 d'un mot de passe partagé, encodé en hexadécimal, long de 56 caractères. S'il est incorrect, le serveur transmet la connexion à un serveur web de secours."
+    },
+    {
+      "question": "Trojan a-t-il besoin d'un domaine ?",
+      "answer": "Oui. Le serveur présente un vrai certificat pour un vrai domaine, ce qui le fait ressembler à un site HTTPS ordinaire. Ce domaine est aussi ce qu'un censeur peut bloquer."
+    },
+    {
+      "question": "Trojan ou VLESS ?",
+      "answer": "Tous deux s'appuient sur TLS plutôt que sur leur propre chiffrement. VLESS avec Reality va plus loin en empruntant la poignée de main d'un site populaire existant : il n'y a donc aucun domaine de proxy à bloquer."
+    },
+    {
+      "question": "Trojan peut-il être détecté ?",
+      "answer": "Pas par un simple sondage, puisque les sondes reçoivent le site web de secours. Des recherches ont montré que le trafic TLS dans TLS peut être identifié par empreinte grâce à sa durée et à la taille des paquets, et que les domaines de proxy peuvent être bloqués une fois identifiés."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, dépôt trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

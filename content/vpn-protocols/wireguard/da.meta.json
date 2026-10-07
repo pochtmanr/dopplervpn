@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: hurtig, enkel og let at blokere",
+  "metaTitle": "Hvad er WireGuard? Sådan virker den, og hvorfor den blokeres",
+  "metaDescription": "WireGuard forklaret: fast moderne kryptografi, hvorfor den er så hurtig, hvorfor et handshake med fast størrelse er let at blokere, og hvilke apps der bruger den.",
+  "excerpt": "Den hurtigste udbredte VPN-protokol, med fast moderne kryptografi og en lille kodebase. Den er aldrig bygget til at skjule sig, og filtrerede netværk blokerer den først.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Et genkendeligt VPN-handshake",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux-kernen (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (officielle apps)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Tværplatformskerne, som flere apps bruger" }
+  ],
+  "faq": [
+    {
+      "question": "Er WireGuard sikker?",
+      "answer": "Ja. WireGuard bruger et fast sæt moderne primitiver (ChaCha20-Poly1305, Curve25519, BLAKE2s) og har en lille kodebase, der i praksis kan gennemgås. Svagheden er synlighed for censorer, ikke styrken af krypteringen."
+    },
+    {
+      "question": "Hvorfor holder WireGuard op med at virke i Rusland eller Iran?",
+      "answer": "Handshake-beskederne har faste størrelser, 148 byte fra klienten og 92 byte i svar, over UDP. Det mønster er enkelt for dyb pakkeinspektion at opdage, og operatører i Rusland er rapporteret at afbryde WireGuard-sessioner lige efter handshaket."
+    },
+    {
+      "question": "Er WireGuard hurtigere end OpenVPN?",
+      "answer": "Som regel ja. WireGuard opretter en session i én tur-retur, kører i kernen på Linux og har langt mindre protokoloverhead at forhandle. Den præcise forskel afhænger af enheden og netværket."
+    },
+    {
+      "question": "Kan WireGuard skjules for DPI?",
+      "answer": "Ikke i sig selv. Forks som AmneziaWG ændrer pakkestørrelser og headere, så trafikken er mindre genkendelig, eller WireGuard kan pakkes ind i en anden protokol med et vist tab af hastighed."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, blokering af OpenVPN og WireGuard i Rusland (issue 274, august 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

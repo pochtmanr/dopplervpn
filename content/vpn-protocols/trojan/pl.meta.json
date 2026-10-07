@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: ukrywanie proxy za prawdziwą stroną",
+  "metaTitle": "Czym jest protokół Trojan? Jak ukrywa ruch proxy jako HTTPS",
+  "metaDescription": "Trojan wyjaśniony: jak ukrywa ruch proxy w prawdziwym połączeniu TLS, dla sond wraca do prawdziwej strony i dlaczego własna domena jest jego słabym punktem.",
+  "excerpt": "Prawdziwe połączenie TLS z prawdziwą stroną, którą masz, ze skrótem hasła w środku. Bez hasła odwiedzający i sondy widzą tylko stronę.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS do własnej domeny",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Brak (wymagana aplikacja)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (implementacja referencyjna)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Jak Trojan uwierzytelnia użytkowników?",
+      "answer": "Wewnątrz połączenia TLS klient wysyła szesnastkowy skrót SHA-224 wspólnego hasła, długi na 56 znaków. Jeśli jest błędny, serwer przekazuje połączenie do zapasowego serwera WWW."
+    },
+    {
+      "question": "Czy Trojan potrzebuje domeny?",
+      "answer": "Tak. Serwer przedstawia prawdziwy certyfikat prawdziwej domeny i dzięki temu wygląda jak zwykła strona HTTPS. Tę domenę cenzor może też zablokować."
+    },
+    {
+      "question": "Trojan czy VLESS?",
+      "answer": "Oba polegają na TLS, a nie na własnym szyfrowaniu. VLESS z Reality idzie dalej: pożycza uzgadnianie istniejącej popularnej strony, więc nie ma domeny proxy do zablokowania."
+    },
+    {
+      "question": "Czy Trojana da się wykryć?",
+      "answer": "Nie prostym sondowaniem, bo sondy dostają zapasową stronę. Badania pokazały, że ruch TLS wewnątrz TLS da się rozpoznać po czasie i rozmiarach pakietów, a domeny proxy można zablokować, gdy zostaną zidentyfikowane."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, protokół Trojan", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repozytorium trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

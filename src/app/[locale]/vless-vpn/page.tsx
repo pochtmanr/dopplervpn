@@ -15,6 +15,7 @@ import { SeoWidePlate } from "@/components/seo/wide-plate";
 import { ProtocolTable } from "@/components/seo/protocol-table";
 import { PageFaq } from "@/components/no-registration/page-faq";
 import type { RelatedRailItem } from "@/components/no-registration/related-rail";
+import { RelatedBlogPosts } from "@/components/blog/related-blog-posts";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -293,6 +294,7 @@ export default async function VlessVpnPage({ params }: PageProps) {
         <section className="py-12 md:py-20">
           <PageFaq title={t("faq.title")} items={faqItems} idPrefix="vless-faq" />
         </section>
+        <RelatedBlogPosts locale={locale} slugs={["what-is-vless", "vless-reality-explained", "vless-reality-vs-wireguard", "vless-vs-vmess-vs-trojan", "vless-uri-format"]} />
       </SeoPageFrame>
     </>
   );

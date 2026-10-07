@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: nejauši baiti un kāpēc tas pārstāja darboties",
+  "metaTitle": "Kas ir Shadowsocks? Kā tas darbojas un kā GFW to atklāj",
+  "metaDescription": "Shadowsocks skaidrojums: šifrēts starpnieks pret Lielo ugunsmūri, kā aktīvā zondēšana to atrada un kā kopš 2021. gada Ķīna bloķē pilnībā šifrētu datplūsmu pēc nejaušības.",
+  "excerpt": "Vieglais starpnieks, kas radies Ķīnā un šifrēts no pirmā baita, lai izskatītos pēc nekā. Kopš 2021. gada Lielais ugunsmūris bloķē datplūsmu tieši par to, ka tā izskatās pēc nekā.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP vai UDP",
+    "looksLike": "Nejauši izskatoši baiti",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Vai Shadowsocks ir VPN?",
+      "answer": "Tehniski tas ir šifrēts starpnieks, nevis VPN. Lielākā daļa mūsdienu klientu pievieno visas sistēmas režīmu, kas visu datplūsmu novirza caur to, tāpēc ikdienā tas uzvedas ļoti līdzīgi."
+    },
+    {
+      "question": "Vai Shadowsocks joprojām darbojas Ķīnā?",
+      "answer": "Mazāk uzticami nekā agrāk. USENIX Security 2023 publicēts pētījums parādīja, ka kopš 2021. gada novembra Lielais ugunsmūris bloķē pilnībā šifrētu datplūsmu, kas neizskatās pēc neviena zināma protokola, un tieši tādu Shadowsocks rada."
+    },
+    {
+      "question": "Kā ugunsmūris izlemj, ka datplūsma ir pilnībā šifrēta?",
+      "answer": "Tas pārbauda pirmo paketi un atbrīvo to, ja tā atbilst zināmam protokolam, satur pietiekami daudz drukājamu rakstzīmju vai ja vidējais iestatīto bitu skaits baitā ir ārpus diapazona no 3.4 līdz 4.6. Atlikušo datplūsmu var bloķēt."
+    },
+    {
+      "question": "Kas ir Shadowsocks 2022?",
+      "answer": "Protokola 2022. gada pārskatīšana (SIP022) ar stiprāku aizsardzību pret atkārtošanu un atjauninātu atslēgu apstrādi. Tas nemaina to, ka datplūsma izskatās nejauša."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD šifri", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022. gada redakcija", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: سريع وبسيط وسهل الحجب",
+  "metaTitle": "ما هو WireGuard؟ كيف يعمل ولماذا يُحجب",
+  "metaDescription": "شرح WireGuard: تشفيره الحديث الثابت، وسبب سرعته، ولماذا يسهّل التعارف الأولي ثابت الحجم على جهات الرقابة حجبه، والتطبيقات التي تستخدمه.",
+  "excerpt": "أسرع بروتوكولات VPN الشائعة، بتشفير حديث ثابت وشيفرة صغيرة جدًا. لم يُبنَ للإخفاء، وتحجبه الشبكات المفلترة أولًا.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "تعارف أولي لـ VPN يمكن التعرّف عليه",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "نواة Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (التطبيقات الرسمية)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "نواة متعددة المنصات تعتمد عليها عدة تطبيقات" }
+  ],
+  "faq": [
+    {
+      "question": "هل WireGuard آمن؟",
+      "answer": "نعم. يستخدم WireGuard مجموعة ثابتة من الخوارزميات الحديثة (ChaCha20-Poly1305 وCurve25519 وBLAKE2s)، وشيفرته صغيرة بما يكفي لتدقيقها عمليًا. نقطة ضعفه هي وضوحه أمام جهات الرقابة، لا قوة تشفيره."
+    },
+    {
+      "question": "لماذا يتوقف WireGuard عن العمل في روسيا أو إيران؟",
+      "answer": "لرسائل التعارف الأولي فيه أحجام ثابتة: 148 بايتًا من العميل و92 بايتًا في الرد، عبر UDP. هذا النمط سهل الرصد على أنظمة فحص الحزم العميق، وقد أُفيد بأن شركات الاتصالات في روسيا تقطع جلسات WireGuard فور انتهاء التعارف الأولي."
+    },
+    {
+      "question": "هل WireGuard أسرع من OpenVPN؟",
+      "answer": "عادةً نعم. ينشئ WireGuard الجلسة في ذهاب وإياب واحد، ويعمل داخل النواة في Linux، وليس عليه تفاوض كثير في البروتوكول. ويعتمد الفارق الدقيق على الجهاز والشبكة."
+    },
+    {
+      "question": "هل يمكن إخفاء WireGuard عن DPI؟",
+      "answer": "ليس بمفرده. تغيّر نسخ مشتقة مثل AmneziaWG أحجام الحزم ورؤوسها لتصبح حركة المرور أقل وضوحًا، أو يمكن تغليف WireGuard داخل بروتوكول آخر، على حساب جزء من السرعة."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, حجب OpenVPN وWireGuard في روسيا (issue 274، أغسطس 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

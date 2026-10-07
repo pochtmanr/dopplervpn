@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard z usuniętymi odciskami",
+  "metaTitle": "Czym jest AmneziaWG? Jak różni się od WireGuarda",
+  "metaDescription": "AmneziaWG wyjaśniony: fork WireGuarda, który losuje nagłówki i rozmiary pakietów oraz wysyła pakiety śmieciowe, by DPI nie dopasowało stałego uzgadniania WireGuarda. Ograniczenia i aplikacje.",
+  "excerpt": "Szybkość i kryptografia WireGuarda, z losowymi nagłówkami, rozmiarami pakietów i pakietami śmieciowymi, żeby filtry nie dopasowały jego stałego uzgadniania.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Nierozpoznawalne UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Brak (wymagana aplikacja)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia client (kod źródłowy)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementacja w przestrzeni użytkownika dla serwerów i klientów" }
+  ],
+  "faq": [
+    {
+      "question": "Czym różni się AmneziaWG od WireGuarda?",
+      "answer": "AmneziaWG zachowuje kryptografię i konstrukcję WireGuarda, ale losuje nagłówki i rozmiary pakietów i może wysyłać pakiety śmieciowe przed uzgadnianiem, więc ruch nie pasuje już do stałej sygnatury WireGuarda."
+    },
+    {
+      "question": "Czy AmneziaWG jest zgodny z WireGuardem?",
+      "answer": "Tylko przy wyłączonym zaciemnianiu. Gdy skonfigurowane są własne nagłówki, prefiksy rozmiaru albo pakiety śmieciowe, oba końce muszą działać na AmneziaWG ze zgodnymi ustawieniami."
+    },
+    {
+      "question": "Co oznaczają ustawienia Jc, S1 i H1?",
+      "answer": "Jc to liczba pakietów śmieciowych wysyłanych przed uzgadnianiem, o rozmiarach między Jmin a Jmax. S1 do S4 dodają losowe prefiksy, by zmienić długości pakietów. H1 do H4 ustawiają własne wartości typu komunikatu, które zastępują stałe wartości WireGuarda."
+    },
+    {
+      "question": "Czy AmneziaWG działa w Rosji?",
+      "answer": "Usuwa sygnatury używane do blokowania zwykłego WireGuarda, co czyni go tam znacznie odporniejszym. Ponieważ działa przez UDP, sieci ograniczające UDP nadal mogą na niego wpływać."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, dokumentacja AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repozytorium amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard cu amprentele scoase",
+  "metaTitle": "Ce este AmneziaWG? Cum diferă protocolul de WireGuard",
+  "metaDescription": "AmneziaWG explicat: un fork al WireGuard care randomizează anteturi și dimensiuni de pachete și trimite pachete junk, ca DPI să nu recunoască handshake-ul fix. Limite și aplicații.",
+  "excerpt": "Viteza și criptografia WireGuard, cu anteturi, dimensiuni de pachete și pachete junk randomizate, ca filtrele să nu potrivească handshake-ul lui fix.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP de nerecunoscut",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Niciunul (e nevoie de aplicație)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clientul Amnezia (cod sursă)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementare în spațiul utilizatorului, pentru servere și clienți" }
+  ],
+  "faq": [
+    {
+      "question": "Care este diferența dintre AmneziaWG și WireGuard?",
+      "answer": "AmneziaWG păstrează criptografia și proiectarea WireGuard, dar randomizează anteturile și dimensiunile pachetelor și poate trimite pachete junk înainte de handshake, așa că traficul nu se mai potrivește cu semnătura fixă a WireGuard."
+    },
+    {
+      "question": "Este AmneziaWG compatibil cu WireGuard?",
+      "answer": "Doar cu mascarea oprită. Odată ce sunt configurate anteturile proprii, prefixele de dimensiune sau pachetele junk, ambele capete trebuie să ruleze AmneziaWG, cu setări care se potrivesc."
+    },
+    {
+      "question": "Ce înseamnă setările Jc, S1 și H1?",
+      "answer": "Jc este numărul de pachete junk trimise înainte de handshake, cu dimensiuni între Jmin și Jmax. S1 până la S4 adaugă prefixe aleatorii ca să schimbe lungimile pachetelor. H1 până la H4 stabilesc valorile proprii ale tipului de mesaj, care le înlocuiesc pe cele fixe ale WireGuard."
+    },
+    {
+      "question": "Funcționează AmneziaWG în Rusia?",
+      "answer": "Înlătură semnăturile folosite ca să se blocheze WireGuard simplu, ceea ce îl face mult mai rezistent acolo. Pentru că rulează peste UDP, rețelele care restricționează UDP tot îl pot afecta."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, documentația AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repository-ul amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

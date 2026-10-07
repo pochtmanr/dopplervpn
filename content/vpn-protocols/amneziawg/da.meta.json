@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard med fingeraftrykkene fjernet",
+  "metaTitle": "Hvad er AmneziaWG? Sådan adskiller den sig fra WireGuard",
+  "metaDescription": "AmneziaWG forklaret: en WireGuard-fork, der gør headere og pakkestørrelser tilfældige og sender junkpakker, så DPI ikke kan matche WireGuards faste handshake. Grænser og apps.",
+  "excerpt": "WireGuards hastighed og kryptografi, med tilfældige headere, pakkestørrelser og junkpakker, så filtre ikke kan matche det faste handshake.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Uigenkendeligt UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ingen (app kræves)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia-klient (kildekode)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementering i brugerområdet til servere og klienter" }
+  ],
+  "faq": [
+    {
+      "question": "Hvad er forskellen på AmneziaWG og WireGuard?",
+      "answer": "AmneziaWG beholder WireGuards kryptografi og design, men gør pakkeheadere og størrelser tilfældige og kan sende junkpakker før handshaket, så trafikken ikke længere matcher WireGuards faste signatur."
+    },
+    {
+      "question": "Er AmneziaWG kompatibel med WireGuard?",
+      "answer": "Kun med obfuskeringen slået fra. Når de egne headere, størrelsespræfikser eller junkpakker er konfigureret, skal begge ender køre AmneziaWG med matchende indstillinger."
+    },
+    {
+      "question": "Hvad betyder indstillingerne Jc, S1 og H1?",
+      "answer": "Jc er antallet af junkpakker sendt før handshaket, med størrelser mellem Jmin og Jmax. S1 til S4 tilføjer tilfældige præfikser for at ændre pakkelængder. H1 til H4 sætter egne værdier for beskedtype, der erstatter WireGuards faste."
+    },
+    {
+      "question": "Virker AmneziaWG i Rusland?",
+      "answer": "Den fjerner de signaturer, der bruges til at blokere almindelig WireGuard, hvilket gør den langt mere modstandsdygtig der. Fordi den kører over UDP, kan netværk, der begrænser UDP, stadig påvirke den."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG-dokumentation", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go-kodearkivet", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

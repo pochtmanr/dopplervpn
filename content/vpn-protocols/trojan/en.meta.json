@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: Hiding a Proxy Behind a Real Website",
+  "metaTitle": "What Is the Trojan Protocol? How It Hides Proxy Traffic as HTTPS",
+  "metaDescription": "Trojan explained: how it hides proxy traffic inside a genuine TLS connection, falls back to a real website for probes, and why needing your own domain is its weak point.",
+  "excerpt": "A real TLS connection to a real website you own, with a password hash inside. Without the password, visitors and probes just see the website.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS to your own domain",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "None (app required)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (reference implementation)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "How does Trojan authenticate users?",
+      "answer": "Inside the TLS connection, the client sends the hex-encoded SHA-224 hash of a shared password, 56 characters long. If it is wrong, the server forwards the connection to a fallback web server."
+    },
+    {
+      "question": "Does Trojan need a domain?",
+      "answer": "Yes. The server presents a real certificate for a real domain, which is what makes it look like an ordinary HTTPS site. That domain is also what a censor can block."
+    },
+    {
+      "question": "Trojan or VLESS?",
+      "answer": "Both rely on TLS rather than their own encryption. VLESS with Reality goes further by borrowing the handshake of an existing popular website, so there is no proxy domain to block."
+    },
+    {
+      "question": "Can Trojan be detected?",
+      "answer": "Not by simple probing, since probes get the fallback website. Research has shown TLS-inside-TLS traffic can be fingerprinted by timing and packet sizes, and proxy domains can be blocked once identified."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan repository", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

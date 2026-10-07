@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: খারাপ নেটওয়ার্কের জন্য তৈরি একটি QUIC প্রক্সি",
+  "metaTitle": "Hysteria 2 কী? এই QUIC প্রক্সি প্রোটোকলের ব্যাখ্যা",
+  "metaDescription": "Hysteria 2 ব্যাখ্যা: QUIC-এর উপর একটি প্রক্সি যা প্রোবের কাছে আসল HTTP/3 ওয়েব সার্ভারের মতো আচরণ করে, প্যাকেট-হারানো নেটওয়ার্কে গতি ধরে, এবং UDP বা QUIC ব্লক হলে ব্যর্থ হয়।",
+  "excerpt": "QUIC-এর উপর একটি প্রক্সি, HTTP/3-এর পেছনের ট্রান্সপোর্ট। প্যাকেট-হারানো লিংকে দ্রুত, এবং পাসওয়ার্ড ছাড়া যার কাছে একটি আসল HTTP/3 ওয়েব সার্ভার। পেরোতে UDP লাগে।",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "একটি HTTP/3 ওয়েব সার্ভার",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "নেই (অ্যাপ লাগে)"
+  },
+  "apps": [
+    { "name": "Hysteria (অফিসিয়াল ক্লায়েন্ট)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "কয়েকটি অ্যাপের ব্যবহৃত ক্রস-প্ল্যাটফর্ম কোর" }
+  ],
+  "faq": [
+    {
+      "question": "Hysteria 2 কি একটি VPN?",
+      "answer": "এটি একটি প্রক্সি প্রোটোকল, কিন্তু Hiddify ও NekoBox-এর মতো ক্লায়েন্ট একটি ডিভাইসের সব ট্র্যাফিক এর মধ্য দিয়ে রাউট করতে পারে, তাই বাস্তবে এটি VPN-এর মতো ব্যবহার করা যায়।"
+    },
+    {
+      "question": "খারাপ সংযোগে Hysteria 2 দ্রুত কেন?",
+      "answer": "এটি UDP-র উপর QUIC-এ চলে, যা প্রতিটি স্ট্রিম আটকে না দিয়ে প্যাকেট হারানো সামলায়, এবং অস্থিতিশীল লিংকের জন্য নিজের কনজেশন কন্ট্রোল ব্যবহার করতে পারে।"
+    },
+    {
+      "question": "Hysteria 2 কি ব্লক করা যায়?",
+      "answer": "প্রোব একটি আসল HTTP/3 সার্ভার দেখে, তাই এটি অ্যাক্টিভ প্রোবিং সামলায়। কিন্তু একজন সেন্সর UDP বা QUIC ব্যাপকভাবে থ্রোটল বা ব্লক করতে পারে, এবং তখন Hysteria 2 সংযুক্ত হতে পারে না।"
+    },
+    {
+      "question": "Hysteria 2 না VLESS-Reality?",
+      "answer": "যেসব প্যাকেট-হারানো নেটওয়ার্ক UDP অনুমতি দেয়, সেখানে Hysteria 2 প্রায়ই দ্রুত। VLESS-Reality TCP-তে চলে এবং UDP ফিল্টার হলেও কাজ করতে থাকে। অনেকে দুটোই রাখে।"
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, Hysteria 2 প্রোটোকল স্পেসিফিকেশন", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, hysteria রিপোজিটরি", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

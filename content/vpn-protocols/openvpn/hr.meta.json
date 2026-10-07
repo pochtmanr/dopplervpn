@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: fleksibilni veteran kojeg cenzori prepoznaju po otisku",
+  "metaTitle": "Što je OpenVPN? Kako radi i zašto ga davatelji usluge vide",
+  "metaDescription": "OpenVPN objašnjen: TLS upravljački i podatkovni kanal, zašto je sporiji od WireGuarda i zašto je istraživanje našlo više od 85 % njegovih tokova kod stvarnog davatelja.",
+  "excerpt": "Dva desetljeća star, beskrajno podesiv i podržan gotovo posvuda. Istraživači su također pokazali da davatelj usluge može izdvojiti većinu prometa OpenVPN-a po obliku.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP ili TCP",
+    "looksLike": "Vlastito TLS uokvirivanje OpenVPN-a",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Nema (potrebna je aplikacija)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (klijent i poslužitelj otvorenog koda)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Je li OpenVPN još siguran?",
+      "answer": "Aktualno izdanje OpenVPN-a sa zdravom konfiguracijom jest sigurno. Budući da je vrlo podesiv, glavni je rizik slaba postavka, poput zastarjelih šifri, a ne mana u protokolu."
+    },
+    {
+      "question": "Zašto se OpenVPN prepoznaje čak i na portu 443?",
+      "answer": "Korištenje porta 443 ne čini promet nalik na HTTPS. OpenVPN uokviruje svoje TLS rukovanje u vlastiti format paketa, a objavljeno je istraživanje po tom obliku prepoznalo više od 85 % tokova OpenVPN-a u mreži stvarnog davatelja usluge."
+    },
+    {
+      "question": "OpenVPN ili WireGuard?",
+      "answer": "Na otvorenoj mreži WireGuard je obično brži i jednostavniji. OpenVPN pobjeđuje po kompatibilnosti i može raditi preko TCP-a. Nijedan nije osmišljen da se skriva od cenzora."
+    },
+    {
+      "question": "Radi li OpenVPN preko UDP-a ili TCP-a?",
+      "answer": "Preko obaju. UDP je zadani i obično brži; TCP pomaže na mrežama koje blokiraju UDP, uz određeni gubitak brzine."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Referentni priručnik OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, blokiranje OpenVPN-a i WireGuarda u Rusiji (issue 274, kolovoz 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

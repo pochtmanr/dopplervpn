@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: proxy schovaná za skutečným webem",
+  "metaTitle": "Co je protokol Trojan? Jak skrývá proxy provoz jako HTTPS",
+  "metaDescription": "Trojan srozumitelně: jak skrývá proxy provoz do skutečného spojení TLS, sondám ukazuje skutečný web a proč je nutnost vlastní domény jeho slabé místo.",
+  "excerpt": "Skutečné spojení TLS se skutečným webem, který vlastníte, a hashem hesla uvnitř. Bez hesla návštěvníci i sondy vidí jen ten web.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS k vaší vlastní doméně",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Není (je potřeba aplikace)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referenční implementace)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Jak Trojan ověřuje uživatele?",
+      "answer": "Uvnitř spojení TLS klient odešle šestnáctkový hash SHA-224 sdíleného hesla, dlouhý 56 znaků. Pokud je špatný, server spojení předá záložnímu webovému serveru."
+    },
+    {
+      "question": "Potřebuje Trojan doménu?",
+      "answer": "Ano. Server předkládá skutečný certifikát pro skutečnou doménu, a právě proto vypadá jako běžný web HTTPS. Tuto doménu může cenzor také zablokovat."
+    },
+    {
+      "question": "Trojan, nebo VLESS?",
+      "answer": "Oba se spoléhají na TLS, ne na vlastní šifrování. VLESS s Reality jde dál: půjčuje si navázání spojení existujícího oblíbeného webu, takže není proxy doména, kterou by šlo zablokovat."
+    },
+    {
+      "question": "Lze Trojan rozpoznat?",
+      "answer": "Jednoduchým sondováním ne, protože sondy dostanou záložní web. Výzkum ukázal, že provoz TLS uvnitř TLS lze rozpoznat podle času a velikosti paketů a proxy domény lze zablokovat, jakmile se zjistí."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repozitář trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

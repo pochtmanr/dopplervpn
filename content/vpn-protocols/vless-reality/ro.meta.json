@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: un VPN care arată ca o vizită pe un site real",
+  "metaTitle": "VLESS-Reality explicat: protocolul cel mai greu de blocat",
+  "metaDescription": "VLESS și Reality pe scurt: protocol proxy minimal plus un strat TLS care împrumută handshake-ul unui site real, deci fără domeniu de proxy de blocat. Viteză, limite și aplicații.",
+  "excerpt": "Un protocol minimal în interiorul unui handshake TLS 1.3 împrumutat de la un site real. Niciun domeniu propriu de blocat, iar sondele văd site-ul real.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "TLS 1.3 către un site popular real",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "Niciunul (e nevoie de aplicație)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/ro/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Care este diferența dintre VLESS și Reality?",
+      "answer": "VLESS este protocolul proxy: identifică utilizatorul și spune unde trebuie să meargă traficul. Reality este stratul TLS de dedesubt, care face conexiunea să arate ca o vizită la un site terț real."
+    },
+    {
+      "question": "Are VLESS-Reality nevoie de un domeniu?",
+      "answer": "Nu. Reality împrumută handshake-ul TLS al unui site existent, așa că serverul nu are nevoie de un domeniu sau de un certificat propriu. Acesta este principalul lui pas înainte față de Trojan și de VMess învelit în TLS."
+    },
+    {
+      "question": "Este VLESS-Reality nedetectabil?",
+      "answer": "Niciun protocol nu este. Cercetarea a arătat că TLS în interiorul TLS poate fi amprentat, iar unii ISP din Rusia au fost raportați tăind conexiunile Reality în noiembrie 2025. Rămâne opțiunea de masă cea mai greu de blocat."
+    },
+    {
+      "question": "Când a fost lansat Reality?",
+      "answer": "Reality a fost lansat în Xray-core 1.8.0, în martie 2023. VLESS însuși a fost propus în iulie 2020."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, specificația protocolului VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16 iulie 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, lansarea Xray-core v1.8.0 (martie 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, raportări de blocare VLESS + Reality + Vision în Rusia (issue 546, noiembrie 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

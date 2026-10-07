@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: willekeurige bytes, en waarom dat ophield te werken",
+  "metaTitle": "Wat is Shadowsocks? Werking en hoe de GFW het detecteert",
+  "metaDescription": "Shadowsocks uitgelegd: de versleutelde proxy tegen de Great Firewall, hoe actieve probing hem vond, en hoe China sinds 2021 volledig versleuteld verkeer blokkeert omdat het willekeurig is.",
+  "excerpt": "De lichte proxy die in China ontstond, vanaf de eerste byte versleuteld zodat hij op niets lijkt. Sinds 2021 blokkeert de Great Firewall verkeer omdat het op niets lijkt.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP of UDP",
+    "looksLike": "Willekeurig ogende bytes",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Geen (app nodig)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Is Shadowsocks een VPN?",
+      "answer": "Technisch is het een versleutelde proxy, geen VPN. De meeste moderne clients voegen een systeembrede modus toe die al het verkeer erdoorheen stuurt, dus in dagelijks gebruik gedraagt het zich grotendeels als een VPN."
+    },
+    {
+      "question": "Werkt Shadowsocks nog in China?",
+      "answer": "Minder betrouwbaar dan voorheen. Onderzoek dat is gepubliceerd op USENIX Security 2023 toonde aan dat de Great Firewall sinds november 2021 volledig versleuteld verkeer blokkeert dat op geen enkel bekend protocol lijkt, en dat is wat Shadowsocks oplevert."
+    },
+    {
+      "question": "Hoe beslist de firewall dat verkeer volledig versleuteld is?",
+      "answer": "Hij inspecteert het eerste pakket en stelt het vrij als het overeenkomt met een bekend protocol, genoeg afdrukbare tekens bevat, of een gemiddelde van gezette bits per byte buiten het bereik 3.4 tot 4.6 heeft. Het resterende verkeer kan worden geblokkeerd."
+    },
+    {
+      "question": "Wat is Shadowsocks 2022?",
+      "answer": "Een revisie van het protocol uit 2022 (SIP022) met sterkere replaybescherming en een bijgewerkte omgang met sleutels. Het verandert niets aan het feit dat het verkeer willekeurig oogt."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD-ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: editie Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

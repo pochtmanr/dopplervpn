@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: Pagtatago ng Proxy sa Likod ng Tunay na Website",
+  "metaTitle": "Ano ang Trojan Protocol? Paano Nito Itinatago ang Proxy bilang HTTPS",
+  "metaDescription": "Paliwanag sa Trojan: paano nito itinatago ang proxy traffic sa loob ng tunay na koneksyon ng TLS, bumabalik sa tunay na website para sa mga probe, at bakit kahinaan ang pangangailangan ng sariling domain.",
+  "excerpt": "Tunay na koneksyon ng TLS patungo sa tunay na website na pag-aari mo, na may password hash sa loob. Kapag walang password, website lang ang nakikita ng mga bisita at probe.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS patungo sa sarili mong domain",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Wala (kailangan ng app)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (reference na implementasyon)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Paano nag-aauthenticate ang Trojan ng mga user?",
+      "answer": "Sa loob ng koneksyon ng TLS, ipinapadala ng client ang hex-encoded na SHA-224 hash ng pinagsasaluhang password, na 56 na character ang haba. Kapag mali ito, ipinapasa ng server ang koneksyon sa isang fallback na web server."
+    },
+    {
+      "question": "Kailangan ba ng Trojan ng domain?",
+      "answer": "Oo. Nagpapakita ang server ng tunay na certificate para sa tunay na domain, na siyang nagpapamukha rito na parang karaniwang HTTPS site. Ang domain na iyon din ang maaaring i-block ng isang censor."
+    },
+    {
+      "question": "Trojan o VLESS?",
+      "answer": "Parehong umaasa sa TLS sa halip na sa sariling encryption. Mas malayo ang VLESS na may Reality sa pamamagitan ng paghiram sa handshake ng isang umiiral at sikat na website, kaya walang domain ng proxy na ma-block."
+    },
+    {
+      "question": "Matutukoy ba ang Trojan?",
+      "answer": "Hindi sa simpleng probing, dahil nakukuha ng mga probe ang fallback na website. Ipinakita ng pananaliksik na maaaring i-fingerprint ang traffic na TLS sa loob ng TLS ayon sa timing at laki ng packet, at maaaring i-block ang mga domain ng proxy kapag natukoy na."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repository ng trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

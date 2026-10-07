@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Rays ursprungliga protokoll",
+  "metaTitle": "Vad är VMess? Så fungerar V2Ray-protokollet och VMess mot VLESS",
+  "metaDescription": "VMess förklarat: V2Rays krypterade proxyprotokoll, autentisering med tidsstämpel, varför det vanligtvis lindas in i WebSocket och TLS, och hur VLESS och Trojan ersatte det.",
+  "excerpt": "Det första protokollet i V2Ray-projektet: krypterade huvuden, ett UUID per användare och vanligtvis en omslutning med WebSocket över TLS för att se ut som webbtrafik.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, ofta WebSocket + TLS",
+    "looksLike": "Slumpmässiga byte, eller HTTPS i en omslutning",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Ingen (app krävs)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Vad är skillnaden mellan VMess och VLESS?",
+      "answer": "VMess krypterar sina egna huvuden och sin data. VLESS behåller identiteten baserad på UUID men slopar den egna krypteringen och förlitar sig på TLS-lagret under, vilket undviker att trafiken krypteras två gånger."
+    },
+    {
+      "question": "Varför misslyckas VMess att ansluta när klockan är fel?",
+      "answer": "Autentiseringen i VMess innehåller en tidsstämpel, så servern avvisar förfrågningar när klientens klocka ligger för långt från serverns. Att ställa enhetens klocka på automatiskt brukar lösa det."
+    },
+    {
+      "question": "Är VMess säkert?",
+      "answer": "Med AEAD-autentisering av huvudet, ja. Det äldre läget baserat på MD5 kunde inte garantera huvudets integritet, och den officiella dokumentationen avråder från det."
+    },
+    {
+      "question": "Kan VMess upptäckas?",
+      "answer": "Rått VMess ser ut som slumpmässiga byte, vilket vissa brandväggar blockerar direkt. Inlindat i WebSocket eller gRPC över TLS ser det ut som HTTPS till en domän, vilket är mycket svårare att peka ut."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentation för VMess-protokollet", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, kodarkivet v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specifikation för VLESS-protokollet", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: VPN trông như một lượt truy cập trang web thật",
+  "metaTitle": "VLESS-Reality: giao thức khó bị chặn nhất",
+  "metaDescription": "Giải thích ngắn gọn VLESS và Reality: giao thức proxy tối giản cùng lớp TLS mượn bước bắt tay của trang web thật, nên không có tên miền proxy nào để chặn. Tốc độ, giới hạn và ứng dụng.",
+  "excerpt": "Giao thức tối giản bên trong bước bắt tay TLS 1.3 mượn từ một trang web thật. Không có tên miền riêng để chặn, và các gói thăm dò thấy trang web thật.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "TLS 1.3 đến một trang web thật phổ biến",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/vi/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VLESS và Reality khác nhau ở điểm nào?",
+      "answer": "VLESS là giao thức proxy: nó xác định người dùng và cho biết lưu lượng cần đi đâu. Reality là lớp TLS bên dưới, khiến kết nối trông như một lượt truy cập trang web thật của bên thứ ba."
+    },
+    {
+      "question": "VLESS-Reality có cần tên miền không?",
+      "answer": "Không. Reality mượn bước bắt tay TLS của một trang web có sẵn, nên máy chủ không cần tên miền hay chứng chỉ riêng. Đó là bước tiến chính của nó so với Trojan và VMess bọc TLS."
+    },
+    {
+      "question": "VLESS-Reality có không thể bị phát hiện không?",
+      "answer": "Không giao thức nào như vậy. Nghiên cứu đã cho thấy TLS bên trong TLS có thể bị nhận dạng dấu vân tay, và có báo cáo rằng một số ISP ở Nga cắt kết nối Reality vào tháng 11 năm 2025. Nó vẫn là lựa chọn phổ biến khó bị chặn nhất."
+    },
+    {
+      "question": "Reality được phát hành khi nào?",
+      "answer": "Reality ra mắt trong Xray-core 1.8.0 vào tháng 3 năm 2023. Bản thân VLESS được đề xuất vào tháng 7 năm 2020."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, đặc tả giao thức VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16 tháng 7 năm 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, bản phát hành Xray-core v1.8.0 (tháng 3 năm 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, báo cáo chặn VLESS + Reality + Vision ở Nga (issue 546, tháng 11 năm 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: octeți aleatorii și de ce asta a încetat să meargă",
+  "metaTitle": "Ce este Shadowsocks? Cum funcționează și cum îl detectează GFW",
+  "metaDescription": "Shadowsocks explicat: proxy-ul criptat făcut să treacă de Marele Firewall, cum l-a găsit sondarea activă și cum, din 2021, China blochează traficul complet criptat pentru că arată aleatoriu.",
+  "excerpt": "Proxy-ul ușor născut în China, criptat de la primul octet ca să nu arate ca nimic. Din 2021, Marele Firewall blochează traficul tocmai pentru că nu arată ca nimic.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP sau UDP",
+    "looksLike": "Octeți cu aspect aleatoriu",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Niciunul (e nevoie de aplicație)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Este Shadowsocks un VPN?",
+      "answer": "Tehnic, este un proxy criptat, nu un VPN. Majoritatea clienților moderni adaugă un mod la nivelul întregului sistem, care trimite tot traficul prin el, așa că în folosirea de zi cu zi se comportă foarte asemănător."
+    },
+    {
+      "question": "Mai funcționează Shadowsocks în China?",
+      "answer": "Mai puțin fiabil decât înainte. O cercetare publicată la USENIX Security 2023 a arătat că, din noiembrie 2021, Marele Firewall blochează traficul complet criptat care nu arată ca niciun protocol cunoscut, iar asta este exact ce produce Shadowsocks."
+    },
+    {
+      "question": "Cum decide firewall-ul că traficul este complet criptat?",
+      "answer": "Inspectează primul pachet și îl lasă să treacă dacă se potrivește cu un protocol cunoscut, conține destule caractere imprimabile sau are o medie a biților setați pe octet în afara intervalului de la 3.4 la 4.6. Traficul rămas poate fi blocat."
+    },
+    {
+      "question": "Ce este Shadowsocks 2022?",
+      "answer": "O revizuire din 2022 a protocolului (SIP022), cu o protecție mai puternică împotriva reluării și o tratare actualizată a cheilor. Nu schimbă faptul că traficul arată aleatoriu."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, cifruri AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: ediția Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

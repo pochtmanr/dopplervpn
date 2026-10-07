@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: γρήγορο, απλό και εύκολο να μπλοκαριστεί",
+  "metaTitle": "Τι είναι το WireGuard; Πώς λειτουργεί και γιατί μπλοκάρεται",
+  "metaDescription": "Το WireGuard με απλά λόγια: σταθερή σύγχρονη κρυπτογραφία, γιατί είναι τόσο γρήγορο, γιατί η χειραψία σταθερού μεγέθους μπλοκάρεται εύκολα και ποιες εφαρμογές το χρησιμοποιούν.",
+  "excerpt": "Το ταχύτερο διαδεδομένο πρωτόκολλο VPN, με σταθερή σύγχρονη κρυπτογραφία και μικροσκοπικό κώδικα. Δεν φτιάχτηκε για να κρύβεται, και τα φιλτραρισμένα δίκτυα το μπλοκάρουν πρώτο.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Αναγνωρίσιμη χειραψία VPN",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Πυρήνας Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (επίσημες εφαρμογές)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Διαπλατφορμικός πυρήνας που χρησιμοποιούν αρκετές εφαρμογές" }
+  ],
+  "faq": [
+    {
+      "question": "Είναι ασφαλές το WireGuard;",
+      "answer": "Ναι. Το WireGuard χρησιμοποιεί ένα σταθερό σύνολο σύγχρονων πρωτογενών (ChaCha20-Poly1305, Curve25519, BLAKE2s) και έχει μικρό κώδικα που είναι πρακτικό να ελεγχθεί. Η αδυναμία του είναι η ορατότητα στους λογοκριτές, όχι η ισχύς της κρυπτογράφησής του."
+    },
+    {
+      "question": "Γιατί το WireGuard σταματά να λειτουργεί στη Ρωσία ή στο Ιράν;",
+      "answer": "Τα μηνύματα χειραψίας του έχουν σταθερά μεγέθη, 148 byte από τον πελάτη και 92 byte στην απάντηση, μέσω UDP. Αυτό το μοτίβο είναι απλό για τη βαθιά επιθεώρηση πακέτων να το εντοπίσει, και πάροχοι στη Ρωσία έχουν αναφερθεί να κόβουν συνεδρίες WireGuard αμέσως μετά τη χειραψία."
+    },
+    {
+      "question": "Είναι το WireGuard ταχύτερο από το OpenVPN;",
+      "answer": "Συνήθως ναι. Το WireGuard στήνει μια συνεδρία σε μία ανταλλαγή μετ' επιστροφής, τρέχει στον πυρήνα στο Linux και έχει πολύ λιγότερα να διαπραγματευτεί. Η ακριβής διαφορά εξαρτάται από τη συσκευή και το δίκτυο."
+    },
+    {
+      "question": "Μπορεί το WireGuard να κρυφτεί από το DPI;",
+      "answer": "Όχι από μόνο του. Διακλαδώσεις όπως το AmneziaWG αλλάζουν μεγέθη και κεφαλίδες πακέτων ώστε η κίνηση να είναι λιγότερο αναγνωρίσιμη, ή το WireGuard μπορεί να τυλιχτεί μέσα σε άλλο πρωτόκολλο, με κάποιο κόστος σε ταχύτητα."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, αποκλεισμοί OpenVPN και WireGuard στη Ρωσία (issue 274, Αύγουστος 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

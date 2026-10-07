@@ -1,0 +1,47 @@
+{
+  "title": "VMess: pierwotny protokół V2Ray",
+  "metaTitle": "Czym jest VMess? Jak działa protokół V2Ray i VMess a VLESS",
+  "metaDescription": "VMess wyjaśniony: szyfrowany protokół proxy V2Ray, uwierzytelnianie oparte na znaczniku czasu, dlaczego zwykle opakowuje się go w WebSocket i TLS oraz jak zastąpiły go VLESS i Trojan.",
+  "excerpt": "Pierwszy protokół projektu V2Ray: szyfrowane nagłówki, UUID dla każdego użytkownika i zwykle otoczka WebSocket przez TLS, by wyglądać jak ruch stron.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, często WebSocket + TLS",
+    "looksLike": "Losowe bajty albo HTTPS w otoczce",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Brak (wymagana aplikacja)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Czym różni się VMess od VLESS?",
+      "answer": "VMess szyfruje własne nagłówki i dane. VLESS zachowuje tożsamość opartą na UUID, ale rezygnuje z własnego szyfrowania i polega na leżącej pod spodem warstwie TLS, co pozwala uniknąć szyfrowania ruchu dwukrotnie."
+    },
+    {
+      "question": "Dlaczego VMess nie łączy się, gdy zegar jest źle ustawiony?",
+      "answer": "Uwierzytelnianie VMess zawiera znacznik czasu, więc serwer odrzuca żądania, gdy zegar klienta za bardzo różni się od jego własnego. Ustawienie zegara urządzenia na automatyczny zwykle to naprawia."
+    },
+    {
+      "question": "Czy VMess jest bezpieczny?",
+      "answer": "Przy uwierzytelnianiu nagłówka AEAD tak. Starszy tryb oparty na MD5 nie mógł zagwarantować integralności nagłówka, a oficjalna dokumentacja przed nim ostrzega."
+    },
+    {
+      "question": "Czy VMess da się wykryć?",
+      "answer": "Surowy VMess wygląda jak losowe bajty, które niektóre firewalle blokują od razu. Opakowany w WebSocket lub gRPC przez TLS wygląda jak HTTPS do domeny, co znacznie trudniej wyłowić."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentacja protokołu VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repozytorium v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specyfikacja protokołu VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

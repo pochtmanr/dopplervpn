@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: দ্রুত, সহজ, এবং সহজে ব্লক হয়",
+  "metaTitle": "WireGuard কী? এটি কীভাবে কাজ করে এবং কেন ব্লক হয়",
+  "metaDescription": "WireGuard ব্যাখ্যা: স্থির আধুনিক ক্রিপ্টোগ্রাফি, এত দ্রুত কেন, স্থির আকারের হ্যান্ডশেক সেন্সরের কাছে সহজে ব্লকযোগ্য কেন, এবং কোন অ্যাপ এটি ব্যবহার করে।",
+  "excerpt": "সবচেয়ে দ্রুত মূলধারার VPN প্রোটোকল, স্থির আধুনিক ক্রিপ্টোগ্রাফি ও ছোট কোডবেসসহ। লুকানোর জন্য এটি তৈরি হয়নি, আর ফিল্টার করা নেটওয়ার্ক এটিকে আগে ব্লক করে।",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "চেনা যায় এমন VPN হ্যান্ডশেক",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux কার্নেল (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (অফিসিয়াল অ্যাপ)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "কয়েকটি অ্যাপের ব্যবহৃত ক্রস-প্ল্যাটফর্ম কোর" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuard কি নিরাপদ?",
+      "answer": "হ্যাঁ। WireGuard আধুনিক প্রিমিটিভের একটি স্থির সেট ব্যবহার করে (ChaCha20-Poly1305, Curve25519, BLAKE2s), এবং এর কোডবেস ছোট, যা অডিট করা বাস্তবসম্মত। এর দুর্বলতা সেন্সরের কাছে দৃশ্যমানতা, এনক্রিপশনের শক্তি নয়।"
+    },
+    {
+      "question": "রাশিয়া বা ইরানে WireGuard কেন কাজ করা বন্ধ করে?",
+      "answer": "এর হ্যান্ডশেক বার্তার আকার স্থির, ক্লায়েন্ট থেকে 148 বাইট এবং উত্তরে 92 বাইট, UDP-তে। এই প্যাটার্ন ডিপ প্যাকেট ইন্সপেকশনের কাছে শনাক্ত করা সহজ, এবং রাশিয়ায় অপারেটররা হ্যান্ডশেকের পরপরই WireGuard সেশন কাটছে বলে জানা গেছে।"
+    },
+    {
+      "question": "WireGuard কি OpenVPN-এর চেয়ে দ্রুত?",
+      "answer": "সাধারণত হ্যাঁ। WireGuard এক রাউন্ড ট্রিপে সেশন তৈরি করে, Linux-এ কার্নেলে চলে, এবং দর কষাকষির প্রোটোকল ওভারহেড অনেক কম। সঠিক পার্থক্য ডিভাইস ও নেটওয়ার্কের উপর নির্ভর করে।"
+    },
+    {
+      "question": "DPI থেকে WireGuard কি লুকানো যায়?",
+      "answer": "একা নয়। AmneziaWG-এর মতো ফর্ক প্যাকেটের আকার ও হেডার বদলায়, যাতে ট্র্যাফিক কম চেনা যায়, অথবা WireGuard অন্য প্রোটোকলের ভিতরে মোড়ানো যায়, গতির কিছু বিনিময়ে।"
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (হোয়াইটপেপার)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, রাশিয়ায় OpenVPN ও WireGuard ব্লক (issue 274, আগস্ট 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

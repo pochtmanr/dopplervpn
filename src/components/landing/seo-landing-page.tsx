@@ -10,6 +10,7 @@ import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { isSecurityLocale } from "@/i18n/security-locales";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import type { CtaLocation } from "@/lib/track-cta";
+import { RelatedBlogPosts } from "@/components/blog/related-blog-posts";
 
 const baseUrl = "https://www.dopplervpn.org";
 
@@ -53,6 +54,8 @@ export interface SeoLandingPageProps {
   stepCount?: number;
   /** Up to 6 internal links shown above the final CTA. */
   related: RelatedLink[];
+  /** Blog explainers to link under the related pages, when published in this locale. */
+  blogSlugs?: readonly string[];
   /** ISO 8601 date the page first shipped (e.g. "2026-05-26"). Required so
    *  ArticleSchema emits a real freshness signal — never default. */
   datePublished: string;
@@ -203,6 +206,7 @@ export async function SeoLandingPage({
   faqCount = 9,
   stepCount = 4,
   related,
+  blogSlugs = [],
   datePublished,
   dateModified,
 }: SeoLandingPageProps) {
@@ -392,6 +396,8 @@ export async function SeoLandingPage({
             </div>
           </section>
         )}
+
+        <RelatedBlogPosts locale={locale} slugs={blogSlugs} />
 
         {/* Final CTA */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">

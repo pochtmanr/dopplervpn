@@ -1,0 +1,47 @@
+{
+  "title": "VMess: הפרוטוקול המקורי של V2Ray",
+  "metaTitle": "מהו VMess? איך פרוטוקול V2Ray עובד, ו-VMess מול VLESS",
+  "metaDescription": "VMess בפשטות: פרוטוקול הפרוקסי המוצפן של V2Ray, האימות שלו מבוסס חותמת זמן, למה בדרך כלל עוטפים אותו ב-WebSocket וב-TLS, ואיך VLESS ו-Trojan החליפו אותו.",
+  "excerpt": "הפרוטוקול הראשון של פרויקט V2Ray: כותרות מוצפנות, UUID לכל משתמש, ובדרך כלל עטיפת WebSocket מעל TLS כדי להיראות כמו תעבורת אינטרנט.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, לעיתים קרובות WebSocket + TLS",
+    "looksLike": "בייטים אקראיים, או HTTPS כשהוא עטוף",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "אין (נדרשת אפליקציה)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "מה ההבדל בין VMess ל-VLESS?",
+      "answer": "VMess מצפין את הכותרות ואת הנתונים של עצמו. VLESS שומר על הזהות מבוססת ה-UUID אבל מוותר על ההצפנה של עצמו ונשען על שכבת ה-TLS שמתחתיו, וכך נמנעת הצפנה כפולה של התעבורה."
+    },
+    {
+      "question": "למה VMess לא מתחבר כשהשעון שלי שגוי?",
+      "answer": "האימות של VMess כולל חותמת זמן, ולכן השרת דוחה בקשות כשהשעון של הלקוח רחוק מדי משלו. הגדרת שעון המכשיר למצב אוטומטי בדרך כלל פותרת את הבעיה."
+    },
+    {
+      "question": "האם VMess מאובטח?",
+      "answer": "עם אימות כותרת AEAD, כן. המצב הישן מבוסס MD5 לא יכול היה להבטיח את שלמות הכותרת, והתיעוד הרשמי מזהיר מפניו."
+    },
+    {
+      "question": "האם אפשר לזהות את VMess?",
+      "answer": "VMess גולמי נראה כמו בייטים אקראיים, ויש חומות אש שחוסמות אותו מיד. כשהוא עטוף ב-WebSocket או ב-gRPC מעל TLS, הוא נראה כמו HTTPS לדומיין, ואז הרבה יותר קשה לבודד אותו."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, תיעוד פרוטוקול VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, מאגר v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, מפרט פרוטוקול VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

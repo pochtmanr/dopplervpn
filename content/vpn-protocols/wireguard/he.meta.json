@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: מהיר, פשוט וקל לחסימה",
+  "metaTitle": "מהו WireGuard? איך הוא עובד ולמה הוא נחסם",
+  "metaDescription": "WireGuard בפשטות: הקריפטוגרפיה המודרנית הקבועה שלו, למה הוא כל כך מהיר, למה לחיצת יד בגודל קבוע מקלה על גורמי צנזורה לחסום אותו, ואילו אפליקציות משתמשות בו.",
+  "excerpt": "פרוטוקול ה-VPN הנפוץ המהיר ביותר, עם קריפטוגרפיה מודרנית קבועה וקוד קטן מאוד. הוא מעולם לא נבנה כדי להסתתר, ורשתות מסוננות חוסמות אותו ראשון.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "לחיצת יד של VPN שקל לזהות",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "ליבת Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (אפליקציות רשמיות)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "ליבה חוצת פלטפורמות שבה משתמשות כמה אפליקציות" }
+  ],
+  "faq": [
+    {
+      "question": "האם WireGuard מאובטח?",
+      "answer": "כן. WireGuard משתמש בסט קבוע של רכיבים קריפטוגרפיים מודרניים (ChaCha20-Poly1305, Curve25519, BLAKE2s) ויש לו בסיס קוד קטן שאפשר לבקר בפועל. החולשה שלו היא הנראות לגורמי צנזורה, לא חוזק ההצפנה."
+    },
+    {
+      "question": "למה WireGuard מפסיק לעבוד ברוסיה או באיראן?",
+      "answer": "להודעות לחיצת היד שלו יש גודל קבוע, 148 בייטים מהלקוח ו-92 בייטים בתשובה, ב-UDP. את הדפוס הזה קל לזהות באמצעות בדיקת חבילות עמוקה, ודווח שספקיות ברוסיה מנתקות סשנים של WireGuard מיד אחרי לחיצת היד."
+    },
+    {
+      "question": "האם WireGuard מהיר יותר מ-OpenVPN?",
+      "answer": "בדרך כלל כן. WireGuard יוצר סשן בהלוך ושוב אחד, רץ בליבה ב-Linux, ויש בו הרבה פחות תקורת פרוטוקול לנהל עליה משא ומתן. ההבדל המדויק תלוי במכשיר וברשת."
+    },
+    {
+      "question": "האם אפשר להסתיר את WireGuard מ-DPI?",
+      "answer": "לא בכוחות עצמו. גרסאות נגזרות כמו AmneziaWG משנים את גודל החבילות ואת הכותרות כדי שהתעבורה תהיה פחות מזוהה, או שאפשר לעטוף את WireGuard בתוך פרוטוקול אחר, במחיר של חלק מהמהירות."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, חסימות OpenVPN ו-WireGuard ברוסיה (issue 274, אוגוסט 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

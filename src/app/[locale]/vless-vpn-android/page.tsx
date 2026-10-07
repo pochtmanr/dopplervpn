@@ -23,6 +23,7 @@ export default async function Page({ params }: PageProps) {
       primaryPlatform="android"
       datePublished="2026-05-26"
       dateModified="2026-06-09"
+      blogSlugs={["vless-uri-format", "what-is-vless", "vless-reality-vs-wireguard"]}
       related={[
         { href: "/vless-vpn", titleKey: "vlessTitle", descKey: "vlessDesc" },
         { href: "/vpn-for-android", titleKey: "androidTitle", descKey: "androidDesc" },

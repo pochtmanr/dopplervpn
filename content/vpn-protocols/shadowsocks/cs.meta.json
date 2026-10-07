@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: náhodné bajty a proč to přestalo fungovat",
+  "metaTitle": "Co je Shadowsocks? Jak funguje a jak ho rozpozná GFW",
+  "metaDescription": "Shadowsocks srozumitelně: šifrovaná proxy proti Velkému čínskému firewallu, jak ho našlo aktivní sondování a jak Čína od roku 2021 blokuje plně šifrovaný provoz podle náhodnosti.",
+  "excerpt": "Lehká proxy zrozená v Číně, šifrovaná od prvního bajtu, aby nevypadala jako nic. Od roku 2021 Velký firewall blokuje provoz právě za to, že nevypadá jako nic.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP nebo UDP",
+    "looksLike": "Bajty vypadající jako náhodné",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Není (je potřeba aplikace)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Je Shadowsocks VPN?",
+      "answer": "Technicky je to šifrovaná proxy, ne VPN. Většina současných klientů přidává režim pro celé zařízení, který přes ni směruje všechen provoz, takže v běžném používání se chová velmi podobně."
+    },
+    {
+      "question": "Funguje Shadowsocks v Číně pořád?",
+      "answer": "Méně spolehlivě než dřív. Výzkum publikovaný na USENIX Security 2023 ukázal, že od listopadu 2021 Velký čínský firewall blokuje plně šifrovaný provoz, který nevypadá jako žádný známý protokol, a právě takový Shadowsocks vytváří."
+    },
+    {
+      "question": "Jak firewall pozná, že je provoz plně šifrovaný?",
+      "answer": "Prohlédne první paket a vynechá ho, pokud odpovídá známému protokolu, obsahuje dost tisknutelných znaků, nebo má průměrný počet nastavených bitů na bajt mimo rozsah 3.4 až 4.6. Zbylý provoz lze zablokovat."
+    },
+    {
+      "question": "Co je Shadowsocks 2022?",
+      "answer": "Revize protokolu z roku 2022 (SIP022) se silnější ochranou proti opakování a upravenou prací s klíči. Nemění to, že provoz vypadá náhodně."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, šifry AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: vydání Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

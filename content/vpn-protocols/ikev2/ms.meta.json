@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: VPN yang Terbina dalam Telefon Anda",
+  "metaTitle": "Apakah IKEv2/IPsec? Cara Ia Berfungsi dan Sebab Ia Mudah Disekat",
+  "metaDescription": "IKEv2/IPsec diterangkan: VPN terbina dalam pada iPhone, Mac, Windows dan Android, cara MOBIKE mengekalkan sambungan semasa bergerak, dan sebab port UDP tetap 500 dan 4500 memudahkan penyekatan.",
+  "excerpt": "Terbina dalam iOS, macOS, Windows dan Android, pantas, dan lancar apabila anda bertukar rangkaian. Ia berjalan pada port tetap yang diketahui umum, jadi menyekatnya hanya memerlukan satu peraturan.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "Trafik IKE dan ESP piawai",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "Port apakah yang digunakan oleh IKEv2?",
+      "answer": "Pertukaran kunci menggunakan port UDP 500. Apabila penghala NAT berada di antara kedua-dua pihak, yang hampir sentiasa berlaku, IKE dan trafik yang disulitkan berpindah ke port UDP 4500."
+    },
+    {
+      "question": "Mengapakah IKEv2 baik pada telefon?",
+      "answer": "Sambungan MOBIKE (RFC 4555) membolehkan sambungan IKEv2 bertahan apabila alamat IP berubah, jadi berpindah daripada Wi-Fi ke data mudah alih tidak memutuskan terowong."
+    },
+    {
+      "question": "Adakah IKEv2 selamat?",
+      "answer": "Ya, dengan algoritma semasa. Ia piawaian IETF yang digunakan secara meluas oleh perusahaan. Kelemahannya ialah ia mudah dikenali dan disekat, bukan kerana ia mudah dinyahsulit."
+    },
+    {
+      "question": "Adakah IKEv2 berfungsi di China atau Rusia?",
+      "answer": "Ia secara amnya tidak boleh dipercayai pada rangkaian yang ditapis, kerana menyekat port UDP tetapnya atau mengenali jabat tangan piawainya adalah mudah."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

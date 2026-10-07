@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: proksi už tikros svetainės",
+  "metaTitle": "Kas yra Trojan protokolas? Kaip jis slepia proksi srautą kaip HTTPS",
+  "metaDescription": "Trojan paprastai: kaip jis slepia proksi srautą tikrame TLS ryšyje, zondams rodo tikrą svetainę ir kodėl savas domenas yra jo silpnoji vieta.",
+  "excerpt": "Tikras TLS ryšys su tikra jūsų svetaine ir slaptažodžio maiša viduje. Be slaptažodžio lankytojai ir zondai mato tiesiog svetainę.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS į jūsų domeną",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nėra (reikia programėlės)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (etaloninė realizacija)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Kaip Trojan autentifikuoja naudotojus?",
+      "answer": "TLS ryšio viduje klientas siunčia bendro slaptažodžio šešioliktainę SHA-224 maišą, 56 simbolių ilgio. Jei ji neteisinga, serveris ryšį perduoda atsarginiam žiniatinklio serveriui."
+    },
+    {
+      "question": "Ar Trojan reikia domeno?",
+      "answer": "Taip. Serveris pateikia tikrą sertifikatą tikram domenui, ir būtent todėl jis atrodo kaip paprasta HTTPS svetainė. Tą patį domeną cenzorius ir gali užblokuoti."
+    },
+    {
+      "question": "Trojan ar VLESS?",
+      "answer": "Abu remiasi TLS, o ne savo šifravimu. VLESS su Reality eina toliau: jis skolinasi esamos populiarios svetainės rankos paspaudimą, todėl nėra proksi domeno, kurį būtų galima blokuoti."
+    },
+    {
+      "question": "Ar Trojan galima aptikti?",
+      "answer": "Paprastu zondavimu — ne, nes zondai gauna atsarginę svetainę. Tyrimai parodė, kad TLS viduje esantį TLS srautą galima atpažinti pagal laiką ir paketų dydžius, o proksi domenus galima užblokuoti, kai jie nustatomi."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan saugykla", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

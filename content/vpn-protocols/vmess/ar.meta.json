@@ -1,0 +1,47 @@
+{
+  "title": "VMess: البروتوكول الأصلي لـ V2Ray",
+  "metaTitle": "ما هو VMess؟ كيف يعمل بروتوكول V2Ray، والفرق بين VMess وVLESS",
+  "metaDescription": "شرح VMess: بروتوكول الوكيل المشفّر في V2Ray، ومصادقته القائمة على الطابع الزمني، ولماذا يُغلَّف عادةً في WebSocket وTLS، وكيف حلّ VLESS وTrojan محله.",
+  "excerpt": "أول بروتوكول في مشروع V2Ray: ترويسات مشفّرة، وUUID لكل مستخدم، وعادةً غلاف WebSocket فوق TLS ليبدو كحركة ويب.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP، وغالبًا WebSocket + TLS",
+    "looksLike": "بايتات عشوائية، أو HTTPS عند التغليف",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "لا شيء (يلزم تطبيق)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "ما الفرق بين VMess وVLESS؟",
+      "answer": "يشفّر VMess ترويساته وبياناته بنفسه. أما VLESS فيحتفظ بالهوية المبنية على UUID لكنه يتخلى عن تشفيره الخاص ويعتمد على طبقة TLS الواقعة تحته، مما يتجنب تشفير الحركة مرتين."
+    },
+    {
+      "question": "لماذا يفشل VMess في الاتصال عندما تكون ساعتي خاطئة؟",
+      "answer": "تتضمن مصادقة VMess طابعًا زمنيًا، فيرفض الخادم الطلبات عندما تبعد ساعة العميل كثيرًا عن ساعته. وغالبًا ما يحل الأمر ضبط ساعة الجهاز على الوضع التلقائي."
+    },
+    {
+      "question": "هل VMess آمن؟",
+      "answer": "مع مصادقة الترويسة بـ AEAD، نعم. أما الوضع الأقدم المبني على MD5 فلم يكن يضمن سلامة الترويسة، وتحذّر الوثائق الرسمية منه."
+    },
+    {
+      "question": "هل يمكن رصد VMess؟",
+      "answer": "يبدو VMess الخام كبايتات عشوائية، وبعض جدران الحماية تحجبه فور رؤيته. وعند تغليفه في WebSocket أو gRPC فوق TLS يبدو كاتصال HTTPS بنطاق ما، ويصعب تمييزه كثيرًا."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, وثائق بروتوكول VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, مستودع v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, مواصفة بروتوكول VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

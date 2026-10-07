@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: سریع، ساده و آسان برای مسدودسازی",
+  "metaTitle": "WireGuard چیست؟ طرز کار و دلیل مسدود شدن آن",
+  "metaDescription": "توضیح WireGuard: رمزنگاری مدرن و ثابت، دلیل سرعت بالا، اینکه چرا دست‌دهی با اندازهٔ ثابت مسدودسازی را برای سانسورچیان آسان می‌کند، و برنامه‌هایی که از آن استفاده می‌کنند.",
+  "excerpt": "سریع‌ترین پروتکل VPN رایج، با رمزنگاری مدرن و ثابت و کدی بسیار کوچک. هرگز برای پنهان شدن ساخته نشده و شبکه‌های فیلترشده آن را زودتر از همه مسدود می‌کنند.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "یک دست‌دهی VPN قابل‌تشخیص",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "هستهٔ Linux (نسخهٔ 5.6 به بعد)"
+  },
+  "apps": [
+    { "name": "WireGuard (برنامه‌های رسمی)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "هستهٔ چندسکویی مورد استفادهٔ چند برنامه" }
+  ],
+  "faq": [
+    {
+      "question": "آیا WireGuard امن است؟",
+      "answer": "بله. WireGuard از مجموعه‌ای ثابت از اجزای مدرن (ChaCha20-Poly1305، Curve25519، BLAKE2s) استفاده می‌کند و کد کوچکی دارد که بازبینی آن عملی است. ضعف آن قابل‌دیده‌شدن برای سانسورچیان است، نه قدرت رمزنگاری‌اش."
+    },
+    {
+      "question": "چرا WireGuard در روسیه یا ایران از کار می‌افتد؟",
+      "answer": "پیام‌های دست‌دهی آن روی UDP اندازهٔ ثابت دارند: 148 بایت از سمت کلاینت و 92 بایت در پاسخ. تشخیص این الگو برای بازرسی عمیق بسته ساده است و گزارش شده که اپراتورها در روسیه نشست‌های WireGuard را درست پس از دست‌دهی قطع کرده‌اند."
+    },
+    {
+      "question": "آیا WireGuard از OpenVPN سریع‌تر است؟",
+      "answer": "معمولاً بله. WireGuard نشست را با یک رفت‌وبرگشت برقرار می‌کند، روی Linux در هسته اجرا می‌شود و بار پروتکلیِ مذاکره در آن بسیار کمتر است. میزان دقیق تفاوت به دستگاه و شبکه بستگی دارد."
+    },
+    {
+      "question": "آیا می‌شود WireGuard را از DPI پنهان کرد؟",
+      "answer": "به‌تنهایی نه. انشعاب‌هایی مانند AmneziaWG اندازه و سرآیند بسته‌ها را تغییر می‌دهند تا ترافیک کمتر قابل‌تشخیص باشد، یا می‌توان WireGuard را درون پروتکل دیگری بسته‌بندی کرد، که مقداری از سرعت می‌کاهد."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (مقالهٔ فنی)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, OpenVPN and WireGuard blocking in Russia (issue 274، اوت 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

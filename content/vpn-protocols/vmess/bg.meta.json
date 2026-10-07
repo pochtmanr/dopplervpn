@@ -1,0 +1,47 @@
+{
+  "title": "VMess: първоначалният протокол на V2Ray",
+  "metaTitle": "Какво е VMess? Протоколът на V2Ray и VMess срещу VLESS",
+  "metaDescription": "VMess с обяснение: шифрованият прокси протокол на V2Ray, удостоверяването по времева марка, защо обикновено се обвива в WebSocket и TLS и как VLESS и Trojan го заместват.",
+  "excerpt": "Първият протокол на проекта V2Ray: шифровани заглавки, UUID за всеки потребител и обикновено обвивка WebSocket върху TLS, за да изглежда като уеб трафик.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, често WebSocket + TLS",
+    "looksLike": "Случайни байтове или HTTPS в обвивка",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Няма (нужно е приложение)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Каква е разликата между VMess и VLESS?",
+      "answer": "VMess шифрова собствените си заглавки и данни. VLESS запазва идентичността чрез UUID, но се отказва от собственото си шифроване и разчита на слоя TLS отдолу, което избягва двойното шифроване на трафика."
+    },
+    {
+      "question": "Защо VMess не се свързва, когато часовникът ми е грешен?",
+      "answer": "Удостоверяването на VMess включва времева марка, затова сървърът отхвърля заявките, когато часовникът на клиента е твърде далеч от неговия. Автоматичната настройка на часовника на устройството обикновено оправя това."
+    },
+    {
+      "question": "Сигурен ли е VMess?",
+      "answer": "С удостоверяване на заглавката чрез AEAD — да. По-старият режим на базата на MD5 не можеше да гарантира цялостността на заглавката и официалната документация предупреждава да не се използва."
+    },
+    {
+      "question": "Може ли VMess да бъде открит?",
+      "answer": "Голият VMess изглежда като случайни байтове, които някои защитни стени блокират веднага. Обвит в WebSocket или gRPC върху TLS, той изглежда като HTTPS към домейн и е много по-труден за открояване."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, документация на протокола VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, хранилище v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, спецификация на протокола VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

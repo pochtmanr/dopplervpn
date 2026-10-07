@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: QUIC starpnieks, veidots sliktiem tīkliem",
+  "metaTitle": "Kas ir Hysteria 2? QUIC starpniekprotokola skaidrojums",
+  "metaDescription": "Hysteria 2 skaidrojums: starpnieks uz QUIC, kas zondēm ir īsts HTTP/3 serveris, notur ātrumu zudumiem bagātos tīklos un nestrādā, kur UDP vai QUIC ir bloķēts.",
+  "excerpt": "Starpnieks uz QUIC, transporta, kas ir HTTP/3 pamatā. Ātrs zudumiem bagātos savienojumos un īsts HTTP/3 tīmekļa serveris ikvienam bez paroles. Lai izkļūtu cauri, tam vajag UDP.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "HTTP/3 tīmekļa serveris",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "Hysteria (oficiālais klients)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Starpplatformu kodols, ko izmanto vairākas lietotnes" }
+  ],
+  "faq": [
+    {
+      "question": "Vai Hysteria 2 ir VPN?",
+      "answer": "Tas ir starpniekprotokols, bet tādi klienti kā Hiddify un NekoBox var novirzīt visu ierīces datplūsmu caur to, tāpēc praksē to var lietot kā VPN."
+    },
+    {
+      "question": "Kāpēc Hysteria 2 ir ātrs sliktos savienojumos?",
+      "answer": "Tas darbojas uz QUIC pa UDP, kas atgūstas no pakešu zuduma, neapturot katru plūsmu, un var izmantot savu sastrēgumu kontroli, kas vērsta uz nestabiliem savienojumiem."
+    },
+    {
+      "question": "Vai Hysteria 2 var bloķēt?",
+      "answer": "Zondes redz īstu HTTP/3 serveri, tāpēc tas pretojas aktīvajai zondēšanai. Bet cenzors var plaši ierobežot vai bloķēt UDP vai QUIC, un tad Hysteria 2 nevar savienoties."
+    },
+    {
+      "question": "Hysteria 2 vai VLESS-Reality?",
+      "answer": "Hysteria 2 bieži ir ātrāks zudumiem bagātos tīklos, kas atļauj UDP. VLESS-Reality darbojas pa TCP un turpina strādāt tur, kur UDP ir filtrēts. Daudzi cilvēki patur abus."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, Hysteria 2 protokola specifikācija", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, hysteria repozitorijs", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

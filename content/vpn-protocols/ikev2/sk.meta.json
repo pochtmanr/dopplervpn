@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: VPN vstavaná vo vašom telefóne",
+  "metaTitle": "Čo je IKEv2/IPsec? Ako funguje a prečo sa ľahko blokuje",
+  "metaDescription": "IKEv2/IPsec zrozumiteľne: vstavaná VPN v iPhone, Macu, Windows a Androide, ako MOBIKE udrží spojenie pri pohybe a prečo sa pevné UDP porty 500 a 4500 ľahko blokujú.",
+  "excerpt": "Vstavaný v iOS, macOS, Windows a Androide, rýchly a plynulý pri prepínaní sietí. Beží na pevných, dobre známych portoch, takže na zablokovanie stačí jedno pravidlo.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "Štandardná prevádzka IKE a ESP",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "Ktoré porty používa IKEv2?",
+      "answer": "Výmena kľúčov používa UDP port 500. Keď medzi stranami stojí smerovač s NAT, čo je takmer vždy, IKE aj šifrovaná prevádzka prejdú na UDP port 4500."
+    },
+    {
+      "question": "Prečo je IKEv2 dobrý na telefónoch?",
+      "answer": "Rozšírenie MOBIKE (RFC 4555) umožní spojeniu IKEv2 prežiť zmenu IP adresy, takže prechod z Wi-Fi na mobilné dáta tunel nepreruší."
+    },
+    {
+      "question": "Je IKEv2 bezpečný?",
+      "answer": "Áno, so súčasnými algoritmami. Je to štandard IETF, ktorý firmy široko používajú. Jeho slabina je, že sa ľahko rozpozná a zablokuje, nie že sa ľahko dešifruje."
+    },
+    {
+      "question": "Funguje IKEv2 v Číne alebo Rusku?",
+      "answer": "Vo filtrovaných sieťach je spravidla nespoľahlivý, pretože zablokovať jeho pevné UDP porty alebo rozpoznať jeho štandardný handshake je jednoduché."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

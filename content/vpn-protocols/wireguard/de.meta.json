@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: schnell, einfach und leicht zu blockieren",
+  "metaTitle": "Was ist WireGuard? Funktionsweise und Gründe für Blockaden",
+  "metaDescription": "WireGuard erklärt: die feste moderne Kryptografie, warum es so schnell ist, warum der Handshake fester Größe Zensoren das Blockieren erleichtert und welche Apps es nutzen.",
+  "excerpt": "Das schnellste gängige VPN-Protokoll, mit fester moderner Kryptografie und winziger Codebasis. Es wurde nie zum Verbergen gebaut, und gefilterte Netzwerke blockieren es zuerst.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Ein erkennbarer VPN-Handshake",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux-Kernel (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (offizielle Apps)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Plattformübergreifender Kern, den mehrere Apps verwenden" }
+  ],
+  "faq": [
+    {
+      "question": "Ist WireGuard sicher?",
+      "answer": "Ja. WireGuard verwendet einen festen Satz moderner Primitive (ChaCha20-Poly1305, Curve25519, BLAKE2s) und hat eine kleine Codebasis, die sich praktikabel prüfen lässt. Seine Schwäche ist die Sichtbarkeit für Zensoren, nicht die Stärke der Verschlüsselung."
+    },
+    {
+      "question": "Warum funktioniert WireGuard in Russland oder im Iran nicht mehr?",
+      "answer": "Die Handshake-Nachrichten haben feste Größen, 148 Byte vom Client und 92 Byte als Antwort, über UDP. Dieses Muster lässt sich per Deep Packet Inspection leicht erkennen, und es wurde berichtet, dass Anbieter in Russland WireGuard-Sitzungen direkt nach dem Handshake unterbrechen."
+    },
+    {
+      "question": "Ist WireGuard schneller als OpenVPN?",
+      "answer": "Meistens ja. WireGuard baut eine Sitzung in einem Round Trip auf, läuft unter Linux im Kernel und hat deutlich weniger Protokoll-Overhead, der ausgehandelt werden muss. Der genaue Unterschied hängt vom Gerät und vom Netzwerk ab."
+    },
+    {
+      "question": "Lässt sich WireGuard vor DPI verbergen?",
+      "answer": "Nicht von allein. Forks wie AmneziaWG ändern Paketgrößen und Header, damit der Datenverkehr weniger erkennbar ist, oder WireGuard kann in ein anderes Protokoll eingepackt werden, mit gewissen Geschwindigkeitseinbußen."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, Blockierung von OpenVPN und WireGuard in Russland (issue 274, Aug. 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

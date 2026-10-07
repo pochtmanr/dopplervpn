@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard ar noņemtiem pirkstu nospiedumiem",
+  "metaTitle": "Kas ir AmneziaWG? Ar ko tas atšķiras no WireGuard",
+  "metaDescription": "AmneziaWG skaidrojums: WireGuard atzars, kas nejaušina galvenes un pakešu izmērus un sūta miskastes paketes, lai DPI neredzētu fiksēto rokasspiedienu. Robežas un lietotnes.",
+  "excerpt": "WireGuard ātrums un kriptogrāfija ar nejaušinātām galvenēm, pakešu izmēriem un miskastes paketēm, lai filtri nevarētu saskaņot tā fiksēto rokasspiedienu.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Neatpazīstams UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia klients (pirmkods)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Lietotāja telpas realizācija serveriem un klientiem" }
+  ],
+  "faq": [
+    {
+      "question": "Kāda ir atšķirība starp AmneziaWG un WireGuard?",
+      "answer": "AmneziaWG patur WireGuard kriptogrāfiju un risinājumu, bet nejaušina pakešu galvenes un izmērus un var sūtīt miskastes paketes pirms rokasspiediena, tāpēc datplūsma vairs neatbilst WireGuard fiksētajai signatūrai."
+    },
+    {
+      "question": "Vai AmneziaWG ir saderīgs ar WireGuard?",
+      "answer": "Tikai ar izslēgtu maskēšanos. Kad ir konfigurētas pielāgotās galvenes, izmēra prefiksi vai miskastes paketes, abiem galiem jādarbojas AmneziaWG ar atbilstošiem iestatījumiem."
+    },
+    {
+      "question": "Ko nozīmē iestatījumi Jc, S1 un H1?",
+      "answer": "Jc ir miskastes pakešu skaits, kas nosūtīts pirms rokasspiediena, ar izmēriem starp Jmin un Jmax. S1 līdz S4 pievieno nejaušus prefiksus, lai mainītu pakešu garumus. H1 līdz H4 iestata pielāgotas ziņojuma tipa vērtības, kas aizstāj WireGuard fiksētās."
+    },
+    {
+      "question": "Vai AmneziaWG darbojas Krievijā?",
+      "answer": "Tas noņem signatūras, ko izmanto, lai bloķētu parasto WireGuard, un tas padara to tur daudz noturīgāku. Tā kā tas darbojas pa UDP, tīkli, kas ierobežo UDP, joprojām var to ietekmēt."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG dokumentācija", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go repozitorijs", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

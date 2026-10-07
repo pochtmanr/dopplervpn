@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray's Original Protocol",
+  "metaTitle": "What Is VMess? How the V2Ray Protocol Works, and VMess vs VLESS",
+  "metaDescription": "VMess explained: V2Ray's encrypted proxy protocol, its timestamp-based authentication, why it is usually wrapped in WebSocket and TLS, and how VLESS and Trojan replaced it.",
+  "excerpt": "The first protocol of the V2Ray project: encrypted headers, a UUID for each user, and usually a WebSocket-over-TLS wrapper to look like web traffic.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, often WebSocket + TLS",
+    "looksLike": "Random bytes, or HTTPS when wrapped",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "None (app required)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "What is the difference between VMess and VLESS?",
+      "answer": "VMess encrypts its own headers and data. VLESS keeps the UUID-based identity but drops its own encryption and relies on the TLS layer underneath, which avoids encrypting traffic twice."
+    },
+    {
+      "question": "Why does VMess fail to connect when my clock is wrong?",
+      "answer": "VMess authentication includes a timestamp, so the server rejects requests when the client's clock is too far from its own. Setting the device clock to automatic usually fixes it."
+    },
+    {
+      "question": "Is VMess secure?",
+      "answer": "With AEAD header authentication, yes. The older MD5-based mode could not guarantee header integrity, and the official documentation warns against it."
+    },
+    {
+      "question": "Is VMess detectable?",
+      "answer": "Raw VMess looks like random bytes, which some firewalls block on sight. Wrapped in WebSocket or gRPC over TLS, it looks like HTTPS to a domain, which is much harder to single out."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess protocol documentation", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core repository", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS protocol specification", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

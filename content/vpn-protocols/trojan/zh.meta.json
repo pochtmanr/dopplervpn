@@ -1,0 +1,47 @@
+{
+  "title": "Trojan：把代理藏在真实网站背后",
+  "metaTitle": "什么是 Trojan 协议？它如何把代理流量伪装成 HTTPS",
+  "metaDescription": "Trojan 详解：它如何把代理流量隐藏在真实的 TLS 连接中，遇到探测时如何回退到真实网站，以及为何需要自己的域名是它的弱点。",
+  "excerpt": "一条通往您自有真实网站的真实 TLS 连接，内部带有密码哈希。没有密码的访问者和探测者看到的只是那个网站。",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "通往您自有域名的 HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "无（需要安装应用）"
+  },
+  "apps": [
+    { "name": "trojan-gfw（参考实现）", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows、macOS、Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows、macOS、Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows、macOS、Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan 如何认证用户？",
+      "answer": "在 TLS 连接内部，客户端发送共享密码的 SHA-224 哈希值的十六进制编码，长度为 56 个字符。如果不正确，服务器会把该连接转发给后备网页服务器。"
+    },
+    {
+      "question": "Trojan 需要域名吗？",
+      "answer": "需要。服务器出示某个真实域名的真实证书，这正是它看起来像普通 HTTPS 网站的原因。而这个域名同样是审查方可以封锁的对象。"
+    },
+    {
+      "question": "该选 Trojan 还是 VLESS？",
+      "answer": "两者都依赖 TLS，而不是自带加密。带 Reality 的 VLESS 更进一步，借用现有热门网站的握手，因此没有可供封锁的代理域名。"
+    },
+    {
+      "question": "Trojan 能被检测到吗？",
+      "answer": "简单的探测做不到，因为探测得到的是后备网站。研究表明，TLS 套 TLS 的流量可以通过时间和数据包大小识别出指纹，而代理域名一旦被识别也可能被封锁。"
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw，trojan 代码仓库", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

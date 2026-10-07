@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: véletlen bájtok, és hogy miért nem működik ez már",
+  "metaTitle": "Mi a Shadowsocks? Hogyan működik, és hogyan észleli a GFW",
+  "metaDescription": "A Shadowsocks egyszerűen: titkosított proxy a Nagy Tűzfal ellen, hogyan találta az aktív szondázás, és hogyan blokkolja Kína 2021 óta a véletlenszerű, teljesen titkosított forgalmat.",
+  "excerpt": "A Kínában született könnyű proxy, az első bájttól titkosítva, hogy semminek se látsszon. 2021 óta a Nagy Tűzfal éppen azért blokkol forgalmat, mert semminek látszik.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP vagy UDP",
+    "looksLike": "Véletlenszerűnek látszó bájtok",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nincs (alkalmazás kell)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "A Shadowsocks VPN?",
+      "answer": "Technikailag titkosított proxy, nem VPN. A legtöbb modern kliens rendszerszintű módot ad hozzá, amely minden forgalmat átvezet rajta, ezért a mindennapi használatban nagyon hasonlóan viselkedik."
+    },
+    {
+      "question": "Működik még a Shadowsocks Kínában?",
+      "answer": "Kevésbé megbízhatóan, mint korábban. A USENIX Security 2023-on megjelent kutatás megmutatta, hogy 2021 novembere óta a Nagy Tűzfal blokkolja a teljesen titkosított forgalmat, amely nem hasonlít egyetlen ismert protokollra sem, márpedig a Shadowsocks ilyet állít elő."
+    },
+    {
+      "question": "Honnan dönti el a tűzfal, hogy a forgalom teljesen titkosított?",
+      "answer": "Az első csomagot vizsgálja, és kihagyja, ha az ismert protokollra illik, elég nyomtatható karaktert tartalmaz, vagy a bájtonként beállított bitek átlaga a 3.4 és 4.6 közötti tartományon kívül esik. A fennmaradó forgalom blokkolható."
+    },
+    {
+      "question": "Mi a Shadowsocks 2022?",
+      "answer": "A protokoll 2022-es átdolgozása (SIP022), erősebb visszajátszás elleni védelemmel és frissített kulcskezeléssel. Azt nem változtatja meg, hogy a forgalom véletlenszerűnek látszik."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD-rejtjelek", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: a Shadowsocks 2022-es kiadása", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: حقیقی ویب سائٹ کے پیچھے چھپا پراکسی",
+  "metaTitle": "Trojan پروٹوکول کیا ہے؟ یہ پراکسی ٹریفک کو HTTPS کیسے چھپاتا ہے",
+  "metaDescription": "Trojan کی وضاحت: یہ پراکسی ٹریفک کو حقیقی TLS کنکشن کے اندر کیسے چھپاتا ہے، پروبز کے لیے حقیقی ویب سائٹ پر واپس جاتا ہے، اور اپنا ڈومین درکار ہونا اس کی کمزور جگہ کیوں ہے۔",
+  "excerpt": "آپ کی اپنی حقیقی ویب سائٹ تک حقیقی TLS کنکشن، اندر پاس ورڈ کا ہیش۔ پاس ورڈ کے بغیر، آنے والے اور پروبز کو بس ویب سائٹ نظر آتی ہے۔",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "آپ کے اپنے ڈومین تک HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "کوئی نہیں (ایپ درکار ہے)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (ریفرنس امپلیمنٹیشن)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan صارفین کی تصدیق کیسے کرتا ہے؟",
+      "answer": "TLS کنکشن کے اندر کلائنٹ شیئرڈ پاس ورڈ کا hex-encoded SHA-224 ہیش بھیجتا ہے، 56 حروف لمبا۔ اگر وہ غلط ہو تو سرور کنکشن کو فال بیک ویب سرور کے سپرد کر دیتا ہے۔"
+    },
+    {
+      "question": "کیا Trojan کو ڈومین چاہیے؟",
+      "answer": "ہاں۔ سرور حقیقی ڈومین کا حقیقی سرٹیفکیٹ پیش کرتا ہے، اسی سے یہ عام HTTPS سائٹ جیسا لگتا ہے۔ وہی ڈومین وہ چیز بھی ہے جسے سنسر بلاک کر سکتا ہے۔"
+    },
+    {
+      "question": "Trojan یا VLESS؟",
+      "answer": "دونوں اپنی انکرپشن کے بجائے TLS پر انحصار کرتے ہیں۔ Reality کے ساتھ VLESS آگے بڑھ کر کسی موجودہ مقبول ویب سائٹ کا ہینڈ شیک ادھار لیتا ہے، اس لیے بلاک کرنے کو کوئی پراکسی ڈومین نہیں رہتا۔"
+    },
+    {
+      "question": "کیا Trojan پہچانا جا سکتا ہے؟",
+      "answer": "سادہ پروبنگ سے نہیں، کیونکہ پروبز کو فال بیک ویب سائٹ ملتی ہے۔ تحقیق نے دکھایا ہے کہ TLS کے اندر TLS والی ٹریفک کا فنگر پرنٹ وقت اور پیکٹ سائز سے بنایا جا سکتا ہے، اور پراکسی ڈومینز پہچان لیے جانے کے بعد بلاک کیے جا سکتے ہیں۔"
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan ریپازٹری", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

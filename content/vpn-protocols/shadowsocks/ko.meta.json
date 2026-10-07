@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: 무작위 바이트, 그리고 더는 통하지 않게 된 이유",
+  "metaTitle": "Shadowsocks란? 작동 방식과 GFW의 탐지 방법",
+  "metaDescription": "Shadowsocks 쉽게 이해하기: 만리방화벽을 피하려고 만든 암호화 프록시, 능동적 프로빙으로 발견된 과정, 2021년 이후 중국이 무작위성으로 완전 암호화 트래픽을 차단하는 방식을 설명합니다.",
+  "excerpt": "중국에서 탄생한 가벼운 프록시로, 첫 바이트부터 암호화되어 아무것처럼도 보이지 않습니다. 2021년부터 만리방화벽은 아무것처럼도 보이지 않는다는 이유로 이런 트래픽을 차단합니다.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP 또는 UDP",
+    "looksLike": "무작위처럼 보이는 바이트",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "없음(앱 필요)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks는 VPN인가요?",
+      "answer": "엄밀히는 VPN이 아니라 암호화 프록시입니다. 최근 클라이언트 대부분은 모든 트래픽을 프록시로 보내는 시스템 전체 모드를 추가로 제공하므로, 일상적으로는 VPN과 매우 비슷하게 동작합니다."
+    },
+    {
+      "question": "Shadowsocks는 지금도 중국에서 작동하나요?",
+      "answer": "예전보다 불안정합니다. USENIX Security 2023에서 발표된 연구에 따르면 2021년 11월부터 만리방화벽은 알려진 어떤 프로토콜과도 닮지 않은 완전 암호화 트래픽을 차단하며, Shadowsocks가 바로 그런 트래픽을 만들어 냅니다."
+    },
+    {
+      "question": "방화벽은 어떻게 완전 암호화 트래픽이라고 판단하나요?",
+      "answer": "첫 패킷을 검사하여 알려진 프로토콜과 일치하거나, 출력 가능한 문자가 충분히 포함되어 있거나, 바이트당 설정된 비트 수의 평균이 3.4~4.6 범위를 벗어나면 예외로 처리합니다. 나머지 트래픽은 차단될 수 있습니다."
+    },
+    {
+      "question": "Shadowsocks 2022란 무엇인가요?",
+      "answer": "재전송 방어를 강화하고 키 처리를 개선한 2022년 프로토콜 개정판(SIP022)입니다. 트래픽이 무작위처럼 보인다는 사실은 바뀌지 않습니다."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

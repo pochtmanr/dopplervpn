@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: এলোমেলো বাইট, এবং কেন সেটা আর কাজ করে না",
+  "metaTitle": "Shadowsocks কী? এটি কীভাবে কাজ করে এবং GFW কীভাবে ধরে",
+  "metaDescription": "Shadowsocks ব্যাখ্যা: গ্রেট ফায়ারওয়াল পেরোনোর এনক্রিপ্টেড প্রক্সি, অ্যাক্টিভ প্রোবিংয়ে কীভাবে ধরা পড়ে, এবং 2021 থেকে চীন এলোমেলো দেখা সম্পূর্ণ এনক্রিপ্টেড ট্র্যাফিক ব্লক করে।",
+  "excerpt": "চীনে জন্ম নেওয়া হালকা প্রক্সি, প্রথম বাইট থেকে এনক্রিপ্ট, তাই দেখতে কিছুই না। 2021 সাল থেকে গ্রেট ফায়ারওয়াল ট্র্যাফিক ব্লক করে কারণ তা কিছুই না দেখায়।",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP বা UDP",
+    "looksLike": "এলোমেলো দেখতে বাইট",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "নেই (অ্যাপ লাগে)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks কি একটি VPN?",
+      "answer": "কারিগরিভাবে এটি একটি এনক্রিপ্টেড প্রক্সি, VPN নয়। বেশিরভাগ আধুনিক ক্লায়েন্ট একটি সিস্টেম-ব্যাপী মোড যোগ করে যা সব ট্র্যাফিক এর মধ্য দিয়ে রাউট করে, তাই দৈনন্দিন ব্যবহারে এটি অনেকটা VPN-এর মতো আচরণ করে।"
+    },
+    {
+      "question": "চীনে Shadowsocks কি এখনও কাজ করে?",
+      "answer": "আগের চেয়ে কম নির্ভরযোগ্যভাবে। USENIX Security 2023-এ প্রকাশিত গবেষণা দেখিয়েছে 2021 সালের নভেম্বর থেকে গ্রেট ফায়ারওয়াল এমন সম্পূর্ণ এনক্রিপ্টেড ট্র্যাফিক ব্লক করে যা কোনো পরিচিত প্রোটোকলের মতো দেখায় না, আর Shadowsocks ঠিক তাই তৈরি করে।"
+    },
+    {
+      "question": "ফায়ারওয়াল কীভাবে ঠিক করে ট্র্যাফিক সম্পূর্ণ এনক্রিপ্টেড?",
+      "answer": "এটি প্রথম প্যাকেট দেখে এবং বাদ দেয় যদি তা পরিচিত প্রোটোকলের সঙ্গে মেলে, যথেষ্ট প্রিন্টযোগ্য অক্ষর থাকে, অথবা প্রতি বাইটে সেট বিটের গড় 3.4 থেকে 4.6 সীমার বাইরে হয়। বাকি ট্র্যাফিক ব্লক করা যায়।"
+    },
+    {
+      "question": "Shadowsocks 2022 কী?",
+      "answer": "প্রোটোকলের একটি 2022 সংশোধন (SIP022), আরও শক্ত রিপ্লে সুরক্ষা ও আপডেট করা কী হ্যান্ডলিংসহ। ট্র্যাফিক এলোমেলো দেখায়, এই তথ্যটি এটি বদলায় না।"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD সাইফার", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 সংস্করণ", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: elastīgais veterāns, ko cenzori var atpazīt pēc pirkstu nospieduma",
+  "metaTitle": "Kas ir OpenVPN? Kā tas darbojas un kāpēc IPS to atklāj",
+  "metaDescription": "OpenVPN skaidrojums: kā darbojas TLS vadības kanāls un datu kanāls, kāpēc tas ir lēnāks par WireGuard un kāpēc pētījumā reālā IPS tīklā atpazina vairāk nekā 85% OpenVPN plūsmu.",
+  "excerpt": "Divas desmitgades vecs, bezgala konfigurējams un atbalstīts gandrīz visur. Pētnieki arī parādīja, ka IPS pēc formas var izdalīt lielāko daļu OpenVPN datplūsmas.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP vai TCP",
+    "looksLike": "OpenVPN paša TLS ietvars",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (atvērtā koda klients un serveris)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Vai OpenVPN joprojām ir drošs?",
+      "answer": "Pašreizējais OpenVPN laidiens ar pareizu konfigurāciju ir drošs. Tā kā tas ir tik konfigurējams, galvenais risks ir vāja iestatīšana, piemēram, novecojuši šifri, nevis kļūda pašā protokolā."
+    },
+    {
+      "question": "Kāpēc OpenVPN atklāj pat 443. portā?",
+      "answer": "443. porta izmantošana nepadara datplūsmu līdzīgu HTTPS. OpenVPN iekadrē savu TLS rokasspiedienu savā pakešu formātā, un publicēts pētījums pēc šīs formas reālā IPS tīklā atpazina vairāk nekā 85% OpenVPN plūsmu."
+    },
+    {
+      "question": "OpenVPN vai WireGuard?",
+      "answer": "Atvērtā tīklā WireGuard parasti ir ātrāks un vienkāršāks. OpenVPN uzvar saderībā un var darboties pa TCP. Neviens no tiem nav veidots, lai slēptos no cenzoriem."
+    },
+    {
+      "question": "Vai OpenVPN ir UDP vai TCP?",
+      "answer": "Abi. UDP ir noklusējums un parasti ir ātrāks; TCP palīdz tīklos, kas bloķē UDP, zaudējot daļu ātruma."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 uzziņu rokasgrāmata", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, OpenVPN un WireGuard bloķēšana Krievijā (issue 274, augusts 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

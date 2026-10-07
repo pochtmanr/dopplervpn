@@ -1,0 +1,47 @@
+{
+  "title": "VMess: το αρχικό πρωτόκολλο του V2Ray",
+  "metaTitle": "Τι είναι το VMess; Πρωτόκολλο V2Ray και διαφορά από το VLESS",
+  "metaDescription": "Το VMess με απλά λόγια: κρυπτογραφημένος διαμεσολαβητής του V2Ray, πιστοποίηση με χρονοσήμανση, περιτύλιγμα σε WebSocket και TLS, και πώς το αντικατέστησαν το VLESS και το Trojan.",
+  "excerpt": "Το πρώτο πρωτόκολλο του έργου V2Ray: κρυπτογραφημένες κεφαλίδες, ένα UUID για κάθε χρήστη, και συνήθως περιτύλιγμα WebSocket πάνω από TLS για να μοιάζει με κίνηση ιστού.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, συχνά WebSocket + TLS",
+    "looksLike": "Τυχαία byte, ή HTTPS όταν είναι τυλιγμένο",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Όχι (χρειάζεται εφαρμογή)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Ποια είναι η διαφορά ανάμεσα σε VMess και VLESS;",
+      "answer": "Το VMess κρυπτογραφεί τις δικές του κεφαλίδες και τα δεδομένα. Το VLESS κρατά την ταυτότητα βάσει UUID αλλά αφήνει τη δική του κρυπτογράφηση και στηρίζεται στο στρώμα TLS από κάτω, κάτι που αποφεύγει να κρυπτογραφείται η κίνηση δύο φορές."
+    },
+    {
+      "question": "Γιατί το VMess αποτυγχάνει να συνδεθεί όταν το ρολόι μου είναι λάθος;",
+      "answer": "Η πιστοποίηση VMess περιλαμβάνει χρονοσήμανση, οπότε ο διακομιστής απορρίπτει αιτήματα όταν το ρολόι του πελάτη απέχει πολύ από το δικό του. Η αυτόματη ρύθμιση του ρολογιού της συσκευής συνήθως το διορθώνει."
+    },
+    {
+      "question": "Είναι ασφαλές το VMess;",
+      "answer": "Με πιστοποίηση κεφαλίδας AEAD, ναι. Η παλαιότερη λειτουργία βάσει MD5 δεν μπορούσε να εγγυηθεί την ακεραιότητα της κεφαλίδας, και η επίσημη τεκμηρίωση προειδοποιεί εναντίον της."
+    },
+    {
+      "question": "Είναι ανιχνεύσιμο το VMess;",
+      "answer": "Το γυμνό VMess μοιάζει με τυχαία byte, και κάποια τείχη προστασίας το μπλοκάρουν με το που το δουν. Τυλιγμένο σε WebSocket ή gRPC πάνω από TLS, μοιάζει με HTTPS προς έναν τομέα, και είναι πολύ πιο δύσκολο να ξεχωρίσει."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, τεκμηρίωση πρωτοκόλλου VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, αποθετήριο v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, προδιαγραφή πρωτοκόλλου VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

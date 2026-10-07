@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: pis şəbəkələr üçün QUIC proksi",
+  "metaTitle": "Hysteria 2 nədir? QUIC proksi protokolu izah edilir",
+  "metaDescription": "Hysteria 2 izahı: zondlara real HTTP/3 veb serveri kimi görünən QUIC proksi, itki olan şəbəkələrdə sürəti saxlayır və UDP və ya QUIC bloklanan yerdə işləmir.",
+  "excerpt": "HTTP/3-ün arxasındakı nəqliyyat olan QUIC üzərində proksi. İtki olan xətlərdə sürətli, parolu olmayan hər kəs üçün isə real HTTP/3 veb serveri. Keçmək üçün ona UDP lazımdır.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "HTTP/3 veb serveri",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Yoxdur (tətbiq lazımdır)"
+  },
+  "apps": [
+    { "name": "Hysteria (rəsmi müştəri)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Bir neçə tətbiqin istifadə etdiyi çoxplatformalı nüvə" }
+  ],
+  "faq": [
+    {
+      "question": "Hysteria 2 VPN-dirmi?",
+      "answer": "O, proksi protokoludur, lakin Hiddify və NekoBox kimi müştərilər cihazın bütün trafikini ondan keçirə bilər, ona görə praktikada ondan VPN kimi istifadə etmək olar."
+    },
+    {
+      "question": "Hysteria 2 niyə pis bağlantılarda sürətlidir?",
+      "answer": "O, UDP üzərindən QUIC-də işləyir, bu isə hər axını dayandırmadan paket itkisindən bərpa olunur və qeyri-sabit xətlər üçün nəzərdə tutulmuş öz tıxac idarəetməsindən istifadə edə bilər."
+    },
+    {
+      "question": "Hysteria 2 bloklana bilərmi?",
+      "answer": "Zondlar real HTTP/3 serveri görür, ona görə o, aktiv zondlamaya davam gətirir. Lakin senzor UDP və ya QUIC-i geniş şəkildə məhdudlaşdıra və ya bloklaya bilər və onda Hysteria 2 qoşula bilmir."
+    },
+    {
+      "question": "Hysteria 2, yoxsa VLESS-Reality?",
+      "answer": "UDP-yə icazə verən, itki olan şəbəkələrdə Hysteria 2 tez-tez daha sürətli olur. VLESS-Reality TCP üzərindən işləyir və UDP-nin süzgəcdən keçdiyi yerdə işləməyə davam edir. Çoxları hər ikisini saxlayır."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, Hysteria 2 protokol spesifikasiyası", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, hysteria repozitoriyası", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

@@ -22,6 +22,7 @@ export default async function Page({ params }: PageProps) {
       namespace={NAMESPACE}
       datePublished="2026-05-26"
       dateModified="2026-06-09"
+      blogSlugs={["breaking-the-blackout-iranian-protestors-use-bitchat-and-noghteha-to-bypass-crackdown", "iran-internet-blackout-enters-23rd-day-netblocks-says", "how-to-bypass-internet-censorship-2026"]}
       related={[
         { href: "/bypass-censorship", titleKey: "censorshipTitle", descKey: "censorshipDesc" },
         { href: "/vless-vpn", titleKey: "vlessTitle", descKey: "vlessDesc" },

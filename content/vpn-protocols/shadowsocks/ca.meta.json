@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: bytes aleatoris, i per què això va deixar de funcionar",
+  "metaTitle": "Què és Shadowsocks? Com funciona i com el detecta el GFW",
+  "metaDescription": "Shadowsocks explicat: el proxy xifrat per superar el Gran Tallafoc, com el va trobar el sondeig actiu i com des del 2021 la Xina bloqueja el trànsit totalment xifrat per l'aleatorietat.",
+  "excerpt": "El proxy lleuger nascut a la Xina, xifrat des del primer byte perquè no s'assembli a res. Des del 2021, el Gran Tallafoc bloqueja el trànsit precisament per això.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP o UDP",
+    "looksLike": "Bytes d'aspecte aleatori",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Cap (cal una aplicació)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks és una VPN?",
+      "answer": "Tècnicament és un proxy xifrat, no una VPN. La majoria de clients moderns hi afegeixen un mode per a tot el sistema que hi fa passar tot el trànsit, de manera que en l'ús diari es comporta gairebé com una VPN."
+    },
+    {
+      "question": "Shadowsocks encara funciona a la Xina?",
+      "answer": "Menys que abans. Una recerca publicada a l'USENIX Security 2023 va mostrar que, des del novembre de 2021, el Gran Tallafoc bloqueja el trànsit totalment xifrat que no s'assembla a cap protocol conegut, que és el que produeix Shadowsocks."
+    },
+    {
+      "question": "Com decideix el tallafoc que el trànsit està totalment xifrat?",
+      "answer": "Inspecciona el primer paquet i el deixa passar si coincideix amb un protocol conegut, conté prou caràcters imprimibles o té un nombre mitjà de bits a 1 per byte fora de l'interval de 3.4 a 4.6. La resta del trànsit es pot bloquejar."
+    },
+    {
+      "question": "Què és Shadowsocks 2022?",
+      "answer": "Una revisió del protocol del 2022 (SIP022), amb una protecció contra la repetició més forta i una gestió de claus actualitzada. No canvia el fet que el trànsit sembli aleatori."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, xifrats AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: edició Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

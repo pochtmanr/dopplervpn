@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray-in ilk protokolu",
+  "metaTitle": "VMess nədir? V2Ray protokolu necə işləyir və VLESS-dən fərqi",
+  "metaDescription": "VMess izahı: V2Ray-in şifrəli proksi protokolu, vaxt damğasına əsaslanan autentifikasiya, niyə adətən WebSocket və TLS-ə bükülür və VLESS ilə Trojan onu necə əvəz edib.",
+  "excerpt": "V2Ray layihəsinin ilk protokolu: şifrələnmiş başlıqlar, hər istifadəçi üçün UUID və veb trafikə bənzəmək üçün adətən TLS üzərindən WebSocket örtüyü.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, tez-tez WebSocket + TLS",
+    "looksLike": "Təsadüfi baytlar, büküldükdə isə HTTPS",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Yoxdur (tətbiq lazımdır)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess ilə VLESS arasında fərq nədir?",
+      "answer": "VMess öz başlıqlarını və verilənlərini şifrələyir. VLESS UUID əsaslı kimliyi saxlayır, lakin öz şifrələməsini atır və altdakı TLS qatına arxalanır, bu da trafikin iki dəfə şifrələnməsinin qarşısını alır."
+    },
+    {
+      "question": "Saatım səhv olanda VMess niyə qoşulmur?",
+      "answer": "VMess autentifikasiyasına vaxt damğası daxildir, ona görə müştərinin saatı serverinkindən çox uzaq olanda server sorğuları rədd edir. Cihazın saatını avtomatik qurmaq adətən bunu düzəldir."
+    },
+    {
+      "question": "VMess təhlükəsizdirmi?",
+      "answer": "AEAD başlıq autentifikasiyası ilə bəli. Köhnə MD5 əsaslı rejim başlığın bütövlüyünü təmin edə bilmirdi və rəsmi sənədlər bundan çəkindirir."
+    },
+    {
+      "question": "VMess aşkarlana bilərmi?",
+      "answer": "Çılpaq VMess təsadüfi baytlara bənzəyir və bəzi firewall-lar bunu görən kimi bloklayır. TLS üzərindən WebSocket və ya gRPC-yə büküldükdə o, domenə HTTPS kimi görünür və onu ayırd etmək xeyli çətindir."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess protokol sənədləri", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core repozitoriyası", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS protokol spesifikasiyası", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

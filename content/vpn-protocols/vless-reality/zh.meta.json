@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality：看起来像访问真实网站的 VPN",
+  "metaTitle": "VLESS-Reality 详解：最难封锁的协议",
+  "metaDescription": "VLESS 与 Reality 简介：极简的代理协议，加上借用真实网站握手的 TLS 层，因此没有可供封锁的代理域名。速度、局限与应用。",
+  "excerpt": "极简协议，运行在借用自真实网站的 TLS 1.3 握手之内。没有自己的域名可供封锁，探测者看到的是真实网站。",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "通往真实热门网站的 TLS 1.3",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "无（需要安装应用）"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/zh/downloads", "platforms": "iOS、Android、macOS、Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows、macOS、Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS、macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VLESS 和 Reality 有什么区别？",
+      "answer": "VLESS 是代理协议：它标识用户，并说明流量应发往何处。Reality 是其下方的 TLS 层，让连接看起来像一次对真实第三方网站的访问。"
+    },
+    {
+      "question": "VLESS-Reality 需要域名吗？",
+      "answer": "不需要。Reality 借用现有网站的 TLS 握手，因此服务器不需要自己的域名或证书。这是它相对于 Trojan 和 TLS 封装的 VMess 的主要进步。"
+    },
+    {
+      "question": "VLESS-Reality 无法被检测吗？",
+      "answer": "没有任何协议能做到。研究表明，TLS 套 TLS 可以被识别出指纹，据报道，2025 年 11 月一些俄罗斯运营商切断了 Reality 连接。它仍然是最难封锁的主流方案。"
+    },
+    {
+      "question": "Reality 是什么时候发布的？",
+      "answer": "Reality 于 2023 年 3 月随 Xray-core 1.8.0 发布。VLESS 本身于 2020 年 7 月提出。"
+    }
+  ],
+  "sources": [
+    { "label": "Project X，VLESS 协议规范", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636（2020 年 7 月 16 日）", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS，Xray-core v1.8.0 发布版（2023 年 3 月）", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people，俄罗斯关于 VLESS + Reality + Vision 被封锁的报告（issue 546，2025 年 11 月）", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: Ang VPN na Built-in sa Telepono Mo",
+  "metaTitle": "Ano ang IKEv2/IPsec? Paano Ito Gumagana at Bakit Madaling I-block",
+  "metaDescription": "Paliwanag sa IKEv2/IPsec: ang built-in na VPN sa iPhone, Mac, Windows, at Android, kung paano ito pinananatiling konektado ng MOBIKE habang gumagalaw, at bakit madali itong i-block dahil sa nakapirming UDP port 500 at 4500.",
+  "excerpt": "Built-in sa iOS, macOS, Windows, at Android, mabilis, at maayos kapag lumilipat ng network. Tumatakbo ito sa mga nakapirming at kilalang port, kaya isang rule lang ang kailangan para i-block ito.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "Karaniwang IKE at ESP traffic",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "Anong mga port ang ginagamit ng IKEv2?",
+      "answer": "Gumagamit ang key exchange ng UDP port 500. Kapag may NAT router sa pagitan ng dalawang panig, na halos laging nangyayari, lumilipat sa UDP port 4500 ang IKE at ang naka-encrypt na traffic."
+    },
+    {
+      "question": "Bakit mahusay ang IKEv2 sa telepono?",
+      "answer": "Hinahayaan ng MOBIKE extension (RFC 4555) na magpatuloy ang isang IKEv2 na koneksyon kahit magbago ang IP address, kaya hindi nawawala ang tunnel kapag lumipat mula Wi-Fi patungong mobile data."
+    },
+    {
+      "question": "Ligtas ba ang IKEv2?",
+      "answer": "Oo, kapag gumagamit ng mga kasalukuyang algorithm. Isa itong IETF standard na malawakang ginagamit ng mga enterprise. Ang kahinaan nito ay madali itong makilala at i-block, hindi na madali itong i-decrypt."
+    },
+    {
+      "question": "Gumagana ba ang IKEv2 sa China o Russia?",
+      "answer": "Karaniwang hindi ito maaasahan sa mga network na may filter, dahil simple lang i-block ang mga nakapirmi nitong UDP port o kilalanin ang karaniwan nitong handshake."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

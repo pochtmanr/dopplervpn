@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray의 최초 프로토콜",
+  "metaTitle": "VMess란? V2Ray 프로토콜의 작동 방식과 VMess vs VLESS",
+  "metaDescription": "VMess 쉽게 이해하기: V2Ray의 암호화 프록시 프로토콜, 타임스탬프 기반 인증, 보통 WebSocket과 TLS로 감싸는 이유, VLESS와 Trojan이 대체한 과정을 설명합니다.",
+  "excerpt": "V2Ray 프로젝트의 첫 프로토콜입니다. 헤더를 암호화하고 사용자마다 UUID를 부여하며, 웹 트래픽처럼 보이도록 보통 TLS 위의 WebSocket으로 감쌉니다.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, 주로 WebSocket + TLS",
+    "looksLike": "무작위 바이트, 감싸면 HTTPS",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "없음(앱 필요)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess와 VLESS는 무엇이 다른가요?",
+      "answer": "VMess는 자체 헤더와 데이터를 암호화합니다. VLESS는 UUID 기반 신원은 유지하지만 자체 암호화를 없애고 하위의 TLS 계층에 의존하므로, 트래픽을 두 번 암호화하지 않습니다."
+    },
+    {
+      "question": "시계가 틀리면 VMess 연결이 실패하는 이유는 무엇인가요?",
+      "answer": "VMess 인증에는 타임스탬프가 포함되므로, 클라이언트 시계가 서버 시계와 너무 많이 어긋나면 서버가 요청을 거부합니다. 기기 시계를 자동으로 설정하면 대개 해결됩니다."
+    },
+    {
+      "question": "VMess는 안전한가요?",
+      "answer": "AEAD 헤더 인증을 사용하면 안전합니다. 이전의 MD5 기반 방식은 헤더 무결성을 보장하지 못했으며, 공식 문서도 사용하지 말라고 경고합니다."
+    },
+    {
+      "question": "VMess는 탐지될 수 있나요?",
+      "answer": "VMess만 쓰면 무작위 바이트처럼 보이며, 일부 방화벽은 이를 보자마자 차단합니다. TLS 위의 WebSocket이나 gRPC로 감싸면 도메인에 대한 HTTPS처럼 보이므로 가려내기가 훨씬 어렵습니다."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess 프로토콜 문서", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core 저장소", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS 프로토콜 사양", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

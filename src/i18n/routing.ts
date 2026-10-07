@@ -8,6 +8,11 @@ export const routing = defineRouting({
     "it", "lt", "lv", "nb", "nl", "ro", "sk", "sl", "sv",
   ],
   defaultLocale: "en",
+  // No hreflang HTTP Link header. next-intl would list all 44 locales for
+  // every path, contradicting the per-page <link rel="alternate"> set that
+  // only names locales a page really exists in (blog: 21, security and
+  // how-it-works: 6). The HTML tags are the single source of hreflang.
+  alternateLinks: false,
 });
 
 export const rtlLocales: readonly string[] = ["he", "fa", "ar", "ur"];

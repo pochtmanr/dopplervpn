@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: Sansürcülerin Parmak İzini Çıkarabildiği Esnek Kıdemli",
+  "metaTitle": "OpenVPN Nedir? Nasıl Çalışır, Servis Sağlayıcılar Neden Fark Eder",
+  "metaDescription": "OpenVPN açıklaması: TLS kontrol kanalı ve veri kanalı, WireGuard'dan neden yavaş olduğu ve bir araştırmanın gerçek bir servis sağlayıcıda akışların %85'inden fazlasını tanıması.",
+  "excerpt": "Yirmi yıllık geçmişi, sonsuz yapılandırma seçeneği ve neredeyse her yerde desteği var. Araştırmacılar ayrıca bir servis sağlayıcının OpenVPN trafiğinin çoğunu biçiminden tanıyabildiğini gösterdi.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP veya TCP",
+    "looksLike": "OpenVPN'in kendi TLS çerçevelemesi",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Yok (uygulama gerekir)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (açık kaynaklı istemci ve sunucu)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN hâlâ güvenli mi?",
+      "answer": "Doğru yapılandırılmış güncel bir OpenVPN sürümü güvenlidir. Çok yapılandırılabilir olduğu için asıl risk protokoldeki bir açık değil, eskimiş şifreler gibi zayıf bir kurulumdur."
+    },
+    {
+      "question": "OpenVPN 443 portunda bile neden tespit ediliyor?",
+      "answer": "443 portunu kullanmak trafiği HTTPS'e benzetmez. OpenVPN, TLS el sıkışmasını kendi paket biçimine sarar ve yayımlanmış bir araştırma, gerçek bir servis sağlayıcı ağındaki OpenVPN akışlarının %85'inden fazlasını bu biçimden tanıdı."
+    },
+    {
+      "question": "OpenVPN mi, WireGuard mı?",
+      "answer": "Filtrelenmeyen bir ağda WireGuard genellikle daha hızlı ve daha basittir. OpenVPN uyumlulukta öne çıkar ve TCP üzerinden çalışabilir. İkisi de sansürcülerden gizlenmek için tasarlanmamıştır."
+    },
+    {
+      "question": "OpenVPN UDP mi, TCP mi kullanır?",
+      "answer": "İkisini de. UDP varsayılandır ve genellikle daha hızlıdır; TCP, UDP'yi engelleyen ağlarda işe yarar, ancak bir miktar hızdan ödün verilir."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 başvuru kılavuzu", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, Rusya'da OpenVPN ve WireGuard engellemeleri (issue 274, Ağustos 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

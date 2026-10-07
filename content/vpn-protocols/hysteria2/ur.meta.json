@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: خراب نیٹ ورکس کے لیے بنا QUIC پراکسی",
+  "metaTitle": "Hysteria 2 کیا ہے؟ QUIC پراکسی پروٹوکول کی وضاحت",
+  "metaDescription": "Hysteria 2 کی وضاحت: QUIC پر پراکسی جو پروبز کے لیے حقیقی HTTP/3 ویب سرور جیسا برتاؤ کرتا ہے، نقصان والے نیٹ ورکس پر رفتار رکھتا ہے، اور جہاں UDP یا QUIC بلاک ہو وہاں ناکام ہوتا ہے۔",
+  "excerpt": "HTTP/3 کے پیچھے والے ٹرانسپورٹ QUIC پر پراکسی۔ نقصان والے لنکس پر تیز، اور پاس ورڈ کے بغیر کسی کے لیے حقیقی HTTP/3 ویب سرور۔ گزرنے کے لیے اسے UDP چاہیے۔",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "HTTP/3 ویب سرور",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "کوئی نہیں (ایپ درکار ہے)"
+  },
+  "apps": [
+    { "name": "Hysteria (سرکاری کلائنٹ)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "کراس پلیٹ فارم کور جسے کئی ایپس استعمال کرتی ہیں" }
+  ],
+  "faq": [
+    {
+      "question": "کیا Hysteria 2 ایک VPN ہے؟",
+      "answer": "یہ پراکسی پروٹوکول ہے، لیکن Hiddify اور NekoBox جیسے کلائنٹس ڈیوائس کی ساری ٹریفک اس سے گزار سکتے ہیں، اس لیے عملی طور پر اسے VPN کی طرح استعمال کیا جا سکتا ہے۔"
+    },
+    {
+      "question": "خراب کنکشنز پر Hysteria 2 تیز کیوں ہے؟",
+      "answer": "یہ UDP پر QUIC چلاتا ہے، جو پیکٹ کے نقصان سے اس طرح سنبھلتا ہے کہ ہر اسٹریم نہ رُکے، اور غیر مستحکم لنکس کے لیے بنا اپنا کنجیشن کنٹرول استعمال کر سکتا ہے۔"
+    },
+    {
+      "question": "کیا Hysteria 2 بلاک ہو سکتا ہے؟",
+      "answer": "پروبز کو حقیقی HTTP/3 سرور نظر آتا ہے، اس لیے یہ ایکٹو پروبنگ کا مقابلہ کرتا ہے۔ لیکن سنسر UDP یا QUIC کو وسیع پیمانے پر سست یا بلاک کر سکتا ہے، اور پھر Hysteria 2 کنیکٹ نہیں ہو سکتا۔"
+    },
+    {
+      "question": "Hysteria 2 یا VLESS-Reality؟",
+      "answer": "جو نقصان والے نیٹ ورکس UDP کی اجازت دیتے ہیں ان پر Hysteria 2 اکثر تیز ہوتا ہے۔ VLESS-Reality، TCP پر چلتا ہے اور جہاں UDP فلٹر ہو وہاں کام کرتا رہتا ہے۔ بہت سے لوگ دونوں رکھتے ہیں۔"
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, Hysteria 2 پروٹوکول تصریح", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, hysteria ریپازٹری", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

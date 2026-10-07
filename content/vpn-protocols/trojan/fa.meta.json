@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: پنهان کردن پراکسی پشت یک وب‌سایت واقعی",
+  "metaTitle": "پروتکل Trojan چیست؟ پنهان کردن ترافیک پراکسی به‌شکل HTTPS",
+  "metaDescription": "توضیح Trojan: چگونه ترافیک پراکسی را درون یک اتصال TLS واقعی پنهان می‌کند، برای کاوشگرها یک وب‌سایت واقعی نشان می‌دهد، و چرا نیاز به دامنهٔ اختصاصی نقطهٔ ضعف آن است.",
+  "excerpt": "یک اتصال TLS واقعی به یک وب‌سایت واقعی که مال شماست، با هش گذرواژه در درون آن. بدون گذرواژه، بازدیدکنندگان و کاوشگرها فقط وب‌سایت را می‌بینند.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS به دامنهٔ خودتان",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "ندارد (نیازمند برنامه)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (پیاده‌سازی مرجع)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan چگونه کاربران را احراز هویت می‌کند؟",
+      "answer": "کلاینت درون اتصال TLS هش SHA-224 گذرواژهٔ مشترک را با کدگذاری هگزادسیمال و به طول 56 نویسه می‌فرستد. اگر نادرست باشد، سرور اتصال را به یک وب‌سرور جایگزین هدایت می‌کند."
+    },
+    {
+      "question": "آیا Trojan به دامنه نیاز دارد؟",
+      "answer": "بله. سرور یک گواهی واقعی برای یک دامنهٔ واقعی ارائه می‌کند و همین باعث می‌شود شبیه یک سایت HTTPS عادی باشد. همان دامنه چیزی است که سانسورچی می‌تواند مسدود کند."
+    },
+    {
+      "question": "Trojan یا VLESS؟",
+      "answer": "هر دو به‌جای رمزگذاری اختصاصی به TLS تکیه دارند. VLESS همراه با Reality یک گام جلوتر می‌رود و دست‌دهی یک وب‌سایت موجود و پرطرفدار را به عاریت می‌گیرد، پس دامنهٔ پراکسی‌ای برای مسدود شدن وجود ندارد."
+    },
+    {
+      "question": "آیا Trojan قابل شناسایی است؟",
+      "answer": "با کاوش ساده نه، چون کاوشگرها وب‌سایت جایگزین را می‌بینند. پژوهش‌ها نشان داده‌اند ترافیک TLS درون TLS را می‌توان از روی زمان‌بندی و اندازهٔ بسته‌ها شناسایی کرد، و دامنه‌های پراکسی پس از شناسایی قابل مسدود شدن هستند."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol (پروتکل Trojan)", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan repository (مخزن trojan)", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

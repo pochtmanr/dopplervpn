@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: a rugalmas veterán, amelyet a cenzorok ujjlenyomatoznak",
+  "metaTitle": "Mi az OpenVPN? Hogyan működik, és miért látják a szolgáltatók",
+  "metaDescription": "Az OpenVPN egyszerűen: a TLS vezérlő- és adatcsatornája, miért lassabb a WireGuard-nál, és miért azonosított a kutatás egy valódi szolgáltatónál az adatfolyamok több mint 85%-át.",
+  "excerpt": "Két évtizedes, vég nélkül állítható, és szinte mindenhol támogatott. A kutatók azt is megmutatták, hogy egy internetszolgáltató az alakja alapján a legtöbb OpenVPN-forgalmat ki tudja szúrni.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP vagy TCP",
+    "looksLike": "Az OpenVPN saját TLS-keretezése",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Nincs (alkalmazás kell)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (nyílt forráskódú kliens és szerver)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Az OpenVPN még biztonságos?",
+      "answer": "Egy aktuális OpenVPN-kiadás rendes konfigurációval biztonságos. Mivel ennyire állítható, a fő kockázat a gyenge beállítás, például az elavult rejtjelek, nem a protokoll hibája."
+    },
+    {
+      "question": "Miért ismerik fel az OpenVPN-t a 443-as porton is?",
+      "answer": "A 443-as port használata nem teszi a forgalmat HTTPS-szerűvé. Az OpenVPN a saját csomagformátumába keretezi a TLS-kézfogását, és egy publikált kutatás egy valódi internetszolgáltató hálózatán az OpenVPN-adatfolyamok több mint 85%-át ennek az alaknak alapján azonosította."
+    },
+    {
+      "question": "OpenVPN vagy WireGuard?",
+      "answer": "Nyílt hálózaton a WireGuard általában gyorsabb és egyszerűbb. Az OpenVPN a kompatibilitásban nyer, és TCP-n is futhat. Egyiket sem arra tervezték, hogy elrejtőzzön a cenzorok elől."
+    },
+    {
+      "question": "Az OpenVPN UDP vagy TCP?",
+      "answer": "Bármelyik. Az UDP az alapértelmezett, és általában gyorsabb; a TCP azokon a hálózatokon segít, amelyek blokkolják az UDP-t, a sebesség egy részének árán."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 referencia-kézikönyv", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, az OpenVPN és a WireGuard blokkolása Oroszországban (issue 274, 2023. augusztus)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "VMess: a V2Ray eredeti protokollja",
+  "metaTitle": "Mi a VMess? A V2Ray protokollja, és miben más, mint a VLESS",
+  "metaDescription": "A VMess egyszerűen: a V2Ray titkosított proxyprotokollja, az időbélyeg-alapú hitelesítése, miért csomagolják általában WebSocketbe és TLS-be, és hogyan váltotta fel a VLESS és a Trojan.",
+  "excerpt": "A V2Ray projekt első protokollja: titkosított fejlécek, felhasználónként egy UUID, és általában WebSocket TLS fölött, hogy webes forgalomnak látsszon.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, gyakran WebSocket + TLS",
+    "looksLike": "Véletlen bájtok, vagy HTTPS, ha be van csomagolva",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Nincs (alkalmazás kell)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Mi a különbség a VMess és a VLESS között?",
+      "answer": "A VMess saját fejléceit és adatait titkosítja. A VLESS megőrzi az UUID-alapú azonosítást, de elhagyja a saját titkosítását, és az alatta lévő TLS-rétegre támaszkodik, így a forgalom nem titkosítódik kétszer."
+    },
+    {
+      "question": "Miért nem csatlakozik a VMess, ha az órám rossz?",
+      "answer": "A VMess-hitelesítés időbélyeget tartalmaz, ezért a szerver elutasítja a kéréseket, ha a kliens órája túl messze van a sajátjától. Az eszköz órájának automatikusra állítása általában megoldja."
+    },
+    {
+      "question": "Biztonságos a VMess?",
+      "answer": "AEAD-fejléc-hitelesítéssel igen. A régebbi, MD5-alapú mód nem tudta garantálni a fejléc sértetlenségét, és a hivatalos dokumentáció óva int tőle."
+    },
+    {
+      "question": "Felismerhető a VMess?",
+      "answer": "A nyers VMess véletlen bájtoknak látszik, amit egyes tűzfalak azonnal blokkolnak. WebSocketbe vagy gRPC-be csomagolva, TLS fölött, egy domainre menő HTTPS-nek látszik, amit sokkal nehezebb kiszúrni."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, a VMess protokoll dokumentációja", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, a v2ray-core kódtára", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, a VLESS protokoll specifikációja", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

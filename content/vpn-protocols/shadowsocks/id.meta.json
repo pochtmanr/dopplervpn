@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: Byte Acak, dan Mengapa Itu Tidak Lagi Berhasil",
+  "metaTitle": "Apa Itu Shadowsocks? Cara Kerja dan Cara GFW Mendeteksinya",
+  "metaDescription": "Penjelasan Shadowsocks: proxy terenkripsi untuk menembus Great Firewall, bagaimana active probing menemukannya, dan bagaimana sejak 2021 Tiongkok memblokir lalu lintas terenkripsi penuh dari keacakannya.",
+  "excerpt": "Proxy ringan yang lahir di Tiongkok, terenkripsi sejak byte pertama agar tampak seperti bukan apa-apa. Sejak 2021 Great Firewall memblokir lalu lintas karena tampak seperti bukan apa-apa.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP atau UDP",
+    "looksLike": "Byte yang tampak acak",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Tidak ada (perlu aplikasi)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Apakah Shadowsocks itu VPN?",
+      "answer": "Secara teknis ia adalah proxy terenkripsi, bukan VPN. Sebagian besar klien modern menambahkan mode seluruh sistem yang mengarahkan semua lalu lintas melaluinya, sehingga dalam penggunaan sehari-hari ia bekerja mirip VPN."
+    },
+    {
+      "question": "Apakah Shadowsocks masih berfungsi di Tiongkok?",
+      "answer": "Tidak seandal dulu. Riset yang dipublikasikan di USENIX Security 2023 menunjukkan bahwa sejak November 2021 Great Firewall memblokir lalu lintas terenkripsi penuh yang tidak menyerupai protokol mana pun yang dikenal, yaitu jenis lalu lintas yang dihasilkan Shadowsocks."
+    },
+    {
+      "question": "Bagaimana firewall menentukan bahwa lalu lintas terenkripsi penuh?",
+      "answer": "Firewall memeriksa paket pertama dan mengecualikannya jika cocok dengan protokol yang dikenal, berisi cukup banyak karakter yang dapat dicetak, atau memiliki rata-rata bit bernilai satu per byte di luar rentang 3.4 hingga 4.6. Lalu lintas yang tersisa dapat diblokir."
+    },
+    {
+      "question": "Apa itu Shadowsocks 2022?",
+      "answer": "Revisi protokol tahun 2022 (SIP022) dengan perlindungan replay yang lebih kuat dan penanganan kunci yang diperbarui. Ini tidak mengubah fakta bahwa lalu lintasnya tampak acak."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, cipher AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: edisi Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

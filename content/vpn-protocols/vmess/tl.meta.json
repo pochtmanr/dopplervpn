@@ -1,0 +1,47 @@
+{
+  "title": "VMess: Ang Orihinal na Protocol ng V2Ray",
+  "metaTitle": "Ano ang VMess? Paano Gumagana ang V2Ray, at VMess vs VLESS",
+  "metaDescription": "Paliwanag sa VMess: naka-encrypt na proxy protocol ng V2Ray, ang authentication nito batay sa timestamp, bakit karaniwan itong ibinabalot sa WebSocket at TLS, at kung paano ito pinalitan ng VLESS at Trojan.",
+  "excerpt": "Ang unang protocol ng proyektong V2Ray: naka-encrypt na mga header, UUID para sa bawat user, at karaniwang wrapper na WebSocket sa ibabaw ng TLS para magmukhang web traffic.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, madalas WebSocket + TLS",
+    "looksLike": "Random na byte, o HTTPS kapag nakabalot",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Wala (kailangan ng app)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Ano ang pagkakaiba ng VMess at VLESS?",
+      "answer": "Ine-encrypt ng VMess ang sarili nitong mga header at data. Pinananatili ng VLESS ang pagkakakilanlan batay sa UUID ngunit iniiwan ang sariling encryption at umaasa sa layer ng TLS sa ilalim, na umiiwas sa pag-encrypt ng traffic nang dalawang beses."
+    },
+    {
+      "question": "Bakit hindi kumokonekta ang VMess kapag mali ang orasan ko?",
+      "answer": "May timestamp ang authentication ng VMess, kaya tinatanggihan ng server ang mga request kapag masyadong malayo ang orasan ng client sa sarili nito. Karaniwang naaayos ito kapag awtomatiko ang orasan ng device."
+    },
+    {
+      "question": "Ligtas ba ang VMess?",
+      "answer": "Oo, kapag may AEAD header authentication. Hindi nagagarantiya ng mas lumang mode na nakabatay sa MD5 ang integridad ng header, at binabalaan ng opisyal na dokumentasyon laban dito."
+    },
+    {
+      "question": "Matutukoy ba ang VMess?",
+      "answer": "Mukhang random na byte ang hubad na VMess, na ibina-block ng ilang firewall sa unang tingin. Kapag nakabalot sa WebSocket o gRPC sa ibabaw ng TLS, mukha itong HTTPS patungo sa isang domain, na mas mahirap ihiwalay."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentasyon ng protocol na VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repository ng v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specification ng protocol na VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

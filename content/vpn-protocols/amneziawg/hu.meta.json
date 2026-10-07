@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard az ujjlenyomatok nélkül",
+  "metaTitle": "Mi az AmneziaWG? Miben különbözik a WireGuard-tól",
+  "metaDescription": "Az AmneziaWG egyszerűen: a WireGuard elágazása véletlen fejlécekkel és csomagméretekkel, szemétcsomagokkal, hogy a DPI ne illessze a rögzített kézfogást. Korlátok, alkalmazások.",
+  "excerpt": "A WireGuard sebessége és kriptográfiája, véletlenszerű fejlécekkel, csomagméretekkel és szemétcsomagokkal, hogy a szűrők ne illesszék a rögzített kézfogását.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Felismerhetetlen UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nincs (alkalmazás kell)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia-kliens (forráskód)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Felhasználói téri megvalósítás szerverekhez és kliensekhez" }
+  ],
+  "faq": [
+    {
+      "question": "Mi a különbség az AmneziaWG és a WireGuard között?",
+      "answer": "Az AmneziaWG megőrzi a WireGuard kriptográfiáját és felépítését, de véletlenszerűvé teszi a csomagfejléceket és a méreteket, és szemétcsomagokat küldhet a kézfogás előtt, így a forgalom többé nem illik a WireGuard rögzített aláírására."
+    },
+    {
+      "question": "Kompatibilis az AmneziaWG a WireGuard-dal?",
+      "answer": "Csak kikapcsolt álcázással. Ha az egyedi fejlécek, a méretelőtagok vagy a szemétcsomagok be vannak állítva, mindkét végén AmneziaWG-nak kell futnia, egyező beállításokkal."
+    },
+    {
+      "question": "Mit jelentenek a Jc, az S1 és a H1 beállítások?",
+      "answer": "A Jc a kézfogás előtt küldött szemétcsomagok száma, a méretük Jmin és Jmax között van. Az S1–S4 véletlen előtagokat ad hozzá, hogy megváltoztassa a csomaghosszakat. A H1–H4 egyedi üzenettípus-értékeket állít be a WireGuard rögzített értékei helyett."
+    },
+    {
+      "question": "Működik az AmneziaWG Oroszországban?",
+      "answer": "Eltávolítja azokat az aláírásokat, amelyekkel a sima WireGuard-ot blokkolják, ezért ott sokkal ellenállóbb. Mivel UDP-n fut, az UDP-t korlátozó hálózatok még érinthetik."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, az AmneziaWG dokumentációja", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, az amneziawg-go kódtára", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

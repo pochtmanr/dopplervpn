@@ -1,0 +1,47 @@
+{
+  "title": "VMess: Protokol Asal V2Ray",
+  "metaTitle": "Apakah VMess? Cara Protokol V2Ray Berfungsi, dan VMess lwn VLESS",
+  "metaDescription": "VMess diterangkan: protokol proksi tersulit V2Ray, pengesahan berasaskan cap masa, sebab ia biasanya dibungkus dalam WebSocket dan TLS, dan cara VLESS serta Trojan menggantikannya.",
+  "excerpt": "Protokol pertama projek V2Ray: pengepala tersulit, UUID untuk setiap pengguna, dan biasanya pembungkus WebSocket melalui TLS supaya kelihatan seperti trafik web.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, selalunya WebSocket + TLS",
+    "looksLike": "Bait rawak, atau HTTPS apabila dibungkus",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Tiada (aplikasi diperlukan)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Apakah perbezaan antara VMess dan VLESS?",
+      "answer": "VMess menyulitkan pengepala dan datanya sendiri. VLESS mengekalkan identiti berasaskan UUID tetapi membuang penyulitannya sendiri dan bergantung pada lapisan TLS di bawahnya, yang mengelakkan trafik disulitkan dua kali."
+    },
+    {
+      "question": "Mengapakah VMess gagal bersambung apabila jam saya salah?",
+      "answer": "Pengesahan VMess mengandungi cap masa, jadi pelayan menolak permintaan apabila jam klien terlalu jauh berbeza daripada jamnya sendiri. Menetapkan jam peranti kepada automatik biasanya menyelesaikannya."
+    },
+    {
+      "question": "Adakah VMess selamat?",
+      "answer": "Dengan pengesahan pengepala AEAD, ya. Mod lama berasaskan MD5 tidak dapat menjamin integriti pengepala, dan dokumentasi rasmi memberi amaran supaya tidak menggunakannya."
+    },
+    {
+      "question": "Bolehkah VMess dikesan?",
+      "answer": "VMess mentah kelihatan seperti bait rawak, yang disekat serta-merta oleh sesetengah tembok api. Apabila dibungkus dalam WebSocket atau gRPC melalui TLS, ia kelihatan seperti HTTPS ke sebuah domain, yang jauh lebih sukar diasingkan."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentasi protokol VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repositori v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, spesifikasi protokol VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

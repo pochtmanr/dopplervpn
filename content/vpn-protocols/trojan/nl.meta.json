@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: een proxy verstoppen achter een echte website",
+  "metaTitle": "Wat is Trojan? Hoe het proxyverkeer verstopt als HTTPS",
+  "metaDescription": "Trojan uitgelegd: hoe het proxyverkeer in een echte TLS-verbinding verstopt, bij probes terugvalt op een echte website, en waarom een eigen domein het zwakke punt is.",
+  "excerpt": "Een echte TLS-verbinding met een echte website van jou, met een wachtwoordhash erin. Zonder het wachtwoord zien bezoekers en probes alleen de website.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS naar je eigen domein",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Geen (app nodig)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referentie-implementatie)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Hoe authenticeert Trojan gebruikers?",
+      "answer": "Binnen de TLS-verbinding stuurt de client de hex-gecodeerde SHA-224-hash van een gedeeld wachtwoord, 56 tekens lang. Klopt die niet, dan stuurt de server de verbinding door naar een fallback-webserver."
+    },
+    {
+      "question": "Heeft Trojan een domein nodig?",
+      "answer": "Ja. De server toont een echt certificaat voor een echt domein, en daardoor lijkt hij op een gewone HTTPS-site. Dat domein is ook wat een censor kan blokkeren."
+    },
+    {
+      "question": "Trojan of VLESS?",
+      "answer": "Beide leunen op TLS en niet op eigen versleuteling. VLESS met Reality gaat verder door de handshake van een bestaande populaire website te lenen, zodat er geen proxydomein is om te blokkeren."
+    },
+    {
+      "question": "Kan Trojan worden gedetecteerd?",
+      "answer": "Niet door eenvoudig aftasten, want probes krijgen de fallback-website. Onderzoek heeft aangetoond dat TLS-in-TLS-verkeer aan timing en pakketgroottes een vingerafdruk kan krijgen, en proxydomeinen kunnen worden geblokkeerd zodra ze bekend zijn."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repository trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

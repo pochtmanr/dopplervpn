@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: проксі за справжнім сайтом",
+  "metaTitle": "Що таке протокол Trojan? Як він маскує проксі-трафік під HTTPS",
+  "metaDescription": "Trojan простими словами: як він ховає проксі-трафік усередині справжнього TLS-з’єднання, показує пробам справжній сайт і чому потреба у власному домені — його слабке місце.",
+  "excerpt": "Справжнє TLS-з’єднання зі справжнім сайтом, який вам належить, із хешем пароля всередині. Без пароля відвідувачі та проби бачать просто сайт.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS до вашого домену",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Немає (потрібен застосунок)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (еталонна реалізація)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Як Trojan автентифікує користувачів?",
+      "answer": "Усередині TLS-з’єднання клієнт надсилає шістнадцятковий хеш SHA-224 спільного пароля завдовжки 56 символів. Якщо він неправильний, сервер переспрямовує з’єднання на резервний вебсервер."
+    },
+    {
+      "question": "Чи потрібен Trojan домен?",
+      "answer": "Так. Сервер подає справжній сертифікат для справжнього домену, і саме тому він виглядає як звичайний HTTPS-сайт. Цей самий домен цензор може й заблокувати."
+    },
+    {
+      "question": "Trojan чи VLESS?",
+      "answer": "Обидва покладаються на TLS, а не на власне шифрування. VLESS з Reality іде далі: він позичає рукостискання наявного популярного сайту, тож проксі-домену для блокування немає."
+    },
+    {
+      "question": "Чи можна виявити Trojan?",
+      "answer": "Простим зондуванням — ні, бо проби отримують резервний сайт. Дослідження показали, що трафік TLS усередині TLS можна розпізнати за часом і розмірами пакетів, а проксі-домени можна заблокувати, щойно їх ідентифікують."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, репозиторій trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: A VPN That Looks Like a Visit to a Real Website",
+  "metaTitle": "VLESS-Reality Explained: The Protocol Hardest to Block",
+  "metaDescription": "VLESS and Reality explained in brief: a minimal proxy protocol plus a TLS layer that borrows a real website's handshake, so there is no proxy domain to block. Speed, limits and apps.",
+  "excerpt": "A minimal protocol inside a borrowed TLS 1.3 handshake from a real website. No domain of its own to block, and probes see the real site.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "TLS 1.3 to a real popular website",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "None (app required)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/en/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "What is the difference between VLESS and Reality?",
+      "answer": "VLESS is the proxy protocol: it identifies the user and says where traffic should go. Reality is the TLS layer underneath that makes the connection look like a visit to a real third-party website."
+    },
+    {
+      "question": "Does VLESS-Reality need a domain?",
+      "answer": "No. Reality borrows the TLS handshake of an existing website, so the server needs no domain or certificate of its own. That is its main advance over Trojan and TLS-wrapped VMess."
+    },
+    {
+      "question": "Is VLESS-Reality undetectable?",
+      "answer": "No protocol is. Research has shown TLS-inside-TLS can be fingerprinted, and some Russian ISPs were reported cutting Reality connections in November 2025. It remains the hardest mainstream option to block."
+    },
+    {
+      "question": "When was Reality released?",
+      "answer": "Reality shipped in Xray-core 1.8.0 in March 2023. VLESS itself was proposed in July 2020."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, VLESS protocol specification", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16 Jul 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, Xray-core v1.8.0 release (Mar 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, VLESS + Reality + Vision blocking reports in Russia (issue 546, Nov 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

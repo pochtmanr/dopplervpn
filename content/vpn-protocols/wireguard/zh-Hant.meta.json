@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard：快速、簡單，也容易被封鎖",
+  "metaTitle": "什麼是 WireGuard？運作方式與被封鎖的原因",
+  "metaDescription": "WireGuard 解析：固定的現代密碼學、為何如此快速、為何固定大小的交握讓審查機構容易封鎖它，以及哪些應用程式使用它。",
+  "excerpt": "最快的主流 VPN 協定，採用固定的現代密碼學，程式碼極為精簡。它從來不是為隱藏而設計，在有過濾的網路中最先被封鎖。",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "可辨識的 VPN 交握",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux 核心（5.6+）"
+  },
+  "apps": [
+    { "name": "WireGuard（官方應用程式）", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "跨平台核心，多款應用程式都以它為基礎" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuard 安全嗎？",
+      "answer": "安全。WireGuard 使用一組固定的現代密碼學原語（ChaCha20-Poly1305、Curve25519、BLAKE2s），程式碼量小，便於審查。它的弱點在於容易被審查機構察覺，而不是加密強度。"
+    },
+    {
+      "question": "為什麼 WireGuard 在俄羅斯或伊朗會失效？",
+      "answer": "它的交握訊息大小固定：客戶端 148 位元組，回應 92 位元組，並透過 UDP 傳輸。這種模式很容易被深度封包檢測偵測到，也有報告指出，俄羅斯的電信業者會在交握之後立即切斷 WireGuard 連線。"
+    },
+    {
+      "question": "WireGuard 比 OpenVPN 快嗎？",
+      "answer": "通常是的。WireGuard 只需一次往返就能建立連線階段，在 Linux 上於核心中執行，需要協商的協定開銷也少得多。實際差距取決於裝置和網路。"
+    },
+    {
+      "question": "WireGuard 可以對 DPI 隱藏嗎？",
+      "answer": "單靠它本身不行。AmneziaWG 等分支版本會改變封包大小和標頭，讓流量較不容易被辨識；也可以把 WireGuard 包在另一種協定裡，代價是損失部分速度。"
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people，俄羅斯對 OpenVPN 與 WireGuard 的封鎖（issue 274，2023 年 8 月）", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

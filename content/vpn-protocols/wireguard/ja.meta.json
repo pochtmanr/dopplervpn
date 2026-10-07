@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard：高速でシンプル、そしてブロックされやすい",
+  "metaTitle": "WireGuardとは？仕組みとブロックされる理由",
+  "metaDescription": "WireGuardを解説：固定された最新の暗号方式、高速な理由、固定サイズのハンドシェイクが検閲当局にブロックされやすい理由、対応アプリを紹介します。",
+  "excerpt": "固定された最新の暗号方式と小さなコードベースを持つ、主流で最速のVPNプロトコル。隠れる設計ではなく、フィルタリングされたネットワークでは真っ先にブロックされます。",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "識別しやすいVPNハンドシェイク",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linuxカーネル（5.6以降）"
+  },
+  "apps": [
+    { "name": "WireGuard（公式アプリ）", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "複数のアプリが使用するクロスプラットフォームのコア" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuardは安全ですか？",
+      "answer": "はい。WireGuardは固定された最新の暗号プリミティブ（ChaCha20-Poly1305、Curve25519、BLAKE2s）を使い、監査が現実的な小さなコードベースを持っています。弱点は暗号の強度ではなく、検閲当局から見つかりやすいことです。"
+    },
+    {
+      "question": "WireGuardがロシアやイランで使えなくなるのはなぜですか？",
+      "answer": "ハンドシェイクのメッセージはサイズが固定されており、クライアントからが148バイト、応答が92バイトで、UDPで送られます。このパターンはディープパケットインスペクションで簡単に検出でき、ロシアでは通信事業者がハンドシェイクの直後にWireGuardのセッションを切断していると報告されています。"
+    },
+    {
+      "question": "WireGuardはOpenVPNより速いですか？",
+      "answer": "通常は速いです。WireGuardは1往復でセッションを確立し、Linuxではカーネル内で動作し、交渉が必要なプロトコル上のオーバーヘッドもはるかに少なくなっています。実際の差はデバイスとネットワークによって異なります。"
+    },
+    {
+      "question": "WireGuardをDPIから隠すことはできますか？",
+      "answer": "単体ではできません。AmneziaWGのようなフォークはパケットサイズやヘッダーを変更して識別されにくくします。また、WireGuardを別のプロトコルで包む方法もありますが、速度は多少犠牲になります。"
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard、プロトコルと暗号方式", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel（ホワイトペーパー）", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia、WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people、ロシアにおけるOpenVPNとWireGuardのブロック（issue 274、2023年8月）", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

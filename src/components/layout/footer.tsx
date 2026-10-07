@@ -75,6 +75,12 @@ const COPYRIGHT_YEAR = 2026;
 
 export async function Footer() {
   const t = await getTranslations("footer");
+  // The long-tail pages reuse the titles their parent pages already link them
+  // with, so the footer needs no new strings in 44 locales.
+  const tUae = await getTranslations("vpnForUae.related");
+  const tRussia = await getTranslations("vpnForRussia.related");
+  const tChina = await getTranslations("vpnForChina.related");
+  const tIos = await getTranslations("vpnForIos.related");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
   // /security ships in the hand-translated core-market locales only
@@ -101,6 +107,7 @@ export async function Footer() {
     { href: "/vpn-for-macos", label: t("vpnForMacos") },
     { href: "/vpn-for-windows", label: t("vpnForWindows") },
     { href: "/vless-vpn-android", label: t("vlessVpnAndroid") },
+    { href: "/vpn-for-public-wifi-iphone", label: tIos("publicWifi") },
   ];
 
   const locationLinks: LinkItem[] = [
@@ -109,6 +116,11 @@ export async function Footer() {
     { href: "/vpn-for-china", label: t("vpnForChina") },
     { href: "/vpn-for-russia", label: t("vpnForRussia") },
     { href: "/vpn-for-turkey", label: t("vpnForTurkey") },
+    // Otherwise reachable only from one parent page each.
+    { href: "/vpn-for-instagram-russia", label: tRussia("instagramTitle") },
+    { href: "/vpn-for-travelers-china", label: tChina("travelersTitle") },
+    { href: "/vpn-for-telegram-calls-uae", label: tUae("telegramCallsTitle") },
+    { href: "/vpn-for-whatsapp-calls-uae", label: tUae("whatsappCallsTitle") },
   ];
 
   const supportLinks: LinkItem[] = [

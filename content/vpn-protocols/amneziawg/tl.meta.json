@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard na Inalis ang mga Fingerprint",
+  "metaTitle": "Ano ang AmneziaWG? Paano Ito Naiiba sa WireGuard",
+  "metaDescription": "Paliwanag sa AmneziaWG: fork ng WireGuard na nagrarandom ng mga header at laki ng packet at nagpapadala ng mga junk packet para hindi maitugma ng DPI ang nakapirming handshake ng WireGuard. Mga limitasyon at app.",
+  "excerpt": "Bilis at cryptography ng WireGuard, na may naka-random na mga header, laki ng packet, at junk packet para hindi maitugma ng mga filter ang nakapirmi nitong handshake.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP na hindi makilala",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Wala (kailangan ng app)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia client (pinagmulang kodigo)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementasyon sa userspace para sa mga server at client" }
+  ],
+  "faq": [
+    {
+      "question": "Ano ang pagkakaiba ng AmneziaWG at WireGuard?",
+      "answer": "Pinananatili ng AmneziaWG ang cryptography at disenyo ng WireGuard ngunit nagrarandom ng mga header at laki ng packet at maaaring magpadala ng mga junk packet bago ang handshake, kaya hindi na tumutugma ang traffic sa nakapirming signature ng WireGuard."
+    },
+    {
+      "question": "Compatible ba ang AmneziaWG sa WireGuard?",
+      "answer": "Kapag naka-off lang ang obfuscation. Kapag naka-configure na ang mga custom na header, size prefix, o junk packet, kailangang parehong magpatakbo ng AmneziaWG ang dalawang dulo na may magkatugmang setting."
+    },
+    {
+      "question": "Ano ang ibig sabihin ng mga setting na Jc, S1, at H1?",
+      "answer": "Ang Jc ang bilang ng mga junk packet na ipinapadala bago ang handshake, na may mga laki sa pagitan ng Jmin at Jmax. Nagdadagdag ang S1 hanggang S4 ng mga random na prefix para baguhin ang mga haba ng packet. Nagtatakda ang H1 hanggang H4 ng mga custom na halaga ng message type na pumapalit sa mga nakapirmi ng WireGuard."
+    },
+    {
+      "question": "Gumagana ba ang AmneziaWG sa Russia?",
+      "answer": "Inaalis nito ang mga signature na ginagamit para i-block ang plain na WireGuard, kaya mas matibay ito roon. Dahil tumatakbo ito sa UDP, maaari pa rin itong maapektuhan ng mga network na naglilimita ng UDP."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, dokumentasyon ng AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repository ng amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

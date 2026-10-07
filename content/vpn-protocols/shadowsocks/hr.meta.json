@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: slučajni bajtovi i zašto je to prestalo raditi",
+  "metaTitle": "Što je Shadowsocks? Kako radi i kako ga GFW prepoznaje",
+  "metaDescription": "Shadowsocks objašnjen: šifrirani proxy za Veliki kineski vatrozid, aktivno ispitivanje koje ga je našlo i kako Kina od 2021. blokira potpuno šifrirani promet zbog slučajnosti.",
+  "excerpt": "Lagani proxy rođen u Kini, šifriran od prvog bajta tako da izgleda kao ništa. Od 2021. Veliki vatrozid blokira promet upravo zato što izgleda kao ništa.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP ili UDP",
+    "looksLike": "Bajtovi koji izgledaju slučajno",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nema (potrebna je aplikacija)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Je li Shadowsocks VPN?",
+      "answer": "Tehnički je šifrirani proxy, a ne VPN. Većina suvremenih klijenata dodaje način rada za cijeli sustav koji sav promet usmjerava kroz njega, pa se u svakodnevnoj uporabi ponaša vrlo slično VPN-u."
+    },
+    {
+      "question": "Radi li Shadowsocks još u Kini?",
+      "answer": "Manje pouzdano nego prije. Istraživanje objavljeno na USENIX Security 2023 pokazalo je da Veliki kineski vatrozid od studenoga 2021. blokira potpuno šifrirani promet koji ne izgleda kao nijedan poznati protokol, a upravo takav promet stvara Shadowsocks."
+    },
+    {
+      "question": "Kako vatrozid odlučuje da je promet potpuno šifriran?",
+      "answer": "Pregledava prvi paket i izuzima ga ako odgovara poznatom protokolu, sadrži dovoljno ispisivih znakova ili ima prosječan broj postavljenih bitova po bajtu izvan raspona od 3,4 do 4,6. Preostali se promet može blokirati."
+    },
+    {
+      "question": "Što je Shadowsocks 2022?",
+      "answer": "Revizija protokola iz 2022. (SIP022) s jačom zaštitom od ponovne reprodukcije i ažuriranim rukovanjem ključevima. Ne mijenja to da promet izgleda slučajno."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, šifre AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: inačica Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

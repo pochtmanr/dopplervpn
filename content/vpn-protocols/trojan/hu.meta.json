@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: proxy egy valódi weboldal mögött",
+  "metaTitle": "Mi a Trojan protokoll? Hogyan rejti a proxyforgalmat HTTPS-ként",
+  "metaDescription": "A Trojan egyszerűen: hogyan rejti a proxyforgalmat egy valódi TLS-kapcsolatba, a szondáknak valódi weboldalt mutat, és miért a saját domain szükségessége a gyenge pontja.",
+  "excerpt": "Valódi TLS-kapcsolat egy saját weboldaladra, belül egy jelszókivonattal. Jelszó nélkül a látogatók és a szondák csak a weboldalt látják.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS a saját domainedre",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nincs (alkalmazás kell)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referencia-megvalósítás)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Hogyan hitelesíti a Trojan a felhasználókat?",
+      "answer": "A TLS-kapcsolaton belül a kliens elküldi a közös jelszó hexadecimálisan kódolt SHA-224 kivonatát, 56 karakter hosszan. Ha hibás, a szerver egy tartalék webszerverre továbbítja a kapcsolatot."
+    },
+    {
+      "question": "Kell a Trojan-nak domain?",
+      "answer": "Igen. A szerver valódi tanúsítványt mutat fel egy valódi domainre, ettől látszik hétköznapi HTTPS-oldalnak. Ugyanezt a domaint tudja a cenzor blokkolni."
+    },
+    {
+      "question": "Trojan vagy VLESS?",
+      "answer": "Mindkettő a TLS-re támaszkodik a saját titkosítása helyett. A VLESS Reality-vel továbbmegy: egy már létező, népszerű weboldal kézfogását kölcsönzi, így nincs blokkolható proxydomain."
+    },
+    {
+      "question": "Felismerhető a Trojan?",
+      "answer": "Egyszerű szondázással nem, mert a szondák a tartalék weboldalt kapják. A kutatás megmutatta, hogy a TLS-en belüli TLS forgalom az időzítés és a csomagméretek alapján ujjlenyomatozható, a proxydomainek pedig blokkolhatók, ha azonosították őket."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, a trojan kódtára", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

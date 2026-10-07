@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG：フィンガープリントを取り除いたWireGuard",
+  "metaTitle": "AmneziaWGとは？WireGuardとの違い",
+  "metaDescription": "AmneziaWGを解説：ヘッダーとパケットサイズをランダム化し、ジャンクパケットを送ることで、DPIがWireGuardの固定ハンドシェイクに一致させられないようにしたWireGuardのフォーク。限界と対応アプリを紹介します。",
+  "excerpt": "WireGuardの速度と暗号方式はそのままに、ヘッダー、パケットサイズ、ジャンクパケットをランダム化して、フィルターが固定のハンドシェイクに一致させられないようにしています。",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "識別できないUDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "なし（アプリが必要）"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amneziaクライアント（ソースコード）", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "サーバーとクライアント向けのユーザー空間実装" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWGとWireGuardの違いは何ですか？",
+      "answer": "AmneziaWGはWireGuardの暗号方式と設計を維持したまま、パケットのヘッダーとサイズをランダム化し、ハンドシェイクの前にジャンクパケットを送ることもできます。これにより、トラフィックはWireGuardの固定のシグネチャに一致しなくなります。"
+    },
+    {
+      "question": "AmneziaWGはWireGuardと互換性がありますか？",
+      "answer": "難読化をオフにした場合のみです。カスタムヘッダー、サイズのプレフィックス、ジャンクパケットを設定すると、両端で一致する設定のAmneziaWGを実行する必要があります。"
+    },
+    {
+      "question": "Jc、S1、H1の設定は何を意味しますか？",
+      "answer": "Jcはハンドシェイクの前に送るジャンクパケットの数で、サイズはJminからJmaxの間です。S1〜S4はランダムなプレフィックスを加えてパケット長を変えます。H1〜H4は、WireGuardの固定値に代わるカスタムのメッセージタイプ値を設定します。"
+    },
+    {
+      "question": "AmneziaWGはロシアで使えますか？",
+      "answer": "通常のWireGuardをブロックするために使われているシグネチャを取り除くため、ロシアではるかに耐性があります。UDPで動作するため、UDPを制限するネットワークの影響は受けることがあります。"
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia、AmneziaWGのドキュメント", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia、amneziawg-goリポジトリ", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard、プロトコルと暗号方式", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

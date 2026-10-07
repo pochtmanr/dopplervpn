@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: Parmak İzleri Silinmiş WireGuard",
+  "metaTitle": "AmneziaWG Nedir? WireGuard'dan Farkı Nedir",
+  "metaDescription": "AmneziaWG açıklaması: başlıkları ve paket boyutlarını rastgeleleştirip çöp paket gönderen, DPI'ın WireGuard'ın sabit el sıkışmasını eşleştirmesini önleyen bir türev.",
+  "excerpt": "WireGuard'ın hızı ve kriptografisi; filtreler sabit el sıkışmasıyla eşleştiremesin diye rastgeleleştirilmiş başlıklar, paket boyutları ve çöp paketlerle.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Tanınmayan UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Yok (uygulama gerekir)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia istemcisi (kaynak kodu)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Sunucular ve istemciler için kullanıcı alanı uygulaması" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG ile WireGuard arasındaki fark nedir?",
+      "answer": "AmneziaWG, WireGuard'ın kriptografisini ve tasarımını korur; ancak paket başlıklarını ve boyutlarını rastgeleleştirir ve el sıkışmadan önce çöp paketler gönderebilir; böylece trafik artık WireGuard'ın sabit imzasıyla eşleşmez."
+    },
+    {
+      "question": "AmneziaWG, WireGuard ile uyumlu mu?",
+      "answer": "Yalnızca gizleme kapalıyken. Özel başlıklar, boyut önekleri ya da çöp paketler yapılandırıldığında iki uçta da eşleşen ayarlarla AmneziaWG çalışmalıdır."
+    },
+    {
+      "question": "Jc, S1 ve H1 ayarları ne anlama gelir?",
+      "answer": "Jc, el sıkışmadan önce gönderilen çöp paket sayısıdır; boyutları Jmin ile Jmax arasındadır. S1–S4 paket uzunluklarını değiştirmek için rastgele önekler ekler. H1–H4, WireGuard'ın sabit değerlerinin yerine geçen özel mesaj türü değerlerini belirler."
+    },
+    {
+      "question": "AmneziaWG Rusya'da çalışır mı?",
+      "answer": "Sade WireGuard'ı engellemek için kullanılan imzaları ortadan kaldırır; bu da orada onu çok daha dayanıklı kılar. UDP üzerinde çalıştığı için UDP'yi kısıtlayan ağlar yine de onu etkileyebilir."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG belgeleri", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go deposu", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

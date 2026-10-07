@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: den flexibla veteranen som censorer kan känna igen",
+  "metaTitle": "Vad är OpenVPN? Så fungerar det och varför en ISP ser det",
+  "metaDescription": "OpenVPN förklarat: TLS-kontrollkanal och datakanal, varför det är långsammare än WireGuard, och varför forskning identifierade över 85% av flödena hos en riktig internetleverantör.",
+  "excerpt": "Två decennier gammalt, ändlöst konfigurerbart och stött nästan överallt. Forskare har också visat att en internetleverantör kan peka ut det mesta av OpenVPN-trafiken på formen.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP eller TCP",
+    "looksLike": "OpenVPNs egen TLS-inramning",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Ingen (app krävs)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (klient och server med öppen källkod)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Är OpenVPN fortfarande säkert?",
+      "answer": "En aktuell OpenVPN-utgåva med en sund konfiguration är säker. Eftersom det är så konfigurerbart är den största risken en svag uppsättning, till exempel föråldrade chiffer, snarare än ett fel i protokollet."
+    },
+    {
+      "question": "Varför upptäcks OpenVPN även på port 443?",
+      "answer": "Att använda port 443 får inte trafiken att se ut som HTTPS. OpenVPN ramar in sin TLS-handskakning i ett eget paketformat, och publicerad forskning identifierade över 85% av OpenVPN-flödena i ett riktigt internetleverantörsnät på den formen."
+    },
+    {
+      "question": "OpenVPN eller WireGuard?",
+      "answer": "I ett öppet nät är WireGuard oftast snabbare och enklare. OpenVPN vinner på kompatibilitet och kan köras över TCP. Inget av dem är utformat för att dölja sig för censorer."
+    },
+    {
+      "question": "Är OpenVPN UDP eller TCP?",
+      "answer": "Båda. UDP är standard och oftast snabbare. TCP hjälper i nät som blockerar UDP, till en viss kostnad i hastighet."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Referensmanual för OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, blockering av OpenVPN och WireGuard i Ryssland (issue 274, augusti 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

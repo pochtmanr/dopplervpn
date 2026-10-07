@@ -53,7 +53,7 @@ export function PreviewPlatforms() {
 export function PreviewFeatures() {
   return (
     <Shell id="features" className="py-6 md:py-10">
-      <PlusFeatures />
+      <PlusFeatures live />
     </Shell>
   );
 }

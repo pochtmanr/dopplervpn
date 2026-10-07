@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard đã được xóa dấu vân tay",
+  "metaTitle": "AmneziaWG là gì? Khác WireGuard ở điểm nào",
+  "metaDescription": "Giải thích AmneziaWG: bản fork WireGuard ngẫu nhiên hóa tiêu đề và kích thước gói, gửi gói rác để DPI không khớp được bước bắt tay cố định của WireGuard. Giới hạn và ứng dụng.",
+  "excerpt": "Tốc độ và mật mã của WireGuard, với tiêu đề, kích thước gói và gói rác được ngẫu nhiên hóa để bộ lọc không khớp được bước bắt tay cố định của nó.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP không nhận ra được",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia client (mã nguồn)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Bản triển khai ở không gian người dùng cho máy chủ và máy khách" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG khác WireGuard ở điểm nào?",
+      "answer": "AmneziaWG giữ nguyên mật mã và thiết kế của WireGuard nhưng ngẫu nhiên hóa tiêu đề và kích thước gói tin, và có thể gửi gói rác trước bước bắt tay, nên lưu lượng không còn khớp với dấu hiệu cố định của WireGuard."
+    },
+    {
+      "question": "AmneziaWG có tương thích với WireGuard không?",
+      "answer": "Chỉ khi tắt chế độ làm rối. Khi đã cấu hình tiêu đề tùy chỉnh, tiền tố kích thước hoặc gói rác, cả hai đầu phải chạy AmneziaWG với các thiết lập trùng khớp."
+    },
+    {
+      "question": "Các thiết lập Jc, S1 và H1 có nghĩa là gì?",
+      "answer": "Jc là số gói rác được gửi trước bước bắt tay, với kích thước nằm giữa Jmin và Jmax. S1 đến S4 thêm các tiền tố ngẫu nhiên để thay đổi độ dài gói. H1 đến H4 đặt các giá trị loại thông điệp tùy chỉnh thay cho giá trị cố định của WireGuard."
+    },
+    {
+      "question": "AmneziaWG có hoạt động ở Nga không?",
+      "answer": "Nó loại bỏ các dấu hiệu dùng để chặn WireGuard thuần, nên có khả năng chống chịu tốt hơn nhiều ở đó. Vì chạy qua UDP, các mạng hạn chế UDP vẫn có thể ảnh hưởng đến nó."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, tài liệu AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, kho mã amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

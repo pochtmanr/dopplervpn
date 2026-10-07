@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: διαμεσολαβητής QUIC για κακά δίκτυα",
+  "metaTitle": "Τι είναι το Hysteria 2; Το πρωτόκολλο διαμεσολάβησης στο QUIC",
+  "metaDescription": "Το Hysteria 2 με απλά λόγια: διαμεσολαβητής στο QUIC που στις ανιχνεύσεις μοιάζει με HTTP/3, κρατά ταχύτητα σε δίκτυα με απώλειες και αποτυγχάνει αν μπλοκαριστεί UDP ή QUIC.",
+  "excerpt": "Διαμεσολαβητής στο QUIC, τη μεταφορά πίσω από το HTTP/3. Γρήγορος σε συνδέσεις με απώλειες, και πραγματικός διακομιστής ιστού HTTP/3 για όποιον δεν έχει τον κωδικό. Χρειάζεται UDP για να περάσει.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "Διακομιστής ιστού HTTP/3",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Όχι (χρειάζεται εφαρμογή)"
+  },
+  "apps": [
+    { "name": "Hysteria (επίσημος πελάτης)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Διαπλατφορμικός πυρήνας που χρησιμοποιούν αρκετές εφαρμογές" }
+  ],
+  "faq": [
+    {
+      "question": "Είναι το Hysteria 2 VPN;",
+      "answer": "Είναι πρωτόκολλο διαμεσολάβησης, αλλά πελάτες όπως το Hiddify και το NekoBox μπορούν να δρομολογήσουν όλη την κίνηση μιας συσκευής μέσω αυτού, οπότε στην πράξη μπορεί να χρησιμοποιηθεί σαν VPN."
+    },
+    {
+      "question": "Γιατί το Hysteria 2 είναι γρήγορο σε κακές συνδέσεις;",
+      "answer": "Τρέχει σε QUIC μέσω UDP, που ανακάμπτει από την απώλεια πακέτων χωρίς να σταματά κάθε ροή, και μπορεί να χρησιμοποιεί δικό του έλεγχο συμφόρησης στοχευμένο σε ασταθείς συνδέσεις."
+    },
+    {
+      "question": "Μπορεί να μπλοκαριστεί το Hysteria 2;",
+      "answer": "Οι ανιχνεύσεις βλέπουν πραγματικό διακομιστή HTTP/3, οπότε αντέχει στην ενεργή ανίχνευση. Αλλά ένας λογοκριτής μπορεί να περιορίσει ή να μπλοκάρει ευρέως το UDP ή το QUIC, και τότε το Hysteria 2 δεν μπορεί να συνδεθεί."
+    },
+    {
+      "question": "Hysteria 2 ή VLESS-Reality;",
+      "answer": "Το Hysteria 2 είναι συχνά ταχύτερο σε δίκτυα με απώλειες που επιτρέπουν UDP. Το VLESS-Reality τρέχει μέσω TCP και συνεχίζει να λειτουργεί όπου το UDP φιλτράρεται. Πολλοί κρατούν και τα δύο."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, προδιαγραφή πρωτοκόλλου Hysteria 2", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, αποθετήριο hysteria", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

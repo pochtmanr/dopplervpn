@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: בייטים אקראיים, ולמה זה הפסיק לעבוד",
+  "metaTitle": "מהו Shadowsocks? איך הוא עובד ואיך ה-GFW מזהה אותו",
+  "metaDescription": "Shadowsocks בפשטות: הפרוקסי המוצפן שנבנה כדי לעקוף את חומת האש הגדולה, איך בדיקה אקטיבית חשפה אותו, ואיך מאז 2021 סין חוסמת תעבורה מוצפנת לחלוטין לפי האקראיות שלה.",
+  "excerpt": "הפרוקסי הקל שנולד בסין, מוצפן מהבייט הראשון כך שהוא נראה כמו שום דבר. מאז 2021 חומת האש הגדולה חוסמת תעבורה בגלל שהיא נראית כמו שום דבר.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP או UDP",
+    "looksLike": "בייטים שנראים אקראיים",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "אין (נדרשת אפליקציה)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "האם Shadowsocks הוא VPN?",
+      "answer": "מבחינה טכנית הוא פרוקסי מוצפן ולא VPN. רוב הלקוחות המודרניים מוסיפים מצב ברמת המערכת שמנתב דרכו את כל התעבורה, ולכן בשימוש יומיומי הוא מתנהג כמעט כמו VPN."
+    },
+    {
+      "question": "האם Shadowsocks עדיין עובד בסין?",
+      "answer": "פחות אמין מבעבר. מחקר שפורסם ב-USENIX Security 2023 הראה שמאז נובמבר 2021 חומת האש הגדולה חוסמת תעבורה מוצפנת לחלוטין שאינה נראית כמו אף פרוטוקול מוכר, וזה בדיוק מה ש-Shadowsocks מייצר."
+    },
+    {
+      "question": "איך חומת האש מחליטה שתעבורה מוצפנת לחלוטין?",
+      "answer": "היא בודקת את החבילה הראשונה ופוטרת אותה אם היא תואמת פרוטוקול מוכר, מכילה מספיק תווים שאפשר להדפיס, או שהממוצע של ביטים דולקים לבייט שלה מחוץ לטווח 3.4 עד 4.6. את שאר התעבורה אפשר לחסום."
+    },
+    {
+      "question": "מהו Shadowsocks 2022?",
+      "answer": "גרסה מ-2022 של הפרוטוקול (SIP022) עם הגנה חזקה יותר מפני שידור חוזר וטיפול מעודכן במפתחות. היא לא משנה את העובדה שהתעבורה נראית אקראית."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, צפני AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: מהדורת Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

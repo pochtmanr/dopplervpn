@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: atsitiktiniai baitai ir kodėl tai nustojo veikti",
+  "metaTitle": "Kas yra Shadowsocks? Kaip jis veikia ir kaip jį aptinka GFW",
+  "metaDescription": "Shadowsocks paprastai: šifruotas proksi Didžiajai ugniasienei apeiti, kaip jį rado aktyvusis zondavimas ir kaip nuo 2021 m. Kinija blokuoja visiškai užšifruotą srautą pagal atsitiktinumą.",
+  "excerpt": "Lengvas proksi iš Kinijos, užšifruotas nuo pirmo baito, kad atrodytų kaip niekas. Nuo 2021 m. Didžioji ugniasienė blokuoja srautą būtent už tai.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP arba UDP",
+    "looksLike": "Į atsitiktinius panašūs baitai",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nėra (reikia programėlės)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Ar Shadowsocks yra VPN?",
+      "answer": "Techniškai tai šifruotas proksi, o ne VPN. Dauguma šiuolaikinių klientų prideda visos sistemos režimą, kuris per jį nukreipia visą srautą, todėl kasdieniame naudojime jis elgiasi labai panašiai."
+    },
+    {
+      "question": "Ar Shadowsocks vis dar veikia Kinijoje?",
+      "answer": "Mažiau patikimai nei anksčiau. USENIX Security 2023 paskelbtas tyrimas parodė, kad nuo 2021 m. lapkričio Didžioji ugniasienė blokuoja visiškai užšifruotą srautą, nepanašų į jokį žinomą protokolą, o būtent tokį ir sukuria Shadowsocks."
+    },
+    {
+      "question": "Kaip ugniasienė nusprendžia, kad srautas visiškai užšifruotas?",
+      "answer": "Ji tiria pirmąjį paketą ir jį praleidžia, jei jis atitinka žinomą protokolą, turi pakankamai spausdinamų simbolių arba vidutinis nustatytų bitų skaičius baite yra už 3.4–4.6 intervalo. Likęs srautas gali būti užblokuotas."
+    },
+    {
+      "question": "Kas yra Shadowsocks 2022?",
+      "answer": "2022 m. protokolo redakcija (SIP022) su stipresne apsauga nuo pakartotinio atkūrimo ir atnaujintu darbu su raktais. Ji nekeičia to, kad srautas atrodo atsitiktinis."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD šifrai", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 redakcija", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: 지문을 지운 WireGuard",
+  "metaTitle": "AmneziaWG란? WireGuard와 다른 점",
+  "metaDescription": "AmneziaWG 쉽게 이해하기: 헤더와 패킷 크기를 무작위화하고 더미 패킷을 보내 DPI가 WireGuard의 고정 핸드셰이크와 대조하지 못하게 하는 WireGuard 포크입니다. 한계와 앱을 소개합니다.",
+  "excerpt": "WireGuard의 속도와 암호화는 그대로 두고, 헤더와 패킷 크기를 무작위화하고 더미 패킷을 보내 필터가 고정된 핸드셰이크와 대조하지 못하게 합니다.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "식별할 수 없는 UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "없음(앱 필요)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia 클라이언트 (소스 코드)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "서버와 클라이언트용 사용자 공간 구현" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG와 WireGuard는 무엇이 다른가요?",
+      "answer": "AmneziaWG는 WireGuard의 암호화와 설계를 유지하되 패킷 헤더와 크기를 무작위화하고 핸드셰이크 전에 더미 패킷을 보낼 수 있어서, 트래픽이 더 이상 WireGuard의 고정된 시그니처와 일치하지 않습니다."
+    },
+    {
+      "question": "AmneziaWG는 WireGuard와 호환되나요?",
+      "answer": "난독화를 끈 경우에만 호환됩니다. 사용자 지정 헤더, 크기 접두부, 더미 패킷을 설정하고 나면 양쪽 끝이 모두 같은 설정으로 AmneziaWG를 실행해야 합니다."
+    },
+    {
+      "question": "Jc, S1, H1 설정은 무엇을 의미하나요?",
+      "answer": "Jc는 핸드셰이크 전에 보내는 더미 패킷의 개수이며, 크기는 Jmin과 Jmax 사이입니다. S1~S4는 무작위 접두부를 붙여 패킷 길이를 바꿉니다. H1~H4는 WireGuard의 고정 값을 대체하는 사용자 지정 메시지 유형 값을 설정합니다."
+    },
+    {
+      "question": "AmneziaWG는 러시아에서 작동하나요?",
+      "answer": "일반 WireGuard를 차단하는 데 쓰이는 시그니처를 없애므로 러시아에서 훨씬 견고합니다. UDP로 실행되기 때문에 UDP를 제한하는 네트워크에서는 여전히 영향을 받을 수 있습니다."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG 문서", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go 저장소", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

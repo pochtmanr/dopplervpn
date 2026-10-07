@@ -6,6 +6,8 @@ import { routing } from "@/i18n/routing";
 import { BLOG_LOCALES, isBlogLocale } from "@/i18n/blog-locales";
 import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
 import { HOW_IT_WORKS_LOCALES, isHowItWorksLocale } from "@/i18n/how-it-works-locales";
+import { VPN_PROTOCOLS_LOCALES, isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
+import { ARTICLE_SLUGS as PROTOCOL_ARTICLE_SLUGS } from "@/lib/vpn-protocols";
 
 // Prerender all 44 shards at BUILD time and serve them as static files from
 // the CDN. Googlebot fetches every shard in /sitemap.xml in parallel; when
@@ -40,6 +42,8 @@ const baseUrl = "https://www.dopplervpn.org";
 // sitemap; a lastmod older than the article's own date is a contradictory
 // freshness signal on a brand-new URL.
 const HOW_IT_WORKS_LASTMOD = new Date("2026-09-24");
+// Same rule for /vpn-protocols: keep in step with the meta.json dateModified.
+const VPN_PROTOCOLS_LASTMOD = new Date("2026-10-07");
 
 interface SitemapPost {
   slug: string;
@@ -164,6 +168,9 @@ const staticPages = [
   "/how-it-works/your-device",
   "/how-it-works/vless-reality-tunnel",
   "/how-it-works/edge-network",
+  // Protocol reference (every locale in i18n/vpn-protocols-locales.ts)
+  "/vpn-protocols",
+  ...PROTOCOL_ARTICLE_SLUGS.map((slug) => `/vpn-protocols/${slug}`),
 ];
 
 const toolPages = new Set([
@@ -233,6 +240,10 @@ function isHowItWorksPage(page: string): boolean {
   return page === "/how-it-works" || page.startsWith("/how-it-works/");
 }
 
+function isVpnProtocolsPage(page: string): boolean {
+  return page === "/vpn-protocols" || page.startsWith("/vpn-protocols/");
+}
+
 function priorityFor(page: string): number {
   if (page === "") return 1;
   if (page === "/blog") return 0.9;
@@ -254,6 +265,7 @@ function priorityFor(page: string): number {
   if (toolPages.has(page)) return 0.8;
   if (page === "/security") return 0.7;
   if (isHowItWorksPage(page)) return 0.7;
+  if (isVpnProtocolsPage(page)) return 0.7;
   if (page === "/support" || page === "/about") return 0.6;
   return 0.5;
 }
@@ -296,6 +308,7 @@ export default async function sitemap({
     .filter((page) => page !== "/security" || isSecurityLocale(locale))
     // So do the /how-it-works articles.
     .filter((page) => !isHowItWorksPage(page) || isHowItWorksLocale(locale))
+    .filter((page) => !isVpnProtocolsPage(page) || isVpnProtocolsLocale(locale))
     .map((page) => {
       let alternates;
       if (page === "/blog") {
@@ -305,12 +318,18 @@ export default async function sitemap({
         alternates = buildSubsetAlternates(page, SECURITY_LOCALES);
       } else if (isHowItWorksPage(page)) {
         alternates = buildSubsetAlternates(page, HOW_IT_WORKS_LOCALES);
+      } else if (isVpnProtocolsPage(page)) {
+        alternates = buildSubsetAlternates(page, VPN_PROTOCOLS_LOCALES);
       } else {
         alternates = buildAlternates(page);
       }
       return {
         url: `${baseUrl}/${locale}${page}`,
-        lastModified: isHowItWorksPage(page) ? HOW_IT_WORKS_LASTMOD : undefined,
+        lastModified: isHowItWorksPage(page)
+          ? HOW_IT_WORKS_LASTMOD
+          : isVpnProtocolsPage(page)
+            ? VPN_PROTOCOLS_LASTMOD
+            : undefined,
         changeFrequency: changeFreqFor(page),
         priority: priorityFor(page),
         alternates,

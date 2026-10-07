@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: giấu proxy sau một trang web thật",
+  "metaTitle": "Giao thức Trojan là gì? Cách giấu lưu lượng proxy thành HTTPS",
+  "metaDescription": "Giải thích Trojan: cách giấu lưu lượng proxy trong kết nối TLS thật, chuyển các gói thăm dò sang trang web thật và vì sao cần tên miền riêng là điểm yếu của nó.",
+  "excerpt": "Một kết nối TLS thật đến một trang web thật của bạn, với giá trị băm mật khẩu bên trong. Không có mật khẩu, người truy cập và các gói thăm dò chỉ thấy trang web.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS đến tên miền của chính bạn",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (bản triển khai tham chiếu)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan xác thực người dùng như thế nào?",
+      "answer": "Bên trong kết nối TLS, máy khách gửi giá trị băm SHA-224 của mật khẩu dùng chung, mã hóa dạng hex, dài 56 ký tự. Nếu sai, máy chủ chuyển kết nối sang một máy chủ web dự phòng."
+    },
+    {
+      "question": "Trojan có cần tên miền không?",
+      "answer": "Có. Máy chủ xuất trình chứng chỉ thật cho một tên miền thật, chính điều đó khiến nó trông như một trang HTTPS bình thường. Tên miền đó cũng là thứ cơ quan kiểm duyệt có thể chặn."
+    },
+    {
+      "question": "Trojan hay VLESS?",
+      "answer": "Cả hai đều dựa vào TLS thay vì mã hóa riêng. VLESS với Reality đi xa hơn bằng cách mượn bước bắt tay của một trang web phổ biến có sẵn, nên không có tên miền proxy nào để chặn."
+    },
+    {
+      "question": "Trojan có bị phát hiện được không?",
+      "answer": "Không phải bằng thăm dò đơn giản, vì các gói thăm dò nhận lại trang web dự phòng. Nghiên cứu cho thấy lưu lượng TLS bên trong TLS có thể bị nhận dạng qua thời gian và kích thước gói tin, và các tên miền proxy có thể bị chặn một khi bị xác định."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, kho mã trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: הוותיק הגמיש שגורמי צנזורה יכולים לזהות",
+  "metaTitle": "מהו OpenVPN? איך הוא עובד ולמה ספקים מזהים אותו",
+  "metaDescription": "OpenVPN בפשטות: איך פועלים ערוץ הבקרה של TLS וערוץ הנתונים, למה הוא איטי יותר מ-WireGuard, ולמה מחקר זיהה יותר מ-85% מהזרמים של OpenVPN אצל ספק אמיתי.",
+  "excerpt": "בן שני עשורים, ניתן להגדרה כמעט בלי גבול ונתמך כמעט בכל מקום. חוקרים גם הראו שספק אינטרנט יכול לזהות את רוב תעבורת OpenVPN לפי הצורה שלה.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP או TCP",
+    "looksLike": "מסגור TLS ייחודי של OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "אין (נדרשת אפליקציה)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (לקוח ושרת בקוד פתוח)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "האם OpenVPN עדיין מאובטח?",
+      "answer": "גרסה עדכנית של OpenVPN עם הגדרות תקינות היא מאובטחת. מכיוון שהוא ניתן להגדרה ברמה גבוהה, הסיכון העיקרי הוא הגדרה חלשה, כמו צפנים מיושנים, ולא פגם בפרוטוקול עצמו."
+    },
+    {
+      "question": "למה OpenVPN מזוהה גם ביציאה 443?",
+      "answer": "שימוש ביציאה 443 לא גורם לתעבורה להיראות כמו HTTPS. OpenVPN מסגר את לחיצת היד של TLS בפורמט חבילות משלו, ומחקר שפורסם זיהה יותר מ-85% מהזרמים של OpenVPN ברשת של ספק אינטרנט אמיתי לפי הצורה הזו."
+    },
+    {
+      "question": "OpenVPN או WireGuard?",
+      "answer": "ברשת פתוחה WireGuard בדרך כלל מהיר ופשוט יותר. OpenVPN מנצח בתאימות ויכול לרוץ ב-TCP. אף אחד מהם לא תוכנן להסתתר מגורמי צנזורה."
+    },
+    {
+      "question": "האם OpenVPN עובד ב-UDP או ב-TCP?",
+      "answer": "בכל אחד מהם. UDP הוא ברירת המחדל ובדרך כלל מהיר יותר; TCP עוזר ברשתות שחוסמות UDP, במחיר של חלק מהמהירות."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "מדריך עזר של OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, חסימות OpenVPN ו-WireGuard ברוסיה (issue 274, אוגוסט 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

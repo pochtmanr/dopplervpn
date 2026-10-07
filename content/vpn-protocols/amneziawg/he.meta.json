@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard בלי טביעות האצבע",
+  "metaTitle": "מהו AmneziaWG? במה הוא שונה מ-WireGuard",
+  "metaDescription": "AmneziaWG בפשטות: פיצול של WireGuard שמגריל כותרות וגדלי חבילות ושולח חבילות זבל, כך ש-DPI לא יכול להתאים את לחיצת היד הקבועה של WireGuard. מגבלות ואפליקציות.",
+  "excerpt": "המהירות והקריפטוגרפיה של WireGuard, עם כותרות, גדלי חבילות וחבילות זבל אקראיים, כך שמסננים לא יכולים להתאים את לחיצת היד הקבועה שלו.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP שאי אפשר לזהות",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "אין (נדרשת אפליקציה)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "לקוח Amnezia (קוד מקור)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "מימוש במרחב המשתמש לשרתים וללקוחות" }
+  ],
+  "faq": [
+    {
+      "question": "מה ההבדל בין AmneziaWG ל-WireGuard?",
+      "answer": "AmneziaWG שומר על הקריפטוגרפיה והעיצוב של WireGuard, אבל מגריל כותרות וגדלי חבילות ויכול לשלוח חבילות זבל לפני לחיצת היד, כך שהתעבורה כבר לא תואמת את החתימה הקבועה של WireGuard."
+    },
+    {
+      "question": "האם AmneziaWG תואם ל-WireGuard?",
+      "answer": "רק כשההסוואה כבויה. ברגע שהוגדרו כותרות מותאמות אישית, קידומות גודל או חבילות זבל, שני הצדדים חייבים להריץ AmneziaWG עם הגדרות תואמות."
+    },
+    {
+      "question": "מה המשמעות של ההגדרות Jc, S1 ו-H1?",
+      "answer": "Jc הוא מספר חבילות הזבל שנשלחות לפני לחיצת היד, בגדלים שבין Jmin ל-Jmax. S1 עד S4 מוסיפים קידומות אקראיות כדי לשנות את אורכי החבילות. H1 עד H4 קובעים ערכי סוג הודעה מותאמים אישית שמחליפים את הערכים הקבועים של WireGuard."
+    },
+    {
+      "question": "האם AmneziaWG עובד ברוסיה?",
+      "answer": "הוא מסיר את החתימות שבהן חוסמים WireGuard רגיל, ולכן הוא עמיד שם הרבה יותר. מכיוון שהוא רץ מעל UDP, רשתות שמגבילות UDP עדיין יכולות להשפיע עליו."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, תיעוד AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, מאגר amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

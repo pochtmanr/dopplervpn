@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: আসল ওয়েবসাইটের আড়ালে প্রক্সি লুকানো",
+  "metaTitle": "Trojan প্রোটোকল কী? প্রক্সি ট্র্যাফিক HTTPS হিসেবে লুকায় কীভাবে",
+  "metaDescription": "Trojan ব্যাখ্যা: কীভাবে এটি প্রক্সি ট্র্যাফিক আসল TLS সংযোগের ভিতরে লুকায়, প্রোবের জন্য আসল ওয়েবসাইটে ফিরে যায়, এবং নিজের ডোমেইন লাগাই এর দুর্বল জায়গা কেন।",
+  "excerpt": "আপনার নিজের ওয়েবসাইটে একটি আসল TLS সংযোগ, ভিতরে একটি পাসওয়ার্ড হ্যাশ। পাসওয়ার্ড ছাড়া দর্শক ও প্রোব শুধু ওয়েবসাইট দেখে।",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "নিজের ডোমেইনে HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "নেই (অ্যাপ লাগে)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (রেফারেন্স ইমপ্লিমেন্টেশন)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan ব্যবহারকারীকে কীভাবে অথেন্টিকেট করে?",
+      "answer": "TLS সংযোগের ভিতরে ক্লায়েন্ট একটি শেয়ার করা পাসওয়ার্ডের হেক্স-এনকোডেড SHA-224 হ্যাশ পাঠায়, 56 অক্ষর লম্বা। ভুল হলে সার্ভার সংযোগ একটি ফলব্যাক ওয়েব সার্ভারে পাঠায়।"
+    },
+    {
+      "question": "Trojan-এর কি ডোমেইন লাগে?",
+      "answer": "হ্যাঁ। সার্ভার একটি আসল ডোমেইনের আসল সার্টিফিকেট দেখায়, যা একে সাধারণ HTTPS সাইটের মতো দেখায়। সেই ডোমেইনই সেন্সর ব্লক করতে পারে।"
+    },
+    {
+      "question": "Trojan না VLESS?",
+      "answer": "দুটোই নিজস্ব এনক্রিপশনের বদলে TLS-এর উপর নির্ভর করে। Reality-সহ VLESS আরও এগোয় একটি বিদ্যমান জনপ্রিয় ওয়েবসাইটের হ্যান্ডশেক ধার করে, তাই ব্লক করার মতো কোনো প্রক্সি ডোমেইন থাকে না।"
+    },
+    {
+      "question": "Trojan কি শনাক্ত করা যায়?",
+      "answer": "সাধারণ প্রোবিংয়ে নয়, কারণ প্রোব ফলব্যাক ওয়েবসাইট পায়। গবেষণা দেখিয়েছে TLS-এর ভিতরের TLS ট্র্যাফিক টাইমিং ও প্যাকেটের আকার দিয়ে ফিঙ্গারপ্রিন্ট করা যায়, এবং প্রক্সি ডোমেইন শনাক্ত হলে ব্লক করা যায়।"
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan রিপোজিটরি", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

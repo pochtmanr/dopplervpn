@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: lão làng linh hoạt mà cơ quan kiểm duyệt có thể nhận dạng",
+  "metaTitle": "OpenVPN là gì? Cách hoạt động và vì sao ISP phát hiện được",
+  "metaDescription": "Giải thích OpenVPN: kênh điều khiển TLS và kênh dữ liệu hoạt động ra sao, vì sao chậm hơn WireGuard và vì sao nghiên cứu nhận ra hơn 85% luồng OpenVPN trên một ISP thật.",
+  "excerpt": "Hai thập kỷ tuổi, tùy biến vô hạn và được hỗ trợ gần như ở mọi nơi. Các nhà nghiên cứu cũng cho thấy một ISP có thể nhận ra phần lớn lưu lượng OpenVPN qua hình dạng của nó.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP hoặc TCP",
+    "looksLike": "Khung TLS riêng của OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (máy khách và máy chủ mã nguồn mở)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN có còn an toàn không?",
+      "answer": "Một bản OpenVPN hiện hành với cấu hình hợp lý là an toàn. Vì nó rất dễ tùy biến, rủi ro chính là cấu hình yếu, chẳng hạn bộ mã hóa lỗi thời, chứ không phải lỗ hổng trong giao thức."
+    },
+    {
+      "question": "Vì sao OpenVPN vẫn bị phát hiện ngay cả trên cổng 443?",
+      "answer": "Dùng cổng 443 không làm lưu lượng trông giống HTTPS. OpenVPN đóng khung bước bắt tay TLS theo định dạng gói tin riêng, và nghiên cứu đã công bố nhận ra hơn 85% luồng OpenVPN trên mạng của một ISP thật nhờ hình dạng đó."
+    },
+    {
+      "question": "OpenVPN hay WireGuard?",
+      "answer": "Trên mạng mở, WireGuard thường nhanh hơn và đơn giản hơn. OpenVPN thắng về tính tương thích và có thể chạy qua TCP. Cả hai đều không được thiết kế để lẩn tránh cơ quan kiểm duyệt."
+    },
+    {
+      "question": "OpenVPN dùng UDP hay TCP?",
+      "answer": "Dùng được cả hai. UDP là mặc định và thường nhanh hơn; TCP hữu ích trên các mạng chặn UDP, với cái giá là mất một phần tốc độ."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Sách tham khảo OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, chặn OpenVPN và WireGuard ở Nga (issue 274, tháng 8 năm 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

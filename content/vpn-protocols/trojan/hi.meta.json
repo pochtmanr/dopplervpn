@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: प्रॉक्सी को असली वेबसाइट के पीछे छिपाना",
+  "metaTitle": "Trojan प्रोटोकॉल क्या है? यह प्रॉक्सी ट्रैफ़िक को HTTPS के रूप में कैसे छिपाता है",
+  "metaDescription": "Trojan की सरल व्याख्या: यह प्रॉक्सी ट्रैफ़िक को असली TLS कनेक्शन के अंदर कैसे छिपाता है, प्रोब के लिए असली वेबसाइट पर कैसे लौटता है, और अपना डोमेन ज़रूरी होना इसकी कमज़ोर कड़ी क्यों है।",
+  "excerpt": "आपकी अपनी किसी असली वेबसाइट से असली TLS कनेक्शन, जिसके अंदर पासवर्ड का हैश होता है। पासवर्ड के बिना आगंतुकों और प्रोब को बस वेबसाइट दिखती है।",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "आपके अपने डोमेन पर HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "कोई नहीं (ऐप ज़रूरी)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (संदर्भ इम्प्लीमेंटेशन)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan यूज़र्स को कैसे प्रमाणित करता है?",
+      "answer": "TLS कनेक्शन के अंदर, क्लाइंट साझा पासवर्ड का हेक्स-एन्कोडेड SHA-224 हैश भेजता है, जो 56 अक्षरों का होता है। अगर यह गलत हो, तो सर्वर कनेक्शन को फ़ॉलबैक वेब सर्वर को भेज देता है।"
+    },
+    {
+      "question": "क्या Trojan को डोमेन चाहिए?",
+      "answer": "हाँ। सर्वर किसी असली डोमेन का असली सर्टिफ़िकेट दिखाता है, जिसकी वजह से वह सामान्य HTTPS साइट जैसा दिखता है। वही डोमेन वह चीज़ भी है जिसे सेंसर ब्लॉक कर सकता है।"
+    },
+    {
+      "question": "Trojan या VLESS?",
+      "answer": "दोनों अपने एन्क्रिप्शन के बजाय TLS पर निर्भर हैं। Reality के साथ VLESS एक कदम आगे जाकर किसी मौजूदा लोकप्रिय वेबसाइट का हैंडशेक उधार लेता है, इसलिए ब्लॉक करने के लिए कोई प्रॉक्सी डोमेन नहीं होता।"
+    },
+    {
+      "question": "क्या Trojan पहचाना जा सकता है?",
+      "answer": "सरल प्रोबिंग से नहीं, क्योंकि प्रोब को फ़ॉलबैक वेबसाइट मिलती है। शोध ने दिखाया है कि TLS-के-अंदर-TLS ट्रैफ़िक की समय और पैकेट आकार से फ़िंगरप्रिंटिंग की जा सकती है, और पहचान लिए जाने पर प्रॉक्सी डोमेन ब्लॉक किए जा सकते हैं।"
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan रिपॉज़िटरी", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

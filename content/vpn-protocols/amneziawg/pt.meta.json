@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: o WireGuard sem as impressões digitais",
+  "metaTitle": "O que é o AmneziaWG? Como ele difere do WireGuard",
+  "metaDescription": "O AmneziaWG explicado: um fork do WireGuard que aleatoriza cabeçalhos e tamanhos de pacote e envia pacotes de lixo para que o DPI não reconheça o handshake fixo do WireGuard. Limites e apps.",
+  "excerpt": "A velocidade e a criptografia do WireGuard, com cabeçalhos, tamanhos de pacote e pacotes de lixo aleatorizados para que os filtros não reconheçam seu handshake fixo.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP não reconhecível",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nenhum (requer aplicativo)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Cliente Amnezia (código-fonte)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementação em espaço de usuário para servidores e clientes" }
+  ],
+  "faq": [
+    {
+      "question": "Qual é a diferença entre o AmneziaWG e o WireGuard?",
+      "answer": "O AmneziaWG mantém a criptografia e o projeto do WireGuard, mas aleatoriza os cabeçalhos e os tamanhos dos pacotes e pode enviar pacotes de lixo antes do handshake, então o tráfego deixa de corresponder à assinatura fixa do WireGuard."
+    },
+    {
+      "question": "O AmneziaWG é compatível com o WireGuard?",
+      "answer": "Somente com a ofuscação desativada. Depois que os cabeçalhos personalizados, os prefixos de tamanho ou os pacotes de lixo são configurados, as duas pontas precisam executar o AmneziaWG com configurações idênticas."
+    },
+    {
+      "question": "O que significam as configurações Jc, S1 e H1?",
+      "answer": "Jc é o número de pacotes de lixo enviados antes do handshake, com tamanhos entre Jmin e Jmax. S1 a S4 adicionam prefixos aleatórios para alterar o comprimento dos pacotes. H1 a H4 definem valores personalizados de tipo de mensagem que substituem os valores fixos do WireGuard."
+    },
+    {
+      "question": "O AmneziaWG funciona na Rússia?",
+      "answer": "Ele elimina as assinaturas usadas para bloquear o WireGuard puro, o que o torna muito mais resistente por lá. Como funciona sobre UDP, redes que restringem o UDP ainda podem afetá-lo."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, documentação do AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repositório amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

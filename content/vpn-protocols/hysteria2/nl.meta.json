@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: een QUIC-proxy gebouwd voor slechte netwerken",
+  "metaTitle": "Wat is Hysteria 2? Het QUIC-proxyprotocol uitgelegd",
+  "metaDescription": "Hysteria 2 uitgelegd: een QUIC-proxy die voor probes een echte HTTP/3-webserver is, snel blijft op slechte netwerken, en faalt waar UDP of QUIC geblokkeerd is.",
+  "excerpt": "Een proxy op QUIC, het transport achter HTTP/3. Snel op verliesrijke verbindingen, en een echte HTTP/3-webserver voor wie het wachtwoord niet heeft. UDP is nodig om erdoor te komen.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "Een HTTP/3-webserver",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Geen (app nodig)"
+  },
+  "apps": [
+    { "name": "Hysteria (officiële client)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Platformonafhankelijke kern die door meerdere apps wordt gebruikt" }
+  ],
+  "faq": [
+    {
+      "question": "Is Hysteria 2 een VPN?",
+      "answer": "Het is een proxyprotocol, maar clients zoals Hiddify en NekoBox kunnen al het verkeer van een apparaat erdoorheen sturen, dus in de praktijk kun je het als een VPN gebruiken."
+    },
+    {
+      "question": "Waarom is Hysteria 2 snel op slechte verbindingen?",
+      "answer": "Het draait op QUIC over UDP, dat van pakketverlies herstelt zonder elke stream te laten stilvallen, en het kan eigen congestiecontrole gebruiken die op instabiele verbindingen is gericht."
+    },
+    {
+      "question": "Kan Hysteria 2 worden geblokkeerd?",
+      "answer": "Probes zien een echte HTTP/3-server, dus het weerstaat actieve probing. Maar een censor kan UDP of QUIC breed afknijpen of blokkeren, en dan kan Hysteria 2 niet verbinden."
+    },
+    {
+      "question": "Hysteria 2 of VLESS-Reality?",
+      "answer": "Hysteria 2 is vaak sneller op verliesrijke netwerken die UDP toelaten. VLESS-Reality draait over TCP en blijft werken waar UDP wordt gefilterd. Veel mensen houden beide aan."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, protocolspecificatie van Hysteria 2", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, repository hysteria", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

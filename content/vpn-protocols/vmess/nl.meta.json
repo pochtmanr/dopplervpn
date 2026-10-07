@@ -1,0 +1,47 @@
+{
+  "title": "VMess: het oorspronkelijke protocol van V2Ray",
+  "metaTitle": "Wat is VMess? Hoe V2Ray werkt, en VMess versus VLESS",
+  "metaDescription": "VMess uitgelegd: het versleutelde proxyprotocol van V2Ray, authenticatie op tijdstempel, waarom het meestal in WebSocket en TLS zit, en hoe VLESS en Trojan het vervingen.",
+  "excerpt": "Het eerste protocol van het V2Ray-project: versleutelde headers, een UUID per gebruiker, en meestal een wikkel van WebSocket over TLS om op webverkeer te lijken.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, vaak WebSocket + TLS",
+    "looksLike": "Willekeurige bytes, of HTTPS als het is ingepakt",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Geen (app nodig)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Wat is het verschil tussen VMess en VLESS?",
+      "answer": "VMess versleutelt zijn eigen headers en data. VLESS houdt de identiteit op basis van een UUID, laat de eigen versleuteling vallen en leunt op de TLS-laag eronder, zodat verkeer niet twee keer wordt versleuteld."
+    },
+    {
+      "question": "Waarom verbindt VMess niet als mijn klok fout staat?",
+      "answer": "De authenticatie van VMess bevat een tijdstempel, dus de server wijst verzoeken af wanneer de klok van de client te ver van de zijne af staat. De klok van het apparaat op automatisch zetten lost het meestal op."
+    },
+    {
+      "question": "Is VMess veilig?",
+      "answer": "Met AEAD-authenticatie van de header wel. De oudere modus op basis van MD5 kon de integriteit van de header niet garanderen, en de officiële documentatie raadt die af."
+    },
+    {
+      "question": "Is VMess te detecteren?",
+      "answer": "Kale VMess lijkt op willekeurige bytes, wat sommige firewalls blokkeren zodra ze het zien. Gewikkeld in WebSocket of gRPC over TLS lijkt het op HTTPS naar een domein, en dat is veel moeilijker eruit te pikken."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, documentatie van het VMess-protocol", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repository v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specificatie van het VLESS-protocol", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

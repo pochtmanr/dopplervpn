@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: ফিঙ্গারপ্রিন্ট সরানো WireGuard",
+  "metaTitle": "AmneziaWG কী? WireGuard থেকে এটি কীভাবে আলাদা হয়",
+  "metaDescription": "AmneziaWG ব্যাখ্যা: WireGuard-এর একটি ফর্ক যা হেডার ও প্যাকেটের আকার এলোমেলো করে এবং জাঙ্ক প্যাকেট পাঠায়, যাতে DPI WireGuard-এর স্থির হ্যান্ডশেক মেলাতে না পারে। সীমা ও অ্যাপ।",
+  "excerpt": "WireGuard-এর গতি ও ক্রিপ্টোগ্রাফি, এলোমেলো হেডার, প্যাকেটের আকার ও জাঙ্ক প্যাকেটসহ, যাতে ফিল্টার এর স্থির হ্যান্ডশেক মেলাতে না পারে।",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "চেনা যায় না এমন UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "নেই (অ্যাপ লাগে)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia ক্লায়েন্ট (সোর্স কোড)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "সার্ভার ও ক্লায়েন্টের জন্য ইউজারস্পেস ইমপ্লিমেন্টেশন" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG ও WireGuard-এর পার্থক্য কী?",
+      "answer": "AmneziaWG WireGuard-এর ক্রিপ্টোগ্রাফি ও নকশা রাখে কিন্তু প্যাকেট হেডার ও আকার এলোমেলো করে এবং হ্যান্ডশেকের আগে জাঙ্ক প্যাকেট পাঠাতে পারে, তাই ট্র্যাফিক আর WireGuard-এর স্থির সিগনেচারের সঙ্গে মেলে না।"
+    },
+    {
+      "question": "AmneziaWG কি WireGuard-এর সঙ্গে সামঞ্জস্যপূর্ণ?",
+      "answer": "শুধু অবফাস্কেশন বন্ধ থাকলে। কাস্টম হেডার, আকারের প্রিফিক্স বা জাঙ্ক প্যাকেট কনফিগার হলে দুই প্রান্তকেই মিলে যাওয়া সেটিংসহ AmneziaWG চালাতে হবে।"
+    },
+    {
+      "question": "Jc, S1 ও H1 সেটিংয়ের মানে কী?",
+      "answer": "Jc হলো হ্যান্ডশেকের আগে পাঠানো জাঙ্ক প্যাকেটের সংখ্যা, আকার Jmin ও Jmax-এর মধ্যে। S1 থেকে S4 এলোমেলো প্রিফিক্স যোগ করে প্যাকেটের দৈর্ঘ্য বদলায়। H1 থেকে H4 কাস্টম মেসেজ টাইপ মান নির্ধারণ করে, যা WireGuard-এর স্থির মানের জায়গা নেয়।"
+    },
+    {
+      "question": "রাশিয়ায় AmneziaWG কি কাজ করে?",
+      "answer": "এটি সাধারণ WireGuard ব্লক করতে ব্যবহৃত সিগনেচার সরিয়ে দেয়, যা সেখানে একে অনেক বেশি সহনশীল করে। এটি UDP-তে চলে বলে, যেসব নেটওয়ার্ক UDP সীমাবদ্ধ করে সেগুলো এখনও একে ছুঁয়ে যেতে পারে।"
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG ডকুমেন্টেশন", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go রিপোজিটরি", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

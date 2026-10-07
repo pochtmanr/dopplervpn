@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: रैंडम बाइट, और यह काम करना क्यों बंद हो गया",
+  "metaTitle": "Shadowsocks क्या है? यह कैसे काम करता है और GFW इसे कैसे पहचानता है",
+  "metaDescription": "Shadowsocks की सरल व्याख्या: ग्रेट फ़ायरवॉल को हराने के लिए बना एन्क्रिप्टेड प्रॉक्सी, एक्टिव प्रोबिंग ने इसे कैसे पकड़ा, और 2021 से चीन पूरी तरह एन्क्रिप्टेड ट्रैफ़िक को उसकी रैंडमनेस से कैसे ब्लॉक करता है।",
+  "excerpt": "चीन में जन्मा हल्का प्रॉक्सी, पहले बाइट से एन्क्रिप्टेड ताकि किसी चीज़ जैसा न दिखे। 2021 से ग्रेट फ़ायरवॉल ट्रैफ़िक को इसलिए ब्लॉक करता है कि वह किसी चीज़ जैसा नहीं दिखता।",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP या UDP",
+    "looksLike": "रैंडम दिखने वाले बाइट",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "कोई नहीं (ऐप ज़रूरी)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "क्या Shadowsocks एक VPN है?",
+      "answer": "तकनीकी रूप से यह एक एन्क्रिप्टेड प्रॉक्सी है, VPN नहीं। ज़्यादातर आधुनिक क्लाइंट एक सिस्टम-व्यापी मोड जोड़ते हैं जो सारा ट्रैफ़िक इसके ज़रिए भेजता है, इसलिए रोज़ के इस्तेमाल में यह काफ़ी हद तक VPN जैसा ही काम करता है।"
+    },
+    {
+      "question": "क्या Shadowsocks अब भी चीन में काम करता है?",
+      "answer": "पहले से कम भरोसेमंद ढंग से। USENIX Security 2023 में प्रकाशित शोध ने दिखाया कि नवंबर 2021 से ग्रेट फ़ायरवॉल उस पूरी तरह एन्क्रिप्टेड ट्रैफ़िक को ब्लॉक करता है जो किसी ज्ञात प्रोटोकॉल जैसा नहीं दिखता, और Shadowsocks ठीक यही पैदा करता है।"
+    },
+    {
+      "question": "फ़ायरवॉल कैसे तय करता है कि ट्रैफ़िक पूरी तरह एन्क्रिप्टेड है?",
+      "answer": "यह पहला पैकेट जाँचता है और उसे छूट देता है अगर वह किसी ज्ञात प्रोटोकॉल से मेल खाता है, उसमें पर्याप्त प्रिंट होने योग्य अक्षर हैं, या प्रति बाइट सेट बिट की औसत 3.4 से 4.6 की सीमा के बाहर है। बाकी ट्रैफ़िक ब्लॉक किया जा सकता है।"
+    },
+    {
+      "question": "Shadowsocks 2022 क्या है?",
+      "answer": "प्रोटोकॉल का 2022 का संशोधन (SIP022), जिसमें रीप्ले सुरक्षा ज़्यादा मज़बूत है और की हैंडलिंग अपडेट की गई है। यह इस तथ्य को नहीं बदलता कि ट्रैफ़िक रैंडम दिखता है।"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD सिफ़र", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 संस्करण", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "VMess：V2Ray 最初的協定",
+  "metaTitle": "什麼是 VMess？V2Ray 協定的運作方式，以及 VMess 與 VLESS 的差異",
+  "metaDescription": "VMess 解析：V2Ray 的加密代理協定、以時間戳記為基礎的驗證、為何通常要包在 WebSocket 和 TLS 中，以及 VLESS 和 Trojan 如何取代它。",
+  "excerpt": "V2Ray 專案的第一個協定：加密標頭、每位使用者一個 UUID，通常再包上 TLS 之上的 WebSocket，讓流量看起來像網頁流量。",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP，常搭配 WebSocket + TLS",
+    "looksLike": "隨機位元組；包裝後則像 HTTPS",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "無（需要應用程式）"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess 和 VLESS 有什麼差別？",
+      "answer": "VMess 會加密自己的標頭和資料。VLESS 保留以 UUID 為基礎的身分，但捨棄自己的加密，改為依賴底層的 TLS 層，因此避免了流量被加密兩次。"
+    },
+    {
+      "question": "為什麼時鐘不準時 VMess 會連不上？",
+      "answer": "VMess 的驗證包含時間戳記，所以當客戶端的時鐘與伺服器相差過大時，伺服器會拒絕請求。把裝置時鐘設為自動通常就能解決。"
+    },
+    {
+      "question": "VMess 安全嗎？",
+      "answer": "使用 AEAD 標頭驗證時是安全的。較舊的 MD5 模式無法保證標頭的完整性，官方文件也警告不要使用。"
+    },
+    {
+      "question": "VMess 會被偵測到嗎？",
+      "answer": "原始的 VMess 看起來像隨機位元組，部分防火牆會一看到就封鎖。若包在 TLS 之上的 WebSocket 或 gRPC 中，它看起來就像連往某個網域的 HTTPS，要將它挑出來困難得多。"
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly，VMess 協定文件", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly，v2ray-core 儲存庫", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X，VLESS 協定規格", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

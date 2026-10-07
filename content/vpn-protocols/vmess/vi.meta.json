@@ -1,0 +1,47 @@
+{
+  "title": "VMess: giao thức gốc của V2Ray",
+  "metaTitle": "VMess là gì? Cách giao thức V2Ray hoạt động, VMess và VLESS",
+  "metaDescription": "Giải thích VMess: giao thức proxy mã hóa của V2Ray, xác thực dựa trên dấu thời gian, vì sao thường được bọc trong WebSocket và TLS, và cách VLESS cùng Trojan thay thế nó.",
+  "excerpt": "Giao thức đầu tiên của dự án V2Ray: tiêu đề được mã hóa, mỗi người dùng một UUID, và thường có lớp bọc WebSocket qua TLS để trông như lưu lượng web.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, thường là WebSocket + TLS",
+    "looksLike": "Byte ngẫu nhiên, hoặc HTTPS khi được bọc",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess khác VLESS ở điểm nào?",
+      "answer": "VMess mã hóa tiêu đề và dữ liệu của chính nó. VLESS giữ danh tính dựa trên UUID nhưng bỏ phần mã hóa riêng và dựa vào lớp TLS bên dưới, nhờ đó tránh phải mã hóa lưu lượng hai lần."
+    },
+    {
+      "question": "Vì sao VMess không kết nối được khi đồng hồ của tôi sai?",
+      "answer": "Xác thực VMess có dấu thời gian, nên máy chủ từ chối yêu cầu khi đồng hồ của máy khách lệch quá xa đồng hồ của nó. Đặt đồng hồ thiết bị sang chế độ tự động thường khắc phục được."
+    },
+    {
+      "question": "VMess có an toàn không?",
+      "answer": "Với xác thực tiêu đề AEAD thì có. Chế độ cũ dựa trên MD5 không đảm bảo được tính toàn vẹn của tiêu đề, và tài liệu chính thức khuyến cáo không dùng."
+    },
+    {
+      "question": "VMess có bị phát hiện được không?",
+      "answer": "VMess thuần trông như các byte ngẫu nhiên, thứ mà một số tường lửa chặn ngay khi thấy. Khi được bọc trong WebSocket hoặc gRPC qua TLS, nó trông như HTTPS đến một tên miền, khó nhận diện riêng ra hơn nhiều."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, tài liệu giao thức VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, kho mã v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, đặc tả giao thức VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

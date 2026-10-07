@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: लचीला अनुभवी प्रोटोकॉल, जिसे सेंसर पहचान सकते हैं",
+  "metaTitle": "OpenVPN क्या है? यह कैसे काम करता है और ISP इसे कैसे पहचानते हैं",
+  "metaDescription": "OpenVPN की सरल व्याख्या: इसका TLS कंट्रोल चैनल और डेटा चैनल कैसे काम करते हैं, यह WireGuard से धीमा क्यों है, और शोध ने एक असली ISP पर 85% से अधिक OpenVPN फ़्लो की पहचान कैसे की।",
+  "excerpt": "दो दशक पुराना, अनंत रूप से कॉन्फ़िगर करने योग्य और लगभग हर जगह समर्थित। शोधकर्ताओं ने यह भी दिखाया कि ISP ज़्यादातर OpenVPN ट्रैफ़िक को उसके आकार से पहचान सकता है।",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP या TCP",
+    "looksLike": "OpenVPN की अपनी TLS फ़्रेमिंग",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "कोई नहीं (ऐप ज़रूरी)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (ओपन-सोर्स क्लाइंट और सर्वर)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "क्या OpenVPN अब भी सुरक्षित है?",
+      "answer": "सही कॉन्फ़िगरेशन वाला OpenVPN का मौजूदा रिलीज़ सुरक्षित है। क्योंकि यह बहुत कॉन्फ़िगर करने योग्य है, मुख्य जोखिम प्रोटोकॉल की खामी नहीं बल्कि कमज़ोर सेटअप है, जैसे पुराने सिफ़र।"
+    },
+    {
+      "question": "OpenVPN पोर्ट 443 पर भी क्यों पकड़ा जाता है?",
+      "answer": "पोर्ट 443 इस्तेमाल करने से ट्रैफ़िक HTTPS जैसा नहीं दिखने लगता। OpenVPN अपने TLS हैंडशेक को अपने पैकेट फ़ॉर्मैट में फ़्रेम करता है, और प्रकाशित शोध ने इसी आकार से एक असली ISP नेटवर्क पर 85% से अधिक OpenVPN फ़्लो की पहचान की।"
+    },
+    {
+      "question": "OpenVPN या WireGuard?",
+      "answer": "खुले नेटवर्क पर WireGuard आमतौर पर ज़्यादा तेज़ और सरल है। संगतता में OpenVPN आगे है और यह TCP पर चल सकता है। दोनों में से कोई भी सेंसर से छिपने के लिए नहीं बना है।"
+    },
+    {
+      "question": "क्या OpenVPN UDP है या TCP?",
+      "answer": "दोनों में से कोई भी। UDP डिफ़ॉल्ट है और आमतौर पर ज़्यादा तेज़ होता है; जो नेटवर्क UDP ब्लॉक करते हैं वहाँ TCP मदद करता है, कुछ गति की कीमत पर।"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 संदर्भ मैनुअल", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, रूस में OpenVPN और WireGuard की ब्लॉकिंग (issue 274, अगस्त 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

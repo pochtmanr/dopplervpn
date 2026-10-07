@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: Veteran Fleksibel yang Boleh Dicap Jari oleh Penapis",
+  "metaTitle": "Apakah OpenVPN? Cara Ia Berfungsi dan Sebab ISP Dapat Mengesannya",
+  "metaDescription": "OpenVPN diterangkan: cara saluran kawalan TLS dan saluran datanya berfungsi, sebab ia lebih perlahan daripada WireGuard, dan sebab kajian mengenal pasti lebih 85% aliran OpenVPN pada ISP sebenar.",
+  "excerpt": "Berusia dua dekad, boleh dikonfigurasikan tanpa had dan disokong hampir di mana-mana. Penyelidik turut menunjukkan bahawa ISP dapat mengenal pasti kebanyakan trafik OpenVPN melalui bentuknya.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP atau TCP",
+    "looksLike": "Rangka TLS tersendiri OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Tiada (aplikasi diperlukan)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (klien dan pelayan sumber terbuka)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Adakah OpenVPN masih selamat?",
+      "answer": "Keluaran OpenVPN terkini dengan konfigurasi yang baik adalah selamat. Oleh kerana ia sangat boleh dikonfigurasikan, risiko utamanya ialah persediaan yang lemah, seperti sifer yang ketinggalan zaman, dan bukannya kelemahan dalam protokol."
+    },
+    {
+      "question": "Mengapakah OpenVPN dikesan walaupun pada port 443?",
+      "answer": "Menggunakan port 443 tidak menjadikan trafik kelihatan seperti HTTPS. OpenVPN membingkaikan jabat tangan TLS-nya dalam format paketnya sendiri, dan kajian yang diterbitkan mengenal pasti lebih 85% aliran OpenVPN pada rangkaian ISP sebenar berdasarkan bentuk itu."
+    },
+    {
+      "question": "OpenVPN atau WireGuard?",
+      "answer": "Pada rangkaian terbuka, WireGuard biasanya lebih pantas dan lebih ringkas. OpenVPN unggul dari segi keserasian dan boleh berjalan melalui TCP. Kedua-duanya tidak direka untuk bersembunyi daripada penapis."
+    },
+    {
+      "question": "Adakah OpenVPN menggunakan UDP atau TCP?",
+      "answer": "Kedua-duanya boleh. UDP ialah lalai dan biasanya lebih pantas; TCP membantu pada rangkaian yang menyekat UDP, dengan sedikit kos pada kelajuan."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Manual rujukan OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, penyekatan OpenVPN dan WireGuard di Rusia (isu 274, Ogos 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

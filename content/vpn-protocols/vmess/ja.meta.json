@@ -1,0 +1,47 @@
+{
+  "title": "VMess：V2Rayの最初のプロトコル",
+  "metaTitle": "VMessとは？V2Rayプロトコルの仕組みとVMess・VLESSの違い",
+  "metaDescription": "VMessを解説：V2Rayの暗号化プロキシプロトコル、タイムスタンプに基づく認証、WebSocketとTLSで包んで使われる理由、VLESSとTrojanに置き換えられた経緯を紹介します。",
+  "excerpt": "V2Rayプロジェクト最初のプロトコル。暗号化されたヘッダーとユーザーごとのUUIDを持ち、通常はTLS上のWebSocketで包んでWebトラフィックに見せかけます。",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP、多くはWebSocket + TLS",
+    "looksLike": "ランダムなバイト列、包んだ場合はHTTPS",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "なし（アプリが必要）"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMessとVLESSの違いは何ですか？",
+      "answer": "VMessはヘッダーとデータを独自に暗号化します。VLESSはUUIDに基づく識別方法を残しつつ、独自の暗号化をやめて下層のTLS層に任せるため、トラフィックを二重に暗号化せずに済みます。"
+    },
+    {
+      "question": "時計がずれているとVMessがつながらないのはなぜですか？",
+      "answer": "VMessの認証にはタイムスタンプが含まれるため、クライアントの時計がサーバーの時計から大きくずれていると、サーバーはリクエストを拒否します。デバイスの時刻を自動設定にすれば、たいてい解決します。"
+    },
+    {
+      "question": "VMessは安全ですか？",
+      "answer": "AEADによるヘッダー認証を使えば安全です。古いMD5ベースの方式ではヘッダーの完全性を保証できず、公式ドキュメントでも使わないよう警告されています。"
+    },
+    {
+      "question": "VMessは検出されますか？",
+      "answer": "VMessをそのまま使うとランダムなバイト列に見え、一部のファイアウォールはそれだけでブロックします。TLS上のWebSocketやgRPCで包めば、ドメインへのHTTPSに見えるため、特定ははるかに難しくなります。"
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly、VMessプロトコルのドキュメント", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly、v2ray-coreリポジトリ", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X、VLESSプロトコル仕様", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

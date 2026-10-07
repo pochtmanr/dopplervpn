@@ -1,0 +1,36 @@
+{
+  "title": "De ce am ales VLESS-Reality în loc de WireGuard, OpenVPN și Shadowsocks",
+  "metaTitle": "De ce VLESS-Reality la Doppler în loc de WireGuard sau OpenVPN",
+  "metaDescription": "Cum am ales protocolul pentru rețele care blochează VPN-uri: amprentă fixă, sonde și liste de blocare, de ce WireGuard, OpenVPN, Shadowsocks și Trojan nu au fost de ajuns și ce am acceptat.",
+  "excerpt": "Trei întrebări au decis: are protocolul o amprentă fixă, ce văd sondele și există ceva de blocat după nume? Iată cum a răspuns fiecare opțiune și la ce am renunțat.",
+  "navLabel": "De ce am ales VLESS",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "faq": [
+    {
+      "question": "De ce nu folosește Doppler WireGuard?",
+      "answer": "Handshake-ul de mărime fixă al WireGuard este ușor de recunoscut pentru filtre, iar în Rusia s-a raportat că operatorii îl taie. Doppler este făcut pentru rețele de felul acesta, așa că folosim VLESS-Reality, care arată ca TLS obișnuit către un site real."
+    },
+    {
+      "question": "Este VLESS-Reality mai lent decât WireGuard?",
+      "answer": "Pe o conexiune curată, diferența este mică. Pe rețele cu pierderi, transportul UDP al WireGuard poate fi mai rapid. Avantajul VLESS-Reality este că continuă să funcționeze acolo unde WireGuard este blocat."
+    },
+    {
+      "question": "Poate fi blocat VLESS-Reality?",
+      "answer": "Da, nu este o garanție. Cercetarea a arătat că TLS în interiorul TLS poate fi amprentat, iar unii ISP din Rusia au fost raportați tăind conexiunile Reality în noiembrie 2025. Ajustăm setările serverelor pe măsură ce filtrarea se schimbă."
+    },
+    {
+      "question": "Ce platforme suportă Doppler?",
+      "answer": "Doppler are aplicații pentru iOS, Android, macOS și Windows."
+    }
+  ],
+  "sources": [
+    { "label": "net4people, blocarea OpenVPN și WireGuard în Rusia (issue 274, august 2023)", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, raportări de blocare VLESS + Reality + Vision în Rusia (issue 546, noiembrie 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

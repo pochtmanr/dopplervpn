@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray algne protokoll",
+  "metaTitle": "Mis on VMess? Kuidas V2Ray protokoll töötab ja VMess vs VLESS",
+  "metaDescription": "VMess selgitatuna: V2Ray krüpteeritud puhverprotokoll, ajatempliga autentimine, miks see mähitakse WebSocketi ja TLS-i ning kuidas VLESS ja Trojan selle asendasid.",
+  "excerpt": "V2Ray projekti esimene protokoll: krüpteeritud päised, UUID igale kasutajale ja tavaliselt WebSocketi-ümbris TLS-i peal, et näha välja nagu veebiliiklus.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, sageli WebSocket + TLS",
+    "looksLike": "Juhuslikud baidid või HTTPS ümbrises",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Puudub (vaja on rakendust)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Mis vahe on VMessil ja VLESSil?",
+      "answer": "VMess krüpteerib oma päised ja andmed. VLESS säilitab UUID-põhise identiteedi, kuid loobub enda krüpteerimisest ja toetub all olevale TLS-kihile, mis väldib liikluse kaks korda krüpteerimist."
+    },
+    {
+      "question": "Miks VMess ei ühendu, kui kell on vale?",
+      "answer": "VMessi autentimine sisaldab ajatemplit, nii et server lükkab päringud tagasi, kui kliendi kell on tema enda kellast liiga kaugel. Seadme kella automaatseks seadmine tavaliselt parandab selle."
+    },
+    {
+      "question": "Kas VMess on turvaline?",
+      "answer": "AEAD-päise autentimisega jah. Vanem MD5-põhine režiim ei suutnud päise terviklust tagada ja ametlik dokumentatsioon hoiatab selle eest."
+    },
+    {
+      "question": "Kas VMessi saab tuvastada?",
+      "answer": "Paljas VMess näeb välja nagu juhuslikud baidid, mida mõned tulemüürid blokeerivad kohe. WebSocketi või gRPC ümbrises TLS-i peal näeb see välja nagu HTTPS domeenile, mida on palju raskem eristada."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMessi protokolli dokumentatsioon", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core'i hoidla", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESSi protokolli spetsifikatsioon", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

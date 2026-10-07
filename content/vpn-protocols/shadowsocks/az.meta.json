@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: təsadüfi baytlar və bu niyə işləməyi dayandırdı",
+  "metaTitle": "Shadowsocks nədir? Necə işləyir və GFW onu necə tanıyır",
+  "metaDescription": "Shadowsocks izahı: Böyük Firewall-dan keçmək üçün qurulmuş şifrəli proksi, aktiv zondlama onu necə tapdı və 2021-ci ildən Çin tam şifrələnmiş trafiki təsadüfiliyinə görə necə bloklayır.",
+  "excerpt": "Çində yaranmış yüngül proksi, heç nəyə bənzəsin deyə ilk baytdan şifrələnib. 2021-ci ildən Böyük Firewall trafiki məhz heç nəyə bənzədiyinə görə bloklayır.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP və ya UDP",
+    "looksLike": "Təsadüfi görünən baytlar",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Yoxdur (tətbiq lazımdır)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks VPN-dirmi?",
+      "answer": "Texniki cəhətdən o, VPN yox, şifrəli proksidir. Əksər müasir müştərilər bütün trafiki ondan keçirən sistem miqyasında rejim əlavə edir, ona görə gündəlik istifadədə o, VPN-ə çox bənzəyir."
+    },
+    {
+      "question": "Shadowsocks Çində hələ də işləyirmi?",
+      "answer": "Əvvəlkindən az etibarlı. USENIX Security 2023-də dərc olunmuş tədqiqat göstərib ki, 2021-ci ilin noyabrından Böyük Firewall məlum heç bir protokola bənzəməyən tam şifrələnmiş trafiki bloklayır, Shadowsocks isə məhz bunu yaradır."
+    },
+    {
+      "question": "Firewall trafikin tam şifrələnmiş olduğuna necə qərar verir?",
+      "answer": "O, ilk paketi yoxlayır və paket məlum protokola uyğundursa, kifayət qədər çap edilə bilən simvol saxlayırsa və ya hər baytda vahid bitlərin ortası 3.4 ilə 4.6 aralığından kənardadırsa, onu istisna edir. Qalan trafik bloklana bilər."
+    },
+    {
+      "question": "Shadowsocks 2022 nədir?",
+      "answer": "Daha güclü təkrar oynatma qorunması və yenilənmiş açar işləməsi olan protokolun 2022-ci il yenidən baxışı (SIP022). O, trafikin təsadüfi görünməsi faktını dəyişmir."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD şifrləri", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 buraxılışı", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

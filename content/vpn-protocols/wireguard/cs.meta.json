@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: rychlý, jednoduchý a snadno blokovatelný",
+  "metaTitle": "Co je WireGuard? Jak funguje a proč ho cenzura blokuje",
+  "metaDescription": "WireGuard srozumitelně: pevná moderní kryptografie, proč je tak rychlý, proč navázání spojení pevné délky usnadňuje cenzorům blokování a které aplikace ho používají.",
+  "excerpt": "Nejrychlejší běžný VPN protokol, s pevnou moderní kryptografií a velmi malým kódem. Nikdy nebyl stavěn tak, aby se schovával, a filtrované sítě ho blokují jako první.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Rozpoznatelné navázání spojení VPN",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Jádro Linuxu (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (oficiální aplikace)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Meziplatformní jádro, které používá několik aplikací" }
+  ],
+  "faq": [
+    {
+      "question": "Je WireGuard bezpečný?",
+      "answer": "Ano. WireGuard používá pevnou sadu moderních primitiv (ChaCha20-Poly1305, Curve25519, BLAKE2s) a má malý kód, který jde prakticky zkontrolovat. Jeho slabina je viditelnost pro cenzory, ne síla šifrování."
+    },
+    {
+      "question": "Proč WireGuard přestává fungovat v Rusku nebo Íránu?",
+      "answer": "Zprávy jeho navázání spojení mají pevnou velikost, 148 bajtů od klienta a 92 bajtů v odpovědi, po UDP. Takový vzor hloubková inspekce paketů snadno rozpozná a u operátorů v Rusku se hlásilo, že přerušují relace WireGuard hned po navázání spojení."
+    },
+    {
+      "question": "Je WireGuard rychlejší než OpenVPN?",
+      "answer": "Obvykle ano. WireGuard naváže relaci jednou výměnou tam a zpět, na Linuxu běží v jádře a má mnohem méně režie protokolu k vyjednání. Přesný rozdíl závisí na zařízení a síti."
+    },
+    {
+      "question": "Lze WireGuard skrýt před DPI?",
+      "answer": "Sám o sobě ne. Odnože jako AmneziaWG mění velikosti a hlavičky paketů, aby byl provoz hůře rozpoznatelný, nebo lze WireGuard zabalit do jiného protokolu za cenu části rychlosti."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, blokování OpenVPN a WireGuard v Rusku (issue 274, srpen 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

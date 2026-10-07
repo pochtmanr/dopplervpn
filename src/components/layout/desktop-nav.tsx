@@ -7,6 +7,8 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { localeConfig, getFlagUrl } from "@/lib/languages";
 import { trackGetPro } from "@/lib/track-cta";
+import { isBlogLocale } from "@/i18n/blog-locales";
+import { isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 
 interface DesktopNavProps {
   logo: ReactNode;
@@ -179,6 +181,22 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
             >
               {t("downloads")}
             </Link>
+            {isVpnProtocolsLocale(locale) && (
+              <Link
+                href="/vpn-protocols"
+                className="hidden lg:inline-flex text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
+              >
+                {t("protocols")}
+              </Link>
+            )}
+            {isBlogLocale(locale) && (
+              <Link
+                href="/blog"
+                className="hidden lg:inline-flex text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
+              >
+                {t("blog")}
+              </Link>
+            )}
 
             <Link
               href="/support"

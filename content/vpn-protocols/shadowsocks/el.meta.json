@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: τυχαία byte, και γιατί αυτό έπαψε να λειτουργεί",
+  "metaTitle": "Τι είναι το Shadowsocks; Πώς λειτουργεί και πώς το βλέπει το GFW",
+  "metaDescription": "Το Shadowsocks με απλά λόγια: κρυπτογραφημένος διαμεσολαβητής για το Μεγάλο Τείχος Προστασίας, ενεργή ανίχνευση, και πώς από το 2021 η Κίνα μπλοκάρει την πλήρως κρυπτογραφημένη κίνηση.",
+  "excerpt": "Ο ελαφρύς διαμεσολαβητής που γεννήθηκε στην Κίνα, κρυπτογραφημένος από το πρώτο byte ώστε να μην μοιάζει με τίποτα. Από το 2021 το Μεγάλο Τείχος Προστασίας μπλοκάρει την κίνηση ακριβώς γι' αυτό.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP ή UDP",
+    "looksLike": "Byte που μοιάζουν τυχαία",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Όχι (χρειάζεται εφαρμογή)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Είναι το Shadowsocks VPN;",
+      "answer": "Τεχνικά είναι κρυπτογραφημένος διαμεσολαβητής, όχι VPN. Οι περισσότεροι σύγχρονοι πελάτες προσθέτουν λειτουργία για όλο το σύστημα που δρομολογεί όλη την κίνηση μέσω αυτού, οπότε στην καθημερινή χρήση συμπεριφέρεται περίπου σαν VPN."
+    },
+    {
+      "question": "Λειτουργεί ακόμη το Shadowsocks στην Κίνα;",
+      "answer": "Λιγότερο αξιόπιστα από πριν. Έρευνα που δημοσιεύτηκε στο USENIX Security 2023 έδειξε ότι από τον Νοέμβριο του 2021 το Μεγάλο Τείχος Προστασίας της Κίνας μπλοκάρει πλήρως κρυπτογραφημένη κίνηση που δεν μοιάζει με κανένα γνωστό πρωτόκολλο, και τέτοια κίνηση παράγει το Shadowsocks."
+    },
+    {
+      "question": "Πώς αποφασίζει το τείχος ότι η κίνηση είναι πλήρως κρυπτογραφημένη;",
+      "answer": "Επιθεωρεί το πρώτο πακέτο και το εξαιρεί αν ταιριάζει με γνωστό πρωτόκολλο, περιέχει αρκετούς εκτυπώσιμους χαρακτήρες, ή έχει μέσο αριθμό ορισμένων bit ανά byte έξω από το εύρος 3.4 έως 4.6. Η υπόλοιπη κίνηση μπορεί να μπλοκαριστεί."
+    },
+    {
+      "question": "Τι είναι το Shadowsocks 2022;",
+      "answer": "Αναθεώρηση του πρωτοκόλλου το 2022 (SIP022) με ισχυρότερη προστασία από επανάληψη και ενημερωμένο χειρισμό κλειδιών. Δεν αλλάζει το γεγονός ότι η κίνηση μοιάζει τυχαία."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, κρυπταλγόριθμοι AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: έκδοση Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: en VPN som ser ut som et besøk til et ekte nettsted",
+  "metaTitle": "VLESS-Reality forklart: protokollen som er vanskeligst å blokkere",
+  "metaDescription": "VLESS og Reality kort forklart: en minimal proxy-protokoll pluss et TLS-lag som låner håndtrykket til et ekte nettsted, så det ikke finnes noe proxy-domene å blokkere. Hastighet, grenser og apper.",
+  "excerpt": "En minimal protokoll inne i et lånt TLS 1.3-håndtrykk fra et ekte nettsted. Ikke noe eget domene å blokkere, og sonder ser det ekte nettstedet.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "TLS 1.3 til et ekte, populært nettsted",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "Ingen (app kreves)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/nb/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Hva er forskjellen på VLESS og Reality?",
+      "answer": "VLESS er proxy-protokollen: den identifiserer brukeren og sier hvor trafikken skal. Reality er TLS-laget under som får tilkoblingen til å se ut som et besøk til et ekte tredjepartsnettsted."
+    },
+    {
+      "question": "Trenger VLESS-Reality et domene?",
+      "answer": "Nei. Reality låner TLS-håndtrykket til et eksisterende nettsted, så serveren ikke trenger eget domene eller sertifikat. Det er det viktigste fremskrittet i forhold til Trojan og VMess pakket inn i TLS."
+    },
+    {
+      "question": "Er VLESS-Reality umulig å oppdage?",
+      "answer": "Ingen protokoll er det. Forskning har vist at TLS inni TLS kan fingeravtrykkes, og noen russiske internettleverandører ble rapportert å kutte Reality-tilkoblinger i november 2025. Den er fortsatt det vanskeligste vanlige alternativet å blokkere."
+    },
+    {
+      "question": "Når ble Reality utgitt?",
+      "answer": "Reality kom i Xray-core 1.8.0 i mars 2023. VLESS selv ble foreslått i juli 2020."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, spesifikasjon for VLESS-protokollen", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16. juli 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, utgivelse av Xray-core v1.8.0 (mars 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, rapporter om blokkering av VLESS + Reality + Vision i Russland (issue 546, november 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

@@ -1,4 +1,6 @@
-import { useTranslations } from 'next-intl';
+import type { ReactNode } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { isHowItWorksLocale } from '@/i18n/how-it-works-locales';
 import { PlusPolicyLinks } from './policy-links';
 import { Link } from '@/i18n/navigation';
 import { PlatformLogo } from '@/components/glyph/platform-icons';
@@ -88,10 +90,18 @@ export function PlusPlatforms({ live = false }: LiveProps) {
 export function PlusTrafficSteps({ live = false }: LiveProps) {
   const t = useTranslations('technicalHowItWorks');
   const steps = live ? allSteps : allSteps.slice(0, 2);
+  // As technical-how-it-works.tsx: the articles are English-first, so other
+  // locales link straight to /en instead of through a 308 on every card.
+  const articleLocale = isHowItWorksLocale(useLocale()) ? undefined : 'en';
   return (
     <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${live ? 'lg:grid-cols-4' : ''}`}>
       {steps.map((step, i) => (
-        <Link key={step} href={live ? stepHrefs[i] : '#'} className={PLUS_CARD_HOVER}>
+        <Link
+          key={step}
+          href={live ? stepHrefs[i] : '#'}
+          locale={live && stepHrefs[i].startsWith('/how-it-works') ? articleLocale : undefined}
+          className={PLUS_CARD_HOVER}
+        >
           <div className="flex items-center gap-3">
             <span className="font-display text-lg font-bold tabular-nums text-(--c-accent)">{String(i + 1).padStart(2, '0')}</span>
             <h3 className={PLUS_TITLE_SM}>{t(`flow.${step}.title`)}</h3>
@@ -198,17 +208,19 @@ export function PlusPricing({ live = false }: LiveProps) {
   );
 }
 
+// The hrefs the shipped features.tsx carried: the homepage is the strongest
+// internal link source these landing pages have.
 const features = [
-  { k: 'noRegistration', icon: <UserIcon className="h-6 w-6" /> },
-  { k: 'vlessReality', icon: <ShieldIcon className="h-6 w-6" /> },
+  { k: 'noRegistration', icon: <UserIcon className="h-6 w-6" />, href: '/no-registration-vpn' },
+  { k: 'vlessReality', icon: <ShieldIcon className="h-6 w-6" />, href: '/vless-vpn' },
   { k: 'smartRouting', icon: featureIcons[1] },
-  { k: 'cryptoPayment', icon: <SparkleIcon className="h-6 w-6" /> },
+  { k: 'cryptoPayment', icon: <SparkleIcon className="h-6 w-6" />, href: '/pay-with-crypto' },
   { k: 'minimalData', icon: featureIcons[4] },
   { k: 'dnsProtection', icon: featureIcons[0] },
-] as const;
+] as { k: string; icon: ReactNode; href?: string }[];
 
 /** No live element of its own: duotone glyphs; the card takes the shadow + teal edge on hover. */
-export function PlusFeatures() {
+export function PlusFeatures({ live = false }: LiveProps) {
   const t = useTranslations('features');
   return (
     <PlusContainer className="py-10">
@@ -217,13 +229,26 @@ export function PlusFeatures() {
         <p className={`mx-auto mt-2 max-w-2xl ${PLUS_BODY}`}>{t('subtitle')}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {features.map(({ k, icon }) => (
-          <div key={k} className={PLUS_CARD_HOVER}>
-            <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal} [&_svg]:h-8 [&_svg]:w-8`}>{icon}</span>
-            <h4 className={`mt-5 ${PLUS_TITLE_SM}`}>{t(`items.${k}.title`)}</h4>
-            <p className={`mt-1.5 ${PLUS_BODY}`}>{t(`items.${k}.description`)}</p>
-          </div>
-        ))}
+        {features.map(({ k, icon, href }) => {
+          const body = (
+            <>
+              <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal} [&_svg]:h-8 [&_svg]:w-8`}>{icon}</span>
+              <h4 className={`mt-5 ${PLUS_TITLE_SM}`}>{t(`items.${k}.title`)}</h4>
+              <p className={`mt-1.5 ${PLUS_BODY}`}>{t(`items.${k}.description`)}</p>
+            </>
+          );
+          return live && href ? (
+            <Link key={k} href={href} className={PLUS_CARD_HOVER}>
+              {body}
+              <span className={`mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-bold text-(--c-accent)`}>
+                {t('seeFullInfo')}
+                <ArrowGlyph className="h-3.5 w-3.5" />
+              </span>
+            </Link>
+          ) : (
+            <div key={k} className={PLUS_CARD_HOVER}>{body}</div>
+          );
+        })}
       </div>
     </PlusContainer>
   );

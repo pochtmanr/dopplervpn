@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: proxy za pravim spletnim mestom",
+  "metaTitle": "Kaj je protokol Trojan? Kako proxy promet skrije kot HTTPS",
+  "metaDescription": "Trojan pojasnjen: kako proxy promet skrije znotraj pristne povezave TLS, sondam pokaže pravo spletno mesto in zakaj je potreba po lastni domeni njegova šibka točka.",
+  "excerpt": "Prava povezava TLS z vašim spletnim mestom in zgoščeno vrednostjo gesla znotraj. Brez gesla obiskovalci in sonde vidijo samo spletno mesto.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS do vaše domene",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ni (potrebna je aplikacija)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referenčna izvedba)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Kako Trojan overi uporabnike?",
+      "answer": "Znotraj povezave TLS odjemalec pošlje šestnajstiško zapisano zgoščeno vrednost SHA-224 skupnega gesla, dolgo 56 znakov. Če je napačna, strežnik povezavo preda nadomestnemu spletnemu strežniku."
+    },
+    {
+      "question": "Ali Trojan potrebuje domeno?",
+      "answer": "Da. Strežnik predloži pravi certifikat za pravo domeno, zaradi česar je videti kot običajno spletno mesto HTTPS. Prav to domeno lahko cenzor blokira."
+    },
+    {
+      "question": "Trojan ali VLESS?",
+      "answer": "Oba se zanašata na TLS, ne na lastno šifriranje. VLESS z Reality gre dlje: izposodi si rokovanje obstoječega priljubljenega spletnega mesta, zato ni proxy domene, ki bi jo bilo mogoče blokirati."
+    },
+    {
+      "question": "Ali je Trojan mogoče zaznati?",
+      "answer": "S preprostim sondiranjem ne, saj sonde dobijo nadomestno spletno mesto. Raziskave so pokazale, da je promet TLS znotraj TLS mogoče prepoznati po času in velikostih paketov, proxy domene pa je mogoče blokirati, ko jih prepoznajo."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repozitorij trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

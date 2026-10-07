@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: VPN, ki je videti kot obisk pravega spletnega mesta",
+  "metaTitle": "VLESS-Reality: protokol, ki ga je najtežje blokirati",
+  "metaDescription": "VLESS in Reality na kratko: minimalen proxy protokol in plast TLS, ki si izposodi rokovanje pravega spletnega mesta, zato ni proxy domene za blokiranje. Hitrost, omejitve in aplikacije.",
+  "excerpt": "Minimalen protokol znotraj izposojenega rokovanja TLS 1.3 pravega spletnega mesta. Lastne domene za blokiranje ni, sonde pa vidijo pravo mesto.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "TLS 1.3 do pravega priljubljenega spletnega mesta",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "Ni (potrebna je aplikacija)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/sl/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Kakšna je razlika med VLESS in Reality?",
+      "answer": "VLESS je proxy protokol: identificira uporabnika in pove, kam naj gre promet. Reality je plast TLS pod njim, zaradi katere je povezava videti kot obisk pravega spletnega mesta tretje osebe."
+    },
+    {
+      "question": "Ali VLESS-Reality potrebuje domeno?",
+      "answer": "Ne. Reality si izposodi rokovanje TLS obstoječega spletnega mesta, zato strežnik ne potrebuje lastne domene ali certifikata. To je njegov glavni napredek glede na Trojan in VMess, ovit v TLS."
+    },
+    {
+      "question": "Ali je VLESS-Reality nezaznaven?",
+      "answer": "Noben protokol ni. Raziskave so pokazale, da je TLS znotraj TLS mogoče prepoznati, novembra 2025 pa so poročali, da nekateri ruski ponudniki prekinjajo povezave Reality. Še vedno je najtežja razširjena možnost za blokiranje."
+    },
+    {
+      "question": "Kdaj je izšel Reality?",
+      "answer": "Reality je izšel v Xray-core 1.8.0 marca 2023. Sam VLESS je bil predlagan julija 2020."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, specifikacija protokola VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16. julij 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, izdaja Xray-core v1.8.0 (marec 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, poročila o blokadi VLESS + Reality + Vision v Rusiji (issue 546, november 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

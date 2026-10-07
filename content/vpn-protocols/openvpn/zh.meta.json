@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN：灵活的老将，却会被审查方识别指纹",
+  "metaTitle": "什么是 OpenVPN？工作原理及运营商为何能识别它",
+  "metaDescription": "OpenVPN 详解：TLS 控制通道和数据通道如何工作、为何比 WireGuard 慢，以及研究为何能在真实运营商网络中识别出超过 85% 的 OpenVPN 流量。",
+  "excerpt": "已有二十年历史，配置灵活，几乎处处受支持。研究人员也证明，运营商可以凭形态识别出大部分 OpenVPN 流量。",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP 或 TCP",
+    "looksLike": "OpenVPN 自有的 TLS 封装",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "无（需要安装应用）"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "OpenVPN Community（开源客户端和服务器）", "url": "https://openvpn.net/community/", "platforms": "Windows、macOS、Linux、BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN 现在还安全吗？",
+      "answer": "配置合理的最新版 OpenVPN 是安全的。由于可配置项很多，主要风险在于配置薄弱，例如使用过时的密码算法，而不是协议本身存在缺陷。"
+    },
+    {
+      "question": "为什么 OpenVPN 即使使用 443 端口也会被识别？",
+      "answer": "使用 443 端口并不会让流量看起来像 HTTPS。OpenVPN 把 TLS 握手封装在自己的数据包格式中，已发表的研究正是凭这种形态，在真实运营商网络中识别出了超过 85% 的 OpenVPN 流量。"
+    },
+    {
+      "question": "该选 OpenVPN 还是 WireGuard？",
+      "answer": "在开放网络中，WireGuard 通常更快、更简单。OpenVPN 的优势在于兼容性，并且可以通过 TCP 运行。两者都不是为躲避审查而设计的。"
+    },
+    {
+      "question": "OpenVPN 使用 UDP 还是 TCP？",
+      "answer": "两者皆可。UDP 是默认方式，通常更快；TCP 适用于封锁 UDP 的网络，但会损失一部分速度。"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 reference manual", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people，俄罗斯对 OpenVPN 和 WireGuard 的封锁（issue 274，2023 年 8 月）", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

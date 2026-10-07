@@ -1,0 +1,47 @@
+{
+  "title": "VMess: protocolul original al V2Ray",
+  "metaTitle": "Ce este VMess? Cum funcționează protocolul V2Ray, VMess vs VLESS",
+  "metaDescription": "VMess explicat: protocolul proxy criptat al V2Ray, autentificarea pe marcaj de timp, de ce e de obicei învelit în WebSocket și TLS și cum l-au înlocuit VLESS și Trojan.",
+  "excerpt": "Primul protocol al proiectului V2Ray: anteturi criptate, un UUID pentru fiecare utilizator și, de obicei, un înveliș WebSocket peste TLS ca să arate ca trafic web.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, adesea WebSocket + TLS",
+    "looksLike": "Octeți aleatorii, sau HTTPS când e învelit",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Niciunul (e nevoie de aplicație)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Care este diferența dintre VMess și VLESS?",
+      "answer": "VMess își criptează propriile anteturi și date. VLESS păstrează identitatea bazată pe UUID, dar renunță la criptarea proprie și se bazează pe stratul TLS de dedesubt, ceea ce evită criptarea traficului de două ori."
+    },
+    {
+      "question": "De ce nu se conectează VMess când ceasul meu este greșit?",
+      "answer": "Autentificarea VMess include un marcaj de timp, așa că serverul respinge cererile când ceasul clientului este prea departe de al lui. Setarea ceasului dispozitivului pe automat rezolvă de obicei problema."
+    },
+    {
+      "question": "Este VMess sigur?",
+      "answer": "Cu autentificarea antetului prin AEAD, da. Modul mai vechi, bazat pe MD5, nu putea garanta integritatea antetului, iar documentația oficială avertizează împotriva lui."
+    },
+    {
+      "question": "Este VMess detectabil?",
+      "answer": "VMess brut arată ca octeți aleatorii, pe care unele firewall-uri le blochează din prima. Învelit în WebSocket sau gRPC peste TLS, arată ca HTTPS către un domeniu, ceea ce este mult mai greu de izolat."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, documentația protocolului VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repository-ul v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specificația protocolului VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

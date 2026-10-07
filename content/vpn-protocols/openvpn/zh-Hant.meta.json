@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN：彈性十足、卻會被審查機構辨識特徵的老將",
+  "metaTitle": "什麼是 OpenVPN？運作方式與 ISP 能偵測它的原因",
+  "metaDescription": "OpenVPN 解析：TLS 控制通道與資料通道如何運作、為何比 WireGuard 慢，以及為何研究在真實 ISP 上辨識出超過 85% 的 OpenVPN 流量。",
+  "excerpt": "已有二十年歷史，可設定項目繁多，幾乎處處都支援。研究人員也證明，ISP 能憑流量形態找出大部分 OpenVPN 流量。",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP 或 TCP",
+    "looksLike": "OpenVPN 自有的 TLS 封裝",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "無（需要應用程式）"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community（開源客戶端與伺服器）", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN 仍然安全嗎？",
+      "answer": "使用目前版本的 OpenVPN 並採用合理的設定是安全的。由於它的可設定性很高，主要風險在於設定薄弱（例如使用過時的加密演算法），而不是協定本身的缺陷。"
+    },
+    {
+      "question": "為什麼 OpenVPN 即使使用 443 連接埠也會被偵測到？",
+      "answer": "使用 443 連接埠並不會讓流量看起來像 HTTPS。OpenVPN 以自己的封包格式封裝 TLS 交握，已發表的研究就是憑這種形態，在真實的 ISP 網路上辨識出超過 85% 的 OpenVPN 流量。"
+    },
+    {
+      "question": "該選 OpenVPN 還是 WireGuard？",
+      "answer": "在開放的網路上，WireGuard 通常更快也更簡單。OpenVPN 的優勢在於相容性，而且可以透過 TCP 執行。兩者都不是為了躲避審查機構而設計的。"
+    },
+    {
+      "question": "OpenVPN 使用 UDP 還是 TCP？",
+      "answer": "兩者皆可。UDP 是預設值，通常較快；TCP 對封鎖 UDP 的網路有幫助，但會損失部分速度。"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 參考手冊", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people，俄羅斯對 OpenVPN 與 WireGuard 的封鎖（issue 274，2023 年 8 月）", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

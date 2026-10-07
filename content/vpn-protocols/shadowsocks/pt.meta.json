@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: bytes aleatórios, e por que isso deixou de funcionar",
+  "metaTitle": "O que é o Shadowsocks? Como funciona e como o GFW o detecta",
+  "metaDescription": "O Shadowsocks explicado: o proxy criptografado criado para vencer o Grande Firewall, como a sondagem ativa o encontrou e como, desde 2021, a China bloqueia tráfego totalmente criptografado pela sua aleatoriedade.",
+  "excerpt": "O proxy leve nascido na China, criptografado desde o primeiro byte para não se parecer com nada. Desde 2021, o Grande Firewall bloqueia tráfego justamente por não se parecer com nada.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP ou UDP",
+    "looksLike": "Bytes de aparência aleatória",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nenhum (requer aplicativo)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "O Shadowsocks é uma VPN?",
+      "answer": "Tecnicamente, é um proxy criptografado, não uma VPN. A maioria dos clientes modernos adiciona um modo para todo o sistema que encaminha todo o tráfego por ele, então no uso diário ele se comporta de forma muito parecida com uma VPN."
+    },
+    {
+      "question": "O Shadowsocks ainda funciona na China?",
+      "answer": "Com menos confiabilidade que antes. Uma pesquisa publicada no USENIX Security 2023 mostrou que, desde novembro de 2021, o Grande Firewall bloqueia tráfego totalmente criptografado que não se parece com nenhum protocolo conhecido, que é justamente o que o Shadowsocks produz."
+    },
+    {
+      "question": "Como o firewall decide que um tráfego é totalmente criptografado?",
+      "answer": "Ele inspeciona o primeiro pacote e o dispensa se corresponder a um protocolo conhecido, contiver caracteres imprimíveis suficientes ou tiver uma média de bits ativados por byte fora do intervalo de 3,4 a 4,6. O tráfego restante pode ser bloqueado."
+    },
+    {
+      "question": "O que é o Shadowsocks 2022?",
+      "answer": "Uma revisão do protocolo de 2022 (SIP022) com proteção contra replay mais forte e tratamento de chaves atualizado. Ela não muda o fato de que o tráfego parece aleatório."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, cifras AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: edição Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

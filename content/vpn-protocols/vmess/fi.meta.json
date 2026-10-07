@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Rayn alkuperäinen protokolla",
+  "metaTitle": "Mikä on VMess? Miten V2Ray-protokolla toimii, VMess vs VLESS",
+  "metaDescription": "VMess selitettynä: V2Rayn salattu välitysprotokolla, aikaleimaan perustuva todennus, miksi se kääritään yleensä WebSocketiin ja TLS:ään ja miten VLESS ja Trojan korvasivat sen.",
+  "excerpt": "V2Ray-projektin ensimmäinen protokolla: salatut otsikot, UUID jokaiselle käyttäjälle ja yleensä WebSocket TLS:n päällä -kääre, jotta se näyttäisi verkkoliikenteeltä.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, usein WebSocket + TLS",
+    "looksLike": "Satunnaiset tavut tai HTTPS käärittynä",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Ei (sovellus tarvitaan)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Mitä eroa on VMessillä ja VLESS:llä?",
+      "answer": "VMess salaa omat otsikkonsa ja datansa. VLESS säilyttää UUID-pohjaisen tunnistuksen mutta luopuu omasta salauksestaan ja nojaa alla olevaan TLS-kerrokseen, mikä välttää liikenteen salaamisen kahdesti."
+    },
+    {
+      "question": "Miksi VMess ei yhdistä, kun kelloni on väärässä?",
+      "answer": "VMess-todennus sisältää aikaleiman, joten palvelin hylkää pyynnöt, kun asiakkaan kello on liian kaukana sen omasta. Laitteen kellon asettaminen automaattiseksi korjaa asian yleensä."
+    },
+    {
+      "question": "Onko VMess turvallinen?",
+      "answer": "AEAD-otsikkotodennuksella kyllä. Vanhempi MD5-pohjainen tila ei voinut taata otsikon eheyttä, ja virallinen dokumentaatio varoittaa siitä."
+    },
+    {
+      "question": "Voiko VMessin tunnistaa?",
+      "answer": "Pelkkä VMess näyttää satunnaisilta tavuilta, ja jotkin palomuurit estävät sellaisen heti. WebSocketiin tai gRPC:hen TLS:n päällä käärittynä se näyttää HTTPS:ltä verkkotunnukseen, ja sitä on paljon vaikeampi erottaa."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess-protokollan dokumentaatio", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core-arkisto", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS-protokollan määrittely", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

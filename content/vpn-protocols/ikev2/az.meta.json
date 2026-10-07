@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: telefonunuza quraşdırılmış VPN",
+  "metaTitle": "IKEv2/IPsec nədir? Necə işləyir və niyə asan bloklanır",
+  "metaDescription": "IKEv2/IPsec izahı: iPhone, Mac, Windows və Android-də quraşdırılmış VPN, MOBIKE hərəkətdə bağlantını necə saxlayır və sabit UDP 500 və 4500 portları niyə bloklamağı asanlaşdırır.",
+  "excerpt": "iOS, macOS, Windows və Android-ə quraşdırılıb, sürətlidir və şəbəkə dəyişəndə rəvan keçir. Sabit, hamıya məlum portlarda işləyir, ona görə bloklamaq üçün bir qayda kifayətdir.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "Standart IKE və ESP trafiki",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "IKEv2 hansı portlardan istifadə edir?",
+      "answer": "Açar mübadiləsi UDP 500 portundan istifadə edir. İki tərəfin arasında NAT router olanda, bu isə demək olar ki, həmişə belədir, IKE və şifrələnmiş trafik UDP 4500 portuna keçir."
+    },
+    {
+      "question": "IKEv2 niyə telefonlarda yaxşıdır?",
+      "answer": "MOBIKE genişlənməsi (RFC 4555) IKEv2 bağlantısının IP ünvanının dəyişməsinə tab gətirməsinə imkan verir, ona görə Wi-Fi-dan mobil dataya keçid tuneli kəsmir."
+    },
+    {
+      "question": "IKEv2 təhlükəsizdirmi?",
+      "answer": "Bəli, cari alqoritmlərlə. O, müəssisələrin geniş istifadə etdiyi IETF standartıdır. Zəif tərəfi deşifrə etməyin asanlığı yox, tanımağın və bloklamağın asanlığıdır."
+    },
+    {
+      "question": "IKEv2 Çində və ya Rusiyada işləyirmi?",
+      "answer": "Süzgəcdən keçən şəbəkələrdə o, ümumiyyətlə etibarsızdır, çünki sabit UDP portlarını bloklamaq və ya standart əl sıxmasını tanımaq sadədir."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

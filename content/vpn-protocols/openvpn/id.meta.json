@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: Veteran Fleksibel yang Sidik Jarinya Dikenali Sensor",
+  "metaTitle": "Apa Itu OpenVPN? Cara Kerja dan Alasan ISP Dapat Mendeteksinya",
+  "metaDescription": "Penjelasan OpenVPN: cara kerja saluran kontrol TLS dan saluran datanya, mengapa lebih lambat dari WireGuard, dan mengapa riset mengidentifikasi lebih dari 85% aliran OpenVPN di ISP nyata.",
+  "excerpt": "Berusia dua dekade, dapat dikonfigurasi tanpa batas, dan didukung hampir di mana-mana. Peneliti juga menunjukkan bahwa ISP dapat mengenali sebagian besar lalu lintas OpenVPN dari bentuknya.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP atau TCP",
+    "looksLike": "Framing TLS milik OpenVPN sendiri",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Tidak ada (perlu aplikasi)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (klien dan server open-source)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Apakah OpenVPN masih aman?",
+      "answer": "OpenVPN rilis terkini dengan konfigurasi yang baik adalah aman. Karena sangat dapat dikonfigurasi, risiko utamanya adalah pengaturan yang lemah, seperti cipher usang, bukan cacat pada protokolnya."
+    },
+    {
+      "question": "Mengapa OpenVPN terdeteksi bahkan di port 443?",
+      "answer": "Memakai port 443 tidak membuat lalu lintas tampak seperti HTTPS. OpenVPN membungkus handshake TLS-nya dalam format paketnya sendiri, dan riset yang dipublikasikan mengidentifikasi lebih dari 85% aliran OpenVPN di jaringan ISP nyata dari bentuk tersebut."
+    },
+    {
+      "question": "OpenVPN atau WireGuard?",
+      "answer": "Di jaringan terbuka, WireGuard biasanya lebih cepat dan lebih sederhana. OpenVPN unggul dalam kompatibilitas dan dapat berjalan melalui TCP. Tidak satu pun dirancang untuk bersembunyi dari sensor."
+    },
+    {
+      "question": "Apakah OpenVPN memakai UDP atau TCP?",
+      "answer": "Keduanya bisa. UDP adalah bawaan dan biasanya lebih cepat; TCP membantu di jaringan yang memblokir UDP, dengan mengorbankan sebagian kecepatan."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Manual referensi OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, pemblokiran OpenVPN dan WireGuard di Rusia (issue 274, Agu 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

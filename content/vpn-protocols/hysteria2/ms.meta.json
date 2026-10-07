@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: Proksi QUIC yang Dibina untuk Rangkaian Lemah",
+  "metaTitle": "Apakah Hysteria 2? Protokol Proksi QUIC Diterangkan",
+  "metaDescription": "Hysteria 2 diterangkan: proksi QUIC yang berkelakuan seperti pelayan HTTP/3 sebenar kepada siasatan, pantas pada rangkaian yang kehilangan paket, dan gagal jika UDP atau QUIC disekat.",
+  "excerpt": "Proksi pada QUIC, pengangkutan di sebalik HTTP/3. Pantas pada pautan yang kehilangan paket, dan pelayan web HTTP/3 sebenar bagi sesiapa tanpa kata laluan. Ia memerlukan UDP untuk lolos.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "Pelayan web HTTP/3",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Tiada (aplikasi diperlukan)"
+  },
+  "apps": [
+    { "name": "Hysteria (klien rasmi)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Teras merentas platform yang digunakan oleh beberapa aplikasi" }
+  ],
+  "faq": [
+    {
+      "question": "Adakah Hysteria 2 sebuah VPN?",
+      "answer": "Ia ialah protokol proksi, tetapi klien seperti Hiddify dan NekoBox boleh menghalakan semua trafik peranti melaluinya, jadi dalam praktiknya ia boleh digunakan seperti VPN."
+    },
+    {
+      "question": "Mengapakah Hysteria 2 pantas pada sambungan yang lemah?",
+      "answer": "Ia berjalan pada QUIC melalui UDP, yang pulih daripada kehilangan paket tanpa menghentikan setiap strim, dan ia boleh menggunakan kawalan kesesakan sendiri yang ditujukan kepada pautan yang tidak stabil."
+    },
+    {
+      "question": "Bolehkah Hysteria 2 disekat?",
+      "answer": "Siasatan melihat pelayan HTTP/3 yang sebenar, jadi ia menahan siasatan aktif. Tetapi penapis boleh memperlahankan atau menyekat UDP atau QUIC secara meluas, dan ketika itu Hysteria 2 tidak dapat bersambung."
+    },
+    {
+      "question": "Hysteria 2 atau VLESS-Reality?",
+      "answer": "Hysteria 2 selalunya lebih pantas pada rangkaian yang kehilangan paket dan membenarkan UDP. VLESS-Reality berjalan melalui TCP dan terus berfungsi di tempat UDP ditapis. Ramai orang menyimpan kedua-duanya."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, spesifikasi protokol Hysteria 2", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, repositori hysteria", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

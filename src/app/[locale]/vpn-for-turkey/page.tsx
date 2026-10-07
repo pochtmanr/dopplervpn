@@ -22,6 +22,7 @@ export default async function Page({ params }: PageProps) {
       namespace={NAMESPACE}
       datePublished="2026-05-26"
       dateModified="2026-06-09"
+      blogSlugs={["how-to-bypass-internet-censorship-2026", "censorship-protocol-history"]}
       related={[
         { href: "/bypass-censorship", titleKey: "censorshipTitle", descKey: "censorshipDesc" },
         { href: "/vless-vpn", titleKey: "vlessTitle", descKey: "vlessDesc" },

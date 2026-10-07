@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: 휴대폰에 내장된 VPN",
+  "metaTitle": "IKEv2/IPsec이란? 작동 방식과 차단되기 쉬운 이유",
+  "metaDescription": "IKEv2/IPsec 쉽게 이해하기: iPhone, Mac, Windows, Android에 내장된 VPN, 이동 중에도 MOBIKE가 연결을 유지하는 방식, 고정 UDP 500/4500 포트가 차단되기 쉬운 이유를 설명합니다.",
+  "excerpt": "iOS, macOS, Windows, Android에 내장되어 있고 빠르며 네트워크를 바꿔도 매끄럽습니다. 고정된 잘 알려진 포트를 사용하므로 규칙 하나로 차단할 수 있습니다.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "표준 IKE 및 ESP 트래픽",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "IKEv2는 어떤 포트를 사용하나요?",
+      "answer": "키 교환에는 UDP 500번 포트를 사용합니다. 양쪽 사이에 NAT 라우터가 있으면(거의 항상 그렇습니다) IKE와 암호화된 트래픽은 UDP 4500번 포트로 옮겨 갑니다."
+    },
+    {
+      "question": "IKEv2가 휴대폰에서 좋은 이유는 무엇인가요?",
+      "answer": "MOBIKE 확장(RFC 4555) 덕분에 IP 주소가 바뀌어도 IKEv2 연결이 유지되므로, Wi-Fi에서 모바일 데이터로 넘어가도 터널이 끊기지 않습니다."
+    },
+    {
+      "question": "IKEv2는 안전한가요?",
+      "answer": "네, 최신 알고리즘을 사용하면 안전합니다. 기업에서 널리 쓰는 IETF 표준입니다. 약점은 복호화하기 쉽다는 것이 아니라 식별하고 차단하기 쉽다는 점입니다."
+    },
+    {
+      "question": "IKEv2는 중국이나 러시아에서 작동하나요?",
+      "answer": "필터링되는 네트워크에서는 대체로 안정적이지 않습니다. 고정된 UDP 포트를 차단하거나 표준 핸드셰이크를 식별하기가 간단하기 때문입니다."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

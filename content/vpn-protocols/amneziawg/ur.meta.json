@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard جس کے فنگر پرنٹ ہٹا دیے گئے",
+  "metaTitle": "AmneziaWG کیا ہے؟ یہ WireGuard سے کیسے مختلف ہے",
+  "metaDescription": "AmneziaWG کی وضاحت: WireGuard کا فورک جو ہیڈرز اور پیکٹ سائز بے ترتیب کرتا ہے اور جنک پیکٹس بھیجتا ہے تاکہ DPI، WireGuard کے مقررہ ہینڈ شیک سے میل نہ کھا سکے۔ حدیں اور ایپس۔",
+  "excerpt": "WireGuard کی رفتار اور کرپٹوگرافی، بے ترتیب ہیڈرز، پیکٹ سائز اور جنک پیکٹس کے ساتھ تاکہ فلٹرز اس کے مقررہ ہینڈ شیک سے میل نہ کھا سکیں۔",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "ناقابلِ پہچان UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "کوئی نہیں (ایپ درکار ہے)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia کلائنٹ (سورس کوڈ)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "سرورز اور کلائنٹس کے لیے یوزر اسپیس امپلیمنٹیشن" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG اور WireGuard میں کیا فرق ہے؟",
+      "answer": "AmneziaWG، WireGuard کی کرپٹوگرافی اور ڈیزائن رکھتا ہے مگر پیکٹ ہیڈرز اور سائز بے ترتیب کرتا ہے اور ہینڈ شیک سے پہلے جنک پیکٹس بھیج سکتا ہے، اس لیے ٹریفک اب WireGuard کے مقررہ نشان سے میل نہیں کھاتی۔"
+    },
+    {
+      "question": "کیا AmneziaWG، WireGuard کے ساتھ مطابقت رکھتا ہے؟",
+      "answer": "صرف تب جب اوبفسکیشن بند ہو۔ جب حسبِ ضرورت ہیڈرز، سائز پریفکس یا جنک پیکٹس کنفیگر ہو جائیں تو دونوں سروں پر مماثل سیٹنگز کے ساتھ AmneziaWG چلنا چاہیے۔"
+    },
+    {
+      "question": "Jc، S1 اور H1 سیٹنگز کا کیا مطلب ہے؟",
+      "answer": "Jc ہینڈ شیک سے پہلے بھیجے گئے جنک پیکٹس کی تعداد ہے، جن کے سائز Jmin اور Jmax کے درمیان ہوتے ہیں۔ S1 سے S4 پیکٹ کی لمبائی بدلنے کے لیے بے ترتیب پریفکس جوڑتے ہیں۔ H1 سے H4 حسبِ ضرورت پیغام-قسم کی قدریں مقرر کرتے ہیں جو WireGuard کی مقررہ قدروں کی جگہ لیتی ہیں۔"
+    },
+    {
+      "question": "کیا AmneziaWG روس میں کام کرتا ہے؟",
+      "answer": "یہ وہ نشانیاں ہٹا دیتا ہے جن سے سادہ WireGuard بلاک کیا جاتا ہے، اس لیے وہاں یہ کہیں زیادہ مزاحم ہے۔ چونکہ یہ UDP پر چلتا ہے، جو نیٹ ورکس UDP محدود کرتے ہیں وہ اب بھی اسے متاثر کر سکتے ہیں۔"
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG دستاویزات", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go ریپازٹری", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

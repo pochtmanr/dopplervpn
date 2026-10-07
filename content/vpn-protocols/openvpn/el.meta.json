@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: ο ευέλικτος βετεράνος που αναγνωρίζεται από το αποτύπωμα",
+  "metaTitle": "Τι είναι το OpenVPN; Πώς λειτουργεί και γιατί εντοπίζεται",
+  "metaDescription": "Το OpenVPN με απλά λόγια: κανάλι ελέγχου TLS και κανάλι δεδομένων, γιατί είναι πιο αργό από το WireGuard και γιατί έρευνα βρήκε πάνω από το 85% των ροών του σε πραγματικό πάροχο.",
+  "excerpt": "Δύο δεκαετίες ιστορίας, ατελείωτες ρυθμίσεις και υποστήριξη σχεδόν παντού. Ερευνητές έδειξαν επίσης ότι ένας πάροχος μπορεί να ξεχωρίσει το μεγαλύτερο μέρος της κίνησης OpenVPN από το σχήμα της.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP ή TCP",
+    "looksLike": "Η δική του πλαισίωση TLS του OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Όχι (χρειάζεται εφαρμογή)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (πελάτης και διακομιστής ανοιχτού κώδικα)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Είναι ακόμη ασφαλές το OpenVPN;",
+      "answer": "Μια τρέχουσα έκδοση του OpenVPN με σωστή διαμόρφωση είναι ασφαλής. Επειδή είναι τόσο ρυθμίσιμο, ο κύριος κίνδυνος είναι μια αδύναμη ρύθμιση, όπως παρωχημένοι κρυπταλγόριθμοι, και όχι ένα ελάττωμα του πρωτοκόλλου."
+    },
+    {
+      "question": "Γιατί το OpenVPN εντοπίζεται ακόμη και στη θύρα 443;",
+      "answer": "Η χρήση της θύρας 443 δεν κάνει την κίνηση να μοιάζει με HTTPS. Το OpenVPN πλαισιώνει τη χειραψία TLS του σε δική του μορφή πακέτων, και δημοσιευμένη έρευνα αναγνώρισε πάνω από το 85% των ροών OpenVPN σε δίκτυο πραγματικού παρόχου από αυτό το σχήμα."
+    },
+    {
+      "question": "OpenVPN ή WireGuard;",
+      "answer": "Σε ανοιχτό δίκτυο το WireGuard είναι συνήθως ταχύτερο και απλούστερο. Το OpenVPN κερδίζει σε συμβατότητα και μπορεί να τρέχει μέσω TCP. Κανένα από τα δύο δεν σχεδιάστηκε για να κρύβεται από λογοκριτές."
+    },
+    {
+      "question": "Το OpenVPN είναι UDP ή TCP;",
+      "answer": "Και τα δύο. Το UDP είναι η προεπιλογή και συνήθως ταχύτερο· το TCP βοηθά σε δίκτυα που μπλοκάρουν το UDP, με κάποιο κόστος σε ταχύτητα."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Εγχειρίδιο αναφοράς OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, αποκλεισμοί OpenVPN και WireGuard στη Ρωσία (issue 274, Αύγουστος 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

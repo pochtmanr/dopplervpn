@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality：実在のWebサイトへのアクセスに見えるVPN",
+  "metaTitle": "VLESS-Realityを解説：最もブロックしにくいプロトコル",
+  "metaDescription": "VLESSとRealityを簡潔に解説：最小限のプロキシプロトコルと、実在サイトのハンドシェイクを借りるTLS層の組み合わせで、ブロックされるプロキシ用ドメインがありません。速度、限界、対応アプリを紹介します。",
+  "excerpt": "実在するWebサイトから借りたTLS 1.3ハンドシェイクの中の最小限のプロトコル。ブロックされる独自のドメインはなく、プローブには実在のサイトが見えます。",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "実在の人気サイトへのTLS 1.3",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "なし（アプリが必要）"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/ja/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VLESSとRealityの違いは何ですか？",
+      "answer": "VLESSはプロキシプロトコルで、ユーザーを識別し、トラフィックの送信先を指定します。Realityはその下にあるTLS層で、接続を実在する第三者のWebサイトへのアクセスに見せます。"
+    },
+    {
+      "question": "VLESS-Realityにはドメインが必要ですか？",
+      "answer": "いいえ。Realityは既存のWebサイトのTLSハンドシェイクを借りるため、サーバーに独自のドメインや証明書は必要ありません。これが、TrojanやTLSで包んだVMessに対する最大の進歩です。"
+    },
+    {
+      "question": "VLESS-Realityは検出されませんか？",
+      "answer": "検出されないプロトコルはありません。研究では、TLSの中でTLSを運ぶとフィンガープリントを取れることが示されており、2025年11月にはロシアの一部のISPがRealityの接続を切断していると報告されました。それでも、主流の選択肢の中では最もブロックしにくいものです。"
+    },
+    {
+      "question": "Realityはいつリリースされましたか？",
+      "answer": "Realityは2023年3月にXray-core 1.8.0で提供されました。VLESS自体が提案されたのは2020年7月です。"
+    }
+  ],
+  "sources": [
+    { "label": "Project X、VLESSプロトコル仕様", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX、[New Protocol] VLESS BETA、v2ray-core issue 2636（2020年7月16日）", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS、REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS、Xray-core v1.8.0リリース（2023年3月）", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people、ロシアにおけるVLESS + Reality + Visionのブロック報告（issue 546、2025年11月）", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

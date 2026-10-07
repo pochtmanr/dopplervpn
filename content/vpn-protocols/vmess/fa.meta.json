@@ -1,0 +1,47 @@
+{
+  "title": "VMess: پروتکل اصلی V2Ray",
+  "metaTitle": "VMess چیست؟ طرز کار پروتکل V2Ray و تفاوت VMess با VLESS",
+  "metaDescription": "توضیح VMess: پروتکل پراکسی رمزگذاری‌شدهٔ V2Ray، احراز هویت مبتنی بر مهر زمانی، دلیل بسته‌بندی معمول آن در WebSocket و TLS، و اینکه VLESS و Trojan چگونه جای آن را گرفتند.",
+  "excerpt": "نخستین پروتکل پروژهٔ V2Ray: سرآیندهای رمزگذاری‌شده، یک UUID برای هر کاربر، و معمولاً لایهٔ WebSocket روی TLS تا شبیه ترافیک وب شود.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP، اغلب WebSocket + TLS",
+    "looksLike": "بایت‌های تصادفی، یا HTTPS وقتی بسته‌بندی شده باشد",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "ندارد (نیازمند برنامه)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "تفاوت VMess و VLESS چیست؟",
+      "answer": "VMess سرآیندها و داده‌های خودش را رمزگذاری می‌کند. VLESS هویت مبتنی بر UUID را نگه می‌دارد اما رمزگذاری اختصاصی خود را کنار می‌گذارد و به لایهٔ TLS زیرین تکیه می‌کند، که از رمزگذاری دوبارهٔ ترافیک جلوگیری می‌کند."
+    },
+    {
+      "question": "چرا وقتی ساعت من اشتباه است VMess وصل نمی‌شود؟",
+      "answer": "احراز هویت VMess شامل مهر زمانی است، پس وقتی ساعت کلاینت با ساعت سرور اختلاف زیادی داشته باشد، سرور درخواست‌ها را رد می‌کند. خودکار کردن ساعت دستگاه معمولاً مشکل را برطرف می‌کند."
+    },
+    {
+      "question": "آیا VMess امن است؟",
+      "answer": "با احراز هویت AEAD برای سرآیند، بله. حالت قدیمی‌تر مبتنی بر MD5 نمی‌توانست یکپارچگی سرآیند را تضمین کند و مستندات رسمی از آن برحذر می‌دارد."
+    },
+    {
+      "question": "آیا VMess قابل شناسایی است؟",
+      "answer": "VMess خام شبیه بایت‌های تصادفی است و برخی فایروال‌ها آن را همان لحظه مسدود می‌کنند. وقتی درون WebSocket یا gRPC روی TLS بسته‌بندی شود، مثل HTTPS به یک دامنه به نظر می‌رسد و جدا کردنش بسیار دشوارتر است."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess protocol documentation (مستندات پروتکل VMess)", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core repository (مخزن v2ray-core)", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS protocol specification (مشخصات پروتکل VLESS)", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: das in Ihr Smartphone eingebaute VPN",
+  "metaTitle": "Was ist IKEv2/IPsec? Funktionsweise und warum es leicht zu blockieren ist",
+  "metaDescription": "IKEv2/IPsec erklärt: das eingebaute VPN auf iPhone, Mac, Windows und Android, wie MOBIKE die Verbindung unterwegs hält und warum die festen UDP-Ports 500 und 4500 das Blockieren erleichtern.",
+  "excerpt": "In iOS, macOS, Windows und Android eingebaut, schnell und reibungslos beim Netzwerkwechsel. Es läuft auf festen, allgemein bekannten Ports, sodass eine einzige Regel zum Blockieren genügt.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "Standardmäßiger IKE- und ESP-Verkehr",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "Welche Ports verwendet IKEv2?",
+      "answer": "Der Schlüsselaustausch nutzt UDP-Port 500. Befindet sich ein NAT-Router zwischen den beiden Seiten, was fast immer der Fall ist, wechseln IKE und der verschlüsselte Datenverkehr auf UDP-Port 4500."
+    },
+    {
+      "question": "Warum ist IKEv2 auf Smartphones gut?",
+      "answer": "Die MOBIKE-Erweiterung (RFC 4555) lässt eine IKEv2-Verbindung eine Änderung der IP-Adresse überstehen, sodass der Wechsel von WLAN zu Mobilfunk den Tunnel nicht unterbricht."
+    },
+    {
+      "question": "Ist IKEv2 sicher?",
+      "answer": "Ja, mit aktuellen Algorithmen. Es ist ein IETF-Standard, der in Unternehmen weit verbreitet ist. Seine Schwäche ist, dass es sich leicht erkennen und blockieren lässt, nicht, dass es sich leicht entschlüsseln lässt."
+    },
+    {
+      "question": "Funktioniert IKEv2 in China oder Russland?",
+      "answer": "In gefilterten Netzwerken ist es im Allgemeinen unzuverlässig, weil es einfach ist, seine festen UDP-Ports zu blockieren oder seinen Standard-Handshake zu erkennen."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

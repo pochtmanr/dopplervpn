@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: הסתרת פרוקסי מאחורי אתר אמיתי",
+  "metaTitle": "מהו פרוטוקול Trojan? איך הוא מסתיר תעבורת פרוקסי כ-HTTPS",
+  "metaDescription": "Trojan בפשטות: איך הוא מסתיר תעבורת פרוקסי בתוך חיבור TLS אמיתי, חוזר לאתר אמיתי כשמגיעות בדיקות, ולמה הצורך בדומיין משלך הוא נקודת התורפה שלו.",
+  "excerpt": "חיבור TLS אמיתי לאתר אמיתי שבבעלותך, עם גיבוב של סיסמה בפנים. בלי הסיסמה, מבקרים ובדיקות רואים רק את האתר.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS לדומיין שלך",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "אין (נדרשת אפליקציה)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (מימוש ייחוס)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "איך Trojan מאמת משתמשים?",
+      "answer": "בתוך חיבור ה-TLS, הלקוח שולח את גיבוב SHA-224 של סיסמה משותפת בקידוד הקסדצימלי, באורך 56 תווים. אם הוא שגוי, השרת מעביר את החיבור לשרת אינטרנט חלופי."
+    },
+    {
+      "question": "האם Trojan צריך דומיין?",
+      "answer": "כן. השרת מציג אישור אמיתי לדומיין אמיתי, וזה מה שגורם לו להיראות כאתר HTTPS רגיל. הדומיין הזה הוא גם מה שגורם צנזורה יכול לחסום."
+    },
+    {
+      "question": "Trojan או VLESS?",
+      "answer": "שניהם נשענים על TLS ולא על הצפנה משלהם. VLESS עם Reality הולך צעד קדימה ושואל את לחיצת היד של אתר פופולרי קיים, כך שאין דומיין של פרוקסי שאפשר לחסום."
+    },
+    {
+      "question": "האם אפשר לזהות את Trojan?",
+      "answer": "לא באמצעות בדיקה פשוטה, כי הבדיקות מקבלות את אתר החלופה. מחקר הראה שאפשר לזהות תעבורת TLS בתוך TLS כטביעת אצבע לפי תזמון וגודל חבילות, ואפשר לחסום דומייני פרוקסי ברגע שמזהים אותם."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, מאגר trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: starpnieka slēpšana aiz īstas vietnes",
+  "metaTitle": "Kas ir Trojan? Kā tas slēpj starpnieka datplūsmu kā HTTPS",
+  "metaDescription": "Trojan skaidrojums: kā tas slēpj starpnieka datplūsmu īstā TLS savienojumā, zondēm atgriež īstu vietni un kāpēc vajadzība pēc sava domēna ir tā vājā vieta.",
+  "excerpt": "Īsts TLS savienojums ar īstu vietni, kas jums pieder, un paroles hešs iekšpusē. Bez paroles apmeklētāji un zondes redz tikai vietni.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS uz jūsu paša domēnu",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (atsauces realizācija)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Kā Trojan autentificē lietotājus?",
+      "answer": "TLS savienojuma iekšpusē klients sūta koplietotās paroles SHA-224 heša heksadecimālo kodējumu, 56 rakstzīmes garu. Ja tas ir nepareizs, serveris pārsūta savienojumu rezerves tīmekļa serverim."
+    },
+    {
+      "question": "Vai Trojan vajag domēnu?",
+      "answer": "Jā. Serveris uzrāda īstu sertifikātu īstam domēnam, un tieši tas liek tam izskatīties pēc parastas HTTPS vietnes. Šo domēnu cenzors arī var bloķēt."
+    },
+    {
+      "question": "Trojan vai VLESS?",
+      "answer": "Abi paļaujas uz TLS, nevis uz savu šifrēšanu. VLESS ar Reality iet tālāk, aizņemoties esošas populāras vietnes rokasspiedienu, tāpēc nav starpnieka domēna, ko bloķēt."
+    },
+    {
+      "question": "Vai Trojan var atklāt?",
+      "answer": "Ne ar vienkāršu zondēšanu, jo zondes saņem rezerves vietni. Pētījumi ir parādījuši, ka TLS iekš TLS datplūsmu var atpazīt pēc pirkstu nospieduma pēc laika un pakešu izmēriem, un starpnieku domēnus var bloķēt, tiklīdz tie ir identificēti."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan repozitorijs", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

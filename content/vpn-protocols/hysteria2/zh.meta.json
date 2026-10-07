@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2：为恶劣网络打造的 QUIC 代理",
+  "metaTitle": "什么是 Hysteria 2？QUIC 代理协议详解",
+  "metaDescription": "Hysteria 2 详解：基于 QUIC 的代理，面对探测时表现得像真实的 HTTP/3 网页服务器，在丢包网络中保持速度，而在 UDP 或 QUIC 被封锁的地方会失效。",
+  "excerpt": "基于 QUIC（HTTP/3 背后的传输协议）的代理。在丢包较多的链路上速度快，对没有密码的任何人而言就是真实的 HTTP/3 网页服务器。它需要 UDP 才能通行。",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC（UDP）",
+    "looksLike": "HTTP/3 网页服务器",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "无（需要安装应用）"
+  },
+  "apps": [
+    { "name": "Hysteria（官方客户端）", "url": "https://v2.hysteria.network/", "platforms": "Windows、macOS、Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "跨平台内核，多款应用基于它构建" }
+  ],
+  "faq": [
+    {
+      "question": "Hysteria 2 是 VPN 吗？",
+      "answer": "它是一种代理协议，但 Hiddify 和 NekoBox 等客户端可以让设备的全部流量都经由它转发，因此在实际使用中可以当作 VPN 来用。"
+    },
+    {
+      "question": "为什么 Hysteria 2 在较差的连接上也很快？",
+      "answer": "它运行在基于 UDP 的 QUIC 上，从丢包中恢复时不会让所有流都停滞，并且可以使用自己针对不稳定链路的拥塞控制。"
+    },
+    {
+      "question": "Hysteria 2 会被封锁吗？",
+      "answer": "探测者看到的是真实的 HTTP/3 服务器，因此它能抵御主动探测。但审查方可以大范围对 UDP 或 QUIC 限速或封锁，这时 Hysteria 2 就无法连接。"
+    },
+    {
+      "question": "该选 Hysteria 2 还是 VLESS-Reality？",
+      "answer": "在允许 UDP 的丢包网络中，Hysteria 2 往往更快。VLESS-Reality 通过 TCP 运行，在 UDP 被过滤的地方依然可用。很多人两者都会保留。"
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria，Hysteria 2 协议规范", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet，hysteria 代码仓库", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

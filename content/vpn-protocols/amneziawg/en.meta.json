@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard With the Fingerprints Removed",
+  "metaTitle": "What Is AmneziaWG? How It Differs From WireGuard",
+  "metaDescription": "AmneziaWG explained: a WireGuard fork that randomises headers and packet sizes and sends junk packets so DPI cannot match WireGuard's fixed handshake. Limits and apps.",
+  "excerpt": "WireGuard's speed and cryptography, with randomised headers, packet sizes and junk packets so filters cannot match its fixed handshake.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Unrecognisable UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "None (app required)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia client (source code)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Userspace implementation for servers and clients" }
+  ],
+  "faq": [
+    {
+      "question": "What is the difference between AmneziaWG and WireGuard?",
+      "answer": "AmneziaWG keeps WireGuard's cryptography and design but randomises packet headers and sizes and can send junk packets before the handshake, so the traffic no longer matches WireGuard's fixed signature."
+    },
+    {
+      "question": "Is AmneziaWG compatible with WireGuard?",
+      "answer": "Only with obfuscation turned off. Once the custom headers, size prefixes or junk packets are configured, both ends must run AmneziaWG with matching settings."
+    },
+    {
+      "question": "What do the Jc, S1 and H1 settings mean?",
+      "answer": "Jc is the number of junk packets sent before the handshake, with sizes between Jmin and Jmax. S1 to S4 add random prefixes to change packet lengths. H1 to H4 set custom message type values that replace WireGuard's fixed ones."
+    },
+    {
+      "question": "Does AmneziaWG work in Russia?",
+      "answer": "It removes the signatures used to block plain WireGuard, which makes it far more resilient there. Because it runs over UDP, networks that restrict UDP can still affect it."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG documentation", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go repository", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

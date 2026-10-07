@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: QUIC-välityspalvelin huonoille verkoille",
+  "metaTitle": "Mikä on Hysteria 2? QUIC-välitysprotokolla selitettynä",
+  "metaDescription": "Hysteria 2 selitettynä: QUIC-välityspalvelin, joka näyttää luotauksille oikealta HTTP/3-verkkopalvelimelta, pitää nopeuden häviöllisissä verkoissa ja pettää siellä, missä UDP tai QUIC estetään.",
+  "excerpt": "Välityspalvelin QUIC:llä, HTTP/3:n taustalla olevalla kuljetuksella. Nopea häviöllisillä yhteyksillä ja oikea HTTP/3-verkkopalvelin kenelle tahansa ilman salasanaa. Läpäisyyn se tarvitsee UDP:n.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "HTTP/3-verkkopalvelin",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ei (sovellus tarvitaan)"
+  },
+  "apps": [
+    { "name": "Hysteria (virallinen asiakas)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Useiden sovellusten käyttämä alustariippumaton ydin" }
+  ],
+  "faq": [
+    {
+      "question": "Onko Hysteria 2 VPN?",
+      "answer": "Se on välitysprotokolla, mutta asiakkaat kuten Hiddify ja NekoBox voivat ohjata laitteen kaiken liikenteen sen kautta, joten käytännössä sitä voi käyttää kuin VPN:ää."
+    },
+    {
+      "question": "Miksi Hysteria 2 on nopea huonoissa yhteyksissä?",
+      "answer": "Se toimii QUIC:llä UDP:n päällä, joka toipuu pakettien katoamisesta pysäyttämättä jokaista virtaa, ja se voi käyttää omaa ruuhkanhallintaansa, joka on suunnattu epävakaille yhteyksille."
+    },
+    {
+      "question": "Voiko Hysteria 2:n estää?",
+      "answer": "Luotaukset näkevät oikean HTTP/3-palvelimen, joten se kestää aktiivista luotausta. Sensuroija voi kuitenkin hidastaa tai estää UDP:n tai QUIC:n laajasti, ja silloin Hysteria 2 ei voi yhdistää."
+    },
+    {
+      "question": "Hysteria 2 vai VLESS-Reality?",
+      "answer": "Hysteria 2 on usein nopeampi häviöllisissä verkoissa, jotka sallivat UDP:n. VLESS-Reality toimii TCP:llä ja jatkaa toimintaansa siellä, missä UDP suodatetaan. Monet pitävät molemmat."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, Hysteria 2 -protokollan määrittely", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, hysteria-arkisto", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

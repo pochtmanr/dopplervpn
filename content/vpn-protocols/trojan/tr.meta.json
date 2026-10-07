@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: Vekil Sunucuyu Gerçek Bir Web Sitesinin Arkasına Gizlemek",
+  "metaTitle": "Trojan Protokolü Nedir? Vekil Trafiğini HTTPS Olarak Nasıl Gizler",
+  "metaDescription": "Trojan açıklaması: vekil trafiğini gerçek bir TLS bağlantısına nasıl gizlediği, yoklamalara gerçek bir web sitesiyle yanıt vermesi ve kendi alan adı gereksiniminin zayıf noktası olması.",
+  "excerpt": "Sahibi olduğunuz gerçek bir web sitesine gerçek bir TLS bağlantısı; içinde bir parola özeti. Parola olmadan ziyaretçiler ve yoklamalar yalnızca web sitesini görür.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "Kendi alan adınıza HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Yok (uygulama gerekir)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referans uygulama)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan kullanıcıların kimliğini nasıl doğrular?",
+      "answer": "TLS bağlantısının içinde istemci, ortak bir parolanın 56 karakter uzunluğundaki onaltılık kodlanmış SHA-224 özetini gönderir. Yanlışsa sunucu bağlantıyı bir yedek web sunucusuna yönlendirir."
+    },
+    {
+      "question": "Trojan'ın bir alan adına ihtiyacı var mı?",
+      "answer": "Evet. Sunucu, gerçek bir alan adı için gerçek bir sertifika sunar; sıradan bir HTTPS sitesine benzemesini sağlayan da budur. Bir sansürcünün engelleyebileceği şey de bu alan adıdır."
+    },
+    {
+      "question": "Trojan mı, VLESS mi?",
+      "answer": "İkisi de kendi şifrelemesine değil TLS'e dayanır. Reality'li VLESS bir adım daha ileri gider ve var olan popüler bir web sitesinin el sıkışmasını ödünç alır; dolayısıyla engellenecek bir vekil alan adı yoktur."
+    },
+    {
+      "question": "Trojan tespit edilebilir mi?",
+      "answer": "Basit yoklamayla hayır, çünkü yoklamalar yedek web sitesini alır. Araştırmalar, TLS içinde TLS trafiğinin zamanlamadan ve paket boyutlarından tanınabildiğini, vekil alan adlarının ise belirlendikten sonra engellenebildiğini gösterdi."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan deposu", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "VMess: pirmasis V2Ray protokolas",
+  "metaTitle": "Kas yra VMess? Kaip veikia V2Ray protokolas ir kuo skiriasi nuo VLESS",
+  "metaDescription": "VMess paprastai: šifruotas V2Ray proksi, autentifikavimas pagal laiko žymą, kodėl jį vynioja į WebSocket ir TLS ir kaip jį pakeitė VLESS bei Trojan.",
+  "excerpt": "Pirmasis V2Ray projekto protokolas: šifruotos antraštės, UUID kiekvienam naudotojui ir paprastai WebSocket ant TLS apvalkalas, kad atrodytų kaip žiniatinklio srautas.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, dažnai WebSocket + TLS",
+    "looksLike": "Atsitiktiniai baitai arba HTTPS, kai įvyniota",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Nėra (reikia programėlės)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Kuo VMess skiriasi nuo VLESS?",
+      "answer": "VMess pats šifruoja antraštes ir duomenis. VLESS išlaiko tapatybę pagal UUID, bet atsisako savo šifravimo ir remiasi po juo esančiu TLS sluoksniu, todėl srautas nešifruojamas du kartus."
+    },
+    {
+      "question": "Kodėl VMess neprisijungia, kai laikrodis neteisingas?",
+      "answer": "VMess autentifikavime yra laiko žyma, todėl serveris atmeta užklausas, kai kliento laikrodis per toli nuo jo paties. Paprastai padeda įjungti automatinį laiko nustatymą."
+    },
+    {
+      "question": "Ar VMess saugus?",
+      "answer": "Su AEAD antraštės autentifikavimu — taip. Senesnis režimas, paremtas MD5, negalėjo garantuoti antraštės vientisumo, ir oficiali dokumentacija nuo jo perspėja."
+    },
+    {
+      "question": "Ar VMess galima aptikti?",
+      "answer": "Grynas VMess atrodo kaip atsitiktiniai baitai, ir kai kurios ugniasienės tokį srautą blokuoja iškart. Įvyniotas į WebSocket arba gRPC ant TLS, jis atrodo kaip HTTPS į domeną, ir jį išskirti daug sunkiau."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess protokolo dokumentacija", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core saugykla", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS protokolo specifikacija", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

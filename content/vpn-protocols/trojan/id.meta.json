@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: Menyembunyikan Proxy di Balik Situs Web Asli",
+  "metaTitle": "Apa Itu Protokol Trojan? Cara Menyamarkan Proxy sebagai HTTPS",
+  "metaDescription": "Penjelasan Trojan: cara menyembunyikan lalu lintas proxy di dalam koneksi TLS asli, beralih ke situs web asli untuk probe, dan mengapa kebutuhan akan domain sendiri menjadi titik lemahnya.",
+  "excerpt": "Koneksi TLS asli ke situs web asli milik Anda, dengan hash kata sandi di dalamnya. Tanpa kata sandi, pengunjung dan probe hanya melihat situs web.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS ke domain Anda sendiri",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Tidak ada (perlu aplikasi)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (implementasi acuan)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Bagaimana Trojan mengautentikasi pengguna?",
+      "answer": "Di dalam koneksi TLS, klien mengirim hash SHA-224 berenkode heksadesimal dari kata sandi bersama, sepanjang 56 karakter. Jika salah, server meneruskan koneksi ke server web cadangan."
+    },
+    {
+      "question": "Apakah Trojan memerlukan domain?",
+      "answer": "Ya. Server menyajikan sertifikat asli untuk domain asli, dan itulah yang membuatnya tampak seperti situs HTTPS biasa. Domain itu juga yang dapat diblokir oleh sensor."
+    },
+    {
+      "question": "Trojan atau VLESS?",
+      "answer": "Keduanya mengandalkan TLS, bukan enkripsi sendiri. VLESS dengan Reality melangkah lebih jauh dengan meminjam handshake dari situs web populer yang sudah ada, sehingga tidak ada domain proxy yang dapat diblokir."
+    },
+    {
+      "question": "Apakah Trojan dapat dideteksi?",
+      "answer": "Tidak dengan probing sederhana, karena probe mendapatkan situs web cadangan. Riset menunjukkan lalu lintas TLS di dalam TLS dapat di-fingerprint dari waktu dan ukuran paketnya, dan domain proxy dapat diblokir setelah teridentifikasi."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repositori trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: 실제 웹사이트 뒤에 프록시를 숨기는 방식",
+  "metaTitle": "Trojan 프로토콜이란? 프록시 트래픽을 HTTPS로 숨기는 방법",
+  "metaDescription": "Trojan 쉽게 이해하기: 진짜 TLS 연결 안에 프록시 트래픽을 숨기는 방식, 프로브에는 실제 웹사이트로 응답하는 폴백, 자체 도메인이 필요하다는 약점을 설명합니다.",
+  "excerpt": "직접 소유한 실제 웹사이트에 대한 진짜 TLS 연결 안에 비밀번호 해시를 담습니다. 비밀번호가 없으면 방문자와 프로브에는 웹사이트만 보입니다.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "내 도메인에 대한 HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "없음(앱 필요)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (참조 구현)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan은 사용자를 어떻게 인증하나요?",
+      "answer": "TLS 연결 안에서 클라이언트가 공유 비밀번호의 SHA-224 해시를 16진수로 인코딩한 56자 값을 보냅니다. 값이 틀리면 서버는 연결을 폴백 웹 서버로 넘깁니다."
+    },
+    {
+      "question": "Trojan에는 도메인이 필요한가요?",
+      "answer": "네. 서버는 실제 도메인의 진짜 인증서를 제시하며, 그래서 평범한 HTTPS 사이트처럼 보입니다. 검열 측이 차단할 수 있는 것도 바로 그 도메인입니다."
+    },
+    {
+      "question": "Trojan과 VLESS 중 무엇이 나은가요?",
+      "answer": "둘 다 자체 암호화가 아니라 TLS에 의존합니다. Reality를 적용한 VLESS는 이미 존재하는 인기 웹사이트의 핸드셰이크를 빌려 쓰므로, 차단될 프록시 도메인이 없다는 점에서 한 걸음 더 나아갑니다."
+    },
+    {
+      "question": "Trojan은 탐지될 수 있나요?",
+      "answer": "단순한 프로빙으로는 어렵습니다. 프로브에는 폴백 웹사이트가 응답하기 때문입니다. 연구에서는 TLS 안의 TLS 트래픽이 타이밍과 패킷 크기로 지문 식별될 수 있고, 프록시 도메인은 식별되면 차단될 수 있음이 확인되었습니다."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan 저장소", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

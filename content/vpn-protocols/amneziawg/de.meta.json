@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard ohne Fingerabdrücke",
+  "metaTitle": "Was ist AmneziaWG? Wie es sich von WireGuard unterscheidet",
+  "metaDescription": "AmneziaWG erklärt: ein WireGuard-Fork, der Header und Paketgrößen randomisiert und Junk-Pakete sendet, damit DPI den festen Handshake von WireGuard nicht erkennt. Grenzen und Apps.",
+  "excerpt": "Die Geschwindigkeit und Kryptografie von WireGuard, mit randomisierten Headern, Paketgrößen und Junk-Paketen, damit Filter den festen Handshake nicht erkennen.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Nicht erkennbares UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Keine (App erforderlich)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia-Client (Quellcode)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementierung im Benutzerbereich für Server und Clients" }
+  ],
+  "faq": [
+    {
+      "question": "Was ist der Unterschied zwischen AmneziaWG und WireGuard?",
+      "answer": "AmneziaWG behält die Kryptografie und das Design von WireGuard bei, randomisiert aber Paket-Header und -Größen und kann vor dem Handshake Junk-Pakete senden, sodass der Datenverkehr nicht mehr zur festen Signatur von WireGuard passt."
+    },
+    {
+      "question": "Ist AmneziaWG mit WireGuard kompatibel?",
+      "answer": "Nur bei ausgeschalteter Obfuskation. Sobald die benutzerdefinierten Header, Größenpräfixe oder Junk-Pakete konfiguriert sind, müssen beide Enden AmneziaWG mit übereinstimmenden Einstellungen ausführen."
+    },
+    {
+      "question": "Was bedeuten die Einstellungen Jc, S1 und H1?",
+      "answer": "Jc ist die Anzahl der Junk-Pakete, die vor dem Handshake gesendet werden, mit Größen zwischen Jmin und Jmax. S1 bis S4 fügen zufällige Präfixe hinzu, um die Paketlängen zu verändern. H1 bis H4 legen benutzerdefinierte Werte für den Nachrichtentyp fest, die die festen Werte von WireGuard ersetzen."
+    },
+    {
+      "question": "Funktioniert AmneziaWG in Russland?",
+      "answer": "Es beseitigt die Signaturen, mit denen reines WireGuard blockiert wird, und ist dort deutlich widerstandsfähiger. Da es über UDP läuft, können Netzwerke, die UDP einschränken, es dennoch beeinträchtigen."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG-Dokumentation", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go-Repository", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

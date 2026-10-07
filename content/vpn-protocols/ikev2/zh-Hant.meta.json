@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec：內建於手機的 VPN",
+  "metaTitle": "什麼是 IKEv2/IPsec？運作方式與容易被封鎖的原因",
+  "metaDescription": "IKEv2/IPsec 解析：iPhone、Mac、Windows 和 Android 內建的 VPN、MOBIKE 如何在移動中保持連線，以及固定的 UDP 500 和 4500 連接埠為何讓它容易被封鎖。",
+  "excerpt": "內建於 iOS、macOS、Windows 和 Android，速度快，切換網路時也很順暢。它使用固定且廣為人知的連接埠，所以只要一條規則就能封鎖它。",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "標準的 IKE 和 ESP 流量",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS、macOS、Windows、Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "IKEv2 使用哪些連接埠？",
+      "answer": "金鑰交換使用 UDP 500 連接埠。當雙方之間有 NAT 路由器時（幾乎總是如此），IKE 和加密流量會改用 UDP 4500 連接埠。"
+    },
+    {
+      "question": "為什麼 IKEv2 在手機上表現很好？",
+      "answer": "MOBIKE 擴充（RFC 4555）可以讓 IKEv2 連線在 IP 位址改變後繼續存在，因此從 Wi-Fi 切換到行動數據時，通道不會中斷。"
+    },
+    {
+      "question": "IKEv2 安全嗎？",
+      "answer": "安全，前提是使用目前的演算法。它是 IETF 標準，被企業廣泛採用。它的弱點在於容易被辨識和封鎖，而不是容易被解密。"
+    },
+    {
+      "question": "IKEv2 在中國或俄羅斯能用嗎？",
+      "answer": "在有過濾的網路上通常不可靠，因為封鎖它固定的 UDP 連接埠，或辨識它標準的交握，都很簡單。"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

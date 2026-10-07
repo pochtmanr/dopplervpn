@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray کا اصل پروٹوکول",
+  "metaTitle": "VMess کیا ہے؟ V2Ray پروٹوکول کیسے کام کرتا ہے، VMess بمقابلہ VLESS",
+  "metaDescription": "VMess کی وضاحت: V2Ray کا انکرپٹڈ پراکسی پروٹوکول، اس کی ٹائم سٹیمپ پر مبنی تصدیق، یہ عموماً WebSocket اور TLS میں کیوں لپیٹا جاتا ہے، اور VLESS اور Trojan نے اس کی جگہ کیسے لی۔",
+  "excerpt": "V2Ray پروجیکٹ کا پہلا پروٹوکول: انکرپٹڈ ہیڈرز، ہر صارف کے لیے UUID، اور عموماً ویب ٹریفک جیسا دکھنے کے لیے TLS پر WebSocket کی لپیٹ۔",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP، اکثر WebSocket + TLS",
+    "looksLike": "بے ترتیب بائٹس، یا لپیٹے جانے پر HTTPS",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "کوئی نہیں (ایپ درکار ہے)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess اور VLESS میں کیا فرق ہے؟",
+      "answer": "VMess اپنے ہیڈرز اور ڈیٹا خود انکرپٹ کرتا ہے۔ VLESS، UUID پر مبنی شناخت رکھتا ہے مگر اپنی انکرپشن چھوڑ دیتا ہے اور نیچے کی TLS پرت پر انحصار کرتا ہے، جس سے ٹریفک دو بار انکرپٹ نہیں ہوتی۔"
+    },
+    {
+      "question": "میری گھڑی غلط ہو تو VMess کنیکٹ کیوں نہیں ہوتا؟",
+      "answer": "VMess کی تصدیق میں ٹائم سٹیمپ شامل ہے، اس لیے جب کلائنٹ کی گھڑی سرور کی گھڑی سے بہت دور ہو تو سرور درخواست مسترد کر دیتا ہے۔ ڈیوائس کی گھڑی کو خودکار پر رکھنا عموماً اسے ٹھیک کر دیتا ہے۔"
+    },
+    {
+      "question": "کیا VMess محفوظ ہے؟",
+      "answer": "AEAD ہیڈر تصدیق کے ساتھ، ہاں۔ پرانا MD5 والا طریقہ ہیڈر کی سالمیت کی ضمانت نہیں دے سکتا تھا، اور سرکاری دستاویزات اس سے پرہیز کا مشورہ دیتی ہیں۔"
+    },
+    {
+      "question": "کیا VMess پہچانا جا سکتا ہے؟",
+      "answer": "بغیر لپیٹ VMess بے ترتیب بائٹس جیسا لگتا ہے، جسے کچھ فائر والز دیکھتے ہی بلاک کر دیتے ہیں۔ TLS پر WebSocket یا gRPC میں لپیٹے جانے پر یہ کسی ڈومین تک HTTPS جیسا لگتا ہے، جسے الگ پہچاننا بہت مشکل ہے۔"
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess پروٹوکول دستاویزات", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core ریپازٹری", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS پروٹوکول تصریح", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

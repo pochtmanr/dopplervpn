@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2：劣悪なネットワーク向けのQUICプロキシ",
+  "metaTitle": "Hysteria 2とは？QUICプロキシプロトコルの解説",
+  "metaDescription": "Hysteria 2を解説：プローブには実際のHTTP/3 Webサーバーのように振る舞い、パケットロスの多いネットワークでも速度を保つQUIC上のプロキシと、UDPやQUICがブロックされると使えなくなる点を紹介します。",
+  "excerpt": "HTTP/3の基盤となるトランスポートQUIC上のプロキシ。パケットロスの多い回線でも高速で、パスワードを持たない相手には本物のHTTP/3 Webサーバーに見えます。通信にはUDPが必要です。",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC（UDP）",
+    "looksLike": "HTTP/3のWebサーバー",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "なし（アプリが必要）"
+  },
+  "apps": [
+    { "name": "Hysteria（公式クライアント）", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "複数のアプリが使用するクロスプラットフォームのコア" }
+  ],
+  "faq": [
+    {
+      "question": "Hysteria 2はVPNですか？",
+      "answer": "プロキシプロトコルですが、HiddifyやNekoBoxなどのクライアントを使えば、デバイスのすべてのトラフィックを経由させることができるため、実際にはVPNのように使えます。"
+    },
+    {
+      "question": "Hysteria 2が品質の悪い接続でも速いのはなぜですか？",
+      "answer": "UDP上のQUICで動作し、すべてのストリームを止めることなくパケットロスから回復します。また、不安定な回線向けの独自の輻輳制御も使えます。"
+    },
+    {
+      "question": "Hysteria 2はブロックされますか？",
+      "answer": "プローブには実際のHTTP/3サーバーが見えるため、アクティブプロービングには耐性があります。ただし、検閲当局がUDPやQUIC全体を速度制限したりブロックしたりすると、Hysteria 2は接続できなくなります。"
+    },
+    {
+      "question": "Hysteria 2とVLESS-Reality、どちらがよいですか？",
+      "answer": "UDPを許可しているパケットロスの多いネットワークでは、Hysteria 2のほうが速いことが多くあります。VLESS-RealityはTCPで動作し、UDPがフィルタリングされる環境でも動作し続けます。両方を使い分けている人も多くいます。"
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria、Hysteria 2プロトコル仕様", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet、hysteriaリポジトリ", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF、RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF、RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

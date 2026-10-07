@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: slumpmässiga byte, och varför det slutade fungera",
+  "metaTitle": "Vad är Shadowsocks? Så fungerar det och hur GFW upptäcker det",
+  "metaDescription": "Shadowsocks förklarat: krypterad proxy mot den stora brandväggen, hur aktiv sondering hittade den, och hur Kina sedan 2021 blockerar helt krypterad, slumpmässig trafik.",
+  "excerpt": "Den lätta proxyn som föddes i Kina, krypterad från första byten så att den inte ser ut som något. Sedan 2021 blockerar den stora brandväggen trafik just för att den inte ser ut som något.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP eller UDP",
+    "looksLike": "Byte som ser slumpmässiga ut",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ingen (app krävs)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Är Shadowsocks en VPN?",
+      "answer": "Tekniskt är det en krypterad proxy, inte en VPN. De flesta moderna klienter har ett systemomfattande läge som dirigerar all trafik genom den, så i dagligt bruk beter den sig ungefär som en VPN."
+    },
+    {
+      "question": "Fungerar Shadowsocks fortfarande i Kina?",
+      "answer": "Mindre tillförlitligt än tidigare. Forskning publicerad vid USENIX Security 2023 visade att den stora brandväggen sedan november 2021 blockerar helt krypterad trafik som inte ser ut som något känt protokoll, vilket är det Shadowsocks producerar."
+    },
+    {
+      "question": "Hur avgör brandväggen att trafik är helt krypterad?",
+      "answer": "Den inspekterar det första paketet och undantar det om det matchar ett känt protokoll, innehåller tillräckligt med utskrivbara tecken eller har ett genomsnitt av satta bitar per byte utanför intervallet 3.4 till 4.6. Övrig trafik kan blockeras."
+    },
+    {
+      "question": "Vad är Shadowsocks 2022?",
+      "answer": "En revidering av protokollet från 2022 (SIP022) med starkare återuppspelningsskydd och uppdaterad nyckelhantering. Den ändrar inte att trafiken ser slumpmässig ut."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD-chiffer", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: utgåvan Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

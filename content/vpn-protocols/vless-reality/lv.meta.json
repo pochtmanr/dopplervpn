@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: VPN, kas izskatās pēc apmeklējuma īstā vietnē",
+  "metaTitle": "VLESS-Reality skaidrojums: visgrūtāk bloķējamais protokols",
+  "metaDescription": "VLESS un Reality īsi: minimāls starpniekprotokols plus TLS slānis, kas aizņemas īstas vietnes rokasspiedienu, tāpēc nav starpnieka domēna, ko bloķēt. Ātrums, robežas un lietotnes.",
+  "excerpt": "Minimāls protokols aizņemta TLS 1.3 rokasspiediena iekšienē no īstas vietnes. Nav sava domēna, ko bloķēt, un zondes redz īsto vietni.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "TLS 1.3 uz īstu populāru vietni",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/lv/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Kāda ir atšķirība starp VLESS un Reality?",
+      "answer": "VLESS ir starpniekprotokols: tas identificē lietotāju un pasaka, kur datplūsmai jādodas. Reality ir apakšējais TLS slānis, kas liek savienojumam izskatīties pēc apmeklējuma īstā trešās puses vietnē."
+    },
+    {
+      "question": "Vai VLESS-Reality vajag domēnu?",
+      "answer": "Nē. Reality aizņemas esošas vietnes TLS rokasspiedienu, tāpēc serverim nav vajadzīgs savs domēns vai sertifikāts. Tā ir galvenā priekšrocība salīdzinājumā ar Trojan un TLS ietītu VMess."
+    },
+    {
+      "question": "Vai VLESS-Reality ir nenosakāms?",
+      "answer": "Neviens protokols nav. Pētījumi ir parādījuši, ka TLS iekš TLS var atpazīt pēc pirkstu nospieduma, un 2025. gada novembrī tika ziņots, ka daži Krievijas interneta pakalpojumu sniedzēji pārtrauc Reality savienojumus. Tas joprojām ir visgrūtāk bloķējamais plaši lietotais variants."
+    },
+    {
+      "question": "Kad tika izlaists Reality?",
+      "answer": "Reality iznāca Xray-core 1.8.0 2023. gada martā. Pats VLESS tika ierosināts 2020. gada jūlijā."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, VLESS protokola specifikācija", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (2020. gada 16. jūlijs)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, Xray-core v1.8.0 laidiens (2023. gada marts)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, ziņojumi par VLESS + Reality + Vision bloķēšanu Krievijā (issue 546, novembris 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

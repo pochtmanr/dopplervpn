@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: بے ترتیب بائٹس، اور یہ کام کرنا کیوں بند ہوا",
+  "metaTitle": "Shadowsocks کیا ہے؟ یہ کیسے کام کرتا ہے اور GFW اسے کیسے پہچانتا ہے",
+  "metaDescription": "Shadowsocks کی وضاحت: عظیم فائر وال سے گزرنے کے لیے بنا انکرپٹڈ پراکسی، ایکٹو پروبنگ نے اسے کیسے پایا، اور 2021 سے چین مکمل انکرپٹڈ ٹریفک کو اس کی بے ترتیبی سے کیسے بلاک کرتا ہے۔",
+  "excerpt": "چین میں بنا ہلکا پراکسی، پہلے بائٹ سے انکرپٹڈ تاکہ کسی چیز جیسا نہ لگے۔ 2021 سے عظیم فائر وال ٹریفک کو اس لیے بلاک کرتا ہے کہ وہ کسی چیز جیسی نہیں لگتی۔",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP یا UDP",
+    "looksLike": "بے ترتیب نظر آنے والے بائٹس",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "کوئی نہیں (ایپ درکار ہے)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "کیا Shadowsocks ایک VPN ہے؟",
+      "answer": "تکنیکی طور پر یہ انکرپٹڈ پراکسی ہے، VPN نہیں۔ زیادہ تر جدید کلائنٹس ایک سسٹم وائیڈ موڈ جوڑتے ہیں جو ساری ٹریفک اس سے گزارتا ہے، اس لیے روزمرہ استعمال میں یہ کافی حد تک VPN جیسا برتاؤ کرتا ہے۔"
+    },
+    {
+      "question": "کیا Shadowsocks اب بھی چین میں کام کرتا ہے؟",
+      "answer": "پہلے سے کم قابلِ اعتماد طریقے سے۔ USENIX Security 2023 میں شائع تحقیق نے دکھایا کہ نومبر 2021 سے عظیم فائر وال ایسی مکمل طور پر انکرپٹڈ ٹریفک بلاک کرتا ہے جو کسی معروف پروٹوکول جیسی نہیں لگتی، اور Shadowsocks یہی پیدا کرتا ہے۔"
+    },
+    {
+      "question": "فائر وال کیسے طے کرتا ہے کہ ٹریفک مکمل طور پر انکرپٹڈ ہے؟",
+      "answer": "یہ پہلا پیکٹ دیکھتا ہے اور اسے چھوڑ دیتا ہے اگر وہ کسی معروف پروٹوکول سے میل کھاتا ہو، اس میں کافی قابلِ طباعت حروف ہوں، یا فی بائٹ سیٹ بٹس کی اوسط 3.4 سے 4.6 کی حد سے باہر ہو۔ باقی ٹریفک بلاک کی جا سکتی ہے۔"
+    },
+    {
+      "question": "Shadowsocks 2022 کیا ہے؟",
+      "answer": "پروٹوکول کا 2022 کا نظرثانی شدہ ورژن (SIP022)، جس میں ری پلے تحفظ مضبوط ہے اور کلید کی ہینڈلنگ اپ ڈیٹ ہوئی ہے۔ یہ اس حقیقت کو نہیں بدلتا کہ ٹریفک بے ترتیب لگتی ہے۔"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD سائفرز", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 ایڈیشن", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

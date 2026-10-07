@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: ה-VPN המובנה בטלפון שלך",
+  "metaTitle": "מהו IKEv2/IPsec? איך הוא עובד ולמה קל לחסום אותו",
+  "metaDescription": "IKEv2/IPsec בפשטות: ה-VPN המובנה ב-iPhone, ב-Mac, ב-Windows וב-Android, איך MOBIKE שומר על החיבור בתנועה, ולמה יציאות UDP קבועות 500 ו-4500 מקלות על החסימה.",
+  "excerpt": "מובנה ב-iOS, ב-macOS, ב-Windows וב-Android, מהיר, וחלק במעבר בין רשתות. הוא פועל ביציאות קבועות ומוכרות, ולכן חסימה שלו דורשת כלל אחד.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "תעבורת IKE ו-ESP סטנדרטית",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "באילו יציאות IKEv2 משתמש?",
+      "answer": "החלפת המפתחות משתמשת ביציאת UDP 500. כשנתב NAT נמצא בין שני הצדדים, וזה כמעט תמיד המצב, IKE והתעבורה המוצפנת עוברים ליציאת UDP 4500."
+    },
+    {
+      "question": "למה IKEv2 טוב בטלפונים?",
+      "answer": "ההרחבה MOBIKE (RFC 4555) מאפשרת לחיבור IKEv2 לשרוד שינוי של כתובת IP, כך שמעבר מ-Wi-Fi לנתונים סלולריים לא מפיל את המנהרה."
+    },
+    {
+      "question": "האם IKEv2 מאובטח?",
+      "answer": "כן, עם אלגוריתמים עדכניים. הוא תקן של IETF שבשימוש נרחב בארגונים. החולשה שלו היא שקל לזהות ולחסום אותו, לא שקל לפענח אותו."
+    },
+    {
+      "question": "האם IKEv2 עובד בסין או ברוסיה?",
+      "answer": "ברשתות מסוננות הוא בדרך כלל אינו אמין, כי חסימה של יציאות ה-UDP הקבועות שלו או זיהוי של לחיצת היד הסטנדרטית שלו הם דברים פשוטים."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

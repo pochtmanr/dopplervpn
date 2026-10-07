@@ -1,0 +1,36 @@
+{
+  "title": "为什么我们选择 VLESS-Reality，而不是 WireGuard、OpenVPN 和 Shadowsocks",
+  "metaTitle": "为什么 Doppler 使用 VLESS-Reality 而不是 WireGuard 或 OpenVPN",
+  "metaDescription": "我们如何为封锁 VPN 的网络选择协议：固定指纹、主动探测和封锁名单，WireGuard、OpenVPN、Shadowsocks 和 Trojan 为何不够理想，以及我们接受的取舍。",
+  "excerpt": "三个问题决定了结果：协议有没有固定的指纹，探测者会看到什么，有没有可以按名称封锁的东西？以下是各个选项的答案，以及我们放弃了什么。",
+  "navLabel": "为什么我们选择 VLESS",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "faq": [
+    {
+      "question": "为什么 Doppler 不使用 WireGuard？",
+      "answer": "WireGuard 固定大小的握手很容易被过滤系统识别，据报道俄罗斯的运营商已在切断它。Doppler 正是为这样的网络而打造的，所以我们使用 VLESS-Reality，它看起来就像通往真实网站的普通 TLS。"
+    },
+    {
+      "question": "VLESS-Reality 比 WireGuard 慢吗？",
+      "answer": "在良好的连接上，差别很小。在丢包较多的网络中，WireGuard 的 UDP 传输可能更快。VLESS-Reality 的优势在于，在 WireGuard 被封锁的地方它依然可用。"
+    },
+    {
+      "question": "VLESS-Reality 会被封锁吗？",
+      "answer": "会，它并不是保证。研究表明，TLS 套 TLS 可以被识别出指纹，据报道 2025 年 11 月一些俄罗斯运营商切断了 Reality 连接。随着过滤方式的变化，我们会调整服务器设置。"
+    },
+    {
+      "question": "Doppler 支持哪些平台？",
+      "answer": "Doppler 提供适用于 iOS、Android、macOS 和 Windows 的应用。"
+    }
+  ],
+  "sources": [
+    { "label": "net4people，俄罗斯对 OpenVPN 和 WireGuard 的封锁（issue 274，2023 年 8 月）", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people，俄罗斯关于 VLESS + Reality + Vision 被封锁的报告（issue 546，2025 年 11 月）", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

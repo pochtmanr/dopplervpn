@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard dengan Cap Jari Dibuang",
+  "metaTitle": "Apakah AmneziaWG? Cara Ia Berbeza daripada WireGuard",
+  "metaDescription": "AmneziaWG diterangkan: fork WireGuard yang merawakkan pengepala dan saiz paket serta menghantar paket sampah supaya DPI tidak dapat memadankan jabat tangan tetapnya. Had dan aplikasi.",
+  "excerpt": "Kelajuan dan kriptografi WireGuard, dengan pengepala dan saiz paket yang dirawakkan serta paket sampah, supaya penapis tidak dapat memadankan jabat tangan tetapnya.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP yang tidak dapat dikenali",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Tiada (aplikasi diperlukan)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "klien Amnezia (kod sumber)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Pelaksanaan ruang pengguna untuk pelayan dan klien" }
+  ],
+  "faq": [
+    {
+      "question": "Apakah perbezaan antara AmneziaWG dan WireGuard?",
+      "answer": "AmneziaWG mengekalkan kriptografi dan reka bentuk WireGuard tetapi merawakkan pengepala serta saiz paket dan boleh menghantar paket sampah sebelum jabat tangan, jadi trafik itu tidak lagi sepadan dengan tandatangan tetap WireGuard."
+    },
+    {
+      "question": "Adakah AmneziaWG serasi dengan WireGuard?",
+      "answer": "Hanya apabila pengaburan dimatikan. Setelah pengepala tersuai, awalan saiz atau paket sampah dikonfigurasikan, kedua-dua hujung mesti menjalankan AmneziaWG dengan tetapan yang sepadan."
+    },
+    {
+      "question": "Apakah maksud tetapan Jc, S1 dan H1?",
+      "answer": "Jc ialah bilangan paket sampah yang dihantar sebelum jabat tangan, dengan saiz antara Jmin dan Jmax. S1 hingga S4 menambah awalan rawak untuk mengubah panjang paket. H1 hingga H4 menetapkan nilai jenis mesej tersuai yang menggantikan nilai tetap WireGuard."
+    },
+    {
+      "question": "Adakah AmneziaWG berfungsi di Rusia?",
+      "answer": "Ia menghapuskan tandatangan yang digunakan untuk menyekat WireGuard biasa, dan itu menjadikannya jauh lebih berdaya tahan di sana. Oleh kerana ia berjalan melalui UDP, rangkaian yang mengehadkan UDP masih boleh menjejaskannya."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, dokumentasi AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repositori amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

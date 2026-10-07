@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: การซ่อนพร็อกซีไว้หลังเว็บไซต์จริง",
+  "metaTitle": "โปรโตคอล Trojan คืออะไร? ซ่อนทราฟฟิกพร็อกซีเป็น HTTPS อย่างไร",
+  "metaDescription": "อธิบาย Trojan: ซ่อนทราฟฟิกพร็อกซีในการเชื่อมต่อ TLS จริงอย่างไร ถอยไปแสดงเว็บไซต์จริงให้โพรบ และเหตุใดการต้องมีโดเมนของตัวเองจึงเป็นจุดอ่อน",
+  "excerpt": "การเชื่อมต่อ TLS จริงไปยังเว็บไซต์จริงที่คุณเป็นเจ้าของ มีแฮชรหัสผ่านอยู่ข้างใน หากไม่มีรหัสผ่าน ผู้เข้าชมและโพรบเห็นแค่เว็บไซต์",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS ไปยังโดเมนของคุณเอง",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "ไม่มี (ต้องใช้แอป)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (อิมพลีเมนต์อ้างอิง)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan ยืนยันตัวตนผู้ใช้อย่างไร?",
+      "answer": "ภายในการเชื่อมต่อ TLS ไคลเอนต์ส่งแฮช SHA-224 ของรหัสผ่านที่ใช้ร่วมกันในรูปเลขฐานสิบหก ยาว 56 อักขระ หากไม่ถูกต้อง เซิร์ฟเวอร์จะส่งการเชื่อมต่อต่อไปยังเว็บเซิร์ฟเวอร์สำรอง"
+    },
+    {
+      "question": "Trojan ต้องมีโดเมนหรือไม่?",
+      "answer": "ต้อง เซิร์ฟเวอร์แสดงใบรับรองจริงของโดเมนจริง ซึ่งเป็นสิ่งที่ทำให้มันดูเหมือนไซต์ HTTPS ทั่วไป โดเมนนั้นเองคือสิ่งที่ผู้เซ็นเซอร์บล็อกได้"
+    },
+    {
+      "question": "Trojan หรือ VLESS?",
+      "answer": "ทั้งคู่พึ่ง TLS ไม่ใช่การเข้ารหัสของตัวเอง VLESS ร่วมกับ Reality ไปไกลกว่า โดยยืม handshake ของเว็บไซต์ยอดนิยมที่มีอยู่แล้ว จึงไม่มีโดเมนพร็อกซีให้บล็อก"
+    },
+    {
+      "question": "ตรวจจับ Trojan ได้หรือไม่?",
+      "answer": "ด้วยการโพรบแบบง่ายทำไม่ได้ เพราะโพรบได้เว็บไซต์สำรอง งานวิจัยแสดงว่าทราฟฟิกแบบ TLS ภายใน TLS จับลายนิ้วมือได้จากจังหวะเวลาและขนาดแพ็กเก็ต และโดเมนพร็อกซีถูกบล็อกได้เมื่อระบุตัวได้แล้ว"
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, ที่เก็บโค้ด trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

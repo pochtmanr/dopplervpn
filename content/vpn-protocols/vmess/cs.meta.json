@@ -1,0 +1,47 @@
+{
+  "title": "VMess: původní protokol V2Ray",
+  "metaTitle": "Co je VMess? Jak funguje protokol V2Ray a čím se liší od VLESS",
+  "metaDescription": "VMess srozumitelně: šifrovaný proxy protokol V2Ray, ověřování podle časového razítka, proč se balí do WebSocket a TLS a jak ho nahradily VLESS a Trojan.",
+  "excerpt": "První protokol projektu V2Ray: šifrované hlavičky, UUID pro každého uživatele a obvykle obal WebSocket přes TLS, aby vypadal jako webový provoz.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, často WebSocket + TLS",
+    "looksLike": "Náhodné bajty, nebo HTTPS v obalu",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Není (je potřeba aplikace)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Jaký je rozdíl mezi VMess a VLESS?",
+      "answer": "VMess sám šifruje své hlavičky a data. VLESS ponechává identitu založenou na UUID, ale opouští vlastní šifrování a spoléhá se na vrstvu TLS pod sebou, čímž se vyhne šifrování provozu dvakrát."
+    },
+    {
+      "question": "Proč se VMess nepřipojí, když mám špatný čas?",
+      "answer": "Ověřování VMess obsahuje časové razítko, takže server odmítne požadavky, když jsou hodiny klienta příliš daleko od jeho vlastních. Obvykle pomůže nastavit hodiny zařízení na automaticky."
+    },
+    {
+      "question": "Je VMess bezpečný?",
+      "answer": "S ověřováním hlavičky přes AEAD ano. Starší režim založený na MD5 integritu hlavičky zaručit neuměl a oficiální dokumentace před ním varuje."
+    },
+    {
+      "question": "Lze VMess rozpoznat?",
+      "answer": "Holý VMess vypadá jako náhodné bajty a některé firewally takový provoz blokují hned. V obalu WebSocket nebo gRPC přes TLS vypadá jako HTTPS k doméně, a ten se vyčleňuje mnohem hůř."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentace protokolu VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repozitář v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specifikace protokolu VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

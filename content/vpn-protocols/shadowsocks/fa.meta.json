@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: بایت‌های تصادفی، و چرا دیگر جواب نمی‌دهند",
+  "metaTitle": "Shadowsocks چیست؟ طرز کار و روش شناسایی آن توسط GFW",
+  "metaDescription": "توضیح Shadowsocks: پراکسی رمزگذاری‌شده‌ای که برای شکست فایروال بزرگ ساخته شد، چگونه کاوش فعال آن را یافت، و چگونه چین از 2021 ترافیک کاملاً رمزگذاری‌شده را از روی تصادفی بودنش مسدود می‌کند.",
+  "excerpt": "پراکسی سبکی که در چین متولد شد و از بایت اول رمزگذاری می‌شود تا شبیه هیچ چیز نباشد. از 2021 فایروال بزرگ ترافیک را به‌خاطر شبیه هیچ چیز نبودن مسدود می‌کند.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP یا UDP",
+    "looksLike": "بایت‌های به‌ظاهر تصادفی",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "ندارد (نیازمند برنامه)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "آیا Shadowsocks یک VPN است؟",
+      "answer": "از نظر فنی یک پراکسی رمزگذاری‌شده است، نه VPN. بیشتر کلاینت‌های امروزی حالتی در سطح کل سیستم اضافه می‌کنند که همهٔ ترافیک را از آن عبور می‌دهد، پس در استفادهٔ روزمره تقریباً مثل VPN رفتار می‌کند."
+    },
+    {
+      "question": "آیا Shadowsocks هنوز در چین کار می‌کند؟",
+      "answer": "کم‌اعتمادتر از قبل. پژوهشی که در USENIX Security 2023 منتشر شد نشان داد از نوامبر 2021 فایروال بزرگ ترافیک کاملاً رمزگذاری‌شده‌ای را که شبیه هیچ پروتکل شناخته‌شده‌ای نیست مسدود می‌کند، و Shadowsocks دقیقاً چنین ترافیکی تولید می‌کند."
+    },
+    {
+      "question": "فایروال چگونه تشخیص می‌دهد ترافیک کاملاً رمزگذاری‌شده است؟",
+      "answer": "بستهٔ اول را بررسی می‌کند و اگر با یک پروتکل شناخته‌شده مطابقت داشته باشد، نویسه‌های قابل‌چاپ کافی داشته باشد، یا میانگین بیت‌های برقرار در هر بایت آن خارج از بازهٔ 3.4 تا 4.6 باشد، آن را مستثنا می‌کند. ترافیک باقی‌مانده قابل مسدود شدن است."
+    },
+    {
+      "question": "Shadowsocks 2022 چیست؟",
+      "answer": "بازنگری سال 2022 پروتکل (SIP022) با محافظت قوی‌تر در برابر بازپخش و مدیریت به‌روزشدهٔ کلید. این موضوع که ترافیک تصادفی به نظر می‌رسد را تغییر نمی‌دهد."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers (رمزهای AEAD)", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition (ویرایش 2022)", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

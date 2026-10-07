@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray का मूल प्रोटोकॉल",
+  "metaTitle": "VMess क्या है? V2Ray प्रोटोकॉल कैसे काम करता है, और VMess बनाम VLESS",
+  "metaDescription": "VMess की सरल व्याख्या: V2Ray का एन्क्रिप्टेड प्रॉक्सी प्रोटोकॉल, इसका टाइमस्टैम्प-आधारित प्रमाणीकरण, इसे आमतौर पर WebSocket और TLS में क्यों लपेटा जाता है, और VLESS व Trojan ने इसकी जगह कैसे ली।",
+  "excerpt": "V2Ray प्रोजेक्ट का पहला प्रोटोकॉल: एन्क्रिप्टेड हेडर, हर यूज़र के लिए एक UUID, और वेब ट्रैफ़िक जैसा दिखने के लिए आमतौर पर TLS के ऊपर WebSocket का रैपर।",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, अक्सर WebSocket + TLS",
+    "looksLike": "रैंडम बाइट, या रैपर में हो तो HTTPS",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "कोई नहीं (ऐप ज़रूरी)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess और VLESS में क्या अंतर है?",
+      "answer": "VMess अपने हेडर और डेटा खुद एन्क्रिप्ट करता है। VLESS UUID-आधारित पहचान रखता है लेकिन अपना एन्क्रिप्शन हटा देता है और नीचे की TLS लेयर पर निर्भर करता है, जिससे ट्रैफ़िक को दो बार एन्क्रिप्ट करने से बचा जाता है।"
+    },
+    {
+      "question": "घड़ी गलत होने पर VMess कनेक्ट क्यों नहीं होता?",
+      "answer": "VMess के प्रमाणीकरण में टाइमस्टैम्प शामिल है, इसलिए जब क्लाइंट की घड़ी सर्वर की घड़ी से बहुत दूर होती है तो सर्वर रिक्वेस्ट अस्वीकार कर देता है। डिवाइस की घड़ी को ऑटोमैटिक पर सेट करने से आमतौर पर यह ठीक हो जाता है।"
+    },
+    {
+      "question": "क्या VMess सुरक्षित है?",
+      "answer": "AEAD हेडर प्रमाणीकरण के साथ, हाँ। पुराना MD5-आधारित मोड हेडर की अखंडता की गारंटी नहीं दे सकता था, और आधिकारिक दस्तावेज़ीकरण इसके खिलाफ़ चेतावनी देता है।"
+    },
+    {
+      "question": "क्या VMess पहचाना जा सकता है?",
+      "answer": "कच्चा VMess रैंडम बाइट जैसा दिखता है, जिसे कुछ फ़ायरवॉल देखते ही ब्लॉक कर देते हैं। TLS के ऊपर WebSocket या gRPC में लपेटने पर यह किसी डोमेन से HTTPS जैसा दिखता है, जिसे अलग से पहचानना कहीं ज़्यादा मुश्किल है।"
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess प्रोटोकॉल दस्तावेज़ीकरण", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core रिपॉज़िटरी", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS प्रोटोकॉल विनिर्देश", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

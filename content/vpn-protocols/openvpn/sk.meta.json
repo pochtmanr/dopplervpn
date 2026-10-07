@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: pružný veterán, ktorého cenzori vedia rozpoznať",
+  "metaTitle": "Čo je OpenVPN? Ako funguje a prečo ho poskytovatelia vidia",
+  "metaDescription": "OpenVPN zrozumiteľne: riadiaci TLS kanál a dátový kanál, prečo je pomalší ako WireGuard a prečo výskum rozpoznal viac ako 85 % tokov u skutočného poskytovateľa.",
+  "excerpt": "Dve desaťročia, takmer neobmedzené nastavenia a podpora takmer všade. Výskum tiež ukázal, že poskytovateľ vie väčšinu prevádzky OpenVPN spoznať podľa jej tvaru.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP alebo TCP",
+    "looksLike": "Vlastné TLS rámcovanie OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Žiadne (treba aplikáciu)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (klient a server s otvoreným kódom)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Je OpenVPN ešte bezpečný?",
+      "answer": "Aktuálne vydanie OpenVPN so zdravou konfiguráciou je bezpečné. Pretože je tak nastaviteľný, hlavné riziko je slabé nastavenie, napríklad zastarané šifry, a nie chyba v protokole."
+    },
+    {
+      "question": "Prečo sa OpenVPN rozpozná aj na porte 443?",
+      "answer": "Použitie portu 443 z prevádzky nerobí HTTPS. OpenVPN rámcuje svoj TLS handshake vlastným formátom paketov a zverejnený výskum podľa tohto tvaru rozpoznal viac ako 85 % tokov OpenVPN v sieti skutočného poskytovateľa."
+    },
+    {
+      "question": "OpenVPN alebo WireGuard?",
+      "answer": "V otvorenej sieti je WireGuard zvyčajne rýchlejší a jednoduchší. OpenVPN vyhráva v kompatibilite a vie bežať cez TCP. Ani jeden nie je navrhnutý tak, aby sa skrýval pred cenzormi."
+    },
+    {
+      "question": "Je OpenVPN UDP alebo TCP?",
+      "answer": "Aj jedno, aj druhé. UDP je predvolené a zvyčajne rýchlejšie; TCP pomáha v sieťach, ktoré blokujú UDP, za cenu časti rýchlosti."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Referenčná príručka OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, blokovanie OpenVPN a WireGuard v Rusku (issue 274, august 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

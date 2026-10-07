@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: hiter, preprost in enostavno blokiran",
+  "metaTitle": "Kaj je WireGuard? Kako deluje in zakaj ga blokirajo",
+  "metaDescription": "WireGuard pojasnjen: fiksna sodobna kriptografija, zakaj je tako hiter, zakaj je rokovanje fiksne velikosti enostavno blokirati in katere aplikacije ga uporabljajo.",
+  "excerpt": "Najhitrejši razširjen VPN protokol s fiksno sodobno kriptografijo in zelo majhno kodo. Nikoli ni bil narejen za skrivanje, filtrirana omrežja pa ga blokirajo prvega.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Prepoznavno rokovanje VPN",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Jedro Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (uradne aplikacije)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Večplatformsko jedro, ki ga uporablja več aplikacij" }
+  ],
+  "faq": [
+    {
+      "question": "Ali je WireGuard varen?",
+      "answer": "Da. WireGuard uporablja fiksen nabor sodobnih primitivov (ChaCha20-Poly1305, Curve25519, BLAKE2s) in ima majhno kodo, ki jo je praktično mogoče pregledati. Njegova šibkost je vidnost za cenzorje, ne trdnost šifriranja."
+    },
+    {
+      "question": "Zakaj WireGuard preneha delovati v Rusiji ali Iranu?",
+      "answer": "Njegova sporočila rokovanja imajo fiksne velikosti, 148 bajtov od odjemalca in 92 bajtov v odgovoru, prek UDP. Ta vzorec je za globok pregled paketov preprost za zaznavo, o operaterjih v Rusiji pa so poročali, da seje WireGuard prekinejo takoj po rokovanju."
+    },
+    {
+      "question": "Ali je WireGuard hitrejši od OpenVPN?",
+      "answer": "Običajno da. WireGuard vzpostavi sejo v eni izmenjavi, v Linuxu teče v jedru in ima veliko manj protokolnega dogovarjanja. Natančna razlika je odvisna od naprave in omrežja."
+    },
+    {
+      "question": "Ali je WireGuard mogoče skriti pred DPI?",
+      "answer": "Sam po sebi ne. Razcepi, kot je AmneziaWG, spremenijo velikosti in glave paketov, da je promet manj prepoznaven, ali pa je WireGuard mogoče oviti v drug protokol, za ceno dela hitrosti."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (tehnični dokument)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, blokade OpenVPN in WireGuard v Rusiji (issue 274, avgust 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

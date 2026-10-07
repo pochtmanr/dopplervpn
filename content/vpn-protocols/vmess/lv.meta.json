@@ -1,0 +1,47 @@
+{
+  "title": "VMess: V2Ray sākotnējais protokols",
+  "metaTitle": "Kas ir VMess? Kā darbojas V2Ray protokols un VMess pret VLESS",
+  "metaDescription": "VMess skaidrojums: V2Ray šifrētais starpniekprotokols, autentifikācija pēc laika zīmoga, kāpēc to parasti ietin WebSocket un TLS un kā VLESS un Trojan to aizstāja.",
+  "excerpt": "V2Ray projekta pirmais protokols: šifrētas galvenes, UUID katram lietotājam un parasti WebSocket virs TLS ietvars, lai izskatītos pēc tīmekļa datplūsmas.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, bieži WebSocket + TLS",
+    "looksLike": "Nejauši baiti vai HTTPS, kad ietīts",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Nav (vajadzīga lietotne)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Kāda ir atšķirība starp VMess un VLESS?",
+      "answer": "VMess šifrē savas galvenes un datus. VLESS patur uz UUID balstīto identitāti, bet atmet savu šifrēšanu un paļaujas uz apakšējo TLS slāni, kas novērš datplūsmas šifrēšanu divreiz."
+    },
+    {
+      "question": "Kāpēc VMess nesavienojas, ja mans pulkstenis ir nepareizs?",
+      "answer": "VMess autentifikācija ietver laika zīmogu, tāpēc serveris noraida pieprasījumus, kad klienta pulkstenis ir pārāk tālu no sava. Ierīces pulksteņa iestatīšana uz automātisko parasti to novērš."
+    },
+    {
+      "question": "Vai VMess ir drošs?",
+      "answer": "Ar AEAD galvenes autentifikāciju — jā. Vecākais uz MD5 balstītais režīms nevarēja garantēt galvenes integritāti, un oficiālā dokumentācija no tā brīdina."
+    },
+    {
+      "question": "Vai VMess ir nosakāms?",
+      "answer": "Neapstrādāts VMess izskatās pēc nejaušiem baitiem, ko daži ugunsmūri bloķē uzreiz. Ietīts WebSocket vai gRPC virs TLS, tas izskatās pēc HTTPS uz domēnu, ko ir daudz grūtāk izcelt."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, VMess protokola dokumentācija", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, v2ray-core repozitorijs", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, VLESS protokola specifikācija", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

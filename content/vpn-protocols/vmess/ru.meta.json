@@ -1,0 +1,47 @@
+{
+  "title": "VMess: первый протокол V2Ray",
+  "metaTitle": "Что такое VMess? Как работает протокол V2Ray и чем он отличается от VLESS",
+  "metaDescription": "VMess простыми словами: шифрованный прокси-протокол V2Ray, аутентификация по метке времени, зачем его заворачивают в WebSocket и TLS и как его сменили VLESS и Trojan.",
+  "excerpt": "Первый протокол проекта V2Ray: шифрованные заголовки, UUID для каждого пользователя и обычно обёртка WebSocket поверх TLS, чтобы выглядеть как веб-трафик.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, часто WebSocket + TLS",
+    "looksLike": "Случайные байты или HTTPS в обёртке",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Нет (нужно приложение)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Чем VMess отличается от VLESS?",
+      "answer": "VMess сам шифрует заголовки и данные. VLESS сохраняет идентификацию по UUID, но отказывается от собственного шифрования и полагается на слой TLS, поэтому трафик не шифруется дважды."
+    },
+    {
+      "question": "Почему VMess не подключается, если на устройстве неправильное время?",
+      "answer": "Аутентификация VMess включает метку времени, поэтому сервер отклоняет запросы, если часы клиента слишком расходятся с его собственными. Обычно помогает включить автоматическую установку времени."
+    },
+    {
+      "question": "Безопасен ли VMess?",
+      "answer": "С аутентификацией заголовка через AEAD — да. Старый режим на основе MD5 не гарантировал целостность заголовка, и официальная документация предостерегает от него."
+    },
+    {
+      "question": "Можно ли распознать VMess?",
+      "answer": "Голый VMess выглядит как случайные байты, и некоторые файрволы блокируют такое сразу. В обёртке WebSocket или gRPC поверх TLS он выглядит как HTTPS к домену, и выделить его гораздо труднее."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, документация протокола VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, репозиторий v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, спецификация протокола VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

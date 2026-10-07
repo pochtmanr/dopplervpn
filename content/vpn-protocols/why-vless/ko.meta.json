@@ -1,0 +1,36 @@
+{
+  "title": "WireGuard, OpenVPN, Shadowsocks 대신 VLESS-Reality를 선택한 이유",
+  "metaTitle": "Doppler가 WireGuard나 OpenVPN 대신 VLESS-Reality를 쓰는 이유",
+  "metaDescription": "VPN을 차단하는 네트워크를 위한 프로토콜을 고른 과정: 고정된 지문, 능동적 프로빙, 차단 목록, WireGuard·OpenVPN·Shadowsocks·Trojan이 부족했던 이유와 감수한 절충을 설명합니다.",
+  "excerpt": "프로토콜에 고정된 지문이 있는가, 프로브에는 무엇이 보이는가, 이름으로 차단할 대상이 있는가, 이 세 가지 질문이 결정했습니다. 각 선택지의 답과 포기한 것을 소개합니다.",
+  "navLabel": "VLESS를 선택한 이유",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "faq": [
+    {
+      "question": "Doppler는 왜 WireGuard를 사용하지 않나요?",
+      "answer": "WireGuard의 고정 크기 핸드셰이크는 필터가 식별하기 쉬우며, 러시아에서는 이동통신사가 이를 끊는다는 보고가 있었습니다. Doppler는 그런 네트워크를 위해 만들어졌기 때문에, 실제 웹사이트에 대한 평범한 TLS처럼 보이는 VLESS-Reality를 사용합니다."
+    },
+    {
+      "question": "VLESS-Reality는 WireGuard보다 느린가요?",
+      "answer": "깨끗한 연결에서는 차이가 작습니다. 패킷 손실이 있는 네트워크에서는 WireGuard의 UDP 전송이 더 빠를 수 있습니다. VLESS-Reality의 장점은 WireGuard가 차단되는 곳에서도 계속 작동한다는 점입니다."
+    },
+    {
+      "question": "VLESS-Reality도 차단될 수 있나요?",
+      "answer": "네, 보장은 아닙니다. 연구에서는 TLS 안의 TLS가 지문 식별될 수 있음이 확인되었고, 2025년 11월에는 일부 러시아 ISP가 Reality 연결을 끊는다는 보고가 있었습니다. 저희는 필터링이 바뀜에 따라 서버 설정을 조정합니다."
+    },
+    {
+      "question": "Doppler는 어떤 플랫폼을 지원하나요?",
+      "answer": "Doppler는 iOS, Android, macOS, Windows용 앱을 제공합니다."
+    }
+  ],
+  "sources": [
+    { "label": "net4people, 러시아의 OpenVPN 및 WireGuard 차단 (issue 274, 2023년 8월)", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, 러시아의 VLESS + Reality + Vision 차단 보고 (issue 546, 2025년 11월)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

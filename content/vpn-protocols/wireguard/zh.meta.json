@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard：快速、简单，也容易被封锁",
+  "metaTitle": "什么是 WireGuard？工作原理及被封锁的原因",
+  "metaDescription": "WireGuard 详解：固定的现代加密算法、速度为何这么快、固定大小的握手为何便于审查方封锁，以及有哪些应用在使用它。",
+  "excerpt": "最快的主流 VPN 协议，采用固定的现代加密，代码量极小。它从未为隐藏而设计，在有过滤的网络中最先被封锁。",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "可识别的 VPN 握手",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux 内核（5.6+）"
+  },
+  "apps": [
+    { "name": "WireGuard（官方应用）", "url": "https://www.wireguard.com/install/", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "跨平台内核，多款应用基于它构建" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuard 安全吗？",
+      "answer": "安全。WireGuard 使用一组固定的现代加密原语（ChaCha20-Poly1305、Curve25519、BLAKE2s），代码量小，便于审计。它的弱点在于容易被审查方发现，而不是加密强度。"
+    },
+    {
+      "question": "为什么 WireGuard 在俄罗斯或伊朗会失效？",
+      "answer": "它的握手消息大小固定，客户端发出 148 字节，回复 92 字节，并且通过 UDP 传输。深度包检测很容易识别这种特征，据报道，俄罗斯的运营商会在握手之后立即切断 WireGuard 会话。"
+    },
+    {
+      "question": "WireGuard 比 OpenVPN 快吗？",
+      "answer": "通常是的。WireGuard 一次往返就能建立会话，在 Linux 上运行于内核中，需要协商的协议开销也少得多。具体差距取决于设备和网络。"
+    },
+    {
+      "question": "WireGuard 能躲过 DPI 吗？",
+      "answer": "单靠它自己不行。AmneziaWG 等分支会改变数据包大小和包头，使流量不那么容易识别；也可以把 WireGuard 封装在另一种协议中，但会损失一部分速度。"
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people，俄罗斯对 OpenVPN 和 WireGuard 的封锁（issue 274，2023 年 8 月）", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

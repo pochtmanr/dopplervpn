@@ -1,0 +1,52 @@
+{
+  "title": "VLESS-Reality: Gerçek Bir Web Sitesini Ziyaret Etmeye Benzeyen VPN",
+  "metaTitle": "VLESS-Reality Nedir? Engellenmesi En Zor Protokol",
+  "metaDescription": "VLESS ve Reality kısaca: asgari bir vekil protokolü ve gerçek bir sitenin el sıkışmasını ödünç alan TLS katmanı; engellenecek vekil alan adı yok. Hız, sınırlar, uygulamalar.",
+  "excerpt": "Gerçek bir web sitesinden ödünç alınan TLS 1.3 el sıkışmasının içinde asgari bir protokol. Engellenecek kendi alan adı yok; yoklamalar gerçek siteyi görür.",
+  "navLabel": "VLESS-Reality",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2020 / 2023",
+    "transport": "TCP + TLS 1.3",
+    "looksLike": "Gerçek, popüler bir web sitesine TLS 1.3",
+    "censorshipResistance": 3,
+    "speed": 3,
+    "builtIn": "Yok (uygulama gerekir)"
+  },
+  "apps": [
+    { "name": "Doppler VPN", "url": "https://www.dopplervpn.org/tr/downloads", "platforms": "iOS, Android, macOS, Windows" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VLESS ile Reality arasındaki fark nedir?",
+      "answer": "VLESS vekil sunucu protokolüdür: kullanıcıyı tanımlar ve trafiğin nereye gideceğini söyler. Reality ise bunun altındaki TLS katmanıdır ve bağlantıyı gerçek bir üçüncü taraf web sitesini ziyaret etmeye benzetir."
+    },
+    {
+      "question": "VLESS-Reality'nin bir alan adına ihtiyacı var mı?",
+      "answer": "Hayır. Reality, var olan bir web sitesinin TLS el sıkışmasını ödünç alır; bu yüzden sunucunun kendi alan adına ya da sertifikasına ihtiyacı yoktur. Trojan'a ve TLS'e sarılmış VMess'e göre başlıca ilerlemesi budur."
+    },
+    {
+      "question": "VLESS-Reality tespit edilemez mi?",
+      "answer": "Hiçbir protokol öyle değildir. Araştırmalar, TLS içinde TLS'in parmak izinin çıkarılabildiğini gösterdi ve Kasım 2025'te bazı Rus internet servis sağlayıcılarının Reality bağlantılarını kestiği bildirildi. Yine de engellenmesi en zor yaygın seçenek olmayı sürdürüyor."
+    },
+    {
+      "question": "Reality ne zaman yayımlandı?",
+      "answer": "Reality, Mart 2023'te Xray-core 1.8.0 ile sunuldu. VLESS'in kendisi Temmuz 2020'de önerilmişti."
+    }
+  ],
+  "sources": [
+    { "label": "Project X, VLESS protokol şartnamesi", "url": "https://xtls.github.io/en/development/protocols/vless.html" },
+    { "label": "RPRX, [New Protocol] VLESS BETA, v2ray-core issue 2636 (16 Temmuz 2020)", "url": "https://github.com/v2ray/v2ray-core/issues/2636" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "XTLS, Xray-core v1.8.0 sürümü (Mart 2023)", "url": "https://github.com/XTLS/Xray-core/releases/tag/v1.8.0" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, Rusya'da VLESS + Reality + Vision engelleme bildirimleri (issue 546, Kasım 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

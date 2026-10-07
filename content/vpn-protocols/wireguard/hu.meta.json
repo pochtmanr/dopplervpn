@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: gyors, egyszerű és könnyen blokkolható",
+  "metaTitle": "Mi a WireGuard? Hogyan működik, és miért blokkolják",
+  "metaDescription": "A WireGuard egyszerűen: rögzített modern kriptográfia, miért ilyen gyors, miért könnyű a cenzoroknak blokkolni a fix méretű kézfogását, és mely alkalmazások használják.",
+  "excerpt": "A leggyorsabb elterjedt VPN-protokoll, rögzített modern kriptográfiával és apró kódbázissal. Soha nem arra készült, hogy rejtőzzön, és a szűrt hálózatok ezt blokkolják először.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Felismerhető VPN-kézfogás",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux-kernel (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (hivatalos alkalmazások)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Több alkalmazás által használt platformfüggetlen mag" }
+  ],
+  "faq": [
+    {
+      "question": "Biztonságos a WireGuard?",
+      "answer": "Igen. A WireGuard rögzített modern primitíveket használ (ChaCha20-Poly1305, Curve25519, BLAKE2s), a kódbázisa pedig elég kicsi ahhoz, hogy a gyakorlatban át lehessen vizsgálni. A gyengesége a cenzorok számára való láthatóság, nem a titkosítás erőssége."
+    },
+    {
+      "question": "Miért áll le a WireGuard Oroszországban vagy Iránban?",
+      "answer": "A kézfogás üzeneteinek mérete rögzített: 148 bájt a klienstől és 92 bájt a válasz, UDP-n. Ezt a mintát a mélycsomag-vizsgálat egyszerűen felismeri, és Oroszországban arról számoltak be, hogy a szolgáltatók a kézfogás után rögtön megszakítják a WireGuard-munkameneteket."
+    },
+    {
+      "question": "A WireGuard gyorsabb az OpenVPN-nél?",
+      "answer": "Általában igen. A WireGuard egy oda-vissza üzenetváltással hoz létre munkamenetet, Linuxon a kernelben fut, és sokkal kevesebb protokollrészletről kell egyeztetnie. A pontos különbség az eszköztől és a hálózattól függ."
+    },
+    {
+      "question": "El lehet rejteni a WireGuard-ot a DPI elől?",
+      "answer": "Önmagában nem. Az olyan elágazások, mint az AmneziaWG, megváltoztatják a csomagméreteket és a fejléceket, hogy a forgalom kevésbé legyen felismerhető, vagy a WireGuard becsomagolható egy másik protokollba, a sebesség egy részének árán."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (tanulmány)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, az OpenVPN és a WireGuard blokkolása Oroszországban (issue 274, 2023. augusztus)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

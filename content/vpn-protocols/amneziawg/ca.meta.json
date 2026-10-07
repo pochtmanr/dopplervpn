@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard sense les empremtes",
+  "metaTitle": "Què és AmneziaWG? En què es diferencia de WireGuard",
+  "metaDescription": "AmneziaWG explicat: bifurcació de WireGuard que aleatoritza capçaleres i mides i envia paquets brossa perquè el DPI no reconegui el handshake fix. Límits i aplicacions.",
+  "excerpt": "La velocitat i la criptografia de WireGuard, amb capçaleres, mides de paquet i paquets brossa aleatoris, perquè els filtres no en reconeguin el handshake fix.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP no reconeixible",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Cap (cal una aplicació)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Client Amnezia (codi font)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementació en espai d'usuari per a servidors i clients" }
+  ],
+  "faq": [
+    {
+      "question": "Quina diferència hi ha entre AmneziaWG i WireGuard?",
+      "answer": "AmneziaWG conserva la criptografia i el disseny de WireGuard, però aleatoritza les capçaleres i les mides dels paquets i pot enviar paquets brossa abans del handshake, de manera que el trànsit ja no coincideix amb la signatura fixa de WireGuard."
+    },
+    {
+      "question": "AmneziaWG és compatible amb WireGuard?",
+      "answer": "Només amb l'ofuscació desactivada. Un cop s'hi configuren capçaleres pròpies, prefixos de mida o paquets brossa, els dos extrems han d'executar AmneziaWG amb els mateixos paràmetres."
+    },
+    {
+      "question": "Què volen dir els paràmetres Jc, S1 i H1?",
+      "answer": "Jc és el nombre de paquets brossa enviats abans del handshake, amb mides entre Jmin i Jmax. S1 a S4 afegeixen prefixos aleatoris per canviar la longitud dels paquets. H1 a H4 fixen valors propis de tipus de missatge que substitueixen els fixos de WireGuard."
+    },
+    {
+      "question": "AmneziaWG funciona a Rússia?",
+      "answer": "Elimina les signatures que es fan servir per bloquejar el WireGuard tal qual, cosa que el fa molt més resistent allà. Com que funciona sobre UDP, les xarxes que restringeixen l'UDP encara el poden afectar."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, documentació d'AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repositori amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

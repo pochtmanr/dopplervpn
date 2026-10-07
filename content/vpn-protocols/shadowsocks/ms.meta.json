@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: Bait Rawak, dan Sebab Ia Berhenti Berkesan",
+  "metaTitle": "Apakah Shadowsocks? Cara Ia Berfungsi dan Cara GFW Mengesannya",
+  "metaDescription": "Shadowsocks diterangkan: proksi tersulit yang dibina untuk mengalahkan Great Firewall, cara penyiasatan aktif menemuinya, dan cara China sejak 2021 menyekat trafik tersulit sepenuhnya berdasarkan kerawakannya.",
+  "excerpt": "Proksi ringan yang lahir di China, disulitkan sejak bait pertama supaya kelihatan seperti tiada apa-apa. Sejak 2021, Great Firewall menyekat trafik kerana kelihatan seperti tiada apa-apa.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP atau UDP",
+    "looksLike": "Bait yang kelihatan rawak",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Tiada (aplikasi diperlukan)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Adakah Shadowsocks sebuah VPN?",
+      "answer": "Secara teknikal ia ialah proksi tersulit, bukan VPN. Kebanyakan klien moden menambah mod seluruh sistem yang menghalakan semua trafik melaluinya, jadi dalam penggunaan harian ia berfungsi hampir seperti VPN."
+    },
+    {
+      "question": "Adakah Shadowsocks masih berfungsi di China?",
+      "answer": "Kurang boleh dipercayai berbanding dahulu. Penyelidikan yang diterbitkan di USENIX Security 2023 menunjukkan bahawa sejak November 2021, Great Firewall menyekat trafik tersulit sepenuhnya yang tidak kelihatan seperti mana-mana protokol yang diketahui, iaitu apa yang dihasilkan oleh Shadowsocks."
+    },
+    {
+      "question": "Bagaimanakah tembok api memutuskan bahawa trafik tersulit sepenuhnya?",
+      "answer": "Ia memeriksa paket pertama dan mengecualikannya jika ia sepadan dengan protokol yang diketahui, mengandungi cukup banyak aksara yang boleh dicetak, atau mempunyai purata bit ditetapkan bagi setiap bait di luar julat 3.4 hingga 4.6. Trafik yang tinggal boleh disekat."
+    },
+    {
+      "question": "Apakah Shadowsocks 2022?",
+      "answer": "Semakan 2022 bagi protokol ini (SIP022) dengan perlindungan ulang tayang yang lebih kukuh dan pengendalian kunci yang dikemas kini. Ia tidak mengubah hakikat bahawa trafiknya kelihatan rawak."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, sifer AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: edisi Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

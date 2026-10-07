@@ -1,0 +1,47 @@
+{
+  "title": "VMess: Protokol Asli V2Ray",
+  "metaTitle": "Apa Itu VMess? Cara Kerja Protokol V2Ray, dan VMess vs VLESS",
+  "metaDescription": "Penjelasan VMess: protokol proxy terenkripsi V2Ray, autentikasi berbasis stempel waktu, mengapa biasanya dibungkus WebSocket dan TLS, dan bagaimana VLESS serta Trojan menggantikannya.",
+  "excerpt": "Protokol pertama proyek V2Ray: header terenkripsi, satu UUID untuk setiap pengguna, dan biasanya pembungkus WebSocket melalui TLS agar tampak seperti lalu lintas web.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, sering WebSocket + TLS",
+    "looksLike": "Byte acak, atau HTTPS bila dibungkus",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Tidak ada (perlu aplikasi)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Apa perbedaan VMess dan VLESS?",
+      "answer": "VMess mengenkripsi header dan datanya sendiri. VLESS mempertahankan identitas berbasis UUID tetapi membuang enkripsi bawaannya dan mengandalkan lapisan TLS di bawahnya, sehingga lalu lintas tidak dienkripsi dua kali."
+    },
+    {
+      "question": "Mengapa VMess gagal tersambung saat jam perangkat saya salah?",
+      "answer": "Autentikasi VMess menyertakan stempel waktu, sehingga server menolak permintaan bila jam klien terlalu jauh berbeda dari jamnya sendiri. Mengatur jam perangkat ke otomatis biasanya menyelesaikannya."
+    },
+    {
+      "question": "Apakah VMess aman?",
+      "answer": "Dengan autentikasi header AEAD, ya. Mode lama berbasis MD5 tidak dapat menjamin integritas header, dan dokumentasi resmi memperingatkan agar tidak memakainya."
+    },
+    {
+      "question": "Apakah VMess dapat dideteksi?",
+      "answer": "VMess mentah tampak seperti byte acak, yang langsung diblokir oleh sebagian firewall. Bila dibungkus WebSocket atau gRPC melalui TLS, ia tampak seperti HTTPS ke sebuah domain, yang jauh lebih sulit dipilah."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentasi protokol VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repositori v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, spesifikasi protokol VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

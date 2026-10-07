@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: 검열 측이 지문을 식별할 수 있는 유연한 베테랑",
+  "metaTitle": "OpenVPN이란? 작동 방식과 ISP가 탐지할 수 있는 이유",
+  "metaDescription": "OpenVPN 쉽게 이해하기: TLS 제어 채널과 데이터 채널의 작동 방식, WireGuard보다 느린 이유, 실제 ISP에서 OpenVPN 플로의 85% 이상이 식별된 연구를 설명합니다.",
+  "excerpt": "20년 된 프로토콜로, 설정 범위가 매우 넓고 거의 모든 곳에서 지원됩니다. 연구에서는 ISP가 트래픽의 형태만으로 OpenVPN 트래픽 대부분을 가려낼 수 있다는 점도 확인되었습니다.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP 또는 TCP",
+    "looksLike": "OpenVPN 고유의 TLS 프레이밍",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "없음(앱 필요)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (오픈 소스 클라이언트 및 서버)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN은 지금도 안전한가요?",
+      "answer": "최신 OpenVPN 릴리스를 올바르게 설정하면 안전합니다. 설정 범위가 매우 넓기 때문에 주된 위험은 프로토콜 자체의 결함이 아니라 오래된 암호 사용 같은 취약한 구성입니다."
+    },
+    {
+      "question": "OpenVPN은 443 포트에서도 왜 탐지되나요?",
+      "answer": "443 포트를 쓴다고 해서 트래픽이 HTTPS처럼 보이지는 않습니다. OpenVPN은 TLS 핸드셰이크를 자체 패킷 형식으로 감싸며, 발표된 연구에서는 그 형태를 근거로 실제 ISP 네트워크에서 OpenVPN 플로의 85% 이상을 식별했습니다."
+    },
+    {
+      "question": "OpenVPN과 WireGuard 중 무엇이 나은가요?",
+      "answer": "열린 네트워크에서는 대체로 WireGuard가 더 빠르고 단순합니다. OpenVPN은 호환성에서 앞서며 TCP로도 실행할 수 있습니다. 둘 다 검열로부터 숨도록 설계된 것은 아닙니다."
+    },
+    {
+      "question": "OpenVPN은 UDP인가요, TCP인가요?",
+      "answer": "둘 다 가능합니다. UDP가 기본값이며 대체로 더 빠릅니다. TCP는 UDP를 차단하는 네트워크에서 도움이 되지만 속도는 어느 정도 떨어집니다."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 레퍼런스 매뉴얼", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, 러시아의 OpenVPN 및 WireGuard 차단 (issue 274, 2023년 8월)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

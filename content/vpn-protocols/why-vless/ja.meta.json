@@ -1,0 +1,36 @@
+{
+  "title": "WireGuard、OpenVPN、ShadowsocksではなくVLESS-Realityを選んだ理由",
+  "metaTitle": "DopplerがWireGuardやOpenVPNではなくVLESS-Realityを使う理由",
+  "metaDescription": "VPNをブロックするネットワーク向けにプロトコルを選んだ経緯：固定のフィンガープリント、アクティブプロービング、ブロックリスト、WireGuard・OpenVPN・Shadowsocks・Trojanが不十分だった理由、受け入れたトレードオフ。",
+  "excerpt": "決め手は3つの問いでした。プロトコルに固定のフィンガープリントはあるか、プローブには何が見えるか、名前でブロックできるものはあるか。各選択肢がどう答えたか、そして何を手放したかを説明します。",
+  "navLabel": "VLESSを選んだ理由",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "faq": [
+    {
+      "question": "DopplerがWireGuardを使わないのはなぜですか？",
+      "answer": "WireGuardの固定サイズのハンドシェイクはフィルターに識別されやすく、ロシアでは通信事業者が切断していると報告されています。Dopplerはそのようなネットワーク向けに作られているため、実在のWebサイトへの通常のTLSに見えるVLESS-Realityを使っています。"
+    },
+    {
+      "question": "VLESS-RealityはWireGuardより遅いですか？",
+      "answer": "良好な接続では差は小さくなります。パケットロスの多いネットワークでは、WireGuardのUDPトランスポートのほうが速いことがあります。VLESS-Realityの利点は、WireGuardがブロックされる環境でも動作し続けることです。"
+    },
+    {
+      "question": "VLESS-Realityはブロックされますか？",
+      "answer": "はい、保証ではありません。研究では、TLSの中でTLSを運ぶとフィンガープリントを取れることが示されており、2025年11月にはロシアの一部のISPがRealityの接続を切断していると報告されました。フィルタリングの変化に合わせて、サーバーの設定を調整しています。"
+    },
+    {
+      "question": "Dopplerはどのプラットフォームに対応していますか？",
+      "answer": "DopplerにはiOS、Android、macOS、Windows向けのアプリがあります。"
+    }
+  ],
+  "sources": [
+    { "label": "net4people、ロシアにおけるOpenVPNとWireGuardのブロック（issue 274、2023年8月）", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "XTLS、REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people、ロシアにおけるVLESS + Reality + Visionのブロック報告（issue 546、2025年11月）", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

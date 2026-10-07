@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: kiire, lihtne ja kergesti blokeeritav",
+  "metaTitle": "Mis on WireGuard? Kuidas see töötab ja miks seda blokeeritakse",
+  "metaDescription": "WireGuard selgitatuna: fikseeritud tänapäevane krüptograafia, miks see on kiire, miks fikseeritud käepigistust on lihtne blokeerida ja millised rakendused seda kasutavad.",
+  "excerpt": "Kiireim levinud VPN-protokoll, fikseeritud tänapäevase krüptograafia ja väga väikese koodibaasiga. Varjata seda ei loodud, ja filtreeritud võrgud blokeerivad selle esimesena.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Äratuntav VPN-käepigistus",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linuxi tuum (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (ametlikud rakendused)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Platvormideülene tuum, millel põhineb mitu rakendust" }
+  ],
+  "faq": [
+    {
+      "question": "Kas WireGuard on turvaline?",
+      "answer": "Jah. WireGuard kasutab fikseeritud komplekti tänapäevaseid primitiive (ChaCha20-Poly1305, Curve25519, BLAKE2s) ja selle koodibaas on piisavalt väike, et seda oleks praktiline auditeerida. Nõrk koht on nähtavus tsensoritele, mitte krüpteerimise tugevus."
+    },
+    {
+      "question": "Miks WireGuard lakkab Venemaal või Iraanis töötamast?",
+      "answer": "Selle käepigistuse sõnumid on fikseeritud suurusega: 148 baiti kliendilt ja 92 baiti vastuseks, UDP kaudu. See muster on süvapaketikontrollile lihtne ära tunda ning Venemaal on teatatud, et operaatorid katkestavad WireGuardi seansid kohe pärast käepigistust."
+    },
+    {
+      "question": "Kas WireGuard on OpenVPN-ist kiirem?",
+      "answer": "Tavaliselt jah. WireGuard loob seansi ühe edasi-tagasi vahetusega, töötab Linuxis tuumas ja sellel on palju vähem protokolli üldkulu, mille üle läbi rääkida. Täpne vahe sõltub seadmest ja võrgust."
+    },
+    {
+      "question": "Kas WireGuardi saab DPI eest peita?",
+      "answer": "Iseenesest mitte. Harud nagu AmneziaWG muudavad pakettide suurusi ja päiseid, et liiklus oleks vähem äratuntav, või WireGuardi saab mähkida teise protokolli sisse, kiiruse arvelt."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, OpenVPN-i ja WireGuardi blokeerimine Venemaal (issue 274, august 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

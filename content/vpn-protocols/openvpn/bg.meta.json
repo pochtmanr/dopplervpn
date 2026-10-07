@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: гъвкавият ветеран, който цензорите разпознават",
+  "metaTitle": "Какво е OpenVPN? Как работи и защо доставчикът го вижда",
+  "metaDescription": "OpenVPN с обяснение: как работят TLS каналът за управление и каналът за данни, защо е по-бавен от WireGuard и защо изследване разпозна над 85% от потоците му при истински доставчик.",
+  "excerpt": "На две десетилетия, безкрайно конфигурируем и поддържан почти навсякъде. Изследователи показаха и че доставчик може да отличи повечето трафик на OpenVPN по формата му.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP или TCP",
+    "looksLike": "Собствената TLS рамка на OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Няма (нужно е приложение)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (клиент и сървър с отворен код)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Още ли е сигурен OpenVPN?",
+      "answer": "Актуално издание на OpenVPN със здрава конфигурация е сигурно. Понеже е толкова конфигурируем, основният риск е слаба настройка, например остарели шифри, а не недостатък в протокола."
+    },
+    {
+      "question": "Защо OpenVPN се разпознава дори на порт 443?",
+      "answer": "Използването на порт 443 не прави трафика да изглежда като HTTPS. OpenVPN оформя TLS ръкостискането си в собствен формат на пакетите и публикувано изследване разпозна над 85% от потоците на OpenVPN в мрежата на истински доставчик именно по тази форма."
+    },
+    {
+      "question": "OpenVPN или WireGuard?",
+      "answer": "В отворена мрежа WireGuard обикновено е по-бърз и по-прост. OpenVPN печели по съвместимост и може да работи по TCP. Нито един от двата не е създаден да се крие от цензори."
+    },
+    {
+      "question": "OpenVPN по UDP ли е, или по TCP?",
+      "answer": "И по двете. UDP е по подразбиране и обикновено е по-бърз; TCP помага в мрежи, които блокират UDP, с цената на част от скоростта."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Справочно ръководство за OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, блокиране на OpenVPN и WireGuard в Русия (issue 274, август 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

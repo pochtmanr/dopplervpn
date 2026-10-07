@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG：去掉指纹的 WireGuard",
+  "metaTitle": "什么是 AmneziaWG？它与 WireGuard 有何不同",
+  "metaDescription": "AmneziaWG 详解：WireGuard 的分支，通过随机化包头和数据包大小并发送垃圾数据包，使 DPI 无法匹配 WireGuard 固定的握手。局限与应用。",
+  "excerpt": "保留 WireGuard 的速度和加密算法，同时随机化包头、数据包大小并发送垃圾数据包，使过滤系统无法匹配其固定的握手。",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "无法识别的 UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "无（需要安装应用）"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "Amnezia 客户端（源代码）", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "适用于服务器和客户端的用户空间实现" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG 和 WireGuard 有什么区别？",
+      "answer": "AmneziaWG 保留了 WireGuard 的加密算法和设计，但会随机化数据包的包头和大小，并可在握手之前发送垃圾数据包，因此流量不再符合 WireGuard 的固定特征。"
+    },
+    {
+      "question": "AmneziaWG 与 WireGuard 兼容吗？",
+      "answer": "只有在关闭混淆时才兼容。一旦配置了自定义包头、大小前缀或垃圾数据包，两端就必须运行 AmneziaWG，并使用相匹配的设置。"
+    },
+    {
+      "question": "Jc、S1 和 H1 这些设置是什么意思？",
+      "answer": "Jc 是握手之前发送的垃圾数据包数量，大小介于 Jmin 和 Jmax 之间。S1 到 S4 添加随机前缀以改变数据包长度。H1 到 H4 设置自定义的消息类型值，以取代 WireGuard 固定的值。"
+    },
+    {
+      "question": "AmneziaWG 在俄罗斯能用吗？",
+      "answer": "它去除了用于封锁普通 WireGuard 的特征，因此在那里的韧性强得多。由于它运行在 UDP 之上，限制 UDP 的网络仍然可能影响它。"
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia，AmneziaWG 文档", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia，amneziawg-go 代码仓库", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

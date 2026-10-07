@@ -4,7 +4,39 @@ import { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { isRtlLocale } from "@/i18n/routing";
+import { isHowItWorksLocale } from "@/i18n/how-it-works-locales";
+import { isSecurityLocale } from "@/i18n/security-locales";
+import { isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 import { BlogInlineCta } from "./blog-inline-cta";
+
+const SITE = "https://www.dopplervpn.org";
+
+/**
+ * Translations keep link targets byte-identical, so a Russian post still links
+ * to /en/vless-vpn. Point our own site pages at the reader's locale when that
+ * page exists in it. Blog links stay as written: a given post may not be
+ * translated into this locale, and that URL would 404.
+ */
+function localizeHref(href: string | undefined, locale: string): string | undefined {
+  if (!href || locale === "en") return href;
+  const m = /^(?:https:\/\/www\.dopplervpn\.org)?\/en(\/[^?#]*)?([?#].*)?$/.exec(href);
+  if (!m) return href;
+  const path = m[1] ?? "";
+  const available = path.startsWith("/blog")
+    ? false
+    : path.startsWith("/how-it-works")
+      ? isHowItWorksLocale(locale)
+      : path.startsWith("/security")
+        ? isSecurityLocale(locale)
+        : path.startsWith("/vpn-protocols")
+          ? isVpnProtocolsLocale(locale)
+          : true;
+  return available ? `/${locale}${path}${m[2] ?? ""}` : href;
+}
+
+function isExternal(href: string | undefined): boolean {
+  return !!href && href.startsWith("http") && !href.startsWith(SITE);
+}
 
 interface BlogContentProps {
   content: string;
@@ -151,9 +183,9 @@ export function BlogContent({ content, locale, plus = false }: BlogContentProps)
           ),
           a: ({ href, children }) => (
             <a
-              href={href}
-              target={href?.startsWith("http") ? "_blank" : undefined}
-              rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+              href={localizeHref(href, locale)}
+              target={isExternal(href) ? "_blank" : undefined}
+              rel={isExternal(href) ? "noopener noreferrer" : undefined}
               className={
                 plus
                   ? "text-(--c-accent) font-semibold underline underline-offset-4 decoration-(--c-accent)/40 hover:decoration-(--c-accent) transition-colors"

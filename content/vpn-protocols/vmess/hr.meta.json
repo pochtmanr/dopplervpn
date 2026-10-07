@@ -1,0 +1,47 @@
+{
+  "title": "VMess: izvorni protokol V2Raya",
+  "metaTitle": "Što je VMess? Kako radi protokol V2Ray i razlika prema VLESS-u",
+  "metaDescription": "VMess objašnjen: šifrirani proxy protokol V2Raya, autentifikacija vremenskom oznakom, zašto se obično omata u WebSocket i TLS te kako su ga zamijenili VLESS i Trojan.",
+  "excerpt": "Prvi protokol projekta V2Ray: šifrirana zaglavlja, UUID za svakog korisnika i obično omotač WebSocketa preko TLS-a da izgleda kao web-promet.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, često WebSocket + TLS",
+    "looksLike": "Slučajni bajtovi ili HTTPS u omotaču",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Nema (potrebna je aplikacija)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Koja je razlika između VMessa i VLESS-a?",
+      "answer": "VMess sam šifrira zaglavlja i podatke. VLESS zadržava identitet na temelju UUID-a, ali odbacuje vlastito šifriranje i oslanja se na sloj TLS-a ispod, čime se izbjegava dvostruko šifriranje prometa."
+    },
+    {
+      "question": "Zašto se VMess ne spaja kad mi je sat kriv?",
+      "answer": "Autentifikacija VMessa uključuje vremensku oznaku, pa poslužitelj odbija zahtjeve kad je sat klijenta previše udaljen od njegova. Postavljanje sata uređaja na automatsko obično to rješava."
+    },
+    {
+      "question": "Je li VMess siguran?",
+      "answer": "S autentifikacijom zaglavlja putem AEAD-a, da. Stariji način na temelju MD5 nije mogao jamčiti cjelovitost zaglavlja, a službena dokumentacija od njega odvraća."
+    },
+    {
+      "question": "Može li se VMess otkriti?",
+      "answer": "Goli VMess izgleda kao slučajni bajtovi, što neki vatrozidi blokiraju odmah. Omotan u WebSocket ili gRPC preko TLS-a izgleda kao HTTPS prema domeni, što je mnogo teže izdvojiti."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, dokumentacija protokola VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repozitorij v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specifikacija protokola VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

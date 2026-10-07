@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard بعد إزالة البصمات",
+  "metaTitle": "ما هو AmneziaWG؟ وبمَ يختلف عن WireGuard",
+  "metaDescription": "شرح AmneziaWG: نسخة مشتقة من WireGuard تجعل الترويسات وأحجام الحزم عشوائية وترسل حزمًا زائدة كي لا يطابق DPI التعارف الأولي الثابت لـ WireGuard. الحدود والتطبيقات.",
+  "excerpt": "سرعة WireGuard وتشفيره، مع ترويسات وأحجام حزم عشوائية وحزم زائدة كي لا تطابق المرشِّحات تعارفه الأولي الثابت.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP لا يمكن التعرّف عليه",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "لا شيء (يلزم تطبيق)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "عميل Amnezia (الشيفرة المصدرية)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "تنفيذ في فضاء المستخدم للخوادم والعملاء" }
+  ],
+  "faq": [
+    {
+      "question": "ما الفرق بين AmneziaWG وWireGuard؟",
+      "answer": "يحتفظ AmneziaWG بتشفير WireGuard وتصميمه لكنه يجعل ترويسات الحزم وأحجامها عشوائية ويستطيع إرسال حزم زائدة قبل التعارف الأولي، فلا تعود الحركة تطابق توقيع WireGuard الثابت."
+    },
+    {
+      "question": "هل AmneziaWG متوافق مع WireGuard؟",
+      "answer": "فقط عند إيقاف التعتيم. فبمجرد ضبط الترويسات المخصصة أو بادئات الحجم أو الحزم الزائدة، يجب أن يشغّل الطرفان AmneziaWG بإعدادات متطابقة."
+    },
+    {
+      "question": "ماذا تعني الإعدادات Jc وS1 وH1؟",
+      "answer": "Jc هو عدد الحزم الزائدة المرسلة قبل التعارف الأولي، بأحجام بين Jmin وJmax. وتضيف S1 إلى S4 بادئات عشوائية لتغيير أطوال الحزم. وتحدد H1 إلى H4 قيم أنواع رسائل مخصصة تحل محل قيم WireGuard الثابتة."
+    },
+    {
+      "question": "هل يعمل AmneziaWG في روسيا؟",
+      "answer": "يزيل التواقيع المستخدمة لحجب WireGuard العادي، مما يجعله أكثر صمودًا بكثير هناك. ولأنه يعمل عبر UDP، يمكن أن تؤثر فيه الشبكات التي تقيّد UDP."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, وثائق AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, مستودع amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

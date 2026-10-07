@@ -16,6 +16,7 @@ import { SeoWidePlate } from "@/components/seo/wide-plate";
 import { ProtocolTable } from "@/components/seo/protocol-table";
 import { PageFaq } from "@/components/no-registration/page-faq";
 import type { RelatedRailItem } from "@/components/no-registration/related-rail";
+import { RelatedBlogPosts } from "@/components/blog/related-blog-posts";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -371,6 +372,7 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
         <section className="py-12 md:py-20">
           <PageFaq title={t("faq.title")} items={faqItems} idPrefix="bypass-faq" />
         </section>
+        <RelatedBlogPosts locale={locale} slugs={["how-to-bypass-internet-censorship-2026", "censorship-protocol-history", "vless-reality-explained"]} />
       </SeoPageFrame>
     </>
   );

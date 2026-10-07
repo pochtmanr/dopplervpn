@@ -1,0 +1,36 @@
+{
+  "title": "למה בחרנו ב-VLESS-Reality ולא ב-WireGuard, ב-OpenVPN וב-Shadowsocks",
+  "metaTitle": "למה Doppler משתמש ב-VLESS-Reality ולא ב-WireGuard או OpenVPN",
+  "metaDescription": "איך בחרנו פרוטוקול לרשתות שחוסמות VPN: טביעות אצבע קבועות, בדיקה אקטיבית ורשימות חסימה, למה WireGuard, OpenVPN, Shadowsocks ו-Trojan לא הספיקו, והפשרות שקיבלנו.",
+  "excerpt": "שלוש שאלות הכריעו: האם לפרוטוקול יש טביעת אצבע קבועה, מה הבדיקות רואות, והאם יש משהו שאפשר לחסום לפי שם? כך כל אפשרות ענתה, ועל מה ויתרנו.",
+  "navLabel": "למה בחרנו ב-VLESS",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "faq": [
+    {
+      "question": "למה Doppler לא משתמש ב-WireGuard?",
+      "answer": "לחיצת היד של WireGuard בגודל קבוע וקל למסננים לזהות אותה, ודווח שספקיות ברוסיה מנתקות אותו. Doppler נבנה לרשתות כאלה, ולכן אנחנו משתמשים ב-VLESS-Reality, שנראה כמו TLS רגיל לאתר אמיתי."
+    },
+    {
+      "question": "האם VLESS-Reality איטי יותר מ-WireGuard?",
+      "answer": "בחיבור נקי ההבדל קטן. ברשתות עם אובדן חבילות, תעבורת ה-UDP של WireGuard יכולה להיות מהירה יותר. היתרון של VLESS-Reality הוא שהוא ממשיך לעבוד במקום ש-WireGuard חסום."
+    },
+    {
+      "question": "האם אפשר לחסום את VLESS-Reality?",
+      "answer": "כן, זו לא ערובה. מחקר הראה שאפשר לזהות TLS בתוך TLS כטביעת אצבע, ודווח שכמה ספקי אינטרנט ברוסיה ניתקו חיבורי Reality בנובמבר 2025. אנחנו מתאימים את הגדרות השרת כשהסינון משתנה."
+    },
+    {
+      "question": "אילו פלטפורמות Doppler תומך בהן?",
+      "answer": "ל-Doppler יש אפליקציות ל-iOS, ל-Android, ל-macOS ול-Windows."
+    }
+  ],
+  "sources": [
+    { "label": "net4people, חסימות OpenVPN ו-WireGuard ברוסיה (issue 274, אוגוסט 2023)", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, דיווחים על חסימת VLESS + Reality + Vision ברוסיה (issue 546, נובמבר 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

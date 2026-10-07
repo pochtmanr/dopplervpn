@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: کهنه‌سرباز انعطاف‌پذیری که سانسورچیان می‌توانند شناسایی‌اش کنند",
+  "metaTitle": "OpenVPN چیست؟ طرز کار و دلیل شناسایی آن توسط ISPها",
+  "metaDescription": "توضیح OpenVPN: طرز کار کانال کنترل TLS و کانال داده، دلیل کندتر بودن از WireGuard، و اینکه چرا پژوهش بیش از 85% جریان‌های OpenVPN را روی یک ISP واقعی شناسایی کرد.",
+  "excerpt": "دو دهه سابقه، پیکربندی‌پذیری بی‌پایان و پشتیبانی تقریباً در همه‌جا. پژوهشگران نشان داده‌اند که یک ISP می‌تواند بیشتر ترافیک OpenVPN را از روی شکلش تشخیص دهد.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP یا TCP",
+    "looksLike": "قالب‌بندی TLS اختصاصی OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "ندارد (نیازمند برنامه)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (کلاینت و سرور متن‌باز)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "آیا OpenVPN هنوز امن است؟",
+      "answer": "نسخهٔ جاری OpenVPN با پیکربندی درست امن است. چون بسیار پیکربندی‌پذیر است، خطر اصلی یک تنظیم ضعیف است، مانند رمزهای منسوخ، نه نقصی در خود پروتکل."
+    },
+    {
+      "question": "چرا OpenVPN حتی روی درگاه 443 هم شناسایی می‌شود؟",
+      "answer": "استفاده از درگاه 443 باعث نمی‌شود ترافیک شبیه HTTPS شود. OpenVPN دست‌دهی TLS را در قالب بستهٔ اختصاصی خودش قاب‌بندی می‌کند و پژوهش منتشرشده بیش از 85% جریان‌های OpenVPN را روی شبکهٔ یک ISP واقعی از روی همین شکل شناسایی کرده است."
+    },
+    {
+      "question": "OpenVPN یا WireGuard؟",
+      "answer": "روی شبکهٔ باز، WireGuard معمولاً سریع‌تر و ساده‌تر است. OpenVPN در سازگاری برتری دارد و می‌تواند روی TCP اجرا شود. هیچ‌کدام برای پنهان شدن از سانسورچیان طراحی نشده‌اند."
+    },
+    {
+      "question": "OpenVPN روی UDP است یا TCP؟",
+      "answer": "هر دو. UDP پیش‌فرض است و معمولاً سریع‌تر؛ TCP روی شبکه‌هایی که UDP را مسدود می‌کنند کمک می‌کند، با مقداری کاهش سرعت."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 reference manual (راهنمای مرجع)", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, OpenVPN and WireGuard blocking in Russia (issue 274، اوت 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

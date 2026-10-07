@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard bez odtlačkov",
+  "metaTitle": "Čo je AmneziaWG? Ako maskuje pevný odtlačok WireGuardu",
+  "metaDescription": "AmneziaWG zrozumiteľne: odvodenina WireGuardu, ktorá mení hlavičky a veľkosti paketov a posiela balastné pakety, aby DPI nespoznalo jeho pevný handshake.",
+  "excerpt": "Rýchlosť a kryptografia WireGuardu, s náhodnými hlavičkami, veľkosťami paketov a balastnými paketmi, aby filtre nespoznali jeho pevný handshake.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Nerozpoznateľné UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Žiadne (treba aplikáciu)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Klient Amnezia (zdrojový kód)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Implementácia v používateľskom priestore pre servery a klientov" }
+  ],
+  "faq": [
+    {
+      "question": "Aký je rozdiel medzi AmneziaWG a WireGuardom?",
+      "answer": "AmneziaWG si ponecháva kryptografiu a stavbu WireGuardu, ale náhodne mení hlavičky a veľkosti paketov a vie pred handshake poslať balastné pakety, takže prevádzka sa už nezhoduje s pevnou signatúrou WireGuardu."
+    },
+    {
+      "question": "Je AmneziaWG kompatibilný s WireGuardom?",
+      "answer": "Len s vypnutým maskovaním. Keď sú nastavené vlastné hlavičky, predpony veľkostí alebo balastné pakety, na oboch stranách musí bežať AmneziaWG so zhodnými nastaveniami."
+    },
+    {
+      "question": "Čo znamenajú nastavenia Jc, S1 a H1?",
+      "answer": "Jc je počet balastných paketov odoslaných pred handshake, s veľkosťami medzi Jmin a Jmax. S1 až S4 pridávajú náhodné predpony, ktoré menia dĺžku paketov. H1 až H4 nastavujú vlastné hodnoty typu správy, ktoré nahrádzajú pevné hodnoty WireGuardu."
+    },
+    {
+      "question": "Funguje AmneziaWG v Rusku?",
+      "answer": "Odstraňuje signatúry, podľa ktorých sa blokuje obyčajný WireGuard, a preto je tam oveľa odolnejší. Pretože beží cez UDP, siete, ktoré UDP obmedzujú, ho stále môžu zasiahnuť."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, dokumentácia AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repozitár amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

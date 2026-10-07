@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: เร็ว เรียบง่าย และบล็อกได้ง่าย",
+  "metaTitle": "WireGuard คืออะไร? ทำงานอย่างไร และทำไมจึงถูกบล็อก",
+  "metaDescription": "อธิบาย WireGuard: การเข้ารหัสสมัยใหม่แบบตายตัว ทำไมจึงเร็วมาก ทำไม handshake ขนาดคงที่ทำให้ถูกบล็อกง่าย และแอปใดบ้างที่ใช้",
+  "excerpt": "โปรโตคอล VPN กระแสหลักที่เร็วที่สุด ด้วยการเข้ารหัสสมัยใหม่แบบตายตัวและโค้ดขนาดเล็ก ไม่ได้ออกแบบมาเพื่อซ่อนตัว และเครือข่ายที่มีการกรองจะบล็อกเป็นอันดับแรก ๆ",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "handshake ของ VPN ที่จดจำได้",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "เคอร์เนล Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (แอปทางการ)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "คอร์ข้ามแพลตฟอร์มที่แอปหลายตัวใช้" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuard ปลอดภัยหรือไม่?",
+      "answer": "ปลอดภัย WireGuard ใช้ชุดอัลกอริทึมสมัยใหม่แบบตายตัว (ChaCha20-Poly1305, Curve25519, BLAKE2s) และมีโค้ดขนาดเล็กที่ตรวจสอบได้จริง จุดอ่อนของมันคือผู้เซ็นเซอร์มองเห็นได้ ไม่ใช่ความแข็งแกร่งของการเข้ารหัส"
+    },
+    {
+      "question": "ทำไม WireGuard จึงใช้งานไม่ได้ในรัสเซียหรืออิหร่าน?",
+      "answer": "ข้อความ handshake ของ WireGuard มีขนาดคงที่ คือ 148 ไบต์จากไคลเอนต์และ 92 ไบต์ในการตอบกลับ ผ่าน UDP รูปแบบนี้ตรวจจับได้ง่ายด้วยการตรวจสอบแพ็กเก็ตเชิงลึก (DPI) และมีรายงานว่าผู้ให้บริการในรัสเซียตัดเซสชัน WireGuard ทันทีหลัง handshake"
+    },
+    {
+      "question": "WireGuard เร็วกว่า OpenVPN หรือไม่?",
+      "answer": "โดยทั่วไปใช่ WireGuard ตั้งเซสชันได้ในการรับส่งรอบเดียว ทำงานในเคอร์เนลบน Linux และมีภาระจากการเจรจาโปรโตคอลน้อยกว่ามาก ส่วนความต่างที่แน่นอนขึ้นอยู่กับอุปกรณ์และเครือข่าย"
+    },
+    {
+      "question": "ซ่อน WireGuard จาก DPI ได้หรือไม่?",
+      "answer": "ด้วยตัวมันเองไม่ได้ ฟอร์กอย่าง AmneziaWG เปลี่ยนขนาดและส่วนหัวของแพ็กเก็ตเพื่อให้ทราฟฟิกจดจำได้ยากขึ้น หรืออาจห่อ WireGuard ไว้ในโปรโตคอลอื่น โดยแลกกับความเร็วบางส่วน"
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, การบล็อก OpenVPN และ WireGuard ในรัสเซีย (issue 274, ส.ค. 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

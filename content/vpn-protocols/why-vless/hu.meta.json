@@ -1,0 +1,36 @@
+{
+  "title": "Miért a VLESS-Reality-t választottuk a WireGuard, az OpenVPN és a Shadowsocks helyett",
+  "metaTitle": "Miért használ a Doppler VLESS-Reality-t WireGuard vagy OpenVPN helyett",
+  "metaDescription": "Hogyan választottunk protokollt a VPN-t blokkoló hálózatokra: rögzített ujjlenyomat, aktív szondázás, tiltólista, miért maradt el a WireGuard, az OpenVPN, a Shadowsocks és a Trojan, és amit vállaltunk.",
+  "excerpt": "Három kérdés döntött: van-e a protokollnak rögzített ujjlenyomata, mit látnak a szondák, és van-e mit név szerint blokkolni? Így válaszolt mindegyik lehetőség, és erről mondtunk le.",
+  "navLabel": "Miért a VLESS-t választottuk",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "faq": [
+    {
+      "question": "Miért nem használ a Doppler WireGuard-ot?",
+      "answer": "A WireGuard rögzített méretű kézfogását a szűrők könnyen felismerik, és Oroszországban arról számoltak be, hogy a szolgáltatók megszakítják. A Doppler ilyen hálózatokra készült, ezért VLESS-Reality-t használunk, amely egy valódi weboldalra menő hétköznapi TLS-nek látszik."
+    },
+    {
+      "question": "A VLESS-Reality lassabb a WireGuard-nál?",
+      "answer": "Tiszta kapcsolaton a különbség kicsi. Veszteséges hálózatokon a WireGuard UDP-átvitele gyorsabb lehet. A VLESS-Reality előnye, hogy ott is működik, ahol a WireGuard blokkolva van."
+    },
+    {
+      "question": "Blokkolható a VLESS-Reality?",
+      "answer": "Igen, ez nem garancia. A kutatás megmutatta, hogy a TLS-en belüli TLS ujjlenyomatozható, és 2025 novemberében arról számoltak be, hogy egyes orosz internetszolgáltatók megszakítják a Reality-kapcsolatokat. A szűrés változásával igazítjuk a szerverbeállításokat."
+    },
+    {
+      "question": "Mely platformokat támogatja a Doppler?",
+      "answer": "A Dopplernek vannak alkalmazásai iOS-re, Androidra, macOS-re és Windowsra."
+    }
+  ],
+  "sources": [
+    { "label": "net4people, az OpenVPN és a WireGuard blokkolása Oroszországban (issue 274, 2023. augusztus)", "url": "https://github.com/net4people/bbs/issues/274" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, beszámolók a VLESS + Reality + Vision blokkolásáról Oroszországban (issue 546, 2025. november)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "VMess: โปรโตคอลดั้งเดิมของ V2Ray",
+  "metaTitle": "VMess คืออะไร? โปรโตคอล V2Ray ทำงานอย่างไร และ VMess กับ VLESS",
+  "metaDescription": "อธิบาย VMess: โปรโตคอลพร็อกซีเข้ารหัสของ V2Ray การยืนยันตัวตนด้วย timestamp ทำไมมักถูกห่อใน WebSocket และ TLS และ VLESS กับ Trojan เข้ามาแทนที่ได้อย่างไร",
+  "excerpt": "โปรโตคอลแรกของโปรเจกต์ V2Ray ส่วนหัวเข้ารหัส มี UUID สำหรับผู้ใช้แต่ละคน และมักห่อด้วย WebSocket over TLS เพื่อให้ดูเหมือนทราฟฟิกเว็บ",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP มักใช้ WebSocket + TLS",
+    "looksLike": "ไบต์สุ่ม หรือ HTTPS เมื่อมีตัวห่อ",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "ไม่มี (ต้องใช้แอป)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "VMess ต่างจาก VLESS อย่างไร?",
+      "answer": "VMess เข้ารหัสส่วนหัวและข้อมูลของตัวเอง ส่วน VLESS คงตัวตนแบบ UUID ไว้ แต่ตัดการเข้ารหัสของตัวเองทิ้งและพึ่งชั้น TLS ด้านล่าง ซึ่งหลีกเลี่ยงการเข้ารหัสทราฟฟิกสองครั้ง"
+    },
+    {
+      "question": "ทำไม VMess จึงเชื่อมต่อไม่ได้เมื่อนาฬิกาของฉันไม่ตรง?",
+      "answer": "การยืนยันตัวตนของ VMess มี timestamp รวมอยู่ด้วย เซิร์ฟเวอร์จึงปฏิเสธคำขอเมื่อนาฬิกาของไคลเอนต์ต่างจากของตนมากเกินไป การตั้งนาฬิกาของอุปกรณ์เป็นอัตโนมัติมักแก้ปัญหาได้"
+    },
+    {
+      "question": "VMess ปลอดภัยหรือไม่?",
+      "answer": "ปลอดภัย เมื่อใช้การยืนยันตัวตนส่วนหัวแบบ AEAD โหมดเก่าที่ใช้ MD5 ไม่สามารถรับประกันความสมบูรณ์ของส่วนหัว และเอกสารทางการเตือนไม่ให้ใช้"
+    },
+    {
+      "question": "ตรวจจับ VMess ได้หรือไม่?",
+      "answer": "VMess แบบดิบดูเหมือนไบต์สุ่ม ซึ่งไฟร์วอลล์บางแห่งบล็อกทันทีที่เห็น เมื่อห่อด้วย WebSocket หรือ gRPC over TLS จะดูเหมือน HTTPS ไปยังโดเมน ซึ่งชี้ตัวออกมาได้ยากกว่ามาก"
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, เอกสารโปรโตคอล VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, ที่เก็บโค้ด v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, สเปกโปรโตคอล VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

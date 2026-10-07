@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard χωρίς τα αποτυπώματα",
+  "metaTitle": "Τι είναι το AmneziaWG; Σε τι διαφέρει από το WireGuard",
+  "metaDescription": "Το AmneziaWG με απλά λόγια: διακλάδωση του WireGuard που αλλάζει κεφαλίδες και μεγέθη και στέλνει πακέτα σκουπιδιών, ώστε το DPI να μην βλέπει τη χειραψία. Όρια και εφαρμογές.",
+  "excerpt": "Η ταχύτητα και η κρυπτογραφία του WireGuard, με τυχαιοποιημένες κεφαλίδες, μεγέθη πακέτων και πακέτα σκουπιδιών, ώστε τα φίλτρα να μην ταιριάζουν τη σταθερή χειραψία του.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Μη αναγνωρίσιμο UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Όχι (χρειάζεται εφαρμογή)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Πελάτης Amnezia (πηγαίος κώδικας)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Υλοποίηση στον χώρο χρήστη για διακομιστές και πελάτες" }
+  ],
+  "faq": [
+    {
+      "question": "Ποια είναι η διαφορά ανάμεσα σε AmneziaWG και WireGuard;",
+      "answer": "Το AmneziaWG κρατά την κρυπτογραφία και τον σχεδιασμό του WireGuard αλλά τυχαιοποιεί τις κεφαλίδες και τα μεγέθη των πακέτων και μπορεί να στέλνει πακέτα σκουπιδιών πριν από τη χειραψία, οπότε η κίνηση δεν ταιριάζει πλέον με τη σταθερή υπογραφή του WireGuard."
+    },
+    {
+      "question": "Είναι συμβατό το AmneziaWG με το WireGuard;",
+      "answer": "Μόνο με την απόκρυψη απενεργοποιημένη. Μόλις ρυθμιστούν οι προσαρμοσμένες κεφαλίδες, τα προθέματα μεγέθους ή τα πακέτα σκουπιδιών, και τα δύο άκρα πρέπει να τρέχουν AmneziaWG με ταιριαστές ρυθμίσεις."
+    },
+    {
+      "question": "Τι σημαίνουν οι ρυθμίσεις Jc, S1 και H1;",
+      "answer": "Το Jc είναι ο αριθμός των πακέτων σκουπιδιών που στέλνονται πριν από τη χειραψία, με μεγέθη ανάμεσα σε Jmin και Jmax. Τα S1 έως S4 προσθέτουν τυχαία προθέματα για να αλλάξουν τα μήκη των πακέτων. Τα H1 έως H4 ορίζουν προσαρμοσμένες τιμές τύπου μηνύματος που αντικαθιστούν τις σταθερές του WireGuard."
+    },
+    {
+      "question": "Λειτουργεί το AmneziaWG στη Ρωσία;",
+      "answer": "Αφαιρεί τις υπογραφές που χρησιμοποιούνται για να μπλοκάρεται το απλό WireGuard, και αυτό το κάνει πολύ πιο ανθεκτικό εκεί. Επειδή τρέχει μέσω UDP, δίκτυα που περιορίζουν το UDP μπορούν ακόμη να το επηρεάσουν."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, τεκμηρίωση AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, αποθετήριο amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

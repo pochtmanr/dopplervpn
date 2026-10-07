@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: Random Bytes, and Why That Stopped Working",
+  "metaTitle": "What Is Shadowsocks? How It Works and How the GFW Detects It",
+  "metaDescription": "Shadowsocks explained: the encrypted proxy built to beat the Great Firewall, how active probing found it, and how since 2021 China blocks fully encrypted traffic by its randomness.",
+  "excerpt": "The lightweight proxy born in China, encrypted from the first byte so it looks like nothing. Since 2021 the Great Firewall blocks traffic for looking like nothing.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP or UDP",
+    "looksLike": "Random-looking bytes",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "None (app required)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Is Shadowsocks a VPN?",
+      "answer": "Technically it is an encrypted proxy, not a VPN. Most modern clients add a system-wide mode that routes all traffic through it, so in daily use it behaves much like one."
+    },
+    {
+      "question": "Does Shadowsocks still work in China?",
+      "answer": "Less reliably than before. Research published at USENIX Security 2023 showed that since November 2021 the Great Firewall blocks fully encrypted traffic that does not look like any known protocol, which is what Shadowsocks produces."
+    },
+    {
+      "question": "How does the firewall decide traffic is fully encrypted?",
+      "answer": "It inspects the first packet and exempts it if it matches a known protocol, contains enough printable characters, or has an average bits-set-per-byte outside the 3.4 to 4.6 range. Remaining traffic can be blocked."
+    },
+    {
+      "question": "What is Shadowsocks 2022?",
+      "answer": "A 2022 revision of the protocol (SIP022) with stronger replay protection and updated key handling. It does not change the fact that the traffic looks random."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: lankstus veteranas, kurį cenzoriai atpažįsta",
+  "metaTitle": "Kas yra OpenVPN? Kaip jis veikia ir kodėl tiekėjai jį mato",
+  "metaDescription": "OpenVPN paprastai: kaip veikia TLS valdymo ir duomenų kanalai, kodėl jis lėtesnis už WireGuard ir kodėl tyrimas tikro tiekėjo tinkle atpažino daugiau kaip 85% OpenVPN srautų.",
+  "excerpt": "Du dešimtmečiai istorijos, begalė nuostatų ir palaikymas beveik visur. Tyrėjai taip pat parodė, kad interneto tiekėjas pagal formą gali atpažinti didžiąją OpenVPN srauto dalį.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP arba TCP",
+    "looksLike": "Savas OpenVPN TLS kadravimas",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Nėra (reikia programėlės)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (atvirojo kodo klientas ir serveris)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Ar OpenVPN vis dar saugus?",
+      "answer": "Aktuali OpenVPN laida su tvarkinga konfigūracija yra saugi. Kadangi nuostatų daug, pagrindinė rizika yra silpna sąranka, pavyzdžiui pasenę šifrai, o ne paties protokolo spraga."
+    },
+    {
+      "question": "Kodėl OpenVPN atpažįstamas net 443 prievade?",
+      "answer": "443 prievadas srauto nepadaro panašaus į HTTPS. OpenVPN savo TLS rankos paspaudimą įvelka į savą paketų formatą, ir paskelbtas tyrimas pagal tą formą tikro interneto tiekėjo tinkle atpažino daugiau kaip 85% OpenVPN srautų."
+    },
+    {
+      "question": "OpenVPN ar WireGuard?",
+      "answer": "Atvirame tinkle WireGuard paprastai greitesnis ir paprastesnis. OpenVPN laimi suderinamumu ir gali veikti per TCP. Nė vienas iš jų nėra sukurtas slėptis nuo cenzorių."
+    },
+    {
+      "question": "OpenVPN veikia per UDP ar TCP?",
+      "answer": "Per bet kurį iš jų. UDP yra numatytasis variantas ir paprastai greitesnis; TCP padeda tinkluose, kuriuose UDP užblokuotas, prarandant dalį greičio."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 žinynas", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, OpenVPN ir WireGuard blokavimas Rusijoje (issue 274, 2023 m. rugpjūtis)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

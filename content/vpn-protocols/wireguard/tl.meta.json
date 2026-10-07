@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: Mabilis, Simple, at Madaling I-block",
+  "metaTitle": "Ano ang WireGuard? Paano Ito Gumagana at Bakit Na-block",
+  "metaDescription": "Paliwanag sa WireGuard: ang nakapirmi nitong makabagong cryptography, bakit ito mabilis, bakit madali itong i-block ng mga censor dahil sa handshake na may nakapirming laki, at aling mga app ang gumagamit nito.",
+  "excerpt": "Ang pinakamabilis na mainstream na VPN protocol, na may nakapirming makabagong cryptography at napakaliit na codebase. Hindi ito ginawa para magtago, at ito ang unang ibina-block ng mga network na may filter.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Kilalang VPN handshake",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux kernel (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (mga opisyal na app)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Cross-platform na core na ginagamit ng ilang app" }
+  ],
+  "faq": [
+    {
+      "question": "Ligtas ba ang WireGuard?",
+      "answer": "Oo. Gumagamit ang WireGuard ng nakapirming set ng mga makabagong primitive (ChaCha20-Poly1305, Curve25519, BLAKE2s) at may maliit na codebase na praktikal na i-audit. Ang kahinaan nito ay ang pagiging kita ng mga censor, hindi ang lakas ng encryption."
+    },
+    {
+      "question": "Bakit tumitigil sa paggana ang WireGuard sa Russia o Iran?",
+      "answer": "May nakapirming laki ang mga handshake message nito, 148 bytes mula sa client at 92 bytes na sagot, sa UDP. Madaling matukoy ng deep packet inspection ang pattern na iyon, at iniulat na pinuputol ng mga carrier sa Russia ang mga WireGuard session pagkatapos mismo ng handshake."
+    },
+    {
+      "question": "Mas mabilis ba ang WireGuard kaysa sa OpenVPN?",
+      "answer": "Karaniwan, oo. Nagagawa ng WireGuard ang session sa isang round trip, tumatakbo ito sa kernel sa Linux, at mas kaunti ang protocol overhead na kailangang pag-usapan. Ang eksaktong pagkakaiba ay nakadepende sa device at network."
+    },
+    {
+      "question": "Maitatago ba ang WireGuard sa DPI?",
+      "answer": "Hindi kung mag-isa lang. Binabago ng mga fork tulad ng AmneziaWG ang laki ng packet at mga header para mas mahirap makilala ang traffic, o maaaring ibalot ang WireGuard sa loob ng ibang protocol, na may kapalit na bahagyang bilis."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, pag-block sa OpenVPN at WireGuard sa Russia (issue 274, Ago 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard, josta sormenjäljet on poistettu",
+  "metaTitle": "Mikä on AmneziaWG? Miten se eroaa WireGuardista",
+  "metaDescription": "AmneziaWG selitettynä: WireGuardin haarautuma, joka satunnaistaa otsikot ja pakettikoot ja lähettää roskapaketteja, jotta DPI ei osu WireGuardin kiinteään kättelyyn. Rajat ja sovellukset.",
+  "excerpt": "WireGuardin nopeus ja kryptografia, satunnaistetuilla otsikoilla, pakettikoilla ja roskapaketeilla, jotta suodattimet eivät osu sen kiinteään kättelyyn.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Tunnistamaton UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ei (sovellus tarvitaan)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia-asiakas (lähdekoodi)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Käyttäjätilan toteutus palvelimille ja asiakkaille" }
+  ],
+  "faq": [
+    {
+      "question": "Mitä eroa on AmneziaWG:llä ja WireGuardilla?",
+      "answer": "AmneziaWG säilyttää WireGuardin kryptografian ja rakenteen mutta satunnaistaa pakettiotsikot ja -koot ja voi lähettää roskapaketteja ennen kättelyä, joten liikenne ei enää vastaa WireGuardin kiinteää tunnistetta."
+    },
+    {
+      "question": "Onko AmneziaWG yhteensopiva WireGuardin kanssa?",
+      "answer": "Vain häivytyksen ollessa pois päältä. Kun omat otsikot, kokoetuliitteet tai roskapaketit on määritetty, molemmissa päissä täytyy olla AmneziaWG samoilla asetuksilla."
+    },
+    {
+      "question": "Mitä asetukset Jc, S1 ja H1 tarkoittavat?",
+      "answer": "Jc on roskapakettien määrä ennen kättelyä, ja niiden koot ovat Jmin:n ja Jmax:n välissä. S1–S4 lisäävät satunnaisia etuliitteitä, jotka muuttavat pakettien pituuksia. H1–H4 asettavat omat viestityypin arvot WireGuardin kiinteiden tilalle."
+    },
+    {
+      "question": "Toimiiko AmneziaWG Venäjällä?",
+      "answer": "Se poistaa tunnisteet, joilla pelkkä WireGuard estetään, mikä tekee siitä siellä paljon kestävämmän. Koska se toimii UDP:llä, verkot, jotka rajoittavat UDP:tä, voivat yhä vaikuttaa siihen."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG-dokumentaatio", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go-arkisto", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

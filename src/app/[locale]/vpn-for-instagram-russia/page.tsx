@@ -22,6 +22,7 @@ export default async function Page({ params }: PageProps) {
       namespace={NAMESPACE}
       datePublished="2026-05-26"
       dateModified="2026-06-09"
+      blogSlugs={["understanding-the-implications-of-telegram-restrictions-in-russia", "how-to-bypass-internet-censorship-2026"]}
       related={[
         { href: "/vpn-for-russia", titleKey: "russiaHubTitle", descKey: "russiaHubDesc" },
         { href: "/bypass-censorship", titleKey: "censorshipTitle", descKey: "censorshipDesc" },

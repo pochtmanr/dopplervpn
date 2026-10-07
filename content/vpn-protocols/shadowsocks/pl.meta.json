@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: losowe bajty i dlaczego to przestało działać",
+  "metaTitle": "Czym jest Shadowsocks? Jak działa i jak wykrywa go GFW",
+  "metaDescription": "Shadowsocks wyjaśniony: szyfrowane proxy zbudowane, by przejść przez Wielki Firewall, jak znalazło je aktywne sondowanie i jak od 2021 roku Chiny blokują w pełni zaszyfrowany ruch po jego losowości.",
+  "excerpt": "Lekkie proxy powstałe w Chinach, szyfrowane od pierwszego bajtu, więc wygląda jak nic. Od 2021 roku Wielki Firewall blokuje ruch właśnie za to, że wygląda jak nic.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP lub UDP",
+    "looksLike": "Bajty wyglądające na losowe",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Brak (wymagana aplikacja)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Czy Shadowsocks to VPN?",
+      "answer": "Technicznie jest szyfrowanym proxy, a nie VPN-em. Większość współczesnych klientów dodaje tryb obejmujący cały system, który kieruje przez nie cały ruch, więc w codziennym użyciu zachowuje się bardzo podobnie."
+    },
+    {
+      "question": "Czy Shadowsocks nadal działa w Chinach?",
+      "answer": "Mniej niezawodnie niż wcześniej. Badania opublikowane na USENIX Security 2023 pokazały, że od listopada 2021 roku Wielki Firewall blokuje w pełni zaszyfrowany ruch, który nie wygląda jak żaden znany protokół, a właśnie taki ruch wytwarza Shadowsocks."
+    },
+    {
+      "question": "Jak firewall uznaje, że ruch jest w pełni zaszyfrowany?",
+      "answer": "Sprawdza pierwszy pakiet i zwalnia go, jeśli pasuje do znanego protokołu, zawiera dość znaków drukowalnych albo ma średnią liczbę ustawionych bitów na bajt poza zakresem od 3.4 do 4.6. Pozostały ruch można zablokować."
+    },
+    {
+      "question": "Czym jest Shadowsocks 2022?",
+      "answer": "To rewizja protokołu z 2022 roku (SIP022) z mocniejszą ochroną przed powtórzeniami i zaktualizowaną obsługą kluczy. Nie zmienia faktu, że ruch wygląda losowo."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, szyfry AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: wydanie Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

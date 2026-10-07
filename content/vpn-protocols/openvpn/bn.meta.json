@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: নমনীয় প্রবীণ, যাকে সেন্সর ফিঙ্গারপ্রিন্ট করতে পারে",
+  "metaTitle": "OpenVPN কী? এটি কীভাবে কাজ করে এবং ISP কেন শনাক্ত করে",
+  "metaDescription": "OpenVPN ব্যাখ্যা: TLS কন্ট্রোল চ্যানেল ও ডেটা চ্যানেল কীভাবে কাজ করে, WireGuard-এর চেয়ে ধীর কেন, এবং গবেষণা কেন আসল ISP-তে OpenVPN ফ্লোর 85%-এর বেশি শনাক্ত করেছে।",
+  "excerpt": "দুই দশক পুরনো, অবাধ কনফিগারযোগ্য, এবং প্রায় সব জায়গায় সমর্থিত। গবেষকরা আরও দেখিয়েছেন একটি ISP আকার দেখে বেশিরভাগ OpenVPN ট্র্যাফিক আলাদা করতে পারে।",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP বা TCP",
+    "looksLike": "OpenVPN-এর নিজস্ব TLS ফ্রেমিং",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "নেই (অ্যাপ লাগে)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (ওপেন-সোর্স ক্লায়েন্ট ও সার্ভার)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN কি এখনও নিরাপদ?",
+      "answer": "ঠিকঠাক কনফিগারেশনসহ OpenVPN-এর বর্তমান রিলিজ নিরাপদ। এটি এত কনফিগারযোগ্য বলে মূল ঝুঁকি দুর্বল সেটআপ, যেমন পুরোনো সাইফার, প্রোটোকলের কোনো ত্রুটি নয়।"
+    },
+    {
+      "question": "443 পোর্টেও OpenVPN কেন শনাক্ত হয়?",
+      "answer": "443 পোর্ট ব্যবহার করলে ট্র্যাফিক HTTPS-এর মতো দেখায় না। OpenVPN তার TLS হ্যান্ডশেক নিজস্ব প্যাকেট ফরম্যাটে ফ্রেম করে, এবং প্রকাশিত গবেষণা সেই আকার দেখে আসল ISP নেটওয়ার্কে OpenVPN ফ্লোর 85%-এর বেশি শনাক্ত করেছে।"
+    },
+    {
+      "question": "OpenVPN না WireGuard?",
+      "answer": "খোলা নেটওয়ার্কে WireGuard সাধারণত দ্রুত ও সহজ। সামঞ্জস্যে OpenVPN এগিয়ে, এবং এটি TCP-তে চলতে পারে। সেন্সরের কাছ থেকে লুকোনোর জন্য কোনোটিই তৈরি নয়।"
+    },
+    {
+      "question": "OpenVPN কি UDP না TCP?",
+      "answer": "যেকোনোটি। UDP ডিফল্ট এবং সাধারণত দ্রুত; যেসব নেটওয়ার্ক UDP ব্লক করে সেখানে TCP কাজে লাগে, গতির কিছু বিনিময়ে।"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "OpenVPN 2.6 রেফারেন্স ম্যানুয়াল", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, রাশিয়ায় OpenVPN ও WireGuard ব্লক (issue 274, আগস্ট 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

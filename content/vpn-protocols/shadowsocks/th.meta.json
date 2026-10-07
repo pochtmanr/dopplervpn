@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: ไบต์สุ่ม และเหตุที่เลิกได้ผล",
+  "metaTitle": "Shadowsocks คืออะไร? ทำงานอย่างไร และ GFW ตรวจจับได้อย่างไร",
+  "metaDescription": "อธิบาย Shadowsocks: พร็อกซีเข้ารหัสที่สร้างมาเพื่อผ่าน Great Firewall, active probing ตรวจพบมันได้อย่างไร และตั้งแต่ปี 2021 จีนบล็อกทราฟฟิกที่เข้ารหัสทั้งหมดจากความสุ่มของมันอย่างไร",
+  "excerpt": "พร็อกซีน้ำหนักเบาที่กำเนิดในจีน เข้ารหัสตั้งแต่ไบต์แรกจึงดูไม่เหมือนอะไรเลย ตั้งแต่ปี 2021 Great Firewall บล็อกทราฟฟิกเพราะดูไม่เหมือนอะไรเลย",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP หรือ UDP",
+    "looksLike": "ไบต์ที่ดูสุ่ม",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "ไม่มี (ต้องใช้แอป)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks เป็น VPN หรือไม่?",
+      "answer": "ในทางเทคนิคเป็นพร็อกซีเข้ารหัส ไม่ใช่ VPN ไคลเอนต์สมัยใหม่ส่วนใหญ่เพิ่มโหมดทั้งระบบที่ส่งทราฟฟิกทั้งหมดผ่านมัน ดังนั้นในการใช้งานประจำวันจึงทำงานคล้าย VPN มาก"
+    },
+    {
+      "question": "Shadowsocks ยังใช้ได้ในจีนหรือไม่?",
+      "answer": "เชื่อถือได้น้อยกว่าเดิม งานวิจัยที่เผยแพร่ใน USENIX Security 2023 แสดงว่าตั้งแต่เดือนพฤศจิกายน 2021 Great Firewall บล็อกทราฟฟิกที่เข้ารหัสทั้งหมดซึ่งไม่เหมือนโปรโตคอลที่รู้จักใด ๆ ซึ่งก็คือสิ่งที่ Shadowsocks สร้างขึ้น"
+    },
+    {
+      "question": "ไฟร์วอลล์ตัดสินอย่างไรว่าทราฟฟิกถูกเข้ารหัสทั้งหมด?",
+      "answer": "ตรวจแพ็กเก็ตแรก และยกเว้นให้หากตรงกับโปรโตคอลที่รู้จัก มีอักขระที่พิมพ์ได้มากพอ หรือมีค่าเฉลี่ยจำนวนบิตที่เป็น 1 ต่อไบต์อยู่นอกช่วง 3.4 ถึง 4.6 ทราฟฟิกที่เหลือสามารถถูกบล็อกได้"
+    },
+    {
+      "question": "Shadowsocks 2022 คืออะไร?",
+      "answer": "การปรับปรุงโปรโตคอลปี 2022 (SIP022) ที่ป้องกันการเล่นซ้ำได้แข็งแรงขึ้นและปรับการจัดการคีย์ใหม่ แต่ไม่ได้เปลี่ยนข้อเท็จจริงที่ว่าทราฟฟิกดูสุ่ม"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

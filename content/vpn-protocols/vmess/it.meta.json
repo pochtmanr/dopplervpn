@@ -1,0 +1,47 @@
+{
+  "title": "VMess: il protocollo originale di V2Ray",
+  "metaTitle": "Che cos'è VMess? Come funziona V2Ray, e VMess contro VLESS",
+  "metaDescription": "VMess spiegato: il protocollo proxy cifrato di V2Ray, l'autenticazione basata sul timestamp, perché di solito è avvolto in WebSocket e TLS e come VLESS e Trojan lo hanno sostituito.",
+  "excerpt": "Il primo protocollo del progetto V2Ray: intestazioni cifrate, un UUID per ogni utente e, di solito, un involucro WebSocket su TLS per sembrare traffico web.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, spesso WebSocket + TLS",
+    "looksLike": "Byte casuali, o HTTPS se avvolto",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Nessuno (app richiesta)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Qual è la differenza tra VMess e VLESS?",
+      "answer": "VMess cifra le proprie intestazioni e i propri dati. VLESS mantiene l'identità basata su UUID ma abbandona la propria cifratura e si affida al livello TLS sottostante, evitando di cifrare il traffico due volte."
+    },
+    {
+      "question": "Perché VMess non si connette se l'orologio è sbagliato?",
+      "answer": "L'autenticazione VMess include un timestamp, quindi il server rifiuta le richieste quando l'orologio del client è troppo lontano dal proprio. Impostare l'orologio del dispositivo su automatico di solito risolve."
+    },
+    {
+      "question": "VMess è sicuro?",
+      "answer": "Con l'autenticazione AEAD dell'intestazione, sì. La modalità più vecchia basata su MD5 non poteva garantire l'integrità dell'intestazione, e la documentazione ufficiale la sconsiglia."
+    },
+    {
+      "question": "VMess è rilevabile?",
+      "answer": "Il VMess grezzo sembra byte casuali, e alcuni firewall lo bloccano a vista. Avvolto in WebSocket o gRPC su TLS, sembra HTTPS verso un dominio, ed è molto più difficile da isolare."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, documentazione del protocollo VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repository v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, specifica del protocollo VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

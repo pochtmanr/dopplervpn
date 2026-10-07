@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: en proxy gömd bakom en riktig webbplats",
+  "metaTitle": "Vad är Trojan-protokollet? Så döljs proxytrafik som HTTPS",
+  "metaDescription": "Trojan förklarat: hur det döljer proxytrafik inuti en äkta TLS-anslutning, faller tillbaka på en riktig webbplats vid sondering, och varför den egna domänen är den svaga punkten.",
+  "excerpt": "En riktig TLS-anslutning till en riktig webbplats som du äger, med en lösenordshash inuti. Utan lösenordet ser besökare och sonderingar bara webbplatsen.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS till din egen domän",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ingen (app krävs)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referensimplementation)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Hur autentiserar Trojan användare?",
+      "answer": "Inuti TLS-anslutningen skickar klienten den hexkodade SHA-224-hashen av ett delat lösenord, 56 tecken lång. Om den är fel skickar servern anslutningen vidare till en reservwebbserver."
+    },
+    {
+      "question": "Behöver Trojan en domän?",
+      "answer": "Ja. Servern visar ett riktigt certifikat för en riktig domän, och det är det som får den att se ut som en vanlig HTTPS-webbplats. Den domänen är också det en censor kan blockera."
+    },
+    {
+      "question": "Trojan eller VLESS?",
+      "answer": "Båda förlitar sig på TLS snarare än egen kryptering. VLESS med Reality går längre genom att låna handskakningen från en befintlig populär webbplats, så det finns ingen proxydomän att blockera."
+    },
+    {
+      "question": "Kan Trojan upptäckas?",
+      "answer": "Inte genom enkel sondering, eftersom sonderingar får reservwebbplatsen. Forskning har visat att trafik med TLS inuti TLS kan identifieras via fingeravtryck utifrån tid och paketstorlekar, och proxydomäner kan blockeras när de väl är identifierade."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, kodarkivet trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

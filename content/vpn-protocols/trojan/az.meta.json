@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: real saytın arxasında gizlənən proksi",
+  "metaTitle": "Trojan protokolu nədir? Trafiki HTTPS kimi necə gizlədir",
+  "metaDescription": "Trojan izahı: proksi trafikini əsl TLS bağlantısının içində necə gizlədir, zondlara real sayt göstərir və öz domeninin lazım olması niyə onun zəif nöqtəsidir.",
+  "excerpt": "Sizin saytınıza real TLS bağlantısı, içində parol heşi. Parol olmadan ziyarətçilər və zondlar sadəcə saytı görür.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "Öz domeninizə HTTPS",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Yoxdur (tətbiq lazımdır)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (istinad realizasiyası)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Trojan istifadəçiləri necə autentifikasiya edir?",
+      "answer": "TLS bağlantısının içində müştəri ortaq parolun 56 simvol uzunluğunda onaltılıq kodlanmış SHA-224 heşini göndərir. O, səhvdirsə, server bağlantını ehtiyat veb serverinə ötürür."
+    },
+    {
+      "question": "Trojan-a domen lazımdırmı?",
+      "answer": "Bəli. Server real domen üçün real sertifikat təqdim edir və onu adi HTTPS saytına bənzədən də budur. Senzorun bloklaya biləcəyi də həmin domendir."
+    },
+    {
+      "question": "Trojan, yoxsa VLESS?",
+      "answer": "Hər ikisi öz şifrələməsi əvəzinə TLS-ə arxalanır. Reality ilə VLESS mövcud populyar saytın əl sıxmasını götürməklə daha irəli gedir, ona görə bloklanacaq proksi domeni yoxdur."
+    },
+    {
+      "question": "Trojan aşkarlana bilərmi?",
+      "answer": "Sadə zondlama ilə yox, çünki zondlar ehtiyat saytı alır. Tədqiqat göstərib ki, TLS içində TLS trafikin barmaq izini zamanlama və paket ölçülərinə görə çıxarmaq olar və proksi domenləri müəyyən ediləndə bloklana bilər."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan repozitoriyası", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

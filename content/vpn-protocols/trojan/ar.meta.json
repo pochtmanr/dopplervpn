@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: إخفاء وكيل خلف موقع ويب حقيقي",
+  "metaTitle": "ما هو بروتوكول Trojan؟ كيف يخفي حركة الوكيل كـ HTTPS",
+  "metaDescription": "شرح Trojan: كيف يخفي حركة الوكيل داخل اتصال TLS حقيقي، ويرجع إلى موقع ويب حقيقي عند الفحص، ولماذا تُعدّ حاجته إلى نطاق خاص نقطة ضعفه.",
+  "excerpt": "اتصال TLS حقيقي بموقع ويب حقيقي تملكه، وبداخله تجزئة كلمة مرور. وبدون كلمة المرور لا يرى الزوار ولا عمليات الفحص سوى الموقع.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS إلى نطاقك الخاص",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "لا شيء (يلزم تطبيق)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (التنفيذ المرجعي)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "كيف يصادق Trojan على المستخدمين؟",
+      "answer": "داخل اتصال TLS، يرسل العميل قيمة تجزئة SHA-224 لكلمة مرور مشتركة بترميز سداسي عشري، وطولها 56 محرفًا. وإذا كانت خاطئة، يحوّل الخادم الاتصال إلى خادم ويب احتياطي."
+    },
+    {
+      "question": "هل يحتاج Trojan إلى نطاق؟",
+      "answer": "نعم. يقدّم الخادم شهادة حقيقية لنطاق حقيقي، وهذا ما يجعله يبدو كموقع HTTPS عادي. وهذا النطاق هو أيضًا ما يستطيع الرقيب حجبه."
+    },
+    {
+      "question": "Trojan أم VLESS؟",
+      "answer": "كلاهما يعتمد على TLS بدل تشفير خاص به. ويذهب VLESS مع Reality أبعد بأن يستعير التعارف الأولي من موقع شائع قائم، فلا يوجد نطاق وكيل يمكن حجبه."
+    },
+    {
+      "question": "هل يمكن رصد Trojan؟",
+      "answer": "ليس بالفحص البسيط، لأن عمليات الفحص تحصل على موقع الويب الاحتياطي. وقد أظهرت الأبحاث أن حركة TLS داخل TLS يمكن أخذ بصمتها من التوقيت وأحجام الحزم، وأن نطاقات الوكلاء يمكن حجبها بعد تحديدها."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, مستودع trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

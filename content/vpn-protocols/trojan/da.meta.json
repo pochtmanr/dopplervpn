@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: en proxy skjult bag et rigtigt website",
+  "metaTitle": "Hvad er Trojan-protokollen? Sådan skjuler den proxytrafik som HTTPS",
+  "metaDescription": "Trojan forklaret: hvordan den skjuler proxytrafik i en ægte TLS-forbindelse, falder tilbage til et rigtigt website ved sondering, og hvorfor eget domæne er det svage punkt.",
+  "excerpt": "En ægte TLS-forbindelse til et rigtigt website, du ejer, med en hash af adgangskoden indeni. Uden adgangskoden ser besøgende og sonder bare websitet.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS til dit eget domæne",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ingen (app kræves)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (referenceimplementering)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Hvordan godkender Trojan brugere?",
+      "answer": "Inde i TLS-forbindelsen sender klienten den hex-kodede SHA-224-hash af en delt adgangskode, 56 tegn lang. Hvis den er forkert, sender serveren forbindelsen videre til en fallback-webserver."
+    },
+    {
+      "question": "Skal Trojan bruge et domæne?",
+      "answer": "Ja. Serveren viser et rigtigt certifikat til et rigtigt domæne, og det er det, der får den til at ligne et almindeligt HTTPS-site. Det domæne er også det, en censor kan blokere."
+    },
+    {
+      "question": "Trojan eller VLESS?",
+      "answer": "Begge bygger på TLS frem for deres egen kryptering. VLESS med Reality går videre ved at låne handshaket fra et eksisterende populært website, så der ikke er et proxydomæne at blokere."
+    },
+    {
+      "question": "Kan Trojan opdages?",
+      "answer": "Ikke ved simpel sondering, da sonder får fallback-websitet. Forskning har vist, at trafik med TLS inde i TLS kan fingeraftrykkes ud fra timing og pakkestørrelser, og proxydomæner kan blokeres, når de er identificeret."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan-kodearkivet", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

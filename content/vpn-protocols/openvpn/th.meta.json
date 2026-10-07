@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: ผู้เก๋าเกมที่ยืดหยุ่นแต่ผู้เซ็นเซอร์จับลายนิ้วมือได้",
+  "metaTitle": "OpenVPN คืออะไร? ทำงานอย่างไร และทำไม ISP จึงตรวจจับได้",
+  "metaDescription": "อธิบาย OpenVPN: ช่องควบคุม TLS และช่องข้อมูลทำงานอย่างไร ทำไมจึงช้ากว่า WireGuard และทำไมงานวิจัยจึงระบุโฟลว์ OpenVPN ได้มากกว่า 85% บน ISP จริง",
+  "excerpt": "อายุกว่าสองทศวรรษ ปรับแต่งได้ไม่จำกัด และรองรับเกือบทุกที่ นักวิจัยยังแสดงให้เห็นว่า ISP สามารถแยกทราฟฟิก OpenVPN ส่วนใหญ่ออกได้จากรูปร่างของมัน",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP หรือ TCP",
+    "looksLike": "การจัดเฟรม TLS แบบเฉพาะของ OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "ไม่มี (ต้องใช้แอป)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (ไคลเอนต์และเซิร์ฟเวอร์โอเพนซอร์ส)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "OpenVPN ยังปลอดภัยอยู่หรือไม่?",
+      "answer": "OpenVPN รุ่นปัจจุบันที่ตั้งค่าอย่างเหมาะสมนั้นปลอดภัย เพราะปรับแต่งได้มาก ความเสี่ยงหลักจึงอยู่ที่การตั้งค่าที่อ่อนแอ เช่น ใช้ชุดการเข้ารหัสที่ล้าสมัย ไม่ใช่ข้อบกพร่องของโปรโตคอล"
+    },
+    {
+      "question": "ทำไม OpenVPN จึงถูกตรวจจับได้แม้ใช้พอร์ต 443?",
+      "answer": "การใช้พอร์ต 443 ไม่ได้ทำให้ทราฟฟิกดูเหมือน HTTPS OpenVPN จัดเฟรม TLS handshake ด้วยรูปแบบแพ็กเก็ตของตัวเอง และงานวิจัยที่เผยแพร่แล้วระบุโฟลว์ OpenVPN ได้มากกว่า 85% บนเครือข่าย ISP จริงจากรูปร่างนั้น"
+    },
+    {
+      "question": "OpenVPN หรือ WireGuard?",
+      "answer": "บนเครือข่ายเปิด WireGuard มักเร็วกว่าและเรียบง่ายกว่า OpenVPN ชนะเรื่องความเข้ากันได้และรันผ่าน TCP ได้ ทั้งสองอย่างไม่ได้ออกแบบมาเพื่อหลบผู้เซ็นเซอร์"
+    },
+    {
+      "question": "OpenVPN ใช้ UDP หรือ TCP?",
+      "answer": "ใช้ได้ทั้งสองอย่าง UDP เป็นค่าเริ่มต้นและมักเร็วกว่า ส่วน TCP ช่วยในเครือข่ายที่บล็อก UDP โดยแลกกับความเร็วบางส่วน"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "คู่มืออ้างอิง OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, การบล็อก OpenVPN และ WireGuard ในรัสเซีย (issue 274, ส.ค. 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: พร็อกซีบน QUIC สำหรับเครือข่ายที่แย่",
+  "metaTitle": "Hysteria 2 คืออะไร? อธิบายโปรโตคอลพร็อกซีบน QUIC",
+  "metaDescription": "อธิบาย Hysteria 2: พร็อกซีบน QUIC ที่ทำตัวเหมือนเว็บเซิร์ฟเวอร์ HTTP/3 จริงเมื่อถูกโพรบ คงความเร็วบนเครือข่ายที่สูญเสียแพ็กเก็ต และใช้ไม่ได้เมื่อ UDP หรือ QUIC ถูกบล็อก",
+  "excerpt": "พร็อกซีบน QUIC ซึ่งเป็น transport เบื้องหลัง HTTP/3 เร็วบนลิงก์ที่สูญเสียแพ็กเก็ต และเป็นเว็บเซิร์ฟเวอร์ HTTP/3 จริงสำหรับคนที่ไม่มีรหัสผ่าน ต้องมี UDP จึงจะผ่าน",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "เว็บเซิร์ฟเวอร์ HTTP/3",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "ไม่มี (ต้องใช้แอป)"
+  },
+  "apps": [
+    { "name": "Hysteria (ไคลเอนต์ทางการ)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "คอร์ข้ามแพลตฟอร์มที่แอปหลายตัวใช้" }
+  ],
+  "faq": [
+    {
+      "question": "Hysteria 2 เป็น VPN หรือไม่?",
+      "answer": "มันเป็นโปรโตคอลพร็อกซี แต่ไคลเอนต์อย่าง Hiddify และ NekoBox ส่งทราฟฟิกทั้งหมดของอุปกรณ์ผ่านมันได้ ดังนั้นในทางปฏิบัติใช้ได้เหมือน VPN"
+    },
+    {
+      "question": "ทำไม Hysteria 2 จึงเร็วบนการเชื่อมต่อที่แย่?",
+      "answer": "มันทำงานบน QUIC ผ่าน UDP ซึ่งกู้คืนจากแพ็กเก็ตที่สูญหายโดยไม่ทำให้ทุกสตรีมชะงัก และใช้การควบคุมความแออัดของตัวเองที่มุ่งลิงก์ไม่เสถียรได้"
+    },
+    {
+      "question": "บล็อก Hysteria 2 ได้หรือไม่?",
+      "answer": "โพรบเห็นเซิร์ฟเวอร์ HTTP/3 จริง จึงต้านการโพรบเชิงรุกได้ แต่ผู้เซ็นเซอร์จำกัดความเร็วหรือบล็อก UDP หรือ QUIC ในวงกว้างได้ และเมื่อนั้น Hysteria 2 เชื่อมต่อไม่ได้"
+    },
+    {
+      "question": "Hysteria 2 หรือ VLESS-Reality?",
+      "answer": "Hysteria 2 มักเร็วกว่าบนเครือข่ายที่สูญเสียแพ็กเก็ตและอนุญาต UDP ส่วน VLESS-Reality ทำงานบน TCP และยังใช้ได้ในที่ที่ UDP ถูกกรอง หลายคนเก็บไว้ทั้งคู่"
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, สเปกโปรโตคอล Hysteria 2", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, ที่เก็บโค้ด hysteria", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

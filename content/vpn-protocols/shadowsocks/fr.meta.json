@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks : des octets aléatoires, et pourquoi cela a cessé de fonctionner",
+  "metaTitle": "Qu'est-ce que Shadowsocks ? Fonctionnement et détection par le GFW",
+  "metaDescription": "Shadowsocks expliqué : le proxy chiffré né pour déjouer le Grand Pare-feu, comment le sondage actif l'a repéré, et pourquoi la Chine bloque depuis 2021 le trafic entièrement chiffré.",
+  "excerpt": "Le proxy léger né en Chine, chiffré dès le premier octet pour ne ressembler à rien. Depuis 2021, le Grand Pare-feu bloque le trafic précisément parce qu'il ne ressemble à rien.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP ou UDP",
+    "looksLike": "Des octets d'apparence aléatoire",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Aucun (application requise)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks est-il un VPN ?",
+      "answer": "Techniquement, c'est un proxy chiffré, pas un VPN. La plupart des clients modernes ajoutent un mode à l'échelle du système qui y fait passer tout le trafic ; à l'usage, il se comporte donc à peu près comme un VPN."
+    },
+    {
+      "question": "Shadowsocks fonctionne-t-il encore en Chine ?",
+      "answer": "Moins fiablement qu'avant. Une étude publiée à USENIX Security 2023 a montré que, depuis novembre 2021, le Grand Pare-feu bloque le trafic entièrement chiffré qui ne ressemble à aucun protocole connu, ce que produit Shadowsocks."
+    },
+    {
+      "question": "Comment le pare-feu détermine-t-il qu'un trafic est entièrement chiffré ?",
+      "answer": "Il inspecte le premier paquet et l'exempte s'il correspond à un protocole connu, contient suffisamment de caractères imprimables, ou a un nombre moyen de bits à 1 par octet hors de la plage 3,4 à 4,6. Le trafic restant peut être bloqué."
+    },
+    {
+      "question": "Qu'est-ce que Shadowsocks 2022 ?",
+      "answer": "Une révision du protocole datant de 2022 (SIP022) avec une protection contre le rejeu renforcée et une gestion des clés mise à jour. Elle ne change rien au fait que le trafic paraît aléatoire."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

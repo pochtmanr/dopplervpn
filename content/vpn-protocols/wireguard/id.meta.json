@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: Cepat, Sederhana, dan Mudah Diblokir",
+  "metaTitle": "Apa Itu WireGuard? Cara Kerja dan Alasan Diblokir",
+  "metaDescription": "Penjelasan WireGuard: kriptografi modern yang tetap, alasan kecepatannya, mengapa handshake berukuran tetap mudah diblokir sensor, dan aplikasi yang memakainya.",
+  "excerpt": "Protokol VPN arus utama tercepat, dengan kriptografi modern yang tetap dan basis kode yang sangat kecil. Protokol ini tidak pernah dibuat untuk bersembunyi, dan jaringan terfilter memblokirnya lebih dulu.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Handshake VPN yang mudah dikenali",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Kernel Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (aplikasi resmi)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Inti lintas platform yang dipakai beberapa aplikasi" }
+  ],
+  "faq": [
+    {
+      "question": "Apakah WireGuard aman?",
+      "answer": "Ya. WireGuard memakai satu set primitif modern yang tetap (ChaCha20-Poly1305, Curve25519, BLAKE2s) dan basis kodenya kecil sehingga praktis untuk diaudit. Kelemahannya ada pada keterlihatannya oleh sensor, bukan pada kekuatan enkripsinya."
+    },
+    {
+      "question": "Mengapa WireGuard berhenti berfungsi di Rusia atau Iran?",
+      "answer": "Pesan handshake-nya berukuran tetap, 148 byte dari klien dan 92 byte sebagai balasan, melalui UDP. Pola itu mudah dideteksi oleh deep packet inspection, dan operator di Rusia dilaporkan memutus sesi WireGuard tepat setelah handshake."
+    },
+    {
+      "question": "Apakah WireGuard lebih cepat daripada OpenVPN?",
+      "answer": "Biasanya ya. WireGuard membuat sesi dalam satu kali pulang-pergi, berjalan di kernel pada Linux, dan memiliki jauh lebih sedikit overhead protokol untuk dinegosiasikan. Selisih pastinya bergantung pada perangkat dan jaringan."
+    },
+    {
+      "question": "Bisakah WireGuard disembunyikan dari DPI?",
+      "answer": "Tidak dengan sendirinya. Fork seperti AmneziaWG mengubah ukuran paket dan header agar lalu lintas kurang mudah dikenali, atau WireGuard dapat dibungkus di dalam protokol lain, dengan mengorbankan sebagian kecepatan."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, pemblokiran OpenVPN dan WireGuard di Rusia (issue 274, Agu 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "VMess: el protocol original de V2Ray",
+  "metaTitle": "Què és VMess? Com funciona el protocol V2Ray, i VMess o VLESS",
+  "metaDescription": "VMess explicat: el protocol de proxy xifrat de V2Ray, l'autenticació per marca de temps, per què normalment va embolcallat en WebSocket i TLS, i com el van substituir VLESS i Trojan.",
+  "excerpt": "El primer protocol del projecte V2Ray: capçaleres xifrades, un UUID per a cada usuari i, normalment, un embolcall de WebSocket sobre TLS per semblar trànsit web.",
+  "navLabel": "VMess",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "TCP, sovint WebSocket + TLS",
+    "looksLike": "Bytes aleatoris, o HTTPS si va embolcallat",
+    "censorshipResistance": 2,
+    "speed": 2,
+    "builtIn": "Cap (cal una aplicació)"
+  },
+  "apps": [
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "v2rayN", "url": "https://github.com/2dust/v2rayN", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Streisand", "url": "https://apps.apple.com/app/streisand/id6450534064", "platforms": "iOS, macOS" }
+  ],
+  "faq": [
+    {
+      "question": "Quina diferència hi ha entre VMess i VLESS?",
+      "answer": "VMess xifra les seves pròpies capçaleres i dades. VLESS conserva la identitat basada en UUID, però deixa el xifratge propi i es basa en la capa TLS de sota, cosa que evita xifrar el trànsit dues vegades."
+    },
+    {
+      "question": "Per què VMess no es connecta si el rellotge va malament?",
+      "answer": "L'autenticació de VMess inclou una marca de temps, de manera que el servidor rebutja les peticions quan el rellotge del client s'allunya massa del seu. Posar el rellotge del dispositiu en automàtic acostuma a resoldre-ho."
+    },
+    {
+      "question": "VMess és segur?",
+      "answer": "Amb autenticació de capçalera AEAD, sí. El mode antic basat en MD5 no podia garantir la integritat de la capçalera, i la documentació oficial en desaconsella l'ús."
+    },
+    {
+      "question": "Es pot detectar VMess?",
+      "answer": "VMess sense embolcall sembla bytes aleatoris, i alguns tallafocs ho bloquegen a la primera. Embolcallat en WebSocket o gRPC sobre TLS, sembla HTTPS cap a un domini, i és molt més difícil d'aïllar."
+    }
+  ],
+  "sources": [
+    { "label": "V2Fly, documentació del protocol VMess", "url": "https://www.v2fly.org/en_US/developer/protocols/vmess.html" },
+    { "label": "V2Fly, repositori v2ray-core", "url": "https://github.com/v2fly/v2ray-core" },
+    { "label": "Project X, especificació del protocol VLESS", "url": "https://xtls.github.io/en/development/protocols/vless.html" }
+  ]
+}

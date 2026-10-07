@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: de flexibele veteraan die censors kunnen herkennen",
+  "metaTitle": "Wat is OpenVPN? Hoe het werkt en waarom providers het herkennen",
+  "metaDescription": "OpenVPN uitgelegd: TLS-besturingskanaal en gegevenskanaal, waarom het trager is dan WireGuard, en waarom onderzoek meer dan 85% van de stromen bij een echte provider herkende.",
+  "excerpt": "Twintig jaar oud, eindeloos instelbaar en bijna overal ondersteund. Onderzoekers toonden ook aan dat een provider het meeste OpenVPN-verkeer aan de vorm kan herkennen.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP of TCP",
+    "looksLike": "Eigen TLS-framing van OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Geen (app nodig)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (opensource-client en -server)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Is OpenVPN nog veilig?",
+      "answer": "Een actuele OpenVPN-release met een degelijke configuratie is veilig. Omdat het zo instelbaar is, zit het grootste risico in een zwakke opzet, zoals verouderde ciphers, en niet in een fout in het protocol."
+    },
+    {
+      "question": "Waarom wordt OpenVPN herkend, zelfs op poort 443?",
+      "answer": "Poort 443 gebruiken laat het verkeer niet op HTTPS lijken. OpenVPN zet zijn TLS-handshake in een eigen pakketformaat, en gepubliceerd onderzoek herkende aan die vorm meer dan 85% van de OpenVPN-stromen op het netwerk van een echte provider."
+    },
+    {
+      "question": "OpenVPN of WireGuard?",
+      "answer": "Op een open netwerk is WireGuard meestal sneller en eenvoudiger. OpenVPN wint op compatibiliteit en kan over TCP draaien. Geen van beide is ontworpen om zich voor censors te verbergen."
+    },
+    {
+      "question": "Werkt OpenVPN via UDP of TCP?",
+      "answer": "Via allebei. UDP is de standaard en meestal sneller; TCP helpt op netwerken die UDP blokkeren, ten koste van wat snelheid."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Referentiehandleiding van OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, blokkades van OpenVPN en WireGuard in Rusland (issue 274, augustus 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

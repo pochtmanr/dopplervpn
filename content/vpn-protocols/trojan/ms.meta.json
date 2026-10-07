@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: Menyembunyikan Proksi di Sebalik Laman Web Sebenar",
+  "metaTitle": "Apakah Protokol Trojan? Cara Ia Menyamar Trafik Proksi sebagai HTTPS",
+  "metaDescription": "Trojan diterangkan: cara ia menyembunyikan trafik proksi di dalam sambungan TLS yang tulen, beralih kepada laman web sebenar untuk siasatan, dan sebab keperluan domain sendiri ialah titik lemahnya.",
+  "excerpt": "Sambungan TLS sebenar ke laman web sebenar milik anda, dengan cincang kata laluan di dalamnya. Tanpa kata laluan, pelawat dan siasatan hanya melihat laman web itu.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS ke domain anda sendiri",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Tiada (aplikasi diperlukan)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (pelaksanaan rujukan)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Bagaimanakah Trojan mengesahkan pengguna?",
+      "answer": "Di dalam sambungan TLS, klien menghantar cincang SHA-224 berkod heks bagi kata laluan yang dikongsi, sepanjang 56 aksara. Jika ia salah, pelayan memajukan sambungan itu ke pelayan web sandaran."
+    },
+    {
+      "question": "Adakah Trojan memerlukan domain?",
+      "answer": "Ya. Pelayan membentangkan sijil sebenar untuk domain sebenar, dan itulah yang menjadikannya kelihatan seperti laman HTTPS biasa. Domain itu juga yang boleh disekat oleh penapis."
+    },
+    {
+      "question": "Trojan atau VLESS?",
+      "answer": "Kedua-duanya bergantung pada TLS dan bukannya penyulitan sendiri. VLESS dengan Reality melangkah lebih jauh dengan meminjam jabat tangan sebuah laman web popular yang sedia ada, jadi tiada domain proksi untuk disekat."
+    },
+    {
+      "question": "Bolehkah Trojan dikesan?",
+      "answer": "Tidak melalui siasatan mudah, kerana siasatan mendapat laman web sandaran. Kajian telah menunjukkan trafik TLS-di-dalam-TLS boleh dicap jari melalui masa dan saiz paket, dan domain proksi boleh disekat setelah dikenal pasti."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, repositori trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

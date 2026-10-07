@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: फ़िंगरप्रिंट हटाया हुआ WireGuard",
+  "metaTitle": "AmneziaWG क्या है? यह WireGuard से कैसे अलग है",
+  "metaDescription": "AmneziaWG की सरल व्याख्या: WireGuard का फ़ोर्क जो हेडर और पैकेट आकार को रैंडमाइज़ करता है और जंक पैकेट भेजता है ताकि DPI WireGuard के तय हैंडशेक से मेल न बैठा सके। सीमाएँ और ऐप।",
+  "excerpt": "WireGuard की गति और क्रिप्टोग्राफ़ी, रैंडमाइज़ किए गए हेडर, पैकेट आकार और जंक पैकेट के साथ, ताकि फ़िल्टर उसके तय हैंडशेक से मेल न बैठा सकें।",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "पहचान में न आने वाला UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "कोई नहीं (ऐप ज़रूरी)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia क्लाइंट (सोर्स कोड)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "सर्वर और क्लाइंट के लिए यूज़रस्पेस इम्प्लीमेंटेशन" }
+  ],
+  "faq": [
+    {
+      "question": "AmneziaWG और WireGuard में क्या अंतर है?",
+      "answer": "AmneziaWG WireGuard की क्रिप्टोग्राफ़ी और डिज़ाइन रखता है, लेकिन पैकेट हेडर और आकार को रैंडमाइज़ करता है और हैंडशेक से पहले जंक पैकेट भेज सकता है, इसलिए ट्रैफ़िक WireGuard के तय सिग्नेचर से मेल नहीं खाता।"
+    },
+    {
+      "question": "क्या AmneziaWG, WireGuard के साथ संगत है?",
+      "answer": "केवल तब जब ऑब्फ़स्केशन बंद हो। कस्टम हेडर, आकार प्रीफ़िक्स या जंक पैकेट कॉन्फ़िगर होने के बाद, दोनों सिरों को मेल खाती सेटिंग के साथ AmneziaWG चलाना होगा।"
+    },
+    {
+      "question": "Jc, S1 और H1 सेटिंग का क्या मतलब है?",
+      "answer": "Jc हैंडशेक से पहले भेजे जाने वाले जंक पैकेट की संख्या है, जिनके आकार Jmin और Jmax के बीच होते हैं। S1 से S4 पैकेट की लंबाई बदलने के लिए रैंडम प्रीफ़िक्स जोड़ते हैं। H1 से H4 कस्टम संदेश प्रकार मान तय करते हैं जो WireGuard के तय मानों की जगह लेते हैं।"
+    },
+    {
+      "question": "क्या AmneziaWG रूस में काम करता है?",
+      "answer": "यह उन सिग्नेचर को हटा देता है जिनसे सादे WireGuard को ब्लॉक किया जाता है, जिससे यह वहाँ कहीं ज़्यादा लचीला बन जाता है। क्योंकि यह UDP पर चलता है, इसलिए UDP को सीमित करने वाले नेटवर्क इसे फिर भी प्रभावित कर सकते हैं।"
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG दस्तावेज़ीकरण", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go रिपॉज़िटरी", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

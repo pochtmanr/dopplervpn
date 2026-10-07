@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard brez prstnih odtisov",
+  "metaTitle": "Kaj je AmneziaWG? Kako se razlikuje od WireGuarda",
+  "metaDescription": "AmneziaWG pojasnjen: razcep WireGuarda, ki naključno spreminja glave in velikosti paketov ter pošilja smetne pakete, da DPI ne ujame fiksnega rokovanja WireGuarda. Omejitve in aplikacije.",
+  "excerpt": "Hitrost in kriptografija WireGuarda z naključnimi glavami, velikostmi paketov in smetnimi paketi, da filtri ne ujamejo njegovega fiksnega rokovanja.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "Neprepoznaven UDP",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ni (potrebna je aplikacija)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Odjemalec Amnezia (izvorna koda)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "Izvedba v uporabniškem prostoru za strežnike in odjemalce" }
+  ],
+  "faq": [
+    {
+      "question": "Kakšna je razlika med AmneziaWG in WireGuard?",
+      "answer": "AmneziaWG ohrani kriptografijo in zasnovo WireGuarda, naključno pa spreminja glave in velikosti paketov in lahko pred rokovanjem pošlje smetne pakete, tako da se promet ne ujema več s fiksnim značilnim vzorcem WireGuarda."
+    },
+    {
+      "question": "Ali je AmneziaWG združljiv z WireGuard?",
+      "answer": "Samo z izklopljenim zakrivanjem. Ko so nastavljene lastne glave, predpone velikosti ali smetni paketi, morata na obeh straneh teči AmneziaWG z enakimi nastavitvami."
+    },
+    {
+      "question": "Kaj pomenijo nastavitve Jc, S1 in H1?",
+      "answer": "Jc je število smetnih paketov pred rokovanjem, njihova velikost pa je med Jmin in Jmax. S1 do S4 dodajo naključne predpone, ki spremenijo dolžino paketov. H1 do H4 nastavijo lastne vrednosti vrste sporočila, ki zamenjajo fiksne vrednosti WireGuarda."
+    },
+    {
+      "question": "Ali AmneziaWG deluje v Rusiji?",
+      "answer": "Odstrani značilne vzorce, po katerih blokirajo navadni WireGuard, zato je tam veliko odpornejši. Ker teče prek UDP, ga omrežja, ki UDP omejujejo, še vedno lahko prizadenejo."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, dokumentacija AmneziaWG", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, repozitorij amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

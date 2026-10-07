@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: случайные байты и почему это перестало работать",
+  "metaTitle": "Что такое Shadowsocks? Как он работает и как его распознаёт GFW",
+  "metaDescription": "Shadowsocks простыми словами: шифрованный прокси для обхода Великого китайского файрвола, как его нашло активное зондирование и как с 2021 года Китай блокирует полностью зашифрованный трафик по его случайности.",
+  "excerpt": "Лёгкий прокси родом из Китая, зашифрованный с первого байта, чтобы не быть похожим ни на что. С 2021 года Великий файрвол блокирует трафик именно за это.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP или UDP",
+    "looksLike": "Байты, похожие на случайные",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Нет (нужно приложение)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks — это VPN?",
+      "answer": "Технически это шифрованный прокси, а не VPN. Большинство современных клиентов добавляют общесистемный режим, который пускает через него весь трафик, так что в быту он ведёт себя почти как VPN."
+    },
+    {
+      "question": "Работает ли Shadowsocks в Китае?",
+      "answer": "Менее надёжно, чем раньше. Исследование на USENIX Security 2023 показало, что с ноября 2021 года Великий файрвол блокирует полностью зашифрованный трафик, не похожий ни на один известный протокол, — а именно такой и создаёт Shadowsocks."
+    },
+    {
+      "question": "Как файрвол определяет, что трафик полностью зашифрован?",
+      "answer": "Он изучает первый пакет и пропускает его, если тот похож на известный протокол, содержит достаточно печатаемых символов или имеет среднее число единичных битов на байт вне диапазона от 3,4 до 4,6. Остальной трафик может быть заблокирован."
+    },
+    {
+      "question": "Что такое Shadowsocks 2022?",
+      "answer": "Редакция протокола 2022 года (SIP022) с усиленной защитой от повторного воспроизведения и обновлённой работой с ключами. Она не меняет того, что трафик выглядит случайным."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, шифры AEAD", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: редакция Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

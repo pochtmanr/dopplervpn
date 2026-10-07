@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: tilfeldige byte, og hvorfor det sluttet å virke",
+  "metaTitle": "Hva er Shadowsocks? Slik virker den, og hvordan GFW oppdager den",
+  "metaDescription": "Shadowsocks forklart: kryptert proxy mot Den store brannmuren, hvordan aktiv sondering fant den, og hvordan Kina siden 2021 blokkerer fullstendig kryptert trafikk på tilfeldigheten.",
+  "excerpt": "Den lette proxyen fra Kina, kryptert fra første byte så den ikke ser ut som noe. Siden 2021 blokkerer Den store brannmuren trafikk nettopp fordi den ikke ser ut som noe.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP eller UDP",
+    "looksLike": "Byte som ser tilfeldige ut",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ingen (app kreves)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Er Shadowsocks en VPN?",
+      "answer": "Teknisk sett er den en kryptert proxy, ikke en VPN. De fleste moderne klienter legger til en systemomfattende modus som ruter all trafikk gjennom den, så i daglig bruk oppfører den seg omtrent som en VPN."
+    },
+    {
+      "question": "Virker Shadowsocks fortsatt i Kina?",
+      "answer": "Mindre pålitelig enn før. Forskning publisert på USENIX Security 2023 viste at Den store brannmuren siden november 2021 blokkerer fullstendig kryptert trafikk som ikke ligner noen kjent protokoll, og det er det Shadowsocks lager."
+    },
+    {
+      "question": "Hvordan avgjør brannmuren at trafikken er fullstendig kryptert?",
+      "answer": "Den inspiserer den første pakken og unntar den hvis den samsvarer med en kjent protokoll, inneholder nok utskrivbare tegn, eller har et gjennomsnittlig antall satte bit per byte utenfor området 3.4 til 4.6. Trafikken som er igjen, kan blokkeres."
+    },
+    {
+      "question": "Hva er Shadowsocks 2022?",
+      "answer": "En revisjon av protokollen fra 2022 (SIP022) med sterkere replay-beskyttelse og oppdatert nøkkelhåndtering. Den endrer ikke at trafikken ser tilfeldig ut."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD-chiffer", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022-utgaven", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

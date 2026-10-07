@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec: το VPN που είναι ενσωματωμένο στο τηλέφωνό σας",
+  "metaTitle": "Τι είναι το IKEv2/IPsec; Πώς λειτουργεί και γιατί μπλοκάρεται",
+  "metaDescription": "Το IKEv2/IPsec με απλά λόγια: ενσωματωμένο VPN σε iPhone, Mac, Windows και Android, πώς το MOBIKE κρατά τη σύνδεση εν κινήσει και γιατί οι θύρες UDP 500 και 4500 μπλοκάρονται εύκολα.",
+  "excerpt": "Ενσωματωμένο σε iOS, macOS, Windows και Android, γρήγορο, και ομαλό όταν αλλάζετε δίκτυο. Τρέχει σε σταθερές, γνωστές θύρες, οπότε για το μπλοκάρισμα αρκεί ένας κανόνας.",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "Τυπική κίνηση IKE και ESP",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS, macOS, Windows, Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux, Android, macOS, Windows" }
+  ],
+  "faq": [
+    {
+      "question": "Ποιες θύρες χρησιμοποιεί το IKEv2;",
+      "answer": "Η ανταλλαγή κλειδιών χρησιμοποιεί τη θύρα UDP 500. Όταν ένας δρομολογητής NAT βρίσκεται ανάμεσα στις δύο πλευρές, κάτι που ισχύει σχεδόν πάντα, το IKE και η κρυπτογραφημένη κίνηση περνούν στη θύρα UDP 4500."
+    },
+    {
+      "question": "Γιατί το IKEv2 είναι καλό στα τηλέφωνα;",
+      "answer": "Η επέκταση MOBIKE (RFC 4555) επιτρέπει σε μια σύνδεση IKEv2 να επιβιώσει από αλλαγή διεύθυνσης IP, οπότε η μετάβαση από Wi-Fi σε δεδομένα κινητής δεν ρίχνει τη σήραγγα."
+    },
+    {
+      "question": "Είναι ασφαλές το IKEv2;",
+      "answer": "Ναι, με τρέχοντες αλγορίθμους. Είναι πρότυπο IETF που χρησιμοποιείται ευρέως από επιχειρήσεις. Η αδυναμία του είναι ότι αναγνωρίζεται και μπλοκάρεται εύκολα, όχι ότι αποκρυπτογραφείται εύκολα."
+    },
+    {
+      "question": "Λειτουργεί το IKEv2 στην Κίνα ή στη Ρωσία;",
+      "answer": "Σε φιλτραρισμένα δίκτυα είναι γενικά αναξιόπιστο, επειδή το μπλοκάρισμα των σταθερών θυρών UDP του ή η αναγνώριση της τυπικής χειραψίας του είναι απλά."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

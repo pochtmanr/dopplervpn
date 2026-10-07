@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: välityspalvelin oikean sivuston takana",
+  "metaTitle": "Mikä on Trojan-protokolla? Miten se piilottaa välityksen HTTPS:ksi",
+  "metaDescription": "Trojan selitettynä: miten se piilottaa välitysliikenteen aidon TLS-yhteyden sisään, palautuu luotauksissa oikeaan sivustoon ja miksi oman verkkotunnuksen tarve on sen heikko kohta.",
+  "excerpt": "Oikea TLS-yhteys oikealle sivustolle, jonka omistat, ja salasanan tiiviste sisällä. Ilman salasanaa kävijät ja luotaukset näkevät vain sivuston.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS omaan verkkotunnukseen",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Ei (sovellus tarvitaan)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (viitetoteutus)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Miten Trojan todentaa käyttäjät?",
+      "answer": "TLS-yhteyden sisällä asiakas lähettää yhteisen salasanan heksakoodatun SHA-224-tiivisteen, 56 merkkiä pitkän. Jos se on väärä, palvelin välittää yhteyden varaverkkopalvelimelle."
+    },
+    {
+      "question": "Tarvitseeko Trojan verkkotunnuksen?",
+      "answer": "Kyllä. Palvelin esittää oikean sertifikaatin oikealle verkkotunnukselle, ja siksi se näyttää tavalliselta HTTPS-sivustolta. Sen verkkotunnuksen sensuroija voi myös estää."
+    },
+    {
+      "question": "Trojan vai VLESS?",
+      "answer": "Molemmat nojaavat TLS:ään oman salauksensa sijaan. VLESS ja Reality menevät pidemmälle lainaamalla olemassa olevan suositun sivuston kättelyä, joten estettävää välitysverkkotunnusta ei ole."
+    },
+    {
+      "question": "Voiko Trojanin tunnistaa?",
+      "answer": "Ei yksinkertaisella luotauksella, sillä luotaukset saavat varasivuston. Tutkimus on osoittanut, että TLS TLS:n sisällä -liikenne voidaan tunnistaa sormenjäljestä ajoituksen ja pakettikokojen perusteella, ja välitysverkkotunnukset voidaan estää, kun ne on tunnistettu."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojan-arkisto", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

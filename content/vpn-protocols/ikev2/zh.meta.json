@@ -1,0 +1,44 @@
+{
+  "title": "IKEv2/IPsec：手机内置的 VPN",
+  "metaTitle": "什么是 IKEv2/IPsec？工作原理及容易被封锁的原因",
+  "metaDescription": "IKEv2/IPsec 详解：iPhone、Mac、Windows 和 Android 上的内置 VPN，MOBIKE 如何在移动中保持连接，以及固定的 UDP 500 和 4500 端口为何使它容易被封锁。",
+  "excerpt": "内置于 iOS、macOS、Windows 和 Android，速度快，切换网络时也很顺畅。它运行在固定且众所周知的端口上，封锁它只需一条规则。",
+  "navLabel": "IKEv2/IPsec",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2005",
+    "transport": "UDP 500 / 4500",
+    "looksLike": "标准的 IKE 和 ESP 流量",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "iOS、macOS、Windows、Android 11+"
+  },
+  "apps": [
+    { "name": "strongSwan", "url": "https://www.strongswan.org/", "platforms": "Linux、Android、macOS、Windows" }
+  ],
+  "faq": [
+    {
+      "question": "IKEv2 使用哪些端口？",
+      "answer": "密钥交换使用 UDP 500 端口。当双方之间存在 NAT 路由器时（几乎总是如此），IKE 和加密流量会改用 UDP 4500 端口。"
+    },
+    {
+      "question": "为什么 IKEv2 在手机上表现好？",
+      "answer": "MOBIKE 扩展（RFC 4555）让 IKEv2 连接在 IP 地址变化后依然保持，因此从 Wi-Fi 切换到移动数据时隧道不会中断。"
+    },
+    {
+      "question": "IKEv2 安全吗？",
+      "answer": "安全，前提是使用当前的算法。它是 IETF 标准，被企业广泛使用。它的弱点是容易被识别和封锁，而不是容易被解密。"
+    },
+    {
+      "question": "IKEv2 在中国或俄罗斯能用吗？",
+      "answer": "在有过滤的网络中通常不可靠，因为封锁其固定的 UDP 端口或识别其标准握手都很简单。"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Internet Key Exchange", "url": "https://en.wikipedia.org/wiki/Internet_Key_Exchange" },
+    { "label": "IETF, RFC 7296: Internet Key Exchange Protocol Version 2 (IKEv2)", "url": "https://www.rfc-editor.org/rfc/rfc7296" },
+    { "label": "IETF, RFC 4555: IKEv2 Mobility and Multihoming Protocol (MOBIKE)", "url": "https://www.rfc-editor.org/rfc/rfc4555" }
+  ]
+}

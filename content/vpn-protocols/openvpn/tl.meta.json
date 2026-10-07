@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: Ang Flexible na Beterano na Makikilala ng mga Censor",
+  "metaTitle": "Ano ang OpenVPN? Paano Ito Gumagana at Bakit Natutukoy ng ISP",
+  "metaDescription": "Paliwanag sa OpenVPN: kung paano gumagana ang TLS control channel at data channel nito, bakit mas mabagal ito kaysa WireGuard, at bakit natukoy ng pananaliksik ang mahigit 85% ng mga OpenVPN flow sa totoong ISP.",
+  "excerpt": "Dalawang dekada na, napaka-configurable, at sinusuportahan halos saanman. Ipinakita rin ng mga mananaliksik na matutukoy ng isang ISP ang karamihan ng OpenVPN traffic mula sa hugis nito.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP o TCP",
+    "looksLike": "Sariling TLS framing ng OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Wala (kailangan ng app)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (open-source na client at server)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "Ligtas pa ba ang OpenVPN?",
+      "answer": "Ligtas ang kasalukuyang release ng OpenVPN na may maayos na configuration. Dahil napaka-configurable nito, ang pangunahing panganib ay ang mahinang setup, tulad ng mga lumang cipher, at hindi ang depekto sa protocol."
+    },
+    {
+      "question": "Bakit natutukoy ang OpenVPN kahit sa port 443?",
+      "answer": "Hindi nagmumukhang HTTPS ang traffic dahil lang sa paggamit ng port 443. Ibinabalot ng OpenVPN ang TLS handshake nito sa sarili nitong packet format, at natukoy ng nailathalang pananaliksik ang mahigit 85% ng mga OpenVPN flow sa totoong ISP network mula sa hugis na iyon."
+    },
+    {
+      "question": "OpenVPN o WireGuard?",
+      "answer": "Sa bukas na network, karaniwang mas mabilis at mas simple ang WireGuard. Nangunguna ang OpenVPN sa compatibility at maaari itong tumakbo sa TCP. Wala sa dalawa ang idinisenyo para magtago sa mga censor."
+    },
+    {
+      "question": "UDP o TCP ba ang OpenVPN?",
+      "answer": "Maaari ang alinman. Ang UDP ang default at karaniwang mas mabilis; nakatutulong ang TCP sa mga network na nagba-block ng UDP, na may kapalit na bahagyang bilis."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Manwal ng sanggunian ng OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, pag-block sa OpenVPN at WireGuard sa Russia (issue 274, Ago 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

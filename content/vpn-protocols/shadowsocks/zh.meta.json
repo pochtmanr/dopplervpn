@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks：随机字节，以及它为何不再奏效",
+  "metaTitle": "什么是 Shadowsocks？工作原理及防火长城如何检测它",
+  "metaDescription": "Shadowsocks 详解：为对抗防火长城而生的加密代理、主动探测如何发现它，以及自 2021 年起中国如何凭随机性封锁完全加密的流量。",
+  "excerpt": "诞生于中国的轻量级代理，从第一个字节起就加密，因此看起来什么都不像。自 2021 年起，防火长城封锁的恰恰是什么都不像的流量。",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP 或 UDP",
+    "looksLike": "看似随机的字节",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "无（需要安装应用）"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows、macOS、iOS、Android、Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows、macOS、Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks 是 VPN 吗？",
+      "answer": "严格来说，它是加密代理，而不是 VPN。大多数现代客户端都增加了全局模式，可将所有流量都经由它转发，因此在日常使用中，它的表现与 VPN 十分相似。"
+    },
+    {
+      "question": "Shadowsocks 在中国还能用吗？",
+      "answer": "可靠性不如从前。USENIX Security 2023 上发表的研究表明，自 2021 年 11 月起，防火长城会封锁不像任何已知协议的完全加密流量，而 Shadowsocks 产生的正是这种流量。"
+    },
+    {
+      "question": "防火长城如何判定流量是完全加密的？",
+      "answer": "它检查第一个数据包，如果该包符合某个已知协议、包含足够多的可打印字符，或每字节置位比特的平均数超出 3.4 到 4.6 的范围，就予以豁免。其余流量可能被封锁。"
+    },
+    {
+      "question": "Shadowsocks 2022 是什么？",
+      "answer": "这是该协议在 2022 年的修订版（SIP022），具有更强的重放保护和更新后的密钥处理方式。它并不改变流量看起来随机这一事实。"
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

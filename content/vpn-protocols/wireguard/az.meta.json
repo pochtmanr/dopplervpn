@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: sürətli, sadə və asan bloklanan",
+  "metaTitle": "WireGuard nədir? Necə işləyir və niyə bloklanır",
+  "metaDescription": "WireGuard izahı: sabit müasir kriptoqrafiya, niyə bu qədər sürətlidir, sabit ölçülü əl sıxma niyə senzorlar üçün bloklamağı asanlaşdırır və hansı tətbiqlər ondan istifadə edir.",
+  "excerpt": "Sabit müasir kriptoqrafiyası və çox kiçik kodu olan ən sürətli kütləvi VPN protokolu. O, gizlənmək üçün hazırlanmayıb və süzgəcdən keçirilən şəbəkələrdə ilk bloklanır.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Tanınan VPN əl sıxması",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux nüvəsi (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (rəsmi tətbiqlər)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Bir neçə tətbiqin istifadə etdiyi çoxplatformalı nüvə" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuard təhlükəsizdirmi?",
+      "answer": "Bəli. WireGuard müasir primitivlərdən ibarət sabit dəstdən (ChaCha20-Poly1305, Curve25519, BLAKE2s) istifadə edir və auditi mümkün olan kiçik koda malikdir. Onun zəif tərəfi şifrələmənin gücü yox, senzorlar üçün görünən olmasıdır."
+    },
+    {
+      "question": "WireGuard niyə Rusiyada və ya İranda işləməyi dayandırır?",
+      "answer": "Onun əl sıxma mesajlarının ölçüsü sabitdir: müştəridən 148 bayt, cavab olaraq 92 bayt, UDP üzərindən. Bu şablonu dərin paket yoxlaması asanlıqla aşkar edir, Rusiyada isə operatorların WireGuard sessiyalarını əl sıxmadan dərhal sonra kəsdiyi barədə məlumat verilib."
+    },
+    {
+      "question": "WireGuard OpenVPN-dən sürətlidirmi?",
+      "answer": "Adətən bəli. WireGuard sessiyanı bir gediş-gəliş mübadiləsi ilə qurur, Linux-da nüvədə işləyir və razılaşdırılacaq protokol yükü xeyli azdır. Dəqiq fərq cihazdan və şəbəkədən asılıdır."
+    },
+    {
+      "question": "WireGuard-ı DPI-dan gizlətmək olarmı?",
+      "answer": "Tək başına yox. AmneziaWG kimi fork-lar trafikin daha az tanınması üçün paketlərin ölçülərini və başlıqlarını dəyişir, yaxud WireGuard sürət itkisi hesabına başqa protokolun içinə yerləşdirilə bilər."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (ağ kitab)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, Rusiyada OpenVPN və WireGuard bloklanması (issue 274, avqust 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

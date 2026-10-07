@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: απόκρυψη διαμεσολαβητή πίσω από πραγματικό ιστότοπο",
+  "metaTitle": "Τι είναι το πρωτόκολλο Trojan; Πώς κρύβει την κίνηση ως HTTPS",
+  "metaDescription": "Το Trojan με απλά λόγια: κρύβει την κίνηση σε γνήσια σύνδεση TLS, δείχνει πραγματικό ιστότοπο στις ανιχνεύσεις, και ο δικός σας τομέας είναι το αδύναμο σημείο του.",
+  "excerpt": "Μια πραγματική σύνδεση TLS προς έναν πραγματικό ιστότοπο που σας ανήκει, με κατακερματισμό κωδικού μέσα. Χωρίς τον κωδικό, επισκέπτες και ανιχνεύσεις βλέπουν απλώς τον ιστότοπο.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS προς τον δικό σας τομέα",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Όχι (χρειάζεται εφαρμογή)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (υλοποίηση αναφοράς)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Πώς πιστοποιεί το Trojan τους χρήστες;",
+      "answer": "Μέσα στη σύνδεση TLS, ο πελάτης στέλνει τον δεκαεξαδικά κωδικοποιημένο κατακερματισμό SHA-224 ενός κοινού κωδικού, μήκους 56 χαρακτήρων. Αν είναι λάθος, ο διακομιστής προωθεί τη σύνδεση σε έναν εφεδρικό διακομιστή ιστού."
+    },
+    {
+      "question": "Χρειάζεται το Trojan τομέα;",
+      "answer": "Ναι. Ο διακομιστής παρουσιάζει πραγματικό πιστοποιητικό για πραγματικό τομέα, και αυτό είναι που τον κάνει να μοιάζει με συνηθισμένο ιστότοπο HTTPS. Αυτόν τον τομέα μπορεί να μπλοκάρει και ένας λογοκριτής."
+    },
+    {
+      "question": "Trojan ή VLESS;",
+      "answer": "Και τα δύο στηρίζονται στο TLS και όχι σε δική τους κρυπτογράφηση. Το VLESS με Reality πάει πιο πέρα δανειζόμενο τη χειραψία ενός υπάρχοντος δημοφιλούς ιστότοπου, οπότε δεν υπάρχει τομέας διαμεσολαβητή να μπλοκαριστεί."
+    },
+    {
+      "question": "Μπορεί να εντοπιστεί το Trojan;",
+      "answer": "Όχι με απλή ανίχνευση, αφού οι ανιχνεύσεις παίρνουν τον εφεδρικό ιστότοπο. Έρευνα έχει δείξει ότι η κίνηση TLS μέσα σε TLS μπορεί να αναγνωριστεί από το αποτύπωμά της μέσω χρόνου και μεγεθών πακέτων, και οι τομείς διαμεσολαβητών μπορούν να μπλοκαριστούν μόλις εντοπιστούν."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, αποθετήριο trojan", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

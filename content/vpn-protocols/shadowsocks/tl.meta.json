@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: Random na Byte, at Bakit Tumigil Ito",
+  "metaTitle": "Ano ang Shadowsocks? Paano Ito Gumagana at Paano Natutukoy ng GFW",
+  "metaDescription": "Paliwanag sa Shadowsocks: naka-encrypt na proxy laban sa Great Firewall, paano ito natuklasan ng active probing, at paano mula 2021 ibina-block ng China ang ganap na naka-encrypt na traffic dahil random ito.",
+  "excerpt": "Ang magaan na proxy na nagmula sa China, naka-encrypt mula sa unang byte para hindi magmukhang anuman. Mula 2021, ibina-block ng Great Firewall ang traffic dahil dito.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP o UDP",
+    "looksLike": "Mga byte na mukhang random",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Wala (kailangan ng app)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "VPN ba ang Shadowsocks?",
+      "answer": "Teknikal na naka-encrypt na proxy ito, hindi VPN. Nagdadagdag ang karamihan ng makabagong client ng system-wide na mode na nagruruta ng lahat ng traffic dito, kaya sa araw-araw na paggamit ay kumikilos itong parang VPN."
+    },
+    {
+      "question": "Gumagana pa ba ang Shadowsocks sa China?",
+      "answer": "Mas hindi na ito kasing maaasahan ng dati. Ipinakita ng pananaliksik na inilathala sa USENIX Security 2023 na mula Nobyembre 2021 ay ibina-block ng Great Firewall ang ganap na naka-encrypt na traffic na hindi mukhang anumang kilalang protocol, na siyang ginagawa ng Shadowsocks."
+    },
+    {
+      "question": "Paano nagpapasya ang firewall na ganap na naka-encrypt ang traffic?",
+      "answer": "Sinusuri nito ang unang packet at ine-exempt ito kung tumutugma ito sa kilalang protocol, may sapat na printable na character, o may average na bits-set-per-byte sa labas ng range na 3.4 hanggang 4.6. Maaaring i-block ang natitirang traffic."
+    },
+    {
+      "question": "Ano ang Shadowsocks 2022?",
+      "answer": "Isang rebisyon ng protocol noong 2022 (SIP022) na may mas matibay na proteksyon laban sa replay at na-update na paghawak ng key. Hindi nito binabago na mukhang random ang traffic."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, mga AEAD cipher", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: edisyon ng Shadowsocks 2022", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

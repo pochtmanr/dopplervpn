@@ -1,0 +1,47 @@
+{
+  "title": "Trojan: puhverserver päris veebisaidi taga",
+  "metaTitle": "Mis on Trojan? Kuidas see peidab puhverserveri liikluse HTTPS-iks",
+  "metaDescription": "Trojan selgitatuna: kuidas see peidab puhverserveri liikluse ehtsa TLS-ühenduse sisse, näitab sondeeringutele päris veebisaiti ja miks oma domeeni vajadus on selle nõrk koht.",
+  "excerpt": "Päris TLS-ühendus päris veebisaidiga, mis teil on, ja parooliräsi sees. Ilma paroolita näevad külastajad ja sondid lihtsalt veebisaiti.",
+  "navLabel": "Trojan",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2017",
+    "transport": "TCP + TLS",
+    "looksLike": "HTTPS teie enda domeenile",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Puudub (vaja on rakendust)"
+  },
+  "apps": [
+    { "name": "trojan-gfw (viiteteostus)", "url": "https://github.com/trojan-gfw/trojan", "platforms": "Windows, macOS, Linux" },
+    { "name": "trojan-go", "url": "https://github.com/p4gefau1t/trojan-go", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Kuidas Trojan kasutajaid autentib?",
+      "answer": "TLS-ühenduse sees saadab klient ühise parooli SHA-224 räsi kuueteistkümnendsüsteemis, 56 märki pikk. Kui see on vale, edastab server ühenduse varuveebiserverile."
+    },
+    {
+      "question": "Kas Trojan vajab domeeni?",
+      "answer": "Jah. Server esitab päris sertifikaadi päris domeenile ja just see teeb selle tavalise HTTPS-saidi sarnaseks. Sama domeeni saab tsensor blokeerida."
+    },
+    {
+      "question": "Trojan või VLESS?",
+      "answer": "Mõlemad toetuvad TLS-ile, mitte enda krüpteerimisele. VLESS koos Realityga läheb kaugemale, laenates olemasoleva populaarse veebisaidi käepigistuse, nii et blokeeritavat puhverdomeeni ei ole."
+    },
+    {
+      "question": "Kas Trojanit saab tuvastada?",
+      "answer": "Lihtsa sondeerimisega mitte, sest sondid saavad varuveebisaidi. Uuringud on näidanud, et TLS-i-sees-TLS-i liiklust saab sõrmejälje järgi ära tunda ajastuse ja paketi suuruste järgi ning puhverdomeene saab blokeerida, kui need on kindlaks tehtud."
+    }
+  ],
+  "sources": [
+    { "label": "trojan-gfw, The Trojan Protocol", "url": "https://trojan-gfw.github.io/trojan/protocol" },
+    { "label": "trojan-gfw, trojani hoidla", "url": "https://github.com/trojan-gfw/trojan" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" }
+  ]
+}

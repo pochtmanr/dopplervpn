@@ -1,0 +1,46 @@
+{
+  "title": "AmneziaWG: WireGuard بدون اثر انگشت",
+  "metaTitle": "AmneziaWG چیست؟ تفاوت آن با WireGuard",
+  "metaDescription": "توضیح AmneziaWG: انشعابی از WireGuard که سرآیندها و اندازهٔ بسته‌ها را تصادفی و بسته‌های بی‌مصرف ارسال می‌کند تا DPI نتواند دست‌دهی ثابت WireGuard را تشخیص دهد. محدودیت‌ها و برنامه‌ها.",
+  "excerpt": "سرعت و رمزنگاری WireGuard، با سرآیندها و اندازهٔ بسته‌های تصادفی و بسته‌های بی‌مصرف تا فیلترها نتوانند دست‌دهی ثابت آن را تشخیص دهند.",
+  "navLabel": "AmneziaWG",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "UDP",
+    "looksLike": "UDP غیرقابل‌تشخیص",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "ندارد (نیازمند برنامه)"
+  },
+  "apps": [
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia client (کد منبع)", "url": "https://github.com/amnezia-vpn/amnezia-client", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "amneziawg-go", "url": "https://github.com/amnezia-vpn/amneziawg-go", "platforms": "پیاده‌سازی در فضای کاربر برای سرورها و کلاینت‌ها" }
+  ],
+  "faq": [
+    {
+      "question": "تفاوت AmneziaWG و WireGuard چیست؟",
+      "answer": "AmneziaWG رمزنگاری و طراحی WireGuard را نگه می‌دارد اما سرآیندها و اندازهٔ بسته‌ها را تصادفی می‌کند و می‌تواند پیش از دست‌دهی بسته‌های بی‌مصرف بفرستد، پس ترافیک دیگر با امضای ثابت WireGuard مطابقت ندارد."
+    },
+    {
+      "question": "آیا AmneziaWG با WireGuard سازگار است؟",
+      "answer": "فقط وقتی مبهم‌سازی خاموش باشد. به‌محض اینکه سرآیندهای سفارشی، پیشوندهای اندازه یا بسته‌های بی‌مصرف پیکربندی شوند، هر دو سر باید AmneziaWG را با تنظیمات یکسان اجرا کنند."
+    },
+    {
+      "question": "تنظیمات Jc، S1 و H1 به چه معنا هستند؟",
+      "answer": "Jc تعداد بسته‌های بی‌مصرفی است که پیش از دست‌دهی فرستاده می‌شود و اندازهٔ آن‌ها بین Jmin و Jmax است. S1 تا S4 پیشوندهای تصادفی اضافه می‌کنند تا طول بسته‌ها تغییر کند. H1 تا H4 مقدارهای سفارشی نوع پیام را تعیین می‌کنند که جای مقدارهای ثابت WireGuard را می‌گیرند."
+    },
+    {
+      "question": "آیا AmneziaWG در روسیه کار می‌کند؟",
+      "answer": "امضاهایی را که برای مسدود کردن WireGuard ساده به کار می‌روند حذف می‌کند و همین آن را آنجا بسیار مقاوم‌تر می‌کند. چون روی UDP اجرا می‌شود، شبکه‌هایی که UDP را محدود می‌کنند همچنان می‌توانند بر آن اثر بگذارند."
+    }
+  ],
+  "sources": [
+    { "label": "Amnezia, AmneziaWG documentation (مستندات AmneziaWG)", "url": "https://docs.amnezia.org/documentation/amnezia-wg/" },
+    { "label": "Amnezia, amneziawg-go repository (مخزن amneziawg-go)", "url": "https://github.com/amnezia-vpn/amneziawg-go" },
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" }
+  ]
+}

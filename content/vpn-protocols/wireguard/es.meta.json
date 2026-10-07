@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: rápido, sencillo y fácil de bloquear",
+  "metaTitle": "¿Qué es WireGuard? Cómo funciona y por qué se bloquea",
+  "metaDescription": "WireGuard explicado: su criptografía moderna fija, por qué es tan rápido, por qué su handshake de tamaño fijo facilita el bloqueo por parte de los censores y qué apps lo usan.",
+  "excerpt": "El protocolo VPN popular más rápido, con criptografía moderna fija y un código diminuto. Nunca se creó para ocultarse, y las redes filtradas lo bloquean primero.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Un handshake de VPN reconocible",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Kernel de Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (apps oficiales)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Núcleo multiplataforma usado por varias apps" }
+  ],
+  "faq": [
+    {
+      "question": "¿Es seguro WireGuard?",
+      "answer": "Sí. WireGuard usa un conjunto fijo de primitivas modernas (ChaCha20-Poly1305, Curve25519, BLAKE2s) y tiene un código pequeño que es viable auditar. Su punto débil es su visibilidad para los censores, no la solidez de su cifrado."
+    },
+    {
+      "question": "¿Por qué WireGuard deja de funcionar en Rusia o Irán?",
+      "answer": "Los mensajes de su handshake tienen tamaños fijos, 148 bytes del cliente y 92 bytes en la respuesta, sobre UDP. Ese patrón es fácil de detectar para la inspección profunda de paquetes, y se ha informado de que operadores en Rusia cortan las sesiones de WireGuard justo después del handshake."
+    },
+    {
+      "question": "¿Es WireGuard más rápido que OpenVPN?",
+      "answer": "Normalmente, sí. WireGuard establece una sesión en un solo viaje de ida y vuelta, se ejecuta en el kernel en Linux y tiene mucha menos sobrecarga de protocolo que negociar. La diferencia exacta depende del dispositivo y de la red."
+    },
+    {
+      "question": "¿Se puede ocultar WireGuard de la DPI?",
+      "answer": "No por sí solo. Forks como AmneziaWG cambian los tamaños y las cabeceras de los paquetes para que el tráfico sea menos reconocible, o bien WireGuard puede encapsularse dentro de otro protocolo, con cierto coste en velocidad."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, bloqueo de OpenVPN y WireGuard en Rusia (issue 274, ago 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

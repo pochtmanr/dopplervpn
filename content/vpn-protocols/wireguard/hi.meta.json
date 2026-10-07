@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: तेज़, सरल और आसानी से ब्लॉक होने वाला",
+  "metaTitle": "WireGuard क्या है? यह कैसे काम करता है और ब्लॉक क्यों होता है",
+  "metaDescription": "WireGuard की सरल व्याख्या: इसकी तय आधुनिक क्रिप्टोग्राफ़ी, यह इतना तेज़ क्यों है, तय आकार का हैंडशेक सेंसर के लिए इसे ब्लॉक करना आसान क्यों बनाता है, और कौन-से ऐप इसे इस्तेमाल करते हैं।",
+  "excerpt": "तय आधुनिक क्रिप्टोग्राफ़ी और बेहद छोटे कोडबेस वाला सबसे तेज़ मुख्यधारा का VPN प्रोटोकॉल। इसे कभी छिपने के लिए नहीं बनाया गया, और फ़िल्टर वाले नेटवर्क इसे सबसे पहले ब्लॉक करते हैं।",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "पहचाना जा सकने वाला VPN हैंडशेक",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Linux कर्नल (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (आधिकारिक ऐप)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "क्रॉस-प्लेटफ़ॉर्म कोर, जिस पर कई ऐप बने हैं" }
+  ],
+  "faq": [
+    {
+      "question": "क्या WireGuard सुरक्षित है?",
+      "answer": "हाँ। WireGuard आधुनिक प्रिमिटिव्स (ChaCha20-Poly1305, Curve25519, BLAKE2s) का एक तय सेट इस्तेमाल करता है और इसका कोडबेस इतना छोटा है कि उसका ऑडिट व्यावहारिक है। इसकी कमज़ोरी सेंसर को दिखाई देना है, एन्क्रिप्शन की मज़बूती नहीं।"
+    },
+    {
+      "question": "WireGuard रूस या ईरान में काम करना क्यों बंद कर देता है?",
+      "answer": "इसके हैंडशेक संदेशों का आकार तय है, क्लाइंट की ओर से 148 बाइट और जवाब में 92 बाइट, UDP पर। डीप पैकेट इंस्पेक्शन के लिए इस पैटर्न को पहचानना आसान है, और रूस में ऑपरेटरों द्वारा हैंडशेक के तुरंत बाद WireGuard सेशन काटे जाने की रिपोर्ट मिली हैं।"
+    },
+    {
+      "question": "क्या WireGuard, OpenVPN से तेज़ है?",
+      "answer": "आमतौर पर हाँ। WireGuard एक राउंड ट्रिप में सेशन स्थापित करता है, Linux पर कर्नल में चलता है, और इसमें बातचीत करने के लिए प्रोटोकॉल ओवरहेड बहुत कम है। सटीक अंतर डिवाइस और नेटवर्क पर निर्भर करता है।"
+    },
+    {
+      "question": "क्या WireGuard को DPI से छिपाया जा सकता है?",
+      "answer": "अपने आप नहीं। AmneziaWG जैसे फ़ोर्क ट्रैफ़िक को कम पहचाना जा सकने वाला बनाने के लिए पैकेट का आकार और हेडर बदलते हैं, या WireGuard को किसी दूसरे प्रोटोकॉल के अंदर लपेटा जा सकता है, जिसकी कीमत कुछ गति से चुकानी पड़ती है।"
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, रूस में OpenVPN और WireGuard की ब्लॉकिंग (issue 274, अगस्त 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

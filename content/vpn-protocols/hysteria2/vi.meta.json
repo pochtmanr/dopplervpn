@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: proxy QUIC xây dựng cho mạng kém",
+  "metaTitle": "Hysteria 2 là gì? Giải thích giao thức proxy QUIC",
+  "metaDescription": "Giải thích Hysteria 2: proxy trên QUIC hoạt động như máy chủ web HTTP/3 thật trước các gói thăm dò, giữ tốc độ trên mạng hay mất gói và thất bại khi UDP hoặc QUIC bị chặn.",
+  "excerpt": "Proxy trên QUIC, phương thức truyền tải đứng sau HTTP/3. Nhanh trên đường truyền hay mất gói, và là máy chủ web HTTP/3 thật với bất kỳ ai không có mật khẩu. Nó cần UDP để đi qua.",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "Máy chủ web HTTP/3",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "Hysteria (máy khách chính thức)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Lõi đa nền tảng được nhiều ứng dụng sử dụng" }
+  ],
+  "faq": [
+    {
+      "question": "Hysteria 2 có phải là VPN không?",
+      "answer": "Đây là một giao thức proxy, nhưng các máy khách như Hiddify và NekoBox có thể định tuyến toàn bộ lưu lượng của thiết bị qua nó, nên trên thực tế có thể dùng như một VPN."
+    },
+    {
+      "question": "Vì sao Hysteria 2 nhanh trên kết nối kém?",
+      "answer": "Nó chạy trên QUIC qua UDP, phục hồi sau mất gói mà không làm đình trệ mọi luồng, và có thể dùng cơ chế kiểm soát tắc nghẽn riêng nhắm đến các đường truyền không ổn định."
+    },
+    {
+      "question": "Hysteria 2 có thể bị chặn không?",
+      "answer": "Các gói thăm dò thấy một máy chủ HTTP/3 thật, nên nó chống được thăm dò chủ động. Nhưng cơ quan kiểm duyệt có thể làm chậm hoặc chặn UDP hay QUIC trên diện rộng, và khi đó Hysteria 2 không thể kết nối."
+    },
+    {
+      "question": "Hysteria 2 hay VLESS-Reality?",
+      "answer": "Hysteria 2 thường nhanh hơn trên các mạng hay mất gói nhưng cho phép UDP. VLESS-Reality chạy trên TCP và vẫn hoạt động ở nơi UDP bị lọc. Nhiều người giữ cả hai."
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, đặc tả giao thức Hysteria 2", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, kho mã hysteria", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}

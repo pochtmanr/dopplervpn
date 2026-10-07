@@ -1,0 +1,46 @@
+{
+  "title": "OpenVPN: el veterano flexible que los censores pueden identificar",
+  "metaTitle": "¿Qué es OpenVPN? Cómo funciona y por qué los ISP lo detectan",
+  "metaDescription": "OpenVPN explicado: cómo funcionan su canal de control TLS y su canal de datos, por qué es más lento que WireGuard y por qué una investigación identificó más del 85 % de sus flujos en un ISP real.",
+  "excerpt": "Con dos décadas de antigüedad, infinitamente configurable y compatible casi en todas partes. Los investigadores también demostraron que un ISP puede reconocer la mayor parte del tráfico de OpenVPN por su forma.",
+  "navLabel": "OpenVPN",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2001",
+    "transport": "UDP o TCP",
+    "looksLike": "El formato TLS propio de OpenVPN",
+    "censorshipResistance": 1,
+    "speed": 2,
+    "builtIn": "Ninguno (requiere app)"
+  },
+  "apps": [
+    { "name": "OpenVPN Connect", "url": "https://openvpn.net/client/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "OpenVPN Community (cliente y servidor de código abierto)", "url": "https://openvpn.net/community/", "platforms": "Windows, macOS, Linux, BSD" }
+  ],
+  "faq": [
+    {
+      "question": "¿Sigue siendo seguro OpenVPN?",
+      "answer": "Una versión actual de OpenVPN con una configuración correcta es segura. Como es tan configurable, el principal riesgo es una configuración débil, como cifrados obsoletos, y no un fallo del protocolo."
+    },
+    {
+      "question": "¿Por qué se detecta OpenVPN incluso en el puerto 443?",
+      "answer": "Usar el puerto 443 no hace que el tráfico parezca HTTPS. OpenVPN encuadra su handshake TLS en su propio formato de paquetes, y una investigación publicada identificó más del 85 % de los flujos de OpenVPN en la red de un ISP real por esa forma."
+    },
+    {
+      "question": "¿OpenVPN o WireGuard?",
+      "answer": "En una red abierta, WireGuard suele ser más rápido y sencillo. OpenVPN gana en compatibilidad y puede funcionar sobre TCP. Ninguno de los dos está diseñado para ocultarse de los censores."
+    },
+    {
+      "question": "¿OpenVPN usa UDP o TCP?",
+      "answer": "Cualquiera de los dos. UDP es el valor predeterminado y suele ser más rápido; TCP ayuda en redes que bloquean UDP, con cierto coste en velocidad."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, OpenVPN", "url": "https://en.wikipedia.org/wiki/OpenVPN" },
+    { "label": "Manual de referencia de OpenVPN 2.6", "url": "https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/" },
+    { "label": "Xue et al., OpenVPN is Open to VPN Fingerprinting (USENIX Security 2022)", "url": "https://www.usenix.org/conference/usenixsecurity22/presentation/xue-diwen" },
+    { "label": "net4people, bloqueo de OpenVPN y WireGuard en Rusia (issue 274, ago 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

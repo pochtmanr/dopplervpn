@@ -1,0 +1,47 @@
+{
+  "title": "WireGuard: nhanh, đơn giản và dễ bị chặn",
+  "metaTitle": "WireGuard là gì? Cách hoạt động và vì sao bị chặn",
+  "metaDescription": "Giải thích WireGuard: mật mã hiện đại cố định, vì sao rất nhanh, vì sao bắt tay kích thước cố định khiến dễ bị chặn và những ứng dụng nào dùng nó.",
+  "excerpt": "Giao thức VPN phổ biến nhanh nhất, với mật mã hiện đại cố định và mã nguồn rất nhỏ. Nó không được xây dựng để ẩn mình, và các mạng bị lọc chặn nó đầu tiên.",
+  "navLabel": "WireGuard",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2015",
+    "transport": "UDP",
+    "looksLike": "Bắt tay VPN dễ nhận ra",
+    "censorshipResistance": 1,
+    "speed": 3,
+    "builtIn": "Nhân Linux (5.6+)"
+  },
+  "apps": [
+    { "name": "WireGuard (ứng dụng chính thức)", "url": "https://www.wireguard.com/install/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Amnezia VPN", "url": "https://amnezia.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "Lõi đa nền tảng được nhiều ứng dụng sử dụng" }
+  ],
+  "faq": [
+    {
+      "question": "WireGuard có an toàn không?",
+      "answer": "Có. WireGuard dùng một bộ nguyên thủy mật mã hiện đại cố định (ChaCha20-Poly1305, Curve25519, BLAKE2s) và có mã nguồn nhỏ, đủ để kiểm toán. Điểm yếu của nó là dễ bị cơ quan kiểm duyệt nhìn thấy, không phải độ mạnh của mã hóa."
+    },
+    {
+      "question": "Vì sao WireGuard ngừng hoạt động ở Nga hoặc Iran?",
+      "answer": "Các thông điệp bắt tay của nó có kích thước cố định, 148 byte từ máy khách và 92 byte phản hồi, qua UDP. Mẫu này dễ bị kiểm tra gói tin sâu phát hiện, và đã có báo cáo rằng các nhà mạng ở Nga cắt phiên WireGuard ngay sau bước bắt tay."
+    },
+    {
+      "question": "WireGuard có nhanh hơn OpenVPN không?",
+      "answer": "Thường là có. WireGuard thiết lập phiên chỉ trong một vòng đi–về, chạy trong nhân trên Linux và có ít chi phí giao thức cần thương lượng hơn nhiều. Mức chênh lệch cụ thể phụ thuộc vào thiết bị và mạng."
+    },
+    {
+      "question": "Có thể giấu WireGuard khỏi DPI không?",
+      "answer": "Tự nó thì không. Các bản fork như AmneziaWG thay đổi kích thước và tiêu đề gói tin để lưu lượng khó nhận ra hơn, hoặc có thể bọc WireGuard bên trong một giao thức khác, với cái giá là mất một phần tốc độ."
+    }
+  ],
+  "sources": [
+    { "label": "WireGuard, Protocol & Cryptography", "url": "https://www.wireguard.com/protocol/" },
+    { "label": "Donenfeld, WireGuard: Next Generation Kernel Network Tunnel (whitepaper)", "url": "https://www.wireguard.com/papers/wireguard.pdf" },
+    { "label": "Wikipedia, WireGuard", "url": "https://en.wikipedia.org/wiki/WireGuard" },
+    { "label": "net4people, chặn OpenVPN và WireGuard ở Nga (issue 274, tháng 8 năm 2023)", "url": "https://github.com/net4people/bbs/issues/274" }
+  ]
+}

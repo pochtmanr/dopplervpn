@@ -1,0 +1,49 @@
+{
+  "title": "Shadowsocks: byte ngẫu nhiên và vì sao cách đó không còn hiệu quả",
+  "metaTitle": "Shadowsocks là gì? Cách hoạt động và cách GFW phát hiện",
+  "metaDescription": "Giải thích Shadowsocks: proxy mã hóa sinh ra để vượt Great Firewall, cách thăm dò chủ động tìm ra nó và cách từ 2021 Trung Quốc chặn lưu lượng mã hóa hoàn toàn qua tính ngẫu nhiên.",
+  "excerpt": "Proxy nhẹ sinh ra ở Trung Quốc, mã hóa từ byte đầu tiên nên trông không giống gì cả. Từ 2021, Great Firewall chặn lưu lượng chính vì nó không giống gì cả.",
+  "navLabel": "Shadowsocks",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 5,
+  "card": {
+    "year": "2012",
+    "transport": "TCP hoặc UDP",
+    "looksLike": "Byte trông như ngẫu nhiên",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "Không (cần ứng dụng)"
+  },
+  "apps": [
+    { "name": "Outline", "url": "https://getoutline.org/", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "v2rayNG", "url": "https://github.com/2dust/v2rayNG", "platforms": "Android" },
+    { "name": "Clash Verge Rev", "url": "https://github.com/clash-verge-rev/clash-verge-rev", "platforms": "Windows, macOS, Linux" }
+  ],
+  "faq": [
+    {
+      "question": "Shadowsocks có phải là VPN không?",
+      "answer": "Về mặt kỹ thuật, nó là một proxy mã hóa chứ không phải VPN. Hầu hết máy khách hiện đại có thêm chế độ toàn hệ thống định tuyến mọi lưu lượng qua nó, nên khi dùng hằng ngày nó hoạt động khá giống VPN."
+    },
+    {
+      "question": "Shadowsocks còn hoạt động ở Trung Quốc không?",
+      "answer": "Kém tin cậy hơn trước. Nghiên cứu công bố tại USENIX Security 2023 cho thấy từ tháng 11 năm 2021, Great Firewall chặn lưu lượng mã hóa hoàn toàn không giống bất kỳ giao thức đã biết nào, đúng loại lưu lượng mà Shadowsocks tạo ra."
+    },
+    {
+      "question": "Tường lửa quyết định lưu lượng là mã hóa hoàn toàn bằng cách nào?",
+      "answer": "Nó kiểm tra gói tin đầu tiên và cho qua nếu gói khớp một giao thức đã biết, chứa đủ ký tự in được, hoặc có số bit được đặt trung bình trên mỗi byte nằm ngoài khoảng từ 3,4 đến 4,6. Lưu lượng còn lại có thể bị chặn."
+    },
+    {
+      "question": "Shadowsocks 2022 là gì?",
+      "answer": "Là bản sửa đổi năm 2022 của giao thức (SIP022) với khả năng chống phát lại mạnh hơn và cách xử lý khóa được cập nhật. Nó không thay đổi thực tế là lưu lượng vẫn trông ngẫu nhiên."
+    }
+  ],
+  "sources": [
+    { "label": "Wikipedia, Shadowsocks", "url": "https://en.wikipedia.org/wiki/Shadowsocks" },
+    { "label": "Shadowsocks, AEAD ciphers", "url": "https://shadowsocks.org/doc/aead.html" },
+    { "label": "Shadowsocks, SIP022: Shadowsocks 2022 edition", "url": "https://shadowsocks.org/doc/sip022.html" },
+    { "label": "GFW Report, How China Detects and Blocks Shadowsocks (IMC 2020)", "url": "https://gfw.report/publications/imc20/en/" },
+    { "label": "Wu et al., How the Great Firewall of China Detects and Blocks Fully Encrypted Traffic (USENIX Security 2023)", "url": "https://gfw.report/publications/usenixsecurity23/en/" }
+  ]
+}

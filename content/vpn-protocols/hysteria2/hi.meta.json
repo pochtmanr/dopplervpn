@@ -1,0 +1,48 @@
+{
+  "title": "Hysteria 2: खराब नेटवर्क के लिए बना QUIC प्रॉक्सी",
+  "metaTitle": "Hysteria 2 क्या है? QUIC प्रॉक्सी प्रोटोकॉल की व्याख्या",
+  "metaDescription": "Hysteria 2 की सरल व्याख्या: QUIC पर बना प्रॉक्सी जो प्रोब को असली HTTP/3 वेब सर्वर जैसा दिखता है, नुकसान वाले नेटवर्क पर गति बनाए रखता है, और जहाँ UDP या QUIC ब्लॉक हो वहाँ विफल होता है।",
+  "excerpt": "QUIC पर बना प्रॉक्सी, वही ट्रांसपोर्ट जो HTTP/3 के पीछे है। नुकसान वाले लिंक पर तेज़, और पासवर्ड के बिना किसी के लिए असली HTTP/3 वेब सर्वर। इसे चलने के लिए UDP चाहिए।",
+  "navLabel": "Hysteria 2",
+  "datePublished": "2026-10-07",
+  "dateModified": "2026-10-07",
+  "readingMinutes": 4,
+  "card": {
+    "year": "2023",
+    "transport": "QUIC (UDP)",
+    "looksLike": "HTTP/3 वेब सर्वर",
+    "censorshipResistance": 2,
+    "speed": 3,
+    "builtIn": "कोई नहीं (ऐप ज़रूरी)"
+  },
+  "apps": [
+    { "name": "Hysteria (आधिकारिक क्लाइंट)", "url": "https://v2.hysteria.network/", "platforms": "Windows, macOS, Linux" },
+    { "name": "Hiddify", "url": "https://github.com/hiddify/hiddify-app", "platforms": "Windows, macOS, iOS, Android, Linux" },
+    { "name": "NekoBox for Android", "url": "https://github.com/MatsuriDayo/NekoBoxForAndroid", "platforms": "Android" },
+    { "name": "sing-box", "url": "https://github.com/SagerNet/sing-box", "platforms": "क्रॉस-प्लेटफ़ॉर्म कोर, जिस पर कई ऐप बने हैं" }
+  ],
+  "faq": [
+    {
+      "question": "क्या Hysteria 2 एक VPN है?",
+      "answer": "यह एक प्रॉक्सी प्रोटोकॉल है, लेकिन Hiddify और NekoBox जैसे क्लाइंट डिवाइस का सारा ट्रैफ़िक इसके ज़रिए रूट कर सकते हैं, इसलिए व्यवहार में इसे VPN की तरह इस्तेमाल किया जा सकता है।"
+    },
+    {
+      "question": "Hysteria 2 खराब कनेक्शन पर तेज़ क्यों है?",
+      "answer": "यह UDP पर QUIC के ऊपर चलता है, जो पैकेट लॉस से इस तरह उबरता है कि हर स्ट्रीम ठप नहीं होती, और यह अस्थिर लिंक के लिए बना अपना कंजेशन कंट्रोल इस्तेमाल कर सकता है।"
+    },
+    {
+      "question": "क्या Hysteria 2 को ब्लॉक किया जा सकता है?",
+      "answer": "प्रोब को असली HTTP/3 सर्वर दिखता है, इसलिए यह एक्टिव प्रोबिंग का सामना करता है। लेकिन सेंसर UDP या QUIC को व्यापक रूप से धीमा या ब्लॉक कर सकता है, और तब Hysteria 2 कनेक्ट नहीं हो पाता।"
+    },
+    {
+      "question": "Hysteria 2 या VLESS-Reality?",
+      "answer": "UDP की अनुमति देने वाले नुकसान वाले नेटवर्क पर Hysteria 2 अक्सर ज़्यादा तेज़ होता है। VLESS-Reality TCP पर चलता है और जहाँ UDP फ़िल्टर है वहाँ भी काम करता रहता है। कई लोग दोनों रखते हैं।"
+    }
+  ],
+  "sources": [
+    { "label": "Hysteria, Hysteria 2 प्रोटोकॉल विनिर्देश", "url": "https://v2.hysteria.network/docs/developers/Protocol/" },
+    { "label": "apernet, hysteria रिपॉज़िटरी", "url": "https://github.com/apernet/hysteria" },
+    { "label": "IETF, RFC 9000: QUIC", "url": "https://www.rfc-editor.org/rfc/rfc9000" },
+    { "label": "IETF, RFC 9114: HTTP/3", "url": "https://www.rfc-editor.org/rfc/rfc9114" }
+  ]
+}
