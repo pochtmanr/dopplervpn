@@ -7,8 +7,6 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { localeConfig, getFlagUrl } from "@/lib/languages";
 import { trackGetPro } from "@/lib/track-cta";
-import { isBlogLocale } from "@/i18n/blog-locales";
-import { isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 import { ThemeToggle } from "./theme-toggle";
 
 export function MobileNav({ logo }: { logo: ReactNode }) {
@@ -138,13 +136,15 @@ export function MobileNav({ logo }: { logo: ReactNode }) {
         <div className="border-t border-overlay/10">
           {/* Nav links — same text size as desktop */}
           <div className="px-2 py-2 space-y-0.5">
-            <Link
-              href="/#pricing"
-              onClick={close}
-              className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
-            >
-              {t("pricing")}
-            </Link>
+            {hasAccount === false && (
+              <Link
+                href="/#pricing"
+                onClick={close}
+                className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
+              >
+                {t("pricing")}
+              </Link>
+            )}
             <Link
               href="/downloads"
               onClick={close}
@@ -152,24 +152,6 @@ export function MobileNav({ logo }: { logo: ReactNode }) {
             >
               {t("downloads")}
             </Link>
-            {isVpnProtocolsLocale(locale) && (
-              <Link
-                href="/vpn-protocols"
-                onClick={close}
-                className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
-              >
-                {t("protocols")}
-              </Link>
-            )}
-            {isBlogLocale(locale) && (
-              <Link
-                href="/blog"
-                onClick={close}
-                className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-text-muted hover:text-text-primary hover:bg-overlay/5 transition-colors"
-              >
-                {t("blog")}
-              </Link>
-            )}
             <Link
               href="/support"
               prefetch={false}

@@ -7,8 +7,6 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { localeConfig, getFlagUrl } from "@/lib/languages";
 import { trackGetPro } from "@/lib/track-cta";
-import { isBlogLocale } from "@/i18n/blog-locales";
-import { isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 
 interface DesktopNavProps {
   logo: ReactNode;
@@ -168,12 +166,16 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
           {/* Desktop links — centered */}
           <div className="hidden md:flex items-center gap-0.5 absolute inset-0 justify-center pointer-events-none transition-opacity duration-300">
             <div className="flex items-center gap-0.5 pointer-events-auto">
-            <Link
-              href="/#pricing"
-              className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
-            >
-              {t("pricing")}
-            </Link>
+            {/* Pricing is for visitors who have not signed up yet; it waits
+                for hasAccount to resolve so a signed-in visitor never sees it. */}
+            {hasAccount === false && (
+              <Link
+                href="/#pricing"
+                className="text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
+              >
+                {t("pricing")}
+              </Link>
+            )}
 
             <Link
               href="/downloads"
@@ -181,22 +183,6 @@ export function DesktopNav({ logo, controls, mobile }: DesktopNavProps) {
             >
               {t("downloads")}
             </Link>
-            {isVpnProtocolsLocale(locale) && (
-              <Link
-                href="/vpn-protocols"
-                className="hidden lg:inline-flex text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
-              >
-                {t("protocols")}
-              </Link>
-            )}
-            {isBlogLocale(locale) && (
-              <Link
-                href="/blog"
-                className="hidden lg:inline-flex text-text-muted hover:text-text-primary transition-colors text-sm font-medium px-3 py-2"
-              >
-                {t("blog")}
-              </Link>
-            )}
 
             <Link
               href="/support"
