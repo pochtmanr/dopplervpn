@@ -313,6 +313,21 @@ Deno.serve(async (req: Request) => {
       ...params,
       p_details: { ...billing, ...details },
     });
+    // The live schema of subscription_events is not in any repo. If it turns
+    // out to CHECK event_type, a newly named type must not become a 500 that
+    // RevenueCat retries forever: fall back to the old unknown-type shape.
+    if (error?.code === "23514" && params.p_event_type !== "INITIAL_PURCHASE") {
+      console.error(
+        `[webhook] ${type} | event_type ${params.p_event_type} rejected by a CHECK; logging as unknown_type`
+      );
+      const { error: retryErr } = await supabase.rpc("webhook_log_event", {
+        ...params,
+        p_event_type: "INITIAL_PURCHASE",
+        p_details: { ...billing, ...details, unknown_type: params.p_event_type },
+      });
+      noteRpcFailure("webhook_log_event", retryErr);
+      return;
+    }
     noteRpcFailure("webhook_log_event", error);
   }
 
@@ -543,11 +558,14 @@ Deno.serve(async (req: Request) => {
         break;
       }
 
-      case "BILLING_ISSUES": {
+      // RevenueCat's name is BILLING_ISSUE, singular. This case used to match
+      // "BILLING_ISSUES", so every billing issue fell to default and was
+      // logged as an INITIAL_PURCHASE, which reporting counts as a sale.
+      case "BILLING_ISSUE": {
         await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
-          p_event_type: "BILLING_ISSUES",
+          p_event_type: "BILLING_ISSUE",
           p_platform: platform,
           p_rc_event_id: rcEventId,
           p_product_id: productId,
@@ -613,11 +631,76 @@ Deno.serve(async (req: Request) => {
         break;
       }
 
+      // Each of these says the subscription is live again, or for longer, with
+      // a new expiration_at_ms. They used to fall to default, so a Play
+      // deferral or an un-cancel never moved the expiry and the sweeper could
+      // downgrade a paying user. Same owner lookup as RENEWAL.
+      case "UNCANCELLATION":
+      case "SUBSCRIPTION_EXTENDED":
+      case "REFUND_REVERSED": {
+        const { accountId: ownerId, ownerFound } = await resolveOwnerAccountId(
+          originalTxnId,
+          accountId
+        );
+        let claimResult: unknown = null;
+        if (expiresAt) {
+          const { data, error } = await supabase.rpc("claim_subscription", {
+            p_account_id: ownerId,
+            p_tier: tier,
+            p_expires_at: expiresAt,
+            p_original_transaction_id: originalTxnId,
+            p_store: storeForRpc(platform),
+            p_product_id: productId,
+          });
+          claimResult = data ?? error;
+          console.log(
+            `[webhook] ${type} claim (owner=${ownerId}, owner_found=${ownerFound}, rc_user=${accountId}) result:`,
+            JSON.stringify(claimResult)
+          );
+          noteRpcOutcome("claim_subscription", data, error);
+        }
+
+        await logEvent({
+          p_account_id: ownerId,
+          p_original_transaction_id: originalTxnId,
+          p_event_type: type,
+          p_platform: platform,
+          p_rc_event_id: rcEventId,
+          p_product_id: productId,
+          p_expires_at: expiresAt,
+          p_details: { rc_app_user_id: accountId, owner_found: ownerFound, claim_result: claimResult },
+        });
+        break;
+      }
+
+      // RevenueCat could not validate the receipt with the store and granted a
+      // short entitlement instead. On Play that purchase is NOT acknowledged,
+      // and Google refunds it after 3 days. Nothing is granted here: the
+      // client already claims the same short expiry, and the ops bot's Store
+      // billing probe alarms on the pattern. Logged loudly so it is findable.
+      case "TEMPORARY_ENTITLEMENT_GRANT": {
+        console.error(
+          `[webhook] TEMPORARY_ENTITLEMENT_GRANT account=${accountId} store=${store} product=${productId}: RevenueCat could not validate this purchase with the store`
+        );
+        await logEvent({
+          p_account_id: accountId,
+          p_original_transaction_id: originalTxnId,
+          p_event_type: type,
+          p_platform: platform,
+          p_rc_event_id: rcEventId,
+          p_product_id: productId,
+          p_expires_at: expiresAt,
+        });
+        break;
+      }
+
+      // Log under RevenueCat's own name. Logging unknown types as
+      // INITIAL_PURCHASE made them look like sales.
       default: {
         await logEvent({
           p_account_id: accountId,
           p_original_transaction_id: originalTxnId,
-          p_event_type: "INITIAL_PURCHASE",
+          p_event_type: type,
           p_platform: platform,
           p_rc_event_id: rcEventId,
           p_details: { unknown_type: type, raw: body },
