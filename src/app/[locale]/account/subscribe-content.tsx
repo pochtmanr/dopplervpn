@@ -18,6 +18,7 @@ import { DevicesCard } from '@/components/account/dashboard/devices-card';
 import { EveryDeviceBand } from '@/components/account/dashboard/every-device-band';
 import { RestoreCard } from '@/components/account/dashboard/restore-card';
 import { SubscriptionCard } from '@/components/account/dashboard/subscription-card';
+import { InstallFirstNotice } from '@/components/account/dashboard/install-first-notice';
 import {
   CheckIcon,
   CloseIcon,
@@ -124,6 +125,10 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
   /* ── Plan & checkout state ─────────────────────────────────────── */
   const [selected, setSelected] = useState<PlanId>('yearly');
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'crypto'>('card');
+  // Install-first guard (InstallFirstNotice): required only where the App Store
+  // has no Doppler, because that is where paying first ends in a refund.
+  const [installStrict, setInstallStrict] = useState(false);
+  const [installConfirmed, setInstallConfirmed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -472,6 +477,23 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
   // Expired pro: rawTier was pro/premium but effective tier is free (server already computed)
   const isExpiredPro = !isActivePro && accountInfo?.rawTier === 'pro';
 
+  const guardedSubscribe = () => {
+    if (installStrict && !installConfirmed) {
+      setError(t('installFirst.confirmRequired'));
+      return;
+    }
+    void handleSubscribe();
+  };
+
+  const installNotice = (
+    <InstallFirstNotice
+      confirmed={installConfirmed}
+      onConfirmedChange={(value) => { setInstallConfirmed(value); setError(''); }}
+      onStrictChange={setInstallStrict}
+      plus={plus}
+    />
+  );
+
   /* ── Plans view (slide 2 of the paywall, and the Pro extend flow) ─ */
   const plansView = (
     <>
@@ -650,10 +672,12 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
         <p className="text-xs text-text-muted text-center">{t('dashboard.cryptoNote')}</p>
       )}
 
+      {installNotice}
+
       {/* Subscribe button */}
       <button
         type="button"
-        onClick={handleSubscribe}
+        onClick={guardedSubscribe}
         disabled={loading}
         className={`${BTN_PRIMARY} w-full`}
       >
@@ -685,6 +709,8 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
 
   /* Calm+ preview of the same picker (design-lab/plus/plan-picker.tsx), on the same state. */
   const plusPlansView = (
+    <>
+    {installNotice}
     <PlusPlanPicker
       plans={PLANS}
       selected={selected}
@@ -702,10 +728,11 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
       paymentMethod={paymentMethod}
       onPaymentMethod={(method) => { setPaymentMethod(method); setError(''); }}
       loading={loading}
-      onSubscribe={handleSubscribe}
+      onSubscribe={guardedSubscribe}
       finalCents={finalCents}
       error={error}
     />
+    </>
   );
 
   // The free paywall is the tallest card, so devices balance the account column

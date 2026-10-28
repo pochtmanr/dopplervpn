@@ -712,13 +712,14 @@
       "step2": "App öffnen — dein Konto wird automatisch erstellt",
       "step3": "Plan wählen und abonnieren",
       "step4": "Verbinden tippen — du bist geschützt!",
-      "learnMore": "Learn more about VPN for iOS"
+      "learnMore": "Learn more about VPN for iOS",
+      "buttonTestflight": "Über TestFlight installieren",
+      "directNote": "Nicht in Ihrem App Store? Installieren Sie die App über TestFlight und kaufen Sie dann in der App."
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Bei Google Play laden",
       "buttonApk": "APK herunterladen",
-      "buttonApk32": "32-Bit-APK (ältere Geräte)",
       "apkNote": "Für Geräte ohne Google Play. Android fragt Sie, ob Sie Installationen aus dieser Quelle zulassen möchten.",
       "step1": "Doppler VPN von Google Play oder APK herunterladen",
       "step2": "App öffnen — dein Konto wird automatisch erstellt",
@@ -733,7 +734,9 @@
       "step2": "App öffnen — dein Konto wird automatisch erstellt",
       "step3": "Plan wählen und abonnieren",
       "step4": "Verbinden tippen — du bist geschützt!",
-      "learnMore": "Mehr erfahren über VPN für Mac"
+      "learnMore": "Mehr erfahren über VPN für Mac",
+      "buttonDmg": "DMG herunterladen",
+      "dmgNote": "Nicht in Ihrem Mac App Store? Laden Sie die DMG herunter (macOS 15 oder neuer) und kaufen Sie dann in der App."
     },
     "windows": {
       "title": "Windows",
@@ -743,7 +746,8 @@
       "step3": "Doppler VPN öffnen — dein Konto wird automatisch erstellt",
       "step4": "Plan wählen, abonnieren und verbinden!",
       "learnMore": "Mehr erfahren über VPN für Windows"
-    }
+    },
+    "installGuide": "Installationsanleitung"
   },
   "support": {
     "title": "Hilfezentrum & Support",
@@ -1318,7 +1322,15 @@
       "copyAndLogout": "ID kopieren & abmelden",
       "telegramLinked": "Telegram verbunden"
     },
-    "securedByCrypto": "Gesichert durch OxaPay"
+    "securedByCrypto": "Gesichert durch OxaPay",
+    "installFirst": {
+      "title": "Installieren Sie die App, bevor Sie bezahlen",
+      "body": "In manchen Ländern ist Doppler VPN nicht im App Store. Installieren und öffnen Sie zuerst die App, dann kaufen Sie hier oder in der App.",
+      "guide": "Installationsanleitung",
+      "downloads": "Downloads",
+      "confirm": "Ich habe Doppler VPN bereits installiert und geöffnet",
+      "confirmRequired": "Bitte installieren Sie zuerst die App und setzen Sie oben das Häkchen."
+    }
   },
   "subscribeSuccess": {
     "title": "Alles erledigt!",
@@ -4466,5 +4478,39 @@
     "backDesc": "Alle Protokolle nebeneinander: Transport, wie sie im Netzwerk aussehen und wie schwer sie zu blockieren sind.",
     "appsTitle": "Apps, die {protocol} nutzen",
     "appsNote": "Unabhängige Projekte, aufgelistet, damit Sie sie selbst prüfen können. Doppler steht in keiner Verbindung zu ihnen und bürgt nicht für sie."
+  },
+  "install": {
+    "title": "So installieren Sie Doppler VPN",
+    "lastUpdated": "Aktualisiert im Oktober 2026",
+    "intro": "In manchen Ländern, darunter Russland und China, ist Doppler VPN nicht im App Store. Diese Anleitung zeigt, wie Sie es trotzdem auf iPhone, Mac und Android installieren und warum Sie die App vor dem Bezahlen installieren sollten.",
+    "sections": {
+      "installFirst": {
+        "title": "Zuerst installieren, dann in der App kaufen",
+        "content": "Installieren und öffnen Sie die App, bevor Sie einen Plan kaufen. Die App legt Ihr Konto selbst an, und ein in der App gekaufter Plan wird sofort diesem Konto zugeordnet.\n\nSchon auf der Website bezahlt? Öffnen Sie die App, melden Sie sich mit der Konto-ID von Ihrer Kontoseite an, und der Plan erscheint."
+      },
+      "iphone": {
+        "title": "iPhone und iPad: TestFlight",
+        "content": "Wenn Doppler VPN nicht in Ihrem App Store ist, installieren Sie es über TestFlight, Apples eigene App zum Installieren von Apps außerhalb des Store-Angebots.\n\n1. Installieren Sie TestFlight aus dem App Store. Es ist kostenlos.\n2. Öffnen Sie auf demselben iPhone unten den Einladungslink für Doppler VPN, tippen Sie auf „Annehmen“ und dann auf „Installieren“.\n3. Öffnen Sie Doppler VPN und kaufen Sie einen Plan in der App. Die Zahlung öffnet sich auf unserer Website, per Karte oder Krypto.\n\nTestFlight hält die App aktuell. Jeder Build läuft 90 Tage, und wir veröffentlichen vorher einen neuen. Lassen Sie die automatischen Updates in TestFlight also eingeschaltet."
+      },
+      "appleIdRegion": {
+        "title": "Wenn TestFlight nicht klappt: Region des Apple Accounts ändern",
+        "content": "Wenn TestFlight für Sie nicht verfügbar ist, verlegen Sie Ihren Apple Account in ein anderes Land oder eine andere Region, zum Beispiel Kasachstan, die Türkei oder die USA, und installieren Sie Doppler VPN aus dem dortigen App Store.\n\nVor dem Wechsel verlangt Apple, dass Sie Ihr Restguthaben aufbrauchen und Abos kündigen, und Sie brauchen eine Zahlungsmethode aus der neuen Region oder wählen „Keine“, wo das angeboten wird. Bereits installierte Apps funktionieren weiter. Apples Anleitung ist unten verlinkt."
+      },
+      "mac": {
+        "title": "Mac: DMG-Download",
+        "content": "Wenn Doppler VPN nicht in Ihrem Mac App Store ist, laden Sie unten die DMG herunter. Sie braucht macOS 15 oder neuer und ist von Apple signiert und notarisiert.\n\n1. Öffnen Sie die DMG und ziehen Sie Doppler VPN in „Programme“. Die App muss aus dem Ordner „Programme“ laufen.\n2. Öffnen Sie Doppler VPN. Beim ersten Verbinden fragt macOS, ob die Netzwerkerweiterung erlaubt werden soll: Öffnen Sie „Systemeinstellungen“ → „Allgemein“ → „Anmeldeobjekte und Erweiterungen“ und schalten Sie Doppler VPN ein.\n3. Kaufen Sie einen Plan in der App. Die Zahlung öffnet sich auf unserer Website.\n\nDie Mac-App sucht selbst nach Updates."
+      },
+      "android": {
+        "title": "Android: APK-Download",
+        "content": "Ohne Google Play laden Sie unten die APK herunter. Sie läuft auf 64-Bit-Android-Handys, also auf fast jedem Handy seit 2019. Android fragt, ob Installationen aus Ihrem Browser erlaubt werden sollen: einmal erlauben, installieren, dann die App öffnen und darin kaufen.\n\nÄltere 32-Bit-Handys: Installieren Sie Doppler VPN stattdessen über Google Play."
+      }
+    },
+    "links": {
+      "testflightApp": "TestFlight im App Store",
+      "testflightInvite": "TestFlight-Einladung für Doppler VPN",
+      "appleRegionHelp": "Apple: Land oder Region ändern",
+      "macDmg": "Doppler VPN für Mac herunterladen (DMG)",
+      "androidApk": "Doppler VPN APK herunterladen"
+    }
   }
 }

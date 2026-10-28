@@ -129,6 +129,7 @@ const staticPages = [
   "/refund",
   "/help/account-id",
   "/help/web-and-store",
+  "/install",
   "/help/restore-cancel-refund",
   "/dpa",
   "/subprocessors",

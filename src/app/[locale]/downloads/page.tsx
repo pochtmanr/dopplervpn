@@ -108,13 +108,18 @@ const URLS = {
   // Same-origin on purpose — the route decides where the bytes come from, so the
   // link printed here survives a change of hosting. See the route's own header.
   androidApk: "/api/android/download/latest",
-  // The 32-bit build, for pre-2019 hardware that cannot install the arm64 APK
-  // (INSTALL_FAILED_NO_MATCHING_ABIS, which Android reports to the user only as
-  // "app not installed"). It has to be a second, explicitly labelled link:
-  // nothing in a browser request states the device's CPU architecture, so the
-  // page cannot pick for the visitor the way the in-app update banner can.
-  androidApk32: "/api/android/download/latest?abi=armeabi-v7a",
+  // The direct builds for people whose App Store has no Doppler (Russia, China):
+  // a public TestFlight link for iPhone and a Developer ID DMG for Mac, both
+  // paying through the web checkout. Same-origin for the same reason as the APK.
+  iosTestflight: "/api/ios/testflight",
+  macDmg: "/api/mac/download/latest",
 };
+
+// Each direct button stays hidden until its build exists, so the page never
+// offers a link that dead-ends. IOS_TESTFLIGHT_URL is the public link itself;
+// MAC_DMG_ENABLED=1 is flipped once the first mac-v* release is published.
+const SHOW_IOS_TESTFLIGHT = Boolean(process.env.IOS_TESTFLIGHT_URL);
+const SHOW_MAC_DMG = process.env.MAC_DMG_ENABLED === "1";
 
 // Store links for the ratings row — the same two the home hero and CTA card use.
 const APP_STORE_URL = URLS.ios;
@@ -243,6 +248,8 @@ type PlatformNote = {
    * keeps its meaning.
    */
   tone: "warn" | "info";
+  /** Appends a link to the install guide (/install#<anchor>) after the text. */
+  guide?: "iphone" | "mac";
 };
 
 type PlatformButton = {
@@ -282,7 +289,23 @@ const PLATFORMS: {
     key: "ios",
     icon: "apple",
     learnHref: "/vpn-for-ios",
-    buttons: [{ labelKey: "ios.button", href: URLS.ios, external: true, primary: true }],
+    buttons: [
+      { labelKey: "ios.button", href: URLS.ios, external: true, primary: true },
+      ...(SHOW_IOS_TESTFLIGHT
+        ? [
+            {
+              labelKey: "ios.buttonTestflight",
+              href: URLS.iosTestflight,
+              variant: "ios-testflight" as const,
+              external: true,
+              primary: false,
+            },
+          ]
+        : []),
+    ],
+    ...(SHOW_IOS_TESTFLIGHT
+      ? { notes: [{ ns: "apps" as const, key: "ios.directNote", tone: "info" as const, guide: "iphone" as const }] }
+      : {}),
   },
   {
     key: "android",
@@ -308,20 +331,29 @@ const PLATFORMS: {
         download: true,
         primary: false,
       },
-      {
-        labelKey: "android.buttonApk32",
-        href: URLS.androidApk32,
-        variant: "android-apk-32",
-        download: true,
-        primary: false,
-      },
     ],
   },
   {
     key: "mac",
     icon: "apple",
     learnHref: "/vpn-for-macos",
-    buttons: [{ labelKey: "mac.button", href: URLS.mac, external: true, primary: true }],
+    buttons: [
+      { labelKey: "mac.button", href: URLS.mac, external: true, primary: true },
+      ...(SHOW_MAC_DMG
+        ? [
+            {
+              labelKey: "mac.buttonDmg",
+              href: URLS.macDmg,
+              variant: "mac-dmg" as const,
+              download: true,
+              primary: false,
+            },
+          ]
+        : []),
+    ],
+    ...(SHOW_MAC_DMG
+      ? { notes: [{ ns: "apps" as const, key: "mac.dmgNote", tone: "info" as const, guide: "mac" as const }] }
+      : {}),
   },
   {
     key: "windows",
@@ -578,6 +610,17 @@ export default async function DownloadsPage({ params }: PageProps) {
                                 {note.tone === "warn" && <WarnIcon />}
                                 <span className={note.tone === "info" ? "text-text-tertiary" : undefined}>
                                   {resolveNote(note)}
+                                  {note.guide && (
+                                    <>
+                                      {" "}
+                                      <Link
+                                        href={`/install#${note.guide}`}
+                                        className={plus ? "font-bold text-(--c-accent)" : "text-accent-teal hover:text-accent-teal-light"}
+                                      >
+                                        {t("installGuide")}
+                                      </Link>
+                                    </>
+                                  )}
                                 </span>
                               </li>
                             ))}

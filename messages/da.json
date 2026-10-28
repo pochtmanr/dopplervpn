@@ -712,13 +712,14 @@
       "step2": "Åbn appen — din konto oprettes automatisk",
       "step3": "Vælg et abonnement og abonnér",
       "step4": "Tryk Opret forbindelse — du er beskyttet!",
-      "learnMore": "Læs mere om VPN til iOS"
+      "learnMore": "Læs mere om VPN til iOS",
+      "buttonTestflight": "Installer via TestFlight",
+      "directNote": "Ikke i din App Store? Installer via TestFlight, og køb derefter i appen."
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Hent på Google Play",
       "buttonApk": "Download APK",
-      "buttonApk32": "32-bit APK (ældre enheder)",
       "apkNote": "Til enheder uden Google Play. Android beder dig om at tillade installation fra denne kilde.",
       "step1": "Download Doppler VPN fra Google Play eller APK",
       "step2": "Åbn appen — din konto oprettes automatisk",
@@ -733,7 +734,9 @@
       "step2": "Åbn appen — din konto oprettes automatisk",
       "step3": "Vælg et abonnement og abonnér",
       "step4": "Tryk Opret forbindelse — du er beskyttet!",
-      "learnMore": "Læs mere om VPN til Mac"
+      "learnMore": "Læs mere om VPN til Mac",
+      "buttonDmg": "Hent DMG",
+      "dmgNote": "Ikke i din Mac App Store? Hent DMG-filen (macOS 15 eller nyere), og køb derefter i appen."
     },
     "windows": {
       "title": "Windows",
@@ -743,7 +746,8 @@
       "step3": "Åbn Doppler VPN — din konto oprettes automatisk",
       "step4": "Vælg et abonnement, abonnér og opret forbindelse!",
       "learnMore": "Læs mere om VPN til Windows"
-    }
+    },
+    "installGuide": "Installationsvejledning"
   },
   "support": {
     "title": "Hjælpecenter & support",
@@ -1318,7 +1322,15 @@
       "copyAndLogout": "Kopiér ID og log ud",
       "telegramLinked": "Telegram tilknyttet"
     },
-    "securedByCrypto": "Sikret af OxaPay"
+    "securedByCrypto": "Sikret af OxaPay",
+    "installFirst": {
+      "title": "Installer appen, før du betaler",
+      "body": "I nogle lande findes Doppler VPN ikke i App Store. Installer og åbn appen først, og køb derefter her eller i appen.",
+      "guide": "Installationsvejledning",
+      "downloads": "Downloads",
+      "confirm": "Jeg har allerede installeret og åbnet Doppler VPN",
+      "confirmRequired": "Installer appen først, og sæt flueben i feltet ovenfor."
+    }
   },
   "subscribeSuccess": {
     "title": "Du er klar!",
@@ -4466,5 +4478,39 @@
     "backDesc": "Alle protokoller side om side: transport, hvordan de ser ud på ledningen, og hvor svære de er at blokere.",
     "appsTitle": "Apps, der bruger {protocol}",
     "appsNote": "Uafhængige projekter, listet så du selv kan tjekke dem. Doppler er ikke tilknyttet dem og indestår ikke for dem."
+  },
+  "install": {
+    "title": "Sådan installerer du Doppler VPN",
+    "lastUpdated": "Opdateret i oktober 2026",
+    "intro": "I nogle lande, blandt andet Rusland og Kina, findes Doppler VPN ikke i App Store. Denne vejledning viser, hvordan du alligevel installerer den på iPhone, Mac og Android, og hvorfor du bør installere appen, før du betaler.",
+    "sections": {
+      "installFirst": {
+        "title": "Installer først, køb derefter i appen",
+        "content": "Installer og åbn appen, før du køber et abonnement. Appen opretter selv din konto, og et abonnement købt i appen knyttes straks til den konto.\n\nHar du allerede betalt på hjemmesiden? Åbn appen, log ind med konto-id'et på din kontoside, så dukker abonnementet op."
+      },
+      "iphone": {
+        "title": "iPhone og iPad: TestFlight",
+        "content": "Hvis Doppler VPN ikke findes i din App Store, så installer den via TestFlight, Apples egen app til at installere apps uden for butikkens udvalg.\n\n1. Installer TestFlight fra App Store. Den er gratis.\n2. Åbn invitationslinket til Doppler VPN nedenfor på samme iPhone, tryk på \"Accepter\" og derefter \"Installer\".\n3. Åbn Doppler VPN, og køb et abonnement i appen. Betalingen åbner på vores hjemmeside, med kort eller krypto.\n\nTestFlight holder appen opdateret. Hver version virker i 90 dage, og vi udgiver en ny, før den udløber, så lad automatiske opdateringer være slået til i TestFlight."
+      },
+      "appleIdRegion": {
+        "title": "Hvis TestFlight ikke virker: skift region for din Apple-konto",
+        "content": "Hvis TestFlight ikke er tilgængelig for dig, så flyt din Apple-konto til et andet land eller en anden region, for eksempel Kasakhstan, Tyrkiet eller USA, og installer Doppler VPN fra det lands App Store.\n\nFør skiftet beder Apple dig bruge resterende saldo og opsige dine abonnementer, og du skal bruge en betalingsmetode fra den nye region eller vælge \"Ingen\", hvor det tilbydes. Apps, du allerede har, bliver ved med at virke. Apples vejledning er linket nedenfor."
+      },
+      "mac": {
+        "title": "Mac: hent DMG",
+        "content": "Hvis Doppler VPN ikke findes i din Mac App Store, så hent DMG-filen nedenfor. Den kræver macOS 15 eller nyere og er signeret og notariseret af Apple.\n\n1. Åbn DMG-filen, og træk Doppler VPN til Programmer. Appen skal køre fra mappen Programmer.\n2. Åbn Doppler VPN. Første gang du forbinder, beder macOS om tilladelse til netværksudvidelsen: Åbn Systemindstillinger → Generelt → Login-emner og udvidelser, og slå Doppler VPN til.\n3. Køb et abonnement i appen. Betalingen åbner på vores hjemmeside.\n\nMac-appen søger selv efter opdateringer."
+      },
+      "android": {
+        "title": "Android: hent APK",
+        "content": "Uden Google Play henter du APK-filen nedenfor. Den virker på 64-bit Android-telefoner, altså næsten alle telefoner fra 2019 og frem. Android beder dig tillade installationer fra din browser: tillad én gang, installer, og åbn så appen og køb i den.\n\nÆldre 32-bit telefoner: Installer Doppler VPN fra Google Play i stedet."
+      }
+    },
+    "links": {
+      "testflightApp": "TestFlight i App Store",
+      "testflightInvite": "TestFlight-invitation til Doppler VPN",
+      "appleRegionHelp": "Apple: skift land eller område",
+      "macDmg": "Hent Doppler VPN til Mac (DMG)",
+      "androidApk": "Hent Doppler VPN som APK"
+    }
   }
 }

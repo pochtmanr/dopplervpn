@@ -5,6 +5,8 @@ import { sendServerEvent } from "@/lib/ga-server";
 import {
   ARM32,
   type AndroidAbi,
+  LAST_ARM32_VERSION,
+  apkAssetName,
   normalizeAbi,
   pickApkAsset,
 } from "@/lib/android-abi";
@@ -42,15 +44,14 @@ import {
  *
  * ## `?abi=` — which architecture
  *
- * Since 1.8.1 a release carries two APKs, one per ABI. `?abi=` selects; anything
- * unrecognised or absent means arm64-v8a, which is what this link always served.
- * The in-app update banner sends Build.SUPPORTED_ABIS[0]; the website's 32-bit
- * link sends armeabi-v7a explicitly, because nothing in an HTTP request from a
- * browser reliably states the device's CPU architecture.
+ * 1.8.1 to 1.8.3 carried two APKs, one per ABI; later releases are arm64-only.
+ * `?abi=` selects; anything unrecognised or absent means arm64-v8a, which is
+ * what this link always served. A 32-bit request (old website links, old
+ * banners that still send Build.SUPPORTED_ABIS[0]) is pinned to
+ * LAST_ARM32_VERSION, the last release that has a file for it.
  *
  * `ANDROID_APK_ORIGIN_URL` (proxy mode) is a single URL and therefore serves the
- * arm64 file only; a 32-bit request falls back to the GitHub redirect rather
- * than being handed the wrong binary.
+ * arm64 file only; a 32-bit request never reaches it.
  */
 
 const REPO = "pochtmanr/dopplervpn";
@@ -250,6 +251,19 @@ async function proxyApk(
 }
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
+  const abi: AndroidAbi = normalizeAbi(req.nextUrl.searchParams.get("abi"));
+
+  if (abi === ARM32) {
+    // No release after LAST_ARM32_VERSION has a 32-bit file, so there is nothing
+    // to resolve. Always the GitHub redirect: the proxy origin is the arm64 file.
+    const attributed = reportDownloadConversion(req);
+    reportDownloadToGa(req, LAST_ARM32_VERSION, attributed, "github", abi);
+    return NextResponse.redirect(
+      githubUrl(LAST_ARM32_VERSION, apkAssetName(TAG_PREFIX, LAST_ARM32_VERSION, abi)),
+      { status: 302, headers: NO_STORE }
+    );
+  }
+
   const latest = await resolveLatestRelease();
 
   if (!latest) {
@@ -262,13 +276,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   }
 
   const { version, assetNames } = latest;
-  const abi: AndroidAbi = normalizeAbi(req.nextUrl.searchParams.get("abi"));
   const assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
 
   if (!assetName) {
-    // Only reachable for a 32-bit request against a release published before
-    // 1.8.1. Answering plainly beats redirecting to a URL that 404s at GitHub,
-    // where the visitor has no way to tell our mistake from a dead link.
+    // The newest release has no APK at all. Answering plainly beats redirecting
+    // to a URL that 404s at GitHub, where the visitor has no way to tell our
+    // mistake from a dead link.
     return NextResponse.json(
       { error: "no-apk-for-abi", abi, version },
       { status: 404, headers: NO_STORE }
@@ -287,12 +300,9 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
   if (mode === "proxy") {
     const originUrl = process.env.ANDROID_APK_ORIGIN_URL;
-    // ANDROID_APK_ORIGIN_URL names one file, and that file is the arm64 build.
-    // Serving it to a 32-bit device would produce an APK that installs nowhere,
-    // which is worse than the slow-but-correct GitHub path.
-    if (!originUrl || abi === ARM32) {
-      // Misconfiguration (or a 32-bit request), not a user error: fall back to
-      // the redirect rather than handing the visitor a 500 or the wrong binary.
+    if (!originUrl) {
+      // Misconfiguration, not a user error: fall back to the redirect rather
+      // than handing the visitor a 500.
       return redirectToGithub();
     }
     return proxyApk(req, originUrl, assetName);

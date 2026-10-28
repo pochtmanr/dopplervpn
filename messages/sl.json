@@ -712,13 +712,14 @@
       "step2": "Odprite aplikacijo — vaš račun je ustvarjen samodejno",
       "step3": "Izberite paket in se naročite",
       "step4": "Tapnite Poveži — zaščiteni ste!",
-      "learnMore": "Learn more about VPN for iOS"
+      "learnMore": "Learn more about VPN for iOS",
+      "buttonTestflight": "Namesti prek TestFlighta",
+      "directNote": "Ni v vaši trgovini App Store? Namestite jo prek TestFlighta, nato kupite v aplikaciji."
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Pridobi na Google Play",
       "buttonApk": "Prenesi APK",
-      "buttonApk32": "32-bitni APK (starejše naprave)",
       "apkNote": "Za naprave brez Googla Play. Android bo zahteval dovoljenje za namestitev iz tega vira.",
       "step1": "Prenesite Doppler VPN iz Google Play ali APK",
       "step2": "Odprite aplikacijo — vaš račun je ustvarjen samodejno",
@@ -733,7 +734,9 @@
       "step2": "Odprite aplikacijo — vaš račun je ustvarjen samodejno",
       "step3": "Izberite paket in se naročite",
       "step4": "Tapnite Poveži — zaščiteni ste!",
-      "learnMore": "Več o VPN za Mac"
+      "learnMore": "Več o VPN za Mac",
+      "buttonDmg": "Prenesi DMG",
+      "dmgNote": "Ni v vaši trgovini Mac App Store? Prenesite DMG (macOS 15 ali novejši), nato kupite v aplikaciji."
     },
     "windows": {
       "title": "Windows",
@@ -743,7 +746,8 @@
       "step3": "Odprite Doppler VPN — vaš račun je ustvarjen samodejno",
       "step4": "Izberite paket, se naročite in se povežite!",
       "learnMore": "Več o VPN za Windows"
-    }
+    },
+    "installGuide": "Navodila za namestitev"
   },
   "support": {
     "title": "Center za pomoč in podpora",
@@ -1318,7 +1322,15 @@
       "copyAndLogout": "Kopiraj ID in se odjavi",
       "telegramLinked": "Telegram povezan"
     },
-    "securedByCrypto": "Zaščiteno z OxaPay"
+    "securedByCrypto": "Zaščiteno z OxaPay",
+    "installFirst": {
+      "title": "Pred plačilom namestite aplikacijo",
+      "body": "V nekaterih državah Doppler VPN ni v trgovini App Store. Najprej namestite in odprite aplikacijo, nato kupite tukaj ali v aplikaciji.",
+      "guide": "Navodila za namestitev",
+      "downloads": "Prenosi",
+      "confirm": "Doppler VPN sem že namestil(a) in odprl(a)",
+      "confirmRequired": "Najprej namestite aplikacijo in označite polje zgoraj."
+    }
   },
   "subscribeSuccess": {
     "title": "Vse je pripravljeno!",
@@ -4466,5 +4478,39 @@
     "backDesc": "Vsak protokol drug ob drugem: transport, kako je videti v omrežju in kako težko ga je blokirati.",
     "appsTitle": "Aplikacije, ki uporabljajo {protocol}",
     "appsNote": "Neodvisni projekti, navedeni zato, da jih lahko preverite sami. Doppler z njimi ni povezan in zanje ne jamči."
+  },
+  "install": {
+    "title": "Kako namestiti Doppler VPN",
+    "lastUpdated": "Posodobljeno oktobra 2026",
+    "intro": "V nekaterih državah, med njimi v Rusiji in na Kitajskem, Doppler VPN ni v trgovini App Store. Ta navodila pokažejo, kako ga vseeno namestite v iPhone, Mac in Android ter zakaj je aplikacijo vredno namestiti pred plačilom.",
+    "sections": {
+      "installFirst": {
+        "title": "Najprej namestite, nato kupite v aplikaciji",
+        "content": "Pred nakupom paketa namestite in odprite aplikacijo. Aplikacija sama ustvari vaš račun, paket, kupljen v aplikaciji, pa se takoj poveže s tem računom.\n\nSte že plačali na spletnem mestu? Odprite aplikacijo, se prijavite z ID-jem računa s strani računa in paket se bo prikazal."
+      },
+      "iphone": {
+        "title": "iPhone in iPad: TestFlight",
+        "content": "Če Doppler VPN ni v vaši trgovini App Store, ga namestite prek TestFlighta, Applove aplikacije za nameščanje aplikacij zunaj ponudbe trgovine.\n\n1. Namestite TestFlight iz trgovine App Store. Je brezplačen.\n2. V istem iPhonu odprite spodnjo povezavo s povabilom za Doppler VPN, tapnite »Sprejmi« in nato »Namesti«.\n3. Odprite Doppler VPN in kupite paket v aplikaciji. Plačilo se odpre na našem spletnem mestu, s kartico ali kriptovaluto.\n\nTestFlight posodablja aplikacijo. Vsaka različica deluje 90 dni, novo pa izdamo pred iztekom, zato pustite samodejne posodobitve v TestFlightu vklopljene."
+      },
+      "appleIdRegion": {
+        "title": "Če TestFlight ne deluje: spremenite regijo računa Apple",
+        "content": "Če vam TestFlight ni na voljo, prestavite račun Apple v drugo državo ali regijo, na primer v Kazahstan, Turčijo ali ZDA, in namestite Doppler VPN iz tamkajšnje trgovine App Store.\n\nPred spremembo Apple zahteva, da porabite preostalo dobroimetje in prekličete naročnine, potrebovali pa boste tudi način plačila iz nove regije ali izberite »Brez«, kjer je na voljo. Že nameščene aplikacije še naprej delujejo. Applova navodila so na spodnji povezavi."
+      },
+      "mac": {
+        "title": "Mac: prenos DMG",
+        "content": "Če Doppler VPN ni v vaši trgovini Mac App Store, prenesite spodnji DMG. Potreben je macOS 15 ali novejši; datoteko je podpisal in overil Apple.\n\n1. Odprite DMG in povlecite Doppler VPN v mapo Programi. Aplikacija se mora zagnati iz mape Programi.\n2. Odprite Doppler VPN. Ob prvi povezavi macOS zaprosi za dovoljenje za omrežno razširitev: odprite Sistemske nastavitve → Splošno → Elementi ob prijavi in razširitve ter vklopite Doppler VPN.\n3. Kupite paket v aplikaciji. Plačilo se odpre na našem spletnem mestu.\n\nAplikacija za Mac sama preverja posodobitve."
+      },
+      "android": {
+        "title": "Android: prenos APK",
+        "content": "Brez Google Playa prenesite spodnji APK. Deluje na 64-bitnih telefonih Android, torej skoraj vseh telefonih, izdelanih od leta 2019. Android bo zaprosil za dovoljenje za namestitev iz brskalnika: dovolite enkrat, namestite, nato odprite aplikacijo in kupite v njej.\n\nStarejši 32-bitni telefoni: Doppler VPN namestite iz Google Playa."
+      }
+    },
+    "links": {
+      "testflightApp": "TestFlight v trgovini App Store",
+      "testflightInvite": "Povabilo TestFlight za Doppler VPN",
+      "appleRegionHelp": "Apple: sprememba države ali regije",
+      "macDmg": "Prenesi Doppler VPN za Mac (DMG)",
+      "androidApk": "Prenesi APK za Doppler VPN"
+    }
   }
 }

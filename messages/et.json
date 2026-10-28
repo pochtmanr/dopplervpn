@@ -712,13 +712,14 @@
       "step2": "Avage rakendus — konto luuakse automaatselt",
       "step3": "Valige pakett ja tellige",
       "step4": "Vajutage Ühendu — olete kaitstud!",
-      "learnMore": "Learn more about VPN for iOS"
+      "learnMore": "Learn more about VPN for iOS",
+      "buttonTestflight": "Paigalda TestFlighti kaudu",
+      "directNote": "Pole sinu App Store'is? Paigalda TestFlighti kaudu ja osta siis rakenduses."
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Hangi Google Playst",
       "buttonApk": "Laadi alla APK",
-      "buttonApk32": "32-bitine APK (vanemad seadmed)",
       "apkNote": "Seadmetele ilma Google Playta. Android palub lubada installimise sellest allikast.",
       "step1": "Laadige Doppler VPN alla Google Playst või APK-na",
       "step2": "Avage rakendus — konto luuakse automaatselt",
@@ -733,7 +734,9 @@
       "step2": "Avage rakendus — konto luuakse automaatselt",
       "step3": "Valige pakett ja tellige",
       "step4": "Vajutage Ühendu — olete kaitstud!",
-      "learnMore": "Loe lähemalt VPN-ist Macile"
+      "learnMore": "Loe lähemalt VPN-ist Macile",
+      "buttonDmg": "Laadi alla DMG",
+      "dmgNote": "Pole sinu Mac App Store'is? Laadi alla DMG (macOS 15 või uuem) ja osta siis rakenduses."
     },
     "windows": {
       "title": "Windows",
@@ -743,7 +746,8 @@
       "step3": "Avage Doppler VPN — konto luuakse automaatselt",
       "step4": "Valige pakett, tellige ja ühenduge!",
       "learnMore": "Loe lähemalt VPN-ist Windowsile"
-    }
+    },
+    "installGuide": "Paigaldusjuhend"
   },
   "support": {
     "title": "Abikeskus ja tugi",
@@ -1318,7 +1322,15 @@
       "copyAndLogout": "Kopeeri ID ja logi välja",
       "telegramLinked": "Telegram ühendatud"
     },
-    "securedByCrypto": "Kaitstud OxaPay poolt"
+    "securedByCrypto": "Kaitstud OxaPay poolt",
+    "installFirst": {
+      "title": "Paigalda rakendus enne maksmist",
+      "body": "Mõnes riigis pole Doppler VPN-i App Store'is. Paigalda ja ava kõigepealt rakendus, siis osta siin või rakenduses.",
+      "guide": "Paigaldusjuhend",
+      "downloads": "Allalaadimised",
+      "confirm": "Olen Doppler VPN-i juba paigaldanud ja avanud",
+      "confirmRequired": "Paigalda kõigepealt rakendus ja märgi ülalolev ruut."
+    }
   },
   "subscribeSuccess": {
     "title": "Kõik on valmis!",
@@ -4466,5 +4478,39 @@
     "backDesc": "Kõik protokollid kõrvuti: transport, kuidas see liikluses välja näeb ja kui raske seda on blokeerida.",
     "appsTitle": "Rakendused, mis kasutavad protokolli {protocol}",
     "appsNote": "Sõltumatud projektid, loetletud selleks, et saaksite neid ise kontrollida. Doppler ei ole nendega seotud ega käenda nende eest."
+  },
+  "install": {
+    "title": "Kuidas Doppler VPN-i paigaldada",
+    "lastUpdated": "Uuendatud oktoobris 2026",
+    "intro": "Mõnes riigis, sealhulgas Venemaal ja Hiinas, pole Doppler VPN-i App Store'is. See juhend näitab, kuidas see ikkagi iPhone'i, Maci ja Androidi paigaldada ning miks tasub rakendus enne maksmist paigaldada.",
+    "sections": {
+      "installFirst": {
+        "title": "Kõigepealt paigalda, siis osta rakenduses",
+        "content": "Paigalda ja ava rakendus enne paketi ostmist. Rakendus loob konto ise ja rakenduses ostetud pakett seotakse kohe selle kontoga.\n\nMaksid juba veebisaidil? Ava rakendus, logi sisse kontolehel näidatud konto ID-ga ja pakett ilmub."
+      },
+      "iphone": {
+        "title": "iPhone ja iPad: TestFlight",
+        "content": "Kui Doppler VPN-i pole sinu App Store'is, paigalda see TestFlighti kaudu. See on Apple'i enda rakendus poe valikust väljaspool olevate rakenduste paigaldamiseks.\n\n1. Paigalda TestFlight App Store'ist. See on tasuta.\n2. Ava samas iPhone'is allolev Doppler VPN-i kutse link, toksa „Nõustu“ ja seejärel „Paigalda“.\n3. Ava Doppler VPN ja osta pakett rakenduses. Makse avaneb meie veebisaidil, kaardi või krüptoga.\n\nTestFlight hoiab rakenduse ajakohasena. Iga versioon töötab 90 päeva ja me avaldame uue enne aegumist, seega hoia TestFlightis automaatsed uuendused sees."
+      },
+      "appleIdRegion": {
+        "title": "Kui TestFlight ei tööta: muuda Apple'i konto piirkonda",
+        "content": "Kui TestFlight pole sulle saadaval, vii oma Apple'i konto teise riiki või piirkonda, näiteks Kasahstani, Türki või USA-sse, ja paigalda Doppler VPN selle riigi App Store'ist.\n\nEnne muutmist palub Apple kasutada ära järelejäänud saldo ja tühistada tellimused ning vaja on uue piirkonna makseviisi või vali „Puudub“, kui see on pakutud. Juba paigaldatud rakendused töötavad edasi. Apple'i juhised on allolevas lingis."
+      },
+      "mac": {
+        "title": "Mac: DMG allalaadimine",
+        "content": "Kui Doppler VPN-i pole sinu Mac App Store'is, laadi alla allolev DMG. Vaja on macOS 15 või uuemat; fail on Apple'i allkirjastatud ja notariseeritud.\n\n1. Ava DMG ja lohista Doppler VPN kausta Rakendused. Rakendus peab käima kaustast Rakendused.\n2. Ava Doppler VPN. Esimesel ühendamisel küsib macOS võrgulaienduse lubamist: ava Süsteemiseaded → Üldine → Sisselogimisüksused ja laiendused ning lülita Doppler VPN sisse.\n3. Osta pakett rakenduses. Makse avaneb meie veebisaidil.\n\nMaci rakendus otsib uuendusi ise."
+      },
+      "android": {
+        "title": "Android: APK allalaadimine",
+        "content": "Ilma Google Playta laadi alla allolev APK. See töötab 64-bitistel Android-telefonidel ehk peaaegu kõigil alates 2019. aastast toodetud telefonidel. Android palub lubada paigaldused brauserist: luba üks kord, paigalda, siis ava rakendus ja osta selles.\n\nVanemad 32-bitised telefonid: paigalda Doppler VPN Google Playst."
+      }
+    },
+    "links": {
+      "testflightApp": "TestFlight App Store'is",
+      "testflightInvite": "Doppler VPN-i TestFlighti kutse",
+      "appleRegionHelp": "Apple: riigi või piirkonna muutmine",
+      "macDmg": "Laadi alla Doppler VPN Macile (DMG)",
+      "androidApk": "Laadi alla Doppler VPN-i APK"
+    }
   }
 }

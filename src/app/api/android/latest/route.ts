@@ -107,9 +107,10 @@ export async function GET(req: NextRequest) {
 
   if (!assetName) {
     // Either the release has no APK at all, or a 32-bit device asked about a
-    // release published before the split (1.8.1). Both are "there is no update
-    // for you", and 404 is what makes the banner stay quiet instead of offering
-    // a download that cannot install.
+    // release outside 1.8.1-1.8.3 (the only ones with a 32-bit file; see
+    // LAST_ARM32_VERSION). Both are "there is no update for you", and 404 is what
+    // makes the banner stay quiet instead of offering a download that cannot
+    // install.
     return NextResponse.json({ error: "no-apk-asset", abi }, { status: 404 });
   }
 

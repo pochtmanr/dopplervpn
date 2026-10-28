@@ -713,13 +713,14 @@
       "step2": "打开应用 — 账户自动创建",
       "step3": "选择套餐并订阅",
       "step4": "点击连接 — 您已受保护！",
-      "learnMore": "Learn more about VPN for iOS"
+      "learnMore": "Learn more about VPN for iOS",
+      "buttonTestflight": "通过 TestFlight 安装",
+      "directNote": "您的 App Store 里没有？请通过 TestFlight 安装，然后在应用内购买。"
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "在 Google Play 下载",
       "buttonApk": "下载 APK",
-      "buttonApk32": "32 位 APK（旧设备）",
       "apkNote": "适用于没有 Google Play 的设备。Android 会要求你允许从此来源安装。",
       "step1": "从 Google Play 或 APK 下载 Doppler VPN",
       "step2": "打开应用 — 账户自动创建",
@@ -734,7 +735,9 @@
       "step2": "打开应用 — 账户自动创建",
       "step3": "选择套餐并订阅",
       "step4": "点击连接 — 您已受保护！",
-      "learnMore": "了解更多 Mac VPN 详情"
+      "learnMore": "了解更多 Mac VPN 详情",
+      "buttonDmg": "下载 DMG",
+      "dmgNote": "您的 Mac App Store 里没有？请下载 DMG（需 macOS 15 或更高版本），然后在应用内购买。"
     },
     "windows": {
       "title": "Windows",
@@ -744,7 +747,8 @@
       "step3": "打开 Doppler VPN — 账户自动创建",
       "step4": "选择套餐、订阅并连接！",
       "learnMore": "了解更多 Windows VPN 详情"
-    }
+    },
+    "installGuide": "安装指南"
   },
   "support": {
     "title": "帮助中心与支持",
@@ -1319,7 +1323,15 @@
       "copyAndLogout": "复制 ID 并退出登录",
       "telegramLinked": "已绑定 Telegram"
     },
-    "securedByCrypto": "由 OxaPay 保护"
+    "securedByCrypto": "由 OxaPay 保护",
+    "installFirst": {
+      "title": "付款前请先安装应用",
+      "body": "在部分国家和地区，App Store 中没有 Doppler VPN。请先安装并打开应用，再在此处或应用内购买。",
+      "guide": "安装指南",
+      "downloads": "下载",
+      "confirm": "我已安装并打开过 Doppler VPN",
+      "confirmRequired": "请先安装应用，并勾选上方的方框。"
+    }
   },
   "subscribeSuccess": {
     "title": "一切就绪！",
@@ -4560,5 +4572,39 @@
     "backDesc": "所有协议并排对照：传输方式、在网络上看起来像什么，以及封锁的难度。",
     "appsTitle": "使用 {protocol} 的应用",
     "appsNote": "这些是独立项目，列出以便您自行核实。Doppler 与它们没有关联，也不为它们担保。"
+  },
+  "install": {
+    "title": "如何安装 Doppler VPN",
+    "lastUpdated": "更新于 2026 年 10 月",
+    "intro": "在包括中国和俄罗斯在内的部分国家，App Store 中没有 Doppler VPN。本指南介绍如何在 iPhone、Mac 和 Android 上照样安装，以及为什么应该先安装应用再付款。",
+    "sections": {
+      "installFirst": {
+        "title": "先安装，再在应用内购买",
+        "content": "购买套餐前，请先安装并打开应用。应用会自动为您创建账户，在应用内购买的套餐会立即绑定到这个账户。\n\n已经在网站上付款了？打开应用，用账户页面上显示的账户 ID 登录，套餐就会出现。"
+      },
+      "iphone": {
+        "title": "iPhone 和 iPad：TestFlight",
+        "content": "如果您的 App Store 中没有 Doppler VPN，请通过 TestFlight 安装。TestFlight 是 Apple 官方提供的、用于安装商店上架之外应用的工具。\n\n1. 从 App Store 安装 TestFlight，它是免费的。\n2. 在同一台 iPhone 上打开下方的 Doppler VPN 邀请链接，点击“接受”，然后点击“安装”。\n3. 打开 Doppler VPN，在应用内购买套餐。付款会在我们的网站上进行，可用银行卡或加密货币。\n\nTestFlight 会自动更新应用。每个版本可使用 90 天，我们会在到期前发布新版本，所以请在 TestFlight 中保持自动更新开启。"
+      },
+      "appleIdRegion": {
+        "title": "如果 TestFlight 无法使用：更改 Apple 账户地区",
+        "content": "如果您无法使用 TestFlight，可以把 Apple 账户转到其他国家或地区，例如哈萨克斯坦、土耳其或美国，然后从该地区的 App Store 安装 Doppler VPN。\n\n更改之前，Apple 会要求您用完账户余额并取消订阅，还需要提供新地区的付款方式，或在可选时选择“无”。已安装的应用可以继续使用。Apple 的操作说明见下方链接。"
+      },
+      "mac": {
+        "title": "Mac：下载 DMG",
+        "content": "如果您的 Mac App Store 中没有 Doppler VPN，请下载下方的 DMG。需要 macOS 15 或更高版本，文件已由 Apple 签名并公证。\n\n1. 打开 DMG，把 Doppler VPN 拖到“应用程序”文件夹。应用必须从“应用程序”文件夹运行。\n2. 打开 Doppler VPN。首次连接时，macOS 会请求允许其网络扩展：打开“系统设置”→“通用”→“登录项与扩展”，然后开启 Doppler VPN。\n3. 在应用内购买套餐。付款会在我们的网站上进行。\n\nMac 版应用会自动检查更新。"
+      },
+      "android": {
+        "title": "Android：下载 APK",
+        "content": "没有 Google Play 时，请下载下方的 APK。它适用于 64 位 Android 手机，也就是 2019 年以来生产的几乎所有手机。Android 会请求允许从浏览器安装：允许一次，完成安装，然后打开应用并在应用内购买。\n\n较旧的 32 位手机：请改为从 Google Play 安装 Doppler VPN。"
+      }
+    },
+    "links": {
+      "testflightApp": "App Store 中的 TestFlight",
+      "testflightInvite": "Doppler VPN 的 TestFlight 邀请",
+      "appleRegionHelp": "Apple：更改国家或地区",
+      "macDmg": "下载 Doppler VPN Mac 版（DMG）",
+      "androidApk": "下载 Doppler VPN APK"
+    }
   }
 }

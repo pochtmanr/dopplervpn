@@ -1,12 +1,10 @@
 /**
  * ABI handling for the standalone (sideload) Android download.
  *
- * From 1.8.1 the sideload build ships as two single-ABI APKs instead of one
- * arm64-only file (see DopplerAndroid/app/build.gradle.kts). Before that, a
- * 32-bit-only device could not install the app at all — `pm install` refused
- * with INSTALL_FAILED_NO_MATCHING_ABIS and the user only ever saw "it does not
- * work". Both the website button and the in-app update banner now have to say
- * which architecture they want, so the mapping lives in one place.
+ * 1.8.1 to 1.8.3 shipped two single-ABI APKs; after 1.8.3 the sideload build
+ * is arm64-only again (see DopplerAndroid/app/build.gradle.kts and
+ * [LAST_ARM32_VERSION]). The ABI stays in the asset name, and old 32-bit
+ * installs still send theirs, so the mapping lives in one place.
  */
 
 export const ARM64 = "arm64-v8a";
@@ -16,6 +14,17 @@ export type AndroidAbi = typeof ARM64 | typeof ARM32;
 
 /** First release whose assets carry the ABI in the file name. */
 export const SPLIT_APK_MIN_VERSION = "1.8.1";
+
+/**
+ * The last release that shipped an armeabi-v7a APK. From the next release the
+ * sideload build is arm64-only (DopplerAndroid/app/build.gradle.kts); 32-bit
+ * phones are pointed at Google Play, which still ships 32-bit. A 32-bit request
+ * is pinned here instead of resolved against the newest release, which has no
+ * file for it: the old "32-bit APK" links keep downloading something that
+ * installs, and the update banner on a 32-bit device stays quiet because no
+ * newer release carries its ABI.
+ */
+export const LAST_ARM32_VERSION = "1.8.3";
 
 /**
  * Maps whatever a caller sends to one of the two ABIs we publish.

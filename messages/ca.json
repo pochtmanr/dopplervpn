@@ -712,13 +712,14 @@
       "step2": "Obre l'app — el teu compte es crea automàticament",
       "step3": "Tria un pla i subscriu-te",
       "step4": "Toca Connectar — ja estàs protegit!",
-      "learnMore": "Learn more about VPN for iOS"
+      "learnMore": "Learn more about VPN for iOS",
+      "buttonTestflight": "Instal·la amb TestFlight",
+      "directNote": "No és al teu App Store? Instal·la-la amb TestFlight i després compra dins l'app."
     },
     "android": {
       "title": "Android",
       "buttonPlayStore": "Obtenir a Google Play",
       "buttonApk": "Descarregar APK",
-      "buttonApk32": "APK de 32 bits (dispositius antics)",
       "apkNote": "Per a dispositius sense Google Play. Android et demanarà que permetis instal·lacions d'aquest origen.",
       "step1": "Descarrega Doppler VPN des de Google Play o APK",
       "step2": "Obre l'app — el teu compte es crea automàticament",
@@ -733,7 +734,9 @@
       "step2": "Obre l'app — el teu compte es crea automàticament",
       "step3": "Tria un pla i subscriu-te",
       "step4": "Toca Connectar — ja estàs protegit!",
-      "learnMore": "Més informació sobre VPN per a Mac"
+      "learnMore": "Més informació sobre VPN per a Mac",
+      "buttonDmg": "Baixa el DMG",
+      "dmgNote": "No és al teu Mac App Store? Baixa el DMG (macOS 15 o posterior) i després compra dins l'app."
     },
     "windows": {
       "title": "Windows",
@@ -743,7 +746,8 @@
       "step3": "Obre Doppler VPN — el teu compte es crea automàticament",
       "step4": "Tria un pla, subscriu-te i connecta't!",
       "learnMore": "Més informació sobre VPN per a Windows"
-    }
+    },
+    "installGuide": "Guia d'instal·lació"
   },
   "support": {
     "title": "Centre d'ajuda i suport",
@@ -1318,7 +1322,15 @@
       "copyAndLogout": "Copia l'ID i tanca la sessió",
       "telegramLinked": "Telegram vinculat"
     },
-    "securedByCrypto": "Protegit per OxaPay"
+    "securedByCrypto": "Protegit per OxaPay",
+    "installFirst": {
+      "title": "Instal·la l'app abans de pagar",
+      "body": "En alguns països Doppler VPN no és a l'App Store. Instal·la i obre primer l'app, i després compra aquí o dins l'app.",
+      "guide": "Guia d'instal·lació",
+      "downloads": "Baixades",
+      "confirm": "Ja he instal·lat i obert Doppler VPN",
+      "confirmRequired": "Instal·la primer l'app i marca la casella de dalt."
+    }
   },
   "subscribeSuccess": {
     "title": "Tot llest!",
@@ -4466,5 +4478,39 @@
     "backDesc": "Tots els protocols, un al costat de l'altre: el transport, com es veuen a la xarxa i com és de difícil bloquejar-los.",
     "appsTitle": "Aplicacions que fan servir {protocol}",
     "appsNote": "Projectes independents, llistats perquè els puguis comprovar tu mateix. Doppler no hi està afiliat ni els avala."
+  },
+  "install": {
+    "title": "Com instal·lar Doppler VPN",
+    "lastUpdated": "Actualitzat l'octubre de 2026",
+    "intro": "En alguns països, com Rússia i la Xina, Doppler VPN no és a l'App Store. Aquesta guia explica com instal·lar-lo igualment a l'iPhone, al Mac i a Android, i per què convé instal·lar l'app abans de pagar.",
+    "sections": {
+      "installFirst": {
+        "title": "Primer instal·la, després compra dins l'app",
+        "content": "Instal·la i obre l'app abans de comprar un pla. L'app crea el teu compte tota sola, i un pla comprat dins l'app queda vinculat a aquest compte a l'instant.\n\nJa has pagat al web? Obre l'app, inicia la sessió amb l'ID de compte que apareix a la pàgina del teu compte i el pla hi apareixerà."
+      },
+      "iphone": {
+        "title": "iPhone i iPad: TestFlight",
+        "content": "Si Doppler VPN no és al teu App Store, instal·la'l amb TestFlight, l'app oficial d'Apple per instal·lar apps fora del catàleg de la botiga.\n\n1. Instal·la TestFlight des de l'App Store. És gratuït.\n2. Al mateix iPhone, obre l'enllaç d'invitació de Doppler VPN de sota, toca «Accepta» i després «Instal·la».\n3. Obre Doppler VPN i compra un pla dins l'app. El pagament s'obre al nostre web, amb targeta o cripto.\n\nTestFlight manté l'app actualitzada. Cada versió funciona 90 dies i en publiquem una de nova abans que caduqui, així que deixa activades les actualitzacions automàtiques a TestFlight."
+      },
+      "appleIdRegion": {
+        "title": "Si TestFlight no funciona: canvia la regió del compte d'Apple",
+        "content": "Si no tens accés a TestFlight, trasllada el teu compte d'Apple a un altre país o regió, per exemple el Kazakhstan, Turquia o els Estats Units, i instal·la Doppler VPN des de l'App Store d'aquell país.\n\nAbans del canvi, Apple et demana que gastis el saldo restant i cancel·lis les subscripcions, i necessites un mètode de pagament de la regió nova o triar «Cap» quan s'ofereixi. Les apps que ja tens continuen funcionant. Les instruccions d'Apple són a l'enllaç de sota."
+      },
+      "mac": {
+        "title": "Mac: baixada del DMG",
+        "content": "Si Doppler VPN no és al teu Mac App Store, baixa el DMG de sota. Cal macOS 15 o posterior, i està signat i notaritzat per Apple.\n\n1. Obre el DMG i arrossega Doppler VPN a Aplicacions. L'app s'ha d'executar des de la carpeta Aplicacions.\n2. Obre Doppler VPN. La primera vegada que et connectis, macOS demanarà permís per a la seva extensió de xarxa: obre Configuració del Sistema → General → Ítems d'inici i extensions i activa Doppler VPN.\n3. Compra un pla dins l'app. El pagament s'obre al nostre web.\n\nL'app per a Mac busca actualitzacions tota sola."
+      },
+      "android": {
+        "title": "Android: baixada de l'APK",
+        "content": "Sense Google Play, baixa l'APK de sota. Funciona en telèfons Android de 64 bits, és a dir, gairebé qualsevol telèfon fabricat des del 2019. Android et demanarà permetre instal·lacions des del navegador: permet-ho un cop, instal·la, obre l'app i compra-hi.\n\nTelèfons antics de 32 bits: instal·la Doppler VPN des de Google Play."
+      }
+    },
+    "links": {
+      "testflightApp": "TestFlight a l'App Store",
+      "testflightInvite": "Invitació de TestFlight per a Doppler VPN",
+      "appleRegionHelp": "Apple: canviar el país o la regió",
+      "macDmg": "Baixa Doppler VPN per a Mac (DMG)",
+      "androidApk": "Baixa l'APK de Doppler VPN"
+    }
   }
 }

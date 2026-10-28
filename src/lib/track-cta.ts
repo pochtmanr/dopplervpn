@@ -71,7 +71,8 @@ export type CtaPlatform =
 export type CtaVariant =
   | "android-play"
   | "android-apk"
-  | "android-apk-32"
+  | "ios-testflight"
+  | "mac-dmg"
   | "windows-x64";
 
 /**
@@ -84,6 +85,8 @@ export type CtaDestination =
   | "google_play"
   | "direct_exe"
   | "apk"
+  | "dmg"
+  | "testflight"
   | "telegram_bot"
   | "internal";
 
@@ -91,7 +94,9 @@ export function deriveDestination(
   platform: CtaPlatform,
   variant?: CtaVariant
 ): CtaDestination {
-  if (variant === "android-apk" || variant === "android-apk-32") return "apk";
+  if (variant === "android-apk") return "apk";
+  if (variant === "mac-dmg") return "dmg";
+  if (variant === "ios-testflight") return "testflight";
   if (variant === "windows-x64") return "direct_exe";
   switch (platform) {
     case "ios":
@@ -115,6 +120,7 @@ const FILE_DOWNLOADS: Partial<
 > = {
   direct_exe: { file_name: "DopplerVPN-Setup.exe", file_extension: "exe" },
   apk: { file_name: "doppler-vpn.apk", file_extension: "apk" },
+  dmg: { file_name: "DopplerVPN.dmg", file_extension: "dmg" },
 };
 
 function currentPath(): string {
