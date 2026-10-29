@@ -5,6 +5,8 @@
 > an internal QA list. Server-side ops live in the private `doppler-infra` repo. When in doubt,
 > put it there.
 
+> **Product spec, parity matrix and brief templates live in [`../doppler-product/`](../doppler-product/README.md).** Read `PRODUCT.md` and your column of `PARITY.md` before any user-facing change, and update `PARITY.md` in the same piece of work when a feature lands.
+
 > **Subscriptions, entitlements and anti-fraud live in one place:**
 > [`../SUBSCRIPTION-AND-ANTIFRAUD.md`](../SUBSCRIPTION-AND-ANTIFRAUD.md) — the Pro predicate on
 > every layer, the purchase→Pro pipeline, per-platform behaviour, the anti-fraud posture with
