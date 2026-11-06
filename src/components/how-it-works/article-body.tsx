@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import type { Element, Text } from "hast";
 import { createHeadingIdFactory } from "@/lib/how-it-works";
 import { chartsFor } from "./charts/registry";
+import { ArticleImage, ArticleShots } from "./article-shots";
 import { PLUS_PROSE_TOKENS } from "@/app/[locale]/design-lab/plus-recipes";
 
 /**
@@ -15,6 +16,12 @@ import { PLUS_PROSE_TOKENS } from "@/app/[locale]/design-lab/plus-recipes";
  * A fenced block whose language is `chart` renders a chart from ./charts by id:
  *   ```chart
  *   protocol-timeline
+ *   ```
+ *
+ * A fenced block whose language is `shots` renders a row of app screenshots, one
+ * per line as `src | label | alt` (see ./article-shots.tsx):
+ *   ```shots
+ *   /images/apple/iphone-connect-1000.avif | Connect | Doppler connected on iPhone
  *   ```
  */
 
@@ -46,11 +53,11 @@ function textOf(children: ReactNode): string {
   return "";
 }
 
-function chartIdOf(node: Element | undefined): string | null {
+function fencedBody(node: Element | undefined, lang: string): string | null {
   const code = node?.children[0];
   if (!code || code.type !== "element" || code.tagName !== "code") return null;
   const cls = code.properties.className;
-  if (!Array.isArray(cls) || !cls.includes("language-chart")) return null;
+  if (!Array.isArray(cls) || !cls.includes(`language-${lang}`)) return null;
   return code.children
     .map((c) => (c as Text).value ?? "")
     .join("")
@@ -73,7 +80,9 @@ export function ArticleBody({ markdown, locale, plus = false }: { markdown: stri
         components={{
           h2: ({ children }) => <h2 id={nextHeadingId(textOf(children))}>{children}</h2>,
           pre: ({ node, children }) => {
-            const id = chartIdOf(node);
+            const shots = fencedBody(node, "shots");
+            if (shots !== null) return <ArticleShots spec={shots} plus={plus} />;
+            const id = fencedBody(node, "chart");
             if (id === null) return <pre>{children}</pre>;
             const Chart = charts[id];
             if (!Chart) throw new Error(`how-it-works: unknown chart id "${id}"`);
@@ -101,6 +110,7 @@ export function ArticleBody({ markdown, locale, plus = false }: { markdown: stri
               {children}
             </td>
           ),
+          img: ({ src, alt, title }) => <ArticleImage src={typeof src === "string" ? src : ""} alt={alt ?? ""} caption={title} plus={plus} />,
           a: ({ href = "", children }) => {
             const external = /^https?:\/\//.test(href);
             const target = href.startsWith("/") ? `/${locale}${href}` : href;

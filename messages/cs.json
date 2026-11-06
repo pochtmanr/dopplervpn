@@ -1528,6 +1528,11 @@
       "regions": {
         "title": "Blokováno v Rusku — stále fungujeme",
         "description": "Naše doména je na seznamu blokovaných Roskomnadzoru. Stále jsme tady. Stáhněte přes Telegram bota, když je web blokován."
+      },
+      "sni": {
+        "title": "Vypadá jako návštěva běžného webu",
+        "description": "Cenzoři čtou název webu, který nese každé zabezpečené připojení, tzv. SNI. Doppler uvede web povolený tam, kde jste, a připojení projde jako běžná návštěva. Vyberte web sami, nebo to nechte na režimu Automaticky.",
+        "cta": "Co je SNI a proč ho cenzoři čtou"
       }
     }
   },
@@ -2394,6 +2399,147 @@
       "windowsDesc": "Doppler VPN pro Windows 10 a 11",
       "publicWifi": "Bezpečnost na veřejné Wi-Fi",
       "publicWifiDesc": "Chraňte svůj iPhone na otevřených sítích"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPhone · iPad · Apple Watch",
+        "title": "Doppler VPN pro iPhone a iPad",
+        "subtitle": "Jedno klepnutí a váš iPhone je v soukromí. Doppler maskuje připojení jako běžnou návštěvu webu, takže funguje i v sítích, které jiné VPN blokují.",
+        "cta": "Stáhnout z App Store",
+        "note": "Stažení zdarma · {days} dny zdarma na zkoušku · Bez e-mailu a telefonního čísla"
+      },
+      "tour": {
+        "kicker": "Uvnitř aplikace",
+        "title": "Všechno na jedno klepnutí",
+        "subtitle": "Skutečné obrazovky z aplikace pro iPhone, nic narežírovaného. Listujte.",
+        "items": {
+          "connect": {
+            "label": "Připojit",
+            "alt": "Domovská obrazovka Doppler na iPhonu, připojeno k Hongkongu, s rychlostí v reálném čase a mapou trasy"
+          },
+          "unblock": {
+            "label": "Způsob připojení",
+            "alt": "Obrazovka Způsob připojení se seznamem běžných webů, za jejichž návštěvu se připojení může vydávat"
+          },
+          "speed": {
+            "label": "Test rychlosti",
+            "alt": "Test rychlosti na iPhonu: stahování, odesílání a ping přes VPN"
+          },
+          "path": {
+            "label": "Vaše trasa",
+            "alt": "Obrazovka Připojení s adresou, kterou weby vidí, stavem DNS a trasou na mapě"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Obrazovka Smart Route s výběrem země, jejíž weby jdou mimo tunel"
+          },
+          "devices": {
+            "label": "Zařízení",
+            "alt": "Obrazovka Zařízení se všemi zařízeními přihlášenými k účtu"
+          },
+          "appearance": {
+            "label": "Vzhled",
+            "alt": "Nastavení vzhledu s velikostí textu, stylem ploch a barvou zvýraznění"
+          },
+          "language": {
+            "label": "Jazyk",
+            "alt": "Seznam jazyků, kterými aplikace mluví"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "Jedno klepnutí",
+          "title": "Klepněte jednou. Jste chráněni.",
+          "body": "Doppler vybere server, otevře šifrovaný tunel a pošle jím veškerý provoz z iPhonu, včetně hovorů v Telegramu a WhatsAppu. Domovská obrazovka živě ukazuje rychlost a místo, kde váš provoz vychází do sítě.",
+          "points": {
+            "p1": "Tunelem jde celé zařízení, nejen prohlížeč",
+            "p2": "Stahování, odesílání a ping živě přímo na domovské obrazovce",
+            "p3": "Kill Switch a Připojit při spuštění, každé jedním přepínačem v Nastavení aplikace"
+          },
+          "alt": "Seznam serverů Doppler na iPhonu s pingem pro každou lokalitu"
+        },
+        "unblock": {
+          "kicker": "Projde všude",
+          "title": "Funguje tam, kde jiné VPN blokují",
+          "body": "Některé sítě blokují VPN tak, že čtou název webu, který připojení údajně navštěvuje. Doppler uvede běžný web povolený tam, kde jste, a vaše připojení vypadá jako obyčejná návštěva.",
+          "points": {
+            "p1": "Režim Automaticky zkusí naráz tři nejpravděpodobnější weby a ponechá nejrychlejší",
+            "p2": "Nebo si web vyberte sami na obrazovce Způsob připojení",
+            "p3": "Postaveno na VLESS Reality, protokolu pro filtrované sítě"
+          },
+          "alt": "iPhone s obrazovkou Způsob připojení"
+        },
+        "path": {
+          "kicker": "Nic skrytého",
+          "title": "Vidíte každý skok",
+          "body": "Obrazovka Připojení ukazuje adresu, kterou weby vidí, komu patří, zda vaše DNS dotazy jdou tunelem, a trasu vašeho provozu na mapě. Nemusíte nám věřit na slovo.",
+          "points": {
+            "p1": "IP adresa a poskytovatel, které weby právě vidí",
+            "p2": "Stav DNS a doba odezvy dotazu",
+            "p3": "Vaše trasa zakreslená na živé mapě"
+          },
+          "alt": "Obrazovka Připojení na iPhonu s trasou na mapě"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "Domácí weby zůstanou doma",
+          "body": "Banky, úřady a streamovací služby doma často odmítají zahraniční adresy. Smart Route posílá weby vaší země napřímo a vše ostatní nechává v tunelu.",
+          "points": {
+            "p1": "Vyberte svou zemi, nebo ji nechte Doppler rozpoznat",
+            "p2": "Posílejte napřímo celou doménovou zónu, třeba .jp",
+            "p3": "Přidejte vlastní domény, které mají jít mimo tunel"
+          },
+          "alt": "Obrazovka Smart Route na iPhonu"
+        }
+      },
+      "setup": {
+        "title": "Nastaveno za méně než minutu",
+        "subtitle": "Žádný registrační formulář ani konfigurační soubory.",
+        "s1": {
+          "title": "Stáhněte Doppler",
+          "body": "Stáhněte si aplikaci z App Store. Funguje na iPhonu a iPadu s iOS 18 nebo novějším."
+        },
+        "s2": {
+          "title": "Otevřete ji",
+          "body": "Doppler vám vytvoří anonymní ID účtu. Žádný e-mail, žádné telefonní číslo, žádné heslo."
+        },
+        "s3": {
+          "title": "Klepněte na Připojit",
+          "body": "Spusťte {days}denní zkušební verzi zdarma a klepněte na Připojit. Po zkušební době začínají plány na {price} měsíčně při ročním předplatném."
+        }
+      },
+      "faq": {
+        "title": "Otázky k Doppleru na iPhonu a iPadu",
+        "q1": {
+          "question": "Funguje Doppler na iPadu?",
+          "answer": "Ano. Stejná aplikace běží na iPhonu i iPadu s iOS nebo iPadOS 18 a novějším a jedno předplatné pokrývá obojí."
+        },
+        "q2": {
+          "question": "Musím si zakládat účet?",
+          "answer": "Ne. Doppler vám přidělí ID účtu při prvním otevření aplikace. Nezadáváte e-mail, telefonní číslo ani heslo. ID si uložte na bezpečné místo: přes něj přidáte další zařízení a obnovíte své předplatné."
+        },
+        "q3": {
+          "question": "Je k dispozici zkušební verze zdarma?",
+          "answer": "Ano. Noví předplatitelé v App Store dostanou {days}denní zkušební verzi zdarma se všemi funkcemi. Poté se předplatné obnovuje přes vaše Apple ID, dokud ho nezrušíte, od {price} měsíčně při ročním předplatném."
+        },
+        "q4": {
+          "question": "Funguje v Rusku, Íránu a Číně?",
+          "answer": "Doppler je stavěný pro filtrované sítě. Používá VLESS Reality a každé připojení maskuje jako návštěvu běžného webu, který je tam, kde jste, povolený. Žádná VPN nemůže slíbit, že bude fungovat všude a navždy, protože filtrování se neustále mění, a proto Doppler zkouší několik maskování a ponechá to, které funguje."
+        },
+        "q5": {
+          "question": "Můžu ovládat VPN z Apple Watch?",
+          "answer": "Ano. S Doppler Pro aplikace pro hodinky zapíná a vypíná VPN na vašem iPhonu, přepíná servery, ukazuje provoz a spouští test rychlosti. Samotný tunel běží na iPhonu. Aplikace pro hodinky vyžaduje watchOS 26."
+        },
+        "q6": {
+          "question": "Jak předplatné zruším?",
+          "answer": "Otevřete na iPhonu Nastavení, klepněte na své jméno, pak na Předplatné, pak na Doppler VPN a zvolte Zrušit předplatné. Přístup vám zůstane do konce zaplaceného období. Platby vyřizuje Apple, takže Doppler vaši kartu nikdy nevidí."
+        }
+      },
+      "cta": {
+        "title": "Získejte Doppler pro iPhone",
+        "subtitle": "Stažení zdarma, {days} dny na zkoušku zdarma a žádná registrace."
+      }
     }
   },
   "vpnForAndroid": {
@@ -2622,6 +2768,139 @@
       "iosDesc": "Stáhněte Doppler VPN pro iPhone a iPad",
       "android": "VPN pro Android",
       "androidDesc": "Získejte Doppler VPN z Google Play"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "Mac · iPhone · iPad",
+        "title": "Doppler VPN pro Mac",
+        "subtitle": "Nativní aplikace pro Mac, která jedním kliknutím chrání vše, co váš Mac odesílá. Připojení vypadá jako běžná návštěva webu, takže funguje i v sítích, které jiné VPN blokují.",
+        "cta": "Stáhnout z Mac App Store",
+        "note": "Stažení zdarma · {days} dny zdarma na zkoušku · Bez e-mailu a telefonního čísla"
+      },
+      "tour": {
+        "kicker": "Uvnitř aplikace",
+        "title": "Stvořeno pro Mac",
+        "subtitle": "Skutečné obrazovky z aplikace pro Mac. Každá funkce je v postranním panelu, jedno kliknutí daleko.",
+        "items": {
+          "unblock": {
+            "label": "Způsob připojení",
+            "alt": "Panel Způsob připojení na Macu se seznamem běžných webů, za které se připojení může vydávat"
+          },
+          "path": {
+            "label": "Připojení",
+            "alt": "Obrazovka Připojení na Macu s adresou, kterou weby vidí, šifrovaným DNS a trasou"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Obrazovka Smart Route na Macu s pravidly přímého směrování a vlastními doménami"
+          },
+          "speed": {
+            "label": "Test rychlosti",
+            "alt": "Test rychlosti na Macu: stahování, odesílání a ping přes VPN"
+          },
+          "devices": {
+            "label": "Zařízení",
+            "alt": "Obrazovka Zařízení na Macu se seznamem všech zařízení v účtu"
+          },
+          "appearance": {
+            "label": "Vzhled",
+            "alt": "Nastavení vzhledu na Macu s velikostí textu, stylem ploch a barvou zvýraznění"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "Jedno kliknutí",
+          "title": "Klikněte jednou. Celý Mac je chráněný.",
+          "body": "Doppler otevře šifrovaný tunel pro každou aplikaci na vašem Macu, nejen pro prohlížeč. Obrazovka VPN ukazuje, jak dlouho jste připojeni, živou rychlost a místo, kde váš provoz vychází do sítě.",
+          "points": {
+            "p1": "Každá aplikace a každé spojení jde jedním tunelem",
+            "p2": "Živá rychlost a délka relace na hlavní obrazovce",
+            "p3": "Servery, test rychlosti a nastavení v postranním panelu"
+          },
+          "alt": "Seznam serverů Doppler na Macu s pingem změřeným před připojením"
+        },
+        "unblock": {
+          "kicker": "Projde všude",
+          "title": "Funguje tam, kde jiné VPN blokují",
+          "body": "Některé sítě blokují VPN tak, že čtou název webu, který připojení údajně navštěvuje. Doppler uvede běžný web povolený tam, kde jste, a vaše připojení vypadá jako obyčejná návštěva.",
+          "points": {
+            "p1": "Režim Automaticky zkusí naráz tři nejpravděpodobnější weby a ponechá nejrychlejší",
+            "p2": "Nebo si web vyberte sami ve Způsobu připojení",
+            "p3": "Postaveno na VLESS Reality, protokolu pro filtrované sítě"
+          },
+          "alt": "Panel Způsob připojení na Macu"
+        },
+        "path": {
+          "kicker": "Nic skrytého",
+          "title": "Vidíte každý skok",
+          "body": "Obrazovka Připojení ukazuje adresu, kterou weby vidí, komu patří, zda jsou vaše DNS dotazy šifrované a jdou tunelem, a vaši trasu na mapě.",
+          "points": {
+            "p1": "IP adresa a poskytovatel, které weby právě vidí",
+            "p2": "Stav šifrovaného DNS a doba dotazu",
+            "p3": "Vaše trasa zakreslená na živé mapě"
+          },
+          "alt": "Obrazovka Připojení na Macu s trasou na mapě"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "Domácí weby zůstanou doma",
+          "body": "Banky, úřady a streamovací služby doma často odmítají zahraniční adresy. Smart Route posílá weby vaší země napřímo a vše ostatní nechává v tunelu.",
+          "points": {
+            "p1": "Vyberte svou zemi, nebo ji nechte Doppler rozpoznat",
+            "p2": "Posílejte napřímo doménovou zónu nebo weby hostované doma",
+            "p3": "Přidávejte, vkládejte nebo importujte vlastní domény"
+          },
+          "alt": "Obrazovka Smart Route na Macu"
+        }
+      },
+      "setup": {
+        "title": "Nastaveno za méně než minutu",
+        "subtitle": "Žádný registrační formulář ani konfigurační soubory.",
+        "s1": {
+          "title": "Stáhněte Doppler",
+          "body": "Stáhněte si aplikaci z Mac App Store. Funguje na macOS 15 Sequoia nebo novějším."
+        },
+        "s2": {
+          "title": "Otevřete ji a povolte VPN",
+          "body": "macOS se jednou zeptá na přidání konfigurace VPN. Doppler vám vytvoří anonymní ID účtu, bez e-mailu a hesla."
+        },
+        "s3": {
+          "title": "Klikněte na Připojit",
+          "body": "Spusťte {days}denní zkušební verzi zdarma a klikněte na Připojit. Po zkušební době začínají plány na {price} měsíčně při ročním předplatném."
+        }
+      },
+      "faq": {
+        "title": "Otázky k Doppleru na Macu",
+        "q1": {
+          "question": "Je Doppler nativní aplikace pro Mac?",
+          "answer": "Ano. Doppler pro Mac je postavený pro macOS na vlastním VPN frameworku Apple, nejde o aplikaci pro iPhone spuštěnou na Macu. Funguje na macOS 15 Sequoia nebo novějším."
+        },
+        "q2": {
+          "question": "Můžu jedno předplatné používat na Macu, iPhonu i iPadu?",
+          "answer": "Ano. Doppler je jedna aplikace v App Store, takže plán koupený na kterémkoli z nich funguje na všech. Na každém zařízení použijte stejné ID účtu a obrazovka Zařízení vypíše všechna zařízení v účtu."
+        },
+        "q3": {
+          "question": "Je k dispozici zkušební verze zdarma?",
+          "answer": "Ano. Noví předplatitelé v App Store dostanou {days}denní zkušební verzi zdarma se všemi funkcemi. Poté se předplatné obnovuje přes vaše Apple ID, dokud ho nezrušíte, od {price} měsíčně při ročním předplatném."
+        },
+        "q4": {
+          "question": "Funguje v Rusku, Íránu a Číně?",
+          "answer": "Doppler je stavěný pro filtrované sítě. Používá VLESS Reality a každé připojení maskuje jako návštěvu běžného webu, který je tam, kde jste, povolený. Žádná VPN nemůže slíbit, že bude fungovat všude a navždy, protože filtrování se neustále mění, a proto Doppler zkouší několik maskování a ponechá to, které funguje."
+        },
+        "q5": {
+          "question": "Zpomalí můj Mac?",
+          "answer": "Doppler je nenáročný. Tunel běží uvnitř Network Extension od Apple a rychlost závisí hlavně na zvoleném serveru a vašem vlastním připojení. Vestavěný test rychlosti přesně ukáže, co přes VPN dostáváte."
+        },
+        "q6": {
+          "question": "Jak předplatné zruším?",
+          "answer": "Otevřete na Macu App Store, klikněte na své jméno, pak na Nastavení účtu a vedle položky Předplatné zvolte Spravovat. Vyberte Doppler VPN a zrušte ho. Přístup vám zůstane do konce zaplaceného období."
+        }
+      },
+      "cta": {
+        "title": "Získejte Doppler pro Mac",
+        "subtitle": "Stažení zdarma, {days} dny na zkoušku zdarma a žádná registrace."
+      }
     }
   },
   "vpnForWindows": {
@@ -4516,6 +4795,219 @@
       "appleRegionHelp": "Apple: změna země nebo oblasti",
       "macDmg": "Stáhnout Doppler VPN pro Mac (DMG)",
       "androidApk": "Stáhnout APK Doppler VPN"
+    }
+  },
+  "vpnForIpad": {
+    "metadata": {
+      "title": "Doppler VPN pro iPad a iPhone Duo — rychlá, soukromá a odolná vůči cenzuře",
+      "description": "Doppler VPN na iPadu a iPhonu Duo: postranní panel na iPadu, dva sloupce na Duo. VLESS-Reality, bez registrace, jeden plán pro všechna zařízení Apple. 3 dny zdarma na zkoušku."
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPad · iPhone Duo",
+        "title": "Doppler VPN pro iPad a iPhone Duo",
+        "subtitle": "Stejná aplikace Doppler, uspořádaná pro větší displej. Postranní panel na iPadu, dva sloupce na iPhonu Duo a na obou stejná ochrana jedním klepnutím.",
+        "cta": "Stáhnout z App Store",
+        "note": "Stažení zdarma · {days} dny zdarma na zkoušku · Bez e-mailu a telefonního čísla"
+      },
+      "chapters": {
+        "duo": {
+          "kicker": "iPhone Duo",
+          "title": "Dva sloupce, nic skrytého",
+          "body": "Po rozložení ukazuje iPhone Duo obrazovku připojení a test rychlosti vedle sebe. Složte ho a Doppler se vrátí ke známému rozložení iPhonu, stále připojený.",
+          "points": {
+            "p1": "Připojení na jedné straně, rychlost a grafy na druhé",
+            "p2": "Tunel vydrží, když telefon složíte nebo rozložíte",
+            "p3": "Kryto stejným plánem jako vaše ostatní zařízení"
+          },
+          "alt": "Doppler na iPhonu Duo drženém v obou rukou, připojený ke Kanadě, vedle něj test rychlosti"
+        },
+        "keyboard": {
+          "kicker": "iPad",
+          "title": "Každá sekce v postranním panelu",
+          "body": "Na iPadu jsou VPN, Servery, Test rychlosti, Připojení a Smart Route v postranním panelu, jedno klepnutí od sebe. Připojte klávesnici a funguje jako aplikace pro Mac.",
+          "points": {
+            "p1": "Postranní panel drží každou sekci na dosah",
+            "p2": "Web, za který se připojení vydává, vyberete na stránce Servery",
+            "p3": "Klávesnice a trackpad fungují jako na notebooku"
+          },
+          "alt": "iPad Pro na Magic Keyboard se stránkou Servery v Doppleru a otevřeným panelem Způsob připojení"
+        },
+        "account": {
+          "kicker": "Jeden účet",
+          "title": "Přidejte iPad do svého plánu",
+          "body": "Plán patří vašemu ID účtu, ne zařízení. Přihlaste se na iPadu stejným ID a připojí se k vašemu iPhonu, Macu a Apple Watch na stránce Zařízení.",
+          "points": {
+            "p1": "Žádné druhé předplatné pro iPad",
+            "p2": "Všechna přihlášená zařízení v jednom seznamu",
+            "p3": "Nepoužívané zařízení odeberete jedním klepnutím"
+          },
+          "alt": "Stránka Zařízení se všemi zařízeními přihlášenými k účtu"
+        }
+      },
+      "setup": {
+        "title": "Nastaveno za méně než minutu",
+        "subtitle": "Žádný registrační formulář ani konfigurační soubory.",
+        "s1": {
+          "title": "Stáhněte Doppler",
+          "body": "Stáhněte si aplikaci z App Store. Funguje na iPadu a iPhonu s iPadOS nebo iOS 18 a novějším."
+        },
+        "s2": {
+          "title": "Otevřete ji",
+          "body": "Doppler vám vytvoří anonymní ID účtu. Žádný e-mail, žádné telefonní číslo, žádné heslo."
+        },
+        "s3": {
+          "title": "Klepněte na Připojit",
+          "body": "Spusťte {days}denní zkušební verzi zdarma a klepněte na Připojit. Po zkušební době začínají plány na {price} měsíčně při ročním předplatném."
+        }
+      },
+      "faq": {
+        "title": "Otázky k Doppleru na iPadu a iPhonu Duo",
+        "q1": {
+          "question": "Kupuje se aplikace pro iPad zvlášť?",
+          "answer": "Ne. iPhone, iPad, Mac a Apple Watch sdílejí jednu stránku v App Store a jedno předplatné pokrývá všechny."
+        },
+        "q2": {
+          "question": "Na kterých iPadech Doppler funguje?",
+          "answer": "Na každém iPadu s iPadOS 18 nebo novějším."
+        },
+        "q3": {
+          "question": "Jak přidám iPad do svého plánu?",
+          "answer": "Nainstalujte Doppler na iPad a přihlaste se ID účtu ze svého iPhonu. Plán je vázaný na ID, takže je iPad hned pokrytý."
+        },
+        "q4": {
+          "question": "Co se mění na iPhonu Duo?",
+          "answer": "Po rozložení má aplikace dva sloupce: hlavní obrazovku na jedné straně a otevřenou stránku na druhé. Po složení je to aplikace pro iPhone. VPN zůstává připojená v obou případech."
+        },
+        "q5": {
+          "question": "Je k dispozici zkušební verze zdarma?",
+          "answer": "Ano. Noví předplatitelé v App Store dostanou {days}denní zkušební verzi zdarma se všemi funkcemi. Poté se předplatné obnovuje přes vaše Apple ID, dokud ho nezrušíte, od {price} měsíčně při ročním předplatném."
+        }
+      },
+      "cta": {
+        "title": "Získejte Doppler pro iPad",
+        "subtitle": "Stažení zdarma, {days} dny na zkoušku zdarma a žádná registrace."
+      }
+    }
+  },
+  "applePage": {
+    "prev": "Předchozí obrazovka",
+    "next": "Další obrazovka",
+    "readGuide": "Přečíst průvodce",
+    "ecosystem": {
+      "kicker": "Jeden účet",
+      "title": "Každé zařízení Apple, jedno ID",
+      "body": "Doppler běží na iPhonu, iPadu, Macu i Apple Watch ze stejné stránky v App Store. Plán patří vašemu ID účtu, takže pokryje každé zařízení bez další registrace.",
+      "photoAlt": "Apple Watch se seznamem serverů Doppler",
+      "photoAltDevices": "Apple Watch se zařízeními přihlášenými k účtu Doppler",
+      "iphone": {
+        "title": "iPhone",
+        "body": "Plná aplikace a k tomu widget na plochu"
+      },
+      "ipad": {
+        "title": "iPad",
+        "body": "Stejná aplikace na větším displeji"
+      },
+      "mac": {
+        "title": "Mac",
+        "body": "Nativní aplikace pro macOS 15 nebo novější"
+      },
+      "watch": {
+        "title": "Apple Watch",
+        "body": "Ovladač VPN z vašeho iPhonu přímo na zápěstí"
+      },
+      "watchShots": {
+        "servers": {
+          "label": "Servery",
+          "alt": "Seznam serverů Doppler na Apple Watch"
+        },
+        "devices": {
+          "label": "Zařízení",
+          "alt": "Zařízení v účtu zobrazená na Apple Watch"
+        },
+        "profile": {
+          "label": "Profil",
+          "alt": "Profil Doppler Pro na Apple Watch"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Soukromí v základu",
+      "subtitle": "To, na co se Doppler nikdy neptá, je stejně důležité jako to, co dělá.",
+      "noEmail": {
+        "title": "Žádný e-mail, žádné jméno",
+        "body": "Váš účet je náhodné ID. Nemáme o vás nic osobního, co by mohlo uniknout."
+      },
+      "vless": {
+        "title": "Vypadá jako běžné HTTPS",
+        "body": "VLESS Reality dělá z tunelu něco, co vypadá jako obyčejná návštěva webu."
+      },
+      "noLogs": {
+        "title": "Žádné záznamy aktivity",
+        "body": "Nezaznamenáváme weby, které navštěvujete, ani co odesíláte. Přihlášení zanechá krátký záznam, uchovávaný 90 dní kvůli prevenci zneužití."
+      },
+      "trial": {
+        "title": "{days} dny zdarma",
+        "body": "Vyzkoušejte všechny funkce, než zaplatíte. Zrušit můžete kdykoli v nastavení Apple ID."
+      }
+    },
+    "guides": {
+      "kicker": "Průvodci",
+      "title": "Zjistěte, jak to funguje",
+      "subtitle": "Krátcí a srozumitelní průvodci aplikací a technologií za ní.",
+      "englishNote": "Průvodci jsou zatím jen v angličtině.",
+      "hub": {
+        "title": "Jak Doppler chrání váš provoz",
+        "desc": "Sledujte krok za krokem jeden požadavek z vašeho zařízení přes tunel až na web."
+      },
+      "items": {
+        "vpn-on-apple-watch": {
+          "title": "Doppler na Apple Watch",
+          "desc": "Připojujte se, přepínejte servery a měřte rychlost přímo ze zápěstí.",
+          "cta": "Doppler na Apple Watch"
+        },
+        "what-is-sni": {
+          "title": "Co je SNI?",
+          "desc": "Název webu, který nese každé zabezpečené připojení, a proč ho cenzoři čtou.",
+          "cta": "Co je SNI a proč ho cenzoři čtou?"
+        },
+        "doppler-on-iphone-and-mac": {
+          "title": "Začínáme na iPhonu a Macu",
+          "desc": "Nainstalujte, připojte se a zorientujte se v aplikaci za pět minut.",
+          "cta": "Přečíst průvodce pro začátečníky"
+        },
+        "one-account-every-apple-device": {
+          "title": "Jeden účet na všech vašich zařízeních Apple",
+          "desc": "Přidejte iPad, Mac a Apple Watch do stejného plánu.",
+          "cta": "Jeden účet na každém zařízení"
+        }
+      }
+    },
+    "related": {
+      "ios": {
+        "title": "VPN pro iPhone a iPad",
+        "desc": "Aplikace pro iOS"
+      },
+      "macos": {
+        "title": "VPN pro Mac",
+        "desc": "Nativní aplikace pro macOS"
+      },
+      "android": {
+        "title": "VPN pro Android",
+        "desc": "Získejte Doppler na Google Play"
+      },
+      "windows": {
+        "title": "VPN pro Windows",
+        "desc": "Pro Windows 10 a 11"
+      },
+      "ipad": {
+        "title": "VPN pro iPad a iPhone Duo",
+        "desc": "Rozložení pro velký displej"
+      }
+    },
+    "cta": {
+      "downloads": "Všechna stažení",
+      "imageAlt": "Doppler VPN na iPhonu v ruce"
     }
   }
 }

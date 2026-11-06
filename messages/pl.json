@@ -1528,6 +1528,11 @@
       "regions": {
         "title": "Zablokowany przez Rosję — wciąż działa",
         "description": "Nasza domena jest na liście blokad Roskomnadzoru. Wciąż tu jesteśmy. Pobierz przez bota Telegram, gdy strona jest zablokowana."
+      },
+      "sni": {
+        "title": "Wygląda jak wizyta na zwykłej stronie",
+        "description": "Cenzorzy czytają nazwę strony, którą niesie każde bezpieczne połączenie, czyli SNI. Doppler podaje stronę dozwoloną tam, gdzie jesteś, więc połączenie uchodzi za zwykłą wizytę. Wybierz stronę sam albo zostaw wybór trybowi Automatycznie.",
+        "cta": "Czym jest SNI i dlaczego cenzorzy go czytają"
       }
     }
   },
@@ -2394,6 +2399,147 @@
       "windowsDesc": "Doppler VPN na Windows 10 i 11",
       "publicWifi": "Bezpieczeństwo w publicznym Wi-Fi",
       "publicWifiDesc": "Chroń swojego iPhone'a w otwartych sieciach"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPhone · iPad · Apple Watch",
+        "title": "Doppler VPN na iPhone i iPad",
+        "subtitle": "Jedno dotknięcie i Twój iPhone jest prywatny. Doppler sprawia, że połączenie wygląda jak zwykła wizyta na stronie, więc działa nawet w sieciach, które blokują inne VPN-y.",
+        "cta": "Pobierz z App Store",
+        "note": "Bezpłatne pobranie · {days} dni za darmo · Bez e-maila i numeru telefonu"
+      },
+      "tour": {
+        "kicker": "W aplikacji",
+        "title": "Wszystko na jedno dotknięcie",
+        "subtitle": "Prawdziwe ekrany z aplikacji na iPhone, nic nie jest upiększone. Przesuń, żeby je obejrzeć.",
+        "items": {
+          "connect": {
+            "label": "Połącz",
+            "alt": "Ekran główny Doppler na iPhonie, połączenie z Hongkongiem, prędkość na żywo i mapa trasy"
+          },
+          "unblock": {
+            "label": "Metoda połączenia",
+            "alt": "Ekran Metoda połączenia z listą zwykłych stron, pod wizytę na których może się podszywać połączenie"
+          },
+          "speed": {
+            "label": "Test prędkości",
+            "alt": "Test prędkości na iPhonie: pobieranie, wysyłanie i ping przez VPN"
+          },
+          "path": {
+            "label": "Twoja trasa",
+            "alt": "Ekran Połączenie z adresem widocznym dla stron, stanem DNS i trasą na mapie"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Ekran Smart Route z wyborem kraju, którego strony omijają tunel"
+          },
+          "devices": {
+            "label": "Urządzenia",
+            "alt": "Ekran Urządzenia z każdym urządzeniem zalogowanym na konto"
+          },
+          "appearance": {
+            "label": "Wygląd",
+            "alt": "Ustawienia wyglądu: rozmiar tekstu, styl powierzchni i kolor akcentu"
+          },
+          "language": {
+            "label": "Język",
+            "alt": "Lista języków, w których mówi aplikacja"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "Jedno dotknięcie",
+          "title": "Dotknij raz. Jesteś chroniony.",
+          "body": "Doppler wybiera serwer, otwiera szyfrowany tunel i przepuszcza przez niego cały ruch z iPhone'a, łącznie z rozmowami w Telegramie i WhatsAppie. Ekran główny pokazuje na żywo prędkość i miejsce, w którym ruch wychodzi do sieci.",
+          "points": {
+            "p1": "Przez tunel idzie całe urządzenie, nie tylko przeglądarka",
+            "p2": "Pobieranie, wysyłanie i ping na żywo na ekranie głównym",
+            "p3": "Kill Switch i Połącz przy uruchomieniu, każde jednym przełącznikiem w Ustawieniach aplikacji"
+          },
+          "alt": "Lista serwerów Doppler na iPhonie z pingiem dla każdej lokalizacji"
+        },
+        "unblock": {
+          "kicker": "Przechodzi przez blokady",
+          "title": "Działa tam, gdzie inne VPN-y są blokowane",
+          "body": "Niektóre sieci blokują VPN-y, odczytując nazwę strony, którą połączenie rzekomo odwiedza. Doppler podaje zwykłą stronę dozwoloną tam, gdzie jesteś, więc połączenie wygląda jak zwykła wizyta na niej.",
+          "points": {
+            "p1": "Tryb Automatycznie sprawdza naraz trzy najlepsze strony i zostawia najszybszą",
+            "p2": "Albo wybierz stronę sam na ekranie Metoda połączenia",
+            "p3": "Oparty na VLESS Reality, protokole stworzonym dla filtrowanych sieci"
+          },
+          "alt": "iPhone z ekranem Metoda połączenia"
+        },
+        "path": {
+          "kicker": "Nic ukrytego",
+          "title": "Zobacz każdy przeskok",
+          "body": "Ekran Połączenie pokazuje adres widoczny dla stron, do kogo należy, czy zapytania DNS idą przez tunel, oraz trasę ruchu na mapie. Nie musisz wierzyć nam na słowo.",
+          "points": {
+            "p1": "Adres IP i dostawca, których strony widzą w tej chwili",
+            "p2": "Stan DNS i czas odpowiedzi na zapytanie",
+            "p3": "Twoja trasa na mapie na żywo"
+          },
+          "alt": "Ekran Połączenie na iPhonie z trasą na mapie"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "Lokalne strony bez objazdów",
+          "body": "Banki, urzędy i serwisy streamingowe w Twoim kraju często odrzucają zagraniczne adresy. Smart Route kieruje strony z Twojego kraju bezpośrednio, a całą resztę zostawia w tunelu.",
+          "points": {
+            "p1": "Wybierz swój kraj albo pozwól, by Doppler go wykrył",
+            "p2": "Kieruj bezpośrednio całą strefę domen, na przykład .jp",
+            "p3": "Dodaj własne domeny, które mają omijać tunel"
+          },
+          "alt": "Ekran Smart Route na iPhonie"
+        }
+      },
+      "setup": {
+        "title": "Gotowe w niecałą minutę",
+        "subtitle": "Bez formularza rejestracji i bez plików konfiguracyjnych.",
+        "s1": {
+          "title": "Pobierz Doppler",
+          "body": "Pobierz aplikację z App Store. Działa na iPhonie i iPadzie z iOS 18 lub nowszym."
+        },
+        "s2": {
+          "title": "Otwórz ją",
+          "body": "Doppler tworzy dla Ciebie anonimowe ID konta. Bez e-maila, bez numeru telefonu, bez hasła."
+        },
+        "s3": {
+          "title": "Dotknij Połącz",
+          "body": "Rozpocznij {days}-dniowy darmowy okres próbny i dotknij Połącz. Po okresie próbnym plany zaczynają się od {price} miesięcznie w planie rocznym."
+        }
+      },
+      "faq": {
+        "title": "Pytania o Doppler na iPhonie i iPadzie",
+        "q1": {
+          "question": "Czy Doppler działa na iPadzie?",
+          "answer": "Tak. Ta sama aplikacja działa na iPhonie i iPadzie z iOS lub iPadOS 18 albo nowszym, a jedna subskrypcja obejmuje oba urządzenia."
+        },
+        "q2": {
+          "question": "Czy muszę zakładać konto?",
+          "answer": "Nie. Doppler nadaje Ci ID konta przy pierwszym uruchomieniu aplikacji. Nie podajesz e-maila, numeru telefonu ani hasła. Zapisz ID w bezpiecznym miejscu: dzięki niemu dodasz inne urządzenia i odzyskasz swój plan."
+        },
+        "q3": {
+          "question": "Czy jest darmowy okres próbny?",
+          "answer": "Tak. Nowi subskrybenci w App Store dostają {days}-dniowy darmowy okres próbny ze wszystkimi funkcjami. Potem plan odnawia się przez Twoje Apple ID, dopóki go nie anulujesz, od {price} miesięcznie w planie rocznym."
+        },
+        "q4": {
+          "question": "Czy działa w Rosji, Iranie i Chinach?",
+          "answer": "Doppler powstał z myślą o filtrowanych sieciach. Korzysta z VLESS Reality i sprawia, że każde połączenie wygląda jak wizyta na zwykłej stronie dozwolonej tam, gdzie jesteś. Żaden VPN nie może obiecać, że zawsze będzie działać wszędzie, bo filtrowanie ciągle się zmienia, dlatego Doppler testuje kilka kamuflaży i zostawia ten, który działa."
+        },
+        "q5": {
+          "question": "Czy mogę sterować VPN z Apple Watch?",
+          "answer": "Tak. Z Doppler Pro aplikacja na zegarek włącza i wyłącza VPN na iPhonie, zmienia serwery, pokazuje ruch i uruchamia test prędkości. Sam tunel działa na iPhonie. Aplikacja na zegarek wymaga watchOS 26."
+        },
+        "q6": {
+          "question": "Jak anulować subskrypcję?",
+          "answer": "Otwórz Ustawienia na iPhonie, dotknij swojego imienia i nazwiska, potem Subskrypcje, potem Doppler VPN i wybierz Anuluj subskrypcję. Dostęp zostaje do końca opłaconego okresu. Płatności obsługuje Apple, więc Doppler nigdy nie widzi Twojej karty."
+        }
+      },
+      "cta": {
+        "title": "Pobierz Doppler na iPhone'a",
+        "subtitle": "Bezpłatne pobranie, {days} dni za darmo i bez zakładania konta."
+      }
     }
   },
   "vpnForAndroid": {
@@ -2622,6 +2768,139 @@
       "iosDesc": "Pobierz Doppler VPN na iPhone i iPad",
       "android": "VPN na Android",
       "androidDesc": "Pobierz Doppler VPN z Google Play"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "Mac · iPhone · iPad",
+        "title": "Doppler VPN na Maca",
+        "subtitle": "Natywna aplikacja na Maca, która jednym kliknięciem chroni wszystko, co wysyła Twój Mac. Połączenie wygląda jak zwykła wizyta na stronie, więc działa nawet w sieciach, które blokują inne VPN-y.",
+        "cta": "Pobierz z Mac App Store",
+        "note": "Bezpłatne pobranie · {days} dni za darmo · Bez e-maila i numeru telefonu"
+      },
+      "tour": {
+        "kicker": "W aplikacji",
+        "title": "Stworzony dla Maca",
+        "subtitle": "Prawdziwe ekrany z aplikacji na Maca. Każda funkcja jest na pasku bocznym, jedno kliknięcie dalej.",
+        "items": {
+          "unblock": {
+            "label": "Metoda połączenia",
+            "alt": "Okno Metoda połączenia na Macu z listą zwykłych stron, pod które może się podszywać połączenie"
+          },
+          "path": {
+            "label": "Połączenie",
+            "alt": "Ekran Połączenie na Macu z adresem widocznym dla stron, szyfrowanym DNS i trasą"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Ekran Smart Route na Macu z regułami ruchu bezpośredniego i własnymi domenami"
+          },
+          "speed": {
+            "label": "Test prędkości",
+            "alt": "Test prędkości na Macu: pobieranie, wysyłanie i ping przez VPN"
+          },
+          "devices": {
+            "label": "Urządzenia",
+            "alt": "Ekran Urządzenia na Macu z listą wszystkich urządzeń na koncie"
+          },
+          "appearance": {
+            "label": "Wygląd",
+            "alt": "Ustawienia wyglądu na Macu: rozmiar tekstu, styl powierzchni i kolor akcentu"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "Jedno kliknięcie",
+          "title": "Kliknij raz. Cały Mac jest chroniony.",
+          "body": "Doppler otwiera szyfrowany tunel dla każdej aplikacji na Macu, nie tylko dla przeglądarki. Ekran VPN pokazuje, jak długo jesteś połączony, prędkość na żywo i miejsce, w którym ruch wychodzi do sieci.",
+          "points": {
+            "p1": "Każda aplikacja i każde połączenie idzie przez jeden tunel",
+            "p2": "Prędkość na żywo i czas sesji na ekranie głównym",
+            "p3": "Serwery, test prędkości i ustawienia na pasku bocznym"
+          },
+          "alt": "Lista serwerów Doppler na Macu z pingiem zmierzonym przed połączeniem"
+        },
+        "unblock": {
+          "kicker": "Przechodzi przez blokady",
+          "title": "Działa tam, gdzie inne VPN-y są blokowane",
+          "body": "Niektóre sieci blokują VPN-y, odczytując nazwę strony, którą połączenie rzekomo odwiedza. Doppler podaje zwykłą stronę dozwoloną tam, gdzie jesteś, więc połączenie wygląda jak zwykła wizyta na niej.",
+          "points": {
+            "p1": "Tryb Automatycznie sprawdza naraz trzy najlepsze strony i zostawia najszybszą",
+            "p2": "Albo wybierz stronę sam w oknie Metoda połączenia",
+            "p3": "Oparty na VLESS Reality, protokole stworzonym dla filtrowanych sieci"
+          },
+          "alt": "Okno Metoda połączenia na Macu"
+        },
+        "path": {
+          "kicker": "Nic ukrytego",
+          "title": "Zobacz każdy przeskok",
+          "body": "Ekran Połączenie pokazuje adres widoczny dla stron, do kogo należy, czy zapytania DNS są szyfrowane i idą przez tunel, oraz Twoją trasę na mapie.",
+          "points": {
+            "p1": "Adres IP i dostawca, których strony widzą w tej chwili",
+            "p2": "Stan szyfrowanego DNS i czas zapytania",
+            "p3": "Twoja trasa na mapie na żywo"
+          },
+          "alt": "Ekran Połączenie na Macu z trasą na mapie"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "Lokalne strony bez objazdów",
+          "body": "Banki, urzędy i serwisy streamingowe w Twoim kraju często odrzucają zagraniczne adresy. Smart Route kieruje strony z Twojego kraju bezpośrednio, a całą resztę zostawia w tunelu.",
+          "points": {
+            "p1": "Wybierz swój kraj albo pozwól, by Doppler go wykrył",
+            "p2": "Kieruj bezpośrednio strefę domen lub strony hostowane w kraju",
+            "p3": "Dodawaj, wklejaj lub importuj własne domeny"
+          },
+          "alt": "Ekran Smart Route na Macu"
+        }
+      },
+      "setup": {
+        "title": "Gotowe w niecałą minutę",
+        "subtitle": "Bez formularza rejestracji i bez plików konfiguracyjnych.",
+        "s1": {
+          "title": "Pobierz Doppler",
+          "body": "Pobierz aplikację z Mac App Store. Działa na macOS 15 Sequoia lub nowszym."
+        },
+        "s2": {
+          "title": "Otwórz ją i zezwól na VPN",
+          "body": "macOS raz poprosi o dodanie konfiguracji VPN. Doppler tworzy dla Ciebie anonimowe ID konta, bez e-maila i hasła."
+        },
+        "s3": {
+          "title": "Kliknij Połącz",
+          "body": "Rozpocznij {days}-dniowy darmowy okres próbny i kliknij Połącz. Po okresie próbnym plany zaczynają się od {price} miesięcznie w planie rocznym."
+        }
+      },
+      "faq": {
+        "title": "Pytania o Doppler na Macu",
+        "q1": {
+          "question": "Czy Doppler to natywna aplikacja na Maca?",
+          "answer": "Tak. Doppler na Maca powstał dla macOS na własnym frameworku VPN od Apple, to nie aplikacja z iPhone'a uruchomiona na Macu. Działa na macOS 15 Sequoia lub nowszym."
+        },
+        "q2": {
+          "question": "Czy jedna subskrypcja wystarczy na Maca, iPhone'a i iPada?",
+          "answer": "Tak. Doppler to jedna aplikacja w App Store, więc plan kupiony na dowolnym z tych urządzeń działa na wszystkich. Używaj tego samego ID konta na każdym urządzeniu, a ekran Urządzenia pokaże wszystkie urządzenia na koncie."
+        },
+        "q3": {
+          "question": "Czy jest darmowy okres próbny?",
+          "answer": "Tak. Nowi subskrybenci w App Store dostają {days}-dniowy darmowy okres próbny ze wszystkimi funkcjami. Potem plan odnawia się przez Twoje Apple ID, dopóki go nie anulujesz, od {price} miesięcznie w planie rocznym."
+        },
+        "q4": {
+          "question": "Czy działa w Rosji, Iranie i Chinach?",
+          "answer": "Doppler powstał z myślą o filtrowanych sieciach. Korzysta z VLESS Reality i sprawia, że każde połączenie wygląda jak wizyta na zwykłej stronie dozwolonej tam, gdzie jesteś. Żaden VPN nie może obiecać, że zawsze będzie działać wszędzie, bo filtrowanie ciągle się zmienia, dlatego Doppler testuje kilka kamuflaży i zostawia ten, który działa."
+        },
+        "q5": {
+          "question": "Czy spowolni mojego Maca?",
+          "answer": "Doppler jest lekki. Tunel działa w Network Extension od Apple, a prędkość zależy głównie od wybranego serwera i Twojego łącza. Wbudowany test prędkości pokazuje dokładnie, ile masz przez VPN."
+        },
+        "q6": {
+          "question": "Jak anulować subskrypcję?",
+          "answer": "Otwórz App Store na Macu, kliknij swoje imię i nazwisko, potem Ustawienia konta, i wybierz Zarządzaj obok Subskrypcji. Wybierz Doppler VPN i anuluj. Dostęp zostaje do końca opłaconego okresu."
+        }
+      },
+      "cta": {
+        "title": "Pobierz Doppler na Maca",
+        "subtitle": "Bezpłatne pobranie, {days} dni za darmo i bez zakładania konta."
+      }
     }
   },
   "vpnForWindows": {
@@ -4516,6 +4795,219 @@
       "appleRegionHelp": "Apple: zmiana kraju lub regionu",
       "macDmg": "Pobierz Doppler VPN na Maca (DMG)",
       "androidApk": "Pobierz APK Doppler VPN"
+    }
+  },
+  "vpnForIpad": {
+    "metadata": {
+      "title": "Doppler VPN na iPad i iPhone Duo — szybki, prywatny i odporny na cenzurę",
+      "description": "Doppler VPN na iPadzie i iPhonie Duo: pasek boczny na iPadzie, dwie kolumny na Duo. VLESS-Reality, bez rejestracji, jeden plan na każde urządzenie Apple. 3 dni za darmo."
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPad · iPhone Duo",
+        "title": "Doppler VPN na iPad i iPhone Duo",
+        "subtitle": "Ta sama aplikacja Doppler, ułożona pod większy ekran. Pasek boczny na iPadzie, dwie kolumny na iPhonie Duo i ta sama ochrona jednym dotknięciem na obu.",
+        "cta": "Pobierz z App Store",
+        "note": "Bezpłatne pobranie · {days} dni za darmo · Bez e-maila i numeru telefonu"
+      },
+      "chapters": {
+        "duo": {
+          "kicker": "iPhone Duo",
+          "title": "Dwie kolumny, nic ukrytego",
+          "body": "Po rozłożeniu iPhone Duo pokazuje ekran połączenia i test prędkości obok siebie. Złóż go, a Doppler wróci do znanego układu iPhone'a, nadal połączony.",
+          "points": {
+            "p1": "Połączenie po jednej stronie, prędkość i wykresy po drugiej",
+            "p2": "Tunel działa dalej, gdy składasz lub rozkładasz telefon",
+            "p3": "Objęty tym samym planem co Twoje inne urządzenia"
+          },
+          "alt": "Doppler na iPhonie Duo trzymanym w dwóch dłoniach, połączony z Kanadą, obok test prędkości"
+        },
+        "keyboard": {
+          "kicker": "iPad",
+          "title": "Każda sekcja na pasku bocznym",
+          "body": "Na iPadzie VPN, Serwery, Test prędkości, Połączenie i Smart Route są na pasku bocznym, jedno dotknięcie od siebie. Podłącz klawiaturę, a działa jak aplikacja na Maca.",
+          "points": {
+            "p1": "Pasek boczny trzyma każdą sekcję pod ręką",
+            "p2": "Wybierz stronę, pod którą podszywa się połączenie, na ekranie Serwery",
+            "p3": "Klawiatura i gładzik działają jak na laptopie"
+          },
+          "alt": "iPad Pro na Magic Keyboard z ekranem Serwery w Doppler i otwartym oknem Metoda połączenia"
+        },
+        "account": {
+          "kicker": "Jedno konto",
+          "title": "Dodaj iPada do swojego planu",
+          "body": "Plan należy do ID konta, a nie do urządzenia. Zaloguj się na iPadzie tym samym ID, a dołączy do Twojego iPhone'a, Maca i Apple Watch na ekranie Urządzenia.",
+          "points": {
+            "p1": "Bez drugiej subskrypcji dla iPada",
+            "p2": "Wszystkie zalogowane urządzenia na jednej liście",
+            "p3": "Usuń nieużywane urządzenie jednym dotknięciem"
+          },
+          "alt": "Ekran Urządzenia z każdym urządzeniem zalogowanym na konto"
+        }
+      },
+      "setup": {
+        "title": "Gotowe w niecałą minutę",
+        "subtitle": "Bez formularza rejestracji i bez plików konfiguracyjnych.",
+        "s1": {
+          "title": "Pobierz Doppler",
+          "body": "Pobierz aplikację z App Store. Działa na iPadzie i iPhonie z iPadOS lub iOS 18 albo nowszym."
+        },
+        "s2": {
+          "title": "Otwórz ją",
+          "body": "Doppler tworzy dla Ciebie anonimowe ID konta. Bez e-maila, bez numeru telefonu, bez hasła."
+        },
+        "s3": {
+          "title": "Dotknij Połącz",
+          "body": "Rozpocznij {days}-dniowy darmowy okres próbny i dotknij Połącz. Po okresie próbnym plany zaczynają się od {price} miesięcznie w planie rocznym."
+        }
+      },
+      "faq": {
+        "title": "Pytania o Doppler na iPadzie i iPhonie Duo",
+        "q1": {
+          "question": "Czy aplikację na iPada kupuje się osobno?",
+          "answer": "Nie. iPhone, iPad, Mac i Apple Watch mają jedną stronę w App Store, a jedna subskrypcja obejmuje je wszystkie."
+        },
+        "q2": {
+          "question": "Na jakich iPadach działa Doppler?",
+          "answer": "Na każdym iPadzie z iPadOS 18 lub nowszym."
+        },
+        "q3": {
+          "question": "Jak dodać iPada do planu?",
+          "answer": "Zainstaluj Doppler na iPadzie i zaloguj się ID konta z iPhone'a. Plan idzie za ID, więc iPad jest od razu objęty."
+        },
+        "q4": {
+          "question": "Co zmienia się na iPhonie Duo?",
+          "answer": "Po rozłożeniu aplikacja ma dwie kolumny: ekran główny po jednej stronie i otwartą stronę po drugiej. Po złożeniu to zwykła aplikacja na iPhone'a. VPN pozostaje połączony w obu przypadkach."
+        },
+        "q5": {
+          "question": "Czy jest darmowy okres próbny?",
+          "answer": "Tak. Nowi subskrybenci w App Store dostają {days}-dniowy darmowy okres próbny ze wszystkimi funkcjami. Potem plan odnawia się przez Twoje Apple ID, dopóki go nie anulujesz, od {price} miesięcznie w planie rocznym."
+        }
+      },
+      "cta": {
+        "title": "Pobierz Doppler na iPada",
+        "subtitle": "Bezpłatne pobranie, {days} dni za darmo i bez zakładania konta."
+      }
+    }
+  },
+  "applePage": {
+    "prev": "Poprzedni ekran",
+    "next": "Następny ekran",
+    "readGuide": "Przeczytaj poradnik",
+    "ecosystem": {
+      "kicker": "Jedno konto",
+      "title": "Każde urządzenie Apple, jedno ID",
+      "body": "Doppler działa na iPhonie, iPadzie, Macu i Apple Watch z tej samej strony w App Store. Plan należy do ID konta, więc obejmuje każde urządzenie bez ponownej rejestracji.",
+      "photoAlt": "Apple Watch z listą serwerów Doppler",
+      "photoAltDevices": "Apple Watch z urządzeniami zalogowanymi na konto Doppler",
+      "iphone": {
+        "title": "iPhone",
+        "body": "Pełna aplikacja plus widżet na ekran główny"
+      },
+      "ipad": {
+        "title": "iPad",
+        "body": "Ta sama aplikacja na większym ekranie"
+      },
+      "mac": {
+        "title": "Mac",
+        "body": "Natywna aplikacja dla macOS 15 lub nowszego"
+      },
+      "watch": {
+        "title": "Apple Watch",
+        "body": "Pilot do VPN na iPhonie, na Twoim nadgarstku"
+      },
+      "watchShots": {
+        "servers": {
+          "label": "Serwery",
+          "alt": "Lista serwerów Doppler na Apple Watch"
+        },
+        "devices": {
+          "label": "Urządzenia",
+          "alt": "Urządzenia na koncie pokazane na Apple Watch"
+        },
+        "profile": {
+          "label": "Profil",
+          "alt": "Profil Doppler Pro na Apple Watch"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Prywatność od podstaw",
+      "subtitle": "To, o co Doppler nigdy nie pyta, jest równie ważne jak to, co robi.",
+      "noEmail": {
+        "title": "Bez e-maila, bez nazwiska",
+        "body": "Twoje konto to losowe ID. Nie ma żadnych danych osobowych, które mogłyby wyciec."
+      },
+      "vless": {
+        "title": "Wygląda jak zwykły HTTPS",
+        "body": "VLESS Reality sprawia, że tunel wygląda jak zwykła wizyta na stronie."
+      },
+      "noLogs": {
+        "title": "Bez logów aktywności",
+        "body": "Nie zapisujemy stron, które odwiedzasz, ani tego, co wysyłasz. Logowanie zostawia krótki wpis, przechowywany 90 dni, by zapobiegać nadużyciom."
+      },
+      "trial": {
+        "title": "{days} dni za darmo",
+        "body": "Wypróbuj każdą funkcję, zanim zapłacisz. Anuluj w dowolnej chwili w ustawieniach Apple ID."
+      }
+    },
+    "guides": {
+      "kicker": "Poradniki",
+      "title": "Dowiedz się, jak to działa",
+      "subtitle": "Krótkie, proste poradniki o aplikacji i technologii, która za nią stoi.",
+      "englishNote": "Na razie poradniki są dostępne tylko po angielsku.",
+      "hub": {
+        "title": "Jak Doppler chroni Twój ruch",
+        "desc": "Prześledź krok po kroku jedno zapytanie: z urządzenia, przez tunel, do strony."
+      },
+      "items": {
+        "vpn-on-apple-watch": {
+          "title": "Doppler na Apple Watch",
+          "desc": "Łącz się, zmieniaj serwery i sprawdzaj prędkość z nadgarstka.",
+          "cta": "Doppler na Apple Watch"
+        },
+        "what-is-sni": {
+          "title": "Czym jest SNI?",
+          "desc": "Nazwa strony, którą niesie każde bezpieczne połączenie, i dlaczego cenzorzy ją czytają.",
+          "cta": "Czym jest SNI i dlaczego cenzorzy go czytają?"
+        },
+        "doppler-on-iphone-and-mac": {
+          "title": "Pierwsze kroki na iPhonie i Macu",
+          "desc": "Zainstaluj, połącz się i poznaj aplikację w pięć minut.",
+          "cta": "Przeczytaj poradnik na start"
+        },
+        "one-account-every-apple-device": {
+          "title": "Jedno konto na wszystkich urządzeniach Apple",
+          "desc": "Dodaj iPada, Maca i Apple Watch do tego samego planu.",
+          "cta": "Jedno konto na każdym urządzeniu"
+        }
+      }
+    },
+    "related": {
+      "ios": {
+        "title": "VPN na iPhone i iPad",
+        "desc": "Aplikacja na iOS"
+      },
+      "macos": {
+        "title": "VPN na Maca",
+        "desc": "Natywna aplikacja na macOS"
+      },
+      "android": {
+        "title": "VPN na Androida",
+        "desc": "Pobierz Doppler z Google Play"
+      },
+      "windows": {
+        "title": "VPN na Windows",
+        "desc": "Dla Windows 10 i 11"
+      },
+      "ipad": {
+        "title": "VPN na iPad i iPhone Duo",
+        "desc": "Układ na duży ekran"
+      }
+    },
+    "cta": {
+      "downloads": "Wszystkie pobrania",
+      "imageAlt": "Doppler VPN na iPhonie trzymanym w dłoni"
     }
   }
 }

@@ -8,6 +8,7 @@ import { CookieSettingsButton } from "./cookie-settings-button";
 import { ObfuscatedEmail } from "@/components/ui/obfuscated-email";
 import { isBlogLocale } from "@/i18n/blog-locales";
 import { isSecurityLocale } from "@/i18n/security-locales";
+import { isGuidesLocale } from "@/lib/guides";
 
 type LinkItem = { href: string; label: string; external?: boolean };
 
@@ -84,6 +85,8 @@ export async function Footer() {
   const tDownloads = await getTranslations("downloads");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
+  // The `guides` namespace exists only in the guide locales, so it is read only there.
+  const guidesLabel = isGuidesLocale(locale) ? (await getTranslations("guides"))("breadcrumb") : null;
   // /security ships in the hand-translated core-market locales only
   // (see /[locale]/security/page.tsx generateStaticParams).
   const showSecurityLink = isSecurityLocale(locale);
@@ -94,6 +97,8 @@ export async function Footer() {
     { href: "/downloads", label: t("download") },
     { href: "/install", label: tDownloads("installGuide") },
     ...(showBlogLink ? [{ href: "/blog", label: t("blog") }] : []),
+    // /guides is English-only (lib/guides.ts), so the link shows where the page exists.
+    ...(guidesLabel ? [{ href: "/guides", label: guidesLabel }] : []),
     { href: "/bypass-censorship", label: t("bypassCensorship") },
     { href: "/vless-vpn", label: t("vlessVpn") },
     { href: "/no-registration-vpn", label: t("noRegistration") },

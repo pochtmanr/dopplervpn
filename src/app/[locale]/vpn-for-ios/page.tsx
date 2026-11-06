@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { PlatformLandingPage } from "@/components/landing/platform-landing-page";
+import { AppleAppPage } from "@/components/landing/apple-app-page";
 import { buildSeoLandingMetadata } from "@/components/landing/seo-landing-metadata";
-import { iosPlatform } from "@/config/platforms/ios";
+import { iosApple } from "@/config/platforms/apple";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -11,14 +11,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   return buildSeoLandingMetadata({
     locale,
-    slug: iosPlatform.slug,
-    namespace: iosPlatform.namespace,
+    slug: iosApple.slug,
+    namespace: iosApple.namespace,
     ogType: "website",
-    ogImageAlt: iosPlatform.ogImageAlt,
+    ogImageAlt: iosApple.ogImageAlt,
   });
 }
 
 export default async function VpnForIosPage({ params }: PageProps) {
   const { locale } = await params;
-  return <PlatformLandingPage locale={locale} config={iosPlatform} />;
+  return <AppleAppPage locale={locale} config={iosApple} />;
 }

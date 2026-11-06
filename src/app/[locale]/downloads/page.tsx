@@ -259,6 +259,8 @@ type PlatformButton = {
   external?: boolean;
   download?: boolean;
   primary: boolean;
+  /** The store's mark on a store button (App Store, Google Play). Defaults to the platform's. */
+  logo?: PlatformIcon;
 };
 
 /**
@@ -290,7 +292,7 @@ const PLATFORMS: {
     icon: "apple",
     learnHref: "/vpn-for-ios",
     buttons: [
-      { labelKey: "ios.button", href: URLS.ios, external: true, primary: true },
+      { labelKey: "ios.button", href: URLS.ios, external: true, primary: true, logo: "appStore" },
       ...(SHOW_IOS_TESTFLIGHT
         ? [
             {
@@ -309,7 +311,8 @@ const PLATFORMS: {
   },
   {
     key: "android",
-    icon: "android",
+    // Google Play everywhere on this card (Roman, 2026-11-06): the store is how most get it.
+    icon: "googlePlay",
     learnHref: "/vpn-for-android",
     // The APK is the only Android route for anyone without Play — mainland China
     // most of all — so it is offered here rather than left to a link handed out
@@ -323,6 +326,7 @@ const PLATFORMS: {
         variant: "android-play",
         external: true,
         primary: true,
+        logo: "googlePlay",
       },
       {
         labelKey: "android.buttonApk",
@@ -338,7 +342,7 @@ const PLATFORMS: {
     icon: "apple",
     learnHref: "/vpn-for-macos",
     buttons: [
-      { labelKey: "mac.button", href: URLS.mac, external: true, primary: true },
+      { labelKey: "mac.button", href: URLS.mac, external: true, primary: true, logo: "appStore" },
       ...(SHOW_MAC_DMG
         ? [
             {
@@ -450,6 +454,7 @@ export default async function DownloadsPage({ params }: PageProps) {
           ...(primary.variant ? { variant: primary.variant } : {}),
           external: !!primary.external,
           download: !!primary.download,
+          logo: primary.logo ?? icon,
         },
       };
     }),
@@ -574,8 +579,8 @@ export default async function DownloadsPage({ params }: PageProps) {
                           {t(`${key}.title`)}
                         </h2>
 
-                        {/* The store/installer button carries the platform mark;
-                            the sideload APKs are files, so they keep the download glyph. */}
+                        {/* The store/installer button carries the store's mark; the
+                            sideload builds are files, so they keep the download glyph. */}
                         {buttons.map((btn) => (
                           <TrackedDownloadLink
                             key={btn.labelKey}
@@ -592,7 +597,7 @@ export default async function DownloadsPage({ params }: PageProps) {
                             }
                           >
                             {btn.primary ? (
-                              <PlatformLogo icon={icon} className="w-4 h-4" />
+                              <PlatformLogo icon={btn.logo ?? icon} className="w-4 h-4" />
                             ) : (
                               <DownloadIcon className="w-4 h-4" />
                             )}

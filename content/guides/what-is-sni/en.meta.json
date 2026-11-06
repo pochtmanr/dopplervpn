@@ -1,0 +1,37 @@
+{
+  "title": "What is SNI, and why do censors read it?",
+  "metaTitle": "What Is SNI? Server Name Indication and VPN Blocking Explained",
+  "metaDescription": "SNI is the site name every HTTPS connection sends in plain text. Learn why censors read it, what Encrypted Client Hello changes, and how Doppler's Connection method makes a VPN look like an ordinary visit.",
+  "excerpt": "The site name every secure connection carries in plain text, why censors read it, and how Doppler turns it to your side.",
+  "navLabel": "What is SNI?",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "readingMinutes": 6,
+  "faq": [
+    {
+      "question": "Does HTTPS hide which site I visit?",
+      "answer": "Not fully. HTTPS encrypts the pages, passwords and cookies, but the site name is sent in plain text in the SNI field of the first message, unless both your browser and the site use Encrypted Client Hello."
+    },
+    {
+      "question": "Is Encrypted Client Hello enough to get past censorship?",
+      "answer": "Not on its own. A censor that cannot read the name can still block every connection that hides it, and China did exactly that to the earlier ESNI in 2020."
+    },
+    {
+      "question": "Which Connection method should I use?",
+      "answer": "Automatic, unless you know one site works on your network. Automatic races the three likeliest sites on every connect and keeps the fastest."
+    },
+    {
+      "question": "Does Doppler send my data when it learns which sites work?",
+      "answer": "Only if you allow it, and then only anonymous counts of which sites connected and which failed. Your account and IP address are never part of them."
+    }
+  ],
+  "sources": [
+    { "label": "IETF, RFC 6066: TLS Extensions, section 3 (Server Name Indication)", "url": "https://www.rfc-editor.org/rfc/rfc6066#section-3" },
+    { "label": "IETF, RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "Cloudflare, Encrypted Client Hello: the last puzzle piece to privacy (29 Sep 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "GFW Report, Exposing and circumventing China's censorship of ESNI (Aug 2020)", "url": "https://gfw.report/blog/gfw_esni_blocking/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, VLESS + Reality + Vision blocking reports in Russia (issue 546, Nov 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

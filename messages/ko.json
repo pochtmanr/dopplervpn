@@ -1528,6 +1528,11 @@
       "regions": {
         "title": "러시아에 차단됨 — 여전히 운영 중",
         "description": "저희 도메인은 Roskomnadzor 차단 목록에 등재되어 있습니다. 그래도 운영 중입니다. 웹사이트가 차단될 때는 Telegram 봇으로 다운로드하세요."
+      },
+      "sni": {
+        "title": "평범한 사이트 방문처럼 보입니다",
+        "description": "검열 당국은 모든 보안 연결이 담고 있는 사이트 이름, 즉 SNI를 읽습니다. Doppler는 현재 위치에서 허용된 사이트 이름을 대기 때문에 연결이 정상적인 방문으로 통과합니다. 사이트를 직접 고르거나 자동 모드에 맡기세요.",
+        "cta": "SNI란 무엇이며, 검열 당국은 왜 그것을 읽을까요"
       }
     }
   },
@@ -2394,6 +2399,147 @@
       "windowsDesc": "Windows 10 & 11용 Doppler VPN",
       "publicWifi": "공용 Wi-Fi 보안",
       "publicWifiDesc": "개방형 네트워크에서 iPhone 보호"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPhone · iPad · Apple Watch",
+        "title": "iPhone & iPad용 Doppler VPN",
+        "subtitle": "한 번의 탭으로 iPhone을 안전하게. Doppler는 연결을 평범한 웹사이트 방문처럼 보이게 만들어, 다른 VPN이 차단되는 네트워크에서도 계속 작동합니다.",
+        "cta": "App Store에서 다운로드",
+        "note": "무료 다운로드 · {days}일 무료 체험 · 이메일·전화번호 불필요"
+      },
+      "tour": {
+        "kicker": "앱 둘러보기",
+        "title": "모든 기능이 탭 한 번 거리에",
+        "subtitle": "연출 없이 iPhone 앱의 실제 화면 그대로입니다. 넘기면서 확인해 보세요.",
+        "items": {
+          "connect": {
+            "label": "연결",
+            "alt": "홍콩에 연결된 iPhone의 Doppler 홈 화면, 실시간 속도와 경로 지도 표시"
+          },
+          "unblock": {
+            "label": "연결 방식",
+            "alt": "연결 방식 화면, 연결이 방문하는 것처럼 보이게 할 수 있는 일반 웹사이트 목록"
+          },
+          "speed": {
+            "label": "속도 테스트",
+            "alt": "iPhone의 속도 테스트 화면, VPN을 통한 다운로드·업로드 속도와 핑 표시"
+          },
+          "path": {
+            "label": "내 경로",
+            "alt": "연결 화면, 웹사이트에 보이는 주소, DNS 상태, 지도 위의 경로 표시"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "어느 나라 사이트를 터널 밖으로 보낼지 고르는 Smart Route 화면"
+          },
+          "devices": {
+            "label": "기기",
+            "alt": "계정에 로그인된 모든 기기를 보여 주는 기기 화면"
+          },
+          "appearance": {
+            "label": "화면 스타일",
+            "alt": "글자 크기, 화면 스타일, 강조 색상을 고르는 화면 설정"
+          },
+          "language": {
+            "label": "언어",
+            "alt": "앱이 지원하는 언어 목록"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "원탭",
+          "title": "한 번 탭하면, 보호가 시작됩니다.",
+          "body": "Doppler가 서버를 고르고 암호화된 터널을 열어, Telegram과 WhatsApp 통화까지 iPhone의 모든 트래픽을 그 안으로 보냅니다. 홈 화면에는 속도와 트래픽이 나가는 위치가 실시간으로 표시됩니다.",
+          "points": {
+            "p1": "브라우저만이 아니라 기기 전체가 터널을 통과",
+            "p2": "홈 화면에서 다운로드·업로드 속도와 핑을 실시간 확인",
+            "p3": "Kill Switch와 시작 시 연결, 앱 설정에서 스위치 하나씩"
+          },
+          "alt": "iPhone의 Doppler 서버 목록, 위치별 핑 표시"
+        },
+        "unblock": {
+          "kicker": "뚫고 나갑니다",
+          "title": "다른 VPN이 막히는 곳에서도 작동",
+          "body": "일부 네트워크는 연결이 방문한다고 밝히는 사이트 이름을 읽어 VPN을 차단합니다. Doppler는 현재 위치에서 허용된 평범한 사이트 이름을 대기 때문에, 연결이 그 사이트를 정상적으로 방문하는 것처럼 보입니다.",
+          "points": {
+            "p1": "자동 모드는 가능성 높은 사이트 세 곳을 동시에 시도해 가장 빠른 곳을 유지",
+            "p2": "연결 방식 화면에서 직접 사이트를 고를 수도 있음",
+            "p3": "검열 네트워크를 위해 만들어진 프로토콜, VLESS Reality 기반"
+          },
+          "alt": "연결 방식 화면을 띄운 iPhone"
+        },
+        "path": {
+          "kicker": "숨김 없이",
+          "title": "모든 경유지를 눈으로",
+          "body": "연결 화면에는 웹사이트에 보이는 주소와 그 소유자, DNS 조회가 터널을 거치는지 여부, 트래픽이 지나는 경로가 지도 위에 표시됩니다. 저희 말만 믿으실 필요가 없습니다.",
+          "points": {
+            "p1": "지금 사이트에 보이는 IP 주소와 통신사",
+            "p2": "DNS 상태와 조회에 걸리는 시간",
+            "p3": "실시간 지도에 그려지는 내 경로"
+          },
+          "alt": "지도 위에 경로를 보여 주는 iPhone의 연결 화면"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "국내 사이트는 국내 그대로",
+          "body": "본국의 은행, 정부 서비스, 스트리밍은 해외 주소를 거부하는 경우가 많습니다. Smart Route는 자국 사이트는 바로 연결하고, 나머지는 모두 터널로 보냅니다.",
+          "points": {
+            "p1": "국가를 직접 고르거나 Doppler가 감지하도록 설정",
+            "p2": ".jp 같은 도메인 영역 전체를 직접 연결",
+            "p3": "터널을 거치지 않을 도메인을 직접 추가"
+          },
+          "alt": "iPhone의 Smart Route 화면"
+        }
+      },
+      "setup": {
+        "title": "1분이면 설정 끝",
+        "subtitle": "가입 양식도, 설정 파일도 필요 없습니다.",
+        "s1": {
+          "title": "Doppler 다운로드",
+          "body": "App Store에서 앱을 받으세요. iOS 18 이상의 iPhone과 iPad에서 작동합니다."
+        },
+        "s2": {
+          "title": "앱 열기",
+          "body": "Doppler가 익명 계정 ID를 만들어 드립니다. 이메일도, 전화번호도, 비밀번호도 필요 없습니다."
+        },
+        "s3": {
+          "title": "연결 탭하기",
+          "body": "{days}일 무료 체험을 시작하고 연결을 탭하세요. 체험 후에는 연간 요금제 기준 월 {price}부터 이용할 수 있습니다."
+        }
+      },
+      "faq": {
+        "title": "iPhone·iPad용 Doppler 자주 묻는 질문",
+        "q1": {
+          "question": "Doppler는 iPad에서도 작동하나요?",
+          "answer": "네. 같은 앱이 iOS 또는 iPadOS 18 이상의 iPhone과 iPad에서 작동하며, 구독 하나로 두 기기 모두 이용할 수 있습니다."
+        },
+        "q2": {
+          "question": "계정을 만들어야 하나요?",
+          "answer": "아니요. 앱을 처음 열면 Doppler가 계정 ID를 발급합니다. 이메일, 전화번호, 비밀번호를 넘길 필요가 없습니다. ID는 안전한 곳에 보관하세요. 다른 기기를 추가하거나 요금제를 복원할 때 필요합니다."
+        },
+        "q3": {
+          "question": "무료 체험이 있나요?",
+          "answer": "네. App Store 신규 구독자는 모든 기능을 쓸 수 있는 {days}일 무료 체험을 받습니다. 이후에는 해지할 때까지 Apple ID를 통해 자동 갱신되며, 연간 요금제 기준 월 {price}부터입니다."
+        },
+        "q4": {
+          "question": "러시아, 이란, 중국에서도 작동하나요?",
+          "answer": "Doppler는 검열되는 네트워크를 위해 만들어졌습니다. VLESS Reality를 사용해 모든 연결을 현재 위치에서 허용된 평범한 웹사이트 방문처럼 보이게 합니다. 검열 방식은 계속 바뀌기 때문에 어떤 VPN도 모든 곳에서 영원히 작동한다고 약속할 수는 없습니다. 그래서 Doppler는 여러 위장 방식을 시험해 통하는 방식을 유지합니다."
+        },
+        "q5": {
+          "question": "Apple Watch에서 VPN을 제어할 수 있나요?",
+          "answer": "네. Doppler Pro를 이용하면 워치 앱으로 iPhone의 VPN을 연결하거나 해제하고, 서버를 바꾸고, 트래픽을 확인하고, 속도 테스트를 실행할 수 있습니다. 터널 자체는 iPhone에서 유지됩니다. 워치 앱은 watchOS 26이 필요합니다."
+        },
+        "q6": {
+          "question": "어떻게 해지하나요?",
+          "answer": "iPhone에서 설정을 열고 이름을 탭한 다음 구독, Doppler VPN 순으로 탭하고 구독 취소를 선택하세요. 결제한 기간이 끝날 때까지는 계속 이용할 수 있습니다. 결제는 Apple이 처리하므로 Doppler는 카드 정보를 전혀 볼 수 없습니다."
+        }
+      },
+      "cta": {
+        "title": "iPhone에서 Doppler를 시작하세요",
+        "subtitle": "무료 다운로드, {days}일 무료 체험, 가입할 계정도 없습니다."
+      }
     }
   },
   "vpnForAndroid": {
@@ -2622,6 +2768,139 @@
       "iosDesc": "iPhone & iPad용 Doppler VPN 다운로드",
       "android": "Android용 VPN",
       "androidDesc": "Google Play에서 Doppler VPN 받기"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "Mac · iPhone · iPad",
+        "title": "Mac용 Doppler VPN",
+        "subtitle": "Mac이 보내는 모든 것을 클릭 한 번으로 보호하는 네이티브 Mac 앱. 연결이 평범한 웹사이트 방문처럼 보여, 다른 VPN이 차단되는 네트워크에서도 계속 작동합니다.",
+        "cta": "Mac App Store에서 다운로드",
+        "note": "무료 다운로드 · {days}일 무료 체험 · 이메일·전화번호 불필요"
+      },
+      "tour": {
+        "kicker": "앱 둘러보기",
+        "title": "Mac을 위해 만들었습니다",
+        "subtitle": "Mac 앱의 실제 화면입니다. 모든 기능이 사이드바에 있어 클릭 한 번이면 됩니다.",
+        "items": {
+          "unblock": {
+            "label": "연결 방식",
+            "alt": "연결이 위장할 수 있는 일반 웹사이트 목록을 보여 주는 Mac의 연결 방식 시트"
+          },
+          "path": {
+            "label": "연결",
+            "alt": "웹사이트에 보이는 주소, 암호화 DNS, 경로를 보여 주는 Mac의 연결 화면"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "직접 연결 규칙과 사용자 지정 도메인이 있는 Mac의 Smart Route 화면"
+          },
+          "speed": {
+            "label": "속도 테스트",
+            "alt": "Mac의 속도 테스트 화면, VPN을 통한 다운로드·업로드 속도와 핑 표시"
+          },
+          "devices": {
+            "label": "기기",
+            "alt": "계정의 모든 기기를 나열한 Mac의 기기 화면"
+          },
+          "appearance": {
+            "label": "화면 스타일",
+            "alt": "글자 크기, 화면 스타일, 강조 색상을 고르는 Mac의 화면 설정"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "원클릭",
+          "title": "한 번 클릭으로 Mac 전체를 보호.",
+          "body": "Doppler는 브라우저만이 아니라 Mac의 모든 앱을 위해 암호화된 터널을 엽니다. VPN 화면에는 연결 시간, 실시간 속도, 트래픽이 나가는 위치가 표시됩니다.",
+          "points": {
+            "p1": "모든 앱, 모든 연결이 하나의 터널을 통과",
+            "p2": "메인 화면에서 실시간 속도와 세션 시간 확인",
+            "p3": "서버, 속도 테스트, 설정은 사이드바에"
+          },
+          "alt": "연결 전에 측정한 핑을 보여 주는 Mac의 Doppler 서버 목록"
+        },
+        "unblock": {
+          "kicker": "뚫고 나갑니다",
+          "title": "다른 VPN이 막히는 곳에서도 작동",
+          "body": "일부 네트워크는 연결이 방문한다고 밝히는 사이트 이름을 읽어 VPN을 차단합니다. Doppler는 현재 위치에서 허용된 평범한 사이트 이름을 대기 때문에, 연결이 그 사이트를 정상적으로 방문하는 것처럼 보입니다.",
+          "points": {
+            "p1": "자동 모드는 가능성 높은 사이트 세 곳을 동시에 시도해 가장 빠른 곳을 유지",
+            "p2": "연결 방식에서 직접 사이트를 고를 수도 있음",
+            "p3": "검열 네트워크를 위해 만들어진 프로토콜, VLESS Reality 기반"
+          },
+          "alt": "Mac의 연결 방식 시트"
+        },
+        "path": {
+          "kicker": "숨김 없이",
+          "title": "모든 경유지를 눈으로",
+          "body": "연결 화면에는 웹사이트에 보이는 주소와 그 소유자, DNS 조회가 암호화되어 터널을 거치는지 여부, 그리고 지도 위의 경로가 표시됩니다.",
+          "points": {
+            "p1": "지금 사이트에 보이는 IP 주소와 통신사",
+            "p2": "암호화 DNS 상태와 조회 시간",
+            "p3": "실시간 지도에 그려지는 내 경로"
+          },
+          "alt": "지도 위에 경로를 보여 주는 Mac의 연결 화면"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "국내 사이트는 국내 그대로",
+          "body": "본국의 은행, 정부 서비스, 스트리밍은 해외 주소를 거부하는 경우가 많습니다. Smart Route는 자국 사이트는 바로 연결하고, 나머지는 모두 터널로 보냅니다.",
+          "points": {
+            "p1": "국가를 직접 고르거나 Doppler가 감지하도록 설정",
+            "p2": "도메인 영역이나 국내에 호스팅된 사이트를 직접 연결",
+            "p3": "내 도메인을 추가, 붙여넣기, 가져오기"
+          },
+          "alt": "Mac의 Smart Route 화면"
+        }
+      },
+      "setup": {
+        "title": "1분이면 설정 끝",
+        "subtitle": "가입 양식도, 설정 파일도 필요 없습니다.",
+        "s1": {
+          "title": "Doppler 다운로드",
+          "body": "Mac App Store에서 앱을 받으세요. macOS 15 Sequoia 이상에서 작동합니다."
+        },
+        "s2": {
+          "title": "앱을 열고 VPN 허용",
+          "body": "macOS가 VPN 구성 추가를 한 번 묻습니다. Doppler가 익명 계정 ID를 만들어 드리므로 이메일도 비밀번호도 필요 없습니다."
+        },
+        "s3": {
+          "title": "연결 클릭하기",
+          "body": "{days}일 무료 체험을 시작하고 연결을 클릭하세요. 체험 후에는 연간 요금제 기준 월 {price}부터 이용할 수 있습니다."
+        }
+      },
+      "faq": {
+        "title": "Mac용 Doppler 자주 묻는 질문",
+        "q1": {
+          "question": "Doppler는 네이티브 Mac 앱인가요?",
+          "answer": "네. Mac용 Doppler는 Apple 자체 VPN 프레임워크로 macOS를 위해 만든 앱이며, Mac에서 돌아가는 iPhone 앱이 아닙니다. macOS 15 Sequoia 이상에서 작동합니다."
+        },
+        "q2": {
+          "question": "구독 하나로 Mac, iPhone, iPad를 모두 쓸 수 있나요?",
+          "answer": "네. Doppler는 App Store에서 하나의 앱이므로, 어느 기기에서 구매한 요금제든 모든 기기에서 작동합니다. 각 기기에서 같은 계정 ID를 사용하면 기기 화면에 계정의 모든 기기가 표시됩니다."
+        },
+        "q3": {
+          "question": "무료 체험이 있나요?",
+          "answer": "네. App Store 신규 구독자는 모든 기능을 쓸 수 있는 {days}일 무료 체험을 받습니다. 이후에는 해지할 때까지 Apple ID를 통해 자동 갱신되며, 연간 요금제 기준 월 {price}부터입니다."
+        },
+        "q4": {
+          "question": "러시아, 이란, 중국에서도 작동하나요?",
+          "answer": "Doppler는 검열되는 네트워크를 위해 만들어졌습니다. VLESS Reality를 사용해 모든 연결을 현재 위치에서 허용된 평범한 웹사이트 방문처럼 보이게 합니다. 검열 방식은 계속 바뀌기 때문에 어떤 VPN도 모든 곳에서 영원히 작동한다고 약속할 수는 없습니다. 그래서 Doppler는 여러 위장 방식을 시험해 통하는 방식을 유지합니다."
+        },
+        "q5": {
+          "question": "Mac이 느려지지 않나요?",
+          "answer": "Doppler는 가볍습니다. 터널은 Apple의 Network Extension 안에서 실행되며, 속도는 주로 선택한 서버와 사용 중인 인터넷 회선에 따라 달라집니다. 내장 속도 테스트로 VPN을 통한 실제 속도를 정확히 확인할 수 있습니다."
+        },
+        "q6": {
+          "question": "어떻게 해지하나요?",
+          "answer": "Mac에서 App Store를 열고 이름을 클릭한 다음 계정 설정을 선택하고, 구독 옆의 관리를 클릭하세요. Doppler VPN을 골라 해지하면 됩니다. 결제한 기간이 끝날 때까지는 계속 이용할 수 있습니다."
+        }
+      },
+      "cta": {
+        "title": "Mac에서 Doppler를 시작하세요",
+        "subtitle": "무료 다운로드, {days}일 무료 체험, 가입할 계정도 없습니다."
+      }
     }
   },
   "vpnForWindows": {
@@ -4516,6 +4795,219 @@
       "appleRegionHelp": "Apple: 국가 또는 지역 변경",
       "macDmg": "Mac용 Doppler VPN 다운로드(DMG)",
       "androidApk": "Doppler VPN APK 다운로드"
+    }
+  },
+  "vpnForIpad": {
+    "metadata": {
+      "title": "iPad & iPhone Duo용 Doppler VPN — 빠르고 안전한 검열 우회 VPN",
+      "description": "iPad와 iPhone Duo를 위한 Doppler VPN: iPad에서는 사이드바, Duo에서는 2단 레이아웃. VLESS-Reality, 가입 불필요, 요금제 하나로 모든 Apple 기기 이용. 3일 무료 체험."
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPad · iPhone Duo",
+        "title": "iPad & iPhone Duo용 Doppler VPN",
+        "subtitle": "같은 Doppler 앱을 큰 화면에 맞게 배치했습니다. iPad에서는 사이드바, iPhone Duo에서는 2단 화면, 두 기기 모두 탭 한 번으로 보호됩니다.",
+        "cta": "App Store에서 다운로드",
+        "note": "무료 다운로드 · {days}일 무료 체험 · 이메일·전화번호 불필요"
+      },
+      "chapters": {
+        "duo": {
+          "kicker": "iPhone Duo",
+          "title": "2단 화면, 감춰진 것 없이",
+          "body": "iPhone Duo를 펼치면 연결 화면과 속도 테스트가 나란히 표시됩니다. 접으면 Doppler는 익숙한 iPhone 레이아웃으로 돌아가고, 연결은 그대로 유지됩니다.",
+          "points": {
+            "p1": "한쪽에는 연결, 다른 쪽에는 속도와 차트",
+            "p2": "접거나 펼쳐도 터널은 끊기지 않음",
+            "p3": "다른 기기와 같은 요금제로 이용"
+          },
+          "alt": "두 손에 든 iPhone Duo의 Doppler, 캐나다에 연결되어 있고 옆에 속도 테스트 표시"
+        },
+        "keyboard": {
+          "kicker": "iPad",
+          "title": "모든 메뉴를 사이드바에",
+          "body": "iPad에서는 VPN, 서버, 속도 테스트, 연결, Smart Route가 사이드바에 모여 있어 탭 한 번으로 이동합니다. 키보드에 연결하면 Mac 앱처럼 쓸 수 있습니다.",
+          "points": {
+            "p1": "사이드바로 모든 메뉴에 바로 접근",
+            "p2": "연결이 위장할 사이트는 서버 페이지에서 선택",
+            "p3": "키보드와 트랙패드를 노트북처럼 사용"
+          },
+          "alt": "Magic Keyboard에 연결된 iPad Pro, 연결 방식 시트가 열린 Doppler 서버 페이지"
+        },
+        "account": {
+          "kicker": "하나의 계정",
+          "title": "지금 쓰는 요금제에 iPad 추가",
+          "body": "요금제는 기기가 아니라 계정 ID에 속합니다. iPad에서 같은 ID로 로그인하면 iPhone, Mac, Apple Watch와 함께 기기 페이지에 나타납니다.",
+          "points": {
+            "p1": "iPad용 추가 구독 불필요",
+            "p2": "로그인된 모든 기기를 한 목록에서",
+            "p3": "더 이상 쓰지 않는 기기는 탭 한 번으로 제거"
+          },
+          "alt": "계정에 로그인된 모든 기기를 나열한 기기 페이지"
+        }
+      },
+      "setup": {
+        "title": "1분이면 설정 끝",
+        "subtitle": "가입 양식도, 설정 파일도 필요 없습니다.",
+        "s1": {
+          "title": "Doppler 다운로드",
+          "body": "App Store에서 앱을 받으세요. iPadOS 또는 iOS 18 이상의 iPad와 iPhone에서 작동합니다."
+        },
+        "s2": {
+          "title": "앱 열기",
+          "body": "Doppler가 익명 계정 ID를 만들어 드립니다. 이메일도, 전화번호도, 비밀번호도 필요 없습니다."
+        },
+        "s3": {
+          "title": "연결 탭하기",
+          "body": "{days}일 무료 체험을 시작하고 연결을 탭하세요. 체험 후에는 연간 요금제 기준 월 {price}부터 이용할 수 있습니다."
+        }
+      },
+      "faq": {
+        "title": "iPad·iPhone Duo용 Doppler 자주 묻는 질문",
+        "q1": {
+          "question": "iPad 앱은 따로 구매해야 하나요?",
+          "answer": "아니요. iPhone, iPad, Mac, Apple Watch는 하나의 App Store 앱을 공유하며, 구독 하나로 모두 이용할 수 있습니다."
+        },
+        "q2": {
+          "question": "어떤 iPad에서 Doppler가 작동하나요?",
+          "answer": "iPadOS 18 이상이 설치된 모든 iPad에서 작동합니다."
+        },
+        "q3": {
+          "question": "내 요금제에 iPad를 어떻게 추가하나요?",
+          "answer": "iPad에 Doppler를 설치하고 iPhone의 계정 ID로 로그인하세요. 요금제는 ID를 따라가므로 iPad도 바로 이용할 수 있습니다."
+        },
+        "q4": {
+          "question": "iPhone Duo에서는 무엇이 달라지나요?",
+          "answer": "펼치면 앱이 2단 화면으로 바뀌어 한쪽에는 메인 화면, 다른 쪽에는 연 페이지가 표시됩니다. 접으면 iPhone 앱 그대로입니다. 어느 쪽이든 VPN은 연결된 상태를 유지합니다."
+        },
+        "q5": {
+          "question": "무료 체험이 있나요?",
+          "answer": "네. App Store 신규 구독자는 모든 기능을 쓸 수 있는 {days}일 무료 체험을 받습니다. 이후에는 해지할 때까지 Apple ID를 통해 자동 갱신되며, 연간 요금제 기준 월 {price}부터입니다."
+        }
+      },
+      "cta": {
+        "title": "iPad에서 Doppler를 시작하세요",
+        "subtitle": "무료 다운로드, {days}일 무료 체험, 가입할 계정도 없습니다."
+      }
+    }
+  },
+  "applePage": {
+    "prev": "이전 화면",
+    "next": "다음 화면",
+    "readGuide": "가이드 읽기",
+    "ecosystem": {
+      "kicker": "하나의 계정",
+      "title": "모든 Apple 기기를 ID 하나로",
+      "body": "Doppler는 같은 App Store 앱으로 iPhone, iPad, Mac, Apple Watch에서 작동합니다. 요금제는 계정 ID에 속하므로 따로 가입하지 않아도 모든 기기에서 이용할 수 있습니다.",
+      "photoAlt": "Doppler 서버 목록을 보여 주는 Apple Watch",
+      "photoAltDevices": "Doppler 계정에 로그인된 기기를 보여 주는 Apple Watch",
+      "iphone": {
+        "title": "iPhone",
+        "body": "모든 기능을 갖춘 앱과 홈 화면 위젯"
+      },
+      "ipad": {
+        "title": "iPad",
+        "body": "같은 앱을 더 큰 화면으로"
+      },
+      "mac": {
+        "title": "Mac",
+        "body": "macOS 15 이상을 위한 네이티브 앱"
+      },
+      "watch": {
+        "title": "Apple Watch",
+        "body": "손목 위의 iPhone VPN 리모컨"
+      },
+      "watchShots": {
+        "servers": {
+          "label": "서버",
+          "alt": "Apple Watch의 Doppler 서버 목록"
+        },
+        "devices": {
+          "label": "기기",
+          "alt": "Apple Watch에 표시된 계정의 기기"
+        },
+        "profile": {
+          "label": "프로필",
+          "alt": "Apple Watch의 Doppler Pro 프로필"
+        }
+      }
+    },
+    "privacy": {
+      "title": "설계부터 프라이버시",
+      "subtitle": "Doppler가 무엇을 하는지만큼, 무엇을 요구하지 않는지도 중요합니다.",
+      "noEmail": {
+        "title": "이메일도, 이름도 없이",
+        "body": "계정은 무작위 ID일 뿐입니다. 유출될 개인 정보가 애초에 저장되어 있지 않습니다."
+      },
+      "vless": {
+        "title": "평범한 HTTPS처럼 보입니다",
+        "body": "VLESS Reality는 터널을 평범한 웹사이트 방문처럼 보이게 합니다."
+      },
+      "noLogs": {
+        "title": "활동 로그 없음",
+        "body": "방문한 사이트나 보낸 내용은 기록하지 않습니다. 로그인 시에는 짧은 기록이 남으며, 악용 방지를 위해 90일간 보관됩니다."
+      },
+      "trial": {
+        "title": "{days}일 무료",
+        "body": "결제 전에 모든 기능을 써 보세요. Apple ID 설정에서 언제든 해지할 수 있습니다."
+      }
+    },
+    "guides": {
+      "kicker": "가이드",
+      "title": "작동 원리 알아보기",
+      "subtitle": "앱과 그 뒤의 기술을 짧고 쉽게 설명한 가이드입니다.",
+      "englishNote": "현재 가이드는 영어로만 제공됩니다.",
+      "hub": {
+        "title": "Doppler가 트래픽을 보호하는 방법",
+        "desc": "요청 하나가 기기에서 출발해 터널을 지나 웹사이트에 닿기까지, 단계별로 따라가 봅니다."
+      },
+      "items": {
+        "vpn-on-apple-watch": {
+          "title": "Apple Watch의 Doppler",
+          "desc": "손목에서 연결하고, 서버를 바꾸고, 속도를 테스트하세요.",
+          "cta": "Apple Watch의 Doppler"
+        },
+        "what-is-sni": {
+          "title": "SNI란 무엇인가요?",
+          "desc": "모든 보안 연결이 담고 있는 사이트 이름, 그리고 검열 당국이 그것을 읽는 이유.",
+          "cta": "SNI란 무엇이며, 검열 당국은 왜 그것을 읽을까요?"
+        },
+        "doppler-on-iphone-and-mac": {
+          "title": "iPhone과 Mac에서 시작하기",
+          "desc": "5분 만에 설치하고, 연결하고, 앱 사용법을 익혀 보세요.",
+          "cta": "시작 가이드 읽기"
+        },
+        "one-account-every-apple-device": {
+          "title": "모든 Apple 기기에서 하나의 계정으로",
+          "desc": "iPad, Mac, Apple Watch를 같은 요금제에 추가하세요.",
+          "cta": "모든 기기에서 하나의 계정으로"
+        }
+      }
+    },
+    "related": {
+      "ios": {
+        "title": "iPhone & iPad용 VPN",
+        "desc": "iOS 앱"
+      },
+      "macos": {
+        "title": "Mac용 VPN",
+        "desc": "네이티브 macOS 앱"
+      },
+      "android": {
+        "title": "Android용 VPN",
+        "desc": "Google Play에서 Doppler 받기"
+      },
+      "windows": {
+        "title": "Windows용 VPN",
+        "desc": "Windows 10 및 11용"
+      },
+      "ipad": {
+        "title": "iPad & iPhone Duo용 VPN",
+        "desc": "큰 화면 레이아웃"
+      }
+    },
+    "cta": {
+      "downloads": "모든 다운로드",
+      "imageAlt": "손에 든 iPhone에 표시된 Doppler VPN"
     }
   }
 }

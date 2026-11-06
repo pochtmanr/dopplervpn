@@ -8,6 +8,7 @@ import { PricingBackdrop } from '@/components/glyph/pricing-glyphs';
 import { HeroCTAsWrapper } from '@/components/hero/hero-ctas-wrapper';
 import { CARD_HAIRLINE } from '@/components/ui/card-recipes';
 import { getRectFlagUrl } from '@/lib/languages';
+import { GUIDE_COVERS } from '@/config/platforms/apple';
 import { PRICING_GLASS } from './landing';
 import { PlusBlogCard, type PlusPost } from './blog';
 
@@ -285,11 +286,12 @@ export function PlusCta() {
               <HeroCTAsWrapper location="landing-cta" secondaryHref="/downloads" secondaryLabel={tHero('downloadDesktop')} />
             </div>
           </div>
-          <div className={`${PLUS_WELL} min-h-56`}>
-            <div className="aspect-[1009/794]" aria-hidden="true" />
+          {/* The studio render the Apple pages use (2026-11-06), on its own backdrop so it bleeds in. */}
+          <div className={`${PLUS_WELL} min-h-56`} style={{ backgroundColor: GUIDE_COVERS['doppler-on-iphone-and-mac'].bg }}>
+            <div className="aspect-[3/2]" aria-hidden="true" />
             <Image
-              src="/images/dopplerdownload.avif"
-              alt="Doppler VPN app interface"
+              src={GUIDE_COVERS['doppler-on-iphone-and-mac'].src}
+              alt="Doppler VPN on an iPhone held in hand, connected and protected"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"

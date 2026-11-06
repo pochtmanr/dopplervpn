@@ -1528,6 +1528,11 @@
       "regions": {
         "title": "被俄羅斯封鎖 — 仍然運作",
         "description": "我們的網域在 Roskomnadzor 的封鎖名單上。我們仍在這裡。網站被封鎖時，可透過 Telegram bot 下載。"
+      },
+      "sni": {
+        "title": "看起來就像造訪一般網站",
+        "description": "每條安全連線都會帶著網站名稱，也就是 SNI，審查者就是讀取它來辨識流量。Doppler 會報上一個你所在地允許造訪的網站，讓連線以正常瀏覽的身分通過。你可以自己挑網站，也可以交給自動模式。",
+        "cta": "什麼是 SNI？審查者為什麼要讀取它"
       }
     }
   },
@@ -2394,6 +2399,147 @@
       "windowsDesc": "適用於 Windows 10 和 11 的 Doppler VPN",
       "publicWifi": "公共 Wi-Fi 安全",
       "publicWifiDesc": "在開放網路上保護您的 iPhone"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPhone · iPad · Apple Watch",
+        "title": "適用於 iPhone 和 iPad 的 Doppler VPN",
+        "subtitle": "輕點一下，iPhone 立刻享有隱私。Doppler 讓連線看起來就像在瀏覽一般網站，所以在封鎖其他 VPN 的網路上照樣能用。",
+        "cta": "從 App Store 下載",
+        "note": "免費下載 · {days} 天免費試用 · 不需電子郵件或手機號碼"
+      },
+      "tour": {
+        "kicker": "App 一覽",
+        "title": "所有功能，輕點即達",
+        "subtitle": "全部是 iPhone App 的真實畫面，沒有任何擺拍。滑動瀏覽看看。",
+        "items": {
+          "connect": {
+            "label": "連線",
+            "alt": "iPhone 上的 Doppler 主畫面，已連線至香港，顯示即時速度與路由地圖"
+          },
+          "unblock": {
+            "label": "連線方式",
+            "alt": "連線方式畫面，列出連線可偽裝成造訪的一般網站"
+          },
+          "speed": {
+            "label": "測速",
+            "alt": "iPhone 上的測速畫面，顯示透過 VPN 的下載、上傳速度與延遲"
+          },
+          "path": {
+            "label": "你的路由",
+            "alt": "連線畫面，顯示網站看到的位址、DNS 狀態，以及地圖上的路由"
+          },
+          "split": {
+            "label": "智慧路由",
+            "alt": "智慧路由畫面，選擇哪個國家的網站不經過通道"
+          },
+          "devices": {
+            "label": "裝置",
+            "alt": "裝置畫面，顯示此帳戶已登入的所有裝置"
+          },
+          "appearance": {
+            "label": "外觀",
+            "alt": "外觀設定，可調整文字大小、介面樣式和強調色"
+          },
+          "language": {
+            "label": "語言",
+            "alt": "語言列表，顯示 App 支援的所有語言"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "一鍵連線",
+          "title": "輕點一下，立即受到保護。",
+          "body": "Doppler 會自動挑選伺服器、建立加密通道，讓 iPhone 的所有流量都經由通道傳送，Telegram 和 WhatsApp 通話也包括在內。主畫面即時顯示你的速度，以及流量從哪裡出去。",
+          "points": {
+            "p1": "整台裝置都走通道，不只是瀏覽器",
+            "p2": "主畫面即時顯示下載、上傳速度與延遲",
+            "p3": "Kill Switch 和啟動時連線，在應用程式設定中各用一個開關就能開啟"
+          },
+          "alt": "iPhone 上的 Doppler 伺服器列表，顯示每個地點的延遲"
+        },
+        "unblock": {
+          "kicker": "暢行無阻",
+          "title": "別的 VPN 被封鎖，它照樣能用",
+          "body": "有些網路會讀取連線聲稱要造訪的網站名稱，藉此封鎖 VPN。Doppler 會報上一個你所在地允許造訪的一般網站，讓你的連線看起來就像正常瀏覽。",
+          "points": {
+            "p1": "自動模式會同時嘗試三個最有機會的網站，並保留最快的那一個",
+            "p2": "也可以在連線方式畫面自己選一個網站",
+            "p3": "採用 VLESS Reality，專為受過濾網路設計的協定"
+          },
+          "alt": "顯示連線方式畫面的 iPhone"
+        },
+        "path": {
+          "kicker": "毫無隱瞞",
+          "title": "每一個節點都看得到",
+          "body": "連線畫面會顯示網站看到的位址與其所屬業者、DNS 查詢是否經過通道，以及流量在地圖上的路由。你不必只聽我們片面之詞。",
+          "points": {
+            "p1": "網站目前看到的 IP 位址與網路業者",
+            "p2": "DNS 狀態與查詢耗時",
+            "p3": "在即時地圖上畫出你的路由"
+          },
+          "alt": "iPhone 上的連線畫面，地圖上顯示路由"
+        },
+        "split": {
+          "kicker": "智慧路由",
+          "title": "在地網站，在地直連",
+          "body": "家鄉的銀行、政府服務和影音串流常常拒絕海外位址。智慧路由讓本國網站直接連線，其他流量則繼續走通道。",
+          "points": {
+            "p1": "選擇你的國家，或讓 Doppler 自動偵測",
+            "p2": "讓整個網域（例如 .jp）直接連線",
+            "p3": "自行加入不經過通道的網域"
+          },
+          "alt": "iPhone 上的智慧路由畫面"
+        }
+      },
+      "setup": {
+        "title": "一分鐘內完成設定",
+        "subtitle": "不用填註冊表單，也不需要設定檔。",
+        "s1": {
+          "title": "下載 Doppler",
+          "body": "從 App Store 取得 App。支援 iOS 18 或以上版本的 iPhone 和 iPad。"
+        },
+        "s2": {
+          "title": "開啟 App",
+          "body": "Doppler 會為你建立一組匿名帳戶 ID。不需電子郵件、手機號碼或密碼。"
+        },
+        "s3": {
+          "title": "輕點連線",
+          "body": "開始 {days} 天免費試用，輕點連線即可。試用結束後，年繳方案每月只要 {price} 起。"
+        }
+      },
+      "faq": {
+        "title": "iPhone 和 iPad 版 Doppler 常見問題",
+        "q1": {
+          "question": "Doppler 可以在 iPad 上使用嗎？",
+          "answer": "可以。同一個 App 可在 iOS 或 iPadOS 18 以上的 iPhone 和 iPad 上執行，一份訂閱兩者通用。"
+        },
+        "q2": {
+          "question": "需要建立帳號嗎？",
+          "answer": "不需要。第一次開啟 App 時，Doppler 就會給你一組帳戶 ID。不必提供電子郵件、手機號碼或密碼。請把這組 ID 妥善保存：新增其他裝置和找回方案都要用到它。"
+        },
+        "q3": {
+          "question": "有免費試用嗎？",
+          "answer": "有。App Store 新訂閱用戶可享 {days} 天免費試用，所有功能都能使用。之後方案會透過你的 Apple ID 自動續訂，直到你取消為止，年繳方案每月只要 {price} 起。"
+        },
+        "q4": {
+          "question": "在俄羅斯、伊朗和中國能用嗎？",
+          "answer": "Doppler 專為受過濾的網路打造。它採用 VLESS Reality，讓每一條連線看起來都像在造訪你所在地允許的一般網站。由於過濾手法不斷改變，沒有任何 VPN 能保證永遠處處可用，所以 Doppler 會測試多種偽裝方式，並保留有效的那一種。"
+        },
+        "q5": {
+          "question": "可以用 Apple Watch 控制 VPN 嗎？",
+          "answer": "可以。訂閱 Doppler Pro 後，手錶 App 能連線或中斷 iPhone 上的 VPN、切換伺服器、查看流量並進行測速。通道本身仍在 iPhone 上執行。手錶 App 需要 watchOS 26。"
+        },
+        "q6": {
+          "question": "要怎麼取消訂閱？",
+          "answer": "打開 iPhone 的「設定」，點一下你的名稱，接著點「訂閱項目」，再點 Doppler VPN，然後選擇「取消訂閱」。在已付費的期間結束前，你都能繼續使用。帳單由 Apple 處理，Doppler 永遠看不到你的信用卡資料。"
+        }
+      },
+      "cta": {
+        "title": "在 iPhone 上使用 Doppler",
+        "subtitle": "免費下載，免費試用 {days} 天，不用註冊帳號。"
+      }
     }
   },
   "vpnForAndroid": {
@@ -2622,6 +2768,139 @@
       "iosDesc": "下載適用於 iPhone 和 iPad 的 Doppler VPN",
       "android": "Android VPN",
       "androidDesc": "在 Google Play 取得 Doppler VPN"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "Mac · iPhone · iPad",
+        "title": "適用於 Mac 的 Doppler VPN",
+        "subtitle": "原生 Mac App，按一下就能保護 Mac 送出的所有流量。它的連線看起來就像在瀏覽一般網站，所以在封鎖其他 VPN 的網路上照樣能用。",
+        "cta": "從 Mac App Store 下載",
+        "note": "免費下載 · {days} 天免費試用 · 不需電子郵件或手機號碼"
+      },
+      "tour": {
+        "kicker": "App 一覽",
+        "title": "為 Mac 量身打造",
+        "subtitle": "全部是 Mac App 的真實畫面。所有功能都在側邊欄，按一下就到。",
+        "items": {
+          "unblock": {
+            "label": "連線方式",
+            "alt": "Mac 上的連線方式面板，列出連線可偽裝成的一般網站"
+          },
+          "path": {
+            "label": "連線",
+            "alt": "Mac 上的連線畫面，顯示網站看到的位址、加密 DNS 與路由"
+          },
+          "split": {
+            "label": "智慧路由",
+            "alt": "Mac 上的智慧路由畫面，包含直連規則與自訂網域"
+          },
+          "speed": {
+            "label": "測速",
+            "alt": "Mac 上的測速畫面，顯示透過 VPN 的下載、上傳速度與延遲"
+          },
+          "devices": {
+            "label": "裝置",
+            "alt": "Mac 上的裝置畫面，列出此帳戶的所有裝置"
+          },
+          "appearance": {
+            "label": "外觀",
+            "alt": "Mac 上的外觀設定，可調整文字大小、介面樣式和強調色"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "一鍵連線",
+          "title": "按一下，整台 Mac 都受到保護。",
+          "body": "Doppler 會為 Mac 上的每個 App 建立加密通道，不只是瀏覽器。VPN 畫面會顯示已連線多久、即時速度，以及流量從哪裡出去。",
+          "points": {
+            "p1": "所有 App、所有連線都經由同一條通道",
+            "p2": "主畫面即時顯示速度與連線時間",
+            "p3": "伺服器、測速和設定都在側邊欄"
+          },
+          "alt": "Mac 上的 Doppler 伺服器列表，連線前就能看到測得的延遲"
+        },
+        "unblock": {
+          "kicker": "暢行無阻",
+          "title": "別的 VPN 被封鎖，它照樣能用",
+          "body": "有些網路會讀取連線聲稱要造訪的網站名稱，藉此封鎖 VPN。Doppler 會報上一個你所在地允許造訪的一般網站，讓你的連線看起來就像正常瀏覽。",
+          "points": {
+            "p1": "自動模式會同時嘗試三個最有機會的網站，並保留最快的那一個",
+            "p2": "也可以在連線方式中自己選一個網站",
+            "p3": "採用 VLESS Reality，專為受過濾網路設計的協定"
+          },
+          "alt": "Mac 上的連線方式面板"
+        },
+        "path": {
+          "kicker": "毫無隱瞞",
+          "title": "每一個節點都看得到",
+          "body": "連線畫面會顯示網站看到的位址與其所屬業者、DNS 查詢是否加密並經過通道，以及你在地圖上的路由。",
+          "points": {
+            "p1": "網站目前看到的 IP 位址與網路業者",
+            "p2": "加密 DNS 狀態與查詢時間",
+            "p3": "在即時地圖上畫出你的路由"
+          },
+          "alt": "Mac 上的連線畫面，地圖上顯示路由"
+        },
+        "split": {
+          "kicker": "智慧路由",
+          "title": "在地網站，在地直連",
+          "body": "家鄉的銀行、政府服務和影音串流常常拒絕海外位址。智慧路由讓本國網站直接連線，其他流量則繼續走通道。",
+          "points": {
+            "p1": "選擇你的國家，或讓 Doppler 自動偵測",
+            "p2": "讓某個網域或架設在本國的網站直接連線",
+            "p3": "新增、貼上或匯入你自己的網域"
+          },
+          "alt": "Mac 上的智慧路由畫面"
+        }
+      },
+      "setup": {
+        "title": "一分鐘內完成設定",
+        "subtitle": "不用填註冊表單，也不需要設定檔。",
+        "s1": {
+          "title": "下載 Doppler",
+          "body": "從 Mac App Store 取得 App。支援 macOS 15 Sequoia 或以上版本。"
+        },
+        "s2": {
+          "title": "開啟 App 並允許 VPN",
+          "body": "macOS 會詢問一次是否加入 VPN 設定。Doppler 會為你建立一組匿名帳戶 ID，不需電子郵件或密碼。"
+        },
+        "s3": {
+          "title": "按一下連線",
+          "body": "開始 {days} 天免費試用，按一下連線即可。試用結束後，年繳方案每月只要 {price} 起。"
+        }
+      },
+      "faq": {
+        "title": "Mac 版 Doppler 常見問題",
+        "q1": {
+          "question": "Doppler 是原生 Mac App 嗎？",
+          "answer": "是的。Mac 版 Doppler 採用 Apple 自家的 VPN 框架專為 macOS 打造，不是在 Mac 上執行的 iPhone App。支援 macOS 15 Sequoia 或以上版本。"
+        },
+        "q2": {
+          "question": "一份訂閱能同時用在 Mac、iPhone 和 iPad 上嗎？",
+          "answer": "可以。Doppler 在 App Store 上是同一個 App，在任何一台裝置購買的方案，所有裝置都能用。在每台裝置上使用同一組帳戶 ID，裝置畫面就會列出此帳戶的所有裝置。"
+        },
+        "q3": {
+          "question": "有免費試用嗎？",
+          "answer": "有。App Store 新訂閱用戶可享 {days} 天免費試用，所有功能都能使用。之後方案會透過你的 Apple ID 自動續訂，直到你取消為止，年繳方案每月只要 {price} 起。"
+        },
+        "q4": {
+          "question": "在俄羅斯、伊朗和中國能用嗎？",
+          "answer": "Doppler 專為受過濾的網路打造。它採用 VLESS Reality，讓每一條連線看起來都像在造訪你所在地允許的一般網站。由於過濾手法不斷改變，沒有任何 VPN 能保證永遠處處可用，所以 Doppler 會測試多種偽裝方式，並保留有效的那一種。"
+        },
+        "q5": {
+          "question": "會拖慢我的 Mac 嗎？",
+          "answer": "Doppler 很輕巧。通道在 Apple 的 Network Extension 中執行，速度主要取決於你選的伺服器和你自己的網路。內建的測速功能會準確顯示透過 VPN 的實際速度。"
+        },
+        "q6": {
+          "question": "要怎麼取消訂閱？",
+          "answer": "打開 Mac 上的 App Store，按一下你的名稱，接著按「帳號設定」，再按「訂閱項目」旁的「管理」。選擇 Doppler VPN 並取消。在已付費的期間結束前，你都能繼續使用。"
+        }
+      },
+      "cta": {
+        "title": "在 Mac 上使用 Doppler",
+        "subtitle": "免費下載，免費試用 {days} 天，不用註冊帳號。"
+      }
     }
   },
   "vpnForWindows": {
@@ -4516,6 +4795,219 @@
       "appleRegionHelp": "Apple：變更國家或地區",
       "macDmg": "下載 Doppler VPN Mac 版（DMG）",
       "androidApk": "下載 Doppler VPN APK"
+    }
+  },
+  "vpnForIpad": {
+    "metadata": {
+      "title": "Doppler VPN iPad 和 iPhone Duo 版 — 快速、隱私、抗審查",
+      "description": "iPad 和 iPhone Duo 上的 Doppler VPN：iPad 採側邊欄，Duo 採雙欄。VLESS-Reality，免註冊，一個方案涵蓋所有 Apple 裝置。免費試用 3 天。"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPad · iPhone Duo",
+        "title": "適用於 iPad 和 iPhone Duo 的 Doppler VPN",
+        "subtitle": "同一個 Doppler App，為大螢幕重新排版。iPad 上是側邊欄，iPhone Duo 上是雙欄，兩者都能一鍵獲得保護。",
+        "cta": "從 App Store 下載",
+        "note": "免費下載 · {days} 天免費試用 · 不需電子郵件或手機號碼"
+      },
+      "chapters": {
+        "duo": {
+          "kicker": "iPhone Duo",
+          "title": "雙欄並陳，一覽無遺",
+          "body": "展開 iPhone Duo，連線畫面與測速結果並排顯示。闔上後，Doppler 回到你熟悉的 iPhone 版面，連線依然保持。",
+          "points": {
+            "p1": "一邊連線，另一邊顯示速度與圖表",
+            "p2": "折起或展開時，通道都不會中斷",
+            "p3": "與你的其他裝置共用同一個方案"
+          },
+          "alt": "雙手握著的 iPhone Duo 上執行 Doppler，已連線至加拿大，旁邊是測速結果"
+        },
+        "keyboard": {
+          "kicker": "iPad",
+          "title": "所有功能，盡在側邊欄",
+          "body": "在 iPad 上，VPN、伺服器、測速、連線和智慧路由都排在側邊欄，輕點即可切換。接上鍵盤，用起來就像 Mac App。",
+          "points": {
+            "p1": "側邊欄讓每個功能都觸手可及",
+            "p2": "在伺服器頁面選擇連線要偽裝成的網站",
+            "p3": "鍵盤和觸控式軌跡板用起來就像筆電"
+          },
+          "alt": "放在巧控鍵盤上的 iPad Pro，顯示 Doppler 的伺服器頁面，並開啟了連線方式面板"
+        },
+        "account": {
+          "kicker": "一個帳戶",
+          "title": "把 iPad 加進現有方案",
+          "body": "你的方案綁定的是帳戶 ID，而不是某台裝置。在 iPad 上用同一組 ID 登入，它就會和你的 iPhone、Mac、Apple Watch 一起出現在裝置頁面。",
+          "points": {
+            "p1": "iPad 不必再另外訂閱",
+            "p2": "所有已登入裝置都在同一個列表",
+            "p3": "不再使用的裝置，輕點一下就能移除"
+          },
+          "alt": "裝置頁面，列出此帳戶已登入的所有裝置"
+        }
+      },
+      "setup": {
+        "title": "一分鐘內完成設定",
+        "subtitle": "不用填註冊表單，也不需要設定檔。",
+        "s1": {
+          "title": "下載 Doppler",
+          "body": "從 App Store 取得 App。支援 iPadOS 或 iOS 18 以上版本的 iPad 和 iPhone。"
+        },
+        "s2": {
+          "title": "開啟 App",
+          "body": "Doppler 會為你建立一組匿名帳戶 ID。不需電子郵件、手機號碼或密碼。"
+        },
+        "s3": {
+          "title": "輕點連線",
+          "body": "開始 {days} 天免費試用，輕點連線即可。試用結束後，年繳方案每月只要 {price} 起。"
+        }
+      },
+      "faq": {
+        "title": "iPad 和 iPhone Duo 版 Doppler 常見問題",
+        "q1": {
+          "question": "iPad 版需要另外購買嗎？",
+          "answer": "不需要。iPhone、iPad、Mac 和 Apple Watch 共用同一個 App Store 項目，一份訂閱全部涵蓋。"
+        },
+        "q2": {
+          "question": "Doppler 支援哪些 iPad？",
+          "answer": "任何執行 iPadOS 18 或以上版本的 iPad。"
+        },
+        "q3": {
+          "question": "要怎麼把 iPad 加進我的方案？",
+          "answer": "在 iPad 上安裝 Doppler，並用 iPhone 上的帳戶 ID 登入。方案跟著 ID 走，iPad 立刻就能使用。"
+        },
+        "q4": {
+          "question": "iPhone Duo 上有什麼不同？",
+          "answer": "展開時，App 會採用雙欄：一邊是主畫面，另一邊是你開啟的頁面。闔上時，就是 iPhone App。無論哪一種，VPN 都會保持連線。"
+        },
+        "q5": {
+          "question": "有免費試用嗎？",
+          "answer": "有。App Store 新訂閱用戶可享 {days} 天免費試用，所有功能都能使用。之後方案會透過你的 Apple ID 自動續訂，直到你取消為止，年繳方案每月只要 {price} 起。"
+        }
+      },
+      "cta": {
+        "title": "在 iPad 上使用 Doppler",
+        "subtitle": "免費下載，免費試用 {days} 天，不用註冊帳號。"
+      }
+    }
+  },
+  "applePage": {
+    "prev": "上一張",
+    "next": "下一張",
+    "readGuide": "閱讀指南",
+    "ecosystem": {
+      "kicker": "一個帳戶",
+      "title": "所有 Apple 裝置，一組 ID 搞定",
+      "body": "Doppler 在 iPhone、iPad、Mac 和 Apple Watch 上都是同一個 App Store 項目。你的方案綁定帳戶 ID，因此每台裝置都能使用，不用再註冊一次。",
+      "photoAlt": "顯示 Doppler 伺服器列表的 Apple Watch",
+      "photoAltDevices": "顯示 Doppler 帳戶已登入裝置的 Apple Watch",
+      "iphone": {
+        "title": "iPhone",
+        "body": "完整 App，還有主畫面小工具"
+      },
+      "ipad": {
+        "title": "iPad",
+        "body": "同一個 App，更大的螢幕"
+      },
+      "mac": {
+        "title": "Mac",
+        "body": "適用於 macOS 15 以上的原生 App"
+      },
+      "watch": {
+        "title": "Apple Watch",
+        "body": "戴在手腕上的 iPhone VPN 遙控器"
+      },
+      "watchShots": {
+        "servers": {
+          "label": "伺服器",
+          "alt": "Apple Watch 上的 Doppler 伺服器列表"
+        },
+        "devices": {
+          "label": "裝置",
+          "alt": "在 Apple Watch 上顯示的帳戶裝置"
+        },
+        "profile": {
+          "label": "個人資料",
+          "alt": "Apple Watch 上的 Doppler Pro 個人資料"
+        }
+      }
+    },
+    "privacy": {
+      "title": "隱私，從設計開始",
+      "subtitle": "Doppler 從不要求提供的東西，跟它做的事一樣重要。",
+      "noEmail": {
+        "title": "不需電子郵件，也不需姓名",
+        "body": "你的帳戶只是一組隨機 ID。沒有任何個人資料存檔，自然無從外洩。"
+      },
+      "vless": {
+        "title": "看起來就是一般 HTTPS",
+        "body": "VLESS Reality 讓通道看起來就像一次普通的網站造訪。"
+      },
+      "noLogs": {
+        "title": "不保留活動紀錄",
+        "body": "我們不記錄你造訪的網站或傳送的內容。登入只會留下一則簡短紀錄，為防止濫用保留 90 天。"
+      },
+      "trial": {
+        "title": "免費 {days} 天",
+        "body": "付費前先體驗所有功能。隨時可在 Apple ID 設定中取消。"
+      }
+    },
+    "guides": {
+      "kicker": "指南",
+      "title": "了解運作原理",
+      "subtitle": "簡短易懂的指南，介紹 App 及其背後的技術。",
+      "englishNote": "這些指南目前只有英文版。",
+      "hub": {
+        "title": "Doppler 如何保護你的流量",
+        "desc": "一步步跟著一個請求，從你的裝置出發，穿過通道，抵達網站。"
+      },
+      "items": {
+        "vpn-on-apple-watch": {
+          "title": "Apple Watch 上的 Doppler",
+          "desc": "在手腕上連線、切換伺服器和測速。",
+          "cta": "Apple Watch 上的 Doppler"
+        },
+        "what-is-sni": {
+          "title": "什麼是 SNI？",
+          "desc": "每條安全連線都帶著的網站名稱，以及審查者為什麼要讀取它。",
+          "cta": "什麼是 SNI？審查者為什麼要讀取它？"
+        },
+        "doppler-on-iphone-and-mac": {
+          "title": "iPhone 和 Mac 入門",
+          "desc": "五分鐘內完成安裝、連線，並熟悉 App 的各項功能。",
+          "cta": "閱讀入門指南"
+        },
+        "one-account-every-apple-device": {
+          "title": "一個帳戶，暢用所有 Apple 裝置",
+          "desc": "把 iPad、Mac 和 Apple Watch 加進同一個方案。",
+          "cta": "一個帳戶，所有裝置通用"
+        }
+      }
+    },
+    "related": {
+      "ios": {
+        "title": "iPhone 和 iPad VPN",
+        "desc": "iOS App"
+      },
+      "macos": {
+        "title": "Mac VPN",
+        "desc": "原生 macOS App"
+      },
+      "android": {
+        "title": "Android VPN",
+        "desc": "在 Google Play 取得 Doppler"
+      },
+      "windows": {
+        "title": "Windows VPN",
+        "desc": "適用於 Windows 10 和 11"
+      },
+      "ipad": {
+        "title": "iPad 和 iPhone Duo VPN",
+        "desc": "大螢幕版面"
+      }
+    },
+    "cta": {
+      "downloads": "所有下載",
+      "imageAlt": "手中拿著 iPhone，螢幕上是 Doppler VPN"
     }
   }
 }

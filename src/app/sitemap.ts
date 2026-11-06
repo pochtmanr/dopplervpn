@@ -8,6 +8,7 @@ import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
 import { HOW_IT_WORKS_LOCALES, isHowItWorksLocale } from "@/i18n/how-it-works-locales";
 import { VPN_PROTOCOLS_LOCALES, isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 import { ARTICLE_SLUGS as PROTOCOL_ARTICLE_SLUGS } from "@/lib/vpn-protocols";
+import { GUIDES_LASTMOD, GUIDES_LOCALES, GUIDE_SLUGS, isGuidesLocale } from "@/lib/guides";
 import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 // Prerender all 44 shards at BUILD time and serve them as static files from
@@ -146,6 +147,7 @@ const staticPages = [
   "/pay-with-crypto",
   "/vless-vpn",
   "/vpn-for-ios",
+  "/vpn-for-ipad",
   "/vpn-for-android",
   "/vpn-for-macos",
   "/vpn-for-windows",
@@ -175,6 +177,9 @@ const staticPages = [
   // Protocol reference (every locale in i18n/vpn-protocols-locales.ts)
   "/vpn-protocols",
   ...PROTOCOL_ARTICLE_SLUGS.map((slug) => `/vpn-protocols/${slug}`),
+  // App guides (English only for now; see lib/guides.ts)
+  "/guides",
+  ...GUIDE_SLUGS.map((slug) => `/guides/${slug}`),
 ];
 
 const toolPages = new Set([
@@ -248,6 +253,10 @@ function isVpnProtocolsPage(page: string): boolean {
   return page === "/vpn-protocols" || page.startsWith("/vpn-protocols/");
 }
 
+function isGuidesPage(page: string): boolean {
+  return page === "/guides" || page.startsWith("/guides/");
+}
+
 function priorityFor(page: string): number {
   if (page === "") return 1;
   if (page === "/blog") return 0.9;
@@ -259,6 +268,7 @@ function priorityFor(page: string): number {
       "/pay-with-crypto",
       "/vless-vpn",
       "/vpn-for-ios",
+      "/vpn-for-ipad",
       "/vpn-for-android",
       "/vpn-for-macos",
       "/vpn-for-windows",
@@ -270,6 +280,7 @@ function priorityFor(page: string): number {
   if (page === "/security") return 0.7;
   if (isHowItWorksPage(page)) return 0.7;
   if (isVpnProtocolsPage(page)) return 0.7;
+  if (isGuidesPage(page)) return 0.7;
   if (page === "/support" || page === "/about") return 0.6;
   return 0.5;
 }
@@ -313,6 +324,7 @@ export default async function sitemap({
     // So do the /how-it-works articles.
     .filter((page) => !isHowItWorksPage(page) || isHowItWorksLocale(locale))
     .filter((page) => !isVpnProtocolsPage(page) || isVpnProtocolsLocale(locale))
+    .filter((page) => !isGuidesPage(page) || isGuidesLocale(locale))
     .map((page) => {
       let alternates;
       if (page === "/blog") {
@@ -324,6 +336,8 @@ export default async function sitemap({
         alternates = buildSubsetAlternates(page, HOW_IT_WORKS_LOCALES);
       } else if (isVpnProtocolsPage(page)) {
         alternates = buildSubsetAlternates(page, VPN_PROTOCOLS_LOCALES);
+      } else if (isGuidesPage(page)) {
+        alternates = buildSubsetAlternates(page, GUIDES_LOCALES);
       } else {
         alternates = buildAlternates(page);
       }
@@ -333,7 +347,9 @@ export default async function sitemap({
           ? HOW_IT_WORKS_LASTMOD
           : isVpnProtocolsPage(page)
             ? VPN_PROTOCOLS_LASTMOD
-            : undefined,
+            : isGuidesPage(page)
+              ? new Date(GUIDES_LASTMOD)
+              : undefined,
         changeFrequency: changeFreqFor(page),
         priority: priorityFor(page),
         alternates,

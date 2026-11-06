@@ -38,6 +38,8 @@ export interface SetupPlatform {
     variant?: CtaVariant;
     external: boolean;
     download: boolean;
+    /** The mark on the button: the store's (App Store, Google Play), not the platform's. */
+    logo: PlatformIcon;
   };
 }
 
@@ -288,7 +290,7 @@ export function SetupSection({
                     {...(current.cta.download ? { download: true } : {})}
                     className={BTN}
                   >
-                    <PlatformLogo icon={current.icon} className="w-5 h-5" />
+                    <PlatformLogo icon={current.cta.logo} className="w-5 h-5" />
                     {current.cta.label}
                   </TrackedDownloadLink>
                   {ratings}

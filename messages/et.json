@@ -1528,6 +1528,11 @@
       "regions": {
         "title": "Venemaa blokeerinud — endiselt tegutseme",
         "description": "Meie domeen on Roskomnadzori blokeerimisloendis. Me oleme endiselt siin. Laadige alla Telegrami boti kaudu, kui veebisait on blokeeritud."
+      },
+      "sni": {
+        "title": "Näeb välja nagu tavalise saidi külastus",
+        "description": "Tsensorid loevad saidi nime, mida iga turvaline ühendus kaasas kannab ja mida nimetatakse SNI-ks. Doppler nimetab saidi, mis on teie asukohas lubatud, nii et ühendus läheb läbi tavalise külastusena. Valige sait ise või laske valida automaatsel režiimil.",
+        "cta": "Mis on SNI ja miks tsensorid seda loevad"
       }
     }
   },
@@ -2394,6 +2399,147 @@
       "windowsDesc": "Doppler VPN Windows 10 ja 11 jaoks",
       "publicWifi": "Avaliku Wi-Fi turvalisus",
       "publicWifiDesc": "Kaitske oma iPhone'i avatud võrkudes"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPhone · iPad · Apple Watch",
+        "title": "Doppler VPN iPhone'ile ja iPadile",
+        "subtitle": "Üks puudutus ja teie iPhone on privaatne. Doppler muudab oma ühenduse tavaliseks veebisaidi külastuseks, nii et see töötab ka võrkudes, mis teisi VPN-e blokeerivad.",
+        "cta": "Laadige alla App Store'ist",
+        "note": "Tasuta allalaadimine · {days}-päevane tasuta prooviperiood · E-posti ega telefoninumbrit pole vaja"
+      },
+      "tour": {
+        "kicker": "Rakenduse sees",
+        "title": "Kõik on ühe puudutuse kaugusel",
+        "subtitle": "Päris ekraanid iPhone'i rakendusest, mitte midagi lavastatut. Libistage need läbi.",
+        "items": {
+          "connect": {
+            "label": "Ühenda",
+            "alt": "Doppleri avaekraan iPhone'is, ühendatud Hongkongiga, reaalajas kiiruse ja marsruudikaardiga"
+          },
+          "unblock": {
+            "label": "Ühendusviis",
+            "alt": "Ühendusviisi ekraan tavaliste veebisaitidega, mille külastusena ühendus võib paista"
+          },
+          "speed": {
+            "label": "Kiirustesti",
+            "alt": "Kiirustest iPhone'is allalaadimise, üleslaadimise ja pingiga läbi VPN-i"
+          },
+          "path": {
+            "label": "Teie marsruut",
+            "alt": "Ühenduse ekraan aadressiga, mida veebisaidid näevad, DNS-i olekuga ja marsruudiga kaardil"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Smart Route'i ekraan, kus valite, millise riigi saidid tunnelist mööda lähevad"
+          },
+          "devices": {
+            "label": "Seadmed",
+            "alt": "Seadmete ekraan kõigi kontole sisse logitud seadmetega"
+          },
+          "appearance": {
+            "label": "Välimus",
+            "alt": "Välimuse seaded teksti suuruse, pindade stiili ja rõhuvärviga"
+          },
+          "language": {
+            "label": "Keel",
+            "alt": "Keelte loend, mida rakendus räägib"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "Üks puudutus",
+          "title": "Puudutage korra. Olete kaitstud.",
+          "body": "Doppler valib serveri, avab krüpteeritud tunneli ja suunab sellest läbi kogu teie iPhone'i liikluse, ka Telegrami ja WhatsAppi kõned. Avaekraan näitab reaalajas teie kiirust ja seda, kust teie liiklus välja läheb.",
+          "points": {
+            "p1": "Tunnelist käib läbi kogu seade, mitte ainult brauser",
+            "p2": "Allalaadimine, üleslaadimine ja ping reaalajas otse avaekraanil",
+            "p3": "Kill Switch ja Ühenda käivitamisel, kumbki üks lüliti rakenduse seadetes"
+          },
+          "alt": "Doppleri serverite loend iPhone'is iga asukoha pingiga"
+        },
+        "unblock": {
+          "kicker": "Pääseb läbi",
+          "title": "Töötab seal, kus teised VPN-id blokeeritakse",
+          "body": "Mõned võrgud blokeerivad VPN-e, lugedes selle saidi nime, mida ühendus väidetavalt külastab. Doppler nimetab tavalise saidi, mis on teie asukohas lubatud, nii et teie ühendus näeb välja nagu tavaline külastus sinna.",
+          "points": {
+            "p1": "Automaatne proovib korraga kolme tõenäolisemat saiti ja jätab alles kiireima",
+            "p2": "Või valige sait ise ühendusviisi ekraanil",
+            "p3": "Põhineb VLESS Realityl, filtreeritud võrkude jaoks loodud protokollil"
+          },
+          "alt": "iPhone ühendusviisi ekraaniga"
+        },
+        "path": {
+          "kicker": "Midagi ei varjata",
+          "title": "Näete iga hüpet",
+          "body": "Ühenduse ekraan näitab aadressi, mida veebisaidid näevad, kellele see kuulub, kas teie DNS-päringud lähevad läbi tunneli, ja teie liikluse marsruuti kaardil. Te ei pea meid sõna pealt uskuma.",
+          "points": {
+            "p1": "IP-aadress ja teenusepakkuja, mida saidid praegu näevad",
+            "p2": "DNS-i olek ja päringu kestus",
+            "p3": "Teie marsruut reaalajas kaardil"
+          },
+          "alt": "Ühenduse ekraan iPhone'is marsruudiga kaardil"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "Kohalikud saidid jäävad kohalikuks",
+          "body": "Pangad, riigiteenused ja kodumaine voogedastus lükkavad välismaised aadressid sageli tagasi. Smart Route saadab teie oma riigi saidid otse välja ja hoiab kõik muu tunnelis.",
+          "points": {
+            "p1": "Valige oma riik või laske Doppleril see ise tuvastada",
+            "p2": "Saatke terve domeenitsoon, näiteks .jp, otse",
+            "p3": "Lisage oma domeenid, mis peaksid tunnelist mööda minema"
+          },
+          "alt": "Smart Route'i ekraan iPhone'is"
+        }
+      },
+      "setup": {
+        "title": "Valmis vähem kui minutiga",
+        "subtitle": "Ei registreerimisvormi ega konfiguratsioonifaile.",
+        "s1": {
+          "title": "Laadige Doppler alla",
+          "body": "Hankige rakendus App Store'ist. See töötab iPhone'is ja iPadis, kus on iOS 18 või uuem."
+        },
+        "s2": {
+          "title": "Avage see",
+          "body": "Doppler loob teile anonüümse konto ID. Ei e-posti, telefoninumbrit ega parooli."
+        },
+        "s3": {
+          "title": "Puudutage Ühenda",
+          "body": "Alustage {days}-päevast tasuta prooviperioodi ja puudutage Ühenda. Pärast prooviperioodi algavad paketid aastaplaaniga hinnast {price} kuus."
+        }
+      },
+      "faq": {
+        "title": "Küsimused Doppleri kohta iPhone'is ja iPadis",
+        "q1": {
+          "question": "Kas Doppler töötab iPadis?",
+          "answer": "Jah. Sama rakendus töötab iPhone'is ja iPadis, kus on iOS või iPadOS 18 või uuem, ja üks tellimus katab mõlemad."
+        },
+        "q2": {
+          "question": "Kas ma pean konto looma?",
+          "answer": "Ei. Doppler annab teile konto ID, kui avate rakenduse esimest korda. E-posti, telefoninumbrit ega parooli pole vaja anda. Hoidke ID turvalises kohas: sellega lisate oma teised seadmed ja saate oma tellimuse tagasi."
+        },
+        "q3": {
+          "question": "Kas tasuta prooviperiood on olemas?",
+          "answer": "Jah. Uued tellijad App Store'is saavad {days}-päevase tasuta prooviperioodi kõigi funktsioonidega. Seejärel uueneb tellimus teie Apple ID kaudu, kuni selle tühistate, aastaplaaniga alates {price} kuus."
+        },
+        "q4": {
+          "question": "Kas see töötab Venemaal, Iraanis ja Hiinas?",
+          "answer": "Doppler on loodud filtreeritud võrkude jaoks. See kasutab VLESS Realityt ja muudab iga ühenduse sarnaseks tavalise veebisaidi külastusega, mis on teie asukohas lubatud. Ükski VPN ei saa lubada, et töötab igal pool igavesti, sest filtreerimine muutub pidevalt, seega proovib Doppler mitut maskeeringut ja jätab alles selle, mis töötab."
+        },
+        "q5": {
+          "question": "Kas saan VPN-i juhtida oma Apple Watchist?",
+          "answer": "Jah. Doppler Proga ühendab ja katkestab kellarakendus teie iPhone'i VPN-i, vahetab servereid, näitab liiklust ja käivitab kiirustesti. Tunnel ise jääb iPhone'i. Kellarakendus vajab watchOS 26."
+        },
+        "q6": {
+          "question": "Kuidas tellimust tühistada?",
+          "answer": "Avage iPhone'is Seaded, puudutage oma nime, seejärel Tellimused, siis Doppler VPN ja valige Tühista tellimus. Juurdepääs jääb alles makstud perioodi lõpuni. Arveldust haldab Apple, nii et Doppler ei näe kunagi teie kaarti."
+        }
+      },
+      "cta": {
+        "title": "Hankige Doppler oma iPhone'i",
+        "subtitle": "Tasuta allalaadimine, {days} päeva tasuta proovimist ja kontot pole vaja registreerida."
+      }
     }
   },
   "vpnForAndroid": {
@@ -2622,6 +2768,139 @@
       "iosDesc": "Laadige Doppler VPN alla iPhone'ile ja iPadile",
       "android": "VPN Androidile",
       "androidDesc": "Hankige Doppler VPN Google Play'st"
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "Mac · iPhone · iPad",
+        "title": "Doppler VPN Macile",
+        "subtitle": "Natiivne Maci rakendus, mis kaitseb ühe klikiga kõike, mida teie Mac saadab. Selle ühendus näeb välja nagu tavaline veebisaidi külastus, nii et see töötab ka võrkudes, mis teisi VPN-e blokeerivad.",
+        "cta": "Laadige alla Mac App Store'ist",
+        "note": "Tasuta allalaadimine · {days}-päevane tasuta prooviperiood · E-posti ega telefoninumbrit pole vaja"
+      },
+      "tour": {
+        "kicker": "Rakenduse sees",
+        "title": "Loodud Maci jaoks",
+        "subtitle": "Päris ekraanid Maci rakendusest. Iga funktsioon on külgribal, ühe kliki kaugusel.",
+        "items": {
+          "unblock": {
+            "label": "Ühendusviis",
+            "alt": "Ühendusviisi aken Macis tavaliste veebisaitidega, mille moodi ühendus võib välja näha"
+          },
+          "path": {
+            "label": "Ühendus",
+            "alt": "Ühenduse ekraan Macis aadressiga, mida veebisaidid näevad, krüpteeritud DNS-i ja marsruudiga"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Smart Route'i ekraan Macis otsemarsruutimise reeglite ja oma domeenidega"
+          },
+          "speed": {
+            "label": "Kiirustesti",
+            "alt": "Kiirustest Macis allalaadimise, üleslaadimise ja pingiga läbi VPN-i"
+          },
+          "devices": {
+            "label": "Seadmed",
+            "alt": "Seadmete ekraan Macis kõigi konto seadmetega"
+          },
+          "appearance": {
+            "label": "Välimus",
+            "alt": "Välimuse seaded Macis teksti suuruse, pindade stiili ja rõhuvärviga"
+          }
+        }
+      },
+      "chapters": {
+        "connect": {
+          "kicker": "Üks klikk",
+          "title": "Klõpsake korra. Kogu teie Mac on kaitstud.",
+          "body": "Doppler avab krüpteeritud tunneli iga rakenduse jaoks teie Macis, mitte ainult brauseri jaoks. VPN-i ekraan näitab, kui kaua olete ühendatud, teie reaalajas kiirust ja seda, kust teie liiklus välja läheb.",
+          "points": {
+            "p1": "Iga rakendus ja iga ühendus käib läbi ühe tunneli",
+            "p2": "Reaalajas kiirus ja seansi kestus põhiekraanil",
+            "p3": "Serverid, kiirustest ja seaded külgribal"
+          },
+          "alt": "Doppleri serverite loend Macis enne ühendamist mõõdetud pingiga"
+        },
+        "unblock": {
+          "kicker": "Pääseb läbi",
+          "title": "Töötab seal, kus teised VPN-id blokeeritakse",
+          "body": "Mõned võrgud blokeerivad VPN-e, lugedes selle saidi nime, mida ühendus väidetavalt külastab. Doppler nimetab tavalise saidi, mis on teie asukohas lubatud, nii et teie ühendus näeb välja nagu tavaline külastus sinna.",
+          "points": {
+            "p1": "Automaatne proovib korraga kolme tõenäolisemat saiti ja jätab alles kiireima",
+            "p2": "Või valige sait ise ühendusviisi aknas",
+            "p3": "Põhineb VLESS Realityl, filtreeritud võrkude jaoks loodud protokollil"
+          },
+          "alt": "Ühendusviisi aken Macis"
+        },
+        "path": {
+          "kicker": "Midagi ei varjata",
+          "title": "Näete iga hüpet",
+          "body": "Ühenduse ekraan näitab aadressi, mida veebisaidid näevad, kellele see kuulub, kas teie DNS-päringud on krüpteeritud ja lähevad läbi tunneli, ning teie marsruuti kaardil.",
+          "points": {
+            "p1": "IP-aadress ja teenusepakkuja, mida saidid praegu näevad",
+            "p2": "Krüpteeritud DNS-i olek ja päringu aeg",
+            "p3": "Teie marsruut reaalajas kaardil"
+          },
+          "alt": "Ühenduse ekraan Macis marsruudiga kaardil"
+        },
+        "split": {
+          "kicker": "Smart Route",
+          "title": "Kohalikud saidid jäävad kohalikuks",
+          "body": "Pangad, riigiteenused ja kodumaine voogedastus lükkavad välismaised aadressid sageli tagasi. Smart Route saadab teie oma riigi saidid otse välja ja hoiab kõik muu tunnelis.",
+          "points": {
+            "p1": "Valige oma riik või laske Doppleril see ise tuvastada",
+            "p2": "Saatke domeenitsoon või kodumaal majutatud saidid otse",
+            "p3": "Lisage, kleepige või importige oma domeenid"
+          },
+          "alt": "Smart Route'i ekraan Macis"
+        }
+      },
+      "setup": {
+        "title": "Valmis vähem kui minutiga",
+        "subtitle": "Ei registreerimisvormi ega konfiguratsioonifaile.",
+        "s1": {
+          "title": "Laadige Doppler alla",
+          "body": "Hankige rakendus Mac App Store'ist. See töötab macOS 15 Sequoias või uuemas."
+        },
+        "s2": {
+          "title": "Avage see ja lubage VPN",
+          "body": "macOS küsib ühe korra luba VPN-i konfiguratsiooni lisamiseks. Doppler loob teile anonüümse konto ID, ilma e-posti ja paroolita."
+        },
+        "s3": {
+          "title": "Klõpsake Ühenda",
+          "body": "Alustage {days}-päevast tasuta prooviperioodi ja klõpsake Ühenda. Pärast prooviperioodi algavad paketid aastaplaaniga hinnast {price} kuus."
+        }
+      },
+      "faq": {
+        "title": "Küsimused Doppleri kohta Macis",
+        "q1": {
+          "question": "Kas Doppler on natiivne Maci rakendus?",
+          "answer": "Jah. Doppler Macile on ehitatud macOS-i jaoks Apple'i enda VPN-raamistikuga, see ei ole Macis jooksev iPhone'i rakendus. See töötab macOS 15 Sequoias või uuemas."
+        },
+        "q2": {
+          "question": "Kas saan kasutada üht tellimust Macis, iPhone'is ja iPadis?",
+          "answer": "Jah. Doppler on üks App Store'i rakendus, nii et ükskõik millises neist ostetud pakett töötab kõigis. Kasutage igas seadmes sama konto ID-d ja seadmete ekraan näitab kõiki konto seadmeid."
+        },
+        "q3": {
+          "question": "Kas tasuta prooviperiood on olemas?",
+          "answer": "Jah. Uued tellijad App Store'is saavad {days}-päevase tasuta prooviperioodi kõigi funktsioonidega. Seejärel uueneb tellimus teie Apple ID kaudu, kuni selle tühistate, aastaplaaniga alates {price} kuus."
+        },
+        "q4": {
+          "question": "Kas see töötab Venemaal, Iraanis ja Hiinas?",
+          "answer": "Doppler on loodud filtreeritud võrkude jaoks. See kasutab VLESS Realityt ja muudab iga ühenduse sarnaseks tavalise veebisaidi külastusega, mis on teie asukohas lubatud. Ükski VPN ei saa lubada, et töötab igal pool igavesti, sest filtreerimine muutub pidevalt, seega proovib Doppler mitut maskeeringut ja jätab alles selle, mis töötab."
+        },
+        "q5": {
+          "question": "Kas see aeglustab mu Maci?",
+          "answer": "Doppler on kerge. Tunnel töötab Apple'i Network Extensioni sees ja kiirus sõltub peamiselt valitud serverist ja teie enda ühendusest. Sisseehitatud kiirustest näitab täpselt, mida te VPN-i kaudu saate."
+        },
+        "q6": {
+          "question": "Kuidas tellimust tühistada?",
+          "answer": "Avage Macis App Store, klõpsake oma nimel, seejärel Konto seaded ja valige Tellimuste kõrval Halda. Valige Doppler VPN ja tühistage. Juurdepääs jääb alles makstud perioodi lõpuni."
+        }
+      },
+      "cta": {
+        "title": "Hankige Doppler oma Maci",
+        "subtitle": "Tasuta allalaadimine, {days} päeva tasuta proovimist ja kontot pole vaja registreerida."
+      }
     }
   },
   "vpnForWindows": {
@@ -4516,6 +4795,219 @@
       "appleRegionHelp": "Apple: riigi või piirkonna muutmine",
       "macDmg": "Laadi alla Doppler VPN Macile (DMG)",
       "androidApk": "Laadi alla Doppler VPN-i APK"
+    }
+  },
+  "vpnForIpad": {
+    "metadata": {
+      "title": "Doppler VPN iPadile ja iPhone Duole — kiire, privaatne ja tsensuurikindel",
+      "description": "Doppler VPN iPadis ja iPhone Duos: külgriba iPadis, kaks veergu Duos. VLESS-Reality, registreerimiseta, üks pakett kõigile Apple'i seadmetele. 3-päevane tasuta prooviperiood."
+    },
+    "apple": {
+      "hero": {
+        "eyebrow": "iPad · iPhone Duo",
+        "title": "Doppler VPN iPadile ja iPhone Duole",
+        "subtitle": "Sama Doppleri rakendus, kujundatud suuremale ekraanile. Külgriba iPadis, kaks veergu iPhone Duos ja mõlemas sama ühe puudutusega kaitse.",
+        "cta": "Laadige alla App Store'ist",
+        "note": "Tasuta allalaadimine · {days}-päevane tasuta prooviperiood · E-posti ega telefoninumbrit pole vaja"
+      },
+      "chapters": {
+        "duo": {
+          "kicker": "iPhone Duo",
+          "title": "Kaks veergu, kõik nähtaval",
+          "body": "Lahtivolditud iPhone Duo näitab ühenduse ekraani ja kiirustesti kõrvuti. Voltige see kokku ja Doppler naaseb tuttavale iPhone'i paigutusele, endiselt ühendatuna.",
+          "points": {
+            "p1": "Ühel pool ühendus, teisel kiirus ja graafikud",
+            "p2": "Tunnel püsib üleval, kui seadet kokku voldite või lahti teete",
+            "p3": "Kaetud sama paketiga kui teie teised seadmed"
+          },
+          "alt": "Doppler kahes käes hoitud iPhone Duos, ühendatud Kanadaga, kõrval kiirustest"
+        },
+        "keyboard": {
+          "kicker": "iPad",
+          "title": "Iga jaotis külgribal",
+          "body": "iPadis on VPN, Serverid, Kiirustesti, Ühendus ja Smart Route külgribal, üksteisest ühe puudutuse kaugusel. Ühendage klaviatuur ja see töötab nagu Maci rakendus.",
+          "points": {
+            "p1": "Külgriba hoiab iga jaotise käe-jala juures",
+            "p2": "Valige serverite lehel sait, mille külastusena teie ühendus paistab",
+            "p3": "Klaviatuur ja puuteplaat töötavad nagu sülearvutis"
+          },
+          "alt": "iPad Pro Magic Keyboardil Doppleri serverite lehe ja avatud ühendusviisi aknaga"
+        },
+        "account": {
+          "kicker": "Üks konto",
+          "title": "Lisage iPad olemasolevasse paketti",
+          "body": "Teie pakett kuulub teie konto ID-le, mitte seadmele. Logige iPadis sisse sama ID-ga ja see liitub seadmete lehel teie iPhone'i, Maci ja Apple Watchiga.",
+          "points": {
+            "p1": "iPadi jaoks pole teist tellimust vaja",
+            "p2": "Kõik sisse logitud seadmed ühes loendis",
+            "p3": "Eemaldage seade, mida enam ei kasuta, ühe puudutusega"
+          },
+          "alt": "Seadmete leht kõigi kontole sisse logitud seadmetega"
+        }
+      },
+      "setup": {
+        "title": "Valmis vähem kui minutiga",
+        "subtitle": "Ei registreerimisvormi ega konfiguratsioonifaile.",
+        "s1": {
+          "title": "Laadige Doppler alla",
+          "body": "Hankige rakendus App Store'ist. See töötab iPadis ja iPhone'is, kus on iPadOS või iOS 18 või uuem."
+        },
+        "s2": {
+          "title": "Avage see",
+          "body": "Doppler loob teile anonüümse konto ID. Ei e-posti, telefoninumbrit ega parooli."
+        },
+        "s3": {
+          "title": "Puudutage Ühenda",
+          "body": "Alustage {days}-päevast tasuta prooviperioodi ja puudutage Ühenda. Pärast prooviperioodi algavad paketid aastaplaaniga hinnast {price} kuus."
+        }
+      },
+      "faq": {
+        "title": "Küsimused Doppleri kohta iPadis ja iPhone Duos",
+        "q1": {
+          "question": "Kas iPadi rakendus tuleb eraldi osta?",
+          "answer": "Ei. iPhone, iPad, Mac ja Apple Watch jagavad üht App Store'i kirjet ja üks tellimus katab need kõik."
+        },
+        "q2": {
+          "question": "Millistes iPadides Doppler töötab?",
+          "answer": "Igas iPadis, kus on iPadOS 18 või uuem."
+        },
+        "q3": {
+          "question": "Kuidas lisada iPad oma paketti?",
+          "answer": "Installige Doppler iPadi ja logige sisse oma iPhone'i konto ID-ga. Pakett järgib ID-d, nii et iPad on kohe kaetud."
+        },
+        "q4": {
+          "question": "Mis iPhone Duos muutub?",
+          "answer": "Lahtivolditult kasutab rakendus kahte veergu: ühel pool põhiekraan, teisel pool avatud leht. Kokkuvolditult on see iPhone'i rakendus. VPN jääb mõlemal juhul ühendatuks."
+        },
+        "q5": {
+          "question": "Kas tasuta prooviperiood on olemas?",
+          "answer": "Jah. Uued tellijad App Store'is saavad {days}-päevase tasuta prooviperioodi kõigi funktsioonidega. Seejärel uueneb tellimus teie Apple ID kaudu, kuni selle tühistate, aastaplaaniga alates {price} kuus."
+        }
+      },
+      "cta": {
+        "title": "Hankige Doppler oma iPadi",
+        "subtitle": "Tasuta allalaadimine, {days} päeva tasuta proovimist ja kontot pole vaja registreerida."
+      }
+    }
+  },
+  "applePage": {
+    "prev": "Eelmine ekraan",
+    "next": "Järgmine ekraan",
+    "readGuide": "Lugege juhendit",
+    "ecosystem": {
+      "kicker": "Üks konto",
+      "title": "Iga Apple'i seade, üks ID",
+      "body": "Doppler töötab iPhone'is, iPadis, Macis ja Apple Watchis sama App Store'i kirje kaudu. Teie pakett kuulub teie konto ID-le, nii et see katab iga seadme ilma uue registreerimiseta.",
+      "photoAlt": "Apple Watch Doppleri serverite loendiga",
+      "photoAltDevices": "Apple Watch Doppleri kontole sisse logitud seadmetega",
+      "iphone": {
+        "title": "iPhone",
+        "body": "Täielik rakendus koos avaekraani vidinaga"
+      },
+      "ipad": {
+        "title": "iPad",
+        "body": "Sama rakendus suuremal ekraanil"
+      },
+      "mac": {
+        "title": "Mac",
+        "body": "Natiivne rakendus macOS 15 või uuema jaoks"
+      },
+      "watch": {
+        "title": "Apple Watch",
+        "body": "Teie iPhone'i VPN-i pult otse randmel"
+      },
+      "watchShots": {
+        "servers": {
+          "label": "Serverid",
+          "alt": "Doppleri serverite loend Apple Watchis"
+        },
+        "devices": {
+          "label": "Seadmed",
+          "alt": "Konto seadmed Apple Watchis"
+        },
+        "profile": {
+          "label": "Profiil",
+          "alt": "Doppler Pro profiil Apple Watchis"
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privaatne algusest peale",
+      "subtitle": "See, mida Doppler kunagi ei küsi, on sama oluline kui see, mida ta teeb.",
+      "noEmail": {
+        "title": "Ei e-posti ega nime",
+        "body": "Teie konto on juhuslik ID. Meil pole talletatud midagi isiklikku, mis võiks lekkida."
+      },
+      "vless": {
+        "title": "Näeb välja nagu tavaline HTTPS",
+        "body": "VLESS Reality muudab tunneli sarnaseks tavalise veebisaidi külastusega."
+      },
+      "noLogs": {
+        "title": "Tegevuslogisid ei peeta",
+        "body": "Me ei salvesta saite, mida külastate, ega seda, mida saadate. Sisselogimistest jääb lühike kirje, mida hoiame kuritarvituste tõkestamiseks 90 päeva."
+      },
+      "trial": {
+        "title": "{days} päeva tasuta",
+        "body": "Proovige kõiki funktsioone enne maksmist. Tühistage igal ajal oma Apple ID seadetes."
+      }
+    },
+    "guides": {
+      "kicker": "Juhendid",
+      "title": "Uurige, kuidas see töötab",
+      "subtitle": "Lühikesed ja lihtsad juhendid rakenduse ja selle taga oleva tehnoloogia kohta.",
+      "englishNote": "Juhendid on praegu inglise keeles.",
+      "hub": {
+        "title": "Kuidas Doppler teie liiklust kaitseb",
+        "desc": "Jälgige üht päringut teie seadmest läbi tunneli veebisaidini, samm-sammult."
+      },
+      "items": {
+        "vpn-on-apple-watch": {
+          "title": "Doppler Apple Watchis",
+          "desc": "Ühendage, vahetage servereid ja mõõtke kiirust otse randmelt.",
+          "cta": "Doppler Apple Watchis"
+        },
+        "what-is-sni": {
+          "title": "Mis on SNI?",
+          "desc": "Saidi nimi, mida iga turvaline ühendus kaasas kannab, ja miks tsensorid seda loevad.",
+          "cta": "Mis on SNI ja miks tsensorid seda loevad?"
+        },
+        "doppler-on-iphone-and-mac": {
+          "title": "Alustamine iPhone'is ja Macis",
+          "desc": "Installige, ühendage ja õppige rakendus tundma viie minutiga.",
+          "cta": "Lugege alustamise juhendit"
+        },
+        "one-account-every-apple-device": {
+          "title": "Üks konto kõigis teie Apple'i seadmetes",
+          "desc": "Lisage oma iPad, Mac ja Apple Watch samasse paketti.",
+          "cta": "Üks konto igas seadmes"
+        }
+      }
+    },
+    "related": {
+      "ios": {
+        "title": "VPN iPhone'ile ja iPadile",
+        "desc": "iOS-i rakendus"
+      },
+      "macos": {
+        "title": "VPN Macile",
+        "desc": "Natiivne macOS-i rakendus"
+      },
+      "android": {
+        "title": "VPN Androidile",
+        "desc": "Hankige Doppler Google Playst"
+      },
+      "windows": {
+        "title": "VPN Windowsile",
+        "desc": "Windows 10 ja 11 jaoks"
+      },
+      "ipad": {
+        "title": "VPN iPadile ja iPhone Duole",
+        "desc": "Suure ekraani paigutus"
+      }
+    },
+    "cta": {
+      "downloads": "Kõik allalaadimised",
+      "imageAlt": "Doppler VPN käes hoitud iPhone'is"
     }
   }
 }
