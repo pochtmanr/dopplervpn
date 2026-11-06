@@ -258,7 +258,7 @@
       "expressvpn": "ExpressVPN",
       "openvpn": "OpenVPN"
     },
-    "note": "Temel bağlantının % olarak hız korunumu. AB sunucularında 100 Mbps baz testlere dayalı, Mart 2026.",
+    "note": "Illustrative relative ordering from internal EU lab checks on a 100 Mbps baseline (March 2026)—not a third-party benchmark. Protocol ratings and sources:",
     "stats": {
       "overhead": {
         "value": "<1%",
@@ -269,14 +269,15 @@
         "label": "Ek gecikme"
       },
       "detection": {
-        "value": "0",
-        "label": "DPI tespiti"
+        "value": "Low",
+        "label": "DPI risk profile"
       },
       "throughput": {
         "value": "94%",
         "label": "Korunan hız"
       }
-    }
+    },
+    "methodologyCta": "Protokol puanlarını ve kaynakları gör"
   },
   "priceComparison": {
     "title": "Premium koruma, adil fiyat",
@@ -318,7 +319,7 @@
       },
       "noLogs": {
         "question": "Doppler VPN gerçekten kayıt tutmuyor mu?",
-        "answer": "Evet, katı bir kayıt tutmama politikası uyguluyoruz. Gezinme etkinliğinizi, bağlantı zaman damgalarınızı, IP adreslerinizi veya diğer kişisel verilerinizi takip etmiyor, saklamıyor veya paylaşmıyoruz. Gizliliğiniz önceliğimizdir."
+        "answer": "VPN trafiği için evet: gezinme etkinliğini, DNS sorgularını, trafik hedeflerini veya oturum sürelerini kaydetmiyoruz. Oturum açma, kötüye kullanımı önlemek için en fazla 90 gün saklanan kısa bir kimlik doğrulama kaydı bırakır (API istek IP’si dahil) — bir cihazın bağlandığını gösterir, nereye gittiğinizi değil. Ayrıntılar Gizlilik Politikası’nda."
       },
       "adBlocker": {
         "question": "Reklam engelleyici nasıl çalışır?",
@@ -334,7 +335,7 @@
       },
       "platforms": {
         "question": "Hangi platformlar desteklenir?",
-        "answer": "Doppler VPN iOS (iPhone & iPad), macOS ve Android'de kullanılabilir. Platform desteğimizi sürekli genişletmek için çalışıyoruz."
+        "answer": "Doppler VPN; iOS (iPhone ve iPad), Android, macOS ve Windows’ta kullanılabilir."
       },
       "cancel": {
         "question": "Aboneliğimi nasıl iptal ederim?",
@@ -342,7 +343,7 @@
       },
       "trial": {
         "question": "Ücretsiz deneme var mı?",
-        "answer": "Nereden abone olduğunuza bağlı. App Store ve Google Play'de her yeni kullanıcı 3 günlük ücretsiz deneme alır. Bu sitede deneme süresi yoktur; bunun yerine her plana ücretsiz günler eklenir: 1 aylık plana 1 hafta, 6 aylık plana yarım ay, 1 yıllık plana 1 ay. Tüm planlar için 30 gün para iade garantisi geçerlidir."
+        "answer": "Nereden abone olduğunuza bağlı. App Store ve Google Play'de her yeni kullanıcı 3 günlük ücretsiz deneme alır. Bu sitede deneme süresi yoktur; bunun yerine her plana ücretsiz günler eklenir: 1 aylık plana 1 hafta, 6 aylık plana yarım ay, 1 yıllık plana 1 ay. İadeler İade Politikamıza göredir."
       },
       "whatIsIncluded": {
         "question": "Premium'a neler dahil?",
@@ -657,14 +658,14 @@
       }
     },
     "stickyBar": {
-      "message": "Gezintinizi koruyun. Doppler VPN kayıt gerektirmez ve hiçbir kayıt tutmaz. 3 gün ücretsiz deneyin.",
+      "message": "Protect your browsing. Doppler VPN needs no registration. VPN traffic stays unlogged; a short auth record may be kept up to 90 days. Try free for 3 days on the App Store and Google Play.",
       "cta": "3 Gün Ücretsiz Dene",
       "dismiss": "Kapat",
       "dismissLabel": "İndirme bannerını kapat"
     },
     "inlineCta": {
       "headline": "Doppler VPN ile gizliliğinizi koruyun",
-      "subtext": "3 gün ücretsiz deneme. Kayıt yok. Günlük yok.",
+      "subtext": "3-day free trial on stores. No registration. VPN traffic unlogged.",
       "downloadIos": "iOS için indir",
       "downloadAndroid": "Android için indir",
       "downloadDesktop": "Uygulamayı İndir"

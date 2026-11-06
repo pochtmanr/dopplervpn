@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { detectPlatform, type Platform } from "@/lib/detect-platform";
 import { trackCta, type CtaLocation } from "@/lib/track-cta";
-// Calm+ recipes for the `plus` branch.
 import { PLUS_BTN, PLUS_ICON, PLUS_ICON_TONE } from "@/app/[locale]/design-lab/plus-recipes";
 import { DopplerLogo } from "@/components/layout/doppler-logo";
 
@@ -13,17 +12,26 @@ const APP_STORE_URL =
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
 
+/** Prefix a site-relative path with the active locale; leave absolute URLs alone. */
+function desktopCtaHref(locale: string, href = "/downloads"): string {
+  if (href.startsWith("http")) return href;
+  return `/${locale}${href}`;
+}
+
 interface BlogStickyBarProps {
   sentinelId?: string;
   trackingLocation?: CtaLocation;
-  /** Calm+ preview, decided on the server; the page wraps the bar in PlusPageShell for the tokens. */
+  /** Calm+ preview; page wraps the bar in PlusPageShell for tokens. */
   plus?: boolean;
+  /** Contextual desktop CTA path (install / landing / product / downloads). */
+  desktopHref?: string;
 }
 
 export function BlogStickyBar({
   sentinelId = "blog-cta-sentinel",
   trackingLocation = "blog-sticky",
   plus = false,
+  desktopHref = "/downloads",
 }: BlogStickyBarProps) {
   const t = useTranslations("blog.stickyBar");
   const locale = useLocale();
@@ -37,13 +45,11 @@ export function BlogStickyBar({
 
   // Show after 30% scroll depth
   useEffect(() => {
-    const handleScroll = () => {
+    function handleScroll() {
       const scrollPercent =
         window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-      if (scrollPercent > 0.3) {
-        setVisible(true);
-      }
-    };
+      if (scrollPercent > 0.3) setVisible(true);
+    }
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -57,37 +63,41 @@ export function BlogStickyBar({
       ([entry]) => {
         if (entry.isIntersecting) setVisible(false);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, [sentinelId]);
 
-  // Check sessionStorage for dismissal
   useEffect(() => {
     if (sessionStorage.getItem("sticky-cta-dismissed") === "1") {
       setDismissed(true);
     }
   }, []);
 
-  const handleDismiss = () => {
+  function handleDismiss() {
     setDismissed(true);
     sessionStorage.setItem("sticky-cta-dismissed", "1");
-  };
+  }
+
+  const desktopPath = desktopCtaHref(locale, desktopHref);
 
   const config = {
     ios: { href: APP_STORE_URL, icon: <AppleIcon /> },
     android: { href: GOOGLE_PLAY_URL, icon: <PlayIcon /> },
     mac: { href: APP_STORE_URL, icon: <AppleIcon /> },
-    windows: { href: `/${locale}/downloads`, icon: <DownloadIcon /> },
-    desktop: { href: `/${locale}/downloads`, icon: <DownloadIcon /> },
+    windows: { href: desktopPath, icon: <DownloadIcon /> },
+    desktop: { href: desktopPath, icon: <DownloadIcon /> },
   }[platform];
 
-  const handleClick = () => {
+  function handleClick() {
     trackCta(trackingLocation, platform);
-  };
+  }
 
   const show = visible && !dismissed;
+  const linkTarget = platform === "desktop" ? undefined : "_blank";
+  const linkRel = platform === "desktop" ? undefined : "noopener noreferrer";
+  const tabIndex = show ? 0 : -1;
 
   if (plus) {
     // Calm+: a floating pill like the landing's sticky CTA (mobile-sticky-cta.tsx),
@@ -108,11 +118,11 @@ export function BlogStickyBar({
           </p>
           <a
             href={config.href}
-            target={platform === "desktop" ? undefined : "_blank"}
-            rel={platform === "desktop" ? undefined : "noopener noreferrer"}
+            target={linkTarget}
+            rel={linkRel}
             onClick={handleClick}
             className={`${PLUS_BTN} shrink-0 whitespace-nowrap`}
-            tabIndex={show ? 0 : -1}
+            tabIndex={tabIndex}
           >
             {config.icon}
             {t("cta")}
@@ -122,7 +132,7 @@ export function BlogStickyBar({
             onClick={handleDismiss}
             className="plus-btn flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-(--c-inset) text-(--c-muted) hover:bg-(--c-accent-tint) hover:text-(--c-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent)"
             aria-label={t("dismissLabel")}
-            tabIndex={show ? 0 : -1}
+            tabIndex={tabIndex}
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
@@ -157,8 +167,8 @@ export function BlogStickyBar({
             <div className="flex items-center gap-2 flex-shrink-0 ps-12 sm:ps-0">
               <a
                 href={config.href}
-                target={platform === "desktop" ? undefined : "_blank"}
-                rel={platform === "desktop" ? undefined : "noopener noreferrer"}
+                target={linkTarget}
+                rel={linkRel}
                 onClick={handleClick}
                 className="cta-key inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-medium whitespace-nowrap"
               >

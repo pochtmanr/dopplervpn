@@ -23,6 +23,7 @@ import {
 } from "@/components/sections";
 import { HomeBlogSection } from "@/components/blog";
 import { isBlogLocale } from "@/i18n/blog-locales";
+import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 const SpeedComparison = dynamic(() => import("@/components/sections/speed-comparison").then(m => ({ default: m.SpeedComparison })));
 const PriceComparison = dynamic(() => import("@/components/sections/price-comparison").then(m => ({ default: m.PriceComparison })));
@@ -109,36 +110,39 @@ async function getLatestPosts(locale: string) {
     // Tiebreak so posts sharing a published_at cannot swap places between
     // revalidations — a reshuffle is a byte diff and bills an ISR write.
     .order("slug")
-    .limit(3);
+    // Over-fetch so gone / malformed slugs can be dropped without emptying the strip.
+    .limit(12);
 
   const postsData = postsRaw as HomePostData[] | null;
 
-  return (postsData || [])
-    .map((post) => {
-      const translation = post.blog_post_translations.find((t) => t.locale === locale);
-      if (!translation) return null;
+  const posts = [];
+  for (const post of postsData || []) {
+    if (!isIndexableBlogSlug(post.slug)) continue;
+    const translation = post.blog_post_translations.find((t) => t.locale === locale);
+    if (!translation) continue;
 
-      // Sorted for stable output — see the tag sort in blog/[slug]/page.tsx.
-      const tags = (post.blog_post_tags || [])
-        .map((pt) => ({
-          slug: pt.blog_tags.slug,
-          name:
-            pt.blog_tags.blog_tag_translations.find((t) => t.locale === locale)
-              ?.name || pt.blog_tags.slug,
-        }))
-        .sort((a, b) => a.slug.localeCompare(b.slug));
+    // Sorted for stable output — see the tag sort in blog/[slug]/page.tsx.
+    const tags = (post.blog_post_tags || [])
+      .map((pt) => ({
+        slug: pt.blog_tags.slug,
+        name:
+          pt.blog_tags.blog_tag_translations.find((t) => t.locale === locale)
+            ?.name || pt.blog_tags.slug,
+      }))
+      .sort((a, b) => a.slug.localeCompare(b.slug));
 
-      return {
-        slug: post.slug,
-        title: translation.title,
-        excerpt: translation.excerpt,
-        imageUrl: post.image_url,
-        imageAlt: translation.image_alt,
-        publishedAt: post.published_at,
-        tags,
-      };
-    })
-    .filter((p): p is NonNullable<typeof p> => p !== null);
+    posts.push({
+      slug: post.slug,
+      title: translation.title,
+      excerpt: translation.excerpt,
+      imageUrl: post.image_url,
+      imageAlt: translation.image_alt,
+      publishedAt: post.published_at,
+      tags,
+    });
+    if (posts.length === 3) break;
+  }
+  return posts;
 }
 
 const faqKeys = [

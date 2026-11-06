@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { detectPlatform, type Platform } from "@/lib/detect-platform";
 import { trackCta } from "@/lib/track-cta";
-// Calm+ pill for the `plus` branch.
 import { PLUS_BODY, PLUS_BTN, PLUS_ICON, PLUS_ICON_TONE, PLUS_TITLE_SM } from "@/app/[locale]/design-lab/plus-recipes";
 import { DopplerLogo } from "@/components/layout/doppler-logo";
 
@@ -13,8 +12,17 @@ const APP_STORE_URL =
 const GOOGLE_PLAY_URL =
   "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
 
-/** `plus`: the Calm+ preview, passed down from the server page through BlogContent. */
-export function BlogInlineCta({ plus = false }: { plus?: boolean }) {
+interface BlogInlineCtaProps {
+  /** Calm+ preview, passed from the server page through BlogContent. */
+  plus?: boolean;
+  /** Site-relative path for desktop CTAs (install / landing / product). */
+  desktopHref?: string;
+}
+
+export function BlogInlineCta({
+  plus = false,
+  desktopHref = "/downloads",
+}: BlogInlineCtaProps) {
   const t = useTranslations("blog.inlineCta");
   const [platform, setPlatform] = useState<Platform>("desktop");
 
@@ -26,23 +34,18 @@ export function BlogInlineCta({ plus = false }: { plus?: boolean }) {
     ios: { href: APP_STORE_URL, label: t("downloadIos"), icon: <AppleIcon /> },
     android: { href: GOOGLE_PLAY_URL, label: t("downloadAndroid"), icon: <PlayIcon /> },
     mac: { href: APP_STORE_URL, label: t("downloadIos"), icon: <AppleIcon /> },
-    windows: { href: "/downloads", label: t("downloadDesktop"), icon: <DownloadIcon /> },
-    desktop: { href: "/downloads", label: t("downloadDesktop"), icon: <DownloadIcon /> },
+    windows: { href: desktopHref, label: t("downloadDesktop"), icon: <DownloadIcon /> },
+    desktop: { href: desktopHref, label: t("downloadDesktop"), icon: <DownloadIcon /> },
   }[platform];
-
-  const handleClick = () => {
-    trackCta("blog-inline", platform);
-  };
 
   const link = {
     href: config.href,
     target: platform === "desktop" ? undefined : "_blank",
     rel: platform === "desktop" ? undefined : "noopener noreferrer",
-    onClick: handleClick,
+    onClick: () => trackCta("blog-inline", platform),
   };
 
   if (plus) {
-    // Calm+: a card on the tonal ramp, the wave mark as a duotone glyph, one flat pill.
     return (
       <div className="not-prose my-10 rounded-[22px] bg-(--c-card) p-5 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">

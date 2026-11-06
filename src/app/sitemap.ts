@@ -8,6 +8,7 @@ import { SECURITY_LOCALES, isSecurityLocale } from "@/i18n/security-locales";
 import { HOW_IT_WORKS_LOCALES, isHowItWorksLocale } from "@/i18n/how-it-works-locales";
 import { VPN_PROTOCOLS_LOCALES, isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 import { ARTICLE_SLUGS as PROTOCOL_ARTICLE_SLUGS } from "@/lib/vpn-protocols";
+import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 // Prerender all 44 shards at BUILD time and serve them as static files from
 // the CDN. Googlebot fetches every shard in /sitemap.xml in parallel; when
@@ -94,6 +95,8 @@ const fetchPostsByLocale = unstable_cache(
     };
     const byLocale: PostsByLocale = {};
     for (const row of (data ?? []) as unknown as Row[]) {
+      // Same gate as blog index — never advertise gone or malformed slugs.
+      if (!isIndexableBlogSlug(row.slug)) continue;
       // The locales this post genuinely has. Sorted for the same reason the
       // query above is ordered: an unordered embed reshuffles between reads,
       // which rewrites every shard's bytes and bills a full set of ISR writes
@@ -117,7 +120,7 @@ const fetchPostsByLocale = unstable_cache(
     }
     return byLocale;
   },
-  ["sitemap-blog-posts-by-locale-reviewed-v3"],
+  ["sitemap-blog-posts-by-locale-reviewed-v4"],
   { revalidate: 86400, tags: ["sitemap"] }
 );
 

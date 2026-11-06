@@ -81,6 +81,7 @@ export async function Footer() {
   const tRussia = await getTranslations("vpnForRussia.related");
   const tChina = await getTranslations("vpnForChina.related");
   const tIos = await getTranslations("vpnForIos.related");
+  const tDownloads = await getTranslations("downloads");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
   // /security ships in the hand-translated core-market locales only
@@ -91,6 +92,7 @@ export async function Footer() {
   const productLinks: LinkItem[] = [
     { href: "/#pricing", label: t("pricing") },
     { href: "/downloads", label: t("download") },
+    { href: "/install", label: tDownloads("installGuide") },
     ...(showBlogLink ? [{ href: "/blog", label: t("blog") }] : []),
     { href: "/bypass-censorship", label: t("bypassCensorship") },
     { href: "/vless-vpn", label: t("vlessVpn") },

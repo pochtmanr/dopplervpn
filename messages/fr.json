@@ -258,7 +258,7 @@
       "expressvpn": "ExpressVPN",
       "openvpn": "OpenVPN"
     },
-    "note": "Conservation de la vitesse en % de la connexion de base. Basé sur des tests à 100 Mbps sur des serveurs EU, mars 2026.",
+    "note": "Illustrative relative ordering from internal EU lab checks on a 100 Mbps baseline (March 2026)—not a third-party benchmark. Protocol ratings and sources:",
     "stats": {
       "overhead": {
         "value": "<1%",
@@ -269,14 +269,15 @@
         "label": "Latence ajoutée"
       },
       "detection": {
-        "value": "0",
-        "label": "Détections DPI"
+        "value": "Low",
+        "label": "DPI risk profile"
       },
       "throughput": {
         "value": "94%",
         "label": "Vitesse conservée"
       }
-    }
+    },
+    "methodologyCta": "Voir les notes des protocoles et les sources"
   },
   "priceComparison": {
     "title": "Protection premium, prix juste",
@@ -318,7 +319,7 @@
       },
       "noLogs": {
         "question": "Doppler VPN est-il vraiment sans journaux ?",
-        "answer": "Oui, nous appliquons une politique stricte de zéro journal. Nous ne suivons, stockons ni partageons votre activité de navigation, horodatages de connexion, adresses IP ou toute autre donnée personnelle. Votre confidentialité est notre priorité."
+        "answer": "Oui pour le trafic VPN : nous n’enregistrons pas l’activité de navigation, les requêtes DNS, les destinations du trafic ni la durée des sessions. La connexion laisse un court enregistrement d’authentification (dont l’IP de la requête API), conservé jusqu’à 90 jours contre les abus — il montre qu’un appareil s’est connecté, pas où vous êtes allé. Détails dans la Politique de confidentialité."
       },
       "adBlocker": {
         "question": "Comment fonctionne le bloqueur de publicités ?",
@@ -334,7 +335,7 @@
       },
       "platforms": {
         "question": "Quelles plateformes sont prises en charge ?",
-        "answer": "Doppler VPN est disponible sur iOS (iPhone et iPad), macOS et Android. Nous travaillons constamment à l'élargissement de notre support de plateformes."
+        "answer": "Doppler VPN est disponible sur iOS (iPhone et iPad), Android, macOS et Windows."
       },
       "cancel": {
         "question": "Comment annuler mon abonnement ?",
@@ -342,7 +343,7 @@
       },
       "trial": {
         "question": "Y a-t-il un essai gratuit ?",
-        "answer": "Cela dépend de l'endroit où vous vous abonnez. Sur l'App Store et Google Play, chaque nouvel utilisateur bénéficie d'un essai gratuit de 3 jours. Sur ce site, il n'y a pas d'essai : à la place, chaque formule inclut des jours offerts — 1 semaine sur la formule 1 mois, un demi-mois sur celle de 6 mois et 1 mois sur la formule annuelle. Une garantie satisfait ou remboursé de 30 jours s'applique à toutes les formules."
+        "answer": "Cela dépend de l'endroit où vous vous abonnez. Sur l'App Store et Google Play, chaque nouvel utilisateur bénéficie d'un essai gratuit de 3 jours. Sur ce site, il n'y a pas d'essai : à la place, chaque formule inclut des jours offerts — 1 semaine sur la formule 1 mois, un demi-mois sur celle de 6 mois et 1 mois sur la formule annuelle. Une garantie satisfait ou remboursé de 30 jours s'applique à toutes les formules. Les remboursements suivent notre Politique de remboursement. Les remboursements suivent notre Politique de remboursement."
       },
       "whatIsIncluded": {
         "question": "Que comprend Premium ?",
@@ -656,14 +657,14 @@
       }
     },
     "stickyBar": {
-      "message": "Protégez votre navigation. Doppler VPN ne nécessite aucune inscription et ne conserve aucun journal. Essayez gratuitement pendant 3 jours.",
+      "message": "Protect your browsing. Doppler VPN needs no registration. VPN traffic stays unlogged; a short auth record may be kept up to 90 days. Try free for 3 days on the App Store and Google Play.",
       "cta": "Essayer 3 jours gratuitement",
       "dismiss": "Fermer",
       "dismissLabel": "Fermer la bannière de téléchargement"
     },
     "inlineCta": {
       "headline": "Protégez votre vie privée avec Doppler VPN",
-      "subtext": "3 jours d'essai gratuit. Sans inscription. Sans journaux.",
+      "subtext": "3-day free trial on stores. No registration. VPN traffic unlogged.",
       "downloadIos": "Télécharger pour iOS",
       "downloadAndroid": "Télécharger pour Android",
       "downloadDesktop": "Télécharger l'app"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { useInView } from "@/hooks/use-in-view";
@@ -65,7 +66,12 @@ export function SpeedComparison() {
                 visible={visible}
               />
             ))}
-            <p className="text-xs text-text-muted pt-2">{t("note")}</p>
+            <p className="text-xs text-text-muted pt-2">
+              {t("note")}{" "}
+              <Link href="/vpn-protocols" className="text-accent-teal hover:text-accent-gold underline-offset-2 hover:underline">
+                {t("methodologyCta")}
+              </Link>
+            </p>
           </div>
 
           {/* Right — key stats */}

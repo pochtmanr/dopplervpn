@@ -24,6 +24,8 @@ import { Fragment } from "react";
 import { calmPlusPreview, PlusPageShell } from "../../design-lab/home-preview";
 import { PLUS_CHIP } from "../../design-lab/plus-recipes";
 import { currentBlogTranslations } from "@/lib/supabase/public-blog";
+import { resolveBlogCtaTarget } from "@/lib/blog-cta-target";
+import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 // Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
@@ -299,7 +301,7 @@ async function getPostData(locale: string, slug: string) {
         publishedAt: link.blog_posts.published_at,
       };
     })
-    .filter((p) => p.title);
+    .filter((p) => p.title && isIndexableBlogSlug(p.slug));
 
   return {
     slug: post.slug,
@@ -346,6 +348,10 @@ export default async function BlogPostPage({ params }: Props) {
 
   const readingTime = estimateReadingTime(post.content);
   const plus = calmPlusPreview;
+  const { href: desktopHref } = resolveBlogCtaTarget({
+    slug: post.slug,
+    tagSlugs: post.tags.map((tag) => tag.slug),
+  });
   const Scope = plus ? PlusPageShell : Fragment;
   const tagChip = (tag: { slug: string; name: string }) =>
     plus ? (
@@ -450,7 +456,12 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Article Content */}
           <div className="max-w-3xl mx-auto">
-            <BlogContent content={post.content} locale={locale} plus={plus} />
+            <BlogContent
+              content={post.content}
+              locale={locale}
+              plus={plus}
+              desktopHref={desktopHref}
+            />
 
             {/* Tags at bottom */}
             {post.tags.length > 0 && (
@@ -484,10 +495,10 @@ export default async function BlogPostPage({ params }: Props) {
       </Scope>
       {plus ? (
         <PlusPageShell>
-          <BlogStickyBar plus />
+          <BlogStickyBar plus desktopHref={desktopHref} />
         </PlusPageShell>
       ) : (
-        <BlogStickyBar />
+        <BlogStickyBar desktopHref={desktopHref} />
       )}
       <Footer />
     </>

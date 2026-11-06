@@ -258,7 +258,7 @@
       "expressvpn": "ExpressVPN",
       "openvpn": "OpenVPN"
     },
-    "note": "基准连接速度保留百分比。基于欧盟服务器 100 Mbps 基准测试，2026 年 3 月。",
+    "note": "基于内部欧盟实验室在 100 Mbps 基线下的相对示意排序（2026 年 3 月）——非第三方基准测试。协议评分与来源：",
     "stats": {
       "overhead": {
         "value": "<1%",
@@ -269,14 +269,15 @@
         "label": "新增延迟"
       },
       "detection": {
-        "value": "0",
-        "label": "DPI 检测次数"
+        "value": "低",
+        "label": "DPI 风险特征"
       },
       "throughput": {
         "value": "94%",
         "label": "速度保留率"
       }
-    }
+    },
+    "methodologyCta": "查看协议评分与来源"
   },
   "priceComparison": {
     "title": "顶级防护，合理定价",
@@ -318,7 +319,7 @@
       },
       "noLogs": {
         "question": "Doppler VPN真的不保存日志吗？",
-        "answer": "是的，我们执行严格的零日志政策。我们不追踪、存储或分享您的任何浏览活动、连接时间戳、IP地址或任何其他个人数据。您的隐私是我们的首要任务。"
+        "answer": "就 VPN 流量而言可以：我们不记录浏览活动、DNS 查询、流量目的地或会话时长。登录会留下短暂的认证记录（含 API 请求 IP），最多保留 90 天用于防滥用——只说明有设备连接过，不会显示你访问了哪里。完整说明见隐私政策。"
       },
       "adBlocker": {
         "question": "广告拦截器如何工作？",
@@ -334,7 +335,7 @@
       },
       "platforms": {
         "question": "支持哪些平台？",
-        "answer": "Doppler VPN支持iOS（iPhone和iPad）、macOS和Android。我们正在不断扩大平台支持。"
+        "answer": "Doppler VPN 支持 iOS（iPhone 和 iPad）、Android、macOS 和 Windows。"
       },
       "cancel": {
         "question": "如何取消订阅？",
@@ -342,7 +343,7 @@
       },
       "trial": {
         "question": "有免费试用吗？",
-        "answer": "这取决于您在哪里订阅。通过 App Store 和 Google Play 订阅，每位新用户可获得 3 天免费试用。在本站订阅则没有试用期，而是每个套餐都会额外赠送免费天数：月付赠 1 周，半年付赠半个月，年付赠 1 个月。所有套餐均适用 30 天退款保证。"
+        "answer": "这取决于您在哪里订阅。通过 App Store 和 Google Play 订阅，每位新用户可获得 3 天免费试用。在本站订阅则没有试用期，而是每个套餐都会额外赠送免费天数：月付赠 1 周，半年付赠半个月，年付赠 1 个月。 退款规则见退款政策。 退款规则见退款政策。"
       },
       "whatIsIncluded": {
         "question": "高级版包含什么？",
@@ -657,14 +658,14 @@
       }
     },
     "stickyBar": {
-      "message": "保护您的浏览安全。Doppler VPN 无需注册，且不保留任何日志。免费试用 3 天。",
+      "message": "Protect your browsing. Doppler VPN needs no registration. VPN traffic stays unlogged; a short auth record may be kept up to 90 days. Try free for 3 days on the App Store and Google Play.",
       "cta": "免费试用 3 天",
       "dismiss": "关闭",
       "dismissLabel": "关闭下载横幅"
     },
     "inlineCta": {
       "headline": "使用 Doppler VPN 保护您的隐私",
-      "subtext": "3 天免费试用。无需注册。无日志。",
+      "subtext": "3-day free trial on stores. No registration. VPN traffic unlogged.",
       "downloadIos": "下载 iOS 版",
       "downloadAndroid": "下载 Android 版",
       "downloadDesktop": "下载应用"

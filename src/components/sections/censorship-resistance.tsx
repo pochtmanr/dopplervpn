@@ -4,14 +4,16 @@ import { Link } from "@/i18n/navigation";
 import { Section, SectionHeader } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 
+const BYPASS_HREF = "/bypass-censorship";
+
 const items = [
-  { key: "dpi", icon: "scan" },
-  { key: "tls", icon: "lock" },
-  { key: "fingerprint", icon: "fingerprint" },
-  { key: "regions", icon: "globe" },
+  { key: "dpi", icon: "scan", variant: "gradient" },
+  { key: "tls", icon: "lock", variant: "gradient" },
+  { key: "fingerprint", icon: "fingerprint", variant: "gradient" },
+  { key: "regions", icon: "globe", variant: "image" },
 ] as const;
 
-const icons: Record<string, React.ReactNode> = {
+const icons: Record<(typeof items)[number]["icon"], React.ReactNode> = {
   scan: (
     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
@@ -35,63 +37,100 @@ const icons: Record<string, React.ReactNode> = {
   ),
 };
 
+function LearnMoreLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-2 text-accent-teal group-hover:text-accent-gold transition-colors text-sm font-medium">
+      {children}
+      <svg className="w-4 h-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+      </svg>
+    </span>
+  );
+}
+
+function ItemBody({
+  title,
+  description,
+  learnMore,
+  icon,
+  iconClassName,
+}: {
+  title: string;
+  description: string;
+  learnMore: string;
+  icon: React.ReactNode;
+  iconClassName: string;
+}) {
+  return (
+    <>
+      <div className={iconClassName}>{icon}</div>
+      <h3 className="text-lg font-semibold text-text-primary mb-1.5">{title}</h3>
+      <p className="text-sm text-text-muted leading-relaxed mb-4">{description}</p>
+      <LearnMoreLabel>{learnMore}</LearnMoreLabel>
+    </>
+  );
+}
+
 export function CensorshipResistance() {
   const t = useTranslations("censorshipResistance");
+  const learnMore = t("learnMore");
 
   return (
     <Section id="censorship-resistance">
       <SectionHeader title={t("title")} subtitle={t("subtitle")} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {items.map(({ key, icon }, i) => (
-          <Reveal key={key} delay={i * 50}>
-            {key === "regions" ? (
-              <Link href="/bypass-censorship" className="relative h-full rounded-2xl overflow-hidden border border-overlay/10 group block">
-                <Image
-                  src="/images/downloads.avif"
-                  alt={t(`items.${key}.title`)}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/95 via-bg-primary/60 to-transparent" />
-                <div className="relative p-6">
-                  <div className="w-10 h-10 rounded-xl bg-accent-teal/15 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-3">
-                    {icons[icon]}
+        {items.map(({ key, icon, variant }, i) => {
+          const title = t(`items.${key}.title`);
+          const description = t(`items.${key}.description`);
+          const glyph = icons[icon];
+
+          return (
+            <Reveal key={key} delay={i * 50}>
+              {variant === "image" ? (
+                <Link
+                  href={BYPASS_HREF}
+                  className="relative h-full rounded-2xl overflow-hidden border border-overlay/10 group block"
+                >
+                  <Image
+                    src="/images/downloads.avif"
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/95 via-bg-primary/60 to-transparent" />
+                  <div className="relative p-6">
+                    <ItemBody
+                      title={title}
+                      description={description}
+                      learnMore={learnMore}
+                      icon={glyph}
+                      iconClassName="w-10 h-10 rounded-xl bg-accent-teal/15 backdrop-blur-sm border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-3"
+                    />
                   </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-1.5">
-                    {t(`items.${key}.title`)}
-                  </h3>
-                  <p className="text-sm text-text-muted leading-relaxed mb-4">
-                    {t(`items.${key}.description`)}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-accent-teal group-hover:text-accent-gold transition-colors text-sm font-medium">
-                    {t("learnMore")}
-                    <svg className="w-4 h-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-            ) : (
-              <div className="group relative h-full rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300">
-                <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
-                <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4">
-                    {icons[icon]}
+                </Link>
+              ) : (
+                <Link
+                  href={BYPASS_HREF}
+                  className="group relative h-full rounded-2xl border border-overlay/10 bg-gradient-to-br from-accent-teal/[0.08] via-bg-secondary/60 to-accent-gold/[0.04] p-6 overflow-hidden backdrop-blur-sm hover:border-accent-teal/30 transition-colors duration-300 block"
+                >
+                  <div className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent" />
+                  <div className="absolute -top-12 -end-12 w-32 h-32 rounded-full bg-accent-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative">
+                    <ItemBody
+                      title={title}
+                      description={description}
+                      learnMore={learnMore}
+                      icon={glyph}
+                      iconClassName="w-10 h-10 rounded-xl bg-accent-teal/10 border border-accent-teal/20 flex items-center justify-center text-accent-teal mb-4"
+                    />
                   </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-1.5">
-                    {t(`items.${key}.title`)}
-                  </h3>
-                  <p className="text-sm text-text-muted leading-relaxed">
-                    {t(`items.${key}.description`)}
-                  </p>
-                </div>
-              </div>
-            )}
-          </Reveal>
-        ))}
+                </Link>
+              )}
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );

@@ -18,21 +18,21 @@ const SITE = "https://www.dopplervpn.org";
  * page exists in it. Blog links stay as written: a given post may not be
  * translated into this locale, and that URL would 404.
  */
+function pathAvailableInLocale(path: string, locale: string): boolean {
+  if (path.startsWith("/blog")) return false;
+  if (path.startsWith("/how-it-works")) return isHowItWorksLocale(locale);
+  if (path.startsWith("/security")) return isSecurityLocale(locale);
+  if (path.startsWith("/vpn-protocols")) return isVpnProtocolsLocale(locale);
+  return true;
+}
+
 function localizeHref(href: string | undefined, locale: string): string | undefined {
   if (!href || locale === "en") return href;
   const m = /^(?:https:\/\/www\.dopplervpn\.org)?\/en(\/[^?#]*)?([?#].*)?$/.exec(href);
   if (!m) return href;
   const path = m[1] ?? "";
-  const available = path.startsWith("/blog")
-    ? false
-    : path.startsWith("/how-it-works")
-      ? isHowItWorksLocale(locale)
-      : path.startsWith("/security")
-        ? isSecurityLocale(locale)
-        : path.startsWith("/vpn-protocols")
-          ? isVpnProtocolsLocale(locale)
-          : true;
-  return available ? `/${locale}${path}${m[2] ?? ""}` : href;
+  if (!pathAvailableInLocale(path, locale)) return href;
+  return `/${locale}${path}${m[2] ?? ""}`;
 }
 
 function isExternal(href: string | undefined): boolean {
@@ -44,6 +44,8 @@ interface BlogContentProps {
   locale: string;
   /** Calm+ preview, decided on the server page. */
   plus?: boolean;
+  /** Contextual desktop CTA path from `resolveBlogCtaTarget`. */
+  desktopHref?: string;
 }
 
 /** Calm+ preview: the same prose on the tonal ramp (plus-recipes.tsx). */
@@ -70,7 +72,7 @@ function findNthH2Line(markdown: string, n: number): number | null {
   return null;
 }
 
-export function BlogContent({ content, locale, plus = false }: BlogContentProps) {
+export function BlogContent({ content, locale, plus = false, desktopHref }: BlogContentProps) {
   const isRtl = isRtlLocale(locale);
   const thirdH2Line = useMemo(() => findNthH2Line(content, 3), [content]);
 
@@ -183,7 +185,7 @@ export function BlogContent({ content, locale, plus = false }: BlogContentProps)
             return (
               <>
                 <h2 {...props}>{children}</h2>
-                {isThirdH2 && <BlogInlineCta plus={plus} />}
+                {isThirdH2 && <BlogInlineCta plus={plus} desktopHref={desktopHref} />}
               </>
             );
           },

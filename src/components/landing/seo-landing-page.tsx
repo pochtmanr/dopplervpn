@@ -11,6 +11,7 @@ import { isSecurityLocale } from "@/i18n/security-locales";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import type { CtaLocation } from "@/lib/track-cta";
 import { RelatedBlogPosts } from "@/components/blog/related-blog-posts";
+import { withQuery } from "@/lib/with-query";
 
 const baseUrl = "https://www.dopplervpn.org";
 
@@ -147,7 +148,11 @@ function DownloadButtons({
   primaryPlatform: PrimaryPlatform;
   location: CtaLocation;
 }) {
-  const utm = `?utm_source=organic&utm_medium=seo&utm_campaign=${location}`;
+  const utmParams = {
+    utm_source: "organic",
+    utm_medium: "seo",
+    utm_campaign: location,
+  };
   const showIos = primaryPlatform !== "android";
   const showAndroid = primaryPlatform !== "ios";
 
@@ -157,7 +162,7 @@ function DownloadButtons({
         <TrackedDownloadLink
           location={location}
           platform="ios"
-          href={`${URLS.ios}${utm}`}
+          href={withQuery(URLS.ios, utmParams)}
           target="_blank"
           rel="noopener noreferrer"
           className="cta-key inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
@@ -171,7 +176,7 @@ function DownloadButtons({
           location={location}
           platform="android"
           variant="android-play"
-          href={`${URLS.androidPlayStore}${utm}`}
+          href={withQuery(URLS.androidPlayStore, utmParams)}
           target="_blank"
           rel="noopener noreferrer"
           className="cta-key inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
@@ -183,7 +188,7 @@ function DownloadButtons({
       <TrackedDownloadLink
         location={location}
         platform="telegram"
-        href={`${URLS.telegramBot}${utm}`}
+        href={withQuery(URLS.telegramBot, utmParams)}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-accent-gold/15 text-accent-gold hover:bg-accent-gold/25 transition-colors"
