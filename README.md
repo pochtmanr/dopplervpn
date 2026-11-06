@@ -85,6 +85,21 @@ The required set is Supabase (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_
 `SUPABASE_SERVICE_ROLE_KEY`) plus `NEXT_PUBLIC_SITE_URL` in production. If you add a
 `process.env.X`, add `X` to `.env.local.example` in the same commit.
 
+### Direct downloads (Mac DMG, iPhone TestFlight)
+
+Off by default; each flag reveals its button on `/downloads` and `/install`. Details in
+`.env.local.example`.
+
+| Variable | Effect |
+| --- | --- |
+| `MAC_DMG_ENABLED=1` | Shows "Download DMG" (build from the newest `mac-v*` GitHub release) |
+| `IOS_TESTFLIGHT_URL` | Public TestFlight link; shows "Install via TestFlight", target of `/api/ios/testflight` |
+| `IOS_LATEST_VERSION`, `IOS_LATEST_BUILD` | Version/build returned by `/api/ios/latest` (in-app "Check for Updates") |
+| `IOS_MIN_OS` | Minimum iOS in `/api/ios/latest` (default `18.0`) |
+
+Mac updates: `/api/mac/appcast.xml` is the Sparkle feed, built from the release body written by
+`doppler-apple/scripts/build-dmg.sh` (`build=<n>` and the `sparkle:edSignature="…" length="…"` line).
+
 ## Things worth knowing
 
 - **This repository is public.** No credentials, node IPs, VPS hostnames, personal addresses,

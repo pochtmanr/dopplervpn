@@ -18,6 +18,7 @@ interface PageProps {
  */
 const SECTIONS = [
   { key: "installFirst", id: "install-first" },
+  { key: "plans", id: "plans" },
   { key: "iphone", id: "iphone" },
   { key: "appleIdRegion", id: "apple-id-region" },
   { key: "mac", id: "mac" },
