@@ -16,6 +16,7 @@ import { PlatformLogo, type PlatformIcon } from "@/components/glyph/platform-ico
 import { SetupSection, type SetupPlatform } from "@/components/downloads/setup-section";
 import { DetectedCard, DetectedPlatformProvider } from "@/components/downloads/detected-platform";
 import type { CtaVariant } from "@/lib/track-cta";
+import { ANDROID_APK_URL, GOOGLE_PLAY_URL as PLAY_URL, HUAWEI_APPGALLERY_URL } from "@/config/platforms/android";
 import { seoTitle } from "@/lib/seo-title";
 import {
   CARD,
@@ -98,7 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 const URLS = {
   ios: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
-  androidPlayStore: "https://play.google.com/store/apps/details?id=org.dopplervpn.android",
+  androidPlayStore: PLAY_URL,
   mac: "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773",
   // One Windows build, x64 only. ARM64 Windows runs it under emulation; there is
   // no separate ARM64 installer to offer and no ARM64 tunnel that has been verified
@@ -107,7 +108,7 @@ const URLS = {
   // Standalone (sideload) build: no Play Billing, pays through the web checkout.
   // Same-origin on purpose — the route decides where the bytes come from, so the
   // link printed here survives a change of hosting. See the route's own header.
-  androidApk: "/api/android/download/latest",
+  androidApk: ANDROID_APK_URL,
   // The direct builds for people whose App Store has no Doppler (Russia, China):
   // a public TestFlight link for iPhone and a Developer ID DMG for Mac, both
   // paying through the web checkout. Same-origin for the same reason as the APK.
@@ -138,9 +139,13 @@ type Release = {
   status?: "review";
 };
 
-const RELEASES: Record<"ios" | "android" | "mac" | "windows", Release> = {
+type PlatformKey = "ios" | "android" | "huawei" | "mac" | "windows";
+
+const RELEASES: Record<PlatformKey, Release> = {
   ios:     { date: "2026-09-14", note: null },
   android: { date: "2026-08-16", note: null },
+  // The Huawei card serves the same standalone APK as the Android card's second button.
+  huawei:  { date: "2026-08-16", note: null },
   mac:     { date: "2026-09-13", note: null },
   windows: { date: "2026-08-16", note: "fullTunnel" },
 };
@@ -270,14 +275,15 @@ type PlatformButton = {
 const HOW_TO_NS = {
   ios: "vpnForIos",
   android: "vpnForAndroid",
+  huawei: "vpnForHuawei",
   mac: "vpnForMacos",
   windows: "vpnForWindows",
 } as const;
 
 const PLATFORMS: {
-  key: "ios" | "android" | "mac" | "windows";
+  key: PlatformKey;
   icon: PlatformIcon;
-  learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
+  learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-huawei" | "/vpn-for-macos" | "/vpn-for-windows";
   buttons: PlatformButton[];
   /**
    * Short caveats shown under the download buttons, each naming the namespace
@@ -334,6 +340,38 @@ const PLATFORMS: {
         variant: "android-apk",
         download: true,
         primary: false,
+      },
+    ],
+  },
+  {
+    // Huawei and Honor phones without Google services. Until the AppGallery listing is live
+    // (HUAWEI_APPGALLERY_URL), the APK is this card's primary button; once it is, AppGallery
+    // leads and the APK follows. HarmonyOS NEXT cannot run APKs, and the note says so.
+    key: "huawei",
+    icon: "appGallery",
+    learnHref: "/vpn-for-huawei",
+    notes: [{ ns: "apps", key: "huawei.apkNote", tone: "info" }],
+    buttons: [
+      ...(HUAWEI_APPGALLERY_URL
+        ? [
+            {
+              labelKey: "huawei.buttonAppGallery",
+              href: HUAWEI_APPGALLERY_URL,
+              variant: "huawei-appgallery" as const,
+              external: true,
+              primary: true,
+              logo: "appGallery" as const,
+            },
+          ]
+        : []),
+      {
+        labelKey: "huawei.buttonApk",
+        href: URLS.androidApk,
+        variant: "android-apk",
+        download: true,
+        primary: !HUAWEI_APPGALLERY_URL,
+        // As the primary it is a file, not a store: the Android mark, never AppGallery's.
+        logo: "android",
       },
     ],
   },
@@ -555,7 +593,8 @@ export default async function DownloadsPage({ params }: PageProps) {
             {/* ── Platform Cards ───────────────────────────────────── */}
             {/* Name, download, the platform's caveats, date. The app itself is
                 shown in the setup card below. */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            {/* Five cards: 2 + 2 + 1 on tablets, 3 + 2 on small laptops, one row from xl. */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
               {PLATFORMS.map(({ key, icon, learnHref, buttons, notes }, i) => {
                 return (
                   <Reveal key={key} delay={i * 50} className="h-full">

@@ -440,7 +440,8 @@
     "vpnForTiktokBan": "TikTok 禁令 VPN",
     "giveaway": "抽奖活动",
     "payWithCrypto": "加密货币支付",
-    "agents": "AI 代理专用"
+    "agents": "AI 代理专用",
+    "vpnForHuawei": "华为 VPN"
   },
   "privacy": {
     "title": "隐私政策",
@@ -749,7 +750,18 @@
       "step4": "选择套餐、订阅并连接！",
       "learnMore": "了解更多 Windows VPN 详情"
     },
-    "installGuide": "安装指南"
+    "installGuide": "安装指南",
+    "huawei": {
+      "title": "华为",
+      "buttonAppGallery": "在 AppGallery 获取",
+      "buttonApk": "下载 APK",
+      "apkNote": "适用于没有 Google Play 的华为和荣耀手机。不支持 HarmonyOS NEXT。",
+      "step1": "在手机上下载 APK",
+      "step2": "允许浏览器安装应用，然后点按“安装”",
+      "step3": "打开应用，在网站上选择套餐",
+      "step4": "轻点连接，即刻受到保护",
+      "learnMore": "了解更多华为手机 VPN 信息"
+    }
   },
   "support": {
     "title": "帮助中心与支持",
@@ -2545,117 +2557,246 @@
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Doppler VPN Android 版 — 快速、私密、抗审查",
-      "description": "从 Google Play 下载 Doppler VPN Android 版。VLESS-Reality 加密，无需注册，突破网络审查。3 天免费试用。"
-    },
-    "hero": {
-      "title": "适用于 Android 的 Doppler VPN",
-      "subtitle": "为 Android 打造的快速、私密、抗审查 VPN。无需注册 — 从 Google Play 下载即可秒速连接。包含 3 天免费试用，可完整使用所有功能。",
-      "cta": "从 Google Play 下载"
-    },
-    "features": {
-      "title": "为什么选择 Doppler VPN Android 版？",
-      "subtitle": "Doppler VPN 专为追求真正隐私且不愿牺牲速度、续航或易用性的 Android 用户打造。",
-      "vlessEncryption": {
-        "title": "VLESS-Reality 加密",
-        "description": "新一代协议，将 VPN 流量伪装为普通 HTTPS 浏览。你的连接对防火墙、深度包检测系统和运营商监控完全不可见。正是用于突破中国防火长城的同一技术。"
-      },
-      "noRegistration": {
-        "title": "无需注册",
-        "description": "无需邮箱、无需手机号、无需创建账号。从 Google Play 下载，打开应用即可立即连接。Doppler 采用基于设备的认证方式，你的身份始终完全私密。"
-      },
-      "oneTapConnect": {
-        "title": "一键连接",
-        "description": "按下一个按钮，Doppler 自动选择最快的服务器，建立加密隧道，保护你的全部流量。智能选路优化速度与稳定性。"
-      },
-      "bypassCensorship": {
-        "title": "突破审查和 DPI 封锁",
-        "description": "专为网络审查严格的国家设计 — 俄罗斯、伊朗、中国等。VLESS-Reality 让你的 VPN 流量与正常网页浏览无法区分，轻松击败 TSPU 和 GFW。"
-      },
-      "noLogs": {
-        "title": "严格的零日志政策",
-        "description": "Doppler 从不收集、存储或分享你的浏览数据。没有流量日志，没有 DNS 查询日志，也没有将你与所访问内容关联的记录。登录只会留下一条简短的认证记录，为防止滥用保留 90 天——它只显示某台设备连接过，绝不显示它去了哪里。"
-      },
-      "globalServers": {
-        "title": "6 个全球服务器节点",
-        "description": "连接到分布在欧洲及其他地区多个国家的服务器。每台服务器都运行 VLESS-Reality，并通过优化路由实现最低延迟和最高吞吐量。"
-      },
-      "freeTrial": {
-        "title": "3 天免费试用",
-        "description": "免费试用 Doppler VPN 3 天，完整使用所有功能。试用结束后，可选择月付、半年付或年付方案，最低每月仅 $3.33。通过 Google Play 管理订阅。"
-      },
-      "batteryEfficient": {
-        "title": "低功耗后台服务",
-        "description": "Doppler 使用 Android 原生的始终开启 VPN 框架，对电量影响极小。即使开启全天候保护，额外电量消耗不到 2%。针对三星、小米、一加、Pixel 及所有主流 Android 品牌优化。"
-      }
+      "title": "Doppler VPN Android 版：在其他 VPN 被封锁的地方照样可用",
+      "description": "适用于 Android 手机和平板的 Doppler VPN。VLESS-Reality 让你在俄罗斯、伊朗和中国保持连接，并提供智能路由和 Kill Switch。可从 Google Play 或以 APK 安装，Google Play 提供免费试用。"
     },
     "howItWorks": {
-      "title": "如何在 Android 上设置 VPN",
-      "subtitle": "30 秒内即可连接 — 无需任何技术知识。",
-      "step1": {
-        "title": "从 Google Play 下载",
-        "description": "在 Google Play 搜索「Doppler VPN」或点击下方的下载按钮。应用免费下载，体积不到 15 MB，兼容 Android 8.0（Oreo）及以上版本。"
+      "title": "如何在 Android 上设置",
+      "subtitle": "不到一分钟即可连接，无需任何技术知识。"
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "手机 · 平板 · 折叠屏",
+        "title": "Doppler VPN Android 版",
+        "subtitle": "轻点一下，手机即刻私密。Doppler 让连接看起来像一次普通的网站访问，因此在封锁其他 VPN 的网络上也能照常工作。",
+        "cta": "在 Google Play 获取",
+        "ctaSecondary": "下载 APK",
+        "note": "免费下载 · Google Play 提供 {days} 天免费试用 · 无需邮箱或手机号"
       },
-      "step2": {
-        "title": "打开应用",
-        "description": "在 Android 手机或平板上启动 Doppler VPN。没有注册界面、没有登记表单、没有邮箱验证。通过基于设备的认证自动创建账号。"
+      "chapters": {
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "在其他 VPN 被封锁的地方照样可用",
+          "body": "Doppler 的隧道看起来就像一次普通的 HTTPS 访问知名网站。俄罗斯、伊朗和中国那些识别并切断常规 VPN 的过滤系统会放行它，让你保持在线。",
+          "points": {
+            "p1": "每台服务器都使用 VLESS-Reality，无需任何设置",
+            "p2": "如果网络封锁了某台服务器，可更换它的连接所模仿的网站",
+            "p3": "轻点一下即可连接到快速服务器"
+          }
+        },
+        "route": {
+          "kicker": "智能路由",
+          "title": "本地网站不走隧道",
+          "body": "银行和本地服务常常拒绝境外地址。智能路由让它们直接走你自己的网络，其他流量则通过 Doppler。",
+          "points": {
+            "p1": "只需选择一次你所在的国家",
+            "p2": "为本地网站以及政府和银行网站准备好的规则",
+            "p3": "添加你自己希望绕过 VPN 的域名"
+          }
+        },
+        "killSwitch": {
+          "kicker": "Kill Switch",
+          "title": "隧道断开时不会泄露任何数据",
+          "body": "如果 VPN 连接中断，Kill Switch 会阻断所有流量，直到 Doppler 恢复连接，任何应用都不会悄悄退回到你的真实地址。",
+          "points": {
+            "p1": "VPN 意外断开时阻断网络",
+            "p2": "Always On 会在连接断开时自动重连",
+            "p3": "一键打开 Android 自带的始终开启 VPN，重启后保护自动恢复"
+          }
+        },
+        "account": {
+          "kicker": "一个账户",
+          "title": "无需邮箱，一个 ID 用于所有设备",
+          "body": "打开应用即会生成一个随机的账户 ID。无需邮箱，无需手机号。同一个 ID 可以登录你的其他手机和平板，以及 iPhone、Mac 和 Windows 电脑。",
+          "points": {
+            "p1": "查看所有已登录的设备，移除不再使用的设备",
+            "p2": "内置测速功能，直接测量隧道本身",
+            "p3": "套餐属于你的 ID，而不是某一部手机"
+          }
+        }
       },
-      "step3": {
-        "title": "选择方案",
-        "description": "开始 3 天免费试用或选择订阅方案。月付（$6.99）、半年付（$29.99）或年付（$39.99）。通过 Google Play 直接管理订阅。"
+      "ecosystem": {
+        "kicker": "Android 无处不在",
+        "title": "今天是手机，接下来是更大的屏幕",
+        "body": "Doppler 支持 Android 8.0 及更高版本，从入门机到旗舰机都能用。适配平板、Chromebook 和电视的界面正在开发中。",
+        "phone": {
+          "title": "手机",
+          "body": "完整应用，支持 Android 8.0 或更高版本"
+        },
+        "tablet": {
+          "title": "平板和折叠屏",
+          "body": "现已可用；双栏布局即将推出"
+        },
+        "chromebook": {
+          "title": "Chromebook",
+          "body": "即将推出"
+        },
+        "tv": {
+          "title": "Android TV",
+          "body": "即将推出"
+        }
       },
-      "step4": {
-        "title": "点击连接",
-        "description": "按下连接按钮。Doppler 自动选择最佳服务器，建立加密的 VLESS-Reality 隧道，并通过它路由你的全部流量。IP 地址被隐藏，数据已加密。"
+      "privacy": {
+        "trial": {
+          "title": "免费 {days} 天",
+          "body": "付费前先体验全部功能。随时可在 Google Play 中取消。"
+        }
+      },
+      "setup": {
+        "title": "一分钟内即可就绪",
+        "subtitle": "无需注册表单，无需邮箱，无需任何配置。",
+        "s1": {
+          "title": "安装应用",
+          "body": "从 Google Play 获取 Doppler。手机上没有 Google Play？请从本页下载 APK。"
+        },
+        "s2": {
+          "title": "打开应用",
+          "body": "首次启动时会自动生成你的账户 ID。无需邮箱或手机号。"
+        },
+        "s3": {
+          "title": "轻点连接",
+          "body": "在 Google Play 开始 {days} 天免费试用，或选择每月 {price} 起的套餐。"
+        }
+      },
+      "faq": {
+        "title": "关于 Android 版 Doppler 的常见问题",
+        "q1": {
+          "question": "Doppler 支持哪些 Android 手机？",
+          "answer": "任何运行 Android 8.0 或更高版本的手机或平板：三星 Galaxy、Pixel、小米、一加、摩托罗拉等。没有 Google 服务的华为和荣耀手机可以安装 APK，华为页面有详细说明。"
+        },
+        "q2": {
+          "question": "Google Play 还是 APK：该选哪个？",
+          "answer": "如果你的手机有 Google Play，就选它：应用会自动更新，还有 {days} 天免费试用。APK 适用于没有 Google Play 的手机，需在网站上用银行卡或加密货币付款，有更新时应用会提醒你。"
+        },
+        "q3": {
+          "question": "在俄罗斯、伊朗和中国能用吗？",
+          "answer": "能。Doppler 使用 VLESS-Reality，让隧道看起来像一次普通的 HTTPS 访问知名网站。这就是它在检测并封锁其他 VPN 协议的网络上仍能正常工作的原因。"
+        },
+        "q4": {
+          "question": "Kill Switch 有什么作用？",
+          "answer": "开启后，如果 VPN 连接意外断开，所有网络流量都会被阻断，直到 Doppler 重新连接。你的应用绝不会在你不知情的情况下退回到你的真实地址。"
+        },
+        "q5": {
+          "question": "如何取消订阅？",
+          "answer": "如果你是在 Google Play 订阅的，请打开 Play 商店，点按你的头像，然后依次进入“付款和订阅”、“订阅”，取消 Doppler VPN。访问权限将持续到已付费周期结束。在网站上购买的套餐为一次性付款，永远不会自动续订。"
+        }
+      },
+      "cta": {
+        "title": "获取 Android 版 Doppler",
+        "subtitle": "免费下载，Google Play 提供 {days} 天免费试用。无需邮箱，无需手机号。"
       }
+    }
+  },
+  "vpnForHuawei": {
+    "metadata": {
+      "title": "华为和荣耀手机的 Doppler VPN：无需 Google 服务",
+      "description": "适用于没有 Google Play 的华为和荣耀手机的 VPN。安装 Doppler APK，在网站上用银行卡或加密货币付款，通过 VLESS-Reality 连接。"
     },
-    "faq": {
-      "title": "常见问题 — Doppler VPN Android 版",
-      "q1": {
-        "question": "Doppler VPN 在三星设备上能用吗？",
-        "answer": "可以。Doppler VPN 完全兼容所有运行 Android 8.0（Oreo）及以上版本的三星 Galaxy 手机和平板。包括 Galaxy S 系列、Galaxy A 系列、Galaxy Z Fold、Galaxy Z Flip 和 Galaxy Tab。Doppler 集成了三星的始终开启 VPN 设置，提供全天候保护。"
+    "howItWorks": {
+      "title": "如何在华为手机上设置",
+      "subtitle": "下载 APK，允许一次，然后连接。"
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "华为 · 荣耀 · 无 Google 服务",
+        "title": "华为和荣耀手机的 Doppler VPN",
+        "subtitle": "没有 Google Play 的手机也能用上同样的 Doppler：轻点一下即可获得私密连接，看起来像一次普通的网站访问，即使在封锁其他 VPN 的网络上也一样。",
+        "cta": "在 AppGallery 获取",
+        "ctaSecondary": "下载 APK",
+        "note": "免费下载 · 在网站上用银行卡或加密货币付款 · 无需邮箱或手机号",
+        "appGalleryNote": "即将上架 AppGallery。在此之前，请从本页安装 APK。"
       },
-      "q2": {
-        "question": "Doppler VPN 费电吗？",
-        "answer": "不费电。即使启用始终开启 VPN，Doppler VPN 的额外电量消耗也不到 2%。VLESS-Reality 协议在设计上追求高效，CPU 开销极低。为获得最佳体验，请在「设置 > 应用 > Doppler VPN > 电池 > 不受限制」中将 Doppler 排除在 Android 电池优化之外。"
+      "chapters": {
+        "noGoogle": {
+          "kicker": "无需 Google 服务",
+          "title": "专为没有 Google Play 的手机打造",
+          "body": "Doppler APK 不需要任何 Google 服务。它直接从本网站安装，有新版本时会提醒你，无需到处寻找更新。",
+          "points": {
+            "p1": "直接从 Doppler 官网下载",
+            "p2": "无需 Google 账号，也无需 Play 服务",
+            "p3": "有更新时应用内会显示提示"
+          }
+        },
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "在 VPN 被封锁的地方保持连接",
+          "body": "它和 Google Play 上的应用完全相同。隧道看起来像一次普通的 HTTPS 访问知名网站，因此切断常规 VPN 的过滤系统会放行它。",
+          "points": {
+            "p1": "每台服务器都使用 VLESS-Reality",
+            "p2": "智能路由让本地网站和银行走你自己的网络",
+            "p3": "VPN 断开时，Kill Switch 会阻断流量"
+          }
+        },
+        "pay": {
+          "kicker": "网页付款",
+          "title": "银行卡或加密货币，无需商店账号",
+          "body": "没有 Google Play 就没有商店支付，所以你需要在 Doppler 网站上订阅。用银行卡或加密货币付款，套餐会直接添加到你的账户 ID。",
+          "points": {
+            "p1": "用银行卡或加密货币付款",
+            "p2": "网页套餐附赠额外天数，代替商店试用",
+            "p3": "一次性付款：不会在你不知情时续订"
+          }
+        },
+        "phones": {
+          "kicker": "适用机型",
+          "title": "EMUI、Magic UI 以及 HarmonyOS 4 及以下版本",
+          "body": "运行 EMUI 或 HarmonyOS 2 至 4 的华为手机，以及运行 Magic UI 的荣耀手机都能运行 Android 应用，因此可以安装 APK。HarmonyOS NEXT 完全无法运行 Android 应用，因此不支持 Doppler。",
+          "points": {
+            "p1": "运行 EMUI 或 HarmonyOS 2、3、4 的华为手机",
+            "p2": "荣耀手机，无论是否有 Google 服务",
+            "p3": "不支持：HarmonyOS NEXT（HarmonyOS 5 及更高版本）"
+          }
+        }
       },
-      "q3": {
-        "question": "如何在 Android 上设置 VPN？",
-        "answer": "在 Android 上设置 Doppler VPN 只需不到 30 秒：1) 从 Google Play 下载，2) 打开应用（无需注册），3) 点击连接。Doppler 自动完成所有技术设置 — 配置 VPN 配置文件、选择最佳服务器并建立加密隧道。"
+      "privacy": {
+        "pay": {
+          "title": "银行卡或加密货币",
+          "body": "无需商店支付。在网站上付款；网页套餐附赠额外天数，代替商店试用。"
+        }
       },
-      "q4": {
-        "question": "在俄罗斯、中国和伊朗能用吗？",
-        "answer": "可以。Doppler 使用 VLESS-Reality 协议，将 VPN 流量伪装为普通 HTTPS 网页浏览。这使得俄罗斯 TSPU、中国防火长城或伊朗过滤系统等审查机制极难检测和封锁。Doppler 专为重度审查地区的用户设计。"
+      "setup": {
+        "title": "三步完成安装",
+        "subtitle": "大约一分钟，Android 只会询问一次。",
+        "s1": {
+          "title": "下载 APK",
+          "body": "在你想要保护的手机上，点按本页的下载按钮。"
+        },
+        "s2": {
+          "title": "允许安装",
+          "body": "Android 会请你允许浏览器或文件管理应用安装应用。打开该选项，返回后点按“安装”。之后可以再关闭它。"
+        },
+        "s3": {
+          "title": "打开并连接",
+          "body": "首次启动时会自动生成你的账户 ID。在网站上选择每月 {price} 起的套餐，然后轻点连接。"
+        }
       },
-      "q5": {
-        "question": "如何取消订阅？",
-        "answer": "在 Android 上取消 Doppler VPN 订阅：打开 Google Play > 点击头像 > 付款和订阅 > 订阅 > Doppler VPN > 取消订阅。在当前计费周期结束前，你仍可继续使用。"
+      "faq": {
+        "title": "关于华为手机上的 Doppler 的常见问题",
+        "q1": {
+          "question": "安装 APK 安全吗？",
+          "answer": "请只从本页下载。APK 由 Doppler 签名，Android 会拒绝安装任何其他人签名的更新来覆盖它。Android 对所有来自商店以外的应用都会显示警告，这是正常的。"
+        },
+        "q2": {
+          "question": "Doppler 会上架 AppGallery 吗？",
+          "answer": "我们正在准备 AppGallery 上架。在上架之前，请通过本页的 APK 安装，应用完全相同。"
+        },
+        "q3": {
+          "question": "HarmonyOS NEXT 上能用吗？",
+          "answer": "不能。HarmonyOS NEXT（HarmonyOS 5 及更高版本）只能运行它自己的应用，无法安装 APK。运行 EMUI 或 HarmonyOS 4 及更早版本的手机可以安装。"
+        },
+        "q4": {
+          "question": "没有 Google Play 怎么付款？",
+          "answer": "在应用内或本网站上选择套餐，用银行卡或加密货币付款。套餐每月 {price} 起，并附赠额外天数代替商店试用。套餐属于你的账户 ID。"
+        },
+        "q5": {
+          "question": "如何更新？",
+          "answer": "应用会检查新版本，有新版本时会显示提示。点按即可下载新的 APK 并覆盖安装旧版本；你的账户会保持登录。"
+        }
       },
-      "q6": {
-        "question": "Doppler VPN 能在 Android TV 上使用吗？",
-        "answer": "可以。你可以在 Android TV 设备和电视盒子上安装 Doppler VPN，保护你的流媒体流量。在大屏上访问受地域限制的内容，使用与手机端相同的 VLESS-Reality 加密。"
+      "cta": {
+        "title": "在你的华为手机上使用 Doppler",
+        "subtitle": "免费下载。无需 Google 账号，无需邮箱，无需手机号。"
       }
-    },
-    "cta": {
-      "title": "下载 Doppler VPN Android 版",
-      "subtitle": "无需注册。3 天免费试用，完整使用所有功能。VLESS-Reality 加密让你的连接私密且无法检测。",
-      "downloadAndroid": "从 Google Play 下载",
-      "otherPlatforms": "其他平台也可使用",
-      "downloadsLink": "查看所有下载"
-    },
-    "related": {
-      "noRegistration": "免注册 VPN",
-      "noRegistrationDesc": "使用无需注册或账号的 VPN",
-      "vless": "VLESS-Reality 协议",
-      "vlessDesc": "了解 VLESS 如何击败深度包检测",
-      "ios": "iOS VPN",
-      "iosDesc": "下载适用于 iPhone 和 iPad 的 Doppler VPN",
-      "macos": "Mac VPN",
-      "macosDesc": "适用于 macOS 的 Doppler VPN 原生应用",
-      "windows": "Windows VPN",
-      "windowsDesc": "适用于 Windows 10 和 11 的 Doppler VPN",
-      "vlessAndroid": "Android 上的 VLESS",
-      "vlessAndroidDesc": "Android 的高级 VLESS-Reality 设置"
     }
   },
   "vpnForMacos": {
@@ -5097,6 +5238,10 @@
       "ipad": {
         "title": "iPad 和 iPhone Duo VPN",
         "desc": "大屏幕布局"
+      },
+      "huawei": {
+        "title": "华为和荣耀手机 VPN",
+        "desc": "无需 Google 服务"
       }
     },
     "cta": {

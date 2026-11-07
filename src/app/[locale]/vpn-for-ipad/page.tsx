@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppleAppPage } from "@/components/landing/apple-app-page";
+import { PlatformAppPage } from "@/components/landing/platform-app-page";
 import { buildSeoLandingMetadata } from "@/components/landing/seo-landing-metadata";
 import { ipadApple } from "@/config/platforms/apple";
 
@@ -20,5 +20,5 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function VpnForIpadPage({ params }: PageProps) {
   const { locale } = await params;
-  return <AppleAppPage locale={locale} config={ipadApple} />;
+  return <PlatformAppPage locale={locale} config={ipadApple} />;
 }

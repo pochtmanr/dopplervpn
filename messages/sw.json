@@ -439,7 +439,8 @@
     "vpnForTiktokBan": "VPN kwa Marufuku ya TikTok",
     "giveaway": "Zawadi",
     "payWithCrypto": "Lipa kwa Crypto",
-    "agents": "Kwa Ajenti za AI"
+    "agents": "Kwa Ajenti za AI",
+    "vpnForHuawei": "VPN kwa Huawei"
   },
   "privacy": {
     "title": "Sera ya Faragha",
@@ -748,7 +749,18 @@
       "step4": "Chagua mpango, jisajili, na uunganishe!",
       "learnMore": "Jifunze zaidi kuhusu VPN kwa Windows"
     },
-    "installGuide": "Mwongozo wa kusakinisha"
+    "installGuide": "Mwongozo wa kusakinisha",
+    "huawei": {
+      "title": "Huawei",
+      "buttonAppGallery": "Pata kwenye AppGallery",
+      "buttonApk": "Pakua APK",
+      "apkNote": "Kwa simu za Huawei na Honor zisizo na Google Play. HarmonyOS NEXT haitumiki.",
+      "step1": "Pakua APK kwenye simu yako",
+      "step2": "Ruhusu usakinishaji kutoka kwa kivinjari, kisha gusa Sakinisha",
+      "step3": "Fungua programu na uchague mpango kwenye tovuti",
+      "step4": "Gusa Unganisha na umelindwa",
+      "learnMore": "Jifunze zaidi kuhusu VPN kwa Huawei"
+    }
   },
   "support": {
     "title": "Kituo cha Msaada na Usaidizi",
@@ -2544,117 +2556,246 @@
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "VPN Bure kwa Android — Bila Usajili | Doppler VPN Pakua APK 2026",
-      "description": "Pakua VPN bora bure kwa Android mwaka 2026. Bila usajili, bila akaunti inayohitajika. Inapatikana kwenye Google Play na kama APK kwa mikoa iliyodhibitiwa. Itifaki ya VLESS-Reality kwa faragha isiyogundulika."
-    },
-    "hero": {
-      "title": "Doppler VPN kwa Android",
-      "subtitle": "VPN bure bila usajili. Bila akaunti, bila barua pepe, bila data binafsi. Inapatikana kwenye Google Play na kama APK kwa mikoa ambapo Play Store imezuiliwa.",
-      "cta": "Get it on Google Play"
-    },
-    "features": {
-      "title": "Kwa Nini Doppler kwa Android?",
-      "subtitle": "Imejengwa mahususi kwa watumiaji wa Android wanaohitaji faragha bila maelewano. Bila usajili, bila ukusanyaji wa data, bila vikwazo.",
-      "vlessEncryption": {
-        "title": "VLESS-Reality Encryption",
-        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring. The same technology used to bypass the Great Firewall of China."
-      },
-      "noRegistration": {
-        "title": "Bila Usajili",
-        "description": "Fungua programu na uunganishe mara moja. Bila barua pepe, bila nambari ya simu, bila kuunda akaunti. Utambulisho wako unabaki wa siri tangu kugonga kwanza."
-      },
-      "oneTapConnect": {
-        "title": "One-Tap Connect",
-        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
-      },
-      "bypassCensorship": {
-        "title": "Bypass Censorship & DPI",
-        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
-      },
-      "noLogs": {
-        "title": "Strict No-Logs Policy",
-        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
-      },
-      "globalServers": {
-        "title": "6 Global Server Locations",
-        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
-      },
-      "freeTrial": {
-        "title": "3-Day Free Trial",
-        "description": "Try Doppler VPN with full access to all features for 3 days. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month. Manage your subscription through Google Play."
-      },
-      "batteryEfficient": {
-        "title": "Battery-Efficient Background Service",
-        "description": "Doppler uses Android's native Always-On VPN framework with minimal battery impact. Less than 2% additional drain even with 24/7 protection enabled. Optimized for Samsung, Xiaomi, OnePlus, Pixel, and all major Android brands."
-      }
+      "title": "Doppler VPN kwa Android: inafanya kazi VPN nyingine zikizuiwa",
+      "description": "Doppler VPN kwa simu na tableti za Android. VLESS-Reality hukuweka mtandaoni nchini Urusi, Iran na China, pamoja na Smart Route na kill switch. Kwenye Google Play au kama APK, na jaribio la bure kwenye Google Play."
     },
     "howItWorks": {
-      "title": "Jinsi Inavyofanya Kazi kwenye Android",
-      "subtitle": "Kutoka kupakua hadi kuvinjari salama kwa chini ya sekunde 30. Bila akaunti, bila barua pepe, bila mchawi wa usanidi.",
-      "step1": {
-        "title": "Pakua Programu",
-        "description": "Sakinisha Doppler VPN kutoka Google Play au pakua APK moja kwa moja. Programu ni nyepesi — chini ya 15 MB."
+      "title": "Jinsi ya kusanidi kwenye Android",
+      "subtitle": "Umeunganishwa kwa chini ya dakika moja, bila ujuzi wa kiufundi."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Simu · Tableti · Simu zinazokunjika",
+        "title": "Doppler VPN kwa Android",
+        "subtitle": "Gusa mara moja na simu yako iko faragha. Doppler hufanya muunganisho wake uonekane kama ziara ya kawaida kwenye tovuti, kwa hiyo unaendelea kufanya kazi kwenye mitandao inayozuia VPN nyingine.",
+        "cta": "Pata kwenye Google Play",
+        "ctaSecondary": "Pakua APK",
+        "note": "Upakuaji bure · Jaribio la bure la siku {days} kwenye Google Play · Bila barua pepe wala nambari ya simu"
       },
-      "step2": {
-        "title": "Fungua Programu",
-        "description": "Zindua Doppler VPN. Bila skrini ya usajili, bila fomu ya kujiandikisha. Programu iko tayari kutumika mara moja."
+      "chapters": {
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Inafanya kazi VPN nyingine zikizuiwa",
+          "body": "Handaki la Doppler linaonekana kama ziara ya kawaida ya HTTPS kwenye tovuti maarufu. Vichujio vya Urusi, Iran na China vinavyogundua na kukata VPN za kawaida huliacha lipite, kwa hiyo unabaki mtandaoni.",
+          "points": {
+            "p1": "VLESS-Reality kwenye kila seva, hakuna cha kusanidi",
+            "p2": "Mtandao ukizuia seva, badilisha tovuti ambayo muunganisho wake unaiga",
+            "p3": "Mguso mmoja hukuunganisha na seva yenye kasi"
+          }
+        },
+        "route": {
+          "kicker": "Smart Route",
+          "title": "Tovuti za ndani hazipiti kwenye handaki",
+          "body": "Benki na huduma za ndani mara nyingi hukataa anwani za nje ya nchi. Smart Route huzipitisha moja kwa moja kupitia muunganisho wako mwenyewe, na kila kitu kingine kupitia Doppler.",
+          "points": {
+            "p1": "Chagua nchi yako ya nyumbani mara moja tu",
+            "p2": "Sheria tayari kwa tovuti za ndani, na kwa serikali na benki",
+            "p3": "Ongeza vikoa vyako mwenyewe vinavyopaswa kukwepa VPN"
+          }
+        },
+        "killSwitch": {
+          "kicker": "Kill switch",
+          "title": "Hakuna kinachovuja handaki likikatika",
+          "body": "Muunganisho wa VPN ukikatika, kill switch huzuia trafiki yote hadi Doppler irudi, kwa hiyo hakuna programu inayorudi kimyakimya kwenye anwani yako halisi.",
+          "points": {
+            "p1": "Huzuia intaneti VPN ikikatika ghafla",
+            "p2": "Always On huunganisha upya yenyewe muunganisho ukikatika",
+            "p3": "Mguso mmoja hadi Always-on VPN ya Android yenyewe, ili ulinzi urudi baada ya kuwasha upya"
+          }
+        },
+        "account": {
+          "kicker": "Akaunti moja",
+          "title": "Bila barua pepe, kitambulisho kimoja kwa kila kifaa",
+          "body": "Kufungua programu huunda Nambari ya Akaunti ya nasibu. Bila barua pepe, bila nambari ya simu. Nambari hiyo hiyo huingia kwenye simu na tableti zako nyingine, iPhone, Mac na Kompyuta ya Windows.",
+          "points": {
+            "p1": "Ona kila kifaa kilichoingia, na uondoe usivyotumia tena",
+            "p2": "Jaribio la kasi lililojengwa ndani hupima handaki lenyewe",
+            "p3": "Mpango wako ni wa Nambari yako, si wa simu moja"
+          }
+        }
       },
-      "step3": {
-        "title": "Gonga Unganisha",
-        "description": "Bonyeza kitufe cha kuunganisha. Doppler inachagua kiotomatiki seva ya haraka zaidi inayopatikana na kuanzisha handaki ya VLESS-Reality."
+      "ecosystem": {
+        "kicker": "Android kila mahali",
+        "title": "Simu yako leo, skrini kubwa baadaye",
+        "body": "Doppler inafanya kazi kwenye Android 8.0 na mpya zaidi, kuanzia simu za bei nafuu hadi za hadhi ya juu. Mipangilio ya tableti, Chromebook na TV inakuja.",
+        "phone": {
+          "title": "Simu",
+          "body": "Programu kamili, kwenye Android 8.0 au mpya zaidi"
+        },
+        "tablet": {
+          "title": "Tableti na simu zinazokunjika",
+          "body": "Inafanya kazi sasa; mpangilio wa paneli mbili unakuja"
+        },
+        "chromebook": {
+          "title": "Chromebook",
+          "body": "Inakuja hivi karibuni"
+        },
+        "tv": {
+          "title": "Android TV",
+          "body": "Inakuja hivi karibuni"
+        }
       },
-      "step4": {
-        "title": "Vinjari kwa Uhuru",
-        "description": "Muunganiko wako sasa umesimbwa kwa njia fiche na hauwezi kugundulika. Fikia tovuti yoyote, programu, au huduma bila vikwazo."
+      "privacy": {
+        "trial": {
+          "title": "Siku {days} bure",
+          "body": "Jaribu kila kipengele kabla ya kulipa. Ghairi wakati wowote kwenye Google Play."
+        }
+      },
+      "setup": {
+        "title": "Tayari kwa chini ya dakika moja",
+        "subtitle": "Hakuna fomu ya usajili, hakuna barua pepe, hakuna cha kusanidi.",
+        "s1": {
+          "title": "Sakinisha programu",
+          "body": "Pata Doppler kwenye Google Play. Simu yako haina Google Play? Pakua APK kutoka ukurasa huu badala yake."
+        },
+        "s2": {
+          "title": "Ifungue",
+          "body": "Nambari yako ya Akaunti huundwa unapofungua mara ya kwanza. Hakuna haja ya barua pepe wala nambari ya simu."
+        },
+        "s3": {
+          "title": "Gusa Unganisha",
+          "body": "Anza jaribio la bure la siku {days} kwenye Google Play, au chagua mpango kuanzia {price} kwa mwezi."
+        }
+      },
+      "faq": {
+        "title": "Maswali kuhusu Doppler kwenye Android",
+        "q1": {
+          "question": "Doppler inafanya kazi kwenye simu gani za Android?",
+          "answer": "Simu au tableti yoyote yenye Android 8.0 au mpya zaidi: Samsung Galaxy, Pixel, Xiaomi, OnePlus, Motorola na nyinginezo. Simu za Huawei na Honor zisizo na huduma za Google zinaweza kusakinisha APK; ukurasa wa Huawei unaeleza jinsi."
+        },
+        "q2": {
+          "question": "Google Play au APK: nichague ipi?",
+          "answer": "Google Play, kama simu yako inayo: programu hujisasisha yenyewe na jaribio la bure la siku {days} lipo hapo. APK ni kwa simu zisizo na Google Play. Hulipiwa kwenye tovuti kwa kadi au crypto, na programu hukujulisha sasisho likitoka."
+        },
+        "q3": {
+          "question": "Je, inafanya kazi Urusi, Iran na China?",
+          "answer": "Ndiyo. Doppler hutumia VLESS-Reality, inayofanya handaki lionekane kama ziara ya kawaida ya HTTPS kwenye tovuti maarufu. Ndiyo sababu inaendelea kufanya kazi kwenye mitandao inayogundua na kuzuia itifaki nyingine za VPN."
+        },
+        "q4": {
+          "question": "Kill switch hufanya nini?",
+          "answer": "Ikiwa imewashwa na muunganisho wa VPN ukakatika ghafla, trafiki yote ya intaneti huzuiwa hadi Doppler iunganishe upya. Programu zako hazirudi kamwe kwenye anwani yako halisi bila wewe kujua."
+        },
+        "q5": {
+          "question": "Ninaghairi vipi?",
+          "answer": "Ukijisajili kwenye Google Play, fungua Play Store, gusa wasifu wako, kisha Malipo na usajili, kisha Usajili, na ughairi Doppler VPN. Ufikiaji unaendelea hadi mwisho wa kipindi ulicholipia. Mipango iliyonunuliwa kwenye tovuti ni malipo ya mara moja na haijisasishi kamwe."
+        }
+      },
+      "cta": {
+        "title": "Pata Doppler kwa Android",
+        "subtitle": "Bure kupakua, na jaribio la bure la siku {days} kwenye Google Play. Bila barua pepe, bila nambari ya simu."
       }
+    }
+  },
+  "vpnForHuawei": {
+    "metadata": {
+      "title": "Doppler VPN kwa Huawei na Honor: hakuna haja ya huduma za Google",
+      "description": "VPN kwa simu za Huawei na Honor zisizo na Google Play. Sakinisha APK ya Doppler, lipa kwenye tovuti kwa kadi au crypto, na uunganishe kwa VLESS-Reality."
     },
-    "faq": {
-      "title": "Frequently Asked Questions — Doppler VPN for Android",
-      "q1": {
-        "question": "Does Doppler VPN work on Samsung devices?",
-        "answer": "Yes. Doppler VPN is fully compatible with all Samsung Galaxy phones and tablets running Android 8.0 (Oreo) or later. This includes the Galaxy S series, Galaxy A series, Galaxy Z Fold, Galaxy Z Flip, and Galaxy Tab. Doppler integrates with Samsung's Always-On VPN settings for 24/7 protection."
+    "howItWorks": {
+      "title": "Jinsi ya kusanidi kwenye Huawei",
+      "subtitle": "Pakua APK, iruhusu mara moja, na uunganishe."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Huawei · Honor · Bila huduma za Google",
+        "title": "Doppler VPN kwa Huawei na Honor",
+        "subtitle": "Simu zisizo na Google Play zinapata Doppler ile ile: mguso mmoja hadi muunganisho wa faragha unaoonekana kama ziara ya kawaida kwenye tovuti, hata kwenye mitandao inayozuia VPN nyingine.",
+        "cta": "Pata kwenye AppGallery",
+        "ctaSecondary": "Pakua APK",
+        "note": "Upakuaji bure · Lipa kwenye tovuti kwa kadi au crypto · Bila barua pepe wala nambari ya simu",
+        "appGalleryNote": "Inakuja kwenye AppGallery. Hadi wakati huo, sakinisha APK kutoka ukurasa huu."
       },
-      "q2": {
-        "question": "Does Doppler VPN drain battery?",
-        "answer": "No. Doppler VPN uses less than 2% additional battery even with Always-On VPN enabled. The VLESS-Reality protocol is designed for efficiency with minimal CPU overhead. For the best experience, exclude Doppler from Android's battery optimization in Settings > Apps > Doppler VPN > Battery > Unrestricted."
+      "chapters": {
+        "noGoogle": {
+          "kicker": "Bila huduma za Google",
+          "title": "Imeundwa kwa simu zisizo na Google Play",
+          "body": "APK ya Doppler haihitaji huduma za Google. Inasakinishwa moja kwa moja kutoka tovuti hii na kukujulisha toleo jipya likitoka, kwa hiyo huhitaji kutafuta masasisho.",
+          "points": {
+            "p1": "Inapakuliwa hapa, moja kwa moja kutoka Doppler",
+            "p2": "Hakuna haja ya akaunti ya Google wala huduma za Play",
+            "p3": "Bango ndani ya programu sasisho likiwa tayari"
+          }
+        },
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Unabaki mtandaoni VPN zikizuiwa",
+          "body": "Ni programu ile ile iliyo kwenye Google Play. Handaki linaonekana kama ziara ya kawaida ya HTTPS kwenye tovuti maarufu, kwa hiyo vichujio vinavyokata VPN za kawaida huliacha lipite.",
+          "points": {
+            "p1": "VLESS-Reality kwenye kila seva",
+            "p2": "Smart Route huweka tovuti za ndani na benki kwenye muunganisho wako mwenyewe",
+            "p3": "Kill switch huzuia trafiki VPN ikikatika"
+          }
+        },
+        "pay": {
+          "kicker": "Lipa mtandaoni",
+          "title": "Kadi au crypto, bila akaunti ya duka",
+          "body": "Bila Google Play hakuna malipo ya duka, kwa hiyo unajisajili kwenye tovuti ya Doppler. Lipa kwa kadi au sarafu ya kidijitali, na mpango unaingia kwenye Nambari yako ya Akaunti.",
+          "points": {
+            "p1": "Lipa kwa kadi ya benki au sarafu ya kidijitali",
+            "p2": "Mipango ya tovuti ina siku za ziada badala ya jaribio la duka",
+            "p3": "Malipo ya mara moja: hakuna kinachojisasisha bila wewe"
+          }
+        },
+        "phones": {
+          "kicker": "Simu zipi",
+          "title": "EMUI, Magic UI na HarmonyOS hadi 4",
+          "body": "Simu za Huawei zenye EMUI au HarmonyOS 2 hadi 4, na simu za Honor zenye Magic UI, huendesha programu za Android, kwa hiyo APK inasakinishwa kwazo. HarmonyOS NEXT haiwezi kabisa kuendesha programu za Android, kwa hiyo Doppler haitumiki huko.",
+          "points": {
+            "p1": "Huawei yenye EMUI, au HarmonyOS 2, 3 au 4",
+            "p2": "Simu za Honor, zenye au zisizo na huduma za Google",
+            "p3": "Haitumiki: HarmonyOS NEXT (HarmonyOS 5 na kuendelea)"
+          }
+        }
       },
-      "q3": {
-        "question": "How do I set up VPN on Android?",
-        "answer": "Setting up Doppler VPN on Android takes under 30 seconds: 1) Download from Google Play, 2) Open the app (no registration needed), 3) Tap Connect. Doppler handles all the technical setup automatically — it configures the VPN profile, selects the best server, and establishes an encrypted tunnel."
+      "privacy": {
+        "pay": {
+          "title": "Kadi au crypto",
+          "body": "Hakuna haja ya malipo ya duka. Lipa kwenye tovuti; mipango ya tovuti huongeza siku za ziada badala ya jaribio la duka."
+        }
       },
-      "q4": {
-        "question": "Does it work in Russia, China, and Iran?",
-        "answer": "Yes. Doppler uses the VLESS-Reality protocol, which disguises VPN traffic as regular HTTPS web browsing. This makes it extremely difficult for censorship systems like Russia's TSPU, China's Great Firewall, or Iran's filtering infrastructure to detect and block. Doppler is specifically designed for users in heavily censored regions."
+      "setup": {
+        "title": "Sakinisha kwa hatua tatu",
+        "subtitle": "Takriban dakika moja, na Android huuliza mara moja tu.",
+        "s1": {
+          "title": "Pakua APK",
+          "body": "Gusa Pakua kwenye ukurasa huu, kwenye simu unayotaka kulinda."
+        },
+        "s2": {
+          "title": "Ruhusu usakinishaji",
+          "body": "Android itakuomba uruhusu usakinishaji kutoka kwa kivinjari au programu ya Files. Iwashe, rudi nyuma na uguse Sakinisha. Unaweza kuizima tena baadaye."
+        },
+        "s3": {
+          "title": "Fungua na uunganishe",
+          "body": "Nambari yako ya Akaunti huundwa unapofungua mara ya kwanza. Chagua mpango kwenye tovuti, kuanzia {price} kwa mwezi, na uguse Unganisha."
+        }
       },
-      "q5": {
-        "question": "How do I cancel my subscription?",
-        "answer": "To cancel your Doppler VPN subscription on Android: Open Google Play > tap your profile icon > Payments & subscriptions > Subscriptions > Doppler VPN > Cancel subscription. Your access continues until the end of the current billing period."
+      "faq": {
+        "title": "Maswali kuhusu Doppler kwenye Huawei",
+        "q1": {
+          "question": "Je, ni salama kusakinisha APK?",
+          "answer": "Ipakue kutoka ukurasa huu tu. APK imetiwa sahihi na Doppler, na Android hukataa kusakinisha sasisho juu yake lililotiwa sahihi na mtu mwingine. Android huonyesha onyo kwa kila programu kutoka nje ya duka; onyo hilo ni la kawaida."
+        },
+        "q2": {
+          "question": "Je, Doppler itakuja kwenye AppGallery?",
+          "answer": "Tunaandaa ukurasa wetu kwenye AppGallery. Hadi utakapokuwa hewani, APK iliyo kwenye ukurasa huu ndiyo njia ya kusakinisha, na ni programu ile ile."
+        },
+        "q3": {
+          "question": "Je, inafanya kazi kwenye HarmonyOS NEXT?",
+          "answer": "Hapana. HarmonyOS NEXT (HarmonyOS 5 na kuendelea) huendesha programu zake pekee na haiwezi kusakinisha APK. Simu zenye EMUI, au HarmonyOS 4 na za awali, zinaweza."
+        },
+        "q4": {
+          "question": "Ninalipaje bila Google Play?",
+          "answer": "Chagua mpango ndani ya programu au kwenye tovuti hii na ulipe kwa kadi au sarafu ya kidijitali. Mipango inaanzia {price} kwa mwezi na ina siku za ziada badala ya jaribio la duka. Mpango ni wa Nambari yako ya Akaunti."
+        },
+        "q5": {
+          "question": "Masasisho hufanyaje kazi?",
+          "answer": "Programu hukagua matoleo mapya na kuonyesha bango moja likiwa tayari. Liguse ili kupakua APK mpya na kuisakinisha juu ya ile ya zamani; akaunti yako inabaki imeingia."
+        }
       },
-      "q6": {
-        "question": "Can I use Doppler VPN on Android TV?",
-        "answer": "Yes. You can install Doppler VPN on Android TV devices and TV boxes to protect your streaming traffic. Access geo-restricted content on the big screen with the same VLESS-Reality encryption used on mobile."
+      "cta": {
+        "title": "Pata Doppler kwenye Huawei yako",
+        "subtitle": "Bure kupakua. Bila akaunti ya Google, bila barua pepe, bila nambari ya simu."
       }
-    },
-    "cta": {
-      "title": "Pata Doppler VPN kwa Android Sasa",
-      "subtitle": "Bure, ya faragha, na isiyogundulika. Bila usajili, bila akaunti, bila ukusanyaji wa data. Pakua kutoka Google Play au pata APK kwa mikoa iliyozuiliwa.",
-      "downloadAndroid": "Get it on Google Play",
-      "otherPlatforms": "Available on other platforms",
-      "downloadsLink": "View all downloads"
-    },
-    "related": {
-      "noRegistration": "VPN Bila Usajili",
-      "noRegistrationDesc": "Tumia VPN bila kujiandikisha au akaunti yoyote",
-      "vless": "Itifaki ya VLESS-Reality",
-      "vlessDesc": "Jifunze jinsi VLESS inavyoshinda ukaguzi wa kina wa pakiti",
-      "ios": "VPN kwa iOS",
-      "iosDesc": "Pakua Doppler VPN kwa iPhone na iPad",
-      "macos": "VPN kwa Mac",
-      "macosDesc": "Programu asilia ya Doppler VPN kwa macOS",
-      "windows": "VPN kwa Windows",
-      "windowsDesc": "Doppler VPN kwa Windows 10 na 11",
-      "vlessAndroid": "VLESS kwenye Android",
-      "vlessAndroidDesc": "Usanidi wa kina wa VLESS-Reality kwa Android"
     }
   },
   "vpnForMacos": {
@@ -5003,6 +5144,10 @@
       "ipad": {
         "title": "VPN kwa iPad na iPhone Duo",
         "desc": "Mpangilio wa skrini kubwa"
+      },
+      "huawei": {
+        "title": "VPN kwa Huawei na Honor",
+        "desc": "Hakuna haja ya huduma za Google"
       }
     },
     "cta": {

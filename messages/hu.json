@@ -439,7 +439,8 @@
     "vpnForTiktokBan": "VPN a TikTok-tiltáshoz",
     "giveaway": "Nyereményjáték",
     "payWithCrypto": "Fizetés kriptóval",
-    "agents": "AI-ügynököknek"
+    "agents": "AI-ügynököknek",
+    "vpnForHuawei": "VPN Huaweire"
   },
   "privacy": {
     "title": "Adatvédelmi irányelvek",
@@ -748,7 +749,18 @@
       "step4": "Válassz csomagot, fizess elő és csatlakozz!",
       "learnMore": "Tudj meg többet a VPN for Windows szolgáltatásról"
     },
-    "installGuide": "Telepítési útmutató"
+    "installGuide": "Telepítési útmutató",
+    "huawei": {
+      "title": "Huawei",
+      "buttonAppGallery": "Letöltés az AppGalleryből",
+      "buttonApk": "APK letöltése",
+      "apkNote": "Google Play nélküli Huawei és Honor telefonokra. A HarmonyOS NEXT nem támogatott.",
+      "step1": "Töltse le az APK-t a telefonjára",
+      "step2": "Engedélyezze a telepítést a böngészőből, majd koppintson a Telepítésre",
+      "step3": "Nyissa meg az alkalmazást, és válasszon csomagot a weboldalon",
+      "step4": "Koppintson a Csatlakozásra, és védve van",
+      "learnMore": "Tudjon meg többet a Huaweire szánt VPN-ről"
+    }
   },
   "support": {
     "title": "Súgóközpont és támogatás",
@@ -2544,117 +2556,246 @@
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Doppler VPN Androidra — Gyors, privat es cenzuraallo",
-      "description": "Toltse le a Doppler VPN-t Androidra a Google Playbol. VLESS-Reality titkositas, nincs regisztracio, cenzura megkerulese. 3 napos ingyenes probaidoszak."
-    },
-    "hero": {
-      "title": "Doppler VPN Androidra",
-      "subtitle": "Gyors, privat es cenzuraallo VPN, kifejezetten Androidra tervezve. Nincs szukseg regisztraciora — toltse le a Google Playbol es csatlakozzon masodpercek alatt. 3 napos ingyenes probaidoszak teljes hozzaferessel minden funkciohoz.",
-      "cta": "Letoltes a Google Playbol"
-    },
-    "features": {
-      "title": "Miert valassza a Doppler VPN-t Androidra?",
-      "subtitle": "A Doppler VPN Android-felhasznaloknak keszult, akik valos adatvedelmet kovetelenek a sebesseg, az akkumulator-elettartam vagy a hasznalhatosag felaldozasa nelkul.",
-      "vlessEncryption": {
-        "title": "VLESS-Reality titkositas",
-        "description": "Uj generacios protokoll, amely a VPN-forgalmat hagyomanyos HTTPS bongeszessel alcazza. Kapcsolata lathatatlan a tuzfalak, a melycsomagvizsgalati (DPI) rendszerek es az internetszolgaltatoi megfigyeles szamara. Ugyanaz a technologia, amellyel Kina Nagy Tuzfalat is meg lehet kerulni."
-      },
-      "noRegistration": {
-        "title": "Nincs szukseg regisztraciora",
-        "description": "Nincs szukseg e-mailre, telefonszamra vagy fiokleterehozasra. Toltse le a Google Playbol, nyissa meg az alkalmazast es csatlakozzon azonnal. A Doppler eszkozalapu hitelesitest hasznal, igy az On kilete teljesen privat marad."
-      },
-      "oneTapConnect": {
-        "title": "Egyerinteses csatlakozas",
-        "description": "Nyomjon meg egyetlen gombot, es a Doppler automatikusan kivalasztja a leggyorsabb szervert, letrehoz egy titkositott alagutat es megvedi teljes forgalmat. Az intelligens szervervalasztas a sebessegre es a megbizhatosagra optimalizal."
-      },
-      "bypassCensorship": {
-        "title": "Cenzura es DPI megkerulese",
-        "description": "Olyan orszagokban is mukodik, ahol szigoru az internetcenzura — Oroszorszag, Iran, Kina es meg sok mas. A VLESS-Reality a VPN-forgalmat megkulonboztethetetlenne teszi a normal webbongeszes forgalmatol, legyozve a TSPU-t es a GFW-t."
-      },
-      "noLogs": {
-        "title": "Szigoru naplozasmentessegi iranyelvek",
-        "description": "A Doppler soha nem gyűjti, tárolja vagy osztja meg a böngészési adataidat. Nincs forgalmi napló, nincs DNS-lekérdezési napló, nincs olyan bejegyzés, amely hozzád kötné, amit meglátogatsz. A bejelentkezés egy rövid hitelesítési bejegyzést hagy hátra, amelyet 90 napig őrzünk a visszaélés megelőzésére — azt mutatja, hogy egy eszköz csatlakozott, azt soha, hogy hová ment."
-      },
-      "globalServers": {
-        "title": "6 globalis szerverhelyszin",
-        "description": "Csatlakozzon szerverekhez tobb europai es azon tuli orszagban. Minden szerver VLESS-Reality protokollt futtat, optimalizalt utvonalvalasztassal a legalacsonyabb kesleltetesert es a legnagyobb atviteli sebessegert."
-      },
-      "freeTrial": {
-        "title": "3 napos ingyenes probaidoszak",
-        "description": "Probalja ki a Doppler VPN-t 3 napig teljes hozzaferessel minden funkciohoz. A probaidoszak utan valasszon havi, feleves vagy eves csomagot, mar havi $3,33-tol. Elofizeteset a Google Playen keresztul kezelheti."
-      },
-      "batteryEfficient": {
-        "title": "Energiatakarekos hatterszolgaltatas",
-        "description": "A Doppler az Android nativ Always-On VPN keretrendszeret hasznalja minimalis akkumulator-hatassal. Kevesebb mint 2% tobbletfogyasztas meg a nonstop vedelem bekapcsolasa mellett is. Optimalizalva Samsung, Xiaomi, OnePlus, Pixel es minden fontosabb Android marka szamara."
-      }
+      "title": "Doppler VPN Androidra: ott is működik, ahol más VPN-eket blokkolnak",
+      "description": "Doppler VPN androidos telefonokra és táblagépekre. A VLESS-Reality Oroszországban, Iránban és Kínában is online tart, Smart Route-tal és kill switch-csel. A Google Playen vagy APK-ként, ingyenes próbaidővel a Google Playen."
     },
     "howItWorks": {
-      "title": "Hogyan allitsa be a VPN-t Androidon",
-      "subtitle": "Csatlakozzon kevesebb mint 30 masodperc alatt — nem szukseges technikai tudas.",
-      "step1": {
-        "title": "Toltse le a Google Playbol",
-        "description": "Keressen ra a \"Doppler VPN\"-re a Google Play Store-ban, vagy nyomja meg az alabb lathato letoltes gombot. Az alkalmazas ingyenesen letoltheto, konnyu (15 MB alatt), es kompatibilis Android 8.0 (Oreo) es ujabb verziokkal."
+      "title": "Beállítás Androidon",
+      "subtitle": "Egy percen belül csatlakozik, műszaki tudás nélkül."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Telefonok · Táblagépek · Hajlítható telefonok",
+        "title": "Doppler VPN Androidra",
+        "subtitle": "Egy koppintás, és a telefonja privát. A Doppler a kapcsolatát egy átlagos weboldal-látogatásnak álcázza, így olyan hálózatokon is működik, amelyek más VPN-eket blokkolnak.",
+        "cta": "Letöltés a Google Playről",
+        "ctaSecondary": "APK letöltése",
+        "note": "Ingyenes letöltés · {days} napos ingyenes próba a Google Playen · Nem kell e-mail vagy telefonszám"
       },
-      "step2": {
-        "title": "Nyissa meg az alkalmazast",
-        "description": "Inditsa el a Doppler VPN-t Android telefonjan vagy tabletjen. Nincs regisztracios kepernyo, nincs feliratkozasi urlap es nincs e-mail ellenorzes. Fiokja automatikusan letrejon eszkozalapu hitelesitessel."
+      "chapters": {
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Ott is működik, ahol más VPN-eket blokkolnak",
+          "body": "A Doppler alagútja egy ismert weboldal átlagos HTTPS-látogatásának tűnik. Az oroszországi, iráni és kínai szűrők, amelyek felismerik és elvágják a szokásos VPN-eket, átengedik, így online marad.",
+          "points": {
+            "p1": "VLESS-Reality minden szerveren, semmit sem kell beállítani",
+            "p2": "Ha egy hálózat blokkol egy szervert, váltson a weboldalon, amelyet a kapcsolata utánoz",
+            "p3": "Egy koppintás egy gyors szerverhez csatlakoztat"
+          }
+        },
+        "route": {
+          "kicker": "Smart Route",
+          "title": "A hazai oldalak megkerülik az alagutat",
+          "body": "A bankok és a helyi szolgáltatások gyakran elutasítják a külföldi címeket. A Smart Route ezeket közvetlenül a saját kapcsolatán küldi, minden mást a Doppleren keresztül.",
+          "points": {
+            "p1": "Egyszer válassza ki az otthoni országát",
+            "p2": "Kész szabályok a hazai weboldalakhoz, a közigazgatáshoz és a bankokhoz",
+            "p3": "Adjon hozzá saját domaineket, amelyek megkerülik a VPN-t"
+          }
+        },
+        "killSwitch": {
+          "kicker": "Kill switch",
+          "title": "Ha az alagút leáll, semmi sem szivárog ki",
+          "body": "Ha megszakad a VPN-kapcsolat, a kill switch minden forgalmat blokkol, amíg a Doppler vissza nem tér, így egyetlen alkalmazás sem vált észrevétlenül a valódi címére.",
+          "points": {
+            "p1": "Blokkolja az internetet, ha a VPN váratlanul leáll",
+            "p2": "Az Always On magától újracsatlakozik, ha megszakad a kapcsolat",
+            "p3": "Egy koppintás az Android saját Always-on VPN-jéhez, hogy a védelem újraindítás után is visszatérjen"
+          }
+        },
+        "account": {
+          "kicker": "Egy fiók",
+          "title": "Nincs e-mail, egy azonosító minden eszközre",
+          "body": "Az alkalmazás megnyitásakor véletlenszerű fiókazonosító jön létre. Nincs e-mail, nincs telefonszám. Ugyanez az azonosító jelentkezteti be a többi telefonját és táblagépét, az iPhone-ját, a Macjét és a Windowsos gépét.",
+          "points": {
+            "p1": "Lássa az összes bejelentkezett eszközt, és távolítsa el, amelyeket már nem használ",
+            "p2": "A beépített sebességteszt magát az alagutat méri",
+            "p3": "Az előfizetés az azonosítójához tartozik, nem egyetlen telefonhoz"
+          }
+        }
       },
-      "step3": {
-        "title": "Fizessen elo egy csomagra",
-        "description": "Inditsa el a 3 napos ingyenes probaidoszakot, vagy valasszon elofizetesi csomagot. Havi ($6,99), feleves ($29,99) vagy eves ($39,99) lehetosegek allnak rendelkezesre. Elofizeteset kozvetlenul a Google Playen keresztul kezelheti."
+      "ecosystem": {
+        "kicker": "Android mindenhol",
+        "title": "Ma a telefon, utána a nagyobb kijelzők",
+        "body": "A Doppler Android 8.0-tól fut, a belépő szintű telefonoktól a csúcsmodellekig. A táblagépekre, Chromebookokra és tévékre szabott elrendezések úton vannak.",
+        "phone": {
+          "title": "Telefonok",
+          "body": "A teljes alkalmazás, Android 8.0-tól"
+        },
+        "tablet": {
+          "title": "Táblagépek és hajlítható telefonok",
+          "body": "Már ma fut; a kétpaneles elrendezés érkezik"
+        },
+        "chromebook": {
+          "title": "Chromebookok",
+          "body": "Hamarosan"
+        },
+        "tv": {
+          "title": "Android TV",
+          "body": "Hamarosan"
+        }
       },
-      "step4": {
-        "title": "Nyomja meg a Csatlakozas gombot",
-        "description": "Nyomja meg a csatlakozas gombot. A Doppler automatikusan kivalasztja a legjobb szervert, letrehoz egy titkositott VLESS-Reality alagutat, es minden forgalmat azon keresztul iranyit. IP-cime rejtve marad, adatai titkositottak."
+      "privacy": {
+        "trial": {
+          "title": "{days} nap ingyen",
+          "body": "Próbáljon ki minden funkciót, mielőtt fizet. Bármikor lemondhatja a Google Playen."
+        }
+      },
+      "setup": {
+        "title": "Egy percen belül kész",
+        "subtitle": "Nincs regisztrációs űrlap, nincs e-mail, semmit sem kell beállítani.",
+        "s1": {
+          "title": "Telepítse az alkalmazást",
+          "body": "Töltse le a Dopplert a Google Playről. Nincs Google Play a telefonján? Töltse le inkább az APK-t erről az oldalról."
+        },
+        "s2": {
+          "title": "Nyissa meg",
+          "body": "A fiókazonosító az első indításkor jön létre. Nem kell e-mail vagy telefonszám."
+        },
+        "s3": {
+          "title": "Koppintson a Csatlakozásra",
+          "body": "Indítsa el a {days} napos ingyenes próbát a Google Playen, vagy válasszon előfizetést havi {price} összegtől."
+        }
+      },
+      "faq": {
+        "title": "Kérdések a Dopplerről Androidon",
+        "q1": {
+          "question": "Mely androidos telefonokon működik a Doppler?",
+          "answer": "Minden Android 8.0 vagy újabb telefonon és táblagépen: Samsung Galaxy, Pixel, Xiaomi, OnePlus, Motorola és mások. A Google-szolgáltatások nélküli Huawei és Honor telefonokra az APK telepíthető; a Huawei-oldal elmagyarázza, hogyan."
+        },
+        "q2": {
+          "question": "Google Play vagy APK: melyiket válasszam?",
+          "answer": "A Google Playt, ha a telefonján van: az alkalmazás magától frissül, és ott elérhető a {days} napos ingyenes próba. Az APK a Google Play nélküli telefonokhoz készült. A weboldalon fizethet érte kártyával vagy kriptovalutával, és az alkalmazás szól, ha frissítés érhető el."
+        },
+        "q3": {
+          "question": "Működik Oroszországban, Iránban és Kínában?",
+          "answer": "Igen. A Doppler VLESS-Reality-t használ, amitől az alagút egy ismert weboldal átlagos HTTPS-látogatásának tűnik. Ezért működik olyan hálózatokon is, amelyek felismerik és blokkolják a többi VPN-protokollt."
+        },
+        "q4": {
+          "question": "Mit csinál a kill switch?",
+          "answer": "Ha be van kapcsolva, és a VPN-kapcsolat váratlanul leáll, minden internetforgalom blokkolva lesz, amíg a Doppler újra nem csatlakozik. Az alkalmazásai így soha nem váltanak a tudta nélkül a valódi címére."
+        },
+        "q5": {
+          "question": "Hogyan mondhatom le?",
+          "answer": "Ha a Google Playen fizetett elő, nyissa meg a Play Áruházat, koppintson a profiljára, majd a Fizetések és előfizetések, azután az Előfizetések pontra, és mondja le a Doppler VPN-t. A hozzáférés a kifizetett időszak végéig megmarad. A weboldalon vásárolt csomagok egyszeri fizetések, és sosem újulnak meg."
+        }
+      },
+      "cta": {
+        "title": "Szerezze be a Dopplert Androidra",
+        "subtitle": "Ingyenes letöltés, {days} napos ingyenes próbával a Google Playen. Nincs e-mail, nincs telefonszám."
       }
+    }
+  },
+  "vpnForHuawei": {
+    "metadata": {
+      "title": "Doppler VPN Huaweire és Honorra: Google-szolgáltatások nélkül",
+      "description": "VPN Google Play nélküli Huawei és Honor telefonokra. Telepítse a Doppler APK-t, fizessen a weboldalon kártyával vagy kriptovalutával, és csatlakozzon VLESS-Reality-vel."
     },
-    "faq": {
-      "title": "Gyakran ismetelt kerdesek — Doppler VPN Androidra",
-      "q1": {
-        "question": "Mukodik a Doppler VPN Samsung eszkozokon?",
-        "answer": "Igen. A Doppler VPN teljes mertekben kompatibilis minden Samsung Galaxy telefonnal es tablettel, amely Android 8.0 (Oreo) vagy ujabb verziot futtat. Ez magaban foglalja a Galaxy S szeriát, a Galaxy A szeriát, a Galaxy Z Foldot, a Galaxy Z Flipet es a Galaxy Tabet. A Doppler integrálódik a Samsung Always-On VPN beallitasaival a nonstop vedelemert."
+    "howItWorks": {
+      "title": "Beállítás Huawei telefonon",
+      "subtitle": "Töltse le az APK-t, engedélyezze egyszer, és csatlakozzon."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Huawei · Honor · Google-szolgáltatások nélkül",
+        "title": "Doppler VPN Huaweire és Honorra",
+        "subtitle": "A Google Play nélküli telefonok ugyanazt a Dopplert kapják: egy koppintással privát kapcsolat, amely átlagos weboldal-látogatásnak tűnik, még a más VPN-eket blokkoló hálózatokon is.",
+        "cta": "Letöltés az AppGalleryből",
+        "ctaSecondary": "APK letöltése",
+        "note": "Ingyenes letöltés · Fizetés a weboldalon kártyával vagy kriptovalutával · Nem kell e-mail vagy telefonszám",
+        "appGalleryNote": "Hamarosan az AppGalleryben. Addig telepítse az APK-t erről az oldalról."
       },
-      "q2": {
-        "question": "Meríti a Doppler VPN az akkumulatort?",
-        "answer": "Nem. A Doppler VPN kevesebb mint 2% tobblet akkumulator-fogyasztast okoz meg bekapcsolt Always-On VPN mellett is. A VLESS-Reality protokoll hatekonysagra lett tervezve, minimalis CPU-terhelessel. A legjobb elmenyer erdekeben zarya ki a Dopplert az Android akkumulator-optimalizalasabol: Beallitasok > Alkalmazasok > Doppler VPN > Akkumulator > Korlatozas nelkuli."
+      "chapters": {
+        "noGoogle": {
+          "kicker": "Google-szolgáltatások nélkül",
+          "title": "Google Play nélküli telefonokra készült",
+          "body": "A Doppler APK-nak nincs szüksége Google-szolgáltatásokra. Közvetlenül erről a weboldalról települ, és szól, ha új verzió jelenik meg, így nem kell frissítések után kutatnia.",
+          "points": {
+            "p1": "Itt tölthető le, közvetlenül a Dopplertől",
+            "p2": "Nem kell Google-fiók és Play-szolgáltatások",
+            "p3": "Értesítés az alkalmazásban, ha kész a frissítés"
+          }
+        },
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Kapcsolatban marad, ahol a VPN-eket blokkolják",
+          "body": "Ugyanaz az alkalmazás, mint a Google Playen. Az alagút egy ismert weboldal átlagos HTTPS-látogatásának tűnik, így a szokásos VPN-eket elvágó szűrők átengedik.",
+          "points": {
+            "p1": "VLESS-Reality minden szerveren",
+            "p2": "A Smart Route a hazai oldalakat és a bankolást a saját kapcsolatán tartja",
+            "p3": "A kill switch blokkolja a forgalmat, ha a VPN leáll"
+          }
+        },
+        "pay": {
+          "kicker": "Fizetés a weben",
+          "title": "Kártya vagy kripto, áruházfiók nélkül",
+          "body": "Google Play nélkül nincs áruházi fizetés, ezért a Doppler weboldalán fizethet elő. Fizessen kártyával vagy kriptovalutával, és a csomag a fiókazonosítójára kerül.",
+          "points": {
+            "p1": "Fizetés bankkártyával vagy kriptovalutával",
+            "p2": "A webes csomagok bónusznapokat adnak az áruházi próba helyett",
+            "p3": "Egyszeri fizetések: semmi sem újul meg Ön nélkül"
+          }
+        },
+        "phones": {
+          "kicker": "Mely telefonok",
+          "title": "EMUI, Magic UI és HarmonyOS 4-ig",
+          "body": "Az EMUI-t vagy HarmonyOS 2–4-et futtató Huawei telefonok és a Magic UI-os Honor telefonok androidos alkalmazásokat futtatnak, így az APK telepíthető rájuk. A HarmonyOS NEXT egyáltalán nem futtat androidos alkalmazásokat, ezért ott a Doppler nem támogatott.",
+          "points": {
+            "p1": "Huawei EMUI-val vagy HarmonyOS 2, 3 vagy 4 rendszerrel",
+            "p2": "Honor telefonok, Google-szolgáltatásokkal vagy anélkül",
+            "p3": "Nem támogatott: HarmonyOS NEXT (HarmonyOS 5 és újabb)"
+          }
+        }
       },
-      "q3": {
-        "question": "Hogyan allithatom be a VPN-t Androidon?",
-        "answer": "A Doppler VPN beallitasa Androidon kevesebb mint 30 masodpercet vesz igenybe: 1) Toltse le a Google Playbol, 2) Nyissa meg az alkalmazast (nincs szukseg regisztraciora), 3) Nyomja meg a Csatlakozas gombot. A Doppler minden technikai beallitast automatikusan elvegez — konfigurálja a VPN-profilt, kivalasztja a legjobb szervert es letrehoz egy titkositott alagutat."
+      "privacy": {
+        "pay": {
+          "title": "Kártya vagy kripto",
+          "body": "Nincs szükség áruházi fizetésre. Fizessen a weboldalon; a webes csomagok bónusznapokat adnak az áruházi próba helyett."
+        }
       },
-      "q4": {
-        "question": "Mukodik Oroszorszagban, Kinaban es Iranban?",
-        "answer": "Igen. A Doppler a VLESS-Reality protokollt hasznalja, amely a VPN-forgalmat normal HTTPS webbongeszessel alcazza. Ez rendkivul megneheziti az olyan cenzurarendszerek szamara, mint az orosz TSPU, Kina Nagy Tuzfala vagy Iran szuroinfrastrukturaja, az eszlelest es blokkolast. A Doppler kifejezetten az erosen cenzuralt regiokban elo felhasznalok szamara keszult."
+      "setup": {
+        "title": "Telepítés három lépésben",
+        "subtitle": "Körülbelül egy perc, és az Android csak egyszer kérdez.",
+        "s1": {
+          "title": "Töltse le az APK-t",
+          "body": "Koppintson a Letöltésre ezen az oldalon, azon a telefonon, amelyet védeni szeretne."
+        },
+        "s2": {
+          "title": "Engedélyezze a telepítést",
+          "body": "Az Android kéri, hogy engedélyezze a telepítést a böngészőből vagy a Fájlok alkalmazásból. Kapcsolja be, lépjen vissza, és koppintson a Telepítésre. Utána újra kikapcsolhatja."
+        },
+        "s3": {
+          "title": "Nyissa meg és csatlakozzon",
+          "body": "A fiókazonosító az első indításkor jön létre. Válasszon csomagot a weboldalon havi {price} összegtől, és koppintson a Csatlakozásra."
+        }
       },
-      "q5": {
-        "question": "Hogyan mondhatom le az elofizetesem?",
-        "answer": "A Doppler VPN elofizetes lemondasahoz Androidon: Nyissa meg a Google Playt > koppintson a profilkepe > Fizetesek es elofizetesek > Elofizetesek > Doppler VPN > Elofizetes lemondasa. Hozzaferese az aktualis szamlazasi idoszak vegeig fennmarad."
+      "faq": {
+        "title": "Kérdések a Dopplerről Huawei telefonon",
+        "q1": {
+          "question": "Biztonságos APK-t telepíteni?",
+          "answer": "Csak erről az oldalról töltse le. Az APK-t a Doppler írta alá, és az Android nem telepít fölé olyan frissítést, amelyet bárki más írt alá. Az Android minden áruházon kívüli alkalmazásnál figyelmeztet; ez a figyelmeztetés várható."
+        },
+        "q2": {
+          "question": "Megjelenik a Doppler az AppGalleryben?",
+          "answer": "Készítjük az AppGallery-megjelenést. Amíg nem érhető el, az erről az oldalról letölthető APK-val telepíthet, és ez ugyanaz az alkalmazás."
+        },
+        "q3": {
+          "question": "Működik HarmonyOS NEXT rendszeren?",
+          "answer": "Nem. A HarmonyOS NEXT (HarmonyOS 5 és újabb) csak saját alkalmazásokat futtat, és nem tud APK-t telepíteni. Az EMUI-t vagy HarmonyOS 4-et és régebbit futtató telefonok igen."
+        },
+        "q4": {
+          "question": "Hogyan fizethetek Google Play nélkül?",
+          "answer": "Válasszon csomagot az alkalmazásban vagy ezen a weboldalon, és fizessen kártyával vagy kriptovalutával. A csomagok havi {price} összegtől indulnak, és bónusznapokat adnak az áruházi próba helyett. A csomag a fiókazonosítójához tartozik."
+        },
+        "q5": {
+          "question": "Hogyan működnek a frissítések?",
+          "answer": "Az alkalmazás figyeli az új verziókat, és értesítést mutat, ha egy elkészült. Koppintson rá, töltse le az új APK-t, és telepítse a régi fölé; a fiókja bejelentkezve marad."
+        }
       },
-      "q6": {
-        "question": "Hasznalhatom a Doppler VPN-t Android TV-n?",
-        "answer": "Igen. A Doppler VPN telepitheto Android TV eszkozokre es TV boxokra a streaming forgalom vedelme erdekeben. Erjen el foldrajzilag korlatozott tartalmakat a nagykepernyon ugyanazzal a VLESS-Reality titkositassal, amelyet mobilon is hasznal."
+      "cta": {
+        "title": "Szerezze be a Dopplert a Huawei telefonjára",
+        "subtitle": "Ingyenes letöltés. Nincs Google-fiók, nincs e-mail, nincs telefonszám."
       }
-    },
-    "cta": {
-      "title": "Toltse le a Doppler VPN-t Androidra",
-      "subtitle": "Nincs szukseg regisztraciora. 3 napos ingyenes probaidoszak teljes hozzaferessel. A VLESS-Reality titkositas privatnak es eszlelhetetlennek tartja kapcsolatat.",
-      "downloadAndroid": "Letoltes a Google Playbol",
-      "otherPlatforms": "Elerheto mas platformokon is",
-      "downloadsLink": "Osszes letoltes megtekintese"
-    },
-    "related": {
-      "noRegistration": "VPN regisztracio nelkul",
-      "noRegistrationDesc": "Hasznaljon VPN-t feliratkozas vagy fiok nelkul",
-      "vless": "VLESS-Reality protokoll",
-      "vlessDesc": "Tudja meg, hogyan gyozi le a VLESS a melycsomagvizsgalatot",
-      "ios": "VPN iOS-re",
-      "iosDesc": "Toltse le a Doppler VPN-t iPhone-ra es iPadre",
-      "macos": "VPN Macre",
-      "macosDesc": "Natív Doppler VPN alkalmazás macOS-re",
-      "windows": "VPN Windowsra",
-      "windowsDesc": "Doppler VPN Windows 10-re és 11-re",
-      "vlessAndroid": "VLESS Androidon",
-      "vlessAndroidDesc": "Haladó VLESS-Reality beállítás Androidra"
     }
   },
   "vpnForMacos": {
@@ -5003,6 +5144,10 @@
       "ipad": {
         "title": "VPN iPadre és iPhone Duóra",
         "desc": "A nagy képernyős elrendezés"
+      },
+      "huawei": {
+        "title": "VPN Huaweire és Honorra",
+        "desc": "Google-szolgáltatások nélkül"
       }
     },
     "cta": {

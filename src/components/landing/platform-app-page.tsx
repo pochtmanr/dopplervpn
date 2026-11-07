@@ -24,10 +24,12 @@ import { BreadcrumbSchema, FAQSchema, PlatformAppSchema } from "@/components/seo
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import { AppleIcon, Stars } from "@/components/icons/platform";
-import { AppStoreMark } from "@/components/glyph/platform-icons";
+import { AppGalleryMark, AppStoreMark, PlatformLogo } from "@/components/glyph/platform-icons";
+import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
 import { Link } from "@/i18n/navigation";
 import { PLANS, SITE_URL, TERMS } from "@/lib/facts";
-import { GUIDE_COVERS, type AppleAppConfig, type AppleChapter } from "@/config/platforms/apple";
+import { GUIDE_COVERS } from "@/config/platforms/apple";
+import type { AppButton, AppChapter, AppGlyph, AppPageConfig, StoreMark } from "@/config/platforms/app-page";
 import { AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
 
 /** Guides are English-only for now (lib/guides.ts), so every guide link goes to /en. */
@@ -50,7 +52,7 @@ function Glyph({ d, className = "h-6 w-6" }: { d: string; className?: string }) 
   );
 }
 
-const ICON = {
+const ICON: Record<AppGlyph | "eyeOff" | "gift" | "lock" | "check", string> = {
   phone: "M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3",
   tablet: "M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-15a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 4.5v15a2.25 2.25 0 0 0 2.25 2.25Z",
   laptop: "M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25Z",
@@ -60,32 +62,99 @@ const ICON = {
   eyeOff: "M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88",
   gift: "M21 11.25v8.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 1 0 9.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1 1 14.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z",
   check: "m4.5 12.75 6 6 9-13.5",
+  tv: "M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z",
+  shield: "M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z",
+  // One road splitting in two, arrowheads up: Smart Route's own symbol in the app.
+  route: "M12 21v-8.25m0 0L6.75 7.5M12 12.75l5.25-5.25M6.75 7.5v3.75m0-3.75h3.75m6.75 0v3.75m0-3.75H13.5",
+  killSwitch: "M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636",
+  download: "M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3",
+  card: "M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z",
 };
 
-/** The App Store button: the page's one primary action, repeated at the end. */
+const PRIVACY_ICON: Record<string, string> = {
+  noEmail: ICON.id,
+  vless: ICON.lock,
+  noLogs: ICON.eyeOff,
+  trial: ICON.gift,
+  pay: ICON.card,
+};
+
+function Mark({ mark, className }: { mark: StoreMark; className: string }) {
+  if (mark === "appStore") return <AppStoreMark className={className} />;
+  if (mark === "appGallery") return <AppGalleryMark className={className} />;
+  if (mark === "googlePlay") return <PlatformLogo icon="googlePlay" className={className} />;
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d={ICON.download} />
+    </svg>
+  );
+}
+
+/**
+ * A download button. The primary is the page's one teal action, repeated at the end; the
+ * secondary (the APK beside Google Play) is a quiet inset pill. A file downloads in place,
+ * a store opens in a new tab.
+ */
 function StoreButton({
   config,
+  button,
   label,
   large = false,
+  quiet = false,
 }: {
-  config: AppleAppConfig;
+  config: AppPageConfig;
+  button: AppButton;
   label: string;
   large?: boolean;
+  quiet?: boolean;
 }) {
+  const file = button.mark === "file";
   return (
     <TrackedDownloadLink
       location={config.trackLocation}
       platform={config.trackPlatform}
-      href={config.downloadUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`plus-btn inline-flex items-center justify-center gap-2.5 rounded-full bg-(--c-accent-fill) font-bold text-white hover:bg-(--c-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg) ${
-        large ? "h-14 px-8 text-base" : "h-12 px-6 text-[15px]"
-      }`}
+      {...(button.variant ? { variant: button.variant } : {})}
+      href={button.href}
+      {...(file ? { download: true } : { target: "_blank", rel: "noopener noreferrer" })}
+      className={`plus-btn inline-flex items-center justify-center gap-2.5 rounded-full font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg) ${
+        quiet
+          ? "bg-(--c-card) text-(--c-text) hover:bg-(--c-accent-tint) hover:text-(--c-accent)"
+          : "bg-(--c-accent-fill) text-white hover:bg-(--c-accent)"
+      } ${large ? "h-14 px-8 text-base" : "h-12 px-6 text-[15px]"}`}
     >
-      <AppStoreMark className={large ? "h-5 w-5" : "h-[18px] w-[18px]"} />
+      <Mark mark={button.mark} className={large ? "h-5 w-5" : "h-[18px] w-[18px]"} />
       {label}
     </TrackedDownloadLink>
+  );
+}
+
+/**
+ * Where a platform has no caption-free screens yet: an inset tray with one line glyph, and the
+ * downloads cards' glyph-rain strip under it at the strip's own size (its grid scales with
+ * the container, so a full-width strip turns into giant characters). Honest by construction:
+ * it never pretends to be a capture.
+ */
+function GlyphTray({ index, children, className = "aspect-[3/2]" }: { index: number; children: ReactNode; className?: string }) {
+  return (
+    <div className={`rounded-[28px] bg-(--c-card) p-3 ${className}`}>
+      <div className="relative h-full overflow-hidden rounded-[20px] bg-(--c-bg)" aria-hidden="true">
+        {/* The strip at the downloads card's own size: its grid scales with width. */}
+        <span className="absolute bottom-4 left-1/2 block h-20 w-[280px] max-w-[80%] -translate-x-1/2 opacity-80">
+          <PlatformGlyphBand index={index} />
+        </span>
+        <span className="absolute inset-0 flex items-center justify-center pb-12">{children}</span>
+      </div>
+    </div>
+  );
+}
+
+function BigGlyph({ d }: { d: string }) {
+  return (
+    <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal} rounded-[28px] bg-(--c-card) p-6 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.45)]`}>
+      <svg className="h-16 w-16 md:h-20 md:w-20" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d={d} />
+      </svg>
+    </span>
   );
 }
 
@@ -112,7 +181,24 @@ function GuideLink({ href, children }: { href: string; children: ReactNode }) {
   );
 }
 
-function ChapterVisual({ chapter, alt, compact }: { chapter: AppleChapter; alt: string; compact: boolean }) {
+function ChapterVisual({
+  chapter,
+  index,
+  alt,
+  compact,
+}: {
+  chapter: AppChapter;
+  index: number;
+  alt: string;
+  compact: boolean;
+}) {
+  if (chapter.frame === "glyph") {
+    return (
+      <GlyphTray index={index}>
+        <BigGlyph d={ICON[chapter.glyph]} />
+      </GlyphTray>
+    );
+  }
   if (chapter.frame === "photo") {
     return (
       <div className="relative aspect-[3/2] overflow-hidden rounded-[28px]" style={{ backgroundColor: chapter.image.bg }}>
@@ -158,20 +244,25 @@ function ChapterVisual({ chapter, alt, compact }: { chapter: AppleChapter; alt: 
 }
 
 /**
- * The iPhone and Mac app pages. Section order: hero, app tour (raw screens, no
- * marketing words in the images), four feature chapters, the Apple-devices band,
- * privacy facts, guides, setup, FAQ, related platforms, final CTA.
+ * The app pages: iPhone, iPad, Mac, Android and Huawei. Section order: hero, app tour (raw
+ * screens, no marketing words in the images), four feature chapters, the devices band,
+ * privacy facts, guides, setup, FAQ, final CTA, related platforms. A section the config
+ * leaves empty (tour, devices band, guides) is skipped.
  */
-export async function AppleAppPage({ locale, config }: { locale: string; config: AppleAppConfig }) {
+export async function PlatformAppPage({ locale, config }: { locale: string; config: AppPageConfig }) {
   setRequestLocale(locale);
   const [t, s, mt, tHero] = await Promise.all([
-    getTranslations(`${config.namespace}.apple`),
+    getTranslations(`${config.namespace}.${config.copyKey}`),
     getTranslations("applePage"),
     getTranslations({ locale, namespace: `${config.namespace}.metadata` }),
     getTranslations({ locale, namespace: "hero" }),
   ]);
 
   const isMac = config.tourDevice === "mac";
+  const isApple = config.family === "apple";
+  // The devices band: Apple's lives in the shared namespace (three pages show it), the
+  // Android family's in each page's own copy.
+  const eco = (key: string) => (isApple ? s(`ecosystem.${key}`) : t(`ecosystem.${key}`));
   const compact = !!config.compact;
   const priceFrom = `$${PLANS.annual.monthly.toFixed(2)}`;
   const faqItems = config.faqKeys.map((k) => ({
@@ -185,10 +276,20 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
     alt: t(`tour.items.${key}.alt`),
   }));
 
+  const rating = config.rating && (
+    <span className="flex items-center gap-1.5">
+      <Stars />
+      <span className="text-sm font-bold text-(--c-text)">
+        {tHero(config.rating === "appStore" ? "socialProof.rating" : "socialProof.ratingGooglePlay")}
+      </span>
+      <span className={PLUS_META}>{tHero(`socialProof.${config.rating}`)}</span>
+    </span>
+  );
+
   const hero = (
     <>
       <span className={`${PLUS_CHIP} bg-(--c-accent-tint) text-(--c-accent)`}>
-        <AppleIcon className="h-3.5 w-3.5" />
+        {isApple ? <AppleIcon className="h-3.5 w-3.5" /> : <PlatformLogo icon="android" className="h-3.5 w-3.5" />}
         {t("hero.eyebrow")}
       </span>
       <h1 className="mt-5 font-display text-[40px] font-bold leading-[1.06] tracking-tight text-(--c-text) sm:text-5xl xl:text-6xl">
@@ -198,14 +299,19 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
         {t("hero.subtitle")}
       </p>
       <div className={`mt-8 flex flex-col items-center gap-4 sm:flex-row ${isMac ? "justify-center" : "justify-center lg:justify-start"}`}>
-        <StoreButton config={config} label={t("hero.cta")} large />
-        <span className="flex items-center gap-1.5">
-          <Stars />
-          <span className="text-sm font-bold text-(--c-text)">{tHero("socialProof.rating")}</span>
-          <span className={PLUS_META}>{tHero("socialProof.appStore")}</span>
-        </span>
+        <StoreButton config={config} button={config.primary} label={t(`hero.${config.primary.labelKey}`)} large />
+        {config.secondary ? (
+          <StoreButton config={config} button={config.secondary} label={t(`hero.${config.secondary.labelKey}`)} large quiet />
+        ) : (
+          rating
+        )}
       </div>
+      {/* Two buttons fill the row, so the rating drops to its own line. */}
+      {config.secondary && rating && (
+        <div className={`mt-5 flex ${isMac ? "justify-center" : "justify-center lg:justify-start"}`}>{rating}</div>
+      )}
       <p className={`mt-5 ${PLUS_META}`}>{t("hero.note", { days: TERMS.freeTrialDays })}</p>
+      {config.heroNote2 && <p className={`mt-1.5 ${PLUS_META}`}>{t(config.heroNote2)}</p>}
     </>
   );
 
@@ -225,7 +331,7 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
         description={mt("description")}
         operatingSystem={config.operatingSystem}
         applicationCategory="UtilitiesApplication"
-        downloadUrl={config.downloadUrl}
+        downloadUrl={config.primary.href.startsWith("/") ? `${SITE_URL}${config.primary.href}` : config.primary.href}
       />
       <FAQSchema items={faqItems} />
       <Navbar />
@@ -293,7 +399,12 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
                         i % 2 === 1 ? `lg:order-2 ${compact ? "lg:me-0" : ""}` : compact ? "lg:ms-0" : ""
                       }`}
                     >
-                      <ChapterVisual chapter={chapter} alt={t(`${k}.alt`)} compact={compact} />
+                      <ChapterVisual
+                        chapter={chapter}
+                        index={i}
+                        alt={chapter.frame === "glyph" ? "" : t(`${k}.alt`)}
+                        compact={compact}
+                      />
                     </div>
                     <div className="max-w-xl">
                       <p className={KICKER}>{t(`${k}.kicker`)}</p>
@@ -319,74 +430,82 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
             </div>
           </PlusContainer>
 
-          {/* ── Every Apple device ───────────────────────────────── */}
-          <PlusContainer className={SECTION}>
-            <div className="overflow-hidden rounded-[32px] bg-(--c-card)">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[560px]" style={{ backgroundColor: config.ecosystem.image.bg }}>
-                  <Image
-                    src={config.ecosystem.image.src}
-                    alt={s(`ecosystem.${config.ecosystem.altKey}`)}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-14">
-                  <p className={KICKER}>{s("ecosystem.kicker")}</p>
-                  <h2 className={`mt-3 ${H2}`}>{s("ecosystem.title")}</h2>
-                  <p className="mt-4 text-lg leading-relaxed text-(--c-muted)">{s("ecosystem.body")}</p>
-                  <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-                    {(
-                      [
-                        ["iphone", ICON.phone],
-                        ["ipad", ICON.tablet],
-                        ["mac", ICON.laptop],
-                        ["watch", ICON.watch],
-                      ] as const
-                    ).map(([key, d]) => (
-                      <li key={key} className="flex gap-3">
-                        <Glyph d={d} />
-                        <span>
-                          <span className={`block ${PLUS_TITLE_SM}`}>{s(`ecosystem.${key}.title`)}</span>
-                          <span className={`mt-1 block ${PLUS_META}`}>{s(`ecosystem.${key}.body`)}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-2 flex flex-wrap gap-x-6">
-                    <GuideLink href="/guides/vpn-on-apple-watch">{s("guides.items.vpn-on-apple-watch.cta")}</GuideLink>
-                    <GuideLink href="/guides/one-account-every-apple-device">
-                      {s("guides.items.one-account-every-apple-device.cta")}
-                    </GuideLink>
+          {/* ── Devices band (every Apple device / Android everywhere) ── */}
+          {config.ecosystem && (
+            <PlusContainer className={SECTION}>
+              <div className="overflow-hidden rounded-[32px] bg-(--c-card)">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  {config.ecosystem.image ? (
+                    <div
+                      className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[560px]"
+                      style={{ backgroundColor: config.ecosystem.image.bg }}
+                    >
+                      <Image
+                        src={config.ecosystem.image.src}
+                        alt={config.ecosystem.altKey ? eco(config.ecosystem.altKey) : ""}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <GlyphTray index={2} className="aspect-[3/2] lg:aspect-auto lg:min-h-[560px]">
+                      <span className="text-(--c-text)">
+                        <PlatformLogo icon="android" className="h-24 w-24 md:h-32 md:w-32" />
+                      </span>
+                    </GlyphTray>
+                  )}
+                  <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-14">
+                    <p className={KICKER}>{eco("kicker")}</p>
+                    <h2 className={`mt-3 ${H2}`}>{eco("title")}</h2>
+                    <p className="mt-4 text-lg leading-relaxed text-(--c-muted)">{eco("body")}</p>
+                    <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                      {config.ecosystem.devices.map(({ key, glyph }) => (
+                        <li key={key} className="flex gap-3">
+                          <Glyph d={ICON[glyph]} />
+                          <span>
+                            <span className={`block ${PLUS_TITLE_SM}`}>{eco(`${key}.title`)}</span>
+                            <span className={`mt-1 block ${PLUS_META}`}>{eco(`${key}.body`)}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    {config.ecosystem.guides.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-x-6">
+                        {config.ecosystem.guides.map((slug) => (
+                          <GuideLink key={slug} href={`/guides/${slug}`}>
+                            {s(`guides.items.${slug}.cta`)}
+                          </GuideLink>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-          </PlusContainer>
+            </PlusContainer>
+          )}
 
           {/* ── Privacy facts ────────────────────────────────────── */}
           <PlusContainer className={SECTION}>
             <SectionHead title={s("privacy.title")} lead={s("privacy.subtitle")} />
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {(
-                [
-                  ["noEmail", ICON.id],
-                  ["vless", ICON.lock],
-                  ["noLogs", ICON.eyeOff],
-                  ["trial", ICON.gift],
-                ] as const
-              ).map(([key, d]) => (
-                <li key={key} className={PLUS_CARD}>
-                  <Glyph d={d} className="h-7 w-7" />
-                  <h3 className={`mt-4 ${PLUS_TITLE_SM}`}>{s(`privacy.${key}.title`, { days: TERMS.freeTrialDays })}</h3>
-                  <p className={`mt-2 ${PLUS_BODY}`}>{s(`privacy.${key}.body`, { days: TERMS.freeTrialDays })}</p>
-                </li>
-              ))}
+              {config.privacy.map((item) => {
+                const own = item.startsWith("page:");
+                const key = own ? item.slice(5) : item;
+                const tr = own ? t : s;
+                return (
+                  <li key={item} className={PLUS_CARD}>
+                    <Glyph d={PRIVACY_ICON[key] ?? ICON.check} className="h-7 w-7" />
+                    <h3 className={`mt-4 ${PLUS_TITLE_SM}`}>{tr(`privacy.${key}.title`, { days: TERMS.freeTrialDays })}</h3>
+                    <p className={`mt-2 ${PLUS_BODY}`}>{tr(`privacy.${key}.body`, { days: TERMS.freeTrialDays })}</p>
+                  </li>
+                );
+              })}
             </ul>
           </PlusContainer>
 
           {/* ── Guides ───────────────────────────────────────────── */}
+          {config.guides.length > 0 && (
           <PlusContainer className={SECTION}>
             <SectionHead kicker={s("guides.kicker")} title={s("guides.title")} lead={s("guides.subtitle")} />
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -423,6 +542,7 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
             </Link>
             {locale !== GUIDE_LOCALE && <p className={`mt-4 text-center ${PLUS_META}`}>{s("guides.englishNote")}</p>}
           </PlusContainer>
+          )}
 
           {/* ── Setup ────────────────────────────────────────────── */}
           <PlusContainer className={SECTION}>
@@ -460,21 +580,29 @@ export async function AppleAppPage({ locale, config }: { locale: string; config:
                 </p>
                 <div id="blog-cta-sentinel" aria-hidden="true" />
                 <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-center">
-                  <StoreButton config={config} label={t("hero.cta")} large />
+                  <StoreButton config={config} button={config.primary} label={t(`hero.${config.primary.labelKey}`)} large />
                   <Link href="/downloads" className="text-[15px] font-bold text-(--c-accent) hover:underline hover:underline-offset-4">
                     {s("cta.downloads")}
                   </Link>
                 </div>
               </div>
-              <div className="relative aspect-[3/2] lg:aspect-auto" style={{ backgroundColor: GUIDE_COVERS["doppler-on-iphone-and-mac"].bg }}>
-                <Image
-                  src={GUIDE_COVERS["doppler-on-iphone-and-mac"].src}
-                  alt={s("cta.imageAlt")}
-                  fill
-                  sizes="(min-width: 1024px) 55vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
+              {config.ctaImage ? (
+                <div className="relative aspect-[3/2] lg:aspect-auto" style={{ backgroundColor: config.ctaImage.bg }}>
+                  <Image
+                    src={config.ctaImage.src}
+                    alt={s("cta.imageAlt")}
+                    fill
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <GlyphTray index={3} className="aspect-[3/2] lg:aspect-auto lg:min-h-[420px]">
+                  <span className="text-(--c-text)">
+                    <Mark mark={config.primary.mark} className="h-20 w-20 md:h-24 md:w-24" />
+                  </span>
+                </GlyphTray>
+              )}
             </div>
 
             {/* Other platforms */}

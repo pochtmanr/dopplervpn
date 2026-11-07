@@ -111,6 +111,7 @@ export async function Footer() {
   const platformLinks: LinkItem[] = [
     { href: "/vpn-for-ios", label: t("vpnForIos") },
     { href: "/vpn-for-android", label: t("vpnForAndroid") },
+    { href: "/vpn-for-huawei", label: t("vpnForHuawei") },
     { href: "/vpn-for-macos", label: t("vpnForMacos") },
     { href: "/vpn-for-windows", label: t("vpnForWindows") },
     { href: "/vless-vpn-android", label: t("vlessVpnAndroid") },

@@ -439,7 +439,8 @@
     "vpnForTiktokBan": "VPN za zabranu TikToka",
     "giveaway": "Nagradna igra",
     "payWithCrypto": "Plaćanje kriptovalutama",
-    "agents": "Za AI agente"
+    "agents": "Za AI agente",
+    "vpnForHuawei": "VPN za Huawei"
   },
   "privacy": {
     "title": "Pravila o privatnosti",
@@ -748,7 +749,18 @@
       "step4": "Odaberite plan, pretplatite se i povežite se!",
       "learnMore": "Saznajte više o VPN-u za Windows"
     },
-    "installGuide": "Upute za instalaciju"
+    "installGuide": "Upute za instalaciju",
+    "huawei": {
+      "title": "Huawei",
+      "buttonAppGallery": "Nabavi na AppGalleryju",
+      "buttonApk": "Preuzmi APK",
+      "apkNote": "Za telefone Huawei i Honor bez Google Playa. HarmonyOS NEXT nije podržan.",
+      "step1": "Preuzmite APK na telefon",
+      "step2": "Dopustite instalacije iz preglednika, zatim dodirnite Instaliraj",
+      "step3": "Otvorite aplikaciju i odaberite plan na web-stranici",
+      "step4": "Dodirnite Spoji i zaštićeni ste",
+      "learnMore": "Saznajte više o VPN-u za Huawei"
+    }
   },
   "support": {
     "title": "Centar za pomoć i podrška",
@@ -2544,117 +2556,246 @@
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Doppler VPN za Android — brz, privatan i otporan na cenzuru",
-      "description": "Preuzmite Doppler VPN za Android s Google Playa. VLESS-Reality enkripcija, bez registracije, zaobilazite cenzuru. 3-dnevna besplatna probna verzija."
-    },
-    "hero": {
-      "title": "Doppler VPN za Android",
-      "subtitle": "Brz, privatan i otporan na cenzuru VPN izrađen za Android. Bez registracije — preuzmite s Google Playa i spojite se u nekoliko sekundi. Uključuje 3-dnevnu besplatnu probnu verziju s potpunim pristupom svim značajkama.",
-      "cta": "Nabavite na Google Playu"
-    },
-    "features": {
-      "title": "Zašto odabrati Doppler VPN za Android?",
-      "subtitle": "Doppler VPN je dizajniran za Android korisnike koji zahtijevaju pravu privatnost bez kompromisa u brzini, trajanju baterije ili upotrebljivosti.",
-      "vlessEncryption": {
-        "title": "VLESS-Reality enkripcija",
-        "description": "Protokol nove generacije koji maskira VPN promet kao obično HTTPS pregledavanje. Vaša veza je nevidljiva za vatrozide, sustave za duboku inspekciju paketa i nadzor ISP-a. Ista tehnologija koja se koristi za zaobilaženje Velikog kineskog vatrozida."
-      },
-      "noRegistration": {
-        "title": "Bez registracije",
-        "description": "Bez e-maila, bez telefonskog broja, bez stvaranja računa. Preuzmite s Google Playa, otvorite aplikaciju i spojite se odmah. Doppler koristi autentifikaciju temeljenu na uređaju pa vaš identitet ostaje potpuno privatan."
-      },
-      "oneTapConnect": {
-        "title": "Spajanje jednim dodirom",
-        "description": "Pritisnite jedan gumb i Doppler automatski odabire najbrži server, uspostavlja šifrirani tunel i štiti sav vaš promet. Pametni odabir servera optimizira brzinu i pouzdanost."
-      },
-      "bypassCensorship": {
-        "title": "Zaobilaženje cenzure i DPI",
-        "description": "Dizajniran za rad u zemljama sa strogom internetskom cenzurom — Rusija, Iran, Kina i šire. VLESS-Reality čini vaš VPN promet nerazlučivim od normalnog pregledavanja weba, pobjeđujući TSPU i GFW."
-      },
-      "noLogs": {
-        "title": "Stroga politika bez zapisa",
-        "description": "Doppler nikada ne prikuplja, ne pohranjuje niti ne dijeli vaše podatke o pregledavanju. Bez zapisa prometa, bez zapisa DNS upita, bez ijednog zapisa koji vas povezuje s onim što posjećujete. Prijava ostavlja kratak zapis autentifikacije, čuvan 90 dana radi sprječavanja zlouporabe — pokazuje da se uređaj povezao, nikada kamo je otišao."
-      },
-      "globalServers": {
-        "title": "6 globalnih lokacija servera",
-        "description": "Spojite se na servere u više zemalja diljem Europe i šire. Svaki server pokreće VLESS-Reality s optimiziranim usmjeravanjem za najniže kašnjenje i najveću propusnost."
-      },
-      "freeTrial": {
-        "title": "3-dnevna besplatna probna verzija",
-        "description": "Isprobajte Doppler VPN s potpunim pristupom svim značajkama 3 dana. Nakon probnog razdoblja odaberite mjesečni, 6-mjesečni ili godišnji plan od 3,33 $/mjesec. Upravljajte pretplatom putem Google Playa."
-      },
-      "batteryEfficient": {
-        "title": "Energetski učinkovita pozadinska usluga",
-        "description": "Doppler koristi Androidov nativni Always-On VPN okvir s minimalnim utjecajem na bateriju. Manje od 2% dodatnog pražnjenja čak i uz uključenu zaštitu 24/7. Optimizirano za Samsung, Xiaomi, OnePlus, Pixel i sve glavne Android brendove."
-      }
+      "title": "Doppler VPN za Android: radi tamo gdje su drugi VPN-ovi blokirani",
+      "description": "Doppler VPN za Android telefone i tablete. VLESS-Reality vas drži povezanima u Rusiji, Iranu i Kini, uz Smart Route i kill switch. Na Google Playu ili kao APK, uz besplatno probno razdoblje na Google Playu."
     },
     "howItWorks": {
       "title": "Kako postaviti VPN na Androidu",
-      "subtitle": "Spojite se za manje od 30 sekundi — nije potrebno tehničko znanje.",
-      "step1": {
-        "title": "Preuzmite s Google Playa",
-        "description": "Potražite \"Doppler VPN\" na Google Play Storeu ili dodirnite gumb za preuzimanje ispod. Aplikacija je besplatna za preuzimanje, lagana s manje od 15 MB i kompatibilna s Android 8.0 (Oreo) i novijim."
+      "subtitle": "Povezani za manje od minute, bez tehničkog znanja."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Telefoni · Tableti · Preklopni telefoni",
+        "title": "Doppler VPN za Android",
+        "subtitle": "Jedan dodir i vaš je telefon privatan. Doppler vezu prikazuje kao običan posjet web-stranici, pa radi i na mrežama koje blokiraju druge VPN-ove.",
+        "cta": "Nabavi na Google Playu",
+        "ctaSecondary": "Preuzmi APK",
+        "note": "Besplatno preuzimanje · {days} dana besplatno na Google Playu · Bez e-pošte i broja telefona"
       },
-      "step2": {
-        "title": "Otvorite aplikaciju",
-        "description": "Pokrenite Doppler VPN na svom Android telefonu ili tabletu. Nema zaslona za registraciju, nema obrasca za prijavu i nema verifikacije e-mailom. Vaš račun se automatski stvara pomoću autentifikacije temeljene na uređaju."
+      "chapters": {
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Radi tamo gdje su drugi VPN-ovi blokirani",
+          "body": "Dopplerov tunel izgleda kao običan HTTPS posjet poznatoj web-stranici. Filtri u Rusiji, Iranu i Kini koji otkrivaju i prekidaju obične VPN-ove propuštaju ga, pa ostajete na mreži.",
+          "points": {
+            "p1": "VLESS-Reality na svakom poslužitelju, ništa za postavljanje",
+            "p2": "Ako mreža blokira poslužitelj, promijenite web-stranicu koju njegova veza oponaša",
+            "p3": "Jedan dodir povezuje vas s brzim poslužiteljem"
+          }
+        },
+        "route": {
+          "kicker": "Smart Route",
+          "title": "Domaće stranice zaobilaze tunel",
+          "body": "Banke i lokalne usluge često odbijaju strane adrese. Smart Route ih šalje izravno vašom vlastitom vezom, a sve ostalo kroz Doppler.",
+          "points": {
+            "p1": "Jednom odaberite svoju matičnu zemlju",
+            "p2": "Gotova pravila za domaće stranice te za državne usluge i bankarstvo",
+            "p3": "Dodajte vlastite domene koje trebaju zaobići VPN"
+          }
+        },
+        "killSwitch": {
+          "kicker": "Kill switch",
+          "title": "Ako tunel padne, ništa ne curi",
+          "body": "Ako se VPN veza prekine, kill switch blokira sav promet dok se Doppler ne vrati, pa nijedna aplikacija neprimjetno ne prijeđe na vašu stvarnu adresu.",
+          "points": {
+            "p1": "Blokira internet ako VPN neočekivano padne",
+            "p2": "Always On se sam ponovno spaja kad veza padne",
+            "p3": "Jedan dodir do Androidova sustavnog Always-on VPN-a, da se zaštita vrati i nakon ponovnog pokretanja"
+          }
+        },
+        "account": {
+          "kicker": "Jedan račun",
+          "title": "Bez e-pošte, jedan ID za svaki uređaj",
+          "body": "Otvaranjem aplikacije nastaje nasumični ID računa. Bez e-pošte, bez broja telefona. Isti ID prijavljuje i vaše druge telefone i tablete, iPhone, Mac i Windows računalo.",
+          "points": {
+            "p1": "Pogledajte sve prijavljene uređaje i uklonite one koje više ne koristite",
+            "p2": "Ugrađeni test brzine mjeri sam tunel",
+            "p3": "Vaš plan pripada vašem ID-u, a ne jednom telefonu"
+          }
+        }
       },
-      "step3": {
-        "title": "Pretplatite se na plan",
-        "description": "Pokrenite 3-dnevnu besplatnu probnu verziju ili odaberite pretplatnički plan. Dostupne su mjesečna (6,99 $), 6-mjesečna (29,99 $) ili godišnja (39,99 $) opcija. Upravljajte pretplatom izravno putem Google Playa."
+      "ecosystem": {
+        "kicker": "Android posvuda",
+        "title": "Danas telefon, zatim veći zasloni",
+        "body": "Doppler radi na Androidu 8.0 i novijem, od povoljnih telefona do vodećih modela. Rasporedi za tablete, Chromebooke i televizore su na putu.",
+        "phone": {
+          "title": "Telefoni",
+          "body": "Puna aplikacija, na Androidu 8.0 ili novijem"
+        },
+        "tablet": {
+          "title": "Tableti i preklopni telefoni",
+          "body": "Radi već danas; raspored s dva okna stiže"
+        },
+        "chromebook": {
+          "title": "Chromebooki",
+          "body": "Uskoro"
+        },
+        "tv": {
+          "title": "Android TV",
+          "body": "Uskoro"
+        }
       },
-      "step4": {
-        "title": "Dodirnite Spoji",
-        "description": "Pritisnite gumb za spajanje. Doppler automatski odabire najbolji server, uspostavlja šifrirani VLESS-Reality tunel i usmjerava sav vaš promet kroz njega. Vaša IP adresa je skrivena, a vaši podaci su šifrirani."
+      "privacy": {
+        "trial": {
+          "title": "{days} dana besplatno",
+          "body": "Isprobajte sve značajke prije plaćanja. Otkažite bilo kada na Google Playu."
+        }
+      },
+      "setup": {
+        "title": "Spremno za manje od minute",
+        "subtitle": "Bez obrasca za registraciju, bez e-pošte, ništa za podešavanje.",
+        "s1": {
+          "title": "Instalirajte aplikaciju",
+          "body": "Preuzmite Doppler s Google Playa. Nemate Google Play na telefonu? Umjesto toga preuzmite APK s ove stranice."
+        },
+        "s2": {
+          "title": "Otvorite je",
+          "body": "ID računa stvara se pri prvom pokretanju. Nisu potrebni e-pošta ni broj telefona."
+        },
+        "s3": {
+          "title": "Dodirnite Spoji",
+          "body": "Započnite {days}-dnevno besplatno probno razdoblje na Google Playu ili odaberite plan od {price} mjesečno."
+        }
+      },
+      "faq": {
+        "title": "Pitanja o Doppleru na Androidu",
+        "q1": {
+          "question": "Na kojim Android telefonima radi Doppler?",
+          "answer": "Na svakom telefonu ili tabletu s Androidom 8.0 ili novijim: Samsung Galaxy, Pixel, Xiaomi, OnePlus, Motorola i drugima. Telefoni Huawei i Honor bez Googleovih usluga mogu instalirati APK; kako, objašnjava stranica za Huawei."
+        },
+        "q2": {
+          "question": "Google Play ili APK: što odabrati?",
+          "answer": "Google Play, ako ga telefon ima: aplikacija se sama ažurira i dostupno je {days}-dnevno besplatno probno razdoblje. APK je za telefone bez Google Playa. Plaća se na web-stranici karticom ili kriptovalutom, a aplikacija vam javlja kad izađe ažuriranje."
+        },
+        "q3": {
+          "question": "Radi li u Rusiji, Iranu i Kini?",
+          "answer": "Da. Doppler koristi VLESS-Reality, zbog kojeg tunel izgleda kao običan HTTPS posjet poznatoj web-stranici. Zato radi i na mrežama koje otkrivaju i blokiraju druge VPN protokole."
+        },
+        "q4": {
+          "question": "Što radi kill switch?",
+          "answer": "Kad je uključen i VPN veza neočekivano padne, sav internetski promet blokira se dok se Doppler ponovno ne spoji. Vaše aplikacije nikad bez vašeg znanja ne prelaze na vašu stvarnu adresu."
+        },
+        "q5": {
+          "question": "Kako otkazati?",
+          "answer": "Ako ste se pretplatili na Google Playu, otvorite Trgovinu Play, dodirnite svoj profil, zatim Plaćanja i pretplate, pa Pretplate i otkažite Doppler VPN. Pristup traje do kraja plaćenog razdoblja. Planovi kupljeni na web-stranici jednokratna su plaćanja i nikad se ne obnavljaju."
+        }
+      },
+      "cta": {
+        "title": "Nabavite Doppler za Android",
+        "subtitle": "Besplatno preuzimanje, uz {days}-dnevno besplatno probno razdoblje na Google Playu. Bez e-pošte, bez broja telefona."
       }
+    }
+  },
+  "vpnForHuawei": {
+    "metadata": {
+      "title": "Doppler VPN za Huawei i Honor: bez Googleovih usluga",
+      "description": "VPN za telefone Huawei i Honor bez Google Playa. Instalirajte Dopplerov APK, platite na web-stranici karticom ili kriptovalutom i spojite se putem VLESS-Reality."
     },
-    "faq": {
-      "title": "Često postavljana pitanja — Doppler VPN za Android",
-      "q1": {
-        "question": "Radi li Doppler VPN na Samsung uređajima?",
-        "answer": "Da. Doppler VPN je potpuno kompatibilan sa svim Samsung Galaxy telefonima i tabletima koji rade na Android 8.0 (Oreo) ili novijem. To uključuje Galaxy S seriju, Galaxy A seriju, Galaxy Z Fold, Galaxy Z Flip i Galaxy Tab. Doppler se integrira sa Samsungovim Always-On VPN postavkama za zaštitu 24/7."
+    "howItWorks": {
+      "title": "Kako postaviti VPN na Huaweiju",
+      "subtitle": "Preuzmite APK, jednom ga dopustite i spojite se."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Huawei · Honor · Bez Googleovih usluga",
+        "title": "Doppler VPN za Huawei i Honor",
+        "subtitle": "Telefoni bez Google Playa dobivaju isti Doppler: jednim dodirom privatna veza koja izgleda kao običan posjet web-stranici, čak i na mrežama koje blokiraju druge VPN-ove.",
+        "cta": "Nabavi na AppGalleryju",
+        "ctaSecondary": "Preuzmi APK",
+        "note": "Besplatno preuzimanje · Plaćanje na web-stranici karticom ili kriptovalutom · Bez e-pošte i broja telefona",
+        "appGalleryNote": "Uskoro na AppGalleryju. Do tada instalirajte APK s ove stranice."
       },
-      "q2": {
-        "question": "Troši li Doppler VPN bateriju?",
-        "answer": "Ne. Doppler VPN troši manje od 2% dodatne baterije čak i s uključenim Always-On VPN-om. VLESS-Reality protokol je dizajniran za učinkovitost s minimalnim opterećenjem procesora. Za najbolje iskustvo isključite Doppler iz Androidove optimizacije baterije u Postavke > Aplikacije > Doppler VPN > Baterija > Neograničeno."
+      "chapters": {
+        "noGoogle": {
+          "kicker": "Bez Googleovih usluga",
+          "title": "Za telefone bez Google Playa",
+          "body": "Dopplerovom APK-u ne trebaju Googleove usluge. Instalira se izravno s ove web-stranice i javlja vam kad izađe nova verzija, pa ažuriranja ne morate tražiti.",
+          "points": {
+            "p1": "Preuzima se ovdje, izravno od Dopplera",
+            "p2": "Bez Google računa i bez usluga Play",
+            "p3": "Obavijest u aplikaciji kad je ažuriranje spremno"
+          }
+        },
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Ostaje povezan tamo gdje su VPN-ovi blokirani",
+          "body": "To je ista aplikacija kao na Google Playu. Tunel izgleda kao običan HTTPS posjet poznatoj web-stranici, pa ga filtri koji prekidaju obične VPN-ove propuštaju.",
+          "points": {
+            "p1": "VLESS-Reality na svakom poslužitelju",
+            "p2": "Smart Route ostavlja domaće stranice i bankarstvo na vašoj vlastitoj vezi",
+            "p3": "Kill switch blokira promet ako VPN padne"
+          }
+        },
+        "pay": {
+          "kicker": "Plaćanje na webu",
+          "title": "Kartica ili kripto, bez računa u trgovini",
+          "body": "Bez Google Playa nema naplate kroz trgovinu, pa se pretplaćujete na Dopplerovoj web-stranici. Platite karticom ili kriptovalutom i plan stiže na vaš ID računa.",
+          "points": {
+            "p1": "Plaćanje bankovnom karticom ili kriptovalutom",
+            "p2": "Web planovi uključuju dodatne dane umjesto probnog razdoblja trgovine",
+            "p3": "Jednokratna plaćanja: ništa se ne obnavlja bez vas"
+          }
+        },
+        "phones": {
+          "kicker": "Koji telefoni",
+          "title": "EMUI, Magic UI i HarmonyOS do verzije 4",
+          "body": "Telefoni Huawei s EMUI-jem ili HarmonyOS-om 2 do 4 i telefoni Honor s Magic UI-jem pokreću Android aplikacije, pa se APK na njih instalira. HarmonyOS NEXT uopće ne može pokretati Android aplikacije, pa Doppler ondje nije podržan.",
+          "points": {
+            "p1": "Huawei s EMUI-jem ili HarmonyOS-om 2, 3 ili 4",
+            "p2": "Telefoni Honor, s Googleovim uslugama ili bez njih",
+            "p3": "Nije podržano: HarmonyOS NEXT (HarmonyOS 5 i noviji)"
+          }
+        }
       },
-      "q3": {
-        "question": "Kako postaviti VPN na Androidu?",
-        "answer": "Postavljanje Doppler VPN-a na Androidu traje manje od 30 sekundi: 1) Preuzmite s Google Playa, 2) Otvorite aplikaciju (bez registracije), 3) Dodirnite Spoji. Doppler automatski obavlja sve tehničke postavke — konfigurira VPN profil, odabire najbolji server i uspostavlja šifrirani tunel."
+      "privacy": {
+        "pay": {
+          "title": "Kartica ili kripto",
+          "body": "Naplata kroz trgovinu nije potrebna. Platite na web-stranici; web planovi dodaju dodatne dane umjesto probnog razdoblja trgovine."
+        }
       },
-      "q4": {
-        "question": "Radi li u Rusiji, Kini i Iranu?",
-        "answer": "Da. Doppler koristi VLESS-Reality protokol koji maskira VPN promet kao obično HTTPS pregledavanje weba. To ga čini iznimno teškim za otkrivanje i blokiranje od strane sustava cenzure poput ruskog TSPU-a, kineskog Velikog vatrozida ili iranske infrastrukture za filtriranje. Doppler je posebno dizajniran za korisnike u strogo cenzuriranim regijama."
+      "setup": {
+        "title": "Instalacija u tri koraka",
+        "subtitle": "Otprilike minuta, a Android pita samo jednom.",
+        "s1": {
+          "title": "Preuzmite APK",
+          "body": "Dodirnite Preuzmi na ovoj stranici, na telefonu koji želite zaštititi."
+        },
+        "s2": {
+          "title": "Dopustite instalaciju",
+          "body": "Android traži da dopustite instalacije iz preglednika ili aplikacije Datoteke. Uključite to, vratite se i dodirnite Instaliraj. Poslije to možete ponovno isključiti."
+        },
+        "s3": {
+          "title": "Otvorite i spojite se",
+          "body": "ID računa stvara se pri prvom pokretanju. Odaberite plan na web-stranici, od {price} mjesečno, i dodirnite Spoji."
+        }
       },
-      "q5": {
-        "question": "Kako otkazati pretplatu?",
-        "answer": "Za otkazivanje pretplate na Doppler VPN na Androidu: Otvorite Google Play > dodirnite ikonu profila > Plaćanja i pretplate > Pretplate > Doppler VPN > Otkaži pretplatu. Vaš pristup traje do kraja trenutnog obračunskog razdoblja."
+      "faq": {
+        "title": "Pitanja o Doppleru na Huaweiju",
+        "q1": {
+          "question": "Je li instaliranje APK-a sigurno?",
+          "answer": "Preuzimajte ga samo s ove stranice. APK je potpisao Doppler, a Android odbija preko njega instalirati ažuriranje koje je potpisao bilo tko drugi. Android prikazuje upozorenje za svaku aplikaciju izvan trgovine; to je upozorenje očekivano."
+        },
+        "q2": {
+          "question": "Hoće li Doppler doći na AppGallery?",
+          "answer": "Pripremamo objavu na AppGalleryju. Dok ne bude dostupna, aplikaciju instalirate putem APK-a s ove stranice, i to je ista aplikacija."
+        },
+        "q3": {
+          "question": "Radi li na HarmonyOS NEXT?",
+          "answer": "Ne. HarmonyOS NEXT (HarmonyOS 5 i noviji) pokreće samo vlastite aplikacije i ne može instalirati APK. Telefoni s EMUI-jem ili s HarmonyOS-om 4 i starijim mogu."
+        },
+        "q4": {
+          "question": "Kako platiti bez Google Playa?",
+          "answer": "Odaberite plan u aplikaciji ili na ovoj web-stranici i platite karticom ili kriptovalutom. Planovi počinju od {price} mjesečno i uključuju dodatne dane umjesto probnog razdoblja trgovine. Plan pripada vašem ID-u računa."
+        },
+        "q5": {
+          "question": "Kako funkcioniraju ažuriranja?",
+          "answer": "Aplikacija provjerava nove verzije i prikazuje obavijest kad je jedna spremna. Dodirnite je, preuzmite novi APK i instalirajte ga preko starog; vaš račun ostaje prijavljen."
+        }
       },
-      "q6": {
-        "question": "Mogu li koristiti Doppler VPN na Android TV-u?",
-        "answer": "Da. Možete instalirati Doppler VPN na Android TV uređaje i TV boxove za zaštitu vašeg streaming prometa. Pristupite geografski ograničenom sadržaju na velikom ekranu s istom VLESS-Reality enkripcijom koja se koristi na mobilnim uređajima."
+      "cta": {
+        "title": "Nabavite Doppler za svoj Huawei",
+        "subtitle": "Besplatno preuzimanje. Bez Google računa, bez e-pošte, bez broja telefona."
       }
-    },
-    "cta": {
-      "title": "Preuzmite Doppler VPN za Android",
-      "subtitle": "Bez registracije. 3-dnevna besplatna probna verzija s potpunim pristupom. VLESS-Reality enkripcija održava vašu vezu privatnom i neotkrivom.",
-      "downloadAndroid": "Nabavite na Google Playu",
-      "otherPlatforms": "Dostupno na drugim platformama",
-      "downloadsLink": "Pogledajte sva preuzimanja"
-    },
-    "related": {
-      "noRegistration": "VPN bez registracije",
-      "noRegistrationDesc": "Koristite VPN bez prijave ili računa",
-      "vless": "VLESS-Reality protokol",
-      "vlessDesc": "Saznajte kako VLESS pobjeđuje duboku inspekciju paketa",
-      "ios": "VPN za iOS",
-      "iosDesc": "Preuzmite Doppler VPN za iPhone i iPad",
-      "macos": "VPN za Mac",
-      "macosDesc": "Nativna aplikacija Doppler VPN za macOS",
-      "windows": "VPN za Windows",
-      "windowsDesc": "Doppler VPN za Windows 10 i 11",
-      "vlessAndroid": "VLESS na Androidu",
-      "vlessAndroidDesc": "Napredna postavka VLESS-Realityja za Android"
     }
   },
   "vpnForMacos": {
@@ -5003,6 +5144,10 @@
       "ipad": {
         "title": "VPN za iPad i iPhone Duo",
         "desc": "Raspored za veliki zaslon"
+      },
+      "huawei": {
+        "title": "VPN za Huawei i Honor",
+        "desc": "Bez Googleovih usluga"
       }
     },
     "cta": {

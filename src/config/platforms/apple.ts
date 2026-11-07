@@ -1,8 +1,11 @@
-import type { CtaLocation, CtaPlatform } from "@/lib/track-cta";
+import type { AppImage, AppPageConfig, GuideSlug } from "./app-page";
+
+export type { AppChapter as AppleChapter, AppDevice as AppleDevice, GuideSlug } from "./app-page";
 
 /**
- * Config for the two Apple app pages (/vpn-for-ios, /vpn-for-macos), rendered by
- * components/landing/apple-app-page.tsx. Android and Windows keep PlatformLandingPage.
+ * Config for the Apple app pages (/vpn-for-ios, /vpn-for-ipad, /vpn-for-macos), rendered by
+ * components/landing/platform-app-page.tsx. The shape is shared with the Android family
+ * (config/platforms/app-page.ts).
  *
  * Every image is a caption-free capture or mockup exported by Screenshot Studio
  * (doppler-apple/fastlane/screenshot-studio/scripts/web-shots.mjs) into
@@ -10,14 +13,9 @@ import type { CtaLocation, CtaPlatform } from "@/lib/track-cta";
  * `<namespace>.apple.*`, never inside the images.
  */
 
-/** One image at a known size. `src` is the largest width; Next picks smaller ones from `sizes`. */
-export interface AppleImage {
-  src: string;
-  width: number;
-  height: number;
-  /** Renders only: the studio backdrop colour, so the panel behind the image matches it. */
-  bg?: string;
-}
+/** One image at a known size. Kept under its first name for the guides and the tour. */
+export type AppleImage = AppImage;
+export type AppleAppConfig = AppPageConfig;
 
 /**
  * Backdrop of each studio render, sampled from its corners. A panel holding a render is
@@ -38,58 +36,6 @@ const DEFAULT_RENDER_BG = "#CDCDCD";
 export function renderBg(src: string): string {
   const name = src.split("/").pop()?.replace(/-\d+\.avif$/, "") ?? "";
   return RENDER_BACKDROPS[name] ?? DEFAULT_RENDER_BG;
-}
-
-export type AppleDevice = "phone" | "mac";
-
-export interface AppleTourShot {
-  /** Key under `<namespace>.apple.tour.items`. */
-  key: string;
-  image: AppleImage;
-}
-
-export interface AppleChapter {
-  /** Key under `<namespace>.apple.chapters`. */
-  key: string;
-  /** "phone" draws an iPhone frame around a capture, "mac" a laptop bezel, "photo" fills the card. */
-  frame: "phone" | "mac" | "photo";
-  image: AppleImage;
-  /** Optional guide link under the copy. Locale-free path; guides are English-only for now. */
-  guide?: GuideSlug;
-}
-
-export type GuideSlug =
-  | "vpn-on-apple-watch"
-  | "what-is-sni"
-  | "doppler-on-iphone-and-mac"
-  | "one-account-every-apple-device";
-
-export interface AppleAppConfig {
-  slug: "vpn-for-ios" | "vpn-for-ipad" | "vpn-for-macos";
-  namespace: "vpnForIos" | "vpnForIpad" | "vpnForMacos";
-  /** A parent page for the breadcrumb (iPad sits under iPhone). Title key is `applePage.related.<key>.title`. */
-  parent?: { href: string; key: string };
-  operatingSystem: string;
-  trackLocation: CtaLocation;
-  trackPlatform: CtaPlatform;
-  downloadUrl: string;
-  ogImageAlt: string;
-  /** Hero art, above the fold, loaded with priority: a 3:2 studio render. */
-  hero: AppleImage & { alt: string };
-  /** The render beside the "every Apple device" copy, and its alt key under `applePage.ecosystem`. */
-  ecosystem: { image: AppleImage; altKey: "photoAlt" | "photoAltDevices" };
-  tourDevice: AppleDevice;
-  /** Swipeable screens. Empty skips the section (iOS dropped it 2026-11-06: "the gallery view is not important"). */
-  tour: AppleTourShot[];
-  /** Smaller chapter cards and headings (iOS + iPad). The Mac page keeps the large ones. */
-  compact?: boolean;
-  chapters: AppleChapter[];
-  /** Order of the guide cards near the bottom of the page. */
-  guides: GuideSlug[];
-  /** Keys under `<namespace>.apple.faq`. */
-  faqKeys: string[];
-  /** Other platform pages, as related links at the foot of the page. */
-  related: Array<{ href: string; key: string }>;
 }
 
 const A = "/images/apple";
@@ -120,16 +66,34 @@ export const APPLE_GUIDES: GuideSlug[] = [
   "one-account-every-apple-device",
 ];
 
+const APP_STORE_BUTTON = { href: APPLE_APP_STORE_URL, mark: "appStore", labelKey: "cta" } as const;
+
+/** The Apple-devices band: its four devices and the two guides under them. */
+const APPLE_DEVICES: Pick<NonNullable<AppPageConfig["ecosystem"]>, "devices" | "guides"> = {
+  devices: [
+    { key: "iphone", glyph: "phone" },
+    { key: "ipad", glyph: "tablet" },
+    { key: "mac", glyph: "laptop" },
+    { key: "watch", glyph: "watch" },
+  ],
+  guides: ["vpn-on-apple-watch", "one-account-every-apple-device"],
+};
+
+const APPLE_PRIVACY = ["noEmail", "vless", "noLogs", "trial"];
+
 export const iosApple: AppleAppConfig = {
+  copyKey: "apple",
+  family: "apple",
   slug: "vpn-for-ios",
   namespace: "vpnForIos",
   operatingSystem: "iOS",
   trackLocation: "vpn-for-ios",
   trackPlatform: "ios",
-  downloadUrl: APPLE_APP_STORE_URL,
+  primary: APP_STORE_BUTTON,
+  rating: "appStore",
   ogImageAlt: "Doppler VPN for iPhone & iPad",
   hero: { ...photo("iphone-hand"), alt: "Doppler VPN on an iPhone held in hand, connected and protected" },
-  ecosystem: { image: photo("watch-s11"), altKey: "photoAlt" },
+  ecosystem: { image: photo("watch-s11"), altKey: "photoAlt", ...APPLE_DEVICES },
   tourDevice: "phone",
   tour: [],
   compact: true,
@@ -139,7 +103,9 @@ export const iosApple: AppleAppConfig = {
     { key: "path", frame: "phone", image: phone("path") },
     { key: "split", frame: "phone", image: phone("split") },
   ],
+  privacy: APPLE_PRIVACY,
   guides: APPLE_GUIDES,
+  ctaImage: GUIDE_COVERS["doppler-on-iphone-and-mac"],
   faqKeys: ["q1", "q2", "q3", "q4", "q5", "q6"],
   related: [
     { href: "/vpn-for-ipad", key: "ipad" },
@@ -153,16 +119,19 @@ export const iosApple: AppleAppConfig = {
  * two columns on Duo). No tour: there are no caption-free iPad captures yet, only renders.
  */
 export const ipadApple: AppleAppConfig = {
+  copyKey: "apple",
+  family: "apple",
   slug: "vpn-for-ipad",
   namespace: "vpnForIpad",
   parent: { href: "/vpn-for-ios", key: "ios" },
   operatingSystem: "iPadOS",
   trackLocation: "vpn-for-ipad",
   trackPlatform: "ios",
-  downloadUrl: APPLE_APP_STORE_URL,
+  primary: APP_STORE_BUTTON,
+  rating: "appStore",
   ogImageAlt: "Doppler VPN for iPad and iPhone Duo",
   hero: { ...photo("ipad-hand", 1800, 1350), alt: "Doppler VPN on an iPad Pro held in one hand, showing the sidebar and the Devices page" },
-  ecosystem: { image: photo("watch-s11"), altKey: "photoAlt" },
+  ecosystem: { image: photo("watch-s11"), altKey: "photoAlt", ...APPLE_DEVICES },
   tourDevice: "phone",
   tour: [],
   compact: true,
@@ -171,7 +140,9 @@ export const ipadApple: AppleAppConfig = {
     { key: "keyboard", frame: "photo", image: photo("ipad-keyboard"), guide: "what-is-sni" },
     { key: "account", frame: "phone", image: phone("devices"), guide: "one-account-every-apple-device" },
   ],
+  privacy: APPLE_PRIVACY,
   guides: APPLE_GUIDES,
+  ctaImage: GUIDE_COVERS["doppler-on-iphone-and-mac"],
   faqKeys: ["q1", "q2", "q3", "q4", "q5"],
   related: [
     { href: "/vpn-for-ios", key: "ios" },
@@ -181,15 +152,18 @@ export const ipadApple: AppleAppConfig = {
 };
 
 export const macosApple: AppleAppConfig = {
+  copyKey: "apple",
+  family: "apple",
   slug: "vpn-for-macos",
   namespace: "vpnForMacos",
   operatingSystem: "macOS",
   trackLocation: "vpn-for-macos",
   trackPlatform: "mac",
-  downloadUrl: APPLE_APP_STORE_URL,
+  primary: APP_STORE_BUTTON,
+  rating: "appStore",
   ogImageAlt: "Doppler VPN for Mac",
   hero: { ...photo("mac-front"), alt: "Doppler VPN on a MacBook Pro, connected and protected" },
-  ecosystem: { image: photo("watch-s10"), altKey: "photoAltDevices" },
+  ecosystem: { image: photo("watch-s10"), altKey: "photoAltDevices", ...APPLE_DEVICES },
   tourDevice: "mac",
   // The hero already shows the connected VPN screen, so the tour starts one step in.
   tour: ["unblock", "path", "split", "speed", "devices", "appearance"].map((key) => ({
@@ -202,7 +176,9 @@ export const macosApple: AppleAppConfig = {
     { key: "path", frame: "mac", image: mac("path") },
     { key: "split", frame: "mac", image: mac("split") },
   ],
+  privacy: APPLE_PRIVACY,
   guides: APPLE_GUIDES,
+  ctaImage: GUIDE_COVERS["doppler-on-iphone-and-mac"],
   faqKeys: ["q1", "q2", "q3", "q4", "q5", "q6"],
   related: [
     { href: "/vpn-for-ios", key: "ios" },

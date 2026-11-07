@@ -439,7 +439,8 @@
     "vpnForTiktokBan": "VPN pret TikTok aizliegumu",
     "giveaway": "Izloze",
     "payWithCrypto": "Maksājiet ar kripto",
-    "agents": "AI aģentiem"
+    "agents": "AI aģentiem",
+    "vpnForHuawei": "VPN priekš Huawei"
   },
   "privacy": {
     "title": "Privātuma politika",
@@ -748,7 +749,18 @@
       "step4": "Izvēlieties plānu, abonējiet un pieslēdzieties!",
       "learnMore": "Uzzināt vairāk par VPN priekš Windows"
     },
-    "installGuide": "Instalēšanas ceļvedis"
+    "installGuide": "Instalēšanas ceļvedis",
+    "huawei": {
+      "title": "Huawei",
+      "buttonAppGallery": "Iegūt AppGallery",
+      "buttonApk": "Lejupielādēt APK",
+      "apkNote": "Huawei un Honor tālruņiem bez Google Play. HarmonyOS NEXT netiek atbalstīts.",
+      "step1": "Lejupielādējiet APK savā tālrunī",
+      "step2": "Atļaujiet instalēšanu no pārlūka, tad pieskarieties Instalēt",
+      "step3": "Atveriet lietotni un izvēlieties plānu vietnē",
+      "step4": "Pieskarieties Savienot, un esat aizsargāts",
+      "learnMore": "Uzziniet vairāk par VPN priekš Huawei"
+    }
   },
   "support": {
     "title": "Palīdzības centrs un atbalsts",
@@ -2544,117 +2556,246 @@
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Doppler VPN priekš Android — ātrs, privāts un izturīgs pret cenzūru",
-      "description": "Lejupielādējiet Doppler VPN priekš Android no Google Play. VLESS-Reality šifrēšana, bez reģistrācijas, apejiet cenzūru. 3 dienu bezmaksas izmēģinājums."
-    },
-    "hero": {
-      "title": "Doppler VPN priekš Android",
-      "subtitle": "Ātrs, privāts un izturīgs pret cenzūru VPN, kas veidots priekš Android. Reģistrācija nav nepieciešama — lejupielādējiet no Google Play un pieslēdzieties dažu sekunžu laikā. Ietver 3 dienu bezmaksas izmēģinājumu ar pilnu piekļuvi visām funkcijām.",
-      "cta": "Iegūt no Google Play"
-    },
-    "features": {
-      "title": "Kāpēc izvēlēties Doppler VPN priekš Android?",
-      "subtitle": "Doppler VPN ir veidots Android lietotājiem, kuri prasa patiesu privātumu, nezaudējot ātrumu, akumulatora darbības laiku vai lietojamību.",
-      "vlessEncryption": {
-        "title": "VLESS-Reality šifrēšana",
-        "description": "Nākamās paaudzes protokols, kas maskē VPN trafiku kā parastu HTTPS pārlūkošanu. Jūsu savienojums ir neredzams ugunsmūriem, DPI sistēmām un interneta pakalpojumu sniedzēju uzraudzībai. Tā pati tehnoloģija, kas tiek izmantota Ķīnas Lielā ugunsmūra apiešanai."
-      },
-      "noRegistration": {
-        "title": "Bez reģistrācijas",
-        "description": "Bez e-pasta, bez tālruņa numura, bez konta izveides. Lejupielādējiet no Google Play, atveriet lietotni un pieslēdzieties uzreiz. Doppler izmanto ierīces autentifikāciju, tāpēc jūsu identitāte paliek pilnībā privāta."
-      },
-      "oneTapConnect": {
-        "title": "Pieslēgšanās ar vienu pieskārienu",
-        "description": "Nospiediet vienu pogu, un Doppler automātiski izvēlas ātrāko serveri, izveido šifrētu tuneli un aizsargā visu jūsu trafiku. Viedā serveru izvēle optimizē ātrumu un uzticamību."
-      },
-      "bypassCensorship": {
-        "title": "Apejiet cenzūru un DPI",
-        "description": "Veidots darbam valstīs ar stingru interneta cenzūru — Krievijā, Irānā, Ķīnā un citur. VLESS-Reality padara jūsu VPN trafiku neatšķiramu no parastas tīmekļa pārlūkošanas, pārvarot TSPU un GFW."
-      },
-      "noLogs": {
-        "title": "Stingra žurnālu neuzglabāšanas politika",
-        "description": "Doppler nekad nevāc, neuzglabā un nekopīgo jūsu pārlūkošanas datus. Bez savienojumu žurnāliem, bez trafika žurnāliem, bez DNS vaicājumu žurnāliem. Mēs nevaram jūs identificēt, jo nekad nevācam identificējošu informāciju."
-      },
-      "globalServers": {
-        "title": "6 globālās serveru atrašanās vietas",
-        "description": "Pieslēdzieties serveriem vairākās valstīs Eiropā un ārpus tās. Katrs serveris darbojas ar VLESS-Reality un optimizētu maršrutēšanu zemākajam aizkavējumam un augstākajai caurlaidspējai."
-      },
-      "freeTrial": {
-        "title": "3 dienu bezmaksas izmēģinājums",
-        "description": "Izmēģiniet Doppler VPN ar pilnu piekļuvi visām funkcijām 3 dienas. Pēc izmēģinājuma izvēlieties mēneša, 6 mēnešu vai gada plānus, sākot no $3,33/mēnesī. Pārvaldiet savu abonementu caur Google Play."
-      },
-      "batteryEfficient": {
-        "title": "Energoefektīvs fona pakalpojums",
-        "description": "Doppler izmanto Android vietējo Always-On VPN ietvaru ar minimālu ietekmi uz akumulatoru. Mazāk nekā 2% papildu patēriņš pat ar ieslēgtu nepārtrauktu aizsardzību. Optimizēts Samsung, Xiaomi, OnePlus, Pixel un visiem galvenajiem Android zīmoliem."
-      }
+      "title": "Doppler VPN priekš Android: darbojas tur, kur citi VPN ir bloķēti",
+      "description": "Doppler VPN Android tālruņiem un planšetdatoriem. VLESS-Reality uztur savienojumu Krievijā, Irānā un Ķīnā, ar Smart Route un kill switch. Google Play vai kā APK, ar bezmaksas izmēģinājumu Google Play."
     },
     "howItWorks": {
-      "title": "Kā iestatīt VPN Android",
-      "subtitle": "Pieslēdzieties mazāk nekā 30 sekundēs — tehniskās zināšanas nav nepieciešamas.",
-      "step1": {
-        "title": "Lejupielādējiet no Google Play",
-        "description": "Meklējiet \"Doppler VPN\" Google Play veikalā vai nospiediet lejupielādes pogu zemāk. Lietotne ir bezmaksas, viegla — mazāk par 15 MB un saderīga ar Android 8.0 (Oreo) un jaunākām versijām."
+      "title": "Kā iestatīt Android ierīcē",
+      "subtitle": "Savienojums mazāk nekā minūtē, tehniskas zināšanas nav vajadzīgas."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Tālruņi · Planšetdatori · Salokāmie",
+        "title": "Doppler VPN priekš Android",
+        "subtitle": "Viens pieskāriens, un jūsu tālrunis ir aizsargāts. Doppler savienojums izskatās pēc parasta vietnes apmeklējuma, tāpēc tas darbojas arī tīklos, kas bloķē citus VPN.",
+        "cta": "Iegūt Google Play",
+        "ctaSecondary": "Lejupielādēt APK",
+        "note": "Bezmaksas lejupielāde · {days} dienu bezmaksas izmēģinājums Google Play · Bez e-pasta un tālruņa numura"
       },
-      "step2": {
-        "title": "Atveriet lietotni",
-        "description": "Palaidiet Doppler VPN savā Android tālrunī vai planšetdatorā. Nav reģistrācijas ekrāna, nav pieteikšanās formas un nav e-pasta verifikācijas. Jūsu konts tiek izveidots automātiski, izmantojot ierīces autentifikāciju."
+      "chapters": {
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Darbojas tur, kur citi VPN ir bloķēti",
+          "body": "Doppler tunelis izskatās pēc parasta HTTPS apmeklējuma labi zināmā vietnē. Krievijas, Irānas un Ķīnas filtri, kas atrod un pārtrauc parastos VPN, to palaiž cauri, tāpēc jūs paliekat tiešsaistē.",
+          "points": {
+            "p1": "VLESS-Reality katrā serverī, nekas nav jāiestata",
+            "p2": "Ja tīkls bloķē serveri, nomainiet vietni, kuru atdarina tā savienojums",
+            "p3": "Viens pieskāriens savieno jūs ar ātru serveri"
+          }
+        },
+        "route": {
+          "kicker": "Smart Route",
+          "title": "Vietējās vietnes apiet tuneli",
+          "body": "Bankas un vietējie pakalpojumi bieži atraida ārvalstu adreses. Smart Route sūta tās tieši caur jūsu pašu savienojumu, bet visu pārējo caur Doppler.",
+          "points": {
+            "p1": "Vienreiz izvēlieties savu mītnes valsti",
+            "p2": "Gatavi noteikumi vietējām vietnēm, kā arī valsts un banku pakalpojumiem",
+            "p3": "Pievienojiet savus domēnus, kuriem jāapiet VPN"
+          }
+        },
+        "killSwitch": {
+          "kicker": "Kill switch",
+          "title": "Nekas nenoplūst, ja tunelis pārtrūkst",
+          "body": "Ja VPN savienojums pārtrūkst, kill switch bloķē visu datplūsmu, līdz Doppler atkal ir savienots, tāpēc neviena lietotne klusi nepāriet uz jūsu īsto adresi.",
+          "points": {
+            "p1": "Bloķē internetu, ja VPN negaidīti pārtrūkst",
+            "p2": "Always On pats atjauno savienojumu, kad tas pārtrūkst",
+            "p3": "Viens pieskāriens līdz paša Android Always-on VPN, lai aizsardzība atgrieztos pēc restartēšanas"
+          }
+        },
+        "account": {
+          "kicker": "Viens konts",
+          "title": "Bez e-pasta, viens ID visām ierīcēm",
+          "body": "Atverot lietotni, tiek izveidots nejaušs konta ID. Bez e-pasta, bez tālruņa numura. Ar to pašu ID pierakstās citi jūsu tālruņi un planšetdatori, iPhone, Mac un Windows dators.",
+          "points": {
+            "p1": "Redziet visas pierakstītās ierīces un noņemiet tās, kuras vairs neizmantojat",
+            "p2": "Iebūvēts ātruma tests mēra pašu tuneli",
+            "p3": "Jūsu plāns pieder jūsu ID, nevis vienam tālrunim"
+          }
+        }
       },
-      "step3": {
-        "title": "Abonējiet plānu",
-        "description": "Sāciet 3 dienu bezmaksas izmēģinājumu vai izvēlieties abonementa plānu. Pieejami mēneša ($6,99), 6 mēnešu ($29,99) vai gada ($39,99) varianti. Pārvaldiet savu abonementu tieši caur Google Play."
+      "ecosystem": {
+        "kicker": "Android visur",
+        "title": "Šodien tālrunis, tālāk lielāki ekrāni",
+        "body": "Doppler darbojas Android 8.0 un jaunākās versijās, no lētiem tālruņiem līdz flagmaņiem. Izkārtojumi planšetdatoriem, Chromebook un televizoriem ir ceļā.",
+        "phone": {
+          "title": "Tālruņi",
+          "body": "Pilna lietotne, Android 8.0 vai jaunākā"
+        },
+        "tablet": {
+          "title": "Planšetdatori un salokāmie",
+          "body": "Darbojas jau šodien; divu paneļu izkārtojums ir ceļā"
+        },
+        "chromebook": {
+          "title": "Chromebook",
+          "body": "Drīzumā"
+        },
+        "tv": {
+          "title": "Android TV",
+          "body": "Drīzumā"
+        }
       },
-      "step4": {
-        "title": "Nospiediet Pieslēgties",
-        "description": "Nospiediet pieslēgšanās pogu. Doppler automātiski izvēlas labāko serveri, izveido šifrētu VLESS-Reality tuneli un maršrutē caur to visu jūsu trafiku. Jūsu IP ir paslēpta un dati ir šifrēti."
+      "privacy": {
+        "trial": {
+          "title": "{days} dienas bez maksas",
+          "body": "Izmēģiniet visas funkcijas, pirms maksājat. Atceliet jebkurā laikā Google Play."
+        }
+      },
+      "setup": {
+        "title": "Gatavs mazāk nekā minūtē",
+        "subtitle": "Bez reģistrācijas formas, bez e-pasta, nekas nav jākonfigurē.",
+        "s1": {
+          "title": "Instalējiet lietotni",
+          "body": "Iegūstiet Doppler Google Play. Jūsu tālrunī nav Google Play? Tā vietā lejupielādējiet APK no šīs lapas."
+        },
+        "s2": {
+          "title": "Atveriet to",
+          "body": "Jūsu konta ID tiek izveidots pirmajā palaišanas reizē. E-pasts vai tālruņa numurs nav vajadzīgs."
+        },
+        "s3": {
+          "title": "Pieskarieties Savienot",
+          "body": "Sāciet {days} dienu bezmaksas izmēģinājumu Google Play vai izvēlieties plānu no {price} mēnesī."
+        }
+      },
+      "faq": {
+        "title": "Jautājumi par Doppler Android ierīcēs",
+        "q1": {
+          "question": "Kuros Android tālruņos darbojas Doppler?",
+          "answer": "Jebkurā tālrunī vai planšetdatorā ar Android 8.0 vai jaunāku: Samsung Galaxy, Pixel, Xiaomi, OnePlus, Motorola un citos. Huawei un Honor tālruņi bez Google pakalpojumiem var instalēt APK; Huawei lapā ir paskaidrots, kā."
+        },
+        "q2": {
+          "question": "Google Play vai APK: ko izvēlēties?",
+          "answer": "Google Play, ja tas ir jūsu tālrunī: lietotne atjaunināsies pati, un tur ir {days} dienu bezmaksas izmēģinājums. APK ir paredzēts tālruņiem bez Google Play. Par to maksā vietnē ar karti vai kriptovalūtu, un lietotne paziņo, kad iznāk atjauninājums."
+        },
+        "q3": {
+          "question": "Vai tas darbojas Krievijā, Irānā un Ķīnā?",
+          "answer": "Jā. Doppler izmanto VLESS-Reality, kas padara tuneli līdzīgu parastam HTTPS apmeklējumam labi zināmā vietnē. Tāpēc tas darbojas arī tīklos, kas atpazīst un bloķē citus VPN protokolus."
+        },
+        "q4": {
+          "question": "Ko dara kill switch?",
+          "answer": "Kad tas ir ieslēgts un VPN savienojums negaidīti pārtrūkst, visa interneta datplūsma tiek bloķēta, līdz Doppler atjauno savienojumu. Jūsu lietotnes nekad bez jūsu ziņas nepāriet uz jūsu īsto adresi."
+        },
+        "q5": {
+          "question": "Kā atcelt abonementu?",
+          "answer": "Ja abonējāt Google Play, atveriet Play veikalu, pieskarieties savam profilam, tad Maksājumi un abonementi, tad Abonementi, un atceliet Doppler VPN. Piekļuve saglabājas līdz apmaksātā perioda beigām. Vietnē pirktie plāni ir vienreizēji maksājumi un nekad netiek atjaunoti."
+        }
+      },
+      "cta": {
+        "title": "Iegūstiet Doppler priekš Android",
+        "subtitle": "Bezmaksas lejupielāde ar {days} dienu bezmaksas izmēģinājumu Google Play. Bez e-pasta, bez tālruņa numura."
       }
+    }
+  },
+  "vpnForHuawei": {
+    "metadata": {
+      "title": "Doppler VPN priekš Huawei un Honor: Google pakalpojumi nav vajadzīgi",
+      "description": "VPN Huawei un Honor tālruņiem bez Google Play. Instalējiet Doppler APK, maksājiet vietnē ar karti vai kriptovalūtu un savienojieties ar VLESS-Reality."
     },
-    "faq": {
-      "title": "Bieži uzdotie jautājumi — Doppler VPN priekš Android",
-      "q1": {
-        "question": "Vai Doppler VPN darbojas Samsung ierīcēs?",
-        "answer": "Jā. Doppler VPN ir pilnībā saderīgs ar visiem Samsung Galaxy tālruņiem un planšetdatoriem ar Android 8.0 (Oreo) vai jaunāku versiju. Tas ietver Galaxy S sēriju, Galaxy A sēriju, Galaxy Z Fold, Galaxy Z Flip un Galaxy Tab. Doppler integrējas ar Samsung Always-On VPN iestatījumiem nepārtrauktai aizsardzībai."
+    "howItWorks": {
+      "title": "Kā iestatīt Huawei ierīcē",
+      "subtitle": "Lejupielādējiet APK, vienreiz atļaujiet to un savienojieties."
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "Huawei · Honor · Bez Google pakalpojumiem",
+        "title": "Doppler VPN priekš Huawei un Honor",
+        "subtitle": "Tālruņi bez Google Play saņem to pašu Doppler: ar vienu pieskārienu privāts savienojums, kas izskatās pēc parasta vietnes apmeklējuma, pat tīklos, kas bloķē citus VPN.",
+        "cta": "Iegūt AppGallery",
+        "ctaSecondary": "Lejupielādēt APK",
+        "note": "Bezmaksas lejupielāde · Maksājiet vietnē ar karti vai kriptovalūtu · Bez e-pasta un tālruņa numura",
+        "appGalleryNote": "Drīzumā AppGallery. Līdz tam instalējiet APK no šīs lapas."
       },
-      "q2": {
-        "question": "Vai Doppler VPN izlādē akumulatoru?",
-        "answer": "Nē. Doppler VPN patērē mazāk nekā 2% papildu akumulatora enerģijas pat ar ieslēgtu Always-On VPN. VLESS-Reality protokols ir izstrādāts efektivitātei ar minimālu procesora noslodzi. Labākai pieredzei izslēdziet Doppler no Android akumulatora optimizācijas: Iestatījumi > Lietotnes > Doppler VPN > Akumulators > Neierobežots."
+      "chapters": {
+        "noGoogle": {
+          "kicker": "Bez Google pakalpojumiem",
+          "title": "Radīts tālruņiem bez Google Play",
+          "body": "Doppler APK nav vajadzīgi Google pakalpojumi. To instalē tieši no šīs vietnes, un tas paziņo, kad iznākusi jauna versija, tāpēc atjauninājumi nav jāmeklē.",
+          "points": {
+            "p1": "Lejupielādējams šeit, tieši no Doppler",
+            "p2": "Nav vajadzīgs Google konts vai Play pakalpojumi",
+            "p3": "Lietotnē parādās paziņojums, kad atjauninājums ir gatavs"
+          }
+        },
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "Savienojums saglabājas tur, kur VPN ir bloķēti",
+          "body": "Tā ir tā pati lietotne kā Google Play. Tunelis izskatās pēc parasta HTTPS apmeklējuma labi zināmā vietnē, tāpēc filtri, kas pārtrauc parastos VPN, to palaiž cauri.",
+          "points": {
+            "p1": "VLESS-Reality katrā serverī",
+            "p2": "Smart Route atstāj vietējās vietnes un bankas jūsu pašu savienojumā",
+            "p3": "Kill switch bloķē datplūsmu, ja VPN pārtrūkst"
+          }
+        },
+        "pay": {
+          "kicker": "Maksājiet tīmeklī",
+          "title": "Karte vai kriptovalūta, bez veikala konta",
+          "body": "Bez Google Play nav veikala norēķinu, tāpēc abonējat Doppler vietnē. Maksājiet ar karti vai kriptovalūtu, un plāns tiek piesaistīts jūsu konta ID.",
+          "points": {
+            "p1": "Maksājiet ar bankas karti vai kriptovalūtu",
+            "p2": "Tīmekļa plānos veikala izmēģinājuma vietā ir bonusa dienas",
+            "p3": "Vienreizēji maksājumi: nekas netiek atjaunots bez jums"
+          }
+        },
+        "phones": {
+          "kicker": "Kuri tālruņi",
+          "title": "EMUI, Magic UI un HarmonyOS līdz 4. versijai",
+          "body": "Huawei tālruņi ar EMUI vai HarmonyOS no 2 līdz 4 un Honor tālruņi ar Magic UI darbina Android lietotnes, tāpēc APK tajos instalējas. HarmonyOS NEXT nevar darbināt Android lietotnes vispār, tāpēc Doppler tur netiek atbalstīts.",
+          "points": {
+            "p1": "Huawei ar EMUI vai HarmonyOS 2, 3 vai 4",
+            "p2": "Honor tālruņi ar vai bez Google pakalpojumiem",
+            "p3": "Netiek atbalstīts: HarmonyOS NEXT (HarmonyOS 5 un jaunākas)"
+          }
+        }
       },
-      "q3": {
-        "question": "Kā iestatīt VPN Android?",
-        "answer": "Doppler VPN iestatīšana Android aizņem mazāk nekā 30 sekundes: 1) Lejupielādējiet no Google Play, 2) Atveriet lietotni (reģistrācija nav nepieciešama), 3) Nospiediet Pieslēgties. Doppler automātiski veic visu tehnisko iestatīšanu — konfigurē VPN profilu, izvēlas labāko serveri un izveido šifrētu tuneli."
+      "privacy": {
+        "pay": {
+          "title": "Karte vai kriptovalūta",
+          "body": "Veikala norēķini nav vajadzīgi. Maksājiet vietnē; tīmekļa plāni veikala izmēģinājuma vietā pievieno bonusa dienas."
+        }
       },
-      "q4": {
-        "question": "Vai tas darbojas Krievijā, Ķīnā un Irānā?",
-        "answer": "Jā. Doppler izmanto VLESS-Reality protokolu, kas maskē VPN trafiku kā parastu HTTPS tīmekļa pārlūkošanu. Tas padara ārkārtīgi grūtu cenzūras sistēmām kā Krievijas TSPU, Ķīnas Lielais ugunsmūris vai Irānas filtrēšanas infrastruktūra to noteikt un bloķēt. Doppler ir īpaši izstrādāts lietotājiem stingri cenzētos reģionos."
+      "setup": {
+        "title": "Instalējiet trīs soļos",
+        "subtitle": "Apmēram minūte, un Android jautā tikai vienreiz.",
+        "s1": {
+          "title": "Lejupielādējiet APK",
+          "body": "Pieskarieties Lejupielādēt šajā lapā, tajā tālrunī, kuru vēlaties aizsargāt."
+        },
+        "s2": {
+          "title": "Atļaujiet instalēšanu",
+          "body": "Android lūgs atļaut instalēšanu no pārlūka vai failu lietotnes. Ieslēdziet to, atgriezieties un pieskarieties Instalēt. Vēlāk to var atkal izslēgt."
+        },
+        "s3": {
+          "title": "Atveriet un savienojieties",
+          "body": "Jūsu konta ID tiek izveidots pirmajā palaišanas reizē. Izvēlieties plānu vietnē, no {price} mēnesī, un pieskarieties Savienot."
+        }
       },
-      "q5": {
-        "question": "Kā atcelt abonementu?",
-        "answer": "Lai atceltu Doppler VPN abonementu Android: atveriet Google Play > nospiediet sava profila ikonu > Maksājumi un abonementi > Abonementi > Doppler VPN > Atcelt abonementu. Jūsu piekļuve turpinās līdz pašreizējā norēķinu perioda beigām."
+      "faq": {
+        "title": "Jautājumi par Doppler Huawei ierīcēs",
+        "q1": {
+          "question": "Vai APK instalēšana ir droša?",
+          "answer": "Lejupielādējiet to tikai no šīs lapas. APK ir parakstījis Doppler, un Android atsakās instalēt virs tā atjauninājumu, ko parakstījis kāds cits. Android rāda brīdinājumu par katru lietotni ārpus veikala; šis brīdinājums ir paredzams."
+        },
+        "q2": {
+          "question": "Vai Doppler būs pieejams AppGallery?",
+          "answer": "Mēs gatavojam Doppler lapu AppGallery. Kamēr tā nav publicēta, instalēšanai izmantojiet APK šajā lapā, un tā ir tā pati lietotne."
+        },
+        "q3": {
+          "question": "Vai tas darbojas HarmonyOS NEXT?",
+          "answer": "Nē. HarmonyOS NEXT (HarmonyOS 5 un jaunākas) darbina tikai savas lietotnes un nevar instalēt APK. Tālruņi ar EMUI vai HarmonyOS 4 un vecākām var."
+        },
+        "q4": {
+          "question": "Kā maksāt bez Google Play?",
+          "answer": "Izvēlieties plānu lietotnē vai šajā vietnē un maksājiet ar karti vai kriptovalūtu. Plāni sākas no {price} mēnesī, un veikala izmēģinājuma vietā tajos ir bonusa dienas. Plāns pieder jūsu konta ID."
+        },
+        "q5": {
+          "question": "Kā darbojas atjauninājumi?",
+          "answer": "Lietotne pārbauda jaunas versijas un parāda paziņojumu, kad kāda ir gatava. Pieskarieties tam, lai lejupielādētu jauno APK un instalētu to virs vecā; jūsu konts paliek pierakstīts."
+        }
       },
-      "q6": {
-        "question": "Vai varu izmantot Doppler VPN Android TV?",
-        "answer": "Jā. Jūs varat instalēt Doppler VPN Android TV ierīcēs un TV kastēs, lai aizsargātu savu straumēšanas trafiku. Piekļūstiet ģeogrāfiski ierobežotam saturam lielajā ekrānā ar to pašu VLESS-Reality šifrēšanu, kas tiek izmantota mobilajās ierīcēs."
+      "cta": {
+        "title": "Iegūstiet Doppler savam Huawei",
+        "subtitle": "Bezmaksas lejupielāde. Bez Google konta, bez e-pasta, bez tālruņa numura."
       }
-    },
-    "cta": {
-      "title": "Lejupielādējiet Doppler VPN priekš Android",
-      "subtitle": "Bez reģistrācijas. 3 dienu bezmaksas izmēģinājums ar pilnu piekļuvi. VLESS-Reality šifrēšana nodrošina jūsu savienojuma privātumu un nenosakāmību.",
-      "downloadAndroid": "Iegūt no Google Play",
-      "otherPlatforms": "Pieejams citās platformās",
-      "downloadsLink": "Skatīt visas lejupielādes"
-    },
-    "related": {
-      "noRegistration": "VPN bez reģistrācijas",
-      "noRegistrationDesc": "Izmantojiet VPN bez reģistrācijas vai konta",
-      "vless": "VLESS-Reality protokols",
-      "vlessDesc": "Uzziniet, kā VLESS uzvar dziļo pakešu inspekciju",
-      "ios": "VPN priekš iOS",
-      "iosDesc": "Lejupielādējiet Doppler VPN priekš iPhone un iPad",
-      "macos": "VPN priekš Mac",
-      "macosDesc": "Doppler VPN natīvā lietotne macOS sistēmai",
-      "windows": "VPN priekš Windows",
-      "windowsDesc": "Doppler VPN Windows 10 un 11 sistēmām",
-      "vlessAndroid": "VLESS uz Android",
-      "vlessAndroidDesc": "Paplašināta VLESS-Reality iestatīšana Android ierīcēm"
     }
   },
   "vpnForMacos": {
@@ -5003,6 +5144,10 @@
       "ipad": {
         "title": "VPN priekš iPad un iPhone Duo",
         "desc": "Lielā ekrāna izkārtojums"
+      },
+      "huawei": {
+        "title": "VPN priekš Huawei un Honor",
+        "desc": "Google pakalpojumi nav vajadzīgi"
       }
     },
     "cta": {

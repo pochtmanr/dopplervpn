@@ -33,6 +33,7 @@ export type CtaLocation =
   | "vpn-for-ios"
   | "vpn-for-ipad"
   | "vpn-for-android"
+  | "vpn-for-huawei"
   | "vpn-for-macos"
   | "guides"
   | "vpn-for-windows"
@@ -65,6 +66,8 @@ export type CtaLocation =
 export type CtaPlatform =
   | "ios"
   | "android"
+  // Huawei and Honor phones without Google services: the APK, or AppGallery once listed.
+  | "huawei"
   | "mac"
   | "windows"
   | "desktop"
@@ -73,6 +76,7 @@ export type CtaPlatform =
 export type CtaVariant =
   | "android-play"
   | "android-apk"
+  | "huawei-appgallery"
   | "ios-testflight"
   | "mac-dmg"
   | "windows-x64";
@@ -85,6 +89,7 @@ export type CtaVariant =
 export type CtaDestination =
   | "app_store"
   | "google_play"
+  | "app_gallery"
   | "direct_exe"
   | "apk"
   | "dmg"
@@ -97,6 +102,7 @@ export function deriveDestination(
   variant?: CtaVariant
 ): CtaDestination {
   if (variant === "android-apk") return "apk";
+  if (variant === "huawei-appgallery") return "app_gallery";
   if (variant === "mac-dmg") return "dmg";
   if (variant === "ios-testflight") return "testflight";
   if (variant === "windows-x64") return "direct_exe";
@@ -106,6 +112,9 @@ export function deriveDestination(
       return "app_store";
     case "android":
       return "google_play";
+    case "huawei":
+      // Until the AppGallery listing exists, every Huawei CTA is the APK.
+      return "apk";
     case "windows":
       return "direct_exe";
     case "telegram":

@@ -439,7 +439,8 @@
     "vpnForTiktokBan": "TikTok禁止対策VPN",
     "giveaway": "プレゼント企画",
     "payWithCrypto": "暗号資産で支払う",
-    "agents": "AIエージェント向け"
+    "agents": "AIエージェント向け",
+    "vpnForHuawei": "ファーウェイ向けVPN"
   },
   "privacy": {
     "title": "プライバシーポリシー",
@@ -748,7 +749,18 @@
       "step4": "プランを選んで登録し、接続！",
       "learnMore": "Windows向けVPNの詳細"
     },
-    "installGuide": "インストールガイド"
+    "installGuide": "インストールガイド",
+    "huawei": {
+      "title": "Huawei",
+      "buttonAppGallery": "AppGalleryで入手",
+      "buttonApk": "APKをダウンロード",
+      "apkNote": "Google Playのないファーウェイ・オナーのスマートフォン向け。HarmonyOS NEXTには非対応です。",
+      "step1": "スマートフォンでAPKをダウンロード",
+      "step2": "ブラウザからのインストールを許可し、「インストール」をタップ",
+      "step3": "アプリを開き、ウェブサイトでプランを選択",
+      "step4": "接続をタップすれば保護完了",
+      "learnMore": "ファーウェイ向けVPNについて詳しく"
+    }
   },
   "support": {
     "title": "ヘルプセンター＆サポート",
@@ -2544,117 +2556,246 @@
   },
   "vpnForAndroid": {
     "metadata": {
-      "title": "Android向けVPN — 登録不要 | Doppler VPN APKダウンロード 2026",
-      "description": "2026年最高のAndroid向けVPNをダウンロード。登録不要、アカウント不要。Google PlayおよびAPKで利用可能（検閲地域向け）。VLESS-Realityプロトコル。3日間無料トライアル。"
-    },
-    "hero": {
-      "title": "Android向けDoppler VPN",
-      "subtitle": "登録不要のVPN。アカウント不要、メール不要、個人データ不要。Google PlayおよびAPKで利用可能。3日間無料トライアル付き。",
-      "cta": "Get it on Google Play"
-    },
-    "features": {
-      "title": "なぜAndroidにDopplerを選ぶのか？",
-      "subtitle": "妥協のないプライバシーを求めるAndroidユーザーのために特別に構築。サインアップなし、データ収集なし、制限なし。",
-      "vlessEncryption": {
-        "title": "VLESS-Reality Encryption",
-        "description": "Next-generation protocol that disguises VPN traffic as regular HTTPS browsing. Your connection is invisible to firewalls, deep packet inspection systems, and ISP monitoring. The same technology used to bypass the Great Firewall of China."
-      },
-      "noRegistration": {
-        "title": "登録不要",
-        "description": "アプリを開いてすぐに接続。メール、電話番号、アカウント作成は不要。最初のタップからアイデンティティはプライベートのまま。"
-      },
-      "oneTapConnect": {
-        "title": "One-Tap Connect",
-        "description": "Press one button and Doppler automatically selects the fastest server, establishes an encrypted tunnel, and protects all your traffic. Smart server selection optimizes for speed and reliability."
-      },
-      "bypassCensorship": {
-        "title": "Bypass Censorship & DPI",
-        "description": "Designed to work in countries with strict internet censorship — Russia, Iran, China, and beyond. VLESS-Reality makes your VPN traffic indistinguishable from normal web browsing, defeating TSPU and GFW."
-      },
-      "noLogs": {
-        "title": "Strict No-Logs Policy",
-        "description": "Doppler never collects, stores, or shares your browsing data. No connection logs, no traffic logs, no DNS query logs. We cannot identify you because we never collect identifying information."
-      },
-      "globalServers": {
-        "title": "6 Global Server Locations",
-        "description": "Connect to servers in multiple countries across Europe and beyond. Each server runs VLESS-Reality with optimized routing for the lowest latency and highest throughput."
-      },
-      "freeTrial": {
-        "title": "3-Day Free Trial",
-        "description": "Try Doppler VPN with full access to all features for 3 days. After the trial, choose monthly, 6-month, or annual plans starting from $3.33/month. Manage your subscription through Google Play."
-      },
-      "batteryEfficient": {
-        "title": "Battery-Efficient Background Service",
-        "description": "Doppler uses Android's native Always-On VPN framework with minimal battery impact. Less than 2% additional drain even with 24/7 protection enabled. Optimized for Samsung, Xiaomi, OnePlus, Pixel, and all major Android brands."
-      }
+      "title": "Android向けDoppler VPN：ほかのVPNがブロックされる場所でも使える",
+      "description": "AndroidスマートフォンとタブレットのためのDoppler VPN。VLESS-Realityでロシア、イラン、中国でもつながり続け、スマートルートとキルスイッチも搭載。Google PlayまたはAPKで入手でき、Google Playでは無料トライアルあり。"
     },
     "howItWorks": {
-      "title": "Androidでの使い方",
-      "subtitle": "ダウンロードから安全なブラウジングまで30秒以内。アカウント不要、メール不要、セットアップウィザード不要。",
-      "step1": {
-        "title": "アプリをダウンロード",
-        "description": "Google PlayからDoppler VPNをインストール、またはAPKを直接ダウンロード。アプリは軽量で15 MB未満です。"
+      "title": "Androidでの設定方法",
+      "subtitle": "1分以内で接続。専門知識は不要です。"
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "スマートフォン · タブレット · 折りたたみ",
+        "title": "Android向けDoppler VPN",
+        "subtitle": "ワンタップでスマートフォンをプライベートに。Dopplerは接続をふつうのウェブサイト訪問のように見せるので、ほかのVPNをブロックするネットワークでも動き続けます。",
+        "cta": "Google Playで入手",
+        "ctaSecondary": "APKをダウンロード",
+        "note": "無料ダウンロード · Google Playで{days}日間無料トライアル · メールアドレス・電話番号不要"
       },
-      "step2": {
-        "title": "アプリを開く",
-        "description": "Doppler VPNを起動。登録画面もサインアップフォームもありません。アプリはすぐに使えます。"
+      "chapters": {
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "ほかのVPNがブロックされる場所でも使える",
+          "body": "Dopplerのトンネルは、有名なウェブサイトへのふつうのHTTPSアクセスにしか見えません。ロシア、イラン、中国で一般的なVPNを見つけて遮断するフィルターも通り抜け、オンラインのままでいられます。",
+          "points": {
+            "p1": "すべてのサーバーでVLESS-Reality、設定は不要",
+            "p2": "ネットワークがサーバーをブロックしたら、接続が装うウェブサイトを切り替え",
+            "p3": "ワンタップで高速なサーバーに接続"
+          }
+        },
+        "route": {
+          "kicker": "スマートルート",
+          "title": "国内サイトはトンネルを通さない",
+          "body": "銀行や国内サービスは海外のアドレスを拒否することがよくあります。スマートルートはそれらを自分の回線へ直接流し、それ以外はDoppler経由にします。",
+          "points": {
+            "p1": "自分の国を一度選ぶだけ",
+            "p2": "国内サイト、行政・銀行サイト向けのルールを用意",
+            "p3": "VPNを通さないドメインを自分で追加"
+          }
+        },
+        "killSwitch": {
+          "kicker": "キルスイッチ",
+          "title": "トンネルが切れても何も漏れない",
+          "body": "VPN接続が切れると、Dopplerが復旧するまでキルスイッチがすべての通信を止めます。アプリが気づかないうちに本当のアドレスへ戻ることはありません。",
+          "points": {
+            "p1": "VPNが予期せず切れたらインターネットを遮断",
+            "p2": "Always Onが接続切れのとき自動で再接続",
+            "p3": "Android標準の常時接続VPNへワンタップ、再起動後も保護が戻る"
+          }
+        },
+        "account": {
+          "kicker": "ひとつのアカウント",
+          "title": "メール不要、すべてのデバイスにひとつのID",
+          "body": "アプリを開くとランダムなアカウントIDが作られます。メールアドレスも電話番号もいりません。同じIDでほかのスマートフォンやタブレット、iPhone、Mac、Windows PCにもサインインできます。",
+          "points": {
+            "p1": "サインイン中のデバイスを一覧し、使わないものを削除",
+            "p2": "内蔵のスピードテストでトンネルそのものを計測",
+            "p3": "プランは1台のスマートフォンではなくIDに紐づく"
+          }
+        }
       },
-      "step3": {
-        "title": "接続をタップ",
-        "description": "接続ボタンを押すと、Dopplerが自動的に最速のサーバーを選択し、VLESS-Realityトンネルを確立します。"
+      "ecosystem": {
+        "kicker": "あらゆるAndroidで",
+        "title": "今日はスマートフォン、次は大きな画面",
+        "body": "DopplerはAndroid 8.0以降で動作し、手頃な機種からフラッグシップまで対応します。タブレット、Chromebook、テレビ向けのレイアウトも準備中です。",
+        "phone": {
+          "title": "スマートフォン",
+          "body": "フル機能のアプリ、Android 8.0以降"
+        },
+        "tablet": {
+          "title": "タブレットと折りたたみ",
+          "body": "現在も動作。2ペインレイアウトは近日対応"
+        },
+        "chromebook": {
+          "title": "Chromebook",
+          "body": "近日対応"
+        },
+        "tv": {
+          "title": "Android TV",
+          "body": "近日対応"
+        }
       },
-      "step4": {
-        "title": "自由にブラウジング",
-        "description": "接続は暗号化され検出不可能に。あらゆるウェブサイト、アプリ、サービスに制限なくアクセスできます。"
+      "privacy": {
+        "trial": {
+          "title": "{days}日間無料",
+          "body": "支払う前にすべての機能をお試しください。Google Playからいつでもキャンセルできます。"
+        }
+      },
+      "setup": {
+        "title": "1分以内に準備完了",
+        "subtitle": "登録フォームもメールも設定も不要です。",
+        "s1": {
+          "title": "アプリをインストール",
+          "body": "Google PlayからDopplerを入手。スマートフォンにGoogle Playがない場合は、このページからAPKをダウンロードしてください。"
+        },
+        "s2": {
+          "title": "アプリを開く",
+          "body": "初回起動時にアカウントIDが作られます。メールアドレスも電話番号も不要です。"
+        },
+        "s3": {
+          "title": "接続をタップ",
+          "body": "Google Playで{days}日間の無料トライアルを始めるか、月額{price}からのプランを選びます。"
+        }
+      },
+      "faq": {
+        "title": "Android版Dopplerについてのよくある質問",
+        "q1": {
+          "question": "DopplerはどのAndroidスマートフォンで使えますか？",
+          "answer": "Android 8.0以降のスマートフォンやタブレットなら使えます。Samsung Galaxy、Pixel、Xiaomi、OnePlus、Motorolaなどです。GoogleサービスのないファーウェイやオナーのスマートフォンにはAPKをインストールできます。方法はファーウェイ向けページで説明しています。"
+        },
+        "q2": {
+          "question": "Google PlayとAPK、どちらを選べばいいですか？",
+          "answer": "スマートフォンにGoogle Playがあるなら、Google Playがおすすめです。アプリは自動で更新され、{days}日間の無料トライアルもあります。APKはGoogle Playのないスマートフォン向けです。支払いはウェブサイトでカードまたは暗号資産で行い、アップデートが出るとアプリが知らせます。"
+        },
+        "q3": {
+          "question": "ロシア、イラン、中国で使えますか？",
+          "answer": "はい。DopplerはVLESS-Realityを使い、トンネルを有名なウェブサイトへのふつうのHTTPSアクセスのように見せます。だからこそ、ほかのVPNプロトコルを検出してブロックするネットワークでも動き続けます。"
+        },
+        "q4": {
+          "question": "キルスイッチは何をしますか？",
+          "answer": "オンにしておくと、VPN接続が予期せず切れたとき、Dopplerが再接続するまですべてのインターネット通信が遮断されます。アプリが知らないうちに本当のアドレスへ戻ることはありません。"
+        },
+        "q5": {
+          "question": "解約するには？",
+          "answer": "Google Playで登録した場合は、Playストアを開き、プロフィールをタップして「お支払いと定期購入」、「定期購入」の順に進み、Doppler VPNを解約します。支払い済みの期間が終わるまで利用できます。ウェブサイトで購入したプランは一回払いで、自動更新されることはありません。"
+        }
+      },
+      "cta": {
+        "title": "Android版Dopplerを入手",
+        "subtitle": "無料でダウンロードでき、Google Playでは{days}日間の無料トライアルがあります。メールアドレスも電話番号も不要です。"
       }
+    }
+  },
+  "vpnForHuawei": {
+    "metadata": {
+      "title": "ファーウェイ・オナー向けDoppler VPN：Googleサービス不要",
+      "description": "Google PlayのないファーウェイとオナーのスマートフォンのためのVPN。Doppler APKをインストールし、ウェブサイトでカードまたは暗号資産で支払い、VLESS-Realityで接続します。"
     },
-    "faq": {
-      "title": "Frequently Asked Questions — Doppler VPN for Android",
-      "q1": {
-        "question": "Does Doppler VPN work on Samsung devices?",
-        "answer": "Yes. Doppler VPN is fully compatible with all Samsung Galaxy phones and tablets running Android 8.0 (Oreo) or later. This includes the Galaxy S series, Galaxy A series, Galaxy Z Fold, Galaxy Z Flip, and Galaxy Tab. Doppler integrates with Samsung's Always-On VPN settings for 24/7 protection."
+    "howItWorks": {
+      "title": "ファーウェイでの設定方法",
+      "subtitle": "APKをダウンロードし、一度許可して接続するだけ。"
+    },
+    "app": {
+      "hero": {
+        "eyebrow": "ファーウェイ · オナー · Googleサービスなし",
+        "title": "ファーウェイ・オナー向けDoppler VPN",
+        "subtitle": "Google PlayのないスマートフォンにもDopplerは同じように届きます。ワンタップで、ふつうのウェブサイト訪問に見えるプライベートな接続を。ほかのVPNをブロックするネットワークでも使えます。",
+        "cta": "AppGalleryで入手",
+        "ctaSecondary": "APKをダウンロード",
+        "note": "無料ダウンロード · ウェブサイトでカードまたは暗号資産で支払い · メールアドレス・電話番号不要",
+        "appGalleryNote": "AppGalleryに近日登場。それまではこのページからAPKをインストールしてください。"
       },
-      "q2": {
-        "question": "Does Doppler VPN drain battery?",
-        "answer": "No. Doppler VPN uses less than 2% additional battery even with Always-On VPN enabled. The VLESS-Reality protocol is designed for efficiency with minimal CPU overhead. For the best experience, exclude Doppler from Android's battery optimization in Settings > Apps > Doppler VPN > Battery > Unrestricted."
+      "chapters": {
+        "noGoogle": {
+          "kicker": "Googleサービス不要",
+          "title": "Google Playのないスマートフォンのために",
+          "body": "Doppler APKはGoogleサービスを必要としません。このウェブサイトから直接インストールでき、新しいバージョンが出ると知らせるので、アップデートを探し回る必要はありません。",
+          "points": {
+            "p1": "ここからDopplerが直接配布",
+            "p2": "GoogleアカウントもPlayサービスも不要",
+            "p3": "アップデートの準備ができるとアプリにバナーを表示"
+          }
+        },
+        "connect": {
+          "kicker": "VLESS-Reality",
+          "title": "VPNがブロックされる場所でもつながる",
+          "body": "Google Playにあるものと同じアプリです。トンネルは有名なウェブサイトへのふつうのHTTPSアクセスに見えるので、一般的なVPNを遮断するフィルターも通り抜けます。",
+          "points": {
+            "p1": "すべてのサーバーでVLESS-Reality",
+            "p2": "スマートルートで国内サイトや銀行は自分の回線のまま",
+            "p3": "VPNが切れたらキルスイッチが通信を遮断"
+          }
+        },
+        "pay": {
+          "kicker": "ウェブで支払い",
+          "title": "カードか暗号資産、ストアアカウント不要",
+          "body": "Google Playがなければストア決済もないため、Dopplerのウェブサイトで登録します。カードまたは暗号資産で支払うと、プランがアカウントIDに反映されます。",
+          "points": {
+            "p1": "銀行カードまたは暗号資産で支払い",
+            "p2": "ウェブのプランにはストアのトライアルの代わりにボーナス日数",
+            "p3": "一回払い：勝手に更新されることはありません"
+          }
+        },
+        "phones": {
+          "kicker": "対応機種",
+          "title": "EMUI、Magic UI、HarmonyOS 4まで",
+          "body": "EMUIまたはHarmonyOS 2〜4のファーウェイ製スマートフォンと、Magic UIのオナー製スマートフォンはAndroidアプリを動かせるので、APKをインストールできます。HarmonyOS NEXTはAndroidアプリをまったく動かせないため、Dopplerは対応していません。",
+          "points": {
+            "p1": "EMUI、またはHarmonyOS 2、3、4のファーウェイ",
+            "p2": "オナーのスマートフォン、Googleサービスの有無を問わず",
+            "p3": "非対応：HarmonyOS NEXT（HarmonyOS 5以降）"
+          }
+        }
       },
-      "q3": {
-        "question": "How do I set up VPN on Android?",
-        "answer": "Setting up Doppler VPN on Android takes under 30 seconds: 1) Download from Google Play, 2) Open the app (no registration needed), 3) Tap Connect. Doppler handles all the technical setup automatically — it configures the VPN profile, selects the best server, and establishes an encrypted tunnel."
+      "privacy": {
+        "pay": {
+          "title": "カードか暗号資産",
+          "body": "ストア決済は不要。ウェブサイトで支払い、ウェブのプランにはストアのトライアルの代わりにボーナス日数が付きます。"
+        }
       },
-      "q4": {
-        "question": "Does it work in Russia, China, and Iran?",
-        "answer": "Yes. Doppler uses the VLESS-Reality protocol, which disguises VPN traffic as regular HTTPS web browsing. This makes it extremely difficult for censorship systems like Russia's TSPU, China's Great Firewall, or Iran's filtering infrastructure to detect and block. Doppler is specifically designed for users in heavily censored regions."
+      "setup": {
+        "title": "3ステップでインストール",
+        "subtitle": "約1分、Androidが確認するのは一度だけです。",
+        "s1": {
+          "title": "APKをダウンロード",
+          "body": "保護したいスマートフォンで、このページのダウンロードをタップします。"
+        },
+        "s2": {
+          "title": "インストールを許可",
+          "body": "ブラウザやファイルアプリからのインストールを許可するよう求められます。オンにして戻り、「インストール」をタップします。あとでオフに戻せます。"
+        },
+        "s3": {
+          "title": "開いて接続",
+          "body": "初回起動時にアカウントIDが作られます。ウェブサイトで月額{price}からのプランを選び、接続をタップします。"
+        }
       },
-      "q5": {
-        "question": "How do I cancel my subscription?",
-        "answer": "To cancel your Doppler VPN subscription on Android: Open Google Play > tap your profile icon > Payments & subscriptions > Subscriptions > Doppler VPN > Cancel subscription. Your access continues until the end of the current billing period."
+      "faq": {
+        "title": "ファーウェイ版Dopplerについてのよくある質問",
+        "q1": {
+          "question": "APKをインストールしても安全ですか？",
+          "answer": "このページからのみダウンロードしてください。APKはDopplerが署名しており、ほかの誰かが署名したアップデートを上書きインストールすることをAndroidは拒否します。ストア以外のアプリにはAndroidが必ず警告を表示しますが、それは想定どおりです。"
+        },
+        "q2": {
+          "question": "DopplerはAppGalleryに登場しますか？",
+          "answer": "AppGalleryへの掲載を準備中です。公開されるまでは、このページのAPKからインストールしてください。中身は同じアプリです。"
+        },
+        "q3": {
+          "question": "HarmonyOS NEXTで使えますか？",
+          "answer": "いいえ。HarmonyOS NEXT（HarmonyOS 5以降）は専用のアプリしか動かせず、APKをインストールできません。EMUIまたはHarmonyOS 4以前のスマートフォンならインストールできます。"
+        },
+        "q4": {
+          "question": "Google Playなしでどう支払いますか？",
+          "answer": "アプリ内またはこのウェブサイトでプランを選び、カードまたは暗号資産で支払います。プランは月額{price}からで、ストアのトライアルの代わりにボーナス日数が付きます。プランはアカウントIDに紐づきます。"
+        },
+        "q5": {
+          "question": "アップデートはどうなりますか？",
+          "answer": "アプリが新しいバージョンを確認し、準備ができるとバナーを表示します。タップすると新しいAPKがダウンロードされ、古いものに上書きインストールできます。アカウントはサインインしたままです。"
+        }
       },
-      "q6": {
-        "question": "Can I use Doppler VPN on Android TV?",
-        "answer": "Yes. You can install Doppler VPN on Android TV devices and TV boxes to protect your streaming traffic. Access geo-restricted content on the big screen with the same VLESS-Reality encryption used on mobile."
+      "cta": {
+        "title": "ファーウェイでDopplerを使う",
+        "subtitle": "無料でダウンロード。Googleアカウントもメールアドレスも電話番号も不要です。"
       }
-    },
-    "cta": {
-      "title": "今すぐAndroid向けDoppler VPNを入手",
-      "subtitle": "プライベートで検出不可能。登録不要、アカウント不要、データ収集なし。3日間無料トライアル。Google PlayまたはAPK（制限地域向け）からダウンロード。",
-      "downloadAndroid": "Get it on Google Play",
-      "otherPlatforms": "Available on other platforms",
-      "downloadsLink": "View all downloads"
-    },
-    "related": {
-      "noRegistration": "登録不要VPN",
-      "noRegistrationDesc": "サインアップやアカウントなしでVPNを利用",
-      "vless": "VLESS-Realityプロトコル",
-      "vlessDesc": "VLESSがディープパケットインスペクションを打ち破る仕組みを学ぶ",
-      "ios": "iOS向けVPN",
-      "iosDesc": "iPhone & iPad向けDoppler VPNをダウンロード",
-      "macos": "Mac向けVPN",
-      "macosDesc": "macOS向けDoppler VPNネイティブアプリ",
-      "windows": "Windows向けVPN",
-      "windowsDesc": "Windows 10・11向けDoppler VPN",
-      "vlessAndroid": "AndroidでVLESS",
-      "vlessAndroidDesc": "Android向けVLESS-Realityの高度な設定"
     }
   },
   "vpnForMacos": {
@@ -5003,6 +5144,10 @@
       "ipad": {
         "title": "iPad・iPhone Duo向けVPN",
         "desc": "大画面向けレイアウト"
+      },
+      "huawei": {
+        "title": "ファーウェイ・オナー向けVPN",
+        "desc": "Googleサービス不要"
       }
     },
     "cta": {

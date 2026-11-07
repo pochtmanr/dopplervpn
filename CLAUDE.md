@@ -93,9 +93,13 @@ src/
 
 - **Shared page shells.** Two, and new pages should use one rather than hand-rolling markup:
   - `components/landing/seo-landing-page.tsx` — the article-style SEO landings (China, Iran, …).
-  - `components/landing/platform-landing-page.tsx` — the four platform pages, driven by
-    `config/platforms/{ios,android,macos,windows}.ts`. These were four ~550-line near-copies
-    before; do not fork them again.
+  - `components/landing/platform-app-page.tsx` — the app pages (iPhone, iPad, Mac, Android,
+    Huawei), Calm+ only, driven by `config/platforms/{apple,android}.ts` in the shape of
+    `config/platforms/app-page.ts`. `HUAWEI_APPGALLERY_URL` in `android.ts` switches the Huawei
+    page and download card from APK-first to AppGallery-first.
+  - `components/landing/platform-landing-page.tsx` — the older platform shell, now Windows only
+    (`config/platforms/windows.ts`). The four pages were ~550-line near-copies once; do not fork
+    either shell again.
   - Both use `components/landing/seo-landing-metadata.ts` — never hand-write `generateMetadata`
     with the 44-locale `alternates.languages` fan-out again.
 - **Icons** live in `components/icons/`. `ShieldIcon` was once declared in seven files; add to the

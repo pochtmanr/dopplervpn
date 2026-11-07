@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { GUIDE_COVERS, iosApple, macosApple } from "@/config/platforms/apple";
+import { androidApp, huaweiApp } from "@/config/platforms/android";
 import { GUIDE_SLUGS, GUIDES_LOCALES, nextGuideSlug, type GuideMeta } from "./guides";
 
 const root = process.cwd();
@@ -64,7 +65,7 @@ describe("guide order", () => {
 describe("Apple page images", () => {
   it("every config image and guide cover exists", () => {
     const srcs = [
-      ...[iosApple, macosApple].flatMap((c) => [c.hero.src, ...c.tour.map((t) => t.image.src), ...c.chapters.map((ch) => ch.image.src)]),
+      ...[iosApple, macosApple, androidApp, huaweiApp].flatMap((c) => [c.hero.src, ...c.tour.map((t) => t.image.src), ...c.chapters.flatMap((ch) => ("image" in ch ? [ch.image.src] : []))]),
       ...Object.values(GUIDE_COVERS).map((c) => c.src),
     ];
     for (const src of srcs) expect(existsSync(publicFile(src)), src).toBe(true);
