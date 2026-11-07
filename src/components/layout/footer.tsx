@@ -82,7 +82,7 @@ export async function Footer() {
   const tRussia = await getTranslations("vpnForRussia.related");
   const tChina = await getTranslations("vpnForChina.related");
   const tIos = await getTranslations("vpnForIos.related");
-  const tDownloads = await getTranslations("downloads");
+  const tDownloads = await getTranslations("apps");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
   // The `guides` namespace exists only in the guide locales, so it is read only there.
