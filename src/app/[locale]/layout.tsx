@@ -181,6 +181,9 @@ export default async function LocaleLayout({
   // RSC payload — passing the full bundle put 276 KB (en) into every page, and
   // more on larger locales. See src/i18n/client-namespaces.ts.
   const messages = pickMessages(await getMessages());
+  // The cookie dialog's Subprocessors link reuses the footer's label as a
+  // prop, so the whole footer namespace is not shipped to the client for it.
+  const tFooter = await getTranslations({ locale, namespace: "footer" });
   const dir = isRtlLocale(locale) ? "rtl" : "ltr";
 
   return (
@@ -208,7 +211,7 @@ export default async function LocaleLayout({
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             {children}
-            <CookieConsent />
+            <CookieConsent subprocessorsLabel={tFooter("subprocessors")} />
           </NextIntlClientProvider>
         </ThemeProvider>
         <GaConsent />

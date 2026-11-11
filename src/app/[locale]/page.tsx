@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { MobileStickyCta } from "@/components/layout/mobile-sticky-cta";
+import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import {
   FAQSchema,
   SoftwareApplicationSchema,
@@ -197,7 +198,13 @@ export default async function HomePage({ params }: PageProps) {
         {calmPlusPreview ? <PreviewFaq /> : <FAQ />}
         {calmPlusPreview ? <PreviewCta /> : <CTA />}
         {calmPlusPreview ? <PreviewBlog posts={posts} locale={locale} /> : <HomeBlogSection posts={posts} locale={locale} />}
-        <MobileStickyCta />
+        {/* Calm+: the same floating "Try Free for 3 Days" pill as the Apple
+            app pages (apple-app-page.tsx). */}
+        {calmPlusPreview ? (
+          <BlogStickyBar plus trackingLocation="sticky-desktop" />
+        ) : (
+          <MobileStickyCta />
+        )}
       </main>
       <Footer />
     </>

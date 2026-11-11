@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { detectPlatform, type Platform } from "@/lib/detect-platform";
 import { trackCta, type CtaLocation } from "@/lib/track-cta";
-import { PLUS_BTN, PLUS_ICON, PLUS_ICON_TONE } from "@/app/[locale]/design-lab/plus-recipes";
+import { PLUS_BTN } from "@/app/[locale]/design-lab/plus-recipes";
 import { DopplerLogo } from "@/components/layout/doppler-logo";
 
 const APP_STORE_URL =
@@ -110,7 +110,9 @@ export function BlogStickyBar({
         aria-hidden={!show}
       >
         <div className="mx-auto flex max-w-3xl items-center gap-3 rounded-full bg-(--c-card) p-2 ps-5 shadow-(--c-lift-shadow) ring-1 ring-(--c-separator)">
-          <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal}`}>
+          {/* The wordmark in the text colour, not teal: the CTA pill is the
+              one accent on the bar. */}
+          <span className="inline-flex shrink-0 text-(--c-text)">
             <DopplerLogo className="h-5 w-[3.25rem]" />
           </span>
           <p className="min-w-0 flex-1 text-[14px] font-medium leading-snug text-(--c-text) line-clamp-2">

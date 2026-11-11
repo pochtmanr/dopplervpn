@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useId, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { DopplerLogo } from "@/components/layout/doppler-logo";
+import { CookieIcon } from "@/components/icons/cookie";
 
 interface CookieConsentState {
   essential: boolean;
@@ -22,7 +24,15 @@ interface CookieConsentState {
    * changes, and every visitor is asked again.
    */
   version?: number;
+  /**
+   * Where the choice came from: the first-layer banner, the preferences layer,
+   * or the browser's Global Privacy Control signal (recorded as Reject All
+   * without asking). Absent on older records. Informational only.
+   */
+  source?: ConsentSource;
 }
+
+type ConsentSource = "banner" | "preferences" | "gpc";
 
 const STORAGE_KEY = "cookie-consent";
 
@@ -73,14 +83,45 @@ function needsPrompt(): boolean {
   return (stored.version ?? 1) < CONSENT_VERSION;
 }
 
-function storeConsent(analytics: boolean, marketing: boolean) {
+/**
+ * Cookies the optional tags set in the browser. Consent Mode and the pixel
+ * revoke stop new collection, but identifiers already written would otherwise
+ * stay behind after a withdrawal. GA4 sets `_ga` and `_ga_<stream>`; `_gid`
+ * is Universal Analytics, still found on returning browsers.
+ */
+const ANALYTICS_COOKIES = [/^_ga$/, /^_ga_/, /^_gid$/, /^_gat/];
+const MARKETING_COOKIES = [/^_fbp$/, /^_fbc$/, /^_gcl_/];
+
+function expireCookies(patterns: RegExp[]) {
+  if (typeof document === "undefined") return;
+  const host = window.location.hostname;
+  const labels = host.split(".");
+  // gtag and the pixel write to the widest domain they can (".dopplervpn.org"),
+  // so try the bare host, every parent domain, and no domain attribute.
+  const domains: (string | null)[] = [null];
+  for (let i = 0; i < labels.length - 1; i++) domains.push(`.${labels.slice(i).join(".")}`);
+  for (const pair of document.cookie.split(";")) {
+    const name = pair.split("=")[0]?.trim();
+    if (!name || !patterns.some((re) => re.test(name))) continue;
+    for (const domain of domains) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${domain ? `; domain=${domain}` : ""}`;
+    }
+  }
+}
+
+function storeConsent(analytics: boolean, marketing: boolean, source: ConsentSource) {
   const state: CookieConsentState = {
     essential: true,
     analytics,
     marketing,
     timestamp: new Date().toISOString(),
     version: CONSENT_VERSION,
+    source,
   };
+  // Withdrawal must be as complete as consent: a category that is off keeps
+  // nothing behind. Harmless when there was nothing to clear.
+  if (!analytics) expireCookies(ANALYTICS_COOKIES);
+  if (!marketing) expireCookies(MARKETING_COOKIES);
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
@@ -131,15 +172,23 @@ export function openCookiePreferences() {
  *    privacy policy.
  *  - No cookie wall: the banner sits at the bottom and the page stays usable.
  *  - Withdrawal: the footer's "Cookie Settings" (cookie-settings-button.tsx)
- *    reopens the preferences layer on every page.
+ *    reopens the preferences layer on every page, and turning a category off
+ *    expires the cookies it left (expireCookies above).
+ *  - Global Privacy Control: a browser that sends GPC and has no stored choice
+ *    is recorded as Reject All and is not asked. It can still opt in from the
+ *    footer.
  */
 
-// Reject, Accept and Save share one recipe (DESIGN.md primary CTA) so none of
-// them is visually weaker than another.
+// Reject and Accept share one recipe so neither is visually weaker than the
+// other. `cta-key` + `rounded-full` is the site's pill (under `plus-pills` it is
+// the same flat round pill as the hero's "Download for Mac").
 const CHOICE_BTN =
-  "inline-flex items-center justify-center px-5 py-3 rounded-lg text-sm font-medium bg-accent-teal text-white hover:bg-accent-teal/90 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-teal";
+  "cta-key inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] font-semibold leading-5 cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-teal";
 const SECONDARY_BTN =
-  "inline-flex items-center justify-center px-5 py-3 rounded-lg text-sm font-medium border border-overlay/20 text-text-primary hover:border-overlay/40 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-teal";
+  "cta-flat inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] font-semibold leading-5 cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-teal";
+
+/** Matches `.consent-out` / `.consent-dim-out` in globals.css. */
+const EXIT_MS = 200;
 
 function ConsentSwitch({
   checked,
@@ -160,22 +209,24 @@ function ConsentSwitch({
       aria-labelledby={labelId}
       aria-describedby={descriptionId}
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-teal ${
-        checked ? "bg-accent-teal" : "bg-overlay/20"
+      className={`relative inline-flex h-[26px] w-[44px] items-center rounded-full transition-colors duration-200 cursor-pointer shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-teal ${
+        checked ? "bg-accent-teal" : "bg-overlay/15"
       }`}
     >
       <span
         aria-hidden="true"
-        className={`inline-block h-4 w-4 rounded-full bg-white transition-transform ${
-          checked ? "ltr:translate-x-6 rtl:-translate-x-6" : "ltr:translate-x-1 rtl:-translate-x-1"
+        className={`inline-block h-[22px] w-[22px] rounded-full bg-white shadow-[0_1px_3px_rgb(0_0_0/0.3),0_0_0_0.5px_rgb(0_0_0/0.06)] transition-transform duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)] ${
+          checked ? "ltr:translate-x-[20px] rtl:-translate-x-[20px]" : "ltr:translate-x-[2px] rtl:-translate-x-[2px]"
         }`}
       />
     </button>
   );
 }
 
-export function CookieConsent() {
+export function CookieConsent({ subprocessorsLabel }: { subprocessorsLabel?: string } = {}) {
   const [mode, setMode] = useState<"hidden" | "banner" | "preferences">("hidden");
+  // True while the open layer plays its exit; it unmounts after EXIT_MS.
+  const [leaving, setLeaving] = useState(false);
   // Where Escape from the preferences layer returns to: the banner if the
   // visitor has not chosen yet, otherwise nothing (their choice stands).
   const [returnTo, setReturnTo] = useState<"hidden" | "banner">("banner");
@@ -192,18 +243,38 @@ export function CookieConsent() {
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogTitleRef = useRef<HTMLHeadingElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    // No choice yet, a choice given against an older consent version (which
-    // covers pre-Marketing records), or a choice older than 12 months.
-    if (needsPrompt()) {
-      const timer = setTimeout(() => setMode("banner"), 1500);
-      return () => clearTimeout(timer);
+    // Global Privacy Control with no valid choice on record: honour it as
+    // Reject All and do not ask. A re-prompt for an older consent version is
+    // left alone, so nothing the visitor chose is overwritten silently.
+    const gpc = (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl;
+    if (gpc === true && !getStoredConsent()) {
+      storeConsent(false, false, "gpc");
+      return;
     }
+    // No choice yet, a choice given against an older consent version (which
+    // covers pre-Marketing records), or a choice older than 12 months. The
+    // banner waits for the page to settle and then for an idle moment, so it
+    // never competes with the hero's first paint.
+    if (!needsPrompt()) return;
+    let idle: number | undefined;
+    const show = () => setMode((m) => (m === "hidden" ? "banner" : m));
+    const timer = setTimeout(() => {
+      if ("requestIdleCallback" in window) idle = window.requestIdleCallback(show, { timeout: 1200 });
+      else show();
+    }, 1200);
+    return () => {
+      clearTimeout(timer);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+    };
   }, []);
 
   useEffect(() => {
     const handler = () => {
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+      setLeaving(false);
       const existing = getStoredConsent();
       restoreFocusRef.current = document.activeElement as HTMLElement | null;
       setAnalyticsEnabled(existing?.analytics ?? false);
@@ -215,25 +286,33 @@ export function CookieConsent() {
     return () => window.removeEventListener("cookie-open-preferences", handler);
   }, []);
 
+  useEffect(() => () => {
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+  }, []);
+
   const close = useCallback(() => {
-    setMode("hidden");
-    const el = restoreFocusRef.current;
-    restoreFocusRef.current = null;
-    if (el && document.contains(el)) el.focus();
+    setLeaving(true);
+    exitTimerRef.current = setTimeout(() => {
+      setMode("hidden");
+      setLeaving(false);
+      const el = restoreFocusRef.current;
+      restoreFocusRef.current = null;
+      if (el && document.contains(el)) el.focus();
+    }, EXIT_MS);
   }, []);
 
   const acceptAll = useCallback(() => {
-    storeConsent(true, true);
+    storeConsent(true, true, mode === "preferences" ? "preferences" : "banner");
     close();
-  }, [close]);
+  }, [close, mode]);
 
   const rejectAll = useCallback(() => {
-    storeConsent(false, false);
+    storeConsent(false, false, mode === "preferences" ? "preferences" : "banner");
     close();
-  }, [close]);
+  }, [close, mode]);
 
   const savePreferences = useCallback(() => {
-    storeConsent(analyticsEnabled, marketingEnabled);
+    storeConsent(analyticsEnabled, marketingEnabled, "preferences");
     close();
   }, [analyticsEnabled, marketingEnabled, close]);
 
@@ -251,7 +330,7 @@ export function CookieConsent() {
   // Preferences dialog: move focus in, trap Tab, Escape steps back out without
   // recording anything.
   useEffect(() => {
-    if (mode !== "preferences") return;
+    if (mode !== "preferences" || leaving) return;
     dialogTitleRef.current?.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -279,15 +358,14 @@ export function CookieConsent() {
     };
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [mode, returnTo, close]);
+  }, [mode, leaving, returnTo, close]);
 
   if (mode === "hidden") return null;
 
+  const linkClass =
+    "text-accent-teal underline decoration-accent-teal/40 underline-offset-2 hover:decoration-accent-teal transition-colors";
   const privacyLink = (
-    <Link
-      href="/privacy"
-      className="text-accent-teal underline underline-offset-2 hover:text-accent-teal/80"
-    >
+    <Link href="/privacy" className={linkClass}>
       {t("privacyLink")}
     </Link>
   );
@@ -311,63 +389,85 @@ export function CookieConsent() {
     ];
 
     return (
-      <div className="overlay-dim fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
+      <div
+        className={`overlay-dim fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/55 backdrop-blur-[2px] ${
+          leaving ? "consent-dim-out" : "consent-dim-in"
+        }`}
+      >
         <div
           ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={dialogTitleId}
           aria-describedby={dialogIntroId}
-          className="overlay-surface-muted w-full max-w-lg max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl border border-overlay/10 bg-bg-secondary p-6 shadow-2xl"
+          className={`consent-card overlay-surface-muted w-full max-w-md max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-[22px] bg-bg-secondary p-5 sm:p-6 ${
+            leaving ? "consent-out" : "consent-dialog-in"
+          }`}
         >
-          <h2
-            id={dialogTitleId}
-            ref={dialogTitleRef}
-            tabIndex={-1}
-            className="text-lg font-semibold text-text-primary mb-2 outline-none"
-          >
-            {t("preferencesTitle")}
-          </h2>
-          <p id={dialogIntroId} className="text-sm text-text-muted leading-relaxed mb-2">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="consent-tint grid place-items-center w-9 h-9 rounded-full shrink-0">
+              <CookieIcon />
+            </span>
+            <h2
+              id={dialogTitleId}
+              ref={dialogTitleRef}
+              tabIndex={-1}
+              className="text-[17px] font-semibold text-text-primary outline-none"
+            >
+              {t("preferencesTitle")}
+            </h2>
+          </div>
+          <p id={dialogIntroId} className="text-[13px] text-text-muted leading-relaxed mb-4">
             {t("preferencesIntro")} {privacyLink}
+            {subprocessorsLabel && (
+              <>
+                {" · "}
+                <Link href="/subprocessors" className={linkClass}>
+                  {subprocessorsLabel}
+                </Link>
+              </>
+            )}
           </p>
 
-          {/* Essential: always on, not a control */}
-          <div className="flex items-center justify-between gap-4 py-3 border-b border-overlay/10">
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-text-primary">{t("essentialTitle")}</p>
-              <p className="text-xs text-text-muted mt-0.5">{t("essentialDescription")}</p>
+          <div className="consent-tray rounded-2xl divide-y divide-overlay/[0.07]">
+            {/* Essential: always on, not a control */}
+            <div className="flex items-center justify-between gap-4 px-4 py-3.5">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary">{t("essentialTitle")}</p>
+                <p className="text-xs text-text-muted mt-0.5 leading-relaxed">{t("essentialDescription")}</p>
+              </div>
+              <span className="consent-tint text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0">
+                {t("alwaysOn")}
+              </span>
             </div>
-            <span className="text-xs font-medium text-accent-teal shrink-0">{t("alwaysOn")}</span>
+
+            {categories.map((c) => {
+              const labelId = `${ids}-${c.key}-label`;
+              const descId = `${ids}-${c.key}-desc`;
+              return (
+                <div key={c.key} className="flex items-center justify-between gap-4 px-4 py-3.5">
+                  <div className="flex-1 min-w-0">
+                    <p id={labelId} className="text-sm font-medium text-text-primary">
+                      {c.title}
+                    </p>
+                    <p id={descId} className="text-xs text-text-muted mt-0.5 leading-relaxed">
+                      {c.description}
+                    </p>
+                  </div>
+                  <ConsentSwitch
+                    checked={c.checked}
+                    onChange={c.onChange}
+                    labelId={labelId}
+                    descriptionId={descId}
+                  />
+                </div>
+              );
+            })}
           </div>
 
-          {categories.map((c) => {
-            const labelId = `${ids}-${c.key}-label`;
-            const descId = `${ids}-${c.key}-desc`;
-            return (
-              <div
-                key={c.key}
-                className="flex items-center justify-between gap-4 py-3 border-b border-overlay/10"
-              >
-                <div className="flex-1 min-w-0">
-                  <p id={labelId} className="text-sm font-medium text-text-primary">
-                    {c.title}
-                  </p>
-                  <p id={descId} className="text-xs text-text-muted mt-0.5">
-                    {c.description}
-                  </p>
-                </div>
-                <ConsentSwitch
-                  checked={c.checked}
-                  onChange={c.onChange}
-                  labelId={labelId}
-                  descriptionId={descId}
-                />
-              </div>
-            );
-          })}
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
+          {/* All three are the same pill: saving a custom choice is never
+              harder than accepting or rejecting everything. */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5">
             <button type="button" onClick={rejectAll} className={CHOICE_BTN}>
               {t("rejectAll")}
             </button>
@@ -383,40 +483,52 @@ export function CookieConsent() {
     );
   }
 
-  // Banner (first layer). Non-modal: the page stays usable behind it.
+  // Banner (first layer). Non-modal: the page stays usable behind it. A small
+  // floating card in the bottom start corner, out of the reading column; full
+  // width (with a gutter) on phones.
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 p-4 slide-in-from-bottom">
+    <div className="fixed z-50 inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:start-5 sm:bottom-5 sm:w-[25rem] pointer-events-none">
       <div
         role="dialog"
         aria-modal="false"
         aria-labelledby={bannerTitleId}
         aria-describedby={bannerTextId}
-        className="overlay-surface-muted mx-auto max-w-4xl max-h-[70dvh] overflow-y-auto rounded-2xl border border-overlay/10 bg-bg-secondary p-5 sm:p-6 shadow-2xl"
+        className={`consent-card overlay-surface-muted pointer-events-auto max-h-[70dvh] overflow-y-auto rounded-[22px] bg-bg-secondary p-4 sm:p-5 ${
+          leaving ? "consent-out" : "consent-in"
+        }`}
       >
-        {/* Stacked at every width: the text keeps the full line length and the
-            choices sit in one row beneath it, Manage at the start. */}
-        <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-3">
+          <span className="consent-tint grid place-items-center w-10 h-10 rounded-full shrink-0">
+            <CookieIcon className="w-5 h-5" />
+          </span>
           <div className="min-w-0">
-            <h2 id={bannerTitleId} className="text-sm font-semibold text-text-primary mb-1">
+            {/* Brand eyebrow: the name is not translated, so it needs no key. */}
+            <div dir="ltr" className="flex items-center gap-1.5 text-text-tertiary rtl:justify-end">
+              <DopplerLogo className="w-3.5 h-3.5" />
+              <span className="text-[11px] font-semibold tracking-tight leading-4">Doppler VPN</span>
+            </div>
+            <h2 id={bannerTitleId} className="text-[15px] font-semibold text-text-primary leading-snug">
               {t("bannerTitle")}
             </h2>
-            <p id={bannerTextId} className="text-sm text-text-muted leading-relaxed">
-              {t("message")} {privacyLink}
-            </p>
           </div>
-          <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-3">
-            <button type="button" onClick={openPreferencesFromBanner} className={SECONDARY_BTN}>
-              {t("managePreferences")}
+        </div>
+        <p id={bannerTextId} className="text-[13px] text-text-muted leading-relaxed mt-3">
+          {t("message")} {privacyLink}
+        </p>
+        {/* Reject and Accept: identical, side by side, equal weight. Manage
+            is the quieter flat pill beneath them. */}
+        <div className="flex flex-col gap-2 mt-4">
+          <div className="grid grid-cols-2 gap-2">
+            <button type="button" onClick={rejectAll} className={CHOICE_BTN}>
+              {t("rejectAll")}
             </button>
-            <div className="grid grid-cols-2 gap-3 sm:ms-auto">
-              <button type="button" onClick={rejectAll} className={CHOICE_BTN}>
-                {t("rejectAll")}
-              </button>
-              <button type="button" onClick={acceptAll} className={CHOICE_BTN}>
-                {t("acceptAll")}
-              </button>
-            </div>
+            <button type="button" onClick={acceptAll} className={CHOICE_BTN}>
+              {t("acceptAll")}
+            </button>
           </div>
+          <button type="button" onClick={openPreferencesFromBanner} className={SECONDARY_BTN}>
+            {t("managePreferences")}
+          </button>
         </div>
       </div>
     </div>

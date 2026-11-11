@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { Reveal } from '@/components/ui/reveal';
 import { ObfuscatedEmail } from '@/components/ui/obfuscated-email';
 import { TicketPlate } from '@/components/glyph/ticket-plate';
-import { TelegramChat } from './telegram-chat';
+import Image from 'next/image';
 import {
   ArrowGlyph,
   PLUS_BTN,
@@ -274,7 +274,17 @@ export function ActionButtons({ onOpenTicket, onOpenRestore, onOpenBusiness, plu
             }
             subtitle={<span dir="ltr">{t('contact.telegramBot')}</span>}
             cta={pill(t('actions.submitRequestCta'), false, 'cta-key-telegram')}
-            art={<TelegramChat />}
+            art={
+              // A real screenshot of the support bot's first reply. The card
+              // is xl+ only, where the well is about half of an 8/12 column.
+              <Image
+                src="/images/support-telegram-bot.avif"
+                alt=""
+                fill
+                sizes="(min-width: 1280px) 420px, 1px"
+                className="object-cover object-top"
+              />
+            }
           />
         </Reveal>
 
