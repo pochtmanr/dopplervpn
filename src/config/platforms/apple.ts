@@ -47,6 +47,18 @@ const photo = (name: string, width = 1800, height = 1200): AppleImage => ({
   height,
   bg: RENDER_BACKDROPS[name] ?? DEFAULT_RENDER_BG,
 });
+/** Device mockups from public/archive/ (chrome already in-frame). */
+const archive = (name: string, width: number, height: number, bg: string): AppleImage => ({
+  src: `/archive/${name}.avif`,
+  width,
+  height,
+  bg,
+});
+
+const ARCHIVE_IPHONE = archive("iphone", 2250, 1500, "#C8C8C8");
+const ARCHIVE_IPHONE2 = archive("iphone2", 2250, 1500, "#C8C8C8");
+const ARCHIVE_IPHONE_BRICK = archive("iphonebrick", 1125, 750, "#D0D0D0");
+const ARCHIVE_MACPRO = archive("macpro", 2250, 1500, "#1E3A2F");
 
 /** One App Store listing serves iPhone, iPad, Mac and Apple Watch (universal purchase). */
 export const APPLE_APP_STORE_URL = "https://apps.apple.com/us/app/doppler-vpn-fast-secure/id6757091773";
@@ -55,7 +67,7 @@ export const APPLE_APP_STORE_URL = "https://apps.apple.com/us/app/doppler-vpn-fa
 export const GUIDE_COVERS: Record<GuideSlug, AppleImage> = {
   "vpn-on-apple-watch": photo("watch-s11"),
   "what-is-sni": photo("sni-options"),
-  "doppler-on-iphone-and-mac": photo("iphone-hand"),
+  "doppler-on-iphone-and-mac": ARCHIVE_IPHONE_BRICK,
   "one-account-every-apple-device": photo("watch-s10"),
 };
 
@@ -92,14 +104,14 @@ export const iosApple: AppleAppConfig = {
   primary: APP_STORE_BUTTON,
   rating: "appStore",
   ogImageAlt: "Doppler VPN for iPhone & iPad",
-  hero: { ...photo("iphone-hand"), alt: "Doppler VPN on an iPhone held in hand, connected and protected" },
+  hero: { ...ARCHIVE_IPHONE, alt: "Doppler VPN on an iPhone held in hand, connected and protected" },
   ecosystem: { image: photo("watch-s11"), altKey: "photoAlt", ...APPLE_DEVICES },
   tourDevice: "phone",
   tour: [],
   compact: true,
   chapters: [
     { key: "connect", frame: "phone", image: phone("search"), guide: "doppler-on-iphone-and-mac" },
-    { key: "unblock", frame: "photo", image: photo("sni-options"), guide: "what-is-sni" },
+    { key: "unblock", frame: "photo", image: ARCHIVE_IPHONE2, guide: "what-is-sni" },
     { key: "path", frame: "phone", image: phone("path") },
     { key: "split", frame: "phone", image: phone("split") },
   ],
@@ -162,7 +174,7 @@ export const macosApple: AppleAppConfig = {
   primary: APP_STORE_BUTTON,
   rating: "appStore",
   ogImageAlt: "Doppler VPN for Mac",
-  hero: { ...photo("mac-front"), alt: "Doppler VPN on a MacBook Pro, connected and protected" },
+  hero: { ...ARCHIVE_MACPRO, alt: "Doppler VPN on a Studio Display, connected and protected" },
   ecosystem: { image: photo("watch-s10"), altKey: "photoAltDevices", ...APPLE_DEVICES },
   tourDevice: "mac",
   // The hero already shows the connected VPN screen, so the tour starts one step in.

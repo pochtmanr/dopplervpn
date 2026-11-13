@@ -2572,12 +2572,43 @@
     },
     "app": {
       "hero": {
-        "eyebrow": "Phones · Tablets · Foldables",
+        "eyebrow": "Phone · Tablet · TV · Chromebook",
         "title": "Doppler VPN for Android",
         "subtitle": "One tap and your phone is private. Doppler makes its connection look like an ordinary website visit, so it keeps working on networks that block other VPNs.",
         "cta": "Get it on Google Play",
         "ctaSecondary": "Download the APK",
         "note": "Free download · {days}-day free trial on Google Play · No email or phone number"
+      },
+      "tour": {
+        "kicker": "Inside the app",
+        "title": "Everything is one tap away",
+        "subtitle": "Real screens from the Android app, nothing staged. Swipe through them.",
+        "items": {
+          "connect": {
+            "label": "Connect",
+            "alt": "Doppler home screen on Android, connected, with live speed and a route map"
+          },
+          "unblock": {
+            "label": "Connection method",
+            "alt": "Connection method screen listing the ordinary websites a connection can look like a visit to"
+          },
+          "path": {
+            "label": "Your route",
+            "alt": "Connection screen showing the address websites see, the DNS status and the route on a map"
+          },
+          "split": {
+            "label": "Smart Route",
+            "alt": "Smart Route screen choosing which country's sites skip the tunnel"
+          },
+          "speed": {
+            "label": "Speed test",
+            "alt": "Speed test on Android showing download, upload and ping through the VPN"
+          },
+          "devices": {
+            "label": "Devices",
+            "alt": "Devices screen showing every device signed in to the account"
+          }
+        }
       },
       "chapters": {
         "connect": {
@@ -2588,7 +2619,8 @@
             "p1": "VLESS-Reality on every server, nothing to set up",
             "p2": "If a network blocks a server, switch the website its connection imitates",
             "p3": "One tap connects you to a fast server"
-          }
+          },
+          "alt": "Server search on Android, picking a country and city"
         },
         "route": {
           "kicker": "Smart Route",
@@ -2598,7 +2630,8 @@
             "p1": "Pick your home country once",
             "p2": "Ready rules for local websites, and for government and banking",
             "p3": "Add your own domains that should bypass the VPN"
-          }
+          },
+          "alt": "Connection screen on Android showing the route on a map"
         },
         "killSwitch": {
           "kicker": "Kill switch",
@@ -2608,7 +2641,8 @@
             "p1": "Blocks the internet if the VPN drops unexpectedly",
             "p2": "Always On reconnects by itself when the connection drops",
             "p3": "One tap to Android's own Always-on VPN, so protection returns after a restart"
-          }
+          },
+          "alt": "Smart Route screen on Android choosing which country's sites skip the tunnel"
         },
         "account": {
           "kicker": "One account",
@@ -2618,13 +2652,63 @@
             "p1": "See every signed-in device, and remove the ones you no longer use",
             "p2": "A built-in speed test measures the tunnel itself",
             "p3": "Your plan belongs to your ID, not to one phone"
+          },
+          "alt": "Devices screen on Android showing every signed-in device"
+        }
+      },
+      "get": {
+        "kicker": "Install",
+        "title": "Download options for every Android device",
+        "subtitle": "One Google Play listing for phone, tablet, Chromebook and Android TV. The same sideload APK for phones without Play, including Huawei and Honor.",
+        "coming": "Coming soon",
+        "footnote": "Minimum Android 8.0 (API 26). Sideload APK is about 57 MB (arm64-v8a). Play may show a smaller size for your device. Older 32-bit phones should use Google Play. HarmonyOS NEXT cannot run APKs.",
+        "headers": {
+          "channel": "Channel",
+          "bestFor": "Best for",
+          "requires": "Requires",
+          "action": "Get it"
+        },
+        "specs": {
+          "android": { "label": "Android", "value": "8.0 or later" },
+          "size": { "label": "App size", "value": "About 57 MB" },
+          "storage": { "label": "Free storage", "value": "About 100 MB" },
+          "abi": { "label": "APK architecture", "value": "arm64-v8a" },
+          "trial": { "label": "Google Play trial", "value": "{days} days free" }
+        },
+        "devices": {
+          "kicker": "Same app on Google Play",
+          "phone": { "title": "Phone", "body": "Android 8.0+" },
+          "tablet": { "title": "Tablet & foldable", "body": "Same Play listing" },
+          "chromebook": { "title": "Chromebook", "body": "ChromeOS + Play" },
+          "tv": { "title": "Android TV", "body": "Google TV too" }
+        },
+        "rows": {
+          "play": {
+            "title": "Google Play",
+            "bestFor": "Phone, tablet, Chromebook and Android TV",
+            "requires": "Android 8.0+, Google Play",
+            "cta": "Get it on Google Play"
+          },
+          "apk": {
+            "title": "Sideload APK",
+            "bestFor": "Phones without Google Play, or a direct install",
+            "requires": "Android 8.0+, arm64, ~57 MB",
+            "cta": "Download the APK"
+          },
+          "huawei": {
+            "title": "Huawei & Honor",
+            "bestFor": "Phones without Google services (AppGallery coming)",
+            "requires": "Android 8.0+, APK install allowed",
+            "cta": "Huawei setup",
+            "ctaApk": "Download APK"
           }
         }
       },
       "ecosystem": {
         "kicker": "Android everywhere",
-        "title": "Your phone today, bigger screens next",
-        "body": "Doppler runs on Android 8.0 and later, from budget phones to flagships. Layouts for tablets, Chromebooks and TVs are on the way.",
+        "title": "Phone, tablet, TV and Chromebook",
+        "body": "One Google Play listing for phones, tablets, foldables, Chromebooks and Android TV. Huawei and Honor without Google services use the APK.",
+        "photoAlt": "Doppler VPN on an Android tablet, connected and protected",
         "phone": {
           "title": "Phones",
           "body": "The full app, on Android 8.0 or later"
@@ -2635,11 +2719,11 @@
         },
         "chromebook": {
           "title": "Chromebooks",
-          "body": "Coming soon"
+          "body": "On Google Play for ChromeOS"
         },
         "tv": {
           "title": "Android TV",
-          "body": "Coming soon"
+          "body": "On Google Play for Android TV and Google TV"
         }
       },
       "privacy": {
@@ -2710,13 +2794,13 @@
         "cta": "Get it on AppGallery",
         "ctaSecondary": "Download the APK",
         "note": "Free download · Pay on the website by card or crypto · No email or phone number",
-        "appGalleryNote": "Coming to AppGallery. Until then, install the APK from this page."
+        "appGalleryNote": "Coming to AppGallery. Until then, install the APK from this page. Full Android download options live on the Android page."
       },
       "chapters": {
         "noGoogle": {
           "kicker": "No Google services",
           "title": "Built for phones without Google Play",
-          "body": "The Doppler APK needs no Google services. It installs straight from this website and tells you when a new version is out, so you never have to hunt for updates.",
+          "body": "The Doppler APK needs no Google services. It installs straight from this website and tells you when a new version is out, so you never have to hunt for updates. See every Android install option on the Android downloads page.",
           "points": {
             "p1": "Downloaded here, directly from Doppler",
             "p2": "No Google account and no Play services needed",
@@ -2731,7 +2815,8 @@
             "p1": "VLESS-Reality on every server",
             "p2": "Smart Route keeps local sites and banking on your own connection",
             "p3": "The kill switch blocks traffic if the VPN drops"
-          }
+          },
+          "alt": "Doppler home screen on a Huawei phone, connected and protected"
         },
         "pay": {
           "kicker": "Pay on the web",
@@ -2751,7 +2836,8 @@
             "p1": "Huawei on EMUI, or on HarmonyOS 2, 3 or 4",
             "p2": "Honor phones, with or without Google services",
             "p3": "Not supported: HarmonyOS NEXT (HarmonyOS 5 and later)"
-          }
+          },
+          "alt": "Devices screen on a Huawei phone showing every signed-in device"
         }
       },
       "privacy": {
@@ -2762,10 +2848,10 @@
       },
       "setup": {
         "title": "Install in three steps",
-        "subtitle": "About a minute, and Android asks only once.",
+        "subtitle": "About a minute, and Android asks only once. The full Android install table also lists Play, TV and Chromebook status.",
         "s1": {
           "title": "Download the APK",
-          "body": "Tap Download on this page, on the phone you want to protect."
+          "body": "Tap Download on this page, on the phone you want to protect. Or open the Android page install table and use the Huawei row."
         },
         "s2": {
           "title": "Allow the install",
@@ -5286,7 +5372,7 @@
       },
       "android": {
         "title": "VPN for Android",
-        "desc": "Get Doppler on Google Play"
+        "desc": "Play, APK, Huawei, TV and Chromebook options"
       },
       "windows": {
         "title": "VPN for Windows",

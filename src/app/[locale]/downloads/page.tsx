@@ -16,7 +16,7 @@ import { PlatformLogo, type PlatformIcon } from "@/components/glyph/platform-ico
 import { SetupSection, type SetupPlatform } from "@/components/downloads/setup-section";
 import { DetectedCard, DetectedPlatformProvider } from "@/components/downloads/detected-platform";
 import type { CtaVariant } from "@/lib/track-cta";
-import { ANDROID_APK_URL, GOOGLE_PLAY_URL as PLAY_URL, HUAWEI_APPGALLERY_URL } from "@/config/platforms/android";
+import { ANDROID_APK_URL, GOOGLE_PLAY_URL as PLAY_URL } from "@/config/platforms/android";
 import { seoTitle } from "@/lib/seo-title";
 import {
   CARD,
@@ -139,13 +139,11 @@ type Release = {
   status?: "review";
 };
 
-type PlatformKey = "ios" | "android" | "huawei" | "mac" | "windows";
+type PlatformKey = "ios" | "android" | "mac" | "windows";
 
 const RELEASES: Record<PlatformKey, Release> = {
   ios:     { date: "2026-09-14", note: null },
   android: { date: "2026-08-16", note: null },
-  // The Huawei card serves the same standalone APK as the Android card's second button.
-  huawei:  { date: "2026-08-16", note: null },
   mac:     { date: "2026-09-13", note: null },
   windows: { date: "2026-08-16", note: "fullTunnel" },
 };
@@ -275,7 +273,6 @@ type PlatformButton = {
 const HOW_TO_NS = {
   ios: "vpnForIos",
   android: "vpnForAndroid",
-  huawei: "vpnForHuawei",
   mac: "vpnForMacos",
   windows: "vpnForWindows",
 } as const;
@@ -283,7 +280,7 @@ const HOW_TO_NS = {
 const PLATFORMS: {
   key: PlatformKey;
   icon: PlatformIcon;
-  learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-huawei" | "/vpn-for-macos" | "/vpn-for-windows";
+  learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
   buttons: PlatformButton[];
   /**
    * Short caveats shown under the download buttons, each naming the namespace
@@ -317,8 +314,8 @@ const PLATFORMS: {
   },
   {
     key: "android",
-    // Google Play everywhere on this card (Roman, 2026-11-06): the store is how most get it.
-    icon: "googlePlay",
+    // Card uses the Android mark; Play stays on the store button.
+    icon: "android",
     learnHref: "/vpn-for-android",
     // The APK is the only Android route for anyone without Play — mainland China
     // most of all — so it is offered here rather than left to a link handed out
@@ -340,38 +337,6 @@ const PLATFORMS: {
         variant: "android-apk",
         download: true,
         primary: false,
-      },
-    ],
-  },
-  {
-    // Huawei and Honor phones without Google services. Until the AppGallery listing is live
-    // (HUAWEI_APPGALLERY_URL), the APK is this card's primary button; once it is, AppGallery
-    // leads and the APK follows. HarmonyOS NEXT cannot run APKs, and the note says so.
-    key: "huawei",
-    icon: "appGallery",
-    learnHref: "/vpn-for-huawei",
-    notes: [{ ns: "apps", key: "huawei.apkNote", tone: "info" }],
-    buttons: [
-      ...(HUAWEI_APPGALLERY_URL
-        ? [
-            {
-              labelKey: "huawei.buttonAppGallery",
-              href: HUAWEI_APPGALLERY_URL,
-              variant: "huawei-appgallery" as const,
-              external: true,
-              primary: true,
-              logo: "appGallery" as const,
-            },
-          ]
-        : []),
-      {
-        labelKey: "huawei.buttonApk",
-        href: URLS.androidApk,
-        variant: "android-apk",
-        download: true,
-        primary: !HUAWEI_APPGALLERY_URL,
-        // As the primary it is a file, not a store: the Android mark, never AppGallery's.
-        logo: "android",
       },
     ],
   },

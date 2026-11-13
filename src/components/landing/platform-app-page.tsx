@@ -24,13 +24,21 @@ import { BreadcrumbSchema, FAQSchema, PlatformAppSchema } from "@/components/seo
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
 import { AppleIcon, Stars } from "@/components/icons/platform";
-import { AppGalleryMark, AppStoreMark, PlatformLogo } from "@/components/glyph/platform-icons";
+import { AppGalleryMark, AppStoreMark, HuaweiMark, PlatformLogo } from "@/components/glyph/platform-icons";
 import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
 import { Link } from "@/i18n/navigation";
 import { PLANS, SITE_URL, TERMS } from "@/lib/facts";
 import { GUIDE_COVERS } from "@/config/platforms/apple";
-import type { AppButton, AppChapter, AppGlyph, AppPageConfig, StoreMark } from "@/config/platforms/app-page";
-import { AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
+import type {
+  AndroidInstallRow,
+  AppButton,
+  AppChapter,
+  AppGlyph,
+  AppPageConfig,
+  StoreMark,
+} from "@/config/platforms/app-page";
+import { AndroidFrame, AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
+import { ANDROID_APK_BUTTON } from "@/config/platforms/android";
 
 /** Guides are English-only for now (lib/guides.ts), so every guide link goes to /en. */
 const GUIDE_LOCALE = "en";
@@ -181,6 +189,52 @@ function GuideLink({ href, children }: { href: string; children: ReactNode }) {
   );
 }
 
+const HUAWEI_PAGE_BTN =
+  "plus-btn inline-flex h-12 items-center justify-center rounded-full bg-(--c-inset) px-5 text-[15px] font-bold text-(--c-text) hover:bg-(--c-accent-tint) hover:text-(--c-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg)";
+
+/** CTA cell for one Android install-matrix row (`#get`). */
+function AndroidGetCta({
+  row,
+  config,
+  t,
+}: {
+  row: AndroidInstallRow;
+  config: AppPageConfig;
+  t: (key: string) => string;
+}) {
+  if (row.status === "coming") {
+    return <span className={`${PLUS_CHIP} bg-(--c-inset) text-(--c-tert)`}>{t("get.coming")}</span>;
+  }
+
+  const label = t(`get.rows.${row.key}.cta`);
+  if (row.cta === "primary") {
+    return <StoreButton config={config} button={config.primary} label={label} />;
+  }
+  if (row.cta === "secondary" && config.secondary) {
+    return <StoreButton config={config} button={config.secondary} label={label} quiet />;
+  }
+  if (row.cta === "apk") {
+    return <StoreButton config={config} button={ANDROID_APK_BUTTON} label={label} quiet />;
+  }
+  if (row.cta === "huawei") {
+    return (
+      <>
+        <Link href="/vpn-for-huawei" className={`${HUAWEI_PAGE_BTN} gap-2`}>
+          <HuaweiMark className="h-[18px] w-[18px]" />
+          {label}
+        </Link>
+        <StoreButton
+          config={config}
+          button={ANDROID_APK_BUTTON}
+          label={t(`get.rows.${row.key}.ctaApk`)}
+          quiet
+        />
+      </>
+    );
+  }
+  return null;
+}
+
 function ChapterVisual({
   chapter,
   index,
@@ -219,8 +273,9 @@ function ChapterVisual({
       </div>
     );
   }
-  // Phone: the screen rises out of a tray and is cut by its bottom edge, so a tall capture
-  // never towers over the copy beside it.
+  // Phone / Android: the screen rises out of a tray and is cut by its bottom edge, so a tall
+  // capture never towers over the copy beside it. Android uses a hole-punch bezel for Play captures.
+  const Frame = chapter.frame === "android" ? AndroidFrame : PhoneFrame;
   return (
     <div className="relative overflow-hidden rounded-[28px] bg-(--c-card)">
       <div
@@ -228,7 +283,7 @@ function ChapterVisual({
           compact ? "h-[360px] pt-8 sm:h-[420px] sm:pt-10" : "h-[440px] pt-10 sm:h-[520px] sm:pt-14"
         }`}
       >
-        <PhoneFrame
+        <Frame
           image={chapter.image}
           alt={alt}
           sizes={compact ? "(min-width: 640px) 240px, 60vw" : "(min-width: 640px) 300px, 70vw"}
@@ -289,7 +344,13 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
   const hero = (
     <>
       <span className={`${PLUS_CHIP} bg-(--c-accent-tint) text-(--c-accent)`}>
-        {isApple ? <AppleIcon className="h-3.5 w-3.5" /> : <PlatformLogo icon="android" className="h-3.5 w-3.5" />}
+        {isApple ? (
+          <AppleIcon className="h-3.5 w-3.5" />
+        ) : config.slug === "vpn-for-huawei" ? (
+          <HuaweiMark className="h-3.5 w-3.5" />
+        ) : (
+          <PlatformLogo icon="android" className="h-3.5 w-3.5" />
+        )}
         {t("hero.eyebrow")}
       </span>
       <h1 className="mt-5 font-display text-[40px] font-bold leading-[1.06] tracking-tight text-(--c-text) sm:text-5xl xl:text-6xl">
@@ -437,7 +498,7 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   {config.ecosystem.image ? (
                     <div
-                      className="relative aspect-[3/2] lg:aspect-auto lg:min-h-[560px]"
+                      className="group relative aspect-[3/2] overflow-hidden lg:aspect-auto lg:min-h-[560px]"
                       style={{ backgroundColor: config.ecosystem.image.bg }}
                     >
                       <Image
@@ -445,7 +506,7 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                         alt={config.ecosystem.altKey ? eco(config.ecosystem.altKey) : ""}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover"
+                        className="object-cover object-top transition-transform duration-500 ease-out group-hover:translate-y-3 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
                       />
                     </div>
                   ) : (
@@ -481,6 +542,80 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                     )}
                   </div>
                 </div>
+              </div>
+            </PlusContainer>
+          )}
+
+          {/* ── Android install: specs, device list, Play / APK / Huawei ── */}
+          {config.androidGet && (
+            <PlusContainer className={SECTION}>
+              <div id="get" className="scroll-mt-28">
+                <SectionHead kicker={t("get.kicker")} title={t("get.title")} lead={t("get.subtitle")} />
+                <dl className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 lg:gap-4">
+                  {config.androidGet.specs.map(({ key }) => (
+                    <div key={key} className="rounded-2xl bg-(--c-card) px-4 py-4 text-center sm:px-5">
+                      <dt className={PLUS_META}>{t(`get.specs.${key}.label`)}</dt>
+                      <dd className={`mt-1 ${PLUS_TITLE_SM}`}>{t(`get.specs.${key}.value`, { days: TERMS.freeTrialDays })}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mb-8 rounded-[28px] bg-(--c-card) px-5 py-6 sm:px-8 sm:py-7">
+                  <p className={`mb-5 text-center ${KICKER}`}>{t("get.devices.kicker")}</p>
+                  <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                    {config.androidGet.devices.map(({ key, glyph }) => (
+                      <li key={key} className="flex flex-col items-center gap-2 text-center">
+                        <Glyph d={ICON[glyph]} className="h-6 w-6" />
+                        <span className={PLUS_TITLE_SM}>{t(`get.devices.${key}.title`)}</span>
+                        <span className={PLUS_META}>{t(`get.devices.${key}.body`)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="overflow-hidden rounded-[28px] bg-(--c-card)">
+                  <div className="hidden border-b border-(--c-inset) px-6 py-3 text-[12px] font-bold uppercase tracking-[0.06em] text-(--c-tert) md:grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)_minmax(0,1fr)_minmax(13rem,1fr)] md:gap-6">
+                    <span>{t("get.headers.channel")}</span>
+                    <span>{t("get.headers.bestFor")}</span>
+                    <span>{t("get.headers.requires")}</span>
+                    <span className="text-end">{t("get.headers.action")}</span>
+                  </div>
+                  <ul>
+                    {config.androidGet.rows.map((row, i) => {
+                      const rowKey = `get.rows.${row.key}`;
+                      return (
+                        <li
+                          key={row.key}
+                          className={`grid grid-cols-1 gap-3 px-5 py-5 sm:px-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.4fr)_minmax(0,1fr)_minmax(13rem,1fr)] md:items-center md:gap-6 ${
+                            i > 0 ? "border-t border-(--c-inset)" : ""
+                          }`}
+                        >
+                          <div className="flex gap-3">
+                            {row.key === "huawei" ? (
+                              <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal}`}>
+                                <HuaweiMark className="h-5 w-5" />
+                              </span>
+                            ) : row.key === "play" ? (
+                              <span className={`${PLUS_ICON} ${PLUS_ICON_TONE.teal}`}>
+                                <PlatformLogo icon="googlePlay" className="h-5 w-5" />
+                              </span>
+                            ) : (
+                              <Glyph d={ICON[row.glyph]} className="h-5 w-5" />
+                            )}
+                            <div>
+                              <p className={PLUS_TITLE_SM}>{t(`${rowKey}.title`)}</p>
+                              <p className={`mt-1 md:hidden ${PLUS_META}`}>{t(`${rowKey}.bestFor`)}</p>
+                            </div>
+                          </div>
+                          <p className={`hidden md:block ${PLUS_BODY}`}>{t(`${rowKey}.bestFor`)}</p>
+                          <p className={PLUS_META}>{t(`${rowKey}.requires`)}</p>
+                          <div className="flex flex-wrap items-center gap-2 md:justify-end">
+                            <AndroidGetCta row={row} config={config} t={t} />
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <p className={`mx-auto mt-5 max-w-3xl text-center ${PLUS_META}`}>{t("get.footnote")}</p>
               </div>
             </PlusContainer>
           )}
@@ -599,7 +734,11 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
               ) : (
                 <GlyphTray index={3} className="aspect-[3/2] lg:aspect-auto lg:min-h-[420px]">
                   <span className="text-(--c-text)">
-                    <Mark mark={config.primary.mark} className="h-20 w-20 md:h-24 md:w-24" />
+                    {config.slug === "vpn-for-huawei" ? (
+                      <HuaweiMark className="h-20 w-20 md:h-24 md:w-24" />
+                    ) : (
+                      <Mark mark={config.primary.mark} className="h-20 w-20 md:h-24 md:w-24" />
+                    )}
                   </span>
                 </GlyphTray>
               )}

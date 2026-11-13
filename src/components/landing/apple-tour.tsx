@@ -64,6 +64,85 @@ function rr(r: Rect) {
   return { x: r.x, y: r.y, width: r.w, height: r.h, rx: r.r };
 }
 
+type DeviceFrameProps = {
+  image: AppleImage;
+  alt: string;
+  sizes: string;
+  className?: string;
+  priority?: boolean;
+  /** Off in the tour rail, where neighbouring shadows muddy the gaps. */
+  shadow?: boolean;
+};
+
+function frameClass(shadow: boolean, className: string): string {
+  return `relative ${shadow ? "drop-shadow-[0_22px_28px_rgba(0,0,0,0.35)]" : ""} ${className}`;
+}
+
+/** Screen hole radius as CSS `% / %` so the capture matches the bezel curve. */
+function holeRadius(hole: Rect): string {
+  const r = (hole.r ?? 0) + 1;
+  return `${pct(r, hole.w + 2)} / ${pct(r, hole.h + 2)}`;
+}
+
+/**
+ * A modern Android phone (flat sides, hole-punch camera) around a Play Store capture.
+ * Geometry mirrors the iPhone frame's outer size so chapter trays stay aligned across pages.
+ */
+const ANDROID_PHONE = {
+  W: 410,
+  H: 850,
+  outer: { x: 1.4, y: 0.8, w: 407.4, h: 848.4, r: 46 },
+  body: { x: 5.8, y: 5.5, w: 396.8, h: 838.7, r: 42 },
+  hole: { x: 14, y: 14, w: 382, h: 822, r: 36 },
+  punch: { cx: 205, cy: 28, r: 7 },
+} as const;
+
+export function AndroidFrame({
+  image,
+  alt,
+  sizes,
+  className = "",
+  priority = false,
+  shadow = true,
+}: DeviceFrameProps) {
+  const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
+  const { W, H, outer: o, body: b, hole: h, punch: p } = ANDROID_PHONE;
+  const band = `aband${uid}`;
+  const cut = `acut${uid}`;
+  return (
+    <div className={frameClass(shadow, className)} style={{ aspectRatio: `${W} / ${H}` }}>
+      <div className="absolute overflow-hidden bg-black" style={holeStyle(h, W, H, holeRadius(h))}>
+        <Image src={image.src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
+      </div>
+      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id={band} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#3A3B3E" />
+            <stop offset=".5" stopColor="#2A2B2E" />
+            <stop offset="1" stopColor="#45464A" />
+          </linearGradient>
+          <mask id={cut} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
+            <rect width={W} height={H} fill="#fff" />
+            <rect {...rr(h)} fill="#000" />
+          </mask>
+        </defs>
+        <g mask={`url(#${cut})`}>
+          <rect {...rr(o)} fill={`url(#${band})`} />
+          <rect
+            {...rr({ x: o.x + 0.8, y: o.y + 0.8, w: o.w - 1.6, h: o.h - 1.6, r: o.r - 0.8 })}
+            fill="none"
+            stroke="#1A1B1E"
+            strokeWidth="1.2"
+          />
+          <rect {...rr(b)} fill="#050505" />
+        </g>
+        <circle cx={p.cx} cy={p.cy} r={p.r} fill="#0A0A0A" />
+        <circle cx={p.cx} cy={p.cy} r={p.r - 2.2} fill="#151618" />
+      </svg>
+    </div>
+  );
+}
+
 /** An iPhone 17 Pro drawn as vector around a raw capture: silver band, black bezel, Dynamic Island. */
 export function PhoneFrame({
   image,
@@ -72,50 +151,41 @@ export function PhoneFrame({
   className = "",
   priority = false,
   shadow = true,
-}: {
-  image: AppleImage;
-  alt: string;
-  sizes: string;
-  className?: string;
-  priority?: boolean;
-  /** Off in the tour rail, where neighbouring shadows muddy the gaps. */
-  shadow?: boolean;
-}) {
+}: DeviceFrameProps) {
   const uid = useId().replace(/[^a-zA-Z0-9]/g, "");
   const { W, H, outer: o, body: b, hole: h, island: i, ticks } = IPHONE;
-  const r = h.r + 1;
+  const band = `band${uid}`;
+  const cut = `cut${uid}`;
+  const shape = `shape${uid}`;
   return (
-    <div
-      className={`relative ${shadow ? "drop-shadow-[0_22px_28px_rgba(0,0,0,0.35)]" : ""} ${className}`}
-      style={{ aspectRatio: `${W} / ${H}` }}
-    >
-      <div className="absolute overflow-hidden bg-black" style={holeStyle(h, W, H, `${pct(r, h.w + 2)} / ${pct(r, h.h + 2)}`)}>
+    <div className={frameClass(shadow, className)} style={{ aspectRatio: `${W} / ${H}` }}>
+      <div className="absolute overflow-hidden bg-black" style={holeStyle(h, W, H, holeRadius(h))}>
         <Image src={image.src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       </div>
       <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id={`band${uid}`} x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id={band} x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stopColor="#D4D5D7" />
             <stop offset=".5" stopColor="#C2C3C6" />
             <stop offset="1" stopColor="#D8D9DB" />
           </linearGradient>
-          <mask id={`cut${uid}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
+          <mask id={cut} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
             <rect width={W} height={H} fill="#fff" />
             <rect {...rr(h)} fill="#000" />
           </mask>
-          <clipPath id={`shape${uid}`}>
+          <clipPath id={shape}>
             <rect {...rr(o)} />
           </clipPath>
         </defs>
-        <g mask={`url(#cut${uid})`}>
-          <rect {...rr(o)} fill={`url(#band${uid})`} />
+        <g mask={`url(#${cut})`}>
+          <rect {...rr(o)} fill={`url(#${band})`} />
           <rect
             {...rr({ x: o.x + 0.8, y: o.y + 0.8, w: o.w - 1.6, h: o.h - 1.6, r: o.r - 0.8 })}
             fill="none"
             stroke="#8E9094"
             strokeWidth="1.4"
           />
-          <g clipPath={`url(#shape${uid})`}>
+          <g clipPath={`url(#${shape})`}>
             {ticks.map(([x, y, w, hh]) => (
               <rect key={`${x}-${y}`} x={x} y={y} width={w} height={hh} fill="#3A3B3E" />
             ))}

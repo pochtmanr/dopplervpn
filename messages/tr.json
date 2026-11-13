@@ -2566,7 +2566,7 @@
     },
     "app": {
       "hero": {
-        "eyebrow": "Telefonlar · Tabletler · Katlanabilirler",
+        "eyebrow": "Telefon · Tablet · TV · Chromebook",
         "title": "Android için Doppler VPN",
         "subtitle": "Tek dokunuşla telefonunuz gizli kalır. Doppler bağlantınızı sıradan bir web sitesi ziyareti gibi gösterir, bu yüzden diğer VPN'leri engelleyen ağlarda da çalışmaya devam eder.",
         "cta": "Google Play'den edinin",
@@ -2582,7 +2582,8 @@
             "p1": "Her sunucuda VLESS-Reality, ayarlanacak bir şey yok",
             "p2": "Bir ağ sunucuyu engellerse, bağlantının taklit ettiği web sitesini değiştirin",
             "p3": "Tek dokunuşla hızlı bir sunucuya bağlanırsınız"
-          }
+          },
+          "alt": "Android'de sunucu arama, ülke ve şehir seçimi"
         },
         "route": {
           "kicker": "Akıllı Yönlendirme",
@@ -2592,7 +2593,8 @@
             "p1": "Ülkenizi bir kez seçin",
             "p2": "Yerel web siteleri ile kamu ve bankacılık için hazır kurallar",
             "p3": "VPN'i atlaması gereken kendi alan adlarınızı ekleyin"
-          }
+          },
+          "alt": "Android'de haritada rotayı gösteren bağlantı ekranı"
         },
         "killSwitch": {
           "kicker": "Kill switch",
@@ -2602,7 +2604,8 @@
             "p1": "VPN beklenmedik şekilde düşerse interneti engeller",
             "p2": "Always On, bağlantı koptuğunda kendiliğinden yeniden bağlanır",
             "p3": "Android'in kendi Always-on VPN ayarına tek dokunuş, yeniden başlatmadan sonra koruma geri gelir"
-          }
+          },
+          "alt": "Android'de hangi ülkenin sitelerinin tüneli atlayacağını seçen Smart Route ekranı"
         },
         "account": {
           "kicker": "Tek hesap",
@@ -2612,29 +2615,31 @@
             "p1": "Oturum açmış her cihazı görün, artık kullanmadıklarınızı kaldırın",
             "p2": "Yerleşik hız testi tünelin kendisini ölçer",
             "p3": "Planınız tek bir telefona değil, kimliğinize aittir"
-          }
+          },
+          "alt": "Android'de oturum açılmış her cihazı gösteren cihazlar ekranı"
         }
       },
       "ecosystem": {
-        "kicker": "Her yerde Android",
-        "title": "Bugün telefon, sırada büyük ekranlar",
-        "body": "Doppler, uygun fiyatlı telefonlardan amiral gemilerine kadar Android 8.0 ve sonrasında çalışır. Tabletler, Chromebook'lar ve TV'ler için düzenler yolda.",
+        "kicker": "Android her yerde",
+        "title": "Telefon, tablet, TV ve Chromebook",
+        "body": "Telefonlar, tabletler, katlanabilirler, Chromebooks ve Android TV için tek bir Google Play listesi. Google hizmeti olmayan Huawei ve Honor APK kullanır.",
         "phone": {
           "title": "Telefonlar",
-          "body": "Uygulamanın tamamı, Android 8.0 veya sonrasında"
+          "body": "Tam uygulama, Android 8.0 veya üzeri"
         },
         "tablet": {
           "title": "Tabletler ve katlanabilirler",
-          "body": "Bugün çalışıyor; iki bölmeli düzen geliyor"
+          "body": "Bugün çalışıyor; iki bölmeli düzen yakında"
         },
         "chromebook": {
-          "title": "Chromebook'lar",
-          "body": "Çok yakında"
+          "title": "Chromebooks",
+          "body": "ChromeOS için Google Play'de"
         },
         "tv": {
           "title": "Android TV",
-          "body": "Çok yakında"
-        }
+          "body": "Android TV ve Google TV için Google Play'de"
+        },
+        "photoAlt": "Android tablette Doppler VPN, bağlı ve korumalı"
       },
       "privacy": {
         "trial": {
@@ -2684,6 +2689,81 @@
       "cta": {
         "title": "Android için Doppler'ı edinin",
         "subtitle": "Ücretsiz indirin, Google Play'de {days} gün ücretsiz deneyin. E-posta yok, telefon numarası yok."
+      },
+      "get": {
+        "kicker": "Yükle",
+        "title": "Her Android cihaz için indirme seçenekleri",
+        "subtitle": "Telefon, tablet, Chromebook ve Android TV için tek bir Google Play listesi. Play olmayan telefonlar için aynı sideload APK; Huawei ve Honor dahil.",
+        "coming": "Yakında",
+        "footnote": "En az Android 8.0 (API 26). Sideload APK yaklaşık 57 MB (arm64-v8a). Play, cihazınız için daha küçük bir boyut gösterebilir. Eski 32 bit telefonlar Google Play kullanmalıdır. HarmonyOS NEXT APK çalıştıramaz.",
+        "headers": {
+          "channel": "Kanal",
+          "bestFor": "En uygun",
+          "requires": "Gereksinimler",
+          "action": "Al"
+        },
+        "specs": {
+          "android": {
+            "label": "Android",
+            "value": "8.0 veya üzeri"
+          },
+          "size": {
+            "label": "Uygulama boyutu",
+            "value": "Yaklaşık 57 MB"
+          },
+          "storage": {
+            "label": "Boş depolama",
+            "value": "Yaklaşık 100 MB"
+          },
+          "abi": {
+            "label": "APK mimarisi",
+            "value": "arm64-v8a"
+          },
+          "trial": {
+            "label": "Google Play denemesi",
+            "value": "{days} gün ücretsiz"
+          }
+        },
+        "devices": {
+          "kicker": "Google Play'de aynı uygulama",
+          "phone": {
+            "title": "Telefon",
+            "body": "Android 8.0+"
+          },
+          "tablet": {
+            "title": "Tablet ve katlanabilir",
+            "body": "Aynı Play listesi"
+          },
+          "chromebook": {
+            "title": "Chromebook",
+            "body": "ChromeOS + Play"
+          },
+          "tv": {
+            "title": "Android TV",
+            "body": "Google TV de"
+          }
+        },
+        "rows": {
+          "play": {
+            "title": "Google Play",
+            "bestFor": "Telefon, tablet, Chromebook ve Android TV",
+            "requires": "Android 8.0+, Google Play",
+            "cta": "Google Play'den al"
+          },
+          "apk": {
+            "title": "Sideload APK",
+            "bestFor": "Google Play olmayan telefonlar veya doğrudan kurulum",
+            "requires": "Android 8.0+, arm64, ~57 MB",
+            "cta": "APK'yı indir"
+          },
+          "huawei": {
+            "title": "Huawei & Honor",
+            "bestFor": "Google hizmeti olmayan telefonlar (AppGallery yakında)",
+            "requires": "Android 8.0+, APK kurulumuna izin",
+            "cta": "Huawei kurulumu",
+            "ctaApk": "APK indir"
+          }
+        }
       }
     }
   },
@@ -2704,13 +2784,13 @@
         "cta": "AppGallery'den edinin",
         "ctaSecondary": "APK'yı indirin",
         "note": "Ücretsiz indirme · Web sitesinde kart veya kriptoyla ödeme · E-posta veya telefon numarası gerekmez",
-        "appGalleryNote": "Yakında AppGallery'de. O zamana kadar APK'yı bu sayfadan yükleyin."
+        "appGalleryNote": "AppGallery'ye geliyor. O zamana kadar APK'yı bu sayfadan yükleyin. Tüm Android indirme seçenekleri Android sayfasında."
       },
       "chapters": {
         "noGoogle": {
           "kicker": "Google hizmetleri olmadan",
           "title": "Google Play olmayan telefonlar için",
-          "body": "Doppler APK'nın Google hizmetlerine ihtiyacı yoktur. Doğrudan bu web sitesinden yüklenir ve yeni sürüm çıktığında size haber verir; güncelleme aramanız gerekmez.",
+          "body": "Doppler APK'sı Google hizmetlerine ihtiyaç duymaz. Doğrudan bu web sitesinden yüklenir ve yeni sürüm çıktığında size bildirir, böylece güncelleme aramak zorunda kalmazsınız. Tüm Android kurulum seçeneklerini Android indirme sayfasında görün.",
           "points": {
             "p1": "Buradan, doğrudan Doppler'dan indirilir",
             "p2": "Google hesabı ve Play hizmetleri gerekmez",
@@ -2756,10 +2836,10 @@
       },
       "setup": {
         "title": "Üç adımda kurulum",
-        "subtitle": "Yaklaşık bir dakika ve Android yalnızca bir kez sorar.",
+        "subtitle": "Yaklaşık bir dakika ve Android yalnızca bir kez sorar. Tam Android kurulum tablosu Play, TV ve Chromebook durumunu da listeler.",
         "s1": {
           "title": "APK'yı indirin",
-          "body": "Korumak istediğiniz telefonda bu sayfadaki İndir düğmesine dokunun."
+          "body": "Korumak istediğiniz telefonda bu sayfadaki İndir'e dokunun. Veya Android sayfasındaki kurulum tablosunu açıp Huawei satırını kullanın."
         },
         "s2": {
           "title": "Yüklemeye izin verin",
@@ -5229,7 +5309,7 @@
       },
       "android": {
         "title": "Android için VPN",
-        "desc": "Doppler'ı Google Play'den edinin"
+        "desc": "Play, APK, Huawei, TV ve Chromebook seçenekleri"
       },
       "windows": {
         "title": "Windows için VPN",

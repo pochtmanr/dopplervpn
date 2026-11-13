@@ -2565,7 +2565,7 @@
     },
     "app": {
       "hero": {
-        "eyebrow": "Telefoner · Surfplattor · Vikbara",
+        "eyebrow": "Telefon · Surfplatta · TV · Chromebook",
         "title": "Doppler VPN för Android",
         "subtitle": "Ett tryck och din telefon är privat. Doppler får anslutningen att se ut som ett vanligt webbplatsbesök, så den fungerar även i nätverk som blockerar andra VPN:er.",
         "cta": "Hämta på Google Play",
@@ -2581,7 +2581,8 @@
             "p1": "VLESS-Reality på varje server, inget att ställa in",
             "p2": "Blockerar ett nätverk en server kan du byta webbplatsen som anslutningen efterliknar",
             "p3": "Ett tryck ansluter dig till en snabb server"
-          }
+          },
+          "alt": "Serversökning på Android, val av land och stad"
         },
         "route": {
           "kicker": "Smart Route",
@@ -2591,7 +2592,8 @@
             "p1": "Välj ditt hemland en gång",
             "p2": "Färdiga regler för lokala webbplatser, och för myndigheter och bank",
             "p3": "Lägg till egna domäner som ska gå förbi VPN:en"
-          }
+          },
+          "alt": "Anslutningsskärm på Android som visar rutten på en karta"
         },
         "killSwitch": {
           "kicker": "Kill switch",
@@ -2601,7 +2603,8 @@
             "p1": "Blockerar internet om VPN:en bryts oväntat",
             "p2": "Alltid på återansluter av sig själv när anslutningen bryts",
             "p3": "Ett tryck till Androids egen Alltid på-VPN, så skyddet kommer tillbaka efter en omstart"
-          }
+          },
+          "alt": "Smart Route-skärm på Android där du väljer vilka länders sajter som går förbi tunneln"
         },
         "account": {
           "kicker": "Ett konto",
@@ -2611,13 +2614,14 @@
             "p1": "Se alla inloggade enheter och ta bort dem du inte längre använder",
             "p2": "Ett inbyggt hastighetstest mäter själva tunneln",
             "p3": "Din plan hör till ditt ID, inte till en telefon"
-          }
+          },
+          "alt": "Enhetsskärm på Android som visar varje inloggad enhet"
         }
       },
       "ecosystem": {
         "kicker": "Android överallt",
-        "title": "Din telefon i dag, större skärmar härnäst",
-        "body": "Doppler körs på Android 8.0 och senare, från budgetmobiler till toppmodeller. Layouter för surfplattor, Chromebooks och tv är på väg.",
+        "title": "Telefon, surfplatta, TV och Chromebook",
+        "body": "En Google Play-listning för telefoner, surfplattor, vikbara, Chromebooks och Android TV. Huawei och Honor utan Google-tjänster använder APK:n.",
         "phone": {
           "title": "Telefoner",
           "body": "Hela appen, på Android 8.0 eller senare"
@@ -2628,12 +2632,13 @@
         },
         "chromebook": {
           "title": "Chromebooks",
-          "body": "Kommer snart"
+          "body": "På Google Play för ChromeOS"
         },
         "tv": {
           "title": "Android TV",
-          "body": "Kommer snart"
-        }
+          "body": "På Google Play för Android TV och Google TV"
+        },
+        "photoAlt": "Doppler VPN på en Android-surfplatta, ansluten och skyddad"
       },
       "privacy": {
         "trial": {
@@ -2683,6 +2688,81 @@
       "cta": {
         "title": "Hämta Doppler för Android",
         "subtitle": "Gratis att ladda ner, med {days} dagars gratis provperiod på Google Play. Ingen e-post, inget telefonnummer."
+      },
+      "get": {
+        "kicker": "Installera",
+        "title": "Nedladdningsalternativ för varje Android-enhet",
+        "subtitle": "En Google Play-listning för telefon, surfplatta, Chromebook och Android TV. Samma sideload-APK för telefoner utan Play, inklusive Huawei och Honor.",
+        "coming": "Kommer snart",
+        "footnote": "Minst Android 8.0 (API 26). Sideload-APK är cirka 57 MB (arm64-v8a). Play kan visa en mindre storlek för din enhet. Äldre 32-bitars telefoner bör använda Google Play. HarmonyOS NEXT kan inte köra APK:er.",
+        "headers": {
+          "channel": "Kanal",
+          "bestFor": "Bäst för",
+          "requires": "Kräver",
+          "action": "Hämta"
+        },
+        "specs": {
+          "android": {
+            "label": "Android",
+            "value": "8.0 eller senare"
+          },
+          "size": {
+            "label": "Appstorlek",
+            "value": "Cirka 57 MB"
+          },
+          "storage": {
+            "label": "Ledigt lagringsutrymme",
+            "value": "Cirka 100 MB"
+          },
+          "abi": {
+            "label": "APK-arkitektur",
+            "value": "arm64-v8a"
+          },
+          "trial": {
+            "label": "Google Play-provperiod",
+            "value": "{days} dagar gratis"
+          }
+        },
+        "devices": {
+          "kicker": "Samma app på Google Play",
+          "phone": {
+            "title": "Telefon",
+            "body": "Android 8.0+"
+          },
+          "tablet": {
+            "title": "Surfplatta och vikbar",
+            "body": "Samma Play-listning"
+          },
+          "chromebook": {
+            "title": "Chromebook",
+            "body": "ChromeOS + Play"
+          },
+          "tv": {
+            "title": "Android TV",
+            "body": "Även Google TV"
+          }
+        },
+        "rows": {
+          "play": {
+            "title": "Google Play",
+            "bestFor": "Telefon, surfplatta, Chromebook och Android TV",
+            "requires": "Android 8.0+, Google Play",
+            "cta": "Hämta på Google Play"
+          },
+          "apk": {
+            "title": "Sideload-APK",
+            "bestFor": "Telefoner utan Google Play, eller direktinstallation",
+            "requires": "Android 8.0+, arm64, ~57 MB",
+            "cta": "Ladda ner APK:n"
+          },
+          "huawei": {
+            "title": "Huawei & Honor",
+            "bestFor": "Telefoner utan Google-tjänster (AppGallery kommer)",
+            "requires": "Android 8.0+, APK-installation tillåten",
+            "cta": "Huawei-installation",
+            "ctaApk": "Ladda ner APK"
+          }
+        }
       }
     }
   },
@@ -2703,13 +2783,13 @@
         "cta": "Hämta i AppGallery",
         "ctaSecondary": "Ladda ner APK:n",
         "note": "Gratis nedladdning · Betala på webbplatsen med kort eller krypto · Ingen e-post eller telefonnummer",
-        "appGalleryNote": "Kommer till AppGallery. Fram till dess installerar du APK:n från den här sidan."
+        "appGalleryNote": "Kommer till AppGallery. Fram till dess installerar du APK:n från den här sidan. Alla Android-nedladdningsalternativ finns på Android-sidan."
       },
       "chapters": {
         "noGoogle": {
           "kicker": "Utan Google-tjänster",
           "title": "Byggd för telefoner utan Google Play",
-          "body": "Dopplers APK behöver inga Google-tjänster. Den installeras direkt från den här webbplatsen och säger till när en ny version finns, så du behöver aldrig leta efter uppdateringar.",
+          "body": "Dopplers APK behöver inga Google-tjänster. Den installeras direkt från den här webbplatsen och meddelar dig när en ny version finns, så du aldrig behöver leta efter uppdateringar. Se alla Android-installationsalternativ på Android-nedladdningssidan.",
           "points": {
             "p1": "Nedladdad här, direkt från Doppler",
             "p2": "Inget Google-konto och inga Play-tjänster behövs",
@@ -2755,10 +2835,10 @@
       },
       "setup": {
         "title": "Installera i tre steg",
-        "subtitle": "Ungefär en minut, och Android frågar bara en gång.",
+        "subtitle": "Ungefär en minut, och Android frågar bara en gång. Den fullständiga Android-installationstabellen listar också status för Play, TV och Chromebook.",
         "s1": {
           "title": "Ladda ner APK:n",
-          "body": "Tryck på Ladda ner på den här sidan, på telefonen du vill skydda."
+          "body": "Tryck på Ladda ner på den här sidan, på telefonen du vill skydda. Eller öppna installationstabellen på Android-sidan och använd Huawei-raden."
         },
         "s2": {
           "title": "Tillåt installationen",
@@ -5135,7 +5215,7 @@
       },
       "android": {
         "title": "VPN för Android",
-        "desc": "Hämta Doppler på Google Play"
+        "desc": "Play-, APK-, Huawei-, TV- och Chromebook-alternativ"
       },
       "windows": {
         "title": "VPN för Windows",

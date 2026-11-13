@@ -5,14 +5,16 @@ import type { AppImage, AppPageConfig } from "./app-page";
  * /vpn-for-huawei (Huawei and Honor phones without Google services: AppGallery once listed,
  * the APK until then). Rendered by components/landing/platform-app-page.tsx.
  *
- * Images: there are no caption-free Android captures or studio renders yet, so both heroes use
- * the one existing composite of real Android screens (android-hero.avif) and every chapter is a
- * glyph tray. TODO(renders): export Android phone, tablet and Huawei renders and give the
- * chapters real screens, the way public/images/apple/* serves the Apple pages.
+ * Images: hero uses a device mockup from public/archive/. Feature chapters use caption-free
+ * Play Store phone captures in public/images/android/ (phone-<name>-1000.avif) inside an
+ * Android hole-punch frame — varied screens, not the home screen on every chapter. Tablet
+ * art for the devices band: tablet-<name>-1920.avif. Words live in messages under
+ * `<namespace>.app.*`, never inside the images.
  *
- * Claims follow doppler-product/PARITY.md's Android column. Chromebooks and Android TV are
- * phrased as coming, and so is a big-screen layout: the app runs on tablets and foldables, but
- * has no two-pane layout yet.
+ * Claims follow doppler-product/PARITY.md's Android column. Phones, tablets, Chromebooks
+ * (ChromeOS) and Android TV / Google TV install from the same Google Play listing; the
+ * sideload APK covers phones without Play (including Huawei / Honor). The app runs on
+ * tablets and foldables today, but has no two-pane layout yet.
  */
 
 export const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=org.dopplervpn.android";
@@ -30,7 +32,42 @@ export const ANDROID_APK_URL = "/api/android/download/latest";
  */
 export const HUAWEI_APPGALLERY_URL: string | null = null;
 
-const ANDROID_HERO: AppImage = { src: "/images/android-hero.avif", width: 1354, height: 909 };
+const A = "/images/android";
+const phone = (name: string): AppImage => ({ src: `${A}/phone-${name}-1000.avif`, width: 1000, height: 2222 });
+/** Device mockups from public/archive/ (chrome already in-frame). */
+const archive = (name: string, width: number, height: number, bg: string): AppImage => ({
+  src: `/archive/${name}.avif`,
+  width,
+  height,
+  bg,
+});
+
+const ANDROID_HERO: AppImage = archive("galaxy", 1500, 1000, "#2A2A2A");
+const MOCK_PHONE = archive("galaxy", 1500, 1000, "#2A2A2A");
+const MOCK_CHROMEBOOK = archive("glalaxy2", 1500, 1000, "#2F2F2F");
+const MOCK_TV = archive("gyexu8daj3uegntwy1nr", 1800, 1350, "#B8B8B8");
+
+const ANDROID_DEVICES = [
+  { key: "phone", glyph: "phone" as const },
+  { key: "tablet", glyph: "tablet" as const },
+  { key: "chromebook", glyph: "laptop" as const },
+  { key: "tv", glyph: "tv" as const },
+];
+
+const PLAY_BUTTON = {
+  href: GOOGLE_PLAY_URL,
+  mark: "googlePlay",
+  variant: "android-play",
+  labelKey: "cta",
+} as const;
+
+/** Sideload APK button — hero secondary on Play, primary on Huawei until AppGallery lists. */
+export const ANDROID_APK_BUTTON = {
+  href: ANDROID_APK_URL,
+  mark: "file",
+  variant: "android-apk",
+  labelKey: "ctaSecondary",
+} as const;
 
 export const androidApp: AppPageConfig = {
   copyKey: "app",
@@ -40,29 +77,43 @@ export const androidApp: AppPageConfig = {
   operatingSystem: "Android",
   trackLocation: "vpn-for-android",
   trackPlatform: "android",
-  primary: { href: GOOGLE_PLAY_URL, mark: "googlePlay", variant: "android-play", labelKey: "cta" },
-  secondary: { href: ANDROID_APK_URL, mark: "file", variant: "android-apk", labelKey: "ctaSecondary" },
+  primary: PLAY_BUTTON,
+  secondary: ANDROID_APK_BUTTON,
   rating: "googlePlay",
   ogImageAlt: "Doppler VPN for Android",
-  hero: { ...ANDROID_HERO, alt: "Doppler VPN on Android: the Home, Smart Route and Devices screens" },
+  hero: { ...ANDROID_HERO, alt: "Doppler VPN on a Galaxy phone, connected and protected" },
   ecosystem: {
-    devices: [
-      { key: "phone", glyph: "phone" },
-      { key: "tablet", glyph: "tablet" },
-      { key: "chromebook", glyph: "laptop" },
-      { key: "tv", glyph: "tv" },
-    ],
+    image: MOCK_CHROMEBOOK,
+    altKey: "photoAlt",
+    devices: ANDROID_DEVICES,
     guides: [],
   },
   tourDevice: "phone",
   tour: [],
   compact: true,
+  // Play-style captures in an Android frame — search / path / Smart Route / devices, not Home×4.
   chapters: [
-    { key: "connect", frame: "glyph", glyph: "shield" },
-    { key: "route", frame: "glyph", glyph: "route" },
-    { key: "killSwitch", frame: "glyph", glyph: "killSwitch" },
-    { key: "account", frame: "glyph", glyph: "id" },
+    { key: "connect", frame: "android", image: phone("search") },
+    { key: "route", frame: "android", image: phone("path") },
+    { key: "killSwitch", frame: "android", image: phone("split") },
+    { key: "account", frame: "android", image: phone("devices") },
   ],
+  androidGet: {
+    specs: [
+      { key: "android" },
+      { key: "size" },
+      { key: "storage" },
+      { key: "abi" },
+      { key: "trial" },
+    ],
+    devices: ANDROID_DEVICES,
+    rows: [
+      { key: "play", status: "available", glyph: "phone", cta: "primary" },
+      { key: "apk", status: "available", glyph: "download", cta: "apk" },
+      { key: "huawei", status: "available", glyph: "download", cta: "huawei" },
+    ],
+  },
+  ctaImage: MOCK_TV,
   privacy: ["noEmail", "vless", "noLogs", "page:trial"],
   guides: [],
   faqKeys: ["q1", "q2", "q3", "q4", "q5"],
@@ -82,30 +133,38 @@ export const huaweiApp: AppPageConfig = {
   operatingSystem: "Android",
   trackLocation: "vpn-for-huawei",
   trackPlatform: "huawei",
-  primary: HUAWEI_APPGALLERY_URL
-    ? { href: HUAWEI_APPGALLERY_URL, mark: "appGallery", variant: "huawei-appgallery", labelKey: "cta" }
-    : { href: ANDROID_APK_URL, mark: "file", variant: "android-apk", labelKey: "ctaSecondary" },
+  // Listing live → AppGallery primary + APK secondary; otherwise APK alone + hero note.
   ...(HUAWEI_APPGALLERY_URL
-    ? { secondary: { href: ANDROID_APK_URL, mark: "file" as const, variant: "android-apk" as const, labelKey: "ctaSecondary" as const } }
-    : {}),
-  // Said only while there is no listing; the FAQ's AppGallery answer goes with it.
-  ...(HUAWEI_APPGALLERY_URL ? {} : { heroNote2: "hero.appGalleryNote" }),
+    ? {
+        primary: {
+          href: HUAWEI_APPGALLERY_URL,
+          mark: "appGallery" as const,
+          variant: "huawei-appgallery" as const,
+          labelKey: "cta" as const,
+        },
+        secondary: ANDROID_APK_BUTTON,
+      }
+    : {
+        primary: ANDROID_APK_BUTTON,
+        heroNote2: "hero.appGalleryNote",
+      }),
   ogImageAlt: "Doppler VPN for Huawei and Honor",
-  hero: { ...ANDROID_HERO, alt: "Doppler VPN's Android app: the Home, Smart Route and Devices screens" },
+  hero: { ...ANDROID_HERO, alt: "Doppler VPN on a Galaxy phone, connected and protected" },
   tourDevice: "phone",
   tour: [],
   compact: true,
   chapters: [
     { key: "noGoogle", frame: "glyph", glyph: "download" },
-    { key: "connect", frame: "glyph", glyph: "shield" },
+    { key: "connect", frame: "android", image: phone("search") },
     { key: "pay", frame: "glyph", glyph: "card" },
-    { key: "phones", frame: "glyph", glyph: "phone" },
+    { key: "phones", frame: "android", image: phone("devices") },
   ],
+  ctaImage: MOCK_PHONE,
   privacy: ["noEmail", "vless", "noLogs", "page:pay"],
   guides: [],
   faqKeys: HUAWEI_APPGALLERY_URL ? ["q1", "q3", "q4", "q5"] : ["q1", "q2", "q3", "q4", "q5"],
   related: [
-    { href: "/vpn-for-android", key: "android" },
+    { href: "/vpn-for-android#get", key: "android" },
     { href: "/vpn-for-ios", key: "ios" },
     { href: "/vpn-for-windows", key: "windows" },
   ],

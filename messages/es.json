@@ -2565,7 +2565,7 @@
     },
     "app": {
       "hero": {
-        "eyebrow": "Móviles · Tablets · Plegables",
+        "eyebrow": "Teléfono · Tablet · TV · Chromebook",
         "title": "Doppler VPN para Android",
         "subtitle": "Un toque y tu móvil es privado. Doppler hace que su conexión parezca una visita normal a un sitio web, así que sigue funcionando en redes que bloquean otras VPN.",
         "cta": "Consíguelo en Google Play",
@@ -2581,7 +2581,8 @@
             "p1": "VLESS-Reality en todos los servidores, nada que configurar",
             "p2": "Si una red bloquea un servidor, cambia el sitio web que imita su conexión",
             "p3": "Un toque te conecta a un servidor rápido"
-          }
+          },
+          "alt": "Búsqueda de servidores en Android, eligiendo país y ciudad"
         },
         "route": {
           "kicker": "Ruta inteligente",
@@ -2591,7 +2592,8 @@
             "p1": "Elige tu país una sola vez",
             "p2": "Reglas listas para sitios locales y para administración y bancos",
             "p3": "Añade tus propios dominios que deben saltarse la VPN"
-          }
+          },
+          "alt": "Pantalla de conexión en Android que muestra la ruta en un mapa"
         },
         "killSwitch": {
           "kicker": "Kill switch",
@@ -2601,7 +2603,8 @@
             "p1": "Bloquea internet si la VPN se cae de forma inesperada",
             "p2": "Always On se reconecta solo cuando se pierde la conexión",
             "p3": "Un toque hasta la VPN siempre activa de Android, para que la protección vuelva tras reiniciar"
-          }
+          },
+          "alt": "Pantalla Smart Route en Android para elegir qué sitios de un país omiten el túnel"
         },
         "account": {
           "kicker": "Una cuenta",
@@ -2611,29 +2614,31 @@
             "p1": "Ve todos los dispositivos conectados y quita los que ya no usas",
             "p2": "Un test de velocidad integrado mide el propio túnel",
             "p3": "Tu plan pertenece a tu ID, no a un solo móvil"
-          }
+          },
+          "alt": "Pantalla Dispositivos en Android que muestra cada dispositivo con sesión iniciada"
         }
       },
       "ecosystem": {
         "kicker": "Android en todas partes",
-        "title": "Hoy tu móvil, después pantallas más grandes",
-        "body": "Doppler funciona en Android 8.0 y posteriores, desde móviles económicos hasta gamas altas. Ya preparamos diseños para tablets, Chromebooks y televisores.",
+        "title": "Teléfono, tablet, TV y Chromebook",
+        "body": "Una sola ficha en Google Play para teléfonos, tablets, plegables, Chromebooks y Android TV. Huawei y Honor sin servicios de Google usan el APK.",
         "phone": {
-          "title": "Móviles",
+          "title": "Teléfonos",
           "body": "La app completa, en Android 8.0 o posterior"
         },
         "tablet": {
           "title": "Tablets y plegables",
-          "body": "Ya funciona; llega un diseño de dos paneles"
+          "body": "Funciona hoy; llega un diseño de dos paneles"
         },
         "chromebook": {
           "title": "Chromebooks",
-          "body": "Próximamente"
+          "body": "En Google Play para ChromeOS"
         },
         "tv": {
           "title": "Android TV",
-          "body": "Próximamente"
-        }
+          "body": "En Google Play para Android TV y Google TV"
+        },
+        "photoAlt": "Doppler VPN en una tablet Android, conectada y protegida"
       },
       "privacy": {
         "trial": {
@@ -2683,6 +2688,81 @@
       "cta": {
         "title": "Consigue Doppler para Android",
         "subtitle": "Descarga gratis, con {days} días de prueba gratuita en Google Play. Sin email ni número de teléfono."
+      },
+      "get": {
+        "kicker": "Instalar",
+        "title": "Opciones de descarga para cada dispositivo Android",
+        "subtitle": "Una sola ficha en Google Play para teléfono, tablet, Chromebook y Android TV. El mismo APK de sideload para teléfonos sin Play, incluidos Huawei y Honor.",
+        "coming": "Próximamente",
+        "footnote": "Mínimo Android 8.0 (API 26). El APK de sideload pesa unos 57 MB (arm64-v8a). Play puede mostrar un tamaño menor para tu dispositivo. Los teléfonos antiguos de 32 bits deberían usar Google Play. HarmonyOS NEXT no puede ejecutar APKs.",
+        "headers": {
+          "channel": "Canal",
+          "bestFor": "Ideal para",
+          "requires": "Requiere",
+          "action": "Consíguelo"
+        },
+        "specs": {
+          "android": {
+            "label": "Android",
+            "value": "8.0 o posterior"
+          },
+          "size": {
+            "label": "Tamaño de la app",
+            "value": "Unos 57 MB"
+          },
+          "storage": {
+            "label": "Almacenamiento libre",
+            "value": "Unos 100 MB"
+          },
+          "abi": {
+            "label": "Arquitectura del APK",
+            "value": "arm64-v8a"
+          },
+          "trial": {
+            "label": "Prueba de Google Play",
+            "value": "{days} días gratis"
+          }
+        },
+        "devices": {
+          "kicker": "La misma app en Google Play",
+          "phone": {
+            "title": "Teléfono",
+            "body": "Android 8.0+"
+          },
+          "tablet": {
+            "title": "Tablet y plegable",
+            "body": "La misma ficha de Play"
+          },
+          "chromebook": {
+            "title": "Chromebook",
+            "body": "ChromeOS + Play"
+          },
+          "tv": {
+            "title": "Android TV",
+            "body": "También Google TV"
+          }
+        },
+        "rows": {
+          "play": {
+            "title": "Google Play",
+            "bestFor": "Teléfono, tablet, Chromebook y Android TV",
+            "requires": "Android 8.0+, Google Play",
+            "cta": "Consíguelo en Google Play"
+          },
+          "apk": {
+            "title": "Sideload APK",
+            "bestFor": "Teléfonos sin Google Play, o instalación directa",
+            "requires": "Android 8.0+, arm64, ~57 MB",
+            "cta": "Descargar el APK"
+          },
+          "huawei": {
+            "title": "Huawei y Honor",
+            "bestFor": "Teléfonos sin servicios de Google (AppGallery pronto)",
+            "requires": "Android 8.0+, instalación de APK permitida",
+            "cta": "Configuración Huawei",
+            "ctaApk": "Descargar APK"
+          }
+        }
       }
     }
   },
@@ -2703,13 +2783,13 @@
         "cta": "Consíguelo en AppGallery",
         "ctaSecondary": "Descargar el APK",
         "note": "Descarga gratis · Pago en la web con tarjeta o cripto · Sin email ni teléfono",
-        "appGalleryNote": "Pronto en AppGallery. Mientras tanto, instala el APK desde esta página."
+        "appGalleryNote": "Próximamente en AppGallery. Hasta entonces, instala el APK desde esta página. Las opciones completas de descarga de Android están en la página de Android."
       },
       "chapters": {
         "noGoogle": {
           "kicker": "Sin servicios de Google",
           "title": "Hecho para móviles sin Google Play",
-          "body": "El APK de Doppler no necesita servicios de Google. Se instala directamente desde esta web y te avisa cuando sale una versión nueva, así nunca tienes que buscar actualizaciones.",
+          "body": "El APK de Doppler no necesita servicios de Google. Se instala directamente desde este sitio web y te avisa cuando hay una versión nueva, así no tienes que buscar actualizaciones. Consulta todas las opciones de instalación de Android en la página de descargas de Android.",
           "points": {
             "p1": "Se descarga aquí, directamente de Doppler",
             "p2": "Sin cuenta de Google ni servicios de Play",
@@ -2755,10 +2835,10 @@
       },
       "setup": {
         "title": "Instalado en tres pasos",
-        "subtitle": "Un minuto más o menos, y Android solo pregunta una vez.",
+        "subtitle": "Un minuto aproximadamente, y Android solo pregunta una vez. La tabla completa de instalación de Android también muestra el estado de Play, TV y Chromebook.",
         "s1": {
           "title": "Descarga el APK",
-          "body": "Toca Descargar en esta página, desde el móvil que quieres proteger."
+          "body": "Toca Descargar en esta página, en el teléfono que quieres proteger. O abre la tabla de instalación de la página de Android y usa la fila de Huawei."
         },
         "s2": {
           "title": "Permite la instalación",
@@ -5135,7 +5215,7 @@
       },
       "android": {
         "title": "VPN para Android",
-        "desc": "Consigue Doppler en Google Play"
+        "desc": "Opciones de Play, APK, Huawei, TV y Chromebook"
       },
       "windows": {
         "title": "VPN para Windows",

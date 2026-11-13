@@ -50,12 +50,13 @@ export interface AppTourShot {
 }
 
 /**
- * One feature chapter. "phone" draws an iPhone frame around a capture, "mac" a laptop bezel,
- * "photo" fills the card with a render. "glyph" draws a line glyph over the glyph rain: for
- * platforms with no caption-free captures yet, so the page never shows a staged screen.
+ * One feature chapter. "phone" draws an iPhone frame around a capture, "android" a
+ * hole-punch Android bezel (Play Store captures), "mac" a laptop bezel, "photo" fills
+ * the card with a render. "glyph" draws a line glyph over the glyph rain: for platforms
+ * with no caption-free captures yet, so the page never shows a staged screen.
  */
 export type AppChapter =
-  | { key: string; frame: "phone" | "mac" | "photo"; image: AppImage; guide?: GuideSlug }
+  | { key: string; frame: "phone" | "android" | "mac" | "photo"; image: AppImage; guide?: GuideSlug }
   | { key: string; frame: "glyph"; glyph: AppGlyph; guide?: GuideSlug };
 
 /** The mark on a download button. "file" is a direct download (the APK), not a store. */
@@ -67,6 +68,23 @@ export interface AppButton {
   variant?: CtaVariant;
   /** Label key under `<namespace>.<copyKey>.hero`. */
   labelKey: "cta" | "ctaSecondary";
+}
+
+/**
+ * Install matrix on /vpn-for-android: real CTAs where a download exists, "Coming soon"
+ * where it does not. Huawei deep-links here rather than duplicating the table.
+ */
+export type AndroidInstallStatus = "available" | "coming";
+
+export interface AndroidInstallRow {
+  key: string;
+  status: AndroidInstallStatus;
+  glyph: AppGlyph;
+  /**
+   * Action for an available row: page primary/secondary, always-APK, or Huawei page + APK.
+   * Omitted on `coming` rows.
+   */
+  cta?: "primary" | "secondary" | "apk" | "huawei";
 }
 
 export interface AppPageConfig {
@@ -125,4 +143,14 @@ export interface AppPageConfig {
    * the primary button's store mark, so a page with one image does not repeat its hero.
    */
   ctaImage?: AppImage;
+  /**
+   * Android-only: specs + device list (same Play APK everywhere) + install channels
+   * (Play, sideload APK, Huawei). Rendered as `#get` so Huawei can deep-link here.
+   */
+  androidGet?: {
+    specs: Array<{ key: string }>;
+    /** Devices that share the Google Play listing / same app. Shown as a glyph list, not download rows. */
+    devices: Array<{ key: string; glyph: AppGlyph }>;
+    rows: AndroidInstallRow[];
+  };
 }

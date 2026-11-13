@@ -236,7 +236,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    // Every optimized <Image> in the app points at a local /images/* file.
+    // Every optimized <Image> in the app points at a local /images/* or /archive/* file.
     // The only remote images are blog OG art, and those render with
     // `unoptimized` (see [locale]/blog/[slug]/page.tsx and blog/blog-card.tsx),
     // which bypasses /_next/image entirely — the live blog already serves
@@ -264,7 +264,7 @@ const nextConfig: NextConfig = {
     // wide range of combinations, so a scripted caller can mint endless unique
     // cache-missing URLs. No component passes a `quality` prop, so 75 (the
     // next/image default) is the only value ever legitimately requested.
-    localPatterns: [{ pathname: "/images/**" }],
+    localPatterns: [{ pathname: "/images/**" }, { pathname: "/archive/**" }],
     deviceSizes: [640, 828, 1080, 1920],
     imageSizes: [32, 64, 128, 256],
     qualities: [75],
