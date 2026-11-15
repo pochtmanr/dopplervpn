@@ -1,0 +1,37 @@
+{
+  "title": "SNI چیست و چرا سانسورچی‌ها آن را می‌خوانند؟",
+  "metaTitle": "SNI چیست؟ توضیح Server Name Indication و مسدود کردن VPN",
+  "metaDescription": "SNI نام سایتی است که هر اتصال HTTPS به صورت متن ساده می‌فرستد. ببینید چرا سانسورچی‌ها آن را می‌خوانند، Encrypted Client Hello چه تغییری می‌دهد، و Connection method در Doppler چطور VPN را شبیه یک بازدید معمولی می‌کند.",
+  "excerpt": "نام سایتی که هر اتصال امن به صورت متن ساده حمل می‌کند، چرا سانسورچی‌ها آن را می‌خوانند، و Doppler چطور آن را به نفع شما برمی‌گرداند.",
+  "navLabel": "SNI چیست؟",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "readingMinutes": 6,
+  "faq": [
+    {
+      "question": "آیا HTTPS پنهان می‌کند به کدام سایت می‌روم؟",
+      "answer": "نه کاملاً. HTTPS صفحه‌ها، گذرواژه‌ها و کوکی‌ها را رمز می‌کند، اما نام سایت در فیلد SNI پیام اول به صورت متن ساده فرستاده می‌شود، مگر اینکه هم مرورگر و هم سایت از Encrypted Client Hello استفاده کنند."
+    },
+    {
+      "question": "آیا Encrypted Client Hello برای عبور از سانسور کافی است؟",
+      "answer": "به‌تنهایی نه. سانسورچی‌ای که نتواند نام را بخواند هنوز می‌تواند هر اتصالی را که نام را پنهان کرده مسدود کند، و چین دقیقاً همین کار را با ESNI قبلی در سال ۲۰۲۰ کرد."
+    },
+    {
+      "question": "کدام Connection method را باید استفاده کنم؟",
+      "answer": "Automatic، مگر بدانید روی شبکه‌تان یک سایت خاص کار می‌کند. Automatic در هر اتصال سه سایت محتمل‌تر را مسابقه می‌دهد و سریع‌ترین را نگه می‌دارد."
+    },
+    {
+      "question": "وقتی Doppler یاد می‌گیرد کدام سایت‌ها کار می‌کنند، داده‌ام را می‌فرستد؟",
+      "answer": "فقط اگر اجازه بدهید، و آن‌وقت فقط شمارش‌های ناشناس از اینکه کدام سایت‌ها وصل شدند و کدام شکست خوردند. حساب و نشانی IP شما هرگز بخشی از آن‌ها نیست."
+    }
+  ],
+  "sources": [
+    { "label": "IETF، RFC 6066: TLS Extensions، بخش ۳ (Server Name Indication)", "url": "https://www.rfc-editor.org/rfc/rfc6066#section-3" },
+    { "label": "IETF، RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "Cloudflare، Encrypted Client Hello: آخرین قطعه‌ی پازل حریم خصوصی (۲۹ سپتامبر ۲۰۲۳)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "GFW Report، افشا و دور زدن سانسور ESNI در چین (اوت ۲۰۲۰)", "url": "https://gfw.report/blog/gfw_esni_blocking/en/" },
+    { "label": "XTLS، REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue و همکاران، Fingerprinting Obfuscated Proxy Traffic with Encapsulated TLS Handshakes (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people، گزارش‌های مسدود شدن VLESS + Reality + Vision در روسیه (issue 546، نوامبر ۲۰۲۵)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

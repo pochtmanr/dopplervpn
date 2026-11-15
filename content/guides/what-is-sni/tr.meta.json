@@ -1,0 +1,37 @@
+{
+  "title": "SNI nedir ve sansürcüler neden okur?",
+  "metaTitle": "SNI Nedir? Server Name Indication ve VPN Engelleme Açıklaması",
+  "metaDescription": "SNI, her HTTPS bağlantısının düz metin gönderdiği site adıdır. Sansürcüler neden okur, Encrypted Client Hello neyi değiştirir ve Doppler'ın Connection method'u bir VPN'i sıradan bir ziyaret gibi nasıl gösterir.",
+  "excerpt": "Her güvenli bağlantının düz metin taşıdığı site adı, sansürcüler neden okur ve Doppler bunu nasıl sizin lehinize çevirir.",
+  "navLabel": "SNI nedir?",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "readingMinutes": 6,
+  "faq": [
+    {
+      "question": "HTTPS hangi siteyi ziyaret ettiğimi gizler mi?",
+      "answer": "Tamamen değil. HTTPS sayfaları, parolaları ve çerezleri şifreler, ama site adı ilk mesajın SNI alanında düz metin olarak gönderilir; hem tarayıcınız hem de site Encrypted Client Hello kullanmıyorsa bu böyledir."
+    },
+    {
+      "question": "Encrypted Client Hello sansürü aşmak için yeterli midir?",
+      "answer": "Tek başına değil. Adı okuyamayan bir sansürcü, onu gizleyen her bağlantıyı yine de engelleyebilir ve Çin 2020'de önceki ESNI'ya tam olarak bunu yaptı."
+    },
+    {
+      "question": "Hangi Connection method'u kullanmalıyım?",
+      "answer": "Ağınızda bir sitenin işe yaradığını bilmiyorsanız Automatic. Automatic her bağlantıda en olası üç siteyi yarıştırır ve en hızlısını tutar."
+    },
+    {
+      "question": "Doppler hangi sitelerin işe yaradığını öğrenirken verilerimi gönderir mi?",
+      "answer": "Yalnızca siz izin verirseniz ve o zaman bile yalnızca hangi sitelerin bağlandığına ve hangilerinin başarısız olduğuna dair anonim sayımlar. Hesabınız ve IP adresiniz bunlara asla dahil edilmez."
+    }
+  ],
+  "sources": [
+    { "label": "IETF, RFC 6066: TLS Extensions, bölüm 3 (Server Name Indication)", "url": "https://www.rfc-editor.org/rfc/rfc6066#section-3" },
+    { "label": "IETF, RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "Cloudflare, Encrypted Client Hello: gizliliğin son parçası (29 Eyl 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "GFW Report, Çin'in ESNI sansürünü ortaya koyma ve aşma (Ağu 2020)", "url": "https://gfw.report/blog/gfw_esni_blocking/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue ve diğerleri, Encapsulated TLS Handshakes ile Gizlenmiş Proxy Trafiğinin Parmak İzi (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, Rusya'da VLESS + Reality + Vision engelleme bildirimleri (sayı 546, Kas 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

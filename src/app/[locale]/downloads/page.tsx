@@ -42,6 +42,7 @@ import {
   PLUS_BTN_SECONDARY,
   PLUS_CARD,
   PLUS_CARD_HOVER,
+  PLUS_CHIP,
   PLUS_ICON,
   PLUS_ICON_TONE,
   PLUS_META,
@@ -139,13 +140,13 @@ type Release = {
   status?: "review";
 };
 
-type PlatformKey = "ios" | "android" | "mac" | "windows";
+type PlatformKey = "ios" | "android" | "mac" | "windows" | "linux";
 
-const RELEASES: Record<PlatformKey, Release> = {
-  ios:     { date: "2026-09-14", note: null },
-  android: { date: "2026-08-16", note: null },
-  mac:     { date: "2026-09-13", note: null },
-  windows: { date: "2026-08-16", note: "fullTunnel" },
+const RELEASES: Record<Exclude<PlatformKey, "linux">, Release> = {
+  ios:     { date: "2026-11-13", note: null },
+  android: { date: "2026-11-13", note: null },
+  mac:     { date: "2026-11-13", note: null },
+  windows: { date: "2026-09-28", note: "fullTunnel" },
 };
 
 function UpdateInfo({
@@ -239,6 +240,29 @@ function Stars() {
   );
 }
 
+/** Device line-icons on the iOS / Android download cards. */
+type DeviceIconKey = "phone" | "tablet" | "watch" | "foldable";
+
+const DEVICE_ICON: Record<DeviceIconKey, string> = {
+  phone:
+    "M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3",
+  tablet:
+    "M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-15a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 4.5v15a2.25 2.25 0 0 0 2.25 2.25Z",
+  watch:
+    "M8.25 6.75h7.5A2.25 2.25 0 0 1 18 9v6a2.25 2.25 0 0 1-2.25 2.25h-7.5A2.25 2.25 0 0 1 6 15V9a2.25 2.25 0 0 1 2.25-2.25ZM9 6.75 9.75 3h4.5L15 6.75M9 17.25 9.75 21h4.5l.75-3.75",
+  // Two panes with a hinge — foldable phone / Pixel Fold style.
+  foldable:
+    "M7.5 3.75h3v16.5h-3A1.5 1.5 0 0 1 6 18.75V5.25a1.5 1.5 0 0 1 1.5-1.5Zm6 0h3A1.5 1.5 0 0 1 18 5.25v13.5a1.5 1.5 0 0 1-1.5 1.5h-3V3.75ZM12 4.5v15",
+};
+
+function DeviceIcon({ d, className = "h-4 w-4" }: { d: string; className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d={d} />
+    </svg>
+  );
+}
+
 /* ── Platform card config ────────────────────────────────────────── */
 
 type PlatformNote = {
@@ -280,8 +304,13 @@ const HOW_TO_NS = {
 const PLATFORMS: {
   key: PlatformKey;
   icon: PlatformIcon;
-  learnHref: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
+  /** Omitted on coming-soon cards (no platform page yet). */
+  learnHref?: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
   buttons: PlatformButton[];
+  /** Fifth grid slot: Linux has no build yet — card shows the badge, no download. */
+  comingSoon?: boolean;
+  /** Small device marks under the title (iOS / Android family cards). */
+  devices?: DeviceIconKey[];
   /**
    * Short caveats shown under the download buttons, each naming the namespace
    * its key lives in. Windows' caveats sit next to the rest of that platform's
@@ -294,6 +323,7 @@ const PLATFORMS: {
     key: "ios",
     icon: "apple",
     learnHref: "/vpn-for-ios",
+    devices: ["phone", "tablet", "watch"],
     buttons: [
       { labelKey: "ios.button", href: URLS.ios, external: true, primary: true, logo: "appStore" },
       ...(SHOW_IOS_TESTFLIGHT
@@ -317,6 +347,7 @@ const PLATFORMS: {
     // Card uses the Android mark; Play stays on the store button.
     icon: "android",
     learnHref: "/vpn-for-android",
+    devices: ["phone", "tablet", "foldable"],
     // The APK is the only Android route for anyone without Play — mainland China
     // most of all — so it is offered here rather than left to a link handed out
     // privately. Secondary, because Play is still the right default everywhere
@@ -383,6 +414,13 @@ const PLATFORMS: {
       },
     ],
   },
+  {
+    key: "linux",
+    icon: "linux",
+    comingSoon: true,
+    buttons: [],
+    notes: [{ ns: "apps", key: "linux.note", tone: "info" }],
+  },
 ];
 
 /* ── Shared class lists ──────────────────────────────────────────── */
@@ -441,11 +479,11 @@ export default async function DownloadsPage({ params }: PageProps) {
   // Resolved here so the four `vpnFor*` namespaces never reach the client
   // bundle: the setup card receives plain strings.
   const setupPlatforms: SetupPlatform[] = await Promise.all(
-    PLATFORMS.map(async ({ key, icon, buttons }) => {
-      const tHowTo = await getTranslations(HOW_TO_NS[key]);
+    PLATFORMS.filter((p) => !p.comingSoon).map(async ({ key, icon, buttons }) => {
+      const tHowTo = await getTranslations(HOW_TO_NS[key as Exclude<PlatformKey, "linux">]);
       const primary = buttons.find((b) => b.primary) ?? buttons[0];
       return {
-        key,
+        key: key as SetupPlatform["key"],
         icon,
         name: t(`${key}.title`),
         title: tHowTo("howItWorks.title"),
@@ -560,7 +598,7 @@ export default async function DownloadsPage({ params }: PageProps) {
                 shown in the setup card below. */}
             {/* Five cards: 2 + 2 + 1 on tablets, 3 + 2 on small laptops, one row from xl. */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
-              {PLATFORMS.map(({ key, icon, learnHref, buttons, notes }, i) => {
+              {PLATFORMS.map(({ key, icon, learnHref, buttons, notes, comingSoon, devices }, i) => {
                 return (
                   <Reveal key={key} delay={i * 50} className="h-full">
                     <DetectedCard
@@ -579,35 +617,63 @@ export default async function DownloadsPage({ params }: PageProps) {
                             </span>
                           </span>
                         )}
-                        <h2 className={plus ? `mb-4 ${PLUS_TITLE_SM}` : `mb-4 ${CARD_TITLE}`}>
+                        <h2 className={plus ? `mb-3 ${PLUS_TITLE_SM}` : `mb-3 ${CARD_TITLE}`}>
                           {t(`${key}.title`)}
                         </h2>
 
-                        {/* The store/installer button carries the store's mark; the
-                            sideload builds are files, so they keep the download glyph. */}
-                        {buttons.map((btn) => (
-                          <TrackedDownloadLink
-                            key={btn.labelKey}
-                            location="downloads-page"
-                            platform={key}
-                            {...(btn.variant ? { variant: btn.variant } : {})}
-                            href={btn.href}
-                            {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                            {...(btn.download ? { download: true } : {})}
+                        {devices && devices.length > 0 && (
+                          <ul className="mb-4 flex flex-wrap gap-3" aria-label={t(`${key}.devicesLabel`)}>
+                            {devices.map((device) => (
+                              <li
+                                key={device}
+                                className={
+                                  plus
+                                    ? "flex items-center gap-1.5 text-[12px] text-(--c-tert)"
+                                    : "flex items-center gap-1.5 text-[12px] text-text-tertiary"
+                                }
+                              >
+                                <DeviceIcon d={DEVICE_ICON[device]} />
+                                <span>{t(`${key}.devices.${device}`)}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        {comingSoon ? (
+                          <span
                             className={
                               plus
-                                ? btn.primary ? PLUS_DL_PRIMARY : PLUS_DL_SECONDARY
-                                : btn.primary ? BTN_PRIMARY : BTN_SECONDARY
+                                ? `${PLUS_CHIP} self-start bg-(--c-inset) text-(--c-tert)`
+                                : "inline-flex self-start rounded-full bg-bg-secondary px-3 py-1.5 text-xs font-semibold text-text-tertiary"
                             }
                           >
-                            {btn.primary ? (
-                              <PlatformLogo icon={btn.logo ?? icon} className="w-4 h-4" />
-                            ) : (
-                              <DownloadIcon className="w-4 h-4" />
-                            )}
-                            {t(btn.labelKey)}
-                          </TrackedDownloadLink>
-                        ))}
+                            {t("comingSoon")}
+                          </span>
+                        ) : (
+                          buttons.map((btn) => (
+                            <TrackedDownloadLink
+                              key={btn.labelKey}
+                              location="downloads-page"
+                              platform={key as Exclude<PlatformKey, "linux">}
+                              {...(btn.variant ? { variant: btn.variant } : {})}
+                              href={btn.href}
+                              {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                              {...(btn.download ? { download: true } : {})}
+                              className={
+                                plus
+                                  ? btn.primary ? PLUS_DL_PRIMARY : PLUS_DL_SECONDARY
+                                  : btn.primary ? BTN_PRIMARY : BTN_SECONDARY
+                              }
+                            >
+                              {btn.primary ? (
+                                <PlatformLogo icon={btn.logo ?? icon} className="w-4 h-4" />
+                              ) : (
+                                <DownloadIcon className="w-4 h-4" />
+                              )}
+                              {t(btn.labelKey)}
+                            </TrackedDownloadLink>
+                          ))
+                        )}
 
                         {notes && (
                           <ul className="mt-3 space-y-1.5">
@@ -637,8 +703,10 @@ export default async function DownloadsPage({ params }: PageProps) {
                         )}
 
                         <div className="mt-auto pt-5">
-                          <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
-                          {plus ? (
+                          {!comingSoon && key !== "linux" && (
+                            <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
+                          )}
+                          {learnHref && (plus ? (
                             <Link
                               href={learnHref}
                               className="plus-btn mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-(--c-accent)"
@@ -656,7 +724,7 @@ export default async function DownloadsPage({ params }: PageProps) {
                               <ArrowIcon />
                             </span>
                           </Link>
-                          )}
+                          ))}
                         </div>
                       </div>
                     </DetectedCard>

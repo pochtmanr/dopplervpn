@@ -1,0 +1,37 @@
+{
+  "title": "什么是 SNI，审查方为什么要读它？",
+  "metaTitle": "什么是 SNI？Server Name Indication 与 VPN 封锁简明解释",
+  "metaDescription": "SNI 是每条 HTTPS 连接用明文发送的站点名。了解审查方为何读它、Encrypted Client Hello 改变了什么，以及 Doppler 的 Connection method 如何让 VPN 看起来像一次普通访问。",
+  "excerpt": "每条安全连接用明文携带的站点名、审查方为何读它，以及 Doppler 如何把它变成对你有利的一面。",
+  "navLabel": "什么是 SNI？",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "readingMinutes": 6,
+  "faq": [
+    {
+      "question": "HTTPS 会隐藏我访问的是哪个站点吗？",
+      "answer": "不完全。HTTPS 加密页面、密码和 Cookie，但站点名会在第一条消息的 SNI 字段里以明文发送，除非你的浏览器和站点都使用 Encrypted Client Hello。"
+    },
+    {
+      "question": "Encrypted Client Hello 足以绕过审查吗？",
+      "answer": "单靠它不够。读不到名字的审查方仍可以封锁每一条把名字藏起来的连接，中国在 2020 年对更早的 ESNI 就是这么做的。"
+    },
+    {
+      "question": "我该用哪种 Connection method？",
+      "answer": "用 Automatic，除非你已经知道某个站点在当前网络上管用。Automatic 每次连接时会让三个最可能的站点竞速，并保留最快的那个。"
+    },
+    {
+      "question": "Doppler 学习哪些站点管用时会发送我的数据吗？",
+      "answer": "只有在你允许时才会，而且只发送哪些站点连接成功、哪些失败的匿名计数。你的账户和 IP 地址从不包含在内。"
+    }
+  ],
+  "sources": [
+    { "label": "IETF，RFC 6066：TLS 扩展，第 3 节（Server Name Indication）", "url": "https://www.rfc-editor.org/rfc/rfc6066#section-3" },
+    { "label": "IETF，RFC 9849：TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "Cloudflare，Encrypted Client Hello：隐私拼图的最后一块（2023 年 9 月 29 日）", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "GFW Report，揭露并绕过中国对 ESNI 的审查（2020 年 8 月）", "url": "https://gfw.report/blog/gfw_esni_blocking/en/" },
+    { "label": "XTLS，REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue 等，用封装 TLS 握手指纹识别混淆代理流量（USENIX Security 2024）", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people，俄罗斯 VLESS + Reality + Vision 封锁报告（issue 546，2025 年 11 月）", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

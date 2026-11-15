@@ -8,11 +8,12 @@ import { APPLE_GUIDES, type GuideSlug } from "@/config/platforms/apple";
  * the iPhone and Mac pages. Same storage as /how-it-works and /vpn-protocols:
  *   content/guides/<slug>/<locale>.md         the body (GitHub markdown, ```chart and ```shots blocks)
  *   content/guides/<slug>/<locale>.meta.json  title, meta, FAQ, sources
- * Hand-written. English only for now: any other locale 308-redirects to /en/guides/*.
- * A locale joins GUIDES_LOCALES only once every guide has its files in it.
+ * Hand-written. Ships in the same first wave as /how-it-works (en + ru/fa/zh/ar/tr);
+ * any other locale 308-redirects to /en/guides/*. A locale joins GUIDES_LOCALES only
+ * once every guide has its files and the top-level `guides` messages namespace land.
  */
 
-export const GUIDES_LOCALES = ["en"] as const;
+export const GUIDES_LOCALES = ["en", "ru", "fa", "zh", "ar", "tr"] as const;
 
 export function isGuidesLocale(locale: string): boolean {
   return (GUIDES_LOCALES as readonly string[]).includes(locale);

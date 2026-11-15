@@ -4,7 +4,7 @@
  * stay one picture.
  */
 
-export type PlatformIcon = "apple" | "android" | "googlePlay" | "windows" | "appStore" | "appGallery";
+export type PlatformIcon = "apple" | "android" | "googlePlay" | "windows" | "linux" | "appStore" | "appGallery";
 
 const PATHS: Record<Exclude<PlatformIcon, "appStore" | "appGallery">, string> = {
   apple:
@@ -15,6 +15,9 @@ const PATHS: Record<Exclude<PlatformIcon, "appStore" | "appGallery">, string> = 
     "M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z",
   windows:
     "M3 12V6.75l6-1.32v6.48L3 12zm17-9v8.75l-10 .08V5.67L20 3zM3 13l6 .09v6.81l-6-1.15V13zm7 .18l10 .08V21l-10-1.76V13.18z",
+  // Tux-style mark (simplified), filled at the same weight as the other platform logos.
+  linux:
+    "M12.5 2.2c-1.6 0-2.9 1.5-2.9 3.4 0 .7.2 1.4.5 2-1.8.7-3.1 2.5-3.1 4.7 0 1.3.5 2.4 1.3 3.2-.1.4-.2.9-.2 1.3 0 1.9 1.3 3.4 3.2 3.8.4 1.1 1.5 1.9 2.8 1.9s2.4-.8 2.8-1.9c1.9-.4 3.2-1.9 3.2-3.8 0-.4-.1-.9-.2-1.3.8-.8 1.3-1.9 1.3-3.2 0-2.2-1.3-4-3.1-4.7.3-.6.5-1.3.5-2 0-1.9-1.3-3.4-2.9-3.4h-.2zm-1.7 4.3c.4 0 .7.4.7.9s-.3.9-.7.9-.7-.4-.7-.9.3-.9.7-.9zm3.4 0c.4 0 .7.4.7.9s-.3.9-.7.9-.7-.4-.7-.9.3-.9.7-.9zM9.8 12.1c.9 1.1 2.1 1.7 3.4 1.7s2.5-.6 3.4-1.7c.3 1.3-.2 2.5-1.2 3.1-.4.2-.8.4-1.3.4h-1.8c-.5 0-.9-.2-1.3-.4-1-.6-1.5-1.8-1.2-3.1z",
 };
 
 export function PlatformLogo({

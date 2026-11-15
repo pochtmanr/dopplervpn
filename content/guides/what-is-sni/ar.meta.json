@@ -1,0 +1,37 @@
+{
+  "title": "ما هو SNI، ولماذا تقرأه الرقابة؟",
+  "metaTitle": "ما هو SNI؟ شرح Server Name Indication وحجب VPN",
+  "metaDescription": "SNI هو اسم الموقع الذي يرسله كل اتصال HTTPS بنص واضح. تعرّف لماذا تقرأه الرقابة، وما يغيّره Encrypted Client Hello، وكيف يجعل Connection method في Doppler الـ VPN يبدو زيارة عادية.",
+  "excerpt": "اسم الموقع الذي يحمله كل اتصال آمن بنص واضح، ولماذا تقرأه الرقابة، وكيف يقلبه Doppler لصالحك.",
+  "navLabel": "ما هو SNI؟",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "readingMinutes": 6,
+  "faq": [
+    {
+      "question": "هل يخفي HTTPS أي موقع أزوره؟",
+      "answer": "ليس بالكامل. يشفر HTTPS الصفحات وكلمات المرور وملفات تعريف الارتباط، لكن اسم الموقع يُرسل بنص واضح في حقل SNI من الرسالة الأولى، ما لم يستخدم متصفحك والموقع معاً Encrypted Client Hello."
+    },
+    {
+      "question": "هل يكفي Encrypted Client Hello لتجاوز الرقابة؟",
+      "answer": "ليس وحده. رقابة لا تستطيع قراءة الاسم تستطيع مع ذلك حجب كل اتصال يخفيه، وقد فعلت الصين ذلك تماماً مع ESNI السابق عام 2020."
+    },
+    {
+      "question": "أي Connection method يجب أن أستخدم؟",
+      "answer": "Automatic، ما لم تعرف موقعاً واحداً يعمل على شبكتك. يتسابق Automatic بين المواقع الثلاثة الأرجح عند كل اتصال ويبقي الأسرع."
+    },
+    {
+      "question": "هل يرسل Doppler بياناتي حين يتعلّم أي المواقع تعمل؟",
+      "answer": "فقط إذا سمحت بذلك، وحينها فقط إحصاءات مجهولة عن المواقع التي اتصلت وتلك التي فشلت. حسابك وعنوان IP الخاص بك ليسا جزءاً منها أبداً."
+    }
+  ],
+  "sources": [
+    { "label": "IETF، RFC 6066: امتدادات TLS، القسم 3 (Server Name Indication)", "url": "https://www.rfc-editor.org/rfc/rfc6066#section-3" },
+    { "label": "IETF، RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "Cloudflare، Encrypted Client Hello: القطعة الأخيرة في لغز الخصوصية (29 سبتمبر 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "GFW Report، كشف والتحايل على حجب الصين لـ ESNI (أغسطس 2020)", "url": "https://gfw.report/blog/gfw_esni_blocking/en/" },
+    { "label": "XTLS، REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue وآخرون، تبصيم حركة الوكيل المموّهة بمصافحات TLS المغلفة (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people، تقارير حجب VLESS + Reality + Vision في روسيا (المسألة 546، نوفمبر 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

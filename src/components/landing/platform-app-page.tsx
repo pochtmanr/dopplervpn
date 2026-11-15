@@ -28,6 +28,7 @@ import { AppGalleryMark, AppStoreMark, HuaweiMark, PlatformLogo } from "@/compon
 import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
 import { Link } from "@/i18n/navigation";
 import { PLANS, SITE_URL, TERMS } from "@/lib/facts";
+import { isGuidesLocale } from "@/lib/guides";
 import { GUIDE_COVERS } from "@/config/platforms/apple";
 import type {
   AndroidInstallRow,
@@ -39,9 +40,6 @@ import type {
 } from "@/config/platforms/app-page";
 import { AndroidFrame, AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
 import { ANDROID_APK_BUTTON } from "@/config/platforms/android";
-
-/** Guides are English-only for now (lib/guides.ts), so every guide link goes to /en. */
-const GUIDE_LOCALE = "en";
 
 const SECTION = "py-12 md:py-20";
 const H2 = "font-display text-3xl font-bold leading-tight text-(--c-text) md:text-[40px]";
@@ -176,11 +174,16 @@ function SectionHead({ kicker, title, lead }: { kicker?: string; title: string; 
   );
 }
 
-function GuideLink({ href, children }: { href: string; children: ReactNode }) {
+/** Guide articles ship in GUIDES_LOCALES only; other locales keep linking to /en. */
+function guideLocaleFor(locale: string): string {
+  return isGuidesLocale(locale) ? locale : "en";
+}
+
+function GuideLink({ href, locale, children }: { href: string; locale: string; children: ReactNode }) {
   return (
     <Link
       href={href}
-      locale={GUIDE_LOCALE}
+      locale={guideLocaleFor(locale)}
       className="group mt-6 inline-flex items-center gap-1.5 text-[15px] font-bold text-(--c-accent) hover:underline hover:underline-offset-4"
     >
       {children}
@@ -482,7 +485,9 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                         ))}
                       </ul>
                       {chapter.guide && (
-                        <GuideLink href={`/guides/${chapter.guide}`}>{s(`guides.items.${chapter.guide}.cta`)}</GuideLink>
+                        <GuideLink href={`/guides/${chapter.guide}`} locale={locale}>
+                          {s(`guides.items.${chapter.guide}.cta`)}
+                        </GuideLink>
                       )}
                     </div>
                   </article>
@@ -534,7 +539,7 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                     {config.ecosystem.guides.length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-x-6">
                         {config.ecosystem.guides.map((slug) => (
-                          <GuideLink key={slug} href={`/guides/${slug}`}>
+                          <GuideLink key={slug} href={`/guides/${slug}`} locale={locale}>
                             {s(`guides.items.${slug}.cta`)}
                           </GuideLink>
                         ))}
@@ -646,7 +651,7 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {config.guides.map((slug) => (
                 <li key={slug}>
-                  <Link href={`/guides/${slug}`} locale={GUIDE_LOCALE} className={`${PLUS_CARD_HOVER} overflow-hidden !p-0`}>
+                  <Link href={`/guides/${slug}`} locale={guideLocaleFor(locale)} className={`${PLUS_CARD_HOVER} overflow-hidden !p-0`}>
                     <span className="relative block aspect-[3/2]" style={{ backgroundColor: GUIDE_COVERS[slug].bg }}>
                       <Image
                         src={GUIDE_COVERS[slug].src}
@@ -675,7 +680,7 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
               </span>
               <ArrowGlyph className="h-6 w-6 shrink-0 text-(--c-tert) group-hover:text-(--c-accent)" />
             </Link>
-            {locale !== GUIDE_LOCALE && <p className={`mt-4 text-center ${PLUS_META}`}>{s("guides.englishNote")}</p>}
+            {!isGuidesLocale(locale) && <p className={`mt-4 text-center ${PLUS_META}`}>{s("guides.englishNote")}</p>}
           </PlusContainer>
           )}
 

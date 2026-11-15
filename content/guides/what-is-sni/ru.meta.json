@@ -1,0 +1,37 @@
+{
+  "title": "Что такое SNI и почему его читают цензоры?",
+  "metaTitle": "Что такое SNI? Server Name Indication и блокировка VPN простыми словами",
+  "metaDescription": "SNI это имя сайта, которое каждое HTTPS-соединение отправляет открытым текстом. Зачем его читают цензоры, что меняет Encrypted Client Hello и как Connection method в Doppler делает VPN похожим на обычный визит.",
+  "excerpt": "Имя сайта, которое несёт каждое защищённое соединение открытым текстом, почему его читают цензоры и как Doppler поворачивает это в вашу сторону.",
+  "navLabel": "Что такое SNI?",
+  "datePublished": "2026-11-06",
+  "dateModified": "2026-11-06",
+  "readingMinutes": 6,
+  "faq": [
+    {
+      "question": "Прячет ли HTTPS, какой сайт я посещаю?",
+      "answer": "Не полностью. HTTPS шифрует страницы, пароли и cookie, но имя сайта уходит открытым текстом в поле SNI первого сообщения, если только и браузер, и сайт не используют Encrypted Client Hello."
+    },
+    {
+      "question": "Достаточно ли Encrypted Client Hello, чтобы обойти цензуру?",
+      "answer": "Само по себе нет. Цензор, который не может прочитать имя, всё равно может блокировать каждое соединение, которое его скрывает, и Китай сделал именно это с более ранним ESNI в 2020 году."
+    },
+    {
+      "question": "Какой Connection method мне выбрать?",
+      "answer": "Automatic, если вы не знаете, что в вашей сети работает конкретный сайт. Automatic при каждом Connect устраивает гонку трёх наиболее вероятных сайтов и оставляет самый быстрый."
+    },
+    {
+      "question": "Отправляет ли Doppler мои данные, когда учится, какие сайты работают?",
+      "answer": "Только если вы разрешите, и тогда только анонимные счётчики того, какие сайты подключились и какие нет. Аккаунт и IP-адрес в них никогда не входят."
+    }
+  ],
+  "sources": [
+    { "label": "IETF, RFC 6066: расширения TLS, раздел 3 (Server Name Indication)", "url": "https://www.rfc-editor.org/rfc/rfc6066#section-3" },
+    { "label": "IETF, RFC 9849: TLS Encrypted Client Hello", "url": "https://www.rfc-editor.org/info/rfc9849/" },
+    { "label": "Cloudflare, Encrypted Client Hello: последний элемент головоломки приватности (29 сентября 2023)", "url": "https://blog.cloudflare.com/announcing-encrypted-client-hello/" },
+    { "label": "GFW Report, как Китай цензурирует ESNI и как это обходили (август 2020)", "url": "https://gfw.report/blog/gfw_esni_blocking/en/" },
+    { "label": "XTLS, REALITY README", "url": "https://github.com/XTLS/REALITY" },
+    { "label": "Xue et al., снятие отпечатков обфусцированного прокси-трафика по вложенным TLS-рукопожатиям (USENIX Security 2024)", "url": "https://www.usenix.org/conference/usenixsecurity24/presentation/xue-fingerprinting" },
+    { "label": "net4people, сообщения о блокировках VLESS + Reality + Vision в России (issue 546, ноябрь 2025)", "url": "https://github.com/net4people/bbs/issues/546" }
+  ]
+}

@@ -178,7 +178,7 @@ const staticPages = [
   // Protocol reference (every locale in i18n/vpn-protocols-locales.ts)
   "/vpn-protocols",
   ...PROTOCOL_ARTICLE_SLUGS.map((slug) => `/vpn-protocols/${slug}`),
-  // App guides (English only for now; see lib/guides.ts)
+  // App guides (GUIDES_LOCALES; see lib/guides.ts)
   "/guides",
   ...GUIDE_SLUGS.map((slug) => `/guides/${slug}`),
 ];
