@@ -18,6 +18,8 @@ import { DetectedCard, DetectedPlatformProvider } from "@/components/downloads/d
 import type { CtaVariant } from "@/lib/track-cta";
 import { ANDROID_APK_URL, GOOGLE_PLAY_URL as PLAY_URL } from "@/config/platforms/android";
 import { seoTitle } from "@/lib/seo-title";
+import { iosApple, macosApple } from "@/config/platforms/apple";
+import { androidApp } from "@/config/platforms/android";
 import {
   CARD,
   CARD_HAIRLINE,
@@ -146,7 +148,7 @@ const RELEASES: Record<Exclude<PlatformKey, "linux">, Release> = {
   ios:     { date: "2026-11-13", note: null },
   android: { date: "2026-11-13", note: null },
   mac:     { date: "2026-11-13", note: null },
-  windows: { date: "2026-09-28", note: "fullTunnel" },
+  windows: { date: "2026-09-28", note: null },
 };
 
 function UpdateInfo({
@@ -197,14 +199,6 @@ function DownloadIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-function ArrowIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
-  return (
-    <svg className={`${className} rtl:-scale-x-100`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
-
 function WarnIcon() {
   return (
     <svg className="mt-px w-3.5 h-3.5 shrink-0 text-accent-amber" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
@@ -240,19 +234,29 @@ function Stars() {
   );
 }
 
-/** Device line-icons on the iOS / Android download cards. */
-type DeviceIconKey = "phone" | "tablet" | "watch" | "foldable";
+/** Device line-icons for the chips under each download card's title. */
+type DeviceIconKey = "phone" | "tablet" | "laptop" | "tv" | "watch" | "chip" | "memory" | "key" | "apple" | "windows";
 
-const DEVICE_ICON: Record<DeviceIconKey, string> = {
+const DEVICE_ICON: Record<Exclude<DeviceIconKey, "apple" | "windows">, string> = {
   phone:
     "M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3",
   tablet:
     "M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-15a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 4.5v15a2.25 2.25 0 0 0 2.25 2.25Z",
+  // Laptop and TV: the same marks as the Android app page's device band.
+  laptop:
+    "M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25Z",
+  tv:
+    "M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125Z",
   watch:
     "M8.25 6.75h7.5A2.25 2.25 0 0 1 18 9v6a2.25 2.25 0 0 1-2.25 2.25h-7.5A2.25 2.25 0 0 1 6 15V9a2.25 2.25 0 0 1 2.25-2.25ZM9 6.75 9.75 3h4.5L15 6.75M9 17.25 9.75 21h4.5l.75-3.75",
-  // Two panes with a hinge — foldable phone / Pixel Fold style.
-  foldable:
-    "M7.5 3.75h3v16.5h-3A1.5 1.5 0 0 1 6 18.75V5.25a1.5 1.5 0 0 1 1.5-1.5Zm6 0h3A1.5 1.5 0 0 1 18 5.25v13.5a1.5 1.5 0 0 1-1.5 1.5h-3V3.75ZM12 4.5v15",
+  // A processor: the Mac card names architectures, not models.
+  chip:
+    "M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z",
+  // A RAM stick: a board with contacts along its lower edge.
+  memory:
+    "M3.75 7.5h16.5a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-.75.75H3.75a.75.75 0 0 1-.75-.75V8.25a.75.75 0 0 1 .75-.75ZM6 15.75v2.25m3-2.25v2.25m3-2.25v2.25m3-2.25v2.25m3-2.25v2.25M6.75 10.5h2.25v2.25H6.75V10.5Zm4.125 0h2.25v2.25h-2.25V10.5Zm4.125 0h2.25v2.25H15V10.5Z",
+  key:
+    "M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z",
 };
 
 function DeviceIcon({ d, className = "h-4 w-4" }: { d: string; className?: string }) {
@@ -277,6 +281,8 @@ type PlatformNote = {
   tone: "warn" | "info";
   /** Appends a link to the install guide (/install#<anchor>) after the text. */
   guide?: "iphone" | "mac";
+  /** Appends a "Learn more" link to the platform page section that explains the note. */
+  learn?: "/vpn-for-windows#smartscreen";
 };
 
 type PlatformButton = {
@@ -288,6 +294,25 @@ type PlatformButton = {
   primary: boolean;
   /** The store's mark on a store button (App Store, Google Play). Defaults to the platform's. */
   logo?: PlatformIcon;
+  /** The setup card's label where the card's own is a short form. Defaults to `labelKey`. */
+  setupLabelKey?: string;
+};
+
+/**
+ * The setup card's picture for each platform: the platform page's own device
+ * render (iPhone, Studio Display, Galaxy), and for Windows the app window itself,
+ * shown whole on its own dark backdrop.
+ */
+const SETUP_IMAGE: Record<Exclude<PlatformKey, "linux">, SetupPlatform["image"]> = {
+  ios: { ...iosApple.ctaImage!, alt: "Doppler VPN on an iPhone, connected and protected" },
+  mac: macosApple.hero,
+  android: androidApp.hero,
+  windows: {
+    src: "/images/windows-hero.avif",
+    bg: "#1C1C1C",
+    alt: "Doppler VPN for Windows, connected",
+    fit: "contain",
+  },
 };
 
 /**
@@ -309,8 +334,13 @@ const PLATFORMS: {
   buttons: PlatformButton[];
   /** Fifth grid slot: Linux has no build yet — card shows the badge, no download. */
   comingSoon?: boolean;
-  /** Small device marks under the title (iOS / Android family cards). */
-  devices?: DeviceIconKey[];
+  /**
+   * The panel under the title, one line each: `[message key, icon]`. Devices on
+   * the phone cards, the two architectures the universal build runs on for Mac,
+   * and the minimum system for Windows (its `devicesLabel` reads "Requirements").
+   * Linux has none.
+   */
+  devices?: [string, DeviceIconKey][];
   /**
    * Short caveats shown under the download buttons, each naming the namespace
    * its key lives in. Windows' caveats sit next to the rest of that platform's
@@ -323,7 +353,7 @@ const PLATFORMS: {
     key: "ios",
     icon: "apple",
     learnHref: "/vpn-for-ios",
-    devices: ["phone", "tablet", "watch"],
+    devices: [["phone", "phone"], ["tablet", "tablet"], ["watch", "watch"]],
     buttons: [
       { labelKey: "ios.button", href: URLS.ios, external: true, primary: true, logo: "appStore" },
       ...(SHOW_IOS_TESTFLIGHT
@@ -347,13 +377,21 @@ const PLATFORMS: {
     // Card uses the Android mark; Play stays on the store button.
     icon: "android",
     learnHref: "/vpn-for-android",
-    devices: ["phone", "tablet", "foldable"],
+    devices: [["phone", "phone"], ["tablet", "tablet"], ["chromebook", "laptop"], ["tv", "tv"]],
     // The APK is the only Android route for anyone without Play — mainland China
     // most of all — so it is offered here rather than left to a link handed out
     // privately. Secondary, because Play is still the right default everywhere
     // it works: it updates itself, and the sideload build cannot.
     notes: [{ ns: "apps", key: "android.apkNote", tone: "info" }],
     buttons: [
+      // Listed first, Play's teal pill under it at the foot of the card.
+      {
+        labelKey: "android.buttonApk",
+        href: URLS.androidApk,
+        variant: "android-apk",
+        download: true,
+        primary: false,
+      },
       {
         labelKey: "android.buttonPlayStore",
         href: URLS.androidPlayStore,
@@ -362,21 +400,15 @@ const PLATFORMS: {
         primary: true,
         logo: "googlePlay",
       },
-      {
-        labelKey: "android.buttonApk",
-        href: URLS.androidApk,
-        variant: "android-apk",
-        download: true,
-        primary: false,
-      },
     ],
   },
   {
     key: "mac",
     icon: "apple",
     learnHref: "/vpn-for-macos",
+    devices: [["appleSilicon", "apple"], ["intel", "chip"]],
     buttons: [
-      { labelKey: "mac.button", href: URLS.mac, external: true, primary: true, logo: "appStore" },
+      // The DMG first, the Mac App Store's teal pill under it at the foot of the card.
       ...(SHOW_MAC_DMG
         ? [
             {
@@ -388,6 +420,7 @@ const PLATFORMS: {
             },
           ]
         : []),
+      { labelKey: "mac.button", href: URLS.mac, external: true, primary: true, logo: "appStore" },
     ],
     ...(SHOW_MAC_DMG
       ? { notes: [{ ns: "apps" as const, key: "mac.dmgNote", tone: "info" as const, guide: "mac" as const }] }
@@ -397,16 +430,27 @@ const PLATFORMS: {
     key: "windows",
     icon: "windows",
     learnHref: "/vpn-for-windows",
-    // Windows-only: the installer isn't code-signed yet, so SmartScreen blocks it
-    // and people give up at the warning. The trial line is here because this card
-    // is the last stop before a paid campaign visitor leaves for the download.
+    // The real floor of the build: TargetPlatformMinVersion / the installer's
+    // MinVersion is 10.0.17763 (1809), ArchitecturesAllowed=x64compatible, and
+    // DopplerVPN.exe ships a requireAdministrator manifest. 2 GB is 64-bit
+    // Windows 10's own minimum, not a figure measured on the app.
+    devices: [["os", "windows"], ["arch", "chip"], ["ram", "memory"], ["admin", "key"]],
+    // The installer isn't code-signed yet, so SmartScreen blocks it and people
+    // give up at the warning. One line here; the steps are on the Windows page.
     notes: [
-      { ns: "vpnForWindows", key: "downloadsSmartScreenNote", tone: "warn" },
-      { ns: "vpnForWindows", key: "downloadsTrialNote", tone: "info" },
+      {
+        ns: "vpnForWindows",
+        key: "smartScreen.title",
+        tone: "warn",
+        learn: "/vpn-for-windows#smartscreen",
+      },
     ],
     buttons: [
       {
-        labelKey: "windows.buttonX64",
+        // "Download .exe" here: the card is too narrow for "Download for
+        // Windows" on one line. The setup card below keeps `buttonX64`.
+        labelKey: "windows.buttonCard",
+        setupLabelKey: "windows.buttonX64",
         href: URLS.windowsX64,
         variant: "windows-x64",
         download: true,
@@ -443,19 +487,42 @@ const BTN_BASE =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light " +
   "focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
 const BTN_PRIMARY = `cta-key ${BTN_BASE} text-white`;
-const BTN_SECONDARY = `cta-flat ${BTN_BASE} mt-2 hover:text-accent-teal`;
+const BTN_SECONDARY = `cta-flat ${BTN_BASE} hover:text-accent-teal`;
+
+/**
+ * One platform card on the grid's shared row tracks, three rows: the card's own
+ * content (picture, title, devices, notes) flows freely in the first; the date +
+ * learn-more block and the buttons take the last two, so those line up across a
+ * row of cards and the buttons sit at the foot. `gap-0` keeps the grid's own gap
+ * between card rows only.
+ */
+const CARD_SUBGRID = "row-span-2 grid grid-rows-subgrid gap-0";
 
 /** The visitor's own platform (DetectedCard) — colour only, so nothing moves. */
 const CARD_DETECTED =
   "data-[detected=true]:border-accent-teal/50 data-[detected=true]:ring-1 data-[detected=true]:ring-accent-teal/25";
 
+/**
+ * The whole card opens the platform page: a link stretched over it, with the
+ * card's own controls (downloads, inline links) raised above it on CARD_RAISED.
+ */
+const CARD_STRETCHED_LINK =
+  "absolute inset-0 z-[1] rounded-[inherit] focus-visible:outline-none focus-visible:ring-2 " +
+  "focus-visible:ring-accent-teal focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
+const CARD_RAISED = "relative z-[2]";
+/** Hover on a linked card: no movement, only the lift shadow one step deeper. */
+const CARD_LIFT = "plus-lift plus-lift-2";
+
 /* ── Calm+ preview (CALM_PLUS_PREVIEW) ───────────────────────────── */
-// Platform cards hold several controls, so no hover: the glyph tray + logo is
-// their live element. The detected card gets a teal ring, colour only.
+// The detected card gets a teal ring, colour only.
 
 const PLUS_DETECTED = "data-[detected=true]:ring-2 data-[detected=true]:ring-(--c-accent)";
-const PLUS_DL_PRIMARY = `${PLUS_BTN} w-full`;
-const PLUS_DL_SECONDARY = `${PLUS_BTN_SECONDARY} mt-2 w-full`;
+// The pills are a fixed h-11; at five across a long label ("Télécharger sur
+// Google Play") wraps, so the card's pills grow instead of spilling. The subgrid
+// keeps the bands aligned when one does.
+const PLUS_DL_FIT = "!h-auto min-h-11 py-2.5 leading-tight text-center xl:px-4";
+const PLUS_DL_PRIMARY = `${PLUS_BTN} ${PLUS_DL_FIT} w-full`;
+const PLUS_DL_SECONDARY = `${PLUS_BTN_SECONDARY} ${PLUS_DL_FIT} w-full`;
 const PLUS_ROW =
   `${PLUS_CARD_HOVER} h-full min-h-[96px] !flex-row items-center !p-0 ` +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg)";
@@ -473,13 +540,15 @@ export default async function DownloadsPage({ params }: PageProps) {
   // hero and the home CTA card — so it reuses their strings rather than adding
   // four more keys to 44 locale files.
   const tHero = await getTranslations("hero");
+  // "Learn more" after a card note — the generic string, already in every locale.
+  const tLearn = await getTranslations("technicalHowItWorks");
   const resolveNote = (note: PlatformNote) =>
     note.ns === "apps" ? t(note.key) : tWindows(note.key);
 
   // Resolved here so the four `vpnFor*` namespaces never reach the client
   // bundle: the setup card receives plain strings.
   const setupPlatforms: SetupPlatform[] = await Promise.all(
-    PLATFORMS.filter((p) => !p.comingSoon).map(async ({ key, icon, buttons }) => {
+    PLATFORMS.filter((p) => !p.comingSoon).map(async ({ key, icon, buttons, learnHref }) => {
       const tHowTo = await getTranslations(HOW_TO_NS[key as Exclude<PlatformKey, "linux">]);
       const primary = buttons.find((b) => b.primary) ?? buttons[0];
       return {
@@ -491,12 +560,14 @@ export default async function DownloadsPage({ params }: PageProps) {
         steps: [1, 2, 3, 4].map((n) => t(`${key}.step${n}`)),
         cta: {
           href: primary.href,
-          label: t(primary.labelKey),
+          label: t(primary.setupLabelKey ?? primary.labelKey),
           ...(primary.variant ? { variant: primary.variant } : {}),
           external: !!primary.external,
           download: !!primary.download,
           logo: primary.logo ?? icon,
         },
+        ...(learnHref ? { learn: { href: learnHref, label: t(`${key}.learnMore`) } } : {}),
+        image: SETUP_IMAGE[key as Exclude<PlatformKey, "linux">],
       };
     }),
   );
@@ -596,135 +667,150 @@ export default async function DownloadsPage({ params }: PageProps) {
             {/* ── Platform Cards ───────────────────────────────────── */}
             {/* Name, download, the platform's caveats, date. The app itself is
                 shown in the setup card below. */}
-            {/* Five cards: 2 + 2 + 1 on tablets, 3 + 2 on small laptops, one row from xl. */}
+            {/* Five cards: 2 + 2 + 1 on tablets, 3 + 2 on small laptops, one row from xl.
+                Each card's own content flows freely; the date + learn-more block and
+                the buttons sit on the grid's shared row tracks (subgrid), so they line
+                up across a row whatever wraps above them. */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-5">
-              {PLATFORMS.map(({ key, icon, learnHref, buttons, notes, comingSoon, devices }, i) => {
+              {PLATFORMS.map(({ key, icon, learnHref, buttons, notes, comingSoon, devices = [] }, i) => {
                 return (
-                  <Reveal key={key} delay={i * 50} className="h-full">
+                  <Reveal key={key} delay={i * 50} className={CARD_SUBGRID}>
                     <DetectedCard
                       platform={key}
                       id={key}
-                      className={plus ? `${PLUS_CARD} ${PLUS_DETECTED} scroll-mt-28` : `${CARD} ${CARD_DETECTED} p-6 scroll-mt-28`}
+                      className={`${CARD_SUBGRID} ${learnHref ? CARD_LIFT : ""} ${plus ? `${PLUS_CARD} !grid ${PLUS_DETECTED} scroll-mt-28` : `${CARD} ${CARD_DETECTED} !grid p-6 scroll-mt-28`}`}
                     >
                       {!plus && <div className={CARD_HAIRLINE} aria-hidden="true" />}
+                      {learnHref && (
+                        <Link href={learnHref} aria-label={t(`${key}.learnMore`)} className={CARD_STRETCHED_LINK} />
+                      )}
 
-                      <div className="relative flex flex-1 flex-col">
-                        {plus && (
+                      {/* 1 · the card's own content, flowing with no reserved gaps */}
+                      <div className="relative">
+                        {/* picture */}
+                        {plus ? (
                           <span className={`${PLUS_WELL} mb-5 block h-24`} aria-hidden="true">
                             <PlatformGlyphBand index={i} />
                             <span className="absolute inset-0 flex items-center justify-center">
                               <PlatformLogo icon={icon} className="h-8 w-8 text-(--c-text)" />
                             </span>
                           </span>
-                        )}
-                        <h2 className={plus ? `mb-3 ${PLUS_TITLE_SM}` : `mb-3 ${CARD_TITLE}`}>
+                        ) : null}
+
+                        {/* title */}
+                        <h2 className={plus ? `relative mb-3 ${PLUS_TITLE_SM}` : `relative mb-3 ${CARD_TITLE}`}>
                           {t(`${key}.title`)}
                         </h2>
 
-                        {devices && devices.length > 0 && (
-                          <ul className="mb-4 flex flex-wrap gap-3" aria-label={t(`${key}.devicesLabel`)}>
-                            {devices.map((device) => (
+                        {/* devices: one panel, one device per line (the warning plate's shape) */}
+                        {devices.length > 0 ? (
+                          <ul
+                            className={`relative mb-4 space-y-1.5 self-start rounded-xl p-3 ${plus ? "bg-(--c-bg)" : "bg-bg-secondary"}`}
+                            aria-label={t(`${key}.devicesLabel`)}
+                          >
+                            {devices.map(([label, glyph]) => (
                               <li
-                                key={device}
+                                key={label}
                                 className={
                                   plus
-                                    ? "flex items-center gap-1.5 text-[12px] text-(--c-tert)"
-                                    : "flex items-center gap-1.5 text-[12px] text-text-tertiary"
+                                    ? "flex items-center gap-2 text-[13px] text-(--c-muted)"
+                                    : "flex items-center gap-2 text-[13px] text-text-tertiary"
                                 }
                               >
-                                <DeviceIcon d={DEVICE_ICON[device]} />
-                                <span>{t(`${key}.devices.${device}`)}</span>
+                                {glyph === "apple" || glyph === "windows" ? (
+                                  <PlatformLogo icon={glyph} className="h-4 w-4" />
+                                ) : (
+                                  <DeviceIcon d={DEVICE_ICON[glyph]} />
+                                )}
+                                <span>{t(`${key}.devices.${label}`)}</span>
                               </li>
                             ))}
                           </ul>
+                        ) : null}
+
+                        {/* notes */}
+                        <ul className="relative space-y-2">
+                          {notes?.map((note) => (
+                            <li
+                              key={`${note.ns}.${note.key}`}
+                              className={`flex items-start gap-1.5 text-xs leading-relaxed text-text-muted ${
+                                note.tone === "warn" ? "rounded-xl bg-accent-amber/10 p-3" : ""
+                              }`}
+                            >
+                              {note.tone === "warn" && <WarnIcon />}
+                              <span className={note.tone === "info" ? "text-text-tertiary" : undefined}>
+                                {resolveNote(note)}
+                                {note.guide && (
+                                  <>
+                                    {" "}
+                                    <Link
+                                      href={`/install#${note.guide}`}
+                                      className={`${CARD_RAISED} ${plus ? "font-bold text-(--c-accent)" : "text-accent-teal hover:text-accent-teal-light"}`}
+                                    >
+                                      {t("installGuide")}
+                                    </Link>
+                                  </>
+                                )}
+                                {note.learn && (
+                                  <>
+                                    {" "}
+                                    <Link
+                                      href={note.learn}
+                                      className={`${CARD_RAISED} whitespace-nowrap ${plus ? "font-bold text-(--c-accent)" : "text-accent-teal hover:text-accent-teal-light"}`}
+                                    >
+                                      {tLearn("readMore")}
+                                    </Link>
+                                  </>
+                                )}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* 2 · the foot, pinned to the bottom: date, then the buttons */}
+                      <div className="relative self-end pt-5">
+                        {!comingSoon && key !== "linux" && (
+                          <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
                         )}
 
-                        {comingSoon ? (
-                          <span
-                            className={
-                              plus
-                                ? `${PLUS_CHIP} self-start bg-(--c-inset) text-(--c-tert)`
-                                : "inline-flex self-start rounded-full bg-bg-secondary px-3 py-1.5 text-xs font-semibold text-text-tertiary"
-                            }
-                          >
-                            {t("comingSoon")}
-                          </span>
-                        ) : (
-                          buttons.map((btn) => (
-                            <TrackedDownloadLink
-                              key={btn.labelKey}
-                              location="downloads-page"
-                              platform={key as Exclude<PlatformKey, "linux">}
-                              {...(btn.variant ? { variant: btn.variant } : {})}
-                              href={btn.href}
-                              {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                              {...(btn.download ? { download: true } : {})}
+                        {/* downloads */}
+                        <div className={`${CARD_RAISED} flex flex-col gap-2 [:not(:empty)+&]:mt-4`}>
+                          {comingSoon ? (
+                            <span
                               className={
                                 plus
-                                  ? btn.primary ? PLUS_DL_PRIMARY : PLUS_DL_SECONDARY
-                                  : btn.primary ? BTN_PRIMARY : BTN_SECONDARY
+                                  ? `${PLUS_CHIP} self-start bg-(--c-inset) text-(--c-tert)`
+                                  : "inline-flex self-start rounded-full bg-bg-secondary px-3 py-1.5 text-xs font-semibold text-text-tertiary"
                               }
                             >
-                              {btn.primary ? (
-                                <PlatformLogo icon={btn.logo ?? icon} className="w-4 h-4" />
-                              ) : (
-                                <DownloadIcon className="w-4 h-4" />
-                              )}
-                              {t(btn.labelKey)}
-                            </TrackedDownloadLink>
-                          ))
-                        )}
-
-                        {notes && (
-                          <ul className="mt-3 space-y-1.5">
-                            {notes.map((note) => (
-                              <li
-                                key={`${note.ns}.${note.key}`}
-                                className="flex items-start gap-1.5 text-xs leading-relaxed text-text-muted"
-                              >
-                                {note.tone === "warn" && <WarnIcon />}
-                                <span className={note.tone === "info" ? "text-text-tertiary" : undefined}>
-                                  {resolveNote(note)}
-                                  {note.guide && (
-                                    <>
-                                      {" "}
-                                      <Link
-                                        href={`/install#${note.guide}`}
-                                        className={plus ? "font-bold text-(--c-accent)" : "text-accent-teal hover:text-accent-teal-light"}
-                                      >
-                                        {t("installGuide")}
-                                      </Link>
-                                    </>
-                                  )}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-
-                        <div className="mt-auto pt-5">
-                          {!comingSoon && key !== "linux" && (
-                            <UpdateInfo release={RELEASES[key]} locale={locale} t={t} />
-                          )}
-                          {learnHref && (plus ? (
-                            <Link
-                              href={learnHref}
-                              className="plus-btn mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-(--c-accent)"
-                            >
-                              {t(`${key}.learnMore`)}
-                              <ArrowGlyph className="h-3.5 w-3.5" />
-                            </Link>
-                          ) : (
-                          <Link
-                            href={learnHref}
-                            className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-teal hover:text-accent-teal-light transition-colors"
-                          >
-                            {t(`${key}.learnMore`)}
-                            <span className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
-                              <ArrowIcon />
+                              {t("comingSoon")}
                             </span>
-                          </Link>
-                          ))}
+                          ) : (
+                            buttons.map((btn) => (
+                              <TrackedDownloadLink
+                                key={btn.labelKey}
+                                location="downloads-page"
+                                platform={key as Exclude<PlatformKey, "linux">}
+                                {...(btn.variant ? { variant: btn.variant } : {})}
+                                href={btn.href}
+                                {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                                {...(btn.download ? { download: true } : {})}
+                                className={
+                                  plus
+                                    ? btn.primary ? PLUS_DL_PRIMARY : PLUS_DL_SECONDARY
+                                    : btn.primary ? BTN_PRIMARY : BTN_SECONDARY
+                                }
+                              >
+                                {btn.primary ? (
+                                  <PlatformLogo icon={btn.logo ?? icon} className="w-4 h-4 shrink-0" />
+                                ) : (
+                                  <DownloadIcon className="w-4 h-4 shrink-0" />
+                                )}
+                                {t(btn.labelKey)}
+                              </TrackedDownloadLink>
+                            ))
+                          )}
                         </div>
                       </div>
                     </DetectedCard>

@@ -895,20 +895,3 @@ body {
   .cmp-row[data-open="true"] .cmp-note { @apply opacity-100 translate-y-0; }
   .cmp-note-label { @apply mb-1 text-[11px] uppercase tracking-wider text-text-tertiary; }
 }
-
-/* Downloads setup card — the bar that times each step of the walk-through.
-   Its animationend advances the step, so it is the clock, not decoration; the
-   component never starts autoplay under reduced motion. */
-@keyframes setup-step-fill {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-.setup-step-bar {
-  transform-origin: left;
-  animation-name: setup-step-fill;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-}
-[dir="rtl"] .setup-step-bar {
-  transform-origin: right;
-}

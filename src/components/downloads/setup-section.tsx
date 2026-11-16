@@ -6,6 +6,14 @@ import { PlatformLogo, type PlatformIcon } from "@/components/glyph/platform-ico
 import { PricingBackdrop } from "@/components/glyph/pricing-glyphs";
 import { TrackedDownloadLink } from "./tracked-download-link";
 import { useDetectedPlatform } from "./detected-platform";
+import { Link } from "@/i18n/navigation";
+import {
+  PLUS_CTA_BTN,
+  PLUS_CTA_LEAD,
+  PLUS_CTA_LINK,
+  PLUS_CTA_TITLE,
+  PlusCtaCard,
+} from "@/components/landing/plus-cta-card";
 import type { CtaPlatform, CtaVariant } from "@/lib/track-cta";
 
 /**
@@ -13,11 +21,8 @@ import type { CtaPlatform, CtaVariant } from "@/lib/track-cta";
  * download card (sections/cta.tsx): copy, steps and the download on the left,
  * that card's own picture on the right, the bottom-end corner cut.
  *
- * The steps play through on their own while the card is on screen, a teal bar
- * timing each one; the bar's `animationend` is the clock, so pausing the
- * animation (off screen, hidden tab) pauses the walk-through with it. Choosing a
- * step hands control to the reader and the autoplay stops for good. Reduced
- * motion never starts it.
+ * The steps are a plain numbered list: no autoplay, no highlighted step (Roman,
+ * 2026-11-16). The picture is the chosen platform's own device.
  *
  * Every string arrives resolved from the server: the heading is the platform
  * page's own `howItWorks.title`/`subtitle` and the steps are
@@ -41,24 +46,22 @@ export interface SetupPlatform {
     /** The mark on the button: the store's (App Store, Google Play), not the platform's. */
     logo: PlatformIcon;
   };
+  /** The platform page, linked beside the download in the Calm+ card. */
+  learn?: { href: string; label: string };
+  /** That platform's device: iPhone, Mac display, Galaxy phone, the Windows window. */
+  image: { src: string; bg?: string; alt: string; fit?: "cover" | "contain" };
 }
-
-/** How long each step holds while the walk-through plays. */
-const STEP_MS = 3200;
 
 const BTN =
   "cta-key inline-flex w-full sm:w-auto items-center justify-center gap-2.5 px-6 py-3 rounded-xl " +
   "text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-2 " +
   "focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
 
-/**
- * Calm+ preview (CALM_PLUS_PREVIEW; design-lab/plus/landing.tsx PRICING_GLASS):
- * the same glass, no notch, the picture in an inset tray, the tabs as a
- * segmented pill. The download keycap turns flat via plus.css.
+/*
+ * Calm+ (CALM_PLUS_PREVIEW): the app pages' closing card (landing/plus-cta-card)
+ * with the tabs as a segmented pill and the steps inside it. No glass, no glyph
+ * backdrop: the picture bleeds to the card's end edge, as on /vpn-for-macos.
  */
-const PLUS_GLASS =
-  "relative overflow-hidden rounded-[22px] border border-(--c-accent)/20 " +
-  "bg-gradient-to-br from-(--c-accent)/[0.08] via-(--c-bg)/60 to-(--c-bg)/75 backdrop-blur-md";
 
 export function SetupSection({
   platforms,
@@ -71,12 +74,8 @@ export function SetupSection({
   plus?: boolean;
 }) {
   const [active, setActive] = useState(0);
-  const [step, setStep] = useState(0);
-  const [autoplay, setAutoplay] = useState(false);
-  const [running, setRunning] = useState(false);
   const touched = useRef(false);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const cardRef = useRef<HTMLDivElement>(null);
   const detected = useDetectedPlatform();
   const current = platforms[active];
 
@@ -84,38 +83,12 @@ export function SetupSection({
   useEffect(() => {
     if (touched.current || !detected) return;
     const i = platforms.findIndex((p) => p.key === detected);
-    if (i >= 0) {
-      setActive(i);
-      setStep(0);
-    }
+    if (i >= 0) setActive(i);
   }, [detected, platforms]);
-
-  useEffect(() => {
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setAutoplay(true);
-  }, []);
-
-  // The bar only advances while the card is on screen and the tab is visible.
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el || !autoplay) return;
-    let inView = false;
-    const sync = () => setRunning(inView && !document.hidden);
-    const io = new IntersectionObserver((entries) => {
-      inView = entries[entries.length - 1].isIntersecting;
-      sync();
-    });
-    io.observe(el);
-    document.addEventListener("visibilitychange", sync);
-    return () => {
-      io.disconnect();
-      document.removeEventListener("visibilitychange", sync);
-    };
-  }, [autoplay]);
 
   const selectTab = (i: number) => {
     touched.current = true;
     setActive(i);
-    setStep(0);
   };
 
   const moveTab = (event: React.KeyboardEvent) => {
@@ -138,184 +111,168 @@ export function SetupSection({
     tabRefs.current[next]?.focus();
   };
 
-  const chooseStep = (i: number) => {
-    setAutoplay(false);
-    setStep(i);
-  };
+  const tabs = (
+    <div
+      role="tablist"
+      onKeyDown={moveTab}
+      className={
+        plus
+          ? "inline-flex flex-wrap justify-center self-center lg:self-start gap-1 rounded-[22px] bg-(--c-inset) p-1"
+          : "flex flex-wrap justify-center lg:justify-start gap-2"
+      }
+    >
+      {platforms.map((platform, i) => {
+        const selected = i === active;
+        return (
+          <button
+            key={platform.key}
+            ref={(el) => {
+              tabRefs.current[i] = el;
+            }}
+            type="button"
+            role="tab"
+            id={`setup-tab-${platform.key}`}
+            aria-selected={selected}
+            aria-controls="setup-panel"
+            // Roving tabindex: one stop for the whole set, arrows move within it.
+            tabIndex={selected ? 0 : -1}
+            onClick={() => selectTab(i)}
+            className={
+              plus
+                ? `inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) ${
+                    selected ? "bg-(--c-accent-fill) text-white" : "text-(--c-muted) hover:text-(--c-text)"
+                  }`
+                : `inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    selected
+                      ? "bg-accent-teal/10 text-accent-teal border border-accent-teal/30"
+                      : "cta-flat hover:text-accent-teal"
+                  }`
+            }
+          >
+            <PlatformLogo icon={platform.icon} className="w-4 h-4" />
+            {platform.name}
+          </button>
+        );
+      })}
+    </div>
+  );
+
+  const steps = (
+    <ol key={current.key} className={`${plus ? "mt-6" : "mt-7"} space-y-1.5 text-start max-w-md mx-auto lg:mx-0`}>
+      {current.steps.map((text, i) => (
+        <li key={i} className="flex items-start gap-3 px-3.5 py-3">
+          <span
+            className={`flex-shrink-0 w-6 h-6 rounded-full text-xs flex items-center justify-center ${
+              plus
+                ? "bg-(--c-accent-tint) text-(--c-accent) font-bold"
+                : "bg-accent-teal/10 border border-accent-teal/20 text-accent-teal font-semibold"
+            }`}
+          >
+            {i + 1}
+          </span>
+          <span className="pt-0.5 text-sm md:text-base leading-snug text-text-muted">{text}</span>
+        </li>
+      ))}
+    </ol>
+  );
+
+  const download = (className: string, iconClass: string) => (
+    <TrackedDownloadLink
+      location="downloads-page"
+      platform={current.key}
+      {...(current.cta.variant ? { variant: current.cta.variant } : {})}
+      href={current.cta.href}
+      {...(current.cta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      {...(current.cta.download ? { download: true } : {})}
+      className={className}
+    >
+      <PlatformLogo icon={current.cta.logo} className={iconClass} />
+      {current.cta.label}
+    </TrackedDownloadLink>
+  );
+
+  if (plus) {
+    return (
+      <section className="section relative overflow-hidden">
+        {/* The ASCII field behind the card, as before the Mac-card restyle. */}
+        <PricingBackdrop />
+        <div className="relative mx-auto max-w-site">
+          <PlusCtaCard key={current.key} image={current.image}>
+            {tabs}
+            <div id="setup-panel" role="tabpanel" aria-labelledby={`setup-tab-${current.key}`}>
+              <h2 className={PLUS_CTA_TITLE}>{current.title}</h2>
+              <p className={`mt-4 ${PLUS_CTA_LEAD}`}>{current.subtitle}</p>
+              {steps}
+              <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                {download(`${PLUS_CTA_BTN} w-full sm:w-auto`, "h-5 w-5")}
+                {current.learn && (
+                  <Link href={current.learn.href} className={PLUS_CTA_LINK}>
+                    {current.learn.label}
+                  </Link>
+                )}
+              </div>
+              <div className="mt-6">{ratings}</div>
+            </div>
+          </PlusCtaCard>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className={plus ? "section relative overflow-hidden" : "section relative overflow-hidden bg-bg-secondary/30"}>
+    <section className="section relative overflow-hidden bg-bg-secondary/30">
       <PricingBackdrop />
 
-      <div ref={cardRef} className="relative mx-auto max-w-site">
-        <div className={plus ? PLUS_GLASS : "notch-card relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/[0.08] via-bg-primary/60 to-bg-primary/75 backdrop-blur-md"}>
+      <div className="relative mx-auto max-w-site">
+        <div className="notch-card relative overflow-hidden rounded-2xl border border-accent-teal/20 bg-gradient-to-br from-accent-teal/[0.08] via-bg-primary/60 to-bg-primary/75 backdrop-blur-md">
           <div
             className="absolute top-0 inset-inline-start-0 inset-inline-end-0 h-px bg-gradient-to-r from-transparent via-accent-teal/50 to-transparent"
             aria-hidden="true"
           />
 
-          <div className={plus ? "grid grid-cols-1 gap-2 p-3 lg:grid-cols-[6fr_5fr]" : "grid grid-cols-1 lg:grid-cols-[6fr_5fr]"}>
+          <div className="grid grid-cols-1 lg:grid-cols-[6fr_5fr]">
             {/* ── Copy column ─────────────────────────────────── */}
-            <div className={plus ? "flex flex-col justify-center p-4 sm:p-6 lg:p-10 text-center lg:text-start" : "flex flex-col justify-center p-6 sm:p-8 lg:p-12 text-center lg:text-start"}>
-              <div
-                role="tablist"
-                onKeyDown={moveTab}
-                className={
-                  plus
-                    ? "inline-flex flex-wrap justify-center self-center lg:self-start gap-1 rounded-[22px] bg-(--c-inset) p-1"
-                    : "flex flex-wrap justify-center lg:justify-start gap-2"
-                }
-              >
-                {platforms.map((platform, i) => {
-                  const selected = i === active;
-                  return (
-                    <button
-                      key={platform.key}
-                      ref={(el) => {
-                        tabRefs.current[i] = el;
-                      }}
-                      type="button"
-                      role="tab"
-                      id={`setup-tab-${platform.key}`}
-                      aria-selected={selected}
-                      aria-controls="setup-panel"
-                      // Roving tabindex: one stop for the whole set, arrows move within it.
-                      tabIndex={selected ? 0 : -1}
-                      onClick={() => selectTab(i)}
-                      className={
-                        plus
-                          ? `inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) ${
-                              selected ? "bg-(--c-accent-fill) text-white" : "text-(--c-muted) hover:text-(--c-text)"
-                            }`
-                          : `inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                              selected
-                                ? "bg-accent-teal/10 text-accent-teal border border-accent-teal/30"
-                                : "cta-flat hover:text-accent-teal"
-                            }`
-                      }
-                    >
-                      <PlatformLogo icon={platform.icon} className="w-4 h-4" />
-                      {platform.name}
-                    </button>
-                  );
-                })}
-              </div>
+            <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-12 text-center lg:text-start">
+              {tabs}
 
               <div id="setup-panel" role="tabpanel" aria-labelledby={`setup-tab-${current.key}`}>
-                <h2 className={`mt-7 text-3xl sm:text-4xl lg:text-[clamp(2rem,2.8vw,2.75rem)] ${plus ? "font-bold" : "font-semibold"} text-text-primary leading-tight`}>
+                <h2 className="mt-7 text-3xl sm:text-4xl lg:text-[clamp(2rem,2.8vw,2.75rem)] font-semibold text-text-primary leading-tight">
                   {current.title}
                 </h2>
                 <p className="mt-3 text-text-muted text-base md:text-lg max-w-md mx-auto lg:mx-0">
                   {current.subtitle}
                 </p>
 
-                <ol key={current.key} className="mt-7 space-y-1.5 text-start max-w-md mx-auto lg:mx-0">
-                  {current.steps.map((text, i) => {
-                    const isActive = i === step;
-                    const done = autoplay && i < step;
-                    const upcoming = autoplay && i > step;
-                    return (
-                      <li key={i}>
-                        <button
-                          type="button"
-                          onClick={() => chooseStep(i)}
-                          aria-current={isActive ? "step" : undefined}
-                          className={`group/step relative flex w-full items-start gap-3 overflow-hidden rounded-xl border px-3.5 py-3 text-start transition-colors duration-300 ${
-                            plus
-                              ? isActive
-                                ? "border-transparent bg-(--c-inset)"
-                                : "border-transparent hover:bg-(--c-inset)/60"
-                              : isActive
-                                ? "border-accent-teal/25 bg-accent-teal/[0.06]"
-                                : "border-transparent hover:bg-overlay/5"
-                          }`}
-                        >
-                          <span
-                            className={`flex-shrink-0 w-6 h-6 rounded-full text-xs font-semibold flex items-center justify-center transition-colors duration-300 ${
-                              plus
-                                ? isActive
-                                  ? "bg-(--c-accent-fill) text-white font-bold"
-                                  : "bg-(--c-accent-tint) text-(--c-accent) font-bold"
-                                : isActive
-                                  ? "bg-accent-teal text-white"
-                                  : "bg-accent-teal/10 border border-accent-teal/20 text-accent-teal"
-                            }`}
-                          >
-                            {done ? (
-                              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                              </svg>
-                            ) : (
-                              i + 1
-                            )}
-                          </span>
-                          <span
-                            className={`pt-0.5 text-sm md:text-base leading-snug transition-colors duration-300 ${
-                              isActive
-                                ? "text-text-primary"
-                                : upcoming
-                                  ? "text-text-tertiary group-hover/step:text-text-muted"
-                                  : "text-text-muted"
-                            }`}
-                          >
-                            {text}
-                          </span>
-
-                          {/* The walk-through's clock: when this bar fills, the next step opens. */}
-                          {isActive && autoplay && (
-                            <span
-                              key={`${current.key}-${step}`}
-                              className="setup-step-bar absolute bottom-0 inset-inline-start-0 h-0.5 w-full bg-accent-teal/60"
-                              style={{
-                                animationDuration: `${STEP_MS}ms`,
-                                animationPlayState: running ? "running" : "paused",
-                              }}
-                              onAnimationEnd={() => setStep((s) => (s + 1) % current.steps.length)}
-                              aria-hidden="true"
-                            />
-                          )}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ol>
+                {steps}
 
                 <div className="mt-8 flex flex-col items-center lg:items-start gap-4">
-                  <TrackedDownloadLink
-                    location="downloads-page"
-                    platform={current.key}
-                    {...(current.cta.variant ? { variant: current.cta.variant } : {})}
-                    href={current.cta.href}
-                    {...(current.cta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    {...(current.cta.download ? { download: true } : {})}
-                    className={BTN}
-                  >
-                    <PlatformLogo icon={current.cta.logo} className="w-5 h-5" />
-                    {current.cta.label}
-                  </TrackedDownloadLink>
+                  {download(BTN, "w-5 h-5")}
                   {ratings}
                 </div>
               </div>
             </div>
 
             {/* ── Image column ────────────────────────────────── */}
-            {/* The home CTA card's picture, the same for every platform. It
-                bleeds to the card edges and the notch cuts its bottom-end corner;
-                the spacer holds the image's own aspect, so a taller copy column
-                only crops it sideways. */}
-            <div className={plus ? "relative overflow-hidden rounded-2xl bg-(--c-bg)" : "relative overflow-hidden border-t lg:border-t-0 lg:border-s border-overlay/5"}>
+            {/* The chosen platform's device. It bleeds to the card edges and the
+                notch cuts its bottom-end corner; the spacer holds a fixed aspect,
+                so a taller copy column only crops it sideways. */}
+            <div
+              className="relative overflow-hidden border-t lg:border-t-0 lg:border-s border-overlay/5"
+              style={{ backgroundColor: current.image.bg }}
+            >
               <div className="aspect-[1009/794]" aria-hidden="true" />
               <Image
-                src="/images/dopplerdownload.avif"
-                alt="Doppler VPN app interface"
+                key={current.key}
+                src={current.image.src}
+                alt={current.image.alt}
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
-                className="object-cover"
+                className={current.image.fit === "contain" ? "object-contain p-8" : "object-cover"}
               />
             </div>
           </div>
 
-          {!plus && <span className="notch-edge" aria-hidden="true" />}
+          <span className="notch-edge" aria-hidden="true" />
         </div>
       </div>
     </section>

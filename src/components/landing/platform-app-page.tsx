@@ -40,6 +40,7 @@ import type {
 } from "@/config/platforms/app-page";
 import { AndroidFrame, AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
 import { ANDROID_APK_BUTTON } from "@/config/platforms/android";
+import { PLUS_CTA_LEAD, PLUS_CTA_LINK, PLUS_CTA_TITLE, PlusCtaCard } from "./plus-cta-card";
 
 const SECTION = "py-12 md:py-20";
 const H2 = "font-display text-3xl font-bold leading-tight text-(--c-text) md:text-[40px]";
@@ -712,31 +713,9 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
 
           {/* ── Final CTA ────────────────────────────────────────── */}
           <PlusContainer className="py-10 md:py-16">
-            <div className="grid grid-cols-1 overflow-hidden rounded-[32px] bg-(--c-card) lg:grid-cols-[5fr_6fr]">
-              <div className="flex flex-col justify-center gap-6 p-6 text-center sm:p-10 lg:p-14 lg:text-start">
-                <h2 className={H2}>{t("cta.title")}</h2>
-                <p className="mx-auto max-w-md text-lg text-(--c-muted) lg:mx-0">
-                  {t("cta.subtitle", { days: TERMS.freeTrialDays })}
-                </p>
-                <div id="blog-cta-sentinel" aria-hidden="true" />
-                <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-center">
-                  <StoreButton config={config} button={config.primary} label={t(`hero.${config.primary.labelKey}`)} large />
-                  <Link href="/downloads" className="text-[15px] font-bold text-(--c-accent) hover:underline hover:underline-offset-4">
-                    {s("cta.downloads")}
-                  </Link>
-                </div>
-              </div>
-              {config.ctaImage ? (
-                <div className="relative aspect-[3/2] lg:aspect-auto" style={{ backgroundColor: config.ctaImage.bg }}>
-                  <Image
-                    src={config.ctaImage.src}
-                    alt={s("cta.imageAlt")}
-                    fill
-                    sizes="(min-width: 1024px) 55vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
+            <PlusCtaCard
+              {...(config.ctaImage ? { image: { ...config.ctaImage, alt: s("cta.imageAlt") } } : {})}
+              imageFallback={
                 <GlyphTray index={3} className="aspect-[3/2] lg:aspect-auto lg:min-h-[420px]">
                   <span className="text-(--c-text)">
                     {config.slug === "vpn-for-huawei" ? (
@@ -746,8 +725,18 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                     )}
                   </span>
                 </GlyphTray>
-              )}
-            </div>
+              }
+            >
+              <h2 className={PLUS_CTA_TITLE}>{t("cta.title")}</h2>
+              <p className={PLUS_CTA_LEAD}>{t("cta.subtitle", { days: TERMS.freeTrialDays })}</p>
+              <div id="blog-cta-sentinel" aria-hidden="true" />
+              <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-center">
+                <StoreButton config={config} button={config.primary} label={t(`hero.${config.primary.labelKey}`)} large />
+                <Link href="/downloads" className={PLUS_CTA_LINK}>
+                  {s("cta.downloads")}
+                </Link>
+              </div>
+            </PlusCtaCard>
 
             {/* Other platforms */}
             <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">

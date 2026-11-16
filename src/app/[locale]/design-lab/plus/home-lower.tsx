@@ -1,15 +1,12 @@
 import type { ReactNode } from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ComparisonAccordion } from '@/components/sections/comparison-accordion';
 import { PrivacyVoidBand } from '@/components/glyph/privacy-void-band';
-import { PricingBackdrop } from '@/components/glyph/pricing-glyphs';
 import { HeroCTAsWrapper } from '@/components/hero/hero-ctas-wrapper';
-import { CARD_HAIRLINE } from '@/components/ui/card-recipes';
 import { getRectFlagUrl } from '@/lib/languages';
 import { GUIDE_COVERS } from '@/config/platforms/apple';
-import { PRICING_GLASS } from './landing';
+import { PLUS_CTA_LEAD, PLUS_CTA_TITLE, PlusCtaCard } from '@/components/landing/plus-cta-card';
 import { PlusBlogCard, type PlusPost } from './blog';
 
 export type { PlusPost };
@@ -250,56 +247,44 @@ function Stars() {
 }
 
 /**
- * Pricing's glass over the glyph backdrop, as the shipped CTA; the picture moves
- * into a tray instead of bleeding to the notched edge. HeroCTAs keeps its tracking;
- * plus.css turns its keycap into the flat Calm+ pill.
+ * The app pages' closing card (landing/plus-cta-card, as on /vpn-for-macos): a
+ * flat slab, the studio render bleeding to its end edge. HeroCTAs keeps its
+ * platform detection and tracking; plus.css turns its keycap into the flat pill.
  */
 export function PlusCta() {
   const t = useTranslations('cta');
   const tHero = useTranslations('hero');
   return (
-    <div className="relative overflow-hidden">
-      <PricingBackdrop />
-      <PlusContainer className="relative py-10">
-        <div className={`${PRICING_GLASS} grid grid-cols-1 gap-2 p-3 lg:grid-cols-[6fr_5fr]`}>
-          <div className={CARD_HAIRLINE} aria-hidden="true" />
-          <div className="flex flex-col justify-center gap-6 p-4 text-center sm:p-6 lg:p-10 lg:text-start">
-            <h2 className="font-display text-3xl font-bold leading-tight text-(--c-text) sm:text-4xl lg:text-[clamp(2.25rem,3.3vw,3rem)]">
-              {t('doppler.titleMiddle')} <span className="whitespace-nowrap text-(--c-muted)">{t('doppler.titlePlayful')}</span>
-            </h2>
-            <p className={`mx-auto max-w-md text-lg text-(--c-muted) lg:mx-0`}>{t('doppler.subtitle')}</p>
-            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 lg:justify-start">
-              <span className="flex items-center gap-1.5">
-                <Stars />
-                <span className="text-sm font-bold text-(--c-text)">{tHero('socialProof.rating')}</span>
-                <span className={PLUS_META}>{tHero('socialProof.appStore')}</span>
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Stars />
-                <span className="text-sm font-bold text-(--c-text)">{tHero('socialProof.ratingGooglePlay')}</span>
-                <span className={PLUS_META}>{tHero('socialProof.googlePlay')}</span>
-              </span>
-              <span className={`hidden sm:inline ${PLUS_META}`} aria-hidden="true">·</span>
-              <span className={PLUS_META}>{tHero('socialProof.users')}</span>
-            </div>
-            <div className="pt-1">
-              <HeroCTAsWrapper location="landing-cta" secondaryHref="/downloads" secondaryLabel={tHero('downloadDesktop')} />
-            </div>
-          </div>
-          {/* The studio render the Apple pages use (2026-11-06), on its own backdrop so it bleeds in. */}
-          <div className={`${PLUS_WELL} min-h-56`} style={{ backgroundColor: GUIDE_COVERS['doppler-on-iphone-and-mac'].bg }}>
-            <div className="aspect-[3/2]" aria-hidden="true" />
-            <Image
-              src={GUIDE_COVERS['doppler-on-iphone-and-mac'].src}
-              alt="Doppler VPN on an iPhone held in hand, connected and protected"
-              fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
-            />
-          </div>
+    <PlusContainer className="py-10">
+      <PlusCtaCard
+        image={{
+          ...GUIDE_COVERS['doppler-on-iphone-and-mac'],
+          alt: 'Doppler VPN on an iPhone held in hand, connected and protected',
+        }}
+      >
+        <h2 className={PLUS_CTA_TITLE}>
+          {t('doppler.titleMiddle')} <span className="whitespace-nowrap text-(--c-muted)">{t('doppler.titlePlayful')}</span>
+        </h2>
+        <p className={PLUS_CTA_LEAD}>{t('doppler.subtitle')}</p>
+        <div>
+          <HeroCTAsWrapper location="landing-cta" secondaryHref="/downloads" secondaryLabel={tHero('downloadDesktop')} large />
         </div>
-      </PlusContainer>
-    </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 lg:justify-start">
+          <span className="flex items-center gap-1.5">
+            <Stars />
+            <span className="text-sm font-bold text-(--c-text)">{tHero('socialProof.rating')}</span>
+            <span className={PLUS_META}>{tHero('socialProof.appStore')}</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Stars />
+            <span className="text-sm font-bold text-(--c-text)">{tHero('socialProof.ratingGooglePlay')}</span>
+            <span className={PLUS_META}>{tHero('socialProof.googlePlay')}</span>
+          </span>
+          <span className={`hidden sm:inline ${PLUS_META}`} aria-hidden="true">·</span>
+          <span className={PLUS_META}>{tHero('socialProof.users')}</span>
+        </div>
+      </PlusCtaCard>
+    </PlusContainer>
   );
 }
 

@@ -23,7 +23,8 @@ type T = Awaited<ReturnType<typeof getTranslations>>;
  */
 function SmartScreenNotice({ t }: { t: T }) {
   return (
-    <div className="mt-6 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] p-4 text-start">
+    // `#smartscreen` is the target of the downloads page's Windows card note.
+    <div id="smartscreen" className="mt-6 scroll-mt-28 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] p-4 text-start">
       <div className="flex items-center gap-2 text-sm font-semibold text-accent-gold">
         <ShieldExclamationIcon />
         {t("smartScreen.title")}

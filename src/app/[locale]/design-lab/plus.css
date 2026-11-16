@@ -6,6 +6,8 @@
 .lab-plus {
   --c-accent-ring: rgb(46 196 196 / 0.45);
   --c-lift-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.5);
+  /* One step up, for whole-card links that stand in a row (the downloads cards). */
+  --c-lift-shadow-2: 0 16px 36px -14px rgb(0 0 0 / 0.6);
   /* Jakarta has no basic Cyrillic: ru/uk/bg fall through to Rubik (set only on
      those locales, hence the var() fallback, without which the stack is invalid). */
   --font-plus: var(--font-jakarta), var(--font-rubik, ui-sans-serif), system-ui, sans-serif;
@@ -15,6 +17,7 @@
 .light .lab-plus {
   --c-accent-ring: rgb(0 112 112 / 0.4);
   --c-lift-shadow: 0 10px 24px -16px rgb(20 30 40 / 0.16);
+  --c-lift-shadow-2: 0 16px 36px -16px rgb(20 30 40 / 0.26);
 }
 .lab-plus :is(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-display);
@@ -28,6 +31,9 @@
 }
 .plus-lift:hover {
   box-shadow: var(--c-lift-shadow);
+}
+.plus-lift-2:hover {
+  box-shadow: var(--c-lift-shadow-2);
 }
 
 /* Big figures (prices, days left) in Current's Instrument Serif. */

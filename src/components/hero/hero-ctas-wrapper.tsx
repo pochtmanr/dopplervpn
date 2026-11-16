@@ -11,6 +11,7 @@ interface HeroCTAsWrapperProps {
   secondaryHref?: string;
   secondaryLabel?: string;
   centered?: boolean;
+  large?: boolean;
 }
 
 export function HeroCTAsWrapper({
@@ -18,6 +19,7 @@ export function HeroCTAsWrapper({
   secondaryHref,
   secondaryLabel,
   centered,
+  large,
 }: HeroCTAsWrapperProps) {
   // null until detected on the client: the primary button stays invisible (its
   // box still reserved) so its label and icon never visibly swap.
@@ -35,6 +37,7 @@ export function HeroCTAsWrapper({
       secondaryHref={secondaryHref}
       secondaryLabel={secondaryLabel}
       centered={centered}
+      large={large}
     />
   );
 }

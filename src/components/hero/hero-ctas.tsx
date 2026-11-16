@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { trackCta, type CtaLocation } from "@/lib/track-cta";
 import type { Platform } from "@/lib/detect-platform";
+import { PLUS_CTA_BTN, PLUS_CTA_LINK } from "@/components/landing/plus-cta-card";
 export type { Platform };
 
 const APP_STORE_URL =
@@ -23,6 +24,11 @@ interface HeroCTAsProps {
   secondaryLabel?: string;
   /** Homepage is start-aligned on lg; centered pages pass true. */
   centered?: boolean;
+  /**
+   * The closing download card's pair (landing/plus-cta-card, Calm+ only): the
+   * large teal pill, and the secondary as a plain text link, as on /vpn-for-macos.
+   */
+  large?: boolean;
 }
 
 export function HeroCTAs({
@@ -32,6 +38,7 @@ export function HeroCTAs({
   secondaryHref = "#pricing",
   secondaryLabel,
   centered = false,
+  large = false,
 }: HeroCTAsProps) {
   const t = useTranslations("hero");
 
@@ -50,12 +57,14 @@ export function HeroCTAs({
   /* `cta-key` (globals.css) is the keycap: cap gradient, top rim, no
      bottom edge, and a 1px press on :active. No `bg-*` utility here — the gradient
      is the background, and a utility would paint over it. */
-  const primaryClass =
-    `cta-key inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center text-white rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary ${ready ? "hero-cta-in" : "opacity-0"}`;
+  const primaryClass = large
+    ? `${PLUS_CTA_BTN} w-full sm:w-auto [&_svg]:h-5 [&_svg]:w-5 ${ready ? "hero-cta-in" : "opacity-0"}`
+    : `cta-key inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center text-white rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary ${ready ? "hero-cta-in" : "opacity-0"}`;
 
   /* Filled, but flat on purpose: the deck the key sits on. No bevel, no travel. */
-  const secondaryClass =
-    "cta-flat inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
+  const secondaryClass = large
+    ? PLUS_CTA_LINK
+    : "cta-flat inline-flex items-center justify-center gap-2 px-5 py-3 w-full sm:w-auto text-center rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-teal-light focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary";
 
   const downloadBtn = downloadConfig.external ? (
     <a
@@ -90,7 +99,7 @@ export function HeroCTAs({
   );
 
   return (
-    <div className={`flex flex-col sm:flex-row items-center gap-3 w-full ${centered ? "justify-center" : "justify-center lg:justify-start"}`}>
+    <div className={`flex flex-col sm:flex-row items-center ${large ? "gap-4" : "gap-3"} w-full ${centered ? "justify-center" : "justify-center lg:justify-start"}`}>
       {downloadBtn}
       {secondaryHref.startsWith("#") ? (
         <a href={secondaryHref} className={secondaryClass}>
