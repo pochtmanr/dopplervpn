@@ -305,8 +305,9 @@ type PlatformButton = {
  */
 const SETUP_IMAGE: Record<Exclude<PlatformKey, "linux">, SetupPlatform["image"]> = {
   ios: { ...iosApple.ctaImage!, alt: "Doppler VPN on an iPhone, connected and protected" },
-  mac: macosApple.hero,
-  android: androidApp.hero,
+  // `hero` is optional only for the Linux announcement, which has no setup card.
+  mac: macosApple.hero!,
+  android: androidApp.hero!,
   windows: {
     src: "/images/windows-hero.avif",
     bg: "#1C1C1C",
@@ -329,8 +330,8 @@ const HOW_TO_NS = {
 const PLATFORMS: {
   key: PlatformKey;
   icon: PlatformIcon;
-  /** Omitted on coming-soon cards (no platform page yet). */
-  learnHref?: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows";
+  /** The platform page the whole card links to. Linux links to its announcement page. */
+  learnHref?: "/vpn-for-ios" | "/vpn-for-android" | "/vpn-for-macos" | "/vpn-for-windows" | "/vpn-for-linux";
   buttons: PlatformButton[];
   /** Fifth grid slot: Linux has no build yet — card shows the badge, no download. */
   comingSoon?: boolean;
@@ -461,6 +462,7 @@ const PLATFORMS: {
   {
     key: "linux",
     icon: "linux",
+    learnHref: "/vpn-for-linux",
     comingSoon: true,
     buttons: [],
     notes: [{ ns: "apps", key: "linux.note", tone: "info" }],
@@ -536,6 +538,8 @@ export default async function DownloadsPage({ params }: PageProps) {
   const t = await getTranslations("apps");
   // Platform-specific caveats live in the platform's own namespace — see `notes`.
   const tWindows = await getTranslations("vpnForWindows");
+  // The Linux card links to its announcement page; its link label lives with that page's copy.
+  const tLinux = await getTranslations("vpnForLinux");
   // The ratings row is the same block, and the same real numbers, as the home
   // hero and the home CTA card — so it reuses their strings rather than adding
   // four more keys to 44 locale files.
@@ -682,7 +686,11 @@ export default async function DownloadsPage({ params }: PageProps) {
                     >
                       {!plus && <div className={CARD_HAIRLINE} aria-hidden="true" />}
                       {learnHref && (
-                        <Link href={learnHref} aria-label={t(`${key}.learnMore`)} className={CARD_STRETCHED_LINK} />
+                        <Link
+                          href={learnHref}
+                          aria-label={key === "linux" ? tLinux("learnMore") : t(`${key}.learnMore`)}
+                          className={CARD_STRETCHED_LINK}
+                        />
                       )}
 
                       {/* 1 · the card's own content, flowing with no reserved gaps */}

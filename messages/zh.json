@@ -2798,6 +2798,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Linux 版 Doppler VPN：桌面应用、命令行与自动化",
+      "description": "Doppler VPN 即将登陆 Linux：桌面应用、面向服务器的命令行、任意浏览器登录、接入你自己的服务器，以及供 n8n 和 AI 智能体使用的 API。加入等候名单。"
+    },
+    "footer": "Linux VPN",
+    "learnMore": "了解更多 Linux VPN 详情",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · 即将推出",
+        "title": "Linux 版 Doppler VPN",
+        "subtitle": "给笔记本电脑的桌面应用，给服务器的命令行。从任意浏览器登录，接入你自己的服务器，让自动化流程自己选择国家。",
+        "note": "首先支持 Ubuntu 和 Debian · x86 与 ARM · Fedora 和 Arch 随后"
+      },
+      "waitlist": {
+        "label": "电子邮箱地址",
+        "placeholder": "you@example.com",
+        "button": "通知我",
+        "success": "你已加入名单。",
+        "error": "没有成功，请再试一次。",
+        "privacy": "准备好时只发一封邮件，别无其他。"
+      },
+      "terminal": {
+        "label": "终端预览",
+        "caption": "命令行预览。正式发布前细节可能调整。"
+      },
+      "chapters": {
+        "app": {
+          "kicker": "桌面应用",
+          "title": "同一个 Doppler，Linux 原生",
+          "body": "真正的 Linux 应用，而不是套在窗口里的网页。界面和用词与 Mac、Windows 上的 Doppler 一致：一个连接按钮、一份服务器列表和一个 Kill Switch。",
+          "points": {
+            "p1": "跟随你的浅色或深色主题",
+            "p2": "为 GNOME 和 KDE 打造，支持 X11 与 Wayland",
+            "p3": "与手机和电脑使用同一个账户"
+          }
+        },
+        "cli": {
+          "kicker": "命令行",
+          "title": "一条命令，完整的 VPN",
+          "body": "服务器没有屏幕，所以 Linux 版 Doppler 从终端开始。应用能做的每件事都是一条命令，输出可供脚本读取。",
+          "points": {
+            "p1": "连接、切换国家、查看状态",
+            "p2": "为脚本提供 JSON 输出",
+            "p3": "作为系统服务运行，重启后自动恢复"
+          }
+        },
+        "login": {
+          "kicker": "登录",
+          "title": "从任意浏览器登录",
+          "body": "运行登录命令，在手机或笔记本电脑上打开它给出的链接。批准这台设备，终端就登录好了。不必通过 SSH 输入账户 ID。",
+          "points": {
+            "p1": "链接和二维码直接显示在终端里",
+            "p2": "一次性密钥，供自动部署的服务器使用",
+            "p3": "如果你愿意，账户 ID 依然可用"
+          }
+        },
+        "servers": {
+          "kicker": "你自己的服务器",
+          "title": "接入你自己的服务器",
+          "body": "Linux 版 Doppler 也能连接不属于我们的服务器。粘贴一条 VLESS 链接或订阅地址，或者用我们的开源部署工具包把你自己的 VPS 变成服务器。需要有效的 Doppler 套餐。",
+          "points": {
+            "p1": "从常见面板导入链接和订阅",
+            "p2": "开源工具包，一条命令部署你的服务器",
+            "p3": "Kill Switch 和安全规则依然生效"
+          }
+        },
+        "automation": {
+          "kicker": "自动化",
+          "title": "让工作流自己选择国家",
+          "body": "Doppler 为你需要的每个国家打开一个本地端口。一个请求走德国，下一个走美国，同时进行，无需切换整台服务器。n8n 和 AI 智能体可以自行打开和关闭这些端口。",
+          "points": {
+            "p1": "面向 AI 智能体的本地 API 和 MCP 服务器",
+            "p2": "n8n 节点，以及可与之并排运行的 Docker 镜像",
+            "p3": "你开启之前保持关闭，默认不对互联网开放"
+          }
+        },
+        "safe": {
+          "kicker": "为服务器而生",
+          "title": "你的 SSH 会话不会断",
+          "body": "让整台服务器走 VPN，通常会切断你正在输入的那条连接。Doppler 让入站连接保留各自的路由，并请你确认这次变更。如果你无法确认，它会自动撤销。",
+          "points": {
+            "p1": "连接期间，入站 SSH 照常工作",
+            "p2": "未确认的变更会自动回滚",
+            "p3": "Docker 容器遵循同样的规则"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "银行卡或加密货币",
+          "body": "在网站上付款。不经应用商店扣费，也不会在你不知情时续订。"
+        }
+      },
+      "setup": {
+        "title": "按顺序推出的内容",
+        "subtitle": "Linux 版分三步发布。等候名单会收到第一步的通知。",
+        "s1": {
+          "title": "命令行",
+          "body": "适用于 Ubuntu 和 Debian 的 dopplervpn 命令及其后台服务。浏览器登录、每个国家一个端口以及 SSH 保护从第一天起就有。"
+        },
+        "s2": {
+          "title": "自有服务器与自动化",
+          "body": "导入你自己的服务器、开源部署工具包、本地 API、MCP 服务器、n8n 节点和 Docker 镜像。"
+        },
+        "s3": {
+          "title": "桌面应用",
+          "body": "桌面应用，随后是 Fedora 和 Arch 的软件包。安全的中继就绪后，再支持 Make.com。"
+        }
+      },
+      "faq": {
+        "title": "关于 Linux 上的 Doppler 的常见问题",
+        "q1": {
+          "question": "Linux 版 Doppler 什么时候发布？",
+          "answer": "目前还没有日期，我们也不想随口猜一个。命令行先到，桌面应用随后。在本页留下邮箱，等第一个版本可以安装时，我们会给你发一封邮件。"
+        },
+        "q2": {
+          "question": "它将支持哪些 Linux 发行版？",
+          "answer": "首先是 Ubuntu 和 Debian，支持 x86-64 和 ARM64，通过 apt 从签名软件源安装。Fedora 和 Arch 的软件包随后推出。"
+        },
+        "q3": {
+          "question": "价格是多少？",
+          "answer": "与其他 Doppler 应用相同的套餐，每月 {price} 起。Linux 没有单独的价格。自有服务器、国家端口和自动化需要有效的套餐。"
+        },
+        "q4": {
+          "question": "我能连接自己的服务器或其他服务商吗？",
+          "answer": "可以。粘贴来自其他服务商或你自己面板的 VLESS 链接或订阅地址，或者用我们的开源工具包在你的 VPS 上搭建服务器。Doppler 的隐私承诺适用于 Doppler 的服务器。你添加的服务器由它的所有者运营。"
+        },
+        "q5": {
+          "question": "它如何与 n8n 和 AI 智能体配合？",
+          "answer": "Doppler 在同一台机器上运行一个小型 API。n8n 可以通过本地端口让每个请求走不同的国家，AI 智能体可以用内置的 MCP 服务器打开端口或切换位置。它默认关闭，并由令牌保护。"
+        },
+        "q6": {
+          "question": "它能和 Make.com 一起用吗？",
+          "answer": "发布时还不行。Make 运行在云端，无法访问你自己服务器上的程序，因此需要一个中继，我们想把它认真做好。计划在本地自动化发布之后推出。"
+        },
+        "q7": {
+          "question": "它会不会把我锁在自己的服务器外面？",
+          "answer": "它的设计就是为了避免这种情况。入站连接保留各自的路由，而对整台服务器路由的变更必须在你设定的时间内确认，否则会被撤销。"
+        }
+      },
+      "cta": {
+        "title": "成为第一批安装的人",
+        "subtitle": "留下邮箱，Linux 版 Doppler 准备好时我们会告诉你。"
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "华为和荣耀手机的 Doppler VPN：无需 Google 服务",

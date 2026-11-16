@@ -65,7 +65,7 @@ describe("guide order", () => {
 describe("Apple page images", () => {
   it("every config image and guide cover exists", () => {
     const srcs = [
-      ...[iosApple, macosApple, androidApp, huaweiApp].flatMap((c) => [c.hero.src, ...c.tour.map((t) => t.image.src), ...c.chapters.flatMap((ch) => ("image" in ch ? [ch.image.src] : []))]),
+      ...[iosApple, macosApple, androidApp, huaweiApp].flatMap((c) => [c.hero!.src, ...c.tour.map((t) => t.image.src), ...c.chapters.flatMap((ch) => ("image" in ch ? [ch.image.src] : []))]),
       ...Object.values(GUIDE_COVERS).map((c) => c.src),
     ];
     for (const src of srcs) expect(existsSync(publicFile(src)), src).toBe(true);

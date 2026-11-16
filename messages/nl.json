@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN voor Linux: app, opdrachtregel en automatiseringen",
+      "description": "Doppler VPN komt naar Linux: een desktop-app, een opdrachtregel voor servers, inloggen vanuit elke browser, je eigen servers en een API voor n8n en AI-agents. Zet je op de wachtlijst."
+    },
+    "footer": "VPN voor Linux",
+    "learnMore": "Meer informatie over VPN voor Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Binnenkort",
+        "title": "Doppler VPN voor Linux",
+        "subtitle": "Een desktop-app voor je laptop en een opdrachtregel voor je servers. Log in vanuit elke browser, neem je eigen servers mee en laat je automatiseringen het land kiezen.",
+        "note": "Eerst Ubuntu en Debian · x86 en ARM · Fedora en Arch volgen"
+      },
+      "waitlist": {
+        "label": "E-mailadres",
+        "placeholder": "you@example.com",
+        "button": "Laat het me weten",
+        "success": "Je staat op de lijst.",
+        "error": "Dat lukte niet. Probeer het opnieuw.",
+        "privacy": "Eén e-mail zodra het klaar is. Verder niets."
+      },
+      "terminal": {
+        "label": "Voorbeeld van de terminal",
+        "caption": "Een voorproefje van de opdrachtregel. Details kunnen nog veranderen voor de release."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Desktop-app",
+          "title": "Dezelfde Doppler, native op Linux",
+          "body": "Een echte Linux-app, geen webpagina in een venster. Met dezelfde schermen en dezelfde woorden als Doppler op Mac en Windows: één knop om te verbinden, een serverlijst en een kill switch.",
+          "points": {
+            "p1": "Volgt je lichte of donkere thema",
+            "p2": "Gemaakt voor GNOME en KDE, op X11 en Wayland",
+            "p3": "Hetzelfde account als op je telefoon en je computer"
+          }
+        },
+        "cli": {
+          "kicker": "Opdrachtregel",
+          "title": "Een volledige VPN in één opdracht",
+          "body": "Servers hebben geen scherm, dus Doppler voor Linux begint in de terminal. Alles wat de app kan, is een opdracht, met uitvoer die scripts kunnen lezen.",
+          "points": {
+            "p1": "Verbinden, van land wisselen en de status bekijken",
+            "p2": "JSON-uitvoer voor je scripts",
+            "p3": "Draait als systeemdienst en komt terug na een herstart"
+          }
+        },
+        "login": {
+          "kicker": "Inloggen",
+          "title": "Log in vanuit elke browser",
+          "body": "Voer de login-opdracht uit en open de link die verschijnt, op je telefoon of je laptop. Keur het apparaat goed en de terminal is ingelogd. Geen account-ID intypen via SSH.",
+          "points": {
+            "p1": "Een link en een QR-code, direct in de terminal",
+            "p2": "Eenmalige sleutels voor servers die zichzelf instellen",
+            "p3": "Je account-ID werkt nog steeds als je dat liever hebt"
+          }
+        },
+        "servers": {
+          "kicker": "Je eigen servers",
+          "title": "Neem je eigen servers mee",
+          "body": "Doppler voor Linux verbindt ook met servers die niet van ons zijn. Plak een VLESS-link of een abonnementsadres, of maak van je eigen VPS een server met onze open installatiekit. Je hebt er een actief Doppler-abonnement voor nodig.",
+          "points": {
+            "p1": "Importeert links en abonnementen uit gangbare panels",
+            "p2": "Een opensourcekit die je server met één opdracht instelt",
+            "p3": "De kill switch en de veiligheidsregels blijven gelden"
+          }
+        },
+        "automation": {
+          "kicker": "Automatiseringen",
+          "title": "Laat je workflows het land kiezen",
+          "body": "Doppler opent een lokale poort voor elk land dat je nodig hebt. Stuur het ene verzoek via Duitsland en het volgende via de Verenigde Staten, tegelijk, zonder de hele server om te leiden. n8n en AI-agents kunnen deze poorten zelf openen en sluiten.",
+          "points": {
+            "p1": "Een lokale API en een MCP-server voor AI-agents",
+            "p2": "Een node voor n8n en een Docker-image om ernaast te draaien",
+            "p3": "Uit tot jij het aanzet, en standaard dicht voor het internet"
+          }
+        },
+        "safe": {
+          "kicker": "Gebouwd voor servers",
+          "title": "Je SSH-sessie blijft overeind",
+          "body": "Een hele server door een VPN sturen verbreekt meestal de verbinding waarin je zit te typen. Doppler houdt inkomende verbindingen op hun eigen route en vraagt je de wijziging te bevestigen. Lukt dat niet, dan draait het de wijziging terug.",
+          "points": {
+            "p1": "Inkomende SSH blijft werken terwijl je verbonden bent",
+            "p2": "Wijzigingen die je niet bevestigt, worden vanzelf teruggedraaid",
+            "p3": "Docker-containers volgen dezelfde regels"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kaart of crypto",
+          "body": "Betaal op de website. Er wordt niets via een winkel afgerekend en niets wordt zonder jou verlengd."
+        }
+      },
+      "setup": {
+        "title": "Wat er komt, op volgorde",
+        "subtitle": "Linux verschijnt in drie stappen. De wachtlijst hoort van de eerste.",
+        "s1": {
+          "title": "Opdrachtregel",
+          "body": "De opdracht dopplervpn en de bijbehorende achtergronddienst voor Ubuntu en Debian. Inloggen via de browser, een poort per land en de SSH-bescherming zitten er vanaf dag één in."
+        },
+        "s2": {
+          "title": "Eigen servers en automatiseringen",
+          "body": "Je eigen servers importeren, de open installatiekit, de lokale API, de MCP-server, de n8n-node en de Docker-image."
+        },
+        "s3": {
+          "title": "Desktop-app",
+          "body": "De app voor je desktop, daarna pakketten voor Fedora en Arch. Make.com volgt zodra er een veilige relay klaar is."
+        }
+      },
+      "faq": {
+        "title": "Vragen over Doppler op Linux",
+        "q1": {
+          "question": "Wanneer komt Doppler voor Linux uit?",
+          "answer": "Er is nog geen datum en we gokken liever niet. De opdrachtregel komt eerst, de desktop-app daarna. Laat je e-mailadres achter op deze pagina en we schrijven je één keer, zodra de eerste versie te installeren is."
+        },
+        "q2": {
+          "question": "Welke Linux-distributies worden ondersteund?",
+          "answer": "Eerst Ubuntu en Debian, op x86-64 en ARM64, geïnstalleerd met apt vanuit een ondertekende repository. Pakketten voor Fedora en Arch volgen."
+        },
+        "q3": {
+          "question": "Wat gaat het kosten?",
+          "answer": "Hetzelfde abonnement als elke andere Doppler-app, vanaf {price} per maand. Er is geen aparte prijs voor Linux. Voor eigen servers, landpoorten en automatiseringen is een actief abonnement nodig."
+        },
+        "q4": {
+          "question": "Kan ik verbinden met mijn eigen server of een andere aanbieder?",
+          "answer": "Ja. Plak een VLESS-link of een abonnementsadres van een andere aanbieder of van je eigen panel, of zet een server op je VPS op met onze open kit. De privacybeloften van Doppler gelden voor de servers van Doppler. Een server die jij toevoegt, wordt beheerd door de eigenaar ervan."
+        },
+        "q5": {
+          "question": "Hoe werkt het met n8n en AI-agents?",
+          "answer": "Doppler draait een kleine API op dezelfde machine. n8n kan elk verzoek via een ander land sturen met een lokale poort, en AI-agents kunnen de ingebouwde MCP-server gebruiken om een poort te openen of van locatie te wisselen. Het staat standaard uit en is beveiligd met een token."
+        },
+        "q6": {
+          "question": "Gaat het werken met Make.com?",
+          "answer": "Niet bij de lancering. Make draait in de cloud en kan een programma op je eigen server niet bereiken. Daarvoor is een relay nodig die we zorgvuldig willen bouwen. Die staat gepland nadat de lokale automatiseringen uit zijn."
+        },
+        "q7": {
+          "question": "Kan het me buitensluiten van mijn server?",
+          "answer": "Het is gebouwd om dat te voorkomen. Inkomende verbindingen houden hun eigen route, en een wijziging van de route van de hele server moet je bevestigen binnen een tijd die je zelf instelt, anders wordt ze teruggedraaid."
+        }
+      },
+      "cta": {
+        "title": "Installeer het als een van de eersten",
+        "subtitle": "Laat je e-mailadres achter en we laten je weten wanneer Doppler voor Linux klaar is."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN voor Huawei en Honor: geen Google-diensten nodig",

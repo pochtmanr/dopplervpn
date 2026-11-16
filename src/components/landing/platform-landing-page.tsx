@@ -503,7 +503,14 @@ export async function PlatformLandingPage({
         </section>
       </main>
       </Scope>
-      <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} />
+      {/* Same rule as seo-landing-page.tsx: the Calm+ pill needs the shell's tokens around it. */}
+      {calmPlusPreview ? (
+        <PlusPageShell>
+          <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} plus />
+        </PlusPageShell>
+      ) : (
+        <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={slug} />
+      )}
       <Footer />
     </>
   );

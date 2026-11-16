@@ -3,6 +3,8 @@ import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { rateLimit } from '@/lib/rate-limit';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Platforms that are, or were, announced ahead of a download. Anything else is refused. */
+const PLATFORMS = ['windows', 'linux'] as const;
 
 export async function POST(req: NextRequest) {
   const rl = rateLimit(req, { limit: 5, windowMs: 60_000, prefix: 'waitlist' });
@@ -16,8 +18,11 @@ export async function POST(req: NextRequest) {
       locale?: string;
     };
 
-    if (!email || !EMAIL_REGEX.test(email)) {
+    if (typeof email !== 'string' || email.length > 254 || !EMAIL_REGEX.test(email)) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+    }
+    if (platform !== undefined && !(PLATFORMS as readonly string[]).includes(platform)) {
+      return NextResponse.json({ error: 'Invalid platform' }, { status: 400 });
     }
 
     const supabase = createUntypedAdminClient();
@@ -25,7 +30,7 @@ export async function POST(req: NextRequest) {
     const { error } = await supabase.from('waitlist').insert({
       email: email.toLowerCase().trim(),
       platform: platform || 'windows',
-      locale: locale || null,
+      locale: typeof locale === 'string' ? locale.slice(0, 12) : null,
     });
 
     if (error) {

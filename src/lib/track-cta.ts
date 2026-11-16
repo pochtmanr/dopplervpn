@@ -34,6 +34,7 @@ export type CtaLocation =
   | "vpn-for-ipad"
   | "vpn-for-android"
   | "vpn-for-huawei"
+  | "vpn-for-linux"
   | "vpn-for-macos"
   | "guides"
   | "vpn-for-windows"
@@ -70,6 +71,8 @@ export type CtaPlatform =
   | "huawei"
   | "mac"
   | "windows"
+  // Announced, no download yet: the page shows a waitlist form, so no CTA event fires for it.
+  | "linux"
   | "desktop"
   | "telegram";
 

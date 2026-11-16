@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN priekš Linux: lietotne, komandrinda un automatizācijas",
+      "description": "Doppler VPN nāk uz Linux: darbvirsmas lietotne, komandrinda serveriem, pierakstīšanās no jebkuras pārlūkprogrammas, jūsu pašu serveri un API priekš n8n un MI aģentiem. Pierakstieties gaidīšanas sarakstā."
+    },
+    "footer": "VPN priekš Linux",
+    "learnMore": "Uzzināt vairāk par VPN priekš Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Drīzumā",
+        "title": "Doppler VPN priekš Linux",
+        "subtitle": "Darbvirsmas lietotne jūsu klēpjdatoram un komandrinda jūsu serveriem. Pierakstieties no jebkuras pārlūkprogrammas, izmantojiet savus serverus un ļaujiet automatizācijām pašām izvēlēties valsti.",
+        "note": "Vispirms Ubuntu un Debian · x86 un ARM · Fedora un Arch vēlāk"
+      },
+      "waitlist": {
+        "label": "E-pasta adrese",
+        "placeholder": "you@example.com",
+        "button": "Paziņojiet man",
+        "success": "Jūs esat sarakstā.",
+        "error": "Neizdevās. Mēģiniet vēlreiz.",
+        "privacy": "Viens e-pasts, kad būs gatavs. Nekas cits."
+      },
+      "terminal": {
+        "label": "Termināļa priekšskatījums",
+        "caption": "Komandrindas priekšskatījums. Līdz izlaišanai detaļas var mainīties."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Darbvirsmas lietotne",
+          "title": "Tas pats Doppler, veidots tieši Linux",
+          "body": "Īsta Linux lietotne, nevis tīmekļa lapa logā. Tajā ir tie paši ekrāni un tie paši vārdi kā Doppler lietotnē Mac un Windows datoros: viena poga savienojumam, serveru saraksts un kill switch.",
+          "points": {
+            "p1": "Pielāgojas jūsu gaišajam vai tumšajam motīvam",
+            "p2": "Veidota GNOME un KDE videi, darbojas X11 un Wayland",
+            "p3": "Tas pats konts, kas tālrunī un datorā"
+          }
+        },
+        "cli": {
+          "kicker": "Komandrinda",
+          "title": "Pilnvērtīgs VPN ar vienu komandu",
+          "body": "Serveriem nav ekrāna, tāpēc Doppler priekš Linux sākas terminālī. Viss, ko prot lietotne, ir komanda, un tās izvadi var nolasīt skripti.",
+          "points": {
+            "p1": "Savienojieties, mainiet valsti un pārbaudiet statusu",
+            "p2": "JSON izvade jūsu skriptiem",
+            "p3": "Darbojas kā sistēmas pakalpojums un atgriežas pēc pārstartēšanas"
+          }
+        },
+        "login": {
+          "kicker": "Pierakstīšanās",
+          "title": "Pierakstieties no jebkuras pārlūkprogrammas",
+          "body": "Palaidiet pierakstīšanās komandu un atveriet tās parādīto saiti tālrunī vai klēpjdatorā. Apstipriniet ierīci, un terminālis ir pierakstīts. Konta ID nav jāraksta caur SSH.",
+          "points": {
+            "p1": "Saite un QR kods tieši terminālī",
+            "p2": "Vienreizējas atslēgas serveriem, kas iestatās paši",
+            "p3": "Jūsu konta ID joprojām darbojas, ja tā jums ērtāk"
+          }
+        },
+        "servers": {
+          "kicker": "Jūsu pašu serveri",
+          "title": "Izmantojiet savus serverus",
+          "body": "Doppler priekš Linux savienojas arī ar serveriem, kas nav mūsu. Ielīmējiet VLESS saiti vai abonementa adresi, vai arī pārvērtiet savu VPS par serveri ar mūsu atvērto uzstādīšanas komplektu. Nepieciešams aktīvs Doppler plāns.",
+          "points": {
+            "p1": "Importē saites un abonementus no izplatītiem paneļiem",
+            "p2": "Atvērtā koda komplekts, kas jūsu serveri iestata ar vienu komandu",
+            "p3": "Kill switch un drošības noteikumi joprojām ir spēkā"
+          }
+        },
+        "automation": {
+          "kicker": "Automatizācijas",
+          "title": "Ļaujiet darbplūsmām pašām izvēlēties valsti",
+          "body": "Doppler atver lokālu portu katrai valstij, kas jums vajadzīga. Vienu pieprasījumu sūtiet caur Vāciju un nākamo caur Amerikas Savienotajām Valstīm, vienlaikus un nepārvirzot visu serveri. n8n un MI aģenti šos portus var atvērt un aizvērt paši.",
+          "points": {
+            "p1": "Lokāla API un MCP serveris MI aģentiem",
+            "p2": "Mezgls priekš n8n un Docker attēls, kas darbojas blakus",
+            "p3": "Izslēgts, līdz to ieslēdzat, un pēc noklusējuma slēgts internetam"
+          }
+        },
+        "safe": {
+          "kicker": "Veidots serveriem",
+          "title": "Jūsu SSH sesija nepārtrūkst",
+          "body": "Novirzot visu serveri caur VPN, parasti pārtrūkst savienojums, kurā pašlaik rakstāt. Doppler atstāj ienākošos savienojumus to pašu maršrutā un lūdz apstiprināt izmaiņas. Ja nevarat, tās tiek atsauktas.",
+          "points": {
+            "p1": "Ienākošais SSH turpina darboties arī savienojuma laikā",
+            "p2": "Neapstiprinātas izmaiņas tiek atsauktas pašas",
+            "p3": "Docker konteineri ievēro tos pašus noteikumus"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Karte vai kriptovalūta",
+          "body": "Maksājiet vietnē. Nekas netiek iekasēts caur veikalu, un nekas netiek atjaunots bez jums."
+        }
+      },
+      "setup": {
+        "title": "Kas iznāks un kādā secībā",
+        "subtitle": "Linux versija iznāk trīs soļos. Gaidīšanas saraksts uzzina par pirmo.",
+        "s1": {
+          "title": "Komandrinda",
+          "body": "Komanda dopplervpn un tās fona pakalpojums priekš Ubuntu un Debian. Pierakstīšanās caur pārlūkprogrammu, ports katrai valstij un SSH aizsardzība ir pieejami no pirmās dienas."
+        },
+        "s2": {
+          "title": "Savi serveri un automatizācijas",
+          "body": "Savu serveru imports, atvērtais uzstādīšanas komplekts, lokālā API, MCP serveris, n8n mezgls un Docker attēls."
+        },
+        "s3": {
+          "title": "Darbvirsmas lietotne",
+          "body": "Lietotne jūsu darbvirsmai, pēc tam pakotnes priekš Fedora un Arch. Make.com atbalsts sekos, kad būs gatavs drošs retranslators."
+        }
+      },
+      "faq": {
+        "title": "Jautājumi par Doppler Linux sistēmā",
+        "q1": {
+          "question": "Kad iznāks Doppler priekš Linux?",
+          "answer": "Datuma vēl nav, un mēs nevēlamies minēt. Vispirms nāk komandrinda, pēc tās darbvirsmas lietotne. Atstājiet savu e-pastu šajā lapā, un mēs uzrakstīsim vienu reizi, kad pirmo versiju varēs instalēt."
+        },
+        "q2": {
+          "question": "Kuras Linux distribūcijas tiks atbalstītas?",
+          "answer": "Vispirms Ubuntu un Debian, uz x86-64 un ARM64, instalējot ar apt no parakstīta repozitorija. Pakotnes priekš Fedora un Arch sekos."
+        },
+        "q3": {
+          "question": "Cik tas maksās?",
+          "answer": "Tas pats plāns kā visām pārējām Doppler lietotnēm, no {price} mēnesī. Atsevišķas cenas Linux sistēmai nav. Saviem serveriem, valstu portiem un automatizācijām nepieciešams aktīvs plāns."
+        },
+        "q4": {
+          "question": "Vai varu savienoties ar savu serveri vai citu pakalpojumu sniedzēju?",
+          "answer": "Jā. Ielīmējiet VLESS saiti vai abonementa adresi no cita pakalpojumu sniedzēja vai sava paneļa, vai arī iestatiet serveri savā VPS ar mūsu atvērto komplektu. Doppler privātuma solījumi attiecas uz Doppler serveriem. Serveri, ko pievienojat jūs, pārvalda tā īpašnieks."
+        },
+        "q5": {
+          "question": "Kā tas darbojas ar n8n un MI aģentiem?",
+          "answer": "Doppler tajā pašā datorā palaiž nelielu API. n8n katru pieprasījumu var sūtīt caur citu valsti, izmantojot lokālu portu, un MI aģenti ar iebūvēto MCP serveri var atvērt portu vai mainīt atrašanās vietu. Pēc noklusējuma tas ir izslēgts un aizsargāts ar pilnvaru."
+        },
+        "q6": {
+          "question": "Vai tas darbosies ar Make.com?",
+          "answer": "Izlaišanas brīdī nē. Make darbojas mākonī un nevar sasniegt programmu jūsu serverī, tāpēc ir vajadzīgs retranslators, ko vēlamies izveidot rūpīgi. Tas ir plānots pēc lokālo automatizāciju iznākšanas."
+        },
+        "q7": {
+          "question": "Vai tas var liegt man piekļuvi manam serverim?",
+          "answer": "Tas ir veidots tā, lai tas nenotiktu. Ienākošie savienojumi saglabā savu maršrutu, un visa servera maršruta maiņa jāapstiprina jūsu noteiktajā laikā, citādi tā tiek atsaukta."
+        }
+      },
+      "cta": {
+        "title": "Instalējiet to vieni no pirmajiem",
+        "subtitle": "Atstājiet savu e-pastu, un mēs paziņosim, kad Doppler priekš Linux būs gatavs."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN priekš Huawei un Honor: Google pakalpojumi nav vajadzīgi",

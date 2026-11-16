@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN Linuxile: rakendus, käsurida ja automatiseerimine",
+      "description": "Doppler VPN jõuab Linuxile: töölauarakendus, käsurida serveritele, sisselogimine mis tahes brauserist, teie enda serverid ning API n8n-i ja tehisaru agentide jaoks. Pange end ootenimekirja."
+    },
+    "footer": "VPN Linuxile",
+    "learnMore": "Loe lähemalt VPN-ist Linuxile",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Varsti",
+        "title": "Doppler VPN Linuxile",
+        "subtitle": "Töölauarakendus teie sülearvutile ja käsurida teie serveritele. Logige sisse mis tahes brauserist, lisage oma serverid ja laske automatiseerimistel ise riik valida.",
+        "note": "Esmalt Ubuntu ja Debian · x86 ja ARM · Fedora ja Arch hiljem"
+      },
+      "waitlist": {
+        "label": "E-posti aadress",
+        "placeholder": "you@example.com",
+        "button": "Andke mulle teada",
+        "success": "Olete nimekirjas.",
+        "error": "See ei õnnestunud. Proovige uuesti.",
+        "privacy": "Üks e-kiri, kui see on valmis. Ei midagi muud."
+      },
+      "terminal": {
+        "label": "Terminali eelvaade",
+        "caption": "Käsurea eelvaade. Üksikasjad võivad enne väljalaset muutuda."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Töölauarakendus",
+          "title": "Sama Doppler, Linuxile omaselt",
+          "body": "Päris Linuxi rakendus, mitte veebileht aknas. Selles on samad vaated ja samad sõnad nagu Doppleris Macis ja Windowsis: üks nupp ühendamiseks, serverite loend ja kill switch.",
+          "points": {
+            "p1": "Järgib teie heledat või tumedat teemat",
+            "p2": "Loodud GNOME'i ja KDE jaoks, X11-s ja Waylandis",
+            "p3": "Sama konto mis telefonis ja arvutis"
+          }
+        },
+        "cli": {
+          "kicker": "Käsurida",
+          "title": "Täielik VPN ühe käsuga",
+          "body": "Serveritel pole ekraani, seega algab Doppler Linuxile terminalist. Kõik, mida rakendus oskab, on käsk, ja selle väljundit saavad lugeda skriptid.",
+          "points": {
+            "p1": "Ühendage, vahetage riiki ja kontrollige olekut",
+            "p2": "JSON-väljund teie skriptidele",
+            "p3": "Töötab süsteemiteenusena ja taastub pärast taaskäivitust"
+          }
+        },
+        "login": {
+          "kicker": "Sisselogimine",
+          "title": "Logige sisse mis tahes brauserist",
+          "body": "Käivitage sisselogimiskäsk ja avage kuvatud link telefonis või sülearvutis. Kinnitage seade ja terminal ongi sisse logitud. Konto ID-d ei pea SSH kaudu trükkima.",
+          "points": {
+            "p1": "Link ja QR-kood otse terminalis",
+            "p2": "Ühekordsed võtmed serveritele, mis seadistavad end ise",
+            "p3": "Teie konto ID töötab endiselt, kui seda eelistate"
+          }
+        },
+        "servers": {
+          "kicker": "Teie enda serverid",
+          "title": "Lisage oma serverid",
+          "body": "Doppler Linuxile ühendub ka serveritega, mis ei ole meie omad. Kleepige VLESS-link või tellimuse aadress või muutke oma VPS serveriks meie avatud paigalduskomplektiga. Selleks on vaja kehtivat Doppleri paketti.",
+          "points": {
+            "p1": "Impordib linke ja tellimusi levinud paneelidest",
+            "p2": "Avatud lähtekoodiga komplekt, mis seadistab teie serveri ühe käsuga",
+            "p3": "Kill switch ja turvareeglid kehtivad endiselt"
+          }
+        },
+        "automation": {
+          "kicker": "Automatiseerimine",
+          "title": "Laske töövoogudel ise riik valida",
+          "body": "Doppler avab kohaliku pordi iga riigi jaoks, mida vajate. Saatke üks päring läbi Saksamaa ja järgmine läbi Ameerika Ühendriikide, samal ajal ja kogu serverit ümber suunamata. n8n ja tehisaru agendid saavad neid porte ise avada ja sulgeda.",
+          "points": {
+            "p1": "Kohalik API ja MCP-server tehisaru agentidele",
+            "p2": "Sõlm n8n-i jaoks ja Dockeri tõmmis, mis töötab selle kõrval",
+            "p3": "Välja lülitatud, kuni selle sisse lülitate, ja vaikimisi internetile suletud"
+          }
+        },
+        "safe": {
+          "kicker": "Loodud serveritele",
+          "title": "Teie SSH-seanss jääb püsima",
+          "body": "Kogu serveri suunamine läbi VPN-i katkestab tavaliselt just selle ühenduse, kus te parajasti trükite. Doppler hoiab sissetulevad ühendused nende enda marsruudil ja palub teil muudatuse kinnitada. Kui te ei saa, võtab ta selle tagasi.",
+          "points": {
+            "p1": "Sissetulev SSH töötab ka ühenduse ajal",
+            "p2": "Kinnitamata muudatused võetakse ise tagasi",
+            "p3": "Dockeri konteinerid järgivad samu reegleid"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kaart või krüpto",
+          "body": "Makske veebisaidil. Midagi ei arveldata poe kaudu ja midagi ei uuene teie teadmata."
+        }
+      },
+      "setup": {
+        "title": "Mis tuleb ja mis järjekorras",
+        "subtitle": "Linuxi versioon ilmub kolmes etapis. Ootenimekiri saab teada esimesest.",
+        "s1": {
+          "title": "Käsurida",
+          "body": "Käsk dopplervpn ja selle taustateenus Ubuntule ja Debianile. Brauseriga sisselogimine, port iga riigi jaoks ja SSH-kaitse on olemas esimesest päevast."
+        },
+        "s2": {
+          "title": "Oma serverid ja automatiseerimine",
+          "body": "Oma serverite importimine, avatud paigalduskomplekt, kohalik API, MCP-server, n8n-i sõlm ja Dockeri tõmmis."
+        },
+        "s3": {
+          "title": "Töölauarakendus",
+          "body": "Rakendus teie töölauale, seejärel paketid Fedorale ja Archile. Make.com-i tugi lisandub, kui turvaline vahendusteenus on valmis."
+        }
+      },
+      "faq": {
+        "title": "Küsimused Doppleri kohta Linuxis",
+        "q1": {
+          "question": "Millal Doppler Linuxile ilmub?",
+          "answer": "Kuupäeva veel ei ole ja me ei taha oletada. Esmalt tuleb käsurida ja pärast seda töölauarakendus. Jätke sellele lehele oma e-posti aadress ja kirjutame teile ühe korra, kui esimest versiooni saab paigaldada."
+        },
+        "q2": {
+          "question": "Milliseid Linuxi distributsioone toetatakse?",
+          "answer": "Esmalt Ubuntut ja Debianit x86-64 ja ARM64 arhitektuuril, paigaldades apt-iga allkirjastatud hoidlast. Paketid Fedorale ja Archile järgnevad."
+        },
+        "q3": {
+          "question": "Kui palju see maksab?",
+          "answer": "Sama pakett mis kõigil teistel Doppleri rakendustel, alates {price} kuus. Linuxil eraldi hinda ei ole. Oma serverid, riikide pordid ja automatiseerimine vajavad kehtivat paketti."
+        },
+        "q4": {
+          "question": "Kas saan ühenduda oma serveri või teise teenusepakkujaga?",
+          "answer": "Jah. Kleepige VLESS-link või tellimuse aadress teiselt teenusepakkujalt või oma paneelist või seadistage server oma VPS-is meie avatud komplektiga. Doppleri privaatsuslubadused kehtivad Doppleri serverite kohta. Teie lisatud serverit haldab selle omanik."
+        },
+        "q5": {
+          "question": "Kuidas see töötab n8n-i ja tehisaru agentidega?",
+          "answer": "Doppler käitab samas masinas väikest API-t. n8n saab iga päringu saata läbi eri riigi kohaliku pordi abil ning tehisaru agendid saavad sisseehitatud MCP-serveri kaudu pordi avada või asukohta vahetada. Vaikimisi on see välja lülitatud ja kaitstud tõendiga."
+        },
+        "q6": {
+          "question": "Kas see töötab Make.com-iga?",
+          "answer": "Väljalaske ajal mitte. Make töötab pilves ega pääse ligi programmile teie enda serveris, seega on vaja vahendusteenust, mille tahame ehitada hoolikalt. See on kavas pärast kohalike automatiseerimiste ilmumist."
+        },
+        "q7": {
+          "question": "Kas see võib mind mu serverist välja lukustada?",
+          "answer": "See on ehitatud nii, et seda ei juhtuks. Sissetulevad ühendused säilitavad oma marsruudi ning kogu serveri marsruudi muutmine tuleb kinnitada teie määratud aja jooksul, muidu võetakse see tagasi."
+        }
+      },
+      "cta": {
+        "title": "Olge esimeste paigaldajate seas",
+        "subtitle": "Jätke oma e-posti aadress ja anname teada, kui Doppler Linuxile on valmis."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN Huaweile ja Honorile: Google'i teenuseid pole vaja",

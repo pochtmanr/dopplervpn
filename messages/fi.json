@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN Linuxille: sovellus, komentorivi ja automaatiot",
+      "description": "Doppler VPN tulee Linuxille: työpöytäsovellus, komentorivi palvelimille, kirjautuminen mistä tahansa selaimesta, omat palvelimesi sekä rajapinta n8n:lle ja tekoälyagenteille. Liity odotuslistalle."
+    },
+    "footer": "VPN Linuxille",
+    "learnMore": "Lue lisää VPN:stä Linuxille",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Tulossa pian",
+        "title": "Doppler VPN Linuxille",
+        "subtitle": "Työpöytäsovellus kannettavallesi ja komentorivi palvelimillesi. Kirjaudu mistä tahansa selaimesta, tuo omat palvelimesi ja anna automaatioidesi valita maa.",
+        "note": "Ensin Ubuntu ja Debian · x86 ja ARM · Fedora ja Arch myöhemmin"
+      },
+      "waitlist": {
+        "label": "Sähköpostiosoite",
+        "placeholder": "you@example.com",
+        "button": "Ilmoita minulle",
+        "success": "Olet listalla.",
+        "error": "Se ei onnistunut. Yritä uudelleen.",
+        "privacy": "Yksi sähköposti, kun se on valmis. Ei muuta."
+      },
+      "terminal": {
+        "label": "Päätteen esikatselu",
+        "caption": "Esikatselu komentorivistä. Yksityiskohdat voivat muuttua ennen julkaisua."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Työpöytäsovellus",
+          "title": "Sama Doppler, natiivisti Linuxilla",
+          "body": "Oikea Linux-sovellus, ei ikkunaan pakattu verkkosivu. Siinä on samat näkymät ja samat sanat kuin Dopplerissa Macilla ja Windowsilla: yksi painike yhdistämiseen, palvelinluettelo ja kill switch.",
+          "points": {
+            "p1": "Seuraa vaaleaa tai tummaa teemaasi",
+            "p2": "Tehty GNOMElle ja KDE:lle, X11:llä ja Waylandilla",
+            "p3": "Sama tili kuin puhelimessasi ja tietokoneessasi"
+          }
+        },
+        "cli": {
+          "kicker": "Komentorivi",
+          "title": "Täysi VPN yhdellä komennolla",
+          "body": "Palvelimissa ei ole näyttöä, joten Doppler Linuxille alkaa päätteestä. Kaikki, mihin sovellus pystyy, on komento, ja sen tulosteen voivat lukea myös skriptit.",
+          "points": {
+            "p1": "Yhdistä, vaihda maata ja tarkista tila",
+            "p2": "JSON-tuloste skripteillesi",
+            "p3": "Toimii järjestelmäpalveluna ja palaa uudelleenkäynnistyksen jälkeen"
+          }
+        },
+        "login": {
+          "kicker": "Kirjautuminen",
+          "title": "Kirjaudu mistä tahansa selaimesta",
+          "body": "Suorita kirjautumiskomento ja avaa sen näyttämä linkki puhelimella tai kannettavalla. Hyväksy laite, ja pääte on kirjautunut sisään. Tilitunnusta ei tarvitse kirjoittaa SSH:n yli.",
+          "points": {
+            "p1": "Linkki ja QR-koodi suoraan päätteessä",
+            "p2": "Kertakäyttöiset avaimet palvelimille, jotka asentuvat itsestään",
+            "p3": "Tilitunnuksesi toimii edelleen, jos käytät sitä mieluummin"
+          }
+        },
+        "servers": {
+          "kicker": "Omat palvelimesi",
+          "title": "Tuo omat palvelimesi",
+          "body": "Doppler Linuxille yhdistää myös palvelimiin, jotka eivät ole meidän. Liitä VLESS-linkki tai tilausosoite, tai tee omasta VPS:stäsi palvelin avoimella asennuspaketillamme. Tähän tarvitaan voimassa oleva Doppler-tilaus.",
+          "points": {
+            "p1": "Tuo linkit ja tilaukset yleisistä hallintapaneeleista",
+            "p2": "Avoimen lähdekoodin paketti, joka asentaa palvelimesi yhdellä komennolla",
+            "p3": "Kill switch ja turvasäännöt ovat silti voimassa"
+          }
+        },
+        "automation": {
+          "kicker": "Automaatiot",
+          "title": "Anna työnkulkujesi valita maa",
+          "body": "Doppler avaa paikallisen portin jokaiselle tarvitsemallesi maalle. Lähetä yksi pyyntö Saksan ja seuraava Yhdysvaltojen kautta, samaan aikaan, siirtämättä koko palvelinta. n8n ja tekoälyagentit voivat avata ja sulkea nämä portit itse.",
+          "points": {
+            "p1": "Paikallinen rajapinta ja MCP-palvelin tekoälyagenteille",
+            "p2": "Solmu n8n:lle ja Docker-levykuva sen rinnalle",
+            "p3": "Pois päältä, kunnes otat sen käyttöön, ja oletuksena suljettu internetistä"
+          }
+        },
+        "safe": {
+          "kicker": "Tehty palvelimille",
+          "title": "SSH-istuntosi pysyy pystyssä",
+          "body": "Koko palvelimen ohjaaminen VPN:n läpi katkaisee yleensä juuri sen yhteyden, jossa kirjoitat. Doppler pitää saapuvat yhteydet omalla reitillään ja pyytää sinua vahvistamaan muutoksen. Jos et pysty, se peruu muutoksen.",
+          "points": {
+            "p1": "Saapuva SSH toimii yhteyden aikana",
+            "p2": "Vahvistamattomat muutokset peruuntuvat itsestään",
+            "p3": "Docker-kontit noudattavat samoja sääntöjä"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kortti tai krypto",
+          "body": "Maksa verkkosivustolla. Mitään ei laskuteta kaupan kautta, eikä mikään uusiudu ilman sinua."
+        }
+      },
+      "setup": {
+        "title": "Mitä on tulossa ja missä järjestyksessä",
+        "subtitle": "Linux julkaistaan kolmessa vaiheessa. Odotuslista saa tiedon ensimmäisestä.",
+        "s1": {
+          "title": "Komentorivi",
+          "body": "Komento dopplervpn ja sen taustapalvelu Ubuntulle ja Debianille. Selainkirjautuminen, portti jokaiselle maalle ja SSH-suoja ovat mukana ensimmäisestä päivästä."
+        },
+        "s2": {
+          "title": "Omat palvelimet ja automaatiot",
+          "body": "Omien palvelimien tuonti, avoin asennuspaketti, paikallinen rajapinta, MCP-palvelin, n8n-solmu ja Docker-levykuva."
+        },
+        "s3": {
+          "title": "Työpöytäsovellus",
+          "body": "Sovellus työpöydällesi, sitten paketit Fedoralle ja Archille. Make.com-tuki tulee, kun turvallinen välityspalvelu on valmis."
+        }
+      },
+      "faq": {
+        "title": "Kysymyksiä Dopplerista Linuxilla",
+        "q1": {
+          "question": "Milloin Doppler Linuxille julkaistaan?",
+          "answer": "Päivämäärää ei vielä ole, emmekä halua arvailla. Komentorivi tulee ensin ja työpöytäsovellus sen jälkeen. Jätä sähköpostiosoitteesi tälle sivulle, niin kirjoitamme kerran, kun ensimmäisen version voi asentaa."
+        },
+        "q2": {
+          "question": "Mitä Linux-jakeluita se tukee?",
+          "answer": "Ensin Ubuntua ja Debiania x86-64- ja ARM64-arkkitehtuureilla, asennettuna apt:lla allekirjoitetusta pakettivarastosta. Paketit Fedoralle ja Archille tulevat sen jälkeen."
+        },
+        "q3": {
+          "question": "Paljonko se maksaa?",
+          "answer": "Sama tilaus kuin kaikissa muissakin Doppler-sovelluksissa, alkaen {price} kuukaudessa. Linuxille ei ole erillistä hintaa. Omat palvelimet, maakohtaiset portit ja automaatiot vaativat voimassa olevan tilauksen."
+        },
+        "q4": {
+          "question": "Voinko yhdistää omaan palvelimeeni tai toiseen palveluntarjoajaan?",
+          "answer": "Kyllä. Liitä VLESS-linkki tai tilausosoite toiselta palveluntarjoajalta tai omasta hallintapaneelistasi, tai pystytä palvelin VPS:llesi avoimella paketillamme. Dopplerin yksityisyyslupaukset koskevat Dopplerin palvelimia. Itse lisäämääsi palvelinta ylläpitää sen omistaja."
+        },
+        "q5": {
+          "question": "Miten se toimii n8n:n ja tekoälyagenttien kanssa?",
+          "answer": "Doppler ajaa pientä rajapintaa samalla koneella. n8n voi lähettää jokaisen pyynnön eri maan kautta paikallisen portin avulla, ja tekoälyagentit voivat avata portin tai vaihtaa sijaintia sisäänrakennetulla MCP-palvelimella. Ominaisuus on oletuksena pois päältä ja suojattu tunnisteella."
+        },
+        "q6": {
+          "question": "Toimiiko se Make.comin kanssa?",
+          "answer": "Ei julkaisussa. Make toimii pilvessä eikä tavoita omalla palvelimellasi olevaa ohjelmaa, joten tarvitaan välityspalvelu, jonka haluamme rakentaa huolella. Se on suunnitteilla paikallisten automaatioiden julkaisun jälkeen."
+        },
+        "q7": {
+          "question": "Voiko se lukita minut ulos palvelimeltani?",
+          "answer": "Se on rakennettu niin, ettei niin käy. Saapuvat yhteydet säilyttävät oman reittinsä, ja koko palvelimen reitin muutos on vahvistettava itse asettamasi ajan kuluessa, tai se perutaan."
+        }
+      },
+      "cta": {
+        "title": "Asenna se ensimmäisten joukossa",
+        "subtitle": "Jätä sähköpostiosoitteesi, niin kerromme, kun Doppler Linuxille on valmis."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN Huaweille ja Honorille: Googlen palveluja ei tarvita",

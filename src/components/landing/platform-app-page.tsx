@@ -23,6 +23,7 @@ import { Footer } from "@/components/layout/footer";
 import { BreadcrumbSchema, FAQSchema, PlatformAppSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { TrackedDownloadLink } from "@/components/downloads/tracked-download-link";
+import { WaitlistForm, type WaitlistLabels } from "@/components/downloads/waitlist-form";
 import { AppleIcon, Stars } from "@/components/icons/platform";
 import { AppGalleryMark, AppStoreMark, HuaweiMark, PlatformLogo } from "@/components/glyph/platform-icons";
 import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
@@ -35,12 +36,14 @@ import type {
   AppButton,
   AppChapter,
   AppGlyph,
+  AppImage,
   AppPageConfig,
   StoreMark,
 } from "@/config/platforms/app-page";
 import { AndroidFrame, AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
 import { ANDROID_APK_BUTTON } from "@/config/platforms/android";
 import { PLUS_CTA_LEAD, PLUS_CTA_LINK, PLUS_CTA_TITLE, PlusCtaCard } from "./plus-cta-card";
+import { TerminalCard } from "./terminal-card";
 
 const SECTION = "py-12 md:py-20";
 const H2 = "font-display text-3xl font-bold leading-tight text-(--c-text) md:text-[40px]";
@@ -136,20 +139,37 @@ function StoreButton({
 }
 
 /**
- * Where a platform has no caption-free screens yet: an inset tray with one line glyph, and the
- * downloads cards' glyph-rain strip under it at the strip's own size (its grid scales with
- * the container, so a full-width strip turns into giant characters). Honest by construction:
- * it never pretends to be a capture.
+ * Where a platform has no caption-free screens yet: an inset tray with one mark, and the
+ * downloads cards' glyph rain falling behind it across the whole tray (on a finer grid than
+ * the downloads strip, so the digits keep their size). Honest by construction: it never
+ * pretends to be a capture.
  */
-function GlyphTray({ index, children, className = "aspect-[3/2]" }: { index: number; children: ReactNode; className?: string }) {
+function GlyphTray({
+  index,
+  children,
+  backdrop,
+  className = "aspect-[3/2]",
+}: {
+  index: number;
+  children: ReactNode;
+  /** A photo under the rain. It is dark in both themes, so the tray stops following the theme. */
+  backdrop?: AppImage;
+  className?: string;
+}) {
   return (
     <div className={`rounded-[28px] bg-(--c-card) p-3 ${className}`}>
-      <div className="relative h-full overflow-hidden rounded-[20px] bg-(--c-bg)" aria-hidden="true">
-        {/* The strip at the downloads card's own size: its grid scales with width. */}
-        <span className="absolute bottom-4 left-1/2 block h-20 w-[280px] max-w-[80%] -translate-x-1/2 opacity-80">
-          <PlatformGlyphBand index={index} />
+      <div
+        className="relative h-full overflow-hidden rounded-[20px] bg-(--c-bg)"
+        style={backdrop ? { backgroundColor: backdrop.bg } : undefined}
+        aria-hidden="true"
+      >
+        {backdrop && (
+          <Image src={backdrop.src} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+        )}
+        <span className={`absolute inset-0 block ${backdrop ? "opacity-70 mix-blend-screen" : "opacity-80"}`}>
+          <PlatformGlyphBand index={index} fill />
         </span>
-        <span className="absolute inset-0 flex items-center justify-center pb-12">{children}</span>
+        <span className="absolute inset-0 flex items-center justify-center">{children}</span>
       </div>
     </div>
   );
@@ -211,7 +231,7 @@ function AndroidGetCta({
   }
 
   const label = t(`get.rows.${row.key}.cta`);
-  if (row.cta === "primary") {
+  if (row.cta === "primary" && config.primary) {
     return <StoreButton config={config} button={config.primary} label={label} />;
   }
   if (row.cta === "secondary" && config.secondary) {
@@ -244,15 +264,21 @@ function ChapterVisual({
   index,
   alt,
   compact,
+  terminal,
 }: {
   chapter: AppChapter;
   index: number;
   alt: string;
   compact: boolean;
+  /** Words around a terminal card; only pages with terminal chapters pass them. */
+  terminal?: { label: string; caption: string };
 }) {
+  if (chapter.frame === "terminal") {
+    return <TerminalCard lines={chapter.lines} label={terminal?.label ?? ""} {...(terminal ? { caption: terminal.caption } : {})} />;
+  }
   if (chapter.frame === "glyph") {
     return (
-      <GlyphTray index={index}>
+      <GlyphTray index={index} {...(chapter.backdrop ? { backdrop: chapter.backdrop } : {})}>
         <BigGlyph d={ICON[chapter.glyph]} />
       </GlyphTray>
     );
@@ -303,7 +329,8 @@ function ChapterVisual({
 }
 
 /**
- * The app pages: iPhone, iPad, Mac, Android and Huawei. Section order: hero, app tour (raw
+ * The app pages: iPhone, iPad, Mac, Android, Huawei, and the Linux announcement (a waitlist
+ * in place of the download button, terminal cards in place of screens). Section order: hero, app tour (raw
  * screens, no marketing words in the images), four feature chapters, the devices band,
  * privacy facts, guides, setup, FAQ, final CTA, related platforms. A section the config
  * leaves empty (tour, devices band, guides) is skipped.
@@ -319,6 +346,19 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
 
   const isMac = config.tourDevice === "mac";
   const isApple = config.family === "apple";
+  const primary = config.primary;
+  // An announced platform: an email form stands where the download button would be.
+  const waitlistLabels: WaitlistLabels | null = config.waitlist
+    ? {
+        label: t("waitlist.label"),
+        placeholder: t("waitlist.placeholder"),
+        button: t("waitlist.button"),
+        success: t("waitlist.success"),
+        error: t("waitlist.error"),
+        privacy: t("waitlist.privacy"),
+      }
+    : null;
+  const terminal = config.family === "linux" ? { label: t("terminal.label"), caption: t("terminal.caption") } : undefined;
   // The devices band: Apple's lives in the shared namespace (three pages show it), the
   // Android family's in each page's own copy.
   const eco = (key: string) => (isApple ? s(`ecosystem.${key}`) : t(`ecosystem.${key}`));
@@ -350,6 +390,8 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
       <span className={`${PLUS_CHIP} bg-(--c-accent-tint) text-(--c-accent)`}>
         {isApple ? (
           <AppleIcon className="h-3.5 w-3.5" />
+        ) : config.family === "linux" ? (
+          <PlatformLogo icon="linux" className="h-3.5 w-3.5" />
         ) : config.slug === "vpn-for-huawei" ? (
           <HuaweiMark className="h-3.5 w-3.5" />
         ) : (
@@ -363,14 +405,26 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
       <p className={`mt-5 max-w-xl text-lg leading-relaxed text-(--c-muted) md:text-xl ${isMac ? "mx-auto" : "mx-auto lg:mx-0"}`}>
         {t("hero.subtitle")}
       </p>
-      <div className={`mt-8 flex flex-col items-center gap-4 sm:flex-row ${isMac ? "justify-center" : "justify-center lg:justify-start"}`}>
-        <StoreButton config={config} button={config.primary} label={t(`hero.${config.primary.labelKey}`)} large />
-        {config.secondary ? (
-          <StoreButton config={config} button={config.secondary} label={t(`hero.${config.secondary.labelKey}`)} large quiet />
-        ) : (
-          rating
-        )}
-      </div>
+      {config.waitlist && waitlistLabels && (
+        <div className="mt-8">
+          <WaitlistForm
+            platform={config.waitlist.platform}
+            locale={locale}
+            labels={waitlistLabels}
+            align={isMac ? "center" : "start"}
+          />
+        </div>
+      )}
+      {primary && (
+        <div className={`mt-8 flex flex-col items-center gap-4 sm:flex-row ${isMac ? "justify-center" : "justify-center lg:justify-start"}`}>
+          <StoreButton config={config} button={primary} label={t(`hero.${primary.labelKey}`)} large />
+          {config.secondary ? (
+            <StoreButton config={config} button={config.secondary} label={t(`hero.${config.secondary.labelKey}`)} large quiet />
+          ) : (
+            rating
+          )}
+        </div>
+      )}
       {/* Two buttons fill the row, so the rating drops to its own line. */}
       {config.secondary && rating && (
         <div className={`mt-5 flex ${isMac ? "justify-center" : "justify-center lg:justify-start"}`}>{rating}</div>
@@ -391,13 +445,16 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
           { name: t("hero.title"), url: `${SITE_URL}/${locale}/${config.slug}` },
         ]}
       />
-      <PlatformAppSchema
-        name="Doppler VPN"
-        description={mt("description")}
-        operatingSystem={config.operatingSystem}
-        applicationCategory="UtilitiesApplication"
-        downloadUrl={config.primary.href.startsWith("/") ? `${SITE_URL}${config.primary.href}` : config.primary.href}
-      />
+      {/* No build, no SoftwareApplication node: it would state the app is in stock. */}
+      {primary && (
+        <PlatformAppSchema
+          name="Doppler VPN"
+          description={mt("description")}
+          operatingSystem={config.operatingSystem}
+          applicationCategory="UtilitiesApplication"
+          downloadUrl={primary.href.startsWith("/") ? `${SITE_URL}${primary.href}` : primary.href}
+        />
+      )}
       <FAQSchema items={faqItems} />
       <Navbar />
       <PlusPageShell>
@@ -408,33 +465,45 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
               {isMac ? (
                 <>
                   <div className="mx-auto max-w-3xl text-center">{hero}</div>
-                  <div
-                    className="relative mt-12 aspect-[3/2] w-full overflow-hidden rounded-[32px] md:mt-16 md:aspect-[16/9]"
-                    style={{ backgroundColor: config.hero.bg }}
-                  >
-                    <Image
-                      src={config.hero.src}
-                      alt={config.hero.alt}
-                      fill
-                      sizes="(min-width: 1400px) 1340px, 100vw"
-                      priority
-                      className="object-cover"
+                  {config.hero && (
+                    <div
+                      className="relative mt-12 aspect-[3/2] w-full overflow-hidden rounded-[32px] md:mt-16 md:aspect-[16/9]"
+                      style={{ backgroundColor: config.hero.bg }}
+                    >
+                      <Image
+                        src={config.hero.src}
+                        alt={config.hero.alt}
+                        fill
+                        sizes="(min-width: 1400px) 1340px, 100vw"
+                        priority
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  {config.heroTerminal && terminal && (
+                    <TerminalCard
+                      lines={config.heroTerminal}
+                      label={terminal.label}
+                      caption={terminal.caption}
+                      className="mx-auto mt-12 max-w-3xl md:mt-16"
                     />
-                  </div>
+                  )}
                 </>
               ) : (
                 <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
                   <div className="text-center lg:text-start">{hero}</div>
-                  <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[32px]" style={{ backgroundColor: config.hero.bg }}>
-                    <Image
-                      src={config.hero.src}
-                      alt={config.hero.alt}
-                      fill
-                      sizes="(min-width: 1024px) 46vw, 100vw"
-                      priority
-                      className="object-cover"
-                    />
-                  </div>
+                  {config.hero && (
+                    <div className="relative aspect-[3/2] w-full overflow-hidden rounded-[32px]" style={{ backgroundColor: config.hero.bg }}>
+                      <Image
+                        src={config.hero.src}
+                        alt={config.hero.alt}
+                        fill
+                        sizes="(min-width: 1024px) 46vw, 100vw"
+                        priority
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -467,8 +536,9 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                       <ChapterVisual
                         chapter={chapter}
                         index={i}
-                        alt={chapter.frame === "glyph" ? "" : t(`${k}.alt`)}
+                        alt={chapter.frame === "glyph" || chapter.frame === "terminal" ? "" : t(`${k}.alt`)}
                         compact={compact}
+                        {...(terminal ? { terminal } : {})}
                       />
                     </div>
                     <div className="max-w-xl">
@@ -716,12 +786,18 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
             <PlusCtaCard
               {...(config.ctaImage ? { image: { ...config.ctaImage, alt: s("cta.imageAlt") } } : {})}
               imageFallback={
-                <GlyphTray index={3} className="aspect-[3/2] lg:aspect-auto lg:min-h-[420px]">
-                  <span className="text-(--c-text)">
+                <GlyphTray
+                  index={3}
+                  className="aspect-[3/2] lg:aspect-auto lg:min-h-[420px]"
+                  {...(config.ctaBackdrop ? { backdrop: config.ctaBackdrop } : {})}
+                >
+                  <span className={config.ctaBackdrop ? "text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.55)]" : "text-(--c-text)"}>
                     {config.slug === "vpn-for-huawei" ? (
                       <HuaweiMark className="h-20 w-20 md:h-24 md:w-24" />
+                    ) : primary ? (
+                      <Mark mark={primary.mark} className="h-20 w-20 md:h-24 md:w-24" />
                     ) : (
-                      <Mark mark={config.primary.mark} className="h-20 w-20 md:h-24 md:w-24" />
+                      <PlatformLogo icon="linux" className="h-20 w-20 md:h-24 md:w-24" />
                     )}
                   </span>
                 </GlyphTray>
@@ -730,8 +806,17 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
               <h2 className={PLUS_CTA_TITLE}>{t("cta.title")}</h2>
               <p className={PLUS_CTA_LEAD}>{t("cta.subtitle", { days: TERMS.freeTrialDays })}</p>
               <div id="blog-cta-sentinel" aria-hidden="true" />
+              {config.waitlist && waitlistLabels && (
+                <WaitlistForm
+                  platform={config.waitlist.platform}
+                  locale={locale}
+                  labels={waitlistLabels}
+                  tone="card"
+                  align="start"
+                />
+              )}
               <div className="flex flex-col items-center gap-4 sm:flex-row lg:items-center">
-                <StoreButton config={config} button={config.primary} label={t(`hero.${config.primary.labelKey}`)} large />
+                {primary && <StoreButton config={config} button={primary} label={t(`hero.${primary.labelKey}`)} large />}
                 <Link href="/downloads" className={PLUS_CTA_LINK}>
                   {s("cta.downloads")}
                 </Link>
@@ -754,7 +839,8 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
             </ul>
           </PlusContainer>
         </main>
-        <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={config.trackLocation} plus />
+        {/* The sticky bar offers a download; a waitlist page has none to offer. */}
+        {!config.waitlist && <BlogStickyBar sentinelId="blog-cta-sentinel" trackingLocation={config.trackLocation} plus />}
       </PlusPageShell>
       <Footer />
     </>

@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Linux üçün Doppler VPN: tətbiq, əmr sətri və avtomatlaşdırma",
+      "description": "Doppler VPN Linux-a gəlir: masaüstü tətbiq, serverlər üçün əmr sətri, istənilən brauzerdən giriş, öz serverləriniz, n8n və süni intellekt agentləri üçün API. Gözləmə siyahısına yazılın."
+    },
+    "footer": "Linux üçün VPN",
+    "learnMore": "Linux üçün VPN haqqında ətraflı",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Tezliklə",
+        "title": "Linux üçün Doppler VPN",
+        "subtitle": "Noutbukunuz üçün masaüstü tətbiq, serverləriniz üçün əmr sətri. İstənilən brauzerdən daxil olun, öz serverlərinizi əlavə edin və ölkəni avtomatlaşdırmalarınız seçsin.",
+        "note": "Əvvəlcə Ubuntu və Debian · x86 və ARM · Fedora və Arch sonra"
+      },
+      "waitlist": {
+        "label": "E-poçt ünvanı",
+        "placeholder": "you@example.com",
+        "button": "Mənə xəbər ver",
+        "success": "Siyahıdasınız.",
+        "error": "Alınmadı. Yenidən cəhd edin.",
+        "privacy": "Hazır olanda bir məktub. Başqa heç nə."
+      },
+      "terminal": {
+        "label": "Terminalın önizləməsi",
+        "caption": "Əmr sətrinin önizləməsi. Təfərrüatlar buraxılışdan əvvəl dəyişə bilər."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Masaüstü tətbiq",
+          "title": "Eyni Doppler, Linux üçün doğma",
+          "body": "Pəncərəyə salınmış veb səhifə deyil, əsl Linux tətbiqi. Mac və Windows-dakı Doppler ilə eyni ekranlar və eyni sözlər: qoşulmaq üçün bir düymə, server siyahısı və kill switch.",
+          "points": {
+            "p1": "Açıq və ya tünd mövzunuza uyğunlaşır",
+            "p2": "GNOME və KDE üçün, X11 və Wayland-da",
+            "p3": "Telefonunuz və kompüterinizlə eyni hesab"
+          }
+        },
+        "cli": {
+          "kicker": "Əmr sətri",
+          "title": "Bir əmrlə tam VPN",
+          "body": "Serverlərin ekranı yoxdur, ona görə Linux üçün Doppler terminaldan başlayır. Tətbiqin bacardığı hər şey bir əmrdir, çıxışını isə skriptlər oxuya bilir.",
+          "points": {
+            "p1": "Qoşulun, ölkəni dəyişin və vəziyyəti yoxlayın",
+            "p2": "Skriptləriniz üçün JSON çıxışı",
+            "p3": "Sistem xidməti kimi işləyir və yenidən yükləmədən sonra qayıdır"
+          }
+        },
+        "login": {
+          "kicker": "Giriş",
+          "title": "İstənilən brauzerdən daxil olun",
+          "body": "Giriş əmrini işə salın və göstərdiyi keçidi telefonunuzda və ya noutbukunuzda açın. Cihazı təsdiqləyin, terminal artıq hesaba daxil olub. SSH üzərindən hesab ID-si yazmağa ehtiyac yoxdur.",
+          "points": {
+            "p1": "Keçid və QR kod birbaşa terminalda",
+            "p2": "Özü qurulan serverlər üçün birdəfəlik açarlar",
+            "p3": "İstəsəniz, hesab ID-niz yenə işləyir"
+          }
+        },
+        "servers": {
+          "kicker": "Öz serverləriniz",
+          "title": "Öz serverlərinizi əlavə edin",
+          "body": "Linux üçün Doppler bizə məxsus olmayan serverlərə də qoşulur. VLESS keçidini və ya abunə ünvanını yapışdırın, yaxud açıq quraşdırma dəstimizlə öz VPS-inizi serverə çevirin. Bunun üçün aktiv Doppler planı lazımdır.",
+          "points": {
+            "p1": "Yayılmış panellərdən keçidləri və abunələri idxal edir",
+            "p2": "Serverinizi bir əmrlə quran açıq mənbəli dəst",
+            "p3": "Kill switch və təhlükəsizlik qaydaları qüvvədə qalır"
+          }
+        },
+        "automation": {
+          "kicker": "Avtomatlaşdırma",
+          "title": "Ölkəni iş axınlarınız seçsin",
+          "body": "Doppler sizə lazım olan hər ölkə üçün lokal port açır. Bir sorğunu Almaniyadan, növbətisini Amerika Birləşmiş Ştatlarından göndərin, eyni vaxtda və bütün serveri köçürmədən. n8n və süni intellekt agentləri bu portları özləri açıb bağlaya bilər.",
+          "points": {
+            "p1": "Süni intellekt agentləri üçün lokal API və MCP serveri",
+            "p2": "n8n üçün qovşaq və yanında işləyən Docker obrazı",
+            "p3": "Siz yandırana qədər sönülüdür və standart olaraq internetə bağlıdır"
+          }
+        },
+        "safe": {
+          "kicker": "Serverlər üçün yaradılıb",
+          "title": "SSH sessiyanız kəsilmir",
+          "body": "Bütün serveri VPN-dən keçirmək adətən yazı yazdığınız bağlantını kəsir. Doppler daxil olan bağlantıları öz marşrutunda saxlayır və dəyişikliyi təsdiqləməyinizi xahiş edir. Təsdiqləyə bilməsəniz, onu geri qaytarır.",
+          "points": {
+            "p1": "Qoşulu olduğunuz müddətdə daxil olan SSH işləməyə davam edir",
+            "p2": "Təsdiqləmədiyiniz dəyişikliklər özü geri qayıdır",
+            "p3": "Docker konteynerləri eyni qaydalara tabedir"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kart və ya kripto",
+          "body": "Saytda ödəyin. Mağaza üzərindən heç nə tutulmur və sizsiz heç nə yenilənmir."
+        }
+      },
+      "setup": {
+        "title": "Nə gələcək, ardıcıllıqla",
+        "subtitle": "Linux üç mərhələdə çıxır. Gözləmə siyahısı birincisindən xəbər tutacaq.",
+        "s1": {
+          "title": "Əmr sətri",
+          "body": "Ubuntu və Debian üçün dopplervpn əmri və onun fon xidməti. Brauzerlə giriş, hər ölkə üçün port və SSH qoruması ilk gündən var."
+        },
+        "s2": {
+          "title": "Öz serverləriniz və avtomatlaşdırma",
+          "body": "Öz serverlərinizin idxalı, açıq quraşdırma dəsti, lokal API, MCP serveri, n8n qovşağı və Docker obrazı."
+        },
+        "s3": {
+          "title": "Masaüstü tətbiq",
+          "body": "Masaüstünüz üçün tətbiq, sonra Fedora və Arch paketləri. Make.com dəstəyi təhlükəsiz ötürücü hazır olanda gələcək."
+        }
+      },
+      "faq": {
+        "title": "Linux-da Doppler haqqında suallar",
+        "q1": {
+          "question": "Linux üçün Doppler nə vaxt çıxacaq?",
+          "answer": "Hələ tarix yoxdur və təxmin etmək istəmirik. Əvvəlcə əmr sətri, ondan sonra masaüstü tətbiq gələcək. Bu səhifədə e-poçtunuzu qoyun, ilk versiyanı quraşdırmaq mümkün olanda sizə bir dəfə yazacağıq."
+        },
+        "q2": {
+          "question": "Hansı Linux distributivləri dəstəklənəcək?",
+          "answer": "Əvvəlcə x86-64 və ARM64 üzərində Ubuntu və Debian; imzalanmış repozitoriyadan apt ilə quraşdırılır. Fedora və Arch paketləri sonra gələcək."
+        },
+        "q3": {
+          "question": "Qiyməti nə qədər olacaq?",
+          "answer": "Digər bütün Doppler tətbiqləri ilə eyni plan, ayda {price}-dan. Linux üçün ayrıca qiymət yoxdur. Öz serverləriniz, ölkə portları və avtomatlaşdırma üçün aktiv plan lazımdır."
+        },
+        "q4": {
+          "question": "Öz serverimə və ya başqa provayderə qoşula bilərəmmi?",
+          "answer": "Bəli. Başqa provayderdən və ya öz panelinizdən VLESS keçidini, yaxud abunə ünvanını yapışdırın, ya da açıq dəstimizlə VPS-inizdə server qurun. Doppler-in məxfilik vədləri Doppler-in serverlərinə aiddir. Sizin əlavə etdiyiniz serveri onun sahibi idarə edir."
+        },
+        "q5": {
+          "question": "n8n və süni intellekt agentləri ilə necə işləyir?",
+          "answer": "Doppler eyni maşında kiçik bir API işlədir. n8n lokal port vasitəsilə hər sorğunu fərqli ölkədən göndərə bilər, süni intellekt agentləri isə daxili MCP serveri ilə port aça və ya məkanı dəyişə bilər. Standart olaraq sönülüdür və tokenlə qorunur."
+        },
+        "q6": {
+          "question": "Make.com ilə işləyəcəkmi?",
+          "answer": "Buraxılışda yox. Make buludda işləyir və öz serverinizdəki proqrama çata bilmir, ona görə diqqətlə qurmaq istədiyimiz bir ötürücü lazımdır. O, lokal avtomatlaşdırmalar çıxandan sonraya planlaşdırılıb."
+        },
+        "q7": {
+          "question": "Məni öz serverimdən kənarda qoya bilərmi?",
+          "answer": "O, bunun baş verməməsi üçün qurulub. Daxil olan bağlantılar öz marşrutunu saxlayır, bütün serverin marşrutundakı dəyişiklik isə sizin təyin etdiyiniz vaxt ərzində təsdiqlənməlidir, əks halda geri qaytarılır."
+        }
+      },
+      "cta": {
+        "title": "İlk quraşdıranlardan olun",
+        "subtitle": "E-poçtunuzu qoyun, Linux üçün Doppler hazır olanda xəbər verək."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Huawei və Honor üçün Doppler VPN: Google xidmətləri lazım deyil",

@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN til Linux: app, kommandolinje og automatiseringer",
+      "description": "Doppler VPN kommer til Linux: en desktop-app, en kommandolinje til servere, login fra enhver browser, dine egne servere og et API til n8n og AI-agenter. Skriv dig på ventelisten."
+    },
+    "footer": "VPN til Linux",
+    "learnMore": "Læs mere om VPN til Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Kommer snart",
+        "title": "Doppler VPN til Linux",
+        "subtitle": "En desktop-app til din bærbare og en kommandolinje til dine servere. Log ind fra enhver browser, tag dine egne servere med, og lad dine automatiseringer vælge landet.",
+        "note": "Ubuntu og Debian først · x86 og ARM · Fedora og Arch følger"
+      },
+      "waitlist": {
+        "label": "E-mailadresse",
+        "placeholder": "you@example.com",
+        "button": "Giv mig besked",
+        "success": "Du er på listen.",
+        "error": "Det lykkedes ikke. Prøv igen.",
+        "privacy": "Én e-mail, når det er klar. Intet andet."
+      },
+      "terminal": {
+        "label": "Forhåndsvisning af terminalen",
+        "caption": "En forhåndsvisning af kommandolinjen. Detaljer kan ændre sig før udgivelsen."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Desktop-app",
+          "title": "Den samme Doppler, bygget til Linux",
+          "body": "En rigtig Linux-app, ikke en webside i et vindue. Den har de samme skærme og de samme ord som Doppler på Mac og Windows: én knap til at forbinde, en serverliste og en kill switch.",
+          "points": {
+            "p1": "Følger dit lyse eller mørke tema",
+            "p2": "Bygget til GNOME og KDE, på X11 og Wayland",
+            "p3": "Den samme konto som på din telefon og din computer"
+          }
+        },
+        "cli": {
+          "kicker": "Kommandolinje",
+          "title": "En komplet VPN i én kommando",
+          "body": "Servere har ingen skærm, så Doppler til Linux begynder i terminalen. Alt, hvad appen kan, findes som en kommando, med output som scripts kan læse.",
+          "points": {
+            "p1": "Forbind, skift land og tjek status",
+            "p2": "JSON-output til dine scripts",
+            "p3": "Kører som systemtjeneste og vender tilbage efter genstart"
+          }
+        },
+        "login": {
+          "kicker": "Login",
+          "title": "Log ind fra enhver browser",
+          "body": "Kør login-kommandoen, og åbn det link, den viser, på din telefon eller din bærbare. Godkend enheden, og terminalen er logget ind. Du skal ikke taste et konto-ID over SSH.",
+          "points": {
+            "p1": "Et link og en QR-kode, direkte i terminalen",
+            "p2": "Engangsnøgler til servere, der sætter sig selv op",
+            "p3": "Dit konto-ID virker stadig, hvis du foretrækker det"
+          }
+        },
+        "servers": {
+          "kicker": "Dine egne servere",
+          "title": "Tag dine egne servere med",
+          "body": "Doppler til Linux forbinder også til servere, der ikke er vores. Indsæt et VLESS-link eller en abonnementsadresse, eller gør din egen VPS til en server med vores åbne installationskit. Det kræver et aktivt Doppler-abonnement.",
+          "points": {
+            "p1": "Importerer links og abonnementer fra gængse paneler",
+            "p2": "Et open source-kit, der sætter din server op med én kommando",
+            "p3": "Kill switch og sikkerhedsreglerne gælder stadig"
+          }
+        },
+        "automation": {
+          "kicker": "Automatiseringer",
+          "title": "Lad dine workflows vælge landet",
+          "body": "Doppler åbner en lokal port for hvert land, du har brug for. Send én forespørgsel gennem Tyskland og den næste gennem USA, på samme tid, uden at flytte hele serveren. n8n og AI-agenter kan selv åbne og lukke portene.",
+          "points": {
+            "p1": "Et lokalt API og en MCP-server til AI-agenter",
+            "p2": "En node til n8n og et Docker-image til at køre ved siden af",
+            "p3": "Slået fra, indtil du slår det til, og lukket for internettet som standard"
+          }
+        },
+        "safe": {
+          "kicker": "Bygget til servere",
+          "title": "Din SSH-session bliver oppe",
+          "body": "At sende en hel server gennem en VPN afbryder som regel den forbindelse, du sidder og skriver i. Doppler lader indgående forbindelser beholde deres egen rute og beder dig bekræfte ændringen. Kan du ikke det, fortryder den ændringen.",
+          "points": {
+            "p1": "Indgående SSH virker fortsat, mens du er forbundet",
+            "p2": "Ændringer, du ikke bekræfter, rulles tilbage af sig selv",
+            "p3": "Docker-containere følger de samme regler"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kort eller krypto",
+          "body": "Betal på hjemmesiden. Intet opkræves gennem en butik, og intet fornyes uden dig."
+        }
+      },
+      "setup": {
+        "title": "Hvad der kommer, i rækkefølge",
+        "subtitle": "Linux udkommer i tre trin. Ventelisten får besked om det første.",
+        "s1": {
+          "title": "Kommandolinje",
+          "body": "Kommandoen dopplervpn og dens baggrundstjeneste til Ubuntu og Debian. Login i browseren, en port pr. land og SSH-beskyttelsen er med fra første dag."
+        },
+        "s2": {
+          "title": "Egne servere og automatiseringer",
+          "body": "Import af dine egne servere, det åbne installationskit, det lokale API, MCP-serveren, n8n-noden og Docker-imaget."
+        },
+        "s3": {
+          "title": "Desktop-app",
+          "body": "Appen til dit skrivebord, derefter pakker til Fedora og Arch. Make.com følger, når et sikkert relæ er klar."
+        }
+      },
+      "faq": {
+        "title": "Spørgsmål om Doppler på Linux",
+        "q1": {
+          "question": "Hvornår udkommer Doppler til Linux?",
+          "answer": "Der er ingen dato endnu, og vi vil helst ikke gætte. Kommandolinjen kommer først og desktop-appen efter den. Efterlad din e-mail på denne side, så skriver vi én gang, når den første version kan installeres."
+        },
+        "q2": {
+          "question": "Hvilke Linux-distributioner bliver understøttet?",
+          "answer": "Ubuntu og Debian først, på x86-64 og ARM64, installeret med apt fra et signeret pakkearkiv. Pakker til Fedora og Arch følger."
+        },
+        "q3": {
+          "question": "Hvad kommer det til at koste?",
+          "answer": "Det samme abonnement som alle andre Doppler-apps, fra {price} om måneden. Der er ingen særskilt pris for Linux. Egne servere, landeporte og automatiseringer kræver et aktivt abonnement."
+        },
+        "q4": {
+          "question": "Kan jeg forbinde til min egen server eller en anden udbyder?",
+          "answer": "Ja. Indsæt et VLESS-link eller en abonnementsadresse fra en anden udbyder eller fra dit eget panel, eller sæt en server op på din VPS med vores åbne kit. Dopplers løfter om privatliv gælder Dopplers servere. En server, du tilføjer, drives af den, der ejer den."
+        },
+        "q5": {
+          "question": "Hvordan virker det med n8n og AI-agenter?",
+          "answer": "Doppler kører et lille API på samme maskine. n8n kan sende hver forespørgsel gennem et andet land via en lokal port, og AI-agenter kan bruge den indbyggede MCP-server til at åbne en port eller skifte placering. Det er slået fra som standard og beskyttet med et token."
+        },
+        "q6": {
+          "question": "Kommer det til at virke med Make.com?",
+          "answer": "Ikke ved lanceringen. Make kører i skyen og kan ikke nå et program på din egen server, så det kræver et relæ, som vi vil bygge omhyggeligt. Det er planlagt, efter at de lokale automatiseringer er udkommet."
+        },
+        "q7": {
+          "question": "Kan det låse mig ude af min server?",
+          "answer": "Det er bygget, så det ikke sker. Indgående forbindelser beholder deres egen rute, og en ændring af hele serverens rute skal bekræftes inden for en tid, du selv vælger, ellers bliver den fortrudt."
+        }
+      },
+      "cta": {
+        "title": "Vær blandt de første til at installere det",
+        "subtitle": "Efterlad din e-mail, så giver vi besked, når Doppler til Linux er klar."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN til Huawei og Honor: ingen Google-tjenester nødvendige",

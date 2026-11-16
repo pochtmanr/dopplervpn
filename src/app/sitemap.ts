@@ -150,6 +150,7 @@ const staticPages = [
   "/vpn-for-ipad",
   "/vpn-for-android",
   "/vpn-for-huawei",
+  "/vpn-for-linux",
   "/vpn-for-macos",
   "/vpn-for-windows",
   // SEO long-tail landing pages
@@ -272,6 +273,7 @@ function priorityFor(page: string): number {
       "/vpn-for-ipad",
       "/vpn-for-android",
       "/vpn-for-huawei",
+      "/vpn-for-linux",
       "/vpn-for-macos",
       "/vpn-for-windows",
     ].includes(page)

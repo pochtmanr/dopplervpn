@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN untuk Linux: aplikasi, baris perintah, dan otomatisasi",
+      "description": "Doppler VPN hadir di Linux: aplikasi desktop, baris perintah untuk server, masuk dari browser mana pun, server milik Anda sendiri, dan API untuk n8n serta agen AI. Gabung ke daftar tunggu."
+    },
+    "footer": "VPN untuk Linux",
+    "learnMore": "Pelajari lebih lanjut tentang VPN untuk Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Segera hadir",
+        "title": "Doppler VPN untuk Linux",
+        "subtitle": "Aplikasi desktop untuk laptop Anda dan baris perintah untuk server Anda. Masuk dari browser mana pun, bawa server Anda sendiri, dan biarkan otomatisasi Anda memilih negaranya.",
+        "note": "Ubuntu dan Debian lebih dulu · x86 dan ARM · Fedora dan Arch menyusul"
+      },
+      "waitlist": {
+        "label": "Alamat email",
+        "placeholder": "you@example.com",
+        "button": "Beri tahu saya",
+        "success": "Anda sudah masuk daftar.",
+        "error": "Tidak berhasil. Silakan coba lagi.",
+        "privacy": "Satu email saat sudah siap. Tidak ada yang lain."
+      },
+      "terminal": {
+        "label": "Pratinjau terminal",
+        "caption": "Pratinjau baris perintah. Detailnya bisa berubah sebelum rilis."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Aplikasi desktop",
+          "title": "Doppler yang sama, asli di Linux",
+          "body": "Aplikasi Linux sungguhan, bukan halaman web di dalam jendela. Layar dan kata-katanya sama dengan Doppler di Mac dan Windows: satu tombol untuk terhubung, daftar server, dan kill switch.",
+          "points": {
+            "p1": "Mengikuti tema terang atau gelap Anda",
+            "p2": "Dibuat untuk GNOME dan KDE, di X11 dan Wayland",
+            "p3": "Akun yang sama dengan ponsel dan komputer Anda"
+          }
+        },
+        "cli": {
+          "kicker": "Baris perintah",
+          "title": "VPN lengkap dalam satu perintah",
+          "body": "Server tidak punya layar, jadi Doppler untuk Linux dimulai dari terminal. Semua yang bisa dilakukan aplikasi tersedia sebagai perintah, dengan keluaran yang bisa dibaca skrip.",
+          "points": {
+            "p1": "Terhubung, ganti negara, dan cek status",
+            "p2": "Keluaran JSON untuk skrip Anda",
+            "p3": "Berjalan sebagai layanan sistem dan kembali setelah reboot"
+          }
+        },
+        "login": {
+          "kicker": "Masuk",
+          "title": "Masuk dari browser mana pun",
+          "body": "Jalankan perintah login dan buka tautan yang ditampilkannya, di ponsel atau laptop Anda. Setujui perangkatnya dan terminal sudah masuk. Tidak perlu mengetik ID akun lewat SSH.",
+          "points": {
+            "p1": "Tautan dan kode QR, langsung di terminal",
+            "p2": "Kunci sekali pakai untuk server yang menyiapkan dirinya sendiri",
+            "p3": "ID akun Anda tetap berfungsi jika Anda lebih suka itu"
+          }
+        },
+        "servers": {
+          "kicker": "Server Anda sendiri",
+          "title": "Bawa server Anda sendiri",
+          "body": "Doppler untuk Linux juga terhubung ke server yang bukan milik kami. Tempel tautan VLESS atau alamat langganan, atau ubah VPS Anda sendiri menjadi server dengan kit penyiapan terbuka kami. Fitur ini memerlukan paket Doppler yang aktif.",
+          "points": {
+            "p1": "Mengimpor tautan dan langganan dari panel yang umum",
+            "p2": "Kit sumber terbuka yang menyiapkan server Anda dengan satu perintah",
+            "p3": "Kill switch dan aturan keamanan tetap berlaku"
+          }
+        },
+        "automation": {
+          "kicker": "Otomatisasi",
+          "title": "Biarkan alur kerja Anda memilih negaranya",
+          "body": "Doppler membuka port lokal untuk setiap negara yang Anda butuhkan. Kirim satu permintaan lewat Jerman dan berikutnya lewat Amerika Serikat, pada saat yang sama, tanpa memindahkan seluruh server. n8n dan agen AI bisa membuka dan menutup port ini sendiri.",
+          "points": {
+            "p1": "API lokal dan server MCP untuk agen AI",
+            "p2": "Node untuk n8n dan image Docker untuk dijalankan di sampingnya",
+            "p3": "Mati sampai Anda menyalakannya, dan tertutup dari internet secara bawaan"
+          }
+        },
+        "safe": {
+          "kicker": "Dibuat untuk server",
+          "title": "Sesi SSH Anda tetap tersambung",
+          "body": "Mengalihkan seluruh server lewat VPN biasanya memutus koneksi tempat Anda sedang mengetik. Doppler menjaga koneksi masuk tetap di rutenya sendiri dan meminta Anda mengonfirmasi perubahan. Jika Anda tidak bisa, Doppler membatalkannya.",
+          "points": {
+            "p1": "SSH masuk tetap berfungsi selama Anda terhubung",
+            "p2": "Perubahan yang tidak Anda konfirmasi dibatalkan dengan sendirinya",
+            "p3": "Kontainer Docker mengikuti aturan yang sama"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kartu atau kripto",
+          "body": "Bayar di situs web. Tidak ada yang ditagih lewat toko aplikasi, dan tidak ada yang diperpanjang tanpa Anda."
+        }
+      },
+      "setup": {
+        "title": "Apa yang hadir, berurutan",
+        "subtitle": "Linux dirilis dalam tiga tahap. Daftar tunggu diberi tahu tentang tahap pertama.",
+        "s1": {
+          "title": "Baris perintah",
+          "body": "Perintah dopplervpn dan layanan latar belakangnya untuk Ubuntu dan Debian. Masuk lewat browser, satu port per negara, dan pelindung SSH tersedia sejak hari pertama."
+        },
+        "s2": {
+          "title": "Server sendiri dan otomatisasi",
+          "body": "Impor server Anda sendiri, kit penyiapan terbuka, API lokal, server MCP, node n8n, dan image Docker."
+        },
+        "s3": {
+          "title": "Aplikasi desktop",
+          "body": "Aplikasi untuk desktop Anda, lalu paket untuk Fedora dan Arch. Dukungan Make.com menyusul setelah relay yang aman siap."
+        }
+      },
+      "faq": {
+        "title": "Pertanyaan tentang Doppler di Linux",
+        "q1": {
+          "question": "Kapan Doppler untuk Linux dirilis?",
+          "answer": "Belum ada tanggalnya, dan kami memilih untuk tidak menebak. Baris perintah hadir lebih dulu, lalu aplikasi desktop. Tinggalkan email Anda di halaman ini dan kami akan menulis satu kali, saat versi pertama sudah bisa dipasang."
+        },
+        "q2": {
+          "question": "Distribusi Linux mana yang akan didukung?",
+          "answer": "Ubuntu dan Debian lebih dulu, di x86-64 dan ARM64, dipasang dengan apt dari repositori bertanda tangan. Paket untuk Fedora dan Arch menyusul."
+        },
+        "q3": {
+          "question": "Berapa biayanya?",
+          "answer": "Paket yang sama dengan semua aplikasi Doppler lainnya, mulai {price} per bulan. Tidak ada harga terpisah untuk Linux. Server sendiri, port negara, dan otomatisasi memerlukan paket yang aktif."
+        },
+        "q4": {
+          "question": "Bisakah saya terhubung ke server sendiri atau penyedia lain?",
+          "answer": "Bisa. Tempel tautan VLESS atau alamat langganan dari penyedia lain atau dari panel Anda sendiri, atau siapkan server di VPS Anda dengan kit terbuka kami. Janji privasi Doppler mencakup server Doppler. Server yang Anda tambahkan dijalankan oleh pemiliknya."
+        },
+        "q5": {
+          "question": "Bagaimana cara kerjanya dengan n8n dan agen AI?",
+          "answer": "Doppler menjalankan API kecil di mesin yang sama. n8n bisa mengirim setiap permintaan lewat negara yang berbeda menggunakan port lokal, dan agen AI bisa memakai server MCP bawaan untuk membuka port atau berganti lokasi. Fitur ini mati secara bawaan dan dilindungi token."
+        },
+        "q6": {
+          "question": "Apakah akan berfungsi dengan Make.com?",
+          "answer": "Belum saat peluncuran. Make berjalan di cloud dan tidak bisa menjangkau program di server Anda sendiri, jadi dibutuhkan relay yang ingin kami bangun dengan hati-hati. Ini direncanakan setelah otomatisasi lokal dirilis."
+        },
+        "q7": {
+          "question": "Bisakah ini membuat saya terkunci dari server saya?",
+          "answer": "Doppler dirancang agar hal itu tidak terjadi. Koneksi masuk tetap memakai rutenya sendiri, dan perubahan rute seluruh server harus dikonfirmasi dalam waktu yang Anda tentukan, atau perubahan itu dibatalkan."
+        }
+      },
+      "cta": {
+        "title": "Jadilah yang pertama memasangnya",
+        "subtitle": "Tinggalkan email Anda dan kami akan memberi tahu saat Doppler untuk Linux siap."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN untuk Huawei dan Honor: tanpa layanan Google",

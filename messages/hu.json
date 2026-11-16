@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN Linuxra: alkalmazás, parancssor és automatizálás",
+      "description": "A Doppler VPN megérkezik Linuxra: asztali alkalmazás, parancssor szerverekhez, bejelentkezés bármely böngészőből, saját szerverek, valamint API az n8n és az AI-ügynökök számára. Iratkozzon fel a várólistára."
+    },
+    "footer": "VPN Linuxra",
+    "learnMore": "Tudjon meg többet a linuxos VPN-ről",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Hamarosan",
+        "title": "Doppler VPN Linuxra",
+        "subtitle": "Asztali alkalmazás a laptopjára és parancssor a szervereire. Jelentkezzen be bármely böngészőből, hozza a saját szervereit, és hagyja, hogy az automatizálásai válasszák ki az országot.",
+        "note": "Először Ubuntu és Debian · x86 és ARM · a Fedora és az Arch később"
+      },
+      "waitlist": {
+        "label": "E-mail-cím",
+        "placeholder": "you@example.com",
+        "button": "Értesítsenek",
+        "success": "Felkerült a listára.",
+        "error": "Nem sikerült. Próbálja újra.",
+        "privacy": "Egyetlen e-mail, amikor elkészül. Semmi más."
+      },
+      "terminal": {
+        "label": "Terminál előnézete",
+        "caption": "A parancssor előnézete. A részletek a kiadásig változhatnak."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Asztali alkalmazás",
+          "title": "Ugyanaz a Doppler, natívan Linuxon",
+          "body": "Valódi linuxos alkalmazás, nem egy ablakba tett weboldal. Ugyanazokat a képernyőket és ugyanazokat a szavakat használja, mint a Doppler Macen és Windowson: egy gomb a csatlakozáshoz, szerverlista és kill switch.",
+          "points": {
+            "p1": "Követi a világos vagy sötét témát",
+            "p2": "GNOME-ra és KDE-re készült, X11-en és Waylanden",
+            "p3": "Ugyanaz a fiók, mint a telefonján és a számítógépén"
+          }
+        },
+        "cli": {
+          "kicker": "Parancssor",
+          "title": "Teljes értékű VPN egyetlen paranccsal",
+          "body": "A szervereknek nincs képernyőjük, ezért a linuxos Doppler a terminálban kezdődik. Minden, amire az alkalmazás képes, parancsként is elérhető, a kimenetét pedig a szkriptek is olvasni tudják.",
+          "points": {
+            "p1": "Csatlakozás, országváltás és állapotlekérdezés",
+            "p2": "JSON-kimenet a szkriptjeihez",
+            "p3": "Rendszerszolgáltatásként fut, és újraindítás után visszatér"
+          }
+        },
+        "login": {
+          "kicker": "Bejelentkezés",
+          "title": "Jelentkezzen be bármely böngészőből",
+          "body": "Futtassa a bejelentkezési parancsot, és nyissa meg a megjelenő hivatkozást a telefonján vagy a laptopján. Hagyja jóvá az eszközt, és a terminál már be is jelentkezett. Nem kell fiókazonosítót gépelni SSH-n keresztül.",
+          "points": {
+            "p1": "Hivatkozás és QR-kód közvetlenül a terminálban",
+            "p2": "Egyszer használható kulcsok az önmagukat beállító szerverekhez",
+            "p3": "A fiókazonosító továbbra is működik, ha azt szeretné használni"
+          }
+        },
+        "servers": {
+          "kicker": "Saját szerverek",
+          "title": "Hozza a saját szervereit",
+          "body": "A linuxos Doppler olyan szerverekhez is csatlakozik, amelyek nem a mieink. Illesszen be egy VLESS-hivatkozást vagy egy előfizetési címet, vagy alakítsa a saját VPS-ét szerverré a nyílt telepítőkészletünkkel. Ehhez aktív Doppler-csomag szükséges.",
+          "points": {
+            "p1": "Hivatkozásokat és előfizetéseket importál az elterjedt panelekből",
+            "p2": "Nyílt forráskódú készlet, amely egy paranccsal beállítja a szerverét",
+            "p3": "A kill switch és a biztonsági szabályok továbbra is érvényesek"
+          }
+        },
+        "automation": {
+          "kicker": "Automatizálás",
+          "title": "Hagyja, hogy a munkafolyamatai válasszanak országot",
+          "body": "A Doppler helyi portot nyit minden országhoz, amelyre szüksége van. Küldje az egyik kérést Németországon, a következőt az Egyesült Államokon keresztül, egyszerre, a teljes szerver átirányítása nélkül. Az n8n és az AI-ügynökök maguk is meg tudják nyitni és be tudják zárni ezeket a portokat.",
+          "points": {
+            "p1": "Helyi API és MCP-szerver az AI-ügynököknek",
+            "p2": "Csomópont az n8n-hez és egy mellette futtatható Docker-képfájl",
+            "p3": "Kikapcsolva marad, amíg be nem kapcsolja, és alapértelmezés szerint zárva van az internet felől"
+          }
+        },
+        "safe": {
+          "kicker": "Szerverekre tervezve",
+          "title": "Az SSH-munkamenete megmarad",
+          "body": "Ha egy teljes szervert VPN-en keresztül küld, általában megszakad az a kapcsolat, amelyben éppen gépel. A Doppler a bejövő kapcsolatokat a saját útvonalukon tartja, és megkéri, hogy erősítse meg a változtatást. Ha ez nem sikerül, visszavonja.",
+          "points": {
+            "p1": "A bejövő SSH csatlakozás közben is működik",
+            "p2": "A meg nem erősített változtatások maguktól visszaállnak",
+            "p3": "A Docker-konténerekre ugyanazok a szabályok érvényesek"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kártya vagy kripto",
+          "body": "Fizessen a weboldalon. Semmit sem számlázunk áruházon keresztül, és semmi sem újul meg Ön nélkül."
+        }
+      },
+      "setup": {
+        "title": "Mi érkezik, sorrendben",
+        "subtitle": "A Linux-verzió három lépésben jelenik meg. A várólista az elsőről kap értesítést.",
+        "s1": {
+          "title": "Parancssor",
+          "body": "A dopplervpn parancs és a háttérszolgáltatása Ubuntura és Debianra. A böngészős bejelentkezés, az országonkénti port és az SSH-védelem az első naptól elérhető."
+        },
+        "s2": {
+          "title": "Saját szerverek és automatizálás",
+          "body": "Saját szerverek importálása, a nyílt telepítőkészlet, a helyi API, az MCP-szerver, az n8n-csomópont és a Docker-képfájl."
+        },
+        "s3": {
+          "title": "Asztali alkalmazás",
+          "body": "Az asztali alkalmazás, majd csomagok Fedorára és Archra. A Make.com támogatása akkor érkezik, amikor elkészül egy biztonságos átjátszó."
+        }
+      },
+      "faq": {
+        "title": "Kérdések a linuxos Dopplerről",
+        "q1": {
+          "question": "Mikor jelenik meg a Doppler Linuxra?",
+          "answer": "Még nincs dátum, és nem szeretnénk találgatni. Először a parancssor érkezik, utána az asztali alkalmazás. Hagyja meg az e-mail-címét ezen az oldalon, és egyszer írunk, amikor az első verzió telepíthető lesz."
+        },
+        "q2": {
+          "question": "Mely Linux-disztribúciókat fogja támogatni?",
+          "answer": "Először az Ubuntut és a Debiant, x86-64 és ARM64 architektúrán, aláírt tárolóból, apt segítségével telepítve. A Fedora- és Arch-csomagok ezután következnek."
+        },
+        "q3": {
+          "question": "Mennyibe fog kerülni?",
+          "answer": "Ugyanaz a csomag, mint bármely más Doppler-alkalmazásnál, havi {price} összegtől. A Linuxnak nincs külön ára. A saját szerverekhez, az országportokhoz és az automatizáláshoz aktív csomag szükséges."
+        },
+        "q4": {
+          "question": "Csatlakozhatok a saját szerveremhez vagy egy másik szolgáltatóhoz?",
+          "answer": "Igen. Illesszen be egy VLESS-hivatkozást vagy előfizetési címet egy másik szolgáltatótól vagy a saját paneljéből, vagy állítson be szervert a VPS-én a nyílt készletünkkel. A Doppler adatvédelmi ígéretei a Doppler szervereire vonatkoznak. Az Ön által hozzáadott szervert a tulajdonosa üzemelteti."
+        },
+        "q5": {
+          "question": "Hogyan működik az n8n-nel és az AI-ügynökökkel?",
+          "answer": "A Doppler egy kis API-t futtat ugyanazon a gépen. Az n8n egy helyi porton át minden kérést más országon keresztül küldhet, az AI-ügynökök pedig a beépített MCP-szerverrel nyithatnak portot vagy válthatnak helyszínt. Alapértelmezés szerint ki van kapcsolva, és token védi."
+        },
+        "q6": {
+          "question": "Működni fog a Make.commal?",
+          "answer": "Az induláskor nem. A Make a felhőben fut, és nem éri el az Ön szerverén futó programot, ezért átjátszóra van szükség, amelyet gondosan szeretnénk megépíteni. A helyi automatizálás megjelenése utánra tervezzük."
+        },
+        "q7": {
+          "question": "Kizárhat a saját szerveremről?",
+          "answer": "Úgy készült, hogy ez ne történjen meg. A bejövő kapcsolatok megtartják a saját útvonalukat, a teljes szerver útvonalának módosítását pedig az Ön által beállított időn belül meg kell erősíteni, különben visszavonódik."
+        }
+      },
+      "cta": {
+        "title": "Legyen az elsők között, akik telepítik",
+        "subtitle": "Hagyja meg az e-mail-címét, és szólunk, amikor a linuxos Doppler elkészül."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN Huaweire és Honorra: Google-szolgáltatások nélkül",

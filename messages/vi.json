@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN cho Linux: ứng dụng, dòng lệnh và tự động hóa",
+      "description": "Doppler VPN sắp có trên Linux: ứng dụng máy tính, dòng lệnh cho máy chủ, đăng nhập từ mọi trình duyệt, máy chủ của riêng bạn và API cho n8n cùng các tác nhân AI. Tham gia danh sách chờ."
+    },
+    "footer": "VPN cho Linux",
+    "learnMore": "Tìm hiểu thêm về VPN cho Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Sắp ra mắt",
+        "title": "Doppler VPN cho Linux",
+        "subtitle": "Ứng dụng máy tính cho laptop và dòng lệnh cho máy chủ của bạn. Đăng nhập từ mọi trình duyệt, dùng máy chủ của riêng bạn và để các quy trình tự động chọn quốc gia.",
+        "note": "Ubuntu và Debian trước · x86 và ARM · Fedora và Arch theo sau"
+      },
+      "waitlist": {
+        "label": "Địa chỉ email",
+        "placeholder": "you@example.com",
+        "button": "Báo cho tôi",
+        "success": "Bạn đã có tên trong danh sách.",
+        "error": "Chưa thực hiện được. Vui lòng thử lại.",
+        "privacy": "Một email khi đã sẵn sàng. Không gì khác."
+      },
+      "terminal": {
+        "label": "Xem trước terminal",
+        "caption": "Bản xem trước của dòng lệnh. Chi tiết có thể thay đổi trước khi phát hành."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Ứng dụng máy tính",
+          "title": "Vẫn là Doppler, thuần Linux",
+          "body": "Một ứng dụng Linux thực thụ, không phải trang web nằm trong cửa sổ. Ứng dụng có cùng màn hình và cùng từ ngữ như Doppler trên Mac và Windows: một nút để kết nối, danh sách máy chủ và kill switch.",
+          "points": {
+            "p1": "Theo giao diện sáng hoặc tối của bạn",
+            "p2": "Dành cho GNOME và KDE, trên X11 và Wayland",
+            "p3": "Cùng tài khoản với điện thoại và máy tính của bạn"
+          }
+        },
+        "cli": {
+          "kicker": "Dòng lệnh",
+          "title": "Một VPN đầy đủ trong một lệnh",
+          "body": "Máy chủ không có màn hình, nên Doppler cho Linux bắt đầu từ terminal. Mọi việc ứng dụng làm được đều là một lệnh, với kết quả mà script đọc được.",
+          "points": {
+            "p1": "Kết nối, đổi quốc gia và xem trạng thái",
+            "p2": "Kết quả dạng JSON cho script của bạn",
+            "p3": "Chạy như dịch vụ hệ thống và tự trở lại sau khi khởi động lại"
+          }
+        },
+        "login": {
+          "kicker": "Đăng nhập",
+          "title": "Đăng nhập từ mọi trình duyệt",
+          "body": "Chạy lệnh đăng nhập và mở liên kết hiện ra, trên điện thoại hoặc laptop. Phê duyệt thiết bị là terminal đã đăng nhập. Không cần gõ ID tài khoản qua SSH.",
+          "points": {
+            "p1": "Liên kết và mã QR ngay trong terminal",
+            "p2": "Khóa dùng một lần cho máy chủ tự cài đặt",
+            "p3": "ID tài khoản vẫn dùng được nếu bạn thích cách đó"
+          }
+        },
+        "servers": {
+          "kicker": "Máy chủ của riêng bạn",
+          "title": "Dùng máy chủ của riêng bạn",
+          "body": "Doppler cho Linux cũng kết nối tới những máy chủ không phải của chúng tôi. Dán liên kết VLESS hoặc địa chỉ đăng ký, hoặc biến VPS của bạn thành máy chủ bằng bộ cài đặt mở của chúng tôi. Tính năng này cần một gói Doppler đang hoạt động.",
+          "points": {
+            "p1": "Nhập liên kết và gói đăng ký từ các bảng điều khiển phổ biến",
+            "p2": "Bộ công cụ mã nguồn mở cài đặt máy chủ của bạn bằng một lệnh",
+            "p3": "Kill switch và các quy tắc an toàn vẫn được áp dụng"
+          }
+        },
+        "automation": {
+          "kicker": "Tự động hóa",
+          "title": "Để quy trình của bạn tự chọn quốc gia",
+          "body": "Doppler mở một cổng cục bộ cho mỗi quốc gia bạn cần. Gửi một yêu cầu qua Đức và yêu cầu tiếp theo qua Hoa Kỳ, cùng lúc, mà không phải chuyển cả máy chủ. n8n và các tác nhân AI có thể tự mở và đóng các cổng này.",
+          "points": {
+            "p1": "API cục bộ và máy chủ MCP cho các tác nhân AI",
+            "p2": "Một node cho n8n và một image Docker để chạy bên cạnh",
+            "p3": "Tắt cho đến khi bạn bật, và mặc định không mở ra internet"
+          }
+        },
+        "safe": {
+          "kicker": "Tạo ra cho máy chủ",
+          "title": "Phiên SSH của bạn không bị ngắt",
+          "body": "Cho cả máy chủ đi qua VPN thường làm đứt chính kết nối bạn đang gõ. Doppler giữ các kết nối đến trên tuyến riêng của chúng và yêu cầu bạn xác nhận thay đổi. Nếu bạn không xác nhận được, Doppler hoàn tác.",
+          "points": {
+            "p1": "SSH đến vẫn hoạt động khi bạn đang kết nối",
+            "p2": "Thay đổi không được xác nhận sẽ tự hoàn tác",
+            "p3": "Container Docker tuân theo cùng các quy tắc"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Thẻ hoặc tiền mã hóa",
+          "body": "Trả tiền trên trang web. Không khoản nào tính qua cửa hàng ứng dụng, và không gì tự gia hạn mà bạn không biết."
+        }
+      },
+      "setup": {
+        "title": "Những gì sẽ đến, theo thứ tự",
+        "subtitle": "Linux ra mắt theo ba bước. Danh sách chờ được báo về bước đầu tiên.",
+        "s1": {
+          "title": "Dòng lệnh",
+          "body": "Lệnh dopplervpn và dịch vụ chạy nền của nó cho Ubuntu và Debian. Đăng nhập qua trình duyệt, một cổng cho mỗi quốc gia và cơ chế bảo vệ SSH có ngay từ ngày đầu."
+        },
+        "s2": {
+          "title": "Máy chủ riêng và tự động hóa",
+          "body": "Nhập máy chủ của riêng bạn, bộ cài đặt mở, API cục bộ, máy chủ MCP, node n8n và image Docker."
+        },
+        "s3": {
+          "title": "Ứng dụng máy tính",
+          "body": "Ứng dụng cho máy tính của bạn, sau đó là các gói cho Fedora và Arch. Hỗ trợ Make.com sẽ có khi một relay an toàn sẵn sàng."
+        }
+      },
+      "faq": {
+        "title": "Câu hỏi về Doppler trên Linux",
+        "q1": {
+          "question": "Khi nào Doppler cho Linux được phát hành?",
+          "answer": "Hiện chưa có ngày cụ thể và chúng tôi không muốn đoán. Dòng lệnh ra trước, ứng dụng máy tính ra sau. Hãy để lại email trên trang này và chúng tôi sẽ viết một lần, khi phiên bản đầu tiên có thể cài đặt."
+        },
+        "q2": {
+          "question": "Những bản phân phối Linux nào sẽ được hỗ trợ?",
+          "answer": "Trước tiên là Ubuntu và Debian, trên x86-64 và ARM64, cài bằng apt từ một kho đã ký. Các gói cho Fedora và Arch sẽ theo sau."
+        },
+        "q3": {
+          "question": "Giá sẽ là bao nhiêu?",
+          "answer": "Cùng gói với mọi ứng dụng Doppler khác, từ {price} mỗi tháng. Không có giá riêng cho Linux. Máy chủ riêng, cổng theo quốc gia và tự động hóa cần một gói đang hoạt động."
+        },
+        "q4": {
+          "question": "Tôi có thể kết nối tới máy chủ của mình hoặc nhà cung cấp khác không?",
+          "answer": "Có. Dán liên kết VLESS hoặc địa chỉ đăng ký từ nhà cung cấp khác hoặc từ bảng điều khiển của bạn, hoặc dựng máy chủ trên VPS của bạn bằng bộ công cụ mở của chúng tôi. Các cam kết về quyền riêng tư của Doppler áp dụng cho máy chủ của Doppler. Máy chủ bạn thêm vào do chủ sở hữu của nó vận hành."
+        },
+        "q5": {
+          "question": "Nó hoạt động với n8n và các tác nhân AI như thế nào?",
+          "answer": "Doppler chạy một API nhỏ trên cùng máy. n8n có thể gửi mỗi yêu cầu qua một quốc gia khác nhau bằng cổng cục bộ, còn các tác nhân AI có thể dùng máy chủ MCP tích hợp để mở cổng hoặc đổi vị trí. Tính năng này mặc định tắt và được bảo vệ bằng token."
+        },
+        "q6": {
+          "question": "Nó có hoạt động với Make.com không?",
+          "answer": "Lúc ra mắt thì chưa. Make chạy trên đám mây và không thể truy cập chương trình trên máy chủ của bạn, nên cần một relay mà chúng tôi muốn xây dựng cẩn thận. Việc này được lên kế hoạch sau khi các tính năng tự động hóa cục bộ ra mắt."
+        },
+        "q7": {
+          "question": "Nó có thể khiến tôi mất quyền truy cập vào máy chủ không?",
+          "answer": "Nó được thiết kế để điều đó không xảy ra. Các kết nối đến giữ tuyến riêng của chúng, và thay đổi tuyến của cả máy chủ phải được xác nhận trong khoảng thời gian bạn đặt, nếu không sẽ bị hoàn tác."
+        }
+      },
+      "cta": {
+        "title": "Hãy là người cài đặt đầu tiên",
+        "subtitle": "Để lại email và chúng tôi sẽ báo khi Doppler cho Linux sẵn sàng."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN cho Huawei và Honor: không cần dịch vụ Google",

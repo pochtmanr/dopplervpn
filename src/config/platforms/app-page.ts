@@ -3,8 +3,8 @@ import type { CtaLocation, CtaPlatform, CtaVariant } from "@/lib/track-cta";
 /**
  * Config shape for the app pages rendered by components/landing/platform-app-page.tsx:
  * the Apple pages (config/platforms/apple.ts) and the Android family
- * (config/platforms/android.ts: /vpn-for-android and /vpn-for-huawei). Windows still uses
- * PlatformLandingPage.
+ * (config/platforms/android.ts: /vpn-for-android and /vpn-for-huawei) and the Linux
+ * announcement (config/platforms/linux.ts). Windows still uses PlatformLandingPage.
  *
  * Words live in messages under `<namespace>.<copyKey>.*`; the strings every app page shares
  * (privacy facts, related links, "All downloads", the tour's prev/next) live in `applePage`,
@@ -53,11 +53,22 @@ export interface AppTourShot {
  * One feature chapter. "phone" draws an iPhone frame around a capture, "android" a
  * hole-punch Android bezel (Play Store captures), "mac" a laptop bezel, "photo" fills
  * the card with a render. "glyph" draws a line glyph over the glyph rain: for platforms
- * with no caption-free captures yet, so the page never shows a staged screen.
+ * with no caption-free captures yet, so the page never shows a staged screen. Its optional
+ * `backdrop` is a photo under the rain (the App Store screenshots' glass photos).
  */
 export type AppChapter =
   | { key: string; frame: "phone" | "android" | "mac" | "photo"; image: AppImage; guide?: GuideSlug }
-  | { key: string; frame: "glyph"; glyph: AppGlyph; guide?: GuideSlug };
+  | { key: string; frame: "glyph"; glyph: AppGlyph; backdrop?: AppImage; guide?: GuideSlug }
+  | { key: string; frame: "terminal"; lines: TerminalLine[]; guide?: GuideSlug };
+
+/**
+ * One line of a terminal card. Commands and their output are product syntax, so they live in
+ * config and are never translated; the words around the card come from messages.
+ */
+export interface TerminalLine {
+  kind: "cmd" | "out";
+  text: string;
+}
 
 /** The mark on a download button. "file" is a direct download (the APK), not a store. */
 export type StoreMark = "appStore" | "googlePlay" | "appGallery" | "file";
@@ -88,19 +99,28 @@ export interface AndroidInstallRow {
 }
 
 export interface AppPageConfig {
-  slug: "vpn-for-ios" | "vpn-for-ipad" | "vpn-for-macos" | "vpn-for-android" | "vpn-for-huawei";
-  namespace: "vpnForIos" | "vpnForIpad" | "vpnForMacos" | "vpnForAndroid" | "vpnForHuawei";
+  slug: "vpn-for-ios" | "vpn-for-ipad" | "vpn-for-macos" | "vpn-for-android" | "vpn-for-huawei" | "vpn-for-linux";
+  namespace: "vpnForIos" | "vpnForIpad" | "vpnForMacos" | "vpnForAndroid" | "vpnForHuawei" | "vpnForLinux";
   /** Sub-key of `namespace` holding this page's copy. */
   copyKey: "apple" | "app";
   /** Picks the eyebrow mark and where the device band's strings live. */
-  family: "apple" | "android";
+  family: "apple" | "android" | "linux";
   /** A parent page for the breadcrumb (iPad sits under iPhone). Title key is `applePage.related.<key>.title`. */
   parent?: { href: string; key: string };
   operatingSystem: string;
   trackLocation: CtaLocation;
   trackPlatform: CtaPlatform;
-  /** The page's one primary action, repeated in the final CTA. Its href is the schema's downloadUrl. */
-  primary: AppButton;
+  /**
+   * The page's one primary action, repeated in the final CTA. Its href is the schema's downloadUrl.
+   * Omitted only on a page with `waitlist`: there is nothing to download yet.
+   */
+  primary?: AppButton;
+  /**
+   * An announced platform with no build: the hero and the final CTA show an email form in place
+   * of a download button, the SoftwareApplication schema is left out (it would claim the app is
+   * in stock), and the sticky download bar is not rendered. Strings: `<namespace>.<copyKey>.waitlist`.
+   */
+  waitlist?: { platform: "linux" };
   /** A quieter second way in, beside the primary (the APK next to Google Play). */
   secondary?: AppButton;
   /** Store whose rating sits beside the hero button. Omitted where there is no listing to rate. */
@@ -108,8 +128,10 @@ export interface AppPageConfig {
   /** A second line under the hero note, key under `<namespace>.<copyKey>` (Huawei: "AppGallery is coming"). */
   heroNote2?: string;
   ogImageAlt: string;
-  /** Hero art, above the fold, loaded with priority: a 3:2 image. */
-  hero: AppImage & { alt: string };
+  /** Hero art, above the fold, loaded with priority: a 3:2 image. Omitted with `heroTerminal`. */
+  hero?: AppImage & { alt: string };
+  /** A terminal card as the hero art, for a platform with no screens to show yet. */
+  heroTerminal?: TerminalLine[];
   /**
    * The devices band. With `image`, the picture fills the left half; without one, a glyph tray
    * stands in. Apple reads its strings from `applePage.ecosystem`, the Android family from
@@ -143,6 +165,8 @@ export interface AppPageConfig {
    * the primary button's store mark, so a page with one image does not repeat its hero.
    */
   ctaImage?: AppImage;
+  /** A photo under the fallback glyph tray's rain, when there is no `ctaImage`. */
+  ctaBackdrop?: AppImage;
   /**
    * Android-only: specs + device list (same Play APK everywhere) + install channels
    * (Play, sideload APK, Huawei). Rendered as `#get` so Huawei can deep-link here.

@@ -172,6 +172,58 @@ const RAIN_COLUMNS: ReadonlyArray<RainColumn | null> = Array.from({ length: COLS
 });
 
 /**
+ * The same rain on a grid of the caller's choosing, for a tray much larger than the
+ * downloads strip. The strip's 24 x 12 lattice stretched over a wide tray turns into giant
+ * characters, so a big host asks for more cells instead and the digits keep their size.
+ * A rectangle in the middle stays empty for the mark that sits over it.
+ */
+export function rainFieldScene(cols: number, rows: number, rainOffsetMs = 0): Scene {
+  const period = rows + RAIN_TRAIL + 3;
+  const columns: ReadonlyArray<RainColumn | null> = Array.from({ length: cols }, (_, c) => {
+    if (rainHash(c, 1.7) < 0.34) return null;
+    return {
+      falls: 2 + Math.floor(rainHash(c, 5.3) * 4), // 2..5, as on the strip
+      offset: Math.floor(rainHash(c, 9.1) * period),
+    };
+  });
+  // The ground under the mark: about a third of the width, half the height.
+  const clearCol0 = Math.round(cols * 0.33);
+  const clearCol1 = cols - clearCol0;
+  const clearRow0 = Math.round(rows * 0.25);
+  const clearRow1 = rows - clearRow0;
+
+  return {
+    cols,
+    rows,
+    paint(f, sceneMs) {
+      const tMs = sceneMs + rainOffsetMs;
+      const tick = Math.floor(tMs / RAIN_FLICKER_MS);
+      for (let c = 0; c < cols; c++) {
+        const column = columns[c];
+        const head = column
+          ? (Math.floor((tMs / CYCLE_MS) * column.falls * period) + column.offset) % period
+          : -period;
+        const clearCol = c >= clearCol0 && c < clearCol1;
+        for (let r = 0; r < rows; r++) {
+          const behind = head - r;
+          if ((clearCol && r >= clearRow0 && r < clearRow1) || behind < 0 || behind > RAIN_TRAIL) {
+            stamp(f, r, c, " ");
+            continue;
+          }
+          const glyph = RAIN_GLYPHS[Math.floor(rainHash(c * 3.1 + tick, r * 7.3) * RAIN_GLYPHS.length)];
+          stamp(f, r, c, glyph, behind === 0 ? "accent" : "auto");
+        }
+      }
+    },
+    order(row, col) {
+      const dx = (col - (cols - 1) / 2) / ((cols - 1) / 2);
+      const dy = (row - (rows - 1) / 2) / ((rows - 1) / 2);
+      return Math.min(1, Math.sqrt(dx * dx + dy * dy) / Math.SQRT2);
+    },
+  };
+}
+
+/**
  * One shared scene: the platforms are told apart by their logo, not by the
  * artwork. `rainOffsetMs` only shifts where each card's drops are, so sibling
  * cards open together without raining in lockstep.

@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN za Linux: aplikacija, naredbeni redak i automatizacije",
+      "description": "Doppler VPN dolazi na Linux: aplikacija za radnu površinu, naredbeni redak za poslužitelje, prijava iz bilo kojeg preglednika, vlastiti poslužitelji i API za n8n i AI agente. Upišite se na listu čekanja."
+    },
+    "footer": "VPN za Linux",
+    "learnMore": "Saznajte više o VPN-u za Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Uskoro",
+        "title": "Doppler VPN za Linux",
+        "subtitle": "Aplikacija za vaše prijenosno računalo i naredbeni redak za vaše poslužitelje. Prijavite se iz bilo kojeg preglednika, dodajte vlastite poslužitelje i pustite da vaše automatizacije biraju državu.",
+        "note": "Najprije Ubuntu i Debian · x86 i ARM · Fedora i Arch slijede"
+      },
+      "waitlist": {
+        "label": "Adresa e-pošte",
+        "placeholder": "you@example.com",
+        "button": "Obavijestite me",
+        "success": "Na popisu ste.",
+        "error": "Nije uspjelo. Pokušajte ponovno.",
+        "privacy": "Jedna poruka kad bude spremno. Ništa drugo."
+      },
+      "terminal": {
+        "label": "Pregled terminala",
+        "caption": "Pregled naredbenog retka. Pojedinosti se mogu promijeniti prije izdanja."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Aplikacija za radnu površinu",
+          "title": "Isti Doppler, izvorno na Linuxu",
+          "body": "Prava aplikacija za Linux, a ne web-stranica u prozoru. Ima iste zaslone i iste riječi kao Doppler na Macu i Windowsu: jedan gumb za spajanje, popis poslužitelja i kill switch.",
+          "points": {
+            "p1": "Prati vašu svijetlu ili tamnu temu",
+            "p2": "Izrađena za GNOME i KDE, na X11 i Waylandu",
+            "p3": "Isti račun kao na telefonu i računalu"
+          }
+        },
+        "cli": {
+          "kicker": "Naredbeni redak",
+          "title": "Potpuni VPN u jednoj naredbi",
+          "body": "Poslužitelji nemaju zaslon, pa Doppler za Linux počinje u terminalu. Sve što aplikacija može dostupno je kao naredba, s ispisom koji skripte mogu čitati.",
+          "points": {
+            "p1": "Spajanje, promjena države i provjera stanja",
+            "p2": "JSON ispis za vaše skripte",
+            "p3": "Radi kao sustavska usluga i vraća se nakon ponovnog pokretanja"
+          }
+        },
+        "login": {
+          "kicker": "Prijava",
+          "title": "Prijavite se iz bilo kojeg preglednika",
+          "body": "Pokrenite naredbu za prijavu i otvorite poveznicu koju prikaže, na telefonu ili prijenosnom računalu. Odobrite uređaj i terminal je prijavljen. Bez upisivanja ID-a računa preko SSH-a.",
+          "points": {
+            "p1": "Poveznica i QR kod izravno u terminalu",
+            "p2": "Jednokratni ključevi za poslužitelje koji se sami postavljaju",
+            "p3": "Vaš ID računa i dalje radi ako vam je tako draže"
+          }
+        },
+        "servers": {
+          "kicker": "Vlastiti poslužitelji",
+          "title": "Dodajte vlastite poslužitelje",
+          "body": "Doppler za Linux spaja se i na poslužitelje koji nisu naši. Zalijepite VLESS poveznicu ili adresu pretplate, ili svoj VPS pretvorite u poslužitelj našim otvorenim kompletom za postavljanje. Potreban je aktivan Doppler plan.",
+          "points": {
+            "p1": "Uvozi poveznice i pretplate iz uobičajenih panela",
+            "p2": "Komplet otvorenog koda koji vaš poslužitelj postavlja jednom naredbom",
+            "p3": "Kill switch i sigurnosna pravila i dalje vrijede"
+          }
+        },
+        "automation": {
+          "kicker": "Automatizacije",
+          "title": "Pustite da vaši tijekovi rada biraju državu",
+          "body": "Doppler otvara lokalni port za svaku državu koja vam treba. Jedan zahtjev pošaljite kroz Njemačku, a sljedeći kroz Sjedinjene Države, istodobno i bez premještanja cijelog poslužitelja. n8n i AI agenti mogu sami otvarati i zatvarati te portove.",
+          "points": {
+            "p1": "Lokalni API i MCP poslužitelj za AI agente",
+            "p2": "Čvor za n8n i Docker slika koja radi uz njega",
+            "p3": "Isključeno dok ga ne uključite i prema zadanom zatvoreno za internet"
+          }
+        },
+        "safe": {
+          "kicker": "Stvoreno za poslužitelje",
+          "title": "Vaša SSH sesija ostaje aktivna",
+          "body": "Kad cijeli poslužitelj pošaljete kroz VPN, obično se prekine veza u kojoj upravo tipkate. Doppler dolazne veze ostavlja na njihovoj vlastitoj ruti i traži da potvrdite promjenu. Ako ne možete, poništava je.",
+          "points": {
+            "p1": "Dolazni SSH radi i dok ste spojeni",
+            "p2": "Promjene koje ne potvrdite same se poništavaju",
+            "p3": "Docker kontejneri slijede ista pravila"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kartica ili kripto",
+          "body": "Platite na web-stranici. Ništa se ne naplaćuje kroz trgovinu i ništa se ne obnavlja bez vas."
+        }
+      },
+      "setup": {
+        "title": "Što stiže i kojim redom",
+        "subtitle": "Linux izlazi u tri koraka. Lista čekanja doznaje za prvi.",
+        "s1": {
+          "title": "Naredbeni redak",
+          "body": "Naredba dopplervpn i njezina pozadinska usluga za Ubuntu i Debian. Prijava preko preglednika, port za svaku državu i zaštita SSH-a dostupni su od prvog dana."
+        },
+        "s2": {
+          "title": "Vlastiti poslužitelji i automatizacije",
+          "body": "Uvoz vlastitih poslužitelja, otvoreni komplet za postavljanje, lokalni API, MCP poslužitelj, n8n čvor i Docker slika."
+        },
+        "s3": {
+          "title": "Aplikacija za radnu površinu",
+          "body": "Aplikacija za vašu radnu površinu, zatim paketi za Fedoru i Arch. Podrška za Make.com slijedi kad bude spreman siguran relej."
+        }
+      },
+      "faq": {
+        "title": "Pitanja o Doppleru na Linuxu",
+        "q1": {
+          "question": "Kada izlazi Doppler za Linux?",
+          "answer": "Datuma još nema i ne želimo nagađati. Najprije stiže naredbeni redak, a nakon njega aplikacija za radnu površinu. Ostavite e-poštu na ovoj stranici i javit ćemo vam se jednom, kad se prva verzija bude mogla instalirati."
+        },
+        "q2": {
+          "question": "Koje će Linux distribucije biti podržane?",
+          "answer": "Najprije Ubuntu i Debian, na x86-64 i ARM64, uz instalaciju putem apt-a iz potpisanog repozitorija. Paketi za Fedoru i Arch slijede."
+        },
+        "q3": {
+          "question": "Koliko će koštati?",
+          "answer": "Isti plan kao i za svaku drugu Doppler aplikaciju, od {price} mjesečno. Nema posebne cijene za Linux. Vlastiti poslužitelji, portovi po državama i automatizacije zahtijevaju aktivan plan."
+        },
+        "q4": {
+          "question": "Mogu li se spojiti na vlastiti poslužitelj ili drugog pružatelja?",
+          "answer": "Da. Zalijepite VLESS poveznicu ili adresu pretplate drugog pružatelja ili iz vlastitog panela, ili postavite poslužitelj na svom VPS-u našim otvorenim kompletom. Dopplerova obećanja o privatnosti odnose se na Dopplerove poslužitelje. Poslužiteljem koji dodate vi upravlja njegov vlasnik."
+        },
+        "q5": {
+          "question": "Kako radi s n8n-om i AI agentima?",
+          "answer": "Doppler pokreće mali API na istom računalu. n8n svaki zahtjev može poslati kroz drugu državu pomoću lokalnog porta, a AI agenti mogu ugrađenim MCP poslužiteljem otvoriti port ili promijeniti lokaciju. Prema zadanom je isključeno i zaštićeno tokenom."
+        },
+        "q6": {
+          "question": "Hoće li raditi s Make.comom?",
+          "answer": "Ne pri izlasku. Make radi u oblaku i ne može doći do programa na vašem poslužitelju, pa mu treba relej koji želimo pažljivo izgraditi. Planiran je nakon izlaska lokalnih automatizacija."
+        },
+        "q7": {
+          "question": "Može li mi zaključati pristup poslužitelju?",
+          "answer": "Izrađen je tako da se to ne dogodi. Dolazne veze zadržavaju vlastitu rutu, a promjenu rute cijelog poslužitelja morate potvrditi u vremenu koje sami zadate, inače se poništava."
+        }
+      },
+      "cta": {
+        "title": "Budite među prvima koji ga instaliraju",
+        "subtitle": "Ostavite e-poštu i javit ćemo vam kad Doppler za Linux bude spreman."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN za Huawei i Honor: bez Googleovih usluga",

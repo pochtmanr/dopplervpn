@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN per a Linux: app, línia d'ordres i automatitzacions",
+      "description": "Doppler VPN arriba a Linux: una app d'escriptori, una línia d'ordres per a servidors, inici de sessió des de qualsevol navegador, els teus propis servidors i una API per a n8n i agents d'IA. Apunta't a la llista d'espera."
+    },
+    "footer": "VPN per a Linux",
+    "learnMore": "Més informació sobre VPN per a Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Properament",
+        "title": "Doppler VPN per a Linux",
+        "subtitle": "Una app d'escriptori per al teu portàtil i una línia d'ordres per als teus servidors. Inicia la sessió des de qualsevol navegador, porta els teus propis servidors i deixa que les teves automatitzacions triïn el país.",
+        "note": "Primer Ubuntu i Debian · x86 i ARM · Fedora i Arch després"
+      },
+      "waitlist": {
+        "label": "Adreça electrònica",
+        "placeholder": "you@example.com",
+        "button": "Avisa'm",
+        "success": "Ja ets a la llista.",
+        "error": "No ha funcionat. Torna-ho a provar.",
+        "privacy": "Un sol correu quan estigui a punt. Res més."
+      },
+      "terminal": {
+        "label": "Vista prèvia del terminal",
+        "caption": "Una vista prèvia de la línia d'ordres. Els detalls poden canviar abans del llançament."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "App d'escriptori",
+          "title": "El mateix Doppler, natiu a Linux",
+          "body": "Una app de Linux de debò, no una pàgina web dins d'una finestra. Té les mateixes pantalles i les mateixes paraules que Doppler al Mac i al Windows: un botó per connectar, una llista de servidors i un kill switch.",
+          "points": {
+            "p1": "Segueix el teu tema clar o fosc",
+            "p2": "Feta per a GNOME i KDE, a X11 i Wayland",
+            "p3": "El mateix compte que al telèfon i a l'ordinador"
+          }
+        },
+        "cli": {
+          "kicker": "Línia d'ordres",
+          "title": "Una VPN completa en una ordre",
+          "body": "Els servidors no tenen pantalla, així que Doppler per a Linux comença al terminal. Tot el que fa l'app és una ordre, amb una sortida que els scripts poden llegir.",
+          "points": {
+            "p1": "Connecta, canvia de país i consulta l'estat",
+            "p2": "Sortida en JSON per als teus scripts",
+            "p3": "Funciona com a servei del sistema i torna després d'un reinici"
+          }
+        },
+        "login": {
+          "kicker": "Inici de sessió",
+          "title": "Inicia la sessió des de qualsevol navegador",
+          "body": "Executa l'ordre d'inici de sessió i obre l'enllaç que mostra, al telèfon o al portàtil. Aprova el dispositiu i el terminal ja té la sessió iniciada. Sense teclejar cap ID de compte per SSH.",
+          "points": {
+            "p1": "Un enllaç i un codi QR, al mateix terminal",
+            "p2": "Claus d'un sol ús per a servidors que es configuren sols",
+            "p3": "El teu ID de compte continua funcionant si el prefereixes"
+          }
+        },
+        "servers": {
+          "kicker": "Els teus propis servidors",
+          "title": "Porta els teus propis servidors",
+          "body": "Doppler per a Linux també es connecta a servidors que no són nostres. Enganxa un enllaç VLESS o una adreça de subscripció, o converteix el teu VPS en servidor amb el nostre kit d'instal·lació obert. Cal un pla de Doppler actiu.",
+          "points": {
+            "p1": "Importa enllaços i subscripcions dels panells habituals",
+            "p2": "Un kit de codi obert que configura el teu servidor amb una ordre",
+            "p3": "El kill switch i les regles de seguretat es continuen aplicant"
+          }
+        },
+        "automation": {
+          "kicker": "Automatitzacions",
+          "title": "Deixa que els teus fluxos triïn el país",
+          "body": "Doppler obre un port local per a cada país que necessitis. Envia una petició per Alemanya i la següent pels Estats Units, alhora, sense moure tot el servidor. n8n i els agents d'IA poden obrir i tancar aquests ports ells mateixos.",
+          "points": {
+            "p1": "Una API local i un servidor MCP per a agents d'IA",
+            "p2": "Un node per a n8n i una imatge de Docker per executar al costat",
+            "p3": "Apagat fins que l'activis, i tancat a internet per defecte"
+          }
+        },
+        "safe": {
+          "kicker": "Fet per a servidors",
+          "title": "La teva sessió SSH es manté",
+          "body": "Fer passar un servidor sencer per una VPN sol tallar la connexió on estàs escrivint. Doppler manté les connexions entrants a la seva pròpia ruta i et demana que confirmis el canvi. Si no pots, el desfà.",
+          "points": {
+            "p1": "L'SSH entrant continua funcionant mentre estàs connectat",
+            "p2": "Els canvis que no confirmes es reverteixen sols",
+            "p3": "Els contenidors de Docker segueixen les mateixes regles"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Targeta o cripto",
+          "body": "Paga al web. No es cobra res a través d'una botiga i res no es renova sense tu."
+        }
+      },
+      "setup": {
+        "title": "Què arriba, per ordre",
+        "subtitle": "Linux surt en tres passos. La llista d'espera rep l'avís del primer.",
+        "s1": {
+          "title": "Línia d'ordres",
+          "body": "L'ordre dopplervpn i el seu servei en segon pla per a Ubuntu i Debian. L'inici de sessió pel navegador, un port per país i la protecció d'SSH hi són des del primer dia."
+        },
+        "s2": {
+          "title": "Servidors propis i automatitzacions",
+          "body": "La importació dels teus servidors, el kit d'instal·lació obert, l'API local, el servidor MCP, el node d'n8n i la imatge de Docker."
+        },
+        "s3": {
+          "title": "App d'escriptori",
+          "body": "L'app per al teu escriptori i després paquets per a Fedora i Arch. Make.com arribarà quan hi hagi un relé segur."
+        }
+      },
+      "faq": {
+        "title": "Preguntes sobre Doppler a Linux",
+        "q1": {
+          "question": "Quan sortirà Doppler per a Linux?",
+          "answer": "Encara no hi ha data i preferim no endevinar. Primer arriba la línia d'ordres i després l'app d'escriptori. Deixa el teu correu en aquesta pàgina i t'escriurem una vegada, quan la primera versió es pugui instal·lar."
+        },
+        "q2": {
+          "question": "Quines distribucions de Linux admetrà?",
+          "answer": "Primer Ubuntu i Debian, en x86-64 i ARM64, instal·lades amb apt des d'un repositori signat. Després arribaran paquets per a Fedora i Arch."
+        },
+        "q3": {
+          "question": "Quant costarà?",
+          "answer": "El mateix pla que qualsevol altra app de Doppler, des de {price} al mes. No hi ha un preu a part per a Linux. Els servidors propis, els ports per país i les automatitzacions necessiten un pla actiu."
+        },
+        "q4": {
+          "question": "Em puc connectar al meu propi servidor o a un altre proveïdor?",
+          "answer": "Sí. Enganxa un enllaç VLESS o una adreça de subscripció d'un altre proveïdor o del teu propi panell, o munta un servidor al teu VPS amb el nostre kit obert. Les promeses de privadesa de Doppler cobreixen els servidors de Doppler. Un servidor que afegeixes tu el gestiona el seu propietari."
+        },
+        "q5": {
+          "question": "Com funciona amb n8n i els agents d'IA?",
+          "answer": "Doppler executa una petita API a la mateixa màquina. n8n pot enviar cada petició per un país diferent amb un port local, i els agents d'IA poden fer servir el servidor MCP integrat per obrir un port o canviar d'ubicació. Ve apagat per defecte i protegit amb un token."
+        },
+        "q6": {
+          "question": "Funcionarà amb Make.com?",
+          "answer": "Al llançament, no. Make funciona al núvol i no pot arribar a un programa del teu propi servidor, de manera que necessita un relé que volem construir amb cura. Està previst per a després que surtin les automatitzacions locals."
+        },
+        "q7": {
+          "question": "Em pot deixar sense accés al meu servidor?",
+          "answer": "Està fet perquè no passi. Les connexions entrants conserven la seva pròpia ruta, i un canvi a la ruta de tot el servidor s'ha de confirmar dins del temps que tu fixis, o es desfà."
+        }
+      },
+      "cta": {
+        "title": "Sigues dels primers a instal·lar-lo",
+        "subtitle": "Deixa el teu correu i t'avisarem quan Doppler per a Linux estigui a punt."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN per a Huawei i Honor: sense serveis de Google",

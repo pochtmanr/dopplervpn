@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN pre Linux: aplikácia, príkazový riadok a automatizácie",
+      "description": "Doppler VPN prichádza na Linux: desktopová aplikácia, príkazový riadok pre servery, prihlásenie z ľubovoľného prehliadača, vlastné servery a API pre n8n a AI agentov. Zapíšte sa na čakaciu listinu."
+    },
+    "footer": "VPN pre Linux",
+    "learnMore": "Zistite viac o VPN pre Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Čoskoro",
+        "title": "Doppler VPN pre Linux",
+        "subtitle": "Desktopová aplikácia pre váš notebook a príkazový riadok pre vaše servery. Prihláste sa z ľubovoľného prehliadača, pripojte vlastné servery a nechajte svoje automatizácie vyberať krajinu.",
+        "note": "Najprv Ubuntu a Debian · x86 a ARM · Fedora a Arch neskôr"
+      },
+      "waitlist": {
+        "label": "E-mailová adresa",
+        "placeholder": "you@example.com",
+        "button": "Dajte mi vedieť",
+        "success": "Ste na zozname.",
+        "error": "Nepodarilo sa. Skúste to znova.",
+        "privacy": "Jeden e-mail, keď bude hotovo. Nič ďalšie."
+      },
+      "terminal": {
+        "label": "Ukážka terminálu",
+        "caption": "Ukážka príkazového riadka. Podrobnosti sa pred vydaním môžu zmeniť."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Desktopová aplikácia",
+          "title": "Ten istý Doppler, natívne na Linuxe",
+          "body": "Skutočná linuxová aplikácia, nie webová stránka v okne. Má rovnaké obrazovky a rovnaké slová ako Doppler na Macu a Windowse: jedno tlačidlo na pripojenie, zoznam serverov a kill switch.",
+          "points": {
+            "p1": "Riadi sa vaším svetlým alebo tmavým motívom",
+            "p2": "Pre GNOME a KDE, na X11 aj Waylande",
+            "p3": "Rovnaký účet ako na telefóne a počítači"
+          }
+        },
+        "cli": {
+          "kicker": "Príkazový riadok",
+          "title": "Plnohodnotná VPN jedným príkazom",
+          "body": "Servery nemajú obrazovku, takže Doppler pre Linux sa začína v termináli. Všetko, čo vie aplikácia, je príkaz, a jeho výstup dokážu čítať skripty.",
+          "points": {
+            "p1": "Pripojenie, zmena krajiny a kontrola stavu",
+            "p2": "Výstup vo formáte JSON pre vaše skripty",
+            "p3": "Beží ako systémová služba a po reštarte sa vráti"
+          }
+        },
+        "login": {
+          "kicker": "Prihlásenie",
+          "title": "Prihláste sa z ľubovoľného prehliadača",
+          "body": "Spustite príkaz na prihlásenie a otvorte odkaz, ktorý vypíše, na telefóne alebo notebooku. Schváľte zariadenie a terminál je prihlásený. Žiadne prepisovanie ID účtu cez SSH.",
+          "points": {
+            "p1": "Odkaz a QR kód priamo v termináli",
+            "p2": "Jednorazové kľúče pre servery, ktoré sa nastavujú samy",
+            "p3": "ID účtu funguje ďalej, ak mu dávate prednosť"
+          }
+        },
+        "servers": {
+          "kicker": "Vlastné servery",
+          "title": "Pripojte vlastné servery",
+          "body": "Doppler pre Linux sa pripojí aj k serverom, ktoré nie sú naše. Vložte odkaz VLESS alebo adresu odberu, alebo z vlastného VPS urobte server pomocou našej otvorenej inštalačnej súpravy. Potrebný je aktívny plán Doppler.",
+          "points": {
+            "p1": "Importuje odkazy a odbery z bežných panelov",
+            "p2": "Open source súprava, ktorá váš server nastaví jedným príkazom",
+            "p3": "Kill switch a bezpečnostné pravidlá platia ďalej"
+          }
+        },
+        "automation": {
+          "kicker": "Automatizácie",
+          "title": "Nechajte svoje workflow vyberať krajinu",
+          "body": "Doppler otvorí lokálny port pre každú krajinu, ktorú potrebujete. Jednu požiadavku pošlite cez Nemecko a ďalšiu cez Spojené štáty, súčasne a bez presmerovania celého servera. n8n a AI agenti si tieto porty môžu otvárať a zatvárať sami.",
+          "points": {
+            "p1": "Lokálne API a MCP server pre AI agentov",
+            "p2": "Uzol pre n8n a Docker image, ktorý beží vedľa neho",
+            "p3": "Vypnuté, kým to nezapnete, a predvolene uzavreté pred internetom"
+          }
+        },
+        "safe": {
+          "kicker": "Stvorené pre servery",
+          "title": "Vaša SSH relácia zostane nažive",
+          "body": "Keď pošlete celý server cez VPN, zvyčajne sa preruší spojenie, v ktorom práve píšete. Doppler necháva prichádzajúce spojenia na ich vlastnej trase a požiada vás o potvrdenie zmeny. Ak ju potvrdiť nemôžete, vráti ju späť.",
+          "points": {
+            "p1": "Prichádzajúce SSH funguje aj počas pripojenia",
+            "p2": "Nepotvrdené zmeny sa samy vrátia späť",
+            "p3": "Kontajnery Dockera sa riadia rovnakými pravidlami"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Karta alebo kryptomena",
+          "body": "Zaplaťte na webe. Nič sa neúčtuje cez obchod a nič sa neobnoví bez vás."
+        }
+      },
+      "setup": {
+        "title": "Čo príde a v akom poradí",
+        "subtitle": "Linux vychádza v troch krokoch. Čakacia listina sa dozvie o prvom.",
+        "s1": {
+          "title": "Príkazový riadok",
+          "body": "Príkaz dopplervpn a jeho služba na pozadí pre Ubuntu a Debian. Prihlásenie cez prehliadač, port pre každú krajinu a ochrana SSH sú k dispozícii od prvého dňa."
+        },
+        "s2": {
+          "title": "Vlastné servery a automatizácie",
+          "body": "Import vlastných serverov, otvorená inštalačná súprava, lokálne API, MCP server, uzol pre n8n a Docker image."
+        },
+        "s3": {
+          "title": "Desktopová aplikácia",
+          "body": "Aplikácia pre váš desktop, potom balíčky pre Fedoru a Arch. Podpora Make.com príde, keď bude pripravený bezpečný prenosový server."
+        }
+      },
+      "faq": {
+        "title": "Otázky o Doppleri na Linuxe",
+        "q1": {
+          "question": "Kedy Doppler pre Linux vyjde?",
+          "answer": "Dátum zatiaľ nie je a nechceme hádať. Najprv príde príkazový riadok, po ňom desktopová aplikácia. Nechajte nám na tejto stránke e-mail a napíšeme vám raz, keď sa prvá verzia bude dať nainštalovať."
+        },
+        "q2": {
+          "question": "Ktoré linuxové distribúcie budú podporované?",
+          "answer": "Najprv Ubuntu a Debian, na x86-64 a ARM64, s inštaláciou cez apt z podpísaného repozitára. Balíčky pre Fedoru a Arch budú nasledovať."
+        },
+        "q3": {
+          "question": "Koľko to bude stáť?",
+          "answer": "Rovnaký plán ako pri každej inej aplikácii Doppler, od {price} mesačne. Osobitná cena pre Linux neexistuje. Vlastné servery, porty pre krajiny a automatizácie vyžadujú aktívny plán."
+        },
+        "q4": {
+          "question": "Môžem sa pripojiť k vlastnému serveru alebo k inému poskytovateľovi?",
+          "answer": "Áno. Vložte odkaz VLESS alebo adresu odberu od iného poskytovateľa či z vlastného panela, alebo si na svojom VPS nastavte server pomocou našej otvorenej súpravy. Sľuby Dopplera o súkromí sa vzťahujú na servery Dopplera. Server, ktorý pridáte vy, prevádzkuje jeho vlastník."
+        },
+        "q5": {
+          "question": "Ako to funguje s n8n a AI agentmi?",
+          "answer": "Doppler spúšťa na tom istom stroji malé API. n8n môže každú požiadavku poslať cez inú krajinu pomocou lokálneho portu a AI agenti môžu cez vstavaný MCP server otvoriť port alebo zmeniť lokalitu. Predvolene je to vypnuté a chránené tokenom."
+        },
+        "q6": {
+          "question": "Bude to fungovať s Make.com?",
+          "answer": "Pri spustení nie. Make beží v cloude a k programu na vašom serveri sa nedostane, takže potrebuje prenosový server, ktorý chceme postaviť starostlivo. Plánujeme ho po vydaní lokálnych automatizácií."
+        },
+        "q7": {
+          "question": "Môže mi zablokovať prístup k môjmu serveru?",
+          "answer": "Je navrhnutý tak, aby sa to nestalo. Prichádzajúce spojenia si držia vlastnú trasu a zmenu trasy celého servera treba potvrdiť v čase, ktorý si nastavíte, inak sa vráti späť."
+        }
+      },
+      "cta": {
+        "title": "Nainštalujte si ho medzi prvými",
+        "subtitle": "Nechajte nám e-mail a dáme vám vedieť, keď bude Doppler pre Linux pripravený."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN pre Huawei a Honor: bez služieb Google",

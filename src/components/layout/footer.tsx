@@ -82,6 +82,7 @@ export async function Footer() {
   const tRussia = await getTranslations("vpnForRussia.related");
   const tChina = await getTranslations("vpnForChina.related");
   const tIos = await getTranslations("vpnForIos.related");
+  const tLinux = await getTranslations("vpnForLinux");
   const tDownloads = await getTranslations("apps");
   const locale = await getLocale();
   const showBlogLink = isBlogLocale(locale);
@@ -114,6 +115,7 @@ export async function Footer() {
     { href: "/vpn-for-huawei", label: t("vpnForHuawei") },
     { href: "/vpn-for-macos", label: t("vpnForMacos") },
     { href: "/vpn-for-windows", label: t("vpnForWindows") },
+    { href: "/vpn-for-linux", label: tLinux("footer") },
     { href: "/vless-vpn-android", label: t("vlessVpnAndroid") },
     { href: "/vpn-for-public-wifi-iphone", label: tIos("publicWifi") },
   ];

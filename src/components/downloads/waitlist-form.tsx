@@ -1,21 +1,41 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useId, useState } from "react";
 
-interface WaitlistFormProps {
-  platform: string;
+export interface WaitlistLabels {
+  /** Accessible name of the email field. */
+  label: string;
+  placeholder: string;
+  button: string;
+  success: string;
+  error: string;
+  /** One quiet line under the form: what the address is used for. */
+  privacy: string;
 }
 
-export function WaitlistForm({ platform }: WaitlistFormProps) {
-  const t = useTranslations("apps.waitlist");
-  const locale = useLocale();
+interface WaitlistFormProps {
+  platform: "linux" | "windows";
+  locale: string;
+  /**
+   * Words come from the server page as props, so the page's namespace stays server-only and
+   * needs no entry in i18n/client-namespaces.ts.
+   */
+  labels: WaitlistLabels;
+  /** The surface the form sits on: the field takes the next tone up so it reads as a well. */
+  tone?: "page" | "card";
+  /** Row alignment at desktop width. */
+  align?: "center" | "start";
+}
+
+/** Email capture for a platform that is announced and not yet downloadable. Calm+ only. */
+export function WaitlistForm({ platform, locale, labels, tone = "page", align = "center" }: WaitlistFormProps) {
+  const id = useId();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!email.trim() || status === "loading") return;
 
     setStatus("loading");
     try {
@@ -24,80 +44,59 @@ export function WaitlistForm({ platform }: WaitlistFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim(), platform, locale }),
       });
-
-      if (res.ok) {
-        setStatus("success");
-      } else {
-        setStatus("error");
-      }
+      setStatus(res.ok ? "success" : "error");
     } catch {
       setStatus("error");
     }
   };
 
+  const edge = align === "center" ? "mx-auto" : "mx-auto lg:mx-0";
+
   if (status === "success") {
     return (
-      <div className="rounded-xl bg-accent-teal/10 border border-accent-teal/20 px-4 py-3 text-center">
-        <p className="text-sm text-accent-teal font-medium">
-          <CheckIcon />
-          {t("success")}
-        </p>
-      </div>
+      <p
+        role="status"
+        className={`${edge} flex w-full max-w-md items-center justify-center gap-2 rounded-full bg-(--c-accent-tint) px-5 py-3.5 text-[15px] font-bold text-(--c-accent)`}
+      >
+        <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2.25} stroke="currentColor" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        </svg>
+        {labels.success}
+      </p>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
-      <div className="flex gap-2">
+    <form onSubmit={handleSubmit} className={`${edge} w-full max-w-md`}>
+      <div className="flex flex-col gap-2.5 sm:flex-row">
+        <label htmlFor={id} className="sr-only">
+          {labels.label}
+        </label>
         <input
+          id={id}
           type="email"
+          name="email"
           required
+          autoComplete="email"
+          inputMode="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder={t("placeholder")}
-          className="flex-1 min-w-0 rounded-lg border border-overlay/15 bg-bg-primary/50 px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent-teal/40 focus:ring-1 focus:ring-accent-teal/20 transition-colors"
+          placeholder={labels.placeholder}
+          className={`h-14 w-full min-w-0 shrink-0 rounded-full sm:w-auto sm:flex-1 sm:shrink px-6 text-base text-(--c-text) placeholder:text-(--c-tert) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) ${
+            tone === "card" ? "bg-(--c-inset)" : "bg-(--c-card)"
+          }`}
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-lg bg-accent-teal text-bg-primary px-4 py-2.5 text-sm font-medium hover:bg-accent-teal/90 transition-colors disabled:opacity-50"
+          className="plus-btn inline-flex h-14 shrink-0 items-center justify-center rounded-full bg-(--c-accent-fill) px-8 text-base font-bold text-white hover:bg-(--c-accent) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--c-accent) focus-visible:ring-offset-2 focus-visible:ring-offset-(--c-bg) disabled:opacity-60"
         >
-          {status === "loading" ? (
-            <LoadingSpinner />
-          ) : (
-            <BellIcon />
-          )}
-          {t("button")}
+          {labels.button}
         </button>
       </div>
-      {status === "error" && (
-        <p className="text-xs text-red-400">{t("error")}</p>
-      )}
+      <p role={status === "error" ? "alert" : undefined} className={`mt-3 text-[13px] leading-snug ${status === "error" ? "text-(--c-danger)" : "text-(--c-tert)"}`}>
+        {status === "error" ? labels.error : labels.privacy}
+      </p>
     </form>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg className="w-4 h-4 inline-block me-1.5 -mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-    </svg>
-  );
-}
-
-function BellIcon() {
-  return (
-    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-    </svg>
-  );
-}
-
-function LoadingSpinner() {
-  return (
-    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-    </svg>
   );
 }

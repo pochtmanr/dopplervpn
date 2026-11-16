@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Linux 版 Doppler VPN：桌面應用程式、命令列與自動化",
+      "description": "Doppler VPN 即將登陸 Linux：桌面應用程式、給伺服器用的命令列、任何瀏覽器都能登入、接上你自己的伺服器，以及供 n8n 和 AI 代理使用的 API。加入等候名單。"
+    },
+    "footer": "Linux VPN",
+    "learnMore": "進一步了解 Linux VPN",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · 即將推出",
+        "title": "Linux 版 Doppler VPN",
+        "subtitle": "給筆電的桌面應用程式，給伺服器的命令列。從任何瀏覽器登入，接上你自己的伺服器，讓自動化流程自己選擇國家。",
+        "note": "首先支援 Ubuntu 和 Debian · x86 與 ARM · Fedora 和 Arch 隨後"
+      },
+      "waitlist": {
+        "label": "電子郵件地址",
+        "placeholder": "you@example.com",
+        "button": "通知我",
+        "success": "你已加入名單。",
+        "error": "沒有成功，請再試一次。",
+        "privacy": "準備好時只寄一封信，別無其他。"
+      },
+      "terminal": {
+        "label": "終端機預覽",
+        "caption": "命令列預覽。正式推出前細節可能調整。"
+      },
+      "chapters": {
+        "app": {
+          "kicker": "桌面應用程式",
+          "title": "同一個 Doppler，Linux 原生",
+          "body": "真正的 Linux 應用程式，而不是包在視窗裡的網頁。畫面和用詞與 Mac、Windows 上的 Doppler 一致：一個連線按鈕、一份伺服器清單和一個 Kill Switch。",
+          "points": {
+            "p1": "跟隨你的淺色或深色主題",
+            "p2": "為 GNOME 和 KDE 打造，支援 X11 與 Wayland",
+            "p3": "與手機和電腦使用同一個帳戶"
+          }
+        },
+        "cli": {
+          "kicker": "命令列",
+          "title": "一行指令，完整的 VPN",
+          "body": "伺服器沒有螢幕，所以 Linux 版 Doppler 從終端機開始。應用程式能做的每件事都是一行指令，輸出可供指令碼讀取。",
+          "points": {
+            "p1": "連線、切換國家、查看狀態",
+            "p2": "為指令碼提供 JSON 輸出",
+            "p3": "以系統服務執行，重新開機後自動恢復"
+          }
+        },
+        "login": {
+          "kicker": "登入",
+          "title": "從任何瀏覽器登入",
+          "body": "執行登入指令，在手機或筆電上打開它顯示的連結。核准這部裝置，終端機就登入完成。不必透過 SSH 輸入帳戶 ID。",
+          "points": {
+            "p1": "連結和 QR 碼直接顯示在終端機裡",
+            "p2": "一次性金鑰，供自動部署的伺服器使用",
+            "p3": "如果你偏好，帳戶 ID 依然可用"
+          }
+        },
+        "servers": {
+          "kicker": "你自己的伺服器",
+          "title": "接上你自己的伺服器",
+          "body": "Linux 版 Doppler 也能連接不屬於我們的伺服器。貼上一條 VLESS 連結或訂閱網址，或用我們的開源部署工具包把你自己的 VPS 變成伺服器。需要有效的 Doppler 方案。",
+          "points": {
+            "p1": "從常見面板匯入連結和訂閱",
+            "p2": "開源工具包，一行指令部署你的伺服器",
+            "p3": "Kill Switch 和安全規則依然生效"
+          }
+        },
+        "automation": {
+          "kicker": "自動化",
+          "title": "讓工作流程自己選擇國家",
+          "body": "Doppler 為你需要的每個國家開啟一個本機連接埠。一個請求走德國，下一個走美國，同時進行，不必切換整部伺服器。n8n 和 AI 代理可以自行開啟和關閉這些連接埠。",
+          "points": {
+            "p1": "給 AI 代理使用的本機 API 和 MCP 伺服器",
+            "p2": "n8n 節點，以及可並排執行的 Docker 映像檔",
+            "p3": "你開啟之前保持關閉，預設不對網際網路開放"
+          }
+        },
+        "safe": {
+          "kicker": "為伺服器而生",
+          "title": "你的 SSH 連線不會斷",
+          "body": "讓整部伺服器走 VPN，通常會切斷你正在輸入的那條連線。Doppler 讓傳入連線保留各自的路由，並請你確認這次變更。如果你無法確認，它會自動復原。",
+          "points": {
+            "p1": "連線期間，傳入的 SSH 照常運作",
+            "p2": "未確認的變更會自動復原",
+            "p3": "Docker 容器遵循同樣的規則"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "信用卡或加密貨幣",
+          "body": "在網站上付款。不透過應用程式商店扣款，也不會在你不知情時續訂。"
+        }
+      },
+      "setup": {
+        "title": "依序推出的內容",
+        "subtitle": "Linux 版分三步推出。等候名單會收到第一步的通知。",
+        "s1": {
+          "title": "命令列",
+          "body": "適用於 Ubuntu 和 Debian 的 dopplervpn 指令及其背景服務。瀏覽器登入、每個國家一個連接埠以及 SSH 保護從第一天起就有。"
+        },
+        "s2": {
+          "title": "自有伺服器與自動化",
+          "body": "匯入你自己的伺服器、開源部署工具包、本機 API、MCP 伺服器、n8n 節點和 Docker 映像檔。"
+        },
+        "s3": {
+          "title": "桌面應用程式",
+          "body": "桌面應用程式，接著是 Fedora 和 Arch 的套件。安全的中繼就緒後，再支援 Make.com。"
+        }
+      },
+      "faq": {
+        "title": "關於 Linux 上 Doppler 的常見問題",
+        "q1": {
+          "question": "Linux 版 Doppler 什麼時候推出？",
+          "answer": "目前還沒有日期，我們也不想隨口猜一個。命令列先到，桌面應用程式隨後。在本頁留下電子郵件，等第一個版本可以安裝時，我們會寄一封信給你。"
+        },
+        "q2": {
+          "question": "它將支援哪些 Linux 發行版？",
+          "answer": "首先是 Ubuntu 和 Debian，支援 x86-64 和 ARM64，透過 apt 從已簽署的套件庫安裝。Fedora 和 Arch 的套件隨後推出。"
+        },
+        "q3": {
+          "question": "價格是多少？",
+          "answer": "與其他 Doppler 應用程式相同的方案，每月 {price} 起。Linux 沒有另外的價格。自有伺服器、國家連接埠和自動化需要有效的方案。"
+        },
+        "q4": {
+          "question": "我能連接自己的伺服器或其他服務商嗎？",
+          "answer": "可以。貼上來自其他服務商或你自己面板的 VLESS 連結或訂閱網址，或用我們的開源工具包在你的 VPS 上架設伺服器。Doppler 的隱私承諾適用於 Doppler 的伺服器。你加入的伺服器由它的擁有者營運。"
+        },
+        "q5": {
+          "question": "它如何與 n8n 和 AI 代理搭配？",
+          "answer": "Doppler 在同一部機器上執行一個小型 API。n8n 可以透過本機連接埠讓每個請求走不同的國家，AI 代理可以用內建的 MCP 伺服器開啟連接埠或切換位置。它預設關閉，並由權杖保護。"
+        },
+        "q6": {
+          "question": "它能和 Make.com 一起用嗎？",
+          "answer": "推出時還不行。Make 在雲端執行，無法連到你自己伺服器上的程式，因此需要一個中繼，我們想把它仔細做好。預計在本機自動化推出之後提供。"
+        },
+        "q7": {
+          "question": "它會不會把我鎖在自己的伺服器外面？",
+          "answer": "它的設計就是為了避免這種情況。傳入連線保留各自的路由，而對整部伺服器路由的變更必須在你設定的時間內確認，否則會被復原。"
+        }
+      },
+      "cta": {
+        "title": "成為第一批安裝的人",
+        "subtitle": "留下電子郵件，Linux 版 Doppler 準備好時我們會告訴你。"
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "華為和榮耀手機的 Doppler VPN：不需 Google 服務",

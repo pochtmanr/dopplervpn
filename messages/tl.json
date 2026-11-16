@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN para sa Linux: app, command line at mga automation",
+      "description": "Paparating na ang Doppler VPN sa Linux: desktop app, command line para sa mga server, pag-sign in mula sa kahit anong browser, sarili mong mga server, at API para sa n8n at mga AI agent. Sumali sa waitlist."
+    },
+    "footer": "VPN para sa Linux",
+    "learnMore": "Alamin pa ang tungkol sa VPN para sa Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Malapit na",
+        "title": "Doppler VPN para sa Linux",
+        "subtitle": "Desktop app para sa laptop mo at command line para sa mga server mo. Mag-sign in mula sa kahit anong browser, dalhin ang sarili mong mga server, at hayaang ang mga automation mo ang pumili ng bansa.",
+        "note": "Ubuntu at Debian muna · x86 at ARM · susunod ang Fedora at Arch"
+      },
+      "waitlist": {
+        "label": "Email address",
+        "placeholder": "you@example.com",
+        "button": "Abisuhan ako",
+        "success": "Nasa listahan ka na.",
+        "error": "Hindi natuloy. Pakisubukan ulit.",
+        "privacy": "Isang email kapag handa na. Wala nang iba."
+      },
+      "terminal": {
+        "label": "Preview ng terminal",
+        "caption": "Preview ng command line. Maaaring magbago ang mga detalye bago ang release."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Desktop app",
+          "title": "Ang parehong Doppler, native sa Linux",
+          "body": "Totoong Linux app, hindi web page sa loob ng window. Pareho ang mga screen at mga salita nito sa Doppler sa Mac at Windows: isang button para kumonekta, listahan ng server at kill switch.",
+          "points": {
+            "p1": "Sumusunod sa light o dark theme mo",
+            "p2": "Ginawa para sa GNOME at KDE, sa X11 at Wayland",
+            "p3": "Parehong account sa phone at computer mo"
+          }
+        },
+        "cli": {
+          "kicker": "Command line",
+          "title": "Buong VPN sa isang command",
+          "body": "Walang screen ang mga server, kaya sa terminal nagsisimula ang Doppler para sa Linux. Bawat kayang gawin ng app ay isang command, na may output na nababasa ng mga script.",
+          "points": {
+            "p1": "Kumonekta, magpalit ng bansa at tingnan ang status",
+            "p2": "JSON output para sa mga script mo",
+            "p3": "Tumatakbo bilang system service at bumabalik pagkatapos ng reboot"
+          }
+        },
+        "login": {
+          "kicker": "Pag-sign in",
+          "title": "Mag-sign in mula sa kahit anong browser",
+          "body": "Patakbuhin ang login command at buksan ang link na ipapakita nito, sa phone o laptop mo. Aprubahan ang device at naka-sign in na ang terminal. Hindi na kailangang i-type ang Account ID sa SSH.",
+          "points": {
+            "p1": "Link at QR code, mismo sa terminal",
+            "p2": "Mga susing pang-isang gamit para sa mga server na nagse-set up nang mag-isa",
+            "p3": "Gumagana pa rin ang Account ID mo kung iyon ang gusto mo"
+          }
+        },
+        "servers": {
+          "kicker": "Sarili mong mga server",
+          "title": "Dalhin ang sarili mong mga server",
+          "body": "Kumokonekta rin ang Doppler para sa Linux sa mga server na hindi sa amin. I-paste ang VLESS link o subscription address, o gawing server ang sarili mong VPS gamit ang aming bukas na setup kit. Kailangan nito ng aktibong Doppler plan.",
+          "points": {
+            "p1": "Nag-i-import ng mga link at subscription mula sa mga karaniwang panel",
+            "p2": "Open source kit na nagse-set up ng server mo sa isang command",
+            "p3": "May bisa pa rin ang kill switch at mga panuntunan sa kaligtasan"
+          }
+        },
+        "automation": {
+          "kicker": "Mga automation",
+          "title": "Hayaang ang mga workflow mo ang pumili ng bansa",
+          "body": "Nagbubukas ang Doppler ng lokal na port para sa bawat bansang kailangan mo. Magpadala ng isang request sa Germany at ang kasunod sa United States, nang sabay, nang hindi inililipat ang buong server. Kaya ng n8n at mga AI agent na buksan at isara ang mga port na ito nang sila lang.",
+          "points": {
+            "p1": "Lokal na API at MCP server para sa mga AI agent",
+            "p2": "Node para sa n8n at Docker image na tatakbo sa tabi nito",
+            "p3": "Naka-off hangga't hindi mo binubuksan, at sarado sa internet bilang default"
+          }
+        },
+        "safe": {
+          "kicker": "Ginawa para sa mga server",
+          "title": "Hindi mapuputol ang SSH session mo",
+          "body": "Kapag pinadaan sa VPN ang buong server, kadalasang napuputol ang koneksyong pinagta-type-an mo. Pinananatili ng Doppler ang mga papasok na koneksyon sa sarili nilang ruta at hinihiling na kumpirmahin mo ang pagbabago. Kung hindi mo magawa, binabawi nito iyon.",
+          "points": {
+            "p1": "Tuloy ang papasok na SSH habang nakakonekta ka",
+            "p2": "Kusang nababawi ang mga pagbabagong hindi mo kinumpirma",
+            "p3": "Sumusunod ang mga Docker container sa parehong mga panuntunan"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Card o crypto",
+          "body": "Magbayad sa website. Walang sinisingil sa pamamagitan ng store, at walang magre-renew nang wala ka."
+        }
+      },
+      "setup": {
+        "title": "Ano ang darating, ayon sa pagkakasunod",
+        "subtitle": "Ilalabas ang Linux sa tatlong hakbang. Aabisuhan ang waitlist tungkol sa una.",
+        "s1": {
+          "title": "Command line",
+          "body": "Ang dopplervpn command at ang background service nito para sa Ubuntu at Debian. Kasama na mula sa unang araw ang pag-sign in sa browser, isang port kada bansa at ang proteksyon sa SSH."
+        },
+        "s2": {
+          "title": "Sariling mga server at automation",
+          "body": "Pag-import ng sarili mong mga server, ang bukas na setup kit, ang lokal na API, ang MCP server, ang n8n node at ang Docker image."
+        },
+        "s3": {
+          "title": "Desktop app",
+          "body": "Ang app para sa desktop mo, pagkatapos ay mga package para sa Fedora at Arch. Susunod ang suporta sa Make.com kapag handa na ang isang ligtas na relay."
+        }
+      },
+      "faq": {
+        "title": "Mga tanong tungkol sa Doppler sa Linux",
+        "q1": {
+          "question": "Kailan ilalabas ang Doppler para sa Linux?",
+          "answer": "Wala pang petsa, at ayaw naming manghula. Mauuna ang command line at susunod ang desktop app. Iwan ang email mo sa page na ito at susulat kami nang isang beses, kapag puwede nang i-install ang unang bersyon."
+        },
+        "q2": {
+          "question": "Aling mga Linux distribution ang susuportahan nito?",
+          "answer": "Ubuntu at Debian muna, sa x86-64 at ARM64, na ini-install gamit ang apt mula sa isang signed na repository. Susunod ang mga package para sa Fedora at Arch."
+        },
+        "q3": {
+          "question": "Magkano ito?",
+          "answer": "Parehong plan sa lahat ng iba pang Doppler app, mula {price} kada buwan. Walang hiwalay na presyo para sa Linux. Kailangan ng aktibong plan ang sarili mong mga server, mga port kada bansa at mga automation."
+        },
+        "q4": {
+          "question": "Puwede ba akong kumonekta sa sarili kong server o sa ibang provider?",
+          "answer": "Oo. I-paste ang VLESS link o subscription address mula sa ibang provider o mula sa sarili mong panel, o mag-set up ng server sa VPS mo gamit ang aming bukas na kit. Ang mga pangako ng Doppler sa privacy ay para sa mga server ng Doppler. Ang server na idinagdag mo ay pinatatakbo ng may-ari nito."
+        },
+        "q5": {
+          "question": "Paano ito gumagana sa n8n at mga AI agent?",
+          "answer": "Nagpapatakbo ang Doppler ng maliit na API sa parehong makina. Kayang ipadala ng n8n ang bawat request sa ibang bansa gamit ang lokal na port, at kayang gamitin ng mga AI agent ang built-in na MCP server para magbukas ng port o magpalit ng lokasyon. Naka-off ito bilang default at protektado ng token."
+        },
+        "q6": {
+          "question": "Gagana ba ito sa Make.com?",
+          "answer": "Hindi pa sa paglulunsad. Tumatakbo ang Make sa cloud at hindi nito maaabot ang program sa sarili mong server, kaya kailangan nito ng relay na gusto naming buuin nang maingat. Nakaplano ito pagkatapos mailabas ang mga lokal na automation."
+        },
+        "q7": {
+          "question": "Puwede ba ako nitong ma-lock out sa server ko?",
+          "answer": "Ginawa ito para hindi iyon mangyari. Nananatili sa sarili nilang ruta ang mga papasok na koneksyon, at ang pagbabago sa ruta ng buong server ay kailangang makumpirma sa loob ng oras na itinakda mo, kung hindi ay babawiin ito."
+        }
+      },
+      "cta": {
+        "title": "Maging isa sa mga unang mag-install",
+        "subtitle": "Iwan ang email mo at sasabihan ka namin kapag handa na ang Doppler para sa Linux."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN para sa Huawei at Honor: hindi kailangan ng Google services",

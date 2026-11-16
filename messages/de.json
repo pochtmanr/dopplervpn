@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN für Linux: App, Kommandozeile und Automatisierungen",
+      "description": "Doppler VPN kommt auf Linux: eine Desktop-App, eine Kommandozeile für Server, Anmeldung aus jedem Browser, eigene Server und eine API für n8n und KI-Agenten. Trag dich in die Warteliste ein."
+    },
+    "footer": "VPN für Linux",
+    "learnMore": "Mehr erfahren über VPN für Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Demnächst",
+        "title": "Doppler VPN für Linux",
+        "subtitle": "Eine Desktop-App für deinen Laptop und eine Kommandozeile für deine Server. Melde dich aus jedem Browser an, bring deine eigenen Server mit und lass deine Automatisierungen das Land wählen.",
+        "note": "Zuerst Ubuntu und Debian · x86 und ARM · Fedora und Arch folgen"
+      },
+      "waitlist": {
+        "label": "E-Mail-Adresse",
+        "placeholder": "you@example.com",
+        "button": "Benachrichtigen",
+        "success": "Du stehst auf der Liste.",
+        "error": "Das hat nicht geklappt. Bitte versuch es noch einmal.",
+        "privacy": "Eine E-Mail, wenn es so weit ist. Sonst nichts."
+      },
+      "terminal": {
+        "label": "Terminal-Vorschau",
+        "caption": "Eine Vorschau der Kommandozeile. Details können sich bis zur Veröffentlichung ändern."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Desktop-App",
+          "title": "Derselbe Doppler, nativ auf Linux",
+          "body": "Eine echte Linux-App, keine Webseite in einem Fenster. Sie hat dieselben Bildschirme und dieselben Begriffe wie Doppler auf Mac und Windows: ein Knopf zum Verbinden, eine Serverliste und ein Kill Switch.",
+          "points": {
+            "p1": "Folgt deinem hellen oder dunklen Design",
+            "p2": "Für GNOME und KDE, unter X11 und Wayland",
+            "p3": "Dasselbe Konto wie auf Handy und Computer"
+          }
+        },
+        "cli": {
+          "kicker": "Kommandozeile",
+          "title": "Ein vollständiges VPN mit einem Befehl",
+          "body": "Server haben keinen Bildschirm, deshalb beginnt Doppler für Linux im Terminal. Alles, was die App kann, gibt es als Befehl, mit einer Ausgabe, die Skripte lesen können.",
+          "points": {
+            "p1": "Verbinden, Land wechseln und Status prüfen",
+            "p2": "JSON-Ausgabe für deine Skripte",
+            "p3": "Läuft als Systemdienst und ist nach einem Neustart wieder da"
+          }
+        },
+        "login": {
+          "kicker": "Anmeldung",
+          "title": "Anmelden aus jedem Browser",
+          "body": "Starte den Login-Befehl und öffne den angezeigten Link auf dem Handy oder Laptop. Bestätige das Gerät, und das Terminal ist angemeldet. Keine Konto-ID über SSH eintippen.",
+          "points": {
+            "p1": "Ein Link und ein QR-Code direkt im Terminal",
+            "p2": "Einmalschlüssel für Server, die sich selbst einrichten",
+            "p3": "Deine Konto-ID funktioniert weiterhin, wenn dir das lieber ist"
+          }
+        },
+        "servers": {
+          "kicker": "Eigene Server",
+          "title": "Bring deine eigenen Server mit",
+          "body": "Doppler für Linux verbindet sich auch mit Servern, die nicht uns gehören. Füge einen VLESS-Link oder eine Abo-Adresse ein, oder mach deinen eigenen VPS mit unserem offenen Setup-Kit zum Server. Dafür brauchst du ein aktives Doppler-Abo.",
+          "points": {
+            "p1": "Importiert Links und Abos aus gängigen Panels",
+            "p2": "Ein Open-Source-Kit richtet deinen Server mit einem Befehl ein",
+            "p3": "Kill Switch und Sicherheitsregeln gelten weiterhin"
+          }
+        },
+        "automation": {
+          "kicker": "Automatisierungen",
+          "title": "Lass deine Workflows das Land wählen",
+          "body": "Doppler öffnet für jedes Land, das du brauchst, einen lokalen Port. Schick eine Anfrage über Deutschland und die nächste über die USA, gleichzeitig und ohne den ganzen Server umzuleiten. n8n und KI-Agenten können diese Ports selbst öffnen und schließen.",
+          "points": {
+            "p1": "Eine lokale API und ein MCP-Server für KI-Agenten",
+            "p2": "Ein Node für n8n und ein Docker-Image, das daneben läuft",
+            "p3": "Aus, bis du es einschaltest, und standardmäßig nicht aus dem Internet erreichbar"
+          }
+        },
+        "safe": {
+          "kicker": "Für Server gebaut",
+          "title": "Deine SSH-Sitzung bleibt bestehen",
+          "body": "Wer einen ganzen Server durch ein VPN schickt, kappt meist die Verbindung, in der er gerade tippt. Doppler lässt eingehende Verbindungen auf ihrer eigenen Route und bittet dich, die Änderung zu bestätigen. Kannst du das nicht, macht Doppler sie rückgängig.",
+          "points": {
+            "p1": "Eingehendes SSH funktioniert weiter, während du verbunden bist",
+            "p2": "Unbestätigte Änderungen werden von selbst zurückgenommen",
+            "p3": "Docker-Container folgen denselben Regeln"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Karte oder Krypto",
+          "body": "Bezahle auf der Website. Nichts wird über einen Store abgerechnet, und nichts verlängert sich ohne dich."
+        }
+      },
+      "setup": {
+        "title": "Was kommt, der Reihe nach",
+        "subtitle": "Linux erscheint in drei Schritten. Die Warteliste erfährt vom ersten.",
+        "s1": {
+          "title": "Kommandozeile",
+          "body": "Der Befehl dopplervpn und sein Hintergrunddienst für Ubuntu und Debian. Browser-Anmeldung, ein Port pro Land und der SSH-Schutz sind vom ersten Tag an dabei."
+        },
+        "s2": {
+          "title": "Eigene Server und Automatisierungen",
+          "body": "Import eigener Server, das offene Setup-Kit, die lokale API, der MCP-Server, der n8n-Node und das Docker-Image."
+        },
+        "s3": {
+          "title": "Desktop-App",
+          "body": "Die App für deinen Desktop, danach Pakete für Fedora und Arch. Make.com folgt, sobald ein sicheres Relay bereit ist."
+        }
+      },
+      "faq": {
+        "title": "Fragen zu Doppler auf Linux",
+        "q1": {
+          "question": "Wann erscheint Doppler für Linux?",
+          "answer": "Es gibt noch kein Datum, und wir möchten nicht raten. Zuerst kommt die Kommandozeile, danach die Desktop-App. Hinterlasse deine E-Mail auf dieser Seite, und wir schreiben dir einmal, sobald sich die erste Version installieren lässt."
+        },
+        "q2": {
+          "question": "Welche Linux-Distributionen werden unterstützt?",
+          "answer": "Zuerst Ubuntu und Debian, auf x86-64 und ARM64, installiert per apt aus einem signierten Repository. Pakete für Fedora und Arch folgen."
+        },
+        "q3": {
+          "question": "Was wird es kosten?",
+          "answer": "Dasselbe Abo wie bei jeder anderen Doppler-App, ab {price} im Monat. Einen eigenen Preis für Linux gibt es nicht. Eigene Server, Länder-Ports und Automatisierungen brauchen ein aktives Abo."
+        },
+        "q4": {
+          "question": "Kann ich mich mit meinem eigenen Server oder einem anderen Anbieter verbinden?",
+          "answer": "Ja. Füge einen VLESS-Link oder eine Abo-Adresse eines anderen Anbieters oder deines eigenen Panels ein, oder richte mit unserem offenen Setup-Kit einen Server auf deinem VPS ein. Dopplers Datenschutzversprechen gelten für Dopplers Server. Einen Server, den du hinzufügst, betreibt sein Besitzer."
+        },
+        "q5": {
+          "question": "Wie funktioniert das mit n8n und KI-Agenten?",
+          "answer": "Doppler betreibt eine kleine API auf demselben Rechner. n8n kann jede Anfrage über einen lokalen Port durch ein anderes Land schicken, und KI-Agenten können über den eingebauten MCP-Server einen Port öffnen oder den Standort wechseln. Das ist standardmäßig aus und durch ein Token geschützt."
+        },
+        "q6": {
+          "question": "Wird es mit Make.com funktionieren?",
+          "answer": "Nicht zum Start. Make läuft in der Cloud und erreicht kein Programm auf deinem eigenen Server. Dafür braucht es ein Relay, das wir sorgfältig bauen wollen. Es ist geplant, sobald die lokalen Automatisierungen erschienen sind."
+        },
+        "q7": {
+          "question": "Kann es mich aus meinem Server aussperren?",
+          "answer": "Es ist so gebaut, dass das nicht passiert. Eingehende Verbindungen behalten ihre eigene Route, und eine Änderung der Route des ganzen Servers muss innerhalb einer von dir gewählten Zeit bestätigt werden, sonst wird sie rückgängig gemacht."
+        }
+      },
+      "cta": {
+        "title": "Installiere es als Erste",
+        "subtitle": "Hinterlasse deine E-Mail, und wir sagen dir Bescheid, wenn Doppler für Linux bereit ist."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN für Huawei und Honor: ohne Google-Dienste",

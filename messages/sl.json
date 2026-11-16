@@ -2797,6 +2797,153 @@
       }
     }
   },
+  "vpnForLinux": {
+    "metadata": {
+      "title": "Doppler VPN za Linux: aplikacija, ukazna vrstica in avtomatizacije",
+      "description": "Doppler VPN prihaja na Linux: namizna aplikacija, ukazna vrstica za strežnike, prijava iz katerega koli brskalnika, vaši lastni strežniki ter API za n8n in agente UI. Vpišite se na čakalni seznam."
+    },
+    "footer": "VPN za Linux",
+    "learnMore": "Več o VPN za Linux",
+    "app": {
+      "hero": {
+        "eyebrow": "Linux · Kmalu",
+        "title": "Doppler VPN za Linux",
+        "subtitle": "Namizna aplikacija za vaš prenosnik in ukazna vrstica za vaše strežnike. Prijavite se iz katerega koli brskalnika, dodajte lastne strežnike in pustite, da vaše avtomatizacije izberejo državo.",
+        "note": "Najprej Ubuntu in Debian · x86 in ARM · Fedora in Arch sledita"
+      },
+      "waitlist": {
+        "label": "E-poštni naslov",
+        "placeholder": "you@example.com",
+        "button": "Obvestite me",
+        "success": "Ste na seznamu.",
+        "error": "Ni uspelo. Poskusite znova.",
+        "privacy": "Eno e-sporočilo, ko bo pripravljeno. Nič drugega."
+      },
+      "terminal": {
+        "label": "Predogled terminala",
+        "caption": "Predogled ukazne vrstice. Podrobnosti se lahko pred izdajo spremenijo."
+      },
+      "chapters": {
+        "app": {
+          "kicker": "Namizna aplikacija",
+          "title": "Isti Doppler, domač v Linuxu",
+          "body": "Prava aplikacija za Linux, ne spletna stran v oknu. Ima enake zaslone in enake besede kot Doppler v Macu in sistemu Windows: en gumb za povezavo, seznam strežnikov in kill switch.",
+          "points": {
+            "p1": "Sledi vaši svetli ali temni temi",
+            "p2": "Narejena za GNOME in KDE, v X11 in Waylandu",
+            "p3": "Isti račun kot v telefonu in računalniku"
+          }
+        },
+        "cli": {
+          "kicker": "Ukazna vrstica",
+          "title": "Celoten VPN v enem ukazu",
+          "body": "Strežniki nimajo zaslona, zato se Doppler za Linux začne v terminalu. Vse, kar zmore aplikacija, je ukaz, njegov izpis pa lahko berejo skripti.",
+          "points": {
+            "p1": "Povezava, menjava države in preverjanje stanja",
+            "p2": "Izpis JSON za vaše skripte",
+            "p3": "Teče kot sistemska storitev in se vrne po vnovičnem zagonu"
+          }
+        },
+        "login": {
+          "kicker": "Prijava",
+          "title": "Prijavite se iz katerega koli brskalnika",
+          "body": "Zaženite ukaz za prijavo in odprite povezavo, ki jo izpiše, v telefonu ali prenosniku. Odobrite napravo in terminal je prijavljen. Brez tipkanja ID-ja računa prek SSH.",
+          "points": {
+            "p1": "Povezava in koda QR neposredno v terminalu",
+            "p2": "Enkratni ključi za strežnike, ki se nastavijo sami",
+            "p3": "Vaš ID računa še vedno deluje, če vam je ljubši"
+          }
+        },
+        "servers": {
+          "kicker": "Lastni strežniki",
+          "title": "Dodajte lastne strežnike",
+          "body": "Doppler za Linux se poveže tudi s strežniki, ki niso naši. Prilepite povezavo VLESS ali naslov naročnine ali pa svoj VPS spremenite v strežnik z našim odprtim namestitvenim kompletom. Potreben je aktiven paket Doppler.",
+          "points": {
+            "p1": "Uvozi povezave in naročnine iz običajnih nadzornih plošč",
+            "p2": "Odprtokodni komplet, ki vaš strežnik nastavi z enim ukazom",
+            "p3": "Kill switch in varnostna pravila še naprej veljajo"
+          }
+        },
+        "automation": {
+          "kicker": "Avtomatizacije",
+          "title": "Pustite, da vaši delovni tokovi izberejo državo",
+          "body": "Doppler odpre lokalna vrata za vsako državo, ki jo potrebujete. Eno zahtevo pošljite prek Nemčije in naslednjo prek Združenih držav, hkrati in brez preusmerjanja celotnega strežnika. n8n in agenti UI lahko ta vrata odpirajo in zapirajo sami.",
+          "points": {
+            "p1": "Lokalni API in strežnik MCP za agente UI",
+            "p2": "Vozlišče za n8n in slika Docker, ki teče ob njem",
+            "p3": "Izklopljeno, dokler ga ne vklopite, in privzeto zaprto za internet"
+          }
+        },
+        "safe": {
+          "kicker": "Narejeno za strežnike",
+          "title": "Vaša seja SSH ostane vzpostavljena",
+          "body": "Ko celoten strežnik pošljete prek VPN, se običajno prekine povezava, v kateri tipkate. Doppler dohodne povezave pusti na njihovi lastni poti in vas prosi, da spremembo potrdite. Če tega ne morete, jo razveljavi.",
+          "points": {
+            "p1": "Dohodni SSH deluje tudi med povezavo",
+            "p2": "Nepotrjene spremembe se razveljavijo same",
+            "p3": "Vsebniki Docker upoštevajo enaka pravila"
+          }
+        }
+      },
+      "privacy": {
+        "pay": {
+          "title": "Kartica ali kripto",
+          "body": "Plačajte na spletnem mestu. Nič se ne zaračuna prek trgovine in nič se ne podaljša brez vas."
+        }
+      },
+      "setup": {
+        "title": "Kaj prihaja in v kakšnem vrstnem redu",
+        "subtitle": "Linux izide v treh korakih. Čakalni seznam izve za prvega.",
+        "s1": {
+          "title": "Ukazna vrstica",
+          "body": "Ukaz dopplervpn in njegova storitev v ozadju za Ubuntu in Debian. Prijava prek brskalnika, vrata za vsako državo in zaščita SSH so na voljo od prvega dne."
+        },
+        "s2": {
+          "title": "Lastni strežniki in avtomatizacije",
+          "body": "Uvoz lastnih strežnikov, odprti namestitveni komplet, lokalni API, strežnik MCP, vozlišče n8n in slika Docker."
+        },
+        "s3": {
+          "title": "Namizna aplikacija",
+          "body": "Aplikacija za vaše namizje, nato paketi za Fedoro in Arch. Podpora za Make.com sledi, ko bo pripravljen varen posrednik."
+        }
+      },
+      "faq": {
+        "title": "Vprašanja o Dopplerju v Linuxu",
+        "q1": {
+          "question": "Kdaj bo izšel Doppler za Linux?",
+          "answer": "Datuma še ni in ne želimo ugibati. Najprej pride ukazna vrstica, za njo namizna aplikacija. Na tej strani pustite e-poštni naslov in pisali vam bomo enkrat, ko bo prvo različico mogoče namestiti."
+        },
+        "q2": {
+          "question": "Katere distribucije Linuxa bodo podprte?",
+          "answer": "Najprej Ubuntu in Debian, na x86-64 in ARM64, z namestitvijo prek apt iz podpisanega skladišča. Paketi za Fedoro in Arch sledijo."
+        },
+        "q3": {
+          "question": "Koliko bo stalo?",
+          "answer": "Enak paket kot pri vseh drugih aplikacijah Doppler, od {price} na mesec. Posebne cene za Linux ni. Lastni strežniki, vrata po državah in avtomatizacije zahtevajo aktiven paket."
+        },
+        "q4": {
+          "question": "Ali se lahko povežem z lastnim strežnikom ali drugim ponudnikom?",
+          "answer": "Da. Prilepite povezavo VLESS ali naslov naročnine drugega ponudnika ali iz lastne nadzorne plošče ali pa z našim odprtim kompletom postavite strežnik na svojem VPS. Dopplerjeve obljube o zasebnosti veljajo za Dopplerjeve strežnike. Strežnik, ki ga dodate vi, upravlja njegov lastnik."
+        },
+        "q5": {
+          "question": "Kako deluje z n8n in agenti UI?",
+          "answer": "Doppler na isti napravi poganja majhen API. n8n lahko vsako zahtevo pošlje prek druge države z lokalnimi vrati, agenti UI pa lahko z vgrajenim strežnikom MCP odprejo vrata ali zamenjajo lokacijo. Privzeto je izklopljeno in zaščiteno z žetonom."
+        },
+        "q6": {
+          "question": "Ali bo delovalo z Make.com?",
+          "answer": "Ob izidu ne. Make teče v oblaku in ne more doseči programa na vašem strežniku, zato potrebuje posrednika, ki ga želimo zgraditi skrbno. Načrtovan je po izidu lokalnih avtomatizacij."
+        },
+        "q7": {
+          "question": "Ali me lahko zaklene iz mojega strežnika?",
+          "answer": "Narejen je tako, da se to ne zgodi. Dohodne povezave ohranijo lastno pot, spremembo poti celotnega strežnika pa je treba potrditi v času, ki ga določite sami, sicer se razveljavi."
+        }
+      },
+      "cta": {
+        "title": "Bodite med prvimi, ki ga namestijo",
+        "subtitle": "Pustite e-poštni naslov in sporočili vam bomo, ko bo Doppler za Linux pripravljen."
+      }
+    }
+  },
   "vpnForHuawei": {
     "metadata": {
       "title": "Doppler VPN za Huawei in Honor: brez storitev Google",
