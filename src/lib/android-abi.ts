@@ -1,10 +1,9 @@
 /**
  * ABI handling for the standalone (sideload) Android download.
  *
- * 1.8.1 to 1.8.3 shipped two single-ABI APKs; after 1.8.3 the sideload build
- * is arm64-only again (see DopplerAndroid/app/build.gradle.kts and
- * [LAST_ARM32_VERSION]). The ABI stays in the asset name, and old 32-bit
- * installs still send theirs, so the mapping lives in one place.
+ * 1.8.1+ ships per-ABI assets (`-arm64-v8a` / `-armeabi-v7a`). 1.8.4–1.8.5 were
+ * arm64-only; from 1.8.6 both ABIs (and a universal APK) ship again so 32-bit
+ * Redmi/Note phones can install from /downloads after the Azure cutover.
  */
 
 export const ARM64 = "arm64-v8a";
@@ -16,15 +15,11 @@ export type AndroidAbi = typeof ARM64 | typeof ARM32;
 export const SPLIT_APK_MIN_VERSION = "1.8.1";
 
 /**
- * The last release that shipped an armeabi-v7a APK. From the next release the
- * sideload build is arm64-only (DopplerAndroid/app/build.gradle.kts); 32-bit
- * phones are pointed at Google Play, which still ships 32-bit. A 32-bit request
- * is pinned here instead of resolved against the newest release, which has no
- * file for it: the old "32-bit APK" links keep downloading something that
- * installs, and the update banner on a 32-bit device stays quiet because no
- * newer release carries its ABI.
+ * Newest release that still has an armeabi-v7a APK. 32-bit requests are pinned
+ * here when the absolute newest tag has no 32-bit asset (the 1.8.4–1.8.5 gap).
+ * Keep in step with DopplerAndroid sideload splits.
  */
-export const LAST_ARM32_VERSION = "1.8.3";
+export const LAST_ARM32_VERSION = "1.8.6";
 
 /**
  * Maps whatever a caller sends to one of the two ABIs we publish.

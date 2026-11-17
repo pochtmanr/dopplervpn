@@ -253,17 +253,6 @@ async function proxyApk(
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const abi: AndroidAbi = normalizeAbi(req.nextUrl.searchParams.get("abi"));
 
-  if (abi === ARM32) {
-    // No release after LAST_ARM32_VERSION has a 32-bit file, so there is nothing
-    // to resolve. Always the GitHub redirect: the proxy origin is the arm64 file.
-    const attributed = reportDownloadConversion(req);
-    reportDownloadToGa(req, LAST_ARM32_VERSION, attributed, "github", abi);
-    return NextResponse.redirect(
-      githubUrl(LAST_ARM32_VERSION, apkAssetName(TAG_PREFIX, LAST_ARM32_VERSION, abi)),
-      { status: 302, headers: NO_STORE }
-    );
-  }
-
   const latest = await resolveLatestRelease();
 
   if (!latest) {
@@ -275,8 +264,18 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const { version, assetNames } = latest;
-  const assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
+  // Prefer the newest release's asset for this ABI. If the newest is arm64-only
+  // (the 1.8.4–1.8.5 gap) and the caller asked for 32-bit, fall back to the last
+  // release that still published armeabi-v7a.
+  let version = latest.version;
+  let assetNames = latest.assetNames;
+  let assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
+
+  if (!assetName && abi === ARM32 && version !== LAST_ARM32_VERSION) {
+    version = LAST_ARM32_VERSION;
+    assetNames = [];
+    assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
+  }
 
   if (!assetName) {
     // The newest release has no APK at all. Answering plainly beats redirecting
@@ -293,16 +292,22 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   reportDownloadToGa(req, version, attributed, mode, abi);
 
   const redirectToGithub = () =>
-    NextResponse.redirect(githubUrl(version, assetName), {
+    NextResponse.redirect(githubUrl(version, assetName!), {
       status: 302,
       headers: NO_STORE,
     });
 
   if (mode === "proxy") {
-    const originUrl = process.env.ANDROID_APK_ORIGIN_URL;
+    // Website /downloads has no ?abi= (defaults to arm64). Serving the thin
+    // arm64 APK there caused "error parsing package" on 32-bit Redmi Notes.
+    // Prefer the universal APK when configured; otherwise abi-specific origins.
+    const universalUrl = process.env.ANDROID_APK_UNIVERSAL_URL;
+    const originUrl =
+      universalUrl ||
+      (abi === ARM32
+        ? process.env.ANDROID_APK_ORIGIN_URL_ARM32
+        : process.env.ANDROID_APK_ORIGIN_URL);
     if (!originUrl) {
-      // Misconfiguration, not a user error: fall back to the redirect rather
-      // than handing the visitor a 500.
       return redirectToGithub();
     }
     return proxyApk(req, originUrl, assetName);
