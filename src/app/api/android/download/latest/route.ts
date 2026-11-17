@@ -67,7 +67,7 @@ const TAG_PREFIX = "android-v";
  * legitimate value here: it makes the route answer 503 rather than hand out a
  * link that 404s.
  */
-const FALLBACK_VERSION: string | null = "1.8.0";
+const FALLBACK_VERSION: string | null = "1.8.6";
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
