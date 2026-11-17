@@ -9,7 +9,7 @@ import { HOW_IT_WORKS_LOCALES, isHowItWorksLocale } from "@/i18n/how-it-works-lo
 import { VPN_PROTOCOLS_LOCALES, isVpnProtocolsLocale } from "@/i18n/vpn-protocols-locales";
 import { ARTICLE_SLUGS as PROTOCOL_ARTICLE_SLUGS } from "@/lib/vpn-protocols";
 import { GUIDES_LASTMOD, GUIDES_LOCALES, GUIDE_SLUGS, isGuidesLocale } from "@/lib/guides";
-import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
+import { isGoneBlogTranslation, isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 // Prerender all 44 shards at BUILD time and serve them as static files from
 // the CDN. Googlebot fetches every shard in /sitemap.xml in parallel; when
@@ -104,7 +104,7 @@ const fetchPostsByLocale = unstable_cache(
       // for content that did not change.
       const locales = currentBlogTranslations(row.blog_post_translations, row.english_revision?.[0]?.content)
         .map((t) => t.locale)
-        .filter((l) => isBlogLocale(l))
+        .filter((l) => isBlogLocale(l) && !isGoneBlogTranslation(row.slug, l))
         .sort();
       const post: SitemapPost = {
         slug: row.slug,
@@ -121,7 +121,7 @@ const fetchPostsByLocale = unstable_cache(
     }
     return byLocale;
   },
-  ["sitemap-blog-posts-by-locale-reviewed-v4"],
+  ["sitemap-blog-posts-by-locale-reviewed-v5"],
   { revalidate: 86400, tags: ["sitemap"] }
 );
 
@@ -372,18 +372,9 @@ export default async function sitemap({
     };
   });
 
-  // Non-localized agent-surface URLs (one canonical URL each, no /:locale
-  // prefix). Emit once — in the en shard — to avoid 44× duplication.
-  const agentSurfaceEntries: MetadataRoute.Sitemap =
-    locale === "en"
-      ? [
-          { url: `${baseUrl}/agents`, changeFrequency: "monthly" as const, priority: 0.6 },
-          { url: `${baseUrl}/llms.txt`, changeFrequency: "monthly" as const, priority: 0.5 },
-          { url: `${baseUrl}/llms-full.txt`, changeFrequency: "monthly" as const, priority: 0.5 },
-        ]
-      : [];
-
+  // Agent surfaces (/agents, llms.txt) are reachable but must not consume
+  // Google crawl budget via the HTML sitemap shards.
   const editorialEntries: MetadataRoute.Sitemap = locale === "en"
     ? [{ url: `${baseUrl}/en/blog/editorial` }] : [];
-  return [...staticEntries, ...blogEntries, ...agentSurfaceEntries, ...editorialEntries];
+  return [...staticEntries, ...blogEntries, ...editorialEntries];
 }

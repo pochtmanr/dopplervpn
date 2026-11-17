@@ -25,7 +25,7 @@ import { calmPlusPreview, PlusPageShell } from "../../design-lab/home-preview";
 import { PLUS_CHIP } from "../../design-lab/plus-recipes";
 import { currentBlogTranslations } from "@/lib/supabase/public-blog";
 import { resolveBlogCtaTarget } from "@/lib/blog-cta-target";
-import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
+import { isGoneBlogTranslation, isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 // Revalidate blog posts every 24h (ISR) to reduce serverless invocations.
 // Use on-demand revalidation (revalidatePath) when publishing/updating posts.
@@ -124,7 +124,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // a post that has five still advertised sixteen URLs that render the
   // "not available in this language" page. This matters most for a freshly
   // published post, which is English-only until translations are run.
-  const currentTranslations = currentBlogTranslations(post.blog_post_translations, post.english_revision?.[0]?.content);
+  const currentTranslations = currentBlogTranslations(post.blog_post_translations, post.english_revision?.[0]?.content)
+    .filter((item) => !isGoneBlogTranslation(slug, item.locale));
   const currentPage = currentTranslations.some((item) => item.locale === locale);
   const availableLocales = currentTranslations
     .map((t) => t.locale)

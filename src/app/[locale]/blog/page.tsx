@@ -12,7 +12,7 @@ import { BreadcrumbSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogIndexContent } from "./blog-index-content";
 import type { Metadata } from "next";
 import { parseBlogPage } from "@/lib/blog-pagination";
-import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
+import { isGoneBlogTranslation, isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 import { seoTitle } from "@/lib/seo-title";
 // Calm+ (design-lab/home-preview.tsx; CALM_PLUS_PREVIEW=0 turns it off).
 import { calmPlusPreview, PlusPageShell } from "../design-lab/home-preview";
@@ -196,15 +196,18 @@ async function fetchBlogData(locale: string) {
         tags: postTags,
       };
     })
-    // Same gate as sitemap — never list gone or malformed slugs.
-    .filter((p): p is NonNullable<typeof p> => p !== null && isIndexableBlogSlug(p.slug));
+    // Same gate as sitemap — never list gone or malformed slugs, or retired locales.
+    .filter(
+      (p): p is NonNullable<typeof p> =>
+        p !== null && isIndexableBlogSlug(p.slug) && !isGoneBlogTranslation(p.slug, locale),
+    );
 
   return { posts, tags };
 }
 
 // One Supabase round-trip per locale per 24h, shared across every request that
 // hits a cold ISR render. Mirrors `fetchPostsByLocale` in src/app/sitemap.ts.
-const getBlogData = unstable_cache(fetchBlogData, ["blog-index-v2"], {
+const getBlogData = unstable_cache(fetchBlogData, ["blog-index-v3"], {
   revalidate: 86400,
   tags: ["blog-index"],
 });

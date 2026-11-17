@@ -29,6 +29,7 @@ import { AppGalleryMark, AppStoreMark, HuaweiMark, PlatformLogo } from "@/compon
 import { PlatformGlyphBand } from "@/components/glyph/platform-glyph-band";
 import { Link } from "@/i18n/navigation";
 import { PLANS, SITE_URL, TERMS } from "@/lib/facts";
+import { isHowItWorksLocale } from "@/i18n/how-it-works-locales";
 import { isGuidesLocale } from "@/lib/guides";
 import { GUIDE_COVERS } from "@/config/platforms/apple";
 import type {
@@ -198,6 +199,11 @@ function SectionHead({ kicker, title, lead }: { kicker?: string; title: string; 
 /** Guide articles ship in GUIDES_LOCALES only; other locales keep linking to /en. */
 function guideLocaleFor(locale: string): string {
   return isGuidesLocale(locale) ? locale : "en";
+}
+
+/** /how-it-works ships in HOW_IT_WORKS_LOCALES only; other locales link to /en. */
+function howItWorksLocaleFor(locale: string): string {
+  return isHowItWorksLocale(locale) ? locale : "en";
 }
 
 function GuideLink({ href, locale, children }: { href: string; locale: string; children: ReactNode }) {
@@ -744,7 +750,7 @@ export async function PlatformAppPage({ locale, config }: { locale: string; conf
                 </li>
               ))}
             </ul>
-            <Link href="/how-it-works" className={`${PLUS_CARD_HOVER} mt-4 !flex-row items-center justify-between gap-4 sm:!p-8`}>
+            <Link href="/how-it-works" locale={howItWorksLocaleFor(locale)} className={`${PLUS_CARD_HOVER} mt-4 !flex-row items-center justify-between gap-4 sm:!p-8`}>
               <span>
                 <span className={`block ${PLUS_TITLE_SM}`}>{s("guides.hub.title")}</span>
                 <span className={`mt-1.5 block max-w-3xl ${PLUS_BODY}`}>{s("guides.hub.desc")}</span>

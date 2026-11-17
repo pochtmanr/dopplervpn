@@ -259,6 +259,11 @@ const nextConfig: NextConfig = {
         hostname: "fzlrhmjdjjzcgstaeblu.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
+      {
+        protocol: "https",
+        hostname: "db.dopplervpn.org",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
     // Bound the optimizer's URL space. Left at defaults, `w` and `q` accept a
     // wide range of combinations, so a scripted caller can mint endless unique

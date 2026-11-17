@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   GONE_BLOG_SLUGS,
+  GONE_BLOG_TRANSLATIONS,
+  isGoneBlogTranslation,
   isIndexableBlogSlug,
   isValidBlogSlug,
   parseBlogSlug,
@@ -46,5 +48,22 @@ describe("parseBlogSlug", () => {
     expect(parseBlogSlug("/en/blog/what-is-vless")).toBe("what-is-vless");
     expect(parseBlogSlug("/ru/blog/what-is-vless/")).toBe("what-is-vless");
     expect(parseBlogSlug("/en/blog/nested/path")).toBeNull();
+  });
+});
+
+describe("isGoneBlogTranslation", () => {
+  it("treats whole-post gone slugs as gone in every locale", () => {
+    const slug = [...GONE_BLOG_SLUGS][0];
+    expect(isGoneBlogTranslation(slug, "en")).toBe(true);
+    expect(isGoneBlogTranslation(slug, "ru")).toBe(true);
+  });
+
+  it("flags only listed locales for per-locale removals", () => {
+    const entry = [...GONE_BLOG_TRANSLATIONS.entries()][0];
+    expect(entry).toBeTruthy();
+    const [slug, locales] = entry!;
+    const goneLocale = [...locales][0];
+    expect(isGoneBlogTranslation(slug, goneLocale)).toBe(true);
+    expect(isGoneBlogTranslation(slug, "en")).toBe(false);
   });
 });

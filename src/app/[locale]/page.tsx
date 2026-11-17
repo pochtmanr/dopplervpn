@@ -24,7 +24,7 @@ import {
 } from "@/components/sections";
 import { HomeBlogSection } from "@/components/blog";
 import { isBlogLocale } from "@/i18n/blog-locales";
-import { isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
+import { isGoneBlogTranslation, isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 const SpeedComparison = dynamic(() => import("@/components/sections/speed-comparison").then(m => ({ default: m.SpeedComparison })));
 const PriceComparison = dynamic(() => import("@/components/sections/price-comparison").then(m => ({ default: m.PriceComparison })));
@@ -118,7 +118,7 @@ async function getLatestPosts(locale: string) {
 
   const posts = [];
   for (const post of postsData || []) {
-    if (!isIndexableBlogSlug(post.slug)) continue;
+    if (!isIndexableBlogSlug(post.slug) || isGoneBlogTranslation(post.slug, locale)) continue;
     const translation = post.blog_post_translations.find((t) => t.locale === locale);
     if (!translation) continue;
 

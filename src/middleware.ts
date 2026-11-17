@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
-import { GONE_BLOG_SLUGS, isValidBlogSlug, parseBlogSlug } from "./lib/blog-gone-slugs";
+import {
+  GONE_BLOG_SLUGS,
+  isGoneBlogTranslation,
+  isValidBlogSlug,
+  parseBlogSlug,
+} from "./lib/blog-gone-slugs";
 import { parseBlogPage } from "./lib/blog-pagination";
 import { publishedBlogArchivePageExists, publishedBlogTranslationExists } from "./lib/supabase/public-blog";
 import { isBlogLocale } from "./i18n/blog-locales";
@@ -116,11 +121,16 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // HTTP 410 Gone for blog posts deleted during the Feb–Apr 2026 cleanup.
-  // 410 tells Google "permanently removed, stop re-crawling, drop from index"
-  // — recovers crawl budget and speeds de-indexation vs a plain 404.
+  // HTTP 410 Gone for blog posts deleted during the Feb–Apr 2026 cleanup
+  // and Nov 2026 low-value URL cull. 410 tells Google "permanently removed,
+  // stop re-crawling, drop from index" — recovers crawl budget vs a plain 404.
   const goneSlug = parseBlogSlug(request.nextUrl.pathname);
-  if (goneSlug && GONE_BLOG_SLUGS.has(goneSlug)) {
+  const goneLocale = blogPathMatch?.[1];
+  if (
+    goneSlug &&
+    (GONE_BLOG_SLUGS.has(goneSlug) ||
+      (goneLocale != null && isGoneBlogTranslation(goneSlug, goneLocale)))
+  ) {
     return new NextResponse(
       `<!doctype html><html><head><meta charset="utf-8"><title>410 Gone</title><meta name="robots" content="noindex"></head><body><h1>410 Gone</h1><p>This post has been permanently removed.</p></body></html>`,
       {

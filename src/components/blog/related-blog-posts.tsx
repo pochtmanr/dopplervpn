@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { createStaticClient } from "@/lib/supabase/server";
 import { isBlogLocale } from "@/i18n/blog-locales";
+import { isGoneBlogTranslation, isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
 
 interface RelatedBlogPostsProps {
   locale: string;
@@ -26,7 +27,13 @@ export async function RelatedBlogPosts({ locale, slugs }: RelatedBlogPostsProps)
     .returns<{ slug: string; blog_post_translations: { title: string; excerpt: string | null }[] }[]>();
   const posts = slugs
     .map((slug) => data?.find((p) => p.slug === slug))
-    .filter((p): p is NonNullable<typeof p> => !!p && p.blog_post_translations.length > 0);
+    .filter(
+      (p): p is NonNullable<typeof p> =>
+        !!p &&
+        p.blog_post_translations.length > 0 &&
+        isIndexableBlogSlug(p.slug) &&
+        !isGoneBlogTranslation(p.slug, locale),
+    );
   if (posts.length === 0) return null;
   const t = await getTranslations({ locale, namespace: "blog" });
 
