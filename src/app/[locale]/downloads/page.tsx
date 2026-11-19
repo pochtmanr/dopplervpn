@@ -16,7 +16,7 @@ import { PlatformLogo, type PlatformIcon } from "@/components/glyph/platform-ico
 import { SetupSection, type SetupPlatform } from "@/components/downloads/setup-section";
 import { DetectedCard, DetectedPlatformProvider } from "@/components/downloads/detected-platform";
 import type { CtaVariant } from "@/lib/track-cta";
-import { ANDROID_APK_URL, GOOGLE_PLAY_URL as PLAY_URL } from "@/config/platforms/android";
+import { ANDROID_APK32_BUTTON, ANDROID_APK_URL, GOOGLE_PLAY_URL as PLAY_URL } from "@/config/platforms/android";
 import { seoTitle } from "@/lib/seo-title";
 import { iosApple, macosApple } from "@/config/platforms/apple";
 import { androidApp } from "@/config/platforms/android";
@@ -112,6 +112,9 @@ const URLS = {
   // Same-origin on purpose — the route decides where the bytes come from, so the
   // link printed here survives a change of hosting. See the route's own header.
   androidApk: ANDROID_APK_URL,
+  // The smaller 32-bit file for old phones (armeabi-v7a only). The plain link
+  // above serves the universal APK, which also installs on them.
+  androidApk32: ANDROID_APK32_BUTTON.href,
   // The direct builds for people whose App Store has no Doppler (Russia, China):
   // a public TestFlight link for iPhone and a Developer ID DMG for Mac, both
   // paying through the web checkout. Same-origin for the same reason as the APK.
@@ -389,6 +392,13 @@ const PLATFORMS: {
       {
         labelKey: "android.buttonApk",
         href: URLS.androidApk,
+        variant: "android-apk",
+        download: true,
+        primary: false,
+      },
+      {
+        labelKey: "android.buttonApk32",
+        href: URLS.androidApk32,
         variant: "android-apk",
         download: true,
         primary: false,

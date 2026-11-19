@@ -67,7 +67,7 @@ const TAG_PREFIX = "android-v";
  * legitimate value here: it makes the route answer 503 rather than hand out a
  * link that 404s.
  */
-const FALLBACK_VERSION: string | null = "1.8.6";
+const FALLBACK_VERSION: string | null = "1.8.8";
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
@@ -251,7 +251,12 @@ async function proxyApk(
 }
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
-  const abi: AndroidAbi = normalizeAbi(req.nextUrl.searchParams.get("abi"));
+  const abiParam = req.nextUrl.searchParams.get("abi");
+  // An explicit ?abi= (the in-app update banner, the website's 32-bit button)
+  // gets that architecture's own, smaller file. No parameter means we cannot
+  // know the phone, so the universal APK is served: it installs on both.
+  const explicitAbi = Boolean(abiParam && abiParam.trim());
+  const abi: AndroidAbi = normalizeAbi(abiParam);
 
   const latest = await resolveLatestRelease();
 
@@ -268,13 +273,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   // (the 1.8.4–1.8.5 gap) and the caller asked for 32-bit, fall back to the last
   // release that still published armeabi-v7a.
   let version = latest.version;
-  let assetNames = latest.assetNames;
+  const assetNames = latest.assetNames;
   let assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
 
-  if (!assetName && abi === ARM32 && version !== LAST_ARM32_VERSION) {
+  if (!assetName && abi === ARM32) {
+    // Newest release listing can lag (Next fetch cache) or omit the 32-bit
+    // asset briefly after upload. Fall back to the known last 32-bit tag by name.
     version = LAST_ARM32_VERSION;
-    assetNames = [];
-    assetName = pickApkAsset(assetNames, TAG_PREFIX, version, abi);
+    assetName = apkAssetName(TAG_PREFIX, version, abi);
   }
 
   if (!assetName) {
@@ -302,15 +308,20 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     // arm64 APK there caused "error parsing package" on 32-bit Redmi Notes.
     // Prefer the universal APK when configured; otherwise abi-specific origins.
     const universalUrl = process.env.ANDROID_APK_UNIVERSAL_URL;
-    const originUrl =
-      universalUrl ||
-      (abi === ARM32
+    const abiUrl =
+      abi === ARM32
         ? process.env.ANDROID_APK_ORIGIN_URL_ARM32
-        : process.env.ANDROID_APK_ORIGIN_URL);
+        : process.env.ANDROID_APK_ORIGIN_URL;
+    const useUniversal = Boolean(universalUrl) && (!explicitAbi || !abiUrl);
+    const originUrl = useUniversal ? universalUrl : abiUrl;
     if (!originUrl) {
       return redirectToGithub();
     }
-    return proxyApk(req, originUrl, assetName);
+    // Name the file after what is actually in it.
+    const servedName = useUniversal
+      ? `doppler-vpn-${TAG_PREFIX}${version}-universal.apk`
+      : assetName;
+    return proxyApk(req, originUrl, servedName);
   }
 
   return redirectToGithub();

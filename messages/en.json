@@ -736,6 +736,7 @@
       },
       "buttonPlayStore": "Get on Google Play",
       "buttonApk": "Download APK",
+      "buttonApk32": "APK 32-bit",
       "apkNote": "For devices without Google Play. Android will ask you to allow installs from this source.",
       "step1": "Download Doppler VPN from Google Play",
       "step2": "Open the app — your account is created automatically",
@@ -2692,7 +2693,7 @@
         "title": "Download options for every Android device",
         "subtitle": "One Google Play listing for phone, tablet, Chromebook and Android TV. The same sideload APK for phones without Play, including Huawei and Honor.",
         "coming": "Coming soon",
-        "footnote": "Minimum Android 8.0 (API 26). Sideload APK is about 57 MB (arm64-v8a). Play may show a smaller size for your device. Older 32-bit phones should use Google Play. HarmonyOS NEXT cannot run APKs.",
+        "footnote": "Minimum Android 8.0 (API 26). Sideload APK is about 34 MB. Play may show a smaller size for your device. HarmonyOS NEXT cannot run APKs.",
         "headers": {
           "channel": "Channel",
           "bestFor": "Best for",
@@ -2701,9 +2702,9 @@
         },
         "specs": {
           "android": { "label": "Android", "value": "8.0 or later" },
-          "size": { "label": "App size", "value": "About 57 MB" },
+          "size": { "label": "App size", "value": "About 34 MB" },
           "storage": { "label": "Free storage", "value": "About 100 MB" },
-          "abi": { "label": "APK architecture", "value": "arm64-v8a" },
+          "abi": { "label": "APK architecture", "value": "arm64-v8a, armeabi-v7a" },
           "trial": { "label": "Google Play trial", "value": "{days} days free" }
         },
         "devices": {
@@ -2723,8 +2724,9 @@
           "apk": {
             "title": "Sideload APK",
             "bestFor": "Phones without Google Play, or a direct install",
-            "requires": "Android 8.0+, arm64, ~57 MB",
-            "cta": "Download the APK"
+            "requires": "Android 8.0+, ~34 MB",
+            "cta": "Download the APK",
+            "cta32": "APK 32-bit"
           },
           "huawei": {
             "title": "Huawei & Honor",
@@ -5435,7 +5437,7 @@
       },
       "android": {
         "title": "Android: APK download",
-        "content": "Without Google Play, download the APK below. It runs on 64-bit Android phones, which is almost every phone made since 2019. Android asks you to allow installs from your browser: allow it once, install, then open the app and buy inside it.\n\nOlder 32-bit phones: install Doppler VPN from Google Play instead."
+        "content": "Without Google Play, download the APK below. It runs on 64-bit Android phones, which is almost every phone made since 2019. Android asks you to allow installs from your browser: allow it once, install, then open the app and buy inside it.\n\nOlder 32-bit phones: the same APK works on them too."
       }
     },
     "links": {

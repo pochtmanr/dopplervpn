@@ -69,6 +69,14 @@ export const ANDROID_APK_BUTTON = {
   labelKey: "ctaSecondary",
 } as const;
 
+/** The smaller armeabi-v7a file for old 32-bit phones; the plain APK link serves the universal one. */
+export const ANDROID_APK32_BUTTON = {
+  href: `${ANDROID_APK_URL}?abi=armeabi-v7a`,
+  mark: "file",
+  variant: "android-apk",
+  labelKey: "ctaSecondary",
+} as const;
+
 export const androidApp: AppPageConfig = {
   copyKey: "app",
   family: "android",

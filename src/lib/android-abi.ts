@@ -19,7 +19,7 @@ export const SPLIT_APK_MIN_VERSION = "1.8.1";
  * here when the absolute newest tag has no 32-bit asset (the 1.8.4–1.8.5 gap).
  * Keep in step with DopplerAndroid sideload splits.
  */
-export const LAST_ARM32_VERSION = "1.8.6";
+export const LAST_ARM32_VERSION = "1.8.8";
 
 /**
  * Maps whatever a caller sends to one of the two ABIs we publish.

@@ -42,7 +42,7 @@ import type {
   StoreMark,
 } from "@/config/platforms/app-page";
 import { AndroidFrame, AppleTour, MacFrame, PhoneFrame } from "./apple-tour";
-import { ANDROID_APK_BUTTON } from "@/config/platforms/android";
+import { ANDROID_APK32_BUTTON, ANDROID_APK_BUTTON } from "@/config/platforms/android";
 import { PLUS_CTA_LEAD, PLUS_CTA_LINK, PLUS_CTA_TITLE, PlusCtaCard } from "./plus-cta-card";
 import { TerminalCard } from "./terminal-card";
 
@@ -244,7 +244,17 @@ function AndroidGetCta({
     return <StoreButton config={config} button={config.secondary} label={label} quiet />;
   }
   if (row.cta === "apk") {
-    return <StoreButton config={config} button={ANDROID_APK_BUTTON} label={label} quiet />;
+    return (
+      <>
+        <StoreButton config={config} button={ANDROID_APK_BUTTON} label={label} quiet />
+        <StoreButton
+          config={config}
+          button={ANDROID_APK32_BUTTON}
+          label={t(`get.rows.${row.key}.cta32`)}
+          quiet
+        />
+      </>
+    );
   }
   if (row.cta === "huawei") {
     return (
