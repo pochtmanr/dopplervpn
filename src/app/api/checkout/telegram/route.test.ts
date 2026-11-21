@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const h = vi.hoisted(() => ({
   inserted: null as Record<string, unknown> | null,
+  insertFails: false,
   createWhiteLabel: vi.fn(async (_params?: unknown) => ({
     track_id: "track",
     address: "TAddr",
@@ -30,6 +31,7 @@ vi.mock("@/lib/supabase/admin", () => ({
       if (table === "vpn_invoices") {
         return {
           insert: async (row: Record<string, unknown>) => {
+            if (h.insertFails) return { error: { message: "db down" } };
             h.inserted = row;
             return { error: null };
           },
@@ -75,6 +77,7 @@ describe("POST /api/checkout/telegram crypto", () => {
   beforeEach(() => {
     process.env.CHECKOUT_SHARED_SECRET = SECRET;
     h.inserted = null;
+    h.insertFails = false;
     h.createWhiteLabel.mockClear();
   });
 
@@ -119,5 +122,12 @@ describe("POST /api/checkout/telegram crypto", () => {
       provider: "oxapay",
       provider_payment_id: json.order_id,
     });
+  });
+
+  it("creates no payment when the pending row cannot be stored", async () => {
+    h.insertFails = true;
+    const res = await POST(request({ ...accountBody, coin: "usdt_trc20" }));
+    expect(res.status).toBe(500);
+    expect(h.createWhiteLabel).not.toHaveBeenCalled();
   });
 });

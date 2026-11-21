@@ -64,6 +64,9 @@ export async function createInvoice(params: OxaPayCreateParams): Promise<OxaPayI
     description: params.description,
     lifetime: params.lifetimeMinutes ?? 60,
     fee_paid_by_payer: 1,
+    // Explicit 0: otherwise the dashboard default applies (up to 60%) and an
+    // underpaid invoice could come back as Paid and be credited in full.
+    under_paid_coverage: 0,
     sandbox: isSandbox(),
   };
   if (params.email) payload.email = params.email;
@@ -117,6 +120,7 @@ export async function createWhiteLabel(params: OxaPayWhiteLabelParams): Promise<
     description: params.description,
     lifetime: params.lifetimeMinutes ?? 60,
     fee_paid_by_payer: 1,
+    under_paid_coverage: 0,
     sandbox: isSandbox(),
   };
   if (params.network) payload.network = params.network;
@@ -223,10 +227,14 @@ export function verifyWebhookSignature(rawBody: string, hmacHeader: string): boo
 }
 
 /**
- * OxaPay webhook payload shape for invoice payments. `status` values we act on:
- * - "Paid"   → final success (credit the account)
- * - "Paying" / "Confirming" → intermediate, ignore
- * - "Expired" / "Failed" → terminal failure
+ * OxaPay webhook payload for invoice / white_label payments.
+ * Statuses (https://docs.oxapay.com/api-reference/payment/payment-status-table):
+ * - "Paid", "Manual_accept" → final success (credit the account)
+ * - "Paying" / "Confirming" / "Waiting" → in progress, ignore
+ * - "Underpaid" → recorded, no credit
+ * - "Refunding" / "Refunded" → recorded + operator alert, no auto-revoke
+ * - "Expired" → terminal failure
+ * `amount` is the invoice amount in `currency`.
  */
 export interface OxaPayWebhookPayload {
   type: string;           // "invoice"

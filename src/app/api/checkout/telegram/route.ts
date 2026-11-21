@@ -6,14 +6,12 @@ import { createWhiteLabel } from '@/lib/oxapay';
 import { resolvePromoCharge } from '@/lib/promo-checkout';
 import { resolveSiteUrl } from '@/lib/site-url';
 import { routing } from '@/i18n/routing';
-
-const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-
-const PLAN_AMOUNTS: Record<string, { amount: number; name: string }> = {
-  monthly: { amount: 699, name: 'Doppler VPN Pro — Monthly' },
-  '6month': { amount: 2999, name: 'Doppler VPN Pro — 6 Months' },
-  yearly: { amount: 3999, name: 'Doppler VPN Pro — Yearly' },
-};
+import {
+  ACCOUNT_ID_REGEX,
+  CHECKOUT_PLANS as PLAN_AMOUNTS,
+  insertPendingOxapayInvoice,
+  markOxapayInvoiceAbandoned,
+} from '@/lib/oxapay-orders';
 
 const COINS: Record<string, { payCurrency: string; network?: string }> = {
   usdt_trc20: { payCurrency: 'USDT', network: 'TRC20' },
@@ -102,30 +100,31 @@ export async function POST(req: NextRequest) {
 
     const orderId = randomUUID();
     const site = resolveSiteUrl(req);
-    const payment = await createWhiteLabel({
-      amount: promoCharge.amount / 100,
-      currency: 'USD',
-      payCurrency: coin.payCurrency,
-      network: coin.network,
+    // Pending row first: without it the webhook cannot credit the payment.
+    await insertPendingOxapayInvoice(supabase, {
       orderId,
-      callbackUrl: `${site}/api/oxapay/webhook`,
-      description: `${plan.name} for ${rawAccountId}`,
-      lifetimeMinutes: 60,
+      planId,
+      accountId: rawAccountId,
+      amountMinor: promoCharge.amount,
+      promoId: promoCharge.promoId,
+      promoCode: promoCharge.promoCode,
     });
 
-    const { error: insertErr } = await supabase.from('vpn_invoices').insert({
-      telegram_user_id: 0,
-      plan: `${planId}:${rawAccountId}`,
-      amount: promoCharge.amount,
-      currency: 'USD',
-      status: 'pending',
-      provider: 'oxapay',
-      provider_payment_id: orderId,
-      promo_id: promoCharge.promoId,
-      promo_code: promoCharge.promoCode,
-    });
-    if (insertErr) {
-      console.error('[checkout-telegram] pending_invoice_insert_failed', insertErr);
+    let payment;
+    try {
+      payment = await createWhiteLabel({
+        amount: promoCharge.amount / 100,
+        currency: 'USD',
+        payCurrency: coin.payCurrency,
+        network: coin.network,
+        orderId,
+        callbackUrl: `${site}/api/oxapay/webhook`,
+        description: `${plan.name} for ${rawAccountId}`,
+        lifetimeMinutes: 60,
+      });
+    } catch (err) {
+      await markOxapayInvoiceAbandoned(supabase, orderId);
+      throw err;
     }
 
     return NextResponse.json({

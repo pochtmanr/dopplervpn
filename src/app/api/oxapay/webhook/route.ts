@@ -6,6 +6,7 @@ import type { CheckoutAttribution } from '@/lib/attribution';
 import { reportPurchase } from '@/lib/purchase-events';
 import { recordPromoRedemption } from '@/lib/promo-checkout';
 import { observeOxapayPaid } from '@/lib/reporting/schedule';
+import { opsAlert } from '@/lib/ops-alert';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -63,8 +64,8 @@ export async function POST(req: NextRequest) {
     order_id: event.order_id,
   });
 
-  // Invoice is the hosted landing checkout. white_label is the Mini App.
-  // Every other type (payout, static_address, donation) stays ignored.
+  // Invoice is the hosted checkout (web + admin-sent links). white_label is the
+  // Mini App. Every other type (payout, static_address, payment_link) stays ignored.
   if (event.type && event.type !== 'invoice' && event.type !== 'white_label') {
     return okResponse();
   }
@@ -77,8 +78,8 @@ export async function POST(req: NextRequest) {
   // `date` is inside the HMAC-signed body, so a replayer can't forge a fresh
   // one — they can only resend a captured callback. The case worth blocking is
   // an old `expired`/`failed` being replayed to knock a row out of `pending`.
-  // Crediting is already idempotent (`invoice.status === 'paid'` below), so a
-  // replayed success is harmless.
+  // Crediting is idempotent (the atomic claim below), so a replayed success is
+  // harmless.
   //
   // Deliberately NOT applied to success callbacks, and deliberately 24h rather
   // than Revolut's 15 min: OxaPay retries until it gets a 200, so a tight
@@ -117,46 +118,102 @@ export async function POST(req: NextRequest) {
     return okResponse();
   }
 
-  // Not final yet — OxaPay sends "Paying" / "Confirming" during processing.
-  // Acknowledge so OxaPay stops retrying, but do not credit the account.
-  if (status !== 'paid') {
+  // Underpaid: the payer sent less than the invoice (beyond any coverage). No
+  // Pro; the row records it so support can see why. A top-up that completes
+  // the invoice arrives later as Paid and is credited from this state.
+  if (status === 'underpaid') {
+    await supabase
+      .from('vpn_invoices')
+      .update({ status: 'underpaid' })
+      .eq('provider_payment_id', orderId)
+      .eq('provider', 'oxapay')
+      .eq('status', 'pending');
+    log('payment_underpaid', { orderId });
+    return okResponse();
+  }
+
+  // Refunds are recorded and escalated; Pro is NOT revoked automatically.
+  if (status === 'refunding' || status === 'refunded') {
+    await supabase
+      .from('vpn_invoices')
+      .update({ status })
+      .eq('provider_payment_id', orderId)
+      .eq('provider', 'oxapay');
+    log('payment_refund', { orderId, status });
+    await opsAlert(`OxaPay ${status}: order ${orderId}. Pro was not revoked; review the account by hand.`);
+    return okResponse();
+  }
+
+  // Paid is final success. manual_accept is an invoice accepted by hand in the
+  // OxaPay dashboard, which is just as final. Anything else ("Paying",
+  // "Confirming", "Waiting") is in progress: acknowledge, do not credit.
+  const isPaid = status === 'paid' || status === 'manual_accept';
+  if (!isPaid) {
     log('not_paid_yet', { orderId, status });
     return okResponse();
   }
 
+  // Undo a claim so OxaPay's retry (or a human) can process it again.
+  const releaseClaim = async (id: number, to: string) => {
+    const { error } = await supabase.from('vpn_invoices').update({ status: to }).eq('id', id);
+    if (error) console.error('[oxapay-webhook] release_claim_failed', id, error);
+  };
+
   try {
-    // Look up the pending invoice row created at /api/oxapay/create-invoice.
-    // If it doesn't exist (e.g. pre-insert failed), we can still recover the
-    // accountId + planId from the callback — but currently we depend on the
-    // row for planId since OxaPay does not echo it back.
-    const { data: invoice, error: invoiceErr } = await supabase
+    // Claim the row atomically BEFORE crediting. Only one delivery can move it
+    // out of an unpaid state, so a retry or a duplicate concurrent callback
+    // finds nothing to claim and cannot extend the account twice. 'failed' and
+    // 'underpaid' are claimable: a late or topped-up payment is still money in.
+    const { data: invoice, error: claimErr } = await supabase
       .from('vpn_invoices')
-      .select('id, status, plan, amount, currency, click_id, promo_id, promo_code')
+      .update({ status: 'paid' })
       .eq('provider_payment_id', orderId)
       .eq('provider', 'oxapay')
+      .in('status', ['pending', 'failed', 'underpaid'])
+      .select('id, status, plan, amount, currency, click_id, promo_id, promo_code')
       .maybeSingle();
 
-    if (invoiceErr) {
-      log('invoice_lookup_error', { orderId, err: invoiceErr.message });
+    if (claimErr) {
+      log('invoice_claim_error', { orderId, err: claimErr.message });
       return NextResponse.json({ error: 'Invoice lookup failed' }, { status: 500 });
     }
 
     if (!invoice) {
+      const { data: existing } = await supabase
+        .from('vpn_invoices')
+        .select('status')
+        .eq('provider_payment_id', orderId)
+        .eq('provider', 'oxapay')
+        .maybeSingle();
+      if (existing) {
+        log('idempotent_skip', { orderId, status: existing.status });
+        return okResponse();
+      }
       log('invoice_not_found', { orderId });
+      await opsAlert(`OxaPay paid callback for unknown order ${orderId} (track ${event.track_id}). Money arrived with no invoice row: credit by hand.`);
       return NextResponse.json({ error: 'Invoice not found' }, { status: 404 });
-    }
-
-    // Idempotency: already paid → just ack.
-    if (invoice.status === 'paid') {
-      log('idempotent_skip', { orderId });
-      return okResponse();
     }
 
     // plan format: `${planId}:${accountId}`
     const [planId, accountId] = String(invoice.plan).split(':');
-    if (!planId || !accountId) {
+    const days = PLAN_DAYS[planId];
+    if (!planId || !accountId || !days) {
       log('invoice_plan_malformed', { orderId, plan: invoice.plan });
+      await releaseClaim(invoice.id, 'pending');
+      await opsAlert(`OxaPay paid order ${orderId} has an unknown plan "${invoice.plan}". Not credited.`);
       return NextResponse.json({ error: 'Invoice plan malformed' }, { status: 400 });
+    }
+
+    // The callback's amount is the invoice amount in its own currency (USD).
+    // It is HMAC-signed, so a mismatch means the row and the payment disagree:
+    // hold the credit for a human rather than guess. manual_accept is a human
+    // decision already, so it is credited regardless.
+    const expectedMajor = Number(invoice.amount) / 100;
+    if (status === 'paid' && event.amount != null && Number(event.amount) + 0.005 < expectedMajor) {
+      log('amount_mismatch', { orderId, expectedMajor, amount: event.amount });
+      await releaseClaim(invoice.id, 'pending');
+      await opsAlert(`OxaPay order ${orderId}: paid ${event.amount} ${event.currency ?? ''} but invoice is ${expectedMajor} USD. Not credited.`);
+      return okResponse();
     }
 
     const { data: account, error: accountError } = await supabase
@@ -167,10 +224,10 @@ export async function POST(req: NextRequest) {
 
     if (accountError || !account) {
       console.error('[oxapay-webhook] account_not_found', accountId, accountError);
+      await releaseClaim(invoice.id, 'pending');
       return NextResponse.json({ error: 'Account not found' }, { status: 400 });
     }
 
-    const days = PLAN_DAYS[planId] || 30;
     const currentExpiry = account.subscription_expires_at
       ? new Date(account.subscription_expires_at)
       : null;
@@ -191,16 +248,16 @@ export async function POST(req: NextRequest) {
 
     if (updateErr) {
       console.error('[oxapay-webhook] account_update_failed', accountId, updateErr);
+      await releaseClaim(invoice.id, 'pending');
       throw new Error(`Account update failed: ${updateErr.message}`);
     }
 
     log('account_upgraded', { accountId, newExpiry: newExpiry.toISOString() });
 
-    // Redeem before the row flips to paid. A retry that already inserted the
-    // redemption returns 'already' and does not increment again. A failure
-    // here is logged and does not stop the 200: the paid-status guard above
-    // would otherwise skip the promo on the next delivery, and returning 500
-    // would make OxaPay retry the whole credit.
+    // A retry that already inserted the redemption returns 'already' and does
+    // not increment again. A failure here is logged and does not stop the 200:
+    // returning 500 would make OxaPay retry, and the claim above would then
+    // (correctly) skip the whole credit.
     if (invoice.promo_id) {
       try {
         const outcome = await recordPromoRedemption(supabase, {
@@ -216,23 +273,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Flip the pre-inserted invoice row to paid. Note: OxaPay sends amount
-    // as decimal — convert back to minor units to match the Revolut convention.
-    const paidAmountMinor = event.amount != null
-      ? Math.round(Number(event.amount) * 100)
-      : invoice.amount;
-
-    const { error: flipErr } = await supabase
-      .from('vpn_invoices')
-      .update({
-        status: 'paid',
-        amount: paidAmountMinor,
-        currency: event.currency || invoice.currency || 'USD',
-      })
-      .eq('id', invoice.id);
-    if (flipErr) {
-      console.error('[oxapay-webhook] invoice_flip_failed', orderId, flipErr);
-    }
+    // The row was already flipped to paid by the claim. Amount stays the
+    // stored minor-unit price (checked against the callback above).
+    const paidAmountMinor = Number(invoice.amount);
 
     // Reporting stays outside the credit. OxaPay retries non-200 responses.
     after(() => observeOxapayPaid({
@@ -245,8 +288,8 @@ export async function POST(req: NextRequest) {
       channel: event.type === 'white_label' ? 'telegram_miniapp' : 'web',
     }));
 
-    // Report the purchase to the ad network. Placed after the idempotency guard
-    // above so an OxaPay retry can't double-count, and inside after() so a slow
+    // Report the purchase to the ad network. Placed after the claim above so an
+    // OxaPay retry can't double-count, and inside after() so a slow
     // tracker can never delay the 200 OxaPay is waiting for.
     after(() =>
       firePostback({

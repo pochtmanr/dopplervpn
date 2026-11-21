@@ -34,7 +34,8 @@ export interface ProbeTarget {
   expect?: "reachable" | "blocked";
 }
 
-const SUPABASE_HOST = "https://fzlrhmjdjjzcgstaeblu.supabase.co";
+// The apps' primary database host (self-hosted since 2026-11-17).
+const SUPABASE_HOST = "https://db.dopplervpn.org";
 
 export const PROBE_TARGETS: ProbeTarget[] = [
   {
@@ -57,7 +58,7 @@ export const PROBE_TARGETS: ProbeTarget[] = [
   },
   {
     id: "supabase",
-    label: "supabase.co",
+    label: "db.dopplervpn.org",
     url: `${SUPABASE_HOST}/rest/v1/`,
     role: "core",
     en: "Accounts, login and the server list. If this fails, the app cannot start at all — this is the single most important row.",

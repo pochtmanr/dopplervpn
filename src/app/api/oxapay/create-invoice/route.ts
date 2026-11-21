@@ -8,17 +8,14 @@ import { readClickIdCookie } from '@/lib/click-id';
 import { parseConsentFlags, readCheckoutAttribution } from '@/lib/attribution';
 import { resolveSiteUrl } from '@/lib/site-url';
 import { resolvePromoCharge } from '@/lib/promo-checkout';
+import {
+  ACCOUNT_ID_REGEX,
+  CHECKOUT_PLANS as PLAN_AMOUNTS,
+  insertPendingOxapayInvoice,
+  markOxapayInvoiceAbandoned,
+} from '@/lib/oxapay-orders';
 
-const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// Price in MINOR units (cents) so it stays in sync with the Revolut flow.
-// We convert to decimal when calling OxaPay.
-const PLAN_AMOUNTS: Record<string, { amount: number; name: string; days: number }> = {
-  monthly: { amount: 699, name: 'Doppler VPN Pro — Monthly', days: 30 },
-  '6month': { amount: 2999, name: 'Doppler VPN Pro — 6 Months', days: 180 },
-  yearly: { amount: 3999, name: 'Doppler VPN Pro — Yearly', days: 365 },
-};
 
 export async function POST(req: NextRequest) {
   const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'oxapay-create' });
@@ -91,56 +88,43 @@ export async function POST(req: NextRequest) {
     returnUrl.searchParams.set('plan', planId);
     returnUrl.searchParams.set('account_id', rawAccountId);
 
-    const invoice = await createInvoice({
-      amount: promoCharge.amount / 100,
-      currency: 'USD',
+    // The pending row goes in FIRST: it is the webhook's only record of the
+    // plan and account, so a payment without it could never be credited.
+    // plan format mirrors the Revolut flow: `${planId}:${accountId}`.
+    await insertPendingOxapayInvoice(supabase, {
       orderId,
-      callbackUrl: `${site}/api/oxapay/webhook`,
-      returnUrl: returnUrl.toString(),
-      description: `${plan.name} for ${rawAccountId}`,
-      email: hasEmail ? email : undefined,
-      lifetimeMinutes: 60,
-    });
-
-    // Pre-insert a pending invoice row so the success page can poll
-    // meaningful state before the webhook lands. The row is keyed by our
-    // internal orderId (stored in provider_payment_id) — the webhook updates
-    // it to 'paid' on final confirmation.
-    //
-    // plan format mirrors the Revolut flow: `${planId}:${accountId}` so we
-    // can recover both values from the invoice alone.
-    const invoiceRow = {
-      telegram_user_id: 0,
-      plan: `${planId}:${rawAccountId}`,
-      amount: promoCharge.amount,
-      currency: 'USD',
-      status: 'pending',
-      provider: 'oxapay',
-      provider_payment_id: orderId,
-      promo_id: promoCharge.promoId,
-      promo_code: promoCharge.promoCode,
+      planId,
+      accountId: rawAccountId,
+      amountMinor: promoCharge.amount,
+      promoId: promoCharge.promoId,
+      promoCode: promoCharge.promoCode,
       // Paid-campaign attribution. The webhook is a server-to-server call with no
       // cookies, so the click id has to be stashed here to survive to confirmation.
-      click_id: readClickIdCookie(req),
-    };
-    // Channel + analytics ids for the webhook's server-side purchase report
-    // (lib/purchase-events.ts). Same reason as click_id: no cookies at webhook time.
-    const attribution = readCheckoutAttribution(
-      req,
-      parseConsentFlags(consent),
-      process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
-    );
-    let { error: insertErr } = await supabase
-      .from('vpn_invoices')
-      .insert({ ...invoiceRow, attribution });
-    if (insertErr && /attribution/i.test(insertErr.message ?? '')) {
-      // Migration 010 not applied yet — keep the pending row, lose attribution.
-      console.error('[oxapay-create] attribution_column_missing');
-      ({ error: insertErr } = await supabase.from('vpn_invoices').insert(invoiceRow));
-    }
-    if (insertErr) {
-      console.error('[oxapay-create] pending_invoice_insert_failed', insertErr);
-      // Do not fail the checkout — the webhook will insert on Paid if needed.
+      clickId: readClickIdCookie(req),
+      // Channel + analytics ids for the webhook's server-side purchase report
+      // (lib/purchase-events.ts). Same reason as click_id.
+      attribution: readCheckoutAttribution(
+        req,
+        parseConsentFlags(consent),
+        process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+      ) as unknown as Record<string, unknown>,
+    });
+
+    let invoice;
+    try {
+      invoice = await createInvoice({
+        amount: promoCharge.amount / 100,
+        currency: 'USD',
+        orderId,
+        callbackUrl: `${site}/api/oxapay/webhook`,
+        returnUrl: returnUrl.toString(),
+        description: `${plan.name} for ${rawAccountId}`,
+        email: hasEmail ? email : undefined,
+        lifetimeMinutes: 60,
+      });
+    } catch (err) {
+      await markOxapayInvoiceAbandoned(supabase, orderId);
+      throw err;
     }
 
     return NextResponse.json({
