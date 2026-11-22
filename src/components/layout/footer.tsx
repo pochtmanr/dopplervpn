@@ -76,12 +76,6 @@ const COPYRIGHT_YEAR = 2026;
 
 export async function Footer() {
   const t = await getTranslations("footer");
-  // The long-tail pages reuse the titles their parent pages already link them
-  // with, so the footer needs no new strings in 44 locales.
-  const tUae = await getTranslations("vpnForUae.related");
-  const tRussia = await getTranslations("vpnForRussia.related");
-  const tChina = await getTranslations("vpnForChina.related");
-  const tIos = await getTranslations("vpnForIos.related");
   const tLinux = await getTranslations("vpnForLinux");
   const tDownloads = await getTranslations("apps");
   const locale = await getLocale();
@@ -93,6 +87,9 @@ export async function Footer() {
   const showSecurityLink = isSecurityLocale(locale);
   const currentYear = COPYRIGHT_YEAR;
 
+  // The footer is navigation, not an index of SEO landings. The country and
+  // use-case pages are reached through /bypass-censorship and each other's
+  // related links; do not list them here again.
   const productLinks: LinkItem[] = [
     { href: "/#pricing", label: t("pricing") },
     { href: "/downloads", label: t("download") },
@@ -101,36 +98,15 @@ export async function Footer() {
     // /guides is English-only (lib/guides.ts), so the link shows where the page exists.
     ...(guidesLabel ? [{ href: "/guides", label: guidesLabel }] : []),
     { href: "/bypass-censorship", label: t("bypassCensorship") },
-    { href: "/vless-vpn", label: t("vlessVpn") },
-    { href: "/no-registration-vpn", label: t("noRegistration") },
-    { href: "/vpn-for-tiktok-ban", label: t("vpnForTiktokBan") },
     { href: "/tools", label: t("tools") },
-    { href: "/giveaway", label: t("giveaway") },
-    { href: "/pay-with-crypto", label: t("payWithCrypto") },
   ];
 
   const platformLinks: LinkItem[] = [
     { href: "/vpn-for-ios", label: t("vpnForIos") },
     { href: "/vpn-for-android", label: t("vpnForAndroid") },
-    { href: "/vpn-for-huawei", label: t("vpnForHuawei") },
     { href: "/vpn-for-macos", label: t("vpnForMacos") },
     { href: "/vpn-for-windows", label: t("vpnForWindows") },
     { href: "/vpn-for-linux", label: tLinux("footer") },
-    { href: "/vless-vpn-android", label: t("vlessVpnAndroid") },
-    { href: "/vpn-for-public-wifi-iphone", label: tIos("publicWifi") },
-  ];
-
-  const locationLinks: LinkItem[] = [
-    { href: "/vpn-for-uae", label: t("vpnForUae") },
-    { href: "/vpn-for-iran", label: t("vpnForIran") },
-    { href: "/vpn-for-china", label: t("vpnForChina") },
-    { href: "/vpn-for-russia", label: t("vpnForRussia") },
-    { href: "/vpn-for-turkey", label: t("vpnForTurkey") },
-    // Otherwise reachable only from one parent page each.
-    { href: "/vpn-for-instagram-russia", label: tRussia("instagramTitle") },
-    { href: "/vpn-for-travelers-china", label: tChina("travelersTitle") },
-    { href: "/vpn-for-telegram-calls-uae", label: tUae("telegramCallsTitle") },
-    { href: "/vpn-for-whatsapp-calls-uae", label: tUae("whatsappCallsTitle") },
   ];
 
   const supportLinks: LinkItem[] = [
@@ -160,7 +136,7 @@ export async function Footer() {
 
       <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Desktop layout — md and up */}
-        <div className="hidden md:grid grid-cols-7 gap-8 lg:gap-12">
+        <div className="hidden md:grid grid-cols-6 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="col-span-2">
             <Link href="/" prefetch={false} className="inline-flex items-center gap-2.5 mb-4" dir="ltr">
@@ -215,12 +191,6 @@ export async function Footer() {
           <div>
             <h3 className="font-semibold text-text-primary mb-4">{t("platformsHeading")}</h3>
             <LinkList links={platformLinks} />
-          </div>
-
-          {/* Locations */}
-          <div>
-            <h3 className="font-semibold text-text-primary mb-4">{t("locationsHeading")}</h3>
-            <LinkList links={locationLinks} />
           </div>
 
           {/* Support */}
@@ -364,16 +334,6 @@ export async function Footer() {
 
           <details className="group border-t border-overlay/5 pt-4">
             <summary className="flex items-center justify-between cursor-pointer list-none font-semibold text-text-primary py-2">
-              <span>{t("locationsHeading")}</span>
-              <ChevronDown className="ms-2 group-open:rotate-180" />
-            </summary>
-            <div className="pt-3 pb-1">
-              <LinkList links={locationLinks} />
-            </div>
-          </details>
-
-          <details className="group border-t border-overlay/5 pt-4">
-            <summary className="flex items-center justify-between cursor-pointer list-none font-semibold text-text-primary py-2">
               <span>{t("supportTitle")}</span>
               <ChevronDown className="ms-2 group-open:rotate-180" />
             </summary>
@@ -473,17 +433,6 @@ export async function Footer() {
                 rel="noopener noreferrer"
                 className="text-text-muted hover:text-text-primary transition-colors"
                 aria-label="Doppler VPN on LinkedIn"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.linkedin.com/company/95724818/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-muted hover:text-text-primary transition-colors"
-                aria-label="Simnetiq on LinkedIn"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z" />

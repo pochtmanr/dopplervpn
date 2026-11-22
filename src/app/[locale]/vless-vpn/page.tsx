@@ -74,7 +74,7 @@ const dopplerFeatures = ["feature1", "feature2", "feature3", "feature4"] as cons
 export default async function VlessVpnPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [t, mt, tHero, tFooter, tNoReg, tCrypto, tBypass] = await Promise.all([
+  const [t, mt, tHero, tFooter, tNoReg, tCrypto, tBypass, tVlessAndroid] = await Promise.all([
     getTranslations("vlessVpn"),
     getTranslations({ locale, namespace: "vlessVpn.metadata" }),
     getTranslations("hero"),
@@ -82,6 +82,7 @@ export default async function VlessVpnPage({ params }: PageProps) {
     getTranslations("noRegistrationVpn"),
     getTranslations("payWithCrypto"),
     getTranslations("bypassCensorship"),
+    getTranslations("vlessVpnAndroid"),
   ]);
 
   const faqItems = faqKeys.map((key) => ({
@@ -108,6 +109,13 @@ export default async function VlessVpnPage({ params }: PageProps) {
       title: tFooter("bypassCensorship"),
       desc: tBypass("hero.title"),
       icon: "bypass",
+    },
+    // The only inbound link to this page now that the footer no longer lists it.
+    {
+      href: "/vless-vpn-android",
+      title: tFooter("vlessVpnAndroid"),
+      desc: tVlessAndroid("hero.title"),
+      icon: "vless",
     },
   ];
 

@@ -84,13 +84,14 @@ function ArrowIcon() {
 export default async function BypassCensorshipPage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [t, mt, tHero, tFooter, tNoReg, tCrypto] = await Promise.all([
+  const [t, mt, tHero, tFooter, tNoReg, tCrypto, tTiktok] = await Promise.all([
     getTranslations("bypassCensorship"),
     getTranslations({ locale, namespace: "bypassCensorship.metadata" }),
     getTranslations("hero"),
     getTranslations("footer"),
     getTranslations("noRegistrationVpn"),
     getTranslations("payWithCrypto"),
+    getTranslations("vpnForTiktokBan"),
   ]);
 
   const faqItems = faqKeys.map((key) => ({
@@ -117,6 +118,13 @@ export default async function BypassCensorshipPage({ params }: PageProps) {
       title: tFooter("payWithCrypto"),
       desc: tCrypto("why.anonymousTitle"),
       icon: "crypto",
+    },
+    // The only inbound link to this page now that the footer no longer lists it.
+    {
+      href: "/vpn-for-tiktok-ban",
+      title: tFooter("vpnForTiktokBan"),
+      desc: tTiktok("hero.title"),
+      icon: "bypass",
     },
   ];
 
