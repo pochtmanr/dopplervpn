@@ -40,6 +40,9 @@ export function SuccessClient() {
   // Payer-facing copy names the processor that actually took the money — a
   // crypto payer must not be told "Revolut reported the payment as failed".
   const processor = provider === 'oxapay' ? 'OxaPay' : 'Revolut';
+  // Set by /api/checkout/desktop: the buyer came from a desktop app that
+  // registered the dopplervpn:// link, so success hands them back to it.
+  const fromApp = params.get('app') === 'windows';
   const t = useTranslations('success');
 
   const [data, setData] = useState<VerifyResponse | null>(null);
@@ -117,6 +120,13 @@ export function SuccessClient() {
     };
   }, [orderId, accountId, provider]);
 
+  // Revolut's hosted page redirects only after a successful payment, and the
+  // desktop order's redirect URL cannot carry the order id (it is fixed before
+  // Revolut assigns one). The app confirms Pro itself, so go straight back.
+  if (!orderId && fromApp) {
+    return <AppReturnShell />;
+  }
+
   if (!orderId) {
     return (
       <ErrorShell
@@ -127,6 +137,10 @@ export function SuccessClient() {
         reason={t('errors.missingReason')}
       />
     );
+  }
+
+  if (data?.status === 'paid' && fromApp) {
+    return <AppReturnShell />;
   }
 
   if (data?.status === 'paid') {
@@ -170,6 +184,43 @@ export function SuccessClient() {
 }
 
 /* ─────────── shells ─────────── */
+
+const APP_RETURN_LINK = 'dopplervpn://purchase?status=ok';
+
+/**
+ * Hands a desktop buyer back to the app. The link is fired once on its own;
+ * browsers ask before opening an app the first time, so the button stays as
+ * the explicit path. The app re-checks Pro when the link arrives.
+ */
+function AppReturnShell() {
+  const t = useTranslations('success');
+  const fired = useRef(false);
+
+  useEffect(() => {
+    if (fired.current) return;
+    fired.current = true;
+    window.location.href = APP_RETURN_LINK;
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-bg-primary text-text-primary flex items-center justify-center p-4">
+      <div className="w-full max-w-md text-center">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-emerald-400/30 to-emerald-600/20 ring-1 ring-emerald-400/40 mb-6">
+          <CheckBadge />
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-3">{t('appReturn.title')}</h1>
+        <p className="text-text-muted text-base mb-8">{t('appReturn.body')}</p>
+        <a
+          href={APP_RETURN_LINK}
+          className="cta-key inline-block px-6 py-3 rounded-xl font-semibold text-white"
+        >
+          {t('appReturn.button')}
+        </a>
+        <p className="text-text-muted/60 text-xs mt-6">{t('appReturn.hint')}</p>
+      </div>
+    </div>
+  );
+}
 
 function PendingShell({
   orderId,

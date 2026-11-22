@@ -50,6 +50,13 @@ export interface RevolutOrder {
   currency: string;
   metadata?: Record<string, string>;
   payments?: RevolutOrderPayment[];
+  /** Revolut's hosted payment page for this order. */
+  checkout_url?: string;
+}
+
+export interface CreateOrderOptions {
+  /** Where the hosted page sends the buyer after a successful payment. */
+  redirectUrl?: string;
 }
 
 export async function createOrder(
@@ -57,6 +64,7 @@ export async function createOrder(
   currency: string,
   description: string,
   metadata: Record<string, string>,
+  options: CreateOrderOptions = {},
 ): Promise<RevolutOrder> {
   return revolutFetch('/orders', {
     method: 'POST',
@@ -65,6 +73,7 @@ export async function createOrder(
       currency,
       description,
       metadata,
+      ...(options.redirectUrl ? { redirect_url: options.redirectUrl } : {}),
     }),
   });
 }

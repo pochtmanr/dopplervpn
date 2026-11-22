@@ -144,13 +144,40 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
 
   /* ── Auto-restore session from localStorage ─────────────────── */
   useEffect(() => {
-    const savedId = localStorage.getItem('doppler_account_id');
-    if (savedId) {
-      setAccountId(savedId);
+    const restore = (id: string) => {
+      setAccountId(id);
       setMode('existing');
       setStep(2);
-      fetchAccountInfo(savedId);
+      fetchAccountInfo(id);
+    };
+
+    // A desktop app's "Manage subscription" link: redeem the one-time token,
+    // then drop it from the address bar so it never lands in history.
+    const handoff = new URLSearchParams(window.location.search).get('h');
+    if (handoff) {
+      window.history.replaceState(null, '', window.location.pathname);
+      fetch('/api/account/handoff/redeem', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: handoff }),
+      })
+        .then((res) => (res.ok ? res.json() : null))
+        .catch(() => null)
+        .then((data: { accountId?: string } | null) => {
+          if (data?.accountId) {
+            localStorage.setItem('doppler_account_id', data.accountId);
+            restore(data.accountId);
+          } else {
+            const savedId = localStorage.getItem('doppler_account_id');
+            if (savedId) restore(savedId);
+          }
+          setHydrated(true);
+        });
+      return;
     }
+
+    const savedId = localStorage.getItem('doppler_account_id');
+    if (savedId) restore(savedId);
     // Both branches are decided now — release the gate.
     setHydrated(true);
   }, []);

@@ -79,9 +79,9 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' 
     (orderId: string, planId: PlanId, account: string | null, provider: 'revolut' | 'oxapay') => {
       const params = new URLSearchParams({ order_id: orderId, plan: planId, provider });
       if (account) params.set('account_id', account);
-      window.location.href = `/en/checkout/success?${params.toString()}`;
+      window.location.href = `/${locale}/checkout/success?${params.toString()}`;
     },
-    [],
+    [locale],
   );
 
   const resetCardWidget = useCallback(() => {
@@ -116,7 +116,7 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' 
         body: JSON.stringify({
           account_id: validAccountId,
           plan_id: selectedPlan,
-          locale: 'en',
+          locale,
           // Tells the payment webhook which tracking the buyer allowed.
           consent: readConsentFlags(),
         }),
@@ -178,7 +178,7 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' 
               reason: err?.message || 'card_field_error',
             });
             if (validAccountId) params.set('account_id', validAccountId);
-            window.location.href = `/en/checkout/success?${params.toString()}`;
+            window.location.href = `/${locale}/checkout/success?${params.toString()}`;
           },
           onCancel: () => setLoading(false),
         });
@@ -191,7 +191,7 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' 
       setError('Network error. Please check your connection and try again.');
       setLoading(false);
     }
-  }, [validAccountId, selectedPlan, goToSuccess, resetCardWidget]);
+  }, [validAccountId, selectedPlan, locale, goToSuccess, resetCardWidget]);
 
   const handleCryptoCheckout = useCallback(async () => {
     if (!validAccountId) {
@@ -209,7 +209,7 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' 
         body: JSON.stringify({
           account_id: validAccountId,
           plan_id: selectedPlan,
-          locale: 'en',
+          locale,
           // Tells the payment webhook which tracking the buyer allowed.
           consent: readConsentFlags(),
         }),
@@ -228,7 +228,7 @@ export function CheckoutForm({ accountId, initialPlan = 'yearly', locale = 'en' 
       setError('Network error. Please check your connection and try again.');
       setLoading(false);
     }
-  }, [validAccountId, selectedPlan]);
+  }, [validAccountId, selectedPlan, locale]);
 
   const handleMethodChange = useCallback(
     (method: PaymentMethod) => {
