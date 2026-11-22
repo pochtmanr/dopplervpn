@@ -18,6 +18,8 @@ const SHIPPED = {
   lastWord: 'account-word bg-gradient-to-t from-text-muted to-text-primary bg-clip-text text-transparent',
   subtitle: 'account-reveal text-sm sm:text-base text-text-muted',
   deleted: 'rounded-xl border border-accent-teal/20 bg-accent-teal/5 px-5 py-3 flex items-center gap-2',
+  notice: 'rounded-xl border border-accent-amber/30 bg-accent-amber/10 px-5 py-3 flex items-start gap-2',
+  noticeText: 'text-sm font-medium text-text-primary',
   toggle: 'grid grid-cols-2 gap-1 p-1 rounded-full bg-bg-secondary/40 border border-overlay/10',
   toggleBtn: 'rounded-full py-2.5 text-sm font-medium transition-colors',
   toggleOn: 'bg-accent-teal text-white',
@@ -42,6 +44,8 @@ const PLUS: typeof SHIPPED = {
   lastWord: 'account-word',
   subtitle: 'account-reveal text-[15px] leading-relaxed text-(--c-muted)',
   deleted: 'rounded-2xl bg-(--c-accent-tint) px-5 py-3 flex items-center gap-2',
+  notice: 'rounded-2xl bg-[color-mix(in_oklab,var(--c-warn)_14%,transparent)] px-5 py-3 flex items-start gap-2',
+  noticeText: 'text-sm font-medium text-(--c-text)',
   toggle: 'grid grid-cols-2 gap-1 p-1 rounded-full bg-(--c-inset)',
   toggleBtn: 'rounded-full py-2.5 text-sm font-bold transition-colors',
   toggleOn: 'bg-(--c-card) text-(--c-text) shadow-sm',
@@ -127,6 +131,8 @@ interface AuthPanelProps {
   /** /login and /signup pin one mode; /account keeps the segmented toggle. */
   lockMode?: boolean;
   deletedNotice?: boolean;
+  /** A warning shown above the form, e.g. an expired app sign-in link. */
+  notice?: string;
   onSuccess: (result: AuthResult) => void;
   /** Calm+ preview, decided on the server (CALM_PLUS_PREVIEW is not a client env). */
   plus?: boolean;
@@ -148,6 +154,7 @@ export function AuthPanel({
   initialMode = 'new',
   lockMode = false,
   deletedNotice = false,
+  notice,
   onSuccess,
   plus = false,
 }: AuthPanelProps) {
@@ -267,6 +274,13 @@ export function AuthPanel({
           <div className={c.deleted}>
             <CheckIcon className="w-4 h-4 text-accent-teal shrink-0" />
             <p className="text-sm font-medium text-accent-teal">{t('dashboard.deleteSuccess')}</p>
+          </div>
+        )}
+
+        {notice && (
+          <div className={c.notice} role="status">
+            <AlertIcon className={plus ? 'w-4 h-4 text-(--c-warn) shrink-0 mt-0.5' : 'w-4 h-4 text-accent-amber shrink-0 mt-0.5'} />
+            <p className={c.noticeText}>{notice}</p>
           </div>
         )}
 

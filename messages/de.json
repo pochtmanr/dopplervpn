@@ -7,8 +7,8 @@
     "metaTitle": "Willkommen bei Doppler VPN Pro",
     "back_home": "Zurück zur Startseite",
     "appReturn": {
-      "title": "Zahlung abgeschlossen",
-      "body": "Doppler schaltet Pro gerade frei. Falls sich die App nicht von selbst geöffnet hat, nutze die Schaltfläche unten.",
+      "title": "Zahlung erhalten",
+      "body": "Du wirst zu Doppler zurückgeleitet. Pro wird in wenigen Sekunden freigeschaltet.",
       "button": "Doppler öffnen",
       "hint": "Wenn dein Browser fragt, erlaube das Öffnen von Doppler VPN."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 Jahr"
     },
     "pending": {
+      "bodyCrypto": "Wir warten auf die Bestätigung im Netzwerk. Das kann bis zu einer Stunde dauern. Du kannst diese Seite schließen; Pro wird automatisch freigeschaltet.",
       "title": "Zahlung wird bestätigt…",
       "body": "{processor} hat die Zahlung angenommen. Wir aktivieren gerade Ihr Doppler VPN Pro-Abonnement.",
       "orderId": "Bestellnummer",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Unbekannter Fehler",
       "timeoutTitle": "Wir bestätigen Ihre Zahlung noch",
       "timeoutBody": "{processor} hat die Zahlung entgegengenommen, aber unser System hat die Bestätigung noch nicht erhalten. Das ist fast immer nur vorübergehend — Ihr Konto wird in wenigen Minuten automatisch auf Pro aktualisiert. Sollte das nicht geschehen, senden Sie uns unten Ihre Bestellnummer und wir beheben es sofort.",
-      "timeoutReason": "Webhook-Zustellung verzögert",
+      "timeoutBodyCrypto": "Das Netzwerk hat deine Zahlung noch nicht bestätigt. Krypto-Bestätigungen können bis zu einer Stunde dauern. Wenn du die Zahlung gesendet hast, wird Pro automatisch freigeschaltet, sobald sie bestätigt ist. Wenn sich innerhalb einer Stunde nichts tut, schick uns die Bestell-ID unten.",
+      "underpaidTitle": "Betrag zu niedrig",
+      "underpaidBody": "Der erhaltene Betrag ist niedriger als die Rechnung. Zahle den Rest auf dieselbe Rechnung nach oder wende dich an den Support.",
+      "refundedTitle": "Zahlung erstattet",
+      "refundedBody": "Diese Zahlung wurde erstattet oder wird gerade erstattet und schaltet Pro daher nicht frei. Wende dich an den Support, wenn du das nicht erwartet hast.",
+      "returnToApp": "Zurück zu Doppler",
+      "timeoutReason":"Webhook-Zustellung verzögert",
       "diagnosticHeading": "Diagnoseinformationen",
       "statusLabel": "Status",
       "contactSupport": "Support kontaktieren",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Ungültiger oder abgelaufener Löschlink. Bitte beantragen Sie einen neuen."
   },
   "subscribe": {
+    "handoffExpired": "Dieser Link ist abgelaufen. Öffne in der App erneut „Abonnement verwalten“ oder melde dich unten an.",
     "title": "Doppler Pro holen",
     "subtitle": "Keine Registrierung. Keine E-Mail. Einfach tippen und loslegen.",
     "newUser": "Konto erstellen",

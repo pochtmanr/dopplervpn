@@ -7,8 +7,8 @@
     "metaTitle": "Tervetuloa Doppler VPN Pro -palveluun",
     "back_home": "Takaisin etusivulle",
     "appReturn": {
-      "title": "Maksu valmis",
-      "body": "Doppler ottaa Pron käyttöön nyt. Jos sovellus ei avautunut itsestään, käytä alla olevaa painiketta.",
+      "title": "Maksu vastaanotettu",
+      "body": "Palautamme sinut Doppleriin. Pro otetaan käyttöön muutamassa sekunnissa.",
       "button": "Avaa Doppler",
       "hint": "Jos selain kysyy, salli Doppler VPN:n avaaminen."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 vuosi"
     },
     "pending": {
+      "bodyCrypto": "Odotetaan verkon vahvistusta. Tämä voi kestää jopa tunnin. Voit sulkea tämän sivun; Pro otetaan käyttöön automaattisesti.",
       "title": "Vahvistamme maksuasi…",
       "body": "{processor} on hyväksynyt maksun. Aktivoimme Doppler VPN Pro -tilaustasi parhaillaan.",
       "orderId": "Tilauksen tunnus",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Tuntematon virhe",
       "timeoutTitle": "Vahvistamme yhä maksuasi",
       "timeoutBody": "{processor} on vastaanottanut maksun, mutta järjestelmämme ei ole vielä saanut vahvistusta. Tämä on lähes aina väliaikaista — tilisi päivittyy automaattisesti muutamassa minuutissa. Jos näin ei käy, lähetä meille alla oleva tilauksen tunnus, niin korjaamme asian heti.",
-      "timeoutReason": "Webhookin toimitus on viivästynyt",
+      "timeoutBodyCrypto": "Verkko ei ole vielä vahvistanut maksuasi. Kryptomaksujen vahvistus voi kestää jopa tunnin. Jos lähetit maksun, Pro otetaan käyttöön automaattisesti heti, kun se on vahvistettu. Jos mikään ei muutu tunnin kuluessa, lähetä meille alla oleva tilaustunnus.",
+      "underpaidTitle": "Summa on liian pieni",
+      "underpaidBody": "Vastaanotettu summa on laskua pienempi. Maksa puuttuva osa samalle laskulle tai ota yhteyttä tukeen.",
+      "refundedTitle": "Maksu hyvitetty",
+      "refundedBody": "Tämä maksu on hyvitetty tai hyvitys on käynnissä, joten se ei ota Prota käyttöön. Ota yhteyttä tukeen, jos et odottanut tätä.",
+      "returnToApp": "Palaa Doppleriin",
+      "timeoutReason":"Webhookin toimitus on viivästynyt",
       "diagnosticHeading": "Diagnostiikkatiedot",
       "statusLabel": "Tila",
       "contactSupport": "Ota yhteyttä tukeen",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Virheellinen tai vanhentunut poistolinkki. Pyydä uusi."
   },
   "subscribe": {
+    "handoffExpired": "Tämä linkki on vanhentunut. Avaa sovelluksessa uudelleen Hallitse tilausta tai kirjaudu sisään alla.",
     "title": "Hanki Doppler Pro",
     "subtitle": "Ei rekisteröitymistä. Ei sähköpostia. Napauta ja aloita.",
     "newUser": "Luo tili",

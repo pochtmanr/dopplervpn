@@ -30,6 +30,9 @@ import {
 // in its Direct (TestFlight / Developer ID) builds, Android in sideload builds.
 const APPS = new Set(['windows', 'mac', 'ios', 'android']);
 
+// How far back a paid invoice for the same account blocks a new order.
+const RECENT_PURCHASE_WINDOW_MS = 15 * 60 * 1000;
+
 export async function POST(req: NextRequest) {
   const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'checkout-desktop' });
   if (rl) return rl;
@@ -60,6 +63,29 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
     }
 
+    // Duplicate-purchase guard. A paid invoice for this account in the last
+    // 15 minutes most likely means the app has not caught up with Pro yet and
+    // the buyer is about to pay twice. The app may resend with
+    // `confirmRepeat: true` once the buyer has confirmed a deliberate repeat.
+    // Invoice rows store `plan` as `<planId>:<accountId>`; the account id is
+    // regex-checked above, so it carries no LIKE wildcards.
+    if (body.confirmRepeat !== true) {
+      const since = new Date(Date.now() - RECENT_PURCHASE_WINDOW_MS).toISOString();
+      const { data: recent, error: recentErr } = await supabase
+        .from('vpn_invoices')
+        .select('id')
+        .eq('status', 'paid')
+        .like('plan', `%:${creds.accountId}`)
+        .gte('created_at', since)
+        .limit(1);
+      if (recentErr) {
+        // Fail open: a lookup error must not block a legitimate purchase.
+        console.error('[checkout-desktop] recent_purchase_lookup_failed', recentErr.message);
+      } else if (recent && recent.length > 0) {
+        return NextResponse.json({ error: 'recent-purchase' }, { status: 409 });
+      }
+    }
+
     const site = resolveSiteUrl(req);
     const successUrl = (provider: string, orderId: string | null) => {
       const u = new URL(`${site}/${locale}/checkout/success`);
@@ -73,9 +99,10 @@ export async function POST(req: NextRequest) {
 
     if (method === 'card') {
       // The redirect URL is fixed before Revolut assigns the order id, so it
-      // carries none. Revolut redirects only after a successful payment, and the
-      // success page's app branch waits on the account's Pro state instead of
-      // the order (see success-client.tsx). The app polls on its own as well.
+      // carries none. Revolut redirects only after a successful payment, so the
+      // success page's no-order_id app branch hands straight back to the app
+      // without polling anything (see success-client.tsx); the app's own Pro
+      // check is what confirms the purchase.
       const order = await createOrder(
         plan.amount,
         'USD',

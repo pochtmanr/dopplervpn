@@ -7,8 +7,8 @@
     "metaTitle": "Velkommen til Doppler VPN Pro",
     "back_home": "Tilbage til forsiden",
     "appReturn": {
-      "title": "Betaling gennemført",
-      "body": "Doppler slår Pro til nu. Hvis appen ikke åbnede af sig selv, så brug knappen nedenfor.",
+      "title": "Betaling modtaget",
+      "body": "Vi sender dig tilbage til Doppler. Pro slås til om få sekunder.",
       "button": "Åbn Doppler",
       "hint": "Hvis din browser spørger, så tillad den at åbne Doppler VPN."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 år"
     },
     "pending": {
+      "bodyCrypto": "Venter på bekræftelse fra netværket. Det kan tage op til en time. Du kan lukke denne side; Pro slås til automatisk.",
       "title": "Bekræfter din betaling…",
       "body": "{processor} har godkendt betalingen. Vi aktiverer dit Doppler VPN Pro-abonnement nu.",
       "orderId": "Ordre-ID",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Ukendt fejl",
       "timeoutTitle": "Vi bekræfter stadig din betaling",
       "timeoutBody": "{processor} har modtaget betalingen, men vores system har endnu ikke fået bekræftelse. Det er næsten altid midlertidigt — din konto opgraderes automatisk i løbet af få minutter. Hvis det ikke sker, så send os ordre-ID'et nedenfor, så ordner vi det med det samme.",
-      "timeoutReason": "Webhook-levering forsinket",
+      "timeoutBodyCrypto": "Netværket har endnu ikke bekræftet din betaling. Kryptobekræftelser kan tage op til en time. Hvis du har sendt betalingen, slås Pro til automatisk, så snart den er bekræftet. Hvis intet sker inden for en time, så send os ordre-id'et nedenfor.",
+      "underpaidTitle": "Beløbet er for lavt",
+      "underpaidBody": "Det modtagne beløb er lavere end fakturaen. Betal resten på samme faktura eller kontakt support.",
+      "refundedTitle": "Betaling refunderet",
+      "refundedBody": "Denne betaling er refunderet eller ved at blive refunderet, så den slår ikke Pro til. Kontakt support, hvis du ikke havde ventet det.",
+      "returnToApp": "Tilbage til Doppler",
+      "timeoutReason":"Webhook-levering forsinket",
       "diagnosticHeading": "Diagnostiske oplysninger",
       "statusLabel": "Status",
       "contactSupport": "Kontakt support",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Ugyldigt eller udløbet sletningslink. Anmod venligst om et nyt."
   },
   "subscribe": {
+    "handoffExpired": "Dette link er udløbet. Åbn Administrér abonnement i appen igen, eller log ind nedenfor.",
     "title": "Få Doppler Pro",
     "subtitle": "Ingen registrering. Ingen e-mail. Bare tryk og gå.",
     "newUser": "Opret konto",

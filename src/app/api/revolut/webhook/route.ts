@@ -6,6 +6,7 @@ import { attributionFromMetadata } from '@/lib/attribution';
 import { reportPurchase } from '@/lib/purchase-events';
 import { verifyRevolutSignature } from '@/lib/revolut-webhook';
 import { observeRevolutCompleted } from '@/lib/reporting/schedule';
+import { opsAlert } from '@/lib/ops-alert';
 
 // Days credited on a successful web payment.
 // Web checkout cannot replicate the 3-day RevenueCat trial available on
@@ -108,7 +109,9 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ error: 'Missing order_id' }, { status: 400 });
         }
 
-        // Idempotency: check if this order has already been processed
+        // Fast path for retries: skip the Revolut API call when the order is
+        // already recorded. Not the idempotency guarantee itself (two
+        // concurrent deliveries both pass this); the claim insert below is.
         const { data: existingInvoice } = await supabase
           .from('vpn_invoices')
           .select('id')
@@ -167,6 +170,41 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ error: 'Account not found' }, { status: 400 });
         }
 
+        // Claim the order atomically BEFORE crediting, as the OxaPay webhook
+        // does. vpn_invoices.provider_payment_id is unique, so only one
+        // delivery can insert this row; a retry or a concurrent duplicate gets
+        // 23505 and cannot extend the account twice.
+        // NOTE: vpn_invoices schema = {id, telegram_user_id, plan, amount,
+        // currency, status, provider, provider_payment_id, created_at,
+        // click_id, promo_*, attribution}. No `notes` column — do NOT add
+        // fields without checking the schema. `attribution` is deliberately
+        // written by a separate update below, never in this insert.
+        const { data: claimed, error: invoiceErr } = await supabase
+          .from('vpn_invoices')
+          .insert({
+            telegram_user_id: 0,
+            plan: `${planId}:${accountId}`,
+            amount: order?.amount ?? 0,
+            currency: order?.currency || 'USD',
+            status: 'paid',
+            provider: 'revolut',
+            provider_payment_id: orderId,
+            click_id: metadata.click_id ?? null,
+          })
+          .select('id')
+          .single();
+
+        if (invoiceErr) {
+          if (invoiceErr.code === '23505') {
+            log('idempotent_skip', { orderId, via: 'claim' });
+            return NextResponse.json({ received: true, deduplicated: true });
+          }
+          // Without the claim row there is no idempotency, so do not credit.
+          // A 500 makes Revolut retry.
+          console.error('[revolut-webhook] invoice_claim_failed', orderId, invoiceErr);
+          return NextResponse.json({ error: 'Invoice claim failed' }, { status: 500 });
+        }
+
         const days = PLAN_DAYS[planId] || 30;
 
         const currentExpiry = account.subscription_expires_at
@@ -189,33 +227,23 @@ export async function POST(req: NextRequest) {
 
         if (updateErr) {
           console.error('[revolut-webhook] account_update_failed', accountId, updateErr);
-          throw new Error(`Account update failed: ${updateErr.message}`);
+          // Release the claim so Revolut's retry can credit the order. If the
+          // delete fails too, the row stays 'paid' with no Pro: log it loudly.
+          const { error: releaseErr } = await supabase
+            .from('vpn_invoices')
+            .delete()
+            .eq('id', claimed.id);
+          if (releaseErr) {
+            console.error('[revolut-webhook] release_claim_failed', orderId, releaseErr);
+            await opsAlert(`Revolut order ${orderId}: account update failed and the invoice claim could not be released. Paid, not credited: credit by hand.`);
+          }
+          return NextResponse.json({ error: 'Account update failed' }, { status: 500 });
         }
 
         log('account_upgraded', { accountId, newExpiry: newExpiry.toISOString() });
 
-        // Log invoice (also seals idempotency for future deliveries).
-        // NOTE: vpn_invoices schema = {id, telegram_user_id, plan, amount,
-        // currency, status, provider, provider_payment_id, created_at,
-        // click_id, promo_*, attribution}. No `notes` column — do NOT add
-        // fields without checking the schema. `attribution` is deliberately
-        // written by a separate update below, never in this insert.
-        const { error: invoiceErr } = await supabase.from('vpn_invoices').insert({
-          telegram_user_id: 0,
-          plan: `${planId}:${accountId}`,
-          amount: order?.amount ?? 0,
-          currency: order?.currency || 'USD',
-          status: 'paid',
-          provider: 'revolut',
-          provider_payment_id: orderId,
-          click_id: metadata.click_id ?? null,
-        });
-        if (invoiceErr) {
-          console.error('[revolut-webhook] invoice_insert_failed', orderId, invoiceErr);
-        }
-
-        // Report the purchase to the ad network. The idempotency check at the top
-        // of this case means a Revolut retry returns before reaching here, and
+        // Report the purchase to the ad network. The claim insert above means a
+        // Revolut retry returns before reaching here, and
         // after() keeps a slow tracker from delaying the 200 Revolut waits for.
         after(() =>
           firePostback({

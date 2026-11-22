@@ -114,6 +114,8 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [deleteError, setDeleteError] = useState('');
   const [deletedNotice, setDeletedNotice] = useState(false);
+  // A desktop app's one-time sign-in link was expired, used or invalid.
+  const [handoffExpired, setHandoffExpired] = useState(false);
 
   /* ── Premium support state ────────────────────────────────────── */
   const [premiumTicketOpen, setPremiumTicketOpen] = useState(false);
@@ -168,8 +170,10 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
             localStorage.setItem('doppler_account_id', data.accountId);
             restore(data.accountId);
           } else {
-            const savedId = localStorage.getItem('doppler_account_id');
-            if (savedId) restore(savedId);
+            // Never fall back to the saved id here: it may be a different
+            // account from the one the app asked for. Say the link expired and
+            // offer sign-in; the saved id still restores on the next visit.
+            setHandoffExpired(true);
           }
           setHydrated(true);
         });
@@ -292,6 +296,7 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
   /* ── Step 1 complete: AuthPanel identified the user ───────────── */
   const handleAuthSuccess = (result: AuthResult) => {
     setDeletedNotice(false);
+    setHandoffExpired(false);
     setAccountId(result.accountId);
     setMode(result.isNew ? 'new' : 'existing');
     setExistingAccount(false);
@@ -808,6 +813,8 @@ function SubscribeInner({ plus = false }: { plus?: boolean }) {
           title={t('title')}
           subtitle={t('subtitle')}
           deletedNotice={deletedNotice}
+          notice={handoffExpired ? t('handoffExpired') : undefined}
+          initialMode={handoffExpired ? 'existing' : undefined}
           onSuccess={handleAuthSuccess}
           plus={plus}
         />

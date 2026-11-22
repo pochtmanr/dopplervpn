@@ -36,6 +36,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 
+  // Expired rows are dead weight (redeem rejects them); sweep them here so the
+  // table stays small. Best-effort: a failed purge must not block the link.
+  const { error: purgeErr } = await supabase
+    .from('account_handoff_tokens')
+    .delete()
+    .lt('expires_at', new Date().toISOString());
+  if (purgeErr) console.error('[account-handoff] purge_failed', purgeErr.message);
+
   const token = randomBytes(24).toString('hex');
   const { error } = await supabase.from('account_handoff_tokens').insert({
     token_hash: createHash('sha256').update(token).digest('hex'),

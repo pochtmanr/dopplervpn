@@ -7,8 +7,8 @@
     "metaTitle": "Selamat datang di Doppler VPN Pro",
     "back_home": "Kembali ke beranda",
     "appReturn": {
-      "title": "Pembayaran selesai",
-      "body": "Doppler sedang mengaktifkan Pro. Jika aplikasi tidak terbuka sendiri, gunakan tombol di bawah.",
+      "title": "Pembayaran diterima",
+      "body": "Mengembalikan Anda ke Doppler. Pro aktif dalam beberapa detik.",
       "button": "Buka Doppler",
       "hint": "Jika browser bertanya, izinkan untuk membuka Doppler VPN."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 Tahun"
     },
     "pending": {
+      "bodyCrypto": "Menunggu konfirmasi jaringan. Ini bisa memakan waktu hingga satu jam. Anda boleh menutup halaman ini; Pro akan aktif secara otomatis.",
       "title": "Mengonfirmasi pembayaran Anda…",
       "body": "{processor} telah menerima pembayaran. Kami sedang mengaktifkan langganan Doppler VPN Pro Anda sekarang.",
       "orderId": "ID Pesanan",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Kegagalan tidak diketahui",
       "timeoutTitle": "Kami masih mengonfirmasi pembayaran Anda",
       "timeoutBody": "{processor} telah menerima pembayaran tetapi sistem kami belum mendapat konfirmasi. Hal ini hampir selalu bersifat sementara — akun Anda akan ditingkatkan otomatis dalam beberapa menit. Jika tidak, kirimkan ID pesanan Anda di bawah ini dan kami akan segera memperbaikinya.",
-      "timeoutReason": "Pengiriman webhook tertunda",
+      "timeoutBodyCrypto": "Jaringan belum mengonfirmasi pembayaran Anda. Konfirmasi kripto bisa memakan waktu hingga satu jam. Jika Anda sudah mengirim pembayaran, Pro akan aktif secara otomatis begitu terkonfirmasi. Jika tidak ada perubahan dalam satu jam, kirimkan ID pesanan di bawah kepada kami.",
+      "underpaidTitle": "Jumlah kurang",
+      "underpaidBody": "Jumlah yang diterima lebih rendah dari tagihan. Lunasi kekurangannya pada tagihan yang sama atau hubungi dukungan.",
+      "refundedTitle": "Pembayaran dikembalikan",
+      "refundedBody": "Pembayaran ini telah atau sedang dikembalikan, jadi tidak mengaktifkan Pro. Hubungi dukungan jika Anda tidak mengharapkannya.",
+      "returnToApp": "Kembali ke Doppler",
+      "timeoutReason":"Pengiriman webhook tertunda",
       "diagnosticHeading": "Info diagnostik",
       "statusLabel": "Status",
       "contactSupport": "Hubungi dukungan",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Tautan penghapusan tidak valid atau kedaluwarsa. Silakan minta yang baru."
   },
   "subscribe": {
+    "handoffExpired": "Tautan ini sudah kedaluwarsa. Buka lagi Kelola Langganan di aplikasi, atau masuk di bawah.",
     "title": "Dapatkan Doppler Pro",
     "subtitle": "Tanpa registrasi. Tanpa email. Cukup ketuk dan mulai.",
     "newUser": "Buat Akun",

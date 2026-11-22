@@ -7,8 +7,8 @@
     "metaTitle": "Te damos la bienvenida a Doppler VPN Pro",
     "back_home": "Volver al inicio",
     "appReturn": {
-      "title": "Pago completado",
-      "body": "Doppler está activando Pro. Si la aplicación no se abrió sola, usa el botón de abajo.",
+      "title": "Pago recibido",
+      "body": "Te llevamos de vuelta a Doppler. Pro se activará en unos segundos.",
       "button": "Abrir Doppler",
       "hint": "Si tu navegador lo pregunta, permite que abra Doppler VPN."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 año"
     },
     "pending": {
+      "bodyCrypto": "Esperando la confirmación de la red. Puede tardar hasta una hora. Puedes cerrar esta página; Pro se activará automáticamente.",
       "title": "Confirmando tu pago…",
       "body": "{processor} ha aceptado el pago. Estamos activando tu suscripción de Doppler VPN Pro.",
       "orderId": "Número de pedido",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Fallo desconocido",
       "timeoutTitle": "Seguimos confirmando tu pago",
       "timeoutBody": "{processor} recibió el pago pero nuestro sistema aún no ha obtenido la confirmación. Casi siempre es algo temporal: tu cuenta se actualizará automáticamente en unos minutos. Si no, envíanos tu número de pedido y lo arreglaremos al momento.",
-      "timeoutReason": "Retraso en la entrega del webhook",
+      "timeoutBodyCrypto": "La red aún no ha confirmado tu pago. Las confirmaciones de criptomonedas pueden tardar hasta una hora. Si ya lo enviaste, Pro se activará automáticamente en cuanto se confirme. Si nada cambia en una hora, envíanos el ID del pedido que aparece abajo.",
+      "underpaidTitle": "Importe insuficiente",
+      "underpaidBody": "El importe recibido es inferior al de la factura. Completa el pago en la misma factura o contacta con soporte.",
+      "refundedTitle": "Pago reembolsado",
+      "refundedBody": "Este pago se ha reembolsado o se está reembolsando, por lo que no activa Pro. Contacta con soporte si no lo esperabas.",
+      "returnToApp": "Volver a Doppler",
+      "timeoutReason":"Retraso en la entrega del webhook",
       "diagnosticHeading": "Información de diagnóstico",
       "statusLabel": "Estado",
       "contactSupport": "Contactar con soporte",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Enlace de eliminación inválido o caducado. Por favor, solicita uno nuevo."
   },
   "subscribe": {
+    "handoffExpired": "Este enlace ha caducado. Vuelve a abrir «Gestionar suscripción» en la app o inicia sesión abajo.",
     "title": "Obtener Doppler Pro",
     "subtitle": "Sin registro. Sin correo. Solo toca y listo.",
     "newUser": "Crear cuenta",

@@ -24,19 +24,40 @@ interface VerifyResponse {
   currency?: string;
   reason?: string;
   revolut_state?: string;
+  /** OxaPay only: which kind of 'failed' this is (see verify-invoice). */
+  failure?: 'underpaid' | 'refunded';
 }
 
-const POLL_INTERVAL_MS = 2_000;
-const POLL_TIMEOUT_MS = 90_000;
+type Provider = 'revolut' | 'oxapay';
+
+// Revolut's webhook lands within seconds of the redirect. A crypto payment
+// waits for network confirmations, which can take most of an hour, so OxaPay
+// polls longer and backs off after the first minute.
+const POLL_TIMEOUT_MS: Record<Provider, number> = {
+  revolut: 90_000,
+  oxapay: 20 * 60_000,
+};
+
+function pollIntervalMs(provider: Provider, elapsedMs: number): number {
+  if (provider === 'oxapay' && elapsedMs > 60_000) return 10_000;
+  return 2_000;
+}
+
+// The app re-checks Pro whenever one of these arrives; the link grants nothing.
+// Only the paid state opens it on its own (AppReturnShell); the others are a
+// button the buyer chooses to press.
+const APP_LINK = {
+  ok: 'dopplervpn://purchase?status=ok',
+  pending: 'dopplervpn://purchase?status=pending',
+  failed: 'dopplervpn://purchase?status=failed',
+} as const;
 
 export function SuccessClient() {
   const params = useSearchParams();
   const orderId = params.get('order_id');
   const accountId = params.get('account_id');
   const plan = params.get('plan');
-  const provider = (params.get('provider') === 'oxapay' ? 'oxapay' : 'revolut') as
-    | 'revolut'
-    | 'oxapay';
+  const provider: Provider = params.get('provider') === 'oxapay' ? 'oxapay' : 'revolut';
   // Payer-facing copy names the processor that actually took the money — a
   // crypto payer must not be told "Revolut reported the payment as failed".
   const processor = provider === 'oxapay' ? 'OxaPay' : 'Revolut';
@@ -72,7 +93,11 @@ export function SuccessClient() {
         setData(body);
         setElapsed(Date.now() - startedAt.current);
 
-        if (body.status === 'paid' || body.status === 'failed') {
+        // Underpaid is shown, but it is not final: a top-up of the same invoice
+        // turns it paid, so keep polling and do not report it as a failure.
+        const underpaid = body.status === 'failed' && body.failure === 'underpaid';
+
+        if (body.status === 'paid' || (body.status === 'failed' && !underpaid)) {
           const trackedKey = `tracked_purchase_${orderId}`;
           if (!sessionStorage.getItem(trackedKey)) {
             sessionStorage.setItem(trackedKey, '1');
@@ -95,20 +120,22 @@ export function SuccessClient() {
           return;
         }
 
-        if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
+        const spent = Date.now() - startedAt.current;
+        if (spent > POLL_TIMEOUT_MS[provider]) {
           setTimedOut(true);
           return;
         }
 
-        timer = setTimeout(poll, POLL_INTERVAL_MS);
+        timer = setTimeout(poll, pollIntervalMs(provider, spent));
       } catch (err) {
         if (cancelled) return;
         console.error('verify-order poll error', err);
-        if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
+        const spent = Date.now() - startedAt.current;
+        if (spent > POLL_TIMEOUT_MS[provider]) {
           setTimedOut(true);
           return;
         }
-        timer = setTimeout(poll, POLL_INTERVAL_MS);
+        timer = setTimeout(poll, pollIntervalMs(provider, spent));
       }
     };
 
@@ -155,6 +182,33 @@ export function SuccessClient() {
     );
   }
 
+  if (data?.status === 'failed' && data.failure === 'underpaid') {
+    return (
+      <ErrorShell
+        title={t('errors.underpaidTitle')}
+        body={t('errors.underpaidBody')}
+        orderId={orderId}
+        accountId={accountId}
+        reason={data.reason || t('errors.failedReasonUnknown')}
+        variant="warn"
+        appLink={fromApp ? APP_LINK.failed : null}
+      />
+    );
+  }
+
+  if (data?.status === 'failed' && data.failure === 'refunded') {
+    return (
+      <ErrorShell
+        title={t('errors.refundedTitle')}
+        body={t('errors.refundedBody')}
+        orderId={orderId}
+        accountId={accountId}
+        reason={data.reason || t('errors.failedReasonUnknown')}
+        appLink={fromApp ? APP_LINK.failed : null}
+      />
+    );
+  }
+
   if (data?.status === 'failed') {
     return (
       <ErrorShell
@@ -163,6 +217,7 @@ export function SuccessClient() {
         orderId={orderId}
         accountId={accountId}
         reason={data.reason || data.revolut_state || t('errors.failedReasonUnknown')}
+        appLink={fromApp ? APP_LINK.failed : null}
       />
     );
   }
@@ -171,21 +226,32 @@ export function SuccessClient() {
     return (
       <ErrorShell
         title={t('errors.timeoutTitle')}
-        body={t('errors.timeoutBody', { processor })}
+        body={
+          provider === 'oxapay'
+            ? t('errors.timeoutBodyCrypto')
+            : t('errors.timeoutBody', { processor })
+        }
         orderId={orderId}
         accountId={accountId}
         reason={data?.reason || t('errors.timeoutReason')}
         variant="warn"
+        appLink={fromApp ? APP_LINK.pending : null}
       />
     );
   }
 
-  return <PendingShell orderId={orderId} elapsed={elapsed} processor={processor} />;
+  return (
+    <PendingShell
+      orderId={orderId}
+      elapsed={elapsed}
+      processor={processor}
+      crypto={provider === 'oxapay'}
+      appLink={fromApp ? APP_LINK.pending : null}
+    />
+  );
 }
 
 /* ─────────── shells ─────────── */
-
-const APP_RETURN_LINK = 'dopplervpn://purchase?status=ok';
 
 /**
  * Hands a desktop buyer back to the app. The link is fired once on its own;
@@ -199,7 +265,7 @@ function AppReturnShell() {
   useEffect(() => {
     if (fired.current) return;
     fired.current = true;
-    window.location.href = APP_RETURN_LINK;
+    window.location.href = APP_LINK.ok;
   }, []);
 
   return (
@@ -211,7 +277,7 @@ function AppReturnShell() {
         <h1 className="text-2xl sm:text-3xl font-bold mb-3">{t('appReturn.title')}</h1>
         <p className="text-text-muted text-base mb-8">{t('appReturn.body')}</p>
         <a
-          href={APP_RETURN_LINK}
+          href={APP_LINK.ok}
           className="cta-key inline-block px-6 py-3 rounded-xl font-semibold text-white"
         >
           {t('appReturn.button')}
@@ -226,10 +292,15 @@ function PendingShell({
   orderId,
   elapsed,
   processor,
+  crypto,
+  appLink,
 }: {
   orderId: string;
   elapsed: number;
   processor: string;
+  /** Crypto: nothing is taken until the network confirms, and the page may close. */
+  crypto: boolean;
+  appLink: string | null;
 }) {
   const t = useTranslations('success');
   const seconds = Math.floor(elapsed / 1000);
@@ -240,12 +311,26 @@ function PendingShell({
           <ThinkingOrb state="solving" size={64} aria-hidden="true" />
         </div>
         <h1 className="text-2xl font-bold mb-2">{t('pending.title')}</h1>
-        <p className="text-text-muted text-sm mb-6">{t('pending.body', { processor })}</p>
+        <p className="text-text-muted text-sm mb-6">
+          {crypto ? t('pending.bodyCrypto') : t('pending.body', { processor })}
+        </p>
         <div className="bg-bg-secondary/60 border border-overlay/10 rounded-xl px-4 py-3 mb-4 text-start">
           <div className="text-text-muted/70 text-xs uppercase tracking-wide mb-1">{t('pending.orderId')}</div>
           <div className="font-mono text-text-primary text-xs break-all">{orderId}</div>
         </div>
-        <p className="text-text-muted/60 text-xs">{t('pending.elapsed', { seconds })}</p>
+        {/* The elapsed line says "do not close this window", which is wrong for
+            crypto: the webhook unlocks Pro whether or not this page is open. */}
+        {!crypto && (
+          <p className="text-text-muted/60 text-xs">{t('pending.elapsed', { seconds })}</p>
+        )}
+        {appLink && (
+          <a
+            href={appLink}
+            className="inline-block mt-6 px-6 py-3 rounded-xl bg-bg-secondary border border-overlay/10 hover:bg-bg-secondary/80 font-semibold text-text-primary transition-colors"
+          >
+            {t('errors.returnToApp')}
+          </a>
+        )}
       </div>
     </div>
   );
@@ -384,6 +469,7 @@ function ErrorShell({
   accountId,
   reason,
   variant = 'error',
+  appLink = null,
 }: {
   title: string;
   body: string;
@@ -391,6 +477,8 @@ function ErrorShell({
   accountId: string | null;
   reason: string;
   variant?: 'error' | 'warn';
+  /** Set when the buyer came from an app: replaces "Back to checkout". */
+  appLink?: string | null;
 }) {
   const t = useTranslations('success');
   const locale = useLocale();
@@ -438,13 +526,23 @@ function ErrorShell({
           >
             {t('errors.contactSupport')}
           </a>
-          {/* There is no /[locale]/checkout page — the paywall lives on /account. */}
-          <Link
-            href={`/${locale}/account`}
-            className="flex-1 text-center px-5 py-3 rounded-xl bg-bg-secondary border border-overlay/10 hover:bg-bg-secondary/80 font-semibold text-text-primary transition-colors"
-          >
-            {t('errors.backCheckout')}
-          </Link>
+          {appLink ? (
+            // An app buyer's checkout is the app's paywall, not /account.
+            <a
+              href={appLink}
+              className="flex-1 text-center px-5 py-3 rounded-xl bg-bg-secondary border border-overlay/10 hover:bg-bg-secondary/80 font-semibold text-text-primary transition-colors"
+            >
+              {t('errors.returnToApp')}
+            </a>
+          ) : (
+            // There is no /[locale]/checkout page — the paywall lives on /account.
+            <Link
+              href={`/${locale}/account`}
+              className="flex-1 text-center px-5 py-3 rounded-xl bg-bg-secondary border border-overlay/10 hover:bg-bg-secondary/80 font-semibold text-text-primary transition-colors"
+            >
+              {t('errors.backCheckout')}
+            </Link>
+          )}
         </div>
 
         <div className="text-center mb-6">

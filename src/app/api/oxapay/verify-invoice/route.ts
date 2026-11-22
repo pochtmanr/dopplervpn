@@ -12,7 +12,7 @@ import { rateLimit } from '@/lib/rate-limit';
  * Response shape:
  *   { status: 'paid'    , tier: 'pro' , expires_at: ISO }
  *   { status: 'pending' , reason?: string }
- *   { status: 'failed'  , reason: string }
+ *   { status: 'failed'  , reason: string, failure?: 'underpaid' | 'refunded' }
  *   { status: 'unknown' , reason: string }
  */
 export async function GET(req: NextRequest) {
@@ -63,6 +63,25 @@ export async function GET(req: NextRequest) {
   if (invoice.status === 'failed' || invoice.status === 'expired') {
     return NextResponse.json({
       status: 'failed',
+      reason: `Payment ${invoice.status}`,
+    });
+  }
+
+  // Written by the webhook. `failure` lets the success page show its own copy;
+  // `status` stays 'failed' so older clients still stop on it. An underpaid
+  // invoice can still be topped up and turn 'paid' later.
+  if (invoice.status === 'underpaid') {
+    return NextResponse.json({
+      status: 'failed',
+      failure: 'underpaid',
+      reason: 'Payment underpaid',
+    });
+  }
+
+  if (invoice.status === 'refunding' || invoice.status === 'refunded') {
+    return NextResponse.json({
+      status: 'failed',
+      failure: 'refunded',
       reason: `Payment ${invoice.status}`,
     });
   }

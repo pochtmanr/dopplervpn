@@ -7,8 +7,8 @@
     "metaTitle": "欢迎使用 Doppler VPN Pro",
     "back_home": "返回首页",
     "appReturn": {
-      "title": "支付完成",
-      "body": "Doppler 正在开通 Pro。如果应用没有自动打开，请点击下方按钮。",
+      "title": "已收到付款",
+      "body": "正在带您返回 Doppler。Pro 将在几秒内开通。",
       "button": "打开 Doppler",
       "hint": "如果浏览器询问，请允许打开 Doppler VPN。"
     },
@@ -18,6 +18,7 @@
       "yearly": "1 年"
     },
     "pending": {
+      "bodyCrypto": "正在等待网络确认，最长可能需要一小时。您可以关闭此页面，Pro 会自动开通。",
       "title": "正在确认您的付款…",
       "body": "{processor} 已受理付款，我们正在为您激活 Doppler VPN Pro 订阅。",
       "orderId": "订单编号",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "未知错误",
       "timeoutTitle": "我们仍在确认您的付款",
       "timeoutBody": "{processor} 已完成扣款，但我们的系统尚未收到确认。这几乎都是临时问题——您的账户通常会在几分钟内自动升级。如未升级，请通过下方订单编号联系我们，我们会立即处理。",
-      "timeoutReason": "Webhook 回调延迟",
+      "timeoutBodyCrypto": "网络尚未确认您的付款。加密货币确认最长可能需要一小时。如果您已发送付款，确认后 Pro 会自动开通。如果一小时内仍无变化，请将下方的订单号发送给我们。",
+      "underpaidTitle": "金额不足",
+      "underpaidBody": "收到的金额低于账单金额。请在同一张账单上补足差额，或联系客服。",
+      "refundedTitle": "付款已退款",
+      "refundedBody": "这笔付款已退款或正在退款，因此不会开通 Pro。如果这出乎您的意料，请联系客服。",
+      "returnToApp": "返回 Doppler",
+      "timeoutReason":"Webhook 回调延迟",
       "diagnosticHeading": "诊断信息",
       "statusLabel": "状态",
       "contactSupport": "联系客服",
@@ -1211,6 +1218,7 @@
     "invalidToken": "删除链接无效或已过期。请重新申请。"
   },
   "subscribe": {
+    "handoffExpired": "此链接已过期。请在应用中再次打开“管理订阅”，或在下方登录。",
     "title": "获取 Doppler Pro",
     "subtitle": "无需注册，无需邮箱，轻点即可开始。",
     "newUser": "创建账户",

@@ -71,6 +71,11 @@ export function gtagConsentUpdate(analyticsGranted: boolean, marketingGranted = 
   });
 }
 
+/** Page-level params (e.g. `page_location`) applied to every later event. */
+export function gtagSet(params: GtagParams): void {
+  callGtag("set", compact(params));
+}
+
 /** Manual page_view — `send_page_view` is false, see the bootstrap component. */
 export function gtagPageView(params: GtagParams): void {
   gtagEvent("page_view", params);

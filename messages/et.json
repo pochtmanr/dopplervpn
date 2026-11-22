@@ -7,8 +7,8 @@
     "metaTitle": "Tere tulemast Doppler VPN Pro juurde",
     "back_home": "Tagasi avalehele",
     "appReturn": {
-      "title": "Makse on tehtud",
-      "body": "Doppler lülitab Pro praegu sisse. Kui rakendus ise ei avanenud, kasuta allolevat nuppu.",
+      "title": "Makse on laekunud",
+      "body": "Suuname sind tagasi Doppleri. Pro lülitub sisse mõne sekundi jooksul.",
       "button": "Ava Doppler",
       "hint": "Kui brauser küsib, luba Doppler VPN avada."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 aasta"
     },
     "pending": {
+      "bodyCrypto": "Ootame võrgu kinnitust. See võib võtta kuni tunni. Võid selle lehe sulgeda; Pro lülitub sisse automaatselt.",
       "title": "Kinnitame teie makset…",
       "body": "{processor} on makse vastu võtnud. Aktiveerime teie Doppler VPN Pro tellimust just praegu.",
       "orderId": "Tellimuse ID",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Tundmatu viga",
       "timeoutTitle": "Kinnitame veel teie makset",
       "timeoutBody": "{processor} võttis makse vastu, kuid meie süsteem pole veel kinnitust saanud. See on peaaegu alati ajutine — teie konto uuendatakse automaatselt mõne minuti jooksul. Kui seda ei juhtu, saatke meile allpool olev tellimuse ID ja lahendame selle kohe.",
-      "timeoutReason": "Webhook-i edastus on viibinud",
+      "timeoutBodyCrypto": "Võrk pole sinu makset veel kinnitanud. Krüptomaksete kinnitamine võib võtta kuni tunni. Kui saatsid makse, lülitub Pro sisse automaatselt kohe, kui see on kinnitatud. Kui tunni jooksul midagi ei muutu, saada meile allolev tellimuse ID.",
+      "underpaidTitle": "Summa on liiga väike",
+      "underpaidBody": "Laekunud summa on arvest väiksem. Maksa puuduolev osa sama arve kaudu või võta ühendust toega.",
+      "refundedTitle": "Makse tagastati",
+      "refundedBody": "See makse on tagastatud või tagastamisel, seega ei lülita see Pro'd sisse. Võta ühendust toega, kui sa seda ei oodanud.",
+      "returnToApp": "Tagasi Doppleri",
+      "timeoutReason":"Webhook-i edastus on viibinud",
       "diagnosticHeading": "Diagnostikateave",
       "statusLabel": "Olek",
       "contactSupport": "Võta toega ühendust",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Kehtetu või aegunud kustutamislink. Palun taotlege uut."
   },
   "subscribe": {
+    "handoffExpired": "See link on aegunud. Ava rakenduses uuesti „Halda tellimust“ või logi allpool sisse.",
     "title": "Hangi Doppler Pro",
     "subtitle": "Registreerimist pole. E-posti pole. Lihtsalt vajuta ja mine.",
     "newUser": "Loo konto",

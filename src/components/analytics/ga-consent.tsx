@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 
 import { currentCtaAttribution } from "@/lib/cta-attribution";
 import { useCookieConsent } from "@/components/cookie-consent";
-import { GA_MEASUREMENT_ID, gtagConsentUpdate, gtagPageView } from "@/lib/ga";
+import { GA_MEASUREMENT_ID, gtagConsentUpdate, gtagPageView, gtagSet } from "@/lib/ga";
+import { sanitizeAnalyticsUrl } from "@/lib/analytics-url";
 
 /**
  * Two jobs that both need to sit in a client component next to the router:
@@ -67,9 +68,14 @@ export function GaConsent() {
     // the unlocalized routes (/checkout), which is correct.
     const locale = window.location.pathname.split("/")[1] ?? "";
 
+    // Credential params (account_id, order_id, h) never reach GA. `set` also
+    // covers the events fired later on this page (purchase on /checkout/success),
+    // which would otherwise report the raw document.location.
+    const pageLocation = sanitizeAnalyticsUrl(window.location.href);
+    gtagSet({ page_location: pageLocation });
     gtagPageView({
-      page_location: window.location.href,
-      page_path: url,
+      page_location: pageLocation,
+      page_path: sanitizeAnalyticsUrl(url),
       page_title: document.title,
       locale,
     });

@@ -7,8 +7,8 @@
     "metaTitle": "Sveiki atvykę į Doppler VPN Pro",
     "back_home": "Grįžti į pradžią",
     "appReturn": {
-      "title": "Mokėjimas atliktas",
-      "body": "Doppler dabar įjungia Pro. Jei programa neatsidarė pati, naudokite mygtuką žemiau.",
+      "title": "Mokėjimas gautas",
+      "body": "Grąžiname jus į Doppler. Pro įsijungs per kelias sekundes.",
       "button": "Atidaryti Doppler",
       "hint": "Jei naršyklė paklaus, leiskite atidaryti Doppler VPN."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 metai"
     },
     "pending": {
+      "bodyCrypto": "Laukiama tinklo patvirtinimo. Tai gali užtrukti iki valandos. Šį puslapį galite uždaryti; Pro įsijungs automatiškai.",
       "title": "Patvirtinamas Jūsų mokėjimas…",
       "body": "{processor} priėmė mokėjimą. Šiuo metu aktyvuojame Jūsų Doppler VPN Pro prenumeratą.",
       "orderId": "Užsakymo ID",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Nežinoma klaida",
       "timeoutTitle": "Vis dar tvirtiname Jūsų mokėjimą",
       "timeoutBody": "{processor} priėmė mokėjimą, tačiau mūsų sistema dar negavo patvirtinimo. Beveik visada tai laikina — Jūsų paskyra bus atnaujinta automatiškai per kelias minutes. Jei taip neatsitiks, atsiųskite mums žemiau esantį užsakymo ID ir nedelsdami viską sutvarkysime.",
-      "timeoutReason": "Vėluoja webhook pranešimas",
+      "timeoutBodyCrypto": "Tinklas dar nepatvirtino jūsų mokėjimo. Kriptovaliutų patvirtinimas gali užtrukti iki valandos. Jei mokėjimą išsiuntėte, Pro įsijungs automatiškai, kai tik jis bus patvirtintas. Jei per valandą niekas nepasikeis, atsiųskite mums toliau nurodytą užsakymo ID.",
+      "underpaidTitle": "Per maža suma",
+      "underpaidBody": "Gauta suma mažesnė nei nurodyta sąskaitoje. Primokėkite trūkstamą dalį pagal tą pačią sąskaitą arba susisiekite su pagalba.",
+      "refundedTitle": "Mokėjimas grąžintas",
+      "refundedBody": "Šis mokėjimas grąžintas arba grąžinamas, todėl Pro neįjungia. Susisiekite su pagalba, jei to nesitikėjote.",
+      "returnToApp": "Grįžti į Doppler",
+      "timeoutReason":"Vėluoja webhook pranešimas",
       "diagnosticHeading": "Diagnostinė informacija",
       "statusLabel": "Būsena",
       "contactSupport": "Susisiekti su pagalba",
@@ -1231,6 +1238,7 @@
     "invalidToken": "Negaliojanti arba pasibaigusi ištrynimo nuoroda. Pateikite nauja prašyma."
   },
   "subscribe": {
+    "handoffExpired": "Ši nuoroda nebegalioja. Programoje dar kartą atidarykite „Valdyti prenumeratą“ arba prisijunkite žemiau.",
     "title": "Gauti Doppler Pro",
     "subtitle": "Be registracijos. Be el. pašto. Tiesiog paspauskite ir pradekite.",
     "newUser": "Sukurti paskyra",

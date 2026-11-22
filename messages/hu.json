@@ -7,8 +7,8 @@
     "metaTitle": "Üdvözöljük a Doppler VPN Pro-ban",
     "back_home": "Vissza a főoldalra",
     "appReturn": {
-      "title": "Fizetés kész",
-      "body": "A Doppler most kapcsolja be a Pro-t. Ha az alkalmazás nem nyílt meg magától, használd a lenti gombot.",
+      "title": "Fizetés beérkezett",
+      "body": "Visszaviszünk a Dopplerbe. A Pro néhány másodpercen belül bekapcsol.",
       "button": "Doppler megnyitása",
       "hint": "Ha a böngésző rákérdez, engedélyezd a Doppler VPN megnyitását."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 év"
     },
     "pending": {
+      "bodyCrypto": "Várjuk a hálózat megerősítését. Ez akár egy óráig is tarthat. Bezárhatod ezt az oldalt; a Pro automatikusan bekapcsol.",
       "title": "Megerősítjük a fizetését…",
       "body": "A {processor} elfogadta a fizetést. Most aktiváljuk az Ön Doppler VPN Pro előfizetését.",
       "orderId": "Rendelésazonosító",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Ismeretlen hiba",
       "timeoutTitle": "Még megerősítjük a fizetését",
       "timeoutBody": "A {processor} elfogadta a fizetést, de rendszerünk még nem kapta meg a megerősítést. Ez szinte mindig átmeneti — fiókját néhány percen belül automatikusan frissítjük. Ha ez nem történik meg, küldje el nekünk az alábbi rendelésazonosítót, és azonnal elintézzük.",
-      "timeoutReason": "A webhook kézbesítése késik",
+      "timeoutBodyCrypto": "A hálózat még nem erősítette meg a fizetésedet. A kriptós megerősítés akár egy óráig is tarthat. Ha elküldted az összeget, a Pro automatikusan bekapcsol, amint megerősítik. Ha egy órán belül semmi sem változik, küldd el nekünk a lenti rendelésazonosítót.",
+      "underpaidTitle": "Túl alacsony összeg",
+      "underpaidBody": "A beérkezett összeg kevesebb a számlán szereplőnél. Fizesd ki a különbözetet ugyanarra a számlára, vagy írj az ügyfélszolgálatnak.",
+      "refundedTitle": "Fizetés visszatérítve",
+      "refundedBody": "Ezt a fizetést visszatérítették vagy épp visszatérítik, ezért nem kapcsolja be a Pro-t. Írj az ügyfélszolgálatnak, ha erre nem számítottál.",
+      "returnToApp": "Vissza a Dopplerbe",
+      "timeoutReason":"A webhook kézbesítése késik",
       "diagnosticHeading": "Diagnosztikai információk",
       "statusLabel": "Állapot",
       "contactSupport": "Kapcsolatfelvétel az ügyfélszolgálattal",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Érvénytelen vagy lejárt törlési link. Kérjük, kérj újat."
   },
   "subscribe": {
+    "handoffExpired": "Ez a link lejárt. Nyisd meg újra az alkalmazásban az „Előfizetés kezelése” menüt, vagy jelentkezz be lent.",
     "title": "Doppler Pro beszerzése",
     "subtitle": "Nincs regisztráció. Nincs e-mail. Csak érintsd meg és indulj.",
     "newUser": "Fiók létrehozása",

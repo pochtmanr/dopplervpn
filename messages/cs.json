@@ -7,8 +7,8 @@
     "metaTitle": "Vítejte v Doppler VPN Pro",
     "back_home": "Zpět na úvod",
     "appReturn": {
-      "title": "Platba dokončena",
-      "body": "Doppler právě zapíná Pro. Pokud se aplikace neotevřela sama, použijte tlačítko níže.",
+      "title": "Platba přijata",
+      "body": "Vracíme vás do Doppleru. Pro se zapne během několika sekund.",
       "button": "Otevřít Doppler",
       "hint": "Pokud se prohlížeč zeptá, povolte otevření Doppler VPN."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 rok"
     },
     "pending": {
+      "bodyCrypto": "Čekáme na potvrzení sítě. Může to trvat až hodinu. Tuto stránku můžete zavřít; Pro se zapne automaticky.",
       "title": "Potvrzujeme vaši platbu…",
       "body": "{processor} platbu přijal. Právě aktivujeme vaše předplatné Doppler VPN Pro.",
       "orderId": "Číslo objednávky",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Neznámá chyba",
       "timeoutTitle": "Stále potvrzujeme vaši platbu",
       "timeoutBody": "{processor} platbu přijal, ale náš systém zatím nedostal potvrzení. Téměř vždy se jedná o dočasný stav — váš účet bude automaticky upgradován během několika minut. Pokud se tak nestane, pošlete nám níže uvedené ID objednávky a okamžitě to vyřešíme.",
-      "timeoutReason": "Doručení webhooku se zpozdilo",
+      "timeoutBodyCrypto": "Síť vaši platbu zatím nepotvrdila. Potvrzení kryptoměnových plateb může trvat až hodinu. Pokud jste platbu odeslali, Pro se zapne automaticky, jakmile bude potvrzena. Pokud se do hodiny nic nezmění, pošlete nám ID objednávky níže.",
+      "underpaidTitle": "Částka je nižší",
+      "underpaidBody": "Přijatá částka je nižší než částka na faktuře. Doplaťte stejnou fakturu nebo kontaktujte podporu.",
+      "refundedTitle": "Platba vrácena",
+      "refundedBody": "Tato platba byla vrácena nebo se vrací, takže Pro nezapne. Pokud jste to nečekali, kontaktujte podporu.",
+      "returnToApp": "Zpět do Doppleru",
+      "timeoutReason":"Doručení webhooku se zpozdilo",
       "diagnosticHeading": "Diagnostické informace",
       "statusLabel": "Stav",
       "contactSupport": "Kontaktovat podporu",
@@ -1210,6 +1217,7 @@
     "invalidToken": "Neplatný nebo expirovaný odkaz pro smazání. Požádejte prosím o nový."
   },
   "subscribe": {
+    "handoffExpired": "Platnost tohoto odkazu vypršela. V aplikaci znovu otevřete „Spravovat předplatné“, nebo se přihlaste níže.",
     "title": "Získejte Doppler Pro",
     "subtitle": "Bez registrace. Bez e-mailu. Stačí klepnout a jít.",
     "newUser": "Vytvořit účet",

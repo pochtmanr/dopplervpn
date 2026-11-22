@@ -7,8 +7,8 @@
     "metaTitle": "Doppler VPN Pro'ya hoş geldiniz",
     "back_home": "Ana sayfaya dön",
     "appReturn": {
-      "title": "Ödeme tamamlandı",
-      "body": "Doppler şu anda Pro'yu açıyor. Uygulama kendiliğinden açılmadıysa aşağıdaki düğmeyi kullanın.",
+      "title": "Ödeme alındı",
+      "body": "Sizi Doppler'a geri götürüyoruz. Pro birkaç saniye içinde açılacak.",
       "button": "Doppler'ı aç",
       "hint": "Tarayıcınız sorarsa Doppler VPN'in açılmasına izin verin."
     },
@@ -18,6 +18,7 @@
       "yearly": "1 Yıl"
     },
     "pending": {
+      "bodyCrypto": "Ağın onayı bekleniyor. Bu bir saate kadar sürebilir. Bu sayfayı kapatabilirsiniz; Pro otomatik olarak açılacak.",
       "title": "Ödemeniz onaylanıyor…",
       "body": "{processor} ödemeyi kabul etti. Doppler VPN Pro aboneliğinizi şimdi etkinleştiriyoruz.",
       "orderId": "Sipariş Kimliği",
@@ -54,7 +55,13 @@
       "failedReasonUnknown": "Bilinmeyen hata",
       "timeoutTitle": "Ödemenizi hâlâ onaylıyoruz",
       "timeoutBody": "{processor} ödemeyi aldı ancak sistemimiz henüz onay almadı. Bu durum neredeyse her zaman geçicidir — hesabınız birkaç dakika içinde otomatik olarak yükseltilecek. Yükseltilmezse aşağıdaki sipariş kimliğini bize iletin, hemen düzeltelim.",
-      "timeoutReason": "Webhook teslimi gecikti",
+      "timeoutBodyCrypto": "Ağ ödemenizi henüz onaylamadı. Kripto onayları bir saate kadar sürebilir. Ödemeyi gönderdiyseniz, onaylanır onaylanmaz Pro otomatik olarak açılacak. Bir saat içinde hiçbir şey değişmezse aşağıdaki sipariş kimliğini bize gönderin.",
+      "underpaidTitle": "Tutar eksik",
+      "underpaidBody": "Alınan tutar faturadakinden düşük. Aynı faturaya eksik tutarı ödeyin veya destekle iletişime geçin.",
+      "refundedTitle": "Ödeme iade edildi",
+      "refundedBody": "Bu ödeme iade edildi veya iade ediliyor, bu yüzden Pro'yu açmaz. Bunu beklemiyorsanız destekle iletişime geçin.",
+      "returnToApp": "Doppler'a dön",
+      "timeoutReason":"Webhook teslimi gecikti",
       "diagnosticHeading": "Tanılama bilgileri",
       "statusLabel": "Durum",
       "contactSupport": "Desteğe başvur",
@@ -1211,6 +1218,7 @@
     "invalidToken": "Geçersiz veya süresi dolmuş silme bağlantısı. Lütfen yenisini talep edin."
   },
   "subscribe": {
+    "handoffExpired": "Bu bağlantının süresi doldu. Uygulamada Aboneliği Yönet'i yeniden açın veya aşağıdan giriş yapın.",
     "title": "Doppler Pro'yu Edinin",
     "subtitle": "Kayıt yok. E-posta yok. Sadece dokun ve başla.",
     "newUser": "Hesap Oluştur",
