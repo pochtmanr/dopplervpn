@@ -151,7 +151,7 @@ const RELEASES: Record<Exclude<PlatformKey, "linux">, Release> = {
   ios:     { date: "2026-11-13", note: null },
   android: { date: "2026-11-13", note: null },
   mac:     { date: "2026-11-13", note: null },
-  windows: { date: "2026-09-28", note: null },
+  windows: { date: "2026-11-22", note: null },
 };
 
 function UpdateInfo({
