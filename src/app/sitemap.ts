@@ -10,6 +10,7 @@ import { VPN_PROTOCOLS_LOCALES, isVpnProtocolsLocale } from "@/i18n/vpn-protocol
 import { ARTICLE_SLUGS as PROTOCOL_ARTICLE_SLUGS } from "@/lib/vpn-protocols";
 import { GUIDES_LASTMOD, GUIDES_LOCALES, GUIDE_SLUGS, isGuidesLocale } from "@/lib/guides";
 import { isGoneBlogTranslation, isIndexableBlogSlug } from "@/lib/blog-gone-slugs";
+import { WINDOWS_PAGE_UPDATED } from "@/config/platforms/windows";
 
 // Prerender all 44 shards at BUILD time and serve them as static files from
 // the CDN. Googlebot fetches every shard in /sitemap.xml in parallel; when
@@ -353,7 +354,9 @@ export default async function sitemap({
             ? VPN_PROTOCOLS_LASTMOD
             : isGuidesPage(page)
               ? new Date(GUIDES_LASTMOD)
-              : undefined,
+              : page === "/vpn-for-windows"
+                ? new Date(WINDOWS_PAGE_UPDATED)
+                : undefined,
         changeFrequency: changeFreqFor(page),
         priority: priorityFor(page),
         alternates,

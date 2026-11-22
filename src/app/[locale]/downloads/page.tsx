@@ -303,8 +303,8 @@ type PlatformButton = {
 
 /**
  * The setup card's picture for each platform: the platform page's own device
- * render (iPhone, Studio Display, Galaxy), and for Windows the app window itself,
- * shown whole on its own dark backdrop.
+ * render (iPhone, Studio Display, Galaxy), and for Windows the app window on a
+ * Windows 11 desktop (the Windows page's hero).
  */
 const SETUP_IMAGE: Record<Exclude<PlatformKey, "linux">, SetupPlatform["image"]> = {
   ios: { ...iosApple.ctaImage!, alt: "Doppler VPN on an iPhone, connected and protected" },
@@ -312,10 +312,9 @@ const SETUP_IMAGE: Record<Exclude<PlatformKey, "linux">, SetupPlatform["image"]>
   mac: macosApple.hero!,
   android: androidApp.hero!,
   windows: {
-    src: "/images/windows-hero.avif",
-    bg: "#1C1C1C",
+    src: "/images/windows-home.avif",
+    bg: "#B9B5BB",
     alt: "Doppler VPN for Windows, connected",
-    fit: "contain",
   },
 };
 

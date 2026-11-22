@@ -21,9 +21,19 @@ export interface PlatformRelatedLink {
 }
 
 export interface PlatformGalleryShot {
-  /** Translation key under `<namespace>.gallery` */
+  /** Translation key under `<namespace>.gallery`: `<key>.alt`, plus `<key>.title` without `titleKey`. */
   key: string;
   src: string;
+  /** The file's real pixel size, so the card reserves the right box before it loads. */
+  width: number;
+  height: number;
+  /**
+   * A full message path for the card's title, to reuse a label that is already translated
+   * in every locale instead of adding a near-copy. Omitted: `<namespace>.gallery.<key>.title`.
+   */
+  titleKey?: string;
+  /** false: the card is the picture and its title, with no `<key>.description` line. */
+  description?: boolean;
 }
 
 /** Right-hand side of the hero: a real screenshot, or a brand panel when we don't have one yet. */
@@ -86,6 +96,12 @@ export interface PlatformLandingConfig {
   /** Optional "inside the app" screenshot gallery. Windows only today. */
   gallery?: readonly PlatformGalleryShot[];
   related: readonly PlatformRelatedLink[];
+  /**
+   * ISO date (YYYY-MM-DD) the page's content last changed: the quiet line under the gallery,
+   * the WebPage schema's `dateModified` and the sitemap's `lastmod` all read this one value.
+   * It is the page's date, not the build's: release dates live on /downloads.
+   */
+  lastUpdated?: string;
   /** Translation key for the final-CTA button label, e.g. "cta.downloadIos". */
   ctaDownloadKey: string;
 }
