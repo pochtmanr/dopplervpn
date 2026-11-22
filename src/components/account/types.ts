@@ -29,4 +29,6 @@ export interface AccountDevice {
 export interface AccountDevices {
   maxDevices: number;
   devices: AccountDevice[];
+  /** Old copies of devices still in use (cleaned up in the apps). Count only, no ids. */
+  duplicateCount: number;
 }

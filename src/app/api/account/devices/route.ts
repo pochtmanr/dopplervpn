@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUntypedAdminClient } from '@/lib/supabase/admin';
 import { rateLimit } from '@/lib/rate-limit';
+import { countDuplicateDevices } from '@/lib/duplicate-devices';
 
 const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 
@@ -11,6 +12,9 @@ const ACCOUNT_ID_REGEX = /^VPN-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
  * for it, and together with the account id it is what `remove_device` takes.
  * There is no remove route on the web — the account id is a bearer credential
  * and removing a session here would not revoke that device's token.
+ *
+ * `duplicateCount` is a read-only hint (old copies of devices still in use, same
+ * rule as the apps' duplicate cleanup). Only the number leaves the server.
  */
 export async function GET(req: NextRequest) {
   const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'account-devices' });
@@ -48,6 +52,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       maxDevices: account.max_devices || 10,
+      duplicateCount: countDuplicateDevices(rows ?? []),
       devices: (rows ?? []).map((d) => ({
         name: d.device_name,
         type: d.device_type,

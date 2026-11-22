@@ -136,6 +136,11 @@ export function DevicesCard({ locale, data, loading, error, onRetry, plus = fals
           </ul>
         )}
 
+        {/* Read-only hint: the cleanup itself lives in the apps (it revokes tokens). */}
+        {data && data.duplicateCount > 0 && (
+          <p className={`pt-3 ${PLUS_META}`}>{t('dashboard.duplicateDevices', { count: data.duplicateCount })}</p>
+        )}
+
         {/* mt-auto: when the grid stretches the card, the note stays on its bottom edge. */}
         {data && <p className={`mt-auto pt-3 ${PLUS_META}`}>{t('dashboard.manageInApp')}</p>}
       </div>
@@ -218,6 +223,10 @@ export function DevicesCard({ locale, data, loading, error, onRetry, plus = fals
             );
           })}
         </ul>
+      )}
+
+      {data && data.duplicateCount > 0 && (
+        <p className="mt-3 text-xs text-text-tertiary">{t('dashboard.duplicateDevices', { count: data.duplicateCount })}</p>
       )}
 
       {data && <p className="mt-3 text-xs text-text-tertiary">{t('dashboard.manageInApp')}</p>}

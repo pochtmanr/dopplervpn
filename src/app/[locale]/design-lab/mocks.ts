@@ -22,6 +22,7 @@ export const MOCK_ACCOUNT_INFO: AccountInfo = {
 export function mockDevices(now: number): AccountDevices {
   return {
     maxDevices: 10,
+    duplicateCount: 0,
     devices: [
       { name: 'iPhone 16 Pro', type: 'ios', isMain: true, lastActiveAt: new Date(now - 2 * 3_600_000).toISOString(), createdAt: '2025-11-20T09:00:00.000Z' },
       { name: 'MacBook Air', type: 'macos', isMain: false, lastActiveAt: new Date(now - 3 * DAY).toISOString(), createdAt: '2026-01-04T09:00:00.000Z' },
