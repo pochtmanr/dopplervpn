@@ -42,7 +42,7 @@ export function SuccessClient() {
   const processor = provider === 'oxapay' ? 'OxaPay' : 'Revolut';
   // Set by /api/checkout/desktop: the buyer came from a desktop app that
   // registered the dopplervpn:// link, so success hands them back to it.
-  const fromApp = params.get('app') === 'windows';
+  const fromApp = ['windows', 'mac', 'ios', 'android'].includes(params.get('app') ?? '');
   const t = useTranslations('success');
 
   const [data, setData] = useState<VerifyResponse | null>(null);

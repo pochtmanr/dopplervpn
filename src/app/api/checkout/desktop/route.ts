@@ -26,7 +26,9 @@ import {
  * Auth is the install's device token (see lib/device-auth.ts), not the bare
  * account code. Pro is still granted only by the provider webhooks.
  */
-const APPS = new Set(['windows']);
+// Apps that register the dopplervpn:// return link. Apple only sells this way
+// in its Direct (TestFlight / Developer ID) builds, Android in sideload builds.
+const APPS = new Set(['windows', 'mac', 'ios', 'android']);
 
 export async function POST(req: NextRequest) {
   const rl = rateLimit(req, { limit: 10, windowMs: 60_000, prefix: 'checkout-desktop' });
