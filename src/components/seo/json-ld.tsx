@@ -280,6 +280,8 @@ interface WebPageSchemaProps {
    *  match the entity Google expects. Defaults to "WebPage". */
   type?: "WebPage" | "CollectionPage";
   inLanguage?: string;
+  /** ISO 8601 date the page's content last changed. Omitted: the node carries no date. */
+  dateModified?: string;
 }
 
 export function WebPageSchema({
@@ -289,6 +291,7 @@ export function WebPageSchema({
   isPartOf,
   type = "WebPage",
   inLanguage,
+  dateModified,
 }: WebPageSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
@@ -298,6 +301,7 @@ export function WebPageSchema({
     name,
     description,
     ...(inLanguage ? { inLanguage } : {}),
+    ...(dateModified ? { dateModified } : {}),
     isPartOf: isPartOf
       ? { "@type": "WebSite", url: isPartOf, name: "Doppler VPN" }
       : { "@type": "WebSite", "@id": WEBSITE_ID, name: "Doppler VPN" },

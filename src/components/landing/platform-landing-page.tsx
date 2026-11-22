@@ -5,7 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { BreadcrumbSchema, FAQSchema, PlatformAppSchema } from "@/components/seo/json-ld";
+import { BreadcrumbSchema, FAQSchema, PlatformAppSchema, WebPageSchema } from "@/components/seo/json-ld";
 import { BlogStickyBar } from "@/components/blog/blog-sticky-bar";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/ui/reveal";
@@ -65,6 +65,8 @@ export async function PlatformLandingPage({
   const t = await getTranslations(config.namespace);
   const mt = await getTranslations({ locale, namespace: `${config.namespace}.metadata` });
   const tHero = await getTranslations({ locale, namespace: "hero" });
+  // Unscoped: gallery titles and the "Last updated" label reuse strings from other namespaces.
+  const tRoot = await getTranslations({ locale });
 
   const {
     slug,
@@ -83,8 +85,16 @@ export async function PlatformLandingPage({
     faqKeys,
     gallery,
     related,
+    lastUpdated,
     ctaDownloadKey,
   } = config;
+
+  // Same medium date as the downloads page's release line. UTC, so the day never slips.
+  const lastUpdatedLabel = lastUpdated
+    ? new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" }).format(
+        new Date(lastUpdated),
+      )
+    : null;
 
   // How the download anchor behaves: our own file vs. an outbound store link.
   const linkBehaviour = directDownload
@@ -121,6 +131,15 @@ export async function PlatformLandingPage({
         downloadUrl={downloadUrl}
       />
       <FAQSchema items={faqItems} />
+      {lastUpdated && (
+        <WebPageSchema
+          url={`${SITE_URL}/${locale}/${slug}`}
+          name={mt("title")}
+          description={mt("description")}
+          inLanguage={locale}
+          dateModified={lastUpdated}
+        />
+      )}
       <Navbar />
       <Scope>
       <main className="overflow-x-clip">
@@ -339,29 +358,40 @@ export async function PlatformLandingPage({
               </Reveal>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {gallery.map(({ key, src }, i) => (
+                {gallery.map(({ key, src, width, height, titleKey, description }, i) => (
                   <Reveal key={key} delay={i * 80} className="h-full">
                     <figure className="group h-full flex flex-col rounded-2xl border border-overlay/10 bg-bg-secondary/50 overflow-hidden transition-all duration-300 hover:border-accent-teal/30">
                       <Image
                         src={src}
                         alt={t(`gallery.${key}.alt`)}
-                        width={986}
-                        height={693}
+                        width={width}
+                        height={height}
                         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                         className="w-full h-auto border-b border-overlay/10"
                       />
                       <figcaption className="p-5">
-                        <h3 className="text-base font-semibold text-text-primary mb-1.5">
-                          {t(`gallery.${key}.title`)}
+                        <h3 className="text-base font-semibold text-text-primary">
+                          {titleKey ? tRoot(titleKey) : t(`gallery.${key}.title`)}
                         </h3>
-                        <p className="text-sm text-text-muted leading-relaxed">
-                          {t(`gallery.${key}.description`)}
-                        </p>
+                        {description !== false && (
+                          <p className="mt-1.5 text-sm text-text-muted leading-relaxed">
+                            {t(`gallery.${key}.description`)}
+                          </p>
+                        )}
                       </figcaption>
                     </figure>
                   </Reveal>
                 ))}
               </div>
+
+              {lastUpdated && lastUpdatedLabel && (
+                <p className="mt-8 text-center text-xs">
+                  <span className="text-text-muted/60">{tRoot("apps.lastUpdated")}: </span>
+                  <time dateTime={lastUpdated} className="text-text-muted">
+                    {lastUpdatedLabel}
+                  </time>
+                </p>
+              )}
             </div>
           </section>
         )}
