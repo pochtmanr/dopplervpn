@@ -689,14 +689,18 @@ export function summarizeSubscriptions(evidence: SubscriptionEvidence, window: S
   const normalized = prices.some((price) => price?.remainder);
   const coverage: SubscriptionModel["coverage"] =
     evidence.eventsTruncated || unknown || missingPrice || normalized ? "partial" : "complete";
-  if (unknown) warnings.push("A lifecycle event did not distinguish trial from paying. That contract is excluded from MRR.");
+  if (unknown) {
+    warnings.push(
+      "A lifecycle event did not distinguish trial from paying. That contract is excluded from MRR; known paying contracts still counted.",
+    );
+  }
 
   const tally = (status: LiveStatus) => statuses.filter((item) => item === status).length;
   let { mrr, arr } = mrrFor(atAsOf.contracts, asOfMs, coverage);
-  if (unknown || evidence.eventsTruncated) {
-    const reason = unknown ? "unknown_billing_state" : "subscription_events_page_cap";
-    mrr = moneyUnavailable(coverage, reason);
-    arr = moneyUnavailable(coverage, reason);
+  // Unknowns are already out of mrrFor; blank only when the event page was truncated.
+  if (evidence.eventsTruncated) {
+    mrr = moneyUnavailable(coverage, "subscription_events_page_cap");
+    arr = moneyUnavailable(coverage, "subscription_events_page_cap");
   }
   if (mrr.quality === "unavailable" && mrr.reason === "mixed_currency_without_fx") {
     warnings.push("MRR is unavailable because active contracts use more than one currency and FX is unconfigured.");

@@ -540,4 +540,44 @@ describe("summarizeSubscriptions", () => {
     ], window, false);
     expect(view.mrr.amount).toBe("6.9900");
   });
+
+  it("keeps known paying MRR when a still-active unknown contract exists", () => {
+    const window = {
+      from: "2026-09-01T00:00:00Z",
+      to: "2026-10-01T00:00:00Z",
+      asOf: "2026-10-01T00:00:00Z",
+      snapshotId: "sub-live-unknown",
+      generatedAt: "2026-10-01T00:00:00Z",
+      dataAsOf: "2026-10-01T00:00:00Z",
+    };
+    const view = reportingFromStoredEvents([
+      {
+        id: "unknown-live",
+        event_type: "CANCELLATION",
+        account_id: "acct-9",
+        original_transaction_id: "GPA.9",
+        platform: "android",
+        product_id: "vpn_premium_monthly",
+        expires_at: "2026-10-20T00:00:00Z",
+        details: { cancel_reason: "UNSUBSCRIBE" },
+        created_at: "2026-09-15T00:00:00Z",
+      },
+      {
+        id: "live",
+        event_type: "INITIAL_PURCHASE",
+        account_id: "acct-1",
+        original_transaction_id: "txn-1",
+        platform: "ios",
+        product_id: "vpn_premium_monthly",
+        expires_at: "2026-10-20T00:00:00Z",
+        details: null,
+        created_at: "2026-09-20T00:00:00Z",
+      },
+    ], window, false);
+    expect(view.mrr.amount).toBe("6.9900");
+    expect(view.mrr.reason).not.toBe("unknown_billing_state");
+    expect(view.coverage).toBe("partial");
+    expect(view.warnings.some((warning) => warning.includes("excluded from MRR"))).toBe(true);
+    expect(view.warnings.some((warning) => warning.includes("known paying contracts still counted"))).toBe(true);
+  });
 });
