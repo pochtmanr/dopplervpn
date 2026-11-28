@@ -11,6 +11,8 @@ interface QueryResult<T> {
 interface Builder extends PromiseLike<QueryResult<unknown>> {
   select(columns: string): Builder;
   eq(column: string, value: string): Builder;
+  order(column: string, options: { ascending: boolean }): Builder;
+  range(from: number, to: number): Builder;
   insert(row: Record<string, unknown>): Promise<QueryResult<unknown>>;
 }
 
@@ -102,15 +104,27 @@ export class SupabaseAnalyticsStore implements AnalyticsStore {
   }
 
   private async rows(provider: string, report: string): Promise<FactRow[]> {
-    const result = await this.supabase
-      .from("reporting_analytics_revisions")
-      .select("provider, report, grain_key, revision, content_hash, source_timezone, source_date, source_as_of, retrieved_at, data_state, body, metadata")
-      .eq("provider", provider)
-      .eq("report", report);
-    if (result.error) throw new Error("analytics_store_failed");
-    return (result.data ?? []) as FactRow[];
+    // The API returns at most 1000 rows per request. A report keeps every revision, so read it in
+    // ordered pages; an unordered capped read drops rows at random and breaks paging for callers.
+    const rows: FactRow[] = [];
+    for (let from = 0; ; from += ROWS_PAGE) {
+      const result = await this.supabase
+        .from("reporting_analytics_revisions")
+        .select("provider, report, grain_key, revision, content_hash, source_timezone, source_date, source_as_of, retrieved_at, data_state, body, metadata")
+        .eq("provider", provider)
+        .eq("report", report)
+        .order("grain_key", { ascending: true })
+        .order("revision", { ascending: true })
+        .range(from, from + ROWS_PAGE - 1);
+      if (result.error) throw new Error("analytics_store_failed");
+      const page = (result.data ?? []) as FactRow[];
+      rows.push(...page);
+      if (page.length < ROWS_PAGE) return rows;
+    }
   }
 }
+
+const ROWS_PAGE = 1000;
 
 function toFact(row: FactRow): StoredFact {
   return {

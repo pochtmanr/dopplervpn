@@ -121,16 +121,20 @@ export function headlineFromEnv(ga4Configured: boolean): HeadlineMetric | null {
   return primaryHeadline(process.env.ANALYTICS_PRIMARY_HEADLINE, ga4Configured);
 }
 
+const DEFAULT_PERIOD_DAYS = 30;
+
 function periodReport(
   input: AnalyticsReportInput,
   facts: StoredFact[],
   sourceTimezone: string,
 ): { ok: true; body: Record<string, unknown> } {
-  const fact = facts.find((item) => {
-    const from = item.body.period_from;
-    const to = item.body.period_to;
-    return from === input.from && to === input.to;
-  });
+  // A period count exists only for the windows one query was run for. When the caller's window is
+  // not one of them, answer with the stored 30-day window and say which period it really covers.
+  const exact = facts.find((item) => item.body.period_from === input.from && item.body.period_to === input.to);
+  const fact = exact ?? facts.find((item) => item.body.days === DEFAULT_PERIOD_DAYS);
+  const stored = !exact && fact && typeof fact.body.period_from === "string" && typeof fact.body.period_to === "string"
+    ? { from: fact.body.period_from, to: fact.body.period_to }
+    : null;
   if (!fact || typeof fact.body.active_users !== "number") {
     return {
       ok: true,
@@ -151,9 +155,13 @@ function periodReport(
       coverage: fact.dataState === "final" ? "complete" : "partial",
       rows: [{ active_users: fact.body.active_users }],
       page: { limit: input.limit, has_more: false, next_cursor: null, complete_property_total: true },
-      limitations: ["Period activeUsers come from one query. Do not sum daily or country rows."],
+      limitations: [
+        "Period activeUsers come from one query. Do not sum daily or country rows.",
+        ...(stored ? [`The requested window has no stored count. This is the stored ${DEFAULT_PERIOD_DAYS}-day window; see period.`] : []),
+      ],
       propertyRef: "redacted",
       mustNotSum: true,
+      ...(stored ? { period: stored } : {}),
     }),
   };
 }
@@ -294,6 +302,8 @@ function envelope(input: AnalyticsReportInput, fields: {
   propertyRef: string;
   mustNotSum?: boolean;
   missing?: string[];
+  /** The period the rows really cover, when it differs from the one requested. */
+  period?: { from: string; to: string };
 }): Record<string, unknown> {
   return {
     schema_version: "1.0.0",
@@ -320,8 +330,8 @@ function envelope(input: AnalyticsReportInput, fields: {
     page: fields.page,
     limitations: fields.limitations,
     period: {
-      from: input.from,
-      to: input.to,
+      from: fields.period?.from ?? input.from,
+      to: fields.period?.to ?? input.to,
       timezone: input.provider === "gsc" ? "America/Los_Angeles" : fields.sourceTimezone,
     },
   };

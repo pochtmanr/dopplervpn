@@ -89,6 +89,30 @@ describe("analytics rules", () => {
     expect(built.body.rows).toEqual([{ active_users: 15 }]);
   });
 
+  it("answers another window with the stored 30-day count and names the period it covers", () => {
+    const stored = (days: number, users: number, from: string, to: string) => ({
+      ...fact({ report: "ga4_period_unique_users", grainKey: `period:${days}`, sourceDate: null, body: {
+        active_users: users, period_from: from, period_to: to, days,
+      } }),
+      revision: 1,
+      contentHash: `hash-${days}`,
+    });
+    const built = buildAnalyticsReport(input({
+      report: "ga4_period_unique_users",
+      facts: [
+        stored(7, 15, "2026-09-20T22:00:00Z", "2026-09-27T22:00:00Z"),
+        stored(30, 120, "2026-08-28T22:00:00Z", "2026-09-27T22:00:00Z"),
+        stored(90, 300, "2026-06-29T22:00:00Z", "2026-09-27T22:00:00Z"),
+      ],
+    }));
+    expect(built.ok).toBe(true);
+    if (!built.ok) return;
+    expect(built.body.availability).toBe("available");
+    expect(built.body.rows).toEqual([{ active_users: 120 }]);
+    expect(built.body.period).toMatchObject({ from: "2026-08-28T22:00:00Z", to: "2026-09-27T22:00:00Z" });
+    expect(JSON.stringify(built.body.limitations)).toContain("stored 30-day window");
+  });
+
   it("does not treat GSC dimension rows as the property total", () => {
     expect(propertyTotalFromDimensionRows().reason).toBe("dimension_rows_are_not_property_totals");
     const built = buildAnalyticsReport(input({
